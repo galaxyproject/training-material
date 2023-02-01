@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-01-31 14:18:13 +0000" />
+<meta name="DC.date" content="2023-02-01 08:28:29 +0000" />
 <meta name="DC.creator" content="Bérénice Batut" />
 <meta name="DC.creator" content="Engy Nasr" />
 
@@ -196,11 +196,11 @@
 
             <div id="archive-selector">
             
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-02-01/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html" title="Version 2023-02-01">2023-02-01</a>
+            
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-01-01/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html" title="Version 2023-01-01">2023-01-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-12-01/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html" title="Version 2022-12-01">2022-12-01</a>
-            
-                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2022-11-01/topics/metagenomics/tutorials/pathogen-detection-from-nanopore-foodborne-data/tutorial.html" title="Version 2022-11-01">2022-11-01</a>
             
                 <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
             </div>
@@ -280,7 +280,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-01-31 14:18:13 +0000",
+  "dateModified": "2023-02-01 08:28:29 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Pathogen detection from (direct Nanopore) sequencing data using Galaxy - Foodborne Edition",
   "interactivityType": "mixed",
@@ -713,7 +713,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 31, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 1, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -733,9 +733,9 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>Food contamination with pathogens are a major burden on our society. In the year 2019, foodborne pathogens caused 137 hospitalisations in Germany <a href="https://www.bvl.bund.de/SharedDocs/Berichte/10_BELA_lebensmittelbed_Krankheitsausbruechen_Dtl/Jahresbericht2019.pdf?__blob=publicationFile&amp;v=4">(BVL 2019)</a>. Globally, they affect an estimated 600 million people a year and impact socioeconomic development at different levels. These outbreaks are mainly due to <em>Salmonella spp.</em> followed by <em>Campylobacter spp.</em> and Noroviruses, as studied by the <a href="https://www.who.int/publications/i/item/9789241565165"><strong>Food safety - World Health Organization (WHO)</strong></a>.</p>
+<p>Food contamination with pathogens is a major burden on our society. In the year 2019, foodborne pathogens caused 137 hospitalisations in Germany <a href="https://www.bvl.bund.de/SharedDocs/Berichte/10_BELA_lebensmittelbed_Krankheitsausbruechen_Dtl/Jahresbericht2019.pdf?__blob=publicationFile&amp;v=4">(BVL 2019)</a>. Globally, they affect an estimated 600 million people a year and impact socioeconomic development at different levels. These outbreaks are mainly due to <em>Salmonella spp.</em> followed by <em>Campylobacter spp.</em> and Noroviruses, as studied by the <a href="https://www.who.int/publications/i/item/9789241565165"><strong>Food safety - World Health Organization (WHO)</strong></a>.</p>
 
-<p>During the investigation of a foodborne outbreak, a microbiological analysis of the potentially responsible food vehicle is performed in order to detect the responsible pathogens and track the contamination source. By default, the <a href="https://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2005:338:0001:0026:EN:PDF"><strong>European Regulation (EC)</strong></a> follows ISO standards to detect bacterial pathogens in food: pathogens are detected and identified by <strong>stepwise cultures</strong> on selective media and/or <strong>targeting specific genes with real-time PCRs</strong>. The current gold standard is Pulsed-field Gel Electrophoresis (PFGE) or Multiple-Locus Variable Number Tandem Repeat Analysis (MLVA) to characterize the detected strains. These techniques have some disadvantages.</p>
+<p>During the investigation of a foodborne outbreak, a microbiological analysis of the potentially responsible food vehicle is performed in order to detect the responsible pathogens and identify the contamination source. By default, the <a href="https://eur-lex.europa.eu/LexUriServ/LexUriServ.do?uri=OJ:L:2005:338:0001:0026:EN:PDF"><strong>European Regulation (EC)</strong></a> follows ISO standards to detect bacterial pathogens in food: pathogens are detected and identified by <strong>stepwise cultures</strong> on selective media and/or <strong>targeting specific genes with real-time PCRs</strong>. The current gold standard is Pulsed-field Gel Electrophoresis (PFGE) or Multiple-Locus Variable Number Tandem Repeat Analysis (MLVA) to characterize the detected strains. These techniques have some disadvantages.</p>
 
 <p><strong>Whole Genome Sequencing</strong> (WGS) has been proposed as an alte<span class="notranslate">rna</span>tive. With just one sequencing run, we can:</p>
 <ul>
@@ -744,21 +744,21 @@
   <li>get information on antimicrobial resistance genes, virulence, serotype, resistance to sanitizers, root cause, and other critical factors in one assay, including historical reference to pathogen emergence.</li>
 </ul>
 
-<p>WGS is more than a surveillance tool and was recommended by the European Centre for Disease Prevention and Control (ECDC) and the European Food Safety Authority (EFSA) for surveillance and outbreak investigation. WGS still requires isolation of the targeted pathogen, which is a time-consuming, not always straightforward, or successful process. <strong>Sequencing methods without prior isolation could solve this issue</strong>.</p>
+<p>WGS is more than a surveillance tool and was recommended by the European Centre for Disease Prevention and Control (ECDC) and the European Food Safety Authority (EFSA) for surveillance and outbreak investigation. WGS still requires isolation of the targeted pathogen, which is a time-consuming process, the execution is not always straightforward, nor the success is guaranteed. <strong>Sequencing methods without prior isolation could solve this issue</strong>.</p>
 
-<p>The evolution of sequencing techniques in the last decades has made possible the development of shotgun metagenomic sequencing, <em>i.e.</em> the <strong>direct sequencing of all <span class="notranslate">DNA</span> present in a sample</strong>. This approach gives an overview of the genomic composition of all cells in the sample, including the food source itself, the microbial community, and any possible pathogens and their complete genetic information, without the need for prior isolation. Several studies have demonstrated the potential of shotgun metagenomics to identify and characterize pathogens and their functional characteristics (<em>e.g.</em> virulence genes) in naturally contaminated or spiked food samples.</p>
+<p>The evolution of sequencing techniques in the last decades has made the development of shotgun metagenomic sequencing possible, <em>i.e.</em> the <strong>direct sequencing of all <span class="notranslate">DNA</span> present in a sample</strong>. This approach gives an overview of the genomic composition of all cells in the sample, including the food source itself, the microbial community, and any possible pathogens and their complete genetic information without the need for prior isolation. Several studies have demonstrated the potential of shotgun metagenomics to identify and characterize pathogens and their functional characteristics (<em>e.g.</em> virulence genes) in naturally contaminated or purposefully spiked food samples.</p>
 
 <p>The currently available studies used Illumina sequencing, generating short <span class="notranslate">reads</span>. Longer read lengths, generated by third-generation sequencing platforms such as Pacific Biosciences (PacBio) and Oxford Nanopore Technologies (ONT), make it <strong>easier and more practical to identify strains with fewer <span class="notranslate">reads</span></strong>. MinION (from Oxford Nanopore) is a portable, real-time device for ONT sequencing. Several proof-of-principle studies have shown the <strong>utility of ONT long-read sequencing from metagenomic samples for pathogen identification</strong> (<span class="citation"><a href="#CIUFFREDA20211497">Ciuffreda <i>et al.</i> 2021</a></span>).</p>
 
 <!--SNIPPET-->
 <blockquote class="comment">   <div id="comment-nanopore-sequencing" class="box-title" aria-label="comment box: Nanopore sequencing"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Nanopore sequencing</div>   <p>Nanopore sequencing has several properties that make it well-suited for our purposes</p>   <ol>   <li>Long-read sequencing technology offers <strong>simplified</strong> and less ambiguous genome <strong>assembly</strong></li>   <li>Long-read sequencing gives the ability to <strong>span repetitive genomic regions</strong></li>   <li>Long-read sequencing makes it possible to <strong>identify large structural variations</strong></li> </ol>   <p><img src="/training-material/topics/metagenomics/images/plasmid-metagenomics-nanopore/nanopore_sequencing.png" alt="How nanopore sequencing works" title="Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: &lt;a href=&quot;https://doi.org/10.7875/togopic.2020.01&quot;&gt;Nanopore sequencing: The advantages of long reads for genome assembly&lt;/a&gt;)" /> <br /><br /></p>   <p>When using Oxford Nanopore Technologies (ONT) sequencing, the change in electrical current is measured over the membrane of a flow cell. When nucleotides pass the pores in the flow cell the current change is translated (basecalled) to nucleotides by a basecaller. A schematic overview is given in the picture above.</p>   <p>When sequencing using a MinIT or MinION Mk1C, the basecalling software is present on the devices. With basecalling the electrical signals are translated to bases (A,T,G,C) with a quality score per base. The sequenced <span class="notranslate">DNA</span> strand will be basecalled and this will form one read. Multiple <span class="notranslate">reads</span> will be stored in a fastq file.</p> </blockquote>
 
-<p>To identify and track foodborne pathogens using long-read metagenomic sequencing, different samples of potentially contaminated food (at different time points or different locations) are prepared, <span class="notranslate">DNA</span> is extracted and sequenced using MinION (ONT). The generated sequencing data need then to be processed using bioinformatics tools.</p>
+<p>To identify and track foodborne pathogens using long-read metagenomic sequencing, different samples of potentially contaminated food (at different time points or different locations) are prepared, <span class="notranslate">DNA</span> is extracted and sequenced using MinION (ONT). The generated sequencing data then need to be processed using bioinformatics tools.</p>
 
-<p>In this tutorial, we will be presenting a series of <span class="notranslate">Galaxy</span> workflows whose main goals are to</p>
+<p>In this tutorial, we will be presenting a series of <span class="notranslate">Galaxy</span> workflows whose main goals are to:</p>
 <ol>
-  <li><strong>agnostically detect pathogens</strong> (what exactly is this pathogen and what virulence factors does it carry) from data extracted directly (without prior cultivation) from a potentially contaminated sample (e.g. food like chicken, cow, etc.,) and sequenced using Nanopore</li>
-  <li><strong>compare different samples to track</strong> the possible source of contamination</li>
+  <li><strong>agnostically detect pathogens</strong> (What exactly is this pathogen and what virulence factors does it carry?) from data extracted directly (without prior cultivation) from a potentially contaminated sample (e.g. food like chicken, beef, etc.) and sequenced using Nanopore</li>
+  <li><strong>compare different samples to trace</strong> the possible source of contamination</li>
 </ol>
 
 <p>To illustrate how to process such data, we will use datasets generated by <a href="https://www.biolytix.ch/">Biolytix</a> with the following approach:</p>
@@ -1017,7 +1017,7 @@ https://zenodo.org/record/7567733/files/Barcode11_Spike2b.fastq.gz
     </div>
   </li>
   <li>
-    <p>Read trimming and filtering with <strong>Porechop</strong> <a href="https://github.com/rrwick/Porechop"><strong>Porechop</strong></a> and <strong>Fastp</strong> (<span class="citation"><a href="#Chen2018">Chen <i>et al.</i> 2018</a></span>)</p>
+    <p>Read trimming and filtering with <a href="https://github.com/rrwick/Porechop"><strong>Porechop</strong></a> and <strong>Fastp</strong> (<span class="citation"><a href="#Chen2018">Chen <i>et al.</i> 2018</a></span>)</p>
 
     <div class="Long-Version">
 
@@ -1074,7 +1074,7 @@ https://zenodo.org/record/7567733/files/Barcode11_Spike2b.fastq.gz
                 <ul>
                   <li><em>“Type of the file(s) to work on”</em>: <code class="language-plaintext highlighter-rouge">fastq</code>
                     <ul>
-                      <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data input files”</em>: <code class="language-plaintext highlighter-rouge">out1</code> (output of <strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, Multiple Input dataset the files from each tag)</li>
+                      <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“files”</em>: outputs of <strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
                     </ul>
                   </li>
                 </ul>
@@ -1156,14 +1156,14 @@ https://zenodo.org/record/7567733/files/Barcode11_Spike2b.fastq.gz
 
 <h2 id="host-read-filtering">Host read filtering</h2>
 
-<p>Generally, we are not interested in the food (host) sequences, rather only in the pathogen itself. It is an important step to get rid of all host sequences and to only retain sequences that might include a pathogen both in order to speed up further analysis and to avoid host sequences compromising the analysis.</p>
+<p>Generally, we are not interested in the food (host) sequences, rather only those originating from the pathogen itself. It is an important to get rid of all host sequences and to only retain sequences that might include a pathogen, both in order to speed up further steps and to avoid host sequences compromising the analysis.</p>
 
-<p>In this tutorial, we know the samples come from <strong>chicken</strong> meat spiked with <strong><em>Salmonella</em></strong> so we already know what will we get as a host and as a main pathogen.</p>
+<p>In this tutorial, we know the samples come from <strong>chicken</strong> meat spiked with <strong><em>Salmonella</em></strong> so we already know what will we get as the host and the main pathogen.</p>
 
 <p>In this tutorial we use:</p>
 <ol>
   <li>
-    <p>Assign <span class="notranslate">reads</span> to taxon using <strong>Kraken2</strong> (<span class="citation"><a href="#Wood2014">Wood and Salzberg 2014</a></span>) and <strong>Kalamari</strong>, a database of completed assemblies for metagenomics-related tasks used widely in contamination and host filtering</p>
+    <p>Assign <span class="notranslate">reads</span> to taxa using <strong>Kraken2</strong> (<span class="citation"><a href="#Wood2014">Wood and Salzberg 2014</a></span>) and <strong>Kalamari</strong>, a database of completed assemblies for metagenomics-related tasks used widely in contamination and host filtering</p>
 
     <div class="Long-Version">
 
@@ -1203,7 +1203,7 @@ https://zenodo.org/record/7567733/files/Barcode11_Spike2b.fastq.gz
 
       <ol>
         <li>What is the species of the host?</li>
-        <li>How many sequences of this host is found?</li>
+        <li>How many sequences of this host was found?</li>
       </ol>
 
       <blockquote class="solution">
@@ -1218,10 +1218,10 @@ https://zenodo.org/record/7567733/files/Barcode11_Spike2b.fastq.gz
     </blockquote>
   </li>
   <li>
-    <p>Filter host assigned <span class="notranslate">reads</span> based on <strong>Kraken2</strong> assignations</p>
+    <p>Filter host assigned <span class="notranslate">reads</span> based on <strong>Kraken2</strong> assignments</p>
     <ol>
       <li>Manipulate <strong>Kraken2</strong> classification to extract the sequence ids of all hosts sequences identified with <strong>Kraken2</strong></li>
-      <li>Filter the FASTQ files to get 1 ouput with the host assigned sequences and 1 output without the host assigned <span class="notranslate">reads</span></li>
+      <li>Filter the FASTQ files to get 1 ouput with the host-assigned sequences and 1 output without the host-assigned <span class="notranslate">reads</span></li>
     </ol>
 
     <div class="Long-Version">
@@ -1249,7 +1249,7 @@ https://zenodo.org/record/7567733/files/Barcode11_Spike2b.fastq.gz
                               <li>Beef (<code class="language-plaintext highlighter-rouge">Bos</code>)</li>
                             </ul>
 
-                            <p>If the contiminated food come from and may include other animals, you can change the value here.</p>
+                            <p>If the contaminated food comes from and may include other animals, you can change the value here.</p>
                           </li>
                           <li>
                             <p><em>“action for regex match”</em>: <code class="language-plaintext highlighter-rouge">include line if pattern found</code></p>
@@ -1268,7 +1268,7 @@ https://zenodo.org/record/7567733/files/Barcode11_Spike2b.fastq.gz
               <li><em>“Filter using the ID list from”</em>: <code class="language-plaintext highlighter-rouge">tabular file</code>
                 <ul>
                   <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Tabular file containing sequence identifiers”</em>: outputs of <strong>Filter Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-                  <li><em>“Column(s) containing sequence identifiers”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+                  <li><em>“Column(s) containing sequence identifiers”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
                 </ul>
               </li>
               <li><em>“Output positive matches, negative matches, or both?”</em>: <code class="language-plaintext highlighter-rouge">Both positive matches (ID on list) and negative matches (ID not on list), as two files</code></li>
@@ -1285,7 +1285,7 @@ https://zenodo.org/record/7567733/files/Barcode11_Spike2b.fastq.gz
 <blockquote class="comment">
   <div id="comment-3" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
-  <p>We will need the outputs from this section in the next one.  If yours is still running or you get an error you can go on and upload it so you can start the next <span class="notranslate">workflow</span>, the next hands-on is optional</p>
+  <p>We will need the outputs from this section in the next one.  If yours is still running or you get an error you can go on and upload it so you can start the next <span class="notranslate">workflow</span>, the next hands-on is optional.</p>
 
   <blockquote class="notranslate hands_on">
     <div id="hands-on-optional-data-upload" class="box-title" aria-label="hands-on box: Optional Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Optional Data upload</div>
@@ -1313,7 +1313,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
 <!--SNIPPET-->
 <blockquote class="details">   <div id="details-what-is-taxonomy" class="box-title"><button type="button" aria-controls="details-what-is-taxonomy-contents" aria-expanded="true" aria-label="Toggle details box: What is Taxonomy?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: What is Taxonomy?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Taxonomy is the method used to naming, defining (circumscribing) and classifying groups of biological organisms based on shared characteristics such as morphological characteristics, phylogenetic characteristics, <span class="notranslate">DNA</span> data, etc. It is founded on the concept that the similarities descend from a common evolutionary ancestor.</p>   <p>Defined groups of organisms are known as <strong>taxa</strong>. Taxa are given a taxonomic rank and are aggregated into super groups of higher rank to create a taxonomic hierarchy. The taxonomic hierarchy includes eight levels: <strong>Domain, Kingdom, Phylum, Class, Order, Family, Genus and Species.</strong></p>   <p><img src="/training-material/topics/metagenomics/faqs/images/taxonomy.png" alt="Example of taxonomy. It starts, top to bottom, with Kingdom &quot;Animalia&quot;, Phylum &quot;Chordata&quot;, Class &quot;Mammalia&quot;, and Order &quot;Carnivora&quot;. Then it splits in 3. On the left, Family &quot;Felidae&quot;, with 2 genus &quot;Felis&quot; and &quot;Panthera&quot; and below 3 species &quot;F. catus&quot; and &quot;F. pardalis&quot; below &quot;Felis&quot;, &quot;P. pardus&quot; below &quot;Panthera&quot;. In the middle, Family &quot;Canidae&quot;, genus &quot;Canis&quot; and 2 species &quot;C. familiaris&quot; and &quot;C. lupus&quot;. On the right, Family &quot;Ursidae&quot;, Genus &quot;Ursus&quot; and 2 species &quot;U. arctos&quot; and &quot;U. horribilus&quot;. Below each species is a illustration of the species" /></p>   <p>The classification system begins with <strong>3 domains</strong> that encompass all living and extinct forms of life</p>   <ul>   <li>The <strong>Bacteria</strong> and <strong>Archae</strong> are mostly microscopic, but quite widespread.</li>   <li>Domain <strong>Eukarya</strong> contains more complex organisms</li> </ul>   <p>When new species are found, they are assigned into taxa in the taxonomic hierarchy. For example for the cat:</p>   <table>   <thead>     <tr>       <th>Level</th>       <th>Classification</th>     </tr>   </thead>   <tbody>     <tr>       <td>Domain</td>       <td>Eukaryota</td>     </tr>     <tr>       <td>Kingdom</td>       <td>Animalia</td>     </tr>     <tr>       <td>Phylum</td>       <td>Chordata</td>     </tr>     <tr>       <td>Class</td>       <td>Mammalia</td>     </tr>     <tr>       <td>Order</td>       <td>Carnivora</td>     </tr>     <tr>       <td>Family</td>       <td>Felidae</td>     </tr>     <tr>       <td>Genus</td>       <td><em>Felis</em></td>     </tr>     <tr>       <td>Species</td>       <td><em>F. catus</em></td>     </tr>   </tbody> </table>   <p>Let’s explore taxonomy in the Tree of Life, using <a href="https://lifemap.univ-lyon1.fr/">Lifemap</a></p>   <iframe id="Lifemap" src="https://lifemap.univ-lyon1.fr/explore.html" frameborder="0" width="100%" height="600px"></iframe> </blockquote>
 
-<p>In the previous section we ran <strong>Kraken2</strong> along with the <strong>Kalamari</strong> database, which is also a kind of taxonomy profiling but the database used is designed to include all possible host sequences. In the following part, we run <strong>Kraken2</strong> again but this time with one of its built-in databases <strong>Standard PlusPF</strong>, which can give us more insight into pathogen candidate species than <strong>Kalamari</strong>. You can test this yourself by comparing reports of both <strong>Kraken2</strong> runs.</p>
+<p>In the previous section we ran <strong>Kraken2</strong> along with the <strong>Kalamari</strong> database, which is also a kind of taxonomy profiling but the database used is designed to include all possible host sequences. In the following part, we run <strong>Kraken2</strong> again; but this time with one of its built-in databases, <strong>Standard PlusPF</strong>, which can give us more insight into pathogen candidate species than <strong>Kalamari</strong>. You can test this yourself by comparing reports of both <strong>Kraken2</strong> runs.</p>
 
 <blockquote class="details">
   <div id="details-kraken2-and-the-k-mer-approach-for-taxonomy-classification" class="box-title"><button type="button" aria-controls="details-kraken2-and-the-k-mer-approach-for-taxonomy-classification-contents" aria-expanded="true" aria-label="Toggle details box: Kraken2 and the k-mer approach for taxonomy classification"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Kraken2 and the k-mer approach for taxonomy classification<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1388,10 +1388,10 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
   <p>Inspect the <strong>Kraken2</strong> report for <code class="language-plaintext highlighter-rouge">Barcode10</code> tag</p>
 
   <ol>
-    <li>What is the most found species?</li>
-    <li>What is the second most found species?</li>
-    <li>How many sequences are classified and How many are unclassified?</li>
-    <li>What are the difference between <strong>Kraken2</strong> tool’s report with <strong>Kalamari</strong> database and <strong>Kraken2</strong> tool’s report with <strong>Standard PlusPF</strong> database with regards to the previous 3 questions</li>
+    <li>What is the most commonly found species?</li>
+    <li>What is the second most commonly found species?</li>
+    <li>How many sequences are classified and how many are unclassified?</li>
+    <li>What are the differences between <strong>Kraken2</strong> tool’s report with <strong>Kalamari</strong> database and <strong>Kraken2</strong> tool’s report with <strong>Standard PlusPF</strong> database regarding the previous 3 questions?</li>
   </ol>
 
   <blockquote class="solution">
@@ -1406,9 +1406,9 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
   </blockquote>
 </blockquote>
 
-<p>In order to view the taxonomy profiling produced by <strong>Kraken2</strong> tool there are a lot of tools to be used afterwards such as <strong>Krona pie chart</strong>, however the species classified are a lot to be shown by this tool. For that reason, we have chosen the <strong>Phinch visualization</strong> interactive tool as it contains multiple visualization plots, it’s interactive you can choose between different parameters, you can visualize each taxonomic level on its own, you can have your metadata of the samples represented along with the taxonomic visualization, download all plots for publications and a lot of other benefits. For later, you can check out <a href="https://academic.oup.com/bioinformatics/article/36/4/1303/5573755"><strong>Pavian</strong></a> tool as well it can replace <strong>Phinch visualization</strong> with similar outputs.</p>
+<p>In order to view the taxonomy profiling produced by <strong>Kraken2</strong> tool, there are a lot of tools to be used afterwards such as <strong>Krona pie chart</strong>, however too many species were detected to be shown by this tool. For that reason, we have chosen the <strong>Phinch visualization</strong> interactive tool as it contains multiple visualization plots, it is interactive alowing you to choose between different parameters, you can visualize each taxonomic level on its own, you can have the metadata of the samples represented along with the taxonomic visualization, download all plots for publications and a lot of other benefits. For later, you can check out <a href="https://academic.oup.com/bioinformatics/article/36/4/1303/5573755"><strong>Pavian</strong></a> tool as well it can replace <strong>Phinch visualization</strong> with similar outputs.</p>
 
-<p><strong>Phinch visualization</strong> needs a <strong>BIOM</strong> file format as an input for that we needed the <a href="https://github.com/smdabdoub/kraken-biom"><strong>Kraken-Biom</strong></a>  tool to convert the <strong>Kraken2</strong> tabular output into a Biom file.</p>
+<p><strong>Phinch visualization</strong> needs a <strong>BIOM</strong> file format as an input, and for that we need the <a href="https://github.com/smdabdoub/kraken-biom"><strong>Kraken-Biom</strong></a>  tool to convert the <strong>Kraken2</strong> tabular output into a Biom file.</p>
 
 <div class="Long-Version">
 
@@ -1430,7 +1430,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
 
 </div>
 
-<p>Once the BIOM file has been generated, the visualisation interactive tool called <a href="https://www.phinch.org/"><strong>Phinch visualization</strong></a> is launched</p>
+<p>Once the BIOM file has been generated, we launch the interactive visualisation tool called <a href="https://www.phinch.org/"><strong>Phinch visualization</strong></a>:</p>
 
 <div class="Long-Version">
 
@@ -1472,8 +1472,8 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
   <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
-    <li>What is the most found species?</li>
-    <li>What is the second most found species?</li>
+    <li>What is the most commonly found species?</li>
+    <li>What is the second most commonly found species?</li>
     <li>What’s your favorite visualization plot?</li>
   </ol>
 
@@ -1484,7 +1484,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
       <li><em>Salmonella enterica</em> with 17,309 sequences</li>
       <li><em>Pseudomonas lundensis</em> with 13,227 sequences</li>
       <li>
-        <p>All of them are good visualization to the data but for us to answer these questions, we used <strong>Taxonomy Bar chart</strong></p>
+        <p>All of them are good visualization of the data but for us to answer these questions, we used the <strong>Taxonomy Bar Chart</strong></p>
 
         <p><img src="./images/phinch_taxonomy_bar_chart.png" alt="Taxonomy Bar Chart. " loading="lazy" /></p>
       </li>
@@ -1495,7 +1495,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
 
 <blockquote class="comment">
   <div id="comment-4" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
-  <p>While the steps is running you can move on to the next section <strong>Gene based pathogenic identification</strong> and run the steps there as well, both analyses can work in parallel.</p>
+  <p>While these steps are running, you can move on to the next section <strong>Gene based pathogenic identification</strong> and run the steps there, as well. Both analyses can execute in parallel.</p>
 </blockquote>
 
 <h1 id="gene-based-pathogenic-identification">Gene based pathogenic identification</h1>
@@ -1503,7 +1503,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
 <p>With taxonomy profiling, we identified some bacterial species. But we want to be sure they are pathogenic, by <strong>looking for genes known to be linked to pathogenicity or to the pathogenecity character</strong> of the organim:</p>
 
 <ul>
-  <li><a href="https://www.sciencedirect.com/topics/immunology-and-microbiology/virulence-factor"><strong>Virulence Factor (VF)</strong></a>: gene products, usually proteins, involved in pathogenicity by identifiying them we can call a pathogen and its severity level</li>
+  <li><a href="https://www.sciencedirect.com/topics/immunology-and-microbiology/virulence-factor"><strong>Virulence Factor (VF)</strong></a>: gene products, usually proteins, involved in pathogenicity. By identifiying them we can call a pathogen and its severity level</li>
   <li>
     <p><a href="https://www.sciencedirect.com/topics/engineering/antibiotic-resistance-genes"><strong>Antimicrobial Resistance genes (AMR)</strong></a>.</p>
 
@@ -1519,7 +1519,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
   <li>Generate reports with <strong>AMR</strong> genes and <strong>VF</strong> using <a href="https://github.com/tseemann/abricate"><strong>ABRicate</strong></a></li>
 </ol>
 
-<p>As outputs, we will get our <strong>FASTA</strong> and <strong>Tabular</strong> files to track genes and visualize our pathogenic identification. For that we will one more file needed to create a report and we can upload it directly:</p>
+<p>As outputs, we will get our <strong>FASTA</strong> and <strong>Tabular</strong> files to track genes and visualize our pathogenic identification. For that we will need one more file to create a report and we can upload it directly:</p>
 
 <blockquote class="notranslate hands_on">
   <div id="hands-on-data-upload-1" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
@@ -1589,7 +1589,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
     <div class="Long-Version">
 
       <blockquote class="hands-on">
-        <div id="hands-on-assembly-with-metaflye" class="box-title" aria-label="hands-on box:  Assembly with metaFlye "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Assembly with metaFlye</div>
+        <div id="hands-on-assembly-with-flye" class="box-title" aria-label="hands-on box:  Assembly with Flye "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Assembly with Flye</div>
 
         <ol>
           <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0"><strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1745,9 +1745,9 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
   <p>Inspect <strong>Flye</strong> and <strong>Medaka consensus pipeline</strong> output results for <code class="language-plaintext highlighter-rouge">Barcode10</code></p>
 
   <ol>
-    <li>How many different contigs you got after <strong>Flye</strong></li>
-    <li>How many are left after <strong>Medaka consensus pipeline</strong>, and what does that mean?</li>
-    <li>What is your result of the <strong>Bandage Image</strong>?</li>
+    <li>How many different contigs did you get after <strong>Flye</strong>?</li>
+    <li>How many were left after <strong>Medaka consensus pipeline</strong>, and what does that mean?</li>
+    <li>What is the result of your <strong>Bandage Image</strong>?</li>
   </ol>
 
   <blockquote class="solution">
@@ -1755,7 +1755,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
 
     <ol>
       <li>After <strong>Flye</strong> we have got 137 contigs</li>
-      <li>After <strong>Medaka consensus pipeline</strong> all 137 contigs were kept, which means that the quality of the <strong>Flye</strong> run was high that the polishing did not remove any of the contigs.</li>
+      <li>After <strong>Medaka consensus pipeline</strong> all 137 contigs were kept, which means that the quality of the <strong>Flye</strong> run was high, and as a result the polishing did not remove any of the contigs.</li>
       <li>
         <p>The graph looks like:</p>
 
@@ -1768,7 +1768,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
 
 <h2 id="multilocus-sequence-typing">Multilocus Sequence Typing</h2>
 
-<p><strong>MLST</strong> tool is used to scan the <a href="https://pubmlst.org/">pubMLST</a> database against PubMLST typing schemes. It’s one of the analysis that you can perform on your dataset to determine the allele IDs you can also detect novel alleles. For the further analysis of this tutorial, this step is not important to identify pathogens and track them, however we wanted to show some of the analysis that one can use <span class="notranslate">Galaxy</span> in to understand more about the dataset as well as identifying the strain that might be a pathogen or not.</p>
+<p><strong>MLST</strong> tool is used to scan the <a href="https://pubmlst.org/">pubMLST</a> database against PubMLST typing schemes. It’s one of the analyses that you can perform on your dataset to determine the allele IDs, you can also detect novel alleles. This step is not essential to identify pathogens and track them in the remainder of this tutorial, however we wanted to show some of the analysis that one can use <span class="notranslate">Galaxy</span> in to understand more about the dataset, as well as identifying the strain that might be a pathogen or not.</p>
 
 <div class="Long-Version">
 
@@ -1778,7 +1778,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mlst/mlst/2.22.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mlst/mlst/2.22.0"><strong>MLST</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mlst/mlst/2.22.0</span></span>  with the following parameters:
         <ul>
-          <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>”“</em>: <code class="language-plaintext highlighter-rouge">Sample Specific Contigs FASTA file</code> files</li>
+          <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“input_files”</em>:  Sample Specific <code class="language-plaintext highlighter-rouge">Contigs-BarcodeXX</code> FASTA files with contigs</li>
           <li><em>“Specify advanced parameters”</em>: <code class="language-plaintext highlighter-rouge">Yes, see full parameter list</code>
             <ul>
               <li><em>“Output novel alleles”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1822,7 +1822,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
 
 <h2 id="antimicrobial-resistance-genes">Antimicrobial Resistance Genes</h2>
 
-<p>Now, to search our samples’ contigs for <strong>AMR</strong> genes, we run <strong>ABRicate</strong> and choose the <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6811410/"><strong>NCBI Bacterial Antimicrobial Resistance Gene Database (AMRFinderPlus)</strong></a> from the advanced options of the tool. The tool identifies if there is an AMR found or not, if found then in which contig, in which location on the contig, what is the name of the exact product, what does it resist against and a lot of other information regarding the found <strong>AMR</strong>.</p>
+<p>Now, to search <strong>AMR</strong> genes among our samples’ contigs, we run <strong>ABRicate</strong> and choose the <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6811410/"><strong>NCBI Bacterial Antimicrobial Resistance Gene Database (AMRFinderPlus)</strong></a> from the advanced options of the tool. The tool checks if there is an AMR found or not, if found then in which contig it is, its location on the contig, what the name of the exact product is, what substance it provides resistance against and a lot of other information regarding the found <strong>AMR</strong>.</p>
 
 <div class="Long-Version">
 
@@ -1832,7 +1832,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1"><strong>ABRicate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1</span></span>  with the following parameters:
         <ul>
-          <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file (Fasta, Genbank or EMBL file)”</em>: <code class="language-plaintext highlighter-rouge">Sample Specific Contigs FASTA file</code> files</li>
+          <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file (Fasta, Genbank or EMBL file)”</em>: Sample Specific <code class="language-plaintext highlighter-rouge">Contigs-BarcodeXX</code> FASTA files with contigs</li>
           <li>In <em>“Advanced options”</em>:
             <ul>
               <li><em>“Database to use - default is ‘resfinder’“</em>: <code class="language-plaintext highlighter-rouge">NCBI Bacterial Antimicrobial Resistance Reference Gene Database</code></li>
@@ -1885,22 +1885,22 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
   <p>Inspect <strong>ABRicate</strong> output files from <code class="language-plaintext highlighter-rouge">Barcode10</code>and <code class="language-plaintext highlighter-rouge">Barcode11</code> tags</p>
 
   <ol>
-    <li>How many <strong>AMR</strong> genes found in <code class="language-plaintext highlighter-rouge">Barcode10</code> sample, what are they, give more details about them?</li>
-    <li>How many <strong>AMR</strong> genes found in <code class="language-plaintext highlighter-rouge">Barcode11</code> sample, what are they, give more details about them?</li>
+    <li>How many <strong>AMR</strong> genes found in <code class="language-plaintext highlighter-rouge">Barcode10</code> sample, what are they? Give more details about them.</li>
+    <li>How many <strong>AMR</strong> genes found in <code class="language-plaintext highlighter-rouge">Barcode11</code> sample, what are they? Give more details about them.</li>
   </ol>
 
   <blockquote class="solution">
     <div id="solution-6" class="box-title"><button type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>5 <strong>AMR</strong> genes are found:
+      <li>5 <strong>AMR</strong> genes were found:
         <ol>
-          <li>Tet(C), which resists <a href="https://medlineplus.gov/druginfo/meds/a682098.html">TETRACYCLINE</a>. It’s found in contig 158 from the position 1633 till 2808, with 100% coverage, so 100% of gene is covered in this contig.</li>
+          <li>Tet(C), which resists <a href="https://medlineplus.gov/druginfo/meds/a682098.html">TETRACYCLINE</a>. It was found in contig 158 from the position 1633 till 2808, with 100% coverage, so 100% of gene is covered in this contig.</li>
           <li>2 genes with sulfonamide-resistant dihydropteroate synthase Sul1 products</li>
           <li>2 genes with oxacillin-hydrolyzing class D beta-lactamase OXA-2 products</li>
         </ol>
       </li>
-      <li>No <strong>AMR</strong> genes are found by the database in <code class="language-plaintext highlighter-rouge">Barcode11_Spike2b</code> sample.</li>
+      <li>No <strong>AMR</strong> genes were found by the database in <code class="language-plaintext highlighter-rouge">Barcode11_Spike2b</code> sample.</li>
     </ol>
 
   </blockquote>
@@ -1908,14 +1908,14 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
 
 <h2 id="virulence-factor-identification">Virulence Factor identification</h2>
 
-<p>In this step we return back to the main goal of the tutorial where we want to identify the pathogens: <strong>identify if the found bacteria in our samples is a bacteria pathogen or not</strong>. One of the ways to do that is to identify if the sequences include genes with a <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2646308/">Virulence Facor</a> or not, such that if the samples include genes with a Virulence Factor then its for sure a pathogen.</p>
+<p>In this step we return back to the main goal of the tutorial where we want to identify the pathogens: <strong>identify if the bacteria found in our samples are pathogenic bacteria or not</strong>. One of the ways to do that is to identify if the sequences include genes with a <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2646308/">Virulence Facor</a> or not, such that if the samples include gene(s) with a Virulence Factor then it for sure is a pathogen.</p>
 
 <blockquote class="comment">
   <div id="comment-definitions" class="box-title" aria-label="comment box: Definitions"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Definitions</div>
 
-  <p><strong>Bacteria Pathogen</strong>: A bacterial pathogen is usually defined as any bacterium that has the capacity to cause disease. Its ability to cause disease is called pathogenicity.</p>
+  <p><strong>Bacterial Pathogen</strong>: A bacterial pathogen is usually defined as any bacterium that has the capacity to cause disease. Its ability to cause disease is called pathogenicity.</p>
 
-  <p><strong>Virulence</strong>: Virulence provides a quantitative measure of the pathogenicity or the likelihood of causing disease.</p>
+  <p><strong>Virulence</strong>: Virulence provides a quantitative measure of the pathogenicity or the likelihood of causing a disease.</p>
 
   <p><strong>Virulence Factors</strong>: Virulence factors refer to the properties (i.e., gene products) that enable a microorganism to establish itself on or within a host of a particular species and enhance its potential to cause disease. Virulence factors include bacterial toxins, cell surface proteins that mediate bacterial attachment, cell surface carbohydrates and proteins that protect a bacterium, and hydrolytic enzymes that may contribute to the pathogenicity of the bacterium.</p>
 
@@ -1931,7 +1931,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1"><strong>ABRicate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/abricate/abricate/1.0.1</span></span>  with the following parameters:
         <ul>
-          <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file (Fasta, Genbank or EMBL file)”</em>:  <code class="language-plaintext highlighter-rouge">Sample Specific Contigs FASTA file</code> files</li>
+          <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file (Fasta, Genbank or EMBL file)”</em>:   Sample Specific <code class="language-plaintext highlighter-rouge">Contigs-BarcodeXX</code> FASTA files with contigs</li>
           <li>In <em>“Advanced options”</em>:
             <ul>
               <li><em>“Database to use - default is ‘resfinder’“</em>: <code class="language-plaintext highlighter-rouge">VFDB</code></li>
@@ -1951,8 +1951,8 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
   <p>Inspect <strong>VFs of genes Identified by VFDB</strong> output file from<code class="language-plaintext highlighter-rouge">Barcode10</code>and <code class="language-plaintext highlighter-rouge">Barcode11</code> tags</p>
 
   <ol>
-    <li>How many different <strong>VFs</strong> gene products found in <code class="language-plaintext highlighter-rouge">Barcode10_Spike2</code> sample?</li>
-    <li>How many different <strong>VFs</strong> gene products found in <code class="language-plaintext highlighter-rouge">Barcode11_Spike2b</code> sample?</li>
+    <li>How many different <strong>VFs</strong> gene products were found in <code class="language-plaintext highlighter-rouge">Barcode10_Spike2</code> sample?</li>
+    <li>How many different <strong>VFs</strong> gene products were found in <code class="language-plaintext highlighter-rouge">Barcode11_Spike2b</code> sample?</li>
   </ol>
 
   <blockquote class="solution">
@@ -2003,15 +2003,15 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
 
 <h1 id="snp-based-pathogenic-identification">SNP based pathogenic identification</h1>
 
-<p>Now we would like to identify pathogen with a third approach based on variant and <a href="https://genome.sph.umich.edu/w/images/e/e6/Seqshop_may_2015_day2_snp_lecture_v2.pdf">single nucleotide polymorphisms (SNPs) calling</a>: comparison of sequences to a targeted reference genones, and call for differences between sample <span class="notranslate">reads</span> and reference genomes to identify variants.</p>
+<p>Now we would like to identify pathogens with a third approach based on variant and <a href="https://genome.sph.umich.edu/w/images/e/e6/Seqshop_may_2015_day2_snp_lecture_v2.pdf">single nucleotide polymorphisms (SNPs) calling</a>: comparison of <span class="notranslate">reads</span> to a targeted reference genome, and call the differences between sample <span class="notranslate">reads</span> and reference genomes to identify variants.</p>
 
-<p>For example, if we want to test our samples if they include <a href="https://www.cdc.gov/campylobacter/index.html"><em>Campylobacter</em> pathogenic strains</a> or not, we will map our samples against the reference genome of the <em>Campylobacter</em> species. Variants in specific positions on the genome are looked to see if these variations would indicate a pathogen or not.</p>
+<p>For example, if we want to check whether our samples include <a href="https://www.cdc.gov/campylobacter/index.html"><em>Campylobacter</em> pathogenic strains</a> or not, we will map our samples against the reference genome of the <em>Campylobacter</em> species. Variants in specific positions on the genome are queried to judge if these variations would indicate a pathogen or not.</p>
 
-<p>This approach allows also identification of novel alleles and so possible <strong>new variant of the pathogen</strong>.</p>
+<p>This approach also allows identification of novel alleles and possible <strong>new variants of the pathogen</strong>.</p>
 
-<p>Using this approach, we also build the consensus genome of each samples, so we can later build a phylogenetic tree of all samples’ full genomes and have an insight into events that occurred during same or different species of our samples’ evolution.</p>
+<p>Using this approach, we also build the consensus genome of each sample, so we can later build a phylogenetic tree of all samples’ full genomes and have an insight into events that occurred during the evolution of same or different species in the samples.</p>
 
-<p>In this training, we are testing <em>Salmonella enterica</em> , which our samples are spiked with its different strains. So we will now upload to our history the reference genome of <a href="https://www.ncbi.nlm.nih.gov/genome/?term=txid99287[Organism:exp]"><em>S. enterica</em></a> we got in prior from the <a href="https://www.ncbi.nlm.nih.gov/">National Center for Biotechnology Information (NCBI) database</a>.</p>
+<p>In this training, we are testing <em>Salmonella enterica</em>, with different strains of which our samples were spiked. So we will now upload to our history the reference genome of <a href="https://www.ncbi.nlm.nih.gov/genome/?term=txid99287[Organism:exp]"><em>S. enterica</em></a> we originally obtained from the <a href="https://www.ncbi.nlm.nih.gov/">National Center for Biotechnology Information (NCBI) database</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <div id="hands-on-data-upload-2" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
@@ -2061,7 +2061,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
 
 <ol>
   <li>
-    <p><strong>Map <span class="notranslate">reads</span> to the reference genome</strong> of the species of the pathogen we want to test our samples against using <strong>Minimap2</strong>(<span class="citation"><a href="#Li2017Minimap2">Li 2017</a></span>) as our datasets are Nanopore</p>
+    <p><strong>Map <span class="notranslate">reads</span> to the reference genome</strong> of the species of the pathogen we want to test our samples against using <strong>Minimap2</strong> (<span class="citation"><a href="#Li2017Minimap2">Li 2017</a></span>) as our datasets are from a Nanopore:</p>
 
     <div class="Long-Version">
 
@@ -2088,7 +2088,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
     </div>
   </li>
   <li>
-    <p><strong>Identify variants and single nucleotide variants</strong> using <strong>Clair3</strong> (<span class="citation"><a href="#Zheng2021">Zheng <i>et al.</i> 2021</a></span>), which is designed specifically for Nanopore datasets giving better results than other variant calling tools as well as its new and up-to-date.</p>
+    <p><strong>Identify variants and single nucleotide variants</strong> using <strong>Clair3</strong> (<span class="citation"><a href="#Zheng2021">Zheng <i>et al.</i> 2021</a></span>), which is designed specifically for Nanopore datasets and giving better results than other variant calling tools, as well as being new and up-to-date.</p>
 
     <blockquote class="comment-on">
       <div id="comment-6" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
@@ -2200,9 +2200,9 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
         <table>
           <tbody>
             <tr>
-              <td>Individual identifier (optional) - The previous column told us to expect to see genotypes here. The genotype is in the form 0</td>
-              <td>1, where 0 indicates the reference allele and 1 indicates the alte<span class="notranslate">rna</span>tive allele, i.e it is heterozygous. The vertical pipe</td>
-              <td>indicates that the genotype is phased, and is used to indicate which chromosome the alleles are on. If this is a slash / rather than a vertical pipe, it means we don’t know which chromosome they are on.</td>
+              <td>Individual identifier (optional) - The previous column told us to expect to see genotypes here. The genotype is in the form “0</td>
+              <td>1”, where 0 indicates the reference allele and 1 indicates the alte<span class="notranslate">rna</span>tive allele, i.e it is heterozygous. The vertical pipe “</td>
+              <td>” indicates that the genotype is phased, and is used to indicate which chromosome the alleles are on. If this is a slash (/) rather than a vertical pipe, it means we don’t know which chromosome they are on.</td>
             </tr>
           </tbody>
         </table>
@@ -2233,11 +2233,11 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
 <blockquote class="question">
   <div id="question-8" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-  <p>Now let’s inspect the outputs for <code class="language-plaintext highlighter-rouge">Barcode10</code> tag</p>
+  <p>Now let’s inspect the outputs for <code class="language-plaintext highlighter-rouge">Barcode10</code> tag:</p>
 
   <ol>
-    <li>How many variants are found by <strong>Clair3</strong>?</li>
-    <li>How many variants are found after quality filtering?</li>
+    <li>How many variants were found by <strong>Clair3</strong>?</li>
+    <li>How many variants were found after quality filtering?</li>
     <li>What is the Strain identified by the NCBI for the sample?</li>
   </ol>
 
@@ -2247,7 +2247,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
     <ol>
       <li>Before filtering: 2,652</li>
       <li>After filtering 2,489</li>
-      <li>Strain <a href="https://bacdive.dsmz.de/strain/5117">LT2</a>, Known after we searched the Chroms. NCBI Reference Sequence: NC_003197.2</li>
+      <li>Strain <a href="https://bacdive.dsmz.de/strain/5117">LT2</a>, can be inferred searching the Chroms. NCBI Reference Sequence: NC_003197.2</li>
     </ol>
   </blockquote>
 </blockquote>
@@ -2256,7 +2256,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
 
 <p>For further anaylsis we have included one more step in this section, where we build the full genome of our samples.</p>
 
-<p>This consensus genome can be used later to compare and relate samples together based on their full genome. In cases such as SARS-COV2 its important to do so in order to discover new outbreaks. In this example of the training its not really important to draw a tree of the full genomes of the samples as <em>Salmonella</em> does not have such a speedy outbreak as SARS-COV2 does. However, we decided to include it in the <span class="notranslate">workflow</span> for any further analysis of the users if needed.</p>
+<p>This consensus genome can be used later to compare and relate samples together based on their full genome. In cases such as SARS-CoV2, it is important to do so in order to discover new outbreaks. In this example of the training, it is not really important to draw a tree of the full genomes of the samples as <em>Salmonella</em> does not have such a speedy outbreak as SARS-CoV2 does. However, we decided to include it in the <span class="notranslate">workflow</span> for any further analysis of the users, if needed.</p>
 
 <p>For this step we run <a href="https://samtools.github.io/bcftools/bcftools.html"><strong>bcftools consensus</strong></a> (<span class="citation"><a href="#Li20092">Li <i>et al.</i> 2009</a></span>).</p>
 
@@ -2286,7 +2286,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
   <p>Inspect the <strong>bcftools consensus</strong> output for <code class="language-plaintext highlighter-rouge">Barcode11</code> tag</p>
 
   <ol>
-    <li>How many sequences we got for the sample? What are they</li>
+    <li>How many sequences did we get for the sample? What are they?</li>
     <li>Why?</li>
   </ol>
 
@@ -2294,8 +2294,8 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
     <div id="solution-9" class="box-title"><button type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>We got 2 sequences: the complete genome and the complete <a href="https://www.genome.gov/genetics-glossary/Plasmid">plasmid</a> gemome.</li>
-      <li>The tool uses the reference genome and the variants found to build the consensus genome of the sample, and the reference genome FASTA file we use includes two sequences a complete one and a plasmid complete one, so the tool constructed both sequences for us to choose from based on our further analysis.</li>
+      <li>We got 2 sequences: the complete genome and the complete <a href="https://www.genome.gov/genetics-glossary/Plasmid">plasmid</a> genome.</li>
+      <li>The tool uses the reference genome and the variants found to build the consensus genome of the sample, and the reference genome FASTA file we use includes two sequences a complete one and a plasmid complete one. So the tool constructed both sequences for us to choose from, based on our further analysis.</li>
     </ol>
   </blockquote>
 </blockquote>
@@ -2305,7 +2305,7 @@ https://zenodo.org/record/7567733/files/Nanopore_processed_sequenced_<span class
 <blockquote class="comment">
   <div id="comment-8" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
-  <p>If you did not get your <strong>Gene based pathogenic identification</strong> section output files needed yet or you got an error with any, you can go on and upload them all or the ones missing from Zenodo so you can start this <span class="notranslate">workflow</span>, please don’t forget to create the collections for them as explained in the pervious hands-on.</p>
+  <p>If you did not get your <strong>Gene based pathogenic identification</strong> section output files needed yet or you got an error for some reason, you can go on and download them all or the ones missing from Zenodo so you can start this <span class="notranslate">workflow</span>, please don’t forget to create the collections for them as explained in the pervious hands-on.</p>
 
   <blockquote class="notranslate hands_on">
     <div id="hands-on-optional-data-upload-1" class="box-title" aria-label="hands-on box: Optional Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Optional Data upload</div>
@@ -2339,7 +2339,7 @@ https://zenodo.org/record/7567733/files/Sample_Specific_Contigs_FASTA_file_Barco
   <li>Drawing a <a href="https://www.sciencedirect.com/topics/medicine-and-dentistry/phylogenetic-tree">phylogenetic tree</a> for each pathogenic gene detected, where we will relate the contigs of the samples together where this gene is found.</li>
 </ol>
 
-<p>With these two types of visualizations we can have an overview of all samples and the genes, but also how samples are related to each other, which common pathogenic genes they share. Given the time of the sampling and the location one can easy identify using these graphes where and when the contamination has occurred among the different samples.</p>
+<p>With these two types of visualizations we can have an overview of all samples and the genes, but also how samples are related to each other, which common pathogenic genes they share. Given the time of the sampling and the location one can easily identify using these graphs, where and when the contamination has occurred among the different samples.</p>
 
 <blockquote class="notranslate hands_on">
   <div id="hands-on-organize-data" class="box-title" aria-label="hands-on box: Organize data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Organize data</div>
@@ -2517,8 +2517,7 @@ https://zenodo.org/record/7567733/files/Sample_Specific_Contigs_FASTA_file_Barco
   <p><img src="./images/heatmap.png" alt="Heatmap. " loading="lazy" /></p>
 
   <ol>
-    <li>Mention three of the common bacteria pathogen genes found in both samples</li>
-    <li>Mention one that is only found in <code class="language-plaintext highlighter-rouge">Barcode10_Spike2</code> sample and one that is only found in <code class="language-plaintext highlighter-rouge">Barcode11_Spike2b</code></li>
+    <li>Mention three of the common bacterial pathogen genes found in both samples.</li>
     <li>How can the differences in the found <strong>VF</strong> bacteria pathogen genes between the two samples be interpreted?</li>
   </ol>
 
@@ -2528,20 +2527,16 @@ https://zenodo.org/record/7567733/files/Sample_Specific_Contigs_FASTA_file_Barco
     <ol>
       <li>A lot of bacteria pathogen <strong>VF</strong> gene products identified by the <strong>VFDB</strong> are common in both samples, three of them are with the following accession number: <strong>NP_461810</strong>, <strong>NP_461809</strong> and <strong>NP_459541</strong></li>
       <li><strong>AAG03023</strong> is only found in <code class="language-plaintext highlighter-rouge">Barcode10</code> sample and <strong>NP_460360</strong> is only found in <code class="language-plaintext highlighter-rouge">Barcode11</code> sample</li>
-      <li>Both samples are spiked with the same pathogen species, <em>S. enterica</em>, but not the same strain.
-        <blockquote>
-          <ul>
-            <li><code class="language-plaintext highlighter-rouge">Barcode10_Spike2</code> sample is spiked with <em>S. enterica subsp. enterica</em> strain</li>
-            <li><code class="language-plaintext highlighter-rouge">Barcode11_Spike2b</code> sample is spiked with <em>S. enterica subsp. houtenae</em> strain.
-              <blockquote>
-                <p>This can be the main cause of the big similarities and the few difference of the bacteria pathogen <strong>VF</strong> gene products found between both of the two samples.</p>
-                <blockquote>
-                  <p>Other factors such as the <strong>time</strong> and <strong>location</strong> of the sampling may cause other differences. By knowing the metadata of the samples inputted for the workflows in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that</p>
-                </blockquote>
-              </blockquote>
-            </li>
-          </ul>
-        </blockquote>
+      <li>
+        <p>Both samples were spiked with the same pathogen species, <em>S. enterica</em>, but not the same strain:</p>
+
+        <ul>
+          <li><code class="language-plaintext highlighter-rouge">Barcode10_Spike2</code> sample is spiked with <em>S. enterica subsp. enterica</em> strain</li>
+          <li><code class="language-plaintext highlighter-rouge">Barcode11_Spike2b</code> sample is spiked with <em>S. enterica subsp. houtenae</em> strain.</li>
+        </ul>
+
+        <p>This can be the main cause of the big similarities and the few differences of the bacteria pathogen <strong>VF</strong> gene products found between both of the two samples. 
+Other factors such as the <strong>time</strong> and <strong>location</strong> of the sampling may cause other differences. By knowing the metadata of the samples inputted for the workflows in real life we can understand what actually happened. We can have samples with no pathogen found then we start detecting genes from the 7th or 8th sample, then we can identify where and when the pathogen entered the host, and stop the cause of that</p>
       </li>
     </ol>
 
@@ -2550,7 +2545,7 @@ https://zenodo.org/record/7567733/files/Sample_Specific_Contigs_FASTA_file_Barco
 
 <h2 id="phylogenetic-tree-building">Phylogenetic Tree building</h2>
 
-<p>Phylogenetic trees are nice ways to track all the bacteria pathogen genes one by one in all samples. So we will have a tree for every found gene, this tree will indicate which contigs the gene is found in all samples and relating these contigs together based on their topology. With such trees we can identify on which location of the sequences sample genome the pathogentic gene is found and is it the same or different location as the other samples. We can also see how many samples have these genes in common and accordingly track our contamination.</p>
+<p>Phylogenetic trees are nice ways to track all the bacterial pathogen genes one by one in all samples. So we will have a tree for every found gene, this tree will indicate which contigs the gene is found in all samples and relating these contigs together based on their topology. With such trees we can identify on which location of the sequences from the sample genome the pathogentic gene is found and whether it is at the same or a different location as the other samples. We can also see how many samples have these genes in common and accordingly track our contamination.</p>
 
 <p>For the phylogenetic trees, for each bacteria pathogen gene found in the samples we use <strong>ClustalW</strong> (<span class="citation"><a href="#Larkin2007">Larkin <i>et al.</i> 2007</a></span>) for <a href="https://www.sciencedirect.com/topics/medicine-and-dentistry/multiple-sequence-alignment">Multiple Sequence Alignment (MSA)</a> needed before constructing a phylogenetic tree, for the tree itself we use <strong>FASTTREE</strong> and <strong>Newick Display</strong> (<span class="citation"><a href="#Dress2008">Dress <i>et al.</i> 2008</a></span>) to visualize it.</p>
 
