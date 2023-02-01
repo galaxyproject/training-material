@@ -221,6 +221,14 @@ Distances have very desirable properties, that can be summarised as follows, for
 ## Data upload
 
 Background on the data used in this workshop.
+
+This workshop will use some recent SARS-CoV-2 nucleotide sequence data, from NCBI, the National Center for Biotechnology Information.
+
+The SARS-CoV-2 virus has caused the largest pandemic in modern history (in absolute terms of population affected, in all history) and understanding its evolution is key to managing it.
+
+![SARS-CoV-2](./images/SARS-CoV-2-www.ncbi.nlm.nih.png){:width="500" :align="center"}
+*Source: /www.ncbi.nlm.nih.gov; CC BY-SA • Alexey Solodovnikov*
+
 The sequences we have chosen for this workshop are complete SARS-CoV2 sequences, publicly available from nextStrain (http).
 We are using a relatively small set of sequences because phylogenetic estimation on many sequences is computationally very intensive, and can take weeks of time on a high-performance computer.
 
@@ -267,13 +275,20 @@ FASTA format is very simple and is commonly used as input to phylogenetic infere
 
 # Sequence Alignment
 
-Sequence alignment is 
+Sequence alignment is a very well developed process, but there can still be some arbitrariness that can make it tricky.
+For a start, while aligning just *two* sequences is "easy", in the sense that an optimal alignment between two sequences can be found in a reasonable amount of time, optimally aligning multiple sequences is *computationally intractable*.
+
+### Aside on dynamic programming for interested readers...
 
 ## Aligning sequences with MAFFT
 
+Today you will be aligning sequences using a modern multiple alignment program called **MAFFT**, whjich is available on Galaxy.
+## Question: is there a format convention for program names, like Courier Bold or something?
+
+
 > <hands-on-title>Sequence alignment with MAFFT</hands-on-title>
 >
-> 1. Align seqs with settings: xxx
+> 1. in Galaxy, search for and select the MAFFT tool from the tool finder on the left.
 > 2. View alignment
 >
 {: .hands_on}
