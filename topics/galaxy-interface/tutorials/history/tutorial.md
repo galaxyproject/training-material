@@ -32,6 +32,8 @@ contributions:
 subtopic: histories
 ---
 
+{% snippet faqs/gtn/galaxy_tested_with.md version="23.0" %}
+
 When data is uploaded from your computer or analysis is done on existing data using Galaxy, each output from those steps
 generates a dataset. These datasets (and the output datasets from later analysis on them) are stored by Galaxy in
 **Histories**.
@@ -194,7 +196,7 @@ your history has hidden datasets, the number will appear there (e.g. '3 hidden')
 the hidden datasets are shown. Each hidden dataset has a link in the top of the summary view that allows you to unhide
 it. You can click that link again (which will now be 'hide hidden') to make them not shown again.
 
-![Hiding dataset](../../images/hide.png "Hiding and unhiding datasets. Left side shows a history with one hidden dataset. We know this because a link "1 hidden" appears under the history's name. Clicking this link will reveal the hidden dataset as shown on the right side of the figure.")
+![Two histories side by side, one shows a message saying "this history is empty", on the right the history search has been replaced by visible:false and now one history is visible.](../../images/hide.png "Hiding and unhiding datasets. Left side shows a history with one hidden dataset. We know this because of the eye with a slash through it and the number 1 which appears under the history's name. Clicking this link will reveal the hidden dataset as shown on the right side of the figure.")
 
 ### Deleting and undeleting datasets
 
@@ -205,13 +207,7 @@ link. Clicking this link (e.g. '3 deleted') will make the deleted datasets visib
 link for manually undeleting it, above its title. You can click that link again (which will now be 'hide deleted') to
 make them not shown again.
 
-![Deleting dataset](../../images/delete.png "Deleting and undeleting datasets. The left side shows a history with one deleted dataset. We know this because a link '1 deleted' appears under the history's name. Clicking this link will reveal the deleted dataset as shown on the right side of the figure. From here it can be undeleted or deleted permanently.")
-
-### Purging datasets and removing them permanently from Galaxy
-
-If you are showing deleted datasets and *your Galaxy allows users to purge datasets*, you will see an additional link in the top of each deleted dataset titled **'Permanently remove it from disk**'. Clicking this will remove the file that contains that dataset's data and will decrease the disk space used by the history. **This action is not reversible and cannot be undone**.
-
-If your Galaxy doesn't allow users to purge their datasets, you will not see that link.
+![Two histories side by side, the left shows the same "this history is empty" message. The right shows a dataset, only identifiable as deleted by a new trash can icon next to the pencil icon.](../../images/delete.png "Deleting and undeleting datasets. The left side shows a history with one deleted dataset. We know this because a button with 1 and a trash can icon appears under the history's name. Clicking this link will reveal the deleted dataset as shown on the right side of the figure. From here it can be undeleted.")
 
 ### Admins may purge your deleted datasets
 
@@ -222,15 +218,11 @@ find out the policy used.
 
 ### Tagging datasets
 
-There are two types of tags that can be used as an additional level of labeling for datasets: **standard tags** and **hashtags** (also known as **name tags** or **propagating tags**). The standard tags work similarly to history tags described above - they add another level of description to datasets making them easier to find:
+There are two types of tags that can be used as an additional level of labeling for datasets: **standard tags** and **hashtags**. The standard tags work similarly to history tags described above - they add another level of description to datasets making them easier to find. **Hashtags** (also known as **name tags** or **propagating tags**) are much more powerful as they **propagate** through the analysis:
 
-![Standard tags](../../images/standard_tags.png "Standard tags provide an additional level of annotation for individual datasets. A. Tags are added by clicking on the tags icon {% icon galaxy-tags %} and entering a name. B. Here the tag is used to search the history. Entering 'microbiome' in the search box and pressing <kbd>Enter</kbd> shows the only dataset containing that tag.")
+![Close up of the history showing tag:#🐇 in the search field, and four discovered datasets. Two are tagged hashtag rabbit emoji only, and the other two are tagged hashtag rabbit emoji and two other identifiers, CS219 and PDB.](../../images/name_tags.png "Hashtags allow you to more easily track datasets through the analysis. Hashtags are added similarly to standard tags but with one important difference: they are prepended with a hash '#' symbol. Here you see a history where two datasets were given tags, some hash tags and some normal tags. The hashtag propagates, when a computation is done, while the standard tags do not.")
 
-**Hashtags** are much more powerful as they are **displayed** in the history panel and **propagate** through the analysis:
-
-![Standard tags](../../images/name_tags.png "Hashtags allow you to more easily track datasets through the analysis. A. Hashtags are added similarly to standard tags but with one important difference: they are prepended with a hash '#' symbol. B. Here you see a history where four starting datasets were given name tags. As the analysis progresses hashtags stay with all datasets that are derived from the initial ones. For example, you can easily see which of the `bwa` and `MarkDuplicates` outputs are derived from, say, mother data.")
-
-For more information on name tags, [a video is available](https://player.vimeo.com/video/216884518) of their usage.
+For more information on name tags, a [dedicated nametag tutorial is available]({% link topics/galaxy-interface/tutorials/name-tags/tutorial.md %}).
 
 ## Managing Multiple Datasets Easily
 
@@ -283,54 +275,3 @@ Click the 'Switch to' button at the top of that history and then click 'done' at
 the 'Analyze Data' page.
 
 ![Switch to history](../../images/undelete.switchto.png "Switching histories")
-
-## Dataset Collections
-
-When you have multiple datasets that will be sent through the same analysis, it can often be useful to place those
-datasets in a dataset collection. When collections are used as input when running a tool, you're telling Galaxy to run
-that tool on each  dataset in the collection using the same settings. This happens automatically and there's no need to
-fill in the tool form more than once.
-
-It may be helpful to metaphorically think of dataset collections as containers (or directories) in which you place
-datasets. To create a dataset collection from datasets in a history:
-
-1. Use multiselect to select the datasets you'd like to put into a collection.
-2. From the drop down menu labeled 'For all selected...', choose one of the collections types.
-3. Depending on the type you chose, some configuration and options may be displayed, and when you've chosen those,
-  the collection is created and will show in the current history panel.
-4. Note: that your datasets are still shown in the history alongside the new collection. You can hide them if you like
-  using the multiselect menu.
-
-### Viewing a dataset collection
-
-You can view what datasets were inside a collection by clicking on the collection title. The history panel will be
-replaced by a list of the collection contents and each are expandable as a normal dataset in a history would be. You
-can click the '< Back to (you history name)' link at the top to return to the history view (see below for examples).
-
-The current collection types are: dataset pairs, dataset list, and list of dataset pairs - described below.
-
-### Dataset pairs
-
-A common pattern of dataset files are pairs of read files - often some form of fastq files - where one file contains
-the forward reads and one file contains the reverse reads. Many bioinformatic tools accept these pairs and Galaxy can
-further simplify this by placing both files into on 'Dataset Pair' collection. Only two files will be added to the
-collection: forward and reverse.
-
-![Dataset pairs](../../images/pair.png "Dataset pairs")
-
-### Dataset list
-
-Choose 'Dataset List' when you have a set of files that are of the same type and will be run through some similar
-analysis. The datasets in a dataset list must have unique names (e.g. you cannot have two datasets in a dataset list
-with the name '1.bed').
-
-![Dataset lists](../../images/list.png "Dataset lists")
-
-### List of dataset pairs
-
-Think of this as a collection of collections: multiple dataset pairs contained in a dataset list. The interface used
-to create this is currently the most flexible and potentially most complicated. It will attempt to automatically pair
-datasets sent to the interface based on the dataset names. You are free to select your own pairs, however, and change
-the order of the collection. Click the help text at the top of the interface to see more information.
-
-![List of dataset pairs](../../images/list-pairs.png "List of pairs")
