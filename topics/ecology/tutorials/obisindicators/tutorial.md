@@ -47,7 +47,7 @@ This first step consist of downloading and uploading obis data onto galaxy.
 >
 > 1. Create a new history for this tutorial and give it a name (example: “Obisindicators tutorial”) for you to find it again later if needed.
 >
->    {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
+>    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 >
 > 2. Download the files from [Obis](https://mapper.obis.org/) 
