@@ -150,6 +150,8 @@ module Jekyll
 
           # Write out the individual page
           page6 = PageWithoutAFile.new(site, "", "api/topics/", "#{q['url'][7..-6]}.json")
+          # Delete the ref to avoid including it by accident
+          q.delete('ref')
           page6.content = JSON.pretty_generate(q)
           page6.data["layout"] = nil
           site.pages << page6

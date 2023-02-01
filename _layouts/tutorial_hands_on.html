@@ -3,6 +3,12 @@ layout: base
 footer: no
 ---
 
+{% comment %}
+TODO(hexylena) someday resolve the duplication of topic_material, own_material, and new_material.
+
+We should ONLY be using new_material (if at all possible.)
+{% endcomment %}
+
 {% assign topic = site.data[page.topic_name] %}
 {% assign contributors = site.data['contributors'] %}
 {% assign instances = site.data['instances'] %}
@@ -23,6 +29,8 @@ footer: no
         {% endif %}
     {% endif %}
 {% endfor %}
+
+{% assign new_material = site | fetch_tutorial_material:page.topic_name, page.tutorial_name %}
 
 <!-- Gitter -->
 {% if page.gitter %}
@@ -164,6 +172,9 @@ footer: no
             {% endif %}
             <a rel="license" href="{{ site.github_repository }}/blob/main/LICENSE.md">{{ locale['license-framework'] | default: "The GTN Framework is licensed under MIT" }}</a>
         </div>
+        {% if page.short_id %}
+        <div><strong>{{ locale['short-link'] | default: "Short Link" }}:</strong> <a href="https://gxy.io/GTN:{{ page.short_id }}">https://gxy.io/GTN:{{ page.short_id }}</a> </div>
+        {% endif %}
     </blockquote>
     </section>
 
