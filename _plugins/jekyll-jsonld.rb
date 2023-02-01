@@ -20,50 +20,6 @@ module Jekyll
       "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
     }
 
-    # todo migrate somewhere else
-    def how_many_topic_feedbacks(feedback, name)
-      feedback.select{|x| x["topic"] == name}.length
-    end
-    def how_many_tutorial_feedbacks(feedback, name)
-      feedback.select{|x| x["tutorial"] == name}.length
-    end
-
-    # todo migrate somewhere more generic
-    def filter_authors(contributors, contributions)
-      if not contributors.nil?
-        return contributors
-      else
-        return contributions["authorship"]
-      end
-    end
-
-    # todo: migrate somewhere else
-    def get_default_link(material)
-      url = nil
-
-      if material['type'] == "introduction"
-        subfolder = 'slides'
-      else
-        subfolder = 'tutorials'
-      end
-
-      if material['slides']
-        url = "topics/#{material['topic_name']}/#{subfolder}/#{material['tutorial_name']}"
-        if material['type'] != "introduction"
-          url += "/slides.html"
-        else
-          url += ".html"
-        end
-      end
-
-      if material['hands_on']
-        if material['hands_on'] != "external" && material['hands_on'] != ""
-          url = "topics/#{material['topic_name']}/tutorials/#{material['tutorial_name']}/tutorial.html"
-        end
-      end
-
-      url
-    end
 
     def generate_dublin_core(material, site)
       if material.key?('data') && material['data'].fetch('type', 'none') != "tutorial_hands_on"
@@ -309,12 +265,7 @@ module Jekyll
 
       data['isPartOf'] = topic_desc
 
-      if material['type'] == 'introduction' then
-        data['learningResourceType'] = "slides"
-        data['name'] = "Introduction to '#{topic['title']}'"
-        data['url'] = "#{site['url']}#{site['baseurl']}#{material['url']}"
-        description.push("Slides for #{topic['title']}")
-      elsif material['name'] == 'tutorial.md' or material['name'] == 'slides.html' then
+      if material['name'] == 'tutorial.md' or material['name'] == 'slides.html' then
         if material['name'] == 'tutorial.md' then
           data['learningResourceType'] = "hands-on tutorial"
           data['name'] = "Hands-on for '#{material['title']}' tutorial"

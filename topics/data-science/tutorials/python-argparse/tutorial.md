@@ -91,7 +91,7 @@ In the coding world, whenever you run a Python script on the command line, it ha
 
 Let's sum up all of the numbers passed on the command line. We'll do this by hand, and then we'll replace it with `argparse` to see how much effort that saves us.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 > Update your script to sum up every number passed to it on the command line.
 >
 > It should handle:

@@ -187,7 +187,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 4. Click the rerun button on the last history item, or click **Testing Tool** in the tool panel, and then click the tool's Execute button.
+> 4. Click the rerun button on the last history item, or click **Testing Tool** in the tool panel, and then click the tool's Run Tool button.
 >
 >    > <question-title></question-title>
 >    >

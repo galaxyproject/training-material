@@ -581,7 +581,7 @@ They can also help the instructors by exposing and clarifying common scenarios, 
 > 1. Why are some tests filtered?
 > 2. Does it improve the *p*-value distribution?
 >
-> > <solution-title></solution-title>
+> > <solution​-title></solution​-title>
 > >
 > > 1. Sol for the first question
 > > 2. Sol for the second question
@@ -736,13 +736,13 @@ Normally a single column, with the boxes above one another, it will automaticall
 
 {% raw %}
 ```markdown
-> > <code-in-title>Bash</code-in-title>
+> > <code​-in-title>Bash</code​-in-title>
 > > ```bash
 > > cat /tmp/test.ini
 > > ```
 > {: .code-in}
 >
-> > <code-out-title></code-out-title>
+> > <code​-out-title></code​-out-title>
 > > The file should look like:
 > >
 > > ```ini
@@ -1187,6 +1187,7 @@ To use this system, you need to take care of a few things:
 
 - Do **not** use hands-on boxes for segments that should be executed (code needs to be left aligned!)
 - Do **not** use snippets
+- Do **not** use icons `{% raw %}{% icon X %}{% endraw %}`
 - Do not use a terminal or prompt character (that would be included in the execution.)
 - Avoid including output when you can, it doesn't render nicely especially when the cells will become runnable.
 

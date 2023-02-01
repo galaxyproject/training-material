@@ -1,0 +1,441 @@
+---
+layout: introduction_slides
+logo: "GTN"
+priority: 1
+title: "Introduction to Genome Annotation"
+level: Intermediate
+redirect_from:
+- /topics/genome-annotation/slides/introduction
+contributors:
+  - abretaud
+  - hexylena
+subtopic: intro
+---
+
+# Genome Annotation
+
+**Structural Annotation**
+
+Positions of genomic features along the genome
+
+**Functional Annotation**
+
+Assigning functions to those features
+
+???
+
+Two parts, structural and function. Structural can come from ab-initio predictions or structural data. Functional annotation often comes from analysis of protein domains or in rare cases from experimental data.
+
+---
+
+## Structural Annotation
+
+Types of elements:
+
+- genes
+- regulatory regions
+- ncRNA
+- repeat elements
+- pseudogenes and paralogs
+
+---
+
+### Structural Annotation: Why?
+
+![Screenshot of apollo, with genome sequence at the top, and several gene models shown below. These gene models are coding sequences + protein sequences.](../../images/intro-structural-annotation.png)
+
+---
+
+### Structural Annotation: Why?
+
+Locate your favorite gene + see what's next to it
+
+Basis for other analysis, e.g.:
+
+- Transcriptomic data (count reads mapping inside exons)
+- Variants detection (SNP, indels, …) and their effects
+- Epigenomic (ChIPSeq, FAIRESeq, …)
+
+Compare with other species
+
+- Presence/absence/mutations of genes
+- Family reduction or expansion
+- Structural variants
+
+---
+
+### Prokaryotic Genes
+
+<div>
+.pull-left[
+Promoter:
+
+- -35 Region
+- TATA Box
+- Initiation site (TSS)
+]
+.pull-right[
+![Cartoon of a promoter region with a -35 region box reading TTGACA, a -10 region TATAAT, and that makes up the promoter. Then at +1 is the TSS or transcription start site.](../../images/intro-prok1.png)
+]
+</div>
+
+
+<div>
+.pull-left[
+Operons:
+
+- Promoter
+- Some genes
+- A terminator
+]
+.pull-right.image-90[
+![A cartoon of gene with promoter, gene 1, gene 2, and gene 3 boxes before a terminator. This produces a polycistronic mRNA and that is cut up into protein 1, 2, and 3](../../images/intro-prok2.png)
+]
+</div>
+
+???
+
+Prokaryotic genes often have a well conserved structure, with a promoter, one or a few genes and a terminator.
+
+---
+
+### Eukaryotic Genes
+
+![A cartoon of a eukaryotic gene with a UTR, Exon 1, an intro, Exon 2, another intro, and Exon 3 before a final UTR shown along a line representing DNA. The process of Transcription extracts the region between and including UTRs, exons, and introns. Splicing produces the next product which is just the UTRs and 3 exons, before translation into a protein.](../../images/intro-eukaryotic-genes.png)
+
+???
+
+Things are a little more complicated for eukaryotic: splicing
+
+---
+
+## Automatic Structural Annotation
+
+Very difficult problem
+
+- Short, variable, unspecific motifs
+- Need data to support predictions
+
+![The previous cartoon of a eukaryotic gene with TSS pointing to the UTR, the ATG codon at exon 1, the three exons, and a final UTR. The letters GT appear at the end of exons 1 and 2, and AG appear at the beginning of Exon 2 and 3, indicating where it will be spliced.](../../images/intro-tss.png)
+
+---
+
+### Evidence
+
+Multiple pieces of evidence
+
+- Alignment of RNASeq reads
+- Alignment of EST or transcripts (same species or closely related species)
+- Alignment of proteins (closely related species)
+
+![Screenshot of genome browser with a new gene at the top, a row with protein/mRNA from other species used as evidence, and a final row with RNASeq coverage indicating mapped reads.](../../images/intro-evidences.png)
+
+*But* data unavailable for novel or very distant genes, or unexpressed genes
+
+---
+
+### *Ab initio* Gene Calling
+
+.pull-left[
+Predictions using:
+- Genome sequence
+- Statistical model (specific to organism)
+
+Models:
+- Training on the best evidence-based gene calls
+- "Best" = strong evidence, highly conserved
+- Training can be iterative:
+  - train, predict, select best genes, retrain, etc
+]
+
+.pull-right.image-90[
+![Cartoon of ab initio prediction with several rows, genome, coding potential, atg and stop codons, splice sites, then these rows are duplicated for the reverse strand. Examples are listed like genefinder, augustus, glimmer, snap, and fgenesh.](../../images/intro-ab-initio.png)
+]
+
+---
+
+### Data Reconcilliation
+
+.pull-left[
+
+- Integration of evidence and *ab initio* predictions
+- "Consensus" of multiple sources
+- Automated pipelines
+  - [**Maker**]({% link topics/genome-annotation/tutorials/annotation-with-maker-short/tutorial.md %}), **Braker**, [**Funannotate**]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}), **Pasa**, **Prokka**, ...
+  - Align evidences (or use pre-aligned)
+  - Run *ab initio* predictors
+  - Reconciliate gene models
+]
+
+.pull-right.image-90[
+![Multiple gene models are shown labelled current evidence, which is complemented by three more gene models from ab initio prediction. Below a final gene model is constructed and labelled current assembly.](../../images/intro-consensus.png)
+]
+
+>>>>>>> 7259342d100 (Remove slides folder and move introduction decks):topics/genome-annotation/tutorials/introduction/slides.html
+<small>
+Source: [Maker documentation](http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018)
+</small>
+]
+
+---
+
+### Evaluation of annotation: metrics
+
+- Number of genes
+- Average number of exons
+- Average gene length
+- Average protein length
+- ...
+
+---
+
+### Evaluation of annotation: BUSCO
+
+#### Benchmarking Universal Single-Copy Orthologs
+
+* Sets of genes having single-copy orthologs in all species of a clade (insects, plants, bacteria, ...)
+* Genes supposed to be vital for the species
+* Expected to be found in a good annotation
+* Results:
+  * Found genes
+  * Fragmented genes
+  * Duplicated genes
+
+---
+
+### Visualisation of Results
+
+Genome Browsers (JBrowse, UCSC, ...)
+
+![Screenshot of Apollo showing a track list on left, and then several rows of evidence like maker annotation and blastn showing gene models, followed by my bam file.](../../images/intro-viz.png)
+
+<small>
+**JBrowse**: [Slides]({% link topics/visualisation/tutorials/jbrowse/slides.html %}) - [Tutorial]({% link topics/visualisation/tutorials/jbrowse/tutorial.md %})
+</small>
+
+---
+
+### Repeated Elements
+
+- Transposons, Retrotransposons, low complexity regions
+- Disrupt gene calling
+- Prediction pipelines:
+  - [RepeatMasker]({% link topics/genome-annotation/tutorials/repeatmasker/tutorial.md %})
+  - RepeatModeler
+  - REPET
+- Databases of repeated elements
+  - Can be used by pipelines
+  - Dfam
+  - RepBase (non free)
+
+---
+
+### Exotic Elements
+
+- tRNA, rRNA, ncRNA, ...
+- Dedicated tools for prediction
+  - Aragorn
+  - tRNAscan
+  - ...
+
+---
+
+### Summary
+
+- Difficult problem
+- Automated pipelines
+- Need for evidences
+- Never perfect
+  - Missing/incomplete genes
+  - Split/fused genes
+  - Pseudogenes
+
+---
+
+## Manual Annotation
+
+- Recruit experts of some gene families
+- Manual curation of their favorite genes
+  - Better annotation
+  - Things to say in the genome paper
+- Limits
+  - There aren't experts for all genes
+  - They can only annotate what is in the sequence
+  - Poor assembly ⇒ Poor annotation
+  - We need a user-friendly environment
+
+---
+
+### Editors
+
+Apollo (based upon JBrowse), Artemis, others
+
+![Screenshot of apollo with dozens of tracks in the list. Several gene model predictions are shown as well as a few bigwig XY density from illumina sequencing data.](../../images/intro-apollo.png)
+
+Check out the Apollo tutorials for more details: [prokaryotes]({% link topics/genome-annotation/tutorials/apollo/tutorial.md %}) - [eukaryotes]({% link topics/genome-annotation/tutorials/apollo-euk/tutorial.md %})
+
+---
+
+### Steps
+
+.pull-left[
+Annotations steps
+
+- Check structure (exons, introns, start, stop, utr, ...)
+- Search for isoforms
+- Ensure consistent naming conventions
+- Add functional annotations (based on homologies with other species)
+]
+
+.pull-right[
+![A report showing 15 errors like gene having no alternate alleles or missing a symbol, or missing a human readable name. 2 warnings about model structures are shown, and the other 119 genes are shown as valid.](../../images/intro-steps.png)
+]
+
+---
+
+## Functional Annotation
+
+Collection of information on the function of identified genes
+- Biological function
+- Regulation, expression, ...
+
+Data Sources
+- Wet lab experiments (reliable but long and expensive)
+- Manual assignment (cf Apollo)
+- **Automatic assignment**
+
+---
+
+### Methods
+
+- Similarity search / homology
+- Pattern search
+- Orthologies
+- Comparison against databases:
+  - GenBank, NR: sequence databanks
+  - InterPro: pattern databank (active sites, protein families, peptide signal ...)
+  - EggNOG: databank of orthology relationships + functional annotation
+
+---
+
+### Blast
+
+- Blast/Diamond against NR
+  - For each protein (or CDS) of the annotation
+  - Find the best xx hits
+- Huge database, good chances to have a match
+- Risk:
+  - Spread of "putative xx protein"
+  - Spread of low-evidence annotations
+
+---
+
+### InterProScan
+
+- For each protein (or CDS) of the annotation
+  - Search for all InterPro patterns
+- Many motifs
+- Some of them manually curated
+- Gene Ontology Terms available for domains
+
+---
+
+### EggNOG
+
+- EggNOG: >4M known orthology groups in >5000 organisms
+- Tool using it: **EggNOG-mapper**
+- For each protein of the annotation
+  - Search for matches with known orthology groups
+- Assign corresponding gene name and functional annotation
+
+---
+
+### Gene Ontology
+
+.pull-left[
+Controlled vocabulary to describe:
+- molecular function
+- biological process
+- cellular component
+  - e.g.: `GO:0044430` = cytoskeletal part
+
+![A tree browser showing the top level groups (MF, CC, BP) followed by a drill down into molecular function with several groups like acetylcholine receptor activator activity, inhibitor, and regulator activity. antioxidant activity, binding, etc. Each group shows large numbers of children.](../../images/intro-go.png)
+]
+
+.pull-right[
+![A stacked bar chart with species along the bottom and the number of annotations. The split is experimental and  non-experimental annotations which is split ~15% experimental/85% non, for most species. Human has the highest with 200k experimental/250k non-experimental.](../../images/intro-go-source.png)
+]
+
+---
+
+### Gene Ontology
+
+Various sources
+
+- InterProScan
+  - Assigned from matches with annotated motifs
+- EggNOG-mapper
+  - Assigned from matches with annotated orthology groups
+- Blast2GO
+  - Based on Blast (and InterProScan) results
+  - For each protein (or CDS) of the annotation, tag with GO terms
+
+---
+
+### Orthology
+
+- For each annotated gene
+  - Search of orthologous genes in related species
+  - Search for paralogues
+
+- Bioinformatics method:
+  - Blast all against all transcripts
+  - Filtering the best hits
+  - Clustering
+  - OrthoFinder, OrthoMCL, ...
+
+![Diagram of orthology with species a and species B as two circles. Inside A is a1, 2, and 3 labelled as in-paralogs. Inside B is b1/b2 also in-paralogs. A1 and B1 are orthologs, and the rest of the potential connections between A and B are labelled co-orthologs.](../../images/intro-ortho.png)
+
+---
+
+### Visualisation
+
+- Genomic databases (NCBI, FlyBase, etc.)
+- Other sites (Tripal sites)
+  - reference data (assembly, annotation, ...)
+  - interfaces to visualize this data
+  - interfaces for querying (e.g. [bipaa.genouest.org](https://bipaa.genouest.org))
+
+---
+
+### Comparing annotations
+
+- Needed to choose between different results on a same genome sequence
+- Compare general statistics
+  - Number of genes
+  - Average number of exons
+  - Average gene length
+  - Average protein length
+  - ...
+- Compare gene content
+  - Alignment of gene structures
+  - Functional annotation
+    - over/underrepresentation of functions
+- Tools: **AEGeAN**, **Funannotate compare**
+
+---
+
+## Genome Annotation
+
+- Difficult problem
+- Automatic:
+	- Structural:
+    - EST/RNA-Seq data provides good evidence
+	  - *Ab initio* methods are improving
+	- Functional:
+	  - Concrete evidence cost-prohibitive to obtain
+    - Various sources of automatic assignment
+	  - Risks of automatically spreading "putative" annotations
+- Manual:
+	- Slow
+	- Requires experts and evidences

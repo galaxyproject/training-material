@@ -157,7 +157,7 @@ Let's look at the quality of the reads in this file.
 > 3. Select the following parameters:
 >    - {% icon param-file %} *"Raw read data from your current history"*: the FASTQ dataset that we uploaded
 >    - No change in the other parameters
-> 4. Click **Execute**
+> 4. Click **Run Tool**
 >
 {: .hands_on}
 
@@ -208,7 +208,7 @@ Let's run a tool to filter out lower-quality reads from our FASTQ file.
 >    - {% icon param-file %} *"Input FASTQ file"*: our initial FASTQ dataset
 >    - *"Quality cut-off value"*: 35
 >    - *"Percent of bases in sequence that must have quality equal to / higher than cut-off value"*: 80
-> 4. Click **Execute**
+> 4. Click **Run Tool**
 {: .hands_on}
 
 After the tool has run, its output dataset will appear at the top of your History panel.
@@ -253,7 +253,7 @@ We can now try to filter our input reads to an even higher standard, and see how
 >
 >    For example, you might decide you want 80 percent of bases to have a quality of 36 or higher, instead of 35.
 >
-> 3. Click **Execute**
+> 3. Click **Run Tool**
 > 4. View the results: Click on the output dataset name to expand the information. (*Note*: not the {% icon galaxy-eye %} (eye) icon.)
 {: .hands_on}
 

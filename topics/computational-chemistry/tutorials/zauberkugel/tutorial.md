@@ -340,8 +340,7 @@ For pharmacophore-based protein target prediction, you can choose to use Galaxy 
 
 # Further analysis
 
-To obtain a docking pose of a protein–ligand interaction predicted from pharmacophore-based protein target prediction, follow the [Protein–ligand docking](https://training.galaxyproject.org/training-material/topics/computational-chemistry/tutorials/cheminformatics/tutorial.html) Galaxy training.
+To obtain a docking pose of a protein–ligand interaction predicted from pharmacophore-based protein target prediction, follow the [Protein–ligand docking]({% link topics/computational-chemistry/tutorials/cheminformatics/tutorial.md %}) Galaxy training.
 
 
 # Conclusion
-

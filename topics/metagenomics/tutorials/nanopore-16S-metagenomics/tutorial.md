@@ -177,7 +177,7 @@ Let's have a look at figure 4, which shows the content of the GC by sequence.
 {: .question}
 
 > <comment-title></comment-title>
-> For more information on the topic of quality control, please see our training materials [here](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html).
+> For more information on the topic, please see [the quality control tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 {: .comment}
 
 
