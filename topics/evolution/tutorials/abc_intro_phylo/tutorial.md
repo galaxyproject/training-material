@@ -21,7 +21,59 @@ contributors:
 ---
 
 # Introduction
-Intro text
+
+This tutorial is based on a workshop that was run in 2019 under the auspices of... by ... and attended by hundreds of people etc. etc.
+
+The title of that workshop was "Phylogenetics - Back To Basics" and it was aimed at helping you understand how phylogenetic inference works, some of the tools used, and what you can learn from phylogenetic estimation.
+
+It has been adapted to work as a stand-alone, self-paced tutorial, which can run (almost) entirely within Galaxy.
+
+
+## Scope:
+**We will cover:**
+
+* What a phylogeny is
+* Motivation: 
+	* conservation / biodiversity, 
+	* fundamental knowledge, 
+	* designing vaccines
+* Why it’s hard to find a phylogeny
+	* How long it takes
+	* We cannot go back and check
+	* The role of simulation
+	* The plethora of methods (nucleic acid sequence based, morphometric based (body shape)) making it hard to choose
+* Data
+	* What a sequence alignment is and how to interpret one;
+	* What to do with difficult data (lots of gaps in the alignment)
+	* The data we will use: from OzMammals data set
+* Three different main approaches:
+	* Distance-based (NJ, BioNJ)
+	* Parsimony
+	* Likelihood (simple models only)
+* Comparing phylogenies --- what do when they aren't all the same
+* Analysing robustness
+* Interpreting results, 
+	* e.g. confidence interval on dates of divergence;
+	* selection pressure dN/dS ratios.
+* What can possibly (probably) go wrong?
+* A sensible workflow
+
+**We will not cover:**
+
+* Workflows from read data to sequences
+* How to get an alignment (much: will use automated methods)
+* Phylogenetic networks
+* MCMC / BEAST / MrBayes
+
+## Learning Objectives
+
+On successful completion of this workshop you will be able to:
+
+* Estimate a phylogenetic tree based on a set of aligned molecular sequences;
+* Assess the quality of a molecular sequence alignment and be able to modify it appropriately for phylogenetic analysis;
+* Apply standard methods to aligned data to infer phylogenetic trees;
+* Assess the reliability of estimated phylogenies.
+
 
 
 > <details-title>Further reading</details-title>
