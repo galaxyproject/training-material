@@ -156,9 +156,6 @@ We will run all these steps using a single workflow, then discuss each step and 
 >
 >      If the contaminated food would be known to come from a different source and may, thus, include other host genomes, you could change the value here.
 >
->    - *"5: Porechop Output format for the reads"*: `fastq.qz`
->
->
 {: .hands_on}
 
 The workflow will take a little while to complete. Once tools have completed, the results will be available in your history for viewing. Note that only the most important outputs will be visible; intermediate files are hidden by default.
