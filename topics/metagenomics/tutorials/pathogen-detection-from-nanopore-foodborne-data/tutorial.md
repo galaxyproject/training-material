@@ -337,7 +337,7 @@ In this tutorial we use:
     >                  - Chicken (`Gallus`)
     >                  - Beef (`Bos`)
     >
-    >                  If the contiminated food comes from and may include other animals, you can change the value here.
+    >                  If the contaminated food comes from and may include other animals, you can change the value here.
     >
     >                - *"action for regex match"*: `include line if pattern found`
     >
