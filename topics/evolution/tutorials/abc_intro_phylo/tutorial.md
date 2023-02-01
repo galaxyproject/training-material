@@ -198,10 +198,10 @@ Phylogeny estimation can be thought of as inferring a collection of compatible h
 ## Building a Tree
 
 The basic method of building a tree begins with a set of *distances*, which record how different the taxa are from each other.
-Distances have very desirable properties, that can be summarised as follows, for any objects *x*, *y*, *z*:
+Distances have very desirable properties, that can be summarised as follows, for any objects $$ x $$, $$y$$, $$z$$, and writing $$d(x,y)$$ to mean the distance from $$x$$ to $$y$$ etc.  These properties are:
  * *non-negativity* -- distances can never be negative, and in fact we treat two things as identical if they have a distance of 0 between them.
- * *symmetry* -- the distance from *x* to *y* is the same as the distance from *y* to *x*.
- * the *triangle inequality* -- there are no short-cuts!  The distance from *x* to *y* is always at most the distance from *x* to *z* plus that from *z* to *y*.
+ * *symmetry* -- the distance from $$x$$ to $$y$$ is the same as the distance from $$y$$ to $$x$$; that is, $$d(x,y) = d(y,x)$$.
+ * the *triangle inequality* -- there are no short-cuts!  The distance from $$x$$ to $$z$$ is always *at most* the distance from $$x$$ to $$y$$ plus that from $$y$$ to $$y$$; that is, $$ d(x,y) + d(y,z) \leq d(x,z)$$.
 
  In phylogenetics terms we like distances to represent something like time, and we can assign lengths to branches.
 
@@ -221,6 +221,9 @@ Distances have very desirable properties, that can be summarised as follows, for
 ## Data upload
 
 Background on the data used in this workshop.
+The sequences we have chosen for this workshop are complete SARS-CoV2 sequences, publicly available from nextStrain (http).
+We are using a relatively small set of sequences because phylogenetic estimation on many sequences is computationally very intensive, and can take weeks of time on a high-performance computer.
+
 
 ## Get the data
 > <hands-on-title>Obtain your data</hands-on-title>
@@ -240,13 +243,31 @@ Background on the data used in this workshop.
 >
 {: .hands_on}
 
+This is a file in **FASTA** format, which has a very simple structure, as follows:
+
+```
+>SEQUENCE_1
+GAGCTATACGACGT
+>SEQUENCE_2
+TTACTAGCTACTACT
+```
+The above toy file has two sequences in it named SEQUENCE_1 and SEQUENCE_2, each with a short set of characters which we can assume are DNA.
+
+FASTA format is very simple and is commonly used as input to phylogenetic inference programs.
+
+> <comment-title>FASTA format</comment-title>
+> The FASTA (pronounced like "faster" (not sounding the 'r'!) or Fast-Eh) format work as follows:
+> 1. each sequence has a name, which appears one its own line after a "greater-than" sign '>'
+> 2. the next line(s) contain the sequence for that name; continuing either until the next sequence name line, or the end of the file.
+>
+{: .comment}
+
 **IMAGE HERE: View of unaligned fasta sequences**
+
 
 # Sequence Alignment
 
-Methods
-Gaps
-Scoring an alignment
+Sequence alignment is 
 
 ## Aligning sequences with MAFFT
 
