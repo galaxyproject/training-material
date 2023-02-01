@@ -145,7 +145,7 @@ First and foremost, **phylogenetic inferences is a statistic estimation process.
 
 It is not generally possible to prove that any tree inferred is *correct* -- since we cannot go back in time and observe speciation events.
 One obvious consequence of this is that different estimates of the phylogenetic tree relating a given set of species may differ, even if no errors were made.  
-Finding an optimal tree is hard!
+Finding an optimal tree is *hard*!
 
 So, how do we do it?
 
@@ -178,6 +178,8 @@ This is a link [introduction to phylogenetics](https://www.ebi.ac.uk/training/on
 
 We need to define some terms, which may be new to you.
 
+### need a picture of a tree in here
+
 Mathematically a *Tree* is a kind of *graph*, which has objects called *nodes* or *vertices*, connected in pairs by things called *edges*.  
 Trees are a natural way to think about phylogenetic relationships, where the nodes correspond to *taxa*, and the edges, also called *branches*, show the relationships between them. 
 Taxa could be species, or lineages, genera, populations, or even individuals if we are considering something like a genealogy.
@@ -204,6 +206,7 @@ Distances have very desirable properties, that can be summarised as follows, for
  * the *triangle inequality* -- there are no short-cuts!  The distance from $$x$$ to $$z$$ is always *at most* the distance from $$x$$ to $$y$$ plus that from $$y$$ to $$y$$; that is, $$ d(x,y) + d(y,z) \leq d(x,z)$$.
 
  In phylogenetics terms we like distances to represent something like time, and we can assign lengths to branches.
+
 
 ## Challenges
 
@@ -339,7 +342,7 @@ Info on models
 
 ##  Estimating a Maximum Likelihood tree 
 
-> <hands-on-title>Estimating a Maximum Likelihood tree with RaXML and IQTree</hands-on-title>
+> <hands-on-title>Estimating a Maximum Likelihood tree with IQTree</hands-on-title>
 >
 > 1. Step 1
 > 2. Step 2
