@@ -980,7 +980,7 @@ To identify variants, we
     - `FILTER`: Pass/fail - If it passed quality filters.
     - `INFO`: Further information - Allows you to provide further information on the variants. Keys in the INFO field can be defined in header lines above thetable.
     - `FORMAT`: Information about the following columns - The GT in the FORMAT column tells us to expect genotypes in the following columns.
-    - Individual identifier (optional) - The previous column told us to expect to see genotypes here. The genotype is in the form "0|1", where 0 indicates the reference allele and 1 indicates the alternative allele, i.e it is heterozygous. The vertical pipe "|" indicates that the genotype is phased, and is used to indicate which chromosome the alleles are on. If this is a slash (/) rather than a vertical pipe, it means we don’t know which chromosome they are on.
+    - `Individual identifier (optional)` - The previous column told us to expect to see genotypes here. The genotype is in the form "0\|1", where 0 indicates the reference allele and 1 indicates the alternative allele, i.e it is heterozygous. The vertical pipe "\|" indicates that the genotype is phased, and is used to indicate which chromosome the alleles are on. If this is a slash (/) rather than a vertical pipe, it means we don’t know which chromosome they are on.
 
 5. **Extract a tabular report** with Chromosome, Position, Identifier, Reference allele, Alternative allele and Filter from the VCF files using [__SnpSift Extract Fields__](http://pcingola.github.io/SnpEff/)
 
