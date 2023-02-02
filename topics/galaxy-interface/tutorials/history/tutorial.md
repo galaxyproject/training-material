@@ -70,7 +70,7 @@ Above the current history panel are three buttons: create a new history, history
 
 - The {% icon new-history %} 'create new history' button will create an empty history.
 - The {% icon switch-histories %} 'history quick switcher' will open a dialog letting you easily swap to any of your other histories.
-- The {% icon galaxy-dropdown %} 'history menu' (formerly the {% icon galaxy-gear %} "Gear menu") gives you access to advanced options to work with your history.
+- The {% icon galaxy-history-options %} 'history menu' (formerly the {% icon galaxy-gear %} "Gear menu") gives you access to advanced options to work with your history.
 
 ## History Information
 
