@@ -92,7 +92,7 @@ From the Cern website:
 > well. So we're just going to get on with things.
 {: .spoken data-visual="gtn" data-target="#cvmfs-quote"}
 
-A slideshow presentation on this subject can be found [here](slides.html). More details on the usegalaxy.org (Galaxy Main's) reference data setup and CVMFS system can be found [here](https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data)
+[A slideshow presentation on this subject is available](slides.html). More details on the usegalaxy.org (Galaxy Main's) [reference data setup and CVMFS system](https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data).
 
 > <agenda-title></agenda-title>
 >
