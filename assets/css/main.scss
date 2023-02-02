@@ -68,6 +68,11 @@ $tutorial-box-spacing: 1rem;
 	--h2-theme-after: "";
 }
 
+/* SLIDES */
+@import "./slides.scss";
+/* SYNTAX */
+@import "./syntax_highlighting.scss";
+/* THEMES */
 @import "./themes.scss";
 
 // palette
@@ -184,8 +189,6 @@ body {
 }
 
 
-@import "./syntax_highlighting-dark.scss";
-
 div#theme-selector,div#lang-selector,div#archive-selector {
 	display: flex;
 	flex-direction: row;
@@ -212,9 +215,19 @@ img {
     margin: 2.5%;
 }
 
-pre {
+:not(pre) > code {
+    color: var(--code-foreground);
+    background: var(--code-background);
+    border: 1px solid var(--text-color-muted);
+    border-radius: 0.25rem;
+}
+
+pre.highlight {
     padding: 1rem;
     background-color: var(--code-background);
+    color: var(--code-foreground);
+    border: 1px solid var(--text-color-muted);
+    @include syntax-dark;
 }
 
 figure {
@@ -465,7 +478,7 @@ blockquote {
     }
 
     &.quote {
-        border-left: 5px solid #eee;
+        border-left: 5px solid var(--brand-color);
         padding-left: 1em;
     }
 
@@ -754,11 +767,6 @@ a {
 }
 .gitter-open-chat-button {
     background-color: var(--brand-color) !important;
-}
-
-code {
-    color: var(--code-foreground);
-    background: var(--code-background);
 }
 
 
@@ -1275,6 +1283,3 @@ a[target="_blank"]::after {
     }
 }
 }
-
-/* SLIDES */
-@import "./slides.scss";
