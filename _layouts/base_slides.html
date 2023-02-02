@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{% if page.lang %}{{ page.lang }}{% else %}en{% endif %}">
 
 {% assign topic = site.data[page.topic_name] %}
 {% assign topic_material = site | topic_filter:page.topic_name %}
@@ -17,7 +17,7 @@
     {% if jekyll.environment == 'production' %}
         {% include _includes/analytics.html %}
     {% endif %}
-    <link rel="stylesheet" href="{{ "/assets/css/slides.css" | prepend: site.baseurl }}">
+    <link rel="stylesheet" href="{{ "/assets/css/main.css?v=2" | prepend: site.baseurl }}">
     <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon" />
