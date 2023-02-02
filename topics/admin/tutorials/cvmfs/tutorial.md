@@ -54,7 +54,7 @@ tags:
 # Overview
 
 
-The CernVM-FS is a distributed filesystem perfectly designed for sharing readonly data across the globe. We use it in the [Galaxy Project](https://galaxyproject.org) for sharing things that a lot of Galaxy servers need. Namely:
+The CernVM-FS {% cite Blomer_2011 %} is a distributed filesystem perfectly designed for sharing readonly data across the globe. We use it in the [Galaxy Project](https://galaxyproject.org) for sharing things that a lot of Galaxy servers need. Namely:
 * **Reference Data**
     * Genome sequences for hundreds of useful species.
     * Indices for the genome sequences
