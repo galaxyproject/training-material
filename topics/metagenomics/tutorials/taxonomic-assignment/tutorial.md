@@ -280,6 +280,25 @@ The **donut partition** summarizes the microbial community according to non-nume
 
 The **attributes column chart** summarizes the microbial community according to numerical attributes. In the drop-down menu at the top right corner, you can switch between the different attributes provided in the metadata file. In our case, you can for example choose the ‘geographic location’ to (again, it doesn’t really make a lot of sense in our very simple dataset, as this will show the same result as sorting them by sample 0 and 1, but if attributes change across different samples this might be an interesting visualization option).
 
+> ### {% icon question %} Questions
+>Let's have a look at our data and try to answer some questions.
+>1. How many percent of the sample reads are bacteria and how many are eukaryota? 
+>2. How do you filter the data from eukaryotic reads?
+> 
+>
+>
+> > ### {% icon solution %} Solution
+> >1. Sample 0: 75,65 % bacteria; 24,51 % eukaryota
+      Sample 1: 92,70 % bacteria; 6,87 % eukaryota
+
+      (go to taxonomy bar chart, choose kingdom and hover over the bars to find "taxonomy occurence in this sample")
+
+> >2. xxx comment: Search function of phinch shows confusing results when clicking on “hide”
+> > 
+>
+> {: .solution}
+>
+{: .question}
 
 
 ## Visualize the taxonomical classification with Pavian
@@ -302,6 +321,24 @@ Select ‘Comparison’ in the sidebar to find a table with taxa as rows and sam
 
 Select ‘Sample’ in the sidebar to zoom into one sample with a Sankey diagram, which shows different taxons as lines with their width based on the quantity of the taxon. The diagram is shown for one sample but when hovering over nodes, the abundance of that specific taxon compared in all samples shown in a bar plot will appear on the right-hand side. 
 One additional feature of Pavian is the ‘Alignment Viewer’ to investigate for example if reads of a taxon cover the genome. Genome coverage can provide an indication whether an assignment is artificial or not. 
+
+> ### {% icon question %} Questions
+>Let's have a look at our data and try to answer some questions.
+>1. What is the taxonomy occurence in percent of the Family Rhodobacteraceae in the two samples?
+>2. Regarding the question the authors had, when collecting the data: What could it biologically mean, if one bacteria family increases their occurence in fertilized pond (JP4D)?
+> 
+>
+>
+> > ### {% icon solution %} Solution
+> >1. Sample JC1A: 12,82 %
+      Sample JP4D: 36,06 %
+
+> >2. It could mean that they have a survival advantage in the new environment. According to the authors this correlates with specific genomic traits that enable them to cope better with high nutrient availability. 
+> > 
+>
+> {: .solution}
+>
+{: .question}
 
 For further information on how to use Pavian please have a look into the [Pavian Walktrough](https://github.com/fbreitwieser/pavian/blob/master/vignettes/pavian-walkthrough.pdf) provided by F. Breitwieser.
 
