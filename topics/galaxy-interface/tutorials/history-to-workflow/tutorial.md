@@ -109,7 +109,7 @@ Now that we have the history we want, let's use Galaxy to create a reusable work
 
 > <hands-on-title>Extract workflow</hands-on-title>
 >
-> 1. *Click* on the **History options (caret icon)** at the top-right of the history panel.
+> 1. *Click* on the {% icon galaxy-history-options %} **History options** at the top-right of the history panel.
 >    - This opens a pull-down menu showing lots of actions that you can perform on the current history.  Right now, we are interested in only one of them:
 > 2. *Click* on **Extract Workflow**.  It's about half-way down the menu.
 >    - This launches a form to create a workflow.
@@ -218,7 +218,7 @@ And Galaxy launches the workflow, running in a new history.  It says (in a nice 
 
 You can check the status of queued jobs and view the resulting data *by refreshing the History pane.* When the job has been run the status will change from 'running' to 'finished' if completed successfully or 'error' if problems were encountered.
 
-But, *that's a lie*.  In our case we sent the results to a new history, and the history panel is still showing us the old history.  To get to the new history, open the multiple history view (*click* the **caret icon** at top of the history panel) and then make the newly created history be the current history.
+But, *that's a lie*.  In our case we sent the results to a new history, and the history panel is still showing us the old history.  To get to the new history, open the multiple history view (*click* the {% icon galaxy-history-options %} **History Options** at top of the history panel) and then make the newly created history be the current history.
 
 Depending on your workflow and datasets, your analysis may already be done by the time you make it the current history and go back to the standard view.
 

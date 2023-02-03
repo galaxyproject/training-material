@@ -57,7 +57,6 @@ key_points:
 tags:
   - pangeo
   - interactive-tools
-  - jupyter-notebook
 contributors:
 - annefou
 notebook:

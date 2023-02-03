@@ -8,7 +8,7 @@ contributors: [bebatut,wm75,hexylena,shiltemann]
 ---
 
 * Click on the dataset
-* Click on {% icon galaxy-tags %} **Edit dataset tags**
+* Click on {% icon galaxy-tags %} **Add Tags**
 * Add a tag starting with `#`
 
     Tags starting with `#` will be automatically propagated to the outputs of tools using this dataset.

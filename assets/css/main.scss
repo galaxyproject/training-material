@@ -965,22 +965,32 @@ blockquote {
     }
 }
 
+:root {
+	--color-primary: #999;
+	--color-darker: #777;
+	--color-dimmed: #555;
+}
+
 .label {
     display: inline;
     padding: .2em .6em .3em;
     font-size: 75%;
-    font-weight: bold;
     line-height: 1;
-    color: #fff;
+    color: #000;
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
     border-radius: .25em;
+    border-style: solid;
+    border-width: 0 2px 1px 0;
+    background-color: var(--color-primary);
+    border-color: var(--color-darker);
     cursor: pointer;
-}
 
-.label-default {
-    background-color: #999999;
+    &:hover {
+        color: #000;
+        background-color: var(--color-dimmed);
+    }
 }
 
 .level {

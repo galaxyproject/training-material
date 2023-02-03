@@ -291,11 +291,11 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 
 > <hands-on-title>Extract workflow</hands-on-title>
 >
-> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-cross %} button.
+> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-delete %} button.
 >
 >    This will make the creation of the workflow easier.
 >
-> 2. Click on {% icon galaxy-dropdown %} (**History options**) at the top of your history panel and select **Extract workflow**.
+> 2. Click on {% icon galaxy-history-options %} (**History options**) at the top of your history panel and select **Extract workflow**.
 >
 >    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
 >
@@ -339,7 +339,7 @@ This new history does not have any datasets in it yet.
 Where is your first history, called "My Analysis"?
 
 > <hands-on-title>View histories</hands-on-title>
-> 1. Click on {% icon galaxy-dropdown %} (**History options**) and then click on the {% icon galaxy-columns %} **Show Histories side-by-side**
+> 1. Click on {% icon galaxy-history-options %} (**History options**) and then click on the {% icon galaxy-columns %} **Show Histories side-by-side**
 >
 >    ![view all histories](../../images/galaxy_interface_history_switch.png){:width="320px"}
 >
