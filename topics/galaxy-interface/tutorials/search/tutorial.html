@@ -561,13 +561,6 @@ any text that a dataset you’d be looking for would contain, including:</p>
   <li>To search for a VCF file named ‘VCF filter on data 1’ and tagged with ‘experiment_1’, you could enter: <code class="language-plaintext highlighter-rouge">vcf filter on data 1 experiment_1</code></li>
 </ul>
 
-<blockquote class="comment">
-  <comment-title>Do I search for VCF or vcf?</comment-title>
-  <p>Searches are case-insensitive. For example, <code class="language-plaintext highlighter-rouge">VCF</code> and <code class="language-plaintext highlighter-rouge">vcf</code> are equivalent.</p>
-</blockquote>
-
-<p><img src="../../images/basic-search.png" alt="Searches for dataset" title="Searching for a dataset. 'vcf', 'data 1', and 'vcf filter on data 1 experiment 1' all return the same results." /></p>
-
 <h2 id="clearing-a-search">Clearing a Search</h2>
 
 <p>You can clear a search and show all visible datasets by clicking the round ‘X’ button in the right of the search bar
@@ -586,83 +579,29 @@ or - while entering text in the search bar - hitting the escape key (‘Esc’).
   </thead>
   <tbody>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">name="FASTQC on"</code></td>
+      <td><code class="language-plaintext highlighter-rouge">name:'FASTQC on'</code></td>
       <td>Any datasets with “FASTQC on” in the title, but avoids items which have “FASTQC on” in other fields like the description or annotation.</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">format=vcf</code></td>
+      <td><code class="language-plaintext highlighter-rouge">extension:vcf</code></td>
       <td>Datasets with a specific format. Some formats are hierarchical, e.g. searching for <code class="language-plaintext highlighter-rouge">fastq</code> will find fastq files but also fastqsanger and fastqillumina files. You can see more formats in the upload dialogue.</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">database=hg19</code></td>
-      <td>Datasets with a specific reference genome</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">annotation="first of five"</code></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">description="This is data of a Borneo Orangutan"</code></td>
-      <td>for dataset summary description</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">info="started <span class="notranslate">mapping</span>"</code></td>
-      <td>for searching on job’s info field.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">tag=experiment1 tag=to_publish</code></td>
+      <td><code class="language-plaintext highlighter-rouge">tag:experiment1 tag:to_publish</code></td>
       <td>for searching on (a partial) dataset tag. You can repeat to search for more tags.</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">hid=25</code></td>
+      <td><code class="language-plaintext highlighter-rouge">related:10</code></td>
       <td>A specific history item ID (based on the ordering in the history)</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">state=error</code></td>
+      <td><code class="language-plaintext highlighter-rouge">state:error</code></td>
       <td>To show only datasets in a given state. Other options include <code class="language-plaintext highlighter-rouge">ok</code>, <code class="language-plaintext highlighter-rouge">running</code>, <code class="language-plaintext highlighter-rouge">paused</code>, and <code class="language-plaintext highlighter-rouge">new</code>.</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">history_content_type=collection</code></td>
-      <td>Filter for collections</td>
     </tr>
   </tbody>
 </table>
 
-<blockquote class="comment">
-  <comment-title>Combining Searches</comment-title>
-  <p>Keyword searches can be combined: <code class="language-plaintext highlighter-rouge">database=mm10 annotation=successful</code>
-You can enclose text with double quotes and include spaces: <code class="language-plaintext highlighter-rouge">name="My Dataset" annotation="First run"</code>.
-Only the datasets that meet ALL search criteria will be shown.</p>
-</blockquote>
-
-<p>If you find normal searching is showing too many datasets, and not what you’re looking for, try the advanced, keyword
-search.</p>
-
-<p><img src="../../images/adv-search.png" alt="Advanced search" title="Advanced searching with multiple filters." /></p>
-
-<h3 id="search-and-multi-select">Search and multi-select</h3>
-
-<p>It’s often useful to combine search and multi-select. Multi-selections will persist between searches, and the All/None buttons
-will only apply to the datasets currently shown with the given search.</p>
-
-<p>So, for example, to select and manipulate two different sets of datasets:</p>
-
-<ol>
-  <li>fastqsanger files tagged with ‘low quality’</li>
-  <li>hg19 reference BAM files whose names contain “Output”</li>
-</ol>
-
-<p>You can do the following steps:</p>
-
-<ol>
-  <li>In the search bar, enter: <code class="language-plaintext highlighter-rouge">format=fastqsanger tag="low quality"</code> and hit enter.</li>
-  <li>Click the multi-select button to show the checkboxes.</li>
-  <li>Click the ‘All’ button to select all the fastqsanger files</li>
-  <li>In the search bar, enter: <code class="language-plaintext highlighter-rouge">database=hg19 format=BAM name=output</code> and hit enter.</li>
-  <li>Click the ‘All’ button again to select all the BAM files.</li>
-  <li>Clear the search using the clear button. All datasets are shown and both fastqsanger and BAM files are still selected.</li>
-  <li>You can now perform some action on those two sets of datasets like building a collection or batch deleting them.</li>
-</ol>
+<p>If you find normal searching is showing too many datasets, and not what you’re looking for, try the advanced search! Just use the <i class="fas fa-angle-double-down" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-advanced-search</span> button next to the search field to show the advanced selector.</p>
 
 
 

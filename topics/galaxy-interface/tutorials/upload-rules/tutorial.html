@@ -24,7 +24,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Rule Based Uploader" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000" />
+<meta name="DC.date" content="2023-02-02 12:11:00 +0000" />
 <meta name="DC.creator" content="John Chilton" />
 <meta name="DC.creator" content="Helena Rasche" />
 
@@ -280,7 +280,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18 14:23:35 +0000",
+  "dateModified": "2023-02-02 12:11:00 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Rule Based Uploader",
   "interactivityType": "mixed",
@@ -598,7 +598,7 @@
 
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 2, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -645,15 +645,15 @@
 
 <blockquote class="notranslate hands_on">
   <div id="hands-on-downloading-data-from-ena" class="box-title" aria-label="hands-on box: Downloading Data from ENA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Downloading Data from ENA</div>
-  <p>To start, navigate to the above study and click the option to “Select columns”. Here we will narrow the set of columns we consider to just a few relevant to uploading these files to <span class="notranslate">Galaxy</span>.</p>
+  <p>To start, navigate to the above study and click the option to “Show Column Selection”. Here we will narrow the set of columns we consider to just a few relevant to uploading these files to <span class="notranslate">Galaxy</span>.</p>
 
   <p>Select only:</p>
 
   <ul>
-    <li>Study accession</li>
-    <li>Experiment accession</li>
-    <li>FASTQ files (FTP)</li>
-    <li>Sample accession</li>
+    <li><code class="language-plaintext highlighter-rouge">study_accession</code></li>
+    <li><code class="language-plaintext highlighter-rouge">experiment_accession</code></li>
+    <li><code class="language-plaintext highlighter-rouge">fastq_ftp</code></li>
+    <li><code class="language-plaintext highlighter-rouge">sample_accession</code></li>
   </ul>
 
   <p>The table should look like:</p>
@@ -672,42 +672,42 @@
         <td>PRJDA60709</td>
         <td>SAMD00016379</td>
         <td>DRX000475</td>
-        <td>File 1</td>
+        <td>DRX000475.fastq.gz</td>
       </tr>
       <tr>
         <td>PRJDA60709</td>
         <td>SAMD00016383</td>
         <td>DRX000476</td>
-        <td>File 1</td>
+        <td>DRX000476.fastq.gz</td>
       </tr>
       <tr>
         <td>PRJDA60709</td>
         <td>SAMD00016380</td>
         <td>DRX000477</td>
-        <td>File 1</td>
+        <td>DRX000477.fastq.gz</td>
       </tr>
       <tr>
         <td>PRJDA60709</td>
         <td>SAMD00016378</td>
         <td>DRX000478</td>
-        <td>File 1</td>
+        <td>DRX000478.fastq.gz</td>
       </tr>
       <tr>
         <td>PRJDA60709</td>
         <td>SAMD00016381</td>
         <td>DRX000479</td>
-        <td>File 1</td>
+        <td>DRX000479.fastq.gz</td>
       </tr>
       <tr>
         <td>PRJDA60709</td>
         <td>SAMD00016382</td>
         <td>DRX000480</td>
-        <td>File 1</td>
+        <td>DRX000480.fastq.gz</td>
       </tr>
     </tbody>
   </table>
 
-  <p>Download the resulting tabular data describing the files by clicking the “TEXT” link at the top of the page. Alte<span class="notranslate">rna</span>tively, the resulting sample sheet can be downloaded directly <a href="https://www.ebi.ac.uk/ena/data/warehouse/filereport?accession=PRJDA60709&amp;result=read_run&amp;fields=study_accession,sample_accession,experiment_accession,fastq_ftp&amp;download=true">here</a>. The number and size of the files for this example are relatively small for sequencing data but larger files and larger numbers of files should work as well - <span class="notranslate">Galaxy</span> will just need more time to download and process the files.</p>
+  <p>Download the resulting tabular data describing the files by clicking the “Download report: TSV” link above the table. Alte<span class="notranslate">rna</span>tively, the <a href="https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJDA60709&amp;result=read_run&amp;fields=study_accession,sample_accession,experiment_accession,fastq_ftp&amp;format=tsv&amp;download=true&amp;limit=0">resulting sample sheet can be downloaded directly</a>. The number and size of the files for this example are relatively small for sequencing data but larger files and larger numbers of files should work as well - <span class="notranslate">Galaxy</span> will just need more time to download and process the files.</p>
 </blockquote>
 
 <p>Unfortunately the ENA ftp server is not operational at this moment,
