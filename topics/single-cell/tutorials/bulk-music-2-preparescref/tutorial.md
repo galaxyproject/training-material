@@ -370,7 +370,7 @@ We're nearly there! We have three more tasks to do: first, we need to create the
 >            - In *"Filter Samples by Condition"*:
 >                - {% icon param-repeat %} *"Insert Filter Samples by Condition"*
 >                    - *"Name of phenotype column"*: `Disease`
->                    - *"List of values in this column to filter for, comma-delimited"*: `normal`
+>                    - *"List of values in this column to filter for, comma-delimited"*: `type II diabetes mellitus`
 >
 > 2. Remove the `#combined` tag from the output **RData ESet Object**
 >
@@ -392,7 +392,7 @@ You can either re-run this tool or set it up again to create the healthy-only ob
 >            - In *"Filter Samples by Condition"*:
 >                - {% icon param-repeat %} *"Insert Filter Samples by Condition"*
 >                    - *"Name of phenotype column"*: `Disease`
->                    - *"List of values in this column to filter for, comma-delimited"*: `type II diabetes mellitus`
+>                    - *"List of values in this column to filter for, comma-delimited"*: `normal`
 >
 > 2. Remove the `#combined` tag from the output **RData ESet Object**
 >
