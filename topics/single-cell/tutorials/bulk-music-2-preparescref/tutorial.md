@@ -20,7 +20,7 @@ contributions:
     - nomadscientist
     - mtekman
   testing:
-    - marisajl
+    - MarisaJL
 
 requirements:
   -
