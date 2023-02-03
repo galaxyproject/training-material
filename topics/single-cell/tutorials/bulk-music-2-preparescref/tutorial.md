@@ -15,7 +15,7 @@ time_estimation: 1H
 key_points:
 - The EMBL-EBI Single-cell expression atlas contains high quality datasets.
 - Metadata manipulation is key for generating the correctly formatted resource.
-contributors:
+contributions:
   authorship:
     - nomadscientist
     - mtekman
