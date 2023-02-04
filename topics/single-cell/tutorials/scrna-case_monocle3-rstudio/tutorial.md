@@ -22,7 +22,7 @@ objectives:
 - Compare the outputs from Scanpy, Monocle in Galaxy and Monocle in RStudio
 - Learn about differential expression analysis methods
 
-time_estimation: 2 H
+time_estimation: 2H
 
 key_points:
 - Being able to switch between Galaxy and RStudio when using Monocle is very useful, particularly when you need to modify the CDS object manually. 
