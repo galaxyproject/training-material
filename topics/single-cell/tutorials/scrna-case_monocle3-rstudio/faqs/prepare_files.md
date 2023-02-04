@@ -1,4 +1,7 @@
-> <hands-on-title> Extract input files </hands-on-title>
+---
+box_type: hands_on
+title: Extract and download the input files
+---
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData_filtered`
@@ -17,4 +20,3 @@
 >
 > 7. Download the generated files from your history. To do so, just click on the {% icon galaxy-save %} save icon for `Cell metadata (obs)`, `Gene metadata (var)` and `Expression matrix`. We will need those later!
 >
-{: .hands_on}
