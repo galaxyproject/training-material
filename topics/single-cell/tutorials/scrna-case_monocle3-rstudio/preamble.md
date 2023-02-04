@@ -18,7 +18,7 @@ Monocle uses cell_data_set class to hold expression data; it requires three inpu
 {% snippet topics/single-cell/tutorials/scrna-case_monocle3-rstudio/faqs/prepare_files.md %} 
 
 
-There are several ways in which you can complete this tutorial – choose your option!
+There are several ways in which you can complete this tutorial – check the {% icon tip %} Tip boxes below and choose your option!
 
 {% snippet topics/single-cell/tutorials/scrna-case_monocle3-rstudio/faqs/tip_rstudio.md %} 
 
