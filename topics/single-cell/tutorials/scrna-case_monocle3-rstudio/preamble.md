@@ -17,15 +17,21 @@ Monocle uses cell_data_set class to hold expression data; it requires three inpu
 
 {% snippet topics/single-cell/tutorials/scrna-case_monocle3-rstudio/faqs/prepare_files.md %} 
 
-We are now ready to open RStudio and start the coding part!  
+
+There are several ways in which you can complete this tutorial – choose your option!
+
+{% snippet topics/single-cell/tutorials/scrna-case_monocle3-rstudio/faqs/tip_rstudio.md %} 
+
+{% snippet topics/single-cell/tutorials/scrna-case_monocle3-rstudio/faqs/tip_jupyter.md %} 
+
+We will now present the workflow following using JupyterLab, but there will be advice for those using RStudio as well.
+
+## Installing packages
+Describe installation in terminal
 
 
-## Launching RStudio
-Thanks to available interactive tools, you can easily launch RStudio in Galaxy. 
+In the meantime, when installation is running…
 
-{% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
+{% snippet topics/single-cell/tutorials/scrna-case_monocle3-rstudio/faqs/files_upload.md %}
 
-
-From now on, you can either view this tutorial in the RMarkdown, which will allow you to read the material and simultaneously execute the code cells, or write/paste the lines of code in RStudio. 
-
-{% snippet faqs/galaxy/interactive_tools_rstudio_rmarkdown.md %}
+From now on, you can switch to JuyterLab and follow the tutorial in there!
