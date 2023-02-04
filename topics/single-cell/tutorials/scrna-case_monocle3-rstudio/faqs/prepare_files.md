@@ -1,7 +1,4 @@
----
-box_type: hands_on
-title: Extract input files
----
+> <hands-on-title> Extract input files </hands-on-title>
 >
 > 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData_filtered`
@@ -16,5 +13,8 @@ title: Extract input files
 > 5. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `AnnData_filtered`
 >    - *"What to inspect?"*: `The full data matrix`
-> 5. Rename {% icon galaxy-pencil %} the output `Expression matrix`
+> 6. Rename {% icon galaxy-pencil %} the output `Expression matrix`
 >
+> 7. Download the generated files from your history. To do so, just click on the {% icon galaxy-save %} save icon for `Cell metadata (obs)`, `Gene metadata (var)` and `Expression matrix`. We will need those later!
+>
+{: .hands_on}
