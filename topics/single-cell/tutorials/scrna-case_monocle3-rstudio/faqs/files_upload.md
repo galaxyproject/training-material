@@ -1,4 +1,7 @@
-> <hands-on-title>Uploading the files</hands-on-title>
+---
+box_type: hands_on
+title: Files upload
+---
 >
 > 1. In the folder window, {% icon galaxy-upload %} Upload the `single-cell-scrna-case_monocle3-rstudio.ipynb` and three data files that you had downloaded from your computer. They should appear in the file window.
 >
@@ -9,4 +12,3 @@
 >
 > 3. Open the notebook by double clicking it in the file window.
 >
-{: .hands_on}
