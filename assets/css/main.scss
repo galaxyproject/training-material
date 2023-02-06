@@ -58,6 +58,10 @@ $tutorial-box-spacing: 1rem;
 	--navbar-item-background: transparent;
 	--navbar-item-hover: transparent;
 
+	// Basically only for the breadcrumbs.
+	--secondary-color: #e9ecef;
+	--secondary-color-text: #000;
+
 	// A11y
 	--outline-color: red;
 
@@ -1153,7 +1157,7 @@ $btn-pink:$keypoints-color;
 
 .btn-purple{
  background-color: $btn-purple;
- color: white;
+ color: black;
 }
 
 .btn-pink{
@@ -1286,7 +1290,14 @@ ul.text-list, ol.text-list {
 }
 .dropdown-item:focus-visible {
 }
-.dropdown-item:focus, .dropdown-item:hover
+
+ol.breadcrumb {
+	background: var(--secondary-color);
+
+	.breadcrumb-item.active {
+		color: var(--secondary-color-text);
+	}
+}
 
 
 
