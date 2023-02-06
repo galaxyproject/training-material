@@ -8,11 +8,33 @@ module Gtn
       end
     end
 
-    #def self.bib()
-    #  @@cache ||= self.populate_cache()
-    #end
-
     def self.populate_cache()
+      @@cache ||= self.discover_bib()
+    end
+
+    def self.render_citation(key)
+      (global_bib, citeproc) = self.populate_cache()
+
+      text = citeproc.render(:bibliography, id: key)[0]
+      entry = global_bib[key]
+      if entry.note
+        text += " #{entry.note}."
+      end
+      doi = entry.fetch('doi', nil)
+      if doi
+        text += " <a href=\"https://doi.org/#{doi}\">#{doi}</a>"
+      end
+      url = entry.fetch('url', nil)
+      if url
+        if ! (url.index('doi.org') and entry.doi)
+          text += " <a href=\"#{url}\">#{url}</a>"
+        end
+      end
+
+      text
+    end
+
+    def self.discover_bib()
       puts "[GTN/scholar] Creating global bib cache"
       global_bib = BibTeX::Bibliography.new
       bib_paths = [Find.find('./topics'), Find.find('./faqs'), Find.find('./news')].lazy.flat_map(&:lazy).select{|x| x =~ /bib$/}

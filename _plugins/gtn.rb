@@ -41,6 +41,16 @@ module Jekyll
       ELIXIR_NODES[name]
     end
 
+    def top_citations(citations)
+      if citations.nil?
+        {}
+      else
+        citations.sort_by{|k, v| v}.reverse.to_h.first(20).map{|k, v| 
+          [k, {"count" => v, "text" => Gtn::Scholar.render_citation(k)}]
+        }.to_h
+      end
+    end
+
     def slugify_unsafe(text)
       # Gets rid of *most* things without making it completely unusable?
       text.gsub(/["'\\\/-;:,.!@#$%^&*()-]/, '').gsub(/\s/, '-')
