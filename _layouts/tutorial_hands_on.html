@@ -42,10 +42,6 @@ footer: no
 </script>
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
-<script type="application/ld+json">
-    {% include _includes/material.jsonld material=page topic=topic site=site %}
-</script>
-
 <section class="tutorial topic-{{ page.topic_name }}">
     <h1 data-toc-skip>{{ page.title }}</h1>
     {% if page.enable == false or page.enable == "false" %}
@@ -288,7 +284,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                 {% endif %}
 
 
-                {% if material.cited %}
+                {% if page.cited %}
                 <h1 id="bibliography">{{locale['references']| default: "References" }}</h1>
                 {% bibliography --cited %}
                 {% endif %}

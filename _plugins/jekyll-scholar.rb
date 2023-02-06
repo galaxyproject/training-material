@@ -1,3 +1,5 @@
+require './_plugins/gtn/scholar'
+
 module Jekyll
   class CiteTag < Liquid::Tag
 
@@ -9,6 +11,7 @@ module Jekyll
     def render(context)
       page = context.registers[:page]
       site = context.registers[:site]
+      Gtn::Scholar.load_bib(site)
 
       # Mark this page as having citations
       page['cited'] = true
@@ -77,12 +80,14 @@ module Jekyll
     end
 
     def render(context)
+      site = context.registers[:site]
+      Gtn::Scholar.load_bib(site)
       # Which page is rendering this tag?
       source_page = context.registers[:page]['path']
-      global_bib = context.registers[:site].config['cached_global_bib']
-      citeproc = context.registers[:site].config['cached_citeproc']
+      global_bib = site.config['cached_global_bib']
+      citeproc = site.config['cached_citeproc']
       # We have our page's citations
-      citations = context.registers[:site].config['citation_cache'][source_page]
+      citations = site.config['citation_cache'][source_page] || []
       # For each of these citation IDs, we need to get the formatted version + pull out
       # year, month for sorting.
       unique_citations = citations.reduce(Hash.new(0)) { |a, b| a[b] += 1; a }.keys

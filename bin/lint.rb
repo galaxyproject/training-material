@@ -195,6 +195,21 @@ module GtnLinter
     }
   end
 
+  def self.check_pmids(contents)
+    # https://www.ncbi.nlm.nih.gov/pubmed/24678044
+    self.find_matching_texts(contents, /(\[[^\]]*\]\(https?:\/\/www.ncbi.nlm.nih.gov\/pubmed\/\/[0-9]*\))/).map { |idx, text, selected|
+      ReviewDogEmitter.warning(
+        path: @path,
+        idx: idx,
+        match_start: selected.begin(0),
+        match_end: selected.end(0) + 2,
+        replacement: "{% cite ... %}",
+        message: "This looks like a PMID which could be better served by using the built-in Citations mechanism. You can use https://doi2bib.org to convert your PMID/PMCID into a .bib formatted entry, and add to your tutorial.md",
+        code: "GTN:004"
+      )
+    }
+  end
+
   def self.check_bad_link_text(contents)
     self.find_matching_texts(contents, /\[\s*(here|link)\s*\]/i)
         .map { |idx, text, selected|
@@ -575,6 +590,7 @@ module GtnLinter
       *link_gtn_slides_external(contents),
       *link_gtn_tutorial_external(contents),
       *check_dois(contents),
+      *check_pmids(contents),
       *check_bad_link_text(contents),
       *incorrect_calls(contents),
       *check_bad_cite(contents),

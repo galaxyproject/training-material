@@ -1,6 +1,7 @@
 require 'json'
 require './_plugins/jekyll-topic-filter.rb'
 require './_plugins/gtn/metrics'
+require './_plugins/gtn/scholar'
 
 module Jekyll
   class APIGenerator < Generator
@@ -16,6 +17,7 @@ module Jekyll
     def generate(site)
 
       # Full Bibliography
+      Gtn::Scholar.load_bib(site)
       puts "[GTN/API] Bibliography"
       page3 = PageWithoutAFile.new(site, "", "api/", "gtn.bib")
       page3.content = site.config['cached_global_bib'].to_s
