@@ -19,10 +19,7 @@ function setTheme(theme){
 		old_classes = "";
 	}
 	var new_classes = old_classes.split(' ').filter(function(x){ return x.substring(0, 6) !== "theme-" })
-
-	if (theme !== "default"){
-		new_classes.push('theme-' + theme)
-	}
+	new_classes.push('theme-' + theme)
 
 	$("body").attr('class', new_classes.join(' '))
 	setThemePreference(theme);
@@ -38,9 +35,8 @@ function setTheme(theme){
 	}
 
 	onDocumentReady(function () {
-
-		$("#theme-selector").click(function(evt){
-			var theme = $(evt.target).data('value');
+		$("#theme-selector button").click(function(evt){
+			var theme = $(evt.target).data('theme');
 			setTheme(theme);
 			if(theme === "straya"){
 				$("body").addClass('downunder');
@@ -54,5 +50,11 @@ function setTheme(theme){
 		if(training_theme_cookie){
 			setTheme(training_theme_cookie);
 		}
+
+                // Just for february
+                if(getThemePreference() === null || getThemePreference() === "undefined" || getThemePreference() === undefined){
+                        setTheme("blm");
+                }
+
 	});
 })(window, document);
