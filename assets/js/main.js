@@ -155,3 +155,14 @@ function fixDiffPresentation(codeBlock){
 <!--  For admin training -->
 document.querySelectorAll("section.tutorial.topic-admin div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
 document.querySelectorAll("section.tutorial.topic-data-science div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
+
+$("#theme-selector button").click(function(evt){
+	var theme = $(evt.target).data('theme');
+	setTheme(theme);
+	if(theme === "straya"){
+		$("body").addClass('downunder');
+		setTimeout(function(){
+			$("body").removeClass('downunder');
+		}, 8000);
+	}
+})
