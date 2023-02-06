@@ -11,5 +11,6 @@ contributions:
   editing: [shiltemann]
   funding: [bioinformatics-ca,erasmusplus]
 
+subtopic: gene-expression
 priority: 7
 ---

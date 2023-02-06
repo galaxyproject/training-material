@@ -11,5 +11,6 @@ contributions:
   editing: [shiltemann]
   funding: [bioinformatics-ca,erasmusplus]
 
-priority: 2
+subtopic: data-formats-databases
+priority: 1
 ---

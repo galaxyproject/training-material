@@ -11,5 +11,6 @@ contributions:
   editing: [shiltemann]
   funding: [bioinformatics-ca,erasmusplus]
 
-priority: 11
+subtopic: clinical
+priority: 2
 ---

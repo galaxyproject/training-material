@@ -183,6 +183,25 @@ So you can use multiple tracks to confirm or validate what is going on in a part
 
 ???
 
+During library prep, fragments generally undergo size selection, to try to select fragments that are roughly the same size.
+
+That means the read pairs have an expected insert size.
+
+The insert size is the distance between the end of the first read and the end of the second read.
+
+When you map your reads back to the reference, a lot of aligners will use this expected insert size to find the best mapping, if there are multiple places to map.
+
+But we can also use information about read pairs with insert size that are either smaller than expected or larger than expected in order to identify structural variants.
+
+So if a fragment originates from a region with a large deletion or insertion, the inferred insert size, this is the insert size when it's mapped back to the reference genome, it changes.
+
+It is either going to get larger if it's a deletion, or smaller if it's an insertion.
+
+
+
+
+
+
 ---
 
 

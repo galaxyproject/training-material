@@ -1,0 +1,867 @@
+---
+layout: tutorial_slides
+
+title: "Genome Alignment"
+questions:
+-
+objectives:
+-
+key_points:
+-
+contributions:
+  authorship:
+    - mbourgey
+  editing:
+    - shiltemann
+subtopic: alignment-assembly
+---
+
+# 1
+
+![](images/lecture/lecture-1_1.png)
+![](images/lecture/lecture-1_2.png)
+
+1 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Canadian Bioinformatics Workshops
+www.bioinformatics.ca
+bioinformaticsdotca.github.io
+
+---
+# 2
+
+![](images/lecture/lecture-2_1.png)
+
+2 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+
+---
+# 3
+
+![](images/lecture/lecture-3_1.png)
+![](images/lecture/lecture-3_2.png)
+![](images/lecture/lecture-3_3.jpg)
+![](images/lecture/lecture-3_4.png)
+![](images/lecture/lecture-3_5.png)
+![](images/lecture/lecture-3_6.jpg)
+
+3 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Genome Alignment
+Mathieu Bourgey
+Cancer Analysis
+June, 7-11, 2021
+
+---
+# 4
+
+
+4 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Learning Objectives
+• By the end of this lecture, you will:
+•
+Learn alignment terminology
+•
+Become familiar with common file formats (FASTQ,
+SAM, BAM)
+•
+Understand cancer-related chalenges
+•
+Run the first steps of a Tumor-pair pipeline
+
+---
+# 5
+
+
+5 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Outline
+<b>1.</b>
+<b>Revisiting Variant discovery in cancer </b>
+<b>2.</b>
+<b>The pipeline we developed (PROFYLE project)</b>
+<b>3.</b>
+<b>Step by step guide </b>
+<b>4.</b>
+<b>Conclusion</b>
+
+---
+# 6
+
+
+6 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Variant discovery in cancer
+<b>Goals:</b>
+o
+<b>What genetic abnormalities underpin the ability of </b>
+<b>tumour cells to achieve oncogenic properties?</b>
+o
+<b>How do genetic abnormalities change over the natural</b>
+<b>history of a tumour? </b>
+o
+<b>What genes/pathways are disrupted due to somatic</b>
+<b>genome aberrations? </b>
+
+---
+# 7
+
+![](images/lecture/lecture-7_1.jpg)
+
+7 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Source of problems
+Clonality (Tumour Heterogeneity)
+o
+<b>Identification of clonal variants is complicated.</b>
+o
+<b>Clonal variants, if rare enough, look like sequencing errors</b>
+o
+<b>High depth could somehow solve the problem</b>
+
+---
+# 8
+
+![](images/lecture/lecture-8_1.jpg)
+
+8 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Source of problems
+Tumor Purity
+o
+<b>Normal contamination during tumor extraction</b>
+o
+<b>Tumor contamination when using adjacent tissues </b>
+<b>control </b>
+o
+<b>Tumor contamination when using blood in case of </b>
+<b>metastasis or leukemia</b>
+
+---
+# 9
+
+![](images/lecture/lecture-9_1.jpg)
+
+9 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Source of problems
+Sequencing/Mapping Errors
+o
+GC rich regions
+o
+Repeats
+o
+Halpotypes
+
+---
+# 10
+
+![](images/lecture/lecture-10_1.jpg)
+
+10 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Source of problems
+All these affect:
+
+---
+# 11
+
+
+11 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Outline
+<b>1.</b>
+<b>Revisiting Variant discovery in cancer </b>
+<b>2.</b>
+<b>The pipeline we developed (PROFYLE project)</b>
+<b>3.</b>
+<b>Step by step guide</b>
+<b>4.</b>
+<b>Conclusion</b>
+
+---
+# 12
+
+![](images/lecture/lecture-12_1.png)
+
+12 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+o
+<b>PROFYLE stands for PRecision</b>
+<b>Oncology For Young peopLE</b>
+o <b>Children, adolescents, and young</b>
+<b>adults (CAYA) with hard-to-treat</b>
+<b>cancers. </b>
+What is PROFYLE ?
+Blood DNA
+Tumor DNA
+Tumor RNA
+CAYA patients
+Fast pass WGS
+analysis
+Full WGS analysis
+WTS analysis
+<b>Results used for </b>
+<b>Research</b>
+<b>Results used for </b>
+<b>Clinical </b>
+<b>application</b>
+Review by M.D
+experts
+Actionable
+targets
+Personalized
+Therapy
+
+---
+# 13
+
+![](images/lecture/lecture-13_1.jpg)
+
+13 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Tumor-pair SNV Pipeline: Overview
+
+---
+# 14
+
+![](images/lecture/lecture-14_1.jpg)
+
+14 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Tumor-pair SNV Pipeline: real workflow
+https://genpipes.readthedocs.io/en/genpipes-v-3.3.0/user_guide/pipelines/gp_tumourpair.html
+
+---
+# 15
+
+
+15 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Outline
+<b>1.</b>
+<b>Revisiting Variant discovery in cancer </b>
+<b>2.</b>
+<b>The pipeline we developed (PROFYLE project)</b>
+<b>3.</b>
+<b>Step by step guide</b>
+<b>4.</b>
+<b>Conclusion </b>
+
+---
+# 16
+
+
+16 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+• HPC servers
+• Clumeq, beluga (+30,000 cores)
+• AWS, GCP
+• Large storage system
+• Large local scratch
+• WGS Final bam: 250-500 GB
+•
+Cagekid project (100 Tumor/Normal WGS):
+• Final storage 80T
+• During processing 240TB
+•
+Processing time
+• 36h of processing per sample
+Compute infrastructute
+
+---
+# 17
+
+
+17 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Pipeline summary
+Trimming Alignment
+Alignment
+refinement
+Variants
+calling
+FASTQ
+METRICS
+
+---
+# 18
+
+
+18 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Input Data: FASTQ
+Sample1_R1.fastq.gz
+Sample2_R1.fastq.gz
+End 1 End 2
+Each sample will generate between 5Gb (100x WES) to 300Gb (100x WGS)
+of data
+@ERR127302.1 HWI-EAS350_0441:1:1:1055:4898#0/1
+GGCTCATCTTGAACTGGGTGGCGACCGTCCCTGGCCCCTTCTTGACACCCAGCGCNNNNNNNNNNNNNNNNA
++
+4=B@D99BDDDDDDD:DD?B<<=?>6B#############################################
+@ERR127302.2 HWI-EAS350_0441:1:1:1056:1163#0/1
+GAATGAGAGGCCCTCCCCGTGGAGGCATGGTATCCGGCCGAGGGGGCTTAGTCATNNNNNNNNNNNNNNNNC
++
+B?,B2,?=?1?1B?D@?:@?DB3>AD,8DD??-B?#####################################
+@ERR127302.3 HWI-EAS350_0441:1:1:1057:13164#0/1
+GGCCGCAGTGCCATTGAGCTCACCAAAATGCTCTGTGAAATCCTGCAGGTTGGGGANNNNNNNNNNNNNNGA
++
+DFBH?GDEG>GEGGDHH>HBDBEGD8G<GG<DGGGCB><82???@DDBBDDGGE##################
+file:///Users/flefebvr/Downloads/fq.txt
+1 of 1 13-05-31 10:43 AM
+Sample1_R2.fastq.gz
+Sample_R2.fastq.gz
+
+---
+# 19
+
+![](images/lecture/lecture-19_1.jpg)
+
+19 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+<i>Q</i> = -10 log_10 ( <i>p</i> )
+Where  <i>Q </i> is the quality and  <i>p </i> is the probability of the
+base being incorrect.
+
+---
+# 20
+
+![](images/lecture/lecture-20_1.jpg)
+
+20 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+QC of raw sequences
+low qualtity bases can bias subsequent anlaysis
+(i.e, SNP and SV calling, …)
+
+---
+# 21
+
+![](images/lecture/lecture-21_1.jpg)
+
+21 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+QC of raw sequences
+Positional Base-Content
+
+---
+# 22
+
+![](images/lecture/lecture-22_1.jpg)
+
+22 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+QC of raw sequences
+
+---
+# 23
+
+![](images/lecture/lecture-23_1.jpg)
+
+23 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+QC of raw sequences
+Species composition (via BLAST)
+
+---
+# 24
+
+
+24 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Pipeline summary
+Trimming Alignment
+Alignment
+refinement
+Variants
+calling
+FASTQ
+METRICS
+
+---
+# 25
+
+![](images/lecture/lecture-25_1.jpg)
+![](images/lecture/lecture-25_2.png)
+![](images/lecture/lecture-25_3.png)
+![](images/lecture/lecture-25_4.png)
+![](images/lecture/lecture-25_5.png)
+![](images/lecture/lecture-25_6.png)
+![](images/lecture/lecture-25_7.jpg)
+
+25 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Read Filtering
+o
+Clip Illumina adapters:
+o
+Trim trailing quality < 30
+o
+Filter for read length ≥  32 bp
+usadellab.org
+
+Trimmomatic uses a two-step approach to find matches between the adapters and reads. First,
+short sections of each adapter (maximum 16 bp) are tested in each possible position within the
+reads.  If  this  short  alignment,  known  as  the  ‘seed’  is  a perfect or sufficiently close match,
+determined by the seedMismatch parameter (see below), the entire alignment between the
+read and adapter is scored. This two-step strategy results in considerable efficiency gains,
+since the seed alignment can be calculated very quickly, while the full alignment score is
+calculated relatively rarely.
+The full alignment score is calculated as follows. Each matching base increases the alignment
+score by 0.6, while each mismatch reduces the alignment score by Q/10. By considering the
+quality of the base calls, mismatches caused by read errors have less impact. A perfect match
+of a 12 base sequence will score just over 7, while 25 bases are needed to score 15. As such
+we recommend values of between 7 - 15 as the threshold value for simple alignment mode. .
+For palindromic matches, a longer alignment is possible, as described above. Therefore this
+threshold can be higher, in the range of 30.  Even though this threshold is very high (requiring
+a match of almost 50 bases) Trimmomatic is still able to identify very, very short adapter
+fragments. (See Figure 2 panels C and D, where the alignment regions are shown).
+
+ILLUMINACLIP:<fastaWithAdaptersEtc>:<seed mismatches>:<palindrome clip
+threshold>:<simple clip threshold>
+fastaWithAdaptersEtc: specifies the path to a fasta file containing all the adapters,
+PCR sequences etc. The naming of the various sequences within this file determines
+how they are used. See the section below or use one of the provided adapter files
+seedMismatches: specifies the maximum mismatch count which will still allow a full
+match to be performed
+
+Trimmomatic uses a two-step approach to find matches between the adapters and reads. First,
+short sections of each adapter (maximum 16 bp) are tested in each possible position within the
+reads.  If  this  short  alignment,  known  as  the  ‘seed’  is  a perfect or sufficiently close match,
+determined by the seedMismatch parameter (see below), the entire alignment between the
+read and adapter is scored. This two-step strategy results in considerable efficiency gains,
+since the seed alignment can be calculated very quickly, while the full alignment score is
+calculated relatively rarely.
+The full alignment score is calculated as follows. Each matching base increases the alignment
+score by 0.6, while each mismatch reduces the alignment score by Q/10. By considering the
+quality of the base calls, mismatches caused by read errors have less impact. A perfect match
+of a 12 base sequence will score just over 7, while 25 bases are needed to score 15. As such
+we recommend values of between 7 - 15 as the threshold value for simple alignment mode. .
+For palindromic matches, a longer alignment is possible, as described above. Therefore this
+threshold can be higher, in the range of 30.  Even though this threshold is very high (requiring
+a match of almost 50 bases) Trimmomatic is still able to identify very, very short adapter
+fragments. (See Figure 2 panels C and D, where the alignment regions are shown).
+
+ILLUMINACLIP:<fastaWithAdaptersEtc>:<seed mismatches>:<palindrome clip
+threshold>:<simple clip threshold>
+fastaWithAdaptersEtc: specifies the path to a fasta file containing all the adapters,
+PCR sequences etc. The naming of the various sequences within this file determines
+how they are used. See the section below or use one of the provided adapter files
+seedMismatches: specifies the maximum mismatch count which will still allow a full
+match to be performed
+
+Trimmomatic uses a two-step approach to find matches between the adapters and reads. First,
+short sections of each adapter (maximum 16 bp) are tested in each possible position within the
+reads.  If  this  short  alignment,  known  as  the  ‘seed’  is  a perfect or sufficiently close match,
+determined by the seedMismatch parameter (see below), the entire alignment between the
+read and adapter is scored. This two-step strategy results in considerable efficiency gains,
+since the seed alignment can be calculated very quickly, while the full alignment score is
+calculated relatively rarely.
+The full alignment score is calculated as follows. Each matching base increases the alignment
+score by 0.6, while each mismatch reduces the alignment score by Q/10. By considering the
+quality of the base calls, mismatches caused by read errors have less impact. A perfect match
+of a 12 base sequence will score just over 7, while 25 bases are needed to score 15. As such
+we recommend values of between 7 - 15 as the threshold value for simple alignment mode. .
+For palindromic matches, a longer alignment is possible, as described above. Therefore this
+threshold can be higher, in the range of 30.  Even though this threshold is very high (requiring
+a match of almost 50 bases) Trimmomatic is still able to identify very, very short adapter
+fragments. (See Figure 2 panels C and D, where the alignment regions are shown).
+
+ILLUMINACLIP:<fastaWithAdaptersEtc>:<seed mismatches>:<palindrome clip
+threshold>:<simple clip threshold>
+fastaWithAdaptersEtc: specifies the path to a fasta file containing all the adapters,
+PCR sequences etc. The naming of the various sequences within this file determines
+how they are used. See the section below or use one of the provided adapter files
+seedMismatches: specifies the maximum mismatch count which will still allow a full
+match to be performed
+
+Trimmomatic uses a two-step approach to find matches between the adapters and reads. First,
+short sections of each adapter (maximum 16 bp) are tested in each possible position within the
+reads.  If  this  short  alignment,  known  as  the  ‘seed’  is  a perfect or sufficiently close match,
+determined by the seedMismatch parameter (see below), the entire alignment between the
+read and adapter is scored. This two-step strategy results in considerable efficiency gains,
+since the seed alignment can be calculated very quickly, while the full alignment score is
+calculated relatively rarely.
+The full alignment score is calculated as follows. Each matching base increases the alignment
+score by 0.6, while each mismatch reduces the alignment score by Q/10. By considering the
+quality of the base calls, mismatches caused by read errors have less impact. A perfect match
+of a 12 base sequence will score just over 7, while 25 bases are needed to score 15. As such
+we recommend values of between 7 - 15 as the threshold value for simple alignment mode. .
+For palindromic matches, a longer alignment is possible, as described above. Therefore this
+threshold can be higher, in the range of 30.  Even though this threshold is very high (requiring
+a match of almost 50 bases) Trimmomatic is still able to identify very, very short adapter
+fragments. (See Figure 2 panels C and D, where the alignment regions are shown).
+
+ILLUMINACLIP:<fastaWithAdaptersEtc>:<seed mismatches>:<palindrome clip
+threshold>:<simple clip threshold>
+fastaWithAdaptersEtc: specifies the path to a fasta file containing all the adapters,
+PCR sequences etc. The naming of the various sequences within this file determines
+how they are used. See the section below or use one of the provided adapter files
+seedMismatches: specifies the maximum mismatch count which will still allow a full
+match to be performed
+
+Trimmomatic uses a two-step approach to find matches between the adapters and reads. First,
+short sections of each adapter (maximum 16 bp) are tested in each possible position within the
+reads.  If  this  short  alignment,  known  as  the  ‘seed’  is  a perfect or sufficiently close match,
+determined by the seedMismatch parameter (see below), the entire alignment between the
+read and adapter is scored. This two-step strategy results in considerable efficiency gains,
+since the seed alignment can be calculated very quickly, while the full alignment score is
+calculated relatively rarely.
+The full alignment score is calculated as follows. Each matching base increases the alignment
+score by 0.6, while each mismatch reduces the alignment score by Q/10. By considering the
+quality of the base calls, mismatches caused by read errors have less impact. A perfect match
+of a 12 base sequence will score just over 7, while 25 bases are needed to score 15. As such
+we recommend values of between 7 - 15 as the threshold value for simple alignment mode. .
+For palindromic matches, a longer alignment is possible, as described above. Therefore this
+threshold can be higher, in the range of 30.  Even though this threshold is very high (requiring
+a match of almost 50 bases) Trimmomatic is still able to identify very, very short adapter
+fragments. (See Figure 2 panels C and D, where the alignment regions are shown).
+
+ILLUMINACLIP:<fastaWithAdaptersEtc>:<seed mismatches>:<palindrome clip
+threshold>:<simple clip threshold>
+fastaWithAdaptersEtc: specifies the path to a fasta file containing all the adapters,
+PCR sequences etc. The naming of the various sequences within this file determines
+how they are used. See the section below or use one of the provided adapter files
+seedMismatches: specifies the maximum mismatch count which will still allow a full
+match to be performed
+
+---
+# 26
+
+
+26 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Read Trimming tools
+o
+<b>Trimmomatic</b>
+<b>(</b> <b>http://www.usadellab.org/cms/index.php?page=tr</b>
+<b>immomatic)</b>
+o
+Converts old CASAVA <1.8 fastqs (phred+64) to the sanger fastq
+format (phred+33)
+o
+<b>Many, many other tools exist! </b>
+o
+Skewer
+o
+Cutadapt
+o
+Emboss
+o
+Fastx
+o
+etc
+
+---
+# 27
+
+
+27 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Pipeline summary
+Trimming Alignment
+Alignment
+refinement
+Variants
+calling
+FASTQ
+METRICS
+
+---
+# 28
+
+
+28 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Read Mapping
+o
+<b>Mapping problem is challenging:</b>
+o
+Need to map millions of short reads to a genome
+o
+Genome = text with billons of letters
+o
+Many mapping locations possible
+o
+NOT exact matching: sequencing errors and
+biological variants (substitutions, insertions,
+deletions, splicing)
+o
+<b>Clever use of the Burrows-Wheeler Transform</b>
+<b>increases speed and reduces memory footprint</b>
+o
+<b>Used mapper:  BWA</b>
+o
+<b>Many, many other exists!</b>
+o
+Novoalign ( http://www.novocraft.com/main/index.php)
+o
+Bowtie2 ( http://bowtie-
+bio.sourceforge.net/bowtie2/index.shtml)
+o
+GEM ( http://algorithms.cnag.cat/wiki/The_GEM_library)
+
+---
+# 29
+
+
+29 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+SAM/BAM
+o
+Used to store alignments
+o
+SAM = text, BAM = binary
+<b>SRR013667.1 99 19 8882171 60 76M = 8882214 119 </b>
+<b>NCCAGCAGCCATAACTGGAATGGGAAATAAACACTATGTTCAAAGCAGA</b>
+<b>#&gt;A@BABAAAAADDEGCEFDHDEDBCFDBCDBCBDCEACB&gt;AC@CDB@&gt;</b>
+<b>&#8230;</b>
+Read name Flag
+Reference
+Position
+CIGAR Mate Position
+Sample1.bam
+Sample2.bam
+SRR013667.1 99 19 8882171 60
+76M = 8882214 119
+NCCAGCAGCCATAACTGGAATGG
+GAAATAAACACTATGTTCAAAG
+between 10Gb ot 500Gb each bam
+SAM:  <b>S</b> equence <b>A</b> lignment/ <b>M</b> ap format
+Mapping
+Quality
+
+---
+# 30
+
+
+30 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Aligner write the RG tag!
+o
+<b>We shoukd align each lane separatly.</b>
+o
+<b>This should be done separatly:</b>
+o
+For speed, you can align each lane in parallel
+o
+To track where the reads came from. Set individual Read
+Group tags
+o
+<b>It is important to set Read Group information:</b>
+o
+Many tools require it
+o
+When generating metrics, many tools can use this
+information to generate separate metrics
+o
+<b>To help differentiate lanes of sequencing in the final </b>
+<b>BAM</b>
+
+---
+# 31
+
+
+31 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Pipeline summary
+Trimming Alignment
+Alignment
+refinement
+Variants
+calling
+FASTQ
+METRICS
+
+---
+# 32
+
+![](images/lecture/lecture-32_1.jpg)
+
+32 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Indel realigment
+o
+<b>Slow and complicated to use BUT does cleanup data. </b>
+o
+<b>Tumor and normal should be realigned altogether:</b>
+o
+For a given region one of the sample in the pair could have
+less reads and the region will be skiped if treated
+indivdually
+o
+Normal and tumor are all in-sync for the somatic calling
+step.
+
+---
+# 33
+
+
+33 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Marking duplicates
+o
+<b>What are duplicates ?</b>
+o
+Different read pairs representing the same initial DNA
+fragment.
+o
+<b>Where they come from ?</b>
+o
+Optical/Clustering
+o
+PCR
+o
+<b>How to detect them ? </b>
+o
+Positional approaches ( <b>Picard</b> ; samtools)
+o
+Kmer approaches (BVAtools)
+o
+Brut force
+
+---
+# 34
+
+![](images/lecture/lecture-34_1.jpg)
+
+34 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Why duplicates read are an issue ?
+
+---
+# 35
+
+![](images/lecture/lecture-35_1.jpg)
+
+35 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Base recalibration
+o
+<b>Vendors tend to inflate the values of the bases in </b>
+<b>the reads.</b>
+o
+<b>The recalibration tries to lower the scores of </b>
+<b>some biased motifs for some technologies.</b>
+o
+<b>Useful to eliminate noise</b>
+o
+<b>Done using GATK</b>
+
+---
+# 36
+
+
+36 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Pipeline summary
+Trimming Alignment
+Alignment
+refinement
+Variants
+calling
+FASTQ
+METRICS
+
+---
+# 37
+
+![](images/lecture/lecture-37_1.jpg)
+
+37 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+General metrics
+•
+Metrics should be collected at every step of the analysis !
+•
+A very nice metrics aggregator is <b>MultiQC</b>
+<a href="http://multiqc.info/"><b>(</b></a> <a href="http://multiqc.info/"><b>http://multiqc.info/</b></a> <a href="http://multiqc.info/"><b>)</b></a>
+
+---
+# 38
+
+
+38 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Outline
+<b>1.</b>
+<b>Revisiting Variant discovery in cancer </b>
+<b>2.</b>
+<b>The pipeline we developed (PROFYLE project)</b>
+<b>3.</b>
+<b>Step by step guide </b>
+<b>4.</b>
+<b>Conclusion</b>
+
+---
+# 39
+
+
+39 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Cancer analysis Challenges
+o
+<b>Understanding</b>
+<b>sources of artefacts</b>
+o
+Sample? technology? analysis?
+o
+<b>Biology of cancer is complex</b>
+o
+Copy number alterations, mutational heterogeneity and
+tumour/normal admixture
+o
+Integration of multiple views, multiple samplings
+o
+T/N pairs: Somatic variants, LOH
+o
+DNA/RNA pairs: gene fusion, RNA edits, allele specific expression
+o
+Pre/Post treatment pairs: mechanisms for chemotherapeutic resistance and tumour
+evolution
+o
+<b>These represent new statistical challenges that</b>
+<b>need to be addressed</b>
+o
+Need for more cancer specific tools
+o
+Single cell genomics of cancer
+
+---
+# 40
+
+![](images/lecture/lecture-40_1.jpg)
+
+40 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+Acknowledgments
+At C3G:
+o
+Guillaume Bourque
+o
+Robert Eveleigh
+o
+François Lefebvre
+o
+Maxime Caron
+Others:
+o
+Pascale St-Onge, CHU Sainte-justine
+o
+Louis Létourneau, SportlogIQ
+a
+
+---
+# 41
+
+![](images/lecture/lecture-41_1.png)
+![](images/lecture/lecture-41_2.png)
+![](images/lecture/lecture-41_3.png)
+![](images/lecture/lecture-41_4.png)
+
+41 <b>Module 3 &#8211; Genome Alignment </b> <b>bio</b> informatics
+.ca
+We are on a Break
+Workshop Sponsors:

@@ -11,6 +11,6 @@ contributions:
   editing: [shiltemann]
   funding: [bioinformatics-ca,erasmusplus]
 
-
+subtopic: pathways
 priority: 9
 ---

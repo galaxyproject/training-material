@@ -16,7 +16,8 @@ contributions:
   editing: [shiltemann]
   funding: [bioinformatics-ca,erasmusplus]
 
-
+subtopic: data-formats-databases
+priority: 2
 ---
 
 <!-- TODO add contributors. From bioinf.ca: "This lab is based on the HTS IGV lab originally by
