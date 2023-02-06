@@ -3,10 +3,7 @@ layout: base
 title: GTN Top Cited Papers
 ---
 
-{% assign topcitations = site.citation_count | top_citations %}
-<pre>
-{{ site.citation_count | jsonify }}
-</pre>
+This page lists the top cited papers, based on citations used throughout the GTN.
 
 <ol>
 {% for cite in topcitations %}
