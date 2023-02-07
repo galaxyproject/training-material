@@ -545,7 +545,7 @@ Click on the "mitochondria" to see how the assembly contigs align to the referen
 
 # Combining workflows
 
-We can combine these galaxy workflows into a single workflow. (See [this GTN tutorial](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-editor/tutorial.html) for more information.) 
+We can combine these galaxy workflows into a single workflow. (See [this GTN tutorial]({% link topics/galaxy-interface/tutorials/workflow-editor/tutorial.md %}) for more information.) 
 
 *Combined assembly and polishing workflow*
 
