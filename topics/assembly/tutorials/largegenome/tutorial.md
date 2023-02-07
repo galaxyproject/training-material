@@ -40,7 +40,7 @@ In reality, we rarely get chromosome-length assemblies, due to many challenges. 
 
 Even though most assemblies are not chromosome-length, the assembly in contigs is still valuable for many research questions. Lengths of assembled contigs are increasing as sequencing technology and assembly tools improve. 
 
-*Can I use my own data with these workflows?*
+### Can I use my own data with these workflows?
 
 This tutorial has been tested on real-sized data sets and should work with your own data. However, there will most likely be some modifications required to tools and settings. Furthermore, as most species have never had their genome sequenced, it is not possible to guarantee existing workflows are optimal for new data.
 
