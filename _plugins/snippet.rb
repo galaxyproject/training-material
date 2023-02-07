@@ -139,3 +139,9 @@ module Jekyll
 end
 
 Liquid::Template.register_tag("snippet", Jekyll::Tags::SnippetIncludeTag)
+
+Jekyll::Hooks.register :pages, :post_render do |page|
+  if page.output =~ /-title>/
+    page.output = Gtn::Boxify.replace_elements(page.output, page.data.fetch('lang', 'en'), page.path)
+  end
+end
