@@ -29,7 +29,7 @@ contributors:
 
 A genome is a representation of the set of DNA in an organism, such as the set of chromosomes. When the DNA is extracted from the sample, it is broken up into fragments much smaller than the lengths of DNA in the chromosomes. After being sequenced, these fragments (and their copies) are called sequencing reads. To assemble the genome, we need to join the reads back into, ideally, chromosome-sized lengths.
 
-!["Image showing the concept of a genome assembly: a sample (a tree), with an arrow going to sequencing reads, with an arrow going to a genome (a set of diploid chromosomes)"](images/sampletogenome.png){: width="650"}
+!["Image showing the concept of a genome assembly: a sample (a tree), with an arrow going to sequencing reads, with an arrow going to a genome (a set of diploid chromosomes)"](images/sampletogenome.png){: width="800"}
 
 ### Assembly challenges
 
