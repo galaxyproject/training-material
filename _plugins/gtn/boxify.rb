@@ -118,6 +118,7 @@ module Gtn
     end
 
     def self.format_box_title(title, box_type, lang="en")
+      if lang == "" or lang.nil? then lang = "en" end
       title_fmted = ((!title.nil?) && title.length > 0 ? ": #{title}" : "")
       "#{@@BOX_TITLES[lang][box_type]}#{title_fmted}"
     end
@@ -178,7 +179,20 @@ module Gtn
       ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip
     end
 
-
+    def self.replace_elements(text, lang="en", key)
+      # We want to replace any `<x-title>(.*)</x-title>` bits
+      # And replace them one by one with "proper" boxes, based on generate_title.
+      #
+      # We're going to rely on never having two on one line
+      text.split("\n").map{|line|
+        line.gsub(/<(?<type>[a-z-]*)-title>(?<title>.*?)<\/[a-z-]*-title>/){|m|
+          title = Regexp.last_match[:title]
+          type = Regexp.last_match[:type]
+          _, box = self.generate_title(type, title, lang=lang, key)
+          box
+        }
+      }.join("\n")
+    end
   end
 end
 

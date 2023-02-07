@@ -90,12 +90,26 @@ module Jekyll
       feedback.select{|x| x["tutorial"] == name}.length
     end
 
+    def fix_box_titles(content, lang, key)
+      Gtn::Boxify.replace_elements(content, lang, key)
+    end
+
     def filter_authors(contributors, contributions)
       if not contributors.nil?
         return contributors
       else
         return contributions["authorship"]
       end
+    end
+
+    def regex_replace(str, regex_search, value_replace)
+      regex = /#{regex_search}/m
+      return str.gsub(regex, value_replace)
+    end
+
+    def regex_replace_once(str, regex_search, value_replace)
+      regex = /#{regex_search}/m
+      return str.sub(regex, value_replace)
     end
 
     def get_default_link(material)

@@ -55,7 +55,7 @@ Measuring gene expression on a genome-wide scale has become common practice over
 
 There are many steps involved in analysing an RNA-Seq experiment. The analysis begins with sequencing reads (FASTQ files). These are usually aligned to a reference genome, if available. Then the number of reads mapped to each gene can be counted. This results in a table of counts, which is what we perform statistical analyses on to determine differentially expressed genes and pathways. The purpose of this tutorial is to demonstrate how to perform differential expression on count data with **limma-voom**. How to generate counts from reads (FASTQs) is covered in the accompanying tutorial [RNA-seq reads to counts]({% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}).
 
-**Mouse mammary gland dataset**
+## Mouse mammary gland dataset
 
 The data for this tutorial comes from a Nature Cell Biology paper by {% cite Fu2015 %}. Both the raw data (sequence reads) and processed data (counts) can be downloaded from Gene Expression Omnibus database (GEO) under accession number [GSE60450](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60450).
 
@@ -63,7 +63,7 @@ This study examined the expression profiles of basal and luminal cells in the ma
 
 We will use **limma-voom** ({% cite Law2014 %}) for identifying differentially expressed genes here. Other popular alternatives are edgeR ({% cite robinson2010edger %}) and DESeq2 ({% cite love2014moderated %}). Limma-voom has been shown to be perform well in terms of precision, accuracy and sensitivity ({% cite CostaSilva2017 %}) and, due to its speed, it's particularly recommended for large-scale datasets with 100s of samples ({% cite Chen2016 %}).
 
-This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop](http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html), first taught [here](http://combine-australia.github.io/2016-05-11-RNAseq/).
+This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop](http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html), first taught [in this course](http://combine-australia.github.io/2016-05-11-RNAseq/).
 
 ![Tutorial Dataset](../../images/rna-seq-reads-to-counts/mouse_exp.png "Tutorial Dataset")
 
