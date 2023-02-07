@@ -118,6 +118,7 @@ module Gtn
     end
 
     def self.format_box_title(title, box_type, lang="en")
+      if lang == "" or lang.nil? then lang = "en" end
       title_fmted = ((!title.nil?) && title.length > 0 ? ": #{title}" : "")
       "#{@@BOX_TITLES[lang][box_type]}#{title_fmted}"
     end
