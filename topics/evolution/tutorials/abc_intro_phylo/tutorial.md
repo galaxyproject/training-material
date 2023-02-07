@@ -184,7 +184,7 @@ Mathematically a *Tree* is a kind of *graph*, which has objects called *nodes* o
 Trees are a natural way to think about phylogenetic relationships, where the nodes correspond to *taxa*, and the edges, also called *branches*, show the relationships between them. 
 Taxa could be species, or lineages, genera, populations, or even individuals if we are considering something like a genealogy.
 Nodes that only have one edge attached to them are called *leaves* (or *tips*), and these correspond to taxa with no descendant taxa in the tree. 
-These taxa might be from fossils, or be currently living, referred to as *extant*.
+These taxa might be from fossils, or be currently living, in which case they're referred to as *extant*.
 
 It's common to call *phylogenetic tree* just a *phylogeny*.
 
@@ -285,7 +285,8 @@ For a start, while aligning just *two* sequences is "easy", in the sense that an
 
 ## Aligning sequences with MAFFT
 
-Today you will be aligning sequences using a modern multiple alignment program called **MAFFT**, whjich is available on Galaxy.
+Today you will be aligning sequences using a modern multiple alignment program called **MAFFT**, which is available on Galaxy.
+
 ## Question: is there a format convention for program names, like Courier Bold or something?
 
 
