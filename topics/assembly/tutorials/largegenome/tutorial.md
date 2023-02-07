@@ -99,7 +99,7 @@ Let's start with uploading the data.
 
 We are also using a reference genome *Arabidopsis thaliana* for a later comparison step - file TAIR10_chr_all.fas downloaded from [The Arabidopsis Information Resource](https://www.arabidopsis.org/download/index-auto.jsp?dir=%2Fdownload_files%2FGenes%2FTAIR10_genome_release%2FTAIR10_chromosome_files).
 
-*Import the data*
+## Import the data
 
 > ### {% icon hands_on %} Hands-on: Import the data
 > 1. Create a new history for this tutorial and give it a proper name
