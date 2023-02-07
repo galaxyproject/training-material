@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="1: RNA-Seq reads to counts" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-11-28 10:10:13 +0000" />
+<meta name="DC.date" content="2023-02-07 10:11:21 +0000" />
 <meta name="DC.creator" content="Maria Doyle" />
 <meta name="DC.creator" content="Belinda Phipson" />
 <meta name="DC.creator" content="Harriet Dashnow" />
@@ -65,7 +65,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-11-28 10:10:13 +0000",
+  "dateModified": "2023-02-07 10:11:21 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "1: RNA-Seq reads to counts",
   "interactivityType": "mixed",
@@ -1043,8 +1043,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -1184,7 +1182,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 7, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1208,13 +1206,13 @@
 
 <p>There are many steps involved in analysing an <span class="notranslate">RNA</span>-Seq experiment. The analysis begins with sequencing <span class="notranslate">reads</span> (FASTQ files). These are usually aligned to a reference genome, if available. Then the number of <span class="notranslate">reads</span> mapped to each gene can be counted. This results in a table of counts, which is what we perform statistical analyses on to determine differentially expressed genes and pathways. The purpose of this tutorial is to demonstrate how to do read alignment and counting, prior to performing differential <span class="notranslate">expression</span>. Differential <span class="notranslate">expression</span> analysis with limma-voom is covered in an accompanying tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html"><span class="notranslate">RNA</span>-seq counts to genes</a>. The tutorial here shows how to start from FASTQ data and perform the <span class="notranslate">mapping</span> and counting steps, along with associated Quality Control.</p>
 
-<p><strong>Mouse mammary gland dataset</strong></p>
+<h2 id="mouse-mammary-gland-dataset">Mouse mammary gland dataset</h2>
 
 <p>The data for this tutorial comes from a Nature Cell Biology paper by <span class="citation"><a href="#Fu2015">Fu <i>et al.</i> 2015</a></span>. Both the raw data (sequence <span class="notranslate">reads</span>) and processed data (counts) can be downloaded from Gene <span class="notranslate">Expression</span> Omnibus database (GEO) under accession number <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60450">GSE60450</a>.</p>
 
 <p>This study examined the <span class="notranslate">expression</span> profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status. Note that two biological replicates are used here, two independent sorts of cells from the mammary glands of virgin, pregnant or lactating mice, however three replicates is usually recommended as a minimum requirement for <span class="notranslate">RNA</span>-seq.</p>
 
-<p>This is a <span class="notranslate">Galaxy</span> tutorial based on material from the <a href="http://combine-australia.github.io/RNAseq-R/07-rnaseq-day2.html">COMBINE R <span class="notranslate">RNA</span>seq workshop</a>, first taught <a href="http://combine-australia.github.io/2016-05-11-RNAseq/">here</a>.</p>
+<p>This is a <span class="notranslate">Galaxy</span> tutorial based on material from the <a href="http://combine-australia.github.io/RNAseq-R/07-rnaseq-day2.html">COMBINE R <span class="notranslate">RNA</span>seq workshop</a>, first taught <a href="http://combine-australia.github.io/2016-05-11-RNAseq/">at a workshop in 2016</a>.</p>
 
 <figure id="figure-1"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Tutorial Dataset</figcaption></figure>
 
@@ -1224,7 +1222,10 @@
   <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a>    <ol>
+      <li><a href="#mouse-mammary-gland-dataset" id="markdown-toc-mouse-mammary-gland-dataset">Mouse mammary gland dataset</a></li>
+    </ol>
+  </li>
   <li><a href="#preparing-the-reads" id="markdown-toc-preparing-the-reads">Preparing the <span class="notranslate">reads</span></a>    <ol>
       <li><a href="#import-data-from-urls" id="markdown-toc-import-data-from-urls">Import data from URLs</a></li>
       <li><a href="#raw-reads-qc" id="markdown-toc-raw-reads-qc">Raw <span class="notranslate">reads</span> QC</a></li>
@@ -1740,7 +1741,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 <p>A BAM (<a href="https://en.wikipedia.org/wiki/SAM_(file_format)">Binary Alignment Map</a>) file is a compressed binary file storing the read sequences, whether they have been aligned to a reference sequence (e.g. a chromosome), and if so, the position on the reference sequence at which they have been aligned.</p>
 
 <blockquote class="notranslate hands_on">
-  <hands-on-title>Inspect a BAM/SAM file</hands-on-title>
+  <div id="hands-on-inspect-a-bam-sam-file" class="box-title" aria-label="hands-on box: Inspect a BAM/SAM file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Inspect a BAM/SAM file</div>
 
   <ol>
     <li>Inspect the <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> output of <strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1837,7 +1838,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 </ul>
 
 <blockquote class="question">
-  <question-title></question-title>
+  <div id="question-9" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Which information do you find in a SAM/BAM file?</li>
@@ -1845,7 +1846,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
   </ol>
 
   <blockquote class="solution">
-    <solution-title></solution-title>
+    <div id="solution-9" class="box-title"><button type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Sequences and quality information, like a FASTQ</li>
       <li><span class="notranslate">Mapping</span> information, Location of the read on the chromosome, <span class="notranslate">Mapping</span> quality, etc</li>

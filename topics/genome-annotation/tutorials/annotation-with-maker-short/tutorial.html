@@ -613,8 +613,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
             Galaxy@GenOuest
         </a>
@@ -729,7 +727,7 @@
                  
 
                 
-<h1 class="no_toc" id="introduction">Introduction</h1>
+<h1 id="introduction">Introduction</h1>
 
 <p>Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.</p>
 
@@ -743,12 +741,12 @@
 
 <p>In this tutorial you will learn how to perform a genome annotation, and how to evaluate its quality. Finally, you will learn how to use the <a href="http://jbrowse.org/">JBrowse</a> genome browser to visualise the results.</p>
 
-<p>More information about Maker can be found <a href="http://www.yandell-lab.org/software/maker.html">here</a>.</p>
+<p>More information about Maker can be found <a href="http://www.yandell-lab.org/software/maker.html">on their website</a>.</p>
 
 <p>This tutorial was inspired by the MAKER Tutorial for <a href="http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018">WGS Assembly and Annotation Winter School 2018</a>, don’t hesitate to consult it for more information on Maker, and on how to run it with command line.</p>
 
 <blockquote class="comment">
-  <comment-title>Note: Two versions of this tutorial</comment-title>
+  <div id="comment-note-two-versions-of-this-tutorial" class="box-title" aria-label="comment box: Note: Two versions of this tutorial"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Note: Two versions of this tutorial</div>
 
   <p>Because this tutorial consists of many steps, we have made two versions of it, one long and one short.</p>
 
@@ -759,11 +757,12 @@ to learn how to perform the training steps, please see the <a href="/training-ma
 </blockquote>
 
 <blockquote class="agenda">
-  <agenda-title></agenda-title>
+  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
   <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
   <li><a href="#genome-quality-evaluation" id="markdown-toc-genome-quality-evaluation">Genome quality evaluation</a></li>
   <li><a href="#maker" id="markdown-toc-maker">Maker</a></li>
@@ -771,6 +770,7 @@ to learn how to perform the training steps, please see the <a href="/training-ma
   <li><a href="#busco" id="markdown-toc-busco">Busco</a></li>
   <li><a href="#improving-gene-naming" id="markdown-toc-improving-gene-naming">Improving gene naming</a></li>
   <li><a href="#visualising-the-results" id="markdown-toc-visualising-the-results">Visualising the results</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
   <li><a href="#whats-next" id="markdown-toc-whats-next">What’s next?</a></li>
 </ol>
 
@@ -789,7 +789,7 @@ to learn how to perform the training steps, please see the <a href="/training-ma
 <p>Maker will align the transcript and protein sequences on the genome sequence to determine gene positions.</p>
 
 <blockquote class="notranslate hands_on">
-  <hands-on-title>Data upload</hands-on-title>
+  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -841,7 +841,7 @@ https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/snap_training_
 <p>Before running the full annotation process, you need first to evaluate the quality of the sequence. It will give you a good idea of what you can expect from it at the end of the annotation.</p>
 
 <blockquote class="notranslate hands_on">
-  <hands-on-title>Get genome sequence statistics</hands-on-title>
+  <div id="hands-on-get-genome-sequence-statistics" class="box-title" aria-label="hands-on box: Get genome sequence statistics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get genome sequence statistics</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1"><strong>Fasta Statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1</span></span>  with the following parameters:
@@ -864,7 +864,7 @@ https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/snap_training_
 <p>These statistics are useful to detect obvious problems in the genome assembly, but it gives no information about the quality of the sequence content. We want to evaluate if the genome sequence contains all the genes we expect to find in the considered species, and if their sequence are correct.</p>
 
 <blockquote class="comment">
-  <comment-title></comment-title>
+  <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>Keep in mind that we are running this tutorial only on the chromosome III instead of the whole genome.</p>
 
@@ -875,7 +875,7 @@ https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/snap_training_
 <p>We will first run this tool on the genome sequence to evaluate its quality.</p>
 
 <blockquote class="notranslate hands_on">
-  <hands-on-title>Run Busco on the genome</hands-on-title>
+  <div id="hands-on-run-busco-on-the-genome" class="box-title" aria-label="hands-on box: Run Busco on the genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run Busco on the genome</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4</span></span>  with the following parameters:
@@ -886,7 +886,7 @@ https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/snap_training_
       </ul>
 
       <blockquote class="comment">
-        <comment-title></comment-title>
+        <div id="comment-1" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>We select <code class="language-plaintext highlighter-rouge">Fungi</code> as we will annotate the genome of <em>Schizosaccharomyces pombe</em> which belongs to the Fungi kingdom. It is usually better to select the most specific lineage for the species you study. Large lineages (like Metazoa) will consist of fewer genes, but with a strong support. More specific lineages (like Hymenoptera) will have more genes, but with a weaker support (has they are found in fewer genomes).</p>
       </blockquote>
@@ -906,12 +906,12 @@ https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/snap_training_
 <p><img src="../../images/busco_genome_summary.png" alt="BUSCO genome summary" title="Example of BUSCO short summary (not from this tutorial). Here BUSCO searched for 290 genes in a genome, and found 282 of them complete (269 in single-copy, and 13 duplicated). 5 where found but are fragmented, and 3 were not found at all." /></p>
 
 <blockquote class="question">
-  <question-title></question-title>
+  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Do you think the genome quality is good enough for performing the annotation?</p>
 
   <blockquote class="solution">
-    <solution-title></solution-title>
+    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The genome consists of the expected number of chromosome sequences (1), with very few N, which is the ideal case.
 As we only analysed chromosome III, many BUSCO genes are missing, but still ~100 are found as complete single copy, and very few are found fragmented, which means that our genome have a good quality, at least on this single chromosome. That’s a very good material to perform an annotation.</p>
@@ -921,7 +921,7 @@ As we only analysed chromosome III, many BUSCO genes are missing, but still ~100
 </blockquote>
 
 <blockquote class="comment">
-  <comment-title></comment-title>
+  <div id="comment-2" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>Keep in mind that we are running this tutorial only on the chromosome III instead of the whole genome. The BUSCO result will also show a lot of missing genes: it is expected as all the BUSCO genes that are not on the chromosome III cannot be found by the tool.</p>
 
@@ -932,7 +932,7 @@ As we only analysed chromosome III, many BUSCO genes are missing, but still ~100
 <p>Let’s run Maker to predict gene models! Maker will use align <a href="https://en.wikipedia.org/wiki/Expressed_sequence_tag">ESTs</a> and proteins to the genome, and it will run ab initio predictors (SNAP and Augustus) using pre-trained models for this organism (have a look at the <a href="/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html">longer version of tutorial</a> to understand how they were trained).</p>
 
 <blockquote class="notranslate hands_on">
-  <hands-on-title>Annotation with Maker</hands-on-title>
+  <div id="hands-on-annotation-with-maker" class="box-title" aria-label="hands-on box: Annotation with Maker"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Annotation with Maker</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span>  with the following parameters:
@@ -968,7 +968,7 @@ As we only analysed chromosome III, many BUSCO genes are missing, but still ~100
       </ul>
 
       <blockquote class="comment">
-        <comment-title></comment-title>
+        <div id="comment-3" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>For this tutorial repeat masking is disabled, which is not the recommended setting. When doing a real-life annotation, you should either use <a href="https://www.dfam.org">Dfam</a> or provide your own repeats library.</p>
       </blockquote>
@@ -992,7 +992,7 @@ As we only analysed chromosome III, many BUSCO genes are missing, but still ~100
 <p>First, use the <code class="language-plaintext highlighter-rouge">Genome annotation statistics</code> that will compute some general statistics on the annotation.</p>
 
 <blockquote class="notranslate hands_on">
-  <hands-on-title>Get annotation statistics</hands-on-title>
+  <div id="hands-on-get-annotation-statistics" class="box-title" aria-label="hands-on box: Get annotation statistics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get annotation statistics</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4"><strong>Genome annotation statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4</span></span>  with the following parameters:
@@ -1010,7 +1010,7 @@ As we only analysed chromosome III, many BUSCO genes are missing, but still ~100
 </blockquote>
 
 <blockquote class="question">
-  <question-title></question-title>
+  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>How many genes where predicted by Maker?</li>
@@ -1018,7 +1018,7 @@ As we only analysed chromosome III, many BUSCO genes are missing, but still ~100
   </ol>
 
   <blockquote class="solution">
-    <solution-title></solution-title>
+    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>864 genes</li>
@@ -1036,7 +1036,7 @@ As we only analysed chromosome III, many BUSCO genes are missing, but still ~100
 <p>First we need to compute all the transcript sequences from the Maker annotation, using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1"><strong>GFFread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1</span></span> . This tool will compute the sequence of each transcript that was predicted by <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span>  and write them all in a FASTA file.</p>
 
 <blockquote class="notranslate hands_on">
-  <hands-on-title>Extract transcript sequences</hands-on-title>
+  <div id="hands-on-extract-transcript-sequences" class="box-title" aria-label="hands-on box: Extract transcript sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extract transcript sequences</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1"><strong>GFFread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1</span></span>  with the following parameters:
@@ -1063,7 +1063,7 @@ As we only analysed chromosome III, many BUSCO genes are missing, but still ~100
 <p>Now run BUSCO with the predicted transcript sequences:</p>
 
 <blockquote class="notranslate hands_on">
-  <hands-on-title>Run BUSCO</hands-on-title>
+  <div id="hands-on-run-busco" class="box-title" aria-label="hands-on box: Run BUSCO"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run BUSCO</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4</span></span>  with the following parameters:
@@ -1078,12 +1078,12 @@ As we only analysed chromosome III, many BUSCO genes are missing, but still ~100
 </blockquote>
 
 <blockquote class="question">
-  <question-title></question-title>
+  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>How do the BUSCO statistics compare to the ones at the genome level?</p>
 
   <blockquote class="solution">
-    <solution-title></solution-title>
+    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>128 complete single-copy, 0 duplicated, 10 fragmented, 620 missing. This is in fact better than what BUSCO found in the genome sequence. That means the quality of this annotation is very good (by default BUSCO in genome mode can miss some genes, the advanced options can improve this at the cost of computing time). (Results can be very slightly different in your own history, it’s normal).</p>
 
@@ -1096,7 +1096,7 @@ As we only analysed chromosome III, many BUSCO genes are missing, but still ~100
 <p>If you look at the content of the <code class="language-plaintext highlighter-rouge">final annotation</code> dataset, you will notice that the gene names are long, complicated, and not very readable. That’s because Maker assign them automatic names based on the way it computed each gene model. We are now going to automatically assign more readable names.</p>
 
 <blockquote class="notranslate hands_on">
-  <hands-on-title>Change gene names</hands-on-title>
+  <div id="hands-on-change-gene-names" class="box-title" aria-label="hands-on box: Change gene names"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Change gene names</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker_map_ids/maker_map_ids/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker_map_ids/maker_map_ids/2.31.11"><strong>Map annotation ids</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker_map_ids/maker_map_ids/2.31.11</span></span>  with the following parameters:
@@ -1107,7 +1107,7 @@ As we only analysed chromosome III, many BUSCO genes are missing, but still ~100
       </ul>
 
       <blockquote class="comment">
-        <comment-title></comment-title>
+        <div id="comment-4" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>Genes will be renamed to look like: <code class="language-plaintext highlighter-rouge">TEST_001234</code>. You can replace <code class="language-plaintext highlighter-rouge">TEST_</code> by anything you like, usually an uppercase short prefix.</p>
       </blockquote>
@@ -1123,7 +1123,7 @@ As we only analysed chromosome III, many BUSCO genes are missing, but still ~100
 <p>With <span class="notranslate">Galaxy</span>, you can visualize the annotation you have generated using JBrowse. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene.</p>
 
 <blockquote class="notranslate hands_on">
-  <hands-on-title>Visualize annotations in JBrowse</hands-on-title>
+  <div id="hands-on-visualize-annotations-in-jbrowse" class="box-title" aria-label="hands-on box: Visualize annotations in JBrowse"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualize annotations in JBrowse</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.10+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.10+galaxy0"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.10+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1167,7 +1167,7 @@ As we only analysed chromosome III, many BUSCO genes are missing, but still ~100
 
 <p>Enable the track on the left side of JBrowse, then navigate along the genome and look at the genes that were predicted by Maker.</p>
 
-<h1 class="no_toc" id="conclusion">Conclusion</h1>
+<h1 id="conclusion">Conclusion</h1>
 
 <p>Congratulations, you finished this tutorial! You learned how to annotate an eukaryotic genome using Maker, how to evaluate the quality of the annotation, and how to visualize it using the JBrowse genome browser.</p>
 

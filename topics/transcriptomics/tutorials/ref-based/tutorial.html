@@ -1178,8 +1178,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -1454,7 +1452,7 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
 </blockquote>
 
 <blockquote class="question">
-  <question-title></question-title>
+  <div id="question-31" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>How are the <span class="notranslate">DNA</span> sequences stored?</li>
@@ -1462,7 +1460,7 @@ https://zenodo.org/record/4541751/files/GSM461180_2_subsampled.fastqsanger
   </ol>
 
   <blockquote class="solution">
-    <solution-title></solution-title>
+    <div id="solution-31" class="box-title"><button type="button" aria-controls="solution-31-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>The <span class="notranslate">DNA</span> sequences are stored in a FASTQ file, in the second line of every 4-line group.</li>
       <li>This file format is called <a href="https://en.wikipedia.org/wiki/FASTQ_format">FASTQ format</a>. It stores sequence information and quality information. Each sequence is represented by a group of 4 lines with the 1st line being the sequence id, the second the sequence of nucleotides, the third a transition line and the last one a sequence of quality score for each nucleotide.</li>
@@ -1613,12 +1611,12 @@ We will first need to transform our the list of pairs to a simple list.</p>
 <p>We should trim the <span class="notranslate">reads</span> to get rid of bases that were sequenced with high uncertainty (i.e. low quality bases) at the read ends, and also remove the <span class="notranslate">reads</span> of overall bad quality.</p>
 
 <blockquote class="question">
-  <question-title></question-title>
+  <div id="question-32" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>What is the relation between <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired_forward</code> and <code class="language-plaintext highlighter-rouge">GSM461177_untreat_paired_reverse</code> ?</p>
 
   <blockquote class="solution">
-    <solution-title></solution-title>
+    <div id="solution-32" class="box-title"><button type="button" aria-controls="solution-32-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>The data has been sequenced using paired-end sequencing.</p>
 
     <p>The paired-end sequencing is based on the idea that the initial <span class="notranslate">DNA</span> fragments (longer than the actual read length) is sequenced from both sides. This approach results in two <span class="notranslate">reads</span> per fragment, with the first read in forward orientation and the second read in reverse-complement orientation. The distance between both <span class="notranslate">reads</span> is known. Thus, it can be used as an additional piece of information to improve the read <span class="notranslate">mapping</span>.</p>
@@ -1676,12 +1674,12 @@ We will first need to transform our the list of pairs to a simple list.</p>
 
           <blockquote class="question">
 
-            <question-title></question-title>
+            <div id="question-33" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
             <p>Why do we run the trimming tool only once on a paired-end dataset and not twice, once for each dataset?</p>
 
             <blockquote class="solution">
-              <solution-title></solution-title>
+              <div id="solution-33" class="box-title"><button type="button" aria-controls="solution-33-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
               <p>The tool can remove sequences if they become too short during the trimming process. For paired-end files it removes entire sequence pairs if one (or both) of the two <span class="notranslate">reads</span> became shorter than the set length cutoff. <span class="notranslate">Reads</span> of a read-pair that are longer than a given threshold but for which the partner read has become too short can optionally be written out to single-end files. This ensures that the information of a read pair is not lost entirely if only one read is of good quality.</p>
 
@@ -1743,7 +1741,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
 <p>In this study, the authors used <em>Drosophila melanogaster</em> cells. We should therefore map the quality-controlled sequences to the reference genome of <em>Drosophila melanogaster</em>.</p>
 
 <blockquote class="question">
-  <question-title></question-title>
+  <div id="question-34" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>What is a reference genome?</li>
@@ -1752,7 +1750,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
   </ol>
 
   <blockquote class="solution">
-    <solution-title></solution-title>
+    <div id="solution-34" class="box-title"><button type="button" aria-controls="solution-34-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>A reference genome (or reference assembly) is a set of nucleic acid sequences assembled as a representative example of a species’ genetic material. As they are often assembled from the sequencing of different individuals, they do not accurately represent the set of genes of any single organism, but a mosaic of different nucleic acid sequences from each individual.</li>
       <li>As the cost of <span class="notranslate">DNA</span> sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are built and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different released versions (called “builds”).</li>
@@ -1915,7 +1913,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
 <p>A BAM (<a href="https://en.wikipedia.org/wiki/SAM_(file_format)">Binary Alignment Map</a>) file is a compressed binary file storing the read sequences, whether they have been aligned to a reference sequence (e.g. a chromosome), and if so, the position on the reference sequence at which they have been aligned.</p>
 
 <blockquote class="notranslate hands_on">
-  <hands-on-title>Inspect a BAM/SAM file</hands-on-title>
+  <div id="hands-on-inspect-a-bam-sam-file" class="box-title" aria-label="hands-on box: Inspect a BAM/SAM file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Inspect a BAM/SAM file</div>
 
   <ol>
     <li>Inspect the <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> output of <strong><span class="notranslate">RNA</span> STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -2012,7 +2010,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
 </ul>
 
 <blockquote class="question">
-  <question-title></question-title>
+  <div id="question-35" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Which information do you find in a SAM/BAM file?</li>
@@ -2020,7 +2018,7 @@ We will first need to transform our the list of pairs to a simple list.</p>
   </ol>
 
   <blockquote class="solution">
-    <solution-title></solution-title>
+    <div id="solution-35" class="box-title"><button type="button" aria-controls="solution-35-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Sequences and quality information, like a FASTQ</li>
       <li><span class="notranslate">Mapping</span> information, Location of the read on the chromosome, <span class="notranslate">Mapping</span> quality, etc</li>

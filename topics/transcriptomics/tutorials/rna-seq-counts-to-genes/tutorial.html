@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="2: RNA-seq counts to genes" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 14:23:35 +0000" />
+<meta name="DC.date" content="2023-02-07 10:10:30 +0000" />
 <meta name="DC.creator" content="Maria Doyle" />
 <meta name="DC.creator" content="Belinda Phipson" />
 <meta name="DC.creator" content="Jovana Maksimovic" />
@@ -70,7 +70,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18 14:23:35 +0000",
+  "dateModified": "2023-02-07 10:10:30 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "2: RNA-seq counts to genes",
   "interactivityType": "mixed",
@@ -1097,8 +1097,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -1242,7 +1240,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 7, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1266,7 +1264,7 @@
 
 <p>There are many steps involved in analysing an <span class="notranslate">RNA</span>-Seq experiment. The analysis begins with sequencing <span class="notranslate">reads</span> (FASTQ files). These are usually aligned to a reference genome, if available. Then the number of <span class="notranslate">reads</span> mapped to each gene can be counted. This results in a table of counts, which is what we perform statistical analyses on to determine differentially expressed genes and pathways. The purpose of this tutorial is to demonstrate how to perform differential <span class="notranslate">expression</span> on count data with <strong>limma-voom</strong>. How to generate counts from <span class="notranslate">reads</span> (FASTQs) is covered in the accompanying tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html"><span class="notranslate">RNA</span>-seq <span class="notranslate">reads</span> to counts</a>.</p>
 
-<p><strong>Mouse mammary gland dataset</strong></p>
+<h2 id="mouse-mammary-gland-dataset">Mouse mammary gland dataset</h2>
 
 <p>The data for this tutorial comes from a Nature Cell Biology paper by <span class="citation"><a href="#Fu2015">Fu <i>et al.</i> 2015</a></span>. Both the raw data (sequence <span class="notranslate">reads</span>) and processed data (counts) can be downloaded from Gene <span class="notranslate">Expression</span> Omnibus database (GEO) under accession number <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60450">GSE60450</a>.</p>
 
@@ -1274,7 +1272,7 @@
 
 <p>We will use <strong>limma-voom</strong> (<span class="citation"><a href="#Law2014">Law <i>et al.</i> 2014</a></span>) for identifying differentially expressed genes here. Other popular alte<span class="notranslate">rna</span>tives are edgeR (<span class="citation"><a href="#robinson2010edger">Robinson <i>et al.</i> 2010</a></span>) and DESeq2 (<span class="citation"><a href="#love2014moderated">Love <i>et al.</i> 2014</a></span>). Limma-voom has been shown to be perform well in terms of precision, accuracy and sensitivity (<span class="citation"><a href="#CostaSilva2017">Costa-Silva <i>et al.</i> 2017</a></span>) and, due to its speed, it’s particularly recommended for large-scale datasets with 100s of samples (<span class="citation"><a href="#Chen2016">Chen <i>et al.</i> 2016</a></span>).</p>
 
-<p>This is a <span class="notranslate">Galaxy</span> tutorial based on material from the <a href="http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html">COMBINE R <span class="notranslate">RNA</span>seq workshop</a>, first taught <a href="http://combine-australia.github.io/2016-05-11-RNAseq/">here</a>.</p>
+<p>This is a <span class="notranslate">Galaxy</span> tutorial based on material from the <a href="http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html">COMBINE R <span class="notranslate">RNA</span>seq workshop</a>, first taught <a href="http://combine-australia.github.io/2016-05-11-RNAseq/">in this course</a>.</p>
 
 <figure id="figure-1"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Tutorial Dataset</figcaption></figure>
 
@@ -1284,7 +1282,10 @@
   <p>In this tutorial, we will deal with:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a>    <ol>
+      <li><a href="#mouse-mammary-gland-dataset" id="markdown-toc-mouse-mammary-gland-dataset">Mouse mammary gland dataset</a></li>
+    </ol>
+  </li>
   <li><a href="#preparing-the-inputs" id="markdown-toc-preparing-the-inputs">Preparing the inputs</a>    <ol>
       <li><a href="#import-data" id="markdown-toc-import-data">Import data</a></li>
       <li><a href="#get-gene-annotations" id="markdown-toc-get-gene-annotations">Get gene annotations</a></li>

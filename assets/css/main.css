@@ -43,6 +43,8 @@
   --navbar-border-color: white;
   --navbar-item-background: transparent;
   --navbar-item-hover: transparent;
+  --secondary-color: #e9ecef;
+  --secondary-color-text: #000;
   --outline-color: red;
   --h1-theme-before: "";
   --h1-theme-after: "";
@@ -502,6 +504,8 @@ body.theme-night {
   --hyperlink-hover: #fff;
   --brand-color: #424a66;
   --slide-heading-color: var(--text-color);
+  --secondary-color: #222;
+  --secondary-color-text: #fff;
 }
 
 body.theme-midnight {
@@ -514,6 +518,8 @@ body.theme-midnight {
   --text-color: #eee;
   --slide-heading-color: #eee;
   --slide-heading-color: var(--text-color);
+  --secondary-color: #222;
+  --secondary-color-text: var(--text-color);
 }
 
 body.theme-blm {
@@ -527,6 +533,8 @@ body.theme-blm {
   --text-color: #eee;
   --slide-heading-color: #eee;
   --slide-heading-color: var(--text-color);
+  --secondary-color: #222;
+  --secondary-color-text: var(--text-color);
 }
 body.theme-blm nav.navbar, body.theme-blm .remark-slide .my-header {
   background: repeating-linear-gradient(135deg, #731 0, #731 2em, #743 2em, #743 4em, #631 4em, #631 6em, #421 6em, #421 8em, #310 8em, #310 10em, #000 10em, #000 12em);
@@ -545,6 +553,8 @@ body.theme-halloween {
   --h1-theme-after: " 🎃 ";
   --h2-theme-before: " 👻 ";
   --h2-theme-after: " 👻 ";
+  --secondary-color: #402900;
+  --secondary-color-text: var(--text-color);
 }
 
 body.theme-progress, body.theme-rainbow {
@@ -1917,6 +1927,7 @@ a:hover, a:focus, a:active {
 
 .gitter-open-chat-button {
   background-color: var(--brand-color) !important;
+  color: var(--brand-color-contrast) !important;
 }
 
 nav[data-toggle=toc] {
@@ -2200,7 +2211,7 @@ a.btn div {
 
 .btn-purple {
   background-color: #8A9AD0;
-  color: white;
+  color: black;
 }
 
 .btn-pink {
@@ -2319,7 +2330,14 @@ ul.text-list li, ol.text-list li {
   color: var(--brand-color-contrast);
 }
 
-.dropdown-item:focus, .dropdown-item:hover a[target=_blank]::after {
+ol.breadcrumb {
+  background: var(--secondary-color);
+}
+ol.breadcrumb .breadcrumb-item.active {
+  color: var(--secondary-color-text);
+}
+
+a[target=_blank]::after {
   content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==) " (opens in new tab)";
   display: inline-block;
   margin-left: 0.2em;
