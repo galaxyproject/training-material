@@ -22,6 +22,14 @@ module Jekyll
 
       # Which page is rendering this tag?
       source_page = page['path']
+
+      # Citation Frequency
+      if ! site.config.has_key?("citation_count")
+        site.config["citation_count"] = Hash.new(0)
+      end
+      site.config["citation_count"][@text] += 1
+
+
       # If the overall cache is nil, create it
       if site.config['citation_cache'].nil?
         site.config['citation_cache'] = Hash.new
@@ -71,7 +79,6 @@ module Jekyll
 
     private
   end
-
   class BibTag < Liquid::Tag
 
     def initialize(tag_name, text, tokens)
@@ -101,21 +108,7 @@ module Jekyll
 
       out = "<ol class=\"bibliography\">"
       out += sorted_citations.map{|c|
-        r = citeproc.render(:bibliography, id: c)[0]
-        entry = global_bib[c]
-        if entry.note
-          r += " #{entry.note}."
-        end
-        doi = entry.fetch('doi', nil)
-        if doi
-          r += " <a href=\"https://doi.org/#{doi}\">#{doi}</a>"
-        end
-        url = entry.fetch('url', nil)
-        if url
-          if ! (url.index('doi.org') and entry.doi)
-            r += " <a href=\"#{url}\">#{url}</a>"
-          end
-        end
+        r = Gtn::Scholar.render_citation(c)
         %Q(<li id="#{c}">#{r}</li>)
       }.join("\n")
       out += "</ol>"
