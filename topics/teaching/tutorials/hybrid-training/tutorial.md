@@ -23,7 +23,9 @@ contributions:
     - erasmusplus
 ---
 
-**Combine with Australia Biocommon paper: https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008715**
+> <tip-title>Combine with Australia Biocommon paper</tip-title>
+> This is an excellent companion paper: {% cite Hall_2021 %}
+{: .tip}
 
 **hybrid training events**, i.e. pairing-up on-site helpers with remote instructors across multiple sites simultaneously:
 
