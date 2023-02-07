@@ -31,7 +31,7 @@ A genome is a representation of the set of DNA in an organism, such as the set o
 
 !["Image showing the concept of a genome assembly: a sample (a tree), with an arrow going to sequencing reads, with an arrow going to a genome (a set of diploid chromosomes)"](images/sampletogenome.png){: width="650"}
 
-*Assembly challenges*
+### Assembly challenges
 
 In reality, we rarely get chromosome-length assemblies, due to many challenges. Here are some examples of particular challenges in a diploid genome assembly:
 
