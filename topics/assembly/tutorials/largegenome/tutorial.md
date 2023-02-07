@@ -6,6 +6,7 @@ zenodo_link: "http://doi.org/10.5281/zenodo.7055935"
 tags:
   - assembly
   - polishing
+  - nanopore
 questions:
   - "How can we assemble a large plant or animal genome?"
 objectives:
@@ -35,7 +36,7 @@ A genome is a representation of the set of DNA in an organism, such as the set o
 
 In reality, we rarely get chromosome-length assemblies, due to many challenges. Here are some examples of particular challenges in a diploid genome assembly:
 
-!["Image showing potential assembly challenges: a set of diploid chromosomes with descriptions of different problems which are: a contig may be a consensus from both chromosomes; telomeres and centromeres are difficult to assemble; contigs may be assembled separately as a copy in both chromosomes but it is unclear which parental chromosome they are from; some contigs are short or missing; some contigs are not placed in the assembly."](images/challenges.png){: width="650"}
+!["Image showing potential assembly challenges: a set of diploid chromosomes with descriptions of different problems which are: a contig may be a consensus from both chromosomes; telomeres and centromeres are difficult to assemble; contigs may be assembled separately as a copy in both chromosomes but it is unclear which parental chromosome they are from; some contigs are short or missing; some contigs are not placed in the assembly."](images/challenges.png){: width="800"}
 
 
 Even though most assemblies are not chromosome-length, the assembly in contigs is still valuable for many research questions. Lengths of assembled contigs are increasing as sequencing technology and assembly tools improve. 
@@ -61,7 +62,7 @@ Before using these workflows on real datasets, we recommend completing all the r
 
 In this tutorial, we will follow these steps: 
 
-!["An image showing the steps in the tutorial in a stylized form: quality control and kmer counting, represented by bold lines as sequencing reads; trimming and filtering reads, represented by truncated reads; assembly, represented by joined reads into one long piece; polishing, represented by corrections (ticks) in the assembly; the finished genome assembly, represented by a set of diploid chromosomes; quality assessment, represented by ticks and crosses at different chromosome locations."](images/steps.png){: width="650"}
+!["An image showing the steps in the tutorial in a stylized form: quality control and kmer counting, represented by bold lines as sequencing reads; trimming and filtering reads, represented by truncated reads; assembly, represented by joined reads into one long piece; polishing, represented by corrections (ticks) in the assembly; the finished genome assembly, represented by a set of diploid chromosomes; quality assessment, represented by ticks and crosses at different chromosome locations."](images/steps.png){: width="800"}
 
 * Each of these steps is described in a section in this tutorial. 
 * For each step, we will run a workflow. 
@@ -171,13 +172,15 @@ Let's look at how many reads we have and their quality scores using the Data QC 
 > {: .solution}
 {: .question}
 
-More about interpreting nanoplot plots: 
-* [Nanoplot on Github](https://github.com/wdecoster/NanoPlot)
-* [Example nanoplots](https://gigabaseorgigabyte.wordpress.com/2017/06/01/example-gallery-of-nanoplot/)
-
-More about FastQC results: 
-* [FastQC webpage](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
-* [FastQC tips](https://timkahlke.github.io/LongRead_tutorials/QC_F.html)
+> ### {% icon comment %} Additional information about the tools
+> More about interpreting nanoplot plots: 
+> * [Nanoplot on Github](https://github.com/wdecoster/NanoPlot)
+> * [Example nanoplots](https://gigabaseorgigabyte.wordpress.com/2017/06/01/example-gallery-of-nanoplot/)
+> 
+> More about FastQC results: 
+> * [FastQC webpage](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/)
+> * [FastQC tips](https://timkahlke.github.io/LongRead_tutorials/QC_F.html)
+{: .comment}
 
 # Determine genome characteristics
 
@@ -187,11 +190,12 @@ A read broken into kmers:
 
 !["An image of the a read broken into kmers: the read is a bold bar with the letters ABCDEF; each kmer is a smaller bar with three letters in it: the kmers are ABC, BCD, CDE, and DEF."](images/kmers.png){: width="650"}
 
-*What is kmer counting?*
-
-Kmer counting is usually done with high-accuracy short reads, not long reads which may have high error rates.  After counting how many times each kmer is seen in the reads, we can see what sorts of counts are common. For example, lots of kmers may have been found 24 or 25 times. A graph shows the number of different kmers (y axis) found at different counts, or depths (x axis). 
-
-Many different kmers will be found the same number of times; e.g. X25. If kmer length approaches read length, this means the average depth of your sequencing is also ~X25, and there would be a peak in the graph at this position (smaller kmers = higher kmer depth). There may be smaller peaks of kmer counts at higher depths, e.g. X50 or X100, indicating repeats in the genome. There may be other smaller peaks of kmers found at half the average depth, indicating a diploid genome with a certain amount of difference between the homologous chromosomes - this is known as heterozygosity. Thus, the plot of how many different kmers are found at all the depths will help inform estimates of sequencing depth, ploidy level, heterozygosity, and genome size. 
+> ### {% icon comment %} What is kmer counting?
+>
+> Kmer counting is usually done with high-accuracy short reads, not long reads which may have high error rates.  After counting how many times each kmer is seen in the reads, we can see what sorts of counts are common. For example, lots of kmers may have been found 24 or 25 times. A graph shows the number of different kmers (y axis) found at different counts, or depths (x axis). 
+>
+> Many different kmers will be found the same number of times; e.g. X25. If kmer length approaches read length, this means the average depth of your sequencing is also ~X25, and there would be a peak in the graph at this position (smaller kmers = higher kmer depth). There may be smaller peaks of kmer counts at higher depths, e.g. X50 or X100, indicating repeats in the genome. There may be other smaller peaks of kmers found at half the average depth, indicating a diploid genome with a certain amount of difference between the homologous chromosomes - this is known as heterozygosity. Thus, the plot of how many different kmers are found at all the depths will help inform estimates of sequencing depth, ploidy level, heterozygosity, and genome size. 
+{: .comment}
 
 *Kmer counting workflow*
 
@@ -220,7 +224,7 @@ Many different kmers will be found the same number of times; e.g. X25. If kmer l
 
 GenomeScope transformed linear plot:
 
-!["An image of the Genomescope plot, described fully in the text following this image."](images/genomescope.png){: width="650"}
+!["An image of the Genomescope plot, described fully in the text following this image."](images/genomescope.png){: width="800"}
 
 Here we can see a central peak - showing that most of the different kmers were found at counts of ~ 120. These are kmers from single-copy homozygous alleles. To the left, a smaller peak at around half the coverage, showing kmers from heterozygous alleles (note that this peak gets higher than the main peak when heterozygosity is only ~ 1.2%). To the right, another smaller peak showing kmers at higher coverage, from repeat regions. Information from these three peaks provide a haploid genome length estimate of ~240,000 bp (note this is test data so smaller than whole plant genome size). 
 
@@ -247,7 +251,7 @@ Because of all these factors, few specific recommendations are made here, but th
 
 Trimming and filtering reads:
 
-!["An image of the concepts of trimming and filtering reads, with reads represented by bold bars; trimming represented by crosses over various locations in each read."](images/trimfilterreads.png){: width="650"}
+!["An image of the concepts of trimming and filtering reads, with reads represented by bold bars; trimming represented by crosses over various locations in each read."](images/trimfilterreads.png){: width="800"}
 
 *Trimming and filtering workflow*
 
@@ -294,7 +298,7 @@ There are two fastp reports - one for the illumina reads and one for the nanopor
 
 Filtering results from fastp on short reads:
 
-!["Image of a table of results from fastp, showing the percentage of reads that were low quality, had too many Ns, or too short."](images/fastp.png){: width="650"}
+!["Image of a table of results from fastp, showing the percentage of reads that were low quality, had too many Ns, or too short."](images/fastp.png){: width="800"}
 
 Here we can see that less than 0.5 % of the reads were discarded based on quality. If our read set had high enough coverage for downstream analyses, we might choose to apply a stricter quality filter. 
 
@@ -323,11 +327,11 @@ Genome assembly means joining the reads up to make contiguous sections of the ge
 
 Extreme simplification of genome assembly:
 
-!["Image of the simplified process of genome assembly, from a tree, to reads (represented by bold bars), to an assembly (represented by one long bold bar), to contigs (various long bold bars) and to an assembly graph."](images/assembly.png){: width="650"}
+!["Image of the simplified process of genome assembly, from a tree, to reads (represented by bold bars), to an assembly (represented by one long bold bar), to contigs (various long bold bars) and to an assembly graph."](images/assembly.png){: width="800"}
 
 Genome assembly algorithms use different approaches to work with the complexities of large sequencing read data sets, large genomes, different sequencing error rates, and computational resources. Many use graph-based algorithms.  For more about genome assembly algorithms see [these tutorials by Ben Langmead](https://langmead-lab.org/teaching-materials/).
 
-*Which assembly tool and approach to use?*
+### Which assembly tool and approach to use?
 
 Here, we will use the assembly tool called Flye to assemble the long reads. This is fast and deals well with the high error rate. Then, we will polish (correct) the assembly using information from the long reads (in their unassembled state), as well as the more accurate short Illumina reads.
 
@@ -371,17 +375,17 @@ For more about the differences between current assembly and polishing tools see 
 The assembled contigs are in the "Flye assembly on data X (consensus)" (X is a number that will vary depending on where it sits in your history).  
 Open the Quast tabular report to see the assembly statistics:
 
-!["Image of the Quast tabular report, showing various assembly statistics."](images/quast.png){: width="650"}
+!["Image of the Quast tabular report, showing various assembly statistics."](images/quast.png){: width="800"}
 
 There are 153 contigs, largest is ~246,000 bp, and total length almost 10 million bp. This is a fair bit longer than the estimated genome size from kmer counting (which was ~240,000 bp), but the difference is likely mainly due to idiosyncrasies of using a subsampled data set. The read coverage was likely <1, causing many kmers to have frequency of <1 and be classed as errors, rather than contributing to the genome size estimate. 
 
 Open the Quast HTML report, then click on "View in Icarus contig browser".  This is a way to visualize the contigs and their sizes:
 
-!["Image of the Icarus contig browser, showing the set of contigs arranged from larges to smallest, represented by rectangles of different widths."](images/icarus.png){: width="650"}
+!["Image of the Icarus contig browser, showing the set of contigs arranged from larges to smallest, represented by rectangles of different widths."](images/icarus.png){: width="800"}
 
 View the Bandage image of the assembly graph:
 
-!["Image of the bandage graph showing one multi-part set of joined contigs, some smaller one- or two- piece contigs, and many single contigs."](images/bandagegraphpartial.png){: width="650"}
+!["Image of the bandage graph showing one multi-part set of joined contigs, some smaller one- or two- piece contigs, and many single contigs."](images/bandagegraphpartial.png){: width="800"}
 
 As this is a subsampled data set, it is not surprising that most of the contigs are unjoined. The joined contigs at the top left are likely to be part of the mitochondrial genome as these reads were probably over-represented in our subsampled data set.
 
@@ -405,7 +409,7 @@ We will polish the assembly using both the long reads and short reads. This proc
 
 Assembly polishing:
 
-!["Image of the concept of assembly polishing, showing reads mapped to the assembly contigs."](images/polish.png){: width="650"}
+!["Image of the concept of assembly polishing, showing reads mapped to the assembly contigs."](images/polish.png){: width="800"}
 
 *Polishing workflow*
 
@@ -480,7 +484,7 @@ For more about Busco see {% cite Simo2015 %}.
 
 Genome assessment:
 
-!["Image of genome assessment, showing contigs as bold bars, with one contig annotated (various sections labelled by coloured boxes), and then compared to an expected annotation."](images/assess.png){: width="650"}
+!["Image of genome assessment, showing contigs as bold bars, with one contig annotated (various sections labelled by coloured boxes), and then compared to an expected annotation."](images/assess.png){: width="800"}
 
 We will also map the assembled contigs to a known reference genome using the tool Quast, to see how they align. For more about quast see [the manual](http://quast.sourceforge.net/docs/manual.html). 
 
@@ -529,7 +533,7 @@ For more about the Icarus browser see {% cite Mikheenko2016 %}.
   * The narrower the taxonomic group, the more total genes are expected. 
 {: .hands_on}
 
-*Assessment results*
+### Assessment results
 
 The output is a set of Quast and Busco reports. 
 
