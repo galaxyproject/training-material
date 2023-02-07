@@ -5,7 +5,6 @@
 {% endif %}
 
 # Introduction
-{:.no_toc}
 
 Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.
 
@@ -685,7 +684,6 @@ You will now see new tracks displaying all the evidences used by Maker to genera
 {% endunless %}
 
 # Conclusion
-{:.no_toc}
 
 Congratulations, you finished this tutorial! You learned how to annotate an eukaryotic genome using Maker, how to evaluate the quality of the annotation, and how to visualize it using the JBrowse genome browser.
 
