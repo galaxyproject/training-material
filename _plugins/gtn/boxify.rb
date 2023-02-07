@@ -185,7 +185,7 @@ module Gtn
       #
       # We're going to rely on never having two on one line
       text.split("\n").map{|line|
-        line.gsub(/<(?<type>[a-z-]*)-title>(?<title>.*)<\/[a-z-]*-title>/){|m|
+        line.gsub(/<(?<type>[a-z-]*)-title>(?<title>.*?)<\/[a-z-]*-title>/){|m|
           title = Regexp.last_match[:title]
           type = Regexp.last_match[:type]
           _, box = self.generate_title(type, title, lang=lang, key)
