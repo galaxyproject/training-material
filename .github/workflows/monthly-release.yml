@@ -14,8 +14,8 @@ jobs:
       - name: Release Name
         id: release_name
         run: |
-          echo "::set-output name=title::$(LC_ALL=C date '+%Y %B %d')"
-          echo "::set-output name=tag::$(LC_ALL=C date -I)"
+          echo "release_title=$(LC_ALL=C date '+%Y %B %d')" >> $GITHUB_ENV
+          echo "release_tag=$(LC_ALL=C date -I)" >> $GITHUB_ENV
 
       - name: Create Release
         id: create_release
@@ -23,9 +23,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.release_name.outputs.tag }}
+          tag_name: ${{ env.release_tag }}
           commitish: main
-          release_name: Release ${{ steps.release_name.outputs.title }}
+          release_name: Release ${{ env.release_title }}
           body: "Monthly release of the GTN materials"
           draft: false
           prerelease: false
@@ -86,7 +86,7 @@ jobs:
           curl --retry 5 https://gallantries.github.io/video-library/api/sessions.json > metadata/session-library.json
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
         env:
-          SOURCE_TAG: ${{ steps.release_name.outputs.tag }}
+          SOURCE_TAG: ${{ env.release_tag }}
           GTN_FORK: ${{ github.repository_owner }}
 
       - name: Deploy 🚀
@@ -94,4 +94,4 @@ jobs:
           pip install awscli
           ./bin/publish-archive
         env:
-          SOURCE_TAG: ${{ steps.release_name.outputs.tag }}
+          SOURCE_TAG: ${{ env.release_tag }}
