@@ -18,7 +18,7 @@ Maker uses ab-initio predictors (like [Augustus](http://bioinf.uni-greifswald.de
 
 In this tutorial you will learn how to perform a genome annotation, and how to evaluate its quality. {% unless include.short %}You will see how training ab-initio predictors is an important step to produce good results. {% endunless %}Finally, you will learn how to use the [JBrowse](http://jbrowse.org/) genome browser to visualise the results.
 
-More information about Maker can be found [here](http://www.yandell-lab.org/software/maker.html).
+More information about Maker can be found [on their website](http://www.yandell-lab.org/software/maker.html).
 
 This tutorial was inspired by the MAKER Tutorial for [WGS Assembly and Annotation Winter School 2018](http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018), don't hesitate to consult it for more information on Maker, and on how to run it with command line.
 
