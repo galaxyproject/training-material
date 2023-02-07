@@ -31,6 +31,8 @@ if(training_theme_cookie){
 }
 
 // Just for february
-if(getThemePreference() === null || getThemePreference() === "undefined" || getThemePreference() === undefined){
-	setTheme("blm");
+if(window.location.pathname === "/"){
+	if(getThemePreference() === null || getThemePreference() === "undefined" || getThemePreference() === undefined){
+		setTheme("blm");
+	}
 }
