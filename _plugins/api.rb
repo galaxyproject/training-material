@@ -142,11 +142,31 @@ module Jekyll
         page5.data["layout"] = nil
         site.pages << page5
       }
+
       # Deploy the feedback file as well
       page2 = PageWithoutAFile.new(site, "", "api/", "feedback.json")
       page2.content = JSON.pretty_generate(site.data['feedback'])
       page2.data["layout"] = nil
       site.pages << page2
+
+      # Top Tools
+      puts "[GTN/API] Top Tools"
+      page2 = PageWithoutAFile.new(site, "", "api/", "top-tools.json")
+      page2.content = JSON.pretty_generate(TopicFilter.list_materials_by_tool(site))
+      page2.data["layout"] = nil
+      site.pages << page2
+
+      # Top Tool Experiment
+      # Not really an API
+      TopicFilter.list_materials_by_tool(site).each do |tool, tutorials|
+        page2 = PageWithoutAFile.new(site, "", "x/by-tool/", "#{tool[1]}.html")
+        page2.content = nil
+        page2.data["layout"] = "by_tool"
+        page2.data["short_tool"] = tool[1]
+        page2.data["tool_id"] = tool[0]
+        page2.data["tutorials"] = tutorials
+        site.pages << page2
+      end
 
     end
   end

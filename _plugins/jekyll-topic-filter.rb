@@ -371,6 +371,10 @@ module TopicFilter
     materials
   end
 
+  def self.list_all_materials(site)
+    self.process_pages(site, site.pages)
+  end
+
   def self.list_all_tags(site)
     materials = self.process_pages(site, site.pages)
     materials.map{|x| x.fetch('tags', [])}.flatten.sort.uniq
@@ -427,6 +431,29 @@ module TopicFilter
       .map{|k, v| v['materials']}.flatten # Not 100% sure why this flatten is needed? Probably due to the map over hash
       .map{|mat| get_contributors(mat) }.flatten.uniq.shuffle
   end
+
+  def self.short_tool(tool)
+    if tool.count('/') > 4 then
+      short_tool = tool.split('/')[2] + '/' + tool.split('/')[4]
+    else
+      short_tool = tool
+    end
+
+    short_tool
+  end
+
+  def self.list_materials_by_tool(site)
+    tool_map = Hash.new{ |h, k| h[k] = [] }
+
+    TopicFilter.list_all_materials(site).each do |m|
+      m.fetch('tools', []).each do |tool|
+        tool_map[[tool, self.short_tool(tool)]].push([
+          m['id'], m['title'], site.data[m['topic_name']]['title'], m['url']
+        ])
+      end
+    end
+    tool_map.map{|k, v| [k, v.uniq.sort]}.to_h.sort_by{|k, v| v.length}.reverse.to_h
+  end
 end
 
 
@@ -479,6 +506,10 @@ module Jekyll
       q = q.sort{|a, b| a[1]['title'] <=> b[1]['title'] }
 
       q
+    end
+
+    def list_materials_by_tool(site)
+      TopicFilter.list_materials_by_tool(site)
     end
 
     def list_materials_structured(site, topic_name)

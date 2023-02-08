@@ -1,0 +1,28 @@
+---
+layout: base
+---
+
+<h1>Tutorials using {{ page.short_tool }}</h1>
+<section>
+	<div class="stats">
+		<div class="row">
+			<div class="col-md-3">
+				<h2>Servers Offering this Tool</h2>
+				<a href="https://usegalaxy.eu/?tool_id={{ page.tool_id }}">UseGalaxy.eu</a>
+			</div>
+
+			<div class="col-md-9">
+				<ul>
+					{% for tutorial in page.tutorials %}
+					<li>
+						{{ tutorial[2] }} /
+						<a href="{{ tutorial[3] }}">
+						{{ tutorial[1] }}
+						</a>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
