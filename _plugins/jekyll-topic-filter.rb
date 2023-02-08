@@ -432,27 +432,56 @@ module TopicFilter
       .map{|mat| get_contributors(mat) }.flatten.uniq.shuffle
   end
 
+  def self.get_version(tool)
+    if tool.count('/') > 4 then
+      tool.split('/')[-1]
+    else
+      tool
+    end
+  end
+
   def self.short_tool(tool)
     if tool.count('/') > 4 then
       short_tool = tool.split('/')[2] + '/' + tool.split('/')[4]
     else
       short_tool = tool
     end
-
     short_tool
   end
 
   def self.list_materials_by_tool(site)
-    tool_map = Hash.new{ |h, k| h[k] = [] }
+    tool_map = Hash.new
 
-    TopicFilter.list_all_materials(site).each do |m|
+    self.list_all_materials(site).each do |m|
       m.fetch('tools', []).each do |tool|
-        tool_map[[tool, self.short_tool(tool)]].push([
+        sid = self.short_tool(tool)
+        if ! tool_map.has_key?(sid)
+          tool_map[sid] = {"tool_id" => [], "tutorials" => []}
+        end
+
+        tool_map[sid]["tool_id"].push([tool, self.get_version(tool)])
+        tool_map[sid]["tutorials"].push([
           m['id'], m['title'], site.data[m['topic_name']]['title'], m['url']
         ])
       end
     end
-    tool_map.map{|k, v| [k, v.uniq.sort]}.to_h.sort_by{|k, v| v.length}.reverse.to_h
+
+    # Uniqueify/sort
+    t = tool_map.map{|k, v| 
+      v["tool_id"].uniq!
+      v["tool_id"].sort_by!{|k| k[1]}
+      v["tool_id"].reverse!
+
+      v["tutorials"].uniq!
+      v["tutorials"].sort!
+      [k, v]
+    }.to_h
+
+    require 'pp'
+    pp tool_map['iuc/multiqc']
+
+    # Order by most popular tool
+    t.sort_by{|k, v| v["tutorials"].length}.reverse.to_h
   end
 end
 

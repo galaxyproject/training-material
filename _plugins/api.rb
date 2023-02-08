@@ -152,23 +152,18 @@ module Jekyll
       # Top Tools
       puts "[GTN/API] Top Tools"
       page2 = PageWithoutAFile.new(site, "", "api/", "top-tools.json")
-      by_tools = TopicFilter.list_materials_by_tool(site).map{|tool, tutorials|
-        [tool[1], {"tool_id" => tool[0], "tutorials" => tutorials.map{|tutorial|
-          {"id" => tutorial[0], "title" => tutorial[1], "topic" => tutorial[2], "url" => site.config['url'] + site.config['baseurl'] + tutorial[3]}
-        }}]
-      }.to_h
-      page2.content = JSON.pretty_generate(by_tools)
+      page2.content = JSON.pretty_generate(TopicFilter.list_materials_by_tool(site))
       page2.data["layout"] = nil
       site.pages << page2
 
       # Not really an API
       TopicFilter.list_materials_by_tool(site).each do |tool, tutorials|
-        page2 = PageWithoutAFile.new(site, "", "by-tool/", "#{tool[1]}.html")
+        page2 = PageWithoutAFile.new(site, "", "by-tool/", "#{tool}.html")
         page2.content = nil
         page2.data["layout"] = "by_tool"
-        page2.data["short_tool"] = tool[1]
-        page2.data["tool_id"] = tool[0]
-        page2.data["tutorials"] = tutorials
+        page2.data["short_tool"] = tool
+        page2.data["observed_tool_ids"] = tutorials["tool_id"]
+        page2.data["tutorial_list"] = tutorials["tutorials"]
         site.pages << page2
       end
 
