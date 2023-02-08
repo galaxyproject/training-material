@@ -1,6 +1,6 @@
 ---
 title: Upload few files (1-10)
-area: datasets
+area: data upload
 box_type: tip
 layout: faq
 contributors: [bebatut]

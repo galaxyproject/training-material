@@ -31,13 +31,13 @@ contributions:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In order to facilitate learning, we had to learn (a bit) how learning works. But motivation is key to learning. If we want to enhance motivation, we have to learn a bit how motivation works.
 Motivation is personal and it is very difficult to work with demotivated learners. Often, teachers cannot do much with deep lack of motivation. Here, we want to see what can trainers do to enhance motivation.
 Adult learners usually come motivated to courses and the point is to not demotivate them.
 
-> ### {% icon comment %} Resources / Reading recommendation
+> <comment-title>Resources / Reading recommendation</comment-title>
 >
 > This tutorial is significantly based on the 3rd session of ELIXIR Train the Trainer curriculum, but also:
 > - [Teaching Tech Together {% cite wilson2019teaching %}](https://teachtogether.tech)
@@ -49,10 +49,10 @@ Adult learners usually come motivated to courses and the point is to not demotiv
 > - Read the chapter "What factors motivate Students to learn?" in [How Learning works, {% cite ambrose2010learning %}](https://www.academia.edu/6743627/How_Learning_Works_Seven_Research_Based_Principles_for_Smart_Teaching_Susan_A_Ambrose_Michael_W_Bridges_Michele_DiPietro_Marsha_C_Lovett_Marie_K_Norman_with_a_Foreword_by_Richard_E_Mayer)
 > - Check ["Motivation and Demotivation" section](https://carpentries.github.io/instructor-training/08-motivation/index.html), Instructor Training, The Carpentries
 >
-{: .tip }
+{: .comment}
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -73,7 +73,8 @@ What is motivation?
 
 Motivation influences **direction**, **intensity**, **persistence** and **quality** of the learning behaviors.
 
-<!-- >> ### {% icon hands_on %} Recall a motivating learning experience (5 min - Silent reflection)
+<!-- 
+> <hands-on-title>Recall a motivating learning experience (5 min - Silent reflection)</hands-on-title>
 >
 > Write in the shared notes about a **motivating** experience in your life (as a learner) and how it impacted you
 >
@@ -82,7 +83,7 @@ Motivation influences **direction**, **intensity**, **persistence** and **qualit
 
 {% include _includes/quiz.html id="motivating_learning_experience.yaml" %}
 
-> ### {% icon tip %} For trainer
+> <tip-title>For trainer</tip-title>
 >
 > The trainer will comment learners' motivating experiences, trying to identify and highlight "patterns of motivation". Key features of motivation (value, expectancy, environment) could be introduced starting from learners' experiences.
 >
@@ -110,7 +111,7 @@ Researcher have identified different categories of goals whose the type influenc
 - **Social goals**: making friends
 - **Affective goals**: engaging in stimulating activities, e.g. have fun
 
-> ### {% icon details %} Performance goals vs Learning goals
+> <details-title>Performance goals vs Learning goals</details-title>
 >
 > When guided by performance goals, students concerned with normative standards try to do what is necessary to demonstrate competence to
 > 1. appear intelligent
@@ -202,7 +203,7 @@ What do we mean about this? To better understand, we should consider the followi
 - discrimination issues and inclusivity
 - stereotypes
 
-    > ### {% icon details %} Examples of stereotypes
+    > <details-title>Examples of stereotypes</details-title>
     >
     > Providing extra or less support to groups of students based on the belief that, in certain disciplines, some groups are not very gifted whereas others are innately talented (e.g. women are not strong in the STEMs or Asians are good at math) represents a type of bias very difficult to detect and it is a subtle form of racial stereotype (see e.g., https://theconversation.com/asians-are-good-at-math-why-dressing-up-racism-as-a-compliment-just-doesnt-add-up-128731, https://www.hepg.org/her-home/issues/harvard-educational-review-volume-89,-issue-4/herarticle/asians-are-good-at-math-is-not-a-compliment)
     >
@@ -212,7 +213,7 @@ What do we mean about this? To better understand, we should consider the followi
 - accessibility (including venue, materials and teacher accessibility)
 - mindset (growth vs fixed mindset)
 
-    > ### {% icon details %} About mindset (from {% cite dweck2006mindset %})
+    > <details-title>About mindset (from {% cite dweck2006mindset %})</details-title>
     >
     > Someone with a **growth mindset** views intelligence, abilities, and talents as learnable and capable of improvement through effort. On the other hand, someone with a **fixed mindset** views those same traits as inherently stable and unchangeable over time.
     >
@@ -231,7 +232,7 @@ In order to have fully MOTIVATED learners, it is important that:
 
 ![3 level matrix ](images/environment_perception.png "Interactive effects of environment, efficacy, and value on motivation. Source: {% cite ambrose2010learning %}")
 
-> ### {% icon details %} About Figure "Interactive effects of environment, efficacy, and value on motivation" from {% cite ambrose2010learning %}
+> <details-title>About Figure "Interactive effects of environment, efficacy, and value on motivation" from {% cite ambrose2010learning %}</details-title>
 >
 > 1. If no value and no expectation, leaners will reject learning with disengagement and even anger
 > 2. If high expectancies but no valuem: the task is doable but unimportant, learners will evade and have difficulty to pay attention
@@ -250,7 +251,8 @@ Motivation can go both ways: motivation and de-motivation are strictly connected
 Adult learners usually come motivated to courses and the point is to not demotivate them.
 In many cases, to not de-motivate learners is an excellent way to support motivation.
 
-<!-- >> ### {% icon hands_on %} Recall a demotivating experience (5 min - Silent reflection)
+<!-- 
+> <hands-on-title>Recall a demotivating experience (5 min - Silent reflection)</hands-on-title>
 >
 > Write in the shared notes about a **demotivating** experience in your life (as a learner) and how it impacted you
 >
@@ -267,7 +269,7 @@ In many cases, to not de-motivate learners is an excellent way to support motiva
 - Dive into complex or detailed technical discussions with one or two people
 - Use diminishing language "just", "simply", "obviously", "don’t you know?"
 
-    > ### {% icon details %} About dismissive language
+    > <details-title>About dismissive language</details-title>
     >
     > Unaware usage of dismissive language (like "just", "easy", etc.) or of apparently "innocent" terms from the point of view of the "white heterosexual male" may be demotivating and / or offensive to certain minority groups (non white and / or non heterosexual and / or non male).
     >
@@ -275,7 +277,7 @@ In many cases, to not de-motivate learners is an excellent way to support motiva
 
 - Hinder autonomy
 
-    > ### {% icon details %} Why taking over the learner's keyboard hinder autonomy?
+    > <details-title>Why taking over the learner's keyboard hinder autonomy?</details-title>
     >
     > It is rarely a good idea to type anything for your learners
     >
@@ -287,7 +289,7 @@ In many cases, to not de-motivate learners is an excellent way to support motiva
 
 - Feign surprise with "I cannot believe you do not know X" or "You have never heard of Y?"
 
-    > ### {% icon details %} Why may feigning surprise trigger demotivation?
+    > <details-title>Why may feigning surprise trigger demotivation?</details-title>
     >
     > Saying things like "I cannot believe you do not know X" or "You have never heard of Y?" signals to the learner that they do not have some required pre-knowledge of the material you are teaching, that they do not belong at the workshop, and it may prevent them from asking questions in the future.
     >
@@ -295,13 +297,13 @@ In many cases, to not de-motivate learners is an excellent way to support motiva
 
 It can be difficult to avoid these demotivators entirely. Teaching yourself to avoid these types of comments takes practice, but is well worth the effort. No one likes to be made fun of.
 
-> ### {% icon details %} Systemic and psychological demotivators
+> <details-title>Systemic and psychological demotivators</details-title>
 >
 > Other factors can contribute to demotivation. Some of which are either **systemic**, or **built into our psychological makeup** as human beings. We cannot always control these demotivators - often they come from outside the classroom - but we can be aware of them, and take certain actions to lessen their impact by thinking carefully about the language that we use and how we interact with our learners.
 >
 > - **Stereotype threat**: Reminding people of negative stereotypes, even in subtle ways, can make them anxious about the risk of confirming those stereotypes, in turn reducing their performance. Clearest examples in computing are gender-related
 >
->   > ### {% icon tip %} What can you as instructor?
+>   > <tip-title>What can you as instructor?</tip-title>
 >   > - Avoid thinking in terms of a deficit model, use a systems approach
 >   > - Not highlight people based on their identity with a minority group: draws attention to the stereotype
 >   > - Ask people to sign up for workshops in small teams rather than as individuals when possible
@@ -309,7 +311,7 @@ It can be difficult to avoid these demotivators entirely. Teaching yourself to a
 >
 > - **Impostor syndrome**: Belief that one is not good enough for a job or position, and that one's achievements are due to luck rather than talent or skill ([Resources for teaching about and dealing with imposter syndrome](https://adainitiative.org/continue-our-work/impostor-syndrome-training/))
 >
->   > ### {% icon tip %} What can you as instructor?
+>   > <tip-title>What can you as instructor?</tip-title>
 >   > - Sharing stories of mistakes that you have made or things you struggled to learn
 >   > - Emphasize that you want questions
 >   > - Remember, it is much more important to _be_ smart than to _look_ smart
@@ -317,7 +319,7 @@ It can be difficult to avoid these demotivators entirely. Teaching yourself to a
 >
 > - **Accessibility issue**: It helps everyone to provide proper captioning of images, for example, benefits people with no or limited vision by giving screen readers something to say, but it also makes the images more findable by exposing their content to search engines.
 >
->   > ### {% icon tip %} What can you as instructor?
+>   > <tip-title>What can you as instructor?</tip-title>
 >   > - Know what you need to do
 >   >   - [Posters of dos and do nots from UK home office](https://hodigital.blog.gov.uk/category/accessibility/)
 >   >   - [W3C Accessibility Initiative’s checklist for presentations](http://www.w3.org/WAI/teach-advocate/accessible-presentations/)
@@ -329,7 +331,7 @@ It can be difficult to avoid these demotivators entirely. Teaching yourself to a
 >
 > - **Inclusivity**: Policy of including people who might otherwise be excluded or marginalized
 >
->   > ### {% icon tip %} What can you as instructor?
+>   > <tip-title>What can you as instructor?</tip-title>
 >   > - Read Lee's paper ["What can I do today to create a more inclusive community in CS?"](https://docs.google.com/document/d/1hLivou9-_wmsZuzKI2pCGQu0KHVIgYfJSaYhvTgO0Wo/edit?usp=sharing)
 >   > - Ask learners to email you before the workshop to explain how they believe the training could help them achieve their goals
 >   > - Review notes to make sure they are free from gendered pronouns, that they include culturally diverse names, etc.;
@@ -353,7 +355,7 @@ We can act to establish or reinforce the value of goals, we can help build posit
 
 1. **Establish value**: Increase the value that students place on the goals and activities identified and created for students
 
-    > ### {% icon details %} Strategies to Establish value
+    > <details-title>Strategies to Establish value</details-title>
     >
     > 1. **Connect the material to learners' interests**: More motivated with material that interests them or has relevance for important aspects of their lives
     >    1. **Show relevance to learners' current academic/working lives**: When presenting knowledge and skills, tell students which ones will be particularly useful for taking other courses fruitfully, make explicit connection between content of different courses for a better understanding the value of each course as building blocks
@@ -369,7 +371,7 @@ We can act to establish or reinforce the value of goals, we can help build posit
     >
     {: .details}
 
-    > ### {% icon tip %} The Carpentries approach: Teach most useful first
+    > <tip-title>The Carpentries approach: Teach most useful first</tip-title>
     >
     > Learners do something that _they_ think is useful in their daily work within 15 minutes of starting each lesson.
     >
@@ -378,7 +380,7 @@ We can act to establish or reinforce the value of goals, we can help build posit
 
 2. **Build positive expectancies**: Strengthen students' expectancies
 
-    > ### {% icon details %} Strategies to Build positive expectancies
+    > <details-title>Strategies to Build positive expectancies</details-title>
     >
     > 1. **Identify an appropriate level of challenge**: Propose activities that are not too simple or too complex for the level of the students, but always commensurate with the level reached. It may be difficult: you need to know who are learners, for example using pre-assessment to evaluate prior knowledge and future goals
     >
@@ -396,7 +398,7 @@ We can act to establish or reinforce the value of goals, we can help build posit
 
 3. **Create an environment that supports motivation**
 
-    > ### {% icon details %} Strategies to Create an environment that supports motivation
+    > <details-title>Strategies to Create an environment that supports motivation</details-title>
     >
     > 1. **Be fair**: And find your way to show learners you are fair, to make them feel they are in a fair environment.
     >
@@ -420,11 +422,11 @@ We can act to establish or reinforce the value of goals, we can help build posit
     >
     {: .details}
 
-> ### {% icon hands_on %} Strategies to improve motivation - _{% icon time %} 15 min - Groups of 2 people_
+> <hands-on-title>Strategies to improve motivation - _⏰ 15 min - Groups of 2 people_</hands-on-title>
 >
 > - Pick 1 strategy associated with **establishing value**, **building positive expectancies** and/or **creating an environment that supports motivation value and expectancies**
 >
->   > ### {% icon details %} Strategies
+>   > <details-title>Strategies</details-title>
 >   >
 >   > 1. **Establish value**
 >   >    1. **Connect the material to learners' interests**: More motivated with material that interests them or has relevance for important aspects of their lives

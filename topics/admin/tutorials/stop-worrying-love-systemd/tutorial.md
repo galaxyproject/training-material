@@ -40,7 +40,7 @@ Many linux sysadmins with years and years of experience bemoan systemd ("it's in
 
 This tutorial assumes a working knowledge of unix systems (files, directories, services, logging, `/var/log`, etc.).
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -224,7 +224,7 @@ systemd-analyze plot > plot.svg
 
 ## Pro/Cons of systemd
 
-> > ### {% icon code-out %} Pros
+> > <code-out-title>Pros</code-out-title>
 > > - CGroups, to reap children!
 > > - CGroups, for hard memory/cpu limits
 > > - CGroups, for security benefits, and dropping capabilities!
@@ -232,7 +232,7 @@ systemd-analyze plot > plot.svg
 > > - Easily override tasks
 > {: .code-out}
 >
-> > ### {% icon code-in %} Cons
+> > <code-in-title>Cons</code-in-title>
 > > - It's new and requires time to learn
 > >     - But all the distros have mostly switched so, might be time to learn.
 > > - It is significantly more complicated
@@ -258,7 +258,7 @@ Would you like to worry less about those issues? Try systemd timers today!
 
 [The arch page](https://wiki.archlinux.org/title/Systemd/Timers) is an excellent reference on why they're interesting and useful. We'll reproduce their pro/con list below:
 
-> > ### {% icon code-out %} Pros
+> > <code-out-title>Pros</code-out-title>
 > > - Easier testing, you can trigger units any time
 > > - Cgroups!
 > > - dependencies (e.g. network!)
@@ -266,7 +266,7 @@ Would you like to worry less about those issues? Try systemd timers today!
 > > - two flavours of timers: clock time based, and monotonic (e.g. time since last execution)
 > {: .code-out}
 >
-> > ### {% icon code-in %} Cons
+> > <code-in-title>Cons</code-in-title>
 > > - Two files, instead of a single line. It *is* annoying, you're not wrong. Maybe write an ansible role that translates it.
 > > - No `MALITO` functionality built in.
 > {: .code-in}
@@ -374,7 +374,7 @@ But now instead of search N different log files, or memorising which files have 
 
 ## Per Unit Logs
 
-> ### {% icon code-out %} The journalctl Way
+> <code-out-title>The journalctl Way</code-out-title>
 > ```bash
 > journalctl -u galaxy
 > ```
@@ -387,14 +387,14 @@ $ journalctl -u galaxy | head -n1
 -- Logs begin at Tue 2022-06-28 08:31:06 UTC, end at Mon 2022-07-04 09:30:01 UTC. --
 ```
 
-> > ### {% icon code-out %} Pros
+> > <code-out-title>Pros</code-out-title>
 > > You did not need to know or remember:
 > > 
 > > - Where the log files were (`/var/log`? `/srv/galaxy/log`? somewhere else?)
 > > - If any of the old logs were compressed (or use `zless`/`zcat`/`zgrep`)
 > {: .code-out}
 >
-> > ### {% icon code-in %} Cons
+> > <code-in-title>Cons</code-in-title>
 > > - Can't just `cat` it.
 > {: .code-in}
 {: .code-2col}
@@ -412,7 +412,7 @@ access_log syslog:server=unix:/dev/log;
 
 And then you can simply
 
-> ### {% icon code-out %} The journalctl Way
+> <code-out-title>The journalctl Way</code-out-title>
 > ```bash
 > journalctl -f -u galaxy* -u nginx -u postgresql
 > ```
@@ -420,13 +420,13 @@ And then you can simply
 
 If you have multiple similarly named units, the wildcard feature is incredibly helpful. UseGalaxy.eu had multiple named processes for: web handlers, workflow schedulers, job handlers. We could see logs simultaneously across all of these units.
 
-> > ### {% icon code-out %} Pros
+> > <code-out-title>Pros</code-out-title>
 > > - Tail multiple units at once
 > > - Again don't have to know where the files are
 > > - Or switch tools if you want to look at older logs
 > {: .code-out}
 >
-> > ### {% icon code-in %} Cons
+> > <code-in-title>Cons</code-in-title>
 > > ? 
 > {: .code-in}
 {: .code-2col}
@@ -445,14 +445,14 @@ RateLimitBurst=0
 
 This is my absolute favourite feature of journalctl, and I've regularly used it to narrow down logs from dozens of processes, especially when I don't know the root cause of an issue and need to watch all of the logs.
 
-> > ### {% icon code-in %} The Old Way
+> > <code-in-title>The Old Way</code-in-title>
 > > ```bash
 > > zcat /var/log/* | egrep "(Jul\s*1 11:4.:..|2022-07-01 11:4.:..)"
 > > ```
 > > Hope everything logs in the same timezone! And no one uses UTC when there's a different system time configured.
 > {: .code-in}
 >
-> > ### {% icon code-out %} The journalctl Way
+> > <code-out-title>The journalctl Way</code-out-title>
 > > ```bash
 > > journalctl --since "2022-07-01 11:40 CEST" --until "2022-07-01 11:50 CEST"
 > > ```

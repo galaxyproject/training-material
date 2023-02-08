@@ -35,7 +35,7 @@ contributions:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 * **Assessment**: evaluation or estimation of the nature, quality, or ability of someone or something
 * **Feedback**: integrate the output of the assessment in the learning process
@@ -67,7 +67,8 @@ and different ways that we can categorise them:
 
 ![A representation of the mental model for assessment, as a tree. It shows the various categories of assessment, as well as the optimal placement of them during the teaching process.](images/assessment-categories.png)
 
-<!-- >> ### {% icon hands_on %} Diagnostic Assessment - Break-out room discussion  - *{% icon time %} 15 min*
+<!-- 
+> <hands-on-title>Diagnostic Assessment - Break-out room discussion  - *⏰ 15 min*</hands-on-title>
 >
 > - Split into groups of 4, depending on the number of participants.
 > - Discuss how you could collect information from learners at the beginning of a course or lesson and how you can use it.
@@ -82,7 +83,7 @@ and different ways that we can categorise them:
 
 - **Summative** assessment takes place **at the end** of teaching and learning. Its purpose is to evaluate learners' learning by comparing it against a standard or benchmark, and provide evidence for evaluating or grading students.
 
-    > ### {% icon comment %} At the end of teaching
+    > <comment-title>At the end of teaching</comment-title>
     >
     > For summative assessment, 'the end' does not necessarily mean the end of an entire course or module of study.
     > Summative assessments may be distributed throughout a course, after a particular unit (or collection of topics) has been taught, but graded any how.
@@ -113,7 +114,8 @@ Formative assessment collect feedback (information) from learners' on their lear
 - **Frequent mistakes**: which types of mistakes need special attention
 - **Ability to perform a task**
 
-<!-- >> ### {% icon hands_on %} Collecting formative assessment - Break-out room discussion  - *{% icon time %} 10 min*
+<!-- 
+> <hands-on-title>Collecting formative assessment - Break-out room discussion  - *⏰ 10 min*</hands-on-title>
 >
 > - Split into groups of 4, depending on the number of participants.
 >
@@ -173,14 +175,14 @@ Look at this example of a MCQ
     - 33
 - Correct answer: 42, but each of the other answers provides valuable insights
 
-> ### {% icon question %} Multiple Choice Questions and mental models
+> <question-title>Multiple Choice Questions and mental models</question-title>
 >
 > In the previous MCQ, which misconception is associated with
 > 1. 32
 > 2. 312
 > 3. 33
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. If they answer 32, they are throwing away the carry completely.
 > > 2. If they answer 312, they know that they can't just discard the carried '1', but doesn't understand that it's actually a ten and needs to be added into the next column. In other words, they are treating each column of numbers as unconnected to its neighbors.
 > > 3. If they answer 33 then they know they have to carry the 1, but are carrying it back into the same column it came from.
@@ -213,13 +215,14 @@ Many group activities are possible
 
 {% include _includes/quiz.html id="frequency_formative_assessment.yaml" %}
 
-<!-- >> ### {% icon hands_on %} Self-reflect  (5 min)
+<!-- 
+> <hands-on-title>Self-reflect  (5 min)</hands-on-title>
 >
 > - Think about this session: how many feedback opportunities have you had so far?
 >
-> > {% icon tip %} Get feedback often
+> > <tip-title>Get feedback often</tip-title>
 > > In this tutorial so far, there were at least 3 feedback opportunities
-> > {: .tip}
+> {: .tip}
 {: .hands_on} -->
 
 ![A figure with a line plot, showing that the learners' attention peaks at ~7-10' and then drastically drops after 15+ minutes.](images/AttentionCurve.jpg "Attention Curve")

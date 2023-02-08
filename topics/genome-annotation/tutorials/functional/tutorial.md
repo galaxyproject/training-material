@@ -32,7 +32,7 @@ In this short tutorial, we will run the most commonly used tools to perform func
 
 For a more complete view of how this step integrates into a whole genome sequencing and annotation process, you can have a look at the [Funannotate tutorial]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %}).
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -45,7 +45,7 @@ For a more complete view of how this step integrates into a whole genome sequenc
 
 We will annotate a small set of **protein sequences**. These sequences were predicted from the gene structures obtained in the [Funannotate tutorial]({% link topics/genome-annotation/tutorials/funannotate/tutorial.md %})? Though these sequences from from a fungal species, you can run the same tools on proteins from any organisms, including prokaryotes.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 >
@@ -64,7 +64,7 @@ We will annotate a small set of **protein sequences**. These sequences were pred
 >
 {: .hands_on}
 
-{% include {{ page.dir }}content.md short=true %}
+{% include topics/genome-annotation/tutorials/functional/content.md short=true %}
 
 # Conclusion
 

@@ -54,7 +54,7 @@ contributions:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 **Teaching and training**, core elements of academic life, can be enormously
 rewarding but also quite challenging. Instructors are often required to perform
@@ -63,7 +63,7 @@ motivate student cohorts with very different backgrounds and aptitudes in
 limited time-frames. This can be daunting for experienced teachers, but
 especially so for those who're relatively new to teaching and training.
 
-> ### {% icon comment %} Definitions of key terms
+> <comment-title>Definitions of key terms</comment-title>
 >
 > **Training**: instruction delivered via short courses designed to expand or
 > build knowledge & practical skills in a given field, often conducted in the
@@ -88,7 +88,7 @@ Formal education enterprises generally begin with **curriculum**
    will use to support learner progression towards the LOs;
 6. the assessments for evaluating student learning and teaching effectiveness.
 
-> ### {% icon comment %} Definitions of key terms
+> <comment-title>Definitions of key terms</comment-title>
 >
 > **Curriculum**: the inventory of tasks involving the design, organisation &
 > planning of an education or training enterprise, including specification of
@@ -138,7 +138,7 @@ With this in mind, this tutorial outlines key steps of curriculum development �
 and the role of Bloom's taxonomy ({% cite bloom1956taxonomy %}) – that can be
 used to inform the design of effective courses.
 
-> ### {% icon comment %} Sources
+> <comment-title>Sources</comment-title>
 >
 > This tutorial is significantly based on {% cite via2020course %}, one session
 > of ELIXIR-GOBLET Train the Trainer curriculum and
@@ -146,7 +146,7 @@ used to inform the design of effective courses.
 >
 {: .comment}
 
-> ### {% icon hands_on %} Select a topic for a 3 minute training - _{% icon time %} 1 min - Silent reflection_
+> <hands-on-title>Select a topic for a 3 minute training - _⏰ 1 min - Silent reflection_</hands-on-title>
 >
 > - Choose a topic for a 3 minutes training related to Galaxy
 >
@@ -159,14 +159,14 @@ used to inform the design of effective courses.
 > - Identify the prerequisites
 {: .hands_on}
 
-> ### {% icon tip %} Check the tutorial on principles of learning
+> <tip-title>Check the tutorial on principles of learning</tip-title>
 >
 > For more details about how learning works and values, check our
 > [tutorial]({% link topics/contributing/tutorials/learning-principles/tutorial.md %})
 >
 {: .tip }
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -198,7 +198,7 @@ weaknesses in the implementation and to highlight improvements needed to
 remediate them. These considerations are key to developing effective curricula
 and courses.
 
-> ### {% icon comment %} Definitions of key terms
+> <comment-title>Definitions of key terms</comment-title>
 >
 > **Actionable**: supportive of a decision, or the taking of some action by a
 > learner, instructor or institution
@@ -221,7 +221,7 @@ and courses.
 >
 {: .comment}
 
-> ### {% icon hands_on %} Define audience and teaching goal - _{% icon time %} 10 min - Silent reflection_
+> <hands-on-title>Define audience and teaching goal - _⏰ 10 min - Silent reflection_</hands-on-title>
 >
 > 1. Take the topic you chose before
 > 2. Define teaching objectives
@@ -252,7 +252,7 @@ learning**. If we're to understand whether we've really achieved this, we must
 3. develop **assessment** and evaluation mechanisms that will allow us to
    measure whether the programme successfully met its goals.
 
-> ### {% icon comment %} Definitions of key terms
+> <comment-title>Definitions of key terms</comment-title>
 >
 > **Assessment**: the evaluation or estimation of the nature, quality or ability
 > of someone or something
@@ -344,7 +344,7 @@ discussion of each of the five phases below.
 
 ## Define intended LOs
 
-> ### {% icon comment %} What are Learning Outcomes (LOs)?
+> <comment-title>What are Learning Outcomes (LOs)?</comment-title>
 >
 > - Statements expressing which KSAs learners will be able to demonstrate upon
 >   completion of a learning experience or a sequence of learning experiences
@@ -372,7 +372,7 @@ tasks (to reveal the target KSAs) but also the rational development of
 development, starting with the selection of intended KSAs stated in a set of
 LOs.
 
-> ### {% icon question %} Evaluate LOs
+> <question-title>Evaluate LOs</question-title>
 >
 > 1. Select a tutorial or a course
 >
@@ -386,7 +386,7 @@ LOs.
 > 2. Check the content
 > 3. Are its intended LOs stated?
 >
->    > ### {% icon solution %} Solution for any GTN tutorials, including the dummy one
+>    > <solution-title>for any GTN tutorials, including the dummy one</solution-title>
 >    >
 >    > LOs are always stated on the top for the tutorial, in the Overview box
 >    >
@@ -404,7 +404,7 @@ published (e.g. {% cite stanford-institutional-research-decision-support %} or
 {% cite national2016higher %}): some of these are listed briefly in the box
 below.
 
-> ### {% icon comment %} Learning outcomes should
+> <comment-title>Learning outcomes should</comment-title>
 >
 > - **be specific & well defined**: LOs should concisely state the specific KSAs
 >   that learners should develop as a result of instruction;
@@ -430,7 +430,7 @@ below.
 
 <!-- NILOA five principles for articulating LOs -->
 
-> ### {% icon hands_on %} Learning outcomes - _{% icon time %} 2 min - Silent working_
+> <hands-on-title>Learning outcomes - _⏰ 2 min - Silent working_</hands-on-title>
 >
 > 1. Take the small lesson you selected at the beginning
 > 2. Try to jot a few LOs down
@@ -448,7 +448,7 @@ outcomes.
 
 {% include _includes/quiz.html id="evaluate_learning_outcomes.yaml" %}
 
-> ### {% icon solution %} Evaluate Learning outcomes - Solution
+> <solution-title>Evaluate Learning outcomes - Solution</solution-title>
 >
 > "By the end of the course learners will know the Pythagora's theorem"
 >
@@ -480,7 +480,7 @@ these criteria is it safe to progress to Phase 2, as shown in [Figure 2](#figure
 SMART LOs will be the roadmap as we plan out instructional strategies, write the
 content and **create assessments**.
 
-> ### {% icon hands_on %} Create SMART LOs - _{% icon time %} 10 min - Silent working_
+> <hands-on-title>Create SMART LOs - _⏰ 10 min - Silent working_</hands-on-title>
 >
 > 1. Take the LOs you created
 > 2. Consider if your LOs are SMART
@@ -521,7 +521,7 @@ content and **create assessments**.
 
 <!-- ELIXIR TtT
 
-> ### {% icon hands_on %} Define audience, goal and outcomes (10 min)
+> <hands-on-title>Define audience, goal and outcomes (10 min)</hands-on-title>
 >
 > 5. Identify the learning experiences
 > 6. Start thinking about the content - but don’t spend time in preparing this
@@ -558,7 +558,7 @@ kinds of TG (Teaching Goals) and LO that each may support.
 | Group work          | Synthesise, Evaluate             | Promote collaborative work & peer instruction, provide opportunities for giving/receiving feedback, & digesting course materials                                  | _provide_ feedback on their peers' work, _share_ ideas, _explain_ the advantages of team-work                               |
 | Problem-solving     | Synthesise, Evaluate             | Promote learner abilities to identify & evaluate solutions, develop new ideas, make decisions, evaluate decision effectiveness, troubleshoot                      | _diagnose_ faulty reasoning or an underperforming result, _correct_ errors                                                  |
 
-> ### {% icon comment %} Definitions of key terms
+> <comment-title>Definitions of key terms</comment-title>
 >
 > **Exercise**: an activity designed to help learners to mentally put into
 > practice learned skills & knowledge
@@ -612,7 +612,7 @@ then the LOs should be revised – i.e., LOs are still the most important featur
 to consider.**The key is to determine exactly what specific LEs can contribute
 to learning or how they will help move learners towards the LOs.**
 
-<!-- >> ### {% icon question %} Evaluate LEs in GTN tutorials
+<!-- >> <question-title>Evaluate LEs in GTN tutorials</question-title>
 >
 > - Think of the course or tutorial you selected before (*e.g.*, the
 >   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
@@ -620,7 +620,7 @@ to learning or how they will help move learners towards the LOs.**
 > - Are any of the LEs listed in Table 1 used in the course or tutorial you
 >   selected?
 >
->   > ### {% icon solution %} Solution for GTN tutorial, including the dummy one
+>   > <solution-title>for GTN tutorial, including the dummy one</solution-title>
 >   >
 >   > Most of the GTN tutorials are using Practical and Exercises as LEs.
 >   >
@@ -629,7 +629,7 @@ to learning or how they will help move learners towards the LOs.**
 > - What kinds of achievement or learning are they most likely to promote?
 >   Is this consistent with the stated LOs?
 >
->   > ### {% icon solution %} Solution for GTN tutorial, including the dummy one
+>   > <solution-title>for GTN tutorial, including the dummy one</solution-title>
 >   >
 >   > They are most likely to show how to do things and give an idea of how a tool
 >   > work.
@@ -639,7 +639,7 @@ to learning or how they will help move learners towards the LOs.**
 > - Does the course or tutorial have any LO that can't be achieved through the
 >   LEs that the course currently uses?
 >
->   > ### {% icon solution %} Solution for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   > "Determine the best strategy to get data into Galaxy" may not be achieved
 >   > with only practical
@@ -650,7 +650,7 @@ to learning or how they will help move learners towards the LOs.**
 
 {% include _includes/quiz.html id="LEs_GTN_tutorials.yaml" %}
 
-> ### {% icon solution %} LEs in GTN tutorials
+> <solution-title>LEs in GTN tutorials</solution-title>
 >
 > Most of the GTN tutorials are using Practical and Exercises as LEs.
 >
@@ -670,7 +670,7 @@ With LOs and LEs aligned, Phase 3 involves finding the most appropriate
 **content** to support learners to achieve the intended LOs. Regardless of where
 content is drawn from, what matters is how it supports the LOs.
 
-> ### {% icon comment %} Definitions of key terms
+> <comment-title>Definitions of key terms</comment-title>
 >
 > **Content**: a specific subject or topic item (e.g., DNA, RNA, proteins, a
 > biochemical pathway, R programming) that is the target of learning
@@ -704,7 +704,7 @@ considered that will; otherwise, it may be necessary to discuss the feasibility 
 content or revising the LOs with those who are able to make changes, to avoid misalignment of
 intended and actual curricula
 
-<!-- >> ### {% icon question %} Evaluate content
+<!-- >> <question-title>Evaluate content</question-title>
 >
 > - Think of the course or tutorial you selected before (*e.g.*, the
 >   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
@@ -712,7 +712,7 @@ intended and actual curricula
 > - Review the LOs and identify which parts of the course content support the
 >   LOs
 >
->   > ### {% icon solution %} Solution for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
@@ -721,28 +721,28 @@ intended and actual curricula
 >   delivered & those specific items of content (e.g., item A supports LO 1, &
 >   will be delivered using a lecture)
 >
->   > ### {% icon solution %} Solution for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
 >
 > - Is there any piece of content that doesn't support any LO(s)?
 >
->   > ### {% icon solution %} Solution for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
 >
 > - Is there at least one piece of content for each LO?
 >
->   > ### {% icon solution %} Solution for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
 >
 > - Is there at least one LE for each piece of content?
 >
->   > ### {% icon solution %} Solution for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
@@ -790,7 +790,7 @@ learners and new concepts This helps in the teaching plan to measure how much
 can be covered, and the hierarchical organization suggests a sequence to cover
 material.
 
-> ### {% icon hands_on %} Draw a concept map - _{% icon time %} 15 min - Silent working_
+> <hands-on-title>Draw a concept map - _⏰ 15 min - Silent working_</hands-on-title>
 >
 > - Draw a concept map of your topic of interest
 > - Start with a question
@@ -800,7 +800,7 @@ material.
 > - Count the items (concepts and links)
 {: .hands_on}
 
-> ### {% icon hands_on %} Give / receive feedback on concept maps - _{% icon time %} 10 min - Group of 2 persons_
+> <hands-on-title>Give / receive feedback on concept maps - _⏰ 10 min - Group of 2 persons_</hands-on-title>
 >
 > - Pair with someone
 > - Check the concept name of your partner
@@ -810,7 +810,7 @@ material.
 >
 {: .hands_on}
 
-> ### {% icon tip %} Further reading
+> <tip-title>Further reading</tip-title>
 >
 > For more details about concept maps, we recommend you {% cite novak2008theory %}
 > ([PDF](http://cmap.ihmc.us/publications/researchpapers/TheoryUnderlyingConceptMaps.pdf))
@@ -824,7 +824,7 @@ material.
 - **Content reduction**: one of the biggest challenges in designing training
   courses is the reduction of content to the training format. key points!
 
-> ### {% icon hands_on %} Producing the content and the training material - _{% icon time %} 15 min_
+> <hands-on-title>Producing the content and the training material - _⏰ 15 min_</hands-on-title>
 >
 > - Prepare the content for your 3 min training
 >
@@ -837,7 +837,7 @@ material.
 > - Use your concept map and adapt as needed
 {: .hands_on}
 
-> ### {% icon details %} From a 2-min presentation to a lesson/session: a plan
+> <details-title>From a 2-min presentation to a lesson/session: a plan</details-title>
 >
 > Template to help developing plan:
 >
@@ -876,7 +876,7 @@ different types of assessment, to evaluate:
    decisions both about learners (e.g., ranking their performances) and about
    the course (*i.e.*, whether any of its LOs, LEs, etc. need to be redesigned).
 
-> ### {% icon comment %} Definitions of key terms
+> <comment-title>Definitions of key terms</comment-title>
 >
 > **Formative assessment**: formal or informal assessments (or feedback) made
 > during learning so that instruction or practice can be better targeted for
@@ -903,7 +903,7 @@ opportunities to change pace and refocus learners’ attention. It may be hard t
 conceive how to integrate such assessments into a course, but they need not be
 complex or time-consuming (just informative about learning at a given point).
 
-> ### {% icon details %} Simple formative assessment strategies
+> <details-title>Simple formative assessment strategies</details-title>
 >
 > The most effective way to test student understanding is to do so in class:
 > it's important to seize the moment, and deal with potential misunderstandings
@@ -952,7 +952,7 @@ Using actionable formative and summative assessment can help to ensure that LOs,
 and progress towards them, are explicitly supported. **LOs clarify what
 specifically needs to be assessed and why.**
 
-<!-- >> ### {% icon question %} Evaluate assessment
+<!-- >> <question-title>Evaluate assessment</question-title>
 >
 > - Think of the course or tutorial you selected before (*e.g.*, the
 >   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
@@ -966,7 +966,7 @@ specifically needs to be assessed and why.**
 
 {% include _includes/quiz.html id="assessments_GTN_tutorials.yaml" %}
 
-> ### {% icon hands_on %} Assessment in mini-training - _{% icon time %} 5 min_
+> <hands-on-title>Assessment in mini-training - _⏰ 5 min_</hands-on-title>
 >
 > - Take the content of your 3 min training
 > - Analyse the flow of the lesson, identify points where you could introduce
@@ -1011,7 +1011,7 @@ concur that multiple features need to be considered. One framework collates
 learner reactions, their actual learning, changes in their behaviour, and the
 impact of the course on their organisation.
 
-> ### {% icon details %} Methods to evaluate training effectiveness
+> <details-title>Methods to evaluate training effectiveness</details-title>
 >
 > Evaluation methods provide systematic frameworks for analysing the
 > effectiveness of training courses. The first approach was introduced by
@@ -1057,14 +1057,14 @@ standards. **Ultimately, the evaluation should identify what works in a course,
 and what needs remediation, to better support the achievement of the intended
 LOs**.
 
-<!-- >> ### {% icon question %} Evaluate effectiveness
+<!-- >> <question-title>Evaluate effectiveness</question-title>
 >
 > - Think of the course or tutorial you selected before (*e.g.*, the
 >   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
 >
 > - Do you evaluate its effectiveness?
 >
->   > ### {% icon solution %} Solution for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   > - Embeded feedback form
 >   > - Collecting feedback at the end of courses
@@ -1074,7 +1074,7 @@ LOs**.
 >   If so, how do you do this? How do you determine its effectiveness in leading
 >   learners to your intended LOs?
 >
->   > ### {% icon solution %} Solution for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
@@ -1082,7 +1082,7 @@ LOs**.
 > - Consider the Kirkpatrick-Katzell framework. What level(s) does your
 >   evaluation incorporate?
 >
->   > ### {% icon solution %} Solution for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
@@ -1090,7 +1090,7 @@ LOs**.
 > - What adjustments would you need to make, if any, in order to align your
 >   evaluation with the Kirkpatrick-Katzell strategy?
 >
->   > ### {% icon solution %} Solution for the dummy tutorial
+>   > <solution-title>for the dummy tutorial</solution-title>
 >   >
 >   >
 >   {: .solution}
@@ -1099,7 +1099,7 @@ LOs**.
 
 {% include _includes/quiz.html id="effectiveness_GTN_tutorials.yaml" %}
 
-> ### {% icon solution %} Evaluate effectiveness in GTN tutorials
+> <solution-title>Evaluate effectiveness in GTN tutorials</solution-title>
 >
 > Tutorials are evaluated using
 > - Embeded feedback forms at the
@@ -1112,7 +1112,7 @@ LOs**.
 <!-- ELIXIR TtT -->
 # Testing the mini-training
 
-> ### {% icon hands_on %} Delivery planning - _{% icon time %} 10 min - Silent working_
+> <hands-on-title>Delivery planning - _⏰ 10 min - Silent working_</hands-on-title>
 >
 > - Think if you want to make your training interactive
 > - Think whether you need or want to use a visual support (images)
@@ -1122,12 +1122,12 @@ LOs**.
 >
 {: .hands_on}
 
-> ### {% icon hands_on %} Deliver mini-training and Give / receive feedback on its delivery - _{% icon time %} 15 min - Groups of 2 persons_
+> <hands-on-title>Deliver mini-training and Give / receive feedback on its delivery - _⏰ 15 min - Groups of 2 persons_</hands-on-title>
 >
 > - Deliver each one your 3 minute session to others with 1 person noting down
 >   feedback in real-time
 >
->    > ### {% icon details %} How to give feedback on training
+>    > <details-title>How to give feedback on training</details-title>
 >    >
 >    > - Listen actively and attentively
 >    > - Ask for clarification if you are confused
@@ -1199,12 +1199,12 @@ did/didn't work, suggested improvements, tips for teaching, challenges
 encountered, learner feedback, and indications of where alignment of
 LOs/LEs/content/assessments failed, and why.
 
-> ### {% icon question %} Resources in the Galaxy Training Network
+> <question-title>Resources in the Galaxy Training Network</question-title>
 >
 > What are the provided resources by the Galaxy Training Network to document
 > training resources?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > - Gitter / Matrix channel
 > > - GitHub Pull Request
@@ -1240,14 +1240,14 @@ training materials (slides, exercises, datasets, etc) should also be FAIR
 
 ![It is like a circle with in the middle "1 - Share" then turning clock wise from left middle: "2 - Describe properly", "3 - Give unique identity", "4 - Register online", "5 - Define access rules", "6 - Use interoperable format", "7 - Make (re)usable for trainers", "8 - Make usable for trainees", "9 - Welcome contributions", "10 - Keep material up-to-date". On the top of rules, "Findable" for 2, 3, 4, "Accessible" for 3, 4, 5, "Interroperable" for 6, "Reusable" for 7, 8, 9, 10](images/fair_training_material.png "Ten simple rules for making training materials FAIR. The first rule—to share—is the central starting point; the Findability rules include description, identity, and registration; the latter two, together with access rules, correspond to Accessibility; Interoperability stands on its own, with one rule about formats; the remaining four rules cover different aspects of Reusability. Illustration from Luc Wiegers and Celia van Gelder ({% cite garcia2020ten %}, {% cite wiegers2019 %})")
 
-> ### {% icon question %} Is GTN material FAIR?
+> <question-title>Is GTN material FAIR?</question-title>
 >
 > - Look at the any GTN tutorial (*e.g.*, the
 >   [dummy tutorial]({% link topics/introduction/tutorials/dummy/tutorial.md %}))
 >
 > - Is this training material FAIR ? If so, how?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > {% snippet faqs/gtn/fair_training.md %}
 > >
@@ -1260,7 +1260,7 @@ development of communities of best practice, and can support both learning and
 the success of a course.**
 
 <!--
->> ### {% icon hands_on %} Apply - _{% icon time %} 5 min_
+> <hands-on-title>Apply - _⏰ 5 min_</hands-on-title>
 >
 > - Articulate a goal of good teaching practice that you are ready to apply for
 >   your next training
@@ -1269,7 +1269,7 @@ the success of a course.**
 -->
 
 # Conclusion
-{:.no_toc}
+
 
 Course design is prefaced by determining the purpose of the programme, analysing
 the context in which the course will be delivered and who will benefit.

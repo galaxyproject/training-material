@@ -15,7 +15,7 @@ contributors:
 
 Interactive quizzes can be used either alone, or with a classroom of students, to check student's knowledge.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >

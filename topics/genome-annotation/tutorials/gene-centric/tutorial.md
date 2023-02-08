@@ -40,24 +40,25 @@ priority: 2
 
 Despite the rapidly increasing number of fully assembled genomes few genomes are well annotated. This is especially true for large eukaryotic genomes with their complex gene structure and abundance of pseudogenes. And of course do not forget about the [Murthy's law](https://en.wikipedia.org/wiki/Murphy%27s_law): if you are interested in a particular gene the chances are that it will not be annotated in your genome of interest. In this tutorial we will demonstrate how to compare gene structures across a set of vertebrate genomes. So ...
 
-> > ### {% icon question %} What I want:
-> > - I work with a gene _X_
-> > - I would like to compare the structure of gene _X_ across _N_ genomes
-> {: .code-in}
->
-> > ### {% icon galaxy-chart-select-data %} What I have:
+> > <code-in-title>What I have</code-in-title>
 > > - I know the gene's name
 > > - I know which species I'm interested in
 > > - I know where to find genomes of these species
+> {: .code-in}
+>
+> > <code-out-title>What I want</code-out-title>
+> > - I work with a gene _X_
+> > - I would like to compare the structure of gene _X_ across _N_ genomes
 > {: .code-out}
+>
 {: .code-2col}
 
-> ### {% icon interactive_tour %} What I will get:
+> <tip-title>What I will get</tip-title>
 > - Interactive graphs showing location of the gene across your species of choice. These will allow you to see the absence/presence of the genes across genomes, to detect potential duplications, predogenization events, re-arrangements etc.
 > - Phylogenetic trees for individual exons of the gene. The trees will give you an idea of potential unusual evolutionary dynamics for the gene.
-{: .warning}
+{: .tip}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -98,18 +99,18 @@ This [example history](https://usegalaxy.org/u/cartman/h/genecomparisonxbp1) con
 
 You can use this history to understand the input datasets as well as outputs of the entire analysis. The key items in the history are labelled with <kbd>tags</kbd>:
 
-> ### {% icon code-in %} Input dataset in the example history
+> <code-in-title>dataset in the example history</code-in-title>
 > - <kbd>EXONS</kbd> - amino acid translation of exons of the gene of interest (*XBP-1*)
 > - <kbd>ORF_BED</kbd> - coordinates of predicted ORFs in the genomes of interest
 > - <kbd>DiamondDB</kbd> - database and amino acid translations of predicted ORFs in the genomes of interest
 {: .code-in}
 
-> ### {% icon code-out %} Outputs in the sample history
+> <code-out-title>in the sample history</code-out-title>
 > - <kbd>PlottingData</kbd> - summary necessary for plotting comparative genome graphs
 > - <kbd>Trees</kbd> - phylogenetic trees for each exon 
 {: .code-out}
 
-> ### {% icon warning %} A suggestion!
+> <warning-title>A suggestion!</warning-title>
 > Importing and looking around this history is very helpful for understanding how this analysis works!
 {: .warning}
 
@@ -159,7 +160,7 @@ In this section we first show how to upload sample datasets. These datasets were
 
 ### Uploading sample data
 
-> ### {% icon hands_on %} Sample Data upload
+> <hands-on-title>Sample Data upload</hands-on-title>
 >
 > - Create a new history for this tutorial
 > - Import the files from [Zenodo]({{ page.zenodo_link }}) using the following URLs:
@@ -187,7 +188,7 @@ These correspond to fragments of genomes from:
 
 Galaxy provides a direct connection to [GenomeArk](https://vgp.github.io/genomeark/) from its "Upload Data" tool. To access GenomeArk data you need to:
 
-> ### {% icon hands_on %} Upload VGP data from GenomeArk
+> <hands-on-title>Upload VGP data from GenomeArk</hands-on-title>
 >
 > - Create a new history for this tutorial
 > - Import genome assembly FASTA files from GenomeArk:
@@ -210,13 +211,11 @@ Galaxy provides a direct connection to [GenomeArk](https://vgp.github.io/genomea
 
 After uploading data from GenomeArk you will end up with a number of FASTA datasets in your history. To proceed with the analysis you will need to combine these into a single dataset collection:
 
-> ### {% icon hands_on %} Combine genome assemblies into a dataset collection
+> <hands-on-title>Combine genome assemblies into a dataset collection</hands-on-title>
 >
 > To create a collection from genome assemblies you just uploaded into GenomeArk follow the steps in the video below. Obviously, you only want to click check-boxes next to FASTA files (assemblies) you want to include and leave everything else out.
 >
 > {% snippet faqs/galaxy/collections_build_list.md %}
->
-> <iframe width="560" height="315" src="https://www.youtube.com/embed/6ZU9hFjnRDo" title="Auto-generated english language captioning on video covering collections" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 >
 {: .hands_on}
 
@@ -226,7 +225,7 @@ After uploading data from GenomeArk you will end up with a number of FASTA datas
 
 Now we can go ahead and find all ORFs in all genome assemblies we have bundled into a collection. For this we will use tool called [ORFiPy](https://github.com/urmi-21/orfipy):
 
-> ### {% icon hands_on %} Find ORFs witrh ORFiPy
+> <hands-on-title>Find ORFs witrh ORFiPy</hands-on-title>
 >
 > Run {% tool [ORFiPy](toolshed.g2.bx.psu.edu/repos/iuc/orfipy/orfipy/0.0.4+galaxy0) %} with the following parameters:
 >    - {% icon param-collection %} *"Find ORFs in"*: The collection containing genome assemblies we just created (click "Dataset collection" {% icon param-collection %} button on left-side of this input field)
@@ -245,7 +244,7 @@ This will produce two new dataset collections in your history: one containing co
 
 Because we will be using the [Diamond](https://github.com/bbuchfink/diamond) tool to find matches between our gene of interest and ORF translations we need to convert FASTA files into Diamond database using __Diamond makedb__ tool:
 
-> ### {% icon hands_on %} Create Diamond database
+> <hands-on-title>Create Diamond database</hands-on-title>
 >
 > Run {% tool [Diamond makedb](toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond_makedb/2.0.15+galaxy0) %} on the collection containing amino acid translations of ORFs generated using __ORFiPy__:
 >    - {% icon param-collection %} "Input reference file in FASTA format"*: Select collections containing amino acid (FASTA Protein) output of __ORFiPy__ 
@@ -260,13 +259,13 @@ At this point we have three input datasets that would allow us to find and visua
 
 ## Steps 5, 6, and 7: Finding matches and building trees
 
-To find location of genes, we will use the following [workflow](/training-material/topics/genome-annotation/tutorials/gene-centric/workflows/) that is available as a part of this tutorial. To use this workflow you need to import it into your Galaxy instance as described [here](/training-material/topics/genome-annotation/tutorials/gene-centric/workflows/).
+To find location of genes, [we will use the following workflow]({% link topics/genome-annotation/tutorials/gene-centric/workflows/index.md %}) that is available as a part of this tutorial. To use this workflow you need to import it into your Galaxy instance.
 
 ![WF](../../images/gene-centric/wf.png)
 
 The workflow takes three inputs: 
 
-> ### {% icon code-in %} Workflow inputs
+> <code-in-title>Workflow inputs</code-in-title>
 >
 > 1. <kbd>EXONS</kbd> - Amino acid translation of exons from the gene of interest ([Step 2](#step-2-get-amino-acid-translations-for-all-exons-of-my-gene-of-interest) of this tutorial)
 > 1. <kbd>DiamondDB</kbd> - Diamond database of ORF translations from genome assemblies ([Step 4](#step-4-extract-amino-acid-sequences-and-genome-coordinates-for-all-orfs) of this tutorial)
@@ -276,7 +275,7 @@ The workflow takes three inputs:
 
 It produces two primary outputs:
 
-> ### {% icon code-out %} Results
+> <code-out-title>Results</code-out-title>
 >
 > 1. <kbd>Trees</kbd> - Phylogenetic trees for each input exon as [Newick](https://en.wikipedia.org/wiki/Newick_format) file
 > 1. <kbd>PlottingData</kbd> - A summary table of exon matches for each genome
@@ -295,7 +294,7 @@ The overall logic of the workflow is as follows:
 
 After running the workflow phylogenetic trees will be saved into a collection named `Join neighbors on ...`. This collection will also be labelled with tag <kbd>Trees</kbd>. To visualize the trees:
 
-> ### {% icon hands_on %} Visualize the trees
+> <hands-on-title>Visualize the trees</hands-on-title>
 >
 > - Expand the collection by clicking on it
 > - Click on any dataset
@@ -4066,7 +4065,7 @@ Another plot currently produced by the notebook is a summary plot showing the di
 
 _XBP-1_ is one of a few vertebrate gene containing overlapping reading frames encoding different proteins within a single gene ({% cite Chung2007-wv %}). In this case the switch between two reading frames occurs when a highly specialized RNA endonuclease, IRE1, excises a 26 nucleotide spacer from _XBP-1_ mRNA ({% cite Nekrutenko2006-bk %}). This converts the so-called “unspliced” form of the transcript (XBP-1U) to the “spliced” form XBP-1S (Note that the term “spliced” is misleading here. The XBP-1U is already processed by splicing machinery and contains no canonical introns. The “spliced” is simply used to indicate the removal of the 26 nucleotide spacer). Because the 26 is not divisible by three, the XBP-1S transcript is translated in a different frame from the point of cleavage. The activation of IRE1 and resulting removal of the spacer is triggered by presence of unfolded proteins in the endoplasmic reticulum and the IRE1-XBP1 pathway is one of the three major unfolded protein response systems in higher eukaryotes ({% cite Chen2021-ws %}) that is conserved all the way to yeast (with _XBP-1_'s homologue _HAC-1_; {% cite Calfon2002-dl %} ) . 
 
-> ### {% icon tip %} Tip: Getting help
+> <tip-title>Getting help</tip-title>
 >
 > For questions about using Galaxy, you can ask in the [Galaxy help forum](https://help.galaxyproject.org/).
 >

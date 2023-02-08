@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} Solution
+> <solution-title></solution-title>
 > 
 > Alternative test for creating an object. Note the `setUp` method and the new import.
 > 

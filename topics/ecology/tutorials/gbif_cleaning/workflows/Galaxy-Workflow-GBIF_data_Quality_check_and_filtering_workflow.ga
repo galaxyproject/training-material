@@ -1,0 +1,451 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Cleaning GBIF data for the use in Ecology",
+    "format-version": "0.1",
+    "name": "GBIF data Quality check and filtering workflow Feb-2020",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/spocc_occ/spocc_occ/0.9.0",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Get species occurrences data",
+                    "name": "sname"
+                }
+            ],
+            "label": null,
+            "name": "Get species occurrences data",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 200,
+                "top": 343
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/spocc_occ/spocc_occ/0.9.0",
+            "tool_shed_repository": {
+                "changeset_revision": "f9d76a46799a",
+                "name": "spocc_occ",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"from\": [\"gbif\"], \"limit\": \"999999\", \"sname\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.9.0",
+            "type": "tool",
+            "uuid": "80bad01e-04d4-4bca-aa08-1b5d92ea4b46",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 343,
+                "top": 477
+            },
+            "post_job_actions": {
+                "TagDatasetActionout_file1": {
+                    "action_arguments": {
+                        "tags": "#basisOfRecord"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"c16=='HUMAN_OBSERVATION' or c16=='OBSERVATION' or c16=='PRESERVED_SPECIMEN'\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "c1bc7d5d-60f1-4a82-b1f7-95e770febe78",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "Count1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Count",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 499,
+                "top": 378
+            },
+            "post_job_actions": {},
+            "tool_id": "Count1",
+            "tool_state": "{\"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"column\": [\"17\"], \"delim\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"sorting\": \"value\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "793a161e-4f21-4913-9589-8c2206904ba9",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "Summary_Statistics1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Summary Statistics",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 448,
+                "top": 200
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "year summary statistics"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                },
+                "TagDatasetActionout_file1": {
+                    "action_arguments": {
+                        "tags": "#ageOfRecord"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Summary_Statistics1",
+            "tool_state": "{\"cond\": \"c40\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "c75fe7c1-6d15-4b43-bec6-9ea17a6f79cd",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "Summary_Statistics1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Summary Statistics",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 640,
+                "top": 270
+            },
+            "post_job_actions": {
+                "RenameDatasetActionout_file1": {
+                    "action_arguments": {
+                        "newname": "individual count summary statistics"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Summary_Statistics1",
+            "tool_state": "{\"cond\": \"c74\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "053a108a-4924-4060-a23b-bae4314c677a",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 626,
+                "top": 502
+            },
+            "post_job_actions": {
+                "TagDatasetActionout_file1": {
+                    "action_arguments": {
+                        "tags": "#individualCount"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"c74>0 and c74<99\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "9b6f7a38-9bb1-4a08-a889-c29fe7ecdb68",
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 860,
+                "top": 343
+            },
+            "post_job_actions": {
+                "TagDatasetActionout_file1": {
+                    "action_arguments": {
+                        "tags": "#ageOfRecord"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"c40>1945\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "1cb76a5e-35c7-4dee-aa8b-d92acc4b12a6",
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "Count1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Count",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1080,
+                "top": 343
+            },
+            "post_job_actions": {},
+            "tool_id": "Count1",
+            "tool_state": "{\"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"column\": [\"31\"], \"delim\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"sorting\": \"value\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.3",
+            "type": "tool",
+            "uuid": "b4ef4c98-f6b8-4c90-ae69-09c2cc58b742",
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "input": {
+                    "id": 6,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Filter",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 1080,
+                "top": 464
+            },
+            "post_job_actions": {
+                "TagDatasetActionout_file1": {
+                    "action_arguments": {
+                        "tags": "#FamilyCheck"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "Filter1",
+            "tool_state": "{\"cond\": \"c30=='Loliginidae'\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "900ae89b-27b4-4dbe-a167-e7082516d1b8",
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/gdal_ogr2ogr/gdal_ogr2ogr/3.0.0",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input": {
+                    "id": 8,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "OGR2ogr",
+            "outputs": [
+                {
+                    "name": "shapefile",
+                    "type": "shp"
+                }
+            ],
+            "position": {
+                "left": 1301,
+                "top": 343
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/gdal_ogr2ogr/gdal_ogr2ogr/3.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "e12db3b4d3a6",
+                "name": "gdal_ogr2ogr",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"f\": \"ESRI Shapefile\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"settings\": {\"advanced\": \"advanced\", \"__current_case__\": 1, \"series_oo\": [{\"__index__\": 0, \"oo\": \"X_POSSIBLE_NAMES=longitude\"}, {\"__index__\": 1, \"oo\": \"Y_POSSIBLE_NAMES=latitude\"}]}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.0",
+            "type": "tool",
+            "uuid": "c02234ad-56a8-4916-aec3-44e0394a4758",
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/ecology/gdal_ogr2ogr/gdal_ogr2ogr/3.0.0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "input": {
+                    "id": 8,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "OGR2ogr",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "xml"
+                }
+            ],
+            "position": {
+                "left": 1301,
+                "top": 463
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutput": {
+                    "action_arguments": {
+                        "newtype": "geojson"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/ecology/gdal_ogr2ogr/gdal_ogr2ogr/3.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "e12db3b4d3a6",
+                "name": "gdal_ogr2ogr",
+                "owner": "ecology",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"f\": \"GeoJSON\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"settings\": {\"advanced\": \"advanced\", \"__current_case__\": 1, \"series_oo\": [{\"__index__\": 0, \"oo\": \"X_POSSIBLE_NAMES=longitude\"}, {\"__index__\": 1, \"oo\": \"Y_POSSIBLE_NAMES=latitude\"}]}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.0",
+            "type": "tool",
+            "uuid": "0f037e6e-8983-49cc-8cbf-6abf83a808c6",
+            "workflow_outputs": []
+        }
+    },
+    "tags": [
+      "ecology"
+    ],
+    "uuid": "ddfb69ee-1e4e-44c0-b266-3ed91134ddb1",
+    "version": 3
+}

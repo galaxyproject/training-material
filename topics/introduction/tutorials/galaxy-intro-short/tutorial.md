@@ -27,19 +27,22 @@ key_points:
 subtopic: core
 translations:
   - es
-contributors:
+contributions:
+  authorship:
   - annasyme
   - nsoranzo
+  editing:
+  - bebatut
 
 ---
 
 # Overview
-{:.no_toc}
+
 
 * This is a short introduction to the Galaxy user interface - the web page that you interact with.
 * We will cover key tasks in Galaxy: uploading files, using tools, viewing histories, and running workflows.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 > 1. TOC
 > {:toc}
 >
@@ -48,14 +51,14 @@ contributors:
 ## What does Galaxy look like?
 
 
-> ### {% icon hands_on %} Hands-on: Log in to Galaxy
+> <hands-on-title>Log in to Galaxy</hands-on-title>
 > 1. Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)
 > 2. Browse to your Galaxy instance
 > 3. Log in or register
 >
 > ![Screenshot of Galaxy Australia with the register or login button highlighted](../../images/galaxy-login.png)
 >
->   > ### {% icon comment %} Different Galaxy servers
+>   > <comment-title>Different Galaxy servers</comment-title>
 >   >  This is an image of Galaxy Australia, located at [usegalaxy.org.au](https://usegalaxy.org.au/)
 >   >
 >   > The particular Galaxy server that you are using may look slightly different and have a different web address:
@@ -81,16 +84,22 @@ The first time you use Galaxy, there will be no files in your history panel.
 
 Your "History" is in the panel at the right.
 
-> ### {% icon hands_on %} Hands-on: Name history
+> <hands-on-title>Name history</hands-on-title>
 > 1. Go to the **History** panel (on the right)
-> 2. Click on the history name (which by default is "Unnamed history")
+> 2. Click on {% icon galaxy-pencil %} (**Edit**) next to the history name (which by default is "Unnamed history")
 >
->    ![Screenshot of the galaxy interface with the history name being edited, it currently reads "Unnamed history", the default value.](../../../../shared/images/rename_history.png){:width="320px"}
+>    ![Screenshot of the galaxy interface with the history name being edited, it currently reads "Unnamed history", the default value.](../../../../shared/images/rename_history.png){:width="250px"}
+>
+>    > <comment-title></comment-title>
+>    >
+>    > In some previous version of Galaxy, you will need to clck on the history name to renmae it as shown here:
+>    > ![Screenshot of the galaxy interface with the history name being edited, it currently reads "Unnamed history", the default value.](../../../../shared/images/rename_history_old.png){:width="320px"}
+>    {: .comment}
 >
 > 3. Type in a new name, for example, "My Analysis"
-> 4. Press <kbd>Enter</kbd> on your keyboard to save it
+> 4. Click on **Save**
 >
-> > ### {% icon comment %} Renaming not an option?
+> > <comment-title>Renaming not an option?</comment-title>
 > > If renaming does not work, it is possible you aren't logged in, so try logging in to Galaxy first. Anonymous users are only permitted to have one history, and they cannot rename it.
 > {: .comment}
 >
@@ -100,7 +109,7 @@ Your "History" is in the panel at the right.
 
 Your "Tools" are in the panel at the left.
 
-> ### {% icon hands_on %} Hands-on: Upload a file from URL
+> <hands-on-title>Upload a file from URL</hands-on-title>
 > 1. At the top of the **Tools** panel (on the left), click {% icon galaxy-upload %} **Upload**
 >
 >    ![upload data button](../../images/upload-data.png)
@@ -124,7 +133,7 @@ Your "Tools" are in the panel at the left.
 Your uploaded file is now in your current history.
 When the file has uploaded to Galaxy, it will turn green.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > After this you will see your first history item (called a "dataset") in Galaxy's right panel. It will go through
 > the gray (preparing/queued) and yellow (running) states to become green (success).
 >
@@ -132,7 +141,7 @@ When the file has uploaded to Galaxy, it will turn green.
 
 What is this file?
 
-> ### {% icon hands_on %} Hands-on: View the dataset content
+> <hands-on-title>View the dataset content</hands-on-title>
 > 1. Click on the {% icon galaxy-eye %} (eye) icon next to the dataset name, to look at the file content
 >
 >    ![eye icon with dropdown titled View Data](../../images/eye-icon.png){:width="320px"}
@@ -148,7 +157,7 @@ This file contains DNA sequencing reads from a bacteria, in FASTQ format:
 
 Let's look at the quality of the reads in this file.
 
-> ### {% icon hands_on %} Hands-on: Use a tool
+> <hands-on-title>Use a tool</hands-on-title>
 > 1. Type **FastQC** in the tools panel search box (top)
 > 2. Click on the {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} tool
 >
@@ -167,14 +176,14 @@ This tool will run and two new output datasets will appear at the top of your hi
 
 We will now look at the output dataset called *FastQC on data 1: Webpage*.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > * Note that Galaxy has given this dataset a name according to both the tool name ("FastQC") and the input ("data 1") that it used.
 > * The name "data 1" means the dataset number 1 in Galaxy's current history (our FASTQ file).
 >
 {: .comment}
 
 
-> ### {% icon hands_on %} Hands-on: View results
+> <hands-on-title>View results</hands-on-title>
 > * Once it's green, click on the {% icon galaxy-eye %} (eye) icon next to the "Webpage" output dataset.
 >
 >    The information is displayed in the central panel
@@ -184,12 +193,12 @@ We will now look at the output dataset called *FastQC on data 1: Webpage*.
 
 This tool has summarised information about all of the reads in our FASTQ file.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What was the length of the reads in the input FASTQ file?
 > 2. Do these reads have higher quality scores in the centre or at the ends?
 >
->   > ### {% icon solution %} Solutions
+>   > <solution-title></solution-title>
 >   > 1. 150 bp
 >   > 2. In the center
 >   {: .solution}
@@ -201,7 +210,7 @@ This tool has summarised information about all of the reads in our FASTQ file.
 Let's run a tool to filter out lower-quality reads from our FASTQ file.
 
 
-> ### {% icon hands_on %} Hands-on: Run another tool
+> <hands-on-title>Run another tool</hands-on-title>
 > 1. Type **Filter by quality** in the tools panel search box (top)
 > 2. Click on the tool {% tool [Filter by quality](toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.2+galaxy0) %}
 > 3. Set the following parameters:
@@ -220,7 +229,7 @@ What are the results from this filtering tool?
 
 We could click on the eye icon to view the contents of this output file, but it will not be very informative - we will just see a list of reads.
 
-> ### {% icon hands_on %} Hands-on: Get metadata about a file
+> <hands-on-title>Get metadata about a file</hands-on-title>
 > 1. Click on the output dataset name in the History panel.
 >
 >    This expands the information about the file.
@@ -229,11 +238,11 @@ We could click on the eye icon to view the contents of this output file, but it 
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > How many read has been discarded
 >
->   > ### {% icon solution %} Solutions
+>   > <solution-title></solution-title>
 >   > 1786 low-quality reads were discarded
 >   {: .solution}
 {: .question}
@@ -242,7 +251,7 @@ We could click on the eye icon to view the contents of this output file, but it 
 
 We can now try to filter our input reads to an even higher standard, and see how this changes the resulting output (an exploratory analysis). We will change the filter settings and re-run the tool.
 
-> ### {% icon hands_on %} Hands-on: Re-run the tool
+> <hands-on-title>Re-run the tool</hands-on-title>
 > 1. Click on the {% icon galaxy-refresh %} icon (**Run this job again**) for the output dataset of **Filter by quality** {% icon tool %}
 >
 >    ![rerun the job](../../images/rerun.png)
@@ -254,13 +263,21 @@ We can now try to filter our input reads to an even higher standard, and see how
 >    For example, you might decide you want 80 percent of bases to have a quality of 36 or higher, instead of 35.
 >
 > 3. Click **Execute**
-> 4. View the results: Click on the output dataset name to expand the information. (*Note*: not the {% icon galaxy-eye %} (eye) icon.)
+> 4. View the results: Click on the output dataset name to expand the information
+>
+>    > <comment-title></comment-title>
+>    > Not the {% icon galaxy-eye %} (eye) icon.
+>    {: .comment}
+>
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > How many reads were discarded under these new filtering conditions?
 >
+>   > <solution-title></solution-title>
+>   > 11517 low-quality reads were discarded
+>   {: .solution}
 {: .question}
 
 You can re-run a tool many times with different settings. Each time you re-run the tool, its new output datasets will appear at the top of your current history.
@@ -272,13 +289,13 @@ When you look carefully at your history, you can see that it contains all the st
 
 Galaxy makes this very easy with the `Extract workflow` option. This means any time you want to build a workflow, you can just perform the steps once manually, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis.
 
-> ### {% icon hands_on %} Hands-on: Extract workflow
+> <hands-on-title>Extract workflow</hands-on-title>
 >
-> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-cross %} button.
+> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-delete %} button.
 >
 >    This will make the creation of the workflow easier.
 >
-> 2. Click on {% icon galaxy-gear %} (**History options**) at the top of your history panel and select **Extract workflow**.
+> 2. Click on {% icon galaxy-history-options %} (**History options**) at the top of your history panel and select **Extract workflow**.
 >
 >    ![`Extract Workflow` entry in the history options menu](../../images/history_menu_extract_workflow.png)
 >
@@ -304,7 +321,7 @@ In a minute we will see how to find the extracted workflow and how to use it.
 
 Let's create a new history.
 
-> ### {% icon hands_on %} Hands-on: New history
+> <hands-on-title>New history</hands-on-title>
 > 1. Create a new history
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
@@ -321,10 +338,16 @@ This new history does not have any datasets in it yet.
 
 Where is your first history, called "My Analysis"?
 
-> ### {% icon hands_on %} Hands-on: View histories
-> 1. Click on the **View all histories** ({% icon galaxy-columns %} icon) at the top right of your history
+> <hands-on-title>View histories</hands-on-title>
+> 1. Click on {% icon galaxy-history-options %} (**History options**) and then click on the {% icon galaxy-columns %} **Show Histories side-by-side**
 >
 >    ![view all histories](../../images/galaxy_interface_history_switch.png){:width="320px"}
+>
+>    > <comment-title></comment-title>
+>    >
+>    > In some previous version of Galaxy, you need to lick on the **View all histories** ({% icon galaxy-columns %} icon) at the top right of your history
+>    > ![view all histories](../../images/galaxy_interface_history_switch_old.png){:width="320px"}
+>    {: .comment}
 >
 >    A new page will appear with all your histories displayed here.
 >
@@ -332,11 +355,11 @@ Where is your first history, called "My Analysis"?
 >    1. Click on the FASTQ dataset in "My Analysis" history
 >    2. Drag it into the "Next Analysis" history
 >
+> ![Copy a dataset between histories](../../images/copy-dataset.gif "Copy a dataset between histories by dragging it")
+>
 >    This makes a copy of the dataset in the new history (without actually using additional disk space).
 >
 > 3. Click on the Home icon {% icon galaxy-home %} (or **Analyze Data** on older versions of Galaxy) in the top panel to go back to your analysis window
->
-> ![Copy a dataset between histories](../../images/copy-dataset.gif "Copy a dataset between histories by dragging it")
 >
 {: .hands_on}
 
@@ -349,32 +372,40 @@ At any time, you can go back into the "View all histories" page and "Switch to" 
 
 Now that we have built our workflow, let's use it to re-create our small analysis in a single step. The same workflow could also be used on some new FASTQ data to quickly repeat the same analysis on different inputs.
 
-> ### {% icon hands_on %} Hands-on: Run workflow
+> <hands-on-title>Run workflow</hands-on-title>
 >
 > 1. Click on **Workflow** in the top menu bar of Galaxy.
->    - Here you have a list of all your workflows.
->    - Your newly created workflow should be listed at the top:
+>
+>    Here you have a list of all your workflows.
+>    Your newly created workflow should be listed at the top:
 >
 >    ![`Your workflows` list](../../images/intro_short_workflow_list.png)
 >
 >    If you click on a workflow name, you can see all available actions for the workflow, e.g. edit, copy, rename, delete.
 >
 > 2. Click on the {% icon workflow-run %} (*Run workflow*) button next to your workflow.
->    - The central panel will change to allow you to configure and launch the workflow.
+>
+>    The central panel will change to allow you to configure and launch the workflow.
 >
 >    ![Run workflow form](../../images/intro_short_run_workflow.png)
 >
+>    > <comment-title></comment-title>
+>    >
+>    > In previous versions of Galaxy, it might look like:
+>    > ![Run workflow form](../../images/intro_short_run_workflow_old.png)
+>    {: .comment}
+>
 > 3. Check that the *"FASTQ reads"* input is set to the FASTQ dataset we have copied to the new history.
-     - In this page we could change any parameter for the tools composing the workflow as we would do when running them one by one.
+>
+>    In this page we could change any parameter for the tools composing the workflow as we would do when running them one by one.
 >
 > 4. Click the **Run Workflow** button at the top-right of the screen.
 >
-> 5. You should see a message that the workflow was successfully invoked. Then jobs will start to run and datasets appear in your "Next Analysis" history, replicating the steps of your previous history.
+>    You should see a message that the workflow was successfully invoked. Then jobs will start to run and datasets appear in your "Next Analysis" history, replicating the steps of your previous history.
 >
 {: .hands_on}
 
 
 # Conclusion
-{:.no_toc}
 
-{% icon trophy %} Well done! You have completed the short introduction to Galaxy, where you named the history, uploaded a file, used a tool, viewed results and run a workflow. Additional tutorials are available for a more in-depth introduction to Galaxy's features.
+Well done! You have completed the short introduction to Galaxy, where you named the history, uploaded a file, used a tool, viewed results and run a workflow. Additional tutorials are available for a more in-depth introduction to Galaxy's features.

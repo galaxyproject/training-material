@@ -21,4 +21,4 @@ contributors:
   - tnabtaf
 ---
 
-{% include {{ page.dir }}content.md short=false %}
+{% include topics/metagenomics/tutorials/mothur-miseq-sop/content.md short=false %}

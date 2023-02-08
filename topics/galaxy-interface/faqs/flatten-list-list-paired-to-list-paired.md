@@ -31,6 +31,6 @@ Flattening this top level list, so it's just a `list:paired` requires a few chan
      - *"List Identifier(s)"*: `D`
    - Click Apply
 3. Click **Save**
-4. Click **Execute**
+4. Click **Run Tool**
 
 The tool will execute and reshape your list, congratulations!

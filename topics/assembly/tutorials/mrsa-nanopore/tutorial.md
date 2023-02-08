@@ -53,7 +53,7 @@ abbreviations:
 
 
 # Introduction
-{:.no_toc}
+
 
 In this training you're going to make an assembly of data produced by
 "Complete Genome Sequences of Eight Methicillin-Resistant
@@ -66,7 +66,7 @@ range from asymptomatic colonization of the nasal mucosa to soft tissue
 infection to fulminant invasive disease. Here, we report the complete
 genome sequences of eight MRSA strains isolated from patients in Japan.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -85,7 +85,7 @@ Nanopore Technologies sequencing have much longer variable lengths.
 
 {% snippet faqs/galaxy/sequencing_nanopore.md %}
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. {% tool [Import](upload1) %} the files from [Zenodo]({{ page.zenodo_link }}) or from the shared data library
@@ -112,12 +112,12 @@ Nanopore Technologies sequencing have much longer variable lengths.
 >
 > 6. **View** {% icon galaxy-eye %} the renamed file
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > 1. What are the 4 main features of each read in a fastq file.
 >    > 2. What is the name of your first read?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. The following:
 >    > >
 >    > >    -   A `@` followed by a name and sometimes information of the read
@@ -157,7 +157,7 @@ reads include:
 - Do I need to ask/perform for a new sequencing run?
 - Is it suitable for the analysis I need to do?
 
-> ### {% icon hands_on %} Hands-on: QC & Filtering
+> <hands-on-title>QC & Filtering</hands-on-title>
 >
 > 1. {% tool [filtlong](toolshed.g2.bx.psu.edu/repos/iuc/filtlong/filtlong/0.2.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input FASTQ"*: `DRR187567` (output of **Convert compressed file to uncompressed.** {% icon tool %})
@@ -206,14 +206,14 @@ Before | After
 ------ | ----
 ![before filtering, showing a large mostly gaussian curve](../../images/mrsa/before.png) | ![after filtering, same curve as before but everything below 1000bp is gone](../../images/mrsa/after.png)
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. What is the increase of your median read length?
 > 2. What is the decrease in total bases?
 > 3. What is coverage?
 > 4. What would be the coverage before and after trimming, based on a genome size of 2.9 Mbp?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. 3,400.0 to 5,451.0, a 60.3% increase
 > > 2. -2.0% decrease, not a very significant decrease so our data was quite good to start with and didn't have many short reads which were removed.
 > > 3. Coverage is a measure of, on average, how many reads 'cover' a single base in the genome. If you divide the total reads, by the genome size, you will get a number how many times your genomes could theoretically be ‘covered’ by reads.
@@ -247,7 +247,7 @@ assembly in a .fasta file, which looks like a .fastq file without the 3rd and
 
 {% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
-> ### {% icon hands_on %} Hands-on: Assembly using Flye
+> <hands-on-title>Assembly using Flye</hands-on-title>
 >
 > 1. {% tool [Flye assembly](toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.6) %} with the following parameters:
 >    - {% icon param-file %} *"Input reads"*: `DRR187567-filtered` (output of **filtlong** {% icon tool %})
@@ -271,14 +271,14 @@ assembly in a .fasta file, which looks like a .fastq file without the 3rd and
 >    ![Bandage output showing two contigs, one big, one tiny](../../images/mrsa/bandage.png)
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. How many contigs do you have?
 > 2. What is the coverage of your longest contig?
 > 3. What is the length of your longest contig?
 > 4. Does this feel like potentially a MRSA genome?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > While results may vary due to randomness in the assembly process, in our case we had:
 > >
 > > 1. 2
@@ -297,7 +297,7 @@ reference file as input, and will provide complementary metrics. QUAST
 stands for QUality ASsessment Tool. With later updates gene annotation
 also possible with QUAST.
 
-> ### {% icon hands_on %} Hands-on: Quality Control of assembly using Quast
+> <hands-on-title>Quality Control of assembly using Quast</hands-on-title>
 >
 > 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1) %} with the following parameters:
 >    - *"Use customized names for the input files?"*: `No, use dataset names`
@@ -321,11 +321,11 @@ length was 2,976,370 bp) and the smallest is 2,987,958 (total length) -
 2,927,008 (length of the largest) = 60,950 bp. sequencing. The length of
 the largest contig can mean that it is the total chromosomal DNA of the *S. aureus*.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. What is you GC content?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The GC content for our assembly was 32.73% (for comparison [MRSA Isolate HC1335 Strain](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5174738/) GC% is 32.89%). This means the length and GC% of the assembly could be good!
 > >
@@ -336,7 +336,7 @@ the largest contig can mean that it is the total chromosomal DNA of the *S. aure
 
 Because we are working with a MRSA we are curious to see which resistance genes are located on the genome or on the plasmid. To determine whether the contigs contain antimicrobial resistance (AMR) genes [staramr](https://github.com/phac-nml/staramr) can be used  **Staramr** scans bacterial genome contigs against both the **ResFinder** ({% cite Zankari2012 %}), **PointFinder** ({% cite Zankari2017 %}), and **PlasmidFinder** ({% cite Carattoli2014 %}) databases (used by the ResFinder webservice) and compiles a summary report of detected antimicrobial resistance genes.
 
-> ### {% icon hands_on %} Hands-on: Run staramr
+> <hands-on-title>Run staramr</hands-on-title>
 >
 > 1. {% tool [staramr](toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"genomes"*: `consensus` (output of **Flye assembly** {% icon tool %})
@@ -372,13 +372,13 @@ To get more information about these antibiotic resistant genes, you can check th
 CARD can be very helpful to check all the resistance genes and check if
 it is logical to find the resistance gene in a specific bacteria.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. To what family does [mecA](https://card.mcmaster.ca/ontology/36911) belong?
 > 2. Do you expect to find this gene in this MRSA strain and why?
 > 3. Is the accession number of the entry related to the accession reported by staramr?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. [Methicillin resistant PBP2](https://card.mcmaster.ca/ontology/37589)
 > > 2. The strain we use is a Methicillin(multi) resistant Staphylococcus aureus. As `mecA` has a perfect resistome mach with *S. aureus*, and the AMR Gene Family is methicillin resistant PBP2, we expect to see mecA in MRSA.
@@ -401,7 +401,7 @@ In this case you will use your assembly as your reference and the output
 from prokka as an information track.
 
 
-> ### {% icon hands_on %} Hands-on: Annotating the Genome
+> <hands-on-title>Annotating the Genome</hands-on-title>
 >
 > 1. {% tool [Prokka](toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Contigs to annotate"*: `consensus` (output of **Flye assembly** {% icon tool %})
@@ -518,15 +518,15 @@ A useful option is the "search features" option
 In this tutorial Jbrowse was only used for showing the locations of your
 found genes, but it can be used with many more inputs.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. Did the location of the aac(6')-aph(2'') regions in staramr correspond with any of the found genes in the prokka/jbrowse output?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. Yes, multiple aacA-aphD genes are found within the staramr annotated aac(6')-aph(2'') region
 > {: .solution}
 {: .question}
 
 
 # Conclusion
-{:.no_toc}
+

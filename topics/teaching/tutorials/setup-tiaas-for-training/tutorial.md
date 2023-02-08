@@ -25,7 +25,9 @@ UseGalaxy.eu has developed Training Infrastructure as a Service (TIaaS for short
 
 ![TIaaS Logo](../../images/tiaas-logo.png){: width="500px"}
 
-> ### Agenda
+UseGalaxy.eu has developed Training Infrastructure as a Service (TIaaS for short) which allows you to use Galaxy with a private queue for your training event. Your trainees' jobs won't wait in the main queue, and can be processed much more quickly than they might be otherwise. This can provide the experience of a local, private Galaxy combined with a public Galaxy that you are not responsible for maintaining. Additionally if something goes wrong, you can conveniently blame the Galaxy admins, rather than feeling the stress of debugging and fixing your private Galaxy.
+
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will see:
 >
@@ -65,7 +67,7 @@ When your users join a training, using a special URL provided to you, they then 
 
 # The Application Process
 
-> ### {% icon hands_on %} Hands-on: Apply for TIaaS Training
+> <hands-on-title>Apply for TIaaS Training</hands-on-title>
 >
 > 1. <span class="Europe-the-Middle-East-and-Africa-EMEA"><a href="https://usegalaxy.eu/tiaas/new/">Fill out the form</a></span><span class="AsiaPacific-APAC"><a href="https://usegalaxy.org.au/tiaas/new/">Fill out the form</a></span><span class="the-Americas-AMER"><a href="https://usegalaxy.org/tiaas/new/">Fill out the form</a></span>
 >
@@ -79,7 +81,7 @@ When your users join a training, using a special URL provided to you, they then 
 
 We have a "test" TIaaS training setup on UseGalaxy.eu, which will never have compute resources associated with it, but you can use it to test the process of signing up, if you wish:
 
-> ### {% icon hands_on %} Hands-on: Join a TIaaS Training
+> <hands-on-title>Join a TIaaS Training</hands-on-title>
 >
 > 1. Click on this link: [https://usegalaxy.eu/join-training/test](https://usegalaxy.eu/join-training/test)
 >
@@ -102,7 +104,7 @@ It shows:
 ![TIaaS Queue Status](../../images/tiaas-status.png "The TIaaS Status dashboard gives you an overview of all jobs states (are they ok or not), as well as a breakdown by tool. This is useful for finding out if everyone is finished running FastQC this morning and if they mostly worked OK. Finally it gives you a detailed breakdown, shown in the order they were submitted. This can give you a more detailed feeling for how the students are progressing through the tutorial.")
 
 
-> ### {% icon hands_on %} Hands-on: View the dashboard
+> <hands-on-title>View the dashboard</hands-on-title>
 >
 > 1. The status dashboard is just the same URL as to join the group, with `/status` at the end: [https://usegalaxy.eu/join-training/test/status](https://usegalaxy.eu/join-training/test/status)
 >

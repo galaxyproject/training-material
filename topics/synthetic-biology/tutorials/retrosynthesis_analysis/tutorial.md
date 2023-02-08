@@ -22,7 +22,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 [Galaxy-SynBioCAD portal](https://galaxy-synbiocad.org/) is the first toolshed for synthetic biology, metabolic engineering, and industrial biotechnology ({% cite Hrisson2022 %}). It provides a set of Retrosynthesis tools aimed at finding pathways to synthesize heterologous compounds in chassis organisms (**RetroRules** ({% cite Duigou2018 %}), **RetroPath2.0** ({% cite Delpine2018 %}), **RP2Paths**, **rpCompletion**).
 
@@ -46,7 +46,7 @@ Lastly, the metabolic network is then deconstructed into individual pathways usi
 
 Note that we will run the steps of this workflow individually so as not to neglect the understanding of the intermediate steps as well. Then, we will run the workflow automatically so that it itself retrieves the outputs from the previous step and gives them as input to the next tool.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -69,23 +69,23 @@ Lastly, we request from RetroRules all possible reactions to find a chemical rea
 
 ## Download a model
 
-> ### {% icon hands_on %} Hands-on: Select a model.
+> <hands-on-title>Select a model.</hands-on-title>
 >
 > 1. Run {% tool [Pick SBML Model](toolshed.g2.bx.psu.edu/repos/tduigou/get_sbml_model/get_sbml_model/0.0.1) %} with the following parameters:
 >    - {% icon galaxy-dropdown %} *"Strain"*: `Escherichia coli str. K-12 substr. MG1655 (iML1515)`
 >
->    > ### {% icon comment %} What does this tool do?
+>    > <comment-title>What does this tool do?</comment-title>
 >    >
 >    > The selected SBML model is downloaded from the [BiGG database](http://bigg.ucsd.edu/).
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What is the file format of the model?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The SBML is based on XML.
 > >
@@ -95,13 +95,13 @@ Lastly, we request from RetroRules all possible reactions to find a chemical rea
 
 ## Create a sink file from the SBML model
 
-> ### {% icon hands_on %} Hands-on: Generate a sink file.
+> <hands-on-title>Generate a sink file.</hands-on-title>
 >
 > 1. Run {% tool [Sink from SBML](toolshed.g2.bx.psu.edu/repos/tduigou/rpextractsink/rpextractsink/5.12.1) %} with the following parameters:
 >    - {% icon param-file %} *"Strain"*: `sbml_model` (output of **Pick SBML Model** {% icon tool %})
 >    - *"SBML compartment ID"*: `c`
 >
->    > ### {% icon comment %} Choose a compartment corresponding to your model
+>    > <comment-title>Choose a compartment corresponding to your model</comment-title>
 >    >
 >    > You can specify the compartment from which the tool will extract the chemical species.
 >    > The default is `c`, the BiGG code for the cytoplasm.
@@ -109,12 +109,12 @@ Lastly, we request from RetroRules all possible reactions to find a chemical rea
 >    {: .comment}
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What this tool does?
 > 2. How many columns are in the file?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. This tool creates a friendly CSV file format that can be used as sink input for RetroPath2.0.
 > > 2. Click on {% icon galaxy-eye %}, you should see 2 columns: "Name" and "InChi"
@@ -125,26 +125,26 @@ Lastly, we request from RetroRules all possible reactions to find a chemical rea
 
 ## Retrieve the reaction rules
 
-> ### {% icon hands_on %} Hands-on: Generate a file with all reactions.
+> <hands-on-title>Generate a file with all reactions.</hands-on-title>
 >
 > 1. Run {% tool [RRules Parser ](toolshed.g2.bx.psu.edu/repos/tduigou/rrparser/rrparser/2.4.6) %} with the following parameters:
 >    - *"Rule Type"*: `retro`
 >    - *"Select the diameters of the reactions rules"*: `2`, `4`, `6`, `8`, `10`, `12`, `14` and `16`
 >    - {% icon galaxy-toggle %} *"Compress output"*: `no`
 >
->    > ### {% icon comment %} How to choose a right diameter ?
+>    > <comment-title>How to choose a right diameter ?</comment-title>
 >    >
 >    > The diameter of the sphere including the atoms around the reacting center.
 >    > The higher is the diameter, the more specific are the rules.
 >    {: .comment}
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Does a low diameter select specific rules?
 > 2. How many rows are in the file?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. No, a low diameter selects more unspecific rules.
 > > 2. More than 200 thousands!
@@ -161,7 +161,7 @@ The retrosynthesis network is outputted as a CSV file providing reactions in the
 
 ## Launch **RetroPath2.0**
 
-> ### {% icon hands_on %} Hands-on: Build a reaction network
+> <hands-on-title>Build a reaction network</hands-on-title>
 >
 > 1. Run {% tool [RetroPath2.0](toolshed.g2.bx.psu.edu/repos/tduigou/retropath2/retropath2/2.3.0) %} with the following parameters:
 >    - {% icon param-file %} *"Rules File"*: `out_rules` (output of **RRules Parser** {% icon tool %})
@@ -169,17 +169,17 @@ The retrosynthesis network is outputted as a CSV file providing reactions in the
 >    - *"InChI type"*: `By string`
 >        - *"Source InChI"*: InChI=1S/C40H56/c1-33(2)19-13-23-37(7)27-17-31-39(9)29-15-25-35(5)21-11-12-22-36(6)26-16-30-40(10)32-18-28-38(8)24-14-20-34(3)4/h11-12,15-22,25-32H,13-14,23-24H2,1-10H3/b12-11+,25-15+,26-16+,31-17+,32-18+,35-21+,36-22+,37-27+,38-28+,39-29+,40-30+
 >
->    > ### {% icon tip %} InChi format
+>    > <tip-title>InChi format</tip-title>
 >    >
 >    > Be careful, you must have `InChi=` in front of your InChi key.
 >    {: .tip}
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What is the file format produce by RetroPath2.0?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. A csv file.
 > >
@@ -193,23 +193,23 @@ The RetroPath2.0 algorithm produces a reaction network, we want to have one path
 We need to split the network and perform some adjustments to these pathways.
 
 ## Split the network
-> ### {% icon hands_on %} Hands-on: Build a reaction network
+> <hands-on-title>Build a reaction network</hands-on-title>
 >
 > 1. Run {% tool [RP2paths](toolshed.g2.bx.psu.edu/repos/tduigou/rp2paths/rp2paths/1.5.0) %} with the following parameters:
 >    - {% icon param-file %} *"RetroPath2.0 Pathways"*: `Reaction_Network` (output of **RetroPath2.0** {% icon tool %})
 >
->    > ### {% icon comment %} Principle
+>    > <comment-title>Principle</comment-title>
 >    >
 >    > Extracts the set of pathways that lies in a metabolic space file output by the RetroPath2.0 workflow
 >    {: .comment}
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Why producing multiple pathways?
 > 2. How many outputs are produced?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. One network could represent several pathways, so several solutions.
 > > 2. Two outputs are produced: one corresponding to the metabolites, the other one corresponding to the pathways.
@@ -220,7 +220,7 @@ We need to split the network and perform some adjustments to these pathways.
 
 ## Refine reactions
 
-> ### {% icon hands_on %} Hands-on: Refine reactions
+> <hands-on-title>Refine reactions</hands-on-title>
 >
 > 1. Run {% tool [Complete Reactions](toolshed.g2.bx.psu.edu/repos/tduigou/rpcompletion/rpcompletion/5.12.2) %} with the following parameters:
 >    - {% icon param-file %} *"RP2paths pathways"*: `master_pathways` (output of **RP2paths** {% icon tool %})
@@ -228,21 +228,21 @@ We need to split the network and perform some adjustments to these pathways.
 >    - {% icon param-file %} *"RetroPath2.0 metabolic network"*: `Reaction_Network` (output of **RetroPath2.0** {% icon tool %})
 >    - {% icon param-file %} *"Sink from SBML"*: `sink` (output of **Sink from SBML** {% icon tool %})
 >
->    > ### {% icon comment %} Principle
+>    > <comment-title>Principle</comment-title>
 >    >
 >    > Each reaction rule can correspond to several template reactions, the task here is to enumerate the different possible transformations according to these templates.
 >    > Because the RetroRules reaction rules consider only one substrate at a time, some compounds are by purpose omitted: the task here is to complete the predicted reactions by putting back these omitted compounds (mostly  cofactors).
-The node converts each predicted pathway to distinct SBML files.
+>    > The node converts each predicted pathway to distinct SBML files.
 >    {: .comment}
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How many solutions are found?
 > 2. In which file format are the pathways?
 > 2. Do these pathways are a good solution?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. We have 9 candidates.
 > > 2. The pathways are represented in a SBML format.
@@ -255,7 +255,7 @@ The node converts each predicted pathway to distinct SBML files.
 
 In this section, you can run the RetroSynthesis Workflow more easily and fastly following these instructions:
 
-> ### {% icon hands_on %} Hands-on: Execute the entire workflow in one go.
+> <hands-on-title>Execute the entire workflow in one go.</hands-on-title>
 >
 > 1. Import your **RetroSynthesis workflow** by uploading the [**workflow file**](https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/RetroSynthesis.ga).
 >
@@ -267,14 +267,14 @@ In this section, you can run the RetroSynthesis Workflow more easily and fastly 
 >    - *"Target to produce":* Provide the following Inchi source:  `InChI=1S/C40H56/c1-33(2)19-13-23-37(7)27-17-31-39(9)29-15-25-35(5)21-11-12-22-36(6)26-16-30-40(10)32-18-28-38(8)24-14-20-34(3)4/h11-12,15-22,25-32H,13-14,23-24H2,1-10H3/b12-11+,25-15+,26-16+,31-17+,32-18+,35-21+,36-22+,37-27+,38-28+,39-29+,40-30+`
 >    - *"Strain":* Select `Escherichia coli str. K-12 substr. MG1655 (iML1515)` SBML model.
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > All the outputs will be automatically generated and identical to the previous ones. 
 >    {: .comment}
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial we produced candidates pathways to produce Lycopene in an Esherichia Coli strain.
 Three main steps were involved:

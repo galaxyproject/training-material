@@ -55,7 +55,7 @@ At the Galaxy end, it is configured within the `job_conf.yml` file and uses one 
 * `galaxy.jobs.runners.pulsar:PulsarRESTJobRunner` for the RESTful interface
 * `galaxy.jobs.runners.pulsar:PulsarMQJobRunner` for the message passing interface.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -70,7 +70,7 @@ At the Galaxy end, it is configured within the `job_conf.yml` file and uses one 
 - You have completed the "Galaxy Installation with Ansible", "Connecting Galaxy to a Compute Cluster", and the "CVMFS" tutorials
 - You have access to the VM/computer where it is installed.
 
-> ### {% icon tip %} This is NOT intended as a standalone Pulsar guide
+> <tip-title>This is NOT intended as a standalone Pulsar guide</tip-title>
 > This tutorial is not intended to be a standalone Pulsar setup guide. If you read carefully and understand Ansible, it is likely you can figure out which portions are required to just setup Pulsar.
 {: .tip}
 
@@ -98,7 +98,7 @@ We will be installing the RabbitMQ server daemon onto the Galaxy server to act a
 * Transport of files, meta-data etc. occur via `curl` from the Pulsar end.
 * RabbitMQ is written in erlang and does not add much overhead to the Galaxy VM, although in larger installations, RabbitMQ is commonly installed on a separate VM to Galaxy. e.g. Galaxy Europe, Galaxy Main and Galaxy Australia.
 
-> ### {% icon tip %} Tip: Other file transport methods for Pulsar
+> <tip-title>Other file transport methods for Pulsar</tip-title>
 >
 >  Pulsar can use a variety of file transport methods including:
 >  * Default: Galaxy initiates file transfer and stages files to Pulsar via http transfer.
@@ -113,7 +113,7 @@ We will be installing the RabbitMQ server daemon onto the Galaxy server to act a
 {: .tip}
 
 
-> ### {% icon details %} Why are we using Pulsar in MQ mode here and not the RESTful interface?
+> <details-title>Why are we using Pulsar in MQ mode here and not the RESTful interface?</details-title>
 > We are teaching you to install Pulsar and configure it in MQ mode in this tutorial. Configuring Pulsar in RESTful mode is also possible and is quite useful in certain situations. However, in the most common situation MQ mode is preferable for a number of reasons:
 > * When running Pulsar in RESTful mode, all of the job control and data transfer is controlled by the Galaxy server usually using http transfers. This can place a limit on the size of files that can be transferred without constant configuring of the webserver.
 > * When running in RESTful mode, Pulsar also needs to have an https server such as nginx, including securing it, configuring it, getting certificates and opening ports. This can be very difficult to do if you are attempting to submit jobs to an institutional HPC where the admins probably won't let you do any of these things.
@@ -132,7 +132,7 @@ RabbitMQ is an AMQP server that can queue messages between systems for all sorts
 
 Firstly we will add and configure another *role* to our Galaxy playbook - we maintain a slightly modified version of `jasonroyle.rabbitmq` to support python3 and other minor updates. Additionally we will use the Galaxy community role for deploying Pulsar
 
-> ### {% icon hands_on %} Hands-on: Install the Ansible roles
+> <hands-on-title>Install the Ansible roles</hands-on-title>
 >
 > 1. From your ansible working directory, edit the `requirements.yml` file and add the following lines:
 >
@@ -156,7 +156,7 @@ Firstly we will add and configure another *role* to our Galaxy playbook - we mai
 >
 > 2. Now install it with:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
@@ -191,7 +191,7 @@ Optional: You can add tags to each user if required. e.g. For an admin user it c
 
 We also need to set some RabbitMQ server configuration variables. Such as where its security certificates are and which ports to listen on (both via localhost and network).
 
-> ### {% icon tip %} Port accessibility is important!
+> <tip-title>Port accessibility is important!</tip-title>
 > We will need to make sure that the RabbitMQ default port is open and accessible on the server we are installing RabbitMQ onto. (In our case this is the Galaxy server). Default port number is: `5671`
 {: .tip}
 
@@ -199,11 +199,11 @@ More information about the rabbitmq ansible role can be found [in the repository
 
 ## Add RabbitMQ configuration to Galaxy VM.
 
-> ### {% icon hands_on %} Hands-on: Add RabbitMQ settings to Galaxy VM groupvars file.
+> <hands-on-title>Add RabbitMQ settings to Galaxy VM groupvars file.</hands-on-title>
 >
 > 1. Edit your `group_vars/secret.yml` and define some random passwords:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```
 >    > ansible-vault edit group_vars/secret.yml
 >    > ```
@@ -306,7 +306,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```
 >    {: data-commit="Configure RabbitMQ"}
 >
->    > ### {% icon tip %} RabbitMQ installation errors?
+>    > <tip-title>RabbitMQ installation errors?</tip-title>
 >    > RabbitMQ depends on specific Erlang versions. If the Erlang version has been updated, you may need to change the value of `rabbitmq_version:` in the configuration above. [Information on the RabbitMQ Erlag version requirements.](https://www.rabbitmq.com/which-erlang.html)
 >    {: .tip}
 >
@@ -328,7 +328,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```
 >    {: data-commit="Add role"}
 >
->    > ### {% icon tip %} Why is this at the end?
+>    > <tip-title>Why is this at the end?</tip-title>
 >    > This is one of the constant problems with Ansible, how do you order everything correctly? Does an ordering exist such that a single run of the playbook will have everything up and working? We encounter one such instance of this problem now.
 >    >
 >    > Here are the dependencies between the roles:
@@ -350,7 +350,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >
 > 4. Run the playbook.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -359,13 +359,13 @@ More information about the rabbitmq ansible role can be found [in the repository
 >
 > The rabbitmq server daemon will have been installed on your Galaxy VM. Check that it's running now:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > systemctl status rabbitmq-server
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output: Bash
+>    > <code-out-title>Bash</code-out-title>
 >    >
 >    > ```ini
 >    > ● rabbitmq-server.service - RabbitMQ broker
@@ -402,13 +402,13 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    file, it falls back to the default configuration (listens *without* ssl on
 >    `tcp/5672`) so be sure to check that everything is OK before continuing.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > sudo rabbitmq-diagnostics status
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output: Bash
+>    > <code-out-title>Bash</code-out-title>
 >    >
 >    > ```ini
 >    > ...
@@ -424,14 +424,14 @@ More information about the rabbitmq ansible role can be found [in the repository
 >
 >    But wait! There are more ways it can go wrong. To be extra sure, run a quick `curl` command.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > curl http://localhost:5672
 >    > curl -k https://localhost:5671
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output: Bash
+>    > <code-out-title>Bash</code-out-title>
 >    >
 >    > These should *both* report the same response:
 >    >
@@ -479,7 +479,7 @@ Some of the other options we will be using are:
 
 * You will need to know the FQDN or IP address of the Galaxy server VM that you installed RabbitMQ on.
 
-> ### {% icon hands_on %} Hands-on: Configure pulsar group variables
+> <hands-on-title>Configure pulsar group variables</hands-on-title>
 >
 >
 > 2. Create a new file in `group_vars` called `pulsarservers.yml` and set some of the above variables as well as some others.
@@ -544,7 +544,7 @@ Some of the other options we will be using are:
 >    ```
 >    {: data-commit="Add pulsar group variables"}
 >
->    > ### {% icon details %} Running non-conda tools
+>    > <details-title>Running non-conda tools</details-title>
 >    > If the tool you want to run on Pulsar doesn't have a conda package, you will need to make alternative arrangements! This is complex and beyond our scope here. See the [Pulsar documentation](https://pulsar.readthedocs.io/en/latest/) for details.
 >    {: .details}
 >
@@ -569,7 +569,7 @@ We will now write a new playbook for the pulsar installation as we are going to 
 
 We need to include a couple of pre-tasks to install virtualenv, git, etc.
 
-> ### {% icon hands_on %} Hands-on: Creating the playbook
+> <hands-on-title>Creating the playbook</hands-on-title>
 >
 > 1. Create a `pulsar.yml` file with the following contents:
 >
@@ -606,11 +606,11 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 >
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Run the Playbook
+> <hands-on-title>Run the Playbook</hands-on-title>
 >
 > 1. Run the playbook.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook pulsar.yml
 >    > ```
@@ -619,7 +619,7 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 >
 >    After the script has run, pulsar will be installed on the remote machines!
 >
->    > ### {% icon tip %} Connection issues?
+>    > <tip-title>Connection issues?</tip-title>
 >    > If your remote pulsar machine uses a different key, you may need to supply the `ansible-playbook` command with the private key for the connection using the `--private-key key.pem` option.
 >    {: .tip}
 >
@@ -645,7 +645,7 @@ There are three things we need to do here:
 
 For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on Pulsar.
 
-> ### {% icon hands_on %} Hands-on: Configure Galaxy
+> <hands-on-title>Configure Galaxy</hands-on-title>
 >
 > 1. In your `templates/galaxy/config/job_conf.yml.j2` file add the following job runner to the `<plugins>` section:
 >
@@ -669,7 +669,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    +    manager: _default_
 >     
 >     execution:
->       default: singularity
+>       default: slurm
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar plugin"}
@@ -719,12 +719,12 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    +++ b/templates/galaxy/config/job_conf.yml.j2
 >    @@ -86,3 +86,7 @@ tools:
 >     - id: testing
->       execution: dynamic_cores_time
+>       environment: dynamic_cores_time
 >       resources: testing
 >    +- id: bwa
->    +  execution: pulsar
+>    +  environment: pulsar
 >    +- id: bwa_mem
->    +  execution: pulsar
+>    +  environment: pulsar
 >    {% endraw %}
 >    ```
 >    {: data-commit="Send bwa and bwa-mem to pulsar"}
@@ -733,7 +733,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >
 > 4. Finally run the Galaxy playbook in order to deploy the updated job configuration, and to restart Galaxy.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -753,7 +753,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 
 Now we will upload a small set of data to run bwa-mem with.
 
-> ### {% icon hands_on %} Hands-on: Testing the Pulsar destination
+> <hands-on-title>Testing the Pulsar destination</hands-on-title>
 >
 > 1. Upload the following files from zenodo.
 >

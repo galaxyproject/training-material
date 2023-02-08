@@ -380,11 +380,13 @@ function showQuestionOne(data){
 	}
 
 	show += `<div class="answer-group">`;
-	show += data.answers.map((q, idx) => {
-		return `
-			<button id="answer-${data.id}-${idx}" value="${q}" class="btn answer-button">${q}</button>
-		`
-	}).join("");
+	if(data.answers !== undefined){
+		show += data.answers.map((q, idx) => {
+			return `
+				<button id="answer-${data.id}-${idx}" value="${q}" class="btn answer-button">${q}</button>
+			`
+		}).join("");
+	}
 	show += '</div>';
 	questionArea.innerHTML = show;
 

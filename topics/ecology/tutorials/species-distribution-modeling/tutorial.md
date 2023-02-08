@@ -13,6 +13,9 @@ requirements:
 time_estimation: "1h"
 tags:
     - interactive-tools
+    - modeling
+    - gbif
+    - species populations EBV class
 key_points:
     - "Use 'classical' Galaxy tools in combination with Interactive tools"
     - "Identify general steps of a species distribution modeling aproach"
@@ -23,13 +26,13 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Species Distribution Modeling (SDM) can help understand the distribution of a species depending on its environment. It can also attempt to quantify the impact of climate change on the species habitat, direct conservation efforts and predict invasive species distributions. This is done by associating data of species occurrences (observations) with a set of environmental data (such as temperature and precipitation).
 
 The goal of this tutorial is to model a theoretical ecological niche and predict species distribution in a future climate scenario by using SDM with the Wallace interactive environment on Galaxy. We'll use the data occurrences of US *Chrysemys picta* ([Painted turtle](https://en.wikipedia.org/wiki/Painted_turtle)) from the North America region.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -44,7 +47,7 @@ The goal of this tutorial is to model a theoretical ecological niche and predict
 In this study the datasets are all imported from the [GBIF](https://www.gbif.org/) databanks. It is also possible to import from [bison](https://www.gbif.org/), [iNaturalist](https://www.inaturalist.org/) and others.
 
 
-> ### {% icon hands_on %} Hands-on: Import the data
+> <hands-on-title>Import the data</hands-on-title>
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
@@ -60,11 +63,11 @@ In this study the datasets are all imported from the [GBIF](https://www.gbif.org
 
 We have now a tabular file with about 10,001 lines and many columns.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 > 1. What do the lines in the files represent?
 > 2. What are the columns 1, 2, 3 and 54 of the generated file?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. Each line represent an observation of Chrysemys picta, with its location, and some other metadata
 > > 2. Column 1 is the name, column 2 the longitude of the observation of Chrysemys picta, column 3 the latitude and column 50 the country code of the location
 > {: .solution }
@@ -72,7 +75,7 @@ We have now a tabular file with about 10,001 lines and many columns.
 
 We would to extraction the 4 columns previously cited and keep only occurrence records from US.
 
-> ### {% icon hands_on %} Hands-on: Import the data
+> <hands-on-title>Import the data</hands-on-title>
 > 1. **Cut columns** {% icon tool %} with the following parameters
 >    - *"Cut columns"*: `c1,c2,c3,c54`
 >    - *"Delimited by"*: `Tab`
@@ -85,11 +88,11 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 >    - *"Number of header lines to skip"*: `1`
 > 3. Inspect the generated files
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > How many occurrences have been conserved?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 63.06% of the occurrences (6,306) are conserved
 >    > {: .solution }
 >    {: .question}
@@ -109,7 +112,7 @@ We would to extraction the 4 columns previously cited and keep only occurrence r
 
 With this you can either upload file you've loaded earlier from Galaxy data or you can download data directly from Wallace. Let's use the data from your Galaxy history:
 
-> ### {% icon hands_on %} Hands-on: Launch Wallace
+> <hands-on-title>Launch Wallace</hands-on-title>
 > 1. Verify your current history is the history containing previous filtered occurences data.
 > 2. Open {% tool [Wallace](interactive_tool_wallace) %} in Galaxy or click here to [open the tool](https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_wallace) and click on execute
 > 3. Go to User > Active InteractiveTools, then click on the active InteractiveTool named `Wallace visualisation`
@@ -127,11 +130,11 @@ In the main panel of Wallace, the data will load. They can now be inspected usin
 You now have your occurrence records on Wallace!
 
 <!--
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > *TODO: Add a questio<F4>n related to the data there*
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > {: .solution }
 {: .question}
@@ -151,7 +154,7 @@ For the modelling, we need to the choose the occurrences we want to use. There i
 
 We want to work on the data from the US, we will select the occurrences with the 1st option
 
-> ### {% icon hands_on %} Hands-on: Select interesting occurrences
+> <hands-on-title>Select interesting occurrences</hands-on-title>
 > 1. Go to **2 Process Occ**
 > 2. In **Process Occurrence Data**
 >    - *"Modules Available"*: ` Select Occurrences On Map`
@@ -168,12 +171,12 @@ We would like now to provide environmental variables, that are considered releva
 
 This module provides a raster with environmental variables from online sources. The raster is composed of environmental information. Each layer of the raster contains a climatic variable: starting from BIO1 = Annual mean temperature, to BIO19 = Precipitation of Coldest Quarter.
 
-> ### {% icon hands_on %} Hands-on: Obtain Environmental Data
+> <hands-on-title>Obtain Environmental Data</hands-on-title>
 > 1. Go to **3 Env Data**
 > 2. In **Obtain Environmental Data**
 >    - *"Modules Available"*: `WorldClim Bioclims`
 >
->      > ### {% icon comment %} Using your own raster
+>      > <comment-title>Using your own raster</comment-title>
 >      > If you prefer to load your own raster:
 >      > 1. Import it into Galaxy in the GeoTIFF format
 >      > 2. In **Obtain Environmental Data**
@@ -205,7 +208,7 @@ Wallace will now associate environmental data and occurrences data to train a mo
 
 2. It samples Background Points
 
-> ### {% icon hands_on %} Hands-on: Obtain Environmental Data
+> <hands-on-title>Obtain Environmental Data</hands-on-title>
 > 1. Go to **4 Process Envs**
 > 2. In **Process Environmental Data**
 >    - *"Modules Available"*: `Select Study Region`
@@ -238,7 +241,7 @@ There is 2 possible way to partition data:
 
 For both of these techniques the number of occurrences into each bin may vary.
 
-> ### {% icon hands_on %} Hands-on: Partition Occurrence Data
+> <hands-on-title>Partition Occurrence Data</hands-on-title>
 > 1. Go to **5 Partition Occs**
 > 2. In **Partition Occurrence Data**
 >    - *"Modules Available"*: `Spatial Partition`
@@ -258,7 +261,7 @@ Wallace can build different models using either:
 
 To evaluate these models, Wallace computes the performance on a hold-out dataset (data not used for training) and provide evaluation metrics as the AUC (Area Under the Curve) mean. As a rule of thumb, an AUC of 0.75 and above is considered good, and closer to 1 is better.
 
-> ### {% icon hands_on %} Hands-on: Build and evaluate the niche model
+> <hands-on-title>Build and evaluate the niche model</hands-on-title>
 > 1. Go to **6 Model**
 > 2. In **Build and Evaluate Niche Model**
 >    - *"Modules Available"*: `BIOCLIM`
@@ -273,7 +276,7 @@ We would like now to visualize the model of the theoretical niche. First we will
 - X-axis: temperature
 - Y-axis: the annual precipitation
 
-> ### {% icon hands_on %} Hands-on: Visualize Model Results
+> <hands-on-title>Visualize Model Results</hands-on-title>
 > 1. Go to **7 Visualize**
 > 2. In **Visualize Model Results**
 >    - *"Modules Available"*: `BIOCLIM Envelope Plots`
@@ -288,7 +291,7 @@ The optimum environmental parameters for this species (represented in green) is 
 
 To visualize the suitability on the map, we can use the map prediction module.
 
-> ### {% icon hands_on %} Hands-on: Visualize Model Results
+> <hands-on-title>Visualize Model Results</hands-on-title>
 > 2. In **Visualize Model Results**
 >    - *"Modules Available"*: `Map Prediction`
 >    - *"Set threshold"*: `No threshold`
@@ -306,7 +309,7 @@ To visualize the suitability on the map, we can use the map prediction module.
 
 Wallace can use the trained model to predict possible species distributions in a different area, outside of the sampled one. Here, we will try it for the Canada.
 
-> ### {% icon hands_on %} Hands-on: Visualize Model Results
+> <hands-on-title>Visualize Model Results</hands-on-title>
 > 1. Go to **8 Project**
 > 2. In **Project Model**
 >    - *"Modules Available"*: `Project to New Extent`
@@ -322,7 +325,7 @@ We can also predict not only for a different area, but also different timing and
 
 We would like to predict the presence of Chrysemys Picta in Canada in 2050, given the model [CCSM4](http://www.cesm.ucar.edu/models/ccsm4.0/), a US model based on earth circulation, and a RCP value of 2.6 <!--(**TODO: what does that represent?**)-->
 
-> ### {% icon hands_on %} Hands-on: Visualize Model Results with a 2.6 RCP
+> <hands-on-title>Visualize Model Results with a 2.6 RCP</hands-on-title>
 > 2. In **Project Model**
 >    - *"Modules Available"*: `Project to New Time`
 >    - *"Select time period"*: `2050`
@@ -336,7 +339,7 @@ We would like to predict the presence of Chrysemys Picta in Canada in 2050, give
 
 We would like now to compare the prediction for RCP value of 8.5 <!--(**TODO: what does that represent?**)-->.
 
-> ### {% icon hands_on %} Hands-on: Visualize Model Results with a 8.5 RCP
+> <hands-on-title>Visualize Model Results with a 8.5 RCP</hands-on-title>
 > 2. In **Project Model**
 >    - *"Modules Available"*: `Project to New Time`
 >    - *"Select time period"*: `2050`
@@ -357,12 +360,12 @@ We would like now to compare the prediction for RCP value of 8.5 <!--(**TODO: wh
 
 Following this tutorial, we have been able here to load a dataset of occurrences used in the shiny app Wallace and model the repartition of *Chrysemys picta* (Painted turtle) with the Species Distribution Modeling (SDM) method. It allowed us to visualize it’s ecological niche and how climate change can influence it’s future repartition on North America. The project saved can help for future similar studies.
 
-> ### {% icon details %} Some useful references
+> <details-title>Some useful references</details-title>
 >
 > - Predicting species distributions for conservation decisions ({% cite guisan2013 %}).
 > - BIOCLIM: the first species distribution modelling package, its early applications and relevance to most current MAXENT studies. Diversity and Distributions ({% cite booth2018 %}).
 > - ENMeval: An R package for conducting spatially independent evaluations and estimating optimal model complexity for MAXENT ecological niche models. ({% cite muscarella2014 %}).
 >
-> [Here](http://www.ipcc-data.org/guidelines/pages/gcm_guide.html) for informations on Global Circulation Model(GCM), how it's done what is taken in consideration and more.
+> [GCM Guidelines](http://www.ipcc-data.org/guidelines/pages/gcm_guide.html) for informations on Global Circulation Model(GCM), how it's done what is taken in consideration and more.
 {: .details}
 

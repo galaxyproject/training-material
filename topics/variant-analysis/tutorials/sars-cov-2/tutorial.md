@@ -23,7 +23,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 The aim of this tutorial is to introduce you to the processing of next generation sequencing data in Galaxy.  This tutorial uses a COVID-19 variant calling from Illumina data, but it isn't about variant calling *per se*.
 
@@ -57,7 +57,7 @@ At the completion of this tutorial you will know:
 
 
 <!--
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -70,8 +70,8 @@ At the completion of this tutorial you will know:
 
 We created twoi trajectories that you can follow through this tutorial.
 
-1. **Trajectory 1** - start with NCBI's SRA and search for available accessions &rarr; Start [here](#the-sequence-read-archive)
-2. **Trajectory 2** - bypass NCBI's SRA and start with Galaxy directly. &rarr; Start [here](#back-in-galaxy)
+1. **Trajectory 1** - start with NCBI's SRA and search for available accessions &rarr; Start [in the SRA section](#the-sequence-read-archive)
+2. **Trajectory 2** - bypass NCBI's SRA and start with Galaxy directly. &rarr; Start [in the Galaxy section](#back-in-galaxy)
 
 We recommend beginning with **Trajectory 2**.
 # The Sequence Read Archive
@@ -80,7 +80,7 @@ The [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) is the prima
 
 This tutorial covers how to get sequence data from SRA into Galaxy using a direct connection between the two.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > You will also hear SRA referred to as the *Short Read Archive*, its original name.
 >
@@ -91,16 +91,16 @@ This tutorial covers how to get sequence data from SRA into Galaxy using a direc
 
 SRA can be reached either directly through it's website, or through the tool panel on Galaxy.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > Initially the tool panel option for accessing SRA exists only on the [usegalaxy.org server](https://usegalaxy.org/).  Support for the direct connection to SRA will be included in the 20.05 release of Galaxy
 {: .comment}
 
 
-> ### {% icon hands_on %} Hands-on: Explore SRA Entrez
+> <hands-on-title>Explore SRA Entrez</hands-on-title>
 >
 > 1. Go to your Galaxy instance of choice such as one of the [usegalaxy.org](https://usegalaxy.org/), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au) or any other. (This tutorial uses usegalaxy.org).
-> 1. If your history is not already empty, than start a new history (see [here](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html) for more on Galaxy histories)
+> 1. If your history is not already empty, than start a new history (see [galaxy interface tutorial]({% link topics/galaxy-interface/tutorials/history/tutorial.md %}) for more on Galaxy histories)
 > 1. **Click** `Get Data` at the top of the tool panel.
 > 1. **Click** `SRA Server` in the list of tools shown under `Get Data`.
 >    This takes you the [Sequence Read Archive home page](https://www.ncbi.nlm.nih.gov/sra) -- you can also start directly from the SRA.  A search box is shown at the top of the page.  Try searching for something you are interested in, such as `dolphin` or `kidney` or `dolphin kidney` and then **click** the  `Search` button.
@@ -113,7 +113,7 @@ SRA can be reached either directly through it's website, or through the tool pan
 {: .hands_on}
 
 
-> ### {% icon hands_on %} Hands-on: Generate list of matching experiments using Entrez
+> <hands-on-title>Generate list of matching experiments using Entrez</hands-on-title>
 >
 > Now that you have a basic familiarity with SRA Entrez, let's find the sequences used in this tutorial.
 >
@@ -127,7 +127,7 @@ SRA can be reached either directly through it's website, or through the tool pan
 {: .hands_on}
 
 
-> ### {% icon hands_on %} Hands-on: Go from Entrez to SRA Run Selector
+> <hands-on-title>Go from Entrez to SRA Run Selector</hands-on-title>
 >
 > View results as an expanded interactive table using the RunSelector.
 >
@@ -135,7 +135,7 @@ SRA can be reached either directly through it's website, or through the tool pan
 >
 > ![sra entrez result](../../images/sra_entrez_result.png)
 >
-> > ### {% icon tip %} What if you don't see the Run Selector Link?
+> > <tip-title>What if you don't see the Run Selector Link?</tip-title>
 > >
 > > You may have noticed this text earlier when you were exploring Entrez search.  This text only appears some of the time, when the number of search results falls within a fairly broad window.  You won't see it if you only have a few results, and you won't see it if you have more results than the Run Selector can accept.
 > >
@@ -160,7 +160,7 @@ We are using Entrez and the Run Selector how they are designed to be used:
     1. Narrow those results using that knowledge.
 
 
-> ### {% icon comment %} Run Selector is both more and less than Entrez
+> <comment-title>Run Selector is both more and less than Entrez</comment-title>
 >
 > Run Selector can do most, but not all of what Entrez search syntax can do.  Run selector uses *faceted search* technology which is easy to use, and powerful, but which has inherent limits.  Specifically, Entrez will work better when searching on attributes that have tens, hundreds, or thousands of different values.  Run Selector will work better searching attributes with fewer than 20 different values.  Fortunately, that describes most searches.
 {: .comment}
@@ -173,14 +173,14 @@ The Run Selector window is divided into several panels:
 * **`Found x Items`** Initially, this is the list of items sent to Run Selector from Entrez.  This list will shrink as we apply filters to it.
 ![sra run selector](../../images/sra_run_selector.png)
 
-> ### {% icon comment %} Why did the number of found items *go up?*
+> <comment-title>Why did the number of found items <i>go up?</i></comment-title>
 >
 > Recall that the Entrez interface lists SRA experiments (SRX entries).  Run Selector lists *runs* &mdash; sequencing datasets &mdash; and there are *one or more* runs per experiment. We have the same data as before, we are now just seeing it in finer detail.
 {: .comment}
 
 The `Filters List` in the upper left shows columns in our results that have either continuous numerical values, or 10 or less (you can change this number) distinct values in them.  **Scroll** down through the list select a few of the filters.  When a filter is selected, a *values* box appears below, listing options for this filter, and the number of runs with each option.  These values / options are pulled from the dataset metadata.  Try **selecting** a few interesting sounding filters and then **select** one or more options for each filter. Try **unselecting** options and filters. As you do this, the number of found results will decrease or increase.
 
-> ### {% icon tip %} Tip: Use Filters to better understand the data
+> <tip-title>Use Filters to better understand the data</tip-title>
 >
 > Filters are how you narrow the datasets under consideration for sending to Galaxy, but they are also an excellent way to understand your data:
 > First, selecting a filter is an easy way to see the range of values in a column.  You may not be able to [find documentation on what the `sirs_outcome` column means](https://www.google.com/search?q=sra+sirs_outcome), but you can possibly figure it out by seeing what values are in it.
@@ -188,7 +188,7 @@ The `Filters List` in the upper left shows columns in our results that have eith
 {: .tip}
 
 
-> ### {% icon hands_on %} Hands-on: Narrow your results using Run Selector
+> <hands-on-title>Narrow your results using Run Selector</hands-on-title>
 >
 > 1. If you have any filters turned on, **unselect** them.
 >     Once you have done this, there won't be any *values* boxes appearing below the `Filters List`.
@@ -203,7 +203,7 @@ This reduces your `Found Items` list from tens of thousands of runs to 3 runs (a
 
 It's possible to select every remaining run by **clicking** the checkmark at the top of the first column.  You can unselect everything by **clicking** the `X`.
 
-> ### {% icon hands_on %} Hands-on: Select runs and send to Galaxy
+> <hands-on-title>Select runs and send to Galaxy</hands-on-title>
 >
 > 1. Select all runs by **clicking** the `X`.
 >    And now, the `Galaxy` button is live.
@@ -215,7 +215,7 @@ It's possible to select every remaining run by **clicking** the checkmark at the
 
 When we click `Galaxy` in Run Selector several things happen.  First, it launches a new browser tab or window which opens in Galaxy.  You will see the *big green box* indicating that the handshake between SRA and Galaxy was successful and you will then see a new `SRA` job in your history panel.  This box may start out as gray / pending, indicating that the transfer has not yet started, or it may go straight to yellow / running or to green / done.
 
-> ### {% icon hands_on %} Hands-on: Examine the new SRA Dataset
+> <hands-on-title>Examine the new SRA Dataset</hands-on-title>
 >
 > 1. Once the `SRA` transfer is complete, **click** on the dataset's {% icon galaxy-eye %} (eye) icon.
 >
@@ -233,11 +233,11 @@ Lets now use that metadata to fetch the sequence data from SRA.  SRA provides to
 
 First we need to find a good dataset to play with. The [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) is the primary archive of *unassembled reads*  operated by the [US National Institutes of Health (NIH)](https://www.ncbi.nlm.nih.gov/).  SRA is a great place to get the sequencing data that underlie publications and studies. Let's do that:
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. Go to NCBI's SRA page by pointing your browser to https://www.ncbi.nlm.nih.gov/sra
 > 2. In the search box enter `SARS-CoV-2 Patient Sequencing From Partners / MGH`:
-> ![Find data](../../../images/find_mgh_data.png) (Alternatively, you simply click on this [link](https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH))
+> ![Find data](../../../images/find_mgh_data.png) (Alternatively, you [simply access the data via link](https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH))
 > 3. Note that some of the datasets found say "ARTICv3 amplicon sequencing". This is a sequencing technique that requires addition analysis steps not discussed in this tutorial. The data that we will analyse (datasets mentioned below) uses a technique called "metagenomic sequencing".
 > 4. The web page will show a large number of SRA datasets (at the time of writing there were 3,927). This is data from a [study](https://science.sciencemag.org/content/early/2020/12/09/science.abe3261) describing analysis of SARS-CoV-2 in Boston area.
 > 5. Download metadata describing these datasets by:
@@ -252,7 +252,7 @@ First we need to find a good dataset to play with. The [Sequence Read Archive (S
 
 Now that we have downloaded this file we can go to a Galaxy instance and start processing it.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > Note that the file we just downloaded is **not** sequencing data itself. Rather, it is *metadata* describing properties of sequencing reads. We will filter this list down to just a few accessions that will be used in the remainder of this tutorial.
 >
@@ -260,7 +260,7 @@ Now that we have downloaded this file we can go to a Galaxy instance and start p
 
 ## Process and filter `SraRunInfo.csv` file in Galaxy
 
-> ### {% icon hands_on %} Hands-on: Upload `SraRunInfo.csv` file into Galaxy
+> <hands-on-title>Upload `SraRunInfo.csv` file into Galaxy</hands-on-title>
 >
 > 1. Go to your Galaxy instance of choice such as one of the [usegalaxy.org](https://usegalaxy.org/), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au) or any other. (This tutorial uses usegalaxy.org).
 > 1. Click *Upload Data* button:
@@ -275,19 +275,17 @@ Now that we have downloaded this file we can go to a Galaxy instance and start p
 
 Galaxy can process all 2,000+ datasets but to make this tutorial bearable we need to selected a smaller subset. In particular our previous experience with this data shows two interesting datasets `SRR11954102` and `SRR12733957`. So, let's pull them out.
 
-> ### {% icon comment %} Beware of **Cut**s
-> The Hands-on section below uses **Cut** tool. There are two **cut** tools in Galaxy due to historical reasons. This example uses tool with the full name **Cut columns from a table (cut)**. However, the same logic applies to the other tool. It simply has a slightly different interface.
-{: .comment}
+{% snippet faqs/galaxy/analysis_cut.md %}
 
-> ### {% icon hands_on %} Hands-on: Creating a subset of data
+> <hands-on-title>Creating a subset of data</hands-on-title>
 >
 > 1. Find {% icon tool %} "**Select lines that match an expression**" tool in **Filter and Sort** section of the tool panel.
->    > ### {% icon tip %} Tip: Finding tools
+>    > <tip-title>Finding tools</tip-title>
 >    > Galaxy may have an overwhelming amount of tools installed. To find a specific tool type the tool name in the tool panel search box to find the tool.
 >    {: .tip}
 > 1. Make sure the `SraRunInfo.csv` dataset we just uploaded is listed in the {% icon param-file %} "*Select lines from*" field of the tool form.
 > 1. In "*the pattern*" field enter the following expression &rarr; `SRR12733957|SRR11954102`. These are two accession we want to find separated by the pipe symbol `|`. The `|` means `or`: find lines containing `SRR12733957` **or** `SRR11954102`.
-> 1. Click `Execute` button.
+> 1. Click `Run Tool` button.
 > 1. This will generate a file containing two lines (well ... one line is also used as the header, so it will appear the the file has three lines. It is OK.)
 > 1. Cut the first column from the file using {% icon tool %} "**Cut**" tool, which you will find in **Text Manipulation** section of the tool pane.
 > 1. Make sure the dataset produced by the previous step is selected in the "*File to cut*" field of the tool form.
@@ -305,12 +303,12 @@ Now that we have identifiers of datasets we want we need to download the actual 
 
 ## Download sequencing data with **Faster Download and Extract Reads in FASTQ**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **Faster Download and Extract Reads in FASTQ** {% icon tool %} with the following parameters:
 >    - *"select input type"*: `List of SRA accession, one per line`
 >        - The parameter {% icon param-file %} *"sra accession list"* should point the output of the {% icon tool %} "**Cut**" from the previous step.
->    - **Click** the `Execute` button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the `SRA` dataset. It may take some time. So this may be a good time to do get coffee.
+>    - **Click** the `Run Tool` button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the `SRA` dataset. It may take some time. So this may be a good time to do get coffee.
 >
 > 2. Several entries are created in your history panel when you submit this job:
 >    - **`Pair-end data (fasterq-dump)`**: Contains Paired-end datasets (if available)
@@ -340,7 +338,7 @@ However, if you retrieved the datasets used in this tutorial's examples above, t
 
 In this part of the tutorial we will perform variant calling and basic analysis of the datasets downloaded above. We will start by downloading the Wuhan-Hu-1 SARS-CoV-2 reference sequence, then run adapter trimming, alignment and variant calling and finally look at the geographic distribution of some of the found variants.
 
-> ### {% icon comment %} The usegalaxy.* COVID-19 analysis project
+> <comment-title>The usegalaxy.* COVID-19 analysis project</comment-title>
 > This tutorial uses a subset of the data and runs through the
 > [Variation Analysis](https://covid19.galaxyproject.org/genomics/4-variation/)
 > section of [covid19.galaxyproject.org](https://covid19.galaxyproject.org/).
@@ -353,9 +351,9 @@ In this part of the tutorial we will perform variant calling and basic analysis 
 
 The reference genome data for today is for SARS-CoV-2, "Severe acute respiratory syndrome coronavirus 2 isolate Wuhan-Hu-1, complete genome", having the accession ID of NC_045512.2.
 
-This data is available from Zenodo using the following [link](https://doi.org/10.5281/zenodo.3906454).
+This [data is available from Zenodo](https://doi.org/10.5281/zenodo.3906454).
 
-> ### {% icon hands_on %} Hands-on: Get the reference genome data
+> <hands-on-title>Get the reference genome data</hands-on-title>
 >
 > 1. Import the following file into your history:
 >
@@ -374,7 +372,7 @@ This data is available from Zenodo using the following [link](https://doi.org/10
 
 Removing sequencing adapters improves alignments and variant calling. **fastp** {% icon tool %} can automatically detect widely used sequencing adapters.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. **fastp** {% icon tool %} with the following parameters:
 >    - *"Single-end or paired reads"*: `Paired Collection`
@@ -388,7 +386,7 @@ Removing sequencing adapters improves alignments and variant calling. **fastp** 
 
 **BWA-MEM** {% icon tool %} is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial.
 
-> ### {% icon hands_on %} Hands-on: Align sequencing reads to reference genome
+> <hands-on-title>Align sequencing reads to reference genome</hands-on-title>
 >
 > 1. **Map with BWA-MEM** {% icon tool %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
@@ -406,7 +404,7 @@ Removing sequencing adapters improves alignments and variant calling. **fastp** 
 
 **MarkDuplicates** {% icon tool %} removes duplicate sequences originating from library preparation artifacts and sequencing artifacts. It is important to remove these artefactual sequences to avoid artificial overrepresentation of single molecule.
 
-> ### {% icon hands_on %} Hands-on: Remove PCR duplicates
+> <hands-on-title>Remove PCR duplicates</hands-on-title>
 >
 > 1. **MarkDuplicates** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
@@ -418,7 +416,7 @@ Removing sequencing adapters improves alignments and variant calling. **fastp** 
 
 After the duplicate marking step above we can generate statistic about the alignment we have generated.
 
-> ### {% icon hands_on %} Hands-on: Generate alignment statistics
+> <hands-on-title>Generate alignment statistics</hands-on-title>
 >
 > 1. **Samtools stats** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"BAM file"*: `outFile` (output of **MarkDuplicates** {% icon tool %})
@@ -433,7 +431,7 @@ After the duplicate marking step above we can generate statistic about the align
 
 **Realign reads** {% icon tool %} corrects misalignments around insertions and deletions. This is required in order to accurately detect variants.
 
-> ### {% icon hands_on %} Hands-on: Realign reads around indels
+> <hands-on-title>Realign reads around indels</hands-on-title>
 >
 > 1. **Realign reads** with lofreq {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Reads to realign"*: `outFile` (output of **MarkDuplicates** {% icon tool %})
@@ -447,7 +445,7 @@ After the duplicate marking step above we can generate statistic about the align
 
 This step adds indel qualities into our alignment file. This is necessary in order to call variants using **Call variants** with lofreq {% icon tool %}
 
-> ### {% icon hands_on %} Hands-on: Add indel qualities
+> <hands-on-title>Add indel qualities</hands-on-title>
 >
 > 1. **Insert indel qualities** with lofreq {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Reads"*: `realigned` (output of **Realign reads** {% icon tool %})
@@ -461,7 +459,7 @@ This step adds indel qualities into our alignment file. This is necessary in ord
 
 We are now ready to call variants.
 
-> ### {% icon hands_on %} Hands-on: Call variants
+> <hands-on-title>Call variants</hands-on-title>
 >
 > 1. **Call variants** with lofreq {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input reads in BAM format"*: `output` (output of **Insert indel qualities** {% icon tool %})
@@ -486,7 +484,7 @@ The output of this step is a collection of VCF files that can be visualized in a
 
 We will now annotate the variants we called in the previous step with the effect they have on the SARS-CoV-2 genome.
 
-> ### {% icon hands_on %} Hands-on: Annotate variant effects
+> <hands-on-title>Annotate variant effects</hands-on-title>
 >
 > 1. **SnpEff eff:** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sequence changes (SNPs, MNPs, InDels)"*: `variants` (output of **Call variants** {% icon tool %})
@@ -504,7 +502,7 @@ The output of this step is a VCF file with added variant effects.
 
 We will now select various effects from the VCF and create a tabular file that is easier to understand for humans.
 
-> ### {% icon hands_on %} Hands-on: Create table of variants
+> <hands-on-title>Create table of variants</hands-on-title>
 >
 > 1. **SnpSift Extract Fields** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Variant input file in VCF format"*: `snpeff_output` (output of **SnpEff eff:** {% icon tool %})
@@ -523,7 +521,7 @@ Interesting variants include the C to T variant at position 14408 (14408C/T) in 
 
 We will now summarize our analysis with MultiQC, which generates a beautiful report for our data.
 
-> ### {% icon hands_on %} Hands-on: Summarize data
+> <hands-on-title>Summarize data</hands-on-title>
 >
 > 1. **MultiQC** {% icon tool %} with the following parameters:
 >    - In *"Results"*:
@@ -549,6 +547,6 @@ We will now summarize our analysis with MultiQC, which generates a beautiful rep
 
 
 # Conclusion
-{:.no_toc}
+
 
 Congratulations, you now know how to import sequence data from the SRA and how to run an example analysis on these datasets.

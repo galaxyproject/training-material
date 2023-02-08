@@ -30,7 +30,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Artificial neural networks are a machine learning discipline roughly inspired by how neurons in a
 human brain work. In the past decade, there has been a huge resurgence of neural networks thanks
@@ -44,7 +44,7 @@ functions, classification/regression problems solved by neural networks, and the
 learning algorithm. Finally, we construct a FNN to solve a regression problem using car purchase
 price prediction dataset.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -297,7 +297,7 @@ why ReLU is so popular in deep networks).
 
 # Get Data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 >
@@ -337,9 +337,9 @@ dataset has 723 training examples, and our test dataset has 242 test examples. I
 
 ### **Create a deep learning model architecture**
 
-> ### {% icon hands_on %} Hands-on: Model config
+> <hands-on-title>Model config</hands-on-title>
 >
-> - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.4.2) %}
+> - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0) %}
 >    - *"Select keras model type"*: `sequential`
 >    - *"input_shape"*: `(5,)`
 >    - In *"LAYER"*:
@@ -355,7 +355,7 @@ dataset has 723 training examples, and our test dataset has 242 test examples. I
 >            - *"Choose the type of layer"*: `Core -- Dense`
 >                - *"units"*": `1`
 >                - *"Activation function"*: `linear`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 {: .hands_on}
 
 Input has 5 attributes: age, gender, average miles driven per day, personal debt, and monthly income. Our neural network has 3 layers. All
@@ -364,9 +364,9 @@ layers use ReLU activation function. The model config can be downloaded as a JSO
 
 ### **Create a deep learning model**
 
-> ### {% icon hands_on %} Hands-on: Model builder (Optimizer, loss function, and fit parameters)
+> <hands-on-title>Model builder (Optimizer, loss function, and fit parameters)</hands-on-title>
 >
-> - {% tool [Create deep learning model](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.4.2) %}
+> - {% tool [Create deep learning model](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0) %}
 >    - *"Choose a building mode"*: `Build a training model`
 >    - *"Select the dataset containing model configuration"*: Select the *Keras Model Config* from the previous step.
 >    - *"Do classification or regression?"*: `KerasGRegressor`
@@ -377,7 +377,7 @@ layers use ReLU activation function. The model config can be downloaded as a JSO
 >    - In *"Fit Parameters"*:
 >        - *"epochs"*: `150`
 >        - *"batch_size"*: `50`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 {: .hands_on}
 
 A loss function measures how different the predicted output is from the expected output. For regression problems, we use
@@ -389,9 +389,9 @@ batch_size decides the size of this subset (which we set to 50). The model build
 
 ### **Deep learning training and evaluation**
 
-> ### {% icon hands_on %} Hands-on: Training the model
+> <hands-on-title>Training the model</hands-on-title>
 >
-> - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.2) %}
+> - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3) %}
 >    - *"Select a scheme"*: `Train and Validate`
 >    - *"Choose the dataset containing pipeline/estimator object"*: Select the *Keras Model Builder* from the previous step.
 >    - *"Select input type:"*: `tabular data`
@@ -401,7 +401,7 @@ batch_size decides the size of this subset (which we set to 50). The model build
 >        - *"Dataset containing class labels or target values"*: Select `y_train` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
 >        - *"Does the dataset contain header:"*: `Yes`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 >
 {: .hands_on}
@@ -411,9 +411,9 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 
 ### **Model Prediction**
 
-> ### {% icon hands_on %} Hands-on: Testing the model
+> <hands-on-title>Testing the model</hands-on-title>
 >
-> - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.2) %}
+> - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3) %}
 >    - *"Choose the dataset containing pipeline/estimator object"* : Select the trained model from the previous step.
 >    - *"Choose the dataset containing weights for the estimator above"* : Select the trained model weights from the previous step.
 >    - *"Select invocation method"*: `predict`
@@ -421,7 +421,7 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 >    - *"Training samples dataset"*: Select `X_test` dataset
 >    - *"Choose how to select data by column:"*: `All columns`
 >    - *"Does the dataset contain header:"*: `Yes`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
@@ -429,12 +429,12 @@ The prediction step generates 1 dataset. It's a file that has the predicted car 
 
 ### **Plot actual vs predicted curves and residual plots**
 
-> ### {% icon hands_on %} Hands-on: Check and visualize the predictions
+> <hands-on-title>Check and visualize the predictions</hands-on-title>
 >
 > - {% tool [Plot actual vs predicted curves and residual plots](toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1) %}
 >    - *"Select input data file"*: `y_test`
 >    - *"Select predicted data file"*": Select `Model Prediction` from the previous step
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
@@ -453,7 +453,7 @@ predicted values. The better our model's predictions, the closer the points to y
 ![Residual vs predicted values plot](../../images/FNN_residual_plot.png "Residual vs predicted values plot")
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we discussed the inspiration behind the neural networks, and explained Perceptron, one of the earliest neural
 networks still in use today. We then discussed different activation functions, what supervised learning is, what are loss/cost functions,

@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} Solution
+> <solution-title></solution-title>
 > 
 > Example of a test verifying a raised exception. Make sure you add the `pytest` import.
 > 

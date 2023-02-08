@@ -45,12 +45,12 @@ abbreviations:
   OGS: Official Gene Set
 ---
 
-> ### {% icon warning %} Only works on UseGalaxy.eu
+> <warning-title>Only works on UseGalaxy.eu</warning-title>
 > Currently this tutorial requires an Apollo server to be deployed by the administrator. This will currently only work on UseGalaxy.eu, hopefully this list will expand in the future.
 {: .warning}
 
 # Introduction
-{:.no_toc}
+
 
 After automatically annotating your genome using [Prokka](../annotation-with-prokka/tutorial.html) for example, it is important to visualize your results so you can understand what your organism looks like, and then to manually refine these annotations along with any additional data you might have. This process is most often done as part of a group, smaller organisms may be annotated individually though.
 
@@ -58,7 +58,7 @@ After automatically annotating your genome using [Prokka](../annotation-with-pro
 
 This demo is inspired by the [Apollo User's Guide](https://genomearchitect.readthedocs.io/en/latest/UsersGuide.html), which provides additional guidance.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -78,7 +78,7 @@ To annotate a genome using Apollo, we need the reference genome sequence in FAST
 
 In this tutorial we have obtained some data from NCBI related to [*Escherichia coli K12 str. MG1655*](https://ecoliwiki.org/colipedia/index.php/Category:Strain:MG1655), and we will visualise this data and use it to make some annotations in order to familiarise you with the process.
 
-> ### {% icon comment %} Real Data: Unreal Circumstances
+> <comment-title>Real Data: Unreal Circumstances</comment-title>
 > While the data for this tutorial is sourced from publicly available databases, and is all related to different experiments on *E. coli K12*, this is not necessarily the data *you* might use to annotate your genomes. You probably know best what data you should be using in your own circumstances, for the specific features on which you are focused.
 {: .comment}
 
@@ -89,7 +89,7 @@ In this tutorial we have obtained some data from NCBI related to [*Escherichia c
 <!-- Apis mellifera: https://zenodo.org/record/3270822 (based on https://hymenoptera.elsiklab.missouri.edu/beebase/download_sequences probably) -->
 <!-- Schizosaccharomyces pombe: https://usegalaxy.eu/u/abretaud/h/apollo-eukaryote-data -->
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 0. Create a new history and give it a good name
 >
@@ -146,7 +146,7 @@ Refining genome annotations happens in multiple steps:
 
 In this tutorial we will focus more on the practical portions than the theoretical part of genome annotation, that are covered in other tutorials. When you've completed this tutorial you should be comfortable manipulating genomic data in Galaxy and Apollo.
 
-> ### {% icon details %} Why bother?
+> <details-title>Why bother?</details-title>
 >
 > Automated annotation programs continue to improve, however a simple score may not provide evidence necessary to confirm an accurate prediction.
 > Therefore, it is necessary to both visually inspect the results and manually fix any issues with the predictions.
@@ -158,12 +158,12 @@ In this tutorial we will focus more on the practical portions than the theoretic
 
 Let's begin by building a JBrowse instance with all the data we have for this genome.
 
-> ### {% icon comment %} Reduced data
+> <comment-title>Reduced data</comment-title>
 >
 > To reduce the size of the data, in this tutorial we will only work on a portion of the *Escherichia coli K12 str. MG1655* genome.
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
@@ -219,7 +219,7 @@ Let's begin by building a JBrowse instance with all the data we have for this ge
 >                        - *"Minimum Gap Size"*: `3`
 >                        - *"Is this a protein blast search?"*: `Yes`
 >
->    > ### {% icon comment %} JBrowse is highly configurable
+>    > <comment-title>JBrowse is highly configurable</comment-title>
 >    >
 >    > JBrowse is highly configurable, we have set a very basic configuration but there are many more advanced features available to you, if you need them. You can choose precisely how data is displayed, and even what menu options are available when users click on features. If your features have some external identifiers like an NCBI Gene ID, you can even configure JBrowse that when the user clicks on the feature, it should show the gene page for that feature in a new tab. These sort of features are incredibly helpful for building very rich experiences.
 >    >
@@ -235,7 +235,7 @@ This tool will take some time to run dependent on data size. All of the inputs n
 
 Now that we have a good looking static JBrowse instance, it is time to load it into Apollo to turn it into a dynamic view where you can make modifications to the genes.
 
-> ### {% icon hands_on %} Import to Apollo
+> <hands-on-title>Import to Apollo</hands-on-title>
 >
 > 1. {% tool [Create or Update Organism](toolshed.g2.bx.psu.edu/repos/gga/apollo_create_or_update/create_or_update/4.2.5) %} with the following parameters:
 >    - {% icon param-file %} *"JBrowse HTML Output"*: output of **JBrowse** {% icon tool %}
@@ -277,7 +277,7 @@ The first four steps are generally the process of structural annotation (the pro
 
 Let's start by looking at the tracks available to us, and then turning on the gene call tracks so we can start exploring our data.
 
-> ### {% icon hands_on %} Visualize the Gene Calls
+> <hands-on-title>Visualize the Gene Calls</hands-on-title>
 >
 > 1. In the right hand panel at the top click on **Tracks** to open the track listing
 >
@@ -305,13 +305,13 @@ We will use the other track in the **Gene Calls** group later in this tutorial, 
 
 With the selected track, if you look along the genome, you will see many genes that were predicted by Augustus. Each of them as an unique name assigned by Augustus (e.g. `NC_000913.3.g7.t1`, which means `the 7th gene on the NC_000913.3 chromosome`). If you right click on gene, an select `View details`, you can get access to the coding sequence (CDS).
 
-> ### {% icon details %} Gene colors
+> <details-title>Gene colors</details-title>
 > Each gene color corresponds to an open reading frame on the genome. This allows to quickly see if two genes that are very close are on the same open reading frame, which could mean that they can be merged into a single gene, if other evidences support this.
 {: .details}
 
 What we want now is first to check that the structure of the genes predicted by Augustus are in good shape. To do this, we will display an additional evidence tracks.
 
-> ### {% icon hands_on %} Display blastp vs swissport track
+> <hands-on-title>Display blastp vs swissport track</hands-on-title>
 >
 > 1. In the right hand panel at the top click on **Tracks** to open the track listing
 >
@@ -349,7 +349,7 @@ Currently, the two genes we added have meaningless names. Let's improve that: ri
 
 From the blast results, we know that this gene is similar to a Swissprot protein, named `Putative uncharacterized protein YabP`. Let's write this in the **Name** field (type it manually and select it from the drop down list), and `YabP` in the **Symbol** field.
 
-> ### {% icon details %} Naming genes
+> <details-title>Naming genes</details-title>
 >
 > Giving a proper name to a gene is not always easy. Should it include "Putative" or not? What if multiple names can apply? Should it be lowercase or uppercase?
 > The important thing is to always use the same naming rules when working on a full annotation, and to agree on these rules with other collaborators.
@@ -364,7 +364,7 @@ You should see `Putative uncharacterized protein YabP` in the **Name** field.
 
 You can do the same for the other gene you created, which is similar to `Uncharacterized protein YabQ` according to Blastp vs Swissprot.
 
-> ### {% icon comment %} Saving your work
+> <comment-title>Saving your work</comment-title>
 >
 > You do not need to do anything specific to *Save* your work in Apollo. Just like Google Docs, each modification is immediately saved, and any other user working on the same genome will instantly see the changes you make.
 {: .comment}
@@ -392,7 +392,7 @@ Sometimes you'll want to modify a gene that was predicted by Augustus, just to a
 If you look at the details of the blast hits, you will notice an identifier looking like that: `gi|11387170|sp|P57289.1|`. In this identifier, `P57289` is the id of an [UniProt record](https://www.uniprot.org/uniprot/P57289). Navigate to this UniProt page and you'll find a lot more details about the protein which was found to be very similar to the gene we are currently annotating. In particular, you can see that 3 [Gene Ontology (GO)](http://www.geneontology.org/) terms are associated with it, in the **GO - Molecular function** and **GO - Biological process** sections. Let's add these terms to our gene with Apollo.
 
 
-> ### {% icon comment %} Gene Ontology (GO) Consortium
+> <comment-title>Gene Ontology (GO) Consortium</comment-title>
 >
 > The [Gene Ontology Consortium](http://www.geneontology.org/) provides with its Ontology a framework for the model of biology.
 > The GO defines concepts/classes used to describe gene function, and relationships between these concepts. It classifies functions along three aspects:
@@ -427,7 +427,7 @@ Other tabs are available in the annotation panel, allowing to add **Comments**, 
 
 In this tutorial we are lucky as we are studying a very well known reference organism. It means we have a [very good quality reference annotation](https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?mode=Info&id=511145&lvl=3&lin=f&keep=1&srchmode=1&unlock) provided by NCBI. You can display it in Apollo by enabling the corresponding track:
 
-> ### {% icon hands_on %} Display NCBI annotation track
+> <hands-on-title>Display NCBI annotation track</hands-on-title>
 >
 > 1. In the right hand panel at the top click on **Tracks** to open the track listing
 >
@@ -455,10 +455,10 @@ Once you have added some alterations, Apollo will automatically display the effe
 
 # Exporting and collaborating
 
-{% include {{ page.dir }}collab.md eukaryote=false %}
+{% include topics/genome-annotation/tutorials/apollo/collab.md eukaryote=false %}
 
 # Conclusion
-{:.no_toc}
+
 
 Congratulations, you finished this tutorial! By using Apollo and JBrowse, you learned how to manually refine predicted annotations and export them to Galaxy for future analyses. You also learn how to give access to your project at any other researcher, making it a real collaborative solution.
 

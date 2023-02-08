@@ -22,7 +22,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 ---
 
@@ -35,11 +35,11 @@ We do not use slides in our lessons. Instead, instructors plug their laptop into
 
 However, the instructor is not live coding in a vacuum. Importantly, learners are strongly encouraged to "code-along" with the instructor. We refer to the practice of having the instructor live code and the learners code along as "participatory live coding" or, less formally, 'code-along sessions'.
 
-> ### {% icon hands_on %} Up and Down (5 min)
+> <hands-on-title>Up and Down (5 min)</hands-on-title>
 >
 > List some advantages and challenges of participatory live coding from both a learner's and an instructor's point of view.
 >
-> > {% icon tip %} Solution
+> > <solution-title></solution-title>
 > > Some advantages are:
 > > * Watching a program being written is more compelling than watching someone page through slides that present bits and pieces of the same code.
 > > * It enables instructors to be more responsive to "what if?" questions. Where a slide deck is like a railway track, participatory live coding allows instructors to go off-road and follow their learners' interests.
@@ -52,14 +52,14 @@ However, the instructor is not live coding in a vacuum. Importantly, learners ar
 > > It can be hard for learners to listen and type at the same time, due to the *split-attention effect* that was discussed in the [learning principles tutorial]({% link topics/contributing/tutorials/learning-principles/tutorial.md %}). This is why it is very important that instructors first explain what they are going to do, then say what they are typing as they type it, and then explain what they did again afterwards.
 > > It may take a bit of practice for instructors to get used to thinking aloud while coding in front of an audience.
 > >
-> > {: .tip}
+> {: .solution}
 {: .hands_on}
 
 Live coding fits well into the practice-feedback model we have been discussing - by providing learners with continuous opportunities for practice (every time they type in a line of code) and continuous feedback (their code either works or fails with an error message). It is important to keep in mind, however, that feedback is not helpful if you cannot understand it.
 Many error messages are obscure and not written with novices in mind. Continue to use the strategies for error framing that
 [was discussed in the motivation tutorial]({% link topics/teaching/tutorials/learner_participation_engagement/tutorial.md %}) to make sure this feedback is useful to learners.
 
-> ### {% icon hands_on %} Compare and Contrast (15 min)
+> <hands-on-title>Compare and Contrast (15 min)</hands-on-title>
 >
 > Watch this first participatory live coding demo video: [https://youtu.be/bXxBeNkKmJE](https://youtu.be/bXxBeNkKmJE) and this second demo video: [https://youtu.be/SkPmwe_WjeY](https://youtu.be/SkPmwe_WjeY) as a group and then summarize your feedback on both. Use the 2x2 rubric for feedback that was [discussed in the feedback tutorial]({% link topics/teaching/tutorials/assessment/tutorial.md %}).
 >
@@ -67,10 +67,10 @@ Many error messages are obscure and not written with novices in mind. Continue t
 >
 > Note: Sometime sounds in the room can be poor. Turning on closed captioning by pressing the cc button will improve the accessibility of these videos.List some advantages and challenges of participatory live coding from both a learner's and an instructor's point of view.
 >
-> > {% icon tip %} Solution
+> > <solution-title></solution-title>
 > > The main idea is for the Instructor to lead a discussion about the videos and your feedback on them, making sure that the points of the Top Ten Tips below have been made.
 > > If this a self-taught session, please do reflect on your feedback by contrasting against the Top Ten Tips below.
-> {: .tip}
+> {: .solution}
 >
 {: .hands_on}
 
@@ -90,7 +90,7 @@ Some instructors use printouts of the lesson material during teaching. Others us
 Read more in [Ten quick tips for teaching with participatory live-coding] {% cite Nederbragt2020 %}, as well as the excellent section on "Live Coding" from the book "Teaching Tech Together" by Greg Wilson {% cite Wilson2019 %}.
 
 
-> ### {% icon hands_on %} Practice Teaching (25 min)
+> <hands-on-title>Practice Teaching (25 min)</hands-on-title>
 >
 > 1. Split into groups of three.
 > 1. Assign roles, which will rotate: presenter, timekeeper, note-taker.
@@ -98,10 +98,9 @@ Read more in [Ten quick tips for teaching with participatory live-coding] {% cit
 > 3. After each person finishes, each group member should share feedback (starting with themselves) using the same 2x2 rubric as yesterday. The timekeeper should keep feedback discussion to about 1 minute per person; this may leave some time at the end for general discussion. The note-taker should record feedback in the Etherpad.
 > 4. Trade off roles.
 >
-> > {% icon tip %} Solution
+> > <solution-title></solution-title>
 > > If this a self-taught session, one way to approach this exercise is by recording your teaching demonstration (e.g. through a cell-phone), and attempting to provide an objective self-feedback based on the 2x2 rubric.
-> >
-> {: .tip}
+> {: .solution}
 {: .hands_on}
 
 

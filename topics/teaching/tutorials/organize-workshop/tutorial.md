@@ -19,11 +19,11 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
 
 
 
-> ### Agenda
+
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -191,4 +191,4 @@ These recommendations are highly inspired from the one by [The Carpentries](http
 4. Contact the participants with the links to the materials
 
 # Conclusion
-{:.no_toc}
+

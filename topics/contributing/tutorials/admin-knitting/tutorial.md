@@ -17,7 +17,7 @@ contributors:
 ---
 
 # Updating Diffs
-{:.no_toc}
+
 
 The admin training was recently converted completely to use diffs. This was
 done so we could build a git repository, and time travel to any point within
@@ -25,7 +25,7 @@ admin training, in support of students and testing.
 
 Here's some common editing scenarios to help you out.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will:
 >
@@ -169,7 +169,7 @@ When you're done editing, you can run the `./bin/knit-automated.sh import`, it w
 - extract the history as patches (using `git format-patch`)
 - knit them into the tutorials
 
-> ### {% icon warning %} Danger: Don't mess with the commit names at this step
+> <warning-title>Danger: Don't mess with the commit names at this step</warning-title>
 > They're used for figuring out which commit a patch file belongs to. Sorry!
 {: .warning}
 
@@ -178,11 +178,11 @@ When you're done editing, you can run the `./bin/knit-automated.sh import`, it w
 
 ## I want to update the text of a specific commit
 
-> ### {% icon question %} Example problem
+> <question-title>Example problem</question-title>
 > I want to edit the commit titled "Add production facing vars" to add an addtional variable in admin/ansible-galaxy.
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: Make the change you want to see in the GAT
+> <hands-on-title>Make the change you want to see in the GAT</hands-on-title>
 > 1. Start by exporting
 >
 >    ```
@@ -306,11 +306,11 @@ The above shows commands with outputs, the rest will be more abbreviated
 
 ## Upgrading an existing tutorial
 
-> ### {% icon question %} Example problem
+> <question-title>Example problem</question-title>
 > I have a new tutorial in the schedule and I want to upgrade it to use this feature
 {: .question}
 
-> ### {% icon hands_on %} Hands-on: Make the change you want to see in the GAT
+> <hands-on-title>Make the change you want to see in the GAT</hands-on-title>
 >
 > 1. Start by exporting
 >
@@ -371,7 +371,7 @@ The above shows commands with outputs, the rest will be more abbreviated
 
 ## I want to add a new commit
 
-> ### {% icon hands_on %} Hands-on: Make the change you want to see in the GAT
+> <hands-on-title>Make the change you want to see in the GAT</hands-on-title>
 >
 > 1. Add your commit where it belongs in the tutorial
 >

@@ -13,7 +13,6 @@ objectives:
   - Use the log to view the diff
   - Undo a bad change
 time_estimation: "30m"
-subtopic: contribute
 key_points:
   - While git is extremely powerful, just using it for tracking changes is quite easy!
   - This does not take advantage of any advanced features, nor collaboration, but it is easy to expand into doing that.
@@ -28,9 +27,9 @@ requirements:
    - cli-basics
 ---
 
-> ### {% icon comment %} Source
+> <comment-title>Source</comment-title>
 > This tutorial contains text from [this tutorial](https://github.com/rdadolf/git-tutorial/) by Robert Adolf ([@rdadolf](https://github.com/rdadolf)), which is licensed CC-BY.
-{: .tip}
+{: .comment}
 
 Version control is a way of tracking the change history of a project. Even if you have never used a version control tool, you've probably already done it manually: copying and renaming project folders ("paper-1.doc", "paper-2.doc", etc.) is a form of version control. Within bioinformatics (from research, to development, to sysadmin) a lot of us are using `git` as our primary method of source control for everything we do: notes, slides, tutorials, code, notebooks, ansible, system configuration, and more.
 
@@ -38,7 +37,7 @@ Git is a tool that automates and enhances a lot of the tasks that arise when dea
 
 While it can be used collaboratively, this tutorial focuses on a single-user git repository for the most basic operations.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, you will learn how to create a git repo, and begin working with it.
 >
@@ -64,10 +63,10 @@ If you ask 10 people, you'll get 10 different answers, but one of the commonalit
 
 Let's create a new repository.
 
-> ### {% icon hands_on %} Hands-on: Create a Repository
+> <hands-on-title>Create a Repository</hands-on-title>
 > 1. Make a new directory where you will store your files, and navigate into it.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > mkdir git-tutorial; cd git-tutorial;
 >    > ```
@@ -76,14 +75,14 @@ Let's create a new repository.
 >
 > 2. Create or "initialise" the `git` repository with the `git init` command.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git init
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output
+>    > <code-out-title></code-out-title>
 >    > ```bash
 >    > Initialized empty Git repository in /tmp/project/.git/
 >    > ```
@@ -93,17 +92,17 @@ Let's create a new repository.
 
 This has created a folder `.git` in your project directory, here is where `git` stores all of it's data that it needs to track repository changes over time. It's not terribly interesting yet though!
 
-> ### {% icon hands_on %} Hands-on: What's the status
+> <hands-on-title>What's the status</hands-on-title>
 > 1. You can always check the status of a repository with `git status`
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git status
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output
+>    > <code-out-title></code-out-title>
 >    > ```bash
 >    > On branch main
 >    >
@@ -120,10 +119,10 @@ This has created a folder `.git` in your project directory, here is where `git` 
 
 Let's add our first file, often a (pretty empty) readme file.
 
-> ### {% icon hands_on %} Hands-on: What's the status
+> <hands-on-title>What's the status</hands-on-title>
 > 1. Create a new file, `readme.md` with some basic content
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > echo "My Project" > readme.md
 >    > ```
@@ -132,7 +131,7 @@ Let's add our first file, often a (pretty empty) readme file.
 >
 > 2. Add a file with `git add`. This adds it to git's staging area to be committed.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git add readme.md
 >    > ```
@@ -141,25 +140,25 @@ Let's add our first file, often a (pretty empty) readme file.
 >
 > 3. Commit the file! This will add it to git's log.
 >
->    > ### {% icon tip %} Tip: What makes a good commit message?
+>    > <tip-title>What makes a good commit message?</tip-title>
 >    > It depends a lot on the community, some have specific style guides they enforce, some don't, but in general
 >    > - Keep the description short (<72 chars) and descriptive.
 >    > - If you need, provide a long description as well, explaining your changes. (Use `git commit` without the `-m` flag!)
 >    > [A lot has been written](https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html) about good commit messages, search the internet and find ideas for what you think makes a good commit message!
 >    >
 >    > And beware of the trap we all fall into sometimes, [unhelpful commit messages](https://xkcd.com/1296/)
->    > ![xkcd comic with commits in a table from 14h to 2h ago, starting with extremely useful commits like "created main loop & timing control", and becoming extremely unhelpful messages for the latest commits, like 'AAAAAA' or "asdfasdf".](https://imgs.xkcd.com/comics/git_commit.png)
+>    > ![xkcd comic with commits in a table from 14h to 2h ago, starting with extremely useful commits like "created main loop & timing control", and becoming extremely unhelpful messages for the latest commits, like 'AAAAAA' or "asdfasdf".](../../images/xkcd/git_commit.png)
 >    > Even your author is [very](https://github.com/galaxyproject/gxadmin/commit/568adb703189d98da701e35c3414be35ea106184), [very](https://github.com/galaxyproject/training-material/commit/611f82d267f1426aa09863c2ac9c9006f38e3c4c) guilty of this, but you can do better!
 >    {: .tip}
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git commit -m "Add readme"
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output
+>    > <code-out-title></code-out-title>
 >    > ```bash
 >    > [main (root-commit) f5ec14f] Add readme
 >    >  1 file changed, 1 insertion(+)
@@ -167,9 +166,9 @@ Let's add our first file, often a (pretty empty) readme file.
 >    > ```
 >    {: .code-out}
 >
-> > ### {% icon question %} Question: Is there anything left to do? Check the status
+> > <question-title>Is there anything left to do? Check the status</question-title>
 > > Check `git status` to see if there's anything else left to resolve.
-> > > ### {% icon solution %} Solution
+> > > <solution-title></solution-title>
 > > > ```console
 > > > $ git status
 > > > On branch main
@@ -192,11 +191,11 @@ Congratulations! You've made your first commit. The output of the commit command
 
 ### Exercise: Make some more commits
 
-> ### {% icon hands_on %} Hands-on: Make some more commits
+> <hands-on-title>Make some more commits</hands-on-title>
 >
 > 1. Add your name to the `readme.md` and commit your changes.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > echo "Author: hexylena" >> readme.md
 >    > git add readme.md
@@ -207,7 +206,7 @@ Congratulations! You've made your first commit. The output of the commit command
 >
 > 2. Make up a project description, add it to the readme, and commit.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > echo "This project enables stakeholders to experience synergistic effects and increase link up opportunities to improve quarterly and YOY ROI.\n" >> readme.md
 >    > git add readme.md
@@ -218,7 +217,7 @@ Congratulations! You've made your first commit. The output of the commit command
 >
 > 3. [Pick a license](https://spdx.org/licenses/) for your project, and mention it in the `readme.md`, and commit.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > echo "# License\nAGPL-3.0" >> readme.md
 >    > git add readme.md
@@ -235,17 +234,17 @@ After this step you should have ~3 commits to work with!
 
 One of the most helpful things about git is that, if you have written good commit messages, you can tell what you did and when!
 
-> ### {% icon hands_on %} Hands-on: Check the Receipts
+> <hands-on-title>Check the Receipts</hands-on-title>
 > 1. Check the `log` with `git log`. Notice that you can see each commit in reverse chronological order (newest at top), who made the commit, when, and what the commit message was.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git log
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    > ### {% icon code-in %} Output
+>    > <code-in-title>Output</code-in-title>
 >    > ```
 >    > commit 5d05eb3ec22fd49282b585c60ef8f983d68c2fd7
 >    > Author: Helena Rasche <hxr@hx42.org>
@@ -277,16 +276,16 @@ One of the most helpful things about git is that, if you have written good commi
 
 The output of `git log` is a great way to help you remember what you were doing.
 
-> ### {% icon hands_on %} Hands-on: `git log -p`
+> <hands-on-title>`git log -p`</hands-on-title>
 > 1. Use `git log -p` to see the log, along with which lines were changed in each commit.
 {: .hands_on}
 
 But currently this log is pretty boring, so let's replace a line and see how that looks.
 
-> ### {% icon hands_on %} Hands-on: Replace a line
+> <hands-on-title>Replace a line</hands-on-title>
 > 1. Update your project description in the `readme.md`, you've been told you need to support completely different features.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > sed -i s'/enables.*ROI/creates baking recipes/g' readme.md
 >    > git add readme.md
@@ -297,7 +296,7 @@ But currently this log is pretty boring, so let's replace a line and see how tha
 >
 > 2. Check what happened with the `git log -p`:
 >
->    > ### {% icon code-in %} Output
+>    > <code-out-title>Output</code-out-title>
 >    > ```bash
 >    > $ git log -p
 >    > commit 416a121dfcda14de0c2cb181f298b2c08950475f (HEAD -> main)
@@ -332,14 +331,14 @@ But currently this log is pretty boring, so let's replace a line and see how tha
 
 If you want to know who changed a specific line of a file, you can use `git blame` to find out it was probably your fault (as most of us experience when we check the logs.)
 
-> ### {% icon code-in %} Input: Bash
+> <code-in-title>Bash</code-in-title>
 > ```bash
 > git blame readme.md
 > ```
 > {: data-cmd="true"}
 {: .code-in}
 
-> ### {% icon code-in %} Output
+> <code-in-title>Output</code-in-title>
 > ```bash
 > ^f5ec14f (Helena Rasche 2022-06-13 11:59:23 +0200 1) My Project
 > 10355c01 (Helena Rasche 2022-06-13 12:13:11 +0200 2) Author: hexylena
@@ -365,18 +364,18 @@ Oftentimes you'll see this pattern:
 
 This is especially relevant for any project that is shared with others, has a public view, or a deployed version of the code. There you don't want to affect anyone else using the project, or you don't want to affect the production deployment, until you're done making your changes.
 
-> ### {% icon hands_on %} Hands-on: Create a new branch
+> <hands-on-title>Create a new branch</hands-on-title>
 >
 > 1. `git switch -c <branch>` is the command used to create a new branch and switch to it.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git switch -c test
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    > ### {% icon code-in %} Output
+>    > <code-in-title>Output</code-in-title>
 >    > ```bash
 >    > Switched to a new branch 'test'
 >    > ```
@@ -386,18 +385,18 @@ This is especially relevant for any project that is shared with others, has a pu
 
 If you look around, you'll notice everything looks exactly the same! But in fact we are now on a different branch:
 
-> ### {% icon hands_on %} Hands-on: See available branches
+> <hands-on-title>See available branches</hands-on-title>
 >
 > 1. `git branch` lists our available branches, and puts an asterisk next to the one we're currently on.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git branch
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    > ### {% icon code-in %} Output
+>    > <code-in-title>Output</code-in-title>
 >    > ```bash
 >    >   main
 >    > * test
@@ -408,10 +407,10 @@ If you look around, you'll notice everything looks exactly the same! But in fact
 
 We're now on the `test` branch, so let's make a commit.
 
-> ### {% icon hands_on %} Hands-on: Add a new file
+> <hands-on-title>Add a new file</hands-on-title>
 > 1. Add a new file, let's call it `docs.md`. Write something into it, it doesn't matter much what.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > echo "# Project Documentation" > docs.md
 >    > ```
@@ -420,7 +419,7 @@ We're now on the `test` branch, so let's make a commit.
 >
 > 2. Add it, commit it.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git add docs.md
 >    > git commit -m "Added documentation"
@@ -432,17 +431,17 @@ We're now on the `test` branch, so let's make a commit.
 
 This file now only exists on the testing branch.
 
-> ### {% icon hands_on %} Hands-on: Try Switching Branches
+> <hands-on-title>Try Switching Branches</hands-on-title>
 > 1. Try switching back and forth between the `main` and `test` branches, and check what's available on each!
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git branch
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git switch main
 >    > ls
@@ -450,13 +449,13 @@ This file now only exists on the testing branch.
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    > ### {% icon code-in %} Output
+>    > <code-in-title>Output</code-in-title>
 >    > ```console
 >    > readme.md
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git switch test
 >    > ls
@@ -464,7 +463,7 @@ This file now only exists on the testing branch.
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    > ### {% icon code-in %} Output
+>    > <code-in-title>Output</code-in-title>
 >    > ```console
 >    > docs.md   readme.md
 >    > ```
@@ -480,18 +479,18 @@ Once you're done with a branch, you can merge it into the main branch. This will
 
 First, let's compare the two branches, to see what changed.
 
-> ### {% icon hands_on %} Hands-on: Replacing argv.
+> <hands-on-title>Replacing argv.</hands-on-title>
 >
 > 1. Compare your current branch against the `main` branch with `git diff main`
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git diff main
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    > ### {% icon code-in %} Output
+>    > <code-in-title>Output</code-in-title>
 >    > ```bash
 >    > diff --git a/docs.md b/docs.md
 >    > new file mode 100644
@@ -507,10 +506,10 @@ First, let's compare the two branches, to see what changed.
 
 We can see the output shows all of our changes compared to the main branch and it looks like what we want, so, let's merge it in.
 
-> ### {% icon hands_on %} Hands-on: Merge the `test` branch into `main`
+> <hands-on-title>Merge the `test` branch into `main`</hands-on-title>
 > 1. Switch to the main branch
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git switch main
 >    > ```
@@ -519,14 +518,14 @@ We can see the output shows all of our changes compared to the main branch and i
 >
 > 2. Merge in the test branch
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git merge test
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    > ### {% icon code-in %} Output
+>    > <code-in-title>Output</code-in-title>
 >    > ```bash
 >    > Updating 416a121..9a3387d
 >    > Fast-forward
@@ -540,7 +539,7 @@ We can see the output shows all of our changes compared to the main branch and i
 
 This has merged all of the changes you made on the `test` branch into the `main` branch.
 
-> ### {% icon hands_on %} Hands-on: Check the history
+> <hands-on-title>Check the history</hands-on-title>
 > 1. Check `git log -p` again to see the history.
 {: .hands_on}
 
@@ -548,11 +547,11 @@ This has merged all of the changes you made on the `test` branch into the `main`
 
 Oh no, you've decided you liked your original project description better. Let's find that commit and revert it.
 
-> ### {% icon hands_on %} Hands-on: Find and revert the bad commit
+> <hands-on-title>Find and revert the bad commit</hands-on-title>
 >
 > 1. Find the commit you want to revert, e.g. with `git log`, find the one named "Update project description" (or similar.)
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git log
 >    > ```
@@ -561,7 +560,7 @@ Oh no, you've decided you liked your original project description better. Let's 
 >
 > 2. We can use the `git revert` command to undo this commit.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git revert 416a121dfcda14de0c2cb181f298b2c08950475f
 >    > ```
