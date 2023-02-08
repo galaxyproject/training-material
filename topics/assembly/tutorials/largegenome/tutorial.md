@@ -73,7 +73,10 @@ In this tutorial, we will follow these steps:
 * The workflows are also linked to this tutorial - see above and import them into your own Galaxy Account. 
 * A note: as of September 2022, these workflows have been tested on Galaxy Australia and we are now in the process of testing them on Galaxy Europe and Galaxy Main. 
 
+{% snippet faqs/galaxy/workflows_import_from_workflowhub.md filter="Large-genome-assembly" %}
+
 After importing the workflows into your account:
+
 * Look at your of Workflows. (Galaxy top panel: Workflow) 
 * For the workflow you want to run, go to the right hand side and see the arrow button (a triangle), click
 * This brings up the workflow in the centre Galaxy panel
