@@ -1,7 +1,8 @@
 ---
 layout: tutorial_hands_on
 
-title: End-to-End Tissue Microarray Analysis with Galaxy-MTI
+title: End-to-End Tissue Microarray Image Analysis with Galaxy-ME
+zenodo_link: https://doi.org/10.5281/zenodo.7622545
 questions:
 - What tools are available for pre-processing multiplex tissue images in Galaxy?
 - What tools are available for downstream analysis of multiplex tissue images in Galaxy?
@@ -19,7 +20,7 @@ key_points:
 - Tissue Microarray data can be analyzed using workflows that invoke MTI tools in batch
 - Segmentation quality can vary significantly depending on features of the input image, tool used, and parameters
 contributors:
-- CameronFRWatson
+- CameronFRWatson, alliecreason
 
 ---
 
@@ -93,7 +94,7 @@ Two new list collections will appear in the history upon completion:
 
 # Stitching and registration with **ASHLAR**
 
-After illumination is corrected across round tiles, the tiles must be stitched together, and subsequently, each round mosaic must be registered together into a single pyramidal OME-TIFF file. **ASHLAR** from MCMICRO provides both of these functions. 
+After illumination is corrected across round tiles, the tiles must be stitched together, and subsequently, each round mosaic must be registered together into a single pyramidal OME-TIFF file. **ASHLAR** ({% cite Muhlich2022 %}) from MCMICRO provides both of these functions. 
 
 > ### {% icon comment %} Important detail: Marker File
 >
@@ -128,14 +129,14 @@ After illumination is corrected across round tiles, the tiles must be stitched t
 
 > ### {% icon warning %} **Imaging platform differences**
 > 
-> ASHLAR, among other tools in the MCMICRO and Galaxy-MTI pre-processing tools have some parameters that are specific to the 
+> ASHLAR, among other tools in the MCMICRO and Galaxy-ME pre-processing tools have some parameters that are specific to the 
 imaging patform used. By default, ASHLAR is oriented to work with images from RareCyte scanners. AxioScan scanners render images
 in a different orientation. Because of this, when using ASHLAR on AxioScan images, it is important to select the **Flip Y-Axis**
 parameter to *Yes*
 > 
 > ASHLAR will work for most imaging modalities; however, certain modalities require different tools to be registered. For example,
 multiplex immunohistochemistry (mIHC) images must use an aligner that registers each moving image to a reference Hematoxylin image. 
-For this, Galaxy-MTI includes the alternative registration tool {% tool **PALOM** %}. 
+For this, Galaxy-ME includes the alternative registration tool {% tool **PALOM** %}. 
 >
 {: .warning}
 
@@ -170,12 +171,12 @@ UNetCoreograph will output images (used for downstream steps), masks, and a prev
 
 # Nuclear segmentation with **Mesmer**
 
-Cell segmentation is the basis for all downstream single-cell analyses. Different segmentation tools work highly variably depending on the imaging modality or platform used. Because of this, Galaxy-MTI has incorporated several cell segmentation tools so users may find the tool that works optimally for their data. 
+Cell segmentation is the basis for all downstream single-cell analyses. Different segmentation tools work highly variably depending on the imaging modality or platform used. Because of this, Galaxy-ME has incorporated several cell segmentation tools so users may find the tool that works optimally for their data. 
 
-Available segmentation tools in Galaxy-MTI:
+Available segmentation tools in Galaxy-ME:
 
   - Mesmer ({% cite Greenwald2021 %})
-  - UnMicst and s3segmenter ({% cite Schapiro2021 %})
+  - UnMicst and s3segmenter ({% cite Yapp2022 %})
   - Cellpose ({% cite Stringer2020 %})
   - ilastik ({% cite Berg2019 %})
 
@@ -206,7 +207,7 @@ In this tutorial, we use **Mesmer** because it tends to perform generally well o
 
 > ### {% icon warning %} **Imaging platform differences: Image resolution**
 > 
-> A crucial parameter for Mesmer and other segmentation tools is the **Image resolution**. This is reported in microns/pixel, and can vary depending on the imaging platform used and the settings at image acquisition. Mesmer accepts the resolution in microns/pixel; however, if using UNMICST, the resolution must be reported as a ratio of the resolution of UNMICST's training images (0.65). For example, when using UNMICST, if your images were captured at a resolution of 0.65, then the UNMICST value would be 1, but if your images were captured at 0.325 microns/pixel, then the value you would enter for UNMICST would be 0.5. 
+> A crucial parameter for Mesmer and other segmentation tools is the **Image resolution**. This is reported in microns/pixel, and can vary depending on the imaging platform used and the settings at image acquisition. Mesmer accepts the resolution in microns/pixel; however, if using UnMICST, the resolution must be reported as a ratio of the resolution of UnMICST's training images (0.65). For example, when using UnMICST, if your images were captured at a resolution of 0.65, then the UnMICST value would be 1, but if your images were captured at 0.325 microns/pixel, then the value you would enter for UnMICST would be 0.5. 
 >
 {: .warning}
 
@@ -265,7 +266,7 @@ Learn more about this file format at the [anndata documentation](https://anndata
 
 # Scimap: **Single Cell Phenotyping**
 
-There are several ways to classify cells available in Galaxy-MTI. Unsupervised approaches, such as Leiden clustering, can be performed on all cells and phenotypes can be manually annotated based on marker expression patterns observed by the user. This approach is time consuming, so here we will demonstrate automated phenotyping based on thresholds of specific lineage markers using MCMICRO's Scimap. Scimap phenotyping can either be provided a table of manual gate values for each marker of interest (which can be determined using the **GateFinder** tool in Galaxy-MTI), or by default, Scimap will fit a Gaussian Mixture Model (GMM) to the `log(intensity)` data for each marker to determine positive and negative populations for that marker. The marker intensity values are rescaled between (0,1) with 0.5 being the cut-off between negative and positive populations. Scimap uses a 'Phenotype workflow' to guide the classification of cells (Figure 5.). For more on how to construct a Scimap workflow, see the [Scimap documentation](https://scimap-doc.readthedocs.io/en/latest/tutorials/scimap-tutorial-cell-phenotyping/).
+There are several ways to classify cells available in Galaxy-ME. Unsupervised approaches, such as Leiden clustering, can be performed on all cells and phenotypes can be manually annotated based on marker expression patterns observed by the user. This approach is time consuming, so here we will demonstrate automated phenotyping based on thresholds of specific lineage markers using MCMICRO's Scimap. Scimap phenotyping can either be provided a table of manual gate values for each marker of interest (which can be determined using the **GateFinder** tool in Galaxy-ME), or by default, Scimap will fit a Gaussian Mixture Model (GMM) to the `log(intensity)` data for each marker to determine positive and negative populations for that marker. The marker intensity values are rescaled between (0,1) with 0.5 being the cut-off between negative and positive populations. Scimap uses a 'Phenotype workflow' to guide the classification of cells (Figure 5.). For more on how to construct a Scimap workflow, see the [Scimap documentation](https://scimap-doc.readthedocs.io/en/latest/tutorials/scimap-tutorial-cell-phenotyping/).
 
 
 ![Screenshot of the phenotypes table](../../images/multiplex-tissue-imaging-TMA/ex2_phenotypeWF.png "Example of a phenotype workflow compatible with Scimap. 'Pos' means that the marker must be positive to be classified as the respective phenotype. 'Anypos' means any, but not necessarily all, of the listed markers can be positive to call the respective phenotype.")
@@ -293,11 +294,11 @@ There are several ways to classify cells available in Galaxy-MTI. Unsupervised a
 
 # Interactive visualization of multiplex tissue images
 
-Visual analysis is an important part of multiplex tissue imaging workflows. Galaxy-MTI has several tools that make interactive visualization easy, and can be used at various stages of analysis. 
+Visual analysis is an important part of multiplex tissue imaging workflows. Galaxy-ME has several tools that make interactive visualization easy, and can be used at various stages of analysis. 
 
 ## Converting UNetCoreograph images to OME-TIFF using the **Convert image** tool
 
-UNetCoreograph outputs each individual core image in `tiff` format. Interactive visualization tools, such as **Vitessce** and **Avivator** require the images to be in `OME-TIFF` format to be viewed. Galaxy-MTI includes a conversion tool that can accomodate this, along with many other useful conversion functions. 
+UNetCoreograph outputs each individual core image in `tiff` format. Interactive visualization tools, such as **Vitessce** and **Avivator** require the images to be in `OME-TIFF` format to be viewed. Galaxy-ME includes a conversion tool that can accomodate this, along with many other useful conversion functions. 
 
 > ### {% icon hands_on %} Hands-on: Convert image
 >
@@ -332,7 +333,7 @@ Some tools can cause the channel names in an OME-TIFF image to be lost. To fix t
 
 ## Initial visualization with **Avivator**
 
-For any `OME-TIFF` image in a Galaxy-MTI history, there will be an option to view the image using **Avivator**. This is a great way to perform an initial inspection of an image for QC purposes before continuing with downstream steps. The **Avivator** window can be launched by expanding the dataset information in the history panel and clicking the link (Figure 7.).
+For any `OME-TIFF` image in a Galaxy-ME history, there will be an option to view the image using **Avivator**. This is a great way to perform an initial inspection of an image for QC purposes before continuing with downstream steps. The **Avivator** window can be launched by expanding the dataset information in the history panel and clicking the link (Figure 7.).
 
 ![Screenshot shows a galaxy dataset expanded, and then the 'display at aviator' link expanded into a screenshot of Aviator showing a multicoloured histology slide.](../../images/multiplex-tissue-imaging-TMA/ex2_avivatorHistory.png "The highlighted link automatically appears for any OME-TIFF image (left) and, when clicked, launches an Avivator window to explore the image (right).")
 
@@ -360,7 +361,7 @@ For any `OME-TIFF` image in a Galaxy-MTI history, there will be an option to vie
 
 # Next steps: Compositional and spatial analyses
 
-Galaxy-MTI includes additional tools from **Scimap** and tools from the **Squidpy** package ({% cite Palla2022 %}) that can be used to perform a variety of downstream analyses. For example, once phenotypes have been assigned to individual cells, **Squidpy** has several methods for understanding the spatial organization of the tissue. Using **Squidpy**, a spatial neighborhood graph is first generated, from which the organization of specific phenotype groups and their interactions can be quantified. 
+Galaxy-ME includes additional tools from **Scimap** and tools from the **Squidpy** package ({% cite Palla2022 %}) that can be used to perform a variety of downstream analyses. For example, once phenotypes have been assigned to individual cells, **Squidpy** has several methods for understanding the spatial organization of the tissue. Using **Squidpy**, a spatial neighborhood graph is first generated, from which the organization of specific phenotype groups and their interactions can be quantified. 
 
 > ### {% icon hands_on %} Hands-on: Spatial analysis with **Squidpy**
 >
@@ -406,7 +407,7 @@ Galaxy-MTI includes additional tools from **Scimap** and tools from the **Squidp
 
 # Conclusion
 
-In this tutorial, we demonstrated a complete multiplex tissue imaging analysis workflow performed entirely in a web browser using Galaxy-MTI. Using an example tissue microarray imaged with cylic immunofluoresence provided by MCMICRO, we...
+In this tutorial, we demonstrated a complete multiplex tissue imaging analysis workflow performed entirely in a web browser using Galaxy-ME. Using an example tissue microarray imaged with cylic immunofluoresence provided by MCMICRO, we...
 
   - Corrected illumination between imaging tiles
   - Stitched and registered input images to produce a single, pyramidal OME-TIFF image that is viewable in multiple built-in interactive viewing tools (Avivator, Vitessce)
