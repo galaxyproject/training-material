@@ -167,6 +167,35 @@ module Jekyll
         site.pages << page2
       end
 
+      # GA4GH TRS Endpoint
+      # Please note that this is all a fun hack
+      TopicFilter.list_all_materials(site).select{|m| m['workflows']}.each do |material|
+        material['workflows'].each do |workflow|
+          wfid = "#{material['topic_name']}-#{material['tutorial_name']}"
+
+          page2 = PageWithoutAFile.new(site, "", "ga4gh/trs/v2/tools/#{wfid}/versions/", "1?gtn=true")
+          page2.content = JSON.pretty_generate({
+            "id" => "1",
+            "url" => site.config['url'] + site.config['baseurl'] + material["url"],
+            "name" => "v1",
+            "author" => [],
+            "descriptor_type" => ["GALAXY"],
+          })
+          page2.data["layout"] = nil
+          site.pages << page2
+
+          page2 = PageWithoutAFile.new(site, "", "ga4gh/trs/v2/tools/#{wfid}/versions/1/GALAXY", "descriptor")
+          page2.content = JSON.pretty_generate({
+            "content" => File.open(material['dir'] + '/workflows/' + workflow['workflow']).read,
+            "checksum" => [],
+            "url" => nil,
+          })
+          page2.data["layout"] = nil
+          site.pages << page2
+        end
+      end
+
+
     end
   end
 end

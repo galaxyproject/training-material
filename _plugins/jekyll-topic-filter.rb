@@ -209,6 +209,7 @@ module TopicFilter
 
       page.data['topic_name'] = material_meta['topic_name']
       page.data['tutorial_name'] = material_meta['tutorial_name']
+      page.data['dir'] = material_meta['dir']
 
       interesting[mk]["resources"].push([material_meta["type"], page])
     end
