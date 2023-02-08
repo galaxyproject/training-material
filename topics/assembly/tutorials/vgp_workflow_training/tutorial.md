@@ -136,22 +136,11 @@ For this tutorial, the first step is to get the datasets from Zenodo. The VGP as
 >
 {: .details}
 
-## Import workflows from WorkflowHub
-    
-Once we have imported the datasets, the next step is to import the VGP workflows from the [WorkflowHub server](https://workflowhub.eu/). WorkflowHub is a workflow management system which allows workflows to be FAIR (Findable, Accessible, Interoperable, and Reusable), citable, have managed metadata profiles, and be openly available for review and analytics.
+Once we have imported the datasets, the next step is to import the VGP workflows from the WorkflowHub.
 
-> ### {% icon hands_on %} Hands-on: Import a workflow
->
-> 1. Click on the **Workflow** menu, located in the top bar.
->   ![Workflow menu](../../images/vgp_assembly/top_bar.png)
-> 2. Click on the <kbd>Import</kbd> button, located in the right corner.
-> 3. In the section **Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)**, click on *Search form*.
-> 4. In the **TRS Server: *workflowhub.eu*** menu you should type `name:vgp`
->    ![Figure 3: Workflow menu](../../images/vgp_assembly/workflow_list.png)
-> 5. Click on the desired workflow, and finally select the latest available version.
-{: .hands_on}
+{% snippet faqs/galaxy/workflows_import_from_workflowhub.md filter="name:vgp" %}
 
-After that, the imported workflows will appear in the main workflow menu. In order to initialize the workflow, we just need to click in the {% icon workflow-run %} **Run workflow** icon, marked with a red square in figure 2.
+The workflows imported are marked with a red square in the following figure:
 
 ![Figure 2: Workflow menu](../../images/vgp_assembly/imported_workflows.png  "Workflow main menu. The workflow menu lists all the workflows that have been imported. It provides useful information for organizing the workflows, such as last update and the tags. The worklows can be run by clicking in the play icon, marked in red in the image.")
 
