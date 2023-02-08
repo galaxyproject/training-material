@@ -158,7 +158,7 @@ module Jekyll
 
       # Not really an API
       TopicFilter.list_materials_by_tool(site).each do |tool, tutorials|
-        page2 = PageWithoutAFile.new(site, "", "by-tool/", "#{tool}.html")
+        page2 = PageWithoutAFile.new(site, "", "by-tool/", "#{tool.gsub('%20', ' ')}.html")
         page2.content = nil
         page2.data["layout"] = "by_tool"
         page2.data["short_tool"] = tool
