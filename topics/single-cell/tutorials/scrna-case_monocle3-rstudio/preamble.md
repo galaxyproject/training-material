@@ -9,20 +9,55 @@ This tutorial is the next one in the [Single-cell RNA-seq: Case Study]({% link t
 ## Get data
 In the [previous tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}), we showed that Monocle3 works great with annotated data, but what if your data is not annotated yet? Is it still possible to use Monocle? The answer is yes, Monocle also allows annotating cells according to their type and it will be shown in this tutorial. First, we need to get appropriate data to work with. We will continue to work on the case study data from a mouse model of fetal growth restriction {% cite Bacon2018 %} (see [the study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and [the project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). We will use the filtered AnnData object, before normalisation and annotation, generated in the [filtering tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}). You can simply go to the history of this tutorial, find step `20: Filtered Object` and download it. For ease of use, that was already done for you and you can import the file from Zenodo below. 
 
-{% snippet topics/single-cell/tutorials/scrna-case_monocle3-rstudio/faqs/get_data.md %} 
+><hands-on-title>Data upload</hands-on-title>
+>
+> 1. Create a new history for this tutorial
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+>    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
+>     -> `{{ page.title }}`):
+>
+>    ```
+>    {{ page.zenodo_link }}/files/AnnData_filtered.h5ad
+>    ```
+>
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>
+> 3. Check that the datatype is `h5ad`
+>
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
+>
+{: .hands_on}
 
 
 ## Preparing the files
 Monocle uses cell_data_set class to hold expression data; it requires three input files: `expression_matrix`, `cell_metadata` and `gene_metadata`. We will extract that information from our AnnData object. 
 
-{% snippet topics/single-cell/tutorials/scrna-case_monocle3-rstudio/faqs/prepare_files.md %} 
-
+><hands-on-title>Extract and download the input files</hands-on-title>
+>
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData_filtered`
+>    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
+> 2. Rename {% icon galaxy-pencil %} the observations annotation `Cell metadata (obs)`
+>
+> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData_filtered`
+>    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
+> 4. Rename {% icon galaxy-pencil %} the annotation of variables `Gene metadata (var)`
+>
+> 5. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `AnnData_filtered`
+>    - *"What to inspect?"*: `The full data matrix`
+> 6. Rename {% icon galaxy-pencil %} the output `Expression matrix`
+>
+> 7. Download the generated files from your history. To do so, just click on the {% icon galaxy-save %} save icon for `Cell metadata (obs)`, `Gene metadata (var)` and `Expression matrix`. We will need those later!
+>
+{: .hands_on}
 
 There are several ways in which you can complete this tutorial – check the {% icon tip %} Tip boxes below and choose your option!
 
-{% snippet topics/single-cell/tutorials/scrna-case_monocle3-rstudio/faqs/tip_rstudio.md %} 
-
 {% snippet topics/single-cell/tutorials/scrna-case_monocle3-rstudio/faqs/tip_jupyter.md %} 
+
+{% snippet topics/single-cell/tutorials/scrna-case_monocle3-rstudio/faqs/tip_rstudio.md %} 
 
 We will now present the workflow following using JupyterLab, but there will be advice for those using RStudio as well.
 
@@ -32,6 +67,17 @@ Describe installation in terminal
 
 In the meantime, when installation is running…
 
-{% snippet topics/single-cell/tutorials/scrna-case_monocle3-rstudio/faqs/files_upload.md %}
+><hands-on-title>Files upload</hands-on-title>
+>
+> 1. In the folder window, {% icon galaxy-upload %} Upload the `single-cell-scrna-case_monocle3-rstudio.ipynb` and three data files that you had downloaded from your computer. They should appear in the file window.
+>
+> 2. Right-click on the files and rename them so that it’s easier to refer to them:
+> - `GalaxyX-[Extracted_cell_annotations_(obs)]` to `cells`
+> - `GalaxyX-[Extracted gene annotations (var)]` to `genes`
+> - `GalaxyX-[Unprocessed expression matrix]` to `expression`
+>
+> 3. Open the notebook by double clicking it in the file window.
+>
+{: .hands_on}
 
 From now on, you can switch to JuyterLab and follow the tutorial in there!
