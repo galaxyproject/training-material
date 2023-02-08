@@ -43,7 +43,8 @@ follow_up_training:
             - rna-seq-viz-with-volcanoplot
             - rna-seq-genes-to-pathways
 
-contributors:
+contributions:
+  authorship:
     - bebatut
     - malloryfreeberg
     - moheydarian
@@ -54,6 +55,8 @@ contributors:
     - nsoranzo
     - pvanheus
     - lldelisle
+  editing:
+    - hexylena
 ---
 
 # Introduction
