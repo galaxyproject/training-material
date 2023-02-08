@@ -830,7 +830,7 @@ Run `cd -` again and you're back in `~/Desktop/shell-lesson-data/creatures`
 > 8. `cd`
 > 9. `cd ..`
 >
-> > <solution-title>Solution</solution-title>
+> > <solution-title></solution-title>
 > > 1. No: `.` stands for the current directory.
 > > 2. No: `/` stands for the root directory.
 > > 3. No: Amanda's home directory is `/Users/amanda`.

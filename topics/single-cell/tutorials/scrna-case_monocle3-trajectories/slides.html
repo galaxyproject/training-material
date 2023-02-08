@@ -34,7 +34,7 @@ requirements:
 ---
 
 ### What is trajectory analysis?
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
+.footnote[{% cite Deconinck2021 %}]
 
 --
 
@@ -55,7 +55,7 @@ TI allows us to study how cells evolve from one cell state to another, and subse
 ---
 
 ### Clustering, trajectory and pseudotime
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
+.footnote[{% cite Deconinck2021 %}]
 --
 
 .pull-left[
@@ -95,12 +95,12 @@ _______________________________________
 --
 
 - It would be quite difficult to analyse a sample every few seconds to see how the cells are changing. Therefore, we assume that snapshot data encompass all naïve, intermediate, and mature cell states with sufficient sampling coverage to allow the reconstruction of differentiation trajectories.
-<br /> [Sagar and Grün, 2020](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7115822/)
+<br /> {% cite Sagar2020 %}
 
 --
 
 - As different TI methods make different assumptions about the data, a first choice to make is based on which biological process is to be expected: **not all TI methods are designed to infer all kinds of biological processes.**
-<br /> [Deconinck et al., 2021](https://doi.org/10.1016/j.coisb.2021.05.005)
+<br /> {% cite Deconinck2021 %}
 
 ---
 ### Why different TI methods are designed to infer different kinds of biological processes?
@@ -110,7 +110,7 @@ There are multiple algorithms used to analyse scRNA-seq data to make it more rea
 Note that this is a graph from 2016 - many new approaches has been developed since then, but this scheme shows how those methods are built.
 --
 
-Look at the pipeline presented by [Robrecht Cannoodt et al., 2016](https://onlinelibrary.wiley.com/doi/10.1002/eji.201646347)
+Look at the pipeline presented by {% cite Cannoodt2016 %}
 
 --
 
@@ -232,7 +232,7 @@ We will consider some aspects shown here to better understand similarities and d
 ---
 
 ### Graph-based approach
-.footnote[[Haghverdi et al. Diffusion pseudotime robustly reconstructs lineage branching, 2016](https://doi.org/10.1101/041384)]
+.footnote[{% cite Haghverdi2016 %}]
 
 .pull-left[
 
@@ -255,7 +255,7 @@ We will consider some aspects shown here to better understand similarities and d
 
 {% comment %}
 ### Trajectory inference approaches:
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
+.footnote[{% cite Deconinck2021 %}]
 
 - Graph-based
 - Manifold learning-based
@@ -270,7 +270,7 @@ We will consider some aspects shown here to better understand similarities and d
 {% endcomment %}
 
 ### Extensions of trajectory inference: **RNA velocity methods**
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
+.footnote[{% cite Deconinck2021 %}]
 --
 
 - RNA velocity methods estimate the future state of a single cell captured in a static snapshot by looking at the ratios between spliced mRNA, unspliced mRNA, and mRNA degradation.
@@ -282,7 +282,7 @@ We will consider some aspects shown here to better understand similarities and d
 ---
 
 ### Extensions of trajectory inference: **RNA velocity methods**
-.footnote[[Deconinck et al. Recent advances in trajectory inference from single-cell omics data](https://doi.org/10.1016/j.coisb.2021.05.005)]
+.footnote[{% cite Deconinck2021 %}]
 
 - scVelo and CellRank use this extra velocity information to construct a directed k-nearest neighbor graph, as a starting step for the TI method.
 
@@ -378,14 +378,14 @@ Cells can differentiate or develop in various way, so they may exhibit different
  - DPT does not rely on dimension reduction and can thus detect subtle changes in high-dimensional gene expression patterns
  - DPT-based analysis proceeds by identifying branching points that occur after cells progress from a root cell through a common ‘trunk trajectory’
  <br />
- <sub>[L. Haghverdi et al. (2016)](http://dx.doi.org/10.1038/nmeth.3971)</sub>
+ <sub>{% cite Haghverdi2016 %}</sub>
 
 - binning and DNB (Dynamical Network Biomarker) theory
  - order cells, according to the pseudotime, evenly segmented into nonoverlap bins with each bin containing X cells
  - categorize DNB and non-DNB markers for each bin
  - one bin contains some unassigned cells - annotated as branch bin; of the remaining bins, there are bins on the trunk, and bins for each of the branch1 and branch2
  <br />
- <sub>[Z. Chen et al. (2018)](https://ieeexplore.ieee.org/document/8386685) </sub>
+ <sub>{% cite Chen2019 %}</sub>
 
 ]
 
@@ -507,12 +507,20 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 
 --
 
+- Monocle3 in RStudio (coming soon)
+
+<!--- 
+([Trajectory Analysis: Monocle3 in RStudio]({% link topics/single-cell/tutorials/scrna-case_monocle3-rstudio/tutorial.md %}))
+-->
+
+--
+
 - scVelo (coming soon)
 
 ---
 
 ### Trajectory analysis methods used in Galaxy: **PAGA (Partition-based graph abstraction)**
-.footnote[[F.A. Wolf et al. 'PAGA: graph abstraction reconciles clustering with trajectory inference through a topology preserving map of single cells' (2019)](https://doi.org/10.1186/s13059-019-1663-x)]
+.footnote[{% cite Wolf2019 %}]
 
 --
 
@@ -567,7 +575,7 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 ---
 
 ### Trajectory analysis methods used in Galaxy: **RaceID**
-.footnote[[D. Grün et al., 'Single-cell messenger RNA sequencing reveals rare intestinal cell types' (2015)](https://doi.org/10.1038/nature14966)]
+.footnote[{% cite Grn2015 %}]
 
 --
 .pull-left[
@@ -593,7 +601,7 @@ It doesn't directly affect your analysis, however do bear in mind that calculati
 ---
 
 ### Trajectory analysis methods used in Galaxy: **RaceID**
-.footnote[[D. Grün et al., 'Single-cell messenger RNA sequencing reveals rare intestinal cell types' (2015)](https://doi.org/10.1038/nature14966)]
+.footnote[{% cite Grn2015 %}]
 
 .pull-left[
 
@@ -621,7 +629,7 @@ From the mentioned tutorial:
 ---
 
 ### Trajectory analysis methods used in Galaxy: **Monocle3**
-.footnote[[C. Trapnell lab website, with detailed Monocle3 description and publications](https://cole-trapnell-lab.github.io/monocle3/)]
+.footnote[C. Trapnell {% cite monocle3 %}]
 
 --
 .pull-left[
@@ -654,7 +662,7 @@ From the mentioned tutorial:
 ---
 
 ### Trajectory analysis methods used in Galaxy: **Monocle3**
-.footnote[[C. Trapnell lab website, with detailed Monocle3 description and publications](https://cole-trapnell-lab.github.io/monocle3/)]
+.footnote[C. Trapnell {% cite monocle3 %}]
 
 .pull-left[
 
@@ -683,7 +691,7 @@ From the mentioned tutorial:
 ---
 
 ### Trajectory analysis methods used in Galaxy: **scVelo**
-.footnote[[ Bergen et al., 'Generalizing RNA velocity to transient cell states through dynamical modeling' (2020)](https://doi.org/10.1038/s41587-020-0591-3)]
+.footnote[{% cite Bergen2020 %}]
 
 --
 
@@ -697,7 +705,7 @@ From the mentioned tutorial:
 
 {% comment %}
 ### Trajectory analysis methods used in Galaxy: **PAGA (Partition-based graph abstraction)**
-.footnote[[F.A. Wolf et al. 'PAGA: graph abstraction reconciles clustering with trajectory inference through a topology preserving map of single cells' (2019)](https://doi.org/10.1186/s13059-019-1663-x)]
+.footnote[{% cite Wolf2019 %}]
 
 --
 
@@ -721,7 +729,7 @@ From the mentioned tutorial:
 
 ---
 ### Trajectory analysis methods used in Galaxy: **RaceID**
-.footnote[[D. Grün et al., 'Single-cell messenger RNA sequencing reveals rare intestinal cell types' (2015)](https://doi.org/10.1038/nature14966)]
+.footnote[{% cite Grn2015 %}]
 
 --
 
@@ -741,7 +749,7 @@ From the mentioned tutorial:
 
 ---
 ### Trajectory analysis methods used in Galaxy: **Monocle3**
-.footnote[[C. Trapnell lab website, with detailed Monocle3 description and publications](https://cole-trapnell-lab.github.io/monocle3/)]
+.footnote[C. Trapnell {% cite monocle3 %}]
 
 --
 
@@ -762,7 +770,7 @@ From the mentioned tutorial:
 
 ---
 ### Trajectory analysis methods used in Galaxy: **scVelo**
-.footnote[[ Bergen et al., 'Generalizing RNA velocity to transient cell states through dynamical modeling' (2020)](https://doi.org/10.1038/s41587-020-0591-3)]
+.footnote[{% cite Bergen2020 %}]
 
 --
 

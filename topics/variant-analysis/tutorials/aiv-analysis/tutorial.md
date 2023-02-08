@@ -389,7 +389,7 @@ Now what if we cannot obtain a consensus base for a position with the above crit
 >
 > 3. {% icon galaxy-eye %} Inspect each consensus sequence generated for the different segments
 >
->    > <question-title>Question</question-title>
+>    > <question-title></question-title>
 >    >
 >    > Does everything look ok?
 >    >
@@ -430,7 +430,7 @@ To do so, we are going to build multiple sequence alignments (MSAs) per segment 
 >
 > 4. {% icon galaxy-eye %} Explore each of the final trees produced by IQTree for the different segments
 >
->    > <question-title>Question</question-title>
+>    > <question-title></question-title>
 >    >
 >    > What are your conclusions about the sample in general and its HA and NA segments in particular?
 >    >
@@ -453,4 +453,3 @@ Analysis workflows for influenza whole-genome sequencing data need to take into 
 Nevertheless, it looks possible, with carefully chosen reference segment sequences and bioinformatic tools, to avoid a computationally expensive de-novo assembly approach and to use mapping against a dynamically compiled reference genome instead.
 
 The rather small reference segment collection suggested for this tutorial consists of 56 different samples, of which only a single one has the H4N6 subtype of the sample analyzed here. Still it allowed us to perform subtyping of the sample, to construct complete consensus sequences for 7 segments including NA, and to draw valuable conclusions about the origin of the sample. It is conceivable that a larger collection of references chosen to capture several strains from each HA subtype could solve the remaining issue of the incomplete HA consensus sequence.
-

@@ -104,7 +104,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run `ustacks`, `cstacks
 {: .comment}
 
 
-> <hands-on-title>Hands-On: Stacks: De novo map</hands-on-title>
+> <hands-on-title>Stacks: De novo map</hands-on-title>
 > **Stacks: De novo map** {% icon tool %}: Run Stacks selecting the Genetic map usage.
 >  - *"Select your usage"*: `Genetic map`
 >  - *"Files containing parent sequences"*: `female` and `male`

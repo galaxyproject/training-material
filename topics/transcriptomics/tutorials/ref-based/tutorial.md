@@ -1880,9 +1880,15 @@ We have extracted genes that are differentially expressed in treated (PS gene-de
 
 > <hands-on-title>Prepare the first dataset for goseq</hands-on-title>
 >
-> 1. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} an expression on every row with the following parameters:
->    - *"Add expression"*: `bool(c7<0.05)`
->    - {% icon param-file %} *"as a new column to"*: the `DESeq2 result file` (output of **DESeq2** {% icon tool %})
+> 1. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0) %} on rows with the following parameters:
+>    - {% icon param-file %} *"Input file"*: the `DESeq2 result file` (output of **DESeq2** {% icon tool %})
+>    - In *"Expressions"*:
+>      - {% icon param-text %} *"Add expression"*: `bool(float(c7)<0.05)`
+>      - {% icon param-select %} *"Mode of the operation?"*: `Append`
+>    - Under *"Error handling"*:
+>      - {% icon param-toggle %} *"Autodetect column types"*: `No`
+>      - {% icon param-select %} *"If an expression cannot be computed for a row"*: `Fill in a replacement value`
+>      - {% icon param-select %} *"Replacement value"*: `False`
 >
 > 2. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
 >    - *"Cut columns"*: `c1,c8`
@@ -2167,7 +2173,7 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 - The results of running DEXSeq-count in 'Prepare annotation' mode
 - Seven count files generated in 'Count reads' mode
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. Create a new history
 > 2. Import the seven count files from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
@@ -2235,7 +2241,7 @@ Similarly to DESeq2, DEXSeq generates a table with:
 7. *p*-value for the statistical significance of this change
 8. *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [Filter](Filter1) %} to extract exons with a significant differential usage (adjusted *p*-value equal or below 0.05) between treated and untreated samples
 >

@@ -1,0 +1,285 @@
+---
+layout: introduction_slides
+logo: "GTN"
+title: "Introduction to metagenomics"
+priority: 1
+redirect_from:
+- /topics/metagenomics/slides/introduction
+contributors:
+  - bebatut
+  - shiltemann
+---
+
+## Metagenomics
+
+---
+
+## Overview
+
+- Why study the microbiome?
+- 2 different approaches
+  - Amplicon sequencing
+  - Shotgun sequencing
+- Analysis pipelines
+- Visualisation options
+
+---
+
+## Why study the microbiome?
+
+.pull-left[
+
+- Health care research
+ - Humans are full of microorganisms
+ - Skin, gut, oral cavity, nasal cavity, eyes, ..
+ - Affects health, drug efficacy, etc
+
+]
+.pull-right[
+
+.image-100[ ![image of a human with lines leading from various points on the body to pie charts of bacteria distribution](../../images/human_microbiome.png) ]
+
+]
+
+- Sometimes referred to as your **second genome**
+ - ~10 times more cells than you
+ - ~100 times more genes than you
+ - ~1000s different species
+
+
+---
+## Why study the microbiome?
+
+- Environmental studies
+  - Microbes in the soil affect plants and animals
+  - Improve agriculture
+
+.image-75[ ![Rhizodeposition: image of a tree converting sun and co2 into fixed carbon used as food for soil microbes.](../../images/environmentalstudies.png) ]
+
+
+---
+
+## Shotgun vs Amplicon
+
+.pull-left[
+
+.image-75[ ![jigsaw puzzle image illustrating shotgun sequencing approach](../../images/puzzles-shotgun.png) ]
+
+**Shotgun Sequencing**
+- Sequence all DNA
+- More information
+- Higher complexity
+- Higher cost
+]
+
+.pull-right[
+
+
+.image-75[ ![jigsaw puzzle image illustrating amplicon sequencing approach](../../images/puzzles-amplicon.png) ]
+
+**Amplicon Sequencing**
+- Sequence only specific gene
+- No functional information
+- Less complex to analyse
+- Cheaper
+]
+
+???
+
+puzzle analogy: think of each organism as a jigsaw puzzle
+
+- shotgun: we considers all pieces (DNA) from all puzzles (organisms); we throw the pieces in a big pile, and need to reconstruct each individual puzzle from this. It is more complex, but you get full details (functional information) about the picture on each puzzle.
+
+- amplicon: we only look at the corner pieces, these are easy to spot, and all puzzles have them. It will not tell us all the details (e.g. functional information) of the picture on the puzzle, but might be enough to tell us whether it is a landscape or a portrait or abstract art for instance (taxonomy).
+
+---
+
+## Amplicon
+
+
+- Targetted approach, e.g. 16S (bacteria), 18S (eukaryotes), ITS (fungi)
+- Amplify gene of specific taxonomic group, i.e. not host or environment
+
+![left is picture of e. coli ribosome with "so much rna" written, right is the RNA structure in a diagram](../../images/16S_gene.png)
+
+---
+
+## Amplicon
+
+- Highly conserved gene: easy to target across all bacteria
+- With variable regions: distinguish between genus
+
+![line graph showing V regions as peaks along x axis of alignment position, and y index of shannon-index/alignment-index.](../../images/16S_variableregions.jpg)
+
+???
+V1, V2 etc are the variable regions
+
+---
+
+## Amplicon
+
+- Pros
+  - Well-established
+  - Inexpensive ($50-$100/sample)
+- Cons
+ - V-region choice can bias results
+ - Is based on a very well conserved gene, making it hard to resolve species and strains
+
+
+???
+18S gene also amplifies archaea
+
+---
+
+## Shotgun metagenomics
+
+- Aims to sequence the "whole" metagenome
+
+- Pros:
+  - Not biased by amplicon primer set
+  - Not limited by conservation of the amplicon
+  - Can also provide functional information
+
+- Cons:
+  - Environmental contamination, including host
+  - More expensive ($1000+/sample)
+  - Complex data analysis
+    - Requires high performance computing, high memory, high compute capacity
+
+---
+
+
+## End-to-End
+
+![graphi with an arrow going from sampling (nose picture) to extraction to amplification to ngs to bioinformatics (computer picture)](../../images/16S_end-to-end.png)
+
+Every step in this process can have serious impact on the results
+
+---
+
+## Bioinformatics
+
+![cartoon titled drowned in NGS data with a man covered in messy data.](../../images/so_much_data.png)
+
+```
+Roche 454 GS:    ~ 100.000 reads
+Illumina MiSeq:  ~ 25.000.000 reads
+Shotgun:             ~ ? reads
+```
+
+---
+
+## Analysis pipelines
+
+![comparison of amplicon and shotgun pipelines. amplicon pipeline goes to community structure viz, shotgun pipeline goes to community structure in addition to functional assignment.](../../images/metagenomics_pipeline.png)
+
+Amplicon analysis variants:
+
+- OTU: operational taxonomic units
+- ASV: amplicon sequence variants
+
+---
+
+## Pre-processing
+
+![fastqc plot with regions labelled good, okay, and bad based on the plot's colour](../../images/preprocessing.png)
+
+- There are a lot of ways to filter and trim your data
+- Trade-off between quality and amount of information retained
+
+---
+
+## OTU Clustering / Denoising
+
+.pull-left[
+OTU clustering:
+
+- Cluster on 97% sequence similarity for genus-level differentiation
+- OTUs depend on the data set: no comparability of data sets
+
+.image-75[ ![tree with clusters around the leaves labelled OTUs and 97% identity threshold](../../images/otu.png) ]
+
+]
+
+.pull-right[
+ASV Denoising:
+
+- Discriminate sequence variations from sequencing errors
+- Based on an error model and the assumption that sequences containing errors are less likely observed repeatedly
+
+.image-90[ ![DNA sequences with hierarchical clustering shown](../../images/clustering.png) ]
+
+]
+
+???
+ASV stands for "Amplicon Sequence Variants"
+
+TODO: expand on OTU vs ASV a bit more
+---
+
+## Chimera Removal
+
+- During PCR multiple sequences can combine to form a hybrid
+- Must be removed from your data for better results
+
+![aborted extension leads to mispriming, which gets extended with the wrong sequence, and results in a chimera](../../images/chimeras.png)
+
+---
+
+## Search marker database and taxonomy assignment
+
+- Homology with reference databases
+  - Amplicon
+
+    ![graphic with two databases green genes (berkely, 2013, 200k entries) and silva (max plank, 2015, 172k entries)](../../images/silva-greengenes.png)
+
+  - Shotgun: MetaPhlAn2 database
+      - ~1M unique clade-specific marker genes
+      - ~17,000 reference genomes (bacterial and archaeal, viral and eukaryotic)
+
+- Accuracy depends on quality and completeness of database used
+- Databases are inevitable incomplete
+
+---
+
+## Search functional database
+
+- Databases to identify gene families
+    - UniRef50
+    - UniRef90
+- Grouping in other functional categories
+    - MetaCyc Reactions
+    - KEGG Orthogroups (KOs)
+    - Pfam domains
+    - Level-4 enzyme commission (EC) categories
+    - EggNOG (including COGs)
+    - Gene Ontology (GO)
+    - Informative GO
+- Pathway reconstruction
+
+---
+
+## Results: OTU table
+
+![screenshot of an excel table](../../images/otutable.png)
+
+
+---
+
+## Results: Visualizations
+
+- **Krona**
+  - interactive exploration of sample taxonomy
+
+![doughnut plot with bands for each kingdom, down to genus, species](../../images/krona_lacto.png)
+
+---
+
+## Results: Visualizations
+
+- **Phinch**
+  - BIOM file input
+  - various visualizations
+  - multi-sample data
+
+![screenshot of phinch website showing multiple plot types](../../../../shared/images/phinch_overviewpage.png)

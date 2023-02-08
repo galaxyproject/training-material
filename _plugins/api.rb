@@ -1,5 +1,7 @@
 require 'json'
 require './_plugins/jekyll-topic-filter.rb'
+require './_plugins/gtn/metrics'
+require './_plugins/gtn/scholar'
 
 module Jekyll
   class APIGenerator < Generator
@@ -15,11 +17,18 @@ module Jekyll
     def generate(site)
 
       # Full Bibliography
+      Gtn::Scholar.load_bib(site)
       puts "[GTN/API] Bibliography"
       page3 = PageWithoutAFile.new(site, "", "api/", "gtn.bib")
       page3.content = site.config['cached_global_bib'].to_s
       page3.data["layout"] = nil
       site.pages << page3
+
+      # Metrics endpoint, /metrics
+      page2 = PageWithoutAFile.new(site, "", "", "metrics")
+      page2.content = "{% raw %}\n" + Gtn::Metrics.generate_metrics(site) + "{% endraw %}"
+      page2.data["layout"] = nil
+      site.pages << page2
 
       def markdownify(site, text)
         site.find_converter_instance(
@@ -142,4 +151,3 @@ module Jekyll
     end
   end
 end
-

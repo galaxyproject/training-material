@@ -174,7 +174,7 @@ Our example can already be found [online](https://github.com/Lain-inrae/geoc-gxi
 In the following sections, we will study how it was built.
 
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > First, let's clone the repository to take a quick look at it.
 >
@@ -297,7 +297,7 @@ This image is already hosted on [Docker Hub](https://hub.docker.com/r/ancelete/f
 If so, don't forget to create a `gxit` folder containing `app.R` and `install.R`
 next to your Dockerfile.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > Let's start working on this Docker container.
 >
@@ -333,7 +333,7 @@ If you are lucky, you might find an available Docker image for the application y
 
 Before we go pushing our container to the cloud, we should give it a local test run to ensure that it's working correctly on our development machine. Have a play and see how our little web app works!
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 > ```sh
 > # Run our application in the container
 > docker run -it -p 127.0.0.1:8765:$PORT $IMAGE_TAG
@@ -359,7 +359,7 @@ during development.
 has great documentation on creating repositories, authenticating with tokens
 and pushing images.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 > ```sh
 > # Set remote tag for your container. This should include your username and
 > # repository name for Docker Hub.
@@ -401,7 +401,7 @@ our new Docker container as a Galaxy tool.
 
 ## The tool XML
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > Create a Galaxy tool XML file named `interactivetool_tabulator.xml`. The file is similar to a regular tool XML, but calls on our remote Docker image as a dependency. The tags that we are most concerned with are:
 > - A `<container>` (under the `<requirements>` tag)
@@ -548,7 +548,7 @@ Let's check this integration on your machine. You can use a VM if you prefer not
 
 ## Galaxy configuration
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > ```sh
 > cd ~/GxIT/galaxy/config

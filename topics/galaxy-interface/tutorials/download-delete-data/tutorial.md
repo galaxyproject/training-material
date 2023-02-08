@@ -154,7 +154,7 @@ This section will show you how to delete and then purge a single dataset from a 
 
 > <hands-on-title>Delete a single dataset</hands-on-title>
 >
-> 1. Click on the {% icon galaxy-cross %} **Delete** button of the dataset you wish to delete
+> 1. Click on the {% icon galaxy-delete %} **Delete** button of the dataset you wish to delete
 >
 >    ![delete button](../../images/download-delete/delete_button.png)
 >

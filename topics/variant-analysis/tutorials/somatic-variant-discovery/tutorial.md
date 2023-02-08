@@ -19,7 +19,7 @@ contributors:
 - Khaled196
 - kpbioteam
 - wm75
-- davidsalgado
+- d-salgado
 - kpoterlowicz
 
 ---

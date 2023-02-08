@@ -123,6 +123,8 @@ Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows yo
 
 ## Concatenating objects
 
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
 > <hands-on-title>Concatenating AnnData objects</hands-on-title>
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
@@ -130,7 +132,7 @@ Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows yo
 >    - *"Function to manipulate the object"*: `Concatenate along the observations axis`
 >    - {% icon param-file %} *"Annotated data matrix to add"*: `Select all the other matrix files from bottom to top, N707 to N702`
 >
->    > <warning-title>Warning!: N707 to N702!</warning-title>
+>    > <warning-title>N707 to N702!</warning-title>
 >    > You are adding files to N701, so do not add N701 to itself!
 >    {: .warning}
 >

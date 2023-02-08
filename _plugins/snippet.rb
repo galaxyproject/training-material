@@ -88,6 +88,7 @@ module Jekyll
              z = z.gsub(/\R/,"\n> ")
              #puts box_start+y+box_end
           end
+
           #if z =~ /contribute/
             #puts "=== step 3   ===\n#{z}\n\n"
             #puts "=== MARKDOWN ===\n#{box_start+z+box_end}\n\n"
@@ -96,7 +97,7 @@ module Jekyll
 
           '<!--SNIPPET-->' + markdownify(box_start+z+box_end)
             .gsub(/<(pre)[^>]*>(.*?)<\/\1>/m){|m| m.gsub(/\n/, '<br>') } # Replace newlines inside of a PRE with <br>, so they don't get eaten during next one.
-            .gsub(/\R+/, '') # Strip out spaces or the boxes break
+            .gsub(/\R+/, ' ') # Strip out spaces or the boxes break, replace them with single spaces so e.g. newlines get collapsed into a space and don't merge words together that shouldn't be merged.
             .gsub('<h3','<h3 data-toc-skip')
         end
       end
@@ -135,20 +136,12 @@ module Jekyll
       end
     end
   end
-
-  module RegexReplace
-    def regex_replace(str, regex_search, value_replace)
-      regex = /#{regex_search}/m
-      return str.gsub(regex, value_replace)
-    end
-
-    def regex_replace_once(str, regex_search, value_replace)
-      regex = /#{regex_search}/m
-      return str.sub(regex, value_replace)
-    end
-  end
-
 end
 
 Liquid::Template.register_tag("snippet", Jekyll::Tags::SnippetIncludeTag)
-Liquid::Template.register_filter(Jekyll::RegexReplace)
+
+Jekyll::Hooks.register :pages, :post_render do |page|
+  if page.output =~ /-title>/
+    page.output = Gtn::Boxify.replace_elements(page.output, page.data.fetch('lang', 'en'), page.path)
+  end
+end
