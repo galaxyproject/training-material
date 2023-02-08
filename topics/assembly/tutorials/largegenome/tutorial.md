@@ -24,7 +24,6 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
 
 ## What is genome assembly?
 
@@ -49,7 +48,7 @@ It is most likely that any new genome assembly will have its own set of required
 
 Before using these workflows on real datasets, we recommend completing all the relevant GTN tutorials about Data QC and Asssembly to give extra familiarity with the concepts. Then, we suggest creating subsampled data sets from your full-sized data, for testing. For best results, it is recommended to test each tool separately, and consider the parameters and their relevance and suitability for your own research questions. 
 
->### Agenda
+> <agenda-title></agenda-title>
 > In this tutorial we will deal with:
 >
 > 1. TOC
@@ -68,7 +67,8 @@ In this tutorial, we will follow these steps:
 * For each step, we will run a workflow. 
 * We will stay in the same Galaxy history throughout. 
 
-*How to run a workflow in Galaxy*
+## How to run a workflow in Galaxy
+
 * All of these workflows have been uploaded to [workflowhub.eu](https://workflowhub.eu/) and have been tagged with "Large-genome-assembly". There, each workflow is accompanied by an image of the workflow canvas and the tool connections. 
 * The workflows are also linked to this tutorial - see above and import them into your own Galaxy Account. 
 * A note: as of September 2022, these workflows have been tested on Galaxy Australia and we are now in the process of testing them on Galaxy Europe and Galaxy Main. 
@@ -89,11 +89,13 @@ Each workflow will be discussed in a separate section.
 
 Let's start with uploading the data.
 
-*What sequence data are we using in the tutorial?*
+## What sequence data are we using in the tutorial?
+
 * The data sets for genome projects can be very large and tools can take some time to run. It is a good idea to test that your planned tools and workflows will work on smaller-sized test data sets, as it is much quicker to find out about any problems. 
 * In this tutorial we will use a subset of real sequencing data from a plant genome, the snow gum, *Eucalyptus pauciflora*, from a genome project described in this paper: {% cite Wang2020 %}. Data is hosted at NCBI BioProject number: PRJNA450887.
 
-*How has this data subset been prepared?*
+## How has this data subset been prepared?
+
 * From NCBI, three read files were imported into Galaxy for this tutorial: nanopore reads (SRR7153076), and paired Illumina reads (SRR7153045). 
 * These were randomly subsampled to 10% of the original file size. 
 * Plant genomes may contain an excess of reads from the chloroplast genome (of which there are many copies per cell). To ensure our test data sets are not swamped from excessive chloroplast-genome reads, reads that mapped to a set of known chloroplast gene sequences were discarded.
@@ -102,16 +104,17 @@ We are also using a reference genome *Arabidopsis thaliana* for a later comparis
 
 ## Import the data
 
-> ### {% icon hands_on %} Hands-on: Import the data
+> <hands-on-title>Import the data</hands-on-title>
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >    {% snippet faqs/galaxy/histories_rename.md %}
 >
 > 2. Import from [Zenodo](https://zenodo.org/record/7055935) or a data library (ask your instructor):
->   - 2 FASTQ files with illumina reads: these files have a R1 or R2 in the name
->   - 1 FASTQ file with nanopore reads: this file has nano in the name
->   - 1 FASTQ file for the genome Arabidopsis
+>
+>    - 2 FASTQ files with illumina reads: these files have a R1 or R2 in the name
+>    - 1 FASTQ file with nanopore reads: this file has nano in the name
+>    - 1 FASTQ file for the genome Arabidopsis
 >   
 >    ```
 >    https://zenodo.org/record/7055935/files/Eucalyptus_subsample_ten_pc_SRR7153045_R1.fastq.gz
@@ -132,39 +135,39 @@ We are also using a reference genome *Arabidopsis thaliana* for a later comparis
 
 Let's look at how many reads we have and their quality scores using the Data QC workflow.
 
-*Data QC workflow*
+## Data QC workflow
 
-> ### {% icon hands_on %} Hands-on: Run the Data QC workflow
->* Find this workflow, enter the correct input files, and run.
-* What it does: Reports statistics from sequencing reads
-* Inputs: 
-  * long reads (fastq.gz format)
-  * short reads (R1 and R2) (fastq.gz format)
-* Outputs: 
-  * For long reads: a nanoplot report (the HTML report summarizes all the information). 
-  * For short reads: a MultiQC report 
-* Tools used: 
-  * Nanoplot
-  * FastQC
-  * MultiQC
-* Input parameters: None required
-* Workflow steps: 
-  * Long reads are analysed by Nanoplot. 
-  * Short reads (R1 and R2) are analysed by FastQC
-  * the resulting reports are processed by MultiQC
-* Options: 
-  * See the tool settings options at runtime and change as required. 
-  * Alternative tool option: fastp
->
+> <hands-on-title>Run the Data QC workflow</hands-on-title>
+> * Find this workflow, enter the correct input files, and run.
+> * What it does: Reports statistics from sequencing reads
+> * Inputs: 
+>   * long reads (fastq.gz format)
+>   * short reads (R1 and R2) (fastq.gz format)
+> * Outputs: 
+>   * For long reads: a nanoplot report (the HTML report summarizes all the information). 
+>   * For short reads: a MultiQC report 
+> * Tools used: 
+>   * Nanoplot
+>   * FastQC
+>   * MultiQC
+> * Input parameters: None required
+> * Workflow steps: 
+>   * Long reads are analysed by Nanoplot. 
+>   * Short reads (R1 and R2) are analysed by FastQC
+>   * the resulting reports are processed by MultiQC
+> * Options: 
+>   * See the tool settings options at runtime and change as required. 
+>   * Alternative tool option: fastp
+> 
 {: .hands_on}
 
-*Data QC results*
+## Data QC results
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. What are the results from the two output files? Are the reads long enough and of high enough quality for our downstream analyses?  Will reads need any trimming or filtering?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. Common things to check are average read length, average quality, and whether quality varies by position in the reads.
 > > * Look at the plot for MultiQC for the Sequence Quality Histograms. This shows how the read quality of Illumina reads (y axis) varies according to base position (x axis).You may see for Illumina reads that there is some drop-off in quality towards the end of the reads, which may benefit from trimming. 
@@ -172,7 +175,7 @@ Let's look at how many reads we have and their quality scores using the Data QC 
 > {: .solution}
 {: .question}
 
-> ### {% icon comment %} Additional information about the tools
+> <comment-title>Additional information about the tools</comment-title>
 > More about interpreting nanoplot plots: 
 > * [Nanoplot on Github](https://github.com/wdecoster/NanoPlot)
 > * [Example nanoplots](https://gigabaseorgigabyte.wordpress.com/2017/06/01/example-gallery-of-nanoplot/)
@@ -190,37 +193,37 @@ A read broken into kmers:
 
 !["An image of the a read broken into kmers: the read is a bold bar with the letters ABCDEF; each kmer is a smaller bar with three letters in it: the kmers are ABC, BCD, CDE, and DEF."](images/kmers.png){: width="650"}
 
-> ### {% icon comment %} What is kmer counting?
+> <comment-title>What is kmer counting?</comment-title>
 >
 > Kmer counting is usually done with high-accuracy short reads, not long reads which may have high error rates.  After counting how many times each kmer is seen in the reads, we can see what sorts of counts are common. For example, lots of kmers may have been found 24 or 25 times. A graph shows the number of different kmers (y axis) found at different counts, or depths (x axis). 
 >
 > Many different kmers will be found the same number of times; e.g. X25. If kmer length approaches read length, this means the average depth of your sequencing is also ~X25, and there would be a peak in the graph at this position (smaller kmers = higher kmer depth). There may be smaller peaks of kmer counts at higher depths, e.g. X50 or X100, indicating repeats in the genome. There may be other smaller peaks of kmers found at half the average depth, indicating a diploid genome with a certain amount of difference between the homologous chromosomes - this is known as heterozygosity. Thus, the plot of how many different kmers are found at all the depths will help inform estimates of sequencing depth, ploidy level, heterozygosity, and genome size. 
 {: .comment}
 
-*Kmer counting workflow*
+## Kmer counting workflow
 
-> ### {% icon hands_on %} Hands-on: Run the Kmer counting workflow
->* Find this workflow, enter the correct input files, and run.
-* What it does: Estimates genome size and heterozygosity based on counts of kmers
-* Inputs: One set of short reads: e.g. R1.fq.gz
-* Outputs: GenomeScope graphs
-* Tools used: 
-  * Meryl
-  * GenomeScope
-* Input parameters: None required
-* Workflow steps:
-  * The tool meryl counts kmers in the input reads (k=21), then converts this into a histogram.
-  * GenomeScope: runs a model on the histogram; reports estimates. k-mer size set to 21. 
-* Options: 
-  * Use a different kmer counting tool. e.g. khmer. If so, for the settings, advanced parameters: 
-  * k-mer size: 21 (as per [this recommendation](https://github.com/schatzlab/genomescope/issues/32)). 
-  * n_tables: 4. tablesize: set at 8 billion (as per [this recommendation](https://khmer.readthedocs.io/en/v1.0/choosing-table-sizes.html)). 
-  * Will also need to run some formatting steps to convert khmer output to a two-column matrix, for the  Genomscope. See [this workflow](https://usegalaxy.org.au/u/anna/w/kmer-counting-khmer). 
-  * Note: khmer: to use both R1 and R2 read sets, khmer needs these paired reads in interleaved format. 
+> <hands-on-title>Run the Kmer counting workflow</hands-on-title>
+> * Find this workflow, enter the correct input files, and run.
+> * What it does: Estimates genome size and heterozygosity based on counts of kmers
+> * Inputs: One set of short reads: e.g. R1.fq.gz
+> * Outputs: GenomeScope graphs
+> * Tools used: 
+>   * Meryl
+>   * GenomeScope
+> * Input parameters: None required
+> * Workflow steps:
+>   * The tool meryl counts kmers in the input reads (k=21), then converts this into a histogram.
+>   * GenomeScope: runs a model on the histogram; reports estimates. k-mer size set to 21. 
+> * Options: 
+>   * Use a different kmer counting tool. e.g. khmer. If so, for the settings, advanced parameters: 
+>   * k-mer size: 21 (as per [this recommendation](https://github.com/schatzlab/genomescope/issues/32)). 
+>   * n_tables: 4. tablesize: set at 8 billion (as per [this recommendation](https://khmer.readthedocs.io/en/v1.0/choosing-table-sizes.html)). 
+>   * Will also need to run some formatting steps to convert khmer output to a two-column matrix, for the  Genomscope. See [this workflow](https://usegalaxy.org.au/u/anna/w/kmer-counting-khmer). 
+>   * Note: khmer: to use both R1 and R2 read sets, khmer needs these paired reads in interleaved format. 
 >
 {: .hands_on}
 
-*Kmer counting results*
+## Kmer counting results
 
 GenomeScope transformed linear plot:
 
@@ -253,46 +256,46 @@ Trimming and filtering reads:
 
 !["An image of the concepts of trimming and filtering reads, with reads represented by bold bars; trimming represented by crosses over various locations in each read."](images/trimfilterreads.png){: width="800"}
 
-*Trimming and filtering workflow*
+## Trimming and filtering workflow
 
-> ### {% icon hands_on %} Hands-on: Run the Trim and Filter workflow
->* Find this workflow, enter the correct input files, and run.
-* What it does: Trims and filters raw sequence reads according to specified settings. 
-* Inputs: 
-  * Long reads (format fastq)
-  * Short reads R1 and R2 (format fastq) 
-* Outputs: Trimmed and filtered reads: 
-  * fastp_filtered_long_reads.fastq.gz (But note: no trimming or filtering is on by default)
-  * fastp_filtered_R1.fastq.gz
-  * fastp_filtered_R2.fastq.gz
-* Tools used:  fastp (Note. The latest version (0.20.1) of fastp has an issue displaying plot results. Using version 0.19.5 here instead until this is rectified). 
-* Input parameters: None required, but recommend removing the long reads from the workflow if not using any trimming/filtering settings. 
-* Workflow steps: 
-  * Long reads: fastp settings: 
-  * These settings have been changed from the defaults (so that all filtering and trimming settings are now disabled). 
-  * Adapter trimming options: Disable adapter trimming: yes. 
-  * Filter options: Quality filtering options: Disable quality filtering: yes. 
-  * Filter options: Length filtering options: Disable length filtering: yes. 
-  * Read modification options: PolyG tail trimming: Disable. 
-  * Output options: output JSON report: yes
-  * Short reads: fastp settings:
-  * adapter trimming (default setting: adapters are auto-detected)
-  * quality filtering (default: phred quality 15), unqualified bases limit (default = 40%), number of Ns allowed in a read (default = 5)
-  * length filtering (default length = min 15)
-  * polyG tail trimming (default = on for NextSeq/NovaSeq data which is auto detected)
-  * Output options: output JSON report: yes
-* Options: 
-  * Change any settings in fastp for any of the input reads.
-  * Adapter trimming: input the actual adapter sequences. (Alternative tool for long read adapter trimming: Porechop.) 
-  * Trimming n bases from ends of reads if quality less than value x  (Alternative tool for trimming long reads: NanoFilt.) 
-  * Discard post-trimmed reads if length is < x (e.g. for long reads, 1000 bp)
-  * Example filtering/trimming that you might do on long reads: remove adapters (can also be done with Porechop), trim bases from ends of the reads with low quality (can also be done with NanoFilt), after this can keep only reads of length x (e.g. 1000 bp) 
-  * If not running any trimming/filtering on nanopore reads, could delete this step from the workflow entirely.
+> <hands-on-title>Run the Trim and Filter workflow</hands-on-title>
+> * Find this workflow, enter the correct input files, and run.
+> * What it does: Trims and filters raw sequence reads according to specified settings. 
+> * Inputs: 
+>   * Long reads (format fastq)
+>   * Short reads R1 and R2 (format fastq) 
+> * Outputs: Trimmed and filtered reads: 
+>   * fastp_filtered_long_reads.fastq.gz (But note: no trimming or filtering is on by default)
+>   * fastp_filtered_R1.fastq.gz
+>   * fastp_filtered_R2.fastq.gz
+> * Tools used:  fastp (Note. The latest version (0.20.1) of fastp has an issue displaying plot results. Using version 0.19.5 here instead until this is rectified). 
+> * Input parameters: None required, but recommend removing the long reads from the workflow if not using any trimming/filtering settings. 
+> * Workflow steps: 
+>   * Long reads: fastp settings: 
+>   * These settings have been changed from the defaults (so that all filtering and trimming settings are now disabled). 
+>   * Adapter trimming options: Disable adapter trimming: yes. 
+>   * Filter options: Quality filtering options: Disable quality filtering: yes. 
+>   * Filter options: Length filtering options: Disable length filtering: yes. 
+>   * Read modification options: PolyG tail trimming: Disable. 
+>   * Output options: output JSON report: yes
+>   * Short reads: fastp settings:
+>   * adapter trimming (default setting: adapters are auto-detected)
+>   * quality filtering (default: phred quality 15), unqualified bases limit (default = 40%), number of Ns allowed in a read (default = 5)
+>   * length filtering (default length = min 15)
+>   * polyG tail trimming (default = on for NextSeq/NovaSeq data which is auto detected)
+>   * Output options: output JSON report: yes
+> * Options: 
+>   * Change any settings in fastp for any of the input reads.
+>   * Adapter trimming: input the actual adapter sequences. (Alternative tool for long read adapter trimming: Porechop.) 
+>   * Trimming n bases from ends of reads if quality less than value x  (Alternative tool for trimming long reads: NanoFilt.) 
+>   * Discard post-trimmed reads if length is < x (e.g. for long reads, 1000 bp)
+>   * Example filtering/trimming that you might do on long reads: remove adapters (can also be done with Porechop), trim bases from ends of the reads with low quality (can also be done with NanoFilt), after this can keep only reads of length x (e.g. 1000 bp) 
+>   * If not running any trimming/filtering on nanopore reads, could delete this step from the workflow entirely.
 >
 {: .hands_on}
 
 
-*Trim and filter reads: results* 
+## Trim and filter reads: results
 
 There are two fastp reports - one for the illumina reads and one for the nanopore reads. We have only processed illumina reads in this example. Look at the fastp illumina report. (Note: the title in the report refers to only one of the input read sets but the report is for both read sets. This is a known issue under investigation.)
 
@@ -302,21 +305,19 @@ Filtering results from fastp on short reads:
 
 Here we can see that less than 0.5 % of the reads were discarded based on quality. If our read set had high enough coverage for downstream analyses, we might choose to apply a stricter quality filter. 
 
-*Summary of read data for genome assembly*
+## Summary of read data for genome assembly
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 > 1. How many reads do we have now for our genome assembly? Is the read coverage high enough? 
 >
-> > ### {% icon solution %} Solution
-> >
-> > 
-* Genome size: From kmer counting, the estimated genome size is ~ 240,000 bp  (this is only subsampled data; full data would likely suggest a size of 0.5 - 1 Gbp for a typical plant genome)
-* Genome coverage (or depth):  total base pairs in the reads / base pairs in genome
-* Short reads: From the fastp report after trimming and filtering short reads, there are 3.2 million reads, comprising 482 million base pairs 
-* Short read coverage:  = X2008
-* Long reads: From the fastp report of the long reads (although no filtering and trimming performed) there are 85 thousand reads, comprising 761 million base pairs.  From the nanoplot tool we ran in the Data QC section , we know that the mean read length is almost 9,000 base pairs, and the longest read is > 140,000 base pairs. 
-* Long read coverage:  = X3170
-These coverages are very high but are ok to use with tutorial data. With a typical full data set, coverage would be more in the order of X40 to X200. 
+> > <solution-title></solution-title>
+> > * Genome size: From kmer counting, the estimated genome size is ~ 240,000 bp  (this is only subsampled data; full data would likely suggest a size of 0.5 - 1 Gbp for a typical plant genome)
+> > * Genome coverage (or depth):  total base pairs in the reads / base pairs in genome
+> > * Short reads: From the fastp report after trimming and filtering short reads, there are 3.2 million reads, comprising 482 million base pairs 
+> > * Short read coverage:  = X2008
+> > * Long reads: From the fastp report of the long reads (although no filtering and trimming performed) there are 85 thousand reads, comprising 761 million base pairs.  From the nanoplot tool we ran in the Data QC section , we know that the mean read length is almost 9,000 base pairs, and the longest read is > 140,000 base pairs. 
+> > * Long read coverage:  = X3170
+> > These coverages are very high but are ok to use with tutorial data. With a typical full data set, coverage would be more in the order of X40 to X200. 
 > >
 > {: .solution}
 {: .question}
@@ -339,38 +340,37 @@ There are many other approaches and combinations of using short and long reads, 
 
 For more about the differences between current assembly and polishing tools see {% cite Chen2021%} and {% cite McCartney2021 %}.
 
-*Assembly with Flye workflow*
+#### Assembly with Flye workflow
 
-> ### {% icon hands_on %} Hands-on: Run the Flye Assembly workflow
->* Find this workflow, enter the correct input files, and run.
-* What it does: Assembles long reads with the tool Flye
-* Inputs: long reads (may be raw, or filtered, and/or corrected); fastq.gz format
-* Outputs: 
-  * Flye assembly fasta. 
-  * Fasta stats on assembly.fasta
-  * Assembly graph image from Bandage
-  * Bar chart of contig sizes
-  * Quast reports of genome assembly
-* Tools used: 
-  * Flye
-  * Fasta statistics
-  * Bandage
-  * Bar chart
-  * Quast
-* Input parameters: None required, but recommend setting assembly mode to match input sequence type
-* Workflow steps: 
-  * Long reads are assembled with Flye, using default tool settings. Note: the default setting for read type ("mode") is nanopore raw. Change this at runtime if required. 
-  * Statistics are computed from the assembly.fasta file output, using Fasta Statistics and Quast (is genome large: Yes; distinguish contigs with more that 50% unaligned bases: no)
-  * The graphical fragment assembly file is visualized with the tool Bandage. 
-  * Assembly information sent to bar chart to visualize contig sizes
-* Options
-  * See other Flye options. 
-  * Use a different assembler (in a different workflow). 
-  * Bandage image options - change size (max size is 32767), labels - add (e.g. node lengths). You can also install Bandage on your own computer and download the "graphical fragment assembly" file to view in greater detail. 
->  
+> <hands-on-title>Run the Flye Assembly workflow</hands-on-title>
+> * Find this workflow, enter the correct input files, and run.
+> * What it does: Assembles long reads with the tool Flye
+> * Inputs: long reads (may be raw, or filtered, and/or corrected); fastq.gz format
+> * Outputs: 
+>   * Flye assembly fasta. 
+>   * Fasta stats on assembly.fasta
+>   * Assembly graph image from Bandage
+>   * Bar chart of contig sizes
+>   * Quast reports of genome assembly
+> * Tools used: 
+>   * Flye
+>   * Fasta statistics
+>   * Bandage
+>   * Bar chart
+>   * Quast
+> * Input parameters: None required, but recommend setting assembly mode to match input sequence type
+> * Workflow steps: 
+>   * Long reads are assembled with Flye, using default tool settings. Note: the default setting for read type ("mode") is nanopore raw. Change this at runtime if required. 
+>   * Statistics are computed from the assembly.fasta file output, using Fasta Statistics and Quast (is genome large: Yes; distinguish contigs with more that 50% unaligned bases: no)
+>   * The graphical fragment assembly file is visualized with the tool Bandage. 
+>   * Assembly information sent to bar chart to visualize contig sizes
+> * Options
+>   * See other Flye options. 
+>   * Use a different assembler (in a different workflow). 
+>   * Bandage image options - change size (max size is 32767), labels - add (e.g. node lengths). You can also install Bandage on your own computer and download the "graphical fragment assembly" file to view in greater detail. 
 {: .hands_on}
 
-*Assembly results*
+#### Assembly results
 
 The assembled contigs are in the "Flye assembly on data X (consensus)" (X is a number that will vary depending on where it sits in your history).  
 Open the Quast tabular report to see the assembly statistics:
@@ -389,11 +389,11 @@ View the Bandage image of the assembly graph:
 
 As this is a subsampled data set, it is not surprising that most of the contigs are unjoined. The joined contigs at the top left are likely to be part of the mitochondrial genome as these reads were probably over-represented in our subsampled data set.
 
-*What about centromeres and telomeres?*
+#### What about centromeres and telomeres?
 
 Some genomic areas such as centromeres, telomeres, and ribosomal DNA arrays, are much harder to assemble. These are long stretches of very similar repeats. With improved sequencing accuracy, length, and technologies (particularly long-range scaffolding), these may soon be much easier to assemble. The latest human genome assembly has a good demonstration of the techniques used for this.   See {% cite Nurk2021 %}, and in particular, Figure 2: Bandage graphs of the human genome chromosomes, with the grey shading showing centromeric regions. 
 
-*What about haplotigs?*
+#### What about haplotigs?
 
 Although our sample may be diploid, with pairs of chromosomes, the resulting assembly is often a haploid (or "collapsed") assembly. This is not the sequence of one of the chromosomes, but a mix of the two. 
 
@@ -411,53 +411,53 @@ Assembly polishing:
 
 !["Image of the concept of assembly polishing, showing reads mapped to the assembly contigs."](images/polish.png){: width="800"}
 
-*Polishing workflow*
+## Polishing workflow
 
-> ### {% icon hands_on %} Hands-on: Run the Assembly Polishing workflow
+> <hands-on-title>Run the Assembly Polishing workflow</hands-on-title>
 > * Find this workflow, enter the correct input files, and run.
-* Workflow structure: The workflow includes two subworkflows: Racon polish with long reads, x 4, and Racon polish with illumina reads, x2
-* What it does: Polishes (corrects) an assembly, using long reads (with the tools Racon and Medaka) and short reads (with the tool Racon). (Note: medaka is only for nanopore reads, not PacBio reads). 
-* Inputs:
-  * assembly to be polished:  assembly.fasta
-  * long reads - the same set used in the assembly (e.g. may be raw or filtered) fastq.gz format 
-  * short reads, R1 only, in fastq.gz format
-* Outputs: 
-  * Racon+Medaka+Racon polished_assembly. fasta
-  * Fasta statistics after each polishing tool
-* Tools used:
-  * Minimap2
-  * Racon
-  * Fasta statistics
-  * Medaka
-* Input parameters: None required, but recommended to set the Medaka model correctly (default = r941_min_high_g360). See drop down list for options. 
-* Workflow steps for Part 1, Polish with long reads: using Racon
-  * Long reads and assembly contigs => Racon polishing (subworkflow): 
-  * minimap2 : long reads are mapped to assembly => overlaps.paf. 
-  * overaps, long reads, assembly => Racon => polished assembly 1
-  * using polished assembly 1 as input; repeat minimap2 + racon => polished assembly 2
-  * using polished assembly 2 as input, repeat minimap2 + racon => polished assembly 3
-  * using polished assembly 3 as input, repeat minimap2 + racon => polished assembly 4
-  * Racon long-read polished assembly => Fasta statistics
-  * Note: The Racon tool panel can be a bit confusing and is under review for improvement. Presently it requires sequences (= long reads), overlaps (= the paf file created by minimap2), and target sequences (= the contigs to be polished) as per "usage" described [here](https://github.com/isovic/racon/blob/master/README.md)
-  * Note: Racon: the default setting for "output unpolished target sequences?" is No. This has been changed to Yes for all Racon steps in these polishing workflows.  This means that even if no polishes are made in some contigs, they will be part of the output fasta file. 
-  * Note: the contigs output by Racon have new tags in their headers. For more on this see [this issue](https://github.com/isovic/racon/issues/85).
-* Workflow steps for Part 2, Polish with long reads: using Medaka
-  * Racon polished assembly + long reads => medaka polishing X1 => medaka polished assembly
-  * Medaka polished assembly => Fasta statistics
-* Workflow steps for Part 3, Polish with short reads: using Racon
-  * Short reads and Medaka polished assembly =>Racon polish (subworkflow):
-  * minimap2: short reads (R1 only) are mapped to the assembly => overlaps.paf. Minimap2 setting is for short reads.
-  * overlaps + short reads + assembly => Racon => polished assembly 1
-  * using polished assembly 1 as input; repeat minimap2 + racon => polished assembly 2
-  * Racon short-read polished assembly => Fasta statistics
-* Options:
-  * Change settings for Racon long read polishing if using PacBio reads:  The default profile setting for Racon long read polishing: minimap2 read mapping is "Oxford Nanopore read to reference mapping", which is specified as an input parameter to the whole Assembly polishing workflow, as text: map-ont. If you are not using nanopore reads and/or need a different setting, change this input. To see the other available settings, open the minimap2 tool, find "Select a profile of preset options", and click on the drop down menu. For each described option, there is a short text in brackets at the end (e.g. map-pb). This is the text to enter into the assembly polishing workflow at runtime instead of the default (map-ont).
-* Other options: change the number of polishes (in Racon and/or Medaka). There are ways to assess how much improvement in assembly quality has occurred per polishing round (for example, the number of corrections made; the change in Busco score - see section "Genome quality assessment" for more on Busco).
-* Option: change polishing settings for any of these tools. Note: for Racon - these will have to be changed within those subworkflows first. Then, in the main workflow, update the subworkflows, and re-save. 
+> * Workflow structure: The workflow includes two subworkflows: Racon polish with long reads, x 4, and Racon polish with illumina reads, x2
+> * What it does: Polishes (corrects) an assembly, using long reads (with the tools Racon and Medaka) and short reads (with the tool Racon). (Note: medaka is only for nanopore reads, not PacBio reads). 
+> * Inputs:
+>   * assembly to be polished:  assembly.fasta
+>   * long reads - the same set used in the assembly (e.g. may be raw or filtered) fastq.gz format 
+>   * short reads, R1 only, in fastq.gz format
+> * Outputs: 
+>   * Racon+Medaka+Racon polished_assembly. fasta
+>   * Fasta statistics after each polishing tool
+> * Tools used:
+>   * Minimap2
+>   * Racon
+>   * Fasta statistics
+>   * Medaka
+> * Input parameters: None required, but recommended to set the Medaka model correctly (default = r941_min_high_g360). See drop down list for options. 
+> * Workflow steps for Part 1, Polish with long reads: using Racon
+>   * Long reads and assembly contigs => Racon polishing (subworkflow): 
+>   * minimap2 : long reads are mapped to assembly => overlaps.paf. 
+>   * overaps, long reads, assembly => Racon => polished assembly 1
+>   * using polished assembly 1 as input; repeat minimap2 + racon => polished assembly 2
+>   * using polished assembly 2 as input, repeat minimap2 + racon => polished assembly 3
+>   * using polished assembly 3 as input, repeat minimap2 + racon => polished assembly 4
+>   * Racon long-read polished assembly => Fasta statistics
+>   * Note: The Racon tool panel can be a bit confusing and is under review for improvement. Presently it requires sequences (= long reads), overlaps (= the paf file created by minimap2), and target sequences (= the contigs to be polished) as per "usage" described [here](https://github.com/isovic/racon/blob/master/README.md)
+>   * Note: Racon: the default setting for "output unpolished target sequences?" is No. This has been changed to Yes for all Racon steps in these polishing workflows.  This means that even if no polishes are made in some contigs, they will be part of the output fasta file. 
+>   * Note: the contigs output by Racon have new tags in their headers. For more on this see [this issue](https://github.com/isovic/racon/issues/85).
+> * Workflow steps for Part 2, Polish with long reads: using Medaka
+>   * Racon polished assembly + long reads => medaka polishing X1 => medaka polished assembly
+>   * Medaka polished assembly => Fasta statistics
+> * Workflow steps for Part 3, Polish with short reads: using Racon
+>   * Short reads and Medaka polished assembly =>Racon polish (subworkflow):
+>   * minimap2: short reads (R1 only) are mapped to the assembly => overlaps.paf. Minimap2 setting is for short reads.
+>   * overlaps + short reads + assembly => Racon => polished assembly 1
+>   * using polished assembly 1 as input; repeat minimap2 + racon => polished assembly 2
+>   * Racon short-read polished assembly => Fasta statistics
+> * Options:
+>   * Change settings for Racon long read polishing if using PacBio reads:  The default profile setting for Racon long read polishing: minimap2 read mapping is "Oxford Nanopore read to reference mapping", which is specified as an input parameter to the whole Assembly polishing workflow, as text: map-ont. If you are not using nanopore reads and/or need a different setting, change this input. To see the other available settings, open the minimap2 tool, find "Select a profile of preset options", and click on the drop down menu. For each described option, there is a short text in brackets at the end (e.g. map-pb). This is the text to enter into the assembly polishing workflow at runtime instead of the default (map-ont).
+> * Other options: change the number of polishes (in Racon and/or Medaka). There are ways to assess how much improvement in assembly quality has occurred per polishing round (for example, the number of corrections made; the change in Busco score - see section "Genome quality assessment" for more on Busco).
+> * Option: change polishing settings for any of these tools. Note: for Racon - these will have to be changed within those subworkflows first. Then, in the main workflow, update the subworkflows, and re-save. 
 >
 {: .hands_on}
 
-*Polishing results*
+## Polishing results
 
 The polished assembly is the final Racon file. 
 
@@ -467,11 +467,11 @@ Look at the Fasta Statistics output files for the status of the assemblies after
 
 The polished genome is in 145 contigs with a total length of ~ 9.6 million base pairs.  We have some idea of how these contigs may be joined (or not) from the Bandage assembly graph. 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. How good is the assembly?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1.  One measure is the N50, a number that indicates how large the contigs are (although, have the contigs been joined correctly)? Another measure is to see if expected gene sequences are found in the assembly, using a tool called BUSCO. For a discussion on these and other methods, see {% cite Wang2020%}.
 > >
@@ -490,47 +490,47 @@ We will also map the assembled contigs to a known reference genome using the too
 
 For more about the Icarus browser see {% cite Mikheenko2016 %}.
 
-*Genome assessment workflow*
+## Genome assessment workflow
 
-> ### {% icon hands_on %} Hands-on: Run the Genome Assessment workflow
->* Find this workflow, enter the correct input files, and run.
-* What it does: 
-  * Assesses the quality of the genome assembly: generate some statistics and determine if expected genes are present
-  * Align contigs to a reference genome.
-* Inputs: 
-  * polished assembly
-  * reference_genome.fasta (e.g. of a closely-related species, if available). 
-* Outputs
-  * Busco table of genes found
-  * Quast HTML report, and link to Icarus contigs browser,  showing contigs aligned to a reference genome
-* Tools used: 
-  * Busco
-  * Quast
-* Input parameters: None required
-* Workflow steps:
-  * Polished assembly => Busco:
-  * First: predict genes in the assembly: using Metaeuk
-  * Second: compare the set of predicted genes to the set of expected genes in a particular lineage. Default setting for lineage: Eukaryota
-  * Polished assembly and a reference genome => Quast:
-  * For the tutorial we will use the Arabidopsis genome. This is not closely related to our Eucalyptus species but will give an idea of how to use Quast. 
-  * Contigs/scaffolds file: polished assembly
-  * Type of assembly: Genome
-  * Use a reference genome: Yes
-  * Reference genome: Arabidopsis genome
-  * Is the genome large (> 100Mbp)? Yes. (Our test data set won't be, but this will still give us some results). 
-  * All other settings as defaults, except second last setting: Distinguish contigs with more than 50% unaligned bases as a separate group of contigs?: change to No
-* Options:
-  * **Gene prediction:** 
-  * Change tool used by Busco to predict genes in the assembly: instead of Metaeuk, use Augustus (Metaeuk is meant to be faster; unsure which is better). 
-  * select: Use Augustus; Use another predefined species model; then choose from the drop down list. 
- select from a database of trained species models. list here:  https://github.com/Gaius-Augustus/Augustus/tree/master/config/species
-  * Note: if using Augustus: it may fail if the input assembly is too small (e.g. a test-size data assembly). It can't do the training part properly. 
-  * **Compare genes found to other lineage:**
-  * Busco has databases of lineages and their expected genes. Option to change lineage. Not all lineages are available - there is a mix of broader and narrower lineages.
-  * list of lineages [here](https://busco.ezlab.org/list_of_lineages.html) 
-  * To see the groups in taxonomic hierarchies see [here](https://busco.ezlab.org/frames/euka.htm)
-  * For example,  if you have a plant species from Fabales, you could set that as the lineage. 
-  * The narrower the taxonomic group, the more total genes are expected. 
+> <hands-on-title>Run the Genome Assessment workflow</hands-on-title>
+> * Find this workflow, enter the correct input files, and run.
+> * What it does: 
+>   * Assesses the quality of the genome assembly: generate some statistics and determine if expected genes are present
+>   * Align contigs to a reference genome.
+> * Inputs: 
+>   * polished assembly
+>   * reference_genome.fasta (e.g. of a closely-related species, if available). 
+> * Outputs
+>   * Busco table of genes found
+>   * Quast HTML report, and link to Icarus contigs browser,  showing contigs aligned to a reference genome
+> * Tools used: 
+>   * Busco
+>   * Quast
+> * Input parameters: None required
+> * Workflow steps:
+>   * Polished assembly => Busco:
+>   * First: predict genes in the assembly: using Metaeuk
+>   * Second: compare the set of predicted genes to the set of expected genes in a particular lineage. Default setting for lineage: Eukaryota
+>   * Polished assembly and a reference genome => Quast:
+>   * For the tutorial we will use the Arabidopsis genome. This is not closely related to our Eucalyptus species but will give an idea of how to use Quast. 
+>   * Contigs/scaffolds file: polished assembly
+>   * Type of assembly: Genome
+>   * Use a reference genome: Yes
+>   * Reference genome: Arabidopsis genome
+>   * Is the genome large (> 100Mbp)? Yes. (Our test data set won't be, but this will still give us some results). 
+>   * All other settings as defaults, except second last setting: Distinguish contigs with more than 50% unaligned bases as a separate group of contigs?: change to No
+> * Options:
+>   * **Gene prediction:** 
+>   * Change tool used by Busco to predict genes in the assembly: instead of Metaeuk, use Augustus (Metaeuk is meant to be faster; unsure which is better). 
+>   * select: Use Augustus; Use another predefined species model; then choose from the drop down list. 
+>  select from a database of trained species models. list here:  https://github.com/Gaius-Augustus/Augustus/tree/master/config/species
+>   * Note: if using Augustus: it may fail if the input assembly is too small (e.g. a test-size data assembly). It can't do the training part properly. 
+>   * **Compare genes found to other lineage:**
+>   * Busco has databases of lineages and their expected genes. Option to change lineage. Not all lineages are available - there is a mix of broader and narrower lineages.
+>   * list of lineages [here](https://busco.ezlab.org/list_of_lineages.html) 
+>   * To see the groups in taxonomic hierarchies see [here](https://busco.ezlab.org/frames/euka.htm)
+>   * For example,  if you have a plant species from Fabales, you could set that as the lineage. 
+>   * The narrower the taxonomic group, the more total genes are expected. 
 {: .hands_on}
 
 ### Assessment results
@@ -551,32 +551,32 @@ Click on the "mitochondria" to see how the assembly contigs align to the referen
 
 We can combine these galaxy workflows into a single workflow. (See [this GTN tutorial]({% link topics/galaxy-interface/tutorials/workflow-editor/tutorial.md %}) for more information.) 
 
-*Combined assembly and polishing workflow*
+## Combined assembly and polishing workflow
 
-> ### {% icon hands_on %} Hands-on: Run the Combined Assembly and Polishing workflow
->* Find this workflow, enter the correct input files, and run.
-* What it does:  A workflow for genome assembly, containing subworkflows:
-  * Data QC
-  * Kmer counting
-  * Trim and filter reads
-  * Assembly with Flye
-  * Assembly polishing
-  * Assess genome quality
-* Inputs
-  * long reads and short reads in fastq format
-  * reference genome for Quast
-* Outputs
-  * Data information - QC, kmers
-  * Filtered, trimmed reads
-  * Genome assembly, assembly graph, stats
-  * Polished assembly, stats
-  * Quality metrics - Busco, Quast
-* Tools used: Sum of tools in each of the subworkflows
-* Input parameters: None required
-* Workflow steps: For detail see each subworkflow
-* Options: 
-  * Omit some steps - e.g. Data QC and kmer counting
-  * Replace a module with one using a different tool - e.g. change assembly tool
+> <hands-on-title>Run the Combined Assembly and Polishing workflow</hands-on-title>
+> * Find this workflow, enter the correct input files, and run.
+> * What it does:  A workflow for genome assembly, containing subworkflows:
+>   * Data QC
+>   * Kmer counting
+>   * Trim and filter reads
+>   * Assembly with Flye
+>   * Assembly polishing
+>   * Assess genome quality
+> * Inputs
+>   * long reads and short reads in fastq format
+>   * reference genome for Quast
+> * Outputs
+>   * Data information - QC, kmers
+>   * Filtered, trimmed reads
+>   * Genome assembly, assembly graph, stats
+>   * Polished assembly, stats
+>   * Quality metrics - Busco, Quast
+> * Tools used: Sum of tools in each of the subworkflows
+> * Input parameters: None required
+> * Workflow steps: For detail see each subworkflow
+> * Options: 
+>   * Omit some steps - e.g. Data QC and kmer counting
+>   * Replace a module with one using a different tool - e.g. change assembly tool
 {: .hands_on}
 
 # Summary
