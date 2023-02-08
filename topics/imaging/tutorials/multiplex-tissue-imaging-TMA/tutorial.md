@@ -118,11 +118,6 @@ After illumination is corrected across round tiles, the tiles must be stitched t
 >    - {% icon param-file %} *"Markers File (optional)"*: Comma-separated markers file with marker_names in third column
 >
 >    - In *"Advanced Options"*:
->        - *"Align Channel Number"*: `0` (Channel usually containing DAPI, hoescht, or other DNA marker)
->        - *"Sigma"*: `Not entered, left as default`
->        - *"Cyto mask channel"*: `Not entered, left as default`
->        - *"Flip output image horizontally"*: `No`
->        - *"Flip output image vertically"*: `No`
 >        - *"Write output as a single pyramidal TIFF"*: `Yes`
 >
 {: .hands_on}
@@ -154,12 +149,6 @@ UNetCoreograph will output images (used for downstream steps), masks, and a prev
 > 1. {% tool [UNetCoreograph](unet_coreograph) %} with the following parameters:
 >
 >    - {% icon param-file %} *"Registered TIFF"*: The output of **ASHLAR** (registered, pyramidal OME-TIFF file)
->    - *"Downsample factor"*: `5`
->    - *"Channel"*: `0`
->    - *"Buffer"*: `2.0`
->    - *"Sensitivity"*: `0.3`
->    - *"Cluster"*: `No`
->    - *"Tissue"*: `No`
 >
 >    > ### {% icon comment %} What about Whole Slide Images? 
 >    >
@@ -192,7 +181,6 @@ In this tutorial, we use **Mesmer** because it tends to perform generally well o
 >
 > 1. {% tool [Mesmer](mesmer) %} with the following parameters:
 >    - {% icon param-collection %} *"Image containing the nuclear marker(s) "*: Collection output of UNetCoreograph (images)
->    - *"The numerical index of the channel(s) from nuclear-image "*: `0`
 >    - *"Compartment for segmentation prediction: "*: `Nuclear`
 >    - *"Resolution of the image in microns-per-pixel"*: `0.65`
 >    - *"Whether to np.squeeze the outputs before saving"*: `Yes`
@@ -251,10 +239,7 @@ Learn more about this file format at the [anndata documentation](https://anndata
 >    - {% icon param-collection %} *"Select the input image or images"*: Collection output of Quantification (cellMaskQuant)
 >    - In *"Advanced Options"*:
 >        - *"Whether to remove the DNA channels from the final output"*: `No`
->        - *"Whether to log the data"*: `Yes`
->        - *"Name of the column that contains the CellID"*: `CellID` (Default)
 >        - *"Whether to use unique name for cells/rows"*: `No`
->        - *"Column name to split the counts table and metadata"*: `X_centroid` (Default)
 >
 >    > ### {% icon warning %} Important parameter: Unique names for cells/rows
 >    >
@@ -302,14 +287,9 @@ UNetCoreograph outputs each individual core image in `tiff` format. Interactive 
 
 > ### {% icon hands_on %} Hands-on: Convert image
 >
-> 1. {% tool [Convert image](ip_convertimage) %} with the following parameters:
+> 1. {% tool [Convert image](ip_convertimage) %} with the following parameters: 
+>    -  {% icon param-collection %} *"Input Image"*: `UNetCoreograph Images`
 >    - *"Output data type"*: `OME TIFF`
->    - *"Extract series"*: `All series`
->    - *"Extract timepoint"*: `All timepoints`
->    - *"Extract channel"*: `All channels`
->    - *"Extract z-slice"*: `All z-slices`
->    - *"Extract range"*: `All images`
->    - *"Extract crop"*: `Full image`
 >    - *"Tile image"*: `Tile image`
 >    - *"Pyramid image"*: `Generate Pyramid`
 >
@@ -324,9 +304,9 @@ Some tools can cause the channel names in an OME-TIFF image to be lost. To fix t
 >
 > 1. {% tool [Rename OME-TIFF Channels](toolshed.g2.bx.psu.edu/repos/watsocam/rename_tiff_channels/rename_tiff_channels/0.0.1.2) %} with the following parameters:
 >
->    - {% icon param-file %} *"Input image in either tiff or OME-tiff format"*: File to be converted (or collection of files to run in batch)
+>    - {% icon param-file %} *"Input image in OME-tiff format"*: `Convert image`
 >    - *"Format of input image"*: `ome.tiff`
->    - {% icon param-file %} *"Channel metadata CSV"*: Comma-separated markers file with marker_names in third column
+>    - {% icon param-file %} *"Channel metadata CSV"*: `markers.csv`, Comma-separated markers file with marker_names in third column
 >
 {: .hands_on}
 
@@ -350,9 +330,10 @@ For any `OME-TIFF` image in a Galaxy-ME history, there will be an option to view
 >
 > 1. {% tool [Vitessce Visualization](vitessce_spatial) %} with the following parameters:
 >
->    - {% icon param-file %} *"Select the OME Tiff image"*: OME-TIFF image to be viewed (or collection of files to run in batch)
->    - {% icon param-file %} *"Select masks for the OME Tiff image (Optional)"*: Output of Mesmer (or other segmentation tool)
+>    - {% icon param-collection %} *"Select the OME Tiff image"*: OME-TIFF image to be viewed (or collection of files to run in batch)
+>    - {% icon param-collection %} *"Select masks for the OME Tiff image (Optional)"*: Output of Mesmer (or other segmentation tool)
 >    - *"Whether to do phenotyping"*: `Yes`
+>        - *"Select the anndata contaning phenotyping info"*: `Single Cell Phenotyping`, an anndata file that includes includes cell phenotype annotations.
 >        - *"Select an embedding algorithm for scatterplot"*: `UMAP`
 >        - *"Input phenotyping keys"*: `Multiple choices`
 >            - *"Select the key(s)"*: `phenotype`
