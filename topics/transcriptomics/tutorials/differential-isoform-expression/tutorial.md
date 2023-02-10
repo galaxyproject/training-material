@@ -131,657 +131,6 @@ The idea is to keep the theory description before quite simple to focus more on 
 A big step can have several subsections or sub steps:
 
 
-## Sub-step with **fastp**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %} with the following parameters:
->    - *"Single-end or paired reads"*: `Paired Collection`
->        - {% icon param-collection %} *"Select paired collection(s)"*: `output` (Input dataset collection)
->    - In *"Overrepresented Sequence Analysis"*:
->        - *"Enable overrepresented analysis"*: `Yes`
->        - *"Overrepresentation sampling"*: `50`
->    - In *"Filter Options"*:
->        - In *"Quality filtering options"*:
->            - *"Qualified quality phred"*: `20`
->    - In *"Output Options"*:
->        - *"Output HTML report"*: `Yes`
->        - *"Output JSON report"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Convert GTF to BED12**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} with the following parameters:
->    - {% icon param-file %} *"GTF File to convert"*: `output` (Input dataset)
->    - *"Advanced options"*: `Set advanced options`
->        - *"Ignore groups without exons"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **fastp**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %} with the following parameters:
->    - *"Single-end or paired reads"*: `Paired Collection`
->        - {% icon param-collection %} *"Select paired collection(s)"*: `output` (Input dataset collection)
->    - In *"Overrepresented Sequence Analysis"*:
->        - *"Enable overrepresented analysis"*: `Yes`
->        - *"Overrepresentation sampling"*: `50`
->    - In *"Filter Options"*:
->        - In *"Quality filtering options"*:
->            - *"Qualified quality phred"*: `20`
->    - In *"Output Options"*:
->        - *"Output HTML report"*: `Yes`
->        - *"Output JSON report"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **RNA STAR**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy1) %} with the following parameters:
->    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
->        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA paired reads"*: `output_paired_coll` (output of **fastp** {% icon tool %})
->    - *"Custom or built-in reference genome"*: `Use reference genome from history and create temporary index`
->        - {% icon param-file %} *"Select a reference genome"*: `output` (Input dataset)
->        - *"Build index with or without known splice junctions annotation"*: `build index with gene-model`
->            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `output` (Input dataset)
->    - *"Use 2-pass mapping for more sensitive novel splice junction discovery"*: `Yes, perform single-sample 2-pass mapping of all reads`
->    - *"Per gene/transcript output"*: `No per gene or transcript output`
->    - In *"BAM output format specification"*:
->        - *"Read alignment tags to include in the BAM output"*: ``
->    - In *"Output filter criteria"*:
->        - *"Would you like to set additional output filters?"*: `No`
->    - In *"Algorithmic settings"*:
->        - *"Configure seed, alignment and limits options"*: `Use Defaults`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **RNA STAR**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy1) %} with the following parameters:
->    - *"Single-end or paired-end reads"*: `Paired-end (as collection)`
->        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA paired reads"*: `output_paired_coll` (output of **fastp** {% icon tool %})
->    - *"Custom or built-in reference genome"*: `Use reference genome from history and create temporary index`
->        - {% icon param-file %} *"Select a reference genome"*: `output` (Input dataset)
->        - *"Build index with or without known splice junctions annotation"*: `build index with gene-model`
->            - {% icon param-file %} *"Gene model (gff3,gtf) file for splice junctions"*: `output` (Input dataset)
->    - *"Use 2-pass mapping for more sensitive novel splice junction discovery"*: `Yes, perform single-sample 2-pass mapping of all reads`
->    - *"Per gene/transcript output"*: `No per gene or transcript output`
->    - In *"BAM output format specification"*:
->        - *"Read alignment tags to include in the BAM output"*: ``
->    - In *"Output filter criteria"*:
->        - *"Would you like to set additional output filters?"*: `No`
->    - In *"Algorithmic settings"*:
->        - *"Configure seed, alignment and limits options"*: `Use Defaults`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Infer Experiment**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Junction Saturation**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Junction Saturation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_saturation/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM/SAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
->    - *"Sampling bounds and frequency"*: `Default sampling bounds and frequency`
->    - *"Output R-Script"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Junction Annotation**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Junction Annotation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_annotation/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM/SAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Read Distribution**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM/SAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Read Distribution**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM/SAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Infer Experiment**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Infer Experiment](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Junction Saturation**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Junction Saturation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_saturation/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM/SAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
->    - *"Sampling bounds and frequency"*: `Default sampling bounds and frequency`
->    - *"Output R-Script"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Junction Annotation**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Junction Annotation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_annotation/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM/SAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **MultiQC**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
->    - In *"Results"*:
->        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `fastp`
->                - {% icon param-file %} *"Output of fastp"*: `report_json` (output of **fastp** {% icon tool %})
->        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `fastp`
->                - {% icon param-file %} *"Output of fastp"*: `report_json` (output of **fastp** {% icon tool %})
->        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `STAR`
->                - In *"STAR output"*:
->                    - {% icon param-repeat %} *"Insert STAR output"*
->                        - *"Type of STAR output?"*: `Log`
->                            - {% icon param-file %} *"STAR log output"*: `output_log` (output of **RNA STAR** {% icon tool %})
->                    - {% icon param-repeat %} *"Insert STAR output"*
->                        - *"Type of STAR output?"*: `Log`
->        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `RSeQC`
->                - In *"RSeQC output"*:
->                    - {% icon param-repeat %} *"Insert RSeQC output"*
->                        - *"Type of RSeQC output?"*: `Infer experiment`
->                            - {% icon param-file %} *"RSeQC infer experiment: configuration output"*: `output` (output of **Infer Experiment** {% icon tool %})
->                    - {% icon param-repeat %} *"Insert RSeQC output"*
->                        - *"Type of RSeQC output?"*: `Infer experiment`
->                    - {% icon param-repeat %} *"Insert RSeQC output"*
->                        - *"Type of RSeQC output?"*: `Read distribution`
->                    - {% icon param-repeat %} *"Insert RSeQC output"*
->                        - *"Type of RSeQC output?"*: `Read distribution`
->                    - {% icon param-repeat %} *"Insert RSeQC output"*
->                        - *"Type of RSeQC output?"*: `Junction saturation`
->                    - {% icon param-repeat %} *"Insert RSeQC output"*
->                        - *"Type of RSeQC output?"*: `Junction saturation`
->                    - {% icon param-repeat %} *"Insert RSeQC output"*
->                        - *"Type of RSeQC output?"*: `Junction annotation`
->                    - {% icon param-repeat %} *"Insert RSeQC output"*
->                        - *"Type of RSeQC output?"*: `Junction annotation`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Sub-step with **StringTie**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy0) %} with the following parameters:
->    - *"Input options"*: `Short reads`
->        - {% icon param-collection %} *"Input short mapped reads"*: `output` (Input dataset collection)
->    - *"Use a reference file to guide assembly?"*: `Use reference GTF/GFF3`
->        - *"Reference file"*: `Use a file from history`
->            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `output` (Input dataset)
->        - *"Use Reference transcripts only?"*: `Yes`
->        - *"Output files for differential expression?"*: `Ballgown`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **StringTie**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [StringTie](toolshed.g2.bx.psu.edu/repos/iuc/stringtie/stringtie/2.2.1+galaxy0) %} with the following parameters:
->    - *"Input options"*: `Short reads`
->        - {% icon param-collection %} *"Input short mapped reads"*: `output` (Input dataset collection)
->    - *"Use a reference file to guide assembly?"*: `Use reference GTF/GFF3`
->        - *"Reference file"*: `Use a file from history`
->            - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `output` (Input dataset)
->        - *"Use Reference transcripts only?"*: `Yes`
->        - *"Output files for differential expression?"*: `Ballgown`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 ## Sub-step with **IsoformSwitchAnalyzeR**
 
 > <hands-on-title> Task description </hands-on-title>
@@ -790,15 +139,13 @@ A big step can have several subsections or sub steps:
 >    - *"Tool function mode"*: `Import data`
 >        - In *"1: Factor level"*:
 >            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `Cancer`
->            - {% icon param-file %} *"Transcript-level expression measurements"*: `transcript_expression` (output of **StringTie** {% icon tool %})
+>            - {% icon param-file %} *"Transcript-level expression measurements"*: `3:transcript_expression` (output of **Modular RNA-seq isoforms-PE Stringtie (single)** {% icon tool %})
 >        - In *"2: Factor level"*:
 >            - *"Specify a factor level, typical values could be 'tumor' or 'treated'"*: `Health`
->            - {% icon param-file %} *"Transcript-level expression measurements"*: `transcript_expression` (output of **StringTie** {% icon tool %})
+>            - {% icon param-file %} *"Transcript-level expression measurements"*: `4:transcript_expression` (output of **Modular RNA-seq isoforms-PE Stringtie (single)** {% icon tool %})
 >        - *"Quantification data source"*: `StringTie`
->            - *"Average read length"*: `{'id': 4, 'output_name': 'output'}`
 >        - {% icon param-file %} *"Genome annotation (GTF)"*: `output` (Input dataset)
 >        - {% icon param-file %} *"Transcriptome"*: `output` (Input dataset)
->        - *"Generate count matrix files"*: `Expression matrix`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -862,6 +209,188 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
+## Sub-step with **CPAT**
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [CPAT](toolshed.g2.bx.psu.edu/repos/bgruening/cpat/cpat/3.0.4+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Query nucletide sequences"*: `isoformNT` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
+>    - {% icon param-file %} *"Reference genome"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Coding sequences file"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Non coding sequeces file"*: `output` (Input dataset)
+>    - *"Search for ORFs from the anti-sense strand"*: `Yes`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **PfamScan**
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [PfamScan](toolshed.g2.bx.psu.edu/repos/bgruening/pfamscan/pfamscan/1.6+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Protein sequences FASTA file"*: `isoformAA` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
+>    - {% icon param-file %} *"Pfam-A HMM library"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Pfam-A HMM Stockholm file"*: `output` (Input dataset)
+>    - *"Predict active site residues"*: `Enabled`
+>        - {% icon param-file %} *"Active sites file"*: `output` (Input dataset)
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Remove beginning**
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
+>    - {% icon param-file %} *"from"*: `orf_seqs_prob_best` (output of **CPAT** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Text reformatting**
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Text reformatting](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters:
+>    - {% icon param-file %} *"File to process"*: `out_file1` (output of **Remove beginning** {% icon tool %})
+>    - *"AWK Program"*: `{print i++\t$1\t$3\t$8\t$9\t$10\t$11\t-}`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Concatenate datasets**
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Concatenate datasets](cat1) %} with the following parameters:
+>    - {% icon param-file %} *"Concatenate Dataset"*: `output` (Input dataset)
+>    - In *"Dataset"*:
+>        - {% icon param-repeat %} *"Insert Dataset"*
+>            - {% icon param-file %} *"Select"*: `outfile` (output of **Text reformatting** {% icon tool %})
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
 ## Sub-step with **IsoformSwitchAnalyzeR**
 
 > <hands-on-title> Task description </hands-on-title>
@@ -870,8 +399,10 @@ A big step can have several subsections or sub steps:
 >    - *"Tool function mode"*: `Analysis part two: Plot all isoform switches and their annotation`
 >        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `switchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
 >        - *"Analysis mode"*: `Full analysis`
->        - *"Include prediction of coding potential information"*: `Disabled`
->        - *"Include Pfam information"*: `Disabled`
+>        - *"Include prediction of coding potential information"*: `CPAT`
+>            - {% icon param-file %} *"CPAT result file"*: `out_file1` (output of **Concatenate datasets** {% icon tool %})
+>        - *"Include Pfam information"*: `Enabled`
+>            - {% icon param-file %} *"Include Pfam results (sequence analysis of protein domains)"*: `output` (output of **PfamScan** {% icon tool %})
 >        - *"Include SignalP results"*: `Disabled`
 >        - *"Include prediction of intrinsically disordered Regions (IDR) information"*: `Disabled`
 >
