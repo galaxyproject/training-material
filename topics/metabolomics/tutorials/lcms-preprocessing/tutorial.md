@@ -50,7 +50,7 @@ the results obtained may not be reliable enough for biological interpretation du
 Nevertheless, the chosen diversity of sample will allow you to explore the basics of a preprocessing workflow.
 
 We chose a subset of 12 samples, composed of 6 biological samples, 3 quality-control pooled samples ('QC pools' - mix of all
-biological samples) and 3 blank samples ('blanks' - injection solvent).
+biological samples) and 3 blank samples ('blanks' - solvent injection).
 
 To analyze these data, we will then follow a Galaxy workflow
 developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/) ({% cite Giacomoni2014 %}, {% cite Guitton2017 %}).
@@ -259,7 +259,7 @@ The sampleMetadata file is a tab-separated table, in text format. This table has
 software you find appropriate to construct your table, as long as you save your file in a compatible format. For example, you can
 use a spreadsheet software such as Microsoft Excel or LibreOffice.
 
-> <warning-title>Important: Save your table in the correct format</warning-title>
+> <warning-title> Save your table in the correct format</warning-title>
 >
 > The file has to be a `.txt` or a `.tsv` (tab-separated values). Neither `.xlsx` nor `.odt` are supported.
 > If you use a spreadsheet software, be sure to change the default format to **Text (Tab delimited)** or equivalent.
@@ -334,6 +334,14 @@ Once your sampleMetadata table is ready, you can proceed to the upload. In this 
 > be uploaded into Galaxy.
 >
 {: .tip}
+
+> <warning-title> The class column </warning-title>
+>
+> Depending on further choices, the sampleMetadata file can be decisive.
+> It can be used to colour some plots, but also for ion selection (see further in the tutorial). 
+> Please note that the information needed for these steps **should be given as the second column of the sampleMetadata file**,
+> the first one being the samples' identifiers. 
+{: .warning}
 
 
 #### Upload the sampleMetada file with 'Get data'
@@ -574,7 +582,7 @@ than a given number of samples. Either a percentage of the total number of sampl
 > > <comment-title>Minimum fraction of samples</comment-title>
 > >
 > > This parameter sets the minimum proportion of samples in a class where a peak should be found to keep the corresponding ion in the peaktable.
-> > The idea is to look inside each class (*i.e.* each group of samples defined in the second column of the sampleMetadata file) and to keep
+> > The idea is to look inside **each class (*i.e.* each group of samples defined in the second column of the sampleMetadata file)** and to keep
 > > an ion if there is at least one class where the ion is found in at least the specified proportion of samples.
 > >
 > > The way to define what kind of classes would be relevant is not straightforward. It is a somehow complex combination of your study objectives,
