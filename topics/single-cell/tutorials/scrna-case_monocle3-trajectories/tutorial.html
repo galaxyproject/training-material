@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Trajectory Analysis using Monocle3 " />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-12-17 19:13:31 +0000" />
+<meta name="DC.date" content="2023-02-09 13:32:12 +0000" />
 <meta name="DC.creator" content="Julia Jakiela" />
 
         
@@ -63,7 +63,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-12-17 19:13:31 +0000",
+  "dateModified": "2023-02-09 13:32:12 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Trajectory Analysis using Monocle3 ",
   "interactivityType": "mixed",
@@ -941,6 +941,8 @@
     
         
     
+        
+    
     </ul>
 
 
@@ -949,7 +951,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 17, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 9, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1088,7 +1090,7 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
 <h2 id="cell-metadata">Cell metadata</h2>
 <p>Our current dataset is not just T-cells: as you might remember from the last tutorial, we identified a cluster of macrophages as well. This might be a problem, because the trajectory algorithm will try to find relationships between all the cells (even if they are not necessarily related!), rather than only the T-cells that we are interested in. We need to remove those unwanted cell types to make the analysis more accurate.</p>
 
-<p>The Manipulate AnnData tool allows you to filter observations or variables, and that would be the most obvious way to remove those cells. However, given that we don’t need an AnnData object, it’s a lot quicker to edit a table rather than manipulate an AnnData object. Ultimately, we need cell metadata, gene metadata and <span class="notranslate">expression</span> matrix files that have macrophages remove, and that have the correct metadata that Monocle looks for. With some table manipulation, we’ll end up with three separate files, ready to be passed onto Monocle3.</p>
+<p>The Manipulate AnnData tool allows you to filter observations or variables, and that would be the most obvious way to remove those cells. However, given that we don’t need an AnnData object, it’s a lot quicker to edit a table rather than manipulate an AnnData object. Ultimately, we need cell metadata, gene metadata and <span class="notranslate">expression</span> matrix files that have macrophages removed, and that have the correct metadata that Monocle looks for. With some table manipulation, we’ll end up with three separate files, ready to be passed onto Monocle3.</p>
 
 <blockquote class="question">
   <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -1192,7 +1194,7 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
       </ul>
     </li>
     <li>
-      <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">h5ad</code></p>
+      <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">tabular</code></p>
 
       <!--SNIPPET-->
       <blockquote class="tip">   <div id="tip-changing-the-datatype-1" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
@@ -1206,7 +1208,7 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
 </blockquote>
 
 <h2 id="expression-matrix"><span class="notranslate">Expression</span> matrix</h2>
-<p>Last, but not least! And in fact, the most important! The <span class="notranslate">expression</span> matrix contains all the values representing the <span class="notranslate">expression</span> level of a particular gene in a cell. This is why in theory the <span class="notranslate">expression</span> matrix is the only input file required by Monocle3. Without annotation files the CDS data can still be generated - it will be quite bare and rather unhelpful for interpretation, but at it’s possible to process.</p>
+<p>Last, but not least! And in fact, the most important! The <span class="notranslate">expression</span> matrix contains all the values representing the <span class="notranslate">expression</span> level of a particular gene in a cell. This is why in theory the <span class="notranslate">expression</span> matrix is the only input file required by Monocle3. Without annotation files the CDS data can still be generated - it will be quite bare and rather unhelpful for interpretation, but it’s possible to process.</p>
 
 <p>So, the values in the <span class="notranslate">expression</span> matrix are just numbers. But do you remember that we have already done some processing such as normalisation and the calculation of principal components in the AnnData object in the previous tutorial? That affected our <span class="notranslate">expression</span> matrix. Preprocessing is one of the steps in the Monocle3 <span class="notranslate">workflow</span>, so we want to make sure that the calculations are done on a ‘clean’ <span class="notranslate">expression</span> matrix. If we apply too many operations on our raw data, it will be too ‘deformed’ to be reliable. The point of the analysis is to use algorithms that make the enormous amount of data understandable in order to draw meaningful conclusions in accordance with biology.</p>
 
@@ -1457,7 +1459,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
 
 <p>Now it’s time for the proper dimensionality reduction, to turn the original thousands of dimensions (genes), into a 2-dimensional graph. There are several algorithms to do this: UMAP, tSNE, PCA and LSI (only possible when preprocess_method is set to <code class="language-plaintext highlighter-rouge">LSI</code>), but due to the same reasons as above, we’ll use UMAP (most common + allows further operations + best results). But I’ll let you see how the outputs from the other algorithms look to convince you that <strong>UMAP</strong> is indeed the best for this dataset. Of course, it’s possible that by choosing different pre-processing values, tSNE or PCA plots would look better, so don’t be afraid to play around with the parameters and test them!</p>
 
-<figure id="figure-6"><img src="../../images/scrna-casestudy-monocle/dim_red_methods.png" alt="Four graphs showing the alignment of cell types depending on the algorithm of dimentionality reduction that was chosen: UMAP, tSNE, PCA, LSI. UMAP shows distinct cell groups, transitioning smoothly from one to another, creating kind of semicircle. tSNE shows distinct cell groups, however no smooth transitions are observed, all groups gathered into one big grouping. PCA shows cell groups whose boundaries are blurred between each other. On LSI graph, the cell types are all mixed together." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> The preview of alignment of cell types depending on the algorithm of dimentionality reduction that was chosen: UMAP, tSNE, PCA, LSI. The methods were applied to the output of the PCA-preprocessed data (except LSI method which was called on LSI-preprocessed data). LSI failed in forming distinct cell groups, PCA managed to cluster cells according to their types but tSNE did it more precisely. However, UMAP gave the best results, not only showing distinct cell type groups, but also ordering them in a way that makes sense biologically - DN to T-mat.</figcaption></figure>
+<figure id="figure-6"><img src="../../images/scrna-casestudy-monocle/dim_red_methods.png" alt="Four graphs showing the alignment of cell types depending on the algorithm of dimensionality reduction that was chosen: UMAP, tSNE, PCA, LSI. UMAP shows distinct cell groups, transitioning smoothly from one to another, creating kind of semicircle. tSNE shows distinct cell groups, however no smooth transitions are observed, all groups gathered into one big grouping. PCA shows cell groups whose boundaries are blurred between each other. On LSI graph, the cell types are all mixed together." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> The preview of alignment of cell types depending on the algorithm of dimensionality reduction that was chosen: UMAP, tSNE, PCA, LSI. The methods were applied to the output of the PCA-preprocessed data (except LSI method which was called on LSI-preprocessed data). LSI failed in forming distinct cell groups, PCA managed to cluster cells according to their types but tSNE did it more precisely. However, UMAP gave the best results, not only showing distinct cell type groups, but also ordering them in a way that makes sense biologically - DN to T-mat.</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div id="hands-on-dimensionality-reduction" class="box-title" aria-label="hands-on box: Dimensionality reduction"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Dimensionality reduction</div>
@@ -1526,7 +1528,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
 
 <p>The <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Previous tutorial</a> discussed in detail the biological interpretation of data, so we will quickly go through similar analysis to see if the results are consistent and if we can draw any new conclusions.</p>
 
-<p>As a reminder, here’s the comparision between cell type annotation done in the other tutorial using Scanpy, and the output from the previous step of this Monocle tutorial. The main difference is that Scanpy was used to identify the cell types and assign them to clusters. That data was then passed on to Force-Directed + PAGA algorithms to infer trajectory, and then the arrangement of the cell groups changed a bit. In Monocle, trajectory analysis will be based on the clustering you see now. Therefore, the fact that on the Monocle plot we clearly see DN cells on one side of the graph and T-mat on the other, going through DP cells, looks promising. But there is DP-M1 group that suspiciously branches out… Let’s investigate that and wait until the trajectory is inferred!</p>
+<p>As a reminder, here’s the comparision between cell type annotation done in the other tutorial using Scanpy, and the output from the previous step of this Monocle tutorial. The main difference is that Scanpy was used to identify the cell types and assign them to clusters. That data was then passed on to Force-Directed + PAGA algorithms to infer trajectory, and then the arrangement of the cell groups changed a bit. In Monocle, trajectory analysis will be based on the clustering you see now.</p>
 
 <figure id="figure-7"><img src="../../images/scrna-casestudy-monocle/cell_types.png" alt="Each cell type forms a distinct group but they lie next to each other: DN, DP-M2, DP-M3, then DP-M4 has DP-M1 on the right and DP-L on the left, and DP-L neighbors with T-mat. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Cells coloured in Monocle by their type.</figcaption></figure>
 
@@ -1870,7 +1872,7 @@ There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. 
 <p>Now we can see how all our hard work has come together to give a final pseudotime trajectory analysis. DN cells gently switching to DP-M which change into DP-L to finally become mature T-cells. Isn’t it beautiful? But wait, don’t be too enthusiastic - why on earth DP-M1 group branches out? We didn’t expect that… What could that mean?</p>
 <blockquote>
 
-  <p>There are a lot of such questions in bioinformatics, and we’re always get excited to try to answer them. However, with analysing sc<span class="notranslate">RNA</span>-seq data, it’s almost like you need to know about 75% of your data to make sure that your analysis is reasonable, before you can identify the 25% new information. Additionally, pseudotime analysis crucially depends on choosing the right analysis and parameter values, as we showed for example with initial dimentionality reduction during pre-processing. The outputs here, at least in our hands, are more sensitive to parameter choice than standard clustering analysis with Scanpy.</p>
+  <p>There are a lot of such questions in bioinformatics, and we’re always get excited to try to answer them. However, with analysing sc<span class="notranslate">RNA</span>-seq data, it’s almost like you need to know about 75% of your data to make sure that your analysis is reasonable, before you can identify the 25% new information. Additionally, pseudotime analysis crucially depends on choosing the right analysis and parameter values, as we showed for example with initial dimensionality reduction during pre-processing. The outputs here, at least in our hands, are more sensitive to parameter choice than standard clustering analysis with Scanpy.</p>
 </blockquote>
 
 <figure id="figure-20"><img src="../../images/scrna-casestudy-monocle/pseudotime.png" alt="Pseudotime plot, showing the development of T-cells – starting in dark blue on DN cells and ending up on mature T-cells, marked in yellow on pseudotime scale and (going in the opposite direction) DP-M1 branch which is marked in light orange." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 20:</span> Trajectory analysis - pseudotime</figcaption></figure>
