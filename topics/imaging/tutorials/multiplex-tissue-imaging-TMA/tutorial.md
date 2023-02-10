@@ -20,7 +20,8 @@ key_points:
 - Tissue Microarray data can be analyzed using workflows that invoke MTI tools in batch
 - Segmentation quality can vary significantly depending on features of the input image, tool used, and parameters
 contributors:
-- CameronFRWatson, alliecreason
+- CameronFRWatson
+- alliecreason
 
 ---
 
