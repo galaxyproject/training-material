@@ -49,7 +49,7 @@ Find a full example history [here](https://cancer.usegalaxy.org/u/watsocam/h/gtn
 
 Multiplex tissue images come in a variety of forms and file-types depending on the modality or platform used. For this tutorial, the Exemplar-002 data was imaged using Cyclic Immunofluorescence (CycIF) with a RareCyte slide scanner. Many of the steps in this workflow have platform-specific parameters, and the hands-on sections will show the best parameters for CycIF RareCyte images; however, notes will be made where critical differences may occur depending on the modality or platform throughout the tutorial.
 
-> ### {% icon hands_on %} Hands-on: Data import to history
+> <hands-on-title> Data import to history </hands-on-title>
 >
 > 1. Create a new history for this tutorial
 >
@@ -98,7 +98,7 @@ Two new list collections will appear in the history upon completion:
   - BaSiC Illumination on Collection `X`: FFP (flat-field)
   - BaSiC Illumination on Collection `X`: DFP (deep-field)
 
-> ### {% icon hands_on %} Hands-on: Illumination correction
+> <hands-on-title> Illumination correction </hands-on-title>
 >
 > 1. {% tool [BaSiC Illumination](toolshed.g2.bx.psu.edu/repos/perssond/basic_illumination/basic_illumination/1.0.3+galaxy1) %} with the following parameters:
 >
@@ -119,7 +119,7 @@ After illumination is corrected across round tiles, the tiles must be stitched t
 >
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Image stitching and registration
+> <hands-on-title>: Image stitching and registration </hands-on-title>
 >
 > 1. {% tool [ASHLAR](toolshed.g2.bx.psu.edu/repos/perssond/ashlar/ashlar/1.14.0+galaxy1) %} with the following parameters:
 >
@@ -155,7 +155,7 @@ UNetCoreograph will output images (used for downstream steps), masks, and a prev
 
 ![Image of four cores (numbered 1-4) on a slide.](../../images/multiplex-tissue-imaging-TMA/ex2_dearray.png "Preview image from UNetCoreograph, outlines show detection of each individual core in the TMA.")
 
-> ### {% icon hands_on %} Hands-on: TMA dearray
+> <hands-on-title> TMA dearray </hands-on-title>
 >
 > 1. {% tool [UNetCoreograph](toolshed.g2.bx.psu.edu/repos/perssond/coreograph/unet_coreograph/2.2.8+galaxy1) %} with the following parameters:
 >
@@ -188,7 +188,7 @@ In this tutorial, we use **Mesmer** because it tends to perform generally well o
 >
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Nuclear segmentation
+> <hands-on-title> Nuclear segmentation </hands-on-title>
 >
 > 1. {% tool [Mesmer](toolshed.g2.bx.psu.edu/repos/goeckslab/mesmer/mesmer/0.12.3+galaxy2) %} with the following parameters:
 >    - {% icon param-collection %} *"Image containing the nuclear marker(s) "*: Collection output of UNetCoreograph (images)
@@ -217,7 +217,7 @@ Once again, as this is a TMA, we will be running this in batch mode for every co
 
 The quantification step will produce a CSV cell feature table for every image in the batch. 
 
-> ### {% icon hands_on %} Hands-on: Quantification
+> <hands-on-title> Quantification </hands-on-title>
 >
 > 1. {% tool [Quantification](toolshed.g2.bx.psu.edu/repos/perssond/quantification/quantification/1.5.3+galaxy1) %} with the following parameters:
 >
@@ -241,7 +241,7 @@ Anndata ({% cite Virshup2021 %}) is a Python package and file format schema for 
 
 Learn more about this file format at the [anndata documentation](https://anndata.readthedocs.io/en/latest/index.html).
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title> Conver to Anndata </hands-on-title>
 >
 > 1. {% tool [Convert McMicro Output to Anndata](toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_mcmicro_to_anndata/scimap_mcmicro_to_anndata/0.17.7+galaxy0) %} with the following parameters:
 >
@@ -265,7 +265,7 @@ There are several ways to classify cells available in Galaxy-ME. Unsupervised ap
 
 ![Screenshot of the phenotypes table](../../images/multiplex-tissue-imaging-TMA/ex2_phenotypeWF.png "Example of a phenotype workflow compatible with Scimap. 'Pos' means that the marker must be positive to be classified as the respective phenotype. 'Anypos' means any, but not necessarily all, of the listed markers can be positive to call the respective phenotype.")
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title> Single Cell Phenotyping with Scimap </hands-on-title>
 >
 > 1. {% tool [Single Cell Phenotyping](toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_phenotyping/scimap_phenotyping/0.17.7+galaxy0) %} with the following parameters:
 >
@@ -294,7 +294,7 @@ Visual analysis is an important part of multiplex tissue imaging workflows. Gala
 
 UNetCoreograph outputs each individual core image in `tiff` format. Interactive visualization tools, such as **Vitessce** and **Avivator** require the images to be in `OME-TIFF` format to be viewed. Galaxy-ME includes a conversion tool that can accomodate this, along with many other useful conversion functions. 
 
-> ### {% icon hands_on %} Hands-on: Convert image
+> <hands-on-title> Convert image </hands-on-title>
 >
 > 1. {% tool [Convert image](toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0) %} with the following parameters: 
 >    -  {% icon param-collection %} *"Input Image"*: `UNetCoreograph Images`
@@ -309,7 +309,7 @@ UNetCoreograph outputs each individual core image in `tiff` format. Interactive 
 
 Some tools can cause the channel names in an OME-TIFF image to be lost. To fix this, or to change the channel names to whatever the user prefers, the **Rename OME-TIFF Channels** tool can be invoked using a markers file similar to the one used in previous steps. 
 
-> ### {% icon hands_on %} Hands-on: Rename channels
+> <hands-on-title> Rename channels </hands-on-title>
 >
 > 1. {% tool [Rename OME-TIFF Channels](toolshed.g2.bx.psu.edu/repos/goeckslab/rename_tiff_channels/rename_tiff_channels/0.0.1+galaxy1) %} with the following parameters:
 >
@@ -326,7 +326,7 @@ For any `OME-TIFF` image in a Galaxy-ME history, there will be an option to view
 
 ![Screenshot shows a galaxy dataset expanded, and then the 'display at aviator' link expanded into a screenshot of Aviator showing a multicoloured histology slide.](../../images/multiplex-tissue-imaging-TMA/ex2_avivatorHistory.png "The highlighted link automatically appears for any OME-TIFF image (left) and, when clicked, launches an Avivator window to explore the image (right).")
 
-> ### {% icon hands_on %} Hands-on: View Images with Avivator
+> <hands-on-title> View Images with Avivator </hands-on-title>
 > 1. Expand the dataset `ASHLAR`: OME-TIFF image to be viewed
 > 2. Click on *"display at Avivator"*
 >
@@ -340,7 +340,7 @@ For any `OME-TIFF` image in a Galaxy-ME history, there will be an option to view
 
 ![screenshot of vitessce interface, on the left in A is a picture of a cell highlighted. On the right in B is a bar chart comparing cell size vs lineages.](../../images/multiplex-tissue-imaging-TMA/ex2_vitessce_zoomed.png "Each window in the dashboard can be resized to view the components in more detail. A closer look at the phenotype-labeled mask overlaid on the actual image (A), and the phenotype barplot (B).")
 
-> ### {% icon hands_on %} Hands-on: Vitessce visualization
+> <hands-on-title> Vitessce visualization </hands-on-title>
 >
 > 1. {% tool [Vitessce Visualization](toolshed.g2.bx.psu.edu/repos/goeckslab/vitessce_spatial/vitessce_spatial/1.0.4+galaxy0) %} with the following parameters:
 >
@@ -358,7 +358,7 @@ For any `OME-TIFF` image in a Galaxy-ME history, there will be an option to view
 
 Galaxy-ME includes additional tools from **Scimap** and tools from the **Squidpy** package ({% cite Palla2022 %}) that can be used to perform a variety of downstream analyses. For example, once phenotypes have been assigned to individual cells, **Squidpy** has several methods for understanding the spatial organization of the tissue. Using **Squidpy**, a spatial neighborhood graph is first generated, from which the organization of specific phenotype groups and their interactions can be quantified. 
 
-> ### {% icon hands_on %} Hands-on: Spatial analysis with **Squidpy**
+> <hands-on-title> Spatial analysis with Squidpy </hands-on-title>
 >
 > 1. {% tool **Squidpy Graph and Plotting** %} generate a spatial neighborhood graph with the following parameters:
 >
