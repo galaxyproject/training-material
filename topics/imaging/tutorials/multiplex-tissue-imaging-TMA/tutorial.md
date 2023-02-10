@@ -48,22 +48,32 @@ Find a full example history [here](https://cancer.usegalaxy.org/u/watsocam/h/gtn
 
 Multiplex tissue images come in a variety of forms and file-types depending on the modality or platform used. For this tutorial, the Exemplar-002 data was imaged using Cyclic Immunofluorescence (CycIF) with a RareCyte slide scanner. Many of the steps in this workflow have platform-specific parameters, and the hands-on sections will show the best parameters for CycIF RareCyte images; however, notes will be made where critical differences may occur depending on the modality or platform throughout the tutorial.
 
-
-The raw files for each round (10 in total) of the exemplar-002 data are available on [cancer.usegalaxy.org](https://cancer.usegalaxy.org) under **Data Libraries** (Figure 2.). Import the raw files into a new history as a **list collection**.
-
-
-![Screenshot of the Galaxy data libraries on cancer.usegalaxy.org, highlighting the path to the dataset, Libraries, Exemplar 002, raw. The UI shows all datasets in that folder selected before using the Export to History button to import them as a Collection.](../../images/multiplex-tissue-imaging-TMA/ex2_getData.png "Finding the Exemplar-002 data on cancer.usegalaxy.org Data Libraries.")
-
-
 > ### {% icon hands_on %} Hands-on: Data import to history
 >
 > 1. Create a new history for this tutorial
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the files for Exemplar-002 from the Shared Data Library to the new history
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
+>    the shared data library (`GTN - Material` -> `{{page.topic_name}}`
+>     -> `{{page.title}}`):
+>    ```
+>    https://zenodo.org/record/7622545/files/markers.csv
+>    https://zenodo.org/record/7622545/files/exemplar_002_phenotypes.csv
+>    https://zenodo.org/record/7622545/files/exemplar-002-cycle-01.ome.tiff
+>    https://zenodo.org/record/7622545/files/exemplar-002-cycle-02.ome.tiff
+>    https://zenodo.org/record/7622545/files/exemplar-002-cycle-03.ome.tiff
+>    https://zenodo.org/record/7622545/files/exemplar-002-cycle-04.ome.tiff
+>    https://zenodo.org/record/7622545/files/exemplar-002-cycle-05.ome.tiff
+>    https://zenodo.org/record/7622545/files/exemplar-002-cycle-06.ome.tiff
+>    https://zenodo.org/record/7622545/files/exemplar-002-cycle-07.ome.tiff
+>    https://zenodo.org/record/7622545/files/exemplar-002-cycle-08.ome.tiff
+>    https://zenodo.org/record/7622545/files/exemplar-002-cycle-09.ome.tiff
+>    https://zenodo.org/record/7622545/files/exemplar-002-cycle-10.ome.tiff
+>    ```
+>    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+> 3. Group the datasets into [collections]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}). Make a collection of the OME-TIFF, ordering the files by cycle number.
 >
 {: .hands_on}
 
@@ -73,6 +83,10 @@ The raw files for each round (10 in total) of the exemplar-002 data are availabl
 >
 {: .warning}
 
+The raw files for each round (10 in total) of the exemplar-002 data are available on [cancer.usegalaxy.org](https://cancer.usegalaxy.org) under **Data Libraries** (Figure 2.). Import the raw files into a new history as a **list collection**.
+
+
+![Screenshot of the Galaxy data libraries on cancer.usegalaxy.org, highlighting the path to the dataset, Libraries, Exemplar 002, raw. The UI shows all datasets in that folder selected before using the Export to History button to import them as a Collection.](../../images/multiplex-tissue-imaging-TMA/ex2_getData.png "Finding the Exemplar-002 data on cancer.usegalaxy.org Data Libraries.")
 
 # Tile illumination correction with **BaSiC Illumination**
 
@@ -111,10 +125,6 @@ After illumination is corrected across round tiles, the tiles must be stitched t
 >    - {% icon param-collection %} *"Raw Images"*: List collection of raw images
 >    - {% icon param-collection %} *"Deep Field Profile Images"*: List collection of DFP images produced by **BaSiC Illumination**
 >    - {% icon param-collection %} *"Flat Field Profile Images"*: List collection of FFP images produced by **BaSiC Illumination**
->    - *"Flip X-axis"*: `No`
->    - *"Flip Y-axis"*: `No`
->    - *"Maximum allowed per-tile corrective shift"*: `30`
->    - *"Upgrade to BF6-Compliant OME-TIFF Pyramid"*: `Upgrade Pyramid`
 >    - {% icon param-file %} *"Markers File (optional)"*: Comma-separated markers file with marker_names in third column
 >
 >    - In *"Advanced Options"*:
@@ -317,7 +327,7 @@ For any `OME-TIFF` image in a Galaxy-ME history, there will be an option to view
 
 > ### {% icon hands_on %} Hands-on: View Images with Avivator
 > 1. Expand the dataset `ASHLAR`: OME-TIFF image to be viewed
-> 2. Click on *"display at Aviator"*
+> 2. Click on *"display at Avivator"*
 >
 {: .hands_on}
 
