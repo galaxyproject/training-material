@@ -85,7 +85,7 @@ Two new list collections will appear in the history upon completion:
 
 > ### {% icon hands_on %} Hands-on: Illumination correction
 >
-> 1. {% tool [BaSiC Illumination](basic_illumination) %} with the following parameters:
+> 1. {% tool [BaSiC Illumination](toolshed.g2.bx.psu.edu/repos/perssond/basic_illumination/basic_illumination/1.0.3+galaxy1) %} with the following parameters:
 >
 >    - {% icon param-collection %} *"Raw Cycle Images: "*: List collection of raw images
 >
@@ -106,7 +106,7 @@ After illumination is corrected across round tiles, the tiles must be stitched t
 
 > ### {% icon hands_on %} Hands-on: Image stitching and registration
 >
-> 1. {% tool [ASHLAR](ashlar) %} with the following parameters:
+> 1. {% tool [ASHLAR](toolshed.g2.bx.psu.edu/repos/perssond/ashlar/ashlar/1.14.0+galaxy1) %} with the following parameters:
 >
 >    - {% icon param-collection %} *"Raw Images"*: List collection of raw images
 >    - {% icon param-collection %} *"Deep Field Profile Images"*: List collection of DFP images produced by **BaSiC Illumination**
@@ -146,7 +146,7 @@ UNetCoreograph will output images (used for downstream steps), masks, and a prev
 
 > ### {% icon hands_on %} Hands-on: TMA dearray
 >
-> 1. {% tool [UNetCoreograph](unet_coreograph) %} with the following parameters:
+> 1. {% tool [UNetCoreograph](toolshed.g2.bx.psu.edu/repos/perssond/coreograph/unet_coreograph/2.2.8+galaxy1) %} with the following parameters:
 >
 >    - {% icon param-file %} *"Registered TIFF"*: The output of **ASHLAR** (registered, pyramidal OME-TIFF file)
 >
@@ -179,12 +179,10 @@ In this tutorial, we use **Mesmer** because it tends to perform generally well o
 
 > ### {% icon hands_on %} Hands-on: Nuclear segmentation
 >
-> 1. {% tool [Mesmer](mesmer) %} with the following parameters:
+> 1. {% tool [Mesmer](toolshed.g2.bx.psu.edu/repos/goeckslab/mesmer/mesmer/0.12.3+galaxy2) %} with the following parameters:
 >    - {% icon param-collection %} *"Image containing the nuclear marker(s) "*: Collection output of UNetCoreograph (images)
->    - *"Compartment for segmentation prediction: "*: `Nuclear`
 >    - *"Resolution of the image in microns-per-pixel"*: `0.65`
->    - *"Whether to np.squeeze the outputs before saving"*: `Yes`
->    - *"Segment with Cell Membrane"*: `No`
+>    - *"Compartment for segmentation prediction:"*: `Nuclear`
 >
 >    > ### {% icon comment %} np.squeeze
 >    >
@@ -210,7 +208,7 @@ The quantification step will produce a CSV cell feature table for every image in
 
 > ### {% icon hands_on %} Hands-on: Quantification
 >
-> 1. {% tool [Quantification](quantification) %} with the following parameters:
+> 1. {% tool [Quantification](toolshed.g2.bx.psu.edu/repos/perssond/quantification/quantification/1.5.3+galaxy1) %} with the following parameters:
 >
 >    - {% icon param-collection %} *"Registered TIFF "*: Collection output of UNetCoreograph (images)
 >    - {% icon param-collection %} *"Primary Cell Mask "*: Collection output of Mesmer (or other segmentation tool)
@@ -234,7 +232,7 @@ Learn more about this file format at the [anndata documentation](https://anndata
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Convert McMicro Output to Anndata](scimap_mcmicro_to_anndata) %} with the following parameters:
+> 1. {% tool [Convert McMicro Output to Anndata](toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_mcmicro_to_anndata/scimap_mcmicro_to_anndata/0.17.7+galaxy0) %} with the following parameters:
 >
 >    - {% icon param-collection %} *"Select the input image or images"*: Collection output of Quantification (cellMaskQuant)
 >    - In *"Advanced Options"*:
@@ -258,11 +256,11 @@ There are several ways to classify cells available in Galaxy-ME. Unsupervised ap
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Single Cell Phenotyping](scimap_phenotyping) %} with the following parameters:
+> 1. {% tool [Single Cell Phenotyping](toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_phenotyping/scimap_phenotyping/0.17.7+galaxy0) %} with the following parameters:
 >
 >    - {% icon param-collection %} *"Select the input anndata"*: Output of **Convert MCMICRO output to Anndata**
 >    - {% icon param-file %} *"Select the dataset containing manual gate information"*: (Optional) manually determined gates in CSV format. Gates will be determined automatically using a GMM for each marker if this file is not provided
->    - {% icon param-file %} *"Select the dataset containing gating workflow"*: CSV phenotype workflow (Figure 5.)
+>    - {% icon param-file %} *"Select the dataset containing gating workflow"*: `exemplar_002_phenotypes.csv`, CSV phenotype workflow (Figure 5.)
 >    - *"Save the GMM gates plots If True"*: `Yes`
 >
 >
@@ -287,7 +285,7 @@ UNetCoreograph outputs each individual core image in `tiff` format. Interactive 
 
 > ### {% icon hands_on %} Hands-on: Convert image
 >
-> 1. {% tool [Convert image](ip_convertimage) %} with the following parameters: 
+> 1. {% tool [Convert image](toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0) %} with the following parameters: 
 >    -  {% icon param-collection %} *"Input Image"*: `UNetCoreograph Images`
 >    - *"Output data type"*: `OME TIFF`
 >    - *"Tile image"*: `Tile image`
@@ -302,7 +300,7 @@ Some tools can cause the channel names in an OME-TIFF image to be lost. To fix t
 
 > ### {% icon hands_on %} Hands-on: Rename channels
 >
-> 1. {% tool [Rename OME-TIFF Channels](toolshed.g2.bx.psu.edu/repos/watsocam/rename_tiff_channels/rename_tiff_channels/0.0.1.2) %} with the following parameters:
+> 1. {% tool [Rename OME-TIFF Channels](toolshed.g2.bx.psu.edu/repos/goeckslab/rename_tiff_channels/rename_tiff_channels/0.0.1+galaxy1) %} with the following parameters:
 >
 >    - {% icon param-file %} *"Input image in OME-tiff format"*: `Convert image`
 >    - *"Format of input image"*: `ome.tiff`
@@ -317,6 +315,11 @@ For any `OME-TIFF` image in a Galaxy-ME history, there will be an option to view
 
 ![Screenshot shows a galaxy dataset expanded, and then the 'display at aviator' link expanded into a screenshot of Aviator showing a multicoloured histology slide.](../../images/multiplex-tissue-imaging-TMA/ex2_avivatorHistory.png "The highlighted link automatically appears for any OME-TIFF image (left) and, when clicked, launches an Avivator window to explore the image (right).")
 
+> ### {% icon hands_on %} Hands-on: View Images with Avivator
+> 1. Expand the dataset `ASHLAR`: OME-TIFF image to be viewed
+> 2. Click on *"display at Aviator"*
+>
+{: .hands_on}
 
 ## Generating an interactive visualization dashboard with **Vitessce**
 
@@ -328,7 +331,7 @@ For any `OME-TIFF` image in a Galaxy-ME history, there will be an option to view
 
 > ### {% icon hands_on %} Hands-on: Vitessce visualization
 >
-> 1. {% tool [Vitessce Visualization](vitessce_spatial) %} with the following parameters:
+> 1. {% tool [Vitessce Visualization](toolshed.g2.bx.psu.edu/repos/goeckslab/vitessce_spatial/vitessce_spatial/1.0.4+galaxy0) %} with the following parameters:
 >
 >    - {% icon param-collection %} *"Select the OME Tiff image"*: OME-TIFF image to be viewed (or collection of files to run in batch)
 >    - {% icon param-collection %} *"Select masks for the OME Tiff image (Optional)"*: Output of Mesmer (or other segmentation tool)
