@@ -5,6 +5,24 @@ require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'
 
 
+def get_authors(material)
+  if material.key?('contributors') then
+    material['contributors']
+  elsif material.key?('contributions') then
+    material['contributions']['authorship']
+  else
+    []
+  end
+end
+
+def lookup_name(user, site)
+  if site.data['contributors'].has_key?(user) then
+    site.data['contributors'][user].fetch('name', user)
+  else
+    user
+  end
+end
+
 module Jekyll
   module GtnFunctions
 
@@ -127,11 +145,16 @@ module Jekyll
 
       url
     end
-
   end
 end
 
 Liquid::Template.register_filter(Jekyll::GtnFunctions)
+
+
+Jekyll::Hooks.register :posts, :pre_render do |post, out|
+  post.data['author'] = get_authors(post.data).map{|c| lookup_name(c, post.site)}.join(", ")
+  post.data['image'] = post.data['cover']
+end
 
 if $0 == __FILE__
   result = Gtn::ModificationTimes.obtain_time(ARGV[0].gsub(/^\//, ''))
