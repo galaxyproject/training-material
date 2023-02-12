@@ -77,7 +77,7 @@ jobs:
       - name: Previous build ID
         id: build_id
         run: |
-          echo "::set-output name=commit::$(curl https://galaxy-training.s3.amazonaws.com/videos/topics/last-commit -f 2>/dev/null || echo none)"
+          echo "commit=$(curl https://galaxy-training.s3.amazonaws.com/videos/topics/last-commit -f 2>/dev/null || echo none)" >> $GITHUB_ENV
 
       # The actual compilation process deposits everything in the ./videos/ folder.
       - name: Build Videos
@@ -90,7 +90,7 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_POLLY_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_POLLY_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-east-1
-          PREVIOUS_COMMIT_ID: ${{ steps.build_id.outputs.commit }}
+          PREVIOUS_COMMIT_ID: ${{ env.commit }}
 
       # Deploy step, scary.
       - uses: jakejarvis/s3-sync-action@v0.5.1

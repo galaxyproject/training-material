@@ -1661,7 +1661,7 @@ taxonomy files. In the following exercise, we will create a Krona plot with per-
 > >
 > > <br> The final result should look something like this (switch between samples via the list on the left): <br><br>
 > >
-> > <iframe id="krona" src="krona_multisample.html" frameBorder="0" width="100%" height="900px"> ![Krona](../../images/krona_multisample.png) </iframe>
+> > <iframe id="krona" src="krona_multisample.html" frameBorder="0" width="100%" height="900px"></iframe>
 > >
 > {: .solution }
 {: .question}

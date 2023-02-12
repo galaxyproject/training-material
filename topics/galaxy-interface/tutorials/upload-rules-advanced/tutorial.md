@@ -68,7 +68,7 @@ In order to make this data useful for the Rule Builder, we need to turn these ac
 >    ![Viewing the FASTA file](../../images/rules/uniprot_fasta_url.png)
 >
 > 5. We can deduce that the FASTA files for the other accession IDs will be available from URLs of the form `https://www.uniprot.org/uniprot/{identifier}.fasta`
->
+> <!-- https://rest.uniprot.org/uniprotkb/search?format=fasta&includeIsoform=true&query=accession:E7C0H6  is also an option, for future editors. -->
 {: .hands_on}
 {:#example-3-metadata}
 
@@ -142,7 +142,7 @@ We will use this information to build a collection of FASTA files from our query
 > 6. Finalize the collection:
 >     - *"Name"*: for example `UP000052092`
 >     - *"Type"*: `fasta`
->     - Click `Upload`
+>     - Click `Build`
 >    ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_4_7_mapping_extension_and_name.png)
 >
 >    > <comment-title>JSON Rule Definitions</comment-title>

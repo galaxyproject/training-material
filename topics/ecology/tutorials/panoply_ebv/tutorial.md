@@ -119,7 +119,7 @@ In this tutorial, we will be using data from the [GEO BON EBV data portal](https
 > >
 > > 1. Open the {% tool [Panoply](interactive_tool_panoply) %} by clicking [on the Panoply interactive tool shortcut](https://usegalaxy.eu/?tool_id=interactive_tool_panoply)
 > > 2. Check **martins_comcom_id1_20220208_v1.nc** dataset selected in the netcdf input field
-> > 3. Click Execute
+> > 3. Click Run Tool
 > > 4. The tool will start running and will stay running permanently
 > > 5. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the Panoply instance you started.
 > > 6. Click on your Panoply instance

@@ -1,0 +1,32 @@
+---
+layout: base
+title: Top Tools
+---
+
+
+{% assign groups = site | list_materials_by_tool %}
+<table class="table table-striped">
+	<thead>
+		<tr><th>Tool</th><th>Tutorials</th></tr>
+	</thead>
+	<tbody>
+	{% for group in groups %}
+	<tr>
+		<td><a href="{{ site.baseurl }}/by-tool/{{group[0]}}.html">{{ group[0] }}</a></td>
+		<td>
+			<ul>
+				{% for tutorial in group[1]["tutorials"] %}
+				<li>
+					{{ tutorial[2] }} /
+					<a href="{{ site.baseurl }}{{ tutorial[3] }}">
+					{{ tutorial[1] }}
+					</a>
+				</li>
+				{% endfor %}
+			</ul>
+		</td>
+	</tr>
+	{% endfor %}
+	</tbody>
+
+</table>

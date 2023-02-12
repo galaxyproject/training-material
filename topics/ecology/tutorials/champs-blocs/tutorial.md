@@ -103,7 +103,7 @@ Now let's focus on our workflow on boulder field ecological state
 >  You need to wait for the data to become green on the right panel
 >    ![Data ready](../../images/champbloc/after_before.png "Data ready")
 >   
-> > <tip-title>Tip: Create a new history</tip-title>
+> > <tip-title>Create a new history</tip-title>
 > > Create a new history for this tutorial and give it a name (example: “Champs blocs indicators”) for you to find it again later if needed.
 > > {% snippet faqs/galaxy/histories_create_new.md box_type="none" %}
 > {: .tip}
@@ -133,7 +133,7 @@ Go on the tool **IVR**
 >    - {% icon param-file %} *"Input champbloc_ivr.csv"*: `input` (champbloc_ivr.csv)
 >    - {% icon param-file %} *"Input ficheterrain.csv"*: `input` (ficheterrain.csv)
 >
-> 2. Press **Execute** (it can take some minutes to process it's normal if you have to wait a bit especially if your internet connection is weak)
+> 2. Press **Run Tool** (it can take some minutes to process it's normal if you have to wait a bit especially if your internet connection is weak)
 >
 > 3. Three outputs will appear in your history panel on the right.
 >
@@ -176,7 +176,7 @@ Get the {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/c
 >    - {% icon param-text %} *"Until when do you have data (write only the YEAR) ?"*: `2021`
 >
 >
-> 2. Press **Execute** (it can take some minutes to process it's normal if you have to wait a bit especially if your internet connection is weak)
+> 2. Press **Run Tool** (it can take some minutes to process it's normal if you have to wait a bit especially if your internet connection is weak)
 >
 > 3. View graphs
 >  * Once it's green, click on type of plot you want to see
