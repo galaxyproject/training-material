@@ -127,8 +127,8 @@ module Gtn
       box_id = self.get_id(box_type, title, key)
       box_title = self.format_box_title(title, box_type, lang=lang)
       return [box_id, %Q(
-        <div id="#{box_id}" class="box-title">
-        <button type="button" aria-controls="#{box_id}-contents" aria-expanded="true" aria-label="Toggle #{box_type} box: #{title}">
+        <div class="box-title #{box_type}-title" id="#{box_id}">
+        <button class="gtn-boxify-button #{box_type}" type="button" aria-controls="#{box_id}-contents" aria-expanded="true" aria-label="Toggle #{box_type} box: #{title}">
           #{self.get_icon(box_type)} #{box_title}
           <span role="button" class="fold-unfold fa fa-minus-square"></span>
         </button>
@@ -145,7 +145,7 @@ module Gtn
       end
 
       return [box_id, %Q(
-        <div id="#{box_id}" class="box-title" aria-label="#{box_type} box: #{title}">
+        <div class="box-title #{box_type}-title" id="#{box_id}" aria-label="#{box_type} box: #{title}">
           #{self.get_icon(box_type)} #{box_title}
         </div>
       ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip]
@@ -175,7 +175,7 @@ module Gtn
       return %Q(
         <div class="box #{box_type}" markdown=0>
         #{box_title}
-        <div id=#{box_id}-contents class="box-content" markdown=1>
+        <div class="box-content" id="#{box_id}-contents" markdown=1>
       ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip
     end
 
