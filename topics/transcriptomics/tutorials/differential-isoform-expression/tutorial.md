@@ -390,7 +390,7 @@ StringTie is a fast and highly efficient assembler of RNA-Seq alignments into po
 >
 {: .hands_on}
 
-## Isoform analysis
+# Isoform analysis
 
 ## Sub-step with **IsoformSwitchAnalyzeR**
 
