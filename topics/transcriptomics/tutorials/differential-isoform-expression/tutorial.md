@@ -164,6 +164,10 @@ Repeat with the other collection.
 >
 {: .hands_on}
 
+![figX:FASTQ sequence quality](../../images/differential_isoform/fastqc_per_base_sequence_quality.png "FASTQ sequence quality")
+
+![figX:FASTQ adapter content](../../images/differential_isoform/fastqc_adapter_content.png "FASTQ adapter content")
+
 # Quality assessment
 
 ## Sub-step with **fastp**
@@ -204,6 +208,18 @@ Repeat with the other collection
 >
 {: .hands_on}
 
+![figX:Overexpressed sequences](../../images/differential_isoform/fastp_general_stats.png "General stats")
+
+![figX:Filtered reads](../../images/differential_isoform/fastp_filtered_reads.png "Filtered reads")
+
+![figX:GC content](../../images/differential_isoform/fastp_gc_content.png "GC content")
+
+![figX:Insert sizes](../../images/differential_isoform/fastp_insert_sizes.png "Insert sizes")
+
+![figX:N content](../../images/differential_isoform/fastp_n_content.png "N content")
+
+![figX:Sequence quality](../../images/differential_isoform/fastp_sequence_quality.png "Sequence quality")
+
 
 # RNA-seq assembly
 
@@ -231,8 +247,20 @@ Repeat with the other collection
 
 ## Post-alignment RNA-seq analysis
 
+## Sub-step with **Junction Annotation**
 
-## Sub-step with **Convert GTF to BED12**
+<!-- Needs to be edited -->
+
+It compare detected splice junctions to reference gene model. splicing annotation is performed in two levels: splice event level and splice junction level.
+
+- Splice read: An RNA read, especially long read, can be spliced more than once, therefore, 100 spliced reads can produce >= 100 splicing events.
+- Splice junction: multiple splicing events spanning the same intron can be consolidated into one splicing junction.
+
+Detected junctions were divided to 3 exclusive categories:
+
+- Annotated (known): The junction is part of the gene model. Both splice sites, 5’ splice site (5’SS) and 3’splice site (3’SS) are annotated by reference gene model.
+- Complete_novel: Both 5’SS and 3’SS are novel.
+- Partial_novel: One of the splice site (5’SS or 3’SS) is novel, and the other splice site is annotated.
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -243,8 +271,6 @@ Repeat with the other collection
 >
 {: .hands_on}
 
-## Sub-step with **Junction Annotation**
-
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [Junction Annotation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_annotation/5.0.1+galaxy1) %} with the following parameters:
@@ -254,6 +280,10 @@ Repeat with the other collection
 {: .hands_on}
 
 ## Sub-step with **Junction Saturation**
+
+<!-- Needs to be edited -->
+
+It’s very important to check if current sequencing depth is deep enough to perform alternative splicing analyses. For a well annotated organism, the number of expressed genes in particular tissue is almost fixed so the number of splice junctions is also fixed. The fixed splice junctions can be predetermined from reference gene model. All (annotated) splice junctions should be rediscovered from a saturated RNA-seq data, otherwise, downstream alternative splicing analysis is problematic because low abundance splice junctions are missing. This module checks for saturation by resampling 5%, 10%, 15%, …, 95% of total alignments from BAM or SAM file, and then detects splice junctions from each subset and compares them to reference gene model.
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -267,6 +297,10 @@ Repeat with the other collection
 
 ## Sub-step with **Read Distribution**
 
+<!-- Needs to be edited -->
+
+Provided a BAM/SAM file and reference gene model, this module will calculate how mapped reads were distributed over genome feature (like CDS exon, 5’UTR exon, 3’ UTR exon, Intron, Intergenic regions). When genome features are overlapped (e.g. a region could be annotated as both exon and intron by two different transcripts) , they are prioritize as: CDS exons > UTR exons > Introns > Intergenic regions, for example, if a read was mapped to both CDS exon and intron, it will be assigned to CDS exons.
+
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy1) %} with the following parameters:
@@ -276,6 +310,10 @@ Repeat with the other collection
 {: .hands_on}
 
 ## Sub-step with **Infer Experiment**
+
+<!-- Needs to be edited -->
+
+This program is used to “guess” how RNA-seq sequencing were configured, particulary how reads were stranded for strand-specific RNA-seq data, through comparing the “strandness of reads” with the “standness of transcripts”.
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -322,9 +360,25 @@ Repeat with the other collection
 >
 {: .hands_on}
 
+![figX:Mapping general stats](../../images/differential_isoform/mapping_general_statistics.png "Mapping general stats")
+
+![figX:STAR alignment](../../images/differential_isoform/star_alignment.png "RNA star alignment")
+
+![figX:RSeQC infer experiment](../../images/differential_isoform/rseqc_infer_experiment.png "RSeQC infer experiment")
+
+![figX:RSeQC junction annotation](../../images/differential_isoform/rseqc_junction_annotation_junctions.png "RSeQC junction annotation")
+
+![figX:RSeQC junction saturation](../../images/differential_isoform/rseqc_junction_saturation.png "RSeQC junction saturation")
+
+![figX:RSeQC read distribution](../../images/differential_isoform/rseqc_read_distribution_plot.png "RSeQC read distribution")
+
 ## Transcriptome assembly
 
 ## Sub-step with **StringTie**
+
+<!-- Needs to be edited -->
+
+StringTie is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts. It uses a novel network flow algorithm as well as an optional de novo assembly step to assemble and quantitate full-length transcripts representing multiple splice variants for each gene locus. Its input can include not only alignments of short reads that can also be used by other transcript assemblers, but also alignments of longer sequences that have been assembled from those reads.
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -406,11 +460,11 @@ Repeat with the other collection
 >    - *"AWK Program"*: `{print i++"\t"$1"\t"$3"\t"$8"\t"$9"\t"$10"\t"$11"\t""-"}`
 >
 > 3. {% tool [Concatenate datasets](https://usegalaxy.eu/root?tool_id=cat1) %} with the following parameters:
->    - {% icon param-file %} *"Concatenate Dataset"*: `Text reformatting on...`
+>    - {% icon param-file %} *"Concatenate Dataset"*: `CPAT_header.tab`
 >    - In *"Dataset"*:
 >       - Click in "*Insert Dataset*"
 >    - In *"1: Dataset"*:
->       - {% icon param-file %} *"Select"*: `CPAT_header.tab`
+>       - {% icon param-file %} *"Select"*: `Text reformatting on...`
 >
 {: .hands_on}
 
@@ -430,6 +484,19 @@ Repeat with the other collection
 >        - *"Include prediction of intrinsically disordered Regions (IDR) information"*: `Disabled`
 >
 {: .hands_on}
+
+![figX:Consequences isoform](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_isoform.png "Consequences isoform")
+
+![figX:Consequences feature](../../images/differential_isoform/isoformSwitchAnalyzer_consequences_features.png "Consequences features")
+
+![figX:Splicing event](../../images/differential_isoform/isoformSwitchAnalyzer_splicing_event.png "Splicing event")
+
+![figX:Summary](../../images/differential_isoform/isoformSwitchAnalyzer_summary.png "Summary")
+
+![figX:Isoform usage](../../images/differential_isoform/isoformSwitchAnalyzer_isoform_usage.png "Isoform usage")
+
+![figX:Isoform usage](../../images/differential_isoform/isoformSwitchAnalyzer_gene.png "PHLPP2 isoform expression profile")
+
 
 ## Re-arrange
 
