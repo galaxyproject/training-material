@@ -36,7 +36,6 @@ module GTNNotebooks
     'feedback' => '⁉️',
     'details' => '💬',
     'hands_on' => '✏️',
-    'hands-on' => '✏️',
   }
 
   ICONS_FA = {
