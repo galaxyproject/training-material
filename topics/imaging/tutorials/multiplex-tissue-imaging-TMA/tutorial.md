@@ -30,7 +30,7 @@ contributors:
 
 Multiplex tissue images are large, multi-channel images that contain intensity data for numerous biomarkers. The methods for generating multiplex tissue images are diverse, and each method can require specialized knowledge for downstream processing and analysis. The MCMICRO ({% cite Schapiro2021 %}) pipeline was developed to process multiplex images into single-cell data, and to have the range of tools to accomodate for different imaging methods. The tools used in the MCMICRO pipeline, in addition to tools for single-cell analysis, spatial analysis, and interactive visualization are available in Galaxy to facilitate comprehensive and accessible analyses of multiplex tissue images. The MCMICRO tools available in Galaxy are capable of processing Whole Slide Images (WSI) and Tissue Microarrays (TMA). WSIs are images in which a tissue section from a single sample occupies the entire microscope slide; whereas, TMAs multiplex smaller cores from multiple samples onto a single slide. This tutorial will demonstrate how to use the Galaxy multiplex imaging tools to process and analyze publicly available TMA test data provided by MCMICRO (Figure 1.).
 
-Find a full example history [here](https://cancer.usegalaxy.org/u/watsocam/h/gtnexemplar002tma)
+Find a full [example history](https://cancer.usegalaxy.org/u/watsocam/h/gtnexemplar002tma)
 
 ![Aviator screenshot](../../images/multiplex-tissue-imaging-TMA/ex2_combined_avivator.png "Fully registered image of the MCMICRO Exemplar-002 Tissue microarray. Exemplar-002 consists of four cores, each with a distinct tissue organization and expression of biomarkers. In the image, there are six biomarkers shown: DNA (white), CD163 (yellow), CD3D (blue), CD31 (red), VDAC1 (green), and Keratin (orange). This image is being viewed using Avivator, an interactive tool that allows the user to selectively view channels and adjust channel intensities.")
 
@@ -78,7 +78,7 @@ Multiplex tissue images come in a variety of forms and file-types depending on t
 >
 {: .hands_on}
 
-> ### {% icon warning %} **Imaging platform differences**
+> <warning-title>**Imaging platform differences**</warning-title>
 > 
 > The Exemplar-002 raw images are in *ome.tiff* format; however, commonly seen raw file-types are *ome.tiff*, *tiff*, *czi*, and *svs*. If your input images are not *ome.tiff* or *tiff*, you may have to edit the dataset attributes in Galaxy to allow tools to recognize them as viable inputs. 
 >
@@ -111,7 +111,7 @@ Two new list collections will appear in the history upon completion:
 
 After illumination is corrected across round tiles, the tiles must be stitched together, and subsequently, each round mosaic must be registered together into a single pyramidal OME-TIFF file. **ASHLAR** ({% cite Muhlich2022 %}) from MCMICRO provides both of these functions. 
 
-> ### {% icon comment %} Important detail: Marker File
+> <comment-title>Important detail: Marker File</comment-title>
 >
 > **ASHLAR** optionally reads a marker metadata file to name the channels in the output OME-TIFF image. This marker file will also be used in later steps. Make sure that the marker file is comma-separated and has the `marker_names` as the third column (Figure 3.). 
 >
@@ -133,7 +133,7 @@ After illumination is corrected across round tiles, the tiles must be stitched t
 >
 {: .hands_on}
 
-> ### {% icon warning %} **Imaging platform differences**
+> <warning-title>**Imaging platform differences**</warning-title> 
 > 
 > ASHLAR, among other tools in the MCMICRO and Galaxy-ME pre-processing tools have some parameters that are specific to the 
 imaging patform used. By default, ASHLAR is oriented to work with images from RareCyte scanners. AxioScan scanners render images
@@ -161,7 +161,7 @@ UNetCoreograph will output images (used for downstream steps), masks, and a prev
 >
 >    - {% icon param-file %} *"Registered TIFF"*: The output of **ASHLAR** (registered, pyramidal OME-TIFF file)
 >
->    > ### {% icon comment %} What about Whole Slide Images? 
+>    > <comment-title>What about Whole Slide Images?</comment-title>
 >    >
 >    > Whole slide images do not need to be dearrayed, so in most cases, this step can be skipped; however, UNetCoreograph has the *"Tissue"* option, which when selected, can act to separate the whole tissue from the background in a whole slide image which can be useful. In this case, it is important to toggle the *"Downsample factor"* as this often needs to be higher when extracting whole tissues.
 >    {: .comment}
@@ -182,7 +182,7 @@ Available segmentation tools in Galaxy-ME:
 
 In this tutorial, we use **Mesmer** because it tends to perform generally well on a diverse range of image types, and has a limited number of parameters to understand. 
 
-> ### {% icon comment %} Important detail: Running images in batches
+> <comment-title>Important detail: Running images in batches</comment-title>
 >
 > Now that each image has been split into individual core images, downstream tools must be run on the images separately. Luckily, Galaxy makes this easy by including the option to run each tool in batch across a collection of inputs. Next to the input for the tool, select {% icon param-collection %} (**Dataset collection**) as the input type, and pass the collection output by UNetCoreograph as input. 
 >
@@ -195,14 +195,14 @@ In this tutorial, we use **Mesmer** because it tends to perform generally well o
 >    - *"Resolution of the image in microns-per-pixel"*: `0.65`
 >    - *"Compartment for segmentation prediction:"*: `Nuclear`
 >
->    > ### {% icon comment %} np.squeeze
+>    > <comment-title>np.squeeze</comment-title> 
 >    >
 >    > The **np.squeeze** parameter is very important to select as `Yes` to make the output compatible with next steps
 >    {: .comment}
 >
 {: .hands_on}
 
-> ### {% icon warning %} **Imaging platform differences: Image resolution**
+> <warning-title>Imaging platform differences: Image resolution**</warning-title>
 > 
 > A crucial parameter for Mesmer and other segmentation tools is the **Image resolution**. This is reported in microns/pixel, and can vary depending on the imaging platform used and the settings at image acquisition. Mesmer accepts the resolution in microns/pixel; however, if using UnMICST, the resolution must be reported as a ratio of the resolution of UnMICST's training images (0.65). For example, when using UnMICST, if your images were captured at a resolution of 0.65, then the UnMICST value would be 1, but if your images were captured at 0.325 microns/pixel, then the value you would enter for UnMICST would be 0.5. 
 >
@@ -226,7 +226,7 @@ The quantification step will produce a CSV cell feature table for every image in
 >    - {% icon param-collection %} *"Additional Cell Masks "*: `Nothing Selected` (Other tools may produce multiple mask types)
 >    - {% icon param-file %} *"Marker channels"*: Comma-separated markers file with marker_names in third column
 >
->    > ### {% icon comment %} Mask metrics and Intensity metrics
+>    > <comment-title>Mask metrics and Intensity metrics</comment-title> 
 >    >
 >    > Leaving the *"mask metrics"* and *"intensity metrics"* blank will by default run all available metrics
 >    >
@@ -250,7 +250,7 @@ Learn more about this file format at the [anndata documentation](https://anndata
 >        - *"Whether to remove the DNA channels from the final output"*: `No`
 >        - *"Whether to use unique name for cells/rows"*: `No`
 >
->    > ### {% icon warning %} Important parameter: Unique names for cells/rows
+>    > <warning-title>Important parameter: Unique names for cells/rows</warning-title> 
 >    >
 >    > Setting *"Whether to use unique name for cells/rows"* to `No` to ensures that downstream interactive visualizations will be able to map observational features to the mask CellIDs. 
 >    {: .comment}
@@ -275,7 +275,7 @@ There are several ways to classify cells available in Galaxy-ME. Unsupervised ap
 >    - *"Save the GMM gates plots If True"*: `Yes`
 >
 >
->    > ### {% icon comment %} Limitations of GMM automated phenotyping
+>    > <comment-title>Limitations of GMM automated phenotyping</comment-title>
 >    >
 >    > When manual gates are not provided, Scimap fits a GMM to determine a threshold between positive and negative cells. This automated gating works well when markers are highly abundant within the tissue, and the data shows a bimodal distribution (Figure 6A.). GMM gating can lead to spurious thresholds, however, when the data does not appear to be bimodal (Figure 6B.). This tends to happen when the marker is not highly abundant in the tissue, so there isn't a large positive population. Markers that have a highly continuous range of intensity, like certain functional markers, can also be problematic with GMM gating. It is recommended to always look at the GMM plots output by Scimap, and validate any potentially spurious gates manually. 
 >    >
@@ -371,7 +371,7 @@ Galaxy-ME includes additional tools from **Scimap** and tools from the **Squidpy
 >    - *"Select an analysis"*: `nhood_enrichment -- Compute neighborhood enrichment by permutation test`
 >    - *"Key in anndata.AnnData.obs where clustering is stored"*: `phenotype`
 >
->    > ### {% icon comment %} Neighborhood enrichment plot
+>    > <comment-title>Neighborhood enrichment plot</comment-title>
 >    >
 >    > **Squidpy** was used to calculate neighborhood enrichments for each phenotype in core 2 of exemplar 2 (Figure 10.). This shows which phenotypes co-locate most frequently within the tissue. 
 >    >
@@ -389,7 +389,7 @@ Galaxy-ME includes additional tools from **Scimap** and tools from the **Squidpy
 >    - In *"Plotting Options"*:
 >        - *"Ripley's statistic to be plotted"*: `L`
 >
->    > ### {% icon comment %} Ripley's L plot
+>    > <comment-title>Ripley's L plot</comment-title> 
 >    >
 >    > **Squidpy** was used to calculate Ripley's L curves for each phenotype in core 2 of exemplar 2 (Figure 11.). This shows the overall organization of each phenotype in the tissue. If the curve for a given phenotype lies above the light grey null line (Example: Epithelial cells in Figure 11.), the phenotype is statistically significantly clustered. If the curve lies on the null line (Example: Myeloid lineage in Figure 11.), it's spatial distribution within the tissue is random. If the curve is underneath the null line (Example: T cells in Figure 11.), it's spatial distribution is statistically significantly dispersed. 
 >    >
