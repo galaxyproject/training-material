@@ -122,7 +122,7 @@ Next we will retrieve the remaining datasets.
 > In this way, we will only take 1% of reads at a random sampling rate.
 {: .details}
 
-# Initial quality control
+# Quality assessment
 
 Quality assessment text.
 
@@ -167,8 +167,6 @@ Repeat with the other collection.
 ![figX:FASTQ sequence quality](../../images/differential_isoform/fastqc_per_base_sequence_quality.png "FASTQ sequence quality")
 
 ![figX:FASTQ adapter content](../../images/differential_isoform/fastqc_adapter_content.png "FASTQ adapter content")
-
-# Preprocessing of sequencing reads
 
 ## Sub-step with **fastp**
 
