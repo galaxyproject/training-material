@@ -725,12 +725,6 @@
         
     
         
-    
-        
-    
-        
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -820,7 +814,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>In this tutorial, you will learn how to create a <span class="notranslate">workflow</span> that downloads a selection of images from the IDR, and uses CellProfiler to segment the nuclei and nucleoli. You will also learn how to extract and export features at three different levels: image, nucleus, nucleolus.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -855,14 +849,14 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <h1 id="get-data">Get data</h1>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-download-images-from-the-idr" class="box-title" aria-label="hands-on box: Download images from the IDR"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Download images from the IDR</div>
+  <div class="box-title hands-on-title" id="hands-on-download-images-from-the-idr" aria-label="hands-on box: Download images from the IDR"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Download images from the IDR</div>
 
   <ol>
     <li>
       <p>If you are logged in, create a new history for this tutorial.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p><strong>IDR Download</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
@@ -878,7 +872,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
       </ul>
 
       <blockquote class="tip">
-        <div id="tip-get-the-idr-link-from-a-manual-selection-of-images" class="box-title"><button type="button" aria-controls="tip-get-the-idr-link-from-a-manual-selection-of-images-contents" aria-expanded="true" aria-label="Toggle tip box: Get the IDR link from a manual selection of images"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Get the IDR link from a manual selection of images<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-get-the-idr-link-from-a-manual-selection-of-images"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-get-the-idr-link-from-a-manual-selection-of-images-contents" aria-expanded="true" aria-label="Toggle tip box: Get the IDR link from a manual selection of images"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Get the IDR link from a manual selection of images<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>To get the valid IDR link, go to the <a href="http://idr.openmicroscopy.org/webclient/?show=screen-102">dataset of interest in the IDR</a> and select in the preview of a plate a few images ((figure <a href="#figure-3">Fig. 3</a> - 1)). Once you see them at the bottom of the page (figure <a href="#figure-3">Fig. 3</a> - 2), select them again and click the link button in the top-right corner of the right panel (figure <a href="#figure-3">Fig. 3</a> - 3).</p>
 
@@ -886,7 +880,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
       </blockquote>
 
       <blockquote class="comment">
-        <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p><strong>IMPORTANT:</strong> When the number of images to download is high, it is strongly recommended to enable the option <em>“Download images in a tarball?”</em> in order to improve the performance.</p>
       </blockquote>
@@ -896,7 +890,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 </blockquote>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Why are we taking the <code class="language-plaintext highlighter-rouge">Cy3</code> channel in the <a href="http://idr.openmicroscopy.org/webclient/img_detail/295900/">example data</a>?</li>
@@ -904,7 +898,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
   </ol>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
@@ -924,7 +918,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>The tool <strong>Starting Modules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> comprises the first 4 modules of the standalone CellProfiler. It needs to be the first tool of a <span class="notranslate">workflow</span> because it sets the naming and metadata handling for the rest of tools.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-specify-metadata-to-cellprofiler" class="box-title" aria-label="hands-on box: Specify metadata to CellProfiler"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Specify metadata to CellProfiler</div>
+  <div class="box-title hands-on-title" id="hands-on-specify-metadata-to-cellprofiler" aria-label="hands-on box: Specify metadata to CellProfiler"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Specify metadata to CellProfiler</div>
 
   <ol>
     <li><strong>Starting Modules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -967,7 +961,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
       </ul>
 
       <blockquote class="comment">
-        <div id="comment-1" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>The images downloaded from the IDR are named following the pattern: <code class="language-plaintext highlighter-rouge">plateName__imageID__cropX__cropY__cropWidth__cropHeight</code>. These fields indicate to which plate the image belongs, what is the identifier of the image in the IDR, and the 4 cropping parameters selected. In our case, the upper-left corner (X, Y) and the width and height from there. We have a total of 6 metadata values encoded in the name of the file, separated by <code class="language-plaintext highlighter-rouge">__</code>. The pattern to extract our metadata from the file name properly is, therefore: <code class="language-plaintext highlighter-rouge">field1__field2__field3__field4__field5__field6</code>. It is important to keep in mind that, for CellProfiler, our <code class="language-plaintext highlighter-rouge">plateName</code> will be called <code class="language-plaintext highlighter-rouge">field1</code>, <code class="language-plaintext highlighter-rouge">imageID</code> will be <code class="language-plaintext highlighter-rouge">field2</code>, <code class="language-plaintext highlighter-rouge">cropX</code> will be <code class="language-plaintext highlighter-rouge">field3</code>, etc. These matches are relevant for a meaningful interpretation of the features.</p>
       </blockquote>
@@ -994,7 +988,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>In the first step, we will identify the nuclei that are complete, meaning that they are not touching the borders of the image.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-segment-nuclei-that-are-complete-within-the-boundaries-of-the-image" class="box-title" aria-label="hands-on box: Segment nuclei that are complete within the boundaries of the image"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Segment nuclei that are complete within the boundaries of the image</div>
+  <div class="box-title hands-on-title" id="hands-on-segment-nuclei-that-are-complete-within-the-boundaries-of-the-image" aria-label="hands-on box: Segment nuclei that are complete within the boundaries of the image"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Segment nuclei that are complete within the boundaries of the image</div>
 
   <ol>
     <li><strong>IdentifyPrimaryObjects</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1034,7 +1028,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
       </ul>
 
       <blockquote class="comment">
-        <div id="comment-2" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-2" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <ul>
           <li>The names entered to the input image and objects have to be consistent (case sensitive) with the ones in <em>NamesAndTypes</em> and the tools to follow.</li>
@@ -1048,12 +1042,12 @@ The images and associated metadata will be retrieved from the <a href="http://id
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>We are using here Otsu’s thresholding method for segmentation. What other segmentation options are available? What is the difference between them?</p>
 
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>In the <em>global</em> methods we have <code class="language-plaintext highlighter-rouge">Manual</code>, <code class="language-plaintext highlighter-rouge">Measurement</code>, <code class="language-plaintext highlighter-rouge">Minimum cross entropy</code>, <code class="language-plaintext highlighter-rouge">Otsu</code> and <code class="language-plaintext highlighter-rouge">Robust background</code>. For the <em>adaptive</em> ones we only have <code class="language-plaintext highlighter-rouge">Otsu</code>. Check the parameters’ help to get more information on each one.</p>
 
@@ -1066,12 +1060,12 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <figure id="figure-4"><img src="../../images/tutorial-CP/img_nuclei_labels.png" alt="Identified nuclei with labels. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Identified nuclei with labels.</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Why are some nuclei not labeled in the image above?</p>
 
   <blockquote class="solution">
-    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>We have indicated to the tool <strong>IdentifyPrimaryObjects</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> that the nuclei that are either outside the diameter range or touching the border should be discarded.</p>
 
@@ -1080,7 +1074,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-mask-the-nuclei-detected" class="box-title" aria-label="hands-on box: Mask the nuclei detected"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Mask the nuclei detected</div>
+  <div class="box-title hands-on-title" id="hands-on-mask-the-nuclei-detected" aria-label="hands-on box: Mask the nuclei detected"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Mask the nuclei detected</div>
 
   <ol>
     <li><strong>ConvertObjectsToImage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1133,7 +1127,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
       </ul>
 
       <blockquote class="comment">
-        <div id="comment-3" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-3" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>The <code class="language-plaintext highlighter-rouge">Text color</code> parameter can be any of your choice, the hexa code is not really relevant. The only consideration is that it needs to be visible on top of the nuclei.</p>
       </blockquote>
@@ -1146,7 +1140,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>The nucleoli are lacking intensity in the <span class="notranslate">DNA</span> staining and therefore, we need to enhance the black holes before masking.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-detect-and-mask-dark-holes" class="box-title" aria-label="hands-on box: Detect and mask dark holes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Detect and mask dark holes</div>
+  <div class="box-title hands-on-title" id="hands-on-detect-and-mask-dark-holes" aria-label="hands-on box: Detect and mask dark holes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Detect and mask dark holes</div>
 
   <ol>
     <li><strong>EnhanceOrSuppressFeatures</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1185,7 +1179,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>Now that we have all the holes in one mask, we can segment the nucleoli as individual objects in the same way as we did with the nuclei. All the nucleoli can be then combined into one single image.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-segment-nucleoli-as-individual-objects" class="box-title" aria-label="hands-on box: Segment nucleoli as individual objects"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Segment nucleoli as individual objects</div>
+  <div class="box-title hands-on-title" id="hands-on-segment-nucleoli-as-individual-objects" aria-label="hands-on box: Segment nucleoli as individual objects"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Segment nucleoli as individual objects</div>
 
   <ol>
     <li><strong>IdentifyPrimaryObjects</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1242,7 +1236,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <figure id="figure-5"><img src="../../images/tutorial-CP/img_combined_masks.png" alt="Combined mask for nuclei and nucleoli. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Combined segmentation masks for nuclei (blue) and nucleoli (magenta).</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-convert-and-save-the-nuclei-and-nucleoli-masks" class="box-title" aria-label="hands-on box: Convert and save the nuclei and nucleoli masks"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Convert and save the nuclei and nucleoli masks</div>
+  <div class="box-title hands-on-title" id="hands-on-convert-and-save-the-nuclei-and-nucleoli-masks" aria-label="hands-on box: Convert and save the nuclei and nucleoli masks"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Convert and save the nuclei and nucleoli masks</div>
 
   <ol>
     <li><strong>GrayToColor</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1282,7 +1276,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
       </ul>
 
       <blockquote class="comment">
-        <div id="comment-4" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-4" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <ul>
           <li>You can pick any other color of your choice, as long as the contrast is good enough to distinguish both objects.</li>
@@ -1303,7 +1297,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <h2 id="identify-the-foreground">Identify the foreground</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-segment-all-nuclei" class="box-title" aria-label="hands-on box: Segment all nuclei"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Segment all nuclei</div>
+  <div class="box-title hands-on-title" id="hands-on-segment-all-nuclei" aria-label="hands-on box: Segment all nuclei"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Segment all nuclei</div>
 
   <ol>
     <li><strong>IdentifyPrimaryObjects</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1357,7 +1351,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <h2 id="remove-the-foreground-from-the-original-image">Remove the foreground from the original image</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-subtract-the-foreground-from-the-original-image" class="box-title" aria-label="hands-on box: Subtract the foreground from the original image"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Subtract the foreground from the original image</div>
+  <div class="box-title hands-on-title" id="hands-on-subtract-the-foreground-from-the-original-image" aria-label="hands-on box: Subtract the foreground from the original image"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Subtract the foreground from the original image</div>
 
   <p><strong>ImageMath</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
@@ -1405,7 +1399,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>A step that requires special attention is the relationship nucleolus-nucleus. This is useful to compute statistics on the number of nucleoli by nucleus.</p>
 
 <blockquote class="comment">
-  <div id="comment-5" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-5" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>The order in which the tools in this section are chained is not relevant for the outcome.</p>
 </blockquote>
@@ -1413,7 +1407,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <h2 id="measure-the-granularity-texture-intensity-size-and-shape">Measure the granularity, texture, intensity, size and shape</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-measure-the-granularity-texture-intensity-size-and-shape" class="box-title" aria-label="hands-on box: Measure the granularity, texture, intensity, size and shape"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Measure the granularity, texture, intensity, size and shape</div>
+  <div class="box-title hands-on-title" id="hands-on-measure-the-granularity-texture-intensity-size-and-shape" aria-label="hands-on box: Measure the granularity, texture, intensity, size and shape"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Measure the granularity, texture, intensity, size and shape</div>
 
   <ol>
     <li><strong>MeasureGranularity</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1504,12 +1498,12 @@ The images and associated metadata will be retrieved from the <a href="http://id
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Why are we measuring the granularity, texture and intensity of the original image and the nuclei only?</p>
 
   <blockquote class="solution">
-    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The nucleoli was not stained in the <span class="notranslate">DNA</span> channel and hence, the granularity, texture and intensity are constant values.</p>
 
@@ -1522,7 +1516,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>It might be relevant to compute some statistics on the number of nucleoli inside each nucleus. CellProfiler has a very interesting module to relate both objects, in which each one of the nucleoli is assigned an identifier and linked to the identifier of its parent nucleus.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-relate-nucleoli-to-their-parent-nucleus" class="box-title" aria-label="hands-on box: Relate nucleoli to their parent nucleus"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Relate nucleoli to their parent nucleus</div>
+  <div class="box-title hands-on-title" id="hands-on-relate-nucleoli-to-their-parent-nucleus" aria-label="hands-on box: Relate nucleoli to their parent nucleus"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Relate nucleoli to their parent nucleus</div>
 
   <ol>
     <li><strong>RelateObjects</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1547,7 +1541,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>In this section, we will measure the image quality, the area occupied by the nuclei and nucleoli in the original image and the intensity of the foreground and background.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-measure-the-image-quality" class="box-title" aria-label="hands-on box: Measure the image quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Measure the image quality</div>
+  <div class="box-title hands-on-title" id="hands-on-measure-the-image-quality" aria-label="hands-on box: Measure the image quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Measure the image quality</div>
 
   <ol>
     <li><strong>MeasureImageQuality</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1640,12 +1634,12 @@ The images and associated metadata will be retrieved from the <a href="http://id
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-4" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>In step 3, we are measuring the area occupied by objects for the <span class="notranslate">DNA</span> twice. Why is that?</p>
 
   <blockquote class="solution">
-    <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>We want to have the global intensity of the image, so the parameter <em>“Measure the intensity only from areas enclosed by objects?”</em> has to be set to <code class="language-plaintext highlighter-rouge">No</code>. However, we also want to obtain the intensity of the foreground, so only the parts of the images that are enclosed by nuclei.</p>
 
@@ -1658,7 +1652,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>All the parameters that we have measured related to the images and objects need to be exported to a file for each one of 6 example images analysed.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-export-features" class="box-title" aria-label="hands-on box: Export features"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Export features</div>
+  <div class="box-title hands-on-title" id="hands-on-export-features" aria-label="hands-on box: Export features"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Export features</div>
 
   <p><strong>ExportToSp<span class="notranslate">reads</span>heet</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
@@ -1676,7 +1670,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <p>All the steps in our <span class="notranslate">workflow</span> (except for the <strong>IDR download</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) have been passing through an <code class="language-plaintext highlighter-rouge">output_pipeline</code> as a parameter. This was the way to assemble all the modules from CellProfiler, now we can run all of them together!</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-run-cellprofiler-pipeline" class="box-title" aria-label="hands-on box: Run CellProfiler pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run CellProfiler pipeline</div>
+  <div class="box-title hands-on-title" id="hands-on-run-cellprofiler-pipeline" aria-label="hands-on box: Run CellProfiler pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run CellProfiler pipeline</div>
 
   <p><strong>CellProfiler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
@@ -1690,7 +1684,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
   </ul>
 
   <blockquote class="comment">
-    <div id="comment-6" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+    <div class="box-title comment-title" id="comment-6" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
     <p>This is the only time-consuming step of the <span class="notranslate">workflow</span>, as it needs to perform the whole analysis in the input dataset.</p>
   </blockquote>

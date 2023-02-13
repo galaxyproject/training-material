@@ -660,7 +660,7 @@ wrapper, and finally the testing and deployment of this tool into both a local a
 Although this will include specific tools, the training is generalizable.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -726,13 +726,13 @@ Recipes should always define the following 6 sections in the <code class="langua
 <p>Let’s write a Bioconda recipe for the tool we want to package: <a href="https://github.com/davebx/bellerophon">bellerophon</a></p>
 
 <blockquote class="warning">
-  <div id="warning-naming-collision" class="box-title" aria-label="warning box: Naming collision"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Naming collision</div>
+  <div class="box-title warning-title" id="warning-naming-collision" aria-label="warning box: Naming collision"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Naming collision</div>
   <p>As this tool is already packaged in Bioconda, to prevent any naming collision, we will slightly modify its name from <code class="language-plaintext highlighter-rouge">bellerophon</code> to <code class="language-plaintext highlighter-rouge">bellerophon_bis</code> in the recipe.
 <strong>This should never be done in real life, we only do it for this exercise!</strong></p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-writing-a-bioconda-recipe" class="box-title" aria-label="hands-on box: Writing a Bioconda Recipe"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Writing a Bioconda Recipe</div>
+  <div class="box-title hands-on-title" id="hands-on-writing-a-bioconda-recipe" aria-label="hands-on box: Writing a Bioconda Recipe"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Writing a Bioconda Recipe</div>
 
   <ol>
     <li>
@@ -746,7 +746,7 @@ Recipes should always define the following 6 sections in the <code class="langua
 conda-build preinstalled, and a folder for the meta.yaml file.</p>
 
       <blockquote class="code-in">
-        <div id="code-in-bash" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout <span class="nt">-b</span> bellerophon_bioconda
 conda create <span class="nt">-y</span> <span class="nt">--name</span> bellerophon_bioconda pip python conda-build
 conda activate bellerophon_bioconda
@@ -758,14 +758,14 @@ conda activate bellerophon_bioconda
       <p>Next we determine the SHA-256 checksum of the source tarball.</p>
 
       <blockquote class="code-in">
-        <div id="code-in-bash-1" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-1" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget <span class="nt">-O</span> bellerophon.tar.gz https://github.com/davebx/bellerophon/archive/1.0.tar.gz
 <span class="nb">sha256sum </span>bellerophon.tar.gz <span class="c"># Copy the 64-character hexadecimal number that this outputs.</span>
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div id="code-out" class="box-title" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+        <div class="box-title code-out-title" id="code-out" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>036c5e23f53ed5b612525d3a32095acca073a9c8d2bf73883deb852c89f40dcf  bellerophon.tar.gz
 </code></pre></div>        </div>
       </blockquote>
@@ -777,7 +777,7 @@ With these definitions, Bioconda’s automatic version updater should recognize 
 create a pull request to update the Bioconda package.</p>
 
       <blockquote class="code-in">
-        <div id="code-in-bash-2" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim recipes/bellerophon_bis/meta.yaml <span class="c"># vim can of course be replaced with any other editor.</span>
 </code></pre></div>        </div>
       </blockquote>
@@ -868,12 +868,12 @@ homepage, and optionally the github use<span class="notranslate">rna</span>me of
   <p>Putting all these parts together, we end up with a complete conda recipe for version 1.0 of bellerophon.</p>
 
   <blockquote class="question">
-    <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
     <p>What does your final file look like?</p>
 
     <blockquote class="solution">
-      <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">{</span><span class="err">%</span> <span class="nv">set name = "bellerophon_bis" %</span><span class="pi">}</span>
 <span class="pi">{</span><span class="err">%</span> <span class="nv">set version = "1.0" %</span><span class="pi">}</span>
@@ -917,7 +917,7 @@ homepage, and optionally the github use<span class="notranslate">rna</span>me of
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-using-build-sh" class="box-title" aria-label="comment box: Using build.sh"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Using build.sh</div>
+  <div class="box-title comment-title" id="comment-using-build-sh" aria-label="comment box: Using build.sh"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Using build.sh</div>
 
   <p>In this recipe, the command to execute for installing the package is very short, that’s why we write it directly in the <code class="language-plaintext highlighter-rouge">meta.yaml</code> file. When you need to run more complex commands (like compilation steps), it is preferable to remove the <code class="language-plaintext highlighter-rouge">build &gt; script</code> entry in the <code class="language-plaintext highlighter-rouge">meta.yaml</code> file, and write all the commands in a script named <code class="language-plaintext highlighter-rouge">build.sh</code> in the same directory.</p>
 
@@ -928,14 +928,14 @@ homepage, and optionally the github use<span class="notranslate">rna</span>me of
 <p>Now that your recipe is written, you can try to build it locally.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-building-the-recipe-locally" class="box-title" aria-label="hands-on box: Building the recipe locally"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Building the recipe locally</div>
+  <div class="box-title hands-on-title" id="hands-on-building-the-recipe-locally" aria-label="hands-on box: Building the recipe locally"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Building the recipe locally</div>
 
   <ol>
     <li>
       <p>Run conda-build</p>
 
       <blockquote class="code-in">
-        <div id="code-in-bash-3" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-3" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda build recipes/bellerophon_bis
 </code></pre></div>        </div>
       </blockquote>
@@ -945,7 +945,7 @@ homepage, and optionally the github use<span class="notranslate">rna</span>me of
 At the end, you should see something like this:</p>
 
       <blockquote class="code-out">
-        <div id="code-out-1" class="box-title" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+        <div class="box-title code-out-title" id="code-out-1" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TEST END: /home/abretaud/miniconda3/conda-bld/noarch/bellerophon-1.0-py_0.tar.bz2
 Renaming work directory [...]
@@ -967,7 +967,7 @@ anaconda_upload is not set.  Not uploading wheels: []
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-note-on-building-locally" class="box-title" aria-label="comment box: Note on building locally"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Note on building locally</div>
+  <div class="box-title comment-title" id="comment-note-on-building-locally" aria-label="comment box: Note on building locally"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Note on building locally</div>
 
   <p>While building locally is a quick way to check if a recipe is working, it’s not the most reliable way.
 That’s because the build is occurring directly on your system, which means you might get interference between the conda requirements in the recipe and your system-wide installed libraries and system configuration.
@@ -980,20 +980,20 @@ The automatic testing of your recipe on GitHub when you create a Pull Request is
 <p>After the recipe is complete, and when we have checked that it builds locally, we can commit and push to our fork, so that the recipe can eventually be integrated into Bioconda.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-creating-the-pr" class="box-title" aria-label="hands-on box: Creating the PR"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating the PR</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-the-pr" aria-label="hands-on box: Creating the PR"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating the PR</div>
 
   <ol>
     <li>
       <p>We start by making sure we’re on a branch, and that <code class="language-plaintext highlighter-rouge">recipes/bellerophon/meta.yaml</code> is the only modified file.</p>
 
       <blockquote class="code-in">
-        <div id="code-in-bash-4" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-4" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div id="code-out-2" class="box-title" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+        <div class="box-title code-out-title" id="code-out-2" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>On branch bellerophon_bioconda
 Untracked files:
@@ -1009,7 +1009,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
       <p>Add your recipes folder, commit, and push it.</p>
 
       <blockquote class="code-in">
-        <div id="code-in-bash-5" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-5" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git add recipes/bellerophon_bis
 git commit <span class="nt">-m</span> <span class="s1">'Add recipe for bellerophon 1.0'</span>
 git push origin <span class="nt">-u</span> bellerophon_bioconda
@@ -1019,7 +1019,7 @@ git push origin <span class="nt">-u</span> bellerophon_bioconda
       <p>Git will give you a url for creating the pull request, which can be clicked to be taken to github.</p>
 
       <blockquote class="code-out">
-        <div id="code-out-3" class="box-title" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+        <div class="box-title code-out-title" id="code-out-3" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push origin <span class="nt">-u</span> bellerophon_bioconda
 Total 0 <span class="o">(</span>delta 0<span class="o">)</span>, reused 0 <span class="o">(</span>delta 0<span class="o">)</span>
 remote:
@@ -1035,7 +1035,7 @@ Branch bellerophon_bioconda <span class="nb">set </span>up to track remote branc
   </ol>
 
   <blockquote class="warning">
-    <div id="warning-don-t-create-the-pull-request-for-real" class="box-title" aria-label="warning box: Don't create the Pull request for real!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Don't create the Pull request for real!</div>
+    <div class="box-title warning-title" id="warning-don-t-create-the-pull-request-for-real" aria-label="warning box: Don't create the Pull request for real!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Don't create the Pull request for real!</div>
 
     <p>You can click on the link to see the diff of what would be included in the Pull Request, and how the form looks like. But please don’t click on the <code class="language-plaintext highlighter-rouge">Create pull request</code> button! We don’t want to get duplicate versions of this recipe integrated in bioconda everytime someone follows this tutorial!</p>
 
@@ -1069,7 +1069,7 @@ anyone wrapping a tool, a more complete list is available in <a href="https://do
 <p>Initializing a tool wrapper to be run in <span class="notranslate">Galaxy</span> is simple</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-creating-a-tool-wrapper-skeleton" class="box-title" aria-label="hands-on box: Creating a Tool Wrapper Skeleton"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating a Tool Wrapper Skeleton</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-a-tool-wrapper-skeleton" aria-label="hands-on box: Creating a Tool Wrapper Skeleton"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating a Tool Wrapper Skeleton</div>
   <ol>
     <li>Go to the “tools” directory in your <span class="notranslate">Galaxy</span> instance.</li>
     <li>Make a new directory for tools you will be wrapping.</li>
@@ -1134,7 +1134,7 @@ anyone wrapping a tool, a more complete list is available in <a href="https://do
 The tool ID and name are defined here as well as which minimum version of <span class="notranslate">Galaxy</span> is required to run it.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-defining-the-tool-section" class="box-title" aria-label="hands-on box: Defining the tool section:"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Defining the tool section:</div>
+  <div class="box-title hands-on-title" id="hands-on-defining-the-tool-section" aria-label="hands-on box: Defining the tool section:"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Defining the tool section:</div>
   <p>For this section, the following is necessary:</p>
 
   <ul>
@@ -1167,7 +1167,7 @@ The tool ID and name are defined here as well as which minimum version of <span 
 The description is simply presented as plaintext between the tags. Bellerophon’s would look like this:</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-adding-a-description" class="box-title" aria-label="hands-on box: Adding a description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding a description</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-a-description" aria-label="hands-on box: Adding a description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding a description</div>
   <p>Add the following description to your tool</p>
   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;description&gt;</span>chimeric <span class="notranslate">reads</span> from Arima Genomics<span class="nt">&lt;/description&gt;</span>
 </code></pre></div>  </div>
@@ -1187,7 +1187,7 @@ useful for tools which have multiple options/modes that reuse parameters. We wil
 <p>The @TOOL_VERSION@ and @VERSION_SUFFIX@ used in the Tool line are defined here. Each need their own ‘token’ line, resulting in</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-macros" class="box-title" aria-label="hands-on box: Macros"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Macros</div>
+  <div class="box-title hands-on-title" id="hands-on-macros" aria-label="hands-on box: Macros"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Macros</div>
   <p>Add the following macros section to your tool:</p>
   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;macros&gt;</span>
     <span class="nt">&lt;token</span> <span class="na">name=</span><span class="s">"@TOOL_VERSION@"</span><span class="nt">&gt;</span>1.0<span class="nt">&lt;/token&gt;</span>
@@ -1222,7 +1222,7 @@ of the requirement would change the value for <code class="language-plaintext hi
 <p>We will now add a useful macro entry. With the <span class="notranslate">Galaxy</span> ecosystem is becoming more reliant on metadata, a bio.tools ID can help <span class="notranslate">Galaxy</span> to pull standardized metadata for your tool. This enables users to find and use the tool more easily from across the web, so we highly recommend setting a bio.tools identifier. If an entry already exists on <a href="https://bio.tools">https://bio.tools</a>, it’s a simple task.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-setting-a-bio-tools-id" class="box-title" aria-label="hands-on box: Setting a bio.tools ID:"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Setting a bio.tools ID:</div>
+  <div class="box-title hands-on-title" id="hands-on-setting-a-bio-tools-id" aria-label="hands-on box: Setting a bio.tools ID:"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Setting a bio.tools ID:</div>
 
   <p>If we go to <a href="https://bio.tools">https://bio.tools</a> and search “Bellerophon”, we find that it already has a bio.tools entry:</p>
 
@@ -1280,7 +1280,7 @@ This specifies the</p>
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-adding-requirements" class="box-title" aria-label="hands-on box: Adding requirements"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding requirements</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-requirements" aria-label="hands-on box: Adding requirements"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding requirements</div>
   <p>In the case of bellerophon, which requires two dependencies, bellerophon and samtools, the requirements section appears like so. Add them to your tool XML.</p>
 
   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;requirements&gt;</span>
@@ -1293,12 +1293,12 @@ This specifies the</p>
 <p>This uses the macro token for @TOOL_VERSION@ for the Bioconda package version to retrieve the version number for bellerophon, while samtools’ version is set manually.</p>
 
 <blockquote class="question">
-  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>If you wanted to add a requirement for the Seurat package of version 3.2, what would that look like?</p>
 
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;requirements&gt;</span>
         <span class="nt">&lt;requirement</span> <span class="na">type=</span><span class="s">"package"</span> <span class="na">version=</span><span class="s">"3.2"</span><span class="nt">&gt;</span>seurat<span class="nt">&lt;/requirement&gt;</span>
@@ -1464,18 +1464,18 @@ goes to the stderr instead of an output file, this can also be skipped. All thre
 but not exposed to the user.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-adding-parameters-to-your-tool" class="box-title" aria-label="hands-on box: Adding parameters to your tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding parameters to your tool</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-parameters-to-your-tool" aria-label="hands-on box: Adding parameters to your tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding parameters to your tool</div>
   <ol>
     <li>Using information in the above sections, add parameters for the forward, reverse, and quality flags to your tool xml.</li>
   </ol>
 
   <blockquote class="question">
-    <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
     <p>What does your <code class="language-plaintext highlighter-rouge">&lt;inputs/&gt;</code> section look like?</p>
 
     <blockquote class="solution">
-      <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
       <p>To include all of the necessary parameters, then, the inputs section would appear like this</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;inputs&gt;</span>
@@ -1498,7 +1498,7 @@ a user from inputting a value below a specified number. Here, the quality flag c
 It also defines the format of that file and the name shown to the user in the history.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-adding-your-outputs" class="box-title" aria-label="hands-on box: Adding your outputs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding your outputs</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-your-outputs" aria-label="hands-on box: Adding your outputs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding your outputs</div>
   <p>As Bellerophon has a single output file, add the following outputs section to your tool:</p>
 
   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;outputs&gt;</span>
@@ -1615,7 +1615,7 @@ For example</p>
 <h4 id="in-practice"><em>In practice</em></h4>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-writing-the-command-block" class="box-title" aria-label="hands-on box: Writing the command block"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Writing the command block</div>
+  <div class="box-title hands-on-title" id="hands-on-writing-the-command-block" aria-label="hands-on box: Writing the command block"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Writing the command block</div>
 
   <p>The bellerophon command section would, based on the variables set previously, would be as follows. Add it to your tool XML.</p>
 
@@ -1673,7 +1673,7 @@ for the test. These params can also be placed inside a conditional, simulating t
 <p>As all parameters in bellerophon are accessible at once, and do not contradict one another, only one test is necessary.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-adding-a-test" class="box-title" aria-label="hands-on box: Adding a test"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding a test</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-a-test" aria-label="hands-on box: Adding a test"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding a test</div>
   <p>Add the following test case to your tool:</p>
   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;tests&gt;</span>
         <span class="nt">&lt;test</span> <span class="na">expect_num_outputs=</span><span class="s">"1"</span><span class="nt">&gt;</span>
@@ -1743,7 +1743,7 @@ of an Arima Genomics tool in association with the Vertebrate Genomes project, th
 <p>Multiple citations can be added by using additional citation tags.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-adding-a-citation" class="box-title" aria-label="hands-on box: Adding a citation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding a citation</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-a-citation" aria-label="hands-on box: Adding a citation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding a citation</div>
   <p>Add the citation above using either method (but not both!)</p>
 </blockquote>
 
@@ -1854,7 +1854,7 @@ see it in action linting, testing, and serving the tool.</p>
 If you not have conda installed we suggest to use <code class="language-plaintext highlighter-rouge">pip</code> for installing <code class="language-plaintext highlighter-rouge">planemo</code>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-installing-planemo-via-pip" class="box-title" aria-label="hands-on box: Installing `planemo` via pip"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Installing `planemo` via pip</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-planemo-via-pip" aria-label="hands-on box: Installing `planemo` via pip"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Installing `planemo` via pip</div>
 
   <p>It is advised to install <code class="language-plaintext highlighter-rouge">planemo</code> in a virtual environment (step 1-2).</p>
 
@@ -1866,7 +1866,7 @@ If you not have conda installed we suggest to use <code class="language-plaintex
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-installing-planemo-via-conda" class="box-title" aria-label="hands-on box: Installing `planemo` via conda"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Installing `planemo` via conda</div>
+  <div class="box-title hands-on-title" id="hands-on-installing-planemo-via-conda" aria-label="hands-on box: Installing `planemo` via conda"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Installing `planemo` via conda</div>
 
   <ol>
     <li>Install <a href="https://conda.io/projects/conda/en/latest/user-guide/install/index.html">miniconda</a></li>
@@ -1878,20 +1878,20 @@ If you not have conda installed we suggest to use <code class="language-plaintex
 <p>Note that for using <code class="language-plaintext highlighter-rouge">planemo</code>from a new shell you will need to activate the python/conda environment again.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-testing-planemo-and-getting-help" class="box-title" aria-label="hands-on box: Testing `planemo` and getting help"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Testing `planemo` and getting help</div>
+  <div class="box-title hands-on-title" id="hands-on-testing-planemo-and-getting-help" aria-label="hands-on box: Testing `planemo` and getting help"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Testing `planemo` and getting help</div>
 
   <ol>
     <li>
       <p>In order to test if the installation worked execute</p>
 
       <blockquote class="code-in">
-        <div id="code-in-bash-6" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-6" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo <span class="nt">--version</span>
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div id="code-out-4" class="box-title" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+        <div class="box-title code-out-title" id="code-out-4" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
         <p>This should output the version of <code class="language-plaintext highlighter-rouge">planemo</code>, e.g.</p>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo, version 0.74.3
 </code></pre></div>        </div>
@@ -1916,7 +1916,7 @@ If you not have conda installed we suggest to use <code class="language-plaintex
 By default <code class="language-plaintext highlighter-rouge">planemo</code> will fail if any warning or error is found, i.e. return a non-zero exit code.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-lint-a-tool-with-planemo" class="box-title" aria-label="hands-on box: Lint a tool with `planemo`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Lint a tool with `planemo`</div>
+  <div class="box-title hands-on-title" id="hands-on-lint-a-tool-with-planemo" aria-label="hands-on box: Lint a tool with `planemo`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Lint a tool with `planemo`</div>
 
   <ol>
     <li>Change into the directory containing the tool</li>
@@ -1942,7 +1942,7 @@ In order to do so <code class="language-plaintext highlighter-rouge">planemo</co
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-test-a-tool-with-planemo" class="box-title" aria-label="hands-on box: Test a tool with `planemo`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Test a tool with `planemo`</div>
+  <div class="box-title hands-on-title" id="hands-on-test-a-tool-with-planemo" aria-label="hands-on box: Test a tool with `planemo`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Test a tool with `planemo`</div>
 
   <ol>
     <li>Change into the directory containing the tool</li>
@@ -1976,7 +1976,7 @@ to determine the source of the test failure.</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div id="tip-useful-parameters-for-planemo-test" class="box-title"><button type="button" aria-controls="tip-useful-parameters-for-planemo-test-contents" aria-expanded="true" aria-label="Toggle tip box: Useful parameters for `planemo test`"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Useful parameters for `planemo test`<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-useful-parameters-for-planemo-test"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-useful-parameters-for-planemo-test-contents" aria-expanded="true" aria-label="Toggle tip box: Useful parameters for `planemo test`"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Useful parameters for `planemo test`<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <ul>
     <li><code class="language-plaintext highlighter-rouge">--failed</code> Will make <code class="language-plaintext highlighter-rouge">planemo</code> rerun only the tests that failed in the previous execution.</li>
@@ -1986,7 +1986,7 @@ to determine the source of the test failure.</p>
 </blockquote>
 
 <blockquote class="details">
-  <div id="details-understanding-planemo-s-output-in-more-detail" class="box-title"><button type="button" aria-controls="details-understanding-planemo-s-output-in-more-detail-contents" aria-expanded="true" aria-label="Toggle details box: Understanding `planemo`'s output in more detail"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Understanding `planemo`'s output in more detail<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-understanding-planemo-s-output-in-more-detail"><button class="gtn-boxify-button details" type="button" aria-controls="details-understanding-planemo-s-output-in-more-detail-contents" aria-expanded="true" aria-label="Toggle details box: Understanding `planemo`'s output in more detail"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Understanding `planemo`'s output in more detail<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Sometimes it can be helpful to understand the <code class="language-plaintext highlighter-rouge">planemo</code> output in more detail.</p>
 
@@ -2023,7 +2023,7 @@ to determine the source of the test failure.</p>
 <p>It can be very useful to check how <span class="notranslate">Galaxy</span> renders a tool and if this meets the expectations of the developer. For instance this is the best way to check if the help section is rendered as expected.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-serve-a-tool-with-planemo" class="box-title" aria-label="hands-on box: Serve a tool with `planemo`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Serve a tool with `planemo`</div>
+  <div class="box-title hands-on-title" id="hands-on-serve-a-tool-with-planemo" aria-label="hands-on box: Serve a tool with `planemo`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Serve a tool with `planemo`</div>
 
   <ol>
     <li>Change into the directory containing the tool</li>
@@ -2037,7 +2037,7 @@ to determine the source of the test failure.</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div id="tip-useful-parameters-for-planemo-test-1" class="box-title"><button type="button" aria-controls="tip-useful-parameters-for-planemo-test-1-contents" aria-expanded="true" aria-label="Toggle tip box: Useful parameters for `planemo test`"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Useful parameters for `planemo test`<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-useful-parameters-for-planemo-test-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-useful-parameters-for-planemo-test-1-contents" aria-expanded="true" aria-label="Toggle tip box: Useful parameters for `planemo test`"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Useful parameters for `planemo test`<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>In order to stop <code class="language-plaintext highlighter-rouge">planemo serve</code> just press <kbd>Ctrl-C</kbd></p>
 </blockquote>
@@ -2095,7 +2095,7 @@ But, the steps can be adapted easily by exchanging the repository URLs. Note tha
 the development branch may have the name <code class="language-plaintext highlighter-rouge">master</code> instead of <code class="language-plaintext highlighter-rouge">main</code>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-fork-and-clone-the-iuc-github-repository" class="box-title" aria-label="hands-on box: Fork and clone the IUC github repository"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Fork and clone the IUC github repository</div>
+  <div class="box-title hands-on-title" id="hands-on-fork-and-clone-the-iuc-github-repository" aria-label="hands-on box: Fork and clone the IUC github repository"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Fork and clone the IUC github repository</div>
 
   <ol>
     <li>If you don’t have an account on github you need to sign up at first.</li>
@@ -2116,7 +2116,7 @@ the development branch may have the name <code class="language-plaintext highlig
       <p>In order to obtain a clone (i.e. a local copy of your fork) click the green button with text “Code” and copy the link. And execute the following commands on your computer</p>
 
       <blockquote class="code-in">
-        <div id="code-in-bash-7" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-7" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>A_DIR_WHERE_YOU_WANT_TO_CREATE_THE_CLONE
 git clone LINK_TO_YOUR_FORK
 <span class="nb">cd </span>tools-iuc/
@@ -2134,7 +2134,7 @@ The last command will add the original sandbox repository as a remote with the n
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-keeping-your-fork-in-sync" class="box-title" aria-label="hands-on box: Keeping your fork in sync"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Keeping your fork in sync</div>
+  <div class="box-title hands-on-title" id="hands-on-keeping-your-fork-in-sync" aria-label="hands-on box: Keeping your fork in sync"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Keeping your fork in sync</div>
 
   <p>You should execute the following steps always before creating a new branch:</p>
 
@@ -2148,7 +2148,7 @@ The last command will add the original sandbox repository as a remote with the n
 <h2 id="create-a-pull-request-for-a-new-tool">Create a pull request for a new tool</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-create-a-pull-request" class="box-title" aria-label="hands-on box: Create a pull request"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create a pull request</div>
+  <div class="box-title hands-on-title" id="hands-on-create-a-pull-request" aria-label="hands-on box: Create a pull request"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create a pull request</div>
   <ol>
     <li><code class="language-plaintext highlighter-rouge">git checkout main</code></li>
     <li><code class="language-plaintext highlighter-rouge">git checkout -b NAME_OF_THE_BRANCH</code>: create a new feature branch and change to this branch. The branch name should not contain names and should be short and if possible descriptive, e.g. the tool name.</li>
@@ -2163,7 +2163,7 @@ The last command will add the original sandbox repository as a remote with the n
 <p>After you created a PR your changes will be reviewed and improvements will be requested. You can add changes to the PR as follows.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-adding-changes-to-a-pr" class="box-title" aria-label="hands-on box: Adding changes to a PR"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding changes to a PR</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-changes-to-a-pr" aria-label="hands-on box: Adding changes to a PR"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding changes to a PR</div>
   <ol>
     <li><code class="language-plaintext highlighter-rouge">git checkout NAME_OF_THE_BRANCH</code></li>
     <li>Make changes as requested.</li>

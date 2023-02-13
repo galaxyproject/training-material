@@ -824,10 +824,6 @@
         
     
         
-    
-        
-    
-        
         <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
             Metagenomics
         </a>
@@ -839,8 +835,6 @@
         <a class="dropdown-item" href="https://nanopore.usegalaxy.eu/" title="NanoGalaxy">
             NanoGalaxy
         </a>
-        
-    
         
     
         
@@ -946,7 +940,7 @@
 <p>SPAdes is a de novo genome assembler written by Pavel Pevzner’s group in St. Petersburg. More details on it can be found <a href="http://cab.spbu.ru/software/spades/">here</a></p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will deal with:</p>
 
@@ -962,14 +956,14 @@
 <p>We will be using the same data that we used in the introductory tutorial, so if you have already completed that and have the data, skip this section.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-getting-the-data" class="box-title" aria-label="hands-on box: Getting the data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Getting the data</div>
+  <div class="box-title hands-on-title" id="hands-on-getting-the-data" aria-label="hands-on box: Getting the data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Getting the data</div>
 
   <ol>
     <li>
       <p>Create and name a new history for this tutorial.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the sequence read raw data (*.fastq) from <a href="https://zenodo.org/record/582600">Zenodo</a></p>
@@ -979,7 +973,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename the files <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span></p>
@@ -989,10 +983,10 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-dataset" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
 
       <blockquote class="question">
-        <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <ol>
           <li>What are four key features of a FASTQ file?</li>
@@ -1009,7 +1003,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 <p>We will perform an assembly with the Velvet Optimiser, which automatically runs and optimises the output of the Velvet assembler (<span class="citation"><a href="#Velvet2008">Zerbino and Birney 2008</a></span>). It will automatically choose a suitable value for the k-mer size (<strong>k</strong>). It will then go on to optimise the coverage cutoff (<strong>cov_cutoff</strong>) which corrects for read errors. It will use the “<em>n50</em>” metric for optimising the k-mer size and the “<em>total number of bases in contigs</em>” for optimising the coverage cutoff.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-assemble-with-the-velvet-optimiser" class="box-title" aria-label="hands-on box: Assemble with the Velvet Optimiser"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Assemble with the Velvet Optimiser</div>
+  <div class="box-title hands-on-title" id="hands-on-assemble-with-the-velvet-optimiser" aria-label="hands-on box: Assemble with the Velvet Optimiser"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Assemble with the Velvet Optimiser</div>
 
   <ol>
     <li><strong>Velvet Optimiser</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Optimise your assembly with the following parameters:
@@ -1044,7 +1038,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 <p>Have a look at each file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-get-contig-statistics-for-velvet-optimiser-contigs" class="box-title" aria-label="hands-on box: Get contig statistics for Velvet Optimiser contigs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get contig statistics for Velvet Optimiser contigs</div>
+  <div class="box-title hands-on-title" id="hands-on-get-contig-statistics-for-velvet-optimiser-contigs" aria-label="hands-on box: Get contig statistics for Velvet Optimiser contigs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get contig statistics for Velvet Optimiser contigs</div>
 
   <ol>
     <li><strong>Fasta Statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Produce a summary of the velvet optimiser contigs:
@@ -1056,7 +1050,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
       <p>View the output</p>
 
       <blockquote class="question">
-        <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p>Compare the output we got here with the output of the simple assemblies obtained in the introductory tutorial.</p>
         <ol>
@@ -1076,7 +1070,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 <p><strong>(b)</strong> <img src="../../images/optstats.png" alt="The results of the contigs from Optimised assembly. In contrast to simple assembly produced much higher n_50, while num_seq is lower." loading="lazy" /></p>
 
 <blockquote class="details">
-  <div id="details-further-reading-on-assembly-with-velvet" class="box-title"><button type="button" aria-controls="details-further-reading-on-assembly-with-velvet-contents" aria-expanded="true" aria-label="Toggle details box: Further reading on assembly with Velvet"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Further reading on assembly with Velvet<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-further-reading-on-assembly-with-velvet"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-reading-on-assembly-with-velvet-contents" aria-expanded="true" aria-label="Toggle details box: Further reading on assembly with Velvet"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Further reading on assembly with Velvet<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>Heuristic Resolution of Repeats and Scaffolding in the Velvet Short-Read de Novo Assembler (<span class="citation"><a href="#Zerbino2009">Zerbino <i>et al.</i> 2009</a></span>)</li>
   </ul>
@@ -1090,7 +1084,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 <p>Currently VelvetOptimiser does not include the LastGraph output, so we will manually run <code class="language-plaintext highlighter-rouge">velveth</code> and <code class="language-plaintext highlighter-rouge">velvetg</code> with the optimised parameters.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-manually-running-velvetg-h" class="box-title" aria-label="hands-on box: Manually running velvetg/h"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Manually running velvetg/h</div>
+  <div class="box-title hands-on-title" id="hands-on-manually-running-velvetg-h" aria-label="hands-on box: Manually running velvetg/h"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Manually running velvetg/h</div>
 
   <ol>
     <li>
@@ -1106,10 +1100,10 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
   <p>What was the optimal k-mer value? (referred to as <em>“hash”</em> in the stderr log)</p>
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>55</p>
   </blockquote>
 </blockquote>
@@ -1117,7 +1111,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 <p>With this information in hand, let’s run velvet:</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-manually-running-velvetg-h-1" class="box-title" aria-label="hands-on box: Manually running velvetg/h"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Manually running velvetg/h</div>
+  <div class="box-title hands-on-title" id="hands-on-manually-running-velvetg-h-1" aria-label="hands-on box: Manually running velvetg/h"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Manually running velvetg/h</div>
 
   <ol>
     <li><strong>velveth</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Prepare a dataset for the Velvet velvetg Assembler
@@ -1166,7 +1160,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 <p>The LastGraph contains a detailed representation of the De Bruijn graph, which can give us an idea how velvet has assembled the genome and potentially resolved any conflicts.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-bandage" class="box-title" aria-label="hands-on box: Bandage"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Bandage</div>
+  <div class="box-title hands-on-title" id="hands-on-bandage" aria-label="hands-on box: Bandage"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Bandage</div>
 
   <ol>
     <li><strong>Bandage Image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: visualize de novo assembly graphs
@@ -1244,7 +1238,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 <p>We will now perform an assembly with the much more modern SPAdes assembler (<span class="citation"><a href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a></span>). It goes through a similar process to Velvet in the fact that it uses and simplifies de Bruijn graphs but it uses multiple values for k-mer size and combines the resultant graphs. This combination produces very good assemblies. When using SPAdes it is typical to choose at least 3 k-mer sizes. One low, one medium and one high. We will use 33, 55 and 91.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-assemble-with-spades" class="box-title" aria-label="hands-on box: Assemble with SPAdes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Assemble with SPAdes</div>
+  <div class="box-title hands-on-title" id="hands-on-assemble-with-spades" aria-label="hands-on box: Assemble with SPAdes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Assemble with SPAdes</div>
 
   <ol>
     <li>
@@ -1276,7 +1270,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 <p><img src="../../images/contig_stats.png" alt="Contig stats file with NODE_5 being the shortest contig with the highest coverage and NODE_1 being the opposite." loading="lazy" /></p>
 
 <blockquote class="question">
-  <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Why would one of the contigs have much higher coverage than the others?</li>
@@ -1286,7 +1280,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-visualize-assembly-with-bandage" class="box-title" aria-label="hands-on box: Visualize assembly with Bandage"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualize assembly with Bandage</div>
+  <div class="box-title hands-on-title" id="hands-on-visualize-assembly-with-bandage" aria-label="hands-on box: Visualize assembly with Bandage"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualize assembly with Bandage</div>
 
   <ol>
     <li><strong>Bandage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1304,14 +1298,14 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 <p><img src="../../images/bandage_spades.svg" alt="bandage spades. " loading="lazy" /></p>
 
 <blockquote class="question">
-  <div id="question-4" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Which assembly looks better to you? Why?</p>
 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-get-contig-statistics-for-spades-contigs" class="box-title" aria-label="hands-on box: Get contig statistics for SPAdes contigs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get contig statistics for SPAdes contigs</div>
+  <div class="box-title hands-on-title" id="hands-on-get-contig-statistics-for-spades-contigs" aria-label="hands-on box: Get contig statistics for SPAdes contigs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get contig statistics for SPAdes contigs</div>
 
   <ol>
     <li><strong>Fasta Statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Produce a summary of the SPAdes contigs:
@@ -1323,7 +1317,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
       <p>Look at the output file.</p>
 
       <blockquote class="question">
-        <div id="question-5" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-5" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p>Compare the output we got here with the output of the simple assemblies obtained in the introductory tutorial.</p>
         <ol>

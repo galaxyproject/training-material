@@ -778,15 +778,9 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
             Human Cell Atlas
         </a>
-        
-    
-        
-    
         
     
         
@@ -914,7 +908,7 @@
 <figure id="figure-1"><img src="../../images/rna-seq-reads-to-counts/mouse_exp.png" alt="Tutorial Dataset. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Tutorial Dataset</figcaption></figure>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will deal with:</p>
 
@@ -933,7 +927,7 @@
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div id="comment-results-may-vary" class="box-title" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or because of stochastic processes in the algorithms.</p> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or because of stochastic processes in the algorithms.</p> </blockquote>
 
 <p>We will use several files for this analysis:</p>
 
@@ -948,17 +942,17 @@
 <h1 id="import-data">Import data</h1>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>
       <p>Create a new history for this <span class="notranslate">RNA</span>-seq exercise e.g. <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>-seq genes to pathways</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-history" class="box-title"><button type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
     <li><strong>Import the files</strong>, there are two options:
       <ul>
@@ -966,13 +960,13 @@
           <p>Option 1: From a shared data library if available (ask your instructor)</p>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div id="tip-importing-data-from-a-data-library" class="box-title"><button type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
         </li>
         <li>
           <p>Option 2: From <a href="https://zenodo.org/record/2596382">Zenodo</a></p>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
         </li>
       </ul>
 
@@ -990,7 +984,7 @@ https://zenodo.org/record/2596382/files/limma-voom_filtered_counts
       <p>Add a tag called <code class="language-plaintext highlighter-rouge">#basal</code> to the <code class="language-plaintext highlighter-rouge">limma-voom_basalpregnant-basallactate</code> and a tag called <code class="language-plaintext highlighter-rouge">#luminal</code> to the <code class="language-plaintext highlighter-rouge">limma-voom_luminalpregnant-luminallactate</code> files.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-adding-a-tag" class="box-title"><button type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1033,7 +1027,7 @@ https://zenodo.org/record/2596382/files/limma-voom_filtered_counts
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-prepare-the-two-inputs-for-goseq" class="box-title" aria-label="hands-on box: Prepare the two inputs for GOSeq"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Prepare the two inputs for GOSeq</div>
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-two-inputs-for-goseq" aria-label="hands-on box: Prepare the two inputs for GOSeq"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Prepare the two inputs for GOSeq</div>
 
   <ol>
     <li><strong>Compute an <span class="notranslate">expression</span> on every row</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1075,7 +1069,7 @@ https://zenodo.org/record/2596382/files/limma-voom_filtered_counts
 <p>We now have the two required input files for goseq.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-perform-go-analysis" class="box-title" aria-label="hands-on box: Perform GO analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Perform GO analysis</div>
+  <div class="box-title hands-on-title" id="hands-on-perform-go-analysis" aria-label="hands-on box: Perform GO analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Perform GO analysis</div>
 
   <ol>
     <li><strong>goseq</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
@@ -1119,11 +1113,11 @@ https://zenodo.org/record/2596382/files/limma-voom_filtered_counts
 <figure id="figure-2"><img src="../../images/rna-seq-genes-to-pathways/basal_top_GO.png" alt="Basal Plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Basal pregnant vs lactating top 10 GO terms</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
   <p>Can you generate the plot of top 10 GO terms for the luminal differentially expressed genes? Tip: You could use the Rerun button for each step (as the parameters are already selected) and choose the luminal file as input.</p>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Running goseq on the luminal file should give a plot similar to below.</p>
     <figure id="figure-3"><img src="../../images/rna-seq-genes-to-pathways/luminal_top_GO.png" alt="Luminal Plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Luminal pregnant vs lactating top 10 GO terms</figcaption></figure>
@@ -1142,7 +1136,7 @@ https://zenodo.org/record/2596382/files/limma-voom_filtered_counts
 <p>There are several ways we could choose to rank our genes, we could rank by log-fold change (most upregulated to most downregulated) but that doesn’t take into account any error in the log fold change value. Another way is to use the “signed fold change” which is to rank by the sign of the fold change multiplied by the P value (as described <a href="http://genomespot.blogspot.com/2014/09/data-analysis-step-8-pathway-analysis.html">here</a>. We could also use the t statistic that’s output from limma, as that takes into account the log-fold change and it’s standard error, see <a href="https://support.bioconductor.org/p/6124/">here</a> for more explanation. We’ll use the t statistic to rank here.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-perform-gene-set-enrichment-with-fgsea" class="box-title" aria-label="hands-on box: Perform gene set enrichment with fgsea"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Perform gene set enrichment with fgsea</div>
+  <div class="box-title hands-on-title" id="hands-on-perform-gene-set-enrichment-with-fgsea" aria-label="hands-on box: Perform gene set enrichment with fgsea"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Perform gene set enrichment with fgsea</div>
 
   <ol>
     <li><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
@@ -1177,7 +1171,7 @@ https://zenodo.org/record/2596382/files/limma-voom_filtered_counts
   </ol>
 
   <!--SNIPPET-->
-  <blockquote class="tip">   <div id="tip-changing-the-datatype" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
 
 </blockquote>
 
@@ -1190,11 +1184,11 @@ https://zenodo.org/record/2596382/files/limma-voom_filtered_counts
 <figure id="figure-5"><img src="../../images/rna-seq-genes-to-pathways/fgsea_enrichplot.png" alt="fgsea Enrichment. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> fgsea Enrichment plot</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
   <p>Can you run fgsea on the luminal contrast and generate the fgsea summary table plot?</p>
 
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Running fgsea on the luminal file should give a plot similar to below.</p>
     <figure id="figure-6"><img src="../../images/rna-seq-genes-to-pathways/fgsea_table_luminal.png" alt="fgsea Luminal. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> fgsea Summary table for luminal</figcaption></figure>
@@ -1207,7 +1201,7 @@ https://zenodo.org/record/2596382/files/limma-voom_filtered_counts
 <p>The ensemble of genes set enrichment analyses (EGSEA) <a href="https://www.ncbi.nlm.nih.gov/pubmed/27694195">(Alhamdoosh et al, 2017)</a> is a method developed for <span class="notranslate">RNA</span>-seq data that combines results from multiple algorithms and calculates collective gene set scores, to try to improve the biological relevance of the highest ranked gene sets. EGSEA has built-in gene sets from MSigDB and KEGG for human and mouse. We’ll show here how it can be used with the MSigDB Hallmark collection and KEGG pathways. For input we need a count matrix and EGSEA will perform a limma-voom analysis before gene set testing. We can use the provided filtered counts file output from limma, where the low count genes have been filtered out (output from limma by selecting <em>“Output Filtered Counts Table?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>). We just need to remove the gene symbol and description columns. We also need a symbols <span class="notranslate">mapping</span> file containing just the Entrez ids and symbols, which we can generate from the filtered counts file. The third input we need is a factors information file, containing what groups the samples belong to, we can use the same one from the tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html"><span class="notranslate">RNA</span>-seq counts to genes</a>. EGSEA provides twelve base methods and we will select eleven, all except roast, as the fry method is a fast approximation of roast.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-perform-ensemble-gene-set-testing-with-egsea" class="box-title" aria-label="hands-on box: Perform ensemble gene set testing with EGSEA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Perform ensemble gene set testing with EGSEA</div>
+  <div class="box-title hands-on-title" id="hands-on-perform-ensemble-gene-set-testing-with-egsea" aria-label="hands-on box: Perform ensemble gene set testing with EGSEA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Perform ensemble gene set testing with EGSEA</div>
 
   <ol>
     <li><strong>Cut columns from a table (cut)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1260,11 +1254,11 @@ https://zenodo.org/record/2596382/files/limma-voom_filtered_counts
 <figure id="figure-8"><img src="../../images/rna-seq-genes-to-pathways/EGSEA_KEGG.png" alt="EGSEA KEGG. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> EGSEA KEGG pathways</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
   <p>Can you run EGSEA on the luminal contrast identify the top KEGG gene sets? Tip: you could use the rerun button and replace the “Contrast of Interest” with the name of the luminal contrast.</p>
 
   <blockquote class="solution">
-    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Running EGSEA on the luminal file should give top KEGG gene sets similar to below.</p>
     <figure id="figure-9"><img src="../../images/rna-seq-genes-to-pathways/EGSEA_KEGG_luminal.png" alt="EGSEA KEGG luminal. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> EGSEA KEGG pathways for luminal</figcaption></figure>

@@ -590,7 +590,7 @@
 <figure id="figure-1"><img src="../../images/scrna-umis/celseq2_schema.svg" alt="CEL-Seq2 Scheme. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Read1 encapsulates the barcodes, and Read2 the m<span class="notranslate">RNA</span> sequence</figcaption></figure>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -636,7 +636,7 @@
 <p>Transcript barcodes are often <em>not</em> unique. This becomes evident when you consider that there are approximately 200,000 m<span class="notranslate">RNA</span>’s in a given mammalian cell (<span class="citation"><a href="#Shapiro2013">Shapiro <i>et al.</i> 2013</a></span>) which would require barcode lengths of greater than 9 nucleotides to capture, assuming no sequencing errors.</p>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Why is it important to know which cell a read came from?</li>
@@ -644,7 +644,7 @@
   </ol>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>If all our <span class="notranslate">reads</span> encode for a <em>Red Gene</em> (as above), we may want to know which cells express <em>Red Gene</em> more than others.
@@ -828,7 +828,7 @@ How do we correct for this bias?</p>
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-about-umis" class="box-title" aria-label="question box: about UMIs"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: about UMIs</div>
+  <div class="box-title question-title" id="question-about-umis" aria-label="question box: about UMIs"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: about UMIs</div>
 
   <ol>
     <li>Are UMIs not specific to certain genes? Can the same UMI map to different genes?</li>
@@ -836,7 +836,7 @@ How do we correct for this bias?</p>
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Yes, UMIs are not specific to genes and the same UMI barcode can tag the transcripts of different genes. UMIs are not universal tags, they are just ‘added randomness’ that help reduce amplification bias.</li>
@@ -897,7 +897,7 @@ How do we correct for this bias?</p>
 <p>We now know the role of UMIs and cell barcodes, but how do we handle them in the analysis? Let us look at 4 example sequences in our paired-end FASTQ data.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-preparing-the-data" class="box-title" aria-label="hands-on box: Preparing the Data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Preparing the Data</div>
+  <div class="box-title hands-on-title" id="hands-on-preparing-the-data" aria-label="hands-on box: Preparing the Data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Preparing the Data</div>
 
   <ol>
     <li>Create a new history and rename it (<em>e.g.</em> ‘Inspecting FastQ Files in sc<span class="notranslate">RNA</span> batch data’)</li>
@@ -907,7 +907,7 @@ https://zenodo.org/record/2573177/files/test_barcodes_celseq2_R2.fastq.gz
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <p><br /></p>
     </li>
     <li>Build a <em>Dataset pair</em> for the two FASTQ files <!-- cannot force this to count from 3 -->
@@ -938,7 +938,7 @@ J00182:75:HTKJNBBXX:2:1115:8501:46961
 <p>At this point we now have a history with two items: our paired FASTQ test data, and a tabular file of read names. We will now apply the tabular file to the FASTQ file and extract only those <span class="notranslate">reads</span>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-extracting-the-reads" class="box-title" aria-label="hands-on box: Extracting the Reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extracting the <span class="notranslate">Reads</span></div>
+  <div class="box-title hands-on-title" id="hands-on-extracting-the-reads" aria-label="hands-on box: Extracting the Reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extracting the <span class="notranslate">Reads</span></div>
 
   <ol>
     <li>Extracting our 4 <span class="notranslate">reads</span>
@@ -970,7 +970,7 @@ J00182:75:HTKJNBBXX:2:1115:8501:46961
       <p>Change the datatypes of the output pair to <code class="language-plaintext highlighter-rouge">fastqsanger</code> if not already set.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-changing-the-datatype" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>Viewing our 4 <span class="notranslate">reads</span> side-by-side
       <ul>
@@ -1005,7 +1005,7 @@ These are reads that all map to ENSDARG00000019692. In [Cell, UMI] format:
 <p>Let us examine these four <span class="notranslate">reads</span> of interest which we have just sub-selected using their headers:</p>
 
 <blockquote class="details">
-  <div id="details-forward-reads" class="box-title"><button type="button" aria-controls="details-forward-reads-contents" aria-expanded="true" aria-label="Toggle details box: Forward Reads:"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Forward <span class="notranslate">Reads</span>:<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-forward-reads"><button class="gtn-boxify-button details" type="button" aria-controls="details-forward-reads-contents" aria-expanded="true" aria-label="Toggle details box: Forward Reads:"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Forward <span class="notranslate">Reads</span>:<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@J00182:75:HTKJNBBXX:2:1115:8501:46961 1:N:0:ATCACG
 GGAAGAACCAGATTTTTTTTTTTTTTTTTT
@@ -1031,7 +1031,7 @@ AAFFFJJJJJJJFAFFJJJJJJJJF---&lt;F
 </blockquote>
 
 <blockquote class="details">
-  <div id="details-reverse-reads" class="box-title"><button type="button" aria-controls="details-reverse-reads-contents" aria-expanded="true" aria-label="Toggle details box: Reverse Reads:"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Reverse <span class="notranslate">Reads</span>:<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-reverse-reads"><button class="gtn-boxify-button details" type="button" aria-controls="details-reverse-reads-contents" aria-expanded="true" aria-label="Toggle details box: Reverse Reads:"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Reverse <span class="notranslate">Reads</span>:<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@J00182:75:HTKJNBBXX:2:1115:8501:46961 2:N:0:ATCACG
 GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
@@ -1097,7 +1097,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 <p>The encoding of the barcodes on the first read can actually be seen by examining the distribution of bases in a FastQC plot.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-confirming-the-barcoding" class="box-title" aria-label="hands-on box: Confirming the Barcoding"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Confirming the Barcoding</div>
+  <div class="box-title hands-on-title" id="hands-on-confirming-the-barcoding" aria-label="hands-on box: Confirming the Barcoding"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Confirming the Barcoding</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -1106,7 +1106,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
       </ul>
 
       <blockquote class="comment">
-        <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>We are only interested in the distribution of bases on the Forward read, but it is more convenient to process the data as a pair instead of un-hiding the original dataset</p>
       </blockquote>
@@ -1130,12 +1130,12 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 <p>We can see that the distribution of nucleotides in the 01-06bp range is relatively more stable than the distribution of nucleotides in the 07-12bp range, which seems to exhibit more extreme variation.</p>
 
 <blockquote class="question">
-  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Why is this the case? Why is the UMI barcode base distribution smoother than the Cell barcode base distribution?</p>
   <blockquote class="solution">
 
-    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>There are far more UMIs than cells. Cell barcodes are designed and selected with a specified edit distance, greatly limiting their availability in the data. UMIs are not so well-curated – i.e it is possible to encounter the same UMI in the same cell multiple times. The more extreme variation in the 7-12bp region is simply caused by a fewer number of samples.</p>
 
@@ -1184,7 +1184,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 </table>
 
 <blockquote class="question">
-  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Provided that these <span class="notranslate">reads</span> all map to the same gene:</p>
 
@@ -1194,7 +1194,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li><span class="notranslate">Reads</span>:
@@ -1232,7 +1232,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 <p>For this we need to take the barcode information from the Forward <span class="notranslate">reads</span>, and stick it into the <em>header</em> of the Reverse <span class="notranslate">reads</span>. That way we can align our sequence to the reference and still keep the barcode information associated with the <span class="notranslate">reads</span>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-barcode-extraction-and-annotation-of-our-4-reads" class="box-title" aria-label="hands-on box: Barcode Extraction and Annotation of our 4 reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Barcode Extraction and Annotation of our 4 <span class="notranslate">reads</span></div>
+  <div class="box-title hands-on-title" id="hands-on-barcode-extraction-and-annotation-of-our-4-reads" aria-label="hands-on box: Barcode Extraction and Annotation of our 4 reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Barcode Extraction and Annotation of our 4 <span class="notranslate">reads</span></div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/0.5.5.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/0.5.5.1"><strong>UMI-tools extract</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/0.5.5.1</span></span>  with the following parameters:
@@ -1249,7 +1249,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
       </ul>
 
       <blockquote class="comment">
-        <div id="comment-1" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <ul>
           <li>Here we specify the format of our barcodes as <code class="language-plaintext highlighter-rouge">NNNNNNCCCCCC</code> where the <em>N</em>s represent UMI bases and the <em>C</em>s represent the cell barcodes.</li>
@@ -1270,7 +1270,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 <p>We should now be able to see the following <span class="notranslate">reads</span>:</p>
 
 <blockquote class="details">
-  <div id="details-forward-reads-1" class="box-title"><button type="button" aria-controls="details-forward-reads-1-contents" aria-expanded="true" aria-label="Toggle details box: Forward Reads:"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Forward <span class="notranslate">Reads</span>:<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-forward-reads-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-forward-reads-1-contents" aria-expanded="true" aria-label="Toggle details box: Forward Reads:"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Forward <span class="notranslate">Reads</span>:<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@J00182:75:HTKJNBBXX:2:1115:8501:46961_ACCAGA_GGAAGA 1:N:0:ATCACG
 TTTTTTTTTTTTTTTTTT
@@ -1296,7 +1296,7 @@ FAFFJJJJJJJJF---&lt;F&gt;
 </blockquote>
 
 <blockquote class="details">
-  <div id="details-reverse-reads-1" class="box-title"><button type="button" aria-controls="details-reverse-reads-1-contents" aria-expanded="true" aria-label="Toggle details box: Reverse Reads:"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Reverse <span class="notranslate">Reads</span>:<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-reverse-reads-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-reverse-reads-1-contents" aria-expanded="true" aria-label="Toggle details box: Reverse Reads:"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Reverse <span class="notranslate">Reads</span>:<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@J00182:75:HTKJNBBXX:2:1115:8501:46961_ACCAGA_GGAAGA 2:N:0:ATCACG
 GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
@@ -1324,7 +1324,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 <p>Notice the remaining sequence in each of the <span class="notranslate">reads</span>, and that the reverse <span class="notranslate">reads</span> appear to fully encapsulate all the information that we wanted to capture in our table at the beginning of this section.</p>
 
 <blockquote class="question">
-  <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Compare the Forward/Read1 and Reverse/Read2 <span class="notranslate">reads</span> to those prior the extraction. What has happened to the header and sequence of each read?</li>
@@ -1332,7 +1332,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Comparison:

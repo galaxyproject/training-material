@@ -668,12 +668,6 @@
         
     
         
-    
-        
-    
-        
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -750,7 +744,7 @@
 <p>We here proposed to re-analyze these data at least until the population genomics statistics calculation step using STACKS pipeline. Existing <em>Gasterosteus aculeatus</em> draft genome will not be used here so the analysis will be performed de novo. In a de novo RAD-seq data analysis, the <span class="notranslate">reads</span> are aligned one on each other to create stacks and then clustered to build loci. A reference approach can also be conducted (see <a href="/training-material/topics/ecology/tutorials/ref-based-rad-seq/tutorial.html">ref_based tutorial</a>, allowing to work on existing assembled loci).</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will deal with:</p>
 
@@ -778,14 +772,14 @@
 <p>We will look at the first run SRR034310 out of seven which includes 16 samples from 2 populations, 8 from Bear Paw (freshwater) and 8 from Rabbit Slough (oceanic). We will download the <span class="notranslate">reads</span> directly from SRA and the remaining data (i.e reference genome, population map file, and barcodes file) from <a href="https://zenodo.org/record/1134547#.WkugUjfjJXI">Zenodo</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>
       <p>Create a <strong>new history</strong> for this RAD-seq exercise. If you are not inspired, you can name it <em>STACKS RAD: population genomics without reference genome</em> for example…</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li><strong>EBI SRA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
@@ -800,13 +794,13 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Make sure your fasta files are of datatype <code class="language-plaintext highlighter-rouge">fastqsanger</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-changing-the-datatype" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">fastqsanger</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">fastqsanger</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -819,7 +813,7 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
 <p>For demultiplexing, we use the Process Radtags tool from <a href="https://www.g3journal.org/content/1/3/171.full">STACKS</a> .</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-demultiplexing-reads" class="box-title" aria-label="hands-on box: Demultiplexing reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Demultiplexing <span class="notranslate">reads</span></div>
+  <div class="box-title hands-on-title" id="hands-on-demultiplexing-reads" aria-label="hands-on box: Demultiplexing reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Demultiplexing <span class="notranslate">reads</span></div>
 
   <ol>
     <li><strong>Process Radtags</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to demultiplex the <span class="notranslate">reads</span>:
@@ -834,7 +828,7 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
       </ul>
 
       <blockquote class="question">
-        <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <ol>
           <li>How many <span class="notranslate">reads</span> where on the original dataset?</li>
@@ -844,7 +838,7 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
         </ol>
 
         <blockquote class="solution">
-          <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>The informations can be found in the results log file:</p>
 
           <ol>
@@ -878,7 +872,7 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on" class="box-title" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
   <p>You can use the <code class="language-plaintext highlighter-rouge">Charts</code> functionality through the Visualize button reachable on the <code class="language-plaintext highlighter-rouge">Radtags logs</code> file you just generated.</p>
 
@@ -922,21 +916,21 @@ Score20		2980543		5158988		626265			129493			8895289
 <p>For quality control, we use similar tools as described in <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">NGS-QC tutorial</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-quality-control" class="box-title" aria-label="hands-on box: Quality control"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Quality control</div>
+  <div class="box-title hands-on-title" id="hands-on-quality-control" aria-label="hands-on box: Quality control"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Quality control</div>
 
   <ol>
     <li>
       <p><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run FastQC on FastQ files to control the quality of the <span class="notranslate">reads</span>. Warning! Don’t forget you are working on data collections….</p>
 
       <blockquote class="question">
-        <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <ol>
           <li>What is the read length?</li>
         </ol>
 
         <blockquote class="solution">
-          <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>The read length is 32 bp</p>
         </blockquote>
       </blockquote>
@@ -954,13 +948,13 @@ Score20		2980543		5158988		626265			129493			8895289
 <p>Run <code class="language-plaintext highlighter-rouge">Stacks: De novo map</code> <span class="notranslate">Galaxy</span> tool. This program will run ustacks, cstacks, and sstacks on the members of the population, accounting for the alignments of each read.</p>
 
 <blockquote class="comment">
-  <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>Information on denovo_map.pl and its parameters can be found online: https://creskolab.uoregon.edu/stacks/comp/denovo_map.php.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-stacks-de-novo-map" class="box-title" aria-label="hands-on box: Stacks: De novo map"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Stacks: De novo map</div>
+  <div class="box-title hands-on-title" id="hands-on-stacks-de-novo-map" aria-label="hands-on box: Stacks: De novo map"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Stacks: De novo map</div>
 
   <ol>
     <li>
@@ -984,7 +978,7 @@ sample_GGTT	2
 sample_GGCC	2
 </code></pre></div>      </div>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-file" class="box-title"><button type="button" aria-controls="tip-creating-a-new-file-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new file<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Open the <span class="notranslate">Galaxy</span> Upload Manager</li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the file contents into the text field</p>   </li>   <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-file-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new file<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Open the <span class="notranslate">Galaxy</span> Upload Manager</li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the file contents into the text field</p>   </li>   <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li><strong>Stacks: De novo map</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the following parameters:
       <ul>
@@ -1008,7 +1002,7 @@ sample_GGCC	2
   </ol>
 
   <blockquote class="comment">
-    <div id="comment-data-formatting" class="box-title" aria-label="comment box: Data formatting"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Data formatting</div>
+    <div class="box-title comment-title" id="comment-data-formatting" aria-label="comment box: Data formatting"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Data formatting</div>
 
     <p>If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use <span class="notranslate">Galaxy</span> tools like <code class="language-plaintext highlighter-rouge">Replace Text</code> (for example to replace <code class="language-plaintext highlighter-rouge">Rabbit Slough</code> by a population number like <code class="language-plaintext highlighter-rouge">2</code>, <code class="language-plaintext highlighter-rouge">Add column</code> (for example to add <code class="language-plaintext highlighter-rouge">sample_</code>) or <code class="language-plaintext highlighter-rouge">Cut columns from a table</code> (to put the new <code class="language-plaintext highlighter-rouge">sample_</code> column af the first place) and finally <code class="language-plaintext highlighter-rouge">Regex replace</code> (replacing <code class="language-plaintext highlighter-rouge">(sample_)\t</code> by <code class="language-plaintext highlighter-rouge">\1</code>) to generate it…</p>
   </blockquote>
@@ -1018,7 +1012,7 @@ sample_GGCC	2
 <h1 id="calculate-population-genomics-statistics">Calculate population genomics statistics</h1>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-calculate-population-genomics-statistics" class="box-title" aria-label="hands-on box: Calculate population genomics statistics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Calculate population genomics statistics</div>
+  <div class="box-title hands-on-title" id="hands-on-calculate-population-genomics-statistics" aria-label="hands-on box: Calculate population genomics statistics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Calculate population genomics statistics</div>
 
   <ol>
     <li><strong>Stacks: populations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1043,7 +1037,7 @@ sample_GGCC	2
   </ol>
 
   <blockquote class="question">
-    <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
     <ol>
       <li>What is the maximum value of FST’ at any SNP? Don’t hesitate to look at the <a href="http://catchenlab.life.illinois.edu/stacks/manual/#files">STACKS manual</a> to find where this parameter is</li>
@@ -1052,7 +1046,7 @@ sample_GGCC	2
     </ol>
 
     <blockquote class="solution">
-      <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
       <ol>
         <li>1</li>
         <li>FST’ is a haplotype measure of FST that is scaled to the theoretical maximum FST value at this locus. Depending on how many haplotypes there are, it may not be possible to reach an FST of 1, so this method will scale the value to 1</li>

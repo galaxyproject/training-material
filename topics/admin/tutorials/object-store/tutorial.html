@@ -887,7 +887,7 @@
                  
 
                 <blockquote class="warning">
-  <div id="warning-switching-object-store-types-will-cause-issues" class="box-title" aria-label="warning box: switching object store types will cause issues"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: switching object store types will cause issues</div>
+  <div class="box-title warning-title" id="warning-switching-object-store-types-will-cause-issues" aria-label="warning box: switching object store types will cause issues"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: switching object store types will cause issues</div>
   <p>Do not run this tutorial on your production instance! We will switch between object stores during this tutorial which has serious implications for production servers.</p>
 </blockquote>
 
@@ -900,7 +900,7 @@
 <p>This tutorial assumes you have done the “Ansible for installing <span class="notranslate">Galaxy</span>” tutorial, it references the base configuration set up in that tutorial in numerous places.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
 <ol id="markdown-toc">
   <li><a href="#expanding-storage" id="markdown-toc-expanding-storage">Expanding Storage</a></li>
@@ -917,7 +917,7 @@
 <p>First, note that your <span class="notranslate">Galaxy</span> datasets have been created thus far in the directory <code class="language-plaintext highlighter-rouge">/data</code>, due to <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config: <span class="notranslate">galaxy</span>: file_path</code>. In some cases, we run out of storage in a particular location. <span class="notranslate">Galaxy</span> allows us to add additional storage locations where it will create new datasets, while still looking in the old locations for old datasets. You will not have to migrate any of your datasets, and can just “plug and play” with new storage pools.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-adding-hierarchical-storage" class="box-title" aria-label="hands-on box: Adding Hierarchical Storage"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding Hierarchical Storage</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-hierarchical-storage" aria-label="hands-on box: Adding Hierarchical Storage"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding Hierarchical Storage</div>
 
   <ol>
     <li>
@@ -975,12 +975,12 @@
       <p>Run a couple of jobs after <span class="notranslate">Galaxy</span> has restarted.</p>
 
       <blockquote class="question">
-        <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p>Where is the data now stored?</p>
 
         <blockquote class="solution">
-          <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>You should see <code class="language-plaintext highlighter-rouge">/data2</code> in the <code class="language-plaintext highlighter-rouge">Full Path</code>, if not, something went wrong. Check that your “order” is correct</p>
 
@@ -997,7 +997,7 @@
 <p>Rather than searching a hierarchy of object stores until the dataset is found, <span class="notranslate">Galaxy</span> can store the ID (in the database) of the object store in which a dataset is located when the dataset is created. This allows <span class="notranslate">Galaxy</span> to write to more than one object store for new datasets.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-distributed-object-store" class="box-title" aria-label="hands-on box: Distributed Object Store"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Distributed Object Store</div>
+  <div class="box-title hands-on-title" id="hands-on-distributed-object-store" aria-label="hands-on box: Distributed Object Store"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Distributed Object Store</div>
 
   <ol>
     <li>
@@ -1031,14 +1031,14 @@
 <p>Sites like Use<span class="notranslate">Galaxy</span>.eu use the distributed object store in order to balance dataset storage across 10 different storage pools.</p>
 
 <blockquote class="details">
-  <div id="details-more-documentation" class="box-title"><button type="button" aria-controls="details-more-documentation-contents" aria-expanded="true" aria-label="Toggle details box: More documentation"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: More documentation<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-more-documentation"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-documentation-contents" aria-expanded="true" aria-label="Toggle details box: More documentation"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: More documentation<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>More information can be found in the <a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/config/sample/object_store_conf.xml.sample">sample file</a>.</p>
 
 </blockquote>
 
 <blockquote class="tip">
-  <div id="tip-can-i-distribute-objects-based-on-the-user" class="box-title"><button type="button" aria-controls="tip-can-i-distribute-objects-based-on-the-user-contents" aria-expanded="true" aria-label="Toggle tip box: Can I distribute objects based on the user?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Can I distribute objects based on the user?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-can-i-distribute-objects-based-on-the-user"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-can-i-distribute-objects-based-on-the-user-contents" aria-expanded="true" aria-label="Toggle tip box: Can I distribute objects based on the user?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Can I distribute objects based on the user?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Yes! You must write your own dynamic job handler code to handle this.
 See <a href="https://github.com/galaxyproject/galaxy/pull/6552">PR#6552</a> and <a href="https://github.com/galaxyproject/galaxy/pull/10233">PR#10233</a></p>
@@ -1050,7 +1050,7 @@ some example code, and we can include this as a training module for everyone.</p
 </blockquote>
 
 <blockquote class="warning">
-  <div id="warning-switching-object-store-types-will-cause-issues-1" class="box-title" aria-label="warning box: switching object store types will cause issues"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: switching object store types will cause issues</div>
+  <div class="box-title warning-title" id="warning-switching-object-store-types-will-cause-issues-1" aria-label="warning box: switching object store types will cause issues"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: switching object store types will cause issues</div>
   <p>We have switched between two different object stores here, but this is not supported. If you need to do this, you will need to update datasets in <span class="notranslate">Galaxy</span>’s database. Any datasets that were created as hierarchical will lack the <code class="language-plaintext highlighter-rouge">object_store_id</code>, and you will need to supply the correct one. Do not just blindly copy these instructions, please understand what they do before running them and talk to us on <a href="http://gitter.im/galaxyproject/Lobby">Gitter</a> for more help</p>
 
   <ol>
@@ -1074,7 +1074,7 @@ some example code, and we can include this as a training module for everyone.</p
 <p>we will set up a local S3-compatible object store, and then talk to the API of this service.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-setting-up-an-s3-compatible-object-store" class="box-title" aria-label="hands-on box: Setting up an S3-compatible Object Store"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Setting up an S3-compatible Object Store</div>
+  <div class="box-title hands-on-title" id="hands-on-setting-up-an-s3-compatible-object-store" aria-label="hands-on box: Setting up an S3-compatible Object Store"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Setting up an S3-compatible Object Store</div>
 
   <ol>
     <li>
@@ -1134,7 +1134,7 @@ minio_secret_key: "my-super-extra-top-secret-key"
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-how-to-read-a-diff" class="box-title"><button type="button" aria-controls="tip-how-to-read-a-diff-contents" aria-expanded="true" aria-label="Toggle tip box: How to read a Diff"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How to read a Diff<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you haven’t worked with diffs before, this can be something quite new or different.</p>   <p>If we have two files, let’s say a grocery list, in two files. We’ll call them ‘a’ and ‘b’.</p>   <blockquote class="code-2col">   <blockquote class="code-in">     <div id="code-in-old" class="box-title" aria-label="code-in box: Old"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Old</div>     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat old<br />🍎<br />🍐<br />🍊<br />🍋<br />🍒<br />🥑<br /></code></pre></div>    </div>   </blockquote>   <blockquote class="code-out">     <div id="code-out-new" class="box-title" aria-label="code-out box: New"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: New</div>     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat new<br />🍎<br />🍐<br />🍊<br />🍋<br />🍍<br />🥑<br /></code></pre></div>    </div>   </blockquote> </blockquote>   <p>We can see that they have some different entries. We’ve removed 🍒 because they’re awful, and replaced them with an 🍍</p>   <p>Diff lets us compare these files</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff old new<br />5c5<br />&lt; 🍒<br /><span class="nt">---</span><br /><span class="o">&gt;</span> 🍍<br /></code></pre></div></div>   <p>Here we see that 🍒 is only in a, and 🍍 is only in b. But otherwise the files are identical.</p>   <p>There are a couple different formats to diffs, one is the ‘unified diff’</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> old new<br /><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:06:36.340962616 +0100<br />@@ <span class="nt">-3</span>,4 +3,4 @@<br /> 🍊<br /> 🍋<br />-🍒<br />+🍍<br /> 🥑<br /></code></pre></div></div>   <p>This is basically what you see in the training materials which gives you a lot of context about the changes:</p>   <ul>   <li><code class="language-plaintext highlighter-rouge">--- old</code> is the ‘old’ file in our view</li>   <li><code class="language-plaintext highlighter-rouge">+++ new</code> is the ‘new’ file</li>   <li>@@ these lines tell us where the change occurs and how many lines are added or removed.</li>   <li>Lines starting with a - are removed from our ‘new’ file</li>   <li>Lines with a + have been added.</li> </ul>   <p>So when you go to apply these diffs to your files in the training:</p>   <ol>   <li>Ignore the header</li>   <li>Remove lines starting with - from your file</li>   <li>Add lines starting with + to your file</li> </ol>   <p>The other lines (🍊/🍋 and 🥑) above just provide “context”, they help you know where a change belongs in a file, but <strong>should not be edited</strong> when you’re making the above change. Given the above diff, you would find a line with a 🍒, and replace it with a 🍍</p>   <h4 id="added--removed-lines">Added &amp; Removed Lines</h4>   <p>Removals are very easy to spot, we just have removed lines</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:10:14.370722802 +0100<br />@@ <span class="nt">-4</span>,3 +4,2 @@<br /> 🍋<br /> 🍒<br />-🥑<br /></code></pre></div></div>   <p>And additions likewise are very easy, just add a new line, between the other lines in your file.</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:11:11.422135393 +0100<br />@@ <span class="nt">-1</span>,3 +1,4 @@<br /> 🍎<br />+🍍<br /> 🍐<br /> 🍊<br /></code></pre></div></div>   <h4 id="completely-new-files">Completely new files</h4>   <p>Completely new files look a bit different, there the “old” file is <code class="language-plaintext highlighter-rouge">/dev/null</code>, the empty file in a Linux machine.</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> /dev/null old<br /><span class="nt">---</span> /dev/null	2022-02-15 11:47:16.100000270 +0100<br />+++ old	2022-02-16 14:06:19.697132568 +0100<br />@@ <span class="nt">-0</span>,0 +1,6 @@<br />+🍎<br />+🍐<br />+🍊<br />+🍋<br />+🍒<br />+🥑<br /></code></pre></div></div>   <p>And removed files are similar, except with the new file being /dev/null</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ /dev/null	2022-02-15 11:47:16.100000270 +0100<br />@@ <span class="nt">-1</span>,6 +0,0 @@<br />-🍎<br />-🍐<br />-🍊<br />-🍋<br />-🍒<br />-🥑<br /></code></pre></div></div> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-how-to-read-a-diff"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-read-a-diff-contents" aria-expanded="true" aria-label="Toggle tip box: How to read a Diff"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How to read a Diff<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you haven’t worked with diffs before, this can be something quite new or different.</p>   <p>If we have two files, let’s say a grocery list, in two files. We’ll call them ‘a’ and ‘b’.</p>   <blockquote class="code-2col">   <blockquote class="code-in">     <div class="box-title code-in-title" id="code-in-old" aria-label="code-in box: Old"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Old</div>     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat old<br />🍎<br />🍐<br />🍊<br />🍋<br />🍒<br />🥑<br /></code></pre></div>    </div>   </blockquote>   <blockquote class="code-out">     <div class="box-title code-out-title" id="code-out-new" aria-label="code-out box: New"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: New</div>     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat new<br />🍎<br />🍐<br />🍊<br />🍋<br />🍍<br />🥑<br /></code></pre></div>    </div>   </blockquote> </blockquote>   <p>We can see that they have some different entries. We’ve removed 🍒 because they’re awful, and replaced them with an 🍍</p>   <p>Diff lets us compare these files</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff old new<br />5c5<br />&lt; 🍒<br /><span class="nt">---</span><br /><span class="o">&gt;</span> 🍍<br /></code></pre></div></div>   <p>Here we see that 🍒 is only in a, and 🍍 is only in b. But otherwise the files are identical.</p>   <p>There are a couple different formats to diffs, one is the ‘unified diff’</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> old new<br /><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:06:36.340962616 +0100<br />@@ <span class="nt">-3</span>,4 +3,4 @@<br /> 🍊<br /> 🍋<br />-🍒<br />+🍍<br /> 🥑<br /></code></pre></div></div>   <p>This is basically what you see in the training materials which gives you a lot of context about the changes:</p>   <ul>   <li><code class="language-plaintext highlighter-rouge">--- old</code> is the ‘old’ file in our view</li>   <li><code class="language-plaintext highlighter-rouge">+++ new</code> is the ‘new’ file</li>   <li>@@ these lines tell us where the change occurs and how many lines are added or removed.</li>   <li>Lines starting with a - are removed from our ‘new’ file</li>   <li>Lines with a + have been added.</li> </ul>   <p>So when you go to apply these diffs to your files in the training:</p>   <ol>   <li>Ignore the header</li>   <li>Remove lines starting with - from your file</li>   <li>Add lines starting with + to your file</li> </ol>   <p>The other lines (🍊/🍋 and 🥑) above just provide “context”, they help you know where a change belongs in a file, but <strong>should not be edited</strong> when you’re making the above change. Given the above diff, you would find a line with a 🍒, and replace it with a 🍍</p>   <h4 id="added--removed-lines">Added &amp; Removed Lines</h4>   <p>Removals are very easy to spot, we just have removed lines</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:10:14.370722802 +0100<br />@@ <span class="nt">-4</span>,3 +4,2 @@<br /> 🍋<br /> 🍒<br />-🥑<br /></code></pre></div></div>   <p>And additions likewise are very easy, just add a new line, between the other lines in your file.</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:11:11.422135393 +0100<br />@@ <span class="nt">-1</span>,3 +1,4 @@<br /> 🍎<br />+🍍<br /> 🍐<br /> 🍊<br /></code></pre></div></div>   <h4 id="completely-new-files">Completely new files</h4>   <p>Completely new files look a bit different, there the “old” file is <code class="language-plaintext highlighter-rouge">/dev/null</code>, the empty file in a Linux machine.</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> /dev/null old<br /><span class="nt">---</span> /dev/null	2022-02-15 11:47:16.100000270 +0100<br />+++ old	2022-02-16 14:06:19.697132568 +0100<br />@@ <span class="nt">-0</span>,0 +1,6 @@<br />+🍎<br />+🍐<br />+🍊<br />+🍋<br />+🍒<br />+🥑<br /></code></pre></div></div>   <p>And removed files are similar, except with the new file being /dev/null</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ /dev/null	2022-02-15 11:47:16.100000270 +0100<br />@@ <span class="nt">-1</span>,6 +0,0 @@<br />-🍎<br />-🍐<br />-🍊<br />-🍋<br />-🍒<br />-🥑<br /></code></pre></div></div> </blockquote>
     </li>
     <li>
       <p>Run the playbook.</p>
@@ -1161,14 +1161,14 @@ As of <a href="https://github.com/galaxyproject/galaxy/pull/9888">20.09</a>, <sp
 <p>This tutorial will help you setup the connection between <span class="notranslate">Galaxy</span> and Dropbox, allowing your users to add their account details and then access their Dropbox data within <span class="notranslate">Galaxy</span></p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-configure-galaxy-to-access-the-dropbox-service" class="box-title" aria-label="hands-on box: Configure Galaxy to access the Dropbox service"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Configure <span class="notranslate">Galaxy</span> to access the Dropbox service</div>
+  <div class="box-title hands-on-title" id="hands-on-configure-galaxy-to-access-the-dropbox-service" aria-label="hands-on box: Configure Galaxy to access the Dropbox service"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Configure <span class="notranslate">Galaxy</span> to access the Dropbox service</div>
 
   <ol>
     <li>
       <p>If the folder does not exist, create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config</code> next to your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook.</p>
 
       <blockquote class="code-in">
-        <div id="code-in-bash" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p templates/<span class="notranslate">galaxy</span>/config
 </code></pre></div>        </div>
       </blockquote>
@@ -1230,13 +1230,13 @@ As of <a href="https://github.com/galaxyproject/galaxy/pull/9888">20.09</a>, <sp
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
-          <div id="code-in-bash-1" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+          <div class="box-title code-in-title" id="code-in-bash-1" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>          </div>
         </blockquote>
 
         <blockquote class="code-out">
-          <div id="code-out-output" class="box-title" aria-label="code-out box: Output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Output</div>
+          <div class="box-title code-out-title" id="code-out-output" aria-label="code-out box: Output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Output</div>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 RUNNING HANDLER [restart <span class="notranslate">galaxy</span>] ****************************************
 changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
@@ -1251,7 +1251,7 @@ changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
 <p>Now we are ready to configure a <span class="notranslate">Galaxy</span>’s user account to upload dataset from Dropbox to the <span class="notranslate">Galaxy</span> server.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-configure-galaxy-to-access-the-dropbox-service-1" class="box-title" aria-label="hands-on box: Configure Galaxy to access the Dropbox service"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Configure <span class="notranslate">Galaxy</span> to access the Dropbox service</div>
+  <div class="box-title hands-on-title" id="hands-on-configure-galaxy-to-access-the-dropbox-service-1" aria-label="hands-on box: Configure Galaxy to access the Dropbox service"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Configure <span class="notranslate">Galaxy</span> to access the Dropbox service</div>
 
   <ol>
     <li>

@@ -785,12 +785,6 @@
         
     
         
-    
-        
-    
-        
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -871,7 +865,7 @@
 <p>Classification is a <a href="https://en.wikipedia.org/wiki/Supervised_learning">supervised learning</a> method in machine learning and the algorithm which is used for this learning task is called a classifier. In this tutorial we will build a classifier which can predict whether a chemical substance is biodegradable or not. Substances which degrade quickly are preferable to those which degrade slowly, as they do not accumulate and pose a risk to the environment. Therefore, it is useful to be able to predict easily in advance whether a substance is biodegradable prior to production and usage in consumer products.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -937,7 +931,7 @@ In the following part, we will perform classification on the biodegradability da
 <p>Let’s begin by uploading the necessary datasets.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -950,13 +944,13 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename the datasets as <code class="language-plaintext highlighter-rouge">train_rows</code>, <code class="language-plaintext highlighter-rouge">test_rows_labels</code> and <code class="language-plaintext highlighter-rouge">test_rows</code> respectively.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-dataset" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -965,7 +959,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 <p class="comment">The <code class="language-plaintext highlighter-rouge">train_rows</code> contains a column <code class="language-plaintext highlighter-rouge">Class</code> which is the class label or target. We will evaluate our model on <code class="language-plaintext highlighter-rouge">test_rows</code> and compare the predicted class with the true class value in <code class="language-plaintext highlighter-rouge">test_rows_labels</code></p>
 
 <blockquote class="details">
-  <div id="details-preparing-the-data-for-classification" class="box-title"><button type="button" aria-controls="details-preparing-the-data-for-classification-contents" aria-expanded="true" aria-label="Toggle details box: Preparing the data for classification"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Preparing the data for classification<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-preparing-the-data-for-classification"><button class="gtn-boxify-button details" type="button" aria-controls="details-preparing-the-data-for-classification-contents" aria-expanded="true" aria-label="Toggle details box: Preparing the data for classification"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Preparing the data for classification<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Preparing the data involves these following major tasks:</p>
   <ol>
@@ -983,7 +977,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 <p>The second thing we need is an optimization algorithm for iteratively updating the weights so as to minimize this loss function. The standard algorithm for this is gradient descent. So, the dataset is divided into two parts - training and test sets. The training set is used to train a classifier and the test set is used to evaluate the performance of the trained model.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-train-logistic-regression-classifier" class="box-title" aria-label="hands-on box: Train logistic regression classifier"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Train logistic regression classifier</div>
+  <div class="box-title hands-on-title" id="hands-on-train-logistic-regression-classifier" aria-label="hands-on box: Train logistic regression classifier"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Train logistic regression classifier</div>
 
   <ol>
     <li><strong>Generalized linear models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to train the regressor:
@@ -1021,12 +1015,12 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 </blockquote>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>What is learned by the logistic regression model?</p>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>In the logistic regressoion model, the coefficients of the logistic regression algorithm have be estimated from our training data. This is done using <a href="https://en.wikipedia.org/wiki/Maximum_likelihood_estimation">maximum-likelihood estimation</a>.</p>
 
@@ -1041,7 +1035,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 <p>Now, we will predict the class in the test dataset using this classifier in order to see if it has learned important features which can be generalized on a new dataset. The test dataset (<code class="language-plaintext highlighter-rouge">test_rows</code>) contains the same number of features but does not contain the <code class="language-plaintext highlighter-rouge">Class</code> column. This is predicted using the trained classifier.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-predict-class-using-the-logistic-regression-classifier" class="box-title" aria-label="hands-on box: Predict class using the logistic regression classifier"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Predict class using the logistic regression classifier</div>
+  <div class="box-title hands-on-title" id="hands-on-predict-class-using-the-logistic-regression-classifier" aria-label="hands-on box: Predict class using the logistic regression classifier"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Predict class using the logistic regression classifier</div>
 
   <ol>
     <li><strong>Generalized linear models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to predict targets of test dataset using the trained model:
@@ -1065,7 +1059,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 <p>We will evaluate the classification by comparing the predicted with the expected classes. In the previous step, we classified the test dataset (<code class="language-plaintext highlighter-rouge">LogisticRegression_result</code>). We have one more dataset (<code class="language-plaintext highlighter-rouge">test_rows_labels</code>) which contains the true class label of the test set. Using the true and predicted class labels in the test set, we will verify the performance by analyzing the plots. As you can see, <code class="language-plaintext highlighter-rouge">LogisticRegression_result</code> has no header, so first we should remove the header from <code class="language-plaintext highlighter-rouge">test_rows_labels</code> to compare.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-remove-the-header" class="box-title" aria-label="hands-on box: Remove the header"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Remove the header</div>
+  <div class="box-title hands-on-title" id="hands-on-remove-the-header" aria-label="hands-on box: Remove the header"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Remove the header</div>
 
   <ol>
     <li><strong>Remove beginning</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1081,7 +1075,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 <p>Now we visualize and analyze the classification using the “Plot confusion matrix, precision, recall and ROC and AUC curves” tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-check-and-visualize-the-classification" class="box-title" aria-label="hands-on box: Check and visualize the classification"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Check and visualize the classification</div>
+  <div class="box-title hands-on-title" id="hands-on-check-and-visualize-the-classification" aria-label="hands-on box: Check and visualize the classification"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Check and visualize the classification</div>
   <ol>
     <li><strong>Plot confusion matrix, precision, recall and ROC and AUC curves</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to visualize the classification:
       <ul>
@@ -1116,12 +1110,12 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 <p>These plots are important to visualize the quality of the classifier and the true and predicted classes.</p>
 
 <blockquote class="question">
-  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Inspect the plots. What can you say about the classification?</p>
 
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Figures 2,3 and 4 show that the classification is acceptable, but as you will see in the next steps, the results can be improved.</p>
 
@@ -1133,12 +1127,12 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 <p>At the second step, we will use k-nearest neighbor classifier. In the <a href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm">k-nearest neighbor</a> classifier, a sample is classified by a majority vote of its neighbors.  The sample is assigned to the class which is most common among its k nearest neighbors.  k is a positive integer and typically it is small. For example, if k = 1, then the sample is simply assigned to the class of that single nearest neighbor. Surprisingly, when the number of data points is large, this classifier is not that bad. Choosing the best value of k is very important. If k is too small, the classifier will be sensitive to noise points and if k is too large, the neighborhood may include points from other classes and causes errors. To select the k that is right for your data, we recommend running the KNN algorithm several times with different values of k and choosing the k that reduces the number of errors the most.</p>
 
 <blockquote class="question">
-  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>What are advantages and disadvantages about this model?</p>
 
   <blockquote class="solution">
-    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Advantages:</p>
     <ul>
       <li>
@@ -1182,7 +1176,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-train-k-nearest-neighbor-classifier" class="box-title" aria-label="hands-on box: Train k-nearest neighbor classifier"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Train k-nearest neighbor classifier</div>
+  <div class="box-title hands-on-title" id="hands-on-train-k-nearest-neighbor-classifier" aria-label="hands-on box: Train k-nearest neighbor classifier"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Train k-nearest neighbor classifier</div>
 
   <ol>
     <li><strong>Nearest Neighbors Classification</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to train the regressor:
@@ -1221,12 +1215,12 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>What is the value of k (number of neighbors) for the model?</p>
 
   <blockquote class="solution">
-    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>As you can see in the Advanced Options, the default value for the number of neighbors is 5, and we used the default value. You can set this parameter based on your problem and data.</p>
 
   </blockquote>
@@ -1235,7 +1229,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 <p>Now, we should evaluate the performance on the test dataset to find out whether the KNN classifier is a good model from the training dataset or not.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-predict-class-using-the-k-nearest-neighbor-classifier" class="box-title" aria-label="hands-on box: Predict class using the k-nearest neighbor classifier"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Predict class using the k-nearest neighbor classifier</div>
+  <div class="box-title hands-on-title" id="hands-on-predict-class-using-the-k-nearest-neighbor-classifier" aria-label="hands-on box: Predict class using the k-nearest neighbor classifier"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Predict class using the k-nearest neighbor classifier</div>
 
   <ol>
     <li><strong>Nearest Neighbors Classification</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to predict targets of test dataset using the trained model:
@@ -1257,7 +1251,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 <p>Now we visualize and analyze the classification. As you can see, <code class="language-plaintext highlighter-rouge">NearestNeighbors_result</code> has a header, so use <code class="language-plaintext highlighter-rouge">test_rows_labels</code> to compare.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-check-and-visualize-the-classification-1" class="box-title" aria-label="hands-on box: Check and visualize the classification"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Check and visualize the classification</div>
+  <div class="box-title hands-on-title" id="hands-on-check-and-visualize-the-classification-1" aria-label="hands-on box: Check and visualize the classification"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Check and visualize the classification</div>
   <ol>
     <li><strong>Plot confusion matrix, precision, recall and ROC and AUC curves</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to visualize the classification:
       <ul>
@@ -1287,7 +1281,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 kernel trick. In the next step, we will build a SVM classifier with our data.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-train-a-svm-classifier" class="box-title" aria-label="hands-on box: Train a SVM classifier"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Train a SVM classifier</div>
+  <div class="box-title hands-on-title" id="hands-on-train-a-svm-classifier" aria-label="hands-on box: Train a SVM classifier"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Train a SVM classifier</div>
 
   <ol>
     <li><strong>Support vector machines (SVMs)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to train the regressor:
@@ -1325,12 +1319,12 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-4" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>What is learned by the support vector machines?</p>
 
   <blockquote class="solution">
-    <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The coefficients of the line with the maximal margin in the kernel space is learned in the training phase.</p>
 
@@ -1341,7 +1335,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
 <p>Now we will evaluate the performance of the SVM classifier:</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-predict-class-svm-classifier" class="box-title" aria-label="hands-on box: Predict class SVM classifier"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Predict class SVM classifier</div>
+  <div class="box-title hands-on-title" id="hands-on-predict-class-svm-classifier" aria-label="hands-on box: Predict class SVM classifier"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Predict class SVM classifier</div>
 
   <ol>
     <li><strong>Support vector machines (SVMs)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to predict targets of test dataset using the trained model:
@@ -1363,7 +1357,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
 <p>Now let’s visualize the results:</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-check-and-visualize-the-classification-2" class="box-title" aria-label="hands-on box: Check and visualize the classification"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Check and visualize the classification</div>
+  <div class="box-title hands-on-title" id="hands-on-check-and-visualize-the-classification-2" aria-label="hands-on box: Check and visualize the classification"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Check and visualize the classification</div>
   <ol>
     <li><strong>Plot confusion matrix, precision, recall and ROC and AUC curves</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to visualize the classification:
       <ul>
@@ -1386,7 +1380,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
 <p>One big advantage of random forest is that it can be used for both classification and regression problems. The main idea behind the random forest is adding additional randomness to the model, while growing the trees and instead of searching for the most important feature while splitting a node, it searches for the best feature among a random subset of features. This results in a better model because of wide diversity. Generally, the more trees in the forest, the more robust the model. Therefore, when using the random forest classifier, a larger number of trees in the forest gives higher accuracy results. Similarly there are two stages in the random forest algorithm: one is random forest creation, the other is to make a prediction from the random forest classifier created in the first stage.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-train-random-forest" class="box-title" aria-label="hands-on box: Train random forest"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Train random forest</div>
+  <div class="box-title hands-on-title" id="hands-on-train-random-forest" aria-label="hands-on box: Train random forest"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Train random forest</div>
 
   <ol>
     <li><strong>Ensemble methods</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to train the regressor:
@@ -1424,12 +1418,12 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-5" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-5" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>What are the advantages of random forest classifier compared with KNN and SVM?</p>
 
   <blockquote class="solution">
-    <div id="solution-5" class="box-title"><button type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>The overfitting problem will never arise when we use the random forest algorithm in any classification problem.</li>
       <li>The same random forest algorithm can be used for both classification and regression task.</li>
@@ -1442,7 +1436,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
 <p>After learning on the training dataset, we should evaluate the performance on the test dataset.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-predict-targets-using-the-random-forest" class="box-title" aria-label="hands-on box: Predict targets using the random forest"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Predict targets using the random forest</div>
+  <div class="box-title hands-on-title" id="hands-on-predict-targets-using-the-random-forest" aria-label="hands-on box: Predict targets using the random forest"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Predict targets using the random forest</div>
 
   <ol>
     <li><strong>Ensemble methods</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to predict targets of test dataset using the trained model:
@@ -1466,12 +1460,12 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
 <figure id="figure-9"><img src="images/roc_rf.png" alt="roc_scores. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Receiver operator characteristics (ROC) and area under ROC (AUC) for the random forest classifier.</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question-6" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-6" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Inspect the plots. What can you say about the classification?</p>
 
   <blockquote class="solution">
-    <div id="solution-6" class="box-title"><button type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Figures show that we achieved an AUC score of <code class="language-plaintext highlighter-rouge">1.0</code>  for the test set using random forest. It means the prediction is very good, in fact it has no error at all. Unfortunately, this is not usually the case when dealing with chemical data.</p>
   </blockquote>
@@ -1482,7 +1476,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
 <p>At the last step, we will create a bagging classifier by using  the <strong>Pipeline builder</strong> tool. Bagging or Bootstrap Aggregating is a widely used ensemble learning algorithm in machine learning. The bagging algorithm creates multiple models from randomly taken subsets of the training dataset and then aggregates learners to build overall stronger classifiers that combine the predictions to produce a final prediction. The <strong>Pipeline builder</strong> tool builds the classifier and returns a zipped file. This tool creates another file which is tabular and contains a list of all the different hyperparameters of the preprocessors and estimators. This tabular file will be used in the <strong>Hyperparameter search</strong> tool to populate the list of hyperparameters with their respective (default) values.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-create-pipeline" class="box-title" aria-label="hands-on box: Create pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create pipeline</div>
+  <div class="box-title hands-on-title" id="hands-on-create-pipeline" aria-label="hands-on box: Create pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create pipeline</div>
 
   <ol>
     <li><strong>Pipeline builder</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1512,7 +1506,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
 <p>After extracting the parameter names from the <strong>Pipeline builder</strong> file, we will use the <strong>Hyperparameter search</strong> tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter. We use only one parameter <code class="language-plaintext highlighter-rouge">n_estimators</code> of <code class="language-plaintext highlighter-rouge">BaggingClassifier</code> for this task. This parameter specifies the number of bagging stages the learning process has to go through. The default value of <code class="language-plaintext highlighter-rouge">n_estimators</code> for this regressor is <code class="language-plaintext highlighter-rouge">10</code>. However, we are not sure if this gives the best accuracy. Therefore, it is important to set this parameter to different values to find the optimal one. We choose a value which is less than <code class="language-plaintext highlighter-rouge">10</code> and a few which are more than <code class="language-plaintext highlighter-rouge">10</code>. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to classify the test dataset.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-hyperparameter-search" class="box-title" aria-label="hands-on box: Hyperparameter search"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hyperparameter search</div>
+  <div class="box-title hands-on-title" id="hands-on-hyperparameter-search" aria-label="hands-on box: Hyperparameter search"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hyperparameter search</div>
 
   <ol>
     <li><strong>Hyperparameter search</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1565,14 +1559,14 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-7" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-7" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>What is the optimal number of estimators for the given dataset?</p>
 
   <p>Hint: Please look at the <code class="language-plaintext highlighter-rouge">mean_test_score</code> column in the tabular result from the <strong>Hyperparameter search</strong> tool.</p>
 
   <blockquote class="solution">
-    <div id="solution-7" class="box-title"><button type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>20 - even though the default value of the number of estimators for Bagging Classifier is <code class="language-plaintext highlighter-rouge">10</code>, <code class="language-plaintext highlighter-rouge">20</code> gives the best accuracy. That’s why it is important to perform hyperparameter search to tune these parameters for any dataset.</p>
 
@@ -1583,7 +1577,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
 <p>Using the <strong>Hyperparameter search</strong> tool, we found the best model, based on the training data. Now, we will predict age in the test dataset using this model.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-predict-age" class="box-title" aria-label="hands-on box: Predict age"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Predict age</div>
+  <div class="box-title hands-on-title" id="hands-on-predict-age" aria-label="hands-on box: Predict age"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Predict age</div>
 
   <ol>
     <li><strong>Ensemble methods for classification and regression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:

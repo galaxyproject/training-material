@@ -742,15 +742,9 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
             Human Cell Atlas
         </a>
-        
-    
-        
-    
         
     
         
@@ -858,7 +852,7 @@
 <p>After completing the <a href="https://xuranw.github.io/MuSiC/articles/MuSiC.html">MuSiC deconvolution tutorial</a> (<span class="citation"><a href="#wang2019bulk">Wang <i>et al.</i> 2019</a></span>), you are hopefully excited to apply this analysis to data of your choice. Annoyingly, getting data in the right format is often what prevents us from being able to successfully apply analyses. This tutorial is all about reformatting a raw bulk <span class="notranslate">RNA</span>-seq dataset pulled from a public resource (the EMBL-EBI <span class="notranslate">Expression</span> atlas (<span class="citation"><a href="#Moreno2021">Moreno <i>et al.</i> 2021</a></span>).  Let’s get started!</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -883,7 +877,7 @@
 <p>We explored the <a href="https://www.ebi.ac.uk/gxa/experiments"><span class="notranslate">expression</span> atlas</a>, browsing experiments in order to find the bulk <span class="notranslate">RNA</span>-seq pancreas dataset (<span class="citation"><a href="#segerstolpe2016single">Segerstolpe <i>et al.</i> 2016</a></span>). You can <a href="https://www.ebi.ac.uk/gxa/experiments/E-MTAB-5060/Results">explore this dataset here</a> using their browser. These cells come from 7 healthy individuals and 4 individuals with Type II diabetes, so we will create reference <span class="notranslate">Expression</span> Set objects for the total as well as separating out by phenotype, as you may have reason to do this in your analysis (or you may not!). This dataset is from the same lab that we built our sc<span class="notranslate">RNA</span>-seq reference from, so we should get quite accurate results given the same lab made both datasets!</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box:  Data upload "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box:  Data upload "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -895,7 +889,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7319173/files/E-MTAB-5060-experiment-design.tsv
 </code></pre></div>      </div>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename the datasets as needed</p>
@@ -904,13 +898,13 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
       <p>Check that the datatype is tabular</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-changing-the-datatype" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Add to <code class="language-plaintext highlighter-rouge">experiment-design</code> the following tags <code class="language-plaintext highlighter-rouge">#metadata #bulk #ebi</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-adding-a-tag" class="box-title"><button type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -921,10 +915,10 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 <p><img src="../../images/bulk-music/bulk-metadata-annoying.png" alt="Columns in a table where some contain run info or Sample Characteristic[age] while others are empty." title="Ridiculous metadata columns and labels" /></p>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div id="tip-using-tutorial-mode" class="box-title"><button type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul> </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-remove-unnecessary-columns" class="box-title" aria-label="hands-on box:  Remove unnecessary columns "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Remove unnecessary columns</div>
+  <div class="box-title hands-on-title" id="hands-on-remove-unnecessary-columns" aria-label="hands-on box:  Remove unnecessary columns "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Remove unnecessary columns</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0"><strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0</span></span>  with the following parameters:
@@ -939,7 +933,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
       </ul>
 
       <blockquote class="comment">
-        <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>Advanced cut works slightly differently in a <span class="notranslate">workflow</span> versus running the tool independently. Independently, there is a list and you can click through the list to note your columns, while in a <span class="notranslate">workflow</span> it appears as a text option and you put each column on a different line. The point is, each number above represents a column, so remove them!</p>
       </blockquote>
@@ -951,12 +945,12 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 <p>Now let’s take care of the excessively wordy header titles - and note that oftentimes various programmes struggle with titles or cells that have any spaces ` ` in them, so removing those now often saves hassle later.</p>
 
 <blockquote class="comment">
-  <div id="comment-1" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
   <p>You might also remember in the MuSiC tutorial that we can analyse numeric parameters in the metadata (in that case, hbac1c content). Reformatting to ensure numerical values in these columns (i.e. taking the ` years` out of an age cell) is helpful then too.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-fixing-titles" class="box-title" aria-label="hands-on box:  Fixing titles "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Fixing titles</div>
+  <div class="box-title hands-on-title" id="hands-on-fixing-titles" aria-label="hands-on box:  Fixing titles "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Fixing titles</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.2"><strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/regex_find_replace/regex1/1.0.2</span></span>  with the following parameters:
@@ -1007,7 +1001,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
       <p>Change the datatype to tabular</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-changing-the-datatype-1" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 </blockquote>
@@ -1023,7 +1017,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 <p>Let’s upload the dataset.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload-1" class="box-title" aria-label="hands-on box:  Data upload "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-1" aria-label="hands-on box:  Data upload "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Data upload</div>
 
   <ol>
     <li>
@@ -1034,20 +1028,20 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7319173/files/E-MTAB-5060-raw-counts.tsv
 </code></pre></div>      </div>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links-1" class="box-title"><button type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>Rename the dataset as needed</li>
     <li>
       <p>Check that the datatype is tabular</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-changing-the-datatype-2" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-2-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-2-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Add to <code class="language-plaintext highlighter-rouge">raw-counts</code> the following tags <code class="language-plaintext highlighter-rouge">#matrix #bulk #ebi</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-adding-a-tag-1" class="box-title"><button type="button" aria-controls="tip-adding-a-tag-1-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-1-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1056,7 +1050,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 <p>Now examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> your raw counts file in the <span class="notranslate">Galaxy</span> history.</p>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Are samples in the rows or columns?</li>
@@ -1077,7 +1071,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 <p>While it’s awesome that there’s a gene name column, unfortunately the gene names will be duplicated - different ENS IDs can refer to the same Gene Name. This going to be a problem later. So we need to get this in a format to collapse the ENS IDs, just as we did previously in the sc<span class="notranslate">RNA</span>-seq data reference preparation. Sadly, we’ll start by removing the column of gene names to prepare for the ENS ID collapse.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-remove-gene-names-column" class="box-title" aria-label="hands-on box:  Remove gene names column "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Remove gene names column</div>
+  <div class="box-title hands-on-title" id="hands-on-remove-gene-names-column" aria-label="hands-on box:  Remove gene names column "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Remove gene names column</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0"><strong>Remove columns</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0</span></span>  with the following parameters:
@@ -1101,14 +1095,14 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 <p>Now that your data is in a format of having a rows of ENS IDs and samples as columns, you can apply the handy ENS ID collapsing <span class="notranslate">workflow</span> as we did in the sc<span class="notranslate">RNA</span>-seq reference. If you have already imported this <span class="notranslate">workflow</span> during the first tutorial, then you can use it again now.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-convert-from-ensembl-to-genesymbol-using-workflow" class="box-title" aria-label="hands-on box:  Convert from Ensembl to GeneSymbol using workflow "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Convert from Ensembl to GeneSymbol using <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-convert-from-ensembl-to-genesymbol-using-workflow" aria-label="hands-on box:  Convert from Ensembl to GeneSymbol using workflow "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Convert from Ensembl to GeneSymbol using <span class="notranslate">workflow</span></div>
 
   <ol>
     <li>
       <p>Import this <a href="https://usegalaxy.eu/u/wendi.bacon.training/w/convert-from-ensembl-to-genesymbol-summing-duplicate-genes"><span class="notranslate">workflow</span></a>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-a-workflow" class="box-title"><button type="button" aria-controls="tip-importing-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> at the top-right of the screen</li>   <li>Provide your <span class="notranslate">workflow</span>     <ul>       <li>Option 1: Paste the URL of the <span class="notranslate">workflow</span> into the box labelled <em>“Archived <span class="notranslate">Workflow</span> URL”</em></li>       <li>Option 2: Upload the <span class="notranslate">workflow</span> file in the box labelled <em>“Archived <span class="notranslate">Workflow</span> File”</em></li>     </ul>   </li>   <li>Click the <strong>Import <span class="notranslate">workflow</span></strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> at the top-right of the screen</li>   <li>Provide your <span class="notranslate">workflow</span>     <ul>       <li>Option 1: Paste the URL of the <span class="notranslate">workflow</span> into the box labelled <em>“Archived <span class="notranslate">Workflow</span> URL”</em></li>       <li>Option 2: Upload the <span class="notranslate">workflow</span> file in the box labelled <em>“Archived <span class="notranslate">Workflow</span> File”</em></li>     </ul>   </li>   <li>Click the <strong>Import <span class="notranslate">workflow</span></strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Run the <span class="notranslate">workflow</span> on your sample with the following parameters:</p>
@@ -1118,7 +1112,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-running-a-workflow" class="box-title"><button type="button" aria-controls="tip-running-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>   <li>Configure the <span class="notranslate">workflow</span> as needed</li>   <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>   <li>Configure the <span class="notranslate">workflow</span> as needed</li>   <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1135,7 +1129,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 <p>We have three more tasks to do: first, we need to create the <span class="notranslate">expression</span> set object with all the phenotypes combined. Then, we will create the two objects we actually need - one for healthy and one for diseased.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-creating-the-combined-object" class="box-title" aria-label="hands-on box:  Creating the combined object "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Creating the combined object</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-the-combined-object" aria-label="hands-on box:  Creating the combined object "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Creating the combined object</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4"><strong>Construct <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+<span class="notranslate">galaxy</span>4</span></span>  with the following parameters:
@@ -1150,7 +1144,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>How many genes are in your object?</li>
@@ -1174,7 +1168,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-creating-the-disease-only-object" class="box-title" aria-label="hands-on box:  Creating the disease-only object "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Creating the disease-only object</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-the-disease-only-object" aria-label="hands-on box:  Creating the disease-only object "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Creating the disease-only object</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4"><strong>Manipulate <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+<span class="notranslate">galaxy</span>4</span></span>  with the following parameters:
@@ -1209,7 +1203,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 <p>You can either re-run this tool or set it up again to create the healthy-only object.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-creating-the-healthy-only-object" class="box-title" aria-label="hands-on box:  Creating the healthy-only object "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Creating the healthy-only object</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-the-healthy-only-object" aria-label="hands-on box:  Creating the healthy-only object "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Creating the healthy-only object</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4"><strong>Manipulate <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+<span class="notranslate">galaxy</span>4</span></span>  with the following parameters:

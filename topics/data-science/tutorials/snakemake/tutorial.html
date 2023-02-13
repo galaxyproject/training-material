@@ -884,7 +884,7 @@
 <p>This tutorial is aimed at students and <span class="notranslate">Galaxy</span> community members who might want to convert Snakemake workflows into <span class="notranslate">Galaxy</span> workflows, but need to understand how Snakemake workflows work.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -977,14 +977,14 @@ you instead write more general rules on how to produce individual files. We’ll
 <h3 id="downloading-data">Downloading Data</h3>
 
 <blockquote class="code-in">
-  <div id="code-in-bash" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+  <div class="box-title code-in-title" id="code-in-bash" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
   <pre class="highlight"><code><span class="s2">wget https://.../GCA_000017985.1_ASM1798v1_genomic.fna.gz
 wget https://.../SRR2584866_1.fq.gz</span>
 </code></pre>
   <p>With bash we download each read file one by one</p>
 </blockquote>
 <blockquote class="code-out">
-  <div id="code-out-make" class="box-title" aria-label="code-out box: Make"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Make</div>
+  <div class="box-title code-out-title" id="code-out-make" aria-label="code-out box: Make"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Make</div>
   <pre class="highlight"><code><span class="nb">%.gz</span>:
 	<span class="s2">wget https://.../$@ -O $@</span>
 </code></pre>
@@ -994,12 +994,12 @@ wget https://.../SRR2584866_1.fq.gz</span>
 <h3 id="fastqc">FastQC</h3>
 
 <blockquote class="code-in">
-  <div id="code-in-bash-1" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+  <div class="box-title code-in-title" id="code-in-bash-1" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
   <pre class="highlight"><code><span class="s2">fastqc *.fq</span></code></pre>
   <p>Generate ALL of the FastQC reports</p>
 </blockquote>
 <blockquote class="code-out">
-  <div id="code-out-make-1" class="box-title" aria-label="code-out box: Make"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Make</div>
+  <div class="box-title code-out-title" id="code-out-make-1" aria-label="code-out box: Make"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Make</div>
   <pre class="highlight"><code><span class="nb">%.fastqc.html</span>: <span class="kt">%.fq</span>
 	<span class="s2">fastqc $&lt;</span>
 </code></pre>
@@ -1009,7 +1009,7 @@ wget https://.../SRR2584866_1.fq.gz</span>
 <h3 id="trimming-data">Trimming Data</h3>
 
 <blockquote class="code-in">
-  <div id="code-in-bash-2" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+  <div class="box-title code-in-title" id="code-in-bash-2" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
   <pre class="highlight"><code><span class="s2">trimmomatic PE</span> <span class="kt">SRR2589044_1.fq.gz SRR2589044_2.fq.gz</span> \
                <span class="nb">SRR2589044_1.trim.fq SRR2589044_1un.trim.fq \
                SRR2589044_2.trim.fq SRR2589044_2un.trim.fq</span> \
@@ -1023,7 +1023,7 @@ wget https://.../SRR2584866_1.fq.gz</span>
   <p>Run these two individual trimmomatic commands with these hardcoded filenames. If you need to run a new file make sure to carefully change all of the uses of it!</p>
 </blockquote>
 <blockquote class="code-out">
-  <div id="code-out-make-2" class="box-title" aria-label="code-out box: Make"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Make</div>
+  <div class="box-title code-out-title" id="code-out-make-2" aria-label="code-out box: Make"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Make</div>
   <pre class="highlight"><code><span class="nb">%_1.trim.fq %_2.trim.fq %_1un.trim.fq %_2un.trim.fq</span>: <span class="kt">%_1.fq.gz %_2.fq.gz</span>
 	<span class="s2">trimmomatic PE $^ \
 		$(shell basename $(word 1,$^) .fq).trim.fq \
@@ -1047,7 +1047,7 @@ wget https://.../SRR2584866_1.fq.gz</span>
 </ul>
 
 <blockquote class="comment">
-  <div id="comment-do-not-remember-this" class="box-title" aria-label="comment box: DO NOT REMEMBER THIS"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: DO NOT REMEMBER THIS</div>
+  <div class="box-title comment-title" id="comment-do-not-remember-this" aria-label="comment box: DO NOT REMEMBER THIS"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: DO NOT REMEMBER THIS</div>
   <p>There is a lot of Make specific things going on in the above examples. You do not need to know it! We just wanted to provide working, correct examples. This tutorial is focused on Snakemake, so read these for context and understanding of why we use Snakemake, not reading them to learn Makefiles.</p>
 </blockquote>
 
@@ -1187,7 +1187,7 @@ wget https://.../SRR2584866_1.fq.gz</span>
 <p>Notice that Make isn’t running every task, it’s reading the one task you asked for, and seeing what’s required for that based on your annotations of inputs and outputs.</p>
 
 <blockquote class="question">
-  <div id="question-check-your-understanding" class="box-title" aria-label="question box: Check your understanding"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Check your understanding</div>
+  <div class="box-title question-title" id="question-check-your-understanding" aria-label="question box: Check your understanding"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Check your understanding</div>
 
   <ol>
     <li>If a file is not part of the final output, or not the requested task, will it be created?</li>
@@ -1195,7 +1195,7 @@ wget https://.../SRR2584866_1.fq.gz</span>
   </ol>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>No, Make only runs the tasks for files it needs, it won’t run any of the other tasks. This is part of what makes <code class="language-plaintext highlighter-rouge">make</code> fast and easily parallelisable.</li>
       <li>Yes! FastQC is missing, it won’t be created unless we ask for it.</li>
@@ -1237,7 +1237,7 @@ wget https://.../SRR2584866_1.fq.gz</span>
 <h3 id="downloading-data-1">Downloading Data</h3>
 
 <blockquote class="code-in">
-  <div id="code-in-make" class="box-title" aria-label="code-in box: Make"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Make</div>
+  <div class="box-title code-in-title" id="code-in-make" aria-label="code-in box: Make"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Make</div>
   <pre class="highlight"><code><span class="nb">%.fq.gz</span>:
 	<span class="s2">wget https://zenodo.org/record/5562251/files/$@</span>
 </code></pre>
@@ -1245,7 +1245,7 @@ wget https://.../SRR2584866_1.fq.gz</span>
   <p>Generic download rule, the <code>$@</code> and <code>%</code> used are a bit opaque, you need to know what they mean to understand how the rule works.</p>
 </blockquote>
 <blockquote class="code-out">
-  <div id="code-out-snakemake" class="box-title" aria-label="code-out box: Snakemake"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Snakemake</div>
+  <div class="box-title code-out-title" id="code-out-snakemake" aria-label="code-out box: Snakemake"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Snakemake</div>
   <pre class="highlight"><code>rule download:
 	<span class="nb">output:
 		"{sample}.fq.gz"</span>
@@ -1259,7 +1259,7 @@ wget https://.../SRR2584866_1.fq.gz</span>
 <h3 id="fastqc-1">FastQC</h3>
 
 <blockquote class="code-in">
-  <div id="code-in-mask" class="box-title" aria-label="code-in box: Mask"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Mask</div>
+  <div class="box-title code-in-title" id="code-in-mask" aria-label="code-in box: Mask"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Mask</div>
   <pre class="highlight"><code><span class="nb">%.fastqc.html</span>: <span class="kt">%.fq</span>
 	<span class="s2">fastqc $&lt;</span>
 </code></pre>
@@ -1267,7 +1267,7 @@ wget https://.../SRR2584866_1.fq.gz</span>
   <p>Here is a rule to generate a single FastQC report from a single FastQ file</p>
 </blockquote>
 <blockquote class="code-out">
-  <div id="code-out-snakemake-1" class="box-title" aria-label="code-out box: Snakemake"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Snakemake</div>
+  <div class="box-title code-out-title" id="code-out-snakemake-1" aria-label="code-out box: Snakemake"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Snakemake</div>
   <pre class="highlight"><code>rule fastqc:
 	<span class="kt">input:
 		"{sample}.fq.gz"</span>
@@ -1283,7 +1283,7 @@ wget https://.../SRR2584866_1.fq.gz</span>
 <h3 id="trimming-data-1">Trimming Data</h3>
 
 <blockquote class="code-in">
-  <div id="code-in-make-1" class="box-title" aria-label="code-in box: Make"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Make</div>
+  <div class="box-title code-in-title" id="code-in-make-1" aria-label="code-in box: Make"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Make</div>
   <pre class="highlight"><code><span class="nb">%_1.trim.fq %_2.trim.fq %_1un.trim.fq %_2un.trim.fq</span>: <span class="kt">%_1.fq.gz %_2.fq.gz</span>
 	<span class="s2">trimmomatic PE $^ \
 		$(shell basename $(word 1,$^) .fq).trim.fq \
@@ -1297,7 +1297,7 @@ wget https://.../SRR2584866_1.fq.gz</span>
 
 </blockquote>
 <blockquote class="code-out">
-  <div id="code-out-snakemake-2" class="box-title" aria-label="code-out box: Snakemake"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Snakemake</div>
+  <div class="box-title code-out-title" id="code-out-snakemake-2" aria-label="code-out box: Snakemake"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Snakemake</div>
   <pre class="highlight"><code>rule trimmomatic:
 	<span class="kt">input:
 		r1="{sample}_1.fq.gz",
@@ -1324,7 +1324,7 @@ wget https://.../SRR2584866_1.fq.gz</span>
 <p>Now that you have seen a few rules, let’s write the rest.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-save-this-snakefile-to-the-filesystem" class="box-title" aria-label="hands-on box: Save this Snakefile to the filesystem"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Save this Snakefile to the filesystem</div>
+  <div class="box-title hands-on-title" id="hands-on-save-this-snakefile-to-the-filesystem" aria-label="hands-on box: Save this Snakefile to the filesystem"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Save this Snakefile to the filesystem</div>
   <p>From here on you are going to finish writing this Snakefile on your own! We’ll give you the bits you have seen up until now, and future tasks will require you to add your own rules and get to actually test out the pipeline!</p>
 
   <pre><code class="language-Snakemake">rule download:
@@ -1367,7 +1367,7 @@ rule trimmomatic:
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-install-snakemake" class="box-title" aria-label="hands-on box: Install Snakemake"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Install Snakemake</div>
+  <div class="box-title hands-on-title" id="hands-on-install-snakemake" aria-label="hands-on box: Install Snakemake"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Install Snakemake</div>
   <p>We’re about to start doing things really with snakemake, so, it’s time to install it.</p>
   <ol>
     <li><a href="https://docs.conda.io/en/latest/miniconda.html">Install Miniconda</a></li>
@@ -1394,27 +1394,27 @@ rule trimmomatic:
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-try-running-snakemake" class="box-title" aria-label="hands-on box: Try running snakemake!"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Try running snakemake!</div>
+  <div class="box-title hands-on-title" id="hands-on-try-running-snakemake" aria-label="hands-on box: Try running snakemake!"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Try running snakemake!</div>
 
   <ol>
     <li>
       <p>Try running snakemake</p>
 
       <blockquote class="code-in">
-        <div id="code-in-cli" class="box-title" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
+        <div class="box-title code-in-title" id="code-in-cli" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>snakemake -c1
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="tip">
-        <div id="tip-quot-specify-the-maximum-number-of-jobs-quot" class="box-title"><button type="button" aria-controls="tip-quot-specify-the-maximum-number-of-jobs-quot-contents" aria-expanded="true" aria-label="Toggle tip box: &quot;specify the maximum number of jobs&quot;"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: &quot;specify the maximum number of jobs&quot;<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-quot-specify-the-maximum-number-of-jobs-quot"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-quot-specify-the-maximum-number-of-jobs-quot-contents" aria-expanded="true" aria-label="Toggle tip box: &quot;specify the maximum number of jobs&quot;"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: &quot;specify the maximum number of jobs&quot;<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>If you see an error like this it might be due to an outdated version of snakemake</p>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: you need to specify the maximum number of jobs to be queued or executed at the same time with --jobs.
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div id="code-out" class="box-title" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+        <div class="box-title code-out-title" id="code-out" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Building DAG of jobs...
 WorkflowError:
 Target rules may not contain wildcards. Please specify concrete files or a rule without wildcards at the command line, or have a rule without wildcards at the very top of your <span class="notranslate">workflow</span> (e.g. the typical "rule all" which just collects all results you want to generate in the end).
@@ -1427,13 +1427,13 @@ Target rules may not contain wildcards. Please specify concrete files or a rule 
       <p>Run snakemake to download <code class="language-plaintext highlighter-rouge">SRR2584866_1.fq.gz</code> and <code class="language-plaintext highlighter-rouge">SRR2584866_2.fq.gz</code></p>
 
       <blockquote class="code-in">
-        <div id="code-in-cli-1" class="box-title" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
+        <div class="box-title code-in-title" id="code-in-cli-1" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>snakemake -c1 SRR2584866_1.fq.gz SRR2584866_2.fq.gz
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out code-max-300">
-        <div id="code-out-1" class="box-title" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+        <div class="box-title code-out-title" id="code-out-1" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Building DAG of jobs...
 Using shell: /usr/bin/bash
 Provided cores: 1 (use --cores to define parallelism)
@@ -1500,7 +1500,7 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T160632.213680.snak
 <p>Now that we’ve got our pipeline started, let’s do some more with it!</p>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>How would you write the following task in Snakemake?</p>
 
@@ -1509,7 +1509,7 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T160632.213680.snak
   <p>and it creates <code class="language-plaintext highlighter-rouge">GCA_000017985.1_ASM1798v1_genomic.fna.gz.bwt</code></p>
 
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <pre class="highlight"><code>rule indexgenome:
 	<span class="kt">input:
@@ -1523,7 +1523,7 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T160632.213680.snak
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>The command is <code class="language-plaintext highlighter-rouge">bwa mem GCA_000017985.1_ASM1798v1_genomic.fna SRR2584866_1.trim.fq SRR2584866_2.trim.fq | samtools sort -O bam -o SRR2584866.bam</code></p>
 
@@ -1534,7 +1534,7 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T160632.213680.snak
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>
@@ -1570,7 +1570,7 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T160632.213680.snak
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-add-the-above-outputs-to-your-pipeline" class="box-title" aria-label="hands-on box: Add the above outputs to your Pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add the above outputs to your Pipeline</div>
+  <div class="box-title hands-on-title" id="hands-on-add-the-above-outputs-to-your-pipeline" aria-label="hands-on box: Add the above outputs to your Pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add the above outputs to your Pipeline</div>
   <p>If you haven’t already, add the above outputs to your Snakemake pipeline. You should now have a few rules:</p>
 
   <ul>
@@ -1591,7 +1591,7 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T160632.213680.snak
 <p>If you’re not already using conda, you should be! Much scientific software you might be interested in using is already in there, probably mostly provided by the <a href="https://anaconda.org/bioconda/repo">BioConda</a> repository. Writing an environment file can be pretty simple, you just need a file like this, which we customarily put in a folder named <code class="language-plaintext highlighter-rouge">envs/</code></p>
 
 <blockquote class="code-in">
-  <div id="code-in-envs-bwa-yaml" class="box-title" aria-label="code-in box: `envs/bwa.yaml`"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: `envs/bwa.yaml`</div>
+  <div class="box-title code-in-title" id="code-in-envs-bwa-yaml" aria-label="code-in box: `envs/bwa.yaml`"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: `envs/bwa.yaml`</div>
   <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">channels</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s">conda-forge</span>
   <span class="pi">-</span> <span class="s">bioconda</span>
@@ -1605,7 +1605,7 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T160632.213680.snak
 <p>In the above code sample you can see <code class="language-plaintext highlighter-rouge">bwa=0.7.17</code>, that’s the version of the <code class="language-plaintext highlighter-rouge">bwa</code> mapper we want to use which was found on <a href="https://anaconda.org/bioconda/bwa">the conda repository page</a>. You’ll notice that after it is <code class="language-plaintext highlighter-rouge">=h5bf99c6_8</code>, this is a specific revision of the package that has been ‘pinned’ (i.e. we want to ensure conda installs specifically the version we know works.) That step is not necessary, but if you really care about reproducibility it can be good in a pipeline</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-add-conda" class="box-title" aria-label="hands-on box: Add conda"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add conda</div>
+  <div class="box-title hands-on-title" id="hands-on-add-conda" aria-label="hands-on box: Add conda"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add conda</div>
   <p>Now you should add Conda environments where appropriate. But where is appropriate? Unix built in tools (wget, curl, gzip, cat, head, tail) generally do not need to be in conda, because they’re very standard across all unix environments.</p>
 
   <p>Bioinformatics tools on the other hand, these need conda envs.</p>
@@ -1649,7 +1649,7 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T160632.213680.snak
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p><code class="language-plaintext highlighter-rouge">envs/bwa.yaml</code> should look like this:</p>
 
@@ -1683,7 +1683,7 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T160632.213680.snak
 </code></pre></div>    </div>
 
     <blockquote class="comment">
-      <div id="comment-how-to-read-diffs" class="box-title" aria-label="comment box: How to read diffs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: How to read diffs</div>
+      <div class="box-title comment-title" id="comment-how-to-read-diffs" aria-label="comment box: How to read diffs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: How to read diffs</div>
       <p>This is a ‘diff’, it shows you the difference between two versions of a text file. Everything added is highlighed in light blue. Anything deleted is shown in black with a strikethrough. Importantly it shows you the context, the bits that are not highlighted, and this helps you know where the changes should go.
 The first line shows the original file, and the second line shows the new file. If the names are different, it means the file has been renamed.</p>
 
@@ -1739,7 +1739,7 @@ The first line shows the original file, and the second line shows the new file. 
 <p>Saving log files is key to making sure that you have a complete log of the execution of sotware. If you don’t save the log files, and you’re running a pipeline with 100 samples, it can be very easy to get confused about what went wrong and where. Unfortunately this is not a completely automatic process, and you’ll need to manually configure it:</p>
 
 <blockquote class="code-in">
-  <div id="code-in-snakefile" class="box-title" aria-label="code-in box: `Snakefile`"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: `Snakefile`</div>
+  <div class="box-title code-in-title" id="code-in-snakefile" aria-label="code-in box: `Snakefile`"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: `Snakefile`</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule indexgenome:
 	input:
 		"{sample}.fna.gz"
@@ -1767,12 +1767,12 @@ The first line shows the original file, and the second line shows the new file. 
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-add-log-files-to-every-step" class="box-title" aria-label="hands-on box: Add log files to every step"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add log files to every step</div>
+  <div class="box-title hands-on-title" id="hands-on-add-log-files-to-every-step" aria-label="hands-on box: Add log files to every step"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add log files to every step</div>
 
   <p>Try and add log files everywhere (err and out where appropriate) to all of your rules. And use them in the <code class="language-plaintext highlighter-rouge">shell</code> sections as well. Also put your logs under the <code class="language-plaintext highlighter-rouge">logs/</code> folder!</p>
 
   <blockquote class="solution">
-    <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>This is again a diff, things in blue were added to the file named at the top, things with black highlight were deleted. Think “track changes” mode in Google Docs or Word, except harder to read.</p>
 
@@ -1869,11 +1869,11 @@ The first line shows the original file, and the second line shows the new file. 
 <p>You’ve seen a couple examples above but it’s best to use folders to help keep your data organised. Separate individual pipeline steps into different folders so you can more easily keep track of e.g. whether you’re working with trimmed or untrimmed data.</p>
 
 <blockquote class="question">
-  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
   <p>What sort of folders would you establish for the example pipeline in this tutorial?</p>
 
   <blockquote class="solution">
-    <div id="solution-5" class="box-title"><button type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>One possible solution you could consider is:</p>
 
@@ -1915,11 +1915,11 @@ The first line shows the original file, and the second line shows the new file. 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-do-it" class="box-title" aria-label="hands-on box: Do it!"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Do it!</div>
+  <div class="box-title hands-on-title" id="hands-on-do-it" aria-label="hands-on box: Do it!"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Do it!</div>
   <p>Update your pipeline to have all of datasets stored nicely in folders.</p>
 
   <blockquote class="solution">
-    <div id="solution-6" class="box-title"><button type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/Snakefile b/Snakefile
 index 59b983c..31ebdff 100644
@@ -2020,11 +2020,11 @@ index 59b983c..31ebdff 100644
 <p>In the Makefile we had an <code class="language-plaintext highlighter-rouge">all</code> rule which was the first and default action to take. Let’s reproduce that.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-add-an-all-task" class="box-title" aria-label="hands-on box: Add an all task"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add an all task</div>
+  <div class="box-title hands-on-title" id="hands-on-add-an-all-task" aria-label="hands-on box: Add an all task"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add an all task</div>
   <p>It should build <code class="language-plaintext highlighter-rouge">alignments/GCA_000017985.1_ASM1798v1_genomic/SRR2584863.bam</code></p>
 
   <blockquote class="solution">
-    <div id="solution-7" class="box-title"><button type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>We add this to the very top of our file.</p>
     <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
 </span><span class="gi">+++ b/Snakefile
@@ -2039,7 +2039,7 @@ index 59b983c..31ebdff 100644
 </code></pre></div>    </div>
 
     <blockquote class="tip">
-      <div id="tip-why-input-and-not-output" class="box-title"><button type="button" aria-controls="tip-why-input-and-not-output-contents" aria-expanded="true" aria-label="Toggle tip box: Why Input and not Output?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why Input and not Output?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title tip-title" id="tip-why-input-and-not-output"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-input-and-not-output-contents" aria-expanded="true" aria-label="Toggle tip box: Why Input and not Output?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why Input and not Output?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
       <p>Because rule all is taking in some other outputs as an input to it. If we used outputs, rule all would do nothing (it has no pre-requisite steps), and since it produces nothing by itself, snakemake would see that the outputs you expected have not been created and flag it as an error.</p>
     </blockquote>
 
@@ -2051,12 +2051,12 @@ index 59b983c..31ebdff 100644
 <p>This is starting to look like a pretty good <span class="notranslate">workflow</span>! Let’s preview how it will run:</p>
 
 <blockquote class="code-in">
-  <div id="code-in" class="box-title" aria-label="code-in box: "><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input</div>
+  <div class="box-title code-in-title" id="code-in" aria-label="code-in box: "><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ snakemake -np
 </code></pre></div>  </div>
 </blockquote>
 <blockquote class="code-out code-max-300">
-  <div id="code-out-2" class="box-title" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+  <div class="box-title code-out-title" id="code-out-2" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Building DAG of jobs...
 Job stats:
 job                count    min th<span class="notranslate">reads</span>    max th<span class="notranslate">reads</span>
@@ -2155,13 +2155,13 @@ This was a dry-run (flag -n). The order of jobs does not reflect the order of ex
 <p>Gosh that’s a lot of output! Let’s build the <abbr title="Directed Acyclic Graph">DAG</abbr> to see a more concise representation of what is going to happen:</p>
 
 <blockquote class="code-in">
-  <div id="code-in-1" class="box-title" aria-label="code-in box: "><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input</div>
+  <div class="box-title code-in-title" id="code-in-1" aria-label="code-in box: "><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input</div>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>snakemake <span class="nt">--dag</span> | dot <span class="nt">-Tsvg</span> <span class="o">&gt;</span> out.svg
 </code></pre></div>  </div>
 </blockquote>
 
 <blockquote class="code-out">
-  <div id="code-out-3" class="box-title" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+  <div class="box-title code-out-title" id="code-out-3" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
   <p><img src="../../images/snakemake.dag.svg" alt="Image of the snakemake dag. Conspicuously missing is FastQC jobs!" loading="lazy" /></p>
 </blockquote>
 
@@ -2245,13 +2245,13 @@ This was a dry-run (flag -n). The order of jobs does not reflect the order of ex
 <p>You can use this function in inputs and outputs to help you list all expected files, without having to write out or hardcode that list of files. Here we define a <code class="language-plaintext highlighter-rouge">sorted_<span class="notranslate">reads</span>/{sample}.bam</code> and then this is repeated for every value of samples</p>
 
 <blockquote class="code-in">
-  <div id="code-in-snakemake-code" class="box-title" aria-label="code-in box: Snakemake Code"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Snakemake Code</div>
+  <div class="box-title code-in-title" id="code-in-snakemake-code" aria-label="code-in box: Snakemake Code"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Snakemake Code</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SAMPLES = ["a", "b", "c"]
 expand("sorted_<span class="notranslate">reads</span>/{sample}.bam", sample=SAMPLES)
 </code></pre></div>  </div>
 </blockquote>
 <blockquote class="code-out">
-  <div id="code-out-snakemake-output" class="box-title" aria-label="code-out box: Snakemake Output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Snakemake Output</div>
+  <div class="box-title code-out-title" id="code-out-snakemake-output" aria-label="code-out box: Snakemake Output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Snakemake Output</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>["sorted_<span class="notranslate">reads</span>/a.bam", "sorted_<span class="notranslate">reads</span>/b.bam", "sorted_<span class="notranslate">reads</span>/c.bam"]
 </code></pre></div>  </div>
 </blockquote>
@@ -2264,7 +2264,7 @@ expand("sorted_<span class="notranslate">reads</span>/{sample}.bam", sample=SAMP
 <p>We should use something exactly like this for our samples. We can have a <code class="language-plaintext highlighter-rouge">SAMPLES</code> variable representing our final output bam files we wish to generate, and then instead of <code class="language-plaintext highlighter-rouge">replicates</code> we’ll have <code class="language-plaintext highlighter-rouge">_1</code> and <code class="language-plaintext highlighter-rouge">_2</code> or so. First let’s make the change to use the <code class="language-plaintext highlighter-rouge">SAMPLES</code> and expand just for our final output.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-update-all-task-to-use-expand" class="box-title" aria-label="hands-on box: Update `all` task to use expand"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Update `all` task to use expand</div>
+  <div class="box-title hands-on-title" id="hands-on-update-all-task-to-use-expand" aria-label="hands-on box: Update `all` task to use expand"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Update `all` task to use expand</div>
   <p>And while you’re at it, define <code class="language-plaintext highlighter-rouge">SAMPLES</code> to be a list (like in python) with two elements:</p>
   <ul>
     <li><code class="language-plaintext highlighter-rouge">SRR2584863</code></li>
@@ -2272,7 +2272,7 @@ expand("sorted_<span class="notranslate">reads</span>/{sample}.bam", sample=SAMP
   </ul>
 
   <blockquote class="solution">
-    <div id="solution-8" class="box-title"><button type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
 </span><span class="gi">+++ b/Snakefile
@@ -2291,7 +2291,7 @@ expand("sorted_<span class="notranslate">reads</span>/{sample}.bam", sample=SAMP
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-run-the-pipeline" class="box-title" aria-label="hands-on box: Run the pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run the pipeline</div>
+  <div class="box-title hands-on-title" id="hands-on-run-the-pipeline" aria-label="hands-on box: Run the pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run the pipeline</div>
   <p>Run <code class="language-plaintext highlighter-rouge">snakemake -c4 --use-conda</code>. Did it work?</p>
 </blockquote>
 
@@ -2300,11 +2300,11 @@ expand("sorted_<span class="notranslate">reads</span>/{sample}.bam", sample=SAMP
 <p>Now that you’ve done one expand, let’s do a more complicated one. The expand function can take multiple variables which we can use to expand both our samples AND our expected extensions</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-add-fastqc-outputs-to-all" class="box-title" aria-label="hands-on box: Add FastQC outputs to `all`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add FastQC outputs to `all`</div>
+  <div class="box-title hands-on-title" id="hands-on-add-fastqc-outputs-to-all" aria-label="hands-on box: Add FastQC outputs to `all`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add FastQC outputs to `all`</div>
   <p>Which file extensions do we expect to see? (e.g. <code class="language-plaintext highlighter-rouge">_1.fastqc</code>) Make a single expand that uses two variables, <code class="language-plaintext highlighter-rouge">{sample}</code> and <code class="language-plaintext highlighter-rouge">{ext}</code>? Add an expand that uses our previously defined <code class="language-plaintext highlighter-rouge">SAMPLES</code> and now also a list of the extensions we expect.</p>
 
   <blockquote class="solution">
-    <div id="solution-9" class="box-title"><button type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
 </span><span class="gi">+++ b/Snakefile
@@ -2321,7 +2321,7 @@ expand("sorted_<span class="notranslate">reads</span>/{sample}.bam", sample=SAMP
 </code></pre></div>    </div>
 
     <blockquote class="tip">
-      <div id="tip-why-not-1-fastqc-html" class="box-title"><button type="button" aria-controls="tip-why-not-1-fastqc-html-contents" aria-expanded="true" aria-label="Toggle tip box: Why not `_1.fastqc.html`?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why not `_1.fastqc.html`?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title tip-title" id="tip-why-not-1-fastqc-html"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-not-1-fastqc-html-contents" aria-expanded="true" aria-label="Toggle tip box: Why not `_1.fastqc.html`?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why not `_1.fastqc.html`?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <p>There’s not always a good answer for this, some tools will mangle names in unexpected ways. The best way to discover this in a <abbr title="Scientific Workflow Management System">SciWMS</abbr> like Snakemake is to just write what you expect, and run it, and see how it fails. Here the filenames were not as expected, so, we updated the <code class="language-plaintext highlighter-rouge">ext</code> to use <code class="language-plaintext highlighter-rouge">_1_fastqc.html</code> and everything works. This was done by <code class="language-plaintext highlighter-rouge">fastqc</code> so if we really wanted the other style of naming we could read the FastQC manual to maybe determine why.</p>
 
@@ -2345,7 +2345,7 @@ expand("sorted_<span class="notranslate">reads</span>/{sample}.bam", sample=SAMP
     <p>We could probably use <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span></code> as a wildcard (like our <code class="language-plaintext highlighter-rouge">{genome}</code> or <code class="language-plaintext highlighter-rouge">{sample}</code>), but here we’d have to have some additional complexity as a result, like the folder name would en up part of the <code class="language-plaintext highlighter-rouge">output</code> name, as is required by <code class="language-plaintext highlighter-rouge">Snakemake</code> to prevent accidental conflicts.</p>
 
     <blockquote class="tip">
-      <div id="tip-how-would-this-look" class="box-title"><button type="button" aria-controls="tip-how-would-this-look-contents" aria-expanded="true" aria-label="Toggle tip box: How would this look?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How would this look?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title tip-title" id="tip-how-would-this-look"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-would-this-look-contents" aria-expanded="true" aria-label="Toggle tip box: How would this look?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How would this look?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>--- a/Snakefile
 +++ b/Snakefile
 @@ -16,16 +16,16 @@ rule download:
@@ -2375,11 +2375,11 @@ expand("sorted_<span class="notranslate">reads</span>/{sample}.bam", sample=SAMP
 <p>So with that said, let’s go with option three, duplicate our fastqc rule to have a <code class="language-plaintext highlighter-rouge">fastqc-trimmed</code> version</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-add-fastqc-outputs-to-all-1" class="box-title" aria-label="hands-on box: Add FastQC outputs to `all`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add FastQC outputs to `all`</div>
+  <div class="box-title hands-on-title" id="hands-on-add-fastqc-outputs-to-all-1" aria-label="hands-on box: Add FastQC outputs to `all`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add FastQC outputs to `all`</div>
   <p>Copy the rule and rename it appropriately, changing all of the variables where necessary to take in trimmed fastq files.</p>
 
   <blockquote class="solution">
-    <div id="solution-10" class="box-title"><button type="button" aria-controls="solution-10-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
 </span><span class="gi">+++ b/Snakefile
@@ -2421,18 +2421,18 @@ expand("sorted_<span class="notranslate">reads</span>/{sample}.bam", sample=SAMP
 <p>Ok! That’s hopefully went successfully. Run your pipeline to check.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on" class="box-title" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
   <ol>
     <li>Dry-run snakemake
       <blockquote class="code-in">
-        <div id="code-in-cli-2" class="box-title" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
+        <div class="box-title code-in-title" id="code-in-cli-2" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>snakemake -np
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div id="code-out-4" class="box-title" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+        <div class="box-title code-out-title" id="code-out-4" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Building DAG of jobs...
 AmbiguousRuleException:
 Rules fastqc_trim and fastqc are ambiguous for the file fastqc/SRR2584863_1_fastqc.html.
@@ -2469,13 +2469,13 @@ Expected output files:
       <p>Re-run the dry-run.</p>
 
       <blockquote class="code-in">
-        <div id="code-in-cli-3" class="box-title" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
+        <div class="box-title code-in-title" id="code-in-cli-3" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>snakemake -np
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-in">
-        <div id="code-in-cli-4" class="box-title" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
+        <div class="box-title code-in-title" id="code-in-cli-4" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 Job stats:
 job         count    min th<span class="notranslate">reads</span>    max th<span class="notranslate">reads</span>
@@ -2496,19 +2496,19 @@ This was a dry-run (flag -n). The order of jobs does not reflect the order of ex
 <p>Now that we’ve got a pipeline successfully completing the dry-run, let’s try it again.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-run-the-pipeline-1" class="box-title" aria-label="hands-on box: Run the pipeline!"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run the pipeline!</div>
+  <div class="box-title hands-on-title" id="hands-on-run-the-pipeline-1" aria-label="hands-on box: Run the pipeline!"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run the pipeline!</div>
   <ol>
     <li>
       <p>Run the pipeline</p>
 
       <blockquote class="code-in">
-        <div id="code-in-cli-5" class="box-title" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
+        <div class="box-title code-in-title" id="code-in-cli-5" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>snakemake --use-conda -c4
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-in">
-        <div id="code-in-cli-6" class="box-title" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
+        <div class="box-title code-in-title" id="code-in-cli-6" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in rule download:
 Removing output files of failed job download since they might be corrupted:
 <span class="notranslate">reads</span>/SRR2584863_2un.fq.gz
@@ -2561,13 +2561,13 @@ Job id: 21 completed successfully, but some output files are missing. 21
       <p>And dry-run</p>
 
       <blockquote class="code-in">
-        <div id="code-in-cli-7" class="box-title" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
+        <div class="box-title code-in-title" id="code-in-cli-7" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>snakemake -np
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div id="code-out-cli" class="box-title" aria-label="code-out box: CLI"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: CLI</div>
+        <div class="box-title code-out-title" id="code-out-cli" aria-label="code-out box: CLI"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: CLI</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Building DAG of jobs...
 MissingInputException in line 55 of /tmp/snake.q5mqtdhfg6/Snakefile:
 Missing input files for rule fastqc:
@@ -2595,13 +2595,13 @@ trim/SRR2584863_1.fq.gz
       <p>And finally? Success?</p>
 
       <blockquote class="code-in">
-        <div id="code-in-cli-8" class="box-title" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
+        <div class="box-title code-in-title" id="code-in-cli-8" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>snakemake --use-conda -c4
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div id="code-out-output" class="box-title" aria-label="code-out box: Output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Output</div>
+        <div class="box-title code-out-title" id="code-out-output" aria-label="code-out box: Output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Output</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   raise IOError(
 OSError: Missing files after 5 seconds:
 fastqc-trim/SRR2589044_1_fastqc.html
@@ -2629,19 +2629,19 @@ Job id: 19 completed successfully, but some output files are missing. 19
       <p>Shoot! No, ok. If we read this message it says <strong>Job Missing files after 5 seconds</strong> which means it couldn’t find the file. Specifically it tells us it is missing <code class="language-plaintext highlighter-rouge">fastqc-trim/SRR2589044_1_fastqc.html</code> and that makes sense, since all of our output fastqc reports had the full input name, so those should have <code class="language-plaintext highlighter-rouge">trim</code> in them too.</p>
 
       <blockquote class="tip">
-        <div id="tip-filesystem-latency" class="box-title"><button type="button" aria-controls="tip-filesystem-latency-contents" aria-expanded="true" aria-label="Toggle tip box: Filesystem Latency?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Filesystem Latency?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-filesystem-latency"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-filesystem-latency-contents" aria-expanded="true" aria-label="Toggle tip box: Filesystem Latency?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Filesystem Latency?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>On servers with shared directories using Network File Systems, it can happen that when you run a job on one machine, it may take time for the files to be visible on other machines, it isn’t instantaneous. In our case this is <strong>not</strong> the issue.</p>
       </blockquote>
     </li>
     <li>Let’s see what files are available, so we know how to fix the command.
       <blockquote class="code-in">
-        <div id="code-in-cli-9" class="box-title" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
+        <div class="box-title code-in-title" id="code-in-cli-9" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ls fastqc-trim
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div id="code-out-output-1" class="box-title" aria-label="code-out box: Output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Output</div>
+        <div class="box-title code-out-title" id="code-out-output-1" aria-label="code-out box: Output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Output</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SRR2584863_1.trim_fastqc.html    SRR2584863_2.trim_fastqc.html
 SRR2589044_1.trim_fastqc.html    SRR2589044_2.trim_fastqc.html
 SRR2584863_1.trim_fastqc.zip     SRR2584863_2.trim_fastqc.zip
@@ -2691,11 +2691,11 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T172535.438752.snak
 <p>As a last step, we’ll summarize all of the FastQC files. With all of the expands at the top, we’re now receiving 4 trimmed FastQC reports plus 2 untrimmed FastQC reports per sample which is a lot of data to go through! So we can use MultiQC to aggregate all of these files and generate a single summary file which makes analysis much easier.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-add-the-multiqc-step" class="box-title" aria-label="hands-on box: Add the MultiQC step"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add the MultiQC step</div>
+  <div class="box-title hands-on-title" id="hands-on-add-the-multiqc-step" aria-label="hands-on box: Add the MultiQC step"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add the MultiQC step</div>
   <p>The command we need to run is: <code class="language-plaintext highlighter-rouge">multiqc --outdir multiqc *fastqc.zip</code>. You cannot use wildcards like that in Snakemake, so write this out as a proper rule that accepts all of the same inputs as you used in the <code class="language-plaintext highlighter-rouge">rule all</code>. It outputs a file named <code class="language-plaintext highlighter-rouge">multiqc/multiqc_report.html</code> (set by the <code class="language-plaintext highlighter-rouge">--outdir</code> flag)</p>
 
   <blockquote class="solution">
-    <div id="solution-11" class="box-title"><button type="button" aria-controls="solution-11-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>You’ll notice that we now need to replace our <code class="language-plaintext highlighter-rouge">.html</code> outputs from the FastQC rules with the <code class="language-plaintext highlighter-rouge">.zip</code> outputs which we need instead. We didn’t have to update the command line, because the output file name was thankfully not part of it.</p>
 
     <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/Snakefile
@@ -2767,20 +2767,20 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T172535.438752.snak
 <p>And with that, you should have a working pipeline! Test it out.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-run-the-pipeline-2" class="box-title" aria-label="hands-on box: Run the pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run the pipeline</div>
+  <div class="box-title hands-on-title" id="hands-on-run-the-pipeline-2" aria-label="hands-on box: Run the pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run the pipeline</div>
   <p>Run <code class="language-plaintext highlighter-rouge">snakemake -c4 --use-conda</code></p>
 </blockquote>
 
 <p>Let’s check our <abbr title="Directed Acyclic Graph">DAG</abbr> again</p>
 
 <blockquote class="code-in">
-  <div id="code-in-2" class="box-title" aria-label="code-in box: "><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input</div>
+  <div class="box-title code-in-title" id="code-in-2" aria-label="code-in box: "><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input</div>
   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>snakemake <span class="nt">--dag</span> | dot <span class="nt">-Tsvg</span> <span class="o">&gt;</span> out.svg
 </code></pre></div>  </div>
 </blockquote>
 
 <blockquote class="code-out">
-  <div id="code-out-5" class="box-title" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+  <div class="box-title code-out-title" id="code-out-5" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
   <p><img src="../../images/snakemake.dag2.svg" alt="Image of the snakemake dag. FastQC and MultiQC are now there which add about 7 new boxes and a bunch of new arrows. This makes the graph very wide and quite hard to read." loading="lazy" /></p>
 </blockquote>
 

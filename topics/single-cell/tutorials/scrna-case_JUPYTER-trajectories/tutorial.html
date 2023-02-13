@@ -851,7 +851,7 @@
 <p>We will use the same sample from the previous three tutorials, which contains largely T-cells in the thymus. We know T-cells differentiate in the thymus, so we would assume that we would capture cells at slightly different time points within the same sample. Furthermore, our cluster analysis alone showed different states of T-cell. Now it’s time to look further!</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -875,7 +875,7 @@
 <p>We’ve provided you with experimental data to analyse from a mouse dataset of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span>. This is the full dataset generated from <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">this tutorial</a> (see the <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">study in <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas</a> and the <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">project submission</a>). You can find the final dataset in this <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferred-trajectory-analysis-using-python-jupyter-notebook-in-galaxy---input">input history</a> or download from Zenodo below.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -887,19 +887,19 @@ https://zenodo.org/record/7075718/files/Final_cell_annotated_object.h5ad
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the .h5ad object as <code class="language-plaintext highlighter-rouge">Final cell annotated object</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-dataset" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Final cell annotated object</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Final cell annotated object</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">h5ad</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-changing-the-datatype" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">h5ad</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">h5ad</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the .ipynb object as <code class="language-plaintext highlighter-rouge">Trajectories_Instructions.ipynb</code></p>
@@ -914,10 +914,10 @@ https://zenodo.org/record/7075718/files/Final_cell_annotated_object.h5ad
 <p>One problem with our current dataset is that it’s not just T-cells: we found in the previous tutorial that it also contains macrophages. This is a problem, because trajectory analysis will generally try to find relationships between all the cells in the sample. We need to remove those cell types to analyse the trajectory.</p>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div id="tip-using-tutorial-mode" class="box-title"><button type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul> </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-removing-macrophages" class="box-title" aria-label="hands-on box: Removing macrophages"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Removing macrophages</div>
+  <div class="box-title hands-on-title" id="hands-on-removing-macrophages" aria-label="hands-on box: Removing macrophages"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Removing macrophages</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -944,7 +944,7 @@ https://zenodo.org/record/7075718/files/Final_cell_annotated_object.h5ad
 <h2 id="launching-jupyter">Launching Jupyter</h2>
 
 <blockquote class="warning">
-  <div id="warning-data-uploads-and-jupyter" class="box-title" aria-label="warning box: Data uploads and Jupyter"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Data uploads and Jupyter</div>
+  <div class="box-title warning-title" id="warning-data-uploads-and-jupyter" aria-label="warning box: Data uploads and Jupyter"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Data uploads and Jupyter</div>
   <p>There are a few ways of importing and uploading data in Jupyter. You might find yourself accidentally doing this differently than the tutorial, and that’s ok. There are a few key steps where you will call files from a location - if these don’t work from you, check that the file location is correct and change accordingly!</p>
 </blockquote>
 
@@ -953,7 +953,7 @@ https://zenodo.org/record/7075718/files/Final_cell_annotated_object.h5ad
 <p><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Please note: this is only currently available on the <a href="https://usegalaxy.eu">use<span class="notranslate">galaxy</span>.eu</a> and <a href="https://usegalaxy.org">use<span class="notranslate">galaxy</span>.org</a> sites.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-downloading-the-tutorial-notebook" class="box-title" aria-label="hands-on box: Downloading the tutorial notebook"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Downloading the tutorial notebook</div>
+  <div class="box-title hands-on-title" id="hands-on-downloading-the-tutorial-notebook" aria-label="hands-on box: Downloading the tutorial notebook"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Downloading the tutorial notebook</div>
 
   <ol>
     <li>You will need to download the tutorial notebook locally to your own computer. Do this by going here: <a href="https://zenodo.org/record/7054806/files/Trajectories_Instructions.ipynb?download=1">Download the notebook</a></li>
@@ -961,7 +961,7 @@ https://zenodo.org/record/7075718/files/Final_cell_annotated_object.h5ad
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-launching-jupyterlab" class="box-title" aria-label="hands-on box: Launching JupyterLab"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launching JupyterLab</div>
+  <div class="box-title hands-on-title" id="hands-on-launching-jupyterlab" aria-label="hands-on box: Launching JupyterLab"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launching JupyterLab</div>
 
   <ol>
     <li><span class="tool" data-tool="interactive_tool_jupyter_notebook" title="Tested with interactive_tool_jupyter_notebook"><strong>Interactive JupyTool and Notebook</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_jupyter_notebook</span></span>  with the following parameters:
@@ -982,12 +982,12 @@ https://zenodo.org/record/7075718/files/Final_cell_annotated_object.h5ad
 <p>Welcome!</p>
 
 <blockquote class="warning">
-  <div id="warning-danger-you-can-lose-data" class="box-title" aria-label="warning box: Danger: You can lose data!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Danger: You can lose data!</div>
+  <div class="box-title warning-title" id="warning-danger-you-can-lose-data" aria-label="warning box: Danger: You can lose data!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Danger: You can lose data!</div>
   <p>Do NOT delete or close this notebook dataset in your history. YOU WILL LOSE IT!</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-creating-a-notebook" class="box-title" aria-label="hands-on box: Creating a notebook"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating a notebook</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-a-notebook" aria-label="hands-on box: Creating a notebook"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating a notebook</div>
 
   <ol>
     <li>Click the <strong>Python 3</strong> icon under <strong>Notebook</strong></li>
@@ -1009,7 +1009,7 @@ https://zenodo.org/record/7075718/files/Final_cell_annotated_object.h5ad
 <p>Cool! Now you know how to create a file! Helpfully, however, we have created one for you, and you’ve downloaded it onto your computer already!</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-uploading-the-tutorial-notebook" class="box-title" aria-label="hands-on box: Uploading the tutorial notebook"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Uploading the tutorial notebook</div>
+  <div class="box-title hands-on-title" id="hands-on-uploading-the-tutorial-notebook" aria-label="hands-on box: Uploading the tutorial notebook"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Uploading the tutorial notebook</div>
 
   <ol>
     <li>
@@ -1023,7 +1023,7 @@ https://zenodo.org/record/7075718/files/Final_cell_annotated_object.h5ad
 </blockquote>
 
 <blockquote class="warning">
-  <div id="warning-you-should-b-save-b-frequently" class="box-title" aria-label="warning box: You should &lt;b&gt;Save&lt;/b&gt; frequently!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: You should <b>Save</b> frequently!</div>
+  <div class="box-title warning-title" id="warning-you-should-b-save-b-frequently" aria-label="warning box: You should &lt;b&gt;Save&lt;/b&gt; frequently!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: You should <b>Save</b> frequently!</div>
   <p>This is both for good practice and to protect you in case you accidentally close the browser. Your environment will still run, so it will contain the last saved notebook you have. You might eventually stop your environment after this tutorial, but ONLY once you have saved and exported your notebook (more on that at the end!) Note that you can have multiple notebooks going at the same time within this JupyterLab, so if you do, you will need to save and export each individual notebook. You can also download them at any time.</p>
 </blockquote>
 
@@ -1054,7 +1054,7 @@ https://zenodo.org/record/7075718/files/Final_cell_annotated_object.h5ad
 <p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations! You’ve made it through Jupyter!</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-closing-jupyterlab" class="box-title" aria-label="hands-on box: Closing JupyterLab"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Closing JupyterLab</div>
+  <div class="box-title hands-on-title" id="hands-on-closing-jupyterlab" aria-label="hands-on box: Closing JupyterLab"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Closing JupyterLab</div>
 
   <ol>
     <li>

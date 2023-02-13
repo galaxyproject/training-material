@@ -852,8 +852,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://galaxytrakr.org/" title="GalaxyTrakr">
             GalaxyTrakr
         </a>
@@ -892,8 +890,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
             Metagenomics
         </a>
@@ -905,8 +901,6 @@
         <a class="dropdown-item" href="https://nanopore.usegalaxy.eu/" title="NanoGalaxy">
             NanoGalaxy
         </a>
-        
-    
         
     
         
@@ -1022,7 +1016,7 @@ For this second reason in particular, researchers will regularly have to remove 
 <p>This tutorial will guide you through a typical <span class="notranslate">workflow</span> for clearing human sequences from any kind (ampliconic or not) of viral sequenced sample, which retains non-human <span class="notranslate">reads</span> in a format ready to be submitted to public databases.</p>
 
 <blockquote class="comment">
-  <div id="comment-nature-of-the-input-data" class="box-title" aria-label="comment box: Nature of the input data"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Nature of the input data</div>
+  <div class="box-title comment-title" id="comment-nature-of-the-input-data" aria-label="comment box: Nature of the input data"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Nature of the input data</div>
   <p>We will use sequencing data of bronchoalveolar lavage fluid (BALF) samples obtained from early COVID-19 patients in China as our input data.
 Since such samples are expected to be contaminated signficantly with human sequenced <span class="notranslate">reads</span>, the effect of the cleaning steps will be much more apparent than for ampliconic sequencing data from diagnostic patient swabs.
 Nevertheless the cleaning processs does not rely on any particular sample isolation or preprcocessing method and could be used unaltered on, for example, ARTIC amplified SARS-CoV-2 samples.</p>
@@ -1030,7 +1024,7 @@ Nevertheless the cleaning processs does not rely on any particular sample isolat
 </blockquote>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will deal with:</p>
 
@@ -1053,16 +1047,16 @@ Nevertheless the cleaning processs does not rely on any particular sample isolat
 <p>As always, it is best to give each analysis you are performing with <span class="notranslate">Galaxy</span> its own history, so let’s start with preparing this:</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-prepare-new-history" class="box-title" aria-label="hands-on box: Prepare new history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Prepare new history</div>
+  <div class="box-title hands-on-title" id="hands-on-prepare-new-history" aria-label="hands-on box: Prepare new history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Prepare new history</div>
 
   <ol>
     <li>
       <p>Create a new history for this tutorial and give it a proper name</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-history" class="box-title"><button type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
   </ol>
 
@@ -1074,14 +1068,14 @@ Nevertheless the cleaning processs does not rely on any particular sample isolat
 After that, we will arrange the uploaded data into a collection in our <span class="notranslate">Galaxy</span> history to facilitate its handling in the analysis.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload-and-rearrangement" class="box-title" aria-label="hands-on box: Data upload and rearrangement"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload and rearrangement</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-and-rearrangement" aria-label="hands-on box: Data upload and rearrangement"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload and rearrangement</div>
 
   <ol>
     <li>
       <p>Upload the data from Zenodo via URLs</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <p>The URLs for our example data are these:</p>
 
@@ -1095,7 +1089,7 @@ https://zenodo.org/record/3732359/files/SRR10903402_r2.fq.gz
       <p>Arrange the data into a paired dataset collection</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-paired-collection" class="box-title"><button type="button" aria-controls="tip-creating-a-paired-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a paired collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a paired collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>For all selected..</strong> and choose <strong>Build List of Dataset Pairs</strong></p>   </li>   <li>Change the text of <em>unpaired forward</em> to a common selector for the forward <span class="notranslate">reads</span></li>   <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse <span class="notranslate">reads</span></li>   <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-paired-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-paired-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a paired collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a paired collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>For all selected..</strong> and choose <strong>Build List of Dataset Pairs</strong></p>   </li>   <li>Change the text of <em>unpaired forward</em> to a common selector for the forward <span class="notranslate">reads</span></li>   <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse <span class="notranslate">reads</span></li>   <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
 
       <p>For the example datasets this means:</p>
       <ul>
@@ -1121,7 +1115,7 @@ https://zenodo.org/record/3732359/files/SRR10903402_r2.fq.gz
 <p>In order to learn which of the <span class="notranslate">reads</span> of each of the input samples are of likely human origin, we need to map the <span class="notranslate">reads</span> to the human reference genome. To improve the quality of this step we will also trim low-quality bases from the ends of all <span class="notranslate">reads</span> before passing them to the read <span class="notranslate">mapping</span> software.</p>
 
 <blockquote class="comment">
-  <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>Do you want to learn more about the principles behind quality control (including trimming) and <span class="notranslate">mapping</span>? Follow our dedicated tutorials:</p>
   <ul>
@@ -1131,7 +1125,7 @@ https://zenodo.org/record/3732359/files/SRR10903402_r2.fq.gz
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-trim-reads-and-map-them-to-the-human-reference-genome" class="box-title" aria-label="hands-on box: Trim reads and map them to the human reference genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Trim <span class="notranslate">reads</span> and map them to the human reference genome</div>
+  <div class="box-title hands-on-title" id="hands-on-trim-reads-and-map-them-to-the-human-reference-genome" aria-label="hands-on box: Trim reads and map them to the human reference genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Trim <span class="notranslate">reads</span> and map them to the human reference genome</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0" title="Tested with toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0"><strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0</span></span>  with default settings and:
@@ -1186,7 +1180,7 @@ https://zenodo.org/record/3732359/files/SRR10903402_r2.fq.gz
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-filter-for-read-pairs-not-mapping-to-the-human-genome-and-extract-their-identifiers" class="box-title" aria-label="hands-on box: Filter for read pairs not mapping to the human genome and extract their identifiers"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter for read pairs not <span class="notranslate">mapping</span> to the human genome and extract their identifiers</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-for-read-pairs-not-mapping-to-the-human-genome-and-extract-their-identifiers" aria-label="hands-on box: Filter for read pairs not mapping to the human genome and extract their identifiers"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter for read pairs not <span class="notranslate">mapping</span> to the human genome and extract their identifiers</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1"><strong>Samtools fastx</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+<span class="notranslate">galaxy</span>1</span></span>  with the following parameter settings:
@@ -1245,7 +1239,7 @@ Since the forward and reverse <span class="notranslate">reads</span> of a pair s
 <p>We are almost there! We already know the identifiers of all <span class="notranslate">reads</span> we would like to retain, we only need a way to filter the original input datasets for these identifiers.</p>
 
 <blockquote class="comment">
-  <div id="comment-why-not-use-the-unmapped-reads-directly" class="box-title" aria-label="comment box: Why not use the unmapped reads directly?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Why not use the unmapped <span class="notranslate">reads</span> directly?</div>
+  <div class="box-title comment-title" id="comment-why-not-use-the-unmapped-reads-directly" aria-label="comment box: Why not use the unmapped reads directly?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Why not use the unmapped <span class="notranslate">reads</span> directly?</div>
 
   <p>When you followed the previous steps you may have noticed that <strong>Samtools fastx</strong> offers <em>fastq</em> as an output format.
 Since we used this tool to report the unmapped <span class="notranslate">reads</span>, you may be wondering why we did not simply ask the tool to write the <span class="notranslate">reads</span> in the format we want and be done with it.</p>
@@ -1262,7 +1256,7 @@ For this reason, we need to first unzip our collection into two simple list coll
 Then, after processing both with <strong>seqtk_subseq</strong>, we zip the filtered collections back into one.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-identifier-based-extraction-of-non-human-reads-from-the-input-data" class="box-title" aria-label="hands-on box: Identifier-based extraction of non-human reads from the input data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Identifier-based extraction of non-human <span class="notranslate">reads</span> from the input data</div>
+  <div class="box-title hands-on-title" id="hands-on-identifier-based-extraction-of-non-human-reads-from-the-input-data" aria-label="hands-on box: Identifier-based extraction of non-human reads from the input data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Identifier-based extraction of non-human <span class="notranslate">reads</span> from the input data</div>
 
   <ol>
     <li><span class="tool" data-tool="__UNZIP_COLLECTION__" title="Tested with __UNZIP_COLLECTION__"><strong>Unzip Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>UNZIP_COLLECTION</strong></span></span>  with the following setting:

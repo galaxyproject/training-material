@@ -605,7 +605,7 @@
 <p>This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
 <ol id="markdown-toc">
   <li><a href="#overview" id="markdown-toc-overview">Overview</a></li>
@@ -640,7 +640,7 @@
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div id="tip-operating-system-compatibility" class="box-title"><button type="button" aria-controls="tip-operating-system-compatibility-contents" aria-expanded="true" aria-label="Toggle tip box: Operating system compatibility"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Operating system compatibility<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>These Ansible roles and training materials were last tested on Centos 7 and Ubuntu 18.04, but will probably work on other RHEL and Debian variants.</p>   <p>The roles that are used in these training are currently used by <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>.*</code>, and other, servers in maintaining their infrastructure. (<a href="https://github.com/galaxyproject/infrastructure-playbook/">US</a>, <a href="https://github.com/usegalaxy-eu/infrastructure-playbook">EU</a>, both are running CentOS 7)</p>   <p>If you have an issue running these trainings on your OS flavour, please report <a href="https://github.com/galaxyproject/training-material/issues/new">the issue</a> in the training material and we can see if it is possible to solve.</p> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-operating-system-compatibility"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-operating-system-compatibility-contents" aria-expanded="true" aria-label="Toggle tip box: Operating system compatibility"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Operating system compatibility<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>These Ansible roles and training materials were last tested on Centos 7 and Ubuntu 18.04, but will probably work on other RHEL and Debian variants.</p>   <p>The roles that are used in these training are currently used by <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>.*</code>, and other, servers in maintaining their infrastructure. (<a href="https://github.com/galaxyproject/infrastructure-playbook/">US</a>, <a href="https://github.com/usegalaxy-eu/infrastructure-playbook">EU</a>, both are running CentOS 7)</p>   <p>If you have an issue running these trainings on your OS flavour, please report <a href="https://github.com/galaxyproject/training-material/issues/new">the issue</a> in the training material and we can see if it is possible to solve.</p> </blockquote>
 
 <h1 id="what-is-ansible">What is Ansible?</h1>
 
@@ -690,7 +690,7 @@ if anything happens to the infrastructure you manage, you’ll still have a copy
 required to rebuild everything with Ansible.</p>
 
 <blockquote class="details">
-  <div id="details-ansible-inventory-documentation-do-you-connect-with-a-different-user-password-ssh-key" class="box-title"><button type="button" aria-controls="details-ansible-inventory-documentation-do-you-connect-with-a-different-user-password-ssh-key-contents" aria-expanded="true" aria-label="Toggle details box: Ansible Inventory Documentation (Do you connect with a different user? Password? SSH key?)"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Ansible Inventory Documentation (Do you connect with a different user? Password? SSH key?)<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-ansible-inventory-documentation-do-you-connect-with-a-different-user-password-ssh-key"><button class="gtn-boxify-button details" type="button" aria-controls="details-ansible-inventory-documentation-do-you-connect-with-a-different-user-password-ssh-key-contents" aria-expanded="true" aria-label="Toggle details box: Ansible Inventory Documentation (Do you connect with a different user? Password? SSH key?)"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Ansible Inventory Documentation (Do you connect with a different user? Password? SSH key?)<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>For more advanced features of the inventory file, check out <a href="https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html">the official documentation on this topic</a>.</p>
 </blockquote>
 
@@ -765,7 +765,7 @@ required to rebuild everything with Ansible.</p>
 </table>
 
 <blockquote class="details">
-  <div id="details-ansible-role-documentation" class="box-title"><button type="button" aria-controls="details-ansible-role-documentation-contents" aria-expanded="true" aria-label="Toggle details box: Ansible Role Documentation"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Ansible Role Documentation<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-ansible-role-documentation"><button class="gtn-boxify-button details" type="button" aria-controls="details-ansible-role-documentation-contents" aria-expanded="true" aria-label="Toggle details box: Ansible Role Documentation"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Ansible Role Documentation<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>For more information check out <a href="https://docs.ansible.com/ansible/2.9/user_guide/playbooks_reuse_roles.html">the official documentation on this topic</a>.</p>
 </blockquote>
@@ -830,7 +830,7 @@ required to rebuild everything with Ansible.</p>
 <p>This is a quite minimal playbook. It selects a <code class="language-plaintext highlighter-rouge">hosts</code> group named <code class="language-plaintext highlighter-rouge">webservers</code>, overrides the variable <code class="language-plaintext highlighter-rouge">cvmfs_numfiles</code>, and then says the following set of roles will be executed for this group of hosts. Ansible makes it easy to collect tasks that should apply to a group of hosts and run a playbook for all of those hosts. Some good uses of this are things like ensuring a certain set of users are installed on all of your managed machines, or using one of the package autoupdating roles to make sure your machines are up-to-date.</p>
 
 <blockquote class="details">
-  <div id="details-ansible-playbook-documentation" class="box-title"><button type="button" aria-controls="details-ansible-playbook-documentation-contents" aria-expanded="true" aria-label="Toggle details box: Ansible Playbook Documentation"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Ansible Playbook Documentation<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-ansible-playbook-documentation"><button class="gtn-boxify-button details" type="button" aria-controls="details-ansible-playbook-documentation-contents" aria-expanded="true" aria-label="Toggle details box: Ansible Playbook Documentation"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Ansible Playbook Documentation<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>For more information check out <a href="https://docs.ansible.com/ansible/2.9/user_guide/playbooks_intro.html">the official documentation on this topic</a>.</p>
 </blockquote>
@@ -880,7 +880,7 @@ required to rebuild everything with Ansible.</p>
 <p>The above introduction was certainly not enough for you to feel confident in Ansible, so we will now build a small role and a playbook to run this role.</p>
 
 <blockquote class="warning">
-  <div id="warning-safety-first" class="box-title" aria-label="warning box: Safety First"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Safety First</div>
+  <div class="box-title warning-title" id="warning-safety-first" aria-label="warning box: Safety First"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Safety First</div>
 
   <p>Many of the things you can do with Ansible can be quite dangerous. As dangerous as normally being at the command line, but scaled across N machines. Be very careful with the changes you plan to make.
 Ansible provides some flags which can help you identify changes before they’re made to production systems:</p>
@@ -897,14 +897,14 @@ Ansible provides some flags which can help you identify changes before they’re
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-requirements-for-running-this-tutorial" class="box-title" aria-label="comment box: Requirements for Running This Tutorial"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Requirements for Running This Tutorial</div>
+  <div class="box-title comment-title" id="comment-requirements-for-running-this-tutorial" aria-label="comment box: Requirements for Running This Tutorial"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Requirements for Running This Tutorial</div>
 
   <ol>
     <li>
       <p>You have <a href="https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html">Ansible installed</a> on the machine where you will install <span class="notranslate">Galaxy</span></p>
 
       <blockquote class="comment">
-        <div id="comment-running-ansible-on-remote-machine" class="box-title" aria-label="comment box: Running Ansible on remote machine"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Running Ansible on remote machine</div>
+        <div class="box-title comment-title" id="comment-running-ansible-on-remote-machine" aria-label="comment box: Running Ansible on remote machine"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Running Ansible on remote machine</div>
         <p>It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will <strong>not</strong> do that in this training.</p>
       </blockquote>
     </li>
@@ -918,7 +918,7 @@ Ansible provides some flags which can help you identify changes before they’re
 <h2 id="a-basic-role">A Basic Role</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-setting-up-our-workspace" class="box-title" aria-label="hands-on box: Setting up our workspace"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Setting up our workspace</div>
+  <div class="box-title hands-on-title" id="hands-on-setting-up-our-workspace" aria-label="hands-on box: Setting up our workspace"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Setting up our workspace</div>
 
   <ol>
     <li>
@@ -942,7 +942,7 @@ Ansible provides some flags which can help you identify changes before they’re
           <p>Create <a href="https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html">an inventory file</a> with the group <code class="language-plaintext highlighter-rouge">my_hosts</code> and <code class="language-plaintext highlighter-rouge">localhost ansible_connection=local</code>, which tells Ansible to not use SSH, and just use the local connection. Additionally, you should explicitly set the <code class="language-plaintext highlighter-rouge">ansible_user</code> variable to the use<span class="notranslate">rna</span>me to use when connecting to the server. Ansible has changed its behaviour over time regarding whether or not <code class="language-plaintext highlighter-rouge">ansible_user</code> is defined, and it is most effective to define it explicitly even when it can sometimes be inferred.</p>
 
           <blockquote class="solution">
-            <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
             <p>The file should look like:</p>
 
             <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[my_hosts]</span>
@@ -951,7 +951,7 @@ Ansible provides some flags which can help you identify changes before they’re
           </blockquote>
 
           <blockquote class="details">
-            <div id="details-for-your-own-infrastructure-do-you-connect-with-a-different-user-password-ssh-key" class="box-title"><button type="button" aria-controls="details-for-your-own-infrastructure-do-you-connect-with-a-different-user-password-ssh-key-contents" aria-expanded="true" aria-label="Toggle details box: For your own infrastructure, do you connect with a different user? Password? SSH key?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: For your own infrastructure, do you connect with a different user? Password? SSH key?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title details-title" id="details-for-your-own-infrastructure-do-you-connect-with-a-different-user-password-ssh-key"><button class="gtn-boxify-button details" type="button" aria-controls="details-for-your-own-infrastructure-do-you-connect-with-a-different-user-password-ssh-key-contents" aria-expanded="true" aria-label="Toggle details box: For your own infrastructure, do you connect with a different user? Password? SSH key?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: For your own infrastructure, do you connect with a different user? Password? SSH key?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
             <p>For more advanced features of the inventory file, check out <a href="https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html">the official documentation on this topic</a>.</p>
           </blockquote>
         </li>
@@ -976,7 +976,7 @@ Ansible provides some flags which can help you identify changes before they’re
       <p>You can read about all of the parameters available to the <a href="http://docs.ansible.com/ansible/2.9/modules/copy_module.html"><code class="language-plaintext highlighter-rouge">copy</code></a> module in Ansible’s documentation.</p>
 
       <blockquote class="details">
-        <div id="details-ansible-module-documentation" class="box-title"><button type="button" aria-controls="details-ansible-module-documentation-contents" aria-expanded="true" aria-label="Toggle details box: Ansible Module Documentation"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Ansible Module Documentation<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-ansible-module-documentation"><button class="gtn-boxify-button details" type="button" aria-controls="details-ansible-module-documentation-contents" aria-expanded="true" aria-label="Toggle details box: Ansible Module Documentation"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Ansible Module Documentation<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>You can usually find a module for most commands you will run in a shell, e.g. by searching the internet for “ansible copy file to server” or “ansible restart service”. If you cannot find a module that does it, there is the <a href="http://docs.ansible.com/ansible/2.9/modules/command_module.html"><code class="language-plaintext highlighter-rouge">command</code></a> module, but this should be avoided if possible. Expect to have a browser session with 10-30 different Ansible module documentation tabs if you work with Ansible regularly, no one remembers what arguments are available to every module.</p>
 
       </blockquote>
@@ -997,12 +997,12 @@ Ansible provides some flags which can help you identify changes before they’re
 </code></pre></div>      </div>
 
       <blockquote class="question">
-        <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p>How does your file tree look now? Use <code class="language-plaintext highlighter-rouge">find</code> or <code class="language-plaintext highlighter-rouge">tree</code>.</p>
 
         <blockquote class="solution">
-          <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
 ├── hosts
@@ -1023,13 +1023,13 @@ Ansible provides some flags which can help you identify changes before they’re
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
-          <div id="code-in-bash" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+          <div class="box-title code-in-title" id="code-in-bash" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
           <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="nt">-i</span> hosts playbook.yml
 </code></pre></div>          </div>
         </blockquote>
 
         <blockquote class="code-out">
-          <div id="code-out-bash" class="box-title" aria-label="code-out box: Bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Bash</div>
+          <div class="box-title code-out-title" id="code-out-bash" aria-label="code-out box: Bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Bash</div>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PLAY [my_hosts] ****************************************************************
 TASK [Gathering Facts] *********************************************************
 ok: [localhost]
@@ -1056,7 +1056,7 @@ localhost                  : ok=2    changed=1    unreachable=0    failed=0    s
 </ul>
 
 <blockquote class="comment">
-  <div id="comment-too-many-cows" class="box-title" aria-label="comment box: Too Many Cows?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Too Many Cows?</div>
+  <div class="box-title comment-title" id="comment-too-many-cows" aria-label="comment box: Too Many Cows?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Too Many Cows?</div>
   <p>If you’ve installed the <code class="language-plaintext highlighter-rouge">cowsay</code> tool, Ansible (for some reason) will take advantage of that to output a lot of the output with cowsay. To disable this you can <code class="language-plaintext highlighter-rouge">export ANSIBLE_NOCOWS=1</code> (Remember that exporting will only last as long as the current invocation of your terminal does, so consider adding this to your user profile if you wish to keep cowsay installed and still have legible output.)</p>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ________________
@@ -1089,7 +1089,7 @@ ok: [localhost]
 <p>The <a href="https://docs.ansible.com/ansible/2.9/modules/setup_module.html"><code class="language-plaintext highlighter-rouge">setup</code></a> module runs by default for every host and gathers facts about the host.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-the-setup-module" class="box-title" aria-label="hands-on box: The Setup Module"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: The Setup Module</div>
+  <div class="box-title hands-on-title" id="hands-on-the-setup-module" aria-label="hands-on box: The Setup Module"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: The Setup Module</div>
 
   <ol>
     <li>
@@ -1101,7 +1101,7 @@ ok: [localhost]
       <p>Investigate the output. See what sort of information is made available to you.</p>
 
       <blockquote class="question">
-        <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <ol>
           <li>What variable stores the OS name?</li>
@@ -1109,7 +1109,7 @@ ok: [localhost]
         </ol>
 
         <blockquote class="solution">
-          <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
             <li>
@@ -1139,12 +1139,12 @@ ok: [localhost]
 <p>Templates give you greater control over the files you are deploying to the target system. If you need to deploy a file to multiple hosts, but configure it differently on each host, you should use templates. For instance, deploying a service that should only listen on the correct IP address for that host would be a good use case for templates. All of the facts you discovered in the previous hands-on are available to you to use in templates, <code class="language-plaintext highlighter-rouge">when</code> statements (like the <a href="#modules-and-tasks">ansible-cvmfs example we saw earlier</a>). Additionally all of the variables you’ve defined are available as well.</p>
 
 <blockquote class="details">
-  <div id="details-template-syntax" class="box-title"><button type="button" aria-controls="details-template-syntax-contents" aria-expanded="true" aria-label="Toggle details box: Template Syntax"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Template Syntax<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-template-syntax"><button class="gtn-boxify-button details" type="button" aria-controls="details-template-syntax-contents" aria-expanded="true" aria-label="Toggle details box: Template Syntax"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Template Syntax<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Templates end with the <code class="language-plaintext highlighter-rouge">.j2</code> suffix and use Jinja2 syntax. If you are not familiar with it, you should <a href="http://jinja.pocoo.org/docs/2.10/templates/">read about it</a> first, before moving on with the tutorial. Ansible fills the templates with variable values and copies the file to its remote destination without the <code class="language-plaintext highlighter-rouge">.j2</code> suffix.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-variables-and-templates" class="box-title" aria-label="hands-on box: Variables and Templates"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Variables and Templates</div>
+  <div class="box-title hands-on-title" id="hands-on-variables-and-templates" aria-label="hands-on box: Variables and Templates"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Variables and Templates</div>
 
   <ol>
     <li>
@@ -1190,13 +1190,13 @@ ok: [localhost]
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
-          <div id="code-in-bash-1" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+          <div class="box-title code-in-title" id="code-in-bash-1" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
           <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /tmp/test.ini
 </code></pre></div>          </div>
         </blockquote>
 
         <blockquote class="code-out">
-          <div id="code-out" class="box-title" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+          <div class="box-title code-out-title" id="code-out" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
 
           <p>The file should look like:</p>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[example]
@@ -1224,22 +1224,22 @@ to show how a person using <code class="language-plaintext highlighter-rouge">my
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-variable-connection" class="box-title"><button type="button" aria-controls="tip-variable-connection-contents" aria-expanded="true" aria-label="Toggle tip box: Variable connection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Variable connection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>When the playbook runs, as part of the setup, it collects any variables that are set. For a playbook affecting a group of hosts named <code class="language-plaintext highlighter-rouge">my_hosts</code>, it checks many different places for variables, including “group_vars/my_hosts.yml”. If there are variables there, they’re added to the collection of current variables. It also checks “group_vars/all.yml” (for the built-in host group <code class="language-plaintext highlighter-rouge">all</code>). There is a precedence order, but then these variables are available for roles and tasks to consume.</p> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-variable-connection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-variable-connection-contents" aria-expanded="true" aria-label="Toggle tip box: Variable connection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Variable connection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>When the playbook runs, as part of the setup, it collects any variables that are set. For a playbook affecting a group of hosts named <code class="language-plaintext highlighter-rouge">my_hosts</code>, it checks many different places for variables, including “group_vars/my_hosts.yml”. If there are variables there, they’re added to the collection of current variables. It also checks “group_vars/all.yml” (for the built-in host group <code class="language-plaintext highlighter-rouge">all</code>). There is a precedence order, but then these variables are available for roles and tasks to consume.</p> </blockquote>
     </li>
     <li>
       <p>Run the playbook again, but imagine you are worried about this change, and supply the <code class="language-plaintext highlighter-rouge">--check --diff</code> flag to see what changes are made before committing to make them.</p>
 
       <blockquote class="code-in">
-        <div id="code-in-bash-2" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-2" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="nt">-i</span> hosts playbook.yml <span class="nt">--check</span> <span class="nt">--diff</span>
 </code></pre></div>        </div>
       </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-what-if-you-forget-diff" class="box-title"><button type="button" aria-controls="tip-what-if-you-forget-diff-contents" aria-expanded="true" aria-label="Toggle tip box: What if you forget `--diff`?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What if you forget `--diff`?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you forget to use <code class="language-plaintext highlighter-rouge">--diff</code>, it is not easy to see what has changed. Some modules like the <code class="language-plaintext highlighter-rouge">copy</code> and <code class="language-plaintext highlighter-rouge">template</code> modules have a <code class="language-plaintext highlighter-rouge">backup</code> option. If you set this option, then it will keep a backup copy next to the destination file.</p>   <p>However, most modules do not have such an option, so if you want to know what changes, always use <code class="language-plaintext highlighter-rouge">--diff</code>.</p> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-what-if-you-forget-diff"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-if-you-forget-diff-contents" aria-expanded="true" aria-label="Toggle tip box: What if you forget `--diff`?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What if you forget `--diff`?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you forget to use <code class="language-plaintext highlighter-rouge">--diff</code>, it is not easy to see what has changed. Some modules like the <code class="language-plaintext highlighter-rouge">copy</code> and <code class="language-plaintext highlighter-rouge">template</code> modules have a <code class="language-plaintext highlighter-rouge">backup</code> option. If you set this option, then it will keep a backup copy next to the destination file.</p>   <p>However, most modules do not have such an option, so if you want to know what changes, always use <code class="language-plaintext highlighter-rouge">--diff</code>.</p> </blockquote>
 
       <blockquote class="code-out">
-        <div id="code-out-1" class="box-title" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+        <div class="box-title code-out-title" id="code-out-1" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PLAY [my_hosts] ****************************************************************
 TASK [Gathering Facts] *********************************************************
@@ -1268,7 +1268,7 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0    s
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-ansible-variable-templating" class="box-title" aria-label="comment box: Ansible Variable Templating"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Ansible Variable Templating</div>
+  <div class="box-title comment-title" id="comment-ansible-variable-templating" aria-label="comment box: Ansible Variable Templating"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Ansible Variable Templating</div>
   <p>In this hands-on we used some templated variables. We defined them in a template, but they are also commonly used in the group variables file. Our templated variable looked like: <code class="language-plaintext highlighter-rouge">listen = {{ ansible_default_ipv4.address }}</code>.</p>
 
   <p>It is common to see things like this in Ansible roles:</p>
@@ -1300,7 +1300,7 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0    s
 <p><strong>Warning</strong>: This will install Memcached on the target machine.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-installing-a-module-using-ansible-galaxy" class="box-title" aria-label="hands-on box: Installing a module using ansible-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Installing a module using ansible-<span class="notranslate">galaxy</span></div>
+  <div class="box-title hands-on-title" id="hands-on-installing-a-module-using-ansible-galaxy" aria-label="hands-on box: Installing a module using ansible-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Installing a module using ansible-<span class="notranslate">galaxy</span></div>
 
   <ol>
     <li>
@@ -1308,14 +1308,14 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0    s
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
-          <div id="code-in-bash-3" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+          <div class="box-title code-in-title" id="code-in-bash-3" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
           <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="se">\</span>
     <span class="nt">-p</span> roles/ geerlingguy.memcached
 </code></pre></div>          </div>
         </blockquote>
 
         <blockquote class="code-out">
-          <div id="code-out-2" class="box-title" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+          <div class="box-title code-out-title" id="code-out-2" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
           <p>This will install the new role into your <code class="language-plaintext highlighter-rouge">roles</code> folder, alongside your own role.</p>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- downloading role 'memcached', owned by geerlingguy
 - downloading role from https://github.com/geerlingguy/ansible-role-memcached/archive/1.1.0.tar.gz
@@ -1332,12 +1332,12 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0    s
       <p>Run the playbook</p>
 
       <blockquote class="question">
-        <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p>Did something go wrong?</p>
 
         <blockquote class="solution">
-          <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>Since you have been running the playbook as a non-root user (or at least you should have been!), the step to install a package fails.
 The solution to this is to set <code class="language-plaintext highlighter-rouge">become: true</code>.</p>
@@ -1354,13 +1354,13 @@ The solution to this is to set <code class="language-plaintext highlighter-rouge
           <p><code class="language-plaintext highlighter-rouge">become</code> causes Ansible to attempt to become a different user (using sudo/su/whatever is appropriate), by default this is <code class="language-plaintext highlighter-rouge">root</code>. If you want to become a different user, just set <code class="language-plaintext highlighter-rouge">become_user</code>. Beware, the user should be able to privilege escalate without a password prompt. Otherwise when you execute the playbook you should set <code class="language-plaintext highlighter-rouge">--ask-become-pass</code>, using the privilege escalation password for that host.</p>
 
           <blockquote class="details">
-            <div id="details-ansible-become" class="box-title"><button type="button" aria-controls="details-ansible-become-contents" aria-expanded="true" aria-label="Toggle details box: Ansible Become"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Ansible Become<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title details-title" id="details-ansible-become"><button class="gtn-boxify-button details" type="button" aria-controls="details-ansible-become-contents" aria-expanded="true" aria-label="Toggle details box: Ansible Become"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Ansible Become<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
             <p>See the <a href="https://docs.ansible.com/ansible/2.9/user_guide/become.html">documentation</a> if you need to control this behaviour differently. <code class="language-plaintext highlighter-rouge">become</code> can be set either at the task level or the playbook level.</p>
 
           </blockquote>
 
           <blockquote class="tip">
-            <div id="tip-should-i-use-sudo-or-directly-login-as-root" class="box-title"><button type="button" aria-controls="tip-should-i-use-sudo-or-directly-login-as-root-contents" aria-expanded="true" aria-label="Toggle tip box: Should I use sudo or directly login as root?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Should I use sudo or directly login as root?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+            <div class="box-title tip-title" id="tip-should-i-use-sudo-or-directly-login-as-root"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-should-i-use-sudo-or-directly-login-as-root-contents" aria-expanded="true" aria-label="Toggle tip box: Should I use sudo or directly login as root?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Should I use sudo or directly login as root?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
             <p>This is often site-specific policy. If your site doesn’t have a dictated policy, then it’s generally preferable to not allow direct login as root, and login as a separate user.</p>
           </blockquote>
 
@@ -1392,14 +1392,14 @@ The solution to this is to set <code class="language-plaintext highlighter-rouge
 <p>Sometimes a role will accomplish 95% of what you need to do, but not everything. Once you have installed the role with <code class="language-plaintext highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install</code>, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. <a href="https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles"><span class="notranslate">galaxy</span>project</a> and <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles">use<span class="notranslate">galaxy</span>.eu</a></p>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div id="tip-how-do-i-know-what-i-can-do-with-a-role-what-variables-are-available" class="box-title"><button type="button" aria-controls="tip-how-do-i-know-what-i-can-do-with-a-role-what-variables-are-available-contents" aria-expanded="true" aria-label="Toggle tip box: How do I know what I can do with a role? What variables are available?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How do I know what I can do with a role? What variables are available?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>You don’t. There is no standard way for reporting this, but well written roles by trusted authors (e.g. geerlingguy, <span class="notranslate">galaxy</span>project) do it properly and write all of the variables in the README file of the repository. We try to pick sensible roles for you in this course, but, in real life it may not be that simple.</p>   <p>So, definitely check there first, but if they aren’t there, then you’ll need to read through <code class="language-plaintext highlighter-rouge">defaults/</code> and <code class="language-plaintext highlighter-rouge">tasks/</code> and <code class="language-plaintext highlighter-rouge">templates/</code> to figure out what the role does and how you can control and modify it to accomplish your goals.</p> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-how-do-i-know-what-i-can-do-with-a-role-what-variables-are-available"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-do-i-know-what-i-can-do-with-a-role-what-variables-are-available-contents" aria-expanded="true" aria-label="Toggle tip box: How do I know what I can do with a role? What variables are available?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How do I know what I can do with a role? What variables are available?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>You don’t. There is no standard way for reporting this, but well written roles by trusted authors (e.g. geerlingguy, <span class="notranslate">galaxy</span>project) do it properly and write all of the variables in the README file of the repository. We try to pick sensible roles for you in this course, but, in real life it may not be that simple.</p>   <p>So, definitely check there first, but if they aren’t there, then you’ll need to read through <code class="language-plaintext highlighter-rouge">defaults/</code> and <code class="language-plaintext highlighter-rouge">tasks/</code> and <code class="language-plaintext highlighter-rouge">templates/</code> to figure out what the role does and how you can control and modify it to accomplish your goals.</p> </blockquote>
 
 <h1 id="ansible-vault">Ansible Vault</h1>
 
 <p>Now that you have a small role built up, you might start thinking about deploying larger and more complex services and infrastructure. One last common task we want to cover here is the inclusion of secrets. Ansible Vault is really useful to include encrypted secrets in your playbook repository.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-setting-up-secrets" class="box-title" aria-label="hands-on box: Setting up secrets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Setting up secrets</div>
+  <div class="box-title hands-on-title" id="hands-on-setting-up-secrets" aria-label="hands-on box: Setting up secrets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Setting up secrets</div>
 
   <ol>
     <li>
@@ -1420,12 +1420,12 @@ The solution to this is to set <code class="language-plaintext highlighter-rouge
 </code></pre></div>      </div>
 
       <blockquote class="question">
-        <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p>How does your file look? Is it readable? Run <code class="language-plaintext highlighter-rouge">cat secret_group_vars/all.yml</code></p>
 
         <blockquote class="solution">
-          <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>The file will look like this, it is encrypted by Ansible Vault with AES256 encryption.</p>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat secret_group_vars/all.yml
@@ -1468,13 +1468,13 @@ $ANSIBLE_VAULT;1.1;AES256
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
-          <div id="code-in-bash-4" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+          <div class="box-title code-in-title" id="code-in-bash-4" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
           <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /tmp/test.ini
 </code></pre></div>          </div>
         </blockquote>
 
         <blockquote class="code-out">
-          <div id="code-out-3" class="box-title" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+          <div class="box-title code-out-title" id="code-out-3" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
           <p>The file should look like:</p>
 
           <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[example]</span>

@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Python - Testing" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 10:13:05 +0000" />
+<meta name="DC.date" content="2023-02-13 13:04:13 +0000" />
 <meta name="DC.creator" content="The Carpentries" />
 <meta name="DC.creator" content="Helena Rasche" />
 
@@ -64,7 +64,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18 10:13:05 +0000",
+  "dateModified": "2023-02-13 13:04:13 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Python - Testing",
   "interactivityType": "mixed",
@@ -443,8 +443,56 @@
         
 
         
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/python-testing/data-science-python-testing.ipynb" title="Jupyter Notebook" alt="Python - Testing Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 13, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -478,6 +526,12 @@
                             </p>
                             -->
                             
+                            <p><b>Run on the GTN with JupyterLite (in-browser computations)</b>
+                                <ol>
+                                    <li><a href="/training-material/jupyter/lab/index.html?path=data-science-python-testing.ipynb">Click to Launch JupyterLite</a></li>
+                                </ol>
+                            </p>
+                            
                             <p><b>Launching the notebook in Jupyter in Galaxy</b>
                                 <ol>
                                     <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
@@ -499,7 +553,7 @@
                 <p>Here we will cover the basics of testing, an important part of software development. Testing lets you know that your code is correct in many situations that matter to you.</p>
 
 <blockquote class="comment">
-  <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>This tutorial is significantly based on <a href="https://carpentries.org">the Carpentries</a> lesson <a href="https://carpentries-incubator.github.io/python-intermediate-development/">“Intermediate Research Software Development”</a>.</p>
 
@@ -518,7 +572,7 @@
 <p>Automation can help, and automation where possible is a good thing - it enables us to define a potentially complex process in a repeatable way that is far less prone to error than manual approaches. Once defined, automation can also save us a lot of effort, particularly in the long run. In this episode we’ll look into techniques of automated testing to improve the predictability of a software change, make development more productive, and help us produce code that works as expected and produces desired results.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -695,7 +749,7 @@ AssertionError:
 <p>And here, we’re defining each of these things for a test case we can run independently that requires no manual intervention.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-run-this-locally" class="box-title" aria-label="hands-on box: Run this locally"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run this locally</div>
+  <div class="box-title hands-on-title" id="hands-on-run-this-locally" aria-label="hands-on box: Run this locally"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run this locally</div>
   <ol>
     <li>Create a new folder somewhere</li>
     <li>Save the RLE encode/decode functions as <code class="language-plaintext highlighter-rouge">main.py</code> in that folder</li>
@@ -707,7 +761,7 @@ AssertionError:
 <p>Going back to our list of requirements, how easy is it to run these tests? We can do this using a Python package called <code class="language-plaintext highlighter-rouge">unittest</code>. This is a built-in testing framework that allows you to write test cases using Python. You can use it to test things like Python functions, database operations, or even things like service APIs - essentially anything that has inputs and expected outputs.</p>
 
 <blockquote class="tip">
-  <div id="tip-what-about-unit-testing-in-other-languages" class="box-title"><button type="button" aria-controls="tip-what-about-unit-testing-in-other-languages-contents" aria-expanded="true" aria-label="Toggle tip box: What About Unit Testing in Other Languages?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What About Unit Testing in Other Languages?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-what-about-unit-testing-in-other-languages"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-about-unit-testing-in-other-languages-contents" aria-expanded="true" aria-label="Toggle tip box: What About Unit Testing in Other Languages?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What About Unit Testing in Other Languages?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Other unit testing frameworks exist for Python, including Nose and pyunit, and the approach to unit testing can be translated to other languages as well, e.g. FRUIT for Fortran, JUnit for Java (the original unit testing framework), Catch for C++, etc.</p>
 </blockquote>
@@ -731,7 +785,7 @@ AssertionError:
 <p>Run all your tests as before.</p>
 
 <blockquote class="tip">
-  <div id="tip-why-should-we-test-invalid-input-data" class="box-title"><button type="button" aria-controls="tip-why-should-we-test-invalid-input-data-contents" aria-expanded="true" aria-label="Toggle tip box: Why Should We Test Invalid Input Data?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why Should We Test Invalid Input Data?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-why-should-we-test-invalid-input-data"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-should-we-test-invalid-input-data-contents" aria-expanded="true" aria-label="Toggle tip box: Why Should We Test Invalid Input Data?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why Should We Test Invalid Input Data?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Testing the behaviour of inputs, both valid and invalid, is a really good idea and is known as <em>data validation</em>. Even if you are developing command line software that cannot be exploited by malicious data entry, testing behaviour against invalid inputs prevents generation of erroneous results that could lead to serious misinterpretation (as well as saving time and compute cycles which may be expensive for longer-running applications). It is generally best not to assume your user’s inputs will always be rational.</p>
 

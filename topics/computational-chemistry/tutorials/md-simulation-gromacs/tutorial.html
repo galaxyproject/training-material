@@ -672,12 +672,6 @@
         
     
         
-    
-        
-    
-        
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -758,12 +752,12 @@
 <p>This is a introductory guide to using GROMACS (<span class="citation"><a href="#abraham15">Abraham <i>et al.</i> 2015</a></span>) in <span class="notranslate">Galaxy</span> to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme.</p>
 
 <blockquote class="comment">
-  <div id="comment-more-information" class="box-title" aria-label="comment box: More information"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: More information</div>
+  <div class="box-title comment-title" id="comment-more-information" aria-label="comment box: More information"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: More information</div>
   <p>This guide is based on the GROMACS tutorial provided by Justin Lemkul <a href="http://www.mdtutorials.com/gmx/lysozyme/index.html">here</a> - please consult it if you are interested in a more detailed, technical guide to GROMACS.</p>
 </blockquote>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -809,13 +803,13 @@
 <p>A prepared file is available via Zenodo. Alte<span class="notranslate">rna</span>tively, you can prepare the file yourself. Download a PDB structure file from the <a href="https://www.rcsb.org/">Protein Data Bank</a> and remove the unwanted atoms using the grep text processing tool. This simply removes the lines in the PDB file that refer to the unwanted atoms.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-upload-an-initial-structure" class="box-title" aria-label="hands-on box: Upload an initial structure"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Upload an initial structure</div>
+  <div class="box-title hands-on-title" id="hands-on-upload-an-initial-structure" aria-label="hands-on box: Upload an initial structure"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Upload an initial structure</div>
   <ol>
     <li>
       <p>First of all, create a new history and give it a name.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>Use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0"><strong>Get PDB</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0</span></span>  tool to download a PDB file for simulation:
       <ul>
@@ -834,17 +828,17 @@
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-alternative-upload" class="box-title" aria-label="comment box: Alternative upload"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Alte<span class="notranslate">rna</span>tive upload</div>
+  <div class="box-title comment-title" id="comment-alternative-upload" aria-label="comment box: Alternative upload"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Alte<span class="notranslate">rna</span>tive upload</div>
   <p>As an alte<span class="notranslate">rna</span>tive option, if you prefer to upload the cleaned file directly from Zenodo, you can do so with the following link:</p>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2598415/files/1AKI_clean.pdb
 </code></pre></div>  </div>
 
   <!--SNIPPET-->
-  <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 </blockquote>
 
 <blockquote class="details">
-  <div id="details-background-what-is-the-pdb-protein-data-bank-and-format" class="box-title"><button type="button" aria-controls="details-background-what-is-the-pdb-protein-data-bank-and-format-contents" aria-expanded="true" aria-label="Toggle details box: Background: What is the PDB (Protein Data Bank) and format?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Background: What is the PDB (Protein Data Bank) and format?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-background-what-is-the-pdb-protein-data-bank-and-format"><button class="gtn-boxify-button details" type="button" aria-controls="details-background-what-is-the-pdb-protein-data-bank-and-format-contents" aria-expanded="true" aria-label="Toggle details box: Background: What is the PDB (Protein Data Bank) and format?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Background: What is the PDB (Protein Data Bank) and format?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The Protein Data Bank (PDB) format contains atomic coordinates of biomolecules and provides a standard representation for macromolecular structure data derived from X-ray diffraction and NMR studies. Each structure is stored under a four-letter accession code. For example, the PDB file we will use is assigned the code <a href="https://www.rcsb.org/pdb/explore/explore.do?structureId=1AKI">1AKI</a>.</p>
 
@@ -877,7 +871,7 @@
 <p>After these files have been generated, a further step is required to define a simulation box (unit cell) in which the simulation can take place. This can be done with the <strong>GROMACS structure configuration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool. It also defines the unit cell ‘box’, centered on the structure. Options include box dimensions and shape; here, while a cuboidal box may be most intuitive, rhombic dodecahedron is the most efficient option, as it can contain the protein using the smallest volume, thus reducing the simulation resources devoted to the solvent.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-perform-initial-processing" class="box-title" aria-label="hands-on box: perform initial processing"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: perform initial processing</div>
+  <div class="box-title hands-on-title" id="hands-on-perform-initial-processing" aria-label="hands-on box: perform initial processing"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: perform initial processing</div>
 
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_setup/gmx_setup/2020.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_setup/gmx_setup/2020.4+galaxy0"><strong>GROMACS initial setup</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/gmx_setup/gmx_setup/2020.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -892,12 +886,12 @@
   </ol>
 
   <blockquote class="question">
-    <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
     <p>Why is it necessary to provide an input structure containing no non-protein molecules?</p>
 
     <blockquote class="solution">
-      <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
       <p>Automatic topology construction only succeeds if the components of the structure are recognized. For example, providing a structure of a protein in complex with a non-protein ligand or cofactor will result in an error.</p>
     </blockquote>
   </blockquote>
@@ -923,7 +917,7 @@
 <figure id="figure-2"><img src="/training-material/topics/computational-chemistry/images/solvated_protein.png" alt="Solvated protein. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Solvated protein in a cubic unit cell</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-solvation" class="box-title" aria-label="hands-on box: solvation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: solvation</div>
+  <div class="box-title hands-on-title" id="hands-on-solvation" aria-label="hands-on box: solvation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: solvation</div>
 
   <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_solvate/gmx_solvate/2020.4+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_solvate/gmx_solvate/2020.4+galaxy1"><strong>GROMACS solvation and adding ions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/gmx_solvate/gmx_solvate/2020.4+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:</p>
   <ul>
@@ -944,7 +938,7 @@
 <p>Here, and in the later steps, two options are presented under ‘Parameter input’. Firstly, the default setting, which we will use for this tutorial, requires options to be selected through the <span class="notranslate">Galaxy</span> interface. Alte<span class="notranslate">rna</span>tively, you can choose to upload an MDP (molecular dynamics parameters) file to define the simulation parameters. Using your own MDP file will allow greater customization, as not all parameters are implemented in <span class="notranslate">Galaxy</span> (yet); however, it requires a more advanced knowledge of GROMACS. Description of all parameters can be found <a href="http://manual.gromacs.org/documentation/2018/user-guide/mdp-options.html">here</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-energy-minimization" class="box-title" aria-label="hands-on box: energy minimization"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: energy minimization</div>
+  <div class="box-title hands-on-title" id="hands-on-energy-minimization" aria-label="hands-on box: energy minimization"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: energy minimization</div>
 
   <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_em/gmx_em/2020.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_em/gmx_em/2020.4+galaxy0"><strong>GROMACS energy minimization</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/gmx_em/gmx_em/2020.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:</p>
   <ul>
@@ -975,7 +969,7 @@
 <p>Firstly, we perform equilibration using classical NVT dynamics.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-nvt-dynamics" class="box-title" aria-label="hands-on box: NVT dynamics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: NVT dynamics</div>
+  <div class="box-title hands-on-title" id="hands-on-nvt-dynamics" aria-label="hands-on box: NVT dynamics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: NVT dynamics</div>
 
   <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1"><strong>GROMACS simulation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:</p>
   <ul>
@@ -1010,7 +1004,7 @@
 <p>Note that we can continue where the last simulation left off (with new parameters) by using the checkpoint (CPT) file saved at the end of the NVT simulation.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-npt-dynamics" class="box-title" aria-label="hands-on box: NPT dynamics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: NPT dynamics</div>
+  <div class="box-title hands-on-title" id="hands-on-npt-dynamics" aria-label="hands-on box: NPT dynamics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: NPT dynamics</div>
 
   <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1"><strong>GROMACS simulation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:</p>
   <ul>
@@ -1041,12 +1035,12 @@
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Why is the position of the protein restrained during equilibration?</p>
 
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>The purpose of equilibration is to stabilize the temperature and pressure of the system; these are overwhelmingly dependent on the solvent. Structural changes in the protein are an additional complicating variable, which can more simply be removed by restraining the protein.</p>
   </blockquote>
 </blockquote>
@@ -1055,7 +1049,7 @@
 <p>Now that equilibration is complete, we can release the position restraints. We are now finally ready to perform a production MD simulation.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-production-simulation" class="box-title" aria-label="hands-on box: Production simulation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Production simulation</div>
+  <div class="box-title hands-on-title" id="hands-on-production-simulation" aria-label="hands-on box: Production simulation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Production simulation</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1"><strong>GROMACS simulation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:

@@ -912,12 +912,6 @@
         
     
         
-    
-        
-    
-        
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -1001,7 +995,7 @@ Please look at the following tutorials in this proteogenomics series before star
 <p><img src="../../images/Third_workflow.png" alt="Workflow. " loading="lazy" /></p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will deal with:</p>
 <ol id="markdown-toc">
@@ -1021,7 +1015,7 @@ Please look at the following tutorials in this proteogenomics series before star
 <p>All the files to run this <span class="notranslate">workflow</span> can be obtained from the <a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html">second tutorial</a> output. Once the tabular output is generated, we convert this tabular report into a FASTA file. This can be achieved by using the Tabular to FASTA convertion tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-organization" class="box-title" aria-label="hands-on box: data organization"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: data organization</div>
+  <div class="box-title hands-on-title" id="hands-on-data-organization" aria-label="hands-on box: data organization"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: data organization</div>
 
   <ol>
     <li>The inputs for this <span class="notranslate">workflow</span> are:
@@ -1049,7 +1043,7 @@ https://zenodo.org/record/1489208/files/genomic_<span class="notranslate">mappin
 <p>The first step in this tutorial is to perfrom BLAST-P analysis using the NCBI-NR database. The output from BLASTP will determine the identification of the novel peptides. The result is a tabular file with 25 columns containing all the information regarding the alignment of these peptides with the sequences in the NCBI-NR database.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-ncbi-blast-blastp" class="box-title" aria-label="hands-on box: NCBI BLAST+ blastp"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: NCBI BLAST+ blastp</div>
+  <div class="box-title hands-on-title" id="hands-on-ncbi-blast-blastp" aria-label="hands-on box: NCBI BLAST+ blastp"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: NCBI BLAST+ blastp</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/0.3.3" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/0.3.3"><strong>NCBI BLAST+ blastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/0.3.3</span></span>  with the following parameters:
@@ -1093,7 +1087,7 @@ https://zenodo.org/record/1489208/files/genomic_<span class="notranslate">mappin
 <p>Once Blast-P search is performed, it provides a tabular output containing “<strong>Novel peptides</strong>”. Now this output is further processed by comparing the Novel Peptide output with the PSM report for selecting only distinct peptides which meet the criteria.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-query-tabular" class="box-title" aria-label="hands-on box: Query Tabular"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Query Tabular</div>
+  <div class="box-title hands-on-title" id="hands-on-query-tabular" aria-label="hands-on box: Query Tabular"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Query Tabular</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0"><strong>Query Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0</span></span>  with the following parameters:
@@ -1143,7 +1137,7 @@ https://zenodo.org/record/1489208/files/genomic_<span class="notranslate">mappin
           <p><em>“Save the sqlite database in your history”</em>: <code class="language-plaintext highlighter-rouge">No</code></p>
 
           <blockquote class="comment">
-            <div id="comment-querying-an-sqlite-database" class="box-title" aria-label="comment box: Querying an SQLite Database"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Querying an SQLite Database</div>
+            <div class="box-title comment-title" id="comment-querying-an-sqlite-database" aria-label="comment box: Querying an SQLite Database"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Querying an SQLite Database</div>
 
             <p><strong>Query Tabular</strong> can also use an existing SQLite database. Activating <code class="language-plaintext highlighter-rouge">Save the sqlite database in your history</code>
 will store the created database in the history, allowing to reuse it directly.</p>
@@ -1158,7 +1152,7 @@ ORDER BY psm.Sequence, psm.ID
 </code></pre></div>          </div>
 
           <blockquote class="comment">
-            <div id="comment-query-information" class="box-title" aria-label="comment box: Query information"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Query information</div>
+            <div class="box-title comment-title" id="comment-query-information" aria-label="comment box: Query information"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Query information</div>
 
             <p>The query wants a tabular list of peptides in which the lenght of the PSM sequence is equal to the length of the Blast sequence, where in the pident (percentage identity) is less that 100 i.e. Peptide cannot be a 100% identical to the NCBI-nr reference database. Or it should fulfill the criteria that there should be atleast 1 gap present (blast.gapopen &gt;= 1) or the length of the peptide in NCBI-nr should be less than the length of the query length. If the peptide follows all this then it is accepted as a “Novel” proteoform.</p>
 
@@ -1175,7 +1169,7 @@ ORDER BY psm.Sequence, psm.ID
 <p>Once this step is completed, a tabular output containing novel proteoforms are displayed. These novel proteforms fulfill our criteria of not being present in the existing NCBI repository. The next step is to remove any duplicate sequences. For this, we use the Query tabular tool again to select distinct sequences from the tabular output.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-query-tabular-1" class="box-title" aria-label="hands-on box: Query Tabular"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Query Tabular</div>
+  <div class="box-title hands-on-title" id="hands-on-query-tabular-1" aria-label="hands-on box: Query Tabular"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Query Tabular</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0"><strong>Query Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0</span></span>
@@ -1219,7 +1213,7 @@ ORDER BY psm.Sequence, psm.ID
 <p>The Multiomics Visualization Platform is a <span class="notranslate">Galaxy</span> visualization plugin that allows the user to browse the selected proteomics data. It uses the SQlite database which allows the data to be filtered and aggregated in a user defined manner. It allows various features such as; the PSM can be displayed with a lorikeet spectral view, the selected peptide can be displayed in a protein view and an IGV browser is also available for the selected protein. The step by step guide shown below will provide a walkthrough on how to use this plugin (NOTE: the example shown below is a representative peptide which is subjected to change, so while you are running this tool please take a look at the “Novel Peptide” output from the previous steps).</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-guide-to-mvp" class="box-title" aria-label="hands-on box: Guide to MVP"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Guide to MVP</div>
+  <div class="box-title hands-on-title" id="hands-on-guide-to-mvp" aria-label="hands-on box: Guide to MVP"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Guide to MVP</div>
 
   <p>The spectra belonging to these “Novel peptides” can be viewed using MVP,this can be achieved by selecting the output from the <code class="language-plaintext highlighter-rouge">mz to sqlite tool</code> (Generated in the second <span class="notranslate">workflow</span>).
 Here is a step by step guide to obtain the proteogenomic view of the “Novel peptides”.</p>
@@ -1307,7 +1301,7 @@ loads two sqlite databases (mzsqlite and genomic <span class="notranslate">mappi
 peptides provided as input. This outputs <span class="notranslate">bed</span> file for peptides.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-peptide-genomic-coordinate" class="box-title" aria-label="hands-on box: Peptide genomic Coordinate"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Peptide genomic Coordinate</div>
+  <div class="box-title hands-on-title" id="hands-on-peptide-genomic-coordinate" aria-label="hands-on box: Peptide genomic Coordinate"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Peptide genomic Coordinate</div>
 
   <ol>
     <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/peptide_genomic_coordinate/peptide_genomic_coordinate/0.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/peptide_genomic_coordinate/peptide_genomic_coordinate/0.1.1"><strong>Peptide genomic Coordinate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/peptide_genomic_coordinate/peptide_genomic_coordinate/0.1.1</span></span>  with the following parameters:
@@ -1330,7 +1324,7 @@ peptides provided as input. This outputs <span class="notranslate">bed</span> fi
 <p>Given chromosomal locations of peptides in a <span class="notranslate">BED</span> file, PepPointer classifies them as CDS, UTR, exon, intron, or intergene.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-peppointer" class="box-title" aria-label="hands-on box: Peppointer"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Peppointer</div>
+  <div class="box-title hands-on-title" id="hands-on-peppointer" aria-label="hands-on box: Peppointer"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Peppointer</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3"><strong>Peppointer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/pep_pointer/pep_pointer/0.1.3</span></span>  with the following parameters:
@@ -1354,7 +1348,7 @@ peptides provided as input. This outputs <span class="notranslate">bed</span> fi
 <h1 id="final-summary-output">Final Summary Output</h1>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-query-tabular-2" class="box-title" aria-label="hands-on box: Query Tabular"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Query Tabular</div>
+  <div class="box-title hands-on-title" id="hands-on-query-tabular-2" aria-label="hands-on box: Query Tabular"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Query Tabular</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0"><strong>Query Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0</span></span>

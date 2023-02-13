@@ -763,15 +763,9 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
             Human Cell Atlas
         </a>
-        
-    
-        
-    
         
     
         
@@ -869,7 +863,7 @@
 <p>This tutorial will take you from raw FASTQ files to a cell x gene data matrix in AnnData format. What’s a data matrix, and what’s AnnData format? Well you’ll find out! Importantly, this is the first step in processing <span class="notranslate">single cell</span> data in order to start analysing it. Currently you have a bunch of strings of <code class="language-plaintext highlighter-rouge">ATGGGCTT</code> etc. in your sequencing files, and what you need to know is how many cells you have and what genes appear in those cells. These steps are the most computationally heavy in the <span class="notranslate">single cell</span> world, as you’re starting with 100s of millions of <span class="notranslate">reads</span>, each with 4 lines of text. Later on in analysis, this data becomes simple gene counts such as ‘Cell A has 4 GAPDHs’, which is a lot easier to store! Because of this data overload, we have downsampled the FASTQ files to speed up the analysis a bit. Saying that, you’re still having to map loads of <span class="notranslate">reads</span> to the massive murine genome, so get yourself a cup of coffee and prepare to analyse!</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -924,7 +918,7 @@
 Additionally, to map your <span class="notranslate">reads</span>, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. You can download these for your species of interest <a href="https://www.ensembl.org/info/data/ftp/index.html">from Ensembe</a>. Additionally, these files are available in the above history as well as the Zenodo links below. Keep in mind, these are big files, so they may take a bit to import!</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload-part-1" class="box-title" aria-label="hands-on box: Data upload - Part 1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload - Part 1</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-part-1" aria-label="hands-on box: Data upload - Part 1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload - Part 1</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -939,7 +933,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the datasets</li>
   </ol>
@@ -947,7 +941,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 </blockquote>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Have a look at the files you now have in your history.</p>
   <ol>
@@ -957,7 +951,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   </ol>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Read 1 (SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k) contains the cell barcode and UMI because it is significantly shorter (indeed, 20 bp!) compared to the longer, r_2 transcript read. For ease, rename these files N701-Read1 and N701-Read2.</li>
@@ -976,18 +970,18 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>In your example data you will see the murine reference annotation as retrieved from Ensembl in GTF format. This annotation contains gene, exon, transcript and all sorts of other information on the sequences. We will use these to generate the transcript/ gene <span class="notranslate">mapping</span> by passing that information to a tool that extracts just the transcript identifiers we need.</p>
 
 <blockquote class="question">
-  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Which of the ‘attributes’ in the last column of the GTF files contains the transcript and gene identifiers?</p>
 
   <blockquote class="tip">
-    <div id="tip-hint" class="box-title"><button type="button" aria-controls="tip-hint-contents" aria-expanded="true" aria-label="Toggle tip box: Hint"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Hint<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-hint"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-hint-contents" aria-expanded="true" aria-label="Toggle tip box: Hint"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Hint<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The file is organised such that the last column (headed ‘Group’) contains a wealth of information in the format: attribute1 “information associated with attribute 1”;attribute2 “information associated with attribute 2” etc.</p>
   </blockquote>
 
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p><em>gene_id</em> and <em>transcript_id</em> are each followed by “ensembl gene_id” and “ensembl transcript_id”</p>
   </blockquote>
 </blockquote>
@@ -995,10 +989,10 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>It’s now time to parse the GTF file using the <a href="https://bioconductor.org/packages/release/bioc/html/rtracklayer.html">rtracklayer</a> package in R. This parsing will give us a conversion table with a list of transcript identifiers and their corresponding gene identifiers for counting. Additionally, because we will be generating our own binary index (more later!), we also need to input our FASTA so that it can be filtered to only contain transcriptome information found in the GTF.</p>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div id="tip-using-tutorial-mode" class="box-title"><button type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul> </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-generate-a-filtered-fasta-and-transcript-gene-map" class="box-title" aria-label="hands-on box: Generate a filtered FASTA and transcript-gene map"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate a filtered FASTA and transcript-gene map</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-a-filtered-fasta-and-transcript-gene-map" aria-label="hands-on box: Generate a filtered FASTA and transcript-gene map"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate a filtered FASTA and transcript-gene map</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0"><strong>GTF2GeneList</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1028,7 +1022,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>Alevin collapses the steps involved in dealing with dsc<span class="notranslate">RNA</span>-seq into a single process. Such tools need to compare the sequences in your sample to a reference containing all the likely transcript sequences (a ‘transcriptome’). This will contain the biological transcript sequences known for a given species, and perhaps also technical sequences such as ‘spike ins’ if you have those.</p>
 
 <blockquote class="details">
-  <div id="details-how-does-alevin-work" class="box-title"><button type="button" aria-controls="details-how-does-alevin-work-contents" aria-expanded="true" aria-label="Toggle details box: How does Alevin work?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: How does Alevin work?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-how-does-alevin-work"><button class="gtn-boxify-button details" type="button" aria-controls="details-how-does-alevin-work-contents" aria-expanded="true" aria-label="Toggle details box: How does Alevin work?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: How does Alevin work?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>To be able to search a transcriptome quickly, Alevin needs to convert the text (FASTA) format sequences into something it can search quickly, called an ‘index’. The index is in a binary rather than human-readable format, but allows fast lookup by Alevin. Because the types of biological and technical sequences we need to include in the index can vary between experiments, and because we often want to use the most up-to-date reference sequences from Ensembl or NCBI, we can end up re-making the indices quite often. Making these indices is time-consuming! Have a look at the uncompressed FASTA to see what it starts with.</p>
 
@@ -1046,25 +1040,25 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>We can now run Alevin. In some public instances, Alevin won’t show up if you search for it. Instead, you may have to click the <span class="notranslate">Single Cell</span> tab at the left and scroll down to the Alevin tool. Alte<span class="notranslate">rna</span>tively, use Tutorial Mode as described above and you’ll easily navigate to all the tools, and their versions will all be the tried and tested ones of this tutorial. It’s often a good idea to check your tool versions. In this case the tutorial was built with Alevin <span class="notranslate">Galaxy</span> Version 1.5.1+<span class="notranslate">galaxy</span>0. To identify which version of a tool you are using. Select <i class="fas fa-cubes" aria-hidden="true"></i><span class="visually-hidden">tool-versions</span> ‘Versions’ and choose the appropriate version.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-running-alevin" class="box-title" aria-label="hands-on box: Running Alevin"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Running Alevin</div>
+  <div class="box-title hands-on-title" id="hands-on-running-alevin" aria-label="hands-on box: Running Alevin"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Running Alevin</div>
 
   <ol>
     <li>
       <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0"><strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+<span class="notranslate">galaxy</span>0</span></span></p>
 
       <blockquote class="question">
-        <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p>Try to fill in the parameters of Alevin using what you know!</p>
 
         <blockquote class="tip">
-          <div id="tip-strandedness" class="box-title"><button type="button" aria-controls="tip-strandedness-contents" aria-expanded="true" aria-label="Toggle tip box: Strandedness?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Strandedness?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title tip-title" id="tip-strandedness"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-strandedness-contents" aria-expanded="true" aria-label="Toggle tip box: Strandedness?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Strandedness?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>The Salmon documentation on ‘Fragment Library Types’ and running the Alevin command is here: <a href="https://salmon.readthedocs.io/en/latest/library_type.html">salmon.readthedocs.io/en/latest/library_type.html</a> and <a href="https://salmon.readthedocs.io/en/latest/alevin.html">salmon.readthedocs.io/en/latest/alevin.html</a>. These links will help here, although keep in mind the image there is drawn with the <span class="notranslate">RNA</span> 5’ on top, whereas in this sc<span class="notranslate">RNA</span>-seq protocol, the polyA is captured by its 3’ tail and thus effectively the bottom or reverse strand…)</p>
         </blockquote>
 
         <blockquote class="solution">
-          <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <ul>
             <li><em>“Select a reference transcriptome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use one from the history</code>
               <ul>
@@ -1093,7 +1087,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-what-if-i-m-running-a-10x-sample" class="box-title" aria-label="comment box: What if I'm running a 10x sample?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: What if I'm running a 10x sample?</div>
+  <div class="box-title comment-title" id="comment-what-if-i-m-running-a-10x-sample" aria-label="comment box: What if I'm running a 10x sample?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: What if I'm running a 10x sample?</div>
 
   <p>The main parameter that needs changing for a 10X Chromium sample is the ‘Protocol’ parameter of Alevin. Just select the correct 10x Chemistry there instead.</p>
 </blockquote>
@@ -1109,7 +1103,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>This is the matrix market (MTX) format.</p>
 
 <blockquote class="question">
-  <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>After you’ve run Alevin, <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> look through all the different files. Can you find:</p>
   <ol>
@@ -1118,7 +1112,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the file <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> meta_info.json. You can see the <span class="notranslate">mapping</span> rate is a paltry <code class="language-plaintext highlighter-rouge">25.45%</code>. This is a terrible <span class="notranslate">mapping</span> rate. Why might this be? Remember this was downsampled, and specifically by taking only the last 400,000 <span class="notranslate">reads</span> of the FASTQ file. The overall <span class="notranslate">mapping</span> rate of the file is more like 50%, which is still quite poor, but for early Drop-Seq samples and <span class="notranslate">single-cell</span> data in general, you might expect a slightly poorer <span class="notranslate">mapping</span> rate. 10x samples are much better these days! This is real data, not test data, after all!</li>
@@ -1130,7 +1124,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 </blockquote>
 
 <blockquote class="warning">
-  <div id="warning-choose-the-appropriate-input-going-forward" class="box-title" aria-label="warning box: Choose the appropriate input going forward!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Choose the appropriate input going forward!</div>
+  <div class="box-title warning-title" id="warning-choose-the-appropriate-input-going-forward" aria-label="warning box: Choose the appropriate input going forward!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Choose the appropriate input going forward!</div>
   <p>Make certain to use <strong>quants_mat.mtx.gz</strong>  and NOT <strong>quants_tier.mtx.gz</strong> going forward.</p>
 </blockquote>
 
@@ -1141,7 +1135,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>The question we’re looking to answer here, is: “do we mostly have a <span class="notranslate">single cell</span> per droplet”? That’s what experimenters are normally aiming for, but it’s not entirely straightforward to get exactly one cell per droplet. Sometimes almost no cells make it into droplets, other times we have too many cells in each droplet. At a minimum, we should easily be able to distinguish droplets with cells from those without.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-generate-a-raw-barcode-qc-plot" class="box-title" aria-label="hands-on box: Generate a raw barcode QC plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate a raw barcode QC plot</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-a-raw-barcode-qc-plot" aria-label="hands-on box: Generate a raw barcode QC plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate a raw barcode QC plot</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2"><strong>Droplet barcode rank plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
@@ -1170,7 +1164,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>The right hand plots are density plots from the first one, and the thresholds are generated either using <a href="https://bioconductor.org/packages/release/bioc/html/DropletUtils.html">dropletUtils</a> or by the method described in the discussion mentioned above. We could use any of these thresholds to select cells, assuming that anything with fewer counts is not a valid cell. By default, Alevin does something similar, and we can learn something about that by plotting just the barcodes Alevin retains.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-generate-alevin-s-barcode-qc-plot" class="box-title" aria-label="hands-on box: Generate Alevin's barcode QC plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate Alevin's barcode QC plot</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-alevin-s-barcode-qc-plot" aria-label="hands-on box: Generate Alevin's barcode QC plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate Alevin's barcode QC plot</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2"><strong>Droplet barcode rank plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
@@ -1204,7 +1198,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <h2 id="generate-an-unprocessed-matrix-in-a-usable-format">Generate an unprocessed matrix in a usable format</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-stopping-alevin-from-thresholding" class="box-title" aria-label="hands-on box: Stopping Alevin from thresholding"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Stopping Alevin from thresholding</div>
+  <div class="box-title hands-on-title" id="hands-on-stopping-alevin-from-thresholding" aria-label="hands-on box: Stopping Alevin from thresholding"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Stopping Alevin from thresholding</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0"><strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+<span class="notranslate">galaxy</span>0</span></span>  (Click re-run on the last Alevin output)
       <ul>
@@ -1216,16 +1210,16 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   </ol>
 
   <!--SNIPPET-->
-  <blockquote class="tip">   <div id="tip-re-running-a-tool" class="box-title"><button type="button" aria-controls="tip-re-running-a-tool-contents" aria-expanded="true" aria-label="Toggle tip box: Re-running a tool"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Re-running a tool<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li><strong>Expand</strong> one of the output datasets of the tool (by clicking on it)</li>   <li><strong>Click</strong> re-run <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> the tool</li> </ol>   <p>This is useful if you want to run the tool again but with slightly different paramters, or if you just want to check which parameter setting you used.</p> </blockquote>
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-re-running-a-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-re-running-a-tool-contents" aria-expanded="true" aria-label="Toggle tip box: Re-running a tool"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Re-running a tool<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li><strong>Expand</strong> one of the output datasets of the tool (by clicking on it)</li>   <li><strong>Click</strong> re-run <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> the tool</li> </ol>   <p>This is useful if you want to run the tool again but with slightly different paramters, or if you just want to check which parameter setting you used.</p> </blockquote>
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-4" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>How many cells are in the output now?</p>
 
   <blockquote class="solution">
-    <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li><code class="language-plaintext highlighter-rouge">22952</code> cells are in the quants_mat_rows now! Far more than the Alevin-filtered <code class="language-plaintext highlighter-rouge">2163</code>. This needs some serious filtering with EmptyDrops!</li>
@@ -1238,12 +1232,12 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>Alevin outputs MTX format, which we can pass to the dropletUtils package and run emptyDrops. Unfortunately the matrix is in the wrong orientation for tools expecting files like those produced by 10X software (which dropletUtils does). We need to ‘transform’ the matrix such that cells are in columns and genes are in rows.</p>
 
 <blockquote class="warning">
-  <div id="warning-be-careful" class="box-title" aria-label="warning box: Be careful!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Be careful!</div>
+  <div class="box-title warning-title" id="warning-be-careful" aria-label="warning box: Be careful!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Be careful!</div>
   <p>Don’t mix up files from the different Alevin runs! Use the later run, which has higher numbers in the history!</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-transform-matrix" class="box-title" aria-label="hands-on box: Transform matrix"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Transform matrix</div>
+  <div class="box-title hands-on-title" id="hands-on-transform-matrix" aria-label="hands-on box: Transform matrix"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Transform matrix</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy6" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy6"><strong>salmonKallistoMtxTo10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+<span class="notranslate">galaxy</span>6</span></span>  with the following parameters:
@@ -1264,12 +1258,12 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <h2 id="adding-in-gene-metadata">Adding in Gene metadata</h2>
 
 <blockquote class="question">
-  <div id="question-5" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-5" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Where can we find this gene information?</p>
 
   <blockquote class="solution">
-    <div id="solution-5" class="box-title"><button type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Our old friend the GTF file!</p>
 
@@ -1278,12 +1272,12 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-6" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-6" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Which of the ‘attributes’ in the last column of that file contains the gene acronym?</p>
 
   <blockquote class="solution">
-    <div id="solution-6" class="box-title"><button type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>gene_name</p>
 
@@ -1294,7 +1288,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>We’re now going to re-run <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> the tool that extracts information from our GTF file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-generate-gene-information" class="box-title" aria-label="hands-on box: Generate gene information"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate gene information</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-gene-information" aria-label="hands-on box: Generate gene information"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate gene information</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0"><strong>GTF2GeneList</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1316,7 +1310,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>Inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the <strong>Gene Information</strong> object in the history. Now you have made a new key for gene_id, with gene name and a column of mitochondrial information (false = not mitochondrial, true = mitochondrial). We need to add this information into the salmonKallistoMtxTo10x output ‘Gene table’. But we need to keep ‘Gene table’ in the same order, since it is referenced in the ‘Matrix table’ by row.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-combine-mtx-gene-table-with-gene-information" class="box-title" aria-label="hands-on box: Combine MTX Gene Table with Gene Information"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Combine MTX Gene Table with Gene Information</div>
+  <div class="box-title hands-on-title" id="hands-on-combine-mtx-gene-table-with-gene-information" aria-label="hands-on box: Combine MTX Gene Table with Gene Information"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Combine MTX Gene Table with Gene Information</div>
 
   <ol>
     <li><span class="tool" data-tool="join1" title="Tested with join1"><strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: join1</span></span>  with the following parameters:
@@ -1351,7 +1345,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>emptyDrops <span class="citation"><a href="#article-emptyDrops">Lun <i>et al.</i> 2019</a></span> works with a specific form of R object called a SingleCellExperiment. We need to convert our transformed MTX files into that form, using the DropletUtils Read10x tool:</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-converting-to-singlecellexperiment-format" class="box-title" aria-label="hands-on box: Converting to SingleCellExperiment format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Converting to SingleCellExperiment format</div>
+  <div class="box-title hands-on-title" id="hands-on-converting-to-singlecellexperiment-format" aria-label="hands-on box: Converting to SingleCellExperiment format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Converting to SingleCellExperiment format</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0"><strong>DropletUtils Read10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1369,7 +1363,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>Fantastic! Now that our matrix is combined into an object, specifically the SingleCellExperiment format, we can now run emptyDrops! Let’s get rid of those background droplets containing no cells!</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-emptydrops" class="box-title" aria-label="hands-on box: Emptydrops"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Emptydrops</div>
+  <div class="box-title hands-on-title" id="hands-on-emptydrops" aria-label="hands-on box: Emptydrops"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Emptydrops</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.4+galaxy0"><strong>DropletUtils emptyDrops</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1386,18 +1380,18 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-7" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-7" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>How many cell barcodes remain after the emptyDrops treatment? Why might that be?</p>
 
   <blockquote class="tip">
-    <div id="tip-hint-1" class="box-title"><button type="button" aria-controls="tip-hint-1-contents" aria-expanded="true" aria-label="Toggle tip box: Hint"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Hint<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-hint-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-hint-1-contents" aria-expanded="true" aria-label="Toggle tip box: Hint"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Hint<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>If you click on the <code class="language-plaintext highlighter-rouge">Emptied-Object</code> in the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-history</span> history, the text in that window says <code class="language-plaintext highlighter-rouge">37 barcodes</code> or something similar to that - there is an element of random in the algorithm, so yours might differ slightly. Why is this so low?? And why might the number be different?
 Consider…is this a complete set of data?</p>
   </blockquote>
 
   <blockquote class="solution">
-    <div id="solution-7" class="box-title"><button type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Remember this is a subsampled dataset. If you look carefully at the parameters of emptyDrops, you’ll see it set a minimum threshold at 100 UMI. If you look at the barcode plots above for the 400k read sample, you’ll see this is far too stringent for this subsampled data! To satisfy your curiosity, this minimum threshold would yield <code class="language-plaintext highlighter-rouge">4332</code> barcodes for the total sample. Also, the number may vary slightly as the output depends on a large number of random iterations.</p>
 
@@ -1408,7 +1402,7 @@ Consider…is this a complete set of data?</p>
 <p>We will nevertheless proceed with your majestic annotated <span class="notranslate">expression</span> matrix of 37 cells, ready to go for further processing and analysis! However, the next tutorials we will link to use a tool suite called Scanpy <span class="citation"><a href="#Wolf2018">Wolf <i>et al.</i> 2018</a></span>. You need to convert this SingleCellExperiment object into a format called <code class="language-plaintext highlighter-rouge">annData</code>, which is a variant of a file format called <code class="language-plaintext highlighter-rouge">hdf5</code>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-converting-to-anndata-format" class="box-title" aria-label="hands-on box: Converting to AnnData format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Converting to AnnData format</div>
+  <div class="box-title hands-on-title" id="hands-on-converting-to-anndata-format" aria-label="hands-on box: Converting to AnnData format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Converting to AnnData format</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1"><strong>SCEasy convert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:

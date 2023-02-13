@@ -760,15 +760,9 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
             Human Cell Atlas
         </a>
-        
-    
-        
-    
         
     
         
@@ -900,7 +894,7 @@
 <p>The goal of this exercise is to identify what transcripts are present in the G1E and megakaryocyte cellular states and which transcripts are differentially expressed between the two states. We will use a <em>de novo</em> transcript reconstruction strategy to infer transcript structures from the mapped <span class="notranslate">reads</span> in the absence of the actual annotated transcript structures. This will allow us to identify novel transcripts and novel isoforms of known transcripts, as well as identify differentially expressed transcripts.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will deal with:</p>
 
@@ -930,17 +924,17 @@
 <p>Due to the large size of this dataset, we have downsampled it to only include <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to chromosome 19 and certain loci with relevance to hematopoeisis. This data is available at <a href="https://zenodo.org/record/583140#.WSW3NhPyub8"><code class="language-plaintext highlighter-rouge">Zenodo</code></a>, where you can find the forward and reverse <span class="notranslate">reads</span> corresponding to replicate <span class="notranslate">RNA</span>-seq libraries from G1E and megakaryocyte cells and an annotation file of RefSeq transcripts we will use to generate our transcriptome database.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>
       <p>Create a new history for this <span class="notranslate">RNA</span>-seq exercise</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-history" class="box-title"><button type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
     <li>Open the data upload manager (Get Data -&gt; Upload file)</li>
     <li>Copy and paste the links for the <span class="notranslate">reads</span> and annotation file</li>
@@ -969,7 +963,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
       <p>You will need to fetch the link to the annotation file yourself ;)</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -980,14 +974,14 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 <p>For quality control, we use similar tools as described in <a href="/training-material/topics/sequence-analysis/">NGS-QC tutorial</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> and <a href="http://www.usadellab.org/cms/?page=trimmomatic">Trimmomatic</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-quality-control" class="box-title" aria-label="hands-on box: Quality control"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Quality control</div>
+  <div class="box-title hands-on-title" id="hands-on-quality-control" aria-label="hands-on box: Quality control"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Quality control</div>
 
   <ol>
     <li>
       <p><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">FastQC</code> on the forward and reverse read files to assess the quality of the <span class="notranslate">reads</span>.</p>
 
       <blockquote class="question">
-        <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <ol>
           <li>What is the read length?</li>
@@ -995,7 +989,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
         </ol>
 
         <blockquote class="solution">
-          <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>The read length is 99 bp</li>
             <li>The quality of base calls declines throughout a sequencing run.</li>
@@ -1020,7 +1014,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
       <p><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Re-run <code class="language-plaintext highlighter-rouge">FastQC</code> on trimmed <span class="notranslate">reads</span> and inspect the differences.</p>
 
       <blockquote class="question">
-        <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <ol>
           <li>What is the read length?</li>
@@ -1028,7 +1022,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
         </ol>
 
         <blockquote class="solution">
-          <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>The read lengths range from 1 to 99 bp after trimming</li>
             <li>The average quality of base calls does not drop off as sharply at the 3’ ends of <span class="notranslate">reads</span>.</li>
@@ -1047,7 +1041,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 <p>Now that we have trimmed our <span class="notranslate">reads</span> and are fortunate that there is a reference genome assembly for mouse, we will align our trimmed <span class="notranslate">reads</span> to the genome.</p>
 
 <blockquote class="comment">
-  <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>Instead of running a single tool multiple times on all your data, would you rather run a single tool on multiple datasets at once? Check out the <a href="https://galaxyproject.org/tutorials/collections/">dataset collections</a> feature of <span class="notranslate">Galaxy</span>!</p>
 </blockquote>
@@ -1057,7 +1051,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 <p>To make sense of the <span class="notranslate">reads</span>, their positions within mouse genome must be determined. This process is known as aligning or ‘<span class="notranslate">mapping</span>’ the <span class="notranslate">reads</span> to the reference genome.</p>
 
 <blockquote class="comment">
-  <div id="comment-1" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>Do you want to learn more about the principles behind <span class="notranslate">mapping</span>? Follow our <a href="/training-material/topics/sequence-analysis/">training</a></p>
 </blockquote>
@@ -1072,7 +1066,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 <p>Spliced mappers have been developed to efficiently map transcript-derived <span class="notranslate">reads</span> against genomes. <a href="https://ccb.jhu.edu/software/hisat2/index.shtml"><code class="language-plaintext highlighter-rouge">HISAT</code></a> is an accurate and fast tool for <span class="notranslate">mapping</span> spliced <span class="notranslate">reads</span> to a genome. Another popular spliced aligner is <a href="https://ccb.jhu.edu/software/tophat/index.shtml"><code class="language-plaintext highlighter-rouge">TopHat</code></a>, but we will be using <code class="language-plaintext highlighter-rouge">HISAT</code> in this tutorial.</p>
 
 <blockquote class="comment">
-  <div id="comment-2" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-2" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
   <p>As it is sometimes quite difficult to determine which settings correspond to those of other programs, the following table might be helpful to identify the library type:</p>
 
   <table>
@@ -1133,7 +1127,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-spliced-mapping" class="box-title" aria-label="hands-on box: Spliced mapping"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Spliced <span class="notranslate">mapping</span></div>
+  <div class="box-title hands-on-title" id="hands-on-spliced-mapping" aria-label="hands-on box: Spliced mapping"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Spliced <span class="notranslate">mapping</span></div>
 
   <ol>
     <li><strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">HISAT2</code> on one forward/reverse read pair and modify the following settings:
@@ -1174,7 +1168,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 <p>Now that we have mapped our <span class="notranslate">reads</span> to the mouse genome with <code class="language-plaintext highlighter-rouge">HISAT</code>, we want to determine transcript structures that are represented by the aligned <span class="notranslate">reads</span>. This is called <em>de novo</em> transcriptome reconstruction. This unbiased approach permits the comprehensive identification of all transcripts present in a sample, including annotated genes, novel isoforms of annotated genes, and novel genes. While common gene/transcript databases are quite large, they are not comprehensive, and the <em>de novo</em> transcriptome reconstruction approach ensures complete transcriptome(s) identification from the experimental samples. The leading tool for transcript reconstruction is <code class="language-plaintext highlighter-rouge">Stringtie</code>. Here, we will use <code class="language-plaintext highlighter-rouge">Stringtie</code> to predict transcript structures based on the <span class="notranslate">reads</span> aligned by <code class="language-plaintext highlighter-rouge">HISAT</code>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-transcriptome-reconstruction" class="box-title" aria-label="hands-on box: Transcriptome reconstruction"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Transcriptome reconstruction</div>
+  <div class="box-title hands-on-title" id="hands-on-transcriptome-reconstruction" aria-label="hands-on box: Transcriptome reconstruction"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Transcriptome reconstruction</div>
 
   <ol>
     <li><strong>Stringtie</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">Stringtie</code> on the <code class="language-plaintext highlighter-rouge">HISAT2</code> alignments using the default parameters.
@@ -1192,7 +1186,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 <p>We just generated four transcriptomes with <code class="language-plaintext highlighter-rouge">Stringtie</code> representing each of the four <span class="notranslate">RNA</span>-seq libraries we are analyzing. Since these were generated in the absence of a reference transcriptome, and we ultimately would like to know what transcript structure corresponds to which annotated transcript (if any), we have to make a <strong>transcriptome database</strong>. We will use the tool <code class="language-plaintext highlighter-rouge">Stringtie - Merge</code> to combine redundant transcript structures across the four samples and the RefSeq reference. Once we have merged our transcript structures, we will use <code class="language-plaintext highlighter-rouge">GFFcompare</code> to annotate the transcripts of our newly created transcriptome so we know the relationship of each transcript to the RefSeq reference.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-transcriptome-assembly" class="box-title" aria-label="hands-on box: Transcriptome assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Transcriptome assembly</div>
+  <div class="box-title hands-on-title" id="hands-on-transcriptome-assembly" aria-label="hands-on box: Transcriptome assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Transcriptome assembly</div>
 
   <ol>
     <li><strong>Stringtie-merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">Stringtie-merge</code> on the <code class="language-plaintext highlighter-rouge">Stringtie</code> assembled transcripts along with the RefSeq annotation file we imported earlier.
@@ -1229,7 +1223,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-note-transcript-categorization-used-by-gffcompare" class="box-title" aria-label="comment box: Note: Transcript categorization used by `GFFcompare`"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Note: Transcript categorization used by `GFFcompare`</div>
+  <div class="box-title comment-title" id="comment-note-transcript-categorization-used-by-gffcompare" aria-label="comment box: Note: Transcript categorization used by `GFFcompare`"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Note: Transcript categorization used by `GFFcompare`</div>
 
   <table>
     <thead>
@@ -1300,7 +1294,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 <p>The recommended mode is “union”, which counts overlaps even if a read only shares parts of its sequence with a genomic feature and disregards <span class="notranslate">reads</span> that overlap more than one feature.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-counting-the-number-of-reads-per-transcript" class="box-title" aria-label="hands-on box: Counting the number of reads per transcript"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Counting the number of <span class="notranslate">reads</span> per transcript</div>
+  <div class="box-title hands-on-title" id="hands-on-counting-the-number-of-reads-per-transcript" aria-label="hands-on box: Counting the number of reads per transcript"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Counting the number of <span class="notranslate">reads</span> per transcript</div>
 
   <ol>
     <li>
@@ -1343,7 +1337,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on" class="box-title" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
   <ol>
     <li><strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">DESeq2</code> with the following parameters:
@@ -1363,7 +1357,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
           </ul>
 
           <blockquote class="comment">
-            <div id="comment-3" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+            <div class="box-title comment-title" id="comment-3" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
             <p>You can select several files by holding down the CTRL (or COMMAND) key and clicking on the desired files</p>
           </blockquote>
@@ -1389,19 +1383,19 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-1" class="box-title" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-1" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
   <ol>
     <li>
       <p><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">Filter</code> to extract genes with a significant change in gene <span class="notranslate">expression</span> (adjusted <em>p</em>-value less than 0.05) between treated and untreated samples</p>
 
       <blockquote class="question">
-        <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p>How many transcripts have a significant change in <span class="notranslate">expression</span> between these conditions?</p>
 
         <blockquote class="solution">
-          <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>To filter, use “c7&lt;0.05”. And we get 249 transcripts with a significant change in gene <span class="notranslate">expression</span> between the G1E and megakaryocyte cellular states.</p>
         </blockquote>
       </blockquote>
@@ -1410,17 +1404,17 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
       <p><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Determine how many transcripts are up or down regulated in the G1E state.</p>
 
       <blockquote class="comment">
-        <div id="comment-4" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-4" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
         <p>Rename your datasets for the <span class="notranslate">downstream</span> analyses</p>
       </blockquote>
 
       <blockquote class="question">
-        <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p>Are there more upregulated or downregulated genes in the treated samples?</p>
 
         <blockquote class="solution">
-          <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>To obtain the up-regulated genes in the G1E state, we filter the previously generated file (with the significant change in transcript <span class="notranslate">expression</span>) with the <span class="notranslate">expression</span> “c3&gt;0” (the log2 fold changes must be greater than 0). We obtain 102  genes (40.9% of the genes with a significant change in gene <span class="notranslate">expression</span>). For the down-regulated genes in the G1E state, we did the inverse and we find 149 transcripts (59% of the genes with a significant change in transcript <span class="notranslate">expression</span>).</p>
         </blockquote>
       </blockquote>
@@ -1470,7 +1464,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 <p>In this last section, we will convert our aligned read data from BAM format to bigWig format to simplify observing where our stranded <span class="notranslate">RNA</span>-seq data aligned to. We’ll then initiate a session on Trackster, load it with our data, and visually inspect our interesting loci.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-converting-aligned-read-files-to-bigwig-format" class="box-title" aria-label="hands-on box: Converting aligned read files to bigWig format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Converting aligned read files to bigWig format</div>
+  <div class="box-title hands-on-title" id="hands-on-converting-aligned-read-files-to-bigwig-format" aria-label="hands-on box: Converting aligned read files to bigWig format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Converting aligned read files to bigWig format</div>
 
   <ol>
     <li><strong>bamCoverage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">bamCoverage</code> on all four aligned read files (<code class="language-plaintext highlighter-rouge">HISAT2</code> output) with the following parameters:
@@ -1497,7 +1491,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-trackster-based-visualization" class="box-title" aria-label="hands-on box: Trackster based visualization"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Trackster based visualization</div>
+  <div class="box-title hands-on-title" id="hands-on-trackster-based-visualization" aria-label="hands-on box: Trackster based visualization"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Trackster based visualization</div>
 
   <ol>
     <li><strong>Viz</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: On the center console at the top of the <span class="notranslate">Galaxy</span> interface, choose “ Visualization” -&gt; “New track browser”
@@ -1549,11 +1543,11 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
   </ol>
 
   <blockquote class="question">
-    <div id="question-4" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
     <p>what do you see?</p>
 
     <blockquote class="solution">
-      <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
       <ol>
         <li>There are two clusters of transcripts that are exclusively expressed in the G1E background</li>
         <li>The left-most transcript is the Hoxb13 transcript</li>

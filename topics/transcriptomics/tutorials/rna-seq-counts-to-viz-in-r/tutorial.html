@@ -1227,7 +1227,7 @@
                 <h1 id="introduction">Introduction</h1>
 
 <blockquote class="comment">
-  <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>This tutorial is significantly based on <a href="https://carpentries.org">the Carpentries</a> <a href="https://datacarpentry.org/genomics-r-intro/">“Intro to R and RStudio for Genomics”</a> lesson</p>
 
@@ -1238,13 +1238,13 @@
 <p>Sometimes we want to have some customizations on visualization, some complex table manipulations or some statistical analysis. If we can not find a <span class="notranslate">Galaxy</span> tools for that or the right parameters, we may need to use programming languages as R or Python.</p>
 
 <blockquote class="tip">
-  <div id="tip-prerequisites" class="box-title"><button type="button" aria-controls="tip-prerequisites-contents" aria-expanded="true" aria-label="Toggle tip box: Prerequisites"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Prerequisites<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-prerequisites"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-prerequisites-contents" aria-expanded="true" aria-label="Toggle tip box: Prerequisites"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Prerequisites<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>It is expected that you are already somewhat familiar with the R basics (how to create variables, create and access lists, etc.) If you are not yet comfortable with those topics, we recommend that you complete the requirements listed at the start of this tutorial first, before proceeding.</p>
 
   <p>If you are starting with this tutorial, you will need to import a dataset:</p>
 
   <blockquote class="notranslate hands_on">
-    <div id="hands-on-using-datasets-from-galaxy" class="box-title" aria-label="hands-on box: Using datasets from Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Using datasets from <span class="notranslate">Galaxy</span></div>
+    <div class="box-title hands-on-title" id="hands-on-using-datasets-from-galaxy" aria-label="hands-on box: Using datasets from Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Using datasets from <span class="notranslate">Galaxy</span></div>
 
     <ol>
       <li>Upload the following URL to <span class="notranslate">Galaxy</span>:
@@ -1265,7 +1265,7 @@
   </blockquote>
 
   <blockquote class="notranslate hands_on">
-    <div id="hands-on-using-datasets-without-galaxy" class="box-title" aria-label="hands-on box: Using datasets without Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Using datasets without <span class="notranslate">Galaxy</span></div>
+    <div class="box-title hands-on-title" id="hands-on-using-datasets-without-galaxy" aria-label="hands-on box: Using datasets without Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Using datasets without <span class="notranslate">Galaxy</span></div>
     <ol>
       <li>
         <p>Read the tabular file into an object called <code class="language-plaintext highlighter-rouge">annotatedDEgenes</code>:</p>
@@ -1282,7 +1282,7 @@
 <p>In this tutorial, we will take the list of DE genes extracted from DESEq2’s output that we generated in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">“Reference-based <span class="notranslate">RNA</span>-Seq data analysis” tutorial</a>, manipulate it and create some visualizations.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -1300,7 +1300,7 @@
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="notranslate hands_on">   <div id="hands-on-launch-rstudio" class="box-title" aria-label="hands_on box: Launch RStudio"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch RStudio</div>   <p>Depending on which server you are using, you may be able to run RStudio directly in <span class="notranslate">Galaxy</span>. If that is not available, RStudio Cloud can be an alte<span class="notranslate">rna</span>tive.</p>   <blockquote class="tip">   <div id="tip-launch-rstudio-in-span-class-quot-notranslate-quot-galaxy-span" class="box-title"><button type="button" aria-controls="tip-launch-rstudio-in-span-class-quot-notranslate-quot-galaxy-span-contents" aria-expanded="true" aria-label="Toggle tip box: Launch RStudio in <span class=&quot;notranslate&quot;>Galaxy</span>"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch RStudio in <span class=&quot;notranslate&quot;>Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Currently RStudio in <span class="notranslate">Galaxy</span> is only available on <a href="https://usegalaxy.eu">Use<span class="notranslate">Galaxy</span>.eu</a> and <a href="https://usegalaxy.org">Use<span class="notranslate">Galaxy</span>.org</a></p>   <ol>     <li>Open the Rstudio tool <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> by clicking <a href="https://usegalaxy.eu/?tool_id=interactive_tool_rstudio">here to launch RStudio</a></li>     <li>Click Run Tool</li>     <li>The tool will start running and will stay running permanently</li>     <li>Click on the “User” menu at the top and go to “Active InteractiveTools” and locate the RStudio instance you started.</li>   </ol> </blockquote>   <blockquote class="tip">   <div id="tip-launch-rstudio-cloud-if-not-available-on-span-class-quot-notranslate-quot-galaxy-span" class="box-title"><button type="button" aria-controls="tip-launch-rstudio-cloud-if-not-available-on-span-class-quot-notranslate-quot-galaxy-span-contents" aria-expanded="true" aria-label="Toggle tip box: Launch RStudio Cloud if not available on <span class=&quot;notranslate&quot;>Galaxy</span>"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch RStudio Cloud if not available on <span class=&quot;notranslate&quot;>Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If RStudio is not available on the <span class="notranslate">Galaxy</span> instance:</p>   <ol>     <li>Register for <a href="https://client.login.rstudio.cloud/oauth/login?show_auth=0&amp;show_login=1&amp;show_setup=1">RStudio Cloud</a>, or login if you already have an account</li>     <li>Create a new project</li>   </ol> </blockquote> </blockquote>
+<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-launch-rstudio" aria-label="hands_on box: Launch RStudio"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch RStudio</div>   <p>Depending on which server you are using, you may be able to run RStudio directly in <span class="notranslate">Galaxy</span>. If that is not available, RStudio Cloud can be an alte<span class="notranslate">rna</span>tive.</p>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-rstudio-in-span-class-quot-notranslate-quot-galaxy-span"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-rstudio-in-span-class-quot-notranslate-quot-galaxy-span-contents" aria-expanded="true" aria-label="Toggle tip box: Launch RStudio in <span class=&quot;notranslate&quot;>Galaxy</span>"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch RStudio in <span class=&quot;notranslate&quot;>Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Currently RStudio in <span class="notranslate">Galaxy</span> is only available on <a href="https://usegalaxy.eu">Use<span class="notranslate">Galaxy</span>.eu</a> and <a href="https://usegalaxy.org">Use<span class="notranslate">Galaxy</span>.org</a></p>   <ol>     <li>Open the Rstudio tool <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> by clicking <a href="https://usegalaxy.eu/?tool_id=interactive_tool_rstudio">here to launch RStudio</a></li>     <li>Click Run Tool</li>     <li>The tool will start running and will stay running permanently</li>     <li>Click on the “User” menu at the top and go to “Active InteractiveTools” and locate the RStudio instance you started.</li>   </ol> </blockquote>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-rstudio-cloud-if-not-available-on-span-class-quot-notranslate-quot-galaxy-span"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-rstudio-cloud-if-not-available-on-span-class-quot-notranslate-quot-galaxy-span-contents" aria-expanded="true" aria-label="Toggle tip box: Launch RStudio Cloud if not available on <span class=&quot;notranslate&quot;>Galaxy</span>"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch RStudio Cloud if not available on <span class=&quot;notranslate&quot;>Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If RStudio is not available on the <span class="notranslate">Galaxy</span> instance:</p>   <ol>     <li>Register for <a href="https://client.login.rstudio.cloud/oauth/login?show_auth=0&amp;show_login=1&amp;show_setup=1">RStudio Cloud</a>, or login if you already have an account</li>     <li>Create a new project</li>   </ol> </blockquote> </blockquote>
 
 <h1 id="visualization">Visualization</h1>
 
@@ -1321,7 +1321,7 @@
 <h2 id="volcano-plot">Volcano plot</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-first-plot-step-by-step" class="box-title" aria-label="hands-on box: First plot, step by step"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: First plot, step by step</div>
+  <div class="box-title hands-on-title" id="hands-on-first-plot-step-by-step" aria-label="hands-on box: First plot, step by step"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: First plot, step by step</div>
 
   <ol>
     <li>
@@ -1331,7 +1331,7 @@
 </span></code></pre></div>      </div>
 
       <blockquote class="tip">
-        <div id="tip-didn-t-work" class="box-title"><button type="button" aria-controls="tip-didn-t-work-contents" aria-expanded="true" aria-label="Toggle tip box: Didn't work?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Didn't work?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-didn-t-work"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-didn-t-work-contents" aria-expanded="true" aria-label="Toggle tip box: Didn't work?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Didn't work?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>You might need to install ggplot2 first</p>
 
         <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;</span><span class="w"> </span><span class="n">install.packages</span><span class="p">(</span><span class="s2">"ggplot2"</span><span class="p">)</span><span class="w">
@@ -1355,7 +1355,7 @@
       <p>X-axis is now the log2 FC and and Y-axis the p-value</p>
 
       <blockquote class="comment">
-        <div id="comment-data-format" class="box-title" aria-label="comment box: Data format"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Data format</div>
+        <div class="box-title comment-title" id="comment-data-format" aria-label="comment box: Data format"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Data format</div>
 
         <p>Some <code class="language-plaintext highlighter-rouge">ggplot2</code> functions need data in the ‘long’ format:</p>
         <ul>
@@ -1374,7 +1374,7 @@
 </span></code></pre></div>      </div>
 
       <blockquote class="comment">
-        <div id="comment-graphical-representations-of-the-data-in-the-plot" class="box-title" aria-label="comment box: Graphical representations of the data in the plot"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Graphical representations of the data in the plot</div>
+        <div class="box-title comment-title" id="comment-graphical-representations-of-the-data-in-the-plot" aria-label="comment box: Graphical representations of the data in the plot"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Graphical representations of the data in the plot</div>
 
         <p><code class="language-plaintext highlighter-rouge">ggplot2</code> offers many different <code class="language-plaintext highlighter-rouge">geoms</code>; we will use some common ones today, including:</p>
         <ul>
@@ -1396,7 +1396,7 @@
 <p>The current version of the plot is not really informative, mostly due to the high number of p-values close to zero. In order to resolve this, we will apply <code class="language-plaintext highlighter-rouge">-log10()</code> to the y-axis values.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-volcano-plot-with-log-values-on-y-axis" class="box-title" aria-label="hands-on box: Volcano plot with log values on y-axis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Volcano plot with log values on y-axis</div>
+  <div class="box-title hands-on-title" id="hands-on-volcano-plot-with-log-values-on-y-axis" aria-label="hands-on box: Volcano plot with log values on y-axis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Volcano plot with log values on y-axis</div>
 
   <ol>
     <li>
@@ -1412,14 +1412,14 @@
 <p><img src="../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v0.png" alt="Volcano Plot version 0. " loading="lazy" /></p>
 
 <blockquote class="question">
-  <div id="question-categorising-expression-levels" class="box-title" aria-label="question box: Categorising expression levels"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Categorising <span class="notranslate">expression</span> levels</div>
+  <div class="box-title question-title" id="question-categorising-expression-levels" aria-label="question box: Categorising expression levels"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Categorising <span class="notranslate">expression</span> levels</div>
 
   <ol>
     <li>Why are there no points with log2 FC between -1 and 1?</li>
   </ol>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>The input file we used are the 130 genes with a significant adjusted p-values (below &lt; 0.05) and an absolute fold change higher than 2 (log2 FC &lt; -1 or log 2 FC &gt; 1).</p>
 
@@ -1427,7 +1427,7 @@
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-the-sign" class="box-title" aria-label="comment box: The `+` sign"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: The `+` sign</div>
+  <div class="box-title comment-title" id="comment-the-sign" aria-label="comment box: The `+` sign"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: The `+` sign</div>
 
   <p>The <code class="language-plaintext highlighter-rouge">+</code> in the <code class="language-plaintext highlighter-rouge">ggplot2</code> package is particularly useful because it allows you to modify existing <code class="language-plaintext highlighter-rouge">ggplot</code> objects. This means you can easily set up plot templates and conveniently explore different types of plots, so the above plot can also be generated with code like this:</p>
 
@@ -1452,7 +1452,7 @@
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-some-extra-comments" class="box-title" aria-label="comment box: Some extra comments"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Some extra comments</div>
+  <div class="box-title comment-title" id="comment-some-extra-comments" aria-label="comment box: Some extra comments"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Some extra comments</div>
 
   <p>Anything you put in the <code class="language-plaintext highlighter-rouge">ggplot()</code> function can be seen by any <code class="language-plaintext highlighter-rouge">geom</code> layers that you add (i.e., these are universal plot settings). This includes the <code class="language-plaintext highlighter-rouge">x-</code> and <code class="language-plaintext highlighter-rouge">y-axis</code> <span class="notranslate">mapping</span> you set up in <code class="language-plaintext highlighter-rouge">aes()</code>.</p>
 
@@ -1462,7 +1462,7 @@
 <p>Building plots with <code class="language-plaintext highlighter-rouge">ggplot2</code> is typically an iterative process. We start by defining the dataset we’ll use, lay out the axes, and choose a <code class="language-plaintext highlighter-rouge">geom</code>. We can now modify this plot to extract more information from it.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-format-plot" class="box-title" aria-label="hands-on box: Format plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Format plot</div>
+  <div class="box-title hands-on-title" id="hands-on-format-plot" aria-label="hands-on box: Format plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Format plot</div>
 
   <ol>
     <li>
@@ -1511,12 +1511,12 @@
 <p><img src="../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v5.png" alt="Volcano Plot version 5. " loading="lazy" /></p>
 
 <blockquote class="question">
-  <div id="question-standard-error-over-the-log10-of-the-adjusted-p-value" class="box-title" aria-label="question box: Standard error over the `-log10` of the adjusted `P-value`"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Standard error over the `-log10` of the adjusted `P-value`</div>
+  <div class="box-title question-title" id="question-standard-error-over-the-log10-of-the-adjusted-p-value" aria-label="question box: Standard error over the `-log10` of the adjusted `P-value`"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Standard error over the `-log10` of the adjusted `P-value`</div>
 
   <p>Create a scatter plot of the standard error over the <code class="language-plaintext highlighter-rouge">-log10</code> of the adjusted <code class="language-plaintext highlighter-rouge">P-value</code> with the chromosomes showing in different colors. Make sure to give your plot relevant axis labels.</p>
 
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ggplot(data = annotatedDEgenes, aes(x = -log10(P.adj), y = StdErr, color = Chromosome)) +
   geom_point() +
@@ -1533,7 +1533,7 @@
 <p><code class="language-plaintext highlighter-rouge">ggplot2</code> has a special technique called faceting that allows us to split one plot into multiple plots based on a factor included in the dataset. We will use it to split our volcano plot into five panels, one for each chromosome.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-volcano-plot-by-chromosomes" class="box-title" aria-label="hands-on box: Volcano plot by chromosomes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Volcano plot by chromosomes</div>
+  <div class="box-title hands-on-title" id="hands-on-volcano-plot-by-chromosomes" aria-label="hands-on box: Volcano plot by chromosomes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Volcano plot by chromosomes</div>
 
   <ol>
     <li>
@@ -1574,7 +1574,7 @@
 </span></code></pre></div>      </div>
 
       <blockquote class="details">
-        <div id="details-ggplot2-themes" class="box-title"><button type="button" aria-controls="details-ggplot2-themes-contents" aria-expanded="true" aria-label="Toggle details box: `ggplot2` themes"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: `ggplot2` themes<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-ggplot2-themes"><button class="gtn-boxify-button details" type="button" aria-controls="details-ggplot2-themes-contents" aria-expanded="true" aria-label="Toggle details box: `ggplot2` themes"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: `ggplot2` themes<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>In addition to <code class="language-plaintext highlighter-rouge">theme_bw()</code>, which changes the plot background to white, <code class="language-plaintext highlighter-rouge">ggplot2</code> comes with several other themes which can be useful to quickly change the look of your visualization.</p>
 
@@ -1605,12 +1605,12 @@
 <p><img src="../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v8.png" alt="Volcano Plot version 8. " loading="lazy" /></p>
 
 <blockquote class="question">
-  <div id="question-standard-error-over-the-log10-of-the-adjusted-p-value-1" class="box-title" aria-label="question box: Standard error over the `-log10` of the adjusted `P-value`"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Standard error over the `-log10` of the adjusted `P-value`</div>
+  <div class="box-title question-title" id="question-standard-error-over-the-log10-of-the-adjusted-p-value-1" aria-label="question box: Standard error over the `-log10` of the adjusted `P-value`"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Standard error over the `-log10` of the adjusted `P-value`</div>
 
   <p>Create a scatter plot of the standard error over the <code class="language-plaintext highlighter-rouge">-log10</code> of the adjusted <code class="language-plaintext highlighter-rouge">P-value</code> with the chromosomes showing in different colors and one facet per strand. Make sure to give your plot relevant axis labels.</p>
 
   <blockquote class="solution">
-    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ggplot(data = annotatedDEgenes, aes(x = -log10(P.adj), y = StdErr, color = Chromosome)) +
  geom_point() +
@@ -1629,7 +1629,7 @@
 <p>We would like now to make a barplot showing the number of differentially expressed genes.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-barplot-of-the-number-of-de-genes" class="box-title" aria-label="hands-on box: Barplot of the number of DE genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Barplot of the number of DE genes</div>
+  <div class="box-title hands-on-title" id="hands-on-barplot-of-the-number-of-de-genes" aria-label="hands-on box: Barplot of the number of DE genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Barplot of the number of DE genes</div>
 
   <ol>
     <li>
@@ -1646,12 +1646,12 @@
 <p><img src="../../images/rna-seq-counts-to-viz-in-r/barPlot_v1.png" alt="Bar plot 1. " loading="lazy" /></p>
 
 <blockquote class="question">
-  <div id="question-remove-the-legend" class="box-title" aria-label="question box: Remove the legend"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Remove the legend</div>
+  <div class="box-title question-title" id="question-remove-the-legend" aria-label="question box: Remove the legend"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Remove the legend</div>
 
   <p>The chromosome is labeled on the individual plot facets so we don’t need the legend. Use the help file for <code class="language-plaintext highlighter-rouge">geom_bar</code> and any other online resources to remove the legend from the plot.</p>
 
   <blockquote class="solution">
-    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ggplot(data = annotatedDEgenes, aes(x = Feature, fill = Chromosome)) +
  geom_bar(show.legend = F) +
@@ -1663,7 +1663,7 @@
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-create-a-r-script-with-plots" class="box-title" aria-label="question box: Create a R script with plots"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Create a R script with plots</div>
+  <div class="box-title question-title" id="question-create-a-r-script-with-plots" aria-label="question box: Create a R script with plots"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Create a R script with plots</div>
 
   <p>Take another few minutes to either improve one of the plots generated in this exercise or create a beautiful graph of your own (using the <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/data-visualization-2.1.pdf">RStudio <code class="language-plaintext highlighter-rouge">ggplot2</code> cheat sheet</a> for inspiration).</p>
 

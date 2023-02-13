@@ -801,15 +801,9 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
             Human Cell Atlas
         </a>
-        
-    
-        
-    
         
     
         
@@ -907,7 +901,7 @@
 <p>This tutorial will take you from the multiple AnnData outputs of the <a href="https://humancellatlas.usegalaxy.eu/training-material/topics/transcriptomics/tutorials/scrna-case_alevin/tutorial.html">previous tutorial</a> to a single, combined  AnnData object, ready for all the fun <span class="notranslate">downstream</span> processing. We will also look at how to add in metadata (for instance, SEX or GENOTYPE) for analysis later on.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -935,13 +929,13 @@
     <p><strong>Your own history</strong> - If you’re feeling confident that you successfully ran a <span class="notranslate">workflow</span> on all 7 samples from the previous tutorial, and that your resulting 7 AnnData objects look right (you can compare with the <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1">answer key history</a>), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history</p>
 
     <!--SNIPPET-->
-    <blockquote class="tip">   <div id="tip-copy-a-dataset-between-histories" class="box-title"><button type="button" aria-controls="tip-copy-a-dataset-between-histories-contents" aria-expanded="true" aria-label="Toggle tip box: Copy a dataset between histories"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Copy a dataset between histories<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>There 3 ways to copy datasets between histories</p>   <ol>   <li>     <p>From the original history</p>     <ol>       <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>       <li>Click on <strong>Copy Dataset</strong></li>       <li>         <p>Select the desired files</p>       </li>       <li>         <p>Give a relevant name to the “New history”</p>       </li>       <li>Click on the new history name in the green box that have just appear to switch to this history</li>     </ol>   </li>   <li>     <p>From the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong></p>     <ol>       <li>Click on <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong> on the top right</li>       <li>Switch to the history in which the dataset should be copied</li>       <li>Drag the dataset to copy from its original history</li>       <li>Drop it in the target history</li>     </ol>   </li>   <li>     <p>From the target history</p>     <ol>       <li>Click on <strong>User</strong> in the top bar</li>       <li>Click on <strong>Datasets</strong></li>       <li>Search for the dataset to copy</li>       <li>Click on it</li>       <li>Click on <strong>Copy to History</strong></li>     </ol>   </li> </ol> </blockquote>
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-copy-a-dataset-between-histories"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-a-dataset-between-histories-contents" aria-expanded="true" aria-label="Toggle tip box: Copy a dataset between histories"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Copy a dataset between histories<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>There 3 ways to copy datasets between histories</p>   <ol>   <li>     <p>From the original history</p>     <ol>       <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>       <li>Click on <strong>Copy Dataset</strong></li>       <li>         <p>Select the desired files</p>       </li>       <li>         <p>Give a relevant name to the “New history”</p>       </li>       <li>Click on the new history name in the green box that have just appear to switch to this history</li>     </ol>   </li>   <li>     <p>From the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong></p>     <ol>       <li>Click on <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong> on the top right</li>       <li>Switch to the history in which the dataset should be copied</li>       <li>Drag the dataset to copy from its original history</li>       <li>Drop it in the target history</li>     </ol>   </li>   <li>     <p>From the target history</p>     <ol>       <li>Click on <strong>User</strong> in the top bar</li>       <li>Click on <strong>Datasets</strong></li>       <li>Search for the dataset to copy</li>       <li>Click on it</li>       <li>Click on <strong>Copy to History</strong></li>     </ol>   </li> </ol> </blockquote>
   </li>
   <li>
     <p><strong>Importing from a history</strong> - You can import <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1">this history</a></p>
 
     <!--SNIPPET-->
-    <blockquote class="tip">   <div id="tip-importing-a-history" class="box-title"><button type="button" aria-controls="tip-importing-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open the link to the shared history</li>   <li>Click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>Import history</em> button on the top right</li>   <li>Enter a title for the new history</li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open the link to the shared history</li>   <li>Click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>Import history</em> button on the top right</li>   <li>Enter a title for the new history</li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
   </li>
   <li>
     <p><strong>Uploading from Zenodo</strong> (see below)</p>
@@ -949,7 +943,7 @@
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload-for-7-files" class="box-title" aria-label="hands-on box: Data upload for 7 files"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload for 7 files</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-for-7-files" aria-label="hands-on box: Data upload for 7 files"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload for 7 files</div>
 
   <ol>
     <li>Create a new history for this tutorial (if you’re not importing the history above)</li>
@@ -967,14 +961,14 @@ https://zenodo.org/record/7075635/files/N707-400k.h5ad
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>Rename the datasets</li>
     <li>
       <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">h5ad</code>, otherwise you will need to change each file to <code class="language-plaintext highlighter-rouge">h5ad</code>!</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-changing-the-datatype" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -985,10 +979,10 @@ https://zenodo.org/record/7075635/files/N707-400k.h5ad
 <h2 id="concatenating-objects">Concatenating objects</h2>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div id="tip-using-tutorial-mode" class="box-title"><button type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul> </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-concatenating-anndata-objects" class="box-title" aria-label="hands-on box: Concatenating AnnData objects"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Concatenating AnnData objects</div>
+  <div class="box-title hands-on-title" id="hands-on-concatenating-anndata-objects" aria-label="hands-on box: Concatenating AnnData objects"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Concatenating AnnData objects</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -999,7 +993,7 @@ https://zenodo.org/record/7075635/files/N707-400k.h5ad
       </ul>
 
       <blockquote class="warning">
-        <div id="warning-n707-to-n702" class="box-title" aria-label="warning box: N707 to N702!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: N707 to N702!</div>
+        <div class="box-title warning-title" id="warning-n707-to-n702" aria-label="warning box: N707 to N702!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: N707 to N702!</div>
         <p>You are adding files to N701, so do not add N701 to itself!</p>
       </blockquote>
 
@@ -1016,7 +1010,7 @@ https://zenodo.org/record/7075635/files/N707-400k.h5ad
 <p>Now let’s look at what we’ve done! Unfortunately, AnnData objects are quite complicated, so the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> won’t help us too much here. Instead, we’re going to use a tool to look into our object from now on.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-inspecting-anndata-objects" class="box-title" aria-label="hands-on box: Inspecting AnnData Objects"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Inspecting AnnData Objects</div>
+  <div class="box-title hands-on-title" id="hands-on-inspecting-anndata-objects" aria-label="hands-on box: Inspecting AnnData Objects"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Inspecting AnnData Objects</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -1043,7 +1037,7 @@ https://zenodo.org/record/7075635/files/N707-400k.h5ad
 <p>Now have a look at the three <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Inspect AnnData</strong> outputs.</p>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>How many cells do you have now?</li>
@@ -1051,7 +1045,7 @@ https://zenodo.org/record/7075635/files/N707-400k.h5ad
   </ol>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>If you look at the <strong>General information</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> output, you can see there are now <code class="language-plaintext highlighter-rouge">338 cells</code>, as the matrix is now 338 cells x 35734 genes. You can see this as well in the <strong>obs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (cells) and <strong>var</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (genes) file sizes.</li>
@@ -1129,7 +1123,7 @@ https://zenodo.org/record/7075635/files/N707-400k.h5ad
 <p>The two critical pieces of metadata in this experiment are <strong>sex</strong> and <strong>genotype</strong>. I will later want to color my cell plots by these parameters, so I want to add them in now!</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-labelling-sex" class="box-title" aria-label="hands-on box: Labelling sex"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Labelling sex</div>
+  <div class="box-title hands-on-title" id="hands-on-labelling-sex" aria-label="hands-on box: Labelling sex"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Labelling sex</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3"><strong>Replace Text in a specific column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</span></span>  with the following parameters:
@@ -1182,7 +1176,7 @@ https://zenodo.org/record/7075635/files/N707-400k.h5ad
 <p>That was so fun, let’s do it all again but for genotype!</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-labelling-genotype" class="box-title" aria-label="hands-on box: Labelling genotype"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Labelling genotype</div>
+  <div class="box-title hands-on-title" id="hands-on-labelling-genotype" aria-label="hands-on box: Labelling genotype"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Labelling genotype</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3"><strong>Replace Text in a specific column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</span></span>  with the following parameters:
@@ -1235,7 +1229,7 @@ https://zenodo.org/record/7075635/files/N707-400k.h5ad
 <p>You might want to do this with all sorts of different metadata - which labs handled the samples, which days they were run, etc. Once you’ve added all your metadata columns, we can add them together before plugging them into the AnnData object itself.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-combining-metadata-columns" class="box-title" aria-label="hands-on box: Combining metadata columns"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Combining metadata columns</div>
+  <div class="box-title hands-on-title" id="hands-on-combining-metadata-columns" aria-label="hands-on box: Combining metadata columns"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Combining metadata columns</div>
 
   <ol>
     <li><span class="tool" data-tool="Paste1" title="Tested with Paste1"><strong>Paste two files side by side</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Paste1</span></span>  with the following parameters:
@@ -1252,7 +1246,7 @@ https://zenodo.org/record/7075635/files/N707-400k.h5ad
 <p>Let’s add it to the AnnData object!</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-adding-metadata-to-anndata-object" class="box-title" aria-label="hands-on box: Adding metadata to AnnData object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding metadata to AnnData object</div>
+  <div class="box-title hands-on-title" id="hands-on-adding-metadata-to-anndata-object" aria-label="hands-on box: Adding metadata to AnnData object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding metadata to AnnData object</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -1269,7 +1263,7 @@ https://zenodo.org/record/7075635/files/N707-400k.h5ad
 <p>Woohoo! We’re there! You can run an <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  to check now, but I want to clean up this AnnData object just a bit more first. It would be a lot nicer if ‘batch’ meant something, rather than ‘the order in which the Manipulate AnnData tool added my datasets’.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-labelling-batches" class="box-title" aria-label="hands-on box: Labelling batches"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Labelling batches</div>
+  <div class="box-title hands-on-title" id="hands-on-labelling-batches" aria-label="hands-on box: Labelling batches"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Labelling batches</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -1291,7 +1285,7 @@ https://zenodo.org/record/7075635/files/N707-400k.h5ad
 <p>Do you remember when we mentioned mitochondria early on in this tutorial? And how often in <span class="notranslate">single cell</span> samples, mitochondrial <span class="notranslate">RNA</span> is often an indicator of stress during dissociation? We should probably do something with our column of true/false in the gene annotation that tells us information about the cells. You will need to do this whether you have combined FASTQ files or are analysing just one.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-calculating-mitochondrial-rna-in-cells" class="box-title" aria-label="hands-on box: Calculating mitochondrial RNA in cells"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Calculating mitochondrial <span class="notranslate">RNA</span> in cells</div>
+  <div class="box-title hands-on-title" id="hands-on-calculating-mitochondrial-rna-in-cells" aria-label="hands-on box: Calculating mitochondrial RNA in cells"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Calculating mitochondrial <span class="notranslate">RNA</span> in cells</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0"><strong>AnnData Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1315,7 +1309,7 @@ https://zenodo.org/record/7075635/files/N707-400k.h5ad
 <p>If you happen to be interested in analysing publicly available data, particularly from the <a href="https://www.ebi.ac.uk/gxa/sc/home"><span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas</a>, you may be interested in the following tool <span class="citation"><a href="#Moreno2020.04.08.032698">Moreno <i>et al.</i> 2020</a></span> which combines all these steps into one! For this tutorial, the dataset can be seen <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads">at the EBI</a> with experiment id of <code class="language-plaintext highlighter-rouge">E-MTAB-6945</code>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-retrieving-data-from-single-cell-expression-atlas" class="box-title" aria-label="hands-on box: Retrieving data from Single Cell Expression Atlas"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Retrieving data from <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas</div>
+  <div class="box-title hands-on-title" id="hands-on-retrieving-data-from-single-cell-expression-atlas" aria-label="hands-on box: Retrieving data from Single Cell Expression Atlas"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Retrieving data from <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2"><strong>EBI SCXA Data Retrieval</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:

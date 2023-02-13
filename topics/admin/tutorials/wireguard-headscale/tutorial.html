@@ -639,7 +639,7 @@
                 <p><a href="https://tailscale.com/">Tailscale</a> makes secure networking easy, it really is like magic. If you’ve used wireguard before, you know it takes a bit to setup and some configuration if you need to do anything fancy.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
 <ol id="markdown-toc">
   <li><a href="#what-is-tailscale" id="markdown-toc-what-is-tailscale">What is Tailscale?</a>    <ol>
@@ -717,7 +717,7 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-configuration-files" class="box-title" aria-label="hands-on box: Configuration files"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Configuration files</div>
+  <div class="box-title hands-on-title" id="hands-on-configuration-files" aria-label="hands-on box: Configuration files"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Configuration files</div>
 
   <ol>
     <li>
@@ -740,13 +740,13 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
-          <div id="code-in-bash" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+          <div class="box-title code-in-title" id="code-in-bash" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
           <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>hosts
 </code></pre></div>          </div>
         </blockquote>
 
         <blockquote class="code-out">
-          <div id="code-out-bash" class="box-title" aria-label="code-out box: Bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Bash</div>
+          <div class="box-title code-out-title" id="code-out-bash" aria-label="code-out box: Bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Bash</div>
 
           <p>Your hostname is probably different:</p>
           <div class="Headscale">
@@ -786,7 +786,7 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
 <div class="Headscale">
 
   <blockquote class="details">
-    <div id="details-consider-using-tailscale" class="box-title"><button type="button" aria-controls="details-consider-using-tailscale-contents" aria-expanded="true" aria-label="Toggle details box: Consider using Tailscale"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Consider using Tailscale<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title details-title" id="details-consider-using-tailscale"><button class="gtn-boxify-button details" type="button" aria-controls="details-consider-using-tailscale-contents" aria-expanded="true" aria-label="Toggle details box: Consider using Tailscale"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Consider using Tailscale<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Tailscale has implemented the coordination server and infrastructure with much better, more robust infrastructure that you won’t have to be responsible for. If you can get your institution to pay for it, or grant money covering it, it’s <strong>probably worth it</strong>. They add many new features often, and things like the mobile apps only work with their service. Tailscale is free for personal use (i.e. to test things out) and offers a free plan for open source projects that you may qualify for.</p>
 
     <p>For a training event obviously we want something free and quick to setup and destroy, so, we’re using <a href="https://github.com/juanfont/headscale">Headscale</a> since it’s free and we’re just going to destroy it immediately, and no one will accidentally get billed ;)</p>
@@ -795,14 +795,14 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
   </blockquote>
 
   <blockquote class="notranslate hands_on">
-    <div id="hands-on-installing-headscale" class="box-title" aria-label="hands-on box: Installing Headscale"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Installing Headscale</div>
+    <div class="box-title hands-on-title" id="hands-on-installing-headscale" aria-label="hands-on box: Installing Headscale"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Installing Headscale</div>
 
     <ol>
       <li>
         <p>Install the role</p>
 
         <blockquote class="code-in">
-          <div id="code-in-bash-1" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+          <div class="box-title code-in-title" id="code-in-bash-1" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
           <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles ckstevenson.headscale
 </code></pre></div>          </div>
         </blockquote>
@@ -836,7 +836,7 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
         <p>Run the playbook:</p>
 
         <blockquote class="code-in">
-          <div id="code-in-bash-2" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+          <div class="box-title code-in-title" id="code-in-bash-2" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
           <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook headscale.yml
 </code></pre></div>          </div>
         </blockquote>
@@ -851,14 +851,14 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
 <p>Now we can setup the nodes</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-configure-the-nodes" class="box-title" aria-label="hands-on box: Configure the nodes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Configure the nodes</div>
+  <div class="box-title hands-on-title" id="hands-on-configure-the-nodes" aria-label="hands-on box: Configure the nodes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Configure the nodes</div>
 
   <ol>
     <li>
       <p>Install the role</p>
 
       <blockquote class="code-in">
-        <div id="code-in-bash-3" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-3" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles artis3n.tailscale
 </code></pre></div>        </div>
       </blockquote>
@@ -920,7 +920,7 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
       <p>Run the playbook:</p>
 
       <blockquote class="code-in">
-        <div id="code-in-bash-4" class="box-title" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="box-title code-in-title" id="code-in-bash-4" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
         <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook tail.yml <span class="nt">-e</span> <span class="nv">tailscale_authkey</span><span class="o">=</span>YOUR_CODE
 </code></pre></div>        </div>
 
@@ -943,7 +943,7 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
 </blockquote>
 
 <blockquote class="tip">
-  <div id="tip-exit-nodes" class="box-title"><button type="button" aria-controls="tip-exit-nodes-contents" aria-expanded="true" aria-label="Toggle tip box: Exit Nodes"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Exit Nodes<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-exit-nodes"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-exit-nodes-contents" aria-expanded="true" aria-label="Toggle tip box: Exit Nodes"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Exit Nodes<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>We’ve configured <code class="language-plaintext highlighter-rouge">--advertise-exit-node</code>, which means you can direct ALL of your traffic to use one of your tailscale endpoints as an exit node, just run <code class="language-plaintext highlighter-rouge">tailscale up --exit-node=...</code></p>
 
   <p>Note that:</p>

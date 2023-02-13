@@ -757,12 +757,6 @@
         
     
         
-    
-        
-    
-        
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -857,7 +851,7 @@ and we suggest you to do it after you have finished all the tutorials of this wo
 this lesson</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -894,7 +888,7 @@ that we need to analyze. The result are the respective 20 VCF files that describ
 for each of the samples. Before starting the analysis of such mutations, we will need to import them
 into <span class="notranslate">Galaxy</span>:</p>
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -940,7 +934,7 @@ https://zenodo.org/record/6010176/files/SRR998584.vcf
 </blockquote>
 
 <blockquote class="tip">
-  <div id="tip" class="box-title"><button type="button" aria-controls="tip-contents" aria-expanded="true" aria-label="Toggle tip box: "><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-contents" aria-expanded="true" aria-label="Toggle tip box: "><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>To create a dataset collection:</p>
   <ul>
     <li>Click on the box under the history name (bottom right) that says “Operations on multiple datasets”</li>
@@ -984,7 +978,7 @@ those variants at a frequency equal or greater than 90%. We will be using here t
 <p><em>Note: TB variant Filter refers to SNPs as SNVs. These two short forms are interchangeable, meaning <strong>S</strong>ingle <strong>N</strong>ucleotide <strong>P</strong>olymorphism and <strong>S</strong>ingle <strong>N</strong>ucleotide <strong>V</strong>ariant, respectively.</em></p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-filter-vcf-files-for-epidemiological-investigation" class="box-title" aria-label="hands-on box: Filter VCF files for epidemiological investigation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter VCF files for epidemiological investigation</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-vcf-files-for-epidemiological-investigation" aria-label="hands-on box: Filter VCF files for epidemiological investigation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter VCF files for epidemiological investigation</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.5+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.5+galaxy2"><strong>TB Variant Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.5+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
@@ -1000,13 +994,13 @@ those variants at a frequency equal or greater than 90%. We will be using here t
 </blockquote>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p><strong><code class="language-plaintext highlighter-rouge">TB Variant Filter</code></strong> <span class="notranslate">reads</span> the VCF and output only SNPs that have, at least, 90% frequency.
 How can this sofware extract such information from the VCF files?</p>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>That information is contained, for each mutation, in the VCF:</p>
     <ul>
@@ -1032,7 +1026,7 @@ given the reference genome and the VCF of the strain we want to reconstruct the 
 <p>https://use<span class="notranslate">galaxy</span>.eu/root?tool_id=<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.9+<span class="notranslate">galaxy</span>2</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-reconstruct-the-complete-genome-of-each-sample" class="box-title" aria-label="hands-on box: Reconstruct the complete genome of each sample"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Reconstruct the complete genome of each sample</div>
+  <div class="box-title hands-on-title" id="hands-on-reconstruct-the-complete-genome-of-each-sample" aria-label="hands-on box: Reconstruct the complete genome of each sample"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Reconstruct the complete genome of each sample</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.9+galaxy2"><strong>bcftools consensus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.9+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
@@ -1051,26 +1045,26 @@ given the reference genome and the VCF of the strain we want to reconstruct the 
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Imagine that we forgot to filter the VCFs to contain only fixed variants, and there are also
 SNPs with frequencies, of 15%, 30%, or 56.78%. Which allele do you think bcftools consensus would
 insert in the genome?</p>
 
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>The behaviour of bcftools consensus in this case can be specified with the option <code class="language-plaintext highlighter-rouge">--haplotype</code>
 For example, we can set <code class="language-plaintext highlighter-rouge">haplotype=2</code> so the second allele will be used… wait… what?</p>
   </blockquote>
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-second-allelle" class="box-title" aria-label="question box: Second allelle!?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Second allelle!?</div>
+  <div class="box-title question-title" id="question-second-allelle" aria-label="question box: Second allelle!?"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Second allelle!?</div>
 
   <p>What do you think that things like “second allele” or “<em>The</em> alterntive allele” mean here?</p>
 
   <blockquote class="solution">
-    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Many of the bioinformatic programs are developed to analyze eukaryotic genomes, particularly
 human genomes. That means that these programs have in mind that the genomes
 are diploid and thus each posible position in the genome has two possible alleles. In
@@ -1111,7 +1105,7 @@ However we can do the same with a specific command that <em>concatenates</em> fi
 <h3 id="build-a-multiple-sequence-alignment-from-complete-genomes-with-concatenate-datasets">Build a multiple-sequence alignment from complete genomes with “<strong>Concatenate datasets</strong>”</h3>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-concatenate-genomes-to-build-a-msa" class="box-title" aria-label="hands-on box: Concatenate genomes to build a MSA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Concatenate genomes to build a MSA</div>
+  <div class="box-title hands-on-title" id="hands-on-concatenate-genomes-to-build-a-msa" aria-label="hands-on box: Concatenate genomes to build a MSA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Concatenate genomes to build a MSA</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1"><strong>Concatenate datasets tail-to-head (cat)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1</span></span>  with the following parameters:
@@ -1130,7 +1124,7 @@ of the rest of genomes in the file</strong>. This can be seen and used as a mult
 all of our genomes! However, it is important that you understand the following question…</p>
 
 <blockquote class="question">
-  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Generating multiple-sequence alignments can be complicated and computationally demanding, and there are
 many software packages to perform such task. How is then possible that we were able to build a MSA by just
@@ -1138,7 +1132,7 @@ stacking genomes one on top of each other? Can you think about what makes our ca
 just use this “trick”?</p>
 
   <blockquote class="solution">
-    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>We have generated the complete genome of each sample by substituting in the reference genome
 those <strong>SNPs</strong> that we found in that said sample (described in the VCF). Remember that <strong>we
@@ -1176,7 +1170,7 @@ our file larger than necessary.</p>
 <figure id="figure-3"><img src="./images/SNP_MSA.png" alt="MSA of 5 MTB genomes. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> A SNP alignment where all positions are polymorphic</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-removing-invariant-sites-from-a-msa" class="box-title" aria-label="hands-on box: Removing invariant sites from a MSA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Removing invariant sites from a MSA</div>
+  <div class="box-title hands-on-title" id="hands-on-removing-invariant-sites-from-a-msa" aria-label="hands-on box: Removing invariant sites from a MSA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Removing invariant sites from a MSA</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snp_sites/snp_sites/2.5.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snp_sites/snp_sites/2.5.1+galaxy0"><strong>Finds SNP sites</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/snp_sites/snp_sites/2.5.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1205,7 +1199,7 @@ patients are within the same transmission cluster or not. Having a SNP alignment
 easy. We will use <strong>SNP distance matrix</strong>, that will generate a matrix with pairwise SNP distances.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-distance-matrix-from-snp-alignment" class="box-title" aria-label="hands-on box: Distance matrix from SNP alignment."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Distance matrix from SNP alignment.</div>
+  <div class="box-title hands-on-title" id="hands-on-distance-matrix-from-snp-alignment" aria-label="hands-on box: Distance matrix from SNP alignment."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Distance matrix from SNP alignment.</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.6.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.6.3+galaxy0"><strong>SNP distance matrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.6.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1214,7 +1208,7 @@ easy. We will use <strong>SNP distance matrix</strong>, that will generate a mat
       </ul>
 
       <blockquote class="comment">
-        <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>Have a look at the distance matrix to make sure you understand the whole process. Given that
 we only have 20 samples, you could already spot some samples that are involved in the same
@@ -1238,7 +1232,7 @@ linking them in between as exemplified in the picture below.</p>
 <figure id="figure-4"><img src="./images/Cluster.png" alt="MSA of 5 MTB genomes. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Example of transmission cluster using 10 SNPs threshold</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question-very-important-question" class="box-title" aria-label="question box: Very Important Question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Very Important Question</div>
+  <div class="box-title question-title" id="question-very-important-question" aria-label="question box: Very Important Question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Very Important Question</div>
 
   <ol>
     <li>In the image above exemplifying a transmission cluster, the distance between samples A and E is
@@ -1247,7 +1241,7 @@ would it be possible that the distance between A and E is different?</li>
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The figure used above as an example is a <strong>flagrant oversimplification</strong>. In the figure not all pairwise
@@ -1350,12 +1344,12 @@ their respective names and the cluster id (an arbitrary number) they belong to:<
 </table>
 
 <blockquote class="question">
-  <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>How many transmission clusters did we find? How many samples are linked to recent transmission in our dataset?</p>
 
   <blockquote class="solution">
-    <div id="solution-answer" class="box-title"><button type="button" aria-controls="solution-answer-contents" aria-expanded="true" aria-label="Toggle solution box: Answer"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution: Answer<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-answer"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answer-contents" aria-expanded="true" aria-label="Toggle solution box: Answer"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution: Answer<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>We have found two transmission clusters with respective IDs 10 and 12. Transmission cluster 10
 is composed by two samples linked by recent transmission and transmission cluster 12 by three samples
 linked by recent transmission. For example samples ERR6362484 and ERR5987352 are linked by
@@ -1364,14 +1358,14 @@ recent transmission.</p>
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-4" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Let’s assume that we have the isolation dates of samples ERR6362484 and ERR5987352, which
 belong to the same transmission cluster. Sample ERR6362484 was isolated on January 2021, while sample
  ERR5987352 was isolated on September 2021. Would you be able to determine who was the infector and who the infectee?</p>
 
   <blockquote class="solution">
-    <div id="solution-5" class="box-title"><button type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p><strong>NO</strong></p>
 
     <p>Isolation dates have been used traditionally to define <strong>index cases</strong> within transmission clusters
@@ -1403,7 +1397,7 @@ for the 20 samples that we used in the clustering analysis, so we have now the T
 all of them.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload-1" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-1" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -1553,7 +1547,7 @@ as output the complete line, for example <code class="language-plaintext highlig
 <h4 id="search-in-textfiles-grep"><em>Search in textfiles (grep)</em></h4>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-search-for-drug-resistance-in-tb-profiler-files" class="box-title" aria-label="hands-on box: Search for `Drug-resistance` in TB-profiler files"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Search for `Drug-resistance` in TB-profiler files</div>
+  <div class="box-title hands-on-title" id="hands-on-search-for-drug-resistance-in-tb-profiler-files" aria-label="hands-on box: Search for `Drug-resistance` in TB-profiler files"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Search for `Drug-resistance` in TB-profiler files</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1"><strong>Search in textfiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1</span></span>  with the following parameters:
@@ -1571,7 +1565,7 @@ We will <em>prepend</em> the column with the sample name so it appears as the fi
  This is arbitrary and just a matter of personal taste:</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-prepend-the-sample-name-to-the-dr-profile" class="box-title" aria-label="hands-on box: Prepend the sample name to the DR profile"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Prepend the sample name to the DR profile</div>
+  <div class="box-title hands-on-title" id="hands-on-prepend-the-sample-name-to-the-dr-profile" aria-label="hands-on box: Prepend the sample name to the DR profile"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Prepend the sample name to the DR profile</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/mvdbeek/add_input_name_as_column/addName/0.2.0" title="Tested with toolshed.g2.bx.psu.edu/repos/mvdbeek/add_input_name_as_column/addName/0.2.0"><strong>Add input name as column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/mvdbeek/add_input_name_as_column/ad<span class="notranslate">dNa</span>me/0.2.0</span></span>  with the following parameters:
@@ -1596,7 +1590,7 @@ at the end of sample names, and the string “Drug-resistance:”. So we will te
 for these two <em>patterns</em> and to replace them with “<em>nothing</em>”</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-task-description" class="box-title" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-task-description" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2</span></span>  with the following parameters:
@@ -1625,7 +1619,7 @@ for these two <em>patterns</em> and to replace them with “<em>nothing</em>”<
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-5" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-5" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>How many MDR strains did we find in the dataset?</li>
@@ -1633,7 +1627,7 @@ for these two <em>patterns</em> and to replace them with “<em>nothing</em>”<
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-6" class="box-title"><button type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Eight MDR strains, three of which are pre-XDR because they have additional resistance to fluoroquinolones. (You can look into details by looking into the TB profiler reports).</li>
       <li>As MDR means to be resistant to INH and RIF, pre-MDR means to be either INH-monoresistant or RIF-monoresistant.
@@ -1782,14 +1776,14 @@ We will be supporting our findings in the results of our analysis, and the conce
 </table>
 
 <blockquote class="question">
-  <div id="question-6" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-6" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Assuming that we have a very good sampling of the outbreak. Which strains <strong>may</strong> represent instances
 of <em>de novo</em> evolution of drug resistance and which ones instances of <em>transmitted</em> (primary) resistance?
 Remember that you can look at the TB-profiler reports of independent samples for detailed information.</p>
 
   <blockquote class="solution">
-    <div id="solution-7" class="box-title"><button type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>In a simplistic scenario, we could consider clustered strains as instances of transmission and
 unclustered strains as instances of de novo evolution of DR. Thus, we see that for example there
 are three MDR strains (ERR551620, ERR6362078, ERR6362653) that are unclustered and therefore may
@@ -1810,7 +1804,7 @@ and was <em>transmitted</em> to the other patient, whereas in the second scenari
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-7" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-7" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>The same principles than those explained above apply to the three MDR strains that are
@@ -1820,7 +1814,7 @@ evidence of <em>de-novo</em> evolution of DR. Do you know which strain and why?<
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-8" class="box-title"><button type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Within this cluster of MDR strains, there is one tagged as Pre-XDR by TB-profiler. If we have
 a look at the TB profiler report, we can see that this strain carries an additional mutation in
@@ -1832,14 +1826,14 @@ the MDR strain.</li>
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-8" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-8" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>There is one strain with a DR profile “other”, because it is only resistant to pyrazinamide. This
 strain is not within a transmission cluster. Therefore, we conclude that pyrazinamide resistance
 most likely evolved <em>de-novo</em> in this patient due to antibiotic treatment. But we are wrong. Do you know why?</p>
 
   <blockquote class="solution">
-    <div id="solution-9" class="box-title"><button type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>The strain is indeed PZA-resistant. And indeed this is strain is NOT linked to transmission
 within our population. However, if we have a look at the TB-profiler report, we observe that this
 is a <em>M. bovis</em> strain, which are known to be intrinsically resistant to PZA.</p>
@@ -1847,7 +1841,7 @@ is a <em>M. bovis</em> strain, which are known to be intrinsically resistant to 
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-9" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-9" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Is it possible to find in the same transmission cluster two RIF-monoresistant strains that
@@ -1856,7 +1850,7 @@ carry different rpoB mutations?</li>
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-10" class="box-title"><button type="button" aria-controls="solution-10-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Yes, it is <strong>possible</strong>. In that scenario, both patiens were <strong>recently</strong>
 transmitted with the <strong>same susceptible strain</strong>, and RIF resistance evolved <strong>independently</strong> in both.</li>

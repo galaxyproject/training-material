@@ -724,15 +724,9 @@
         
     
         
-    
-        
-    
-        
         <a class="dropdown-item" href="https://nanopore.usegalaxy.eu/" title="NanoGalaxy">
             NanoGalaxy
         </a>
-        
-    
         
     
         
@@ -847,7 +841,7 @@ The <span class="notranslate">downstream</span> analysis will use <strong>Nanopl
 <p><img src="../../images/plasmid-metagenomics-nanopore/Workflow.png" alt="Workflow representation of this tutorial. " loading="lazy" /></p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -885,7 +879,7 @@ The <span class="notranslate">downstream</span> analysis will use <strong>Nanopl
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div id="comment-results-may-vary" class="box-title" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or because of stochastic processes in the algorithms.</p> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or because of stochastic processes in the algorithms.</p> </blockquote>
 
 <p>In this tutorial we use metagenomic Nanopore data, but similar pipelines can be used for other types of datasets or other long-read sequencing platforms.</p>
 
@@ -895,21 +889,21 @@ The <span class="notranslate">downstream</span> analysis will use <strong>Nanopl
 We will use the plasmid dataset created by <span class="citation"><a href="#LiXie2018">Li <i>et al.</i> 2018</a></span> for their evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment, 12 MDR plasmid-bearing bacterial strains were selected for plasmid extraction, including <em>E. coli</em>, <em>S. typhimurium</em>, <em>V. parahaemolyticus</em>, and <em>K. pneumoniae</em>.</p>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div id="comment-nanopore-sequencing" class="box-title" aria-label="comment box: Nanopore sequencing"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Nanopore sequencing</div>   <p>Nanopore sequencing has several properties that make it well-suited for our purposes</p>   <ol>   <li>Long-read sequencing technology offers <strong>simplified</strong> and less ambiguous genome <strong>assembly</strong></li>   <li>Long-read sequencing gives the ability to <strong>span repetitive genomic regions</strong></li>   <li>Long-read sequencing makes it possible to <strong>identify large structural variations</strong></li> </ol>   <p><img src="/training-material/topics/metagenomics/images/plasmid-metagenomics-nanopore/nanopore_sequencing.png" alt="How nanopore sequencing works" title="Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: &lt;a href=&quot;https://doi.org/10.7875/togopic.2020.01&quot;&gt;Nanopore sequencing: The advantages of long reads for genome assembly&lt;/a&gt;)" /> <br /><br /></p>   <p>When using Oxford Nanopore Technologies (ONT) sequencing, the change in electrical current is measured over the membrane of a flow cell. When nucleotides pass the pores in the flow cell the current change is translated (basecalled) to nucleotides by a basecaller. A schematic overview is given in the picture above.</p>   <p>When sequencing using a MinIT or MinION Mk1C, the basecalling software is present on the devices. With basecalling the electrical signals are translated to bases (A,T,G,C) with a quality score per base. The sequenced <span class="notranslate">DNA</span> strand will be basecalled and this will form one read. Multiple <span class="notranslate">reads</span> will be stored in a fastq file.</p> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-nanopore-sequencing" aria-label="comment box: Nanopore sequencing"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Nanopore sequencing</div>   <p>Nanopore sequencing has several properties that make it well-suited for our purposes</p>   <ol>   <li>Long-read sequencing technology offers <strong>simplified</strong> and less ambiguous genome <strong>assembly</strong></li>   <li>Long-read sequencing gives the ability to <strong>span repetitive genomic regions</strong></li>   <li>Long-read sequencing makes it possible to <strong>identify large structural variations</strong></li> </ol>   <p><img src="/training-material/topics/metagenomics/images/plasmid-metagenomics-nanopore/nanopore_sequencing.png" alt="How nanopore sequencing works" title="Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: &lt;a href=&quot;https://doi.org/10.7875/togopic.2020.01&quot;&gt;Nanopore sequencing: The advantages of long reads for genome assembly&lt;/a&gt;)" /> <br /><br /></p>   <p>When using Oxford Nanopore Technologies (ONT) sequencing, the change in electrical current is measured over the membrane of a flow cell. When nucleotides pass the pores in the flow cell the current change is translated (basecalled) to nucleotides by a basecaller. A schematic overview is given in the picture above.</p>   <p>When sequencing using a MinIT or MinION Mk1C, the basecalling software is present on the devices. With basecalling the electrical signals are translated to bases (A,T,G,C) with a quality score per base. The sequenced <span class="notranslate">DNA</span> strand will be basecalled and this will form one read. Multiple <span class="notranslate">reads</span> will be stored in a fastq file.</p> </blockquote>
 
 <h2 id="importing-the-data-into-galaxy">Importing the data into <span class="notranslate">Galaxy</span></h2>
 
 <p>For this tutorial, in order to speed up the analysis time, we will use 6 of the 12 samples from the original study.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-obtaining-our-data" class="box-title" aria-label="hands-on box: Obtaining our data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Obtaining our data</div>
+  <div class="box-title hands-on-title" id="hands-on-obtaining-our-data" aria-label="hands-on box: Obtaining our data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Obtaining our data</div>
 
   <ol>
     <li>
       <p>Make sure you have an empty analysis history. Give it a name.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li><strong>Import Sample Data</strong> <a href="https://doi.org/10.5281/zenodo.3247504"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3247504.svg" alt="DOI. " loading="lazy" /></a>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3247504/files/RB01.fasta
@@ -921,13 +915,13 @@ https://zenodo.org/record/3247504/files/RB12.fasta
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p><strong>Build a list collection</strong> containing all fasta files. Name it <code class="language-plaintext highlighter-rouge">Plasmids</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-dataset-collection" class="box-title"><button type="button" aria-controls="tip-creating-a-dataset-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a dataset collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a dataset collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -944,7 +938,7 @@ report page.</p>
 <p><img src="../../images/plasmid-metagenomics-nanopore/NanoPlot.png" alt="NanoPlot example. " loading="lazy" /></p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-plotting-scripts-for-long-read-sequencing-data" class="box-title" aria-label="hands-on box: Plotting scripts for long read sequencing data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plotting scripts for long read sequencing data</div>
+  <div class="box-title hands-on-title" id="hands-on-plotting-scripts-for-long-read-sequencing-data" aria-label="hands-on box: Plotting scripts for long read sequencing data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plotting scripts for long read sequencing data</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1"><strong>Nanoplot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters
@@ -955,7 +949,7 @@ report page.</p>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-selecting-a-dataset-collection-as-input" class="box-title"><button type="button" aria-controls="tip-selecting-a-dataset-collection-as-input-contents" aria-expanded="true" aria-label="Toggle tip box: Selecting a dataset collection as input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a dataset collection as input<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-selecting-a-dataset-collection-as-input"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-selecting-a-dataset-collection-as-input-contents" aria-expanded="true" aria-label="Toggle tip box: Selecting a dataset collection as input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a dataset collection as input<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
     </li>
   </ol>
 
@@ -966,12 +960,12 @@ plot the read length distribution of each sample:
 <img src="../../images/plasmid-metagenomics-nanopore/NanoPlot_output.png" alt="NanoPlot Output. " loading="lazy" /></p>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>What was the mean read length for this (RB01) sample?</p>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>4906.3</p>
 
     <p>This can be determined by looking at the NanoStats or HTML output of NanoPlot RB01.</p>
@@ -1005,7 +999,7 @@ the Minimap2 publication (<span class="citation"><a href="#Li2018">Li 2018</a></
 <p><img src="../../images/plasmid-metagenomics-nanopore/Minimap2.png" alt="Pairwise alignment. " loading="lazy" /></p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-pairwise-sequence-alignment" class="box-title" aria-label="hands-on box: Pairwise sequence alignment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Pairwise sequence alignment</div>
+  <div class="box-title hands-on-title" id="hands-on-pairwise-sequence-alignment" aria-label="hands-on box: Pairwise sequence alignment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Pairwise sequence alignment</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy2"><strong>Map with minimap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters
@@ -1029,7 +1023,7 @@ the Minimap2 publication (<span class="citation"><a href="#Li2018">Li 2018</a></
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-selecting-a-dataset-collection-as-input-1" class="box-title"><button type="button" aria-controls="tip-selecting-a-dataset-collection-as-input-1-contents" aria-expanded="true" aria-label="Toggle tip box: Selecting a dataset collection as input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a dataset collection as input<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-selecting-a-dataset-collection-as-input-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-selecting-a-dataset-collection-as-input-1-contents" aria-expanded="true" aria-label="Toggle tip box: Selecting a dataset collection as input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a dataset collection as input<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
     </li>
   </ol>
 
@@ -1131,7 +1125,7 @@ Thus the per-base error rate is similar to the raw input <span class="notranslat
 <figure id="figure-1"><img src="../../images/plasmid-metagenomics-nanopore/Miniasm.png" alt="Pairwise alignment. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Sequencing and Assembly Schematic. A longer sequence is constructed from many smaller, overlapping fragments. These are aligned and reconstructed during assembly to produce the best guess assembly.</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-de-novo-assembly" class="box-title" aria-label="hands-on box: De novo assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: De novo assembly</div>
+  <div class="box-title hands-on-title" id="hands-on-de-novo-assembly" aria-label="hands-on box: De novo assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: De novo assembly</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/miniasm/miniasm/0.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/miniasm/miniasm/0.3+galaxy0"><strong>miniasm</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/miniasm/miniasm/0.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters
@@ -1141,7 +1135,7 @@ Thus the per-base error rate is similar to the raw input <span class="notranslat
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-selecting-a-dataset-collection-as-input-2" class="box-title"><button type="button" aria-controls="tip-selecting-a-dataset-collection-as-input-2-contents" aria-expanded="true" aria-label="Toggle tip box: Selecting a dataset collection as input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a dataset collection as input<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-selecting-a-dataset-collection-as-input-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-selecting-a-dataset-collection-as-input-2-contents" aria-expanded="true" aria-label="Toggle tip box: Selecting a dataset collection as input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a dataset collection as input<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
     </li>
   </ol>
 
@@ -1162,7 +1156,7 @@ a	utg000001l	0	channel_364_204a2254-2b6f-4f10-9ec5-6d40f0b870e4_template:101-445
 <p>The Assembly graph created can be used for <span class="notranslate">mapping</span> again with Minimap2, but first the graph should be transformed to FASTA format.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-pairwise-sequence-alignment-1" class="box-title" aria-label="hands-on box: Pairwise sequence alignment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Pairwise sequence alignment</div>
+  <div class="box-title hands-on-title" id="hands-on-pairwise-sequence-alignment-1" aria-label="hands-on box: Pairwise sequence alignment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Pairwise sequence alignment</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.1"><strong>GFA to Fasta</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.1</span></span>  with the following parameters
@@ -1171,14 +1165,14 @@ a	utg000001l	0	channel_364_204a2254-2b6f-4f10-9ec5-6d40f0b870e4_template:101-445
       </ul>
 
       <blockquote class="question">
-        <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p>How many contigs do we have for the RB05 sample after de novo assembly?
 <br /><br />
 Hint: run <strong>Nanoplot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the output of <strong>GFA to Fasta</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
 
         <blockquote class="solution">
-          <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>25</p>
 
           <p>This can be determined by looking at the NanoStats output of NanoPlot.</p>
@@ -1206,7 +1200,7 @@ Hint: run <strong>Nanoplot</strong> <i class="fas fa-wrench" aria-hidden="true">
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-selecting-a-dataset-collection-as-input-3" class="box-title"><button type="button" aria-controls="tip-selecting-a-dataset-collection-as-input-3-contents" aria-expanded="true" aria-label="Toggle tip box: Selecting a dataset collection as input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a dataset collection as input<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-selecting-a-dataset-collection-as-input-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-selecting-a-dataset-collection-as-input-3-contents" aria-expanded="true" aria-label="Toggle tip box: Selecting a dataset collection as input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a dataset collection as input<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
     </li>
   </ol>
 
@@ -1221,7 +1215,7 @@ It supports data produced by both Pacific Biosciences and Oxford Nanopore Techno
 <p><img src="../../images/plasmid-metagenomics-nanopore/Racon.png" alt="Consensus Module. " loading="lazy" /></p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-consensus-module" class="box-title" aria-label="hands-on box: Consensus module"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Consensus module</div>
+  <div class="box-title hands-on-title" id="hands-on-consensus-module" aria-label="hands-on box: Consensus module"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Consensus module</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.4.13" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.4.13"><strong>Racon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/racon/racon/1.4.13</span></span>  with the following parameters
@@ -1255,7 +1249,7 @@ Sequence assembler programs (such as <strong>Miniasm</strong> <i class="fas fa-w
 <p><img src="../../images/plasmid-metagenomics-nanopore/Bandage.png" alt="Bandage GUI. " loading="lazy" /></p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-visualising-de-novo-assembly-graphs" class="box-title" aria-label="hands-on box: Visualising de novo assembly graphs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualising de novo assembly graphs</div>
+  <div class="box-title hands-on-title" id="hands-on-visualising-de-novo-assembly-graphs" aria-label="hands-on box: Visualising de novo assembly graphs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualising de novo assembly graphs</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2"><strong>Bandage image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters
@@ -1267,14 +1261,14 @@ Sequence assembler programs (such as <strong>Miniasm</strong> <i class="fas fa-w
   </ol>
 
   <blockquote class="question">
-    <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
     <p>In how many samples were the full plasmid sequences assembled?</p>
 
     <p>Hint: what shape do you expect plasmid molecules to be?</p>
 
     <blockquote class="solution">
-      <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
       <p>Ideally, we want to see circular assemblies, indicating the full plasmid sequence was resolved.
 This is not the case for most of the samples, but we will improve our assemblies in the next section!</p>
     </blockquote>
@@ -1305,7 +1299,7 @@ This is not the case for most of the samples, but we will improve our assemblies
 <p>Let’s try it on our data!</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-unicycler-assembly" class="box-title" aria-label="hands-on box: Unicycler assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Unicycler assembly</div>
+  <div class="box-title hands-on-title" id="hands-on-unicycler-assembly" aria-label="hands-on box: Unicycler assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Unicycler assembly</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.8.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.8.0"><strong>Create assemblies with Unicycler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.8.0</span></span>  with the following parameters
@@ -1334,21 +1328,21 @@ This is not the case for most of the samples, but we will improve our assemblies
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-using-the-scratchbook-to-view-multiple-datasets" class="box-title"><button type="button" aria-controls="tip-using-the-scratchbook-to-view-multiple-datasets-contents" aria-expanded="true" aria-label="Toggle tip box: Using the Scratchbook to view multiple datasets"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using the Scratchbook to view multiple datasets<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you would like to view two or more datasets at once, you can use the <strong>Scratchbook</strong> feature in <span class="notranslate">Galaxy</span>:</p>   <ol>   <li><strong>Click</strong> on the <em>Scratchbook</em> icon <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-scratchbook</span> on the top menu bar.     <ul>       <li>You should see a little checkmark on the icon now</li>     </ul>   </li>   <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> a dataset by clicking on the eye icon <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> to view the output     <ul>       <li>You should see the output in a window overlayed over <span class="notranslate">Galaxy</span></li>       <li>You can resize this window by dragging the bottom-right corner</li>     </ul>   </li>   <li><strong>Click</strong> outside the file to exit the Scratchbook</li>   <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> a second dataset from your history     <ul>       <li>You should now see a second window with the new dataset</li>       <li>This makes it easier to compare the two outputs</li>     </ul>   </li>   <li>Repeat this for as many files as you would like to compare</li>   <li>You can turn off the <strong>Scratchbook</strong> <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-scratchbook</span> by clicking on the icon again</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-using-the-scratchbook-to-view-multiple-datasets"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-the-scratchbook-to-view-multiple-datasets-contents" aria-expanded="true" aria-label="Toggle tip box: Using the Scratchbook to view multiple datasets"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using the Scratchbook to view multiple datasets<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you would like to view two or more datasets at once, you can use the <strong>Scratchbook</strong> feature in <span class="notranslate">Galaxy</span>:</p>   <ol>   <li><strong>Click</strong> on the <em>Scratchbook</em> icon <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-scratchbook</span> on the top menu bar.     <ul>       <li>You should see a little checkmark on the icon now</li>     </ul>   </li>   <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> a dataset by clicking on the eye icon <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> to view the output     <ul>       <li>You should see the output in a window overlayed over <span class="notranslate">Galaxy</span></li>       <li>You can resize this window by dragging the bottom-right corner</li>     </ul>   </li>   <li><strong>Click</strong> outside the file to exit the Scratchbook</li>   <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> a second dataset from your history     <ul>       <li>You should now see a second window with the new dataset</li>       <li>This makes it easier to compare the two outputs</li>     </ul>   </li>   <li>Repeat this for as many files as you would like to compare</li>   <li>You can turn off the <strong>Scratchbook</strong> <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-scratchbook</span> by clicking on the icon again</li> </ol> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-searching-your-history" class="box-title"><button type="button" aria-controls="tip-searching-your-history-contents" aria-expanded="true" aria-label="Toggle tip box: Searching your history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Searching your history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To make it easier to find datasets in large histories, you can filter your history by keywords as follows:</p>   <ol>   <li>     <p><strong>Click</strong> on the <em>search datasets</em> box at the top of the history panel.</p>     <p><img src="/training-material/shared/images/history_search_datasets.png" alt="history search box" /></p>   </li>   <li><strong>Type</strong> a search term in this box     <ul>       <li>For example a tool name, or sample name</li>     </ul>   </li>   <li>To undo the filtering and show your full history again, press on the <em>clear search</em> button <i class="fas fa-times-circle" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-clear</span> next to the search box</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-searching-your-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-searching-your-history-contents" aria-expanded="true" aria-label="Toggle tip box: Searching your history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Searching your history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To make it easier to find datasets in large histories, you can filter your history by keywords as follows:</p>   <ol>   <li>     <p><strong>Click</strong> on the <em>search datasets</em> box at the top of the history panel.</p>     <p><img src="/training-material/shared/images/history_search_datasets.png" alt="history search box" /></p>   </li>   <li><strong>Type</strong> a search term in this box     <ul>       <li>For example a tool name, or sample name</li>     </ul>   </li>   <li>To undo the filtering and show your full history again, press on the <em>clear search</em> button <i class="fas fa-times-circle" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-clear</span> next to the search box</li> </ol> </blockquote>
     </li>
     <li>
       <p>Repeat this comparison for the other samples.</p>
 
       <blockquote class="question">
-        <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <p>For which samples has the plasmid assembly improved?</p>
 
         <blockquote class="solution">
-          <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>Exploring the outputs for all the samples reveals that many now display circular assemblies, indicating the full plasmids sequence was resolved.</p>
         </blockquote>
       </blockquote>
@@ -1373,7 +1367,7 @@ It relies on the neural network models trained on full genome and plasmid sequen
 <p><img src="../../images/plasmid-metagenomics-nanopore/PlasFlow.png" alt="Pairwise alignment. " loading="lazy" /></p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-prediction-of-plasmid-sequences" class="box-title" aria-label="hands-on box: Prediction of plasmid sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Prediction of plasmid sequences</div>
+  <div class="box-title hands-on-title" id="hands-on-prediction-of-plasmid-sequences" aria-label="hands-on box: Prediction of plasmid sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Prediction of plasmid sequences</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/plasflow/PlasFlow/1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/plasflow/PlasFlow/1.0"><strong>PlasFlow</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/plasflow/PlasFlow/1.0</span></span>  with the following parameters
@@ -1384,12 +1378,12 @@ It relies on the neural network models trained on full genome and plasmid sequen
   </ol>
 
   <blockquote class="question">
-    <div id="question-4" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
     <p>What is the classification of contig_id 0 in RB10? (Hint: Check the probability table created by PlasFlow)</p>
 
     <blockquote class="solution">
-      <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
       <p>plasmid.Proteobacteria</p>
 
       <p>This can be determined by looking at the 5th column of the probability table.</p>
@@ -1426,7 +1420,7 @@ and compiles a summary report of detected antimicrobial resistance genes.</p>
 <p><img src="../../images/plasmid-metagenomics-nanopore/StarAmr.png" alt="Pairwise alignment. " loading="lazy" /></p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-prediction-of-amr-genes" class="box-title" aria-label="hands-on box: Prediction of AMR genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Prediction of AMR genes</div>
+  <div class="box-title hands-on-title" id="hands-on-prediction-of-amr-genes" aria-label="hands-on box: Prediction of AMR genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Prediction of AMR genes</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+galaxy2"><strong>staramr</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters
@@ -1437,14 +1431,14 @@ and compiles a summary report of detected antimicrobial resistance genes.</p>
   </ol>
 
   <blockquote class="question">
-    <div id="question-5" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question-5" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
     <p>Which samples contained the resistance gene: dfrA17?</p>
 
     <p>Hint: Check the resfinder.tsv created by staramr</p>
 
     <blockquote class="solution">
-      <div id="solution-5" class="box-title"><button type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
       <p>RB01, RB02, and RB10</p>
 
       <p>This can be determined by looking at the 2nd column of the resfinder.tsv output (and the first column for the sample names).</p>
@@ -1470,12 +1464,12 @@ and compiles a summary report of detected antimicrobial resistance genes.</p>
 <figure id="figure-3"><img src="../../images/plasmid-metagenomics-nanopore/card_database.png" alt="Screenshot of the CARD database. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Screenshot of the CARD database interface. CARD gives information about the antibiotic resistance genes, as well as links to relevant publications.</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question-6" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-6" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>What is the resistance mechanism of the <em>dfrA17</em> gene?</p>
 
   <blockquote class="solution">
-    <div id="solution-6" class="box-title"><button type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>antibiotic target replacement</p>
 
     <p>This can be determined by searching for <a href="https://card.mcmaster.ca/ontology/39294">the gene on the CARD database</a>

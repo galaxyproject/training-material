@@ -696,7 +696,7 @@
 </ul>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -748,7 +748,7 @@
 <p>The SRA aligned <span class="notranslate">reads</span>, the VCF files, the results of these analyses (such as BLAST and VIGOR3 annotation), and the associated BioSample and sequencing library metadata are available for free access from cloud providers.</p>
 
 <blockquote class="comment">
-  <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>These data can be dumped in <code class="language-plaintext highlighter-rouge">sam</code> format using the <code class="language-plaintext highlighter-rouge">sam-dump</code> tool in the SRA Toolkit, but this function doesn’t work within <span class="notranslate">Galaxy</span> yet.
 We hope to include that functionality in a future update.</p>
@@ -764,7 +764,7 @@ We hope to include that functionality in a future update.</p>
 <p>Metadata for SARS-CoV-2 submissions to the SRA includes submitted sample and library information, BLAST results, descriptive contig statistics, and variation and annotation information.  These metadata are updated daily and made available to query in the cloud using <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-bigquery/">Google’s BigQuery</a> or <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-athena/">Amazon’s Athena</a> services. However, the raw underlying information is also provided as a group of json files that can be <strong>downloaded for free from the Open Data Platform</strong> without logging in to the cloud. These json files can be imported to <span class="notranslate">Galaxy</span> and queried there to find <strong>Runs of interest</strong>.</p>
 
 <blockquote class="comment">
-  <div id="comment-1" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>Some of these tables include complex data fields (array of values) that don’t have a clean analogue in a classic SQL database or table and these can’t be easily queried in <span class="notranslate">Galaxy</span> currently. If you require access to <a href="https://www.ncbi.nlm.nih.gov/sra/docs/aligned-metadata-tables/">cloud tables</a> or fields not available in <span class="notranslate">Galaxy</span> we recommend accessing those natively in <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-bigquery/">BigQuery</a> or <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-athena/">Athena</a>.</p>
 
@@ -773,14 +773,14 @@ We hope to include that functionality in a future update.</p>
 <p>We will import the JSON files into <span class="notranslate">Galaxy</span> to query them directory, however the files are split up for efficient querying in the cloud and updated daily, so we first need to get the most up-to-date list of files so we can import those to <span class="notranslate">Galaxy</span>. We’ll just be using a couple of tables in this training, but the other tables can be imported in the same way, using the index files below.</p>
 
 <blockquote class="comment">
-  <div id="comment-2" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-2" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>These metadata files are updated daily around 5:30pm EST. If you try to access the data around this time but encounter an error, trying again a short while later should resolve the issue. <a href="https://www.thetimezoneconverter.com">Time Zone Converter</a></p>
 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-loading-sra-aligned-read-format-sarf-object-metadata-urls-into-galaxy" class="box-title" aria-label="hands-on box: Loading SRA Aligned Read Format (SARF) Object Metadata URLs into Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Loading SRA Aligned Read Format (SARF) Object Metadata URLs into <span class="notranslate">Galaxy</span></div>
+  <div class="box-title hands-on-title" id="hands-on-loading-sra-aligned-read-format-sarf-object-metadata-urls-into-galaxy" aria-label="hands-on box: Loading SRA Aligned Read Format (SARF) Object Metadata URLs into Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Loading SRA Aligned Read Format (SARF) Object Metadata URLs into <span class="notranslate">Galaxy</span></div>
 
   <p>This step needs to be repeated at the beginning of an analysis to refresh the metadata to the latest daily version.</p>
 
@@ -792,13 +792,13 @@ We hope to include that functionality in a future update.</p>
       <p>Create a new history</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Rename your history, <em>e.g.</em> “NCBI SARF”</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-history" class="box-title"><button type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
     <li>
       <p><strong>Click</strong> the upload icon toward the top left corner.</p>
@@ -870,7 +870,7 @@ https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/variations.f
 </code></pre></div></div>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-loading-sra-aligned-read-format-sarf-contig-metadata-into-galaxy" class="box-title" aria-label="hands-on box: Loading SRA Aligned Read Format (SARF) Contig Metadata into Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Loading SRA Aligned Read Format (SARF) Contig Metadata into <span class="notranslate">Galaxy</span></div>
+  <div class="box-title hands-on-title" id="hands-on-loading-sra-aligned-read-format-sarf-contig-metadata-into-galaxy" aria-label="hands-on box: Loading SRA Aligned Read Format (SARF) Contig Metadata into Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Loading SRA Aligned Read Format (SARF) Contig Metadata into <span class="notranslate">Galaxy</span></div>
 
   <p>Next we will convert this list of filenames to the HTTP URLs for easy import into <span class="notranslate">Galaxy</span>.</p>
 
@@ -931,7 +931,7 @@ https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/variations.f
       <p>Rename this history item to <code class="language-plaintext highlighter-rouge">contigs.single.json</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-dataset" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">contigs.single.json</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">contigs.single.json</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jq/jq/1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jq/jq/1.0"><strong>JQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jq/jq/1.0</span></span>  process JSON files with the following parameters:</p>
@@ -947,14 +947,14 @@ https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/variations.f
       <p>Rename this file <code class="language-plaintext highlighter-rouge">contigs.tsv</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-dataset-1" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">contigs.tsv</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">contigs.tsv</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-3" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-3" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>The conversion of the json files to tabular format takes some time, this is a good time to go make some tea.</p>
 
@@ -965,7 +965,7 @@ https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/variations.f
 <p>Now that a table has been generated, we will query the table to find the runs of interest.  It is a good idea to save the table for future queries on the same dataset.  Rerunning the import steps above without filtration will provide a different set of metadata each day.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-query-the-sra-metadata-table-using-sqlite" class="box-title" aria-label="hands-on box: Query the SRA Metadata Table using SQLite"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Query the SRA Metadata Table using SQLite</div>
+  <div class="box-title hands-on-title" id="hands-on-query-the-sra-metadata-table-using-sqlite" aria-label="hands-on box: Query the SRA Metadata Table using SQLite"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Query the SRA Metadata Table using SQLite</div>
 
   <p>Next we’ll query this metadata using the <code class="language-plaintext highlighter-rouge">Query tabular</code> tool to get a list of all Runs containing contigs of greater than 20,000 nucleotides and average coverage of at least 100X.</p>
 
@@ -974,7 +974,7 @@ https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/variations.f
       <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0"><strong>Query Tabular using sqlite sql</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0</span></span>  with the following parameters:</p>
 
       <blockquote class="tip">
-        <div id="tip-can-t-find-it" class="box-title"><button type="button" aria-controls="tip-can-t-find-it-contents" aria-expanded="true" aria-label="Toggle tip box: Can't find it?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Can't find it?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-can-t-find-it"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-can-t-find-it-contents" aria-expanded="true" aria-label="Toggle tip box: Can't find it?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Can't find it?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>If you’re not using the <a href="https://docs.galaxyproject.org/en/latest/admin/special_topics/gtn.html">GTN-in-<span class="notranslate">Galaxy</span> view</a>, you can search for ‘sql’ to find it.</p>
       </blockquote>
 
@@ -1012,7 +1012,7 @@ https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/variations.f
       </ul>
 
       <blockquote class="tip">
-        <div id="tip-save-sqlite-database-for-future-queries" class="box-title"><button type="button" aria-controls="tip-save-sqlite-database-for-future-queries-contents" aria-expanded="true" aria-label="Toggle tip box: Save SQlite Database for future queries"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Save SQlite Database for future queries<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-save-sqlite-database-for-future-queries"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-save-sqlite-database-for-future-queries-contents" aria-expanded="true" aria-label="Toggle tip box: Save SQlite Database for future queries"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Save SQlite Database for future queries<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>If you plan to do multiple queries on the same SQL database or want to skip preprocessing the metadata for future work, it may be useful to set</p>
 
@@ -1026,15 +1026,15 @@ https://storage.googleapis.com/nih-sequence-read-archive/SARS_COV_2/variations.f
       <p>Click <strong>Run Tool</strong> and rename the output file to <code class="language-plaintext highlighter-rouge">Run_list</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-dataset-2" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-2-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Run_list</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-2-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Run_list</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
 
       <blockquote class="tip">
-        <div id="tip-need-fastq" class="box-title"><button type="button" aria-controls="tip-need-fastq-contents" aria-expanded="true" aria-label="Toggle tip box: Need fastq?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Need fastq?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-need-fastq"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-need-fastq-contents" aria-expanded="true" aria-label="Toggle tip box: Need fastq?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Need fastq?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>Use <code class="language-plaintext highlighter-rouge">Run_list</code> to bring in Fastq files with Submitted Quality Scores (+BQS format)</p>
       </blockquote>
 
       <blockquote class="tip">
-        <div id="tip-column-headers-for-the-other-metadata-tables" class="box-title"><button type="button" aria-controls="tip-column-headers-for-the-other-metadata-tables-contents" aria-expanded="true" aria-label="Toggle tip box: Column Headers for the Other Metadata Tables"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Column Headers for the Other Metadata Tables<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-column-headers-for-the-other-metadata-tables"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-column-headers-for-the-other-metadata-tables-contents" aria-expanded="true" aria-label="Toggle tip box: Column Headers for the Other Metadata Tables"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Column Headers for the Other Metadata Tables<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>We are not going to bring in the other metadata tables in this tutorial. Here is a list of column headers for contigs and the other tables.
 You can find full definitions for these columns here:</p>
 
@@ -1071,7 +1071,7 @@ You can find full definitions for these columns here:</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div id="tip-download-fastq-with-quality-scores" class="box-title"><button type="button" aria-controls="tip-download-fastq-with-quality-scores-contents" aria-expanded="true" aria-label="Toggle tip box: Download Fastq with Quality Scores"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Download Fastq with Quality Scores<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-download-fastq-with-quality-scores"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-download-fastq-with-quality-scores-contents" aria-expanded="true" aria-label="Toggle tip box: Download Fastq with Quality Scores"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Download Fastq with Quality Scores<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If you would like to dump the raw, underlying data in fastq format with the original quality scores, you can stop here and use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.11.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.11.0+galaxy0"><strong>Faster Download and Extract <span class="notranslate">Reads</span> in FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.11.0+<span class="notranslate">galaxy</span>0</span></span>  tool with the following parameters:</p>
 
@@ -1083,7 +1083,7 @@ You can find full definitions for these columns here:</p>
 </blockquote>
 
 <blockquote class="tip">
-  <div id="tip-importing-a-list-of-srr-from-athena-or-bigquery" class="box-title"><button type="button" aria-controls="tip-importing-a-list-of-srr-from-athena-or-bigquery-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a list of SRR from Athena or BigQuery"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a list of SRR from Athena or BigQuery<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-importing-a-list-of-srr-from-athena-or-bigquery"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-list-of-srr-from-athena-or-bigquery-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a list of SRR from Athena or BigQuery"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a list of SRR from Athena or BigQuery<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>If you opted to conduct your metadata search in the cloud using AWS Athena or GCP BigQuery instead of importing the json file to <span class="notranslate">Galaxy</span>, you can save a list of your Run accessions from that search result and import that file as the <code class="language-plaintext highlighter-rouge">Run_list</code> to proceed with the rest of this tutorial.</p>
 </blockquote>
@@ -1093,7 +1093,7 @@ You can find full definitions for these columns here:</p>
 <p>Now that we have assembled a list of Runs that have contigs we are interested in, we’ll construct the path to the <strong>SARFS</strong> in the cloud and import those to <span class="notranslate">Galaxy</span> so we can work with them.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-importing-sarfs-of-interest" class="box-title" aria-label="hands-on box: Importing SARFs of Interest"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Importing SARFs of Interest</div>
+  <div class="box-title hands-on-title" id="hands-on-importing-sarfs-of-interest" aria-label="hands-on box: Importing SARFs of Interest"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Importing SARFs of Interest</div>
 
   <ol>
     <li>
@@ -1143,7 +1143,7 @@ You can find full definitions for these columns here:</p>
           <p>Name the output collection <code class="language-plaintext highlighter-rouge">sarf_path</code> before clicking <strong>Upload</strong></p>
 
           <blockquote class="comment">
-            <div id="comment-4" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+            <div class="box-title comment-title" id="comment-4" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
             <p>Please note that there can be some lag in availability of SARF/VCF files in the cloud (particularly for newly submitted data). So it’s possible to get a download error for a file that isn’t yet present in the cloud. In these cases waiting ~24 hours will generally resolve the issue and allow you to access the file.</p>
 
@@ -1183,7 +1183,7 @@ You can find full definitions for these columns here:</p>
       <p>The resulting dataset includes the contigs generated from these Runs in fasta format</p>
 
       <blockquote class="tip">
-        <div id="tip-fastq-format-option" class="box-title"><button type="button" aria-controls="tip-fastq-format-option-contents" aria-expanded="true" aria-label="Toggle tip box: Fastq format option"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Fastq format option<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-fastq-format-option"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-fastq-format-option-contents" aria-expanded="true" aria-label="Toggle tip box: Fastq format option"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Fastq format option<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>If you prefer to dump the raw <span class="notranslate">reads</span> in fastq format with placeholder quality scores, leave the <code class="language-plaintext highlighter-rouge">Table name within cSRA object</code> field blank.</p>
 
       </blockquote>
@@ -1198,7 +1198,7 @@ You can find full definitions for these columns here:</p>
 <p>A <code class="language-plaintext highlighter-rouge">Run_list</code> could also be imported after querying metadata in the cloud using  <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-bigquery/">Google’s BigQuery</a> or <a href="https://www.ncbi.nlm.nih.gov/sra/docs/sra-athena/">Amazon’s Athena</a> services. Metadata about these runs includes submitted sample and library information, BLAST results, descriptive contig statistics, and variation and annotations. See the tutorial video for a short demo on how to search and download <code class="language-plaintext highlighter-rouge">Run_list</code> from the cloud.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-importing-vcfs-of-interest" class="box-title" aria-label="hands-on box: Importing VCFs of Interest"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Importing VCFs of Interest</div>
+  <div class="box-title hands-on-title" id="hands-on-importing-vcfs-of-interest" aria-label="hands-on box: Importing VCFs of Interest"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Importing VCFs of Interest</div>
 
   <ol>
     <li>
@@ -1240,7 +1240,7 @@ You can find full definitions for these columns here:</p>
           <p>Name the output collection <code class="language-plaintext highlighter-rouge">VCFs</code> before clicking <strong>Upload</strong></p>
 
           <blockquote class="comment">
-            <div id="comment-5" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+            <div class="box-title comment-title" id="comment-5" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
             <p>Please note that there can be some lag in availability of SARF/VCF files in the cloud (particularly for newly submitted data). So it’s possible to get a download error for a file that isn’t yet present in the cloud. In these cases waiting ~24 hours will generally resolve the issue and allow you to access the file.</p>
 
@@ -1258,7 +1258,7 @@ You can find full definitions for these columns here:</p>
       </ul>
 
       <blockquote class="comment">
-        <div id="comment-6" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-6" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>Please note that there are 2 Snepff tools, please choose the one for SARS-CoV-2</p>
 

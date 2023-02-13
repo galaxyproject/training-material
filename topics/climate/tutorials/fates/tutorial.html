@@ -908,12 +908,6 @@
         
     
         
-    
-        
-    
-        
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -983,7 +977,7 @@
 It will also teach you on how to create <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> for your site-level CLM-FATES simulations to make your research fully reproducible. We hope this tutorial will promote the use of CLM-FATES and other terrestrial ecosystem models by a broader community.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -1006,7 +1000,7 @@ It will also teach you on how to create <span class="notranslate">Galaxy</span> 
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-background" class="box-title" aria-label="comment box: Background"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Background</div>
+  <div class="box-title comment-title" id="comment-background" aria-label="comment box: Background"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Background</div>
 
   <p>FATES is the “Functionally Assembled Terrestrial Ecosystem Simulator”, which is a vegetation demographic model (<span class="citation"><a href="#Fisher2017">Fisher <i>et al.</i> 2017</a></span>).
 FATES needs what we call a “Host Land Model” (HLM) to run and in this tutorial
@@ -1030,14 +1024,14 @@ The <a href="https://fates-docs.readthedocs.io/en/latest/index.html">FATES docum
 For the purpose of this tutorial, input data for a single point location (ALP1) on the Norwegian alpine tundra ecosystem (Latitude: 61.0243N, Longitude: 8.12343E, Elevation: 1208 m) has been prepared and is ready to use. This is a site included in the modelling platform developed under [EMERALD project] (https://www.mn.uio.no/geo/english/research/projects/emerald/). More details about the sites can be found in <span class="citation"><a href="#Klanderud2015">Klanderud <i>et al.</i> 2015</a></span> and  <span class="citation"><a href="#Vandvik2020">Vandvik <i>et al.</i> 2020</a></span></p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>
       <p>Create a new history for this tutorial. If you are not inspired, you can name it <em>fates</em>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the <a href="https://doi.org/10.5281/zenodo.4108341">input data</a> and the <a href="https://doi.org/10.5281/zenodo.4126404">restart dataset from Zenodo</a>
@@ -1048,16 +1042,16 @@ https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_res
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-data-from-a-data-library" class="box-title"><button type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li>
       <p>Check the datatype (for both files) is <strong>tar</strong></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-changing-the-datatype" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> datasets</p>
@@ -1073,7 +1067,7 @@ https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_res
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-dataset" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1084,7 +1078,7 @@ https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_res
 <p>We will be using the CTSM/FATES-EMERALD <span class="notranslate">Galaxy</span> tool.This tool is based on the version of <a href="https://github.com/NordicESMhub/ctsm/tree/fates_emerald_api">CLM-FATES</a> that have been adapted to run at the sites included in the EMERALD project. More details about this model version can be found in <a href="https://github.com/NordicESMhub/ctsm/blob/fates_emerald_api/README_fates_emerald_api">README_fates_emerald_api</a></p>
 
 <blockquote class="comment">
-  <div id="comment-tip-finding-your-tool" class="box-title" aria-label="comment box: Tip: Finding your tool"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Tip: Finding your tool</div>
+  <div class="box-title comment-title" id="comment-tip-finding-your-tool" aria-label="comment box: Tip: Finding your tool"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Tip: Finding your tool</div>
 
   <p>Different <span class="notranslate">Galaxy</span> servers may have tools available under different sections, therefore it is often useful to use the <strong>search bar</strong> at the top of the tool panel to find your tool.</p>
 
@@ -1093,7 +1087,7 @@ https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_res
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-tip-pre-selected-tool-parameters" class="box-title" aria-label="comment box: Tip: Pre-selected tool parameters"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Tip: Pre-selected tool parameters</div>
+  <div class="box-title comment-title" id="comment-tip-pre-selected-tool-parameters" aria-label="comment box: Tip: Pre-selected tool parameters"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Tip: Pre-selected tool parameters</div>
 
   <p>When selecting a tool, <span class="notranslate">Galaxy</span> will pre-fill the tool parameters, selecting the first dataset with the corresponding type in your history.
 Be aware that very often, the default pre-selection is incorrect and do not correspond to the required dataset.
@@ -1102,7 +1096,7 @@ So always check and update accordingly the tool parameters!</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-creating-a-new-ctsm-fates-emerald-case" class="box-title" aria-label="hands-on box: Creating a new CTSM/FATES-EMERALD case"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating a new CTSM/FATES-EMERALD case</div>
+  <div class="box-title hands-on-title" id="hands-on-creating-a-new-ctsm-fates-emerald-case" aria-label="hands-on box: Creating a new CTSM/FATES-EMERALD case"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating a new CTSM/FATES-EMERALD case</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1"><strong>CTSM/FATES-EMERALD</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1</span></span>  with the following parameters:
@@ -1126,7 +1120,7 @@ So always check and update accordingly the tool parameters!</p>
       </ul>
 
       <blockquote class="comment">
-        <div id="comment-startup-versus-hybrid" class="box-title" aria-label="comment box: Startup versus Hybrid"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Startup versus Hybrid</div>
+        <div class="box-title comment-title" id="comment-startup-versus-hybrid" aria-label="comment box: Startup versus Hybrid"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Startup versus Hybrid</div>
 
         <p>When using <strong>startup</strong>, the FATES model will start from some arbitrary baseline state that is not linked to any previous run.
 Startup runs are typically initialized using a start date of 0001-01-01 except if you change it (start date option).
@@ -1143,13 +1137,13 @@ of your restart files. This is what we do in this tutorial.</p>
       </ul>
 
       <blockquote class="comment">
-        <div id="comment-about-clm-fates-history-files" class="box-title" aria-label="comment box: About CLM-FATES history files"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: About CLM-FATES history files</div>
+        <div class="box-title comment-title" id="comment-about-clm-fates-history-files" aria-label="comment box: About CLM-FATES history files"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: About CLM-FATES history files</div>
         <p>All the CLM-FATES history files are organized in a collection.</p>
 
       </blockquote>
 
       <blockquote class="comment">
-        <div id="comment-about-datatypes" class="box-title" aria-label="comment box: About datatypes"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: About datatypes</div>
+        <div class="box-title comment-title" id="comment-about-datatypes" aria-label="comment box: About datatypes"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: About datatypes</div>
 
         <p>All the history files contain gridded data values written at specified times during the model run.
 Depending on the length of your simulation, you may have one or more history files that you can recognize from their names:
@@ -1159,7 +1153,7 @@ To cope with that, one can change the datatype manually, as shown below.</p>
       </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-changing-the-datatype-1" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the output dataset (history file) to <code class="language-plaintext highlighter-rouge">ALP1_exp.nc</code></p>
@@ -1169,7 +1163,7 @@ to rename all netCDF files so that they do not contain any special characters or
 particular Panoply, won’t be able to recognize your file if not named properly.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-dataset-1" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1"><strong>NetCDF xarray Metadata Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1</span></span>   to get metadata information for CLM-FATES netCDF outputs:
       <ul>
@@ -1182,7 +1176,7 @@ particular Panoply, won’t be able to recognize your file if not named properly
       </ul>
 
       <blockquote class="question">
-        <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <ol>
           <li>What are the short names of the relevant variables? Which one will you pick if you want a result in <strong>mm/s</strong>?</li>
@@ -1190,7 +1184,7 @@ particular Panoply, won’t be able to recognize your file if not named properly
         </ol>
 
         <blockquote class="solution">
-          <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li><strong>FCTR</strong> is the canopy transpiration in W/m^2 and <strong>QVEGT</strong> is in mm/s. Therefore, we would select the latter.</li>
             <li>These variables are stored as a function of time and lndgrid and since we have only one grid cell, lngrid=1, hence the time series.</li>
@@ -1207,12 +1201,12 @@ particular Panoply, won’t be able to recognize your file if not named properly
 <h2 id="opening-up-panoply">Opening up Panoply</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-launch-panoply" class="box-title" aria-label="hands-on box: Launch Panoply"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch Panoply</div>
+  <div class="box-title hands-on-title" id="hands-on-launch-panoply" aria-label="hands-on box: Launch Panoply"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch Panoply</div>
 
   <p><a href="https://www.giss.nasa.gov/tools/panoply/">Panoply</a> plots geo-referenced and other arrays from netCDF and is available as a <span class="notranslate">Galaxy</span> interactive environment and may not be available on all <span class="notranslate">Galaxy</span> servers.</p>
 
   <blockquote class="tip">
-    <div id="tip-only-on-usegalaxy-eu" class="box-title"><button type="button" aria-controls="tip-only-on-usegalaxy-eu-contents" aria-expanded="true" aria-label="Toggle tip box: Only on UseGalaxy.eu"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Only on Use<span class="notranslate">Galaxy</span>.eu<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-only-on-usegalaxy-eu"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-only-on-usegalaxy-eu-contents" aria-expanded="true" aria-label="Toggle tip box: Only on UseGalaxy.eu"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Only on Use<span class="notranslate">Galaxy</span>.eu<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Currently Panoply in <span class="notranslate">Galaxy</span> is available on use<span class="notranslate">Galaxy</span>.eu instance, on the “Interactive tools” tool panel section or,
 as all interactive tools, from the dedicated use<span class="notranslate">Galaxy</span>.eu subdomain: <a href="https://live.usegalaxy.eu">live.use<span class="notranslate">Galaxy</span>.eu</a>.
 You may have to login again to <a href="https://live.usegalaxy.eu">live.use<span class="notranslate">galaxy</span>.eu</a> (use the same use<span class="notranslate">rna</span>me and password than on other use<span class="notranslate">Galaxy</span>.eu subdomains)
@@ -1237,7 +1231,7 @@ and switch to the correct history.</p>
 <h2 id="inspect-metadata">Inspect metadata</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-inspect-dataset" class="box-title" aria-label="hands-on box: Inspect dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Inspect dataset</div>
+  <div class="box-title hands-on-title" id="hands-on-inspect-dataset" aria-label="hands-on box: Inspect dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Inspect dataset</div>
 
   <ol>
     <li>
@@ -1246,7 +1240,7 @@ and switch to the correct history.</p>
       <p>Here you can look at the dataset (<code class="language-plaintext highlighter-rouge">ALP1_exp.nc</code>) and related variables (FSDS, FSA, AREA_TREE, BIOMASS_CANOPY, etc.)</p>
 
       <blockquote class="question">
-        <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <ol>
           <li>What is the long name of <strong>MORTALITY</strong>?</li>
@@ -1254,7 +1248,7 @@ and switch to the correct history.</p>
         </ol>
 
         <blockquote class="solution">
-          <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>Rate of total mortality per PFT (Plat functional types)</li>
             <li>indiv/ha/yr</li>
@@ -1268,13 +1262,13 @@ and switch to the correct history.</p>
       <p>Cutomize your plot and save it as <strong>png</strong> file in the output folder. Remember that
 if you do not save in the output folder, your plot will get lost.</p>
       <blockquote class="question">
-        <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
         <ol>
           <li>Can you observe any pattern? Does it make any sense?</li>
         </ol>
 
         <blockquote class="solution">
-          <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>We can clearly see a seasonal cycle.</li>
           </ol>
@@ -1288,13 +1282,13 @@ if you do not save in the output folder, your plot will get lost.</p>
       <p>Select a 2D plot with time as x-axis and colored by the rate of total mortality per PFT (Plant functional type).
 Make sure to adjust the y-axis and save your plots in the output folder (as png file).</p>
       <blockquote class="question">
-        <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
         <ol>
           <li>Can you observe any pattern? Does it make any sense?</li>
         </ol>
 
         <blockquote class="solution">
-          <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>We can clearly see a seasonal cycle of PFT2.</li>
           </ol>
@@ -1303,7 +1297,7 @@ Make sure to adjust the y-axis and save your plots in the output folder (as png 
       </blockquote>
 
       <blockquote class="comment">
-        <div id="comment-quit-panoply-properly-to-save-your-plots" class="box-title" aria-label="comment box: Quit Panoply properly to save your plots!"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Quit Panoply properly to save your plots!</div>
+        <div class="box-title comment-title" id="comment-quit-panoply-properly-to-save-your-plots" aria-label="comment box: Quit Panoply properly to save your plots!"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Quit Panoply properly to save your plots!</div>
 
         <p>To make sure all your plots stored in <strong>outputs</strong> folder  get exported to <span class="notranslate">Galaxy</span>, you need to quit panoply: <strong>File</strong> –&gt; <strong>Quit Panoply</strong>.</p>
       </blockquote>
@@ -1317,7 +1311,7 @@ Make sure to adjust the y-axis and save your plots in the output folder (as png 
 so that we can reuse it for any simulations.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-select-and-plot-b-leafc-b" class="box-title" aria-label="hands-on box: Select and plot &lt;b&gt;LEAFC&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Select and plot <b>LEAFC</b></div>
+  <div class="box-title hands-on-title" id="hands-on-select-and-plot-b-leafc-b" aria-label="hands-on box: Select and plot &lt;b&gt;LEAFC&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Select and plot <b>LEAFC</b></div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1"><strong>NetCDF xarray Selection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1</span></span>  to select the total carbon in live plant leaves (<strong>LEAFC</strong>)
@@ -1331,7 +1325,7 @@ so that we can reuse it for any simulations.</p>
       <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> dataset to <code class="language-plaintext highlighter-rouge">NetCDF xarray Selection on ALP1_exp.nc</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-dataset-2" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-2-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-2-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3"><strong>Replace parts of text </strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3</span></span>  to clean date column for plotting:
       <ul>
@@ -1349,7 +1343,7 @@ so that we can reuse it for any simulations.</p>
       <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> dataset to <code class="language-plaintext highlighter-rouge">LEAFC_clean.tabular</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-dataset-3" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-3-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-3-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li><strong>Scatterplot w ggplot2</strong>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to plot the total carbon in live plant leaves (<strong>LEAFC</strong>):
       <ul>
@@ -1384,7 +1378,7 @@ so that we can reuse it for any simulations.</p>
 <h1 id="convert-your-analysis-history-into-a-galaxy-workflow">Convert your analysis history into a <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span></h1>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-extract-workflow" class="box-title" aria-label="hands-on box: Extract workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extract <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-extract-workflow" aria-label="hands-on box: Extract workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extract <span class="notranslate">workflow</span></div>
 
   <ol>
     <li>Go to the <strong>History Options menu</strong>  <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> menu
@@ -1414,7 +1408,7 @@ so that we can reuse it for any simulations.</p>
 <p>We would like to run a CLM-FATES case where the atmospheric Carbon Dioxyde Concentration (CO2) is increased by a factor of 4.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-compare-the-two-simulations" class="box-title" aria-label="hands-on box: Compare the two simulations"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Compare the two simulations</div>
+  <div class="box-title hands-on-title" id="hands-on-compare-the-two-simulations" aria-label="hands-on box: Compare the two simulations"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Compare the two simulations</div>
 
   <p>Using the results from your two CLM-FATES simulations and the generated plots, assess the impact
  of an increase in the atmosperhic CO2 on the outputs of the model.</p>
@@ -1424,7 +1418,7 @@ so that we can reuse it for any simulations.</p>
       <p>Open the <strong><span class="notranslate">workflow</span> editor</strong></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-opening-the-workflow-editor" class="box-title"><button type="button" aria-controls="tip-opening-the-workflow-editor-contents" aria-expanded="true" aria-label="Toggle tip box: Opening the workflow editor"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Opening the <span class="notranslate">workflow</span> editor<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>In the top menu bar, click on <strong>Workflows</strong></li>   <li>Click on the name of the <span class="notranslate">workflow</span> you want to edit <img src="/training-material/topics/galaxy-interface/images/edit_workflow.png" alt="Workflow drop down menu showing Edit option" title="When you click on the name of a workflow it will open a drop down menu whose first option is Edit. Select the Edit option to edit the workflow." /></li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-edit</span> <strong>Edit</strong> from the dropdown menu to open the <span class="notranslate">workflow</span> in the <span class="notranslate">workflow</span> editor</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-opening-the-workflow-editor"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-opening-the-workflow-editor-contents" aria-expanded="true" aria-label="Toggle tip box: Opening the workflow editor"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Opening the <span class="notranslate">workflow</span> editor<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>In the top menu bar, click on <strong>Workflows</strong></li>   <li>Click on the name of the <span class="notranslate">workflow</span> you want to edit <img src="/training-material/topics/galaxy-interface/images/edit_workflow.png" alt="Workflow drop down menu showing Edit option" title="When you click on the name of a workflow it will open a drop down menu whose first option is Edit. Select the Edit option to edit the workflow." /></li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-edit</span> <strong>Edit</strong> from the dropdown menu to open the <span class="notranslate">workflow</span> in the <span class="notranslate">workflow</span> editor</li> </ol> </blockquote>
     </li>
     <li>
       <p>Edit your <span class="notranslate">workflow</span> and customize it to run your new CO2 experiment. For this you would need to:</p>
@@ -1439,7 +1433,7 @@ The final <span class="notranslate">workflow</span> would be similar to the one 
       <figure id="figure-4"><img src="../../images/fates_workflow.png" alt="Snapshot of FATES workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> FATES <span class="notranslate">workflow</span></figcaption></figure>
 
       <blockquote class="question">
-        <div id="question-4" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
         <ol>
           <li>Is the model response to this significant increase of atmospheric CO2 what you expected?
   Justify your answer.</li>
@@ -1448,7 +1442,7 @@ The final <span class="notranslate">workflow</span> would be similar to the one 
         </ol>
 
         <blockquote class="solution">
-          <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>Running 5 years is already sufficient to highlight significant changes.
 <img src="../../images/LEAFC_ALP1_4CO2_ggplot.png" alt="LEAFC 4xCO2. " loading="lazy" /></li>
@@ -1475,14 +1469,14 @@ both simulations are represented on the same plot.</li>
 </ol>
 
 <blockquote class="comment">
-  <div id="comment-permissions" class="box-title" aria-label="comment box: Permissions"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Permissions</div>
+  <div class="box-title comment-title" id="comment-permissions" aria-label="comment box: Permissions"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Permissions</div>
   <p>Different servers have different default permission settings. Some servers create all of your datasets completely private to you, while others make them accessible if you know the secret ID.</p>
 
   <p>Be sure to select <strong>Also make all objects within the History accessible</strong> whenever you make a history accessible via link, otherwise whomever you send your link to might not be able to see your history.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-share-history" class="box-title" aria-label="hands-on box: Share history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Share history</div>
+  <div class="box-title hands-on-title" id="hands-on-share-history" aria-label="hands-on box: Share history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Share history</div>
 
   <ol>
     <li>Share your history with your neighbour (ask for his/her <span class="notranslate">galaxy</span> use<span class="notranslate">rna</span>me).</li>
@@ -1491,7 +1485,7 @@ both simulations are represented on the same plot.</li>
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-publish-your-history-to-https-workflowhub-eu" class="box-title" aria-label="comment box: Publish your history to https://workflowhub.eu/"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Publish your history to https://workflowhub.eu/</div>
+  <div class="box-title comment-title" id="comment-publish-your-history-to-https-workflowhub-eu" aria-label="comment box: Publish your history to https://workflowhub.eu/"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Publish your history to https://workflowhub.eu/</div>
   <p>One step further is to share your <span class="notranslate">workflow</span> on <a href="https://workflowhub.eu">https://workflowhub.eu</a> where it
 will be stored in a <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> format as well as in <a href="https://www.commonwl.org/">Common <span class="notranslate">Workflow</span> Language</a>.
 It provides standardised <span class="notranslate">workflow</span> identifiers and descriptions needed for <span class="notranslate">workflow</span> discovery, reuse, preservation, interoperability and monitoring and metadata harvesting using standard protocols.

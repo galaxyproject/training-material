@@ -892,15 +892,9 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
             Human Cell Atlas
         </a>
-        
-    
-        
-    
         
     
         
@@ -1002,7 +996,7 @@
 <p>Debido a la enorme cantidad de datos, hemos reducido la resolución de los archivos FASTQ para poder acelerar el análisis. Una vez que hemos aclarado este punto, todavía tienes que mapear enormes cantidades de lecturas al inmenso genoma murino, así que ¡ve por una taza de café y prepárate para iniciar el análisis!</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>En este tutorial abordaremos:</p>
 
@@ -1056,7 +1050,7 @@
 <p>Utilizaremos Alevin <span class="citation"><a href="#article-Alevin">Srivastava <i>et al.</i> 2019</a></span> con propósitos demostrativos, sin embargo no avalamos ningún método en particular.</p>
 
 <blockquote class="comment">
-  <div id="comment-comentario" class="box-title" aria-label="comment box: Comentario"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comentario: Comentario</div>
+  <div class="box-title comment-title" id="comment-comentario" aria-label="comment box: Comentario"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comentario: Comentario</div>
   <ul>
     <li>Notas sobre la traducción y uso de términos técnicos
 En este tutorial manejaremos algunos términos en el idioma original ya que simplificará la búsqueda posterior de información sobre el tema. Estas notas aparecerán en este tipo de recuadros y los términos estarán listados con la viñeta “•”.</li>
@@ -1078,7 +1072,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 Adicionalmente, necesitarás un transcriptoma (en formato FASTA) contra el cual podrás mapear tus lecturas, así como la información génica de cada transcrito (en un archivo tipo GTF). Adicionalmente, estos archivos están disponibles en el historial anteriormente mencionado, al igual que en los enlaces de Zenodo mostrados en la parte inferior de este párrafo, así que puede que tarden un buen rato en importarse. Puedes acceder a <a href="https://www.ensembl.org/info/data/ftp/index.html">Ensembl si deseas bajar datos</a> para tu especie de interés.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-cargar-datos-parte-1" class="box-title" aria-label="hands-on box: Cargar datos - Parte 1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Cargar datos - Parte 1</div>
+  <div class="box-title hands-on-title" id="hands-on-cargar-datos-parte-1" aria-label="hands-on box: Cargar datos - Parte 1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Cargar datos - Parte 1</div>
 
   <ol>
     <li>Crear un historial nuevo para este tutorial</li>
@@ -1093,7 +1087,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importación-por-medio-de-enlaces" class="box-title"><button type="button" aria-controls="tip-importación-por-medio-de-enlaces-contents" aria-expanded="true" aria-label="Toggle tip box: Importación por medio de enlaces"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Importación por medio de enlaces<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copia los enlaces</li>   <li>     <p>Abre el manejador de carga de datos de <span class="notranslate">Galaxy</span> (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> en la parte superior derecha del panel de herramientas)</p>   </li>   <li>Selecciona ‘Pegar/Traer datos’ <strong>Paste/Fetch Data</strong></li>   <li>     <p>Copia los enlaces en el campo de textos</p>   </li>   <li>     <p>Presiona ‘Iniciar’ <strong>Start</strong></p>   </li>   <li>     <p><strong>Close</strong> Cierra la ventana.</p>   </li>   <li><span class="notranslate">Galaxy</span> utiliza los URLs como nombres de forma predeterminada , así que los tendrás que cambiar a algunos que sean más útiles o informativos. the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importación-por-medio-de-enlaces"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importación-por-medio-de-enlaces-contents" aria-expanded="true" aria-label="Toggle tip box: Importación por medio de enlaces"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Importación por medio de enlaces<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copia los enlaces</li>   <li>     <p>Abre el manejador de carga de datos de <span class="notranslate">Galaxy</span> (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> en la parte superior derecha del panel de herramientas)</p>   </li>   <li>Selecciona ‘Pegar/Traer datos’ <strong>Paste/Fetch Data</strong></li>   <li>     <p>Copia los enlaces en el campo de textos</p>   </li>   <li>     <p>Presiona ‘Iniciar’ <strong>Start</strong></p>   </li>   <li>     <p><strong>Close</strong> Cierra la ventana.</p>   </li>   <li><span class="notranslate">Galaxy</span> utiliza los URLs como nombres de forma predeterminada , así que los tendrás que cambiar a algunos que sean más útiles o informativos. the window</li> </ul> </blockquote>
     </li>
     <li>Cambiar el nombre <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> de los conjuntos de datos</li>
   </ol>
@@ -1101,7 +1095,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-preguntas" class="box-title" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
+  <div class="box-title question-title" id="question-preguntas" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
 
   <p>Dale un vistazo a los archivos que ahora están en tu historial.</p>
   <ol>
@@ -1111,7 +1105,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-soluciones" class="box-title"><button type="button" aria-controls="solution-soluciones-contents" aria-expanded="true" aria-label="Toggle solution box: Soluciones"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Soluciones<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-soluciones"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-soluciones-contents" aria-expanded="true" aria-label="Toggle solution box: Soluciones"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Soluciones<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>La lectura 1 (SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k)  contiene el código de barras de la célula y el UMI ya que es significativamente más corta (¡solo 20pb!), en comparación con r_2 que es la lectura más larga de transcrito. Cambiaremos de nombre a estos archivos y los llamaremos N701-Read1 y N701-Read2 para hacer más claro el análisis.</li>
@@ -1130,7 +1124,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>Notarás en tus datos de ejemplo que la anotación de referencia murina se obtuvo en formato GTF desde Ensembl. Esta anotación contiene genes, exones, transcritos y todo tipo de información adicional de las secuencias. Utilizaremos esta información para generar el mapeo de correspondencia transcrito/genes. Esto lo haremos por medio del traspaso de información a una herramienta que extrae exclusivamente los identificadores de transcrito que necesitamos.</p>
 
 <blockquote class="comment">
-  <div id="comment-comentario-1" class="box-title" aria-label="comment box: Comentario"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comentario: Comentario</div>
+  <div class="box-title comment-title" id="comment-comentario-1" aria-label="comment box: Comentario"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comentario: Comentario</div>
   <p>Nota sobre la traducción y uso de términos técnicos</p>
   <ul>
     <li>Spike-in,	transcrito de ARN de cantidad y secuencia conocida utilizado para calibrar mediciones en ensayos de hibridación de ARN. Nos referiremos a este control con su nombre en el idioma inglés ya que su traducción no es utilizada comúnmente.</li>
@@ -1138,18 +1132,18 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-preguntas-1" class="box-title" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
+  <div class="box-title question-title" id="question-preguntas-1" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
 
   <p>¿Cuál de los ‘atributos’ en la última columna de los archivos GTF contiene los identificadores de transcrito y de gen?</p>
 
   <blockquote class="tip">
-    <div id="tip-una-pequeña-pista" class="box-title"><button type="button" aria-controls="tip-una-pequeña-pista-contents" aria-expanded="true" aria-label="Toggle tip box: Una pequeña pista"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Una pequeña pista<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-una-pequeña-pista"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-una-pequeña-pista-contents" aria-expanded="true" aria-label="Toggle tip box: Una pequeña pista"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Una pequeña pista<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>El archivo está organizado de tal modo que la última columna (con el nombre ‘Group’ en el encabezado) contiene una gran cantidad de información: attribute1 “información asociada con el atributo1”;attribute2 “información asociada con el atributo 2” etc.</p>
   </blockquote>
 
   <blockquote class="solution">
-    <div id="solution-solución" class="box-title"><button type="button" aria-controls="solution-solución-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>A gene_id y transcript_id les sigue “ensembl gene_id” y “ensembl transcript_id”</p>
   </blockquote>
 </blockquote>
@@ -1157,7 +1151,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>Ahora es el momento de analizar el archivo GTF utilizando el paquete de R <a href="https://bioconductor.org/packages/release/bioc/html/rtracklayer.html">rtracklayer</a>. Este análisis proporcionará una tabla de conversión con un listado de identificadores de transcritos y sus genes correspondientes para hacer conteos. Adicionalmente, ya que generaremos nuestro propio índice binario (más sobre esto en secciones posteriores), también necesitaremos proporcionar nuestro archivo FASTA para que pueda ser filtrado y que al final solo contenga la información del transcriptoma que está contenida en el archivo GTF.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-generar-un-archivo-fasta-filtrado-y-un-mapa-de-correspondencia-de-transcritos-a-genes" class="box-title" aria-label="hands-on box: Generar un archivo FASTA filtrado y un mapa de correspondencia de transcritos a genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Generar un archivo FASTA filtrado y un mapa de correspondencia de transcritos a genes</div>
+  <div class="box-title hands-on-title" id="hands-on-generar-un-archivo-fasta-filtrado-y-un-mapa-de-correspondencia-de-transcritos-a-genes" aria-label="hands-on box: Generar un archivo FASTA filtrado y un mapa de correspondencia de transcritos a genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Generar un archivo FASTA filtrado y un mapa de correspondencia de transcritos a genes</div>
 
   <ol>
     <li>Ejecutar la herramienta GTF2GeneList <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6"><strong>GTF2GeneList</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+<span class="notranslate">galaxy</span>6</span></span>  utilizando los siguiente parámetros:
@@ -1186,7 +1180,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>Alevin reduce a un solo proceso los pasos requeridos para realizar dsc<span class="notranslate">RNA</span>-Seq. Dichas herramientas requieren comparar las secuencias de tu muestra a una referencia que contenga todas las secuencias probables de transcritos (un ‘transcriptoma). Esto contendrá las secuencias biológicas de los transcritos conocidos en una especie determinada, y quizás también contendrá secuencias técnicas como ‘spike ins’.</p>
 
 <blockquote class="details">
-  <div id="details-cómo-trabaja-alevin" class="box-title"><button type="button" aria-controls="details-cómo-trabaja-alevin-contents" aria-expanded="true" aria-label="Toggle details box: ¿Cómo trabaja Alevin?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Detalles: ¿Cómo trabaja Alevin?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-cómo-trabaja-alevin"><button class="gtn-boxify-button details" type="button" aria-controls="details-cómo-trabaja-alevin-contents" aria-expanded="true" aria-label="Toggle details box: ¿Cómo trabaja Alevin?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Detalles: ¿Cómo trabaja Alevin?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Alevin necesita convertir las secuencias de texto contenidas dentro del formato FASTA a algo con lo que pueda realizar búsquedas rápidamente dentro del transcriptoma, ese ‘algo’ es un archivo llamado ‘índice’ (‘index’). El índice es un archivo binario (un tipo de archivos optimizados para el uso de ordenadores y que no es legible ‘por humanos’), pero permite que Alevin realice búsquedas rápidas. El índice puede variar entre experimentos debido al tipo de secuencias técnicas y biológicas que necesitamos incluir en él, y ya que frecuentemente queremos utilizar las referencias más actualizadas, ya sea que provengan de Ensembl o NCBI, a menudo pudiésemos terminar reconstruyendo los índices. El generar estos índices requiere mucho tiempo. Échale un vistazo al archivo FASTA no comprimido para que veas cómo es la estructura inicial.</p>
 
@@ -1208,25 +1202,25 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <figure id="figure-2"><img src="../../images/scrna-casestudy/wab-tutorial-option-filler.png" alt="La herramienta en el tutorial de Galaxy tiene un botón. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figura 2:</span> Haz click sobre la herramienta en el tutorial de <span class="notranslate">Galaxy</span></figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-practica-ejecutando-alevin" class="box-title" aria-label="hands-on box: Practica: Ejecutando Alevin"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Practica: Ejecutando Alevin</div>
+  <div class="box-title hands-on-title" id="hands-on-practica-ejecutando-alevin" aria-label="hands-on box: Practica: Ejecutando Alevin"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Practica: Ejecutando Alevin</div>
 
   <ol>
     <li>
       <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2"><strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+<span class="notranslate">galaxy</span>2</span></span></p>
 
       <blockquote class="question">
-        <div id="question-preguntas-2" class="box-title" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
+        <div class="box-title question-title" id="question-preguntas-2" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
 
         <p>Intenta dar valores a los parámetros de Alevin utilizando lo que sabes por el momento.</p>
 
         <blockquote class="tip">
-          <div id="tip-sobre-la-direccionalidad-de-las-cadenas-de-rna-strandness" class="box-title"><button type="button" aria-controls="tip-sobre-la-direccionalidad-de-las-cadenas-de-rna-strandness-contents" aria-expanded="true" aria-label="Toggle tip box: Sobre la direccionalidad de las cadenas de RNA (Strandness)"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Sobre la direccionalidad de las cadenas de <span class="notranslate">RNA</span> (Strandness)<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title tip-title" id="tip-sobre-la-direccionalidad-de-las-cadenas-de-rna-strandness"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-sobre-la-direccionalidad-de-las-cadenas-de-rna-strandness-contents" aria-expanded="true" aria-label="Toggle tip box: Sobre la direccionalidad de las cadenas de RNA (Strandness)"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Sobre la direccionalidad de las cadenas de <span class="notranslate">RNA</span> (Strandness)<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <p>La documentación sobre ‘Tipos de bibliotecas de fragmentos’ (‘Fragment Library Types‘) de de la herramienta salmón, el ejecutar el comando de Alevin (<a href="https://salmon.readthedocs.io/en/latest/library_type.html]">salmon.readthedocs.io/en/latest/library_type.html</a> y <a href="https://salmon.readthedocs.io/en/latest/alevin.html">salmon.readthedocs.io/en/latest/alevin.html</a>) nos serán de ayuda en este caso; aunque ten en cuenta que la imagen ahí se dibuja con el ARN 5’ en la parte superior, mientras que en este protocolo de sc<span class="notranslate">RNA</span>-Seq el segmento polyA es capturado por su extremo 3’, y, por lo tanto, efectivamente la hebra inferior o inversa.)</p>
         </blockquote>
 
         <blockquote class="solution">
-          <div id="solution-solución-valores-de-los-parámetros" class="box-title"><button type="button" aria-controls="solution-solución-valores-de-los-parámetros-contents" aria-expanded="true" aria-label="Toggle solution box: Solución: valores de los parámetros"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución: valores de los parámetros<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-solución-valores-de-los-parámetros"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-valores-de-los-parámetros-contents" aria-expanded="true" aria-label="Toggle solution box: Solución: valores de los parámetros"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución: valores de los parámetros<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <ul>
             <li><em>“Select a reference transcriptome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use one from the history</code>
               <ul>
@@ -1256,7 +1250,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-comentario-2" class="box-title" aria-label="comment box: Comentario"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comentario: Comentario</div>
+  <div class="box-title comment-title" id="comment-comentario-2" aria-label="comment box: Comentario"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comentario: Comentario</div>
   <p>Notas sobre la traducción de algunos de los valores de los parámetros:
 En este tutorial manejaremos algunos términos en el idioma original ya que simplificará la búsqueda posterior de información sobre el tema. Estas notas aparecerán en estos recuadros y los términos estarán listados con la viñeta “•”.</p>
   <ul>
@@ -1300,7 +1294,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-qué-sucede-si-estoy-procesando-una-muestra-10x" class="box-title" aria-label="comment box: ¿Qué sucede si estoy procesando una muestra 10x??"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comentario: ¿Qué sucede si estoy procesando una muestra 10x??</div>
+  <div class="box-title comment-title" id="comment-qué-sucede-si-estoy-procesando-una-muestra-10x" aria-label="comment box: ¿Qué sucede si estoy procesando una muestra 10x??"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comentario: ¿Qué sucede si estoy procesando una muestra 10x??</div>
 
   <p>En Alevin, “Protocol” (Protocolo) es el parámetro principal que debe cambiarse para una muestra 10X Chromium. Simplemente selecciona los reactivos correspondientes a la química de 10x en lugar de Drop-seq.</p>
 </blockquote>
@@ -1316,7 +1310,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <p>Este es el formato “matrix market” (MTX).</p>
 
 <blockquote class="question">
-  <div id="question-preguntas-3" class="box-title" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
+  <div class="box-title question-title" id="question-preguntas-3" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
 
   <p>Echa un vistazo a los diversos archivos generados después de ejecutar Alevin. ¿Puedes localizar las siguientes dos cosas?…</p>
   <ol>
@@ -1325,7 +1319,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-solución-1" class="box-title"><button type="button" aria-controls="solution-solución-1-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-1-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Inspecciona <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> el archivo <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> meta_info.json. Puedes ver que la tasa de mapeo es un insignificante <code class="language-plaintext highlighter-rouge">24.75%</code>. Esta tasa es terrible. ¿Por qué sucede esto? Recuerda que este archivo fue submuestreado, siendo específicos, solo tomamos las últimas 400,000 lecturas del archivo FASTQ. La tasa general de mapeo del archivo es de alrededor del 50%, que sigue siendo una tasa muy baja, pero en general se pueden esperar tasas de mapeos ligeramente menores para muestras que fueron procesadas durante los inicios de las técnicas Drop-Seq y la secuenciación de ARN de células únicas. Actualmente las muestras procesadas con la técnica 10x son mucho mejores. Después de todo, los datos que estamos utilizando son reales, no son datos de prueba.</li>
@@ -1337,7 +1331,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 </blockquote>
 
 <blockquote class="warning">
-  <div id="warning-de-aquí-en-adelante-selecciona-la-entrada-apropiada" class="box-title" aria-label="warning box: De aquí en adelante selecciona la entrada apropiada."><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> ¡Precaucion!: De aquí en adelante selecciona la entrada apropiada.</div>
+  <div class="box-title warning-title" id="warning-de-aquí-en-adelante-selecciona-la-entrada-apropiada" aria-label="warning box: De aquí en adelante selecciona la entrada apropiada."><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> ¡Precaucion!: De aquí en adelante selecciona la entrada apropiada.</div>
   <p>Asegurate de usar el archivo <strong>quants_mat.mtx.gz</strong>, NO EL ARCHIVO <em>quants_tier.mtx.gz</em>.</p>
 </blockquote>
 
@@ -1348,7 +1342,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <p>La pregunta que buscamos contestar aquí es: “En su mayoría, ¿tenemos una sola célula por gota?”. Este es el principal objetivo, pero no es del todo sencillo obtener exactamente una sola célula por cada gota. En algunas ocasiones casi ninguna célula logra depositarse en las gotas, en otras ocasiones tenemos demasiadas células por gota. Cuando menos deberíamos poder distinguir fácilmente las gotas que contienen células de las que no las contienen.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-generar-un-gráfico-inicial-de-control-de-calidad-qc" class="box-title" aria-label="hands-on box: Generar un gráfico inicial de control de calidad (QC)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Generar un gráfico inicial de control de calidad (QC)</div>
+  <div class="box-title hands-on-title" id="hands-on-generar-un-gráfico-inicial-de-control-de-calidad-qc" aria-label="hands-on box: Generar un gráfico inicial de control de calidad (QC)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Generar un gráfico inicial de control de calidad (QC)</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2"><strong>Droplet barcode rank plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+<span class="notranslate">galaxy</span>2</span></span>  Gráfico de rangos de códigos de barras obtenido por técnicas de goteo (Droplet barcode rank plot) con los siguientes parámetros:
@@ -1377,7 +1371,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <p>A la derecha encontramos los gráficos de densidad de la primera, y los umbrales generados ya sea utilizando <a href="https://bioconductor.org/packages/release/bioc/html/DropletUtils.html">dropletUtils</a> o por medio del método descrito en la discusión que se mencionó con anterioridad (en la parte superior). Podremos utilizar cualquiera de estos umbrales para seleccionar células, asumiendo que cualquier medición con conteos menores es una célula válida. Alevin hace algo similar por defecto, y podemos aprender algo de esto graficando únicamente los códigos de barras que retiene Alevin.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-obtener-el-gráfico-de-código-de-barras-de-alevin" class="box-title" aria-label="hands-on box: Obtener el gráfico de código de barras de Alevin"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Obtener el gráfico de código de barras de Alevin</div>
+  <div class="box-title hands-on-title" id="hands-on-obtener-el-gráfico-de-código-de-barras-de-alevin" aria-label="hands-on box: Obtener el gráfico de código de barras de Alevin"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Obtener el gráfico de código de barras de Alevin</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2"><strong>Droplet barcode rank plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+<span class="notranslate">galaxy</span>2</span></span>  Genera el gráfico de código de barras basado en goteos utilizando los siguientes parámetros:
@@ -1413,7 +1407,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <h2 id="generar-una-matriz-sin-procesamiento-en-un-formato-utilizable">Generar una matriz sin procesamiento en un formato utilizable</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-prevenir-que-alevin-utilice-sus-propios-umbrales" class="box-title" aria-label="hands-on box: Prevenir que Alevin utilice sus propios umbrales"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Prevenir que Alevin utilice sus propios umbrales</div>
+  <div class="box-title hands-on-title" id="hands-on-prevenir-que-alevin-utilice-sus-propios-umbrales" aria-label="hands-on box: Prevenir que Alevin utilice sus propios umbrales"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Prevenir que Alevin utilice sus propios umbrales</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2"><strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+<span class="notranslate">galaxy</span>2</span></span>  (Haz clic sobre la última salida de Alevin para volver a ejecutar)
       <ul>
@@ -1425,16 +1419,16 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
   </ol>
 
   <!--SNIPPET-->
-  <blockquote class="tip">   <div id="tip-para-volver-a-ejecutar-una-herramienta" class="box-title"><button type="button" aria-controls="tip-para-volver-a-ejecutar-una-herramienta-contents" aria-expanded="true" aria-label="Toggle tip box: Para volver a ejecutar una herramienta"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Para volver a ejecutar una herramienta<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li><strong>Expande</strong> uno de los conjuntos de datos de la salida de la herramienta haciendo clic sobre él</li>   <li><strong>Selecciona</strong> volver a ejecutar <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> de la herramienta</li> </ol>   <p>Esto es de utilidad si quieres volver a correr la herramienta variando ligeramente los valores de los parámetros, o si deseas verificar la configuración de parámetros que utilizaste.</p> </blockquote>
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-para-volver-a-ejecutar-una-herramienta"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-para-volver-a-ejecutar-una-herramienta-contents" aria-expanded="true" aria-label="Toggle tip box: Para volver a ejecutar una herramienta"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Para volver a ejecutar una herramienta<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li><strong>Expande</strong> uno de los conjuntos de datos de la salida de la herramienta haciendo clic sobre él</li>   <li><strong>Selecciona</strong> volver a ejecutar <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> de la herramienta</li> </ol>   <p>Esto es de utilidad si quieres volver a correr la herramienta variando ligeramente los valores de los parámetros, o si deseas verificar la configuración de parámetros que utilizaste.</p> </blockquote>
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-pregunta" class="box-title" aria-label="question box: Pregunta"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta</div>
+  <div class="box-title question-title" id="question-pregunta" aria-label="question box: Pregunta"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta</div>
 
   <p>¿Cuántas células hay ahora en la salida?</p>
 
   <blockquote class="solution">
-    <div id="solution-solución-2" class="box-title"><button type="button" aria-controls="solution-solución-2-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-2-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>¡Ahora hay <code class="language-plaintext highlighter-rouge">22539</code> células en quants_mat_rows! Muchas más que las <code class="language-plaintext highlighter-rouge">2163</code> que Alevin filtró. ¡Esto necesita ser filtrado en serio con emptyDrops!</li>
@@ -1447,12 +1441,12 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <p>Alevin da salida a un formato MTX, el cual puede ser la entrada del paquete dropletUtils y procesarse en emptyDrops. Desafortunadamente la matriz tiene una orientación equivocada. La matriz no puede ser procesada por herramientas cuya entrada son archivos como los que produce el software 10X. Necesitamos ‘transformar’ la matriz de tal forma que las células esten en columnas y los genes en filas.</p>
 
 <blockquote class="warning">
-  <div id="warning" class="box-title" aria-label="warning box: "><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> ¡Precaucion!</div>
+  <div class="box-title warning-title" id="warning" aria-label="warning box: "><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> ¡Precaucion!</div>
   <p>¡No mezcles los archivos de distintas ejecuciones de Alevin! Utiliza la última ejecución, la cual tiene los números más altos en el historial.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-transformación-de-la-matriz" class="box-title" aria-label="hands-on box: Transformación de la matriz"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Transformación de la matriz</div>
+  <div class="box-title hands-on-title" id="hands-on-transformación-de-la-matriz" aria-label="hands-on box: Transformación de la matriz"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Transformación de la matriz</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy5" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy5"><strong>salmonKallistoMtxTo10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+<span class="notranslate">galaxy</span>5</span></span>  con los siguientes parámetros:
@@ -1473,12 +1467,12 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <h2 id="añadir-metadatos-de-genes">Añadir metadatos de genes</h2>
 
 <blockquote class="question">
-  <div id="question-pregunta-1" class="box-title" aria-label="question box: Pregunta"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta</div>
+  <div class="box-title question-title" id="question-pregunta-1" aria-label="question box: Pregunta"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta</div>
 
   <p>¿Dónde podemos encontrar esta información sobre los genes?</p>
 
   <blockquote class="solution">
-    <div id="solution-solución-3" class="box-title"><button type="button" aria-controls="solution-solución-3-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-3-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Dentro de un archivo GTF, nuestro viejo amigo.</p>
 
@@ -1487,12 +1481,12 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-pregunta-2" class="box-title" aria-label="question box: Pregunta"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta</div>
+  <div class="box-title question-title" id="question-pregunta-2" aria-label="question box: Pregunta"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta</div>
 
   <p>¿Cual de los ‘atributos’ dentro de la última columna del archivo contiene el acrónimo de los genes?</p>
 
   <blockquote class="solution">
-    <div id="solution-solución-4" class="box-title"><button type="button" aria-controls="solution-solución-4-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-4-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>gene_name</p>
 
@@ -1503,7 +1497,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <p>Ahora vamos a volver a ejecutar la herramienta que extrae información contenida dentro de nuestro archivo GTF.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-generar-información-de-genes" class="box-title" aria-label="hands-on box: Generar información de genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Generar información de genes</div>
+  <div class="box-title hands-on-title" id="hands-on-generar-información-de-genes" aria-label="hands-on box: Generar información de genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Generar información de genes</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6"><strong>GTF2GeneList</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+<span class="notranslate">galaxy</span>6</span></span>  con los siguientes parámetros:
@@ -1525,7 +1519,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <p>Inspecciona <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> el objeto <strong>Gene Information</strong> del historial. Ahora has incluido un nuevo campo para gene_id, esto incluye el nombre de los genes y una columna para información mitocondrial (false = not mitochondrial, true = mitochondrial). Necesitamos añadir esta información a la tabla de salida ‘Gene table’ proveniente de la herramienta salmonKallistoMtxto10x. Sin embargo, necesitamos mantener la tabla ‘Gene table’ en el mismo orden, ya que se hace referencia a ella en las filas de la tabla ‘Matrix table’.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-combinar-la-tabla-de-genes-mtx-con-la-información-de-los-genes" class="box-title" aria-label="hands-on box: Combinar la tabla de genes MTX con la información de los genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Combinar la tabla de genes MTX con la información de los genes</div>
+  <div class="box-title hands-on-title" id="hands-on-combinar-la-tabla-de-genes-mtx-con-la-información-de-los-genes" aria-label="hands-on box: Combinar la tabla de genes MTX con la información de los genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Combinar la tabla de genes MTX con la información de los genes</div>
 
   <ol>
     <li><span class="tool" data-tool="join1" title="Tested with join1"><strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: join1</span></span>  con los siguientes parámetros:
@@ -1560,7 +1554,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <p>La herramienta emptyDrops <span class="citation"><a href="#article-emptyDrops">Lun <i>et al.</i> 2019</a></span> trabaja con un tipo específico de objeto R llamado SingleCellExperiment. Necesitamos convertir nuestros archivos transformados MTX a este tipo de objetos, esto lo haremos utilizando la herramienta Read10x de DropletUtils:</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-convertir-al-formato-singlecellexperiment" class="box-title" aria-label="hands-on box: Convertir al formato SingleCellExperiment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Convertir al formato SingleCellExperiment</div>
+  <div class="box-title hands-on-title" id="hands-on-convertir-al-formato-singlecellexperiment" aria-label="hands-on box: Convertir al formato SingleCellExperiment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Convertir al formato SingleCellExperiment</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.3+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.3+galaxy2"><strong>DropletUtils Read10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.3+<span class="notranslate">galaxy</span>2</span></span>  con los siguientes parámetros:
@@ -1578,7 +1572,7 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 <p>¡Fantástico! Ya hemos convertido la matriz en el objeto que ocupamos, siendo más específicos, la hemos convertido al formato SingleCellExperiment, ¡Ahora podemos ejecutar emptyDrops! Pero primero deshagámonos de esas gotas que no contienen células.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-emptydrops" class="box-title" aria-label="hands-on box: emptyDrops"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: emptyDrops</div>
+  <div class="box-title hands-on-title" id="hands-on-emptydrops" aria-label="hands-on box: emptyDrops"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: emptyDrops</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1"><strong>DropletUtils emptyDrops</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+<span class="notranslate">galaxy</span>1</span></span>  con los siguientes parámetros:
@@ -1595,18 +1589,18 @@ En este tutorial manejaremos algunos términos en el idioma original ya que simp
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-pregunta-3" class="box-title" aria-label="question box: Pregunta"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta</div>
+  <div class="box-title question-title" id="question-pregunta-3" aria-label="question box: Pregunta"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Pregunta</div>
 
   <p>¿Cuántos códigos de barras de células quedan después de procesar emptyDrops? ¿Por qué será esto?</p>
 
   <blockquote class="tip">
-    <div id="tip-pista" class="box-title"><button type="button" aria-controls="tip-pista-contents" aria-expanded="true" aria-label="Toggle tip box: Pista"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Pista<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-pista"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-pista-contents" aria-expanded="true" aria-label="Toggle tip box: Pista"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Pista<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Si haces clic sobre el <code class="language-plaintext highlighter-rouge">Stringent-Object</code> en el historial <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-history</span>, el texto de la ventana dice <code class="language-plaintext highlighter-rouge">22 barcodes</code> o algo similar.  ¿Por qué es tan bajo?
 Toma en consideración, ¿Es este un conjunto de datos completo?</p>
   </blockquote>
 
   <blockquote class="solution">
-    <div id="solution-solución-5" class="box-title"><button type="button" aria-controls="solution-solución-5-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-solución-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-solución-5-contents" aria-expanded="true" aria-label="Toggle solution box: Solución"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Solución<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Recuerda que este conjunto de datos está submestreado. Si observas detenidamente los parámetros de emptyDrops, verás que la herramienta estableció un umbral mínimo de 100 UMI. Analizando los gráficos de códigos de barras mostrados en este tutorial, para la muestra de 400k lecturas, verás que este umbral es demasiado riguroso para la muestra submuestreada. Saliendo de dudas, este umbral mínimo daría como resultado <code class="language-plaintext highlighter-rouge">3011</code> códigos de barras para la muestra total.</p>
 
@@ -1617,7 +1611,7 @@ Toma en consideración, ¿Es este un conjunto de datos completo?</p>
 <p>Ejecutemos de nuevo y cambiemos parámetros; volvamos a ejecutar la herramienta con un umbral mínimo más laxo.</p>
 
 <blockquote class="details">
-  <div id="details-estás-trabajando-en-equipo-hora-de-tomar-decisiones" class="box-title"><button type="button" aria-controls="details-estás-trabajando-en-equipo-hora-de-tomar-decisiones-contents" aria-expanded="true" aria-label="Toggle details box: ¿Estás trabajando en equipo? ¡Hora de tomar decisiones!"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Detalles: ¿Estás trabajando en equipo? ¡Hora de tomar decisiones!<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-estás-trabajando-en-equipo-hora-de-tomar-decisiones"><button class="gtn-boxify-button details" type="button" aria-controls="details-estás-trabajando-en-equipo-hora-de-tomar-decisiones-contents" aria-expanded="true" aria-label="Toggle details box: ¿Estás trabajando en equipo? ¡Hora de tomar decisiones!"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Detalles: ¿Estás trabajando en equipo? ¡Hora de tomar decisiones!<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Si estáis trabajando en equipo en este punto tenéis la oportunidad de tomar diversas rutas, la primera utilizando un control y el resto variando números para que podáis comparar resultados a lo largo de los tutoriales.</p>
   <ul>
     <li>Variable: <strong>UMI count lower bound</strong></li>
@@ -1627,7 +1621,7 @@ Toma en consideración, ¿Es este un conjunto de datos completo?</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-emptydrops-intentemoslo-de-nuevo" class="box-title" aria-label="hands-on box: emptyDrops - ¡Intentemoslo de nuevo!"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: emptyDrops - ¡Intentemoslo de nuevo!</div>
+  <div class="box-title hands-on-title" id="hands-on-emptydrops-intentemoslo-de-nuevo" aria-label="hands-on box: emptyDrops - ¡Intentemoslo de nuevo!"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: emptyDrops - ¡Intentemoslo de nuevo!</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1"><strong>DropletUtils emptyDrops</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+<span class="notranslate">galaxy</span>1</span></span>  con los siguiente parámetros:
@@ -1647,7 +1641,7 @@ Toma en consideración, ¿Es este un conjunto de datos completo?</p>
 <p>¡En este punto debes tener <code class="language-plaintext highlighter-rouge">111</code> códigos de barras! Ahora tienes una matriz de expresión anotada y lista para los procesos y análisis subsecuentes, ¡Bien hecho! Sin embargo, en los siguientes tutoriales nos vincularemos al uso de una herramienta llamada Scanpy. Por tanto, necesitarás convertir este objeto SingleCellExperiment a un formato llamado <code class="language-plaintext highlighter-rouge">annData</code>, el cual es una variante de un archivo que utiliza un formato llamado <code class="language-plaintext highlighter-rouge">hdf5</code>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-conversión-al-formato-anndata" class="box-title" aria-label="hands-on box: Conversión al formato AnnData"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Conversión al formato AnnData</div>
+  <div class="box-title hands-on-title" id="hands-on-conversión-al-formato-anndata" aria-label="hands-on box: Conversión al formato AnnData"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Conversión al formato AnnData</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1"><strong>SCEasy convert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+<span class="notranslate">galaxy</span>1</span></span>  con los siguientes parámetros:
@@ -1673,7 +1667,7 @@ Toma en consideración, ¿Es este un conjunto de datos completo?</p>
 <h2 id="datos">Datos</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-cargar-datos-combinar-archivos" class="box-title" aria-label="hands-on box: Cargar datos - Combinar archivos"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Cargar datos - Combinar archivos</div>
+  <div class="box-title hands-on-title" id="hands-on-cargar-datos-combinar-archivos" aria-label="hands-on box: Cargar datos - Combinar archivos"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Cargar datos - Combinar archivos</div>
 
   <ol>
     <li>Crear un historial huevo para este tutorial (si es que no estás importando el historial mencionado en la parte superior)</li>
@@ -1692,14 +1686,14 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importación-por-medio-de-enlaces-1" class="box-title"><button type="button" aria-controls="tip-importación-por-medio-de-enlaces-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importación por medio de enlaces"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Importación por medio de enlaces<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copia los enlaces</li>   <li>     <p>Abre el manejador de carga de datos de <span class="notranslate">Galaxy</span> (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> en la parte superior derecha del panel de herramientas)</p>   </li>   <li>Selecciona ‘Pegar/Traer datos’ <strong>Paste/Fetch Data</strong></li>   <li>     <p>Copia los enlaces en el campo de textos</p>   </li>   <li>     <p>Presiona ‘Iniciar’ <strong>Start</strong></p>   </li>   <li>     <p><strong>Close</strong> Cierra la ventana.</p>   </li>   <li><span class="notranslate">Galaxy</span> utiliza los URLs como nombres de forma predeterminada , así que los tendrás que cambiar a algunos que sean más útiles o informativos. the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importación-por-medio-de-enlaces-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importación-por-medio-de-enlaces-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importación por medio de enlaces"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Importación por medio de enlaces<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copia los enlaces</li>   <li>     <p>Abre el manejador de carga de datos de <span class="notranslate">Galaxy</span> (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> en la parte superior derecha del panel de herramientas)</p>   </li>   <li>Selecciona ‘Pegar/Traer datos’ <strong>Paste/Fetch Data</strong></li>   <li>     <p>Copia los enlaces en el campo de textos</p>   </li>   <li>     <p>Presiona ‘Iniciar’ <strong>Start</strong></p>   </li>   <li>     <p><strong>Close</strong> Cierra la ventana.</p>   </li>   <li><span class="notranslate">Galaxy</span> utiliza los URLs como nombres de forma predeterminada , así que los tendrás que cambiar a algunos que sean más útiles o informativos. the window</li> </ul> </blockquote>
     </li>
     <li>Cambiar de nombre al conjunto de datos</li>
     <li>
       <p>Verifica que el tipo de datos sea <code class="language-plaintext highlighter-rouge">h5ad</code> de lo contrario ¡Necesitarás cambiar cada tipo de datos al formato <code class="language-plaintext highlighter-rouge">h5ad</code>!</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-cambiar-el-tipo-de-datos" class="box-title"><button type="button" aria-controls="tip-cambiar-el-tipo-de-datos-contents" aria-expanded="true" aria-label="Toggle tip box: Cambiar el tipo de datos"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Cambiar el tipo de datos<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Selecciona sobre el <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>icono del lápiz</strong> para editar los atributos del conjunto de datos</li>   <li>Selecciona en la pestaña <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> en la parte superior del panel central</li>   <li>Selecciona <code class="language-plaintext highlighter-rouge">datatypes</code></li>   <li>Da clic en el botón <strong>Change datatype</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-cambiar-el-tipo-de-datos"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-cambiar-el-tipo-de-datos-contents" aria-expanded="true" aria-label="Toggle tip box: Cambiar el tipo de datos"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Consejo: Cambiar el tipo de datos<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Selecciona sobre el <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>icono del lápiz</strong> para editar los atributos del conjunto de datos</li>   <li>Selecciona en la pestaña <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> en la parte superior del panel central</li>   <li>Selecciona <code class="language-plaintext highlighter-rouge">datatypes</code></li>   <li>Da clic en el botón <strong>Change datatype</strong></li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1709,7 +1703,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 
 <h2 id="concatenación-de-objetos">Concatenación de objetos</h2>
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-concatenación-de-objetos-anndata" class="box-title" aria-label="hands-on box: Concatenación de objetos AnnData"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Concatenación de objetos AnnData</div>
+  <div class="box-title hands-on-title" id="hands-on-concatenación-de-objetos-anndata" aria-label="hands-on box: Concatenación de objetos AnnData"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Concatenación de objetos AnnData</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>0</span></span>  con los siguientes parámetros:
@@ -1728,7 +1722,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 <p>¡Demos un vistazo a lo que hemos hecho! Desafortunadamente, los objetos AnnData son bastante complicados, así que aquí el icono del ojo <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> no nos será de mucha ayuda. En lugar de esto, de aquí en adelante vamos a utilizar una herramienta para visualizar nuestro objeto.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-inspección-de-objetos-anndata" class="box-title" aria-label="hands-on box: Inspección de objetos AnnData"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Inspección de objetos AnnData</div>
+  <div class="box-title hands-on-title" id="hands-on-inspección-de-objetos-anndata" aria-label="hands-on box: Inspección de objetos AnnData"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Inspección de objetos AnnData</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+<span class="notranslate">galaxy</span>0</span></span>  con los siguiente parámetros:
@@ -1755,7 +1749,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 <p>Ya hemos visualizado las tres salidas de <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Inspect AnnData</strong>.</p>
 
 <blockquote class="question">
-  <div id="question-preguntas-4" class="box-title" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
+  <div class="box-title question-title" id="question-preguntas-4" aria-label="question box: Preguntas"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Preguntas: Preguntas</div>
 
   <ol>
     <li>¿Cuántas células tienes ahora?</li>
@@ -1763,7 +1757,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-soluciones-1" class="box-title"><button type="button" aria-controls="solution-soluciones-1-contents" aria-expanded="true" aria-label="Toggle solution box: Soluciones"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Soluciones<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-soluciones-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-soluciones-1-contents" aria-expanded="true" aria-label="Toggle solution box: Soluciones"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solución: Soluciones<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Si verificas la salida <strong>General information</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, podrás ver que ahora tienes <code class="language-plaintext highlighter-rouge">4079 células</code>, ya que la matriz ahora tiene 4079 células y 35,734 genes. También puedes observar esto en los tamaños de los archivos <strong>obs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (células) and <strong>var</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (genes).</li>
@@ -1841,7 +1835,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 <p>Los dos metadatos más críticos en este experimento son <code class="language-plaintext highlighter-rouge">sex</code> y <code class="language-plaintext highlighter-rouge">genotype</code>. Posteriormente, vamos a colorear nuestros gráficos de células según los valores de estos parámetros, así que vamos a añadirlos ya.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-etiquetas-de-sexo" class="box-title" aria-label="hands-on box: Etiquetas de sexo"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Etiquetas de sexo</div>
+  <div class="box-title hands-on-title" id="hands-on-etiquetas-de-sexo" aria-label="hands-on box: Etiquetas de sexo"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Etiquetas de sexo</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3"><strong>Replace Text in a specific column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</span></span>  con los siguientes parámetros:
@@ -1894,7 +1888,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 <p>Estuvo divertido, ahora hagámoslo de nuevo pero para el genotipo.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-etiquetas-de-genotipo" class="box-title" aria-label="hands-on box: Etiquetas de genotipo"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Etiquetas de genotipo</div>
+  <div class="box-title hands-on-title" id="hands-on-etiquetas-de-genotipo" aria-label="hands-on box: Etiquetas de genotipo"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Etiquetas de genotipo</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3"><strong>Replace Text in a specific column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3</span></span>  con los siguientes parámetros:
@@ -1947,7 +1941,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 <p>Es posible que desees hacer esto con distintos tipos de metadatos - qué laboratorios manejaron las muestras, en qué día se procesaron, etc. Una vez que hayas agregado todas tus columnas de metadatos, podemos entonces adherirlas unas a otras antes de conectarlas al objeto AnnData.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-combinar-las-columnas-de-metadatos" class="box-title" aria-label="hands-on box: Combinar las columnas de metadatos"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Combinar las columnas de metadatos</div>
+  <div class="box-title hands-on-title" id="hands-on-combinar-las-columnas-de-metadatos" aria-label="hands-on box: Combinar las columnas de metadatos"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Combinar las columnas de metadatos</div>
 
   <ol>
     <li><span class="tool" data-tool="Paste1" title="Tested with Paste1"><strong>Paste two files side by side</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Paste1</span></span>  con los siguientes parámetros:
@@ -1964,7 +1958,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 <p>¡Agrégalo al objeto AnnData!</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-añadir-los-metadatos-al-objeto-anndata" class="box-title" aria-label="hands-on box: Añadir los metadatos al objeto AnnData"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Añadir los metadatos al objeto AnnData</div>
+  <div class="box-title hands-on-title" id="hands-on-añadir-los-metadatos-al-objeto-anndata" aria-label="hands-on box: Añadir los metadatos al objeto AnnData"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Añadir los metadatos al objeto AnnData</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>0</span></span>  con los siguientes parámetros:
@@ -1981,7 +1975,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 <p>¡Perfecto! Ahora puedes ejecutar <strong>Inspect AnnData</strong> para verificación, pero primero limpiemos un poco más este objeto. Sería mucho mejor si “lote” (<code class="language-plaintext highlighter-rouge">batch</code>) significara algo, en lugar de “el orden en el que la herramienta ‘Manipulate AnnData’ agregó mis conjuntos de datos”.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-etiquetado-de-lotes" class="box-title" aria-label="hands-on box:  Etiquetado de lotes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica:  Etiquetado de lotes</div>
+  <div class="box-title hands-on-title" id="hands-on-etiquetado-de-lotes" aria-label="hands-on box:  Etiquetado de lotes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica:  Etiquetado de lotes</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+<span class="notranslate">galaxy</span>0</span></span>  con los siguientes parámetros:
@@ -2002,7 +1996,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 <p>¿Recuerdas cuando mencionamos mitocondrias en los inicios de este tutorial? Y en muestras de células únicas, ¿Cómo de frecuente el ARN mitocondrial es un indicador de estrés durante la disociación? Probablemente deberíamos hacer algo con nuestra columna de verdadero/falso (true/false) en la anotación de genes, la cual nos provee información sobre las células. Ya sea que hayas combinado los archivos FASTQ o que estés analizando solo un archivo necesitarás hacer esto (saltándose así las secciones 4 y 5).</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-calculando-el-arn-mitocondrial-en-las-células" class="box-title" aria-label="hands-on box: Calculando el ARN mitocondrial en las células"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Calculando el ARN mitocondrial en las células</div>
+  <div class="box-title hands-on-title" id="hands-on-calculando-el-arn-mitocondrial-en-las-células" aria-label="hands-on box: Calculando el ARN mitocondrial en las células"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Calculando el ARN mitocondrial en las células</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/0.0.3+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/0.0.3+galaxy1"><strong>AnnData Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/0.0.3+<span class="notranslate">galaxy</span>1</span></span>  con los siguientes parámetros:
@@ -2027,7 +2021,7 @@ https://zenodo.org/record/4574153/files/N707-400k-AnnData.h5ad
 <p>Si te interesa analizar datos de acceso público, particularmente del <a href="https://www.ebi.ac.uk/gxa/sc/home"><span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas</a>, quizá te interese la herramienta <span class="citation"><a href="#Moreno2020.04.08.032698">Moreno <i>et al.</i> 2020</a></span>, la cual más bien reduce estos pasos en uno. <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads">Aquí</a>  puedes encontrar el conjunto de datos para este tutorial, el cual tiene el número de identificación de experimento <code class="language-plaintext highlighter-rouge">E-MTAB-6945</code>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-obtener-datos-de-el-atlas-de-expresión-de-células-únicas" class="box-title" aria-label="hands-on box: Obtener datos de el Atlas de Expresión de Células Únicas"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Obtener datos de el Atlas de Expresión de Células Únicas</div>
+  <div class="box-title hands-on-title" id="hands-on-obtener-datos-de-el-atlas-de-expresión-de-células-únicas" aria-label="hands-on box: Obtener datos de el Atlas de Expresión de Células Únicas"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Práctica: Obtener datos de el Atlas de Expresión de Células Únicas</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2"><strong>EBI SCXA Data Retrieval</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+<span class="notranslate">galaxy</span>2</span></span>  con los siguientes parámetros:

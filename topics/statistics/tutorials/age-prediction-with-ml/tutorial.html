@@ -707,12 +707,6 @@
         
     
         
-    
-        
-    
-        
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -791,7 +785,7 @@
 <p>The datasets from these studies contain features (present as columns). The last column in both the datasets refers to <code class="language-plaintext highlighter-rouge">age</code> which is used as labels/targets. Since the targets are real numbers, the machine learning task becomes <a href="https://en.wikipedia.org/wiki/Regression_analysis">regression</a>. Using these features and targets, a model is learned using machine learning (regression) which learns a <span class="notranslate">mapping</span> between these features and targets. Using machine learning tools in <span class="notranslate">Galaxy</span>, we can achieve comparable prediction scores to those achieved by published analyses. In this tutorial, we will apply a couple of (<a href="https://scikit-learn.org/stable/">scikit-learn</a>) machine learning tools to <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9"><span class="notranslate">RNA</span>-seq</a> and <a href="https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub"><span class="notranslate">DNA</span> methylation</a> datasets to predict the chronological age of humans. This tutorial is divided into two parts - one with an <span class="notranslate">RNA</span>-seq dataset and another with a <span class="notranslate">DNA</span> methylation dataset.</p>
 
 <blockquote class="comment">
-  <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
   <p>In cross-validation, a dataset is divided into <code class="language-plaintext highlighter-rouge">k</code> equal parts (<code class="language-plaintext highlighter-rouge">k</code> should be at least <code class="language-plaintext highlighter-rouge">2</code>). One part is used as the validation set to evaluate the performance of any machine learning algorithm and the remaining parts are used for learning/training.</p>
 </blockquote>
 
@@ -803,7 +797,7 @@
 <figure id="figure-2"><img src="../../images/age-prediction-with-ml/model_good.png" alt="model_good. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> This shows an example of a good model as most of the points lie along the x = y line. Because most of the points lie along the x = y line, R2 score is 0.99 very close to the best score of 1.0</figcaption></figure>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -838,7 +832,7 @@
 <p>The <span class="notranslate">RNA</span>-seq dataset is collected from fibroblast cell lines belonging to 133 healthy patients with age ranging from 1 to 94 years. The skin fibroblasts cells dataset is conducive for age prediction related studies for multiple reasons - these skin fibroblasts hold age-related damage, contain phenotypic, epigenomic and transcriptomic changes which are age-dependent and it is easy to collect this dataset using non-invasive techniques. Using this dataset, we perform an <a href="https://en.wikipedia.org/wiki/Hyperparameter_optimization">exhaustive search</a> (also known as grid search) for finding the best features and then apply <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet">ElasticNet regressor</a> with 5-fold cross-validation. The R2 score achieved is comparable to the predictions found in the study performed by <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9">Jason G. Fleischer et al. 2018</a>.</p>
 
 <blockquote class="details">
-  <div id="details-5-fold-cross-validation" class="box-title"><button type="button" aria-controls="details-5-fold-cross-validation-contents" aria-expanded="true" aria-label="Toggle details box: 5-fold cross-validation"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: 5-fold cross-validation<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-5-fold-cross-validation"><button class="gtn-boxify-button details" type="button" aria-controls="details-5-fold-cross-validation-contents" aria-expanded="true" aria-label="Toggle details box: 5-fold cross-validation"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: 5-fold cross-validation<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>It is a model validation technique which estimates the performance of a predictive model on an unseen data. A dataset is divided into <code class="language-plaintext highlighter-rouge">5</code> folds and these folds are categorised into training and validation sets. The idea of cross-validation is shown in figure <a href="#figure-3">3</a>. The complete dataset is divided into <code class="language-plaintext highlighter-rouge">5</code> equal parts. 80% of the dataset is used for training and the remaining 20% is used for validating the performance of training. This is done for <code class="language-plaintext highlighter-rouge">5</code> folds/iterations, each time the validation set (20% of the dataset) is different. In all five folds, the complete dataset is used for training and validation. The final validation performance is averaged over <code class="language-plaintext highlighter-rouge">5</code> folds.</p>
 
@@ -851,14 +845,14 @@
 <p>We proceed to the analysis by uploading the <span class="notranslate">RNA</span>-seq dataset. The dataset has <code class="language-plaintext highlighter-rouge">133</code> rows corresponding to human patients and over <code class="language-plaintext highlighter-rouge">27,000</code> columns specifying genes. The last column <code class="language-plaintext highlighter-rouge">age</code> contains the chronological age. For the validation set, this <code class="language-plaintext highlighter-rouge">age</code> column is predicted and the R2 metric is computed.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>
       <p>Create a new history for this tutorial</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the files from <a href="https://zenodo.org/record/2545213#.XEWTJ9-YVa0">Zenodo</a></p>
@@ -867,26 +861,26 @@
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename the dataset to <code class="language-plaintext highlighter-rouge">training_data_normal</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-dataset" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">tabular</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-changing-the-datatype" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-1" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
   <p>In the <code class="language-plaintext highlighter-rouge">training_data_normal</code> dataset, you might have noticed that it showed <code class="language-plaintext highlighter-rouge">134</code> rows instead of <code class="language-plaintext highlighter-rouge">133</code> rows. The first row contains the header information i.e. the description of each column.</p>
 </blockquote>
 
@@ -895,7 +889,7 @@
 <p>We can see that this <span class="notranslate">RNA</span>-seq dataset is high-dimensional. There are over <code class="language-plaintext highlighter-rouge">27,000</code> columns/features. Generally, not all the features in the dataset are useful for prediction. We need only those features which increase the predictive ability of the model. To filter these features, we perform feature selection and retain only those which are useful. To do that, we use <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.SelectKBest.html#sklearn.feature_selection.SelectKBest">SelectKBest</a> module. This approach involves extracting those features which are most correlated to the target (<code class="language-plaintext highlighter-rouge">age</code> in our dataset). <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_selection.f_regression.html#sklearn.feature_selection.f_regression">F-regression</a> is used for the extraction of features. Moreover, we are not sure of how many of these features we will need. To find the right number of features, we do a hyperparameter search (to find the best combination of values of different parameters). It works by setting many different numbers of features to determine to number which gives the highest accuracy. To wrap this feature selector with a regressor, we will use the <strong>Pipeline builder</strong> tool. This tool creates a sequential flow of algorithms to execute on datasets. Since the hyperparameters will be tuned, we choose to output the parameters for searchCV. The tool does not take any dataset as input. Rather, the outputs will be used as inputs to the <strong>Hyperparameter search</strong> tool (explained in the following step). We will use ElasticNet as a regressor which creates an age prediction model. It is a linear regressor with <code class="language-plaintext highlighter-rouge">l1</code> (also called lasso) and <code class="language-plaintext highlighter-rouge">l2</code> (also called ridge) as regularisers. Regularisation is a technique used in machine learning to prevent overfitting. Overfitting happens when a machine learning algorithm starts memorising the dataset it is trained upon, rather than learning general features. The consequence of overfitting is that the accuracy on the training set is good, but results on the unseen set (test set) are poor, which happens because the algorithm has not learned general features from the dataset. To prevent overfitting, regularisers like <code class="language-plaintext highlighter-rouge">l1</code> and <code class="language-plaintext highlighter-rouge">l2</code> are used. <code class="language-plaintext highlighter-rouge">L1</code> is a linear term added to the error function of a machine learning algorithm and <code class="language-plaintext highlighter-rouge">l2</code> adds a squared term to the error function. More details about <code class="language-plaintext highlighter-rouge">l1</code> and <code class="language-plaintext highlighter-rouge">l2</code> can found <a href="https://www.kaggle.com/residentmario/l1-norms-versus-l2-norms">here</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-create-pipeline" class="box-title" aria-label="hands-on box: Create pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create pipeline</div>
+  <div class="box-title hands-on-title" id="hands-on-create-pipeline" aria-label="hands-on box: Create pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create pipeline</div>
 
   <ol>
     <li><strong>Pipeline builder</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -963,12 +957,12 @@
 <p>For these three parameters, we have 24 different combinations (4 x 2 x 3) of values and we will verify the performance of each combination. The parameter <strong>k</strong> is used for feature selection and parameters <strong>normalize</strong> and <strong>alpha</strong> are used for the regressor. There are many more hyperparameters of the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet">ElasticNet</a> regressor which are explained in the official documentation of scikit-learn. However, the combination of the above three parameters already gives a comparable accuracy published in the study <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9">Jason G. Fleischer et al. 2018</a>. Therefore, we will stick to these parameters.</p>
 
 <blockquote class="comment">
-  <div id="comment-2" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-2" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
   <p>It is advisable to tune all the parameters of a machine learning algorithm for a dataset if no prior information is available about the subset of parameters which works best for the dataset.</p>
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-3" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-3" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
   <p>These parameters have the same description and values in the second part of the tutorial where we will again use the <strong>Hyperparameter search</strong> tool.</p>
 </blockquote>
 
@@ -977,7 +971,7 @@
 <p>We will use the <strong>Hyperparameter search</strong> tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-hyperparameter-search" class="box-title" aria-label="hands-on box: Hyperparameter search"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hyperparameter search</div>
+  <div class="box-title hands-on-title" id="hands-on-hyperparameter-search" aria-label="hands-on box: Hyperparameter search"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hyperparameter search</div>
 
   <ol>
     <li><strong>Hyperparameter search</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1071,7 +1065,7 @@
 <p>The tool returns two outputs, one of which is a table with numerical results. Please inspect it carefully: the <code class="language-plaintext highlighter-rouge">rank_test_score</code> column shows the ranking of different combinations based on the values in the <code class="language-plaintext highlighter-rouge">mean_test_score</code> column.</p>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>What is the best <code class="language-plaintext highlighter-rouge">mean_test_score</code> value estimated by the <strong>Hyperparameter search</strong> tool?</li>
@@ -1080,7 +1074,7 @@
   </ol>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>0.73 (it is close to the best R2 score (0.81) achieved by a customised ensemble algorithm explained by <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-018-1599-6#Sec9">Jason G. Fleischer et al. 2018</a>)</li>
@@ -1097,7 +1091,7 @@
 <p>We will visualize the tabular output of <strong>Hyperparameter search</strong> tool from the previous step using the <strong>Parallel coordinates plot of tabular data</strong> tool. There are multiple columns in the tabular output, but we will focus on only a few of them.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-create-parallel-coordinates-plot" class="box-title" aria-label="hands-on box: Create parallel coordinates plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create parallel coordinates plot</div>
+  <div class="box-title hands-on-title" id="hands-on-create-parallel-coordinates-plot" aria-label="hands-on box: Create parallel coordinates plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create parallel coordinates plot</div>
 
   <ol>
     <li><strong>Parallel coordinates plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1116,12 +1110,12 @@
 <figure id="figure-4"><img src="../../images/age-prediction-with-ml/parallel_coor_plot.png" alt="data. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> The visualization of the hyperparameter optimisation tool output. We optimised the values of 3 hyperparameters (alpha, normalize and k). These can be seen as the columns (first three from left to right) in the plot. The rightmost column contains the accuracy values (mean_test_score).</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>What are the worst performing combinations of hyperparameters (name four)?</p>
 
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Worst four:</p>
     <ul>
@@ -1152,7 +1146,7 @@
 <p>We proceed with the analysis by uploading new datasets. You might want to create a new history first. The training set contains <code class="language-plaintext highlighter-rouge">208</code> rows corresponding to humans and <code class="language-plaintext highlighter-rouge">13</code> features (age-correlated CpG sites in <span class="notranslate">DNA</span> methylation dataset). The last column is <code class="language-plaintext highlighter-rouge">age</code>. The test set contains <code class="language-plaintext highlighter-rouge">104</code> rows and the same number of features as the training set. The <code class="language-plaintext highlighter-rouge">age</code> column in the test set is predicted after training on the training set. Another dataset <code class="language-plaintext highlighter-rouge">test_rows_labels</code> contains the true age values of the test set which is used to compute R2 scores between true and predicted age.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload-1" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-1" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -1165,19 +1159,19 @@ https://zenodo.org/record/2545213/files/test_rows.csv
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links-1" class="box-title"><button type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename the datasets as <code class="language-plaintext highlighter-rouge">train_rows</code>, <code class="language-plaintext highlighter-rouge">test_rows_labels</code> and <code class="language-plaintext highlighter-rouge">test_rows</code> respectively.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-dataset-1" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Check that the datatype of all the three datasets is <code class="language-plaintext highlighter-rouge">tabular</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-changing-the-datatype-1" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1190,7 +1184,7 @@ https://zenodo.org/record/2545213/files/test_rows.csv
 <p>We will create a pipeline with <strong>Pipeline builder</strong> tool, but this time, we just specify the regressor. <a href="https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub">Jana Naue et al. 2017</a> has used <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor">Random Forest</a> as the regressor and we can conclude from this study that the ensemble-based regressor works well on this <span class="notranslate">DNA</span> methylation dataset. Therefore, we will use <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingRegressor.html#sklearn.ensemble.GradientBoostingRegressor">Gradient boosting</a> which is an ensemble-based regressor because it uses multiple decision tree regressors inte<span class="notranslate">rna</span>lly and predicts by taking the collective performances of the predictions (by multiple decision trees). It has a good predictive power and is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimises error. One disadvantage, which comes from its basic principle of boosting, is that it cannot be parallelised. The <strong>Pipeline builder</strong> tool will wrap this regressor and return a zipped file and a tabular file containing all tunable hyperparameters.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-create-pipeline-1" class="box-title" aria-label="hands-on box: Create pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create pipeline</div>
+  <div class="box-title hands-on-title" id="hands-on-create-pipeline-1" aria-label="hands-on box: Create pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create pipeline</div>
 
   <ol>
     <li><strong>Pipeline builder</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1213,7 +1207,7 @@ https://zenodo.org/record/2545213/files/test_rows.csv
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-4" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-4" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
   <p>The <a href="https://scikit-learn.org/stable/modules/ensemble.html#ensemble"><em>ensemble</em></a> method uses multiple learning models inte<span class="notranslate">rna</span>lly for better predictions.</p>
 </blockquote>
 
@@ -1227,7 +1221,7 @@ We use only one parameter <code class="language-plaintext highlighter-rouge">n_e
 <p>We will use the <strong>Hyperparameter search</strong> tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-hyperparameter-search-1" class="box-title" aria-label="hands-on box: Hyperparameter search"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hyperparameter search</div>
+  <div class="box-title hands-on-title" id="hands-on-hyperparameter-search-1" aria-label="hands-on box: Hyperparameter search"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hyperparameter search</div>
 
   <ol>
     <li><strong>Hyperparameter search</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1307,14 +1301,14 @@ We use only one parameter <code class="language-plaintext highlighter-rouge">n_e
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>What is the optimal number of estimators for the given dataset?</p>
 
   <p>Hint: Please look at the <code class="language-plaintext highlighter-rouge">mean_test_score</code> column in the tabular result from the <strong>Hyperparameter search</strong> tool.</p>
 
   <blockquote class="solution">
-    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>(Even though the default value of the number of estimators for Gradient boosting regressor is <code class="language-plaintext highlighter-rouge">100</code>, <code class="language-plaintext highlighter-rouge">75</code> gives the best accuracy. That’s why it is important to perform hyperparameter search to tune these parameters for any dataset). 50 estimators also give almost the same accuracy.</li>
@@ -1329,7 +1323,7 @@ We use only one parameter <code class="language-plaintext highlighter-rouge">n_e
 <p>Using the <strong>Hyperparameter search</strong> tool, we found the best model based on the training data. Now, we will predict age in the test dataset using this model in order to see if the model has learned important features which can be generalised on a new dataset. The test dataset (<code class="language-plaintext highlighter-rouge">test_rows</code>) contains the same number of features, but does not contain the <code class="language-plaintext highlighter-rouge">age</code> column. This is predicted using the trained model.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-predict-age" class="box-title" aria-label="hands-on box: Predict age"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Predict age</div>
+  <div class="box-title hands-on-title" id="hands-on-predict-age" aria-label="hands-on box: Predict age"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Predict age</div>
 
   <ol>
     <li><strong>Ensemble methods for classification and regression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1352,7 +1346,7 @@ We use only one parameter <code class="language-plaintext highlighter-rouge">n_e
 <p>In the previous step, we generated predictions for the test dataset. We have one more dataset (<code class="language-plaintext highlighter-rouge">test_rows_labels</code>) which contains the true age values of the test set. Using the true and predicted values of age in the test set, we will verify the performance by analysing the plots.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-create-regression-plots" class="box-title" aria-label="hands-on box: Create regression plots"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create regression plots</div>
+  <div class="box-title hands-on-title" id="hands-on-create-regression-plots" aria-label="hands-on box: Create regression plots"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create regression plots</div>
 
   <ol>
     <li><strong>Plot actual vs predicted curves and residual plots of tabular data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1368,12 +1362,12 @@ We use only one parameter <code class="language-plaintext highlighter-rouge">n_e
 <p>The tool outputs three HTML files which contain the interactive plots.</p>
 
 <blockquote class="question">
-  <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Inspect the plots. What can you say about the predictions?</p>
 
   <blockquote class="solution">
-    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Figures <a href="#figure-6">6</a> and <a href="#figure-8">8</a> show that the prediction is good because the predicted age lies close to the true age.</p>
 

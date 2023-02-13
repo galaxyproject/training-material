@@ -872,15 +872,9 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
             Human Cell Atlas
         </a>
-        
-    
-        
-    
         
     
         
@@ -974,7 +968,7 @@
 <p>In this tutorial we will perform trajectory analysis using <a href="https://cole-trapnell-lab.github.io/monocle3/">monocle3</a>. You can find out more about the theory behind trajectory analysis in our <a href="/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/slides.html">slide deck</a>. We have already analysed the trajectory of our sample using the ScanPy toolkit in another tutorial: <a href="/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html">Trajectory Analysis using Python (Jupyter Notebook) in <span class="notranslate">Galaxy</span></a>. However, trajectory analysis is quite sensitive and some methods work better for specific datasets. In this tutorial, you will perform the same steps but using a different method for inferring trajectories. You will then compare the results, usability and outcomes! Sounds exciting, let’s dive into that!</p>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div id="tip-using-tutorial-mode" class="box-title"><button type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul> </blockquote>
 
 <h2 id="get-data">Get data</h2>
 <p>We will continue to work on the case study data from a mouse model of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span> (see <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">the study in <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas</a> and <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">the project submission</a>).
@@ -982,7 +976,7 @@ Monocle3 works great with annotated data, so we will make use of our annotated A
 You can find both datasets in this <a href="https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/monocle3-input-files">input history</a> or download from Zenodo below.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -994,20 +988,20 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">h5ad</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-changing-the-datatype" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">h5ad</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">h5ad</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -1046,12 +1040,12 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
 <p>To run Monocle, we need cell metadata, gene metadata, and an <span class="notranslate">expression</span> matrix file of genes by cells. (In theory, the <span class="notranslate">expression</span> matrix alone could do, but then we wouldn’t have all those useful annotations that we worked on so hard in the previous tutorials!). In order to get these files, we will extract the gene and cell annotations from our AnnData object.</p>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>How many lines do you expect to be in the gene and cell metadata files?</p>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>If you click on the step with uploaded annotated AnnData file, you will see on a small preview that this object has 8605 observations and 15395 variables, so we expect to get a cell metadata file with 8605 lines and gene metadata file with 15395 lines (without headers of course!).</p>
 
@@ -1060,7 +1054,7 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-extracting-annotations" class="box-title" aria-label="hands-on box: Extracting annotations"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extracting annotations</div>
+  <div class="box-title hands-on-title" id="hands-on-extracting-annotations" aria-label="hands-on box: Extracting annotations"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extracting annotations</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -1091,12 +1085,12 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
 <p>The Manipulate AnnData tool allows you to filter observations or variables, and that would be the most obvious way to remove those cells. However, given that we don’t need an AnnData object, it’s a lot quicker to edit a table rather than manipulate an AnnData object. Ultimately, we need cell metadata, gene metadata and <span class="notranslate">expression</span> matrix files that have macrophages removed, and that have the correct metadata that Monocle looks for. With some table manipulation, we’ll end up with three separate files, ready to be passed onto Monocle3.</p>
 
 <blockquote class="question">
-  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Where is the information about cell types stored?</p>
 
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>We have already extracted the cell annotations file - in one of the columns you can find the information about cell type, assigned to each cell.</p>
     <figure id="figure-1"><img src="../../images/scrna-casestudy-monocle/example_cell_annotations.png" alt="Cell annotations along the top, n_genes, n_counts, louvain, cell_type with a cell barcode and subsequent metadata as each row. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Example cell annotations</figcaption></figure>
@@ -1108,12 +1102,12 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
 <p>Click on <code class="language-plaintext highlighter-rouge">Extracted cell annotations (obs)</code> file to see a small preview window. This shows you that the column containing the cell types has number 22.  We’ll need that to filter out unwanted cell types!</p>
 
 <blockquote class="warning">
-  <div id="warning-check-the-column-number" class="box-title" aria-label="warning box: Check the column number!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Check the column number!</div>
+  <div class="box-title warning-title" id="warning-check-the-column-number" aria-label="warning box: Check the column number!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Check the column number!</div>
   <p>If you are working on a different dataset, the number of the ‘cell_type’ column might be different, so make sure you check it on a preview and use the correct number!</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-filter-out-macrophages" class="box-title" aria-label="hands-on box: Filter out macrophages"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter out macrophages</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-out-macrophages" aria-label="hands-on box: Filter out macrophages"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter out macrophages</div>
 
   <ol>
     <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
@@ -1128,7 +1122,7 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
       <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the output: <code class="language-plaintext highlighter-rouge">Cells input data for Monocle3</code></p>
 
       <blockquote class="details">
-        <div id="details-parameters" class="box-title"><button type="button" aria-controls="details-parameters-contents" aria-expanded="true" aria-label="Toggle details box: Parameters"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Parameters<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title details-title" id="details-parameters"><button class="gtn-boxify-button details" type="button" aria-controls="details-parameters-contents" aria-expanded="true" aria-label="Toggle details box: Parameters"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Parameters<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ul>
           <li><code class="language-plaintext highlighter-rouge">c22</code> means column no. 22 - that’s the column with cell types, and it will be filtered for the macrophages</li>
@@ -1137,7 +1131,7 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
       </blockquote>
 
       <blockquote class="tip">
-        <div id="tip-other-unwanted-cell-types" class="box-title"><button type="button" aria-controls="tip-other-unwanted-cell-types-contents" aria-expanded="true" aria-label="Toggle tip box: Other unwanted cell types"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Other unwanted cell types<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-other-unwanted-cell-types"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-other-unwanted-cell-types-contents" aria-expanded="true" aria-label="Toggle tip box: Other unwanted cell types"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Other unwanted cell types<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <p>It might happen that during clustering you’ll find another cell type that you want to get rid of for the trajectory analysis. Then simply re-run this tool on already filtered file and change ‘Macrophages’ to another unwanted cell type.</p>
       </blockquote>
@@ -1149,7 +1143,7 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
 <p>Sometimes certain functionalities require a specific indication of where the data should be taken from. Monocle3 tools expect that the genes column is named ‘gene_short_name’. Let’s check what the name of that column is in our dataset currently.</p>
 
 <blockquote class="question">
-  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Where can you check the header of a column containing genes names?</li>
@@ -1157,7 +1151,7 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Our extracted gene annotations file! Either by clicking on the eye icon <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> or having a look at the small preview window.</li>
@@ -1172,7 +1166,7 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
 <p>Let’s click on the <code class="language-plaintext highlighter-rouge">Extracted gene annotations (var)</code> file to see a small preview. We can see that the gene names are in the third column with a header <code class="language-plaintext highlighter-rouge">Symbol</code>. Keep that in mind - we’ll use that in a second!</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-changing-the-column-name" class="box-title" aria-label="hands-on box: Changing the column name"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Changing the column name</div>
+  <div class="box-title hands-on-title" id="hands-on-changing-the-column-name" aria-label="hands-on box: Changing the column name"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Changing the column name</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.2"><strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/regex_find_replace/regexColumn1/1.0.2</span></span>  with the following parameters:
@@ -1195,7 +1189,7 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
       <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">tabular</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-changing-the-datatype-1" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
       <ul>
         <li>Voila! That’s the gene input for Monocle! Just a quick rename…</li>
       </ul>
@@ -1212,7 +1206,7 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
 
 <p>So how do we do that?</p>
 <blockquote class="question">
-  <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>How many cells and genes are there in the <code class="language-plaintext highlighter-rouge">Anndata_before_processing</code> file?</li>
@@ -1221,7 +1215,7 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>You can answer all the questions just by clicking on the given file and looking at the preview window.</p>
     <ol>
       <li>[n_obs x n_vars] = 31178 x 35734, so there are 31178 cells and 35734 genes.</li>
@@ -1236,7 +1230,7 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
 <p>As you can see, there are way more genes and cells in the unprocessed AnnData file, so the <span class="notranslate">expression</span> matrix is much bigger than we need it to be. If the genes and cells we prepared for Monocle3 are not the same as in the <span class="notranslate">expression</span> matrix, Monocle3 will crash. Therefore, we have to filter that big, clean matrix and adjust it to our already prepared genes and cells files. But first, let’s extract the matrix from the unprocessed AnnData object.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-extracting-matrix" class="box-title" aria-label="hands-on box: Extracting matrix"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extracting matrix</div>
+  <div class="box-title hands-on-title" id="hands-on-extracting-matrix" aria-label="hands-on box: Extracting matrix"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extracting matrix</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1"><strong>Inspect AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -1253,7 +1247,7 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
 <p>If you have a look at the preview of <code class="language-plaintext highlighter-rouge">Unprocessed <span class="notranslate">expression</span> matrix</code>, you’ll see that the first column contains the cell barcodes, while the first row - the gene IDs. We would like to keep only the values corresponding to the cells and genes that are included in <code class="language-plaintext highlighter-rouge">Cells input data for Monocle3</code> and <code class="language-plaintext highlighter-rouge">Genes input data for Monocle3</code>. How do we do it? First, we compare the cell barcodes from <code class="language-plaintext highlighter-rouge">Cells input data for Monocle3</code> to those in <code class="language-plaintext highlighter-rouge">Unprocessed <span class="notranslate">expression</span> matrix</code> and ask <span class="notranslate">Galaxy</span> to keep the values of the matrix for which the barcodes in both files are the same. Then, we’ll do the same for gene IDs. We will cut the first columns from <code class="language-plaintext highlighter-rouge">Cells input data for Monocle3</code> and <code class="language-plaintext highlighter-rouge">Genes input data for Monocle3</code> to be able to compare those columns side by side with the matrix file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-cutting-out-the-columns" class="box-title" aria-label="hands-on box: Cutting out the columns"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Cutting out the columns</div>
+  <div class="box-title hands-on-title" id="hands-on-cutting-out-the-columns" aria-label="hands-on box: Cutting out the columns"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Cutting out the columns</div>
 
   <ol>
     <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
@@ -1275,7 +1269,7 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-filter-matrix-values-by-cell-barcodes" class="box-title" aria-label="hands-on box:  Filter matrix values by cell barcodes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Filter matrix values by cell barcodes</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-matrix-values-by-cell-barcodes" aria-label="hands-on box:  Filter matrix values by cell barcodes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Filter matrix values by cell barcodes</div>
 
   <ol>
     <li><span class="tool" data-tool="join1" title="Tested with join1"><strong>Join two Datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: join1</span></span>  with the following parameters:
@@ -1298,7 +1292,7 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
 <p>Look at the preview of the output file. First of all, you can see that there are 8570 lines (8569 cells) instead of 31178 cells that were present in the matrix. That’s exactly what we wanted to achieve - now we have raw information for the T-cells that we have filtered. However, the step that we have already performed left us with the matrix whose first and second columns are the same - let’s get rid of one of those!</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-remove-duplicate-column-cells-ids" class="box-title" aria-label="hands-on box: Remove duplicate column (cells IDs)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Remove duplicate column (cells IDs)</div>
+  <div class="box-title hands-on-title" id="hands-on-remove-duplicate-column-cells-ids" aria-label="hands-on box: Remove duplicate column (cells IDs)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Remove duplicate column (cells IDs)</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0"><strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0</span></span>  with the following parameters:
@@ -1320,7 +1314,7 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
 <p>Now we will perform the same steps, but for gene IDs. But gene IDs are currently in the first row, so we need to transpose the matrix, and from there we can repeat the same steps as above for Gene IDs.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-filter-matrix-by-gene-ids" class="box-title" aria-label="hands-on box: Filter matrix by gene IDs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter matrix by gene IDs</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-matrix-by-gene-ids" aria-label="hands-on box: Filter matrix by gene IDs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter matrix by gene IDs</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+galaxy2"><strong>Transpose</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
@@ -1365,7 +1359,7 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
 <p>Monocle3 turns the <span class="notranslate">expression</span> matrix, cell and gene annotations into an object called cell_data_set (CDS), which holds <span class="notranslate">single-cell</span> <span class="notranslate">expression</span> data.</p>
 
 <blockquote class="details">
-  <div id="details-input-files" class="box-title"><button type="button" aria-controls="details-input-files-contents" aria-expanded="true" aria-label="Toggle details box: Input files"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Input files<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-input-files"><button class="gtn-boxify-button details" type="button" aria-controls="details-input-files-contents" aria-expanded="true" aria-label="Toggle details box: Input files"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Input files<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Here is what <a href="https://cole-trapnell-lab.github.io/monocle3/docs/starting/">Monocle3 documentation</a> says about the required three input files:</p>
   <ul>
@@ -1383,10 +1377,10 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
 <p>We will follow those steps and see how it all works in practice.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-create-cds-object" class="box-title" aria-label="hands-on box: Create CDS object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create CDS object</div>
+  <div class="box-title hands-on-title" id="hands-on-create-cds-object" aria-label="hands-on box: Create CDS object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create CDS object</div>
 
   <blockquote class="details">
-    <div id="details-data-format" class="box-title"><button type="button" aria-controls="details-data-format-contents" aria-expanded="true" aria-label="Toggle details box: Data format"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Data format<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title details-title" id="details-data-format"><button class="gtn-boxify-button details" type="button" aria-controls="details-data-format-contents" aria-expanded="true" aria-label="Toggle details box: Data format"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Data format<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>You can provide <span class="notranslate">expression</span> matrix as TSV, CSV, MTX or RDS file, while genes and cells metadata as TSV, CSV or RDS files. In our case all three files are tabular, so we will set the format to TSV.</p>
   </blockquote>
@@ -1406,12 +1400,12 @@ https://zenodo.org/record/7078524/files/Annotated_AnnData.h5ad
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-4" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>What are the dimensions of the created CDS object?</p>
 
   <blockquote class="solution">
-    <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Just click on the performed step - on the preview you’ll see that the dimensions are 15395 x 8569 - so exactly as we predicted genes x cells!</p>
     <figure id="figure-4"><img src="../../images/scrna-casestudy-monocle/monocle_dimensions.png" alt="The dataset preview shows class: cell_data_set, dim: 15395 8569. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Monocle Object Dimensions</figcaption></figure>
@@ -1427,12 +1421,12 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
 <figure id="figure-5"><img src="../../images/scrna-casestudy-monocle/num_dim_legend.jpg" alt="Six graphs showing the output of depending on the number of dimensions that the space was reduced to during pre-processing. Chosen numbers: 10 (really disjoint cell groups), 50 (disjoint cell groups), 150 (two bigger groups), 200 (cell groups start to come together), 250 (cell groups well aligned into a semicircle), 300 (cell groups start to fold and become biologically irrelevant). " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Different outputs depending on the number of dimensions that the space was reduced to during pre-processing. Currently the label size in Monocle graphs in <span class="notranslate">Galaxy</span> is a nightmare, so for clarity additional legend was added to this image. We're working on the label size so that you can generate clear, readable and pretty graphs. However in this particular figure, the main point is to show the differences in shapes depending on the num-dim.</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question-5" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-5" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Looking at the image above, which value would you choose?</p>
 
   <blockquote class="solution">
-    <div id="solution-5" class="box-title"><button type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>It might be hard to tell at this point without any explanation! Don’t worry, after a few more steps you’ll understand what all those colors mean and how to generate those plots. But look - we want to infer trajectories and find relationships between cells, ideally we would see the development of cells or transition from one type to another. In the graphs where num-dim is from 10 to 200, you see that the clusters are quite disjoint, while we want to see smooth transitions from one to another. I can tell you now that we’ll go ahead with the value of <strong>250</strong>. We’re not choosing 300, because the arrangement of the cells on that graph is not really biologically relevant.</p>
 
@@ -1440,7 +1434,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-pre-processing" class="box-title" aria-label="hands-on box: Pre-processing"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Pre-processing</div>
+  <div class="box-title hands-on-title" id="hands-on-pre-processing" aria-label="hands-on box: Pre-processing"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Pre-processing</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_preprocess/monocle3_preprocess/0.1.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_preprocess/monocle3_preprocess/0.1.4+galaxy0"><strong>Monocle3 preprocess</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/monocle3_preprocess/monocle3_preprocess/0.1.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1460,7 +1454,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
 <figure id="figure-6"><img src="../../images/scrna-casestudy-monocle/dim_red_methods.png" alt="Four graphs showing the alignment of cell types depending on the algorithm of dimensionality reduction that was chosen: UMAP, tSNE, PCA, LSI. UMAP shows distinct cell groups, transitioning smoothly from one to another, creating kind of semicircle. tSNE shows distinct cell groups, however no smooth transitions are observed, all groups gathered into one big grouping. PCA shows cell groups whose boundaries are blurred between each other. On LSI graph, the cell types are all mixed together." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> The preview of alignment of cell types depending on the algorithm of dimensionality reduction that was chosen: UMAP, tSNE, PCA, LSI. The methods were applied to the output of the PCA-preprocessed data (except LSI method which was called on LSI-preprocessed data). LSI failed in forming distinct cell groups, PCA managed to cluster cells according to their types but tSNE did it more precisely. However, UMAP gave the best results, not only showing distinct cell type groups, but also ordering them in a way that makes sense biologically - DN to T-mat.</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-dimensionality-reduction" class="box-title" aria-label="hands-on box: Dimensionality reduction"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Dimensionality reduction</div>
+  <div class="box-title hands-on-title" id="hands-on-dimensionality-reduction" aria-label="hands-on box: Dimensionality reduction"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Dimensionality reduction</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_reducedim/monocle3_reduceDim/0.1.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_reducedim/monocle3_reduceDim/0.1.4+galaxy0"><strong>Monocle3 reduceDim</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/monocle3_reducedim/monocle3_reduceDim/0.1.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1479,7 +1473,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
 <p>Thanks to the fact that we provided Monocle3 with annotated data, we can now color the cells by any attribute that was in the cell metadata file! Similarly to the previous tutorial, we’ll color them by cell type, genotype, batch and sex. At least for now…</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-plotting" class="box-title" aria-label="hands-on box: Plotting"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plotting</div>
+  <div class="box-title hands-on-title" id="hands-on-plotting" aria-label="hands-on box: Plotting"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plotting</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1"><strong>Monocle3 plotCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -1533,12 +1527,12 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
 <p>In the mentioned tutorial, we annotated the cells so that we know what type they are. Above you can see how Monocle used this information to colour cells by their type. It is important to see the ‘form’ of the graph and how the cell types are arranged within its confines. But why is it important? Well, in Monocle, our trajectory analysis will be based on the same arrangement of the cells that you see now. And if you now recall our choice of the number of dimensions during pre-processing, you’ll understand why it was crucial - choosing the right value at the beginning determines the ‘shape’ of the graph that is then retained for the trajectory analysis. Therefore, the fact that on the plot above we clearly see DN cells on one side of the graph and T-mat on the other, going through DP cells, looks promising. But there is DP-M1 group that suspiciously branches out… Let’s investigate that and wait until the trajectory is inferred!</p>
 
 <blockquote class="question">
-  <div id="question-genotype" class="box-title" aria-label="question box: Genotype"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Genotype</div>
+  <div class="box-title question-title" id="question-genotype" aria-label="question box: Genotype"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Genotype</div>
   <p>Based on our results, can we confirm findings from the previous tutorial that DP-L and mature T-cells (particularly the top half) are missing some knockout cells?</p>
   <figure id="figure-8"><img src="../../images/scrna-casestudy-monocle/genotypes.png" alt="Genotype data plotted on the obtained graph, compared with the cell types graph. Cell types DP-M1, DP-L and T-mat are mainly wildtypes, while for other cell types the distribution is fairly even." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Genotype differences</figcaption></figure>
 
   <blockquote class="solution">
-    <div id="solution-6" class="box-title"><button type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Indeed, that’s what we see in our graph! But look closer, there is something more…Additionally, we also discovered that the vast majority of DP-M1 is only wildtype cells. That’s interesting, isn’t it?</p>
 
@@ -1546,12 +1540,12 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-batch-effect" class="box-title" aria-label="question box: Batch effect"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Batch effect</div>
+  <div class="box-title question-title" id="question-batch-effect" aria-label="question box: Batch effect"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Batch effect</div>
   <p>Can we confirm the previous findings that DP-L looks to be mainly comprised of N705?</p>
   <figure id="figure-9"><img src="../../images/scrna-casestudy-monocle/batch_1.png" alt="Batch data plotted on the obtained graph, compared with the cell types graph. DP-L and DP-M1 seem to consist mostly of N705 and N706, while other cell types have quite even batch distribution." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Checking for batch effect</figcaption></figure>
 
   <blockquote class="solution">
-    <div id="solution-7" class="box-title"><button type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Both DP-L and DP-M1 seem to consist mostly of N705 and N706. There might be indeed a bit of batch effect, so you could consider using batch correction on this dataset. In the absence of batch correction, we will focus on those clusters where there is batch mixing for biological interpretation. Finally, we will look at the confounding effect of sex.</p>
     <figure id="figure-10"><img src="../../images/scrna-casestudy-monocle/sex_1.png" alt="Sex data plotted on the obtained graph, compared with the cell types and genotype graphs. No female cells in DP-L and DP-M1 can be observed, but they appear in other cell types." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Sex distribution across the sample</figcaption></figure>
@@ -1571,7 +1565,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
 </blockquote>
 
 <blockquote class="details">
-  <div id="details-clusters-vs-partitions" class="box-title"><button type="button" aria-controls="details-clusters-vs-partitions-contents" aria-expanded="true" aria-label="Toggle details box: Clusters vs partitions"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Clusters vs partitions<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-clusters-vs-partitions"><button class="gtn-boxify-button details" type="button" aria-controls="details-clusters-vs-partitions-contents" aria-expanded="true" aria-label="Toggle details box: Clusters vs partitions"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Clusters vs partitions<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Clusters are particularly useful while trying to assign cells to a certain type, because they are based on the similarity in gene <span class="notranslate">expression</span>. The relationships between different clusters are analysed to identify possible trajectories.</p>
 
@@ -1580,7 +1574,7 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-clustering" class="box-title" aria-label="hands-on box: Clustering "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Clustering</div>
+  <div class="box-title hands-on-title" id="hands-on-clustering" aria-label="hands-on box: Clustering "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Clustering</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_partition/monocle3_partition/0.1.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_partition/monocle3_partition/0.1.4+galaxy0"><strong>Monocle3 partition</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/monocle3_partition/monocle3_partition/0.1.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1611,21 +1605,21 @@ Given that PCA is more commonly used, and it allows us to perform further steps 
 
 </blockquote>
 <blockquote class="tip">
-  <div id="tip-if-the-partition-does-not-contain-all-your-cells-of-interest" class="box-title"><button type="button" aria-controls="tip-if-the-partition-does-not-contain-all-your-cells-of-interest-contents" aria-expanded="true" aria-label="Toggle tip box: If the partition does not contain all your cells of interest..."><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: If the partition does not contain all your cells of interest...<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-if-the-partition-does-not-contain-all-your-cells-of-interest"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-the-partition-does-not-contain-all-your-cells-of-interest-contents" aria-expanded="true" aria-label="Toggle tip box: If the partition does not contain all your cells of interest..."><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: If the partition does not contain all your cells of interest...<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Sometimes it might happen that cells are grouped into several partitions, while you want them all to be in just one in order to perform trajectory analysis on all of them. Then, you can try to increase the <code class="language-plaintext highlighter-rouge">q-value</code> threshold that is used to determine the partition of cells.</p>
   <figure id="figure-11"><img src="../../images/scrna-casestudy-monocle/partition_qval.png" alt="Two graphs showing the difference between q-value used. For q-value=0.05 there are two partitions formed and for q-value=1.0 all cells were assigned to one partition so that there is only one in total." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> q-value threshold affecting the span of partition. Note that 0.05 is the default value.</figcaption></figure>
 
 </blockquote>
 <blockquote class="tip">
-  <div id="tip-if-the-granularity-of-clusters-does-not-make-sense" class="box-title"><button type="button" aria-controls="tip-if-the-granularity-of-clusters-does-not-make-sense-contents" aria-expanded="true" aria-label="Toggle tip box: If the granularity of clusters does not make sense..."><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: If the granularity of clusters does not make sense...<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-if-the-granularity-of-clusters-does-not-make-sense"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-if-the-granularity-of-clusters-does-not-make-sense-contents" aria-expanded="true" aria-label="Toggle tip box: If the granularity of clusters does not make sense..."><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: If the granularity of clusters does not make sense...<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>When using standard igraph louvain clustering, the value of <code class="language-plaintext highlighter-rouge">resolution</code> parameter is by default set to <code class="language-plaintext highlighter-rouge">NULL</code>, which means that it is determined automatically. If you are not satisfied with the results of the standard igraph louvain clustering, you may set the <code class="language-plaintext highlighter-rouge">resolution</code> value manually, and thus specify the granularity of the clustering.</p>
   <figure id="figure-12"><img src="../../images/scrna-casestudy-monocle/clusters_resolution.png" alt="Three graphs showing the difference between the resolution of clustering. During automatic determination of this value, there were 6 clusters formed, corresponding to cell types. Manually set resolution=0.001 resulted in 11 clusters so that more than one cluster corresponds to one cell type, and resolution=0.1 resulted in almost 200 very small clusters." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Different granularity of clusters based on the resolution set automatically and manually.</figcaption></figure>
 </blockquote>
 
 <blockquote class="warning">
-  <div id="warning-ambiguous-clusters" class="box-title" aria-label="warning box: Ambiguous clusters!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Ambiguous clusters!</div>
+  <div class="box-title warning-title" id="warning-ambiguous-clusters" aria-label="warning box: Ambiguous clusters!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Ambiguous clusters!</div>
   <p>As mentioned above, standard igraph louvain clustering determines the resolution automatically, unless the specific value is provided by the user. Therefore, it sometimes returns slightly different outputs. To ensure that your clusters are reproducible, you might want to pass a certain value to the <code class="language-plaintext highlighter-rouge">resolution</code> parameter. In case of our data, the resolution value of 0.00015 gave the same results as the best output of igraph louvain clustering, and ensured reproducibility.</p>
   <figure id="figure-13"><img src="../../images/scrna-casestudy-monocle/igraph.png" alt="Four graphs showing slight changes in clustering: 1) 5 clusters, 2) 5 clusters but with other cells assigned, 3) 4 clusters, 4) 6 clusters." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Standard igraph louvain clustering giving different results despite the same input becasue of the automatic determination of resolution vaule.</figcaption></figure>
 
@@ -1676,7 +1670,7 @@ Below is the table that we used in the previous tutorial to identify the cell ty
 </table>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-gene-expression" class="box-title" aria-label="hands-on box: Gene expression"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Gene <span class="notranslate">expression</span></div>
+  <div class="box-title hands-on-title" id="hands-on-gene-expression" aria-label="hands-on box: Gene expression"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Gene <span class="notranslate">expression</span></div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+galaxy1"><strong>Monocle3 plotCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/monocle3_plotcells/monocle3_plotCells/0.1.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
@@ -1693,11 +1687,11 @@ Below is the table that we used in the previous tutorial to identify the cell ty
 <figure id="figure-15"><img src="../../images/scrna-casestudy-monocle/gene_expression.png" alt="Expression on the genes: Il2ra expressed in DN, Cd8b1, Cd8a expressed in the areas where middle DP, Cd4 mostly expressed in late DP cluster, Itm2a expressed in mature T-cells, Aif1 – no expression, Hba-a1 - very high expression in small branch of DP-M4." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 15:</span> <span class="notranslate">Expression</span> of the genes across analysed sample</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question-genes-and-cell-types" class="box-title" aria-label="question box: Genes and cell types"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Genes and cell types</div>
+  <div class="box-title question-title" id="question-genes-and-cell-types" aria-label="question box: Genes and cell types"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Genes and cell types</div>
   <p>Based on the gene <span class="notranslate">expression</span> graph that we just generated, the table above and your knowledge from the previous tutorial, how would you interpret the results?</p>
 
   <blockquote class="solution">
-    <div id="solution-8" class="box-title"><button type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ul>
       <li><code class="language-plaintext highlighter-rouge">Il2ra</code>: expressed in the cluster where DN cells are - an indication of where the trajectory should start</li>
@@ -1712,7 +1706,7 @@ Below is the table that we used in the previous tutorial to identify the cell ty
 </blockquote>
 
 <blockquote class="tip">
-  <div id="tip-purity-of-the-sample-hba-a1-gene" class="box-title"><button type="button" aria-controls="tip-purity-of-the-sample-hba-a1-gene-contents" aria-expanded="true" aria-label="Toggle tip box: Purity of the sample - Hba-a1 gene"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Purity of the sample - Hba-a1 gene<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-purity-of-the-sample-hba-a1-gene"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-purity-of-the-sample-hba-a1-gene-contents" aria-expanded="true" aria-label="Toggle tip box: Purity of the sample - Hba-a1 gene"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Purity of the sample - Hba-a1 gene<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The Hba-a1 gene creates hemoglobin which is found in red blood cells. This is highly expressed in a tiny bit of the middle DP cluster. Interestingly, it forms a a clearly visible, distinct, little branch. Hemoglobin should NOT be found in T-cells. However, if you remember, the gene was found to be expressed in the previous Scanpy tutorial (see the image below). That marker appeared throughout the entire sample in low numbers, suggesting some background contamination of red blood cell debris in the cell samples during library generation. Unlike Scanpy, Monocle algorithms allowed us to gather the cells expressing that gene into a distinct group! That’s great!</p>
 
@@ -1725,12 +1719,12 @@ Below is the table that we used in the previous tutorial to identify the cell ty
 <p>Here we used a priori knowledge regarding the marker genes. If we wanted to approach this problem in an unsupervised manner, we could use Monocle to tell us the top marker genes in each group of cells. This is very useful if we are trying to identify a cell type, or if we want to find novel marker genes for known cell types.</p>
 
 <blockquote class="question">
-  <div id="question-6" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-6" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>If I cluster cells that are not annotated, can I assign clusters to a cell type based on gene <span class="notranslate">expression</span> using Monocle3?</p>
 
   <blockquote class="solution">
-    <div id="solution-9" class="box-title"><button type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Theoretically…yes! That’s the point of the clustering and gene <span class="notranslate">expression</span> analysis. However, as of the writing of this tutorial, this function hasn’t been turned into a <span class="notranslate">Galaxy</span> tool yet and is only available in R.</p>
 
@@ -1739,7 +1733,7 @@ Below is the table that we used in the previous tutorial to identify the cell ty
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-top-marker-genes" class="box-title" aria-label="hands-on box: Top marker genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Top marker genes</div>
+  <div class="box-title hands-on-title" id="hands-on-top-marker-genes" aria-label="hands-on box: Top marker genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Top marker genes</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_topmarkers/monocle3_topmarkers/0.1.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_topmarkers/monocle3_topmarkers/0.1.5+galaxy0"><strong>Monocle3 top markers</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/monocle3_topmarkers/monocle3_topmarkers/0.1.5+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1757,12 +1751,12 @@ Below is the table that we used in the previous tutorial to identify the cell ty
 <figure id="figure-17"><img src="../../images/scrna-casestudy-monocle/top_markers.jpg" alt="A table showing top markers - which genes (and their percentage) are the most expressed in each cell type." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 17:</span> Identification of the genes most specifically expressed in groups of cells.</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question-7" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-7" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>What genes are uniquely expressed in DP-M1?</p>
 
   <blockquote class="solution">
-    <div id="solution-10" class="box-title"><button type="button" aria-controls="solution-10-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>By looking at the table, you might give the 5 top gene IDs expressed in DP-M1. To save you some time and make the analysis more readable, we converted the gene IDs to gene names and they are as follows: Rps17, Rpl41, Rps26, Rps29, Rps28. They are all ribosomal! [You can do this yourself if you want by following this section of a previous tutorial that <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html#findmarkers">uses the gene names in one object to add to a table of Ensembl IDs</a>. These ribosomal differences might be due to housekeeping background, cell cycling, or even something more bioligically interesting…or all three!
 The plot also indicates other specifically expressed genes, such as Hmgb2, Pclaf, Rpl13, Rps19, Ybx1, Ncl, Hsp90ab1, Npm1.</p>
@@ -1779,7 +1773,7 @@ The plot also indicates other specifically expressed genes, such as Hmgb2, Pclaf
 <p>We’re getting closer and closer! The next step is to learn the trajectory graph, which means to fit a principal graph within each partition. In that way, we’ll ‘connect’ the existing clusters by creating a path between them.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-learn-graph" class="box-title" aria-label="hands-on box: Learn graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Learn graph</div>
+  <div class="box-title hands-on-title" id="hands-on-learn-graph" aria-label="hands-on box: Learn graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Learn graph</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_learngraph/monocle3_learnGraph/0.1.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_learngraph/monocle3_learnGraph/0.1.4+galaxy0"><strong>Monocle3 learnGraph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/monocle3_learngraph/monocle3_learnGraph/0.1.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1808,7 +1802,7 @@ There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. 
 <figure id="figure-18"><img src="../../images/scrna-casestudy-monocle/learned_trajectory.png" alt="A trajectory path, branching out to connect all the clusters and thus show their relationships." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 18:</span> Learned trajectory path</figcaption></figure>
 
 <blockquote class="tip">
-  <div id="tip-comparing-the-trajectories" class="box-title"><button type="button" aria-controls="tip-comparing-the-trajectories-contents" aria-expanded="true" aria-label="Toggle tip box: Comparing the trajectories"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comparing the trajectories<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-comparing-the-trajectories"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comparing-the-trajectories-contents" aria-expanded="true" aria-label="Toggle tip box: Comparing the trajectories"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comparing the trajectories<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>As a reminder, here’s the comparision between our trajectory and the one from the previous tutorial, where we used Scanpy for clustering, and then appplied Force-Directed + PAGA algorithms to infer trajectory. As you remember from those tutorials, the arrangement of the cell groups changed a bit during these steps. Indeed - by using the mentioned methods, we get different graphs for clusters and trajectory, while in Monocle the general ‘shape’ of the graph stays the same from the beginning. ‘Leranig the trajectory’ step in Monocle is about finding a path, along which the cells can be then ordered in pseudotime.</p>
   <figure id="figure-19"><img src="../../images/scrna-casestudy-monocle/scanpy_monocle_trajectories.png" alt="First graph shows the trajectory inferred by using Scanpy + Force-Directed + PAGA (DN connecting equally with DP-M2 and DP-M3, then going to DP-M1, and branching out to DP-M4, then going down to DP-L and finally turning into T-mat).  Second graph shows the trajectory inferred by using Monocle (DN connected to DP-M2 and DP-M3, then DP-M4 has DP-M1 on the right and DP-L on the left, and DP-L comes to T-mat)." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 19:</span> Comparison between the trajectory inferred in the previous 'case study' tutorials (Scanpy + Force-Directed + PAGA) and the trajectory obtained in Monocle.</figcaption></figure>
@@ -1819,14 +1813,14 @@ There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. 
 <p>Finally, it’s time to see our cells in pseudotime! We have already learned a trajectory, now we only have to order the cells along it. Monocle3 requires information on where to start ordering the cells, so we need to provide it with this information. We annotated early T-cells as double negative (DN), so those will be our root cells!</p>
 
 <blockquote class="details">
-  <div id="details-pseudotime" class="box-title"><button type="button" aria-controls="details-pseudotime-contents" aria-expanded="true" aria-label="Toggle details box: Pseudotime"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Pseudotime<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-pseudotime"><button class="gtn-boxify-button details" type="button" aria-controls="details-pseudotime-contents" aria-expanded="true" aria-label="Toggle details box: Pseudotime"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Pseudotime<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>To infer trajectories, we need data from cells at different points along a path of differentiation. The assumption is that in any given sample, some cells are further along a trajectory than others. This inferred temporal dimension is known as pseudotime. Pseudotime measures the cells’ progress through the transition.  See <span class="citation"><a href="#Reid_2016">Reid and Wernisch 2016</a></span> for more.</p>
 
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-ordering-the-cells-along-trajectory" class="box-title" aria-label="hands-on box: Ordering the cells along trajectory"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Ordering the cells along trajectory</div>
+  <div class="box-title hands-on-title" id="hands-on-ordering-the-cells-along-trajectory" aria-label="hands-on box: Ordering the cells along trajectory"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Ordering the cells along trajectory</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_ordercells/monocle3_orderCells/0.1.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_ordercells/monocle3_orderCells/0.1.4+galaxy0"><strong>Monocle3 orderCells</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/monocle3_ordercells/monocle3_orderCells/0.1.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1848,7 +1842,7 @@ There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. 
 </blockquote>
 
 <blockquote class="tip">
-  <div id="tip-other-ways-to-specify-the-root-cells" class="box-title"><button type="button" aria-controls="tip-other-ways-to-specify-the-root-cells-contents" aria-expanded="true" aria-label="Toggle tip box: Other ways to specify the root cells"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Other ways to specify the root cells<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-other-ways-to-specify-the-root-cells"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-other-ways-to-specify-the-root-cells-contents" aria-expanded="true" aria-label="Toggle tip box: Other ways to specify the root cells"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Other ways to specify the root cells<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The method to specify the root cells shown above is not the only one available in <span class="notranslate">Galaxy</span>! However, it is probably the most intuitive one.</p>
   <ol>
@@ -1878,7 +1872,7 @@ There are many trajectory patterns: linear, cycle, bifurcation, tree and so on. 
 <p>Last but not least, you can now identify genes that define the inferred trajectories.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-differentially-expressed-genes" class="box-title" aria-label="hands-on box: Differentially expressed genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Differentially expressed genes</div>
+  <div class="box-title hands-on-title" id="hands-on-differentially-expressed-genes" aria-label="hands-on box: Differentially expressed genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Differentially expressed genes</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_diffexp/monocle3_diffExp/0.1.4+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/monocle3_diffexp/monocle3_diffExp/0.1.4+galaxy1"><strong>Monocle3 diffExp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/monocle3_diffexp/monocle3_diffExp/0.1.4+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:

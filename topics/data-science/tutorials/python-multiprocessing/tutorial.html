@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Python - Multiprocessing" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-10-18 10:13:05 +0000" />
+<meta name="DC.date" content="2023-02-13 13:04:13 +0000" />
 <meta name="DC.creator" content="Helena Rasche" />
 
         
@@ -63,7 +63,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-10-18 10:13:05 +0000",
+  "dateModified": "2023-02-13 13:04:13 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Python - Multiprocessing",
   "interactivityType": "mixed",
@@ -436,8 +436,56 @@
         
 
         
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Oct 18, 2022 </div>
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/python-multiprocessing/data-science-python-multiprocessing.ipynb" title="Jupyter Notebook" alt="Python - Multiprocessing Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 13, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -471,6 +519,12 @@
                             </p>
                             -->
                             
+                            <p><b>Run on the GTN with JupyterLite (in-browser computations)</b>
+                                <ol>
+                                    <li><a href="/training-material/jupyter/lab/index.html?path=data-science-python-multiprocessing.ipynb">Click to Launch JupyterLite</a></li>
+                                </ol>
+                            </p>
+                            
                             <p><b>Launching the notebook in Jupyter in Galaxy</b>
                                 <ol>
                                     <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
@@ -490,7 +544,7 @@
                  
 
                 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -549,12 +603,12 @@ function to send inputs multiply to the specified function <code class="language
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
   <p>What did you see here?</p>
 
   <p>Was it clear and easy to read?</p>
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>It prints four timestamps immediately, all around the same time. Then one second later it prints 4 more, and one second later, a final four.
 Our Pool of 4 processes processes the function the maximal amount of times possible concurrently. Once each of those functions returns, then it can move on to processing the next tasks.
 This is precisely the situation of e.g. 4 queues at the grocery; as soon as one customer is processed, they immediately begin on the next, until no more remain.</p>
@@ -644,10 +698,10 @@ This is precisely the situation of e.g. 4 queues at the grocery; as soon as one 
 <p>If however this were a more complicated task (e.g. calculating a large number, machine learning, etc.), then we might wish to set our pool size to the number of CPUs - 1, as each process will potentially consume it’s CPU allocation completely, and we wish to have some left over for the managing program and any other work going on, on the system.</p>
 
 <blockquote class="question">
-  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
   <p>Try changing the pool size and see what effect it has on runtime. Start from a value of 1, and go up to 5, the number of servers in our list.</p>
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>Given the small sample size (5 servers), and the variability of response times (in local testing between 3-8 seconds for the single-pool version), you can see varying results but <em>generally</em> it should decrease as the pool size increases. However, sometimes you will see the Pool=5 version take the same or longer than Pool=4.</p>
 
     <p>Especially in the case that 1 server (or 1 request one time) dominates the request time, this can “hide” the improvements as the others complete quickly on the remaining N-1 processes.</p>
@@ -706,7 +760,7 @@ This is precisely the situation of e.g. 4 queues at the grocery; as soon as one 
 <p>This is a bit more complicated to write, but again, if you’re not blocking on CPU resources, then this is potentially approximately as effecient as thread pools.</p>
 
 <blockquote class="question">
-  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
   <p>What result did you get? Was it slower, faster, or about the same as processes?</p>
 </blockquote>
 

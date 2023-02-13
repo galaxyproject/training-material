@@ -648,15 +648,9 @@
         
     
         
-    
-        
-    
-        
         <a class="dropdown-item" href="https://ml.usegalaxy.eu/" title="Machine Learning Workbench">
             Machine Learning Workbench
         </a>
-        
-    
         
     
         
@@ -780,7 +774,7 @@
 <p>This tutorial shows how to use a machine learning module implemented as a <span class="notranslate">Galaxy</span> tool. The data used in this tutorial is available at <a href="https://zenodo.org/record/1468039#.W8zyxBRoSAo">Zenodo</a>.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>Performing a machine learning task (classification) using a tool involves the following steps:</p>
 
@@ -799,14 +793,14 @@
 <p>The datasets required for this tutorial contain 9 features of breast cells which include the thickness of clump, cell-size, cell-shape and so on (<a href="https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w">more information</a>). In addition to these features, the training dataset contains one more column as <code class="language-plaintext highlighter-rouge">target</code>. It has a binary value (0 or 1) for each row. <code class="language-plaintext highlighter-rouge">0</code> indicates no breast cancer and <code class="language-plaintext highlighter-rouge">1</code> indicates breast cancer. The test dataset does not contain the <code class="language-plaintext highlighter-rouge">target</code> column.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>
       <p>Create a new history for this tutorial</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the following datasets and choose the type of data as <code class="language-plaintext highlighter-rouge">tabular</code>.</p>
@@ -816,13 +810,13 @@ https://zenodo.org/record/1401230/files/breast-w_test.tsv
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename datasets to <code class="language-plaintext highlighter-rouge">breast-w_train</code> and <code class="language-plaintext highlighter-rouge">breast-w_test</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-dataset" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>The datasets should look like these:</p>
@@ -838,7 +832,7 @@ https://zenodo.org/record/1401230/files/breast-w_test.tsv
 <p>In this step, we will use the <a href="https://scikit-learn.org/stable/modules/svm.html#svm-classification">SVM (support vector machine)</a> classifier for training on the <code class="language-plaintext highlighter-rouge">breast-w_train</code> dataset. The classifier learns a <span class="notranslate">mapping</span> between each row and its category. SVM is a memory efficient classifier which needs only those data points which lie on the decision boundaries among different classes to predict a class for a new sample. The rest of the data points can thrown away. We will use the <code class="language-plaintext highlighter-rouge">LinearSVC</code> variant of SVM which is faster. Other variants <code class="language-plaintext highlighter-rouge">SVC</code> and <code class="language-plaintext highlighter-rouge">NuSVC</code> have high running time for large datasets. The last column of the training dataset contains a category/class for each row. The classifier learns a <span class="notranslate">mapping</span> between data row and its category which is called a trained model. The trained model is used to predict the categories of the unseen data.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-train-a-classifier" class="box-title" aria-label="hands-on box: Train a classifier"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Train a classifier</div>
+  <div class="box-title hands-on-title" id="hands-on-train-a-classifier" aria-label="hands-on box: Train a classifier"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Train a classifier</div>
 
   <p><strong>Support vector machines (SVMs) for classification</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to train:</p>
   <ul>
@@ -864,7 +858,7 @@ https://zenodo.org/record/1401230/files/breast-w_test.tsv
 <p>The previous step produced a trained model (<code class="language-plaintext highlighter-rouge">zip</code> file) which we will use to predict classes for the test data (<code class="language-plaintext highlighter-rouge">breast-w_test</code>).</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-predict-using-a-trained-model" class="box-title" aria-label="hands-on box: Predict using a trained model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Predict using a trained model</div>
+  <div class="box-title hands-on-title" id="hands-on-predict-using-a-trained-model" aria-label="hands-on box: Predict using a trained model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Predict using a trained model</div>
 
   <p><strong>Support vector machines (SVMs) for classification</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters</p>
 
@@ -885,7 +879,7 @@ https://zenodo.org/record/1401230/files/breast-w_test.tsv
 <p>The last column of the predicted dataset shows the category of each row. A row either gets <code class="language-plaintext highlighter-rouge">0</code> (no breast cancer) or <code class="language-plaintext highlighter-rouge">1</code> (breast cancer) as its predicted category.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-see-the-predicted-column" class="box-title" aria-label="hands-on box: See the predicted column"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: See the predicted column</div>
+  <div class="box-title hands-on-title" id="hands-on-see-the-predicted-column" aria-label="hands-on box: See the predicted column"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: See the predicted column</div>
   <ol>
     <li>Click on <code class="language-plaintext highlighter-rouge">view data</code> link of the dataset created after executing the previous step.</li>
     <li>The last column of the <code class="language-plaintext highlighter-rouge">tabular</code> data shows the predicted category (<code class="language-plaintext highlighter-rouge">target</code>) for each row.</li>
@@ -894,7 +888,7 @@ https://zenodo.org/record/1401230/files/breast-w_test.tsv
 </blockquote>
 
 <blockquote class="details">
-  <div id="details-additional-ml-resources" class="box-title"><button type="button" aria-controls="details-additional-ml-resources-contents" aria-expanded="true" aria-label="Toggle details box: Additional ML resources"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Additional ML resources<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-additional-ml-resources"><button class="gtn-boxify-button details" type="button" aria-controls="details-additional-ml-resources-contents" aria-expanded="true" aria-label="Toggle details box: Additional ML resources"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Additional ML resources<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Read more about <strong>machine learning using scikit-learn</strong> <a href="http://scikit-learn.org/stable/">here</a>.</p>
 </blockquote>

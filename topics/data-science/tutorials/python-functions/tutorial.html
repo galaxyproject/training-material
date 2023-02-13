@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Python - Functions" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-09-29 12:58:11 +0000" />
+<meta name="DC.date" content="2023-02-13 13:04:13 +0000" />
 <meta name="DC.creator" content="The Carpentries" />
 <meta name="DC.creator" content="Helena Rasche" />
 <meta name="DC.creator" content="Donny Vrins" />
@@ -66,7 +66,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-09-29 12:58:11 +0000",
+  "dateModified": "2023-02-13 13:04:13 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Python - Functions",
   "interactivityType": "mixed",
@@ -703,8 +703,56 @@
         
 
         
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Sep 29, 2022 </div>
+            
+
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/data-science/tutorials/python-functions/data-science-python-functions.ipynb" title="Jupyter Notebook" alt="Python - Functions Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 13, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -738,6 +786,12 @@
                             </p>
                             -->
                             
+                            <p><b>Run on the GTN with JupyterLite (in-browser computations)</b>
+                                <ol>
+                                    <li><a href="/training-material/jupyter/lab/index.html?path=data-science-python-functions.ipynb">Click to Launch JupyterLite</a></li>
+                                </ol>
+                            </p>
+                            
                             <p><b>Launching the notebook in Jupyter in Galaxy</b>
                                 <ol>
                                     <li><a href="/training-material/faqs/galaxy/interactive_tools_jupyter_launch.html">Instructions to Launch JupyterLab</a></li>
@@ -759,7 +813,7 @@
                 <p>Functions are the basic unit of all work in Python! Absolutely everything you do uses functions. Conceptually, functions are super simple. Just like in maths, they take an input, do some transformation, and return an output. As an example, <code class="language-plaintext highlighter-rouge">f(x) = x + 2</code> is a function that calculates whatever value you request, plus two. But functions are foundational, so, you should understand them well before moving on.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -776,7 +830,7 @@
 
 <blockquote class="code-2col">
   <blockquote class="code-in">
-    <div id="code-in-math" class="box-title" aria-label="code-in box: Math"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Math</div>
+    <div class="box-title code-in-title" id="code-in-math" aria-label="code-in box: Math"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Math</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Define our function
 f(x) = 3 * x
 # Compute some value
@@ -785,7 +839,7 @@ f(3) # is 9
   </blockquote>
 
   <blockquote class="code-out">
-    <div id="code-out-python" class="box-title" aria-label="code-out box: Python"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Python</div>
+    <div class="box-title code-out-title" id="code-out-python" aria-label="code-out box: Python"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Python</div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Define our function
 def f(x):
    return 3 * x
@@ -822,7 +876,7 @@ f(3)
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <div id="tip-formatting-strings" class="box-title"><button type="button" aria-controls="tip-formatting-strings-contents" aria-expanded="true" aria-label="Toggle tip box: Formatting Strings"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Formatting Strings<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-formatting-strings"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-formatting-strings-contents" aria-expanded="true" aria-label="Toggle tip box: Formatting Strings"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Formatting Strings<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>There are several ways to print out a few values in python. We’d recommend you to use <code class="language-plaintext highlighter-rouge">f-strings</code> as it’s the cleanest and most modern way to do it.</p>
 
   <p><code class="language-plaintext highlighter-rouge">f</code>-strings start with an <code class="language-plaintext highlighter-rouge">f</code> (very descriptive name eh?). Within the text between the single or double quotes (<code class="language-plaintext highlighter-rouge">'</code>/<code class="language-plaintext highlighter-rouge">"</code>) you can use curly braces to refer to variables or python code which will be placed there in the string.</p>
@@ -855,7 +909,7 @@ print(f"Here is the value of a: {function_that_returns_10()}")
 </code></pre></div></div>
 
 <blockquote class="tip">
-  <div id="tip-what-is-0" class="box-title"><button type="button" aria-controls="tip-what-is-0-contents" aria-expanded="true" aria-label="Toggle tip box: What is `0.`"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What is `0.`<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-what-is-0"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-what-is-0-contents" aria-expanded="true" aria-label="Toggle tip box: What is `0.`"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: What is `0.`<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>That’s a float! A <code class="language-plaintext highlighter-rouge">.</code> in a number makes it a float, rather than an integer.</p>
 </blockquote>
 
@@ -893,13 +947,13 @@ print(f"Here is the value of a: {function_that_returns_10()}")
 <p>For a function this small, with such a descriptive name (<code class="language-plaintext highlighter-rouge">fahr_to_kelvin</code>) it feels quite obvious what the function should do, what inputs it takes, what outputs it produces. However, you will thank yourself in the future if you do this now. You may think you will remember what the code does, but, be kind to your future self who is busy and stressed and may not want to spend time reading the code over again to figure out what every single function does.</p>
 
 <blockquote class="question">
-  <div id="question-converting-statements-to-functions" class="box-title" aria-label="question box: Converting statements to functions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Converting statements to functions</div>
+  <div class="box-title question-title" id="question-converting-statements-to-functions" aria-label="question box: Converting statements to functions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Converting statements to functions</div>
   <p>A lot of what you’ll do in programing is to turn a procedure that you want to do, into statements and a function.</p>
 
   <p>Fill in the missing portions of this function, two average numbers. Then use it to find the average of 32326 and 631</p>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def average2(a, b):
     c = (a + b) / 2
     return c
@@ -917,7 +971,7 @@ print(f"Here is the value of a: {function_that_returns_10()}")
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div id="question-a-more-complicated-example" class="box-title" aria-label="question box: A more complicated example"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: A more complicated example</div>
+  <div class="box-title question-title" id="question-a-more-complicated-example" aria-label="question box: A more complicated example"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: A more complicated example</div>
 
   <p>The formula for a 90° triangle can be expressed as: \(c = \sqrt{a^2 + b^2}\)</p>
 
@@ -928,7 +982,7 @@ print(f"Here is the value of a: {function_that_returns_10()}")
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def pythagorus(a, b):
     c = math.sqrt(math.pow(a, 2) + math.pow(b, 2))
     return c
@@ -979,11 +1033,11 @@ print(f"Here is the value of a: {function_that_returns_10()}")
 </span></code></pre></div></div>
 
 <blockquote class="question">
-  <div id="question-scope" class="box-title" aria-label="question box: Scope"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Scope</div>
+  <div class="box-title question-title" id="question-scope" aria-label="question box: Scope"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Scope</div>
   <p>Given the above code, which variables are accessible at Locations 1, 2, and 3?</p>
 
   <blockquote class="solution">
-    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>a, b</li>
       <li>a and b are there but you shouldn’t use these. x, y, c, d, e are also accessible.</li>
@@ -1014,7 +1068,7 @@ print(f"Here is the value of a: {function_that_returns_10()}")
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div id="question-exercise-signing-a-message" class="box-title" aria-label="question box: Exercise: Signing a message"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Exercise: Signing a message</div>
+  <div class="box-title question-title" id="question-exercise-signing-a-message" aria-label="question box: Exercise: Signing a message"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Exercise: Signing a message</div>
   <p>Let’s test out a default argument. Imagine you are printing out a message, and at the bottom it should have a signature.</p>
 
   <p>Inputs:</p>
@@ -1031,7 +1085,7 @@ print(f"Here is the value of a: {function_that_returns_10()}")
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def myFunction(message, signature="Your name"):
     print(message)
     print()

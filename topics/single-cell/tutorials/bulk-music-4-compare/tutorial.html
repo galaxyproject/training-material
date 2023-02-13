@@ -801,15 +801,9 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
             Human Cell Atlas
         </a>
-        
-    
-        
-    
         
     
         
@@ -917,7 +911,7 @@
 <p>The goal of this tutorial is to apply bulk <span class="notranslate">RNA</span> deconvolution techniques to a problem with multiple variables - in this case, a model of diabetes is compared with its healthy counterparts. All you need to compare inferred cell compositions are well-annotated, high quality reference sc<span class="notranslate">RNA</span>-seq datasets, transformed into MuSiC-friendly <span class="notranslate">Expression</span> Set objects, and your bulk <span class="notranslate">RNA</span>-samples of choice (also transformed into MuSiC-friendly <span class="notranslate">Expression</span> Set objects). For more information on how MuSiC works, you can check out their github site <a href="https://xuranw.github.io/MuSiC/articles/MuSiC.html">MuSiC</a> or published article (<span class="citation"><a href="#wang2019bulk">Wang <i>et al.</i> 2019</a></span>).</p>
 
 <blockquote class="comment">
-  <div id="comment-research-question" class="box-title" aria-label="comment box: Research question"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Research question</div>
+  <div class="box-title comment-title" id="comment-research-question" aria-label="comment box: Research question"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Research question</div>
   <ul>
     <li>How does variable X impact the cell distributions in my samples?</li>
     <li>Needs: sc<span class="notranslate">RNA</span>-seq reference dataset; bulk <span class="notranslate">RNA</span>-seq samples of interest to compare</li>
@@ -925,7 +919,7 @@
 </blockquote>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -955,12 +949,12 @@
 <p>If you have followed the previous tutorials to create your own bulk and <span class="notranslate">single cell</span> <span class="notranslate">expression</span> sets, then you can copy these into a new history now. Otherwise, follow the steps below to import the datasets you’ll need.</p>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div id="tip-copy-a-dataset-between-histories" class="box-title"><button type="button" aria-controls="tip-copy-a-dataset-between-histories-contents" aria-expanded="true" aria-label="Toggle tip box: Copy a dataset between histories"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Copy a dataset between histories<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>There 3 ways to copy datasets between histories</p>   <ol>   <li>     <p>From the original history</p>     <ol>       <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>       <li>Click on <strong>Copy Dataset</strong></li>       <li>         <p>Select the desired files</p>       </li>       <li>         <p>Give a relevant name to the “New history”</p>       </li>       <li>Click on the new history name in the green box that have just appear to switch to this history</li>     </ol>   </li>   <li>     <p>From the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong></p>     <ol>       <li>Click on <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong> on the top right</li>       <li>Switch to the history in which the dataset should be copied</li>       <li>Drag the dataset to copy from its original history</li>       <li>Drop it in the target history</li>     </ol>   </li>   <li>     <p>From the target history</p>     <ol>       <li>Click on <strong>User</strong> in the top bar</li>       <li>Click on <strong>Datasets</strong></li>       <li>Search for the dataset to copy</li>       <li>Click on it</li>       <li>Click on <strong>Copy to History</strong></li>     </ol>   </li> </ol> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-copy-a-dataset-between-histories"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-a-dataset-between-histories-contents" aria-expanded="true" aria-label="Toggle tip box: Copy a dataset between histories"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Copy a dataset between histories<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>There 3 ways to copy datasets between histories</p>   <ol>   <li>     <p>From the original history</p>     <ol>       <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>       <li>Click on <strong>Copy Dataset</strong></li>       <li>         <p>Select the desired files</p>       </li>       <li>         <p>Give a relevant name to the “New history”</p>       </li>       <li>Click on the new history name in the green box that have just appear to switch to this history</li>     </ol>   </li>   <li>     <p>From the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong></p>     <ol>       <li>Click on <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong> on the top right</li>       <li>Switch to the history in which the dataset should be copied</li>       <li>Drag the dataset to copy from its original history</li>       <li>Drop it in the target history</li>     </ol>   </li>   <li>     <p>From the target history</p>     <ol>       <li>Click on <strong>User</strong> in the top bar</li>       <li>Click on <strong>Datasets</strong></li>       <li>Search for the dataset to copy</li>       <li>Click on it</li>       <li>Click on <strong>Copy to History</strong></li>     </ol>   </li> </ol> </blockquote>
 
 <h2 id="get-data">Get data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial <em>“Deconvolution: Compare”</em></li>
@@ -985,7 +979,7 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename the datasets as needed</p>
@@ -994,7 +988,7 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
       <p>Add to each file a tag corresponding to <code class="language-plaintext highlighter-rouge">#bulk</code> and <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-adding-a-tag" class="box-title"><button type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1007,10 +1001,10 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
 <h2 id="altogether-deconvolution-with-a-combined-sc-reference">Altogether: Deconvolution with a combined sc reference</h2>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div id="tip-using-tutorial-mode" class="box-title"><button type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul> </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-comparing-altogether" class="box-title" aria-label="hands-on box:  Comparing: altogether "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Comparing: altogether</div>
+  <div class="box-title hands-on-title" id="hands-on-comparing-altogether" aria-label="hands-on box:  Comparing: altogether "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Comparing: altogether</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4"><strong>MuSiC Compare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+<span class="notranslate">galaxy</span>4</span></span>  with the following parameters:
@@ -1094,14 +1088,14 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
 <figure id="figure-5"><img src="../../images/bulk-music/data_table.png" alt="Table with individual rows for each cell type within each sample, with columns of Cell, Factor, CT Prop in Sample and Number of Reads." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Altogether: Data table</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Why does the data table contain 42 rows?</li>
   </ol>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The data table contains a row for each cell type within each sample. Since there are 6 cell types and 7 samples, <code class="language-plaintext highlighter-rouge">6*7 = 42</code> rows.</li>
@@ -1116,7 +1110,7 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
 <h2 id="like4like-deconvolution-of-healthy-samples-with-a-healthy-reference-and-diseased-samples-with-a-diseased-reference">Like4like: Deconvolution of healthy samples with a healthy reference and diseased samples with a diseased reference</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-like4like-inference" class="box-title" aria-label="hands-on box:  Like4like Inference "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Like4like Inference</div>
+  <div class="box-title hands-on-title" id="hands-on-like4like-inference" aria-label="hands-on box:  Like4like Inference "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Like4like Inference</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4"><strong>MuSiC Compare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+<span class="notranslate">galaxy</span>4</span></span>  with the following parameters:
@@ -1181,14 +1175,14 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>How have the cell inferences changed, now that we have changed the sc<span class="notranslate">RNA</span> references used?</li>
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <figure id="figure-6"><img src="../../images/bulk-music/plot_altogether.png" alt="Two graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether and the bottom labelled #like4like. Differences are more pronounced in the top #altogether graph." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Altogether vs like4like</figcaption></figure>
     <ol>
@@ -1204,7 +1198,7 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
 <h2 id="healthyscref-deconvolution-using-only-healthy-cells-as-a-reference">healthyscref: Deconvolution using only healthy cells as a reference</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-healthy-sc-reference-only-inference" class="box-title" aria-label="hands-on box:  Healthy sc reference only inference "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Healthy sc reference only inference</div>
+  <div class="box-title hands-on-title" id="hands-on-healthy-sc-reference-only-inference" aria-label="hands-on box:  Healthy sc reference only inference "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Healthy sc reference only inference</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4"><strong>MuSiC Compare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+<span class="notranslate">galaxy</span>4</span></span>  with the following parameters:
@@ -1252,14 +1246,14 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>How have the cell inferences changed this time?</li>
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <blockquote>
       <blockquote>

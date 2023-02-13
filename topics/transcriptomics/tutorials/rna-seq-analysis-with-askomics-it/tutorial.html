@@ -982,14 +982,14 @@
 <p>To link the human gene with neXtProt database, we will use the RDF abstraction of neXtProt. This file was obtained using the <a href="https://github.com/askomics/abstractor">Abstractor</a> tool.</p>
 
 <blockquote class="details">
-  <div id="details-abstraction" class="box-title"><button type="button" aria-controls="details-abstraction-contents" aria-expanded="true" aria-label="Toggle details box: Abstraction"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Abstraction<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-abstraction"><button class="gtn-boxify-button details" type="button" aria-controls="details-abstraction-contents" aria-expanded="true" aria-label="Toggle details box: Abstraction"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Abstraction<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>During the integration step, AskOmics builds an RDF description of the data: the <strong>abstraction</strong>. This abstraction is used to explore the data and build the query.
 AskOmics can also integrate <strong>abstraction</strong> of distant endpoint. Abstraction are obtained using <a href="https://github.com/askomics/abstractor">abstractor</a>, a python package to generate RDF abstractions from distant endpoints.
 The query builder interface is used to create a path through the <strong>abstraction</strong> of each ressources. The path is converted to a SPARQL query that is sent to the multiple SPARQL endpoint.</p>
 </blockquote>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -1036,16 +1036,16 @@ The query builder interface is used to create a path through the <strong>abstrac
 <h2 id="import-data">Import data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>
       <p>Create a new history for this <span class="notranslate">RNA</span>-seq exercise e.g. <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>-seq AskOmics</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-history" class="box-title"><button type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the files.</p>
@@ -1057,9 +1057,9 @@ The query builder interface is used to create a path through the <strong>abstrac
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-data-from-a-data-library" class="box-title"><button type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
 
       <ul>
         <li>
@@ -1100,7 +1100,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
   <p>If the datatypes are wrong, please change it.</p>
 
   <!--SNIPPET-->
-  <blockquote class="tip">   <div id="tip-changing-the-datatype" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
 </blockquote>
 
 <p>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon and take a look at the uploaded files.</p>
@@ -1114,7 +1114,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 <h2 id="launch-askomics-interactive-tool">Launch AskOmics Interactive Tool</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-launch-askomics-it" class="box-title" aria-label="hands-on box: Launch AskOmics IT"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch AskOmics IT</div>
+  <div class="box-title hands-on-title" id="hands-on-launch-askomics-it" aria-label="hands-on box: Launch AskOmics IT"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch AskOmics IT</div>
   <ol>
     <li><strong>AskOmics</strong> a visual SPARQL query builder <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to launch the Interactive Tool
       <ul>
@@ -1143,7 +1143,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 <p>On the <strong>Files</strong> page (link at the top of the page), you will see the files you uploaded from <span class="notranslate">Galaxy</span>. We will now integrate all these files.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-integrate-data" class="box-title" aria-label="hands-on box: Integrate data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Integrate data</div>
+  <div class="box-title hands-on-title" id="hands-on-integrate-data" aria-label="hands-on box: Integrate data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Integrate data</div>
   <ol>
     <li>Got to the <strong>Files</strong> page</li>
     <li>Select all the input files</li>
@@ -1162,7 +1162,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 <p>The <code class="language-plaintext highlighter-rouge">Mus musculus annotation</code> file we’re using contains gene and m<span class="notranslate">RNA</span> entities, and we will need both in the rest of the tutorial.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-integrate-mus-musculus-annotation" class="box-title" aria-label="hands-on box: Integrate `Mus musculus annotation`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Integrate `Mus musculus annotation`</div>
+  <div class="box-title hands-on-title" id="hands-on-integrate-mus-musculus-annotation" aria-label="hands-on box: Integrate `Mus musculus annotation`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Integrate `Mus musculus annotation`</div>
   <ol>
     <li>Search for <code class="language-plaintext highlighter-rouge">Mus musculus annotation (preview)</code></li>
     <li>Select <code class="language-plaintext highlighter-rouge">gene</code> and <code class="language-plaintext highlighter-rouge">m<span class="notranslate">RNA</span></code></li>
@@ -1200,7 +1200,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 <p>A column can also represent a relation between the <em>entity</em> to another. In this case, the header have to be named <code class="language-plaintext highlighter-rouge">relationName@TargetedEntity</code> and the type <em>Directed</em> or <em>Symetric</em> relation. A <em>Directed</em> relation is a relation from this entity to the targeted one (e.g. A is B’s father, but B is not A’s father). A <em>Symetric relation</em> is a relation that works in both directions (e.g. A loves B, and B loves A).</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-integrate-de-results" class="box-title" aria-label="hands-on box: Integrate `DE results`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Integrate `DE results`</div>
+  <div class="box-title hands-on-title" id="hands-on-integrate-de-results" aria-label="hands-on box: Integrate `DE results`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Integrate `DE results`</div>
   <ol>
     <li>Search for <code class="language-plaintext highlighter-rouge">DE results (preview)</code></li>
     <li>Edit attribute names and types:
@@ -1217,7 +1217,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-integrate-gene-symbols" class="box-title" aria-label="hands-on box: Integrate `Gene symbols`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Integrate `Gene symbols`</div>
+  <div class="box-title hands-on-title" id="hands-on-integrate-gene-symbols" aria-label="hands-on box: Integrate `Gene symbols`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Integrate `Gene symbols`</div>
   <ol>
     <li>Search for <code class="language-plaintext highlighter-rouge">Gene symbols (preview)</code></li>
     <li>Edit attribute names and types:
@@ -1232,7 +1232,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-integrate-qtl" class="box-title" aria-label="hands-on box: Integrate `QTL`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Integrate `QTL`</div>
+  <div class="box-title hands-on-title" id="hands-on-integrate-qtl" aria-label="hands-on box: Integrate `QTL`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Integrate `QTL`</div>
   <ol>
     <li>Search for <code class="language-plaintext highlighter-rouge">QTL (preview)</code></li>
     <li>Edit attribute names and types:
@@ -1249,7 +1249,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-integrate-homolog-groups" class="box-title" aria-label="hands-on box: Integrate `Homolog groups`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Integrate `Homolog groups`</div>
+  <div class="box-title hands-on-title" id="hands-on-integrate-homolog-groups" aria-label="hands-on box: Integrate `Homolog groups`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Integrate `Homolog groups`</div>
   <ol>
     <li>Search for <code class="language-plaintext highlighter-rouge">Homolog groups (preview)</code></li>
     <li>Edit attribute names and types:
@@ -1270,7 +1270,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 <p>The last dataset we want to integrate is the neXtProt abstraction. This file contains some RDF data that instructs AskOmics how to communicate with a remote RDF database containing <a href="https://www.nextprot.org/">neXtProt</a> data.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-integrate-nextprot-abstraction" class="box-title" aria-label="hands-on box: Integrate `neXtProt abstraction`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Integrate `neXtProt abstraction`</div>
+  <div class="box-title hands-on-title" id="hands-on-integrate-nextprot-abstraction" aria-label="hands-on box: Integrate `neXtProt abstraction`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Integrate `neXtProt abstraction`</div>
   <ol>
     <li>Search for <code class="language-plaintext highlighter-rouge">neXtProt abstraction (preview)</code></li>
     <li>Check that <strong>Distant endpoint</strong> is set to <code class="language-plaintext highlighter-rouge">https://sparql.nextprot.org/sparql</code> in <strong>advanced options</strong></li>
@@ -1284,7 +1284,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 <p>Integration can take some time depending on the file size. The <strong>Datasets</strong> page shows the progress.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-track-integration-progress" class="box-title" aria-label="hands-on box: track integration progress"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: track integration progress</div>
+  <div class="box-title hands-on-title" id="hands-on-track-integration-progress" aria-label="hands-on box: track integration progress"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: track integration progress</div>
   <ol>
     <li>Go to the <strong>Dataset</strong> page</li>
     <li>Wait for all datasets to be in <em>success</em> state</li>
@@ -1305,7 +1305,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 <figure id="figure-10"><img src="images/ask.png" alt="ask. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> ask page</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-start-a-query" class="box-title" aria-label="hands-on box: Start a query"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Start a query</div>
+  <div class="box-title hands-on-title" id="hands-on-start-a-query" aria-label="hands-on box: Start a query"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Start a query</div>
   <ol>
     <li>Go to the <strong>Ask!</strong> page</li>
     <li>Select the <em>Differential <span class="notranslate">Expression</span></em> entity</li>
@@ -1322,7 +1322,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 <p>On the right, attributes of the selected entity are displayed as attribute boxes. Each box has an eye icon: an opened eye means the attribute will be displayed on the results.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-ask-for-all-differential-expression-and-display-some-attributes" class="box-title" aria-label="hands-on box: Ask for all Differential Expression and display some attributes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Ask for all Differential <span class="notranslate">Expression</span> and display some attributes</div>
+  <div class="box-title hands-on-title" id="hands-on-ask-for-all-differential-expression-and-display-some-attributes" aria-label="hands-on box: Ask for all Differential Expression and display some attributes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Ask for all Differential <span class="notranslate">Expression</span> and display some attributes</div>
   <ol>
     <li>Display <code class="language-plaintext highlighter-rouge">logFC</code> and <code class="language-plaintext highlighter-rouge">adj.P.val</code> by clicking on the eye icon</li>
     <li><strong>Run &amp; preview</strong></li>
@@ -1339,7 +1339,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 <p>Back to the query builder,</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-filter-attributes-to-get-significant-over-expressed-genes" class="box-title" aria-label="hands-on box: Filter attributes to get significant over-expressed genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter attributes to get significant over-expressed genes</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-attributes-to-get-significant-over-expressed-genes" aria-label="hands-on box: Filter attributes to get significant over-expressed genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter attributes to get significant over-expressed genes</div>
   <ol>
     <li>Filter <code class="language-plaintext highlighter-rouge">logFC</code> with <code class="language-plaintext highlighter-rouge">&gt; 2</code></li>
     <li>Filter <code class="language-plaintext highlighter-rouge">adj.P.val</code> with <code class="language-plaintext highlighter-rouge">≤ 0.05</code></li>
@@ -1357,7 +1357,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 <p>To constraint on relation, we have to click on suggested nodes, linked to our entity of interest.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-link-de-results-to-gene-using-gene-symbol" class="box-title" aria-label="hands-on box: Link `De results` to `gene` using `Gene Symbol`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Link `De results` to `gene` using `Gene Symbol`</div>
+  <div class="box-title hands-on-title" id="hands-on-link-de-results-to-gene-using-gene-symbol" aria-label="hands-on box: Link `De results` to `gene` using `Gene Symbol`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Link `De results` to `gene` using `Gene Symbol`</div>
   <ol>
     <li>First, hide <code class="language-plaintext highlighter-rouge">Label</code>, <code class="language-plaintext highlighter-rouge">logFC</code> and <code class="language-plaintext highlighter-rouge">adj.P.val</code> of <code class="language-plaintext highlighter-rouge">Differential <span class="notranslate">Expression</span></code> using the eye icon</li>
     <li>Instantiate <code class="language-plaintext highlighter-rouge">Gene Symbol</code> by clicking on the suggested node, and hide his <code class="language-plaintext highlighter-rouge">Label</code> using the eye icon</li>
@@ -1370,7 +1370,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 <p>Results now show the Ensembl id of our over-expressed genes. We have now access to all the information about the <code class="language-plaintext highlighter-rouge">gene</code> entity contained in the GFF file. For example, we can filter on chromosome and display chromosome and strand to get information about gene location.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-filter-gene" class="box-title" aria-label="hands-on box: Filter `gene`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter `gene`</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-gene" aria-label="hands-on box: Filter `gene`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter `gene`</div>
   <ol>
     <li>Show <code class="language-plaintext highlighter-rouge">reference</code> and <code class="language-plaintext highlighter-rouge">strand</code> using the eye icon</li>
     <li>Filter <code class="language-plaintext highlighter-rouge">reference</code> by selecting <code class="language-plaintext highlighter-rouge">X</code> chromosome</li>
@@ -1390,14 +1390,14 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 </ul>
 
 <blockquote class="details">
-  <div id="details-faldo-ontology" class="box-title"><button type="button" aria-controls="details-faldo-ontology-contents" aria-expanded="true" aria-label="Toggle details box: FALDO ontology"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: FALDO ontology<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-faldo-ontology"><button class="gtn-boxify-button details" type="button" aria-controls="details-faldo-ontology-contents" aria-expanded="true" aria-label="Toggle details box: FALDO ontology"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: FALDO ontology<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>The <a href="https://bioportal.bioontology.org/ontologies/FALDO">FALDO</a> ontology describes sequence feature positions and regions. AskOmics uses FALDO ontology to represent entity positions. GFF are using FALDO, as well as TSV entities with chromosome, strand, start and end.</p>
 </blockquote>
 
 <p>On the query builder interface, locatable entities are represented with a green circle and relations based on location are represented as green arrow.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-filter-gene-1" class="box-title" aria-label="hands-on box: Filter `gene`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter `gene`</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-gene-1" aria-label="hands-on box: Filter `gene`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter `gene`</div>
   <ol>
     <li>First, remove the reference filter (unselect <code class="language-plaintext highlighter-rouge">X</code> using <code class="language-plaintext highlighter-rouge">ctrl</code>+<code class="language-plaintext highlighter-rouge">click</code>)</li>
     <li>Remove the strand filter (unselect <code class="language-plaintext highlighter-rouge">+</code> using <code class="language-plaintext highlighter-rouge">ctrl</code>+<code class="language-plaintext highlighter-rouge">click</code>)</li>
@@ -1413,7 +1413,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 <p>To go further, we can filter on <code class="language-plaintext highlighter-rouge">QTL</code> to refine the results.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-filter-gene-2" class="box-title" aria-label="hands-on box: Filter `gene`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter `gene`</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-gene-2" aria-label="hands-on box: Filter `gene`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter `gene`</div>
   <ol>
     <li>Go back to the <code class="language-plaintext highlighter-rouge">QTL</code> node</li>
     <li>Show the <code class="language-plaintext highlighter-rouge">Name</code> attribute using the eye icon</li>
@@ -1425,7 +1425,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 <p>From now, our query is “All Genes that are over-expressed (logFC &gt; 2 and FDR ≤ 0.05) and located on a QTL that is related to growth”. We can save this results with the <em>Run &amp; save</em> button.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-save-a-result" class="box-title" aria-label="hands-on box: Save a result"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Save a result</div>
+  <div class="box-title hands-on-title" id="hands-on-save-a-result" aria-label="hands-on box: Save a result"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Save a result</div>
   <ol>
     <li><strong>Run &amp; save</strong></li>
   </ol>
@@ -1438,7 +1438,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 <p>Since we added the neXtProt abstraction into our AskOmics instance, we can link our data to neXtProt.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-find-human-homolog-genes" class="box-title" aria-label="hands-on box: Find human homolog genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Find human homolog genes</div>
+  <div class="box-title hands-on-title" id="hands-on-find-human-homolog-genes" aria-label="hands-on box: Find human homolog genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Find human homolog genes</div>
   <ol>
     <li>Go back to the <code class="language-plaintext highlighter-rouge">gene</code> node</li>
     <li>instantiate <code class="language-plaintext highlighter-rouge">Gene Symbol</code> and hide his <code class="language-plaintext highlighter-rouge">Label</code></li>
@@ -1457,7 +1457,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 <p>Now we are linked to the neXtProt database, we can obtain information about the proteins encoded by these genes, as well as their location in the cell.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-get-the-protein-and-their-location" class="box-title" aria-label="hands-on box: Get the protein and their location"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get the protein and their location</div>
+  <div class="box-title hands-on-title" id="hands-on-get-the-protein-and-their-location" aria-label="hands-on box: Get the protein and their location"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get the protein and their location</div>
   <ol>
     <li>Instantiate <code class="language-plaintext highlighter-rouge">Entry</code></li>
     <li>Instantiate <code class="language-plaintext highlighter-rouge">Isoform</code> and hide the <code class="language-plaintext highlighter-rouge">Label</code></li>
@@ -1475,7 +1475,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 <p>Finally, our query is “All genes that are over-expressed and located on a QTL that is related to growth, their human homologs and the location of the proteins coded by this genes”. We will save it to the results.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-save-a-result-1" class="box-title" aria-label="hands-on box: Save a result"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Save a result</div>
+  <div class="box-title hands-on-title" id="hands-on-save-a-result-1" aria-label="hands-on box: Save a result"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Save a result</div>
   <ol>
     <li><strong>Run &amp; save</strong></li>
   </ol>
@@ -1486,7 +1486,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 <p>The results page displays the saved queries. Queries are sorted by creation date. At the end of the table, action buttons can be used to preview the result, download or send it to <span class="notranslate">Galaxy</span> history.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-edit-query-name" class="box-title" aria-label="hands-on box: Edit query name"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Edit query name</div>
+  <div class="box-title hands-on-title" id="hands-on-edit-query-name" aria-label="hands-on box: Edit query name"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Edit query name</div>
   <ol>
     <li>Go to the <em>Results</em> page</li>
     <li>Use the <em>Preview</em> button to check the result</li>
@@ -1508,7 +1508,7 @@ https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-send-results-to-galaxy" class="box-title" aria-label="hands-on box: Send results to Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Send results to <span class="notranslate">Galaxy</span></div>
+  <div class="box-title hands-on-title" id="hands-on-send-results-to-galaxy" aria-label="hands-on box: Send results to Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Send results to <span class="notranslate">Galaxy</span></div>
   <ol>
     <li>Click on <strong>Send results to <span class="notranslate">Galaxy</span></strong> on each query to send them to the last used <span class="notranslate">Galaxy</span> history</li>
     <li>Get back to <span class="notranslate">galaxy</span> and wait for the dataset (reload if needed)</li>

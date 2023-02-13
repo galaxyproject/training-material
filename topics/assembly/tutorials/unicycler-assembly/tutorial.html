@@ -786,8 +786,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://galaxytrakr.org/" title="GalaxyTrakr">
             GalaxyTrakr
         </a>
@@ -807,10 +805,6 @@
         <a class="dropdown-item" href="https://galaxy.hyphy.org/" title="HyPhy HIV NGS Tools">
             HyPhy HIV NGS Tools
         </a>
-        
-    
-        
-    
         
     
         
@@ -972,7 +966,7 @@
 <p>You can see that there many <span class="notranslate">reads</span> under the second peak with median of approximately 7.5 kb.</p>
 
 <blockquote class="warning">
-  <div id="warning-oxford-nanopore-data-format" class="box-title" aria-label="warning box: Oxford Nanopore Data Format"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Oxford Nanopore Data Format</div>
+  <div class="box-title warning-title" id="warning-oxford-nanopore-data-format" aria-label="warning box: Oxford Nanopore Data Format"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Oxford Nanopore Data Format</div>
   <p>Oxford Nanopore machines output
  data in <a href="http://bioinformatics.cvr.ac.uk/blog/exploring-the-fast5-format/">fast5</a> format that contains additional information besides sequence data. In this tutorial we assume that this data is <em>already</em> converted into <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq</a>. An additional tutorial dedicated to handling fast5 datasets will be developed shortly.</p>
 </blockquote>
@@ -984,7 +978,7 @@
 <h3 id="assembly">Assembly</h3>
 
 <blockquote class="comment">
-  <div id="comment-knowing-your-assembly" class="box-title" aria-label="comment box: Knowing your assembly"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Knowing your assembly</div>
+  <div class="box-title comment-title" id="comment-knowing-your-assembly" aria-label="comment box: Knowing your assembly"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Knowing your assembly</div>
 
   <p>Here we assume that you know a thing or two about assembly process. If you don’t: look at the slides accompanying this tutorial as well as other tutorials is this section.</p>
 </blockquote>
@@ -1076,14 +1070,14 @@
 <p>In this example we will use a downsampled version of <em>E. coli</em> C-1 Illumina and ONT sequencing data. These include 3 files: forward and reverse <span class="notranslate">reads</span> for Illumina, and Long read file produced by ONT. All data are in <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq</a> format.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-obtaining-our-data" class="box-title" aria-label="hands-on box: Obtaining our data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Obtaining our data</div>
+  <div class="box-title hands-on-title" id="hands-on-obtaining-our-data" aria-label="hands-on box: Obtaining our data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Obtaining our data</div>
 
   <ol>
     <li>
       <p>Make sure you have an empty analysis history. Give it a name.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the following file from <a href="https://zenodo.org/record/940733">Zenodo</a></p>
@@ -1094,9 +1088,9 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-data-from-a-data-library" class="box-title"><button type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1111,7 +1105,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 <p>To assess quality we will use two tools: FastQC (<span class="citation"><a href="#FastQC">Andrews</a></span>) to generate quality statistics and multiQC (<span class="citation"><a href="#Ewels2016">Ewels <i>et al.</i> 2016</a></span>) to summarize these statistics.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-quality-control" class="box-title" aria-label="hands-on box: Quality Control"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Quality Control</div>
+  <div class="box-title hands-on-title" id="hands-on-quality-control" aria-label="hands-on box: Quality Control"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Quality Control</div>
 
   <ol>
     <li>
@@ -1146,7 +1140,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 <p>Now it is time to perform assembly.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-unicycler-assembly" class="box-title" aria-label="hands-on box: Unicycler Assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Unicycler Assembly</div>
+  <div class="box-title hands-on-title" id="hands-on-unicycler-assembly" aria-label="hands-on box: Unicycler Assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Unicycler Assembly</div>
 
   <ol>
     <li><strong>Unicycler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters :
@@ -1173,7 +1167,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 <p>Quast (<span class="citation"><a href="#Gurevich2013">Gurevich <i>et al.</i> 2013</a></span>) is a tool providing quality metrics for assemblies, and can also be used to compare multiple assemblies. The tool can also take an optional reference file as input, and will provide complementary metrics.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-assembly-quality" class="box-title" aria-label="hands-on box: Assembly Quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Assembly Quality</div>
+  <div class="box-title hands-on-title" id="hands-on-assembly-quality" aria-label="hands-on box: Assembly Quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Assembly Quality</div>
 
   <ol>
     <li><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the following parameters
@@ -1194,7 +1188,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 <h2 id="annotation-with-prokka">Annotation with Prokka</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-annotation" class="box-title" aria-label="hands-on box: Annotation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Annotation</div>
+  <div class="box-title hands-on-title" id="hands-on-annotation" aria-label="hands-on box: Annotation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Annotation</div>
 
   <ol>
     <li><strong>Prokka</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>:
@@ -1235,7 +1229,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 <p>Go to IGV <a href="http://software.broadinstitute.org/software/igv/download">download page</a> and select one of the options. The one I would try first would be <strong>Java Web Start</strong>. Simply click the <strong>Launch</strong> button for 10 GB distribution.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-visualization-in-igv" class="box-title" aria-label="hands-on box: Visualization in IGV"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualization in IGV</div>
+  <div class="box-title hands-on-title" id="hands-on-visualization-in-igv" aria-label="hands-on box: Visualization in IGV"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualization in IGV</div>
 
   <ol>
     <li>

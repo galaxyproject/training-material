@@ -723,12 +723,6 @@
         
     
         
-    
-        
-    
-        
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -815,7 +809,7 @@
 <p>For more advanced proteomics workflows, please consult the OpenMS <a href="/training-material/topics/proteomics/tutorials/protein-id-oms/tutorial.html">identification</a>, <a href="/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html">quantification</a> as well as <a href="/training-material/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html">SearchGUI/PeptideShaker</a> tutorials.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -838,14 +832,14 @@
 <p>The serum proteomic samples and the fasta file for this training were deposited at <a href="https://zenodo.org/record/3774452">Zenodo</a>. It is of course possible to use other fasta files that contain human proteome sequences, but to ensure that the results are compatible we recommend to use the provided fasta file. MaxQuant not only adds known contaminants to the fasta file, but also generates the “decoy” hits for false discovery rate estimation itself, therefore the fasta file is not allowed to have decoy entries. To learn more about fasta files, have a look at <a href="/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">Protein FASTA Database Handling</a>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>
       <p>Create a new history for this tutorial and give it a meaningful name</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the fasta and raw files from <a href="https://zenodo.org/record/3774452">Zenodo</a></p>
@@ -856,19 +850,19 @@ https://zenodo.org/record/4274987/files/Sample2.raw
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Once the files are green, rename the raw datasets into ‘sample1’ and ‘sample2’ and the fasta file into ‘protein database’</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-dataset" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Set the data type to thermo.raw for ‘sample1’ and ‘sample2’</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-changing-the-datatype" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">thermo.raw</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">thermo.raw</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -879,7 +873,7 @@ https://zenodo.org/record/4274987/files/Sample2.raw
 <p>The MaxQuant <span class="notranslate">Galaxy</span> implementation contains the most important MaxQuant parameters. As an alte<span class="notranslate">rna</span>tive, <strong>MaxQuant (using mqpar.xml)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> can be used with a preconfigured mqpar.xml file. We will explain the parameters after starting the MaxQuant run which takes some time to finish.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-maxquant-analysis" class="box-title" aria-label="hands-on box: MaxQuant analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: MaxQuant analysis</div>
+  <div class="box-title hands-on-title" id="hands-on-maxquant-analysis" aria-label="hands-on box: MaxQuant analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: MaxQuant analysis</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3"><strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/maxquant/maxquant/1.6.10.43+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters
@@ -913,7 +907,7 @@ https://zenodo.org/record/4274987/files/Sample2.raw
       </ul>
 
       <blockquote class="comment">
-        <div id="comment-protein-groups" class="box-title" aria-label="comment box: Protein Groups"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Protein Groups</div>
+        <div class="box-title comment-title" id="comment-protein-groups" aria-label="comment box: Protein Groups"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Protein Groups</div>
         <p>Proteins that share all their peptides with other proteins cannot be unambiguously identified. Therefore, MaxQuant groups such proteins into one protein group and only one common quantification will be calculated. The different protein properties are separated by semicolon.</p>
       </blockquote>
     </li>
@@ -947,7 +941,7 @@ https://zenodo.org/record/4274987/files/Sample2.raw
 <p>MaxQuant automatically generates several output files. In the <em>“Output Options”</em> all or some of the output files can be selected. The protein information can be obtained by selecting <code class="language-plaintext highlighter-rouge">Protein Groups</code>, while the peptide information is obtained by choosing <code class="language-plaintext highlighter-rouge">Peptides</code>. The applied MaxQuant parameters are stored in the <code class="language-plaintext highlighter-rouge">mqpar.xml</code> This file can be re-used as an input file in the <strong>MaxQuant (using mqpar.xml)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
 <blockquote class="details">
-  <div id="details-more-maxquant-parameters" class="box-title"><button type="button" aria-controls="details-more-maxquant-parameters-contents" aria-expanded="true" aria-label="Toggle details box: More MaxQuant parameters"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: More MaxQuant parameters<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-more-maxquant-parameters"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-maxquant-parameters-contents" aria-expanded="true" aria-label="Toggle details box: More MaxQuant parameters"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: More MaxQuant parameters<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>
       <p>For pre-fractionated data an <em>“experimental design template”</em> has to be used. This has to be a tab-separated text file with a column for the fractions (e.g. 1-10) and a column for the experiment (sample1, sample2, sample3) and a column for post translational modifications (PTM). Examples are given in the help section of the MaxQuant tool.</p>
@@ -962,7 +956,7 @@ https://zenodo.org/record/4274987/files/Sample2.raw
 </blockquote>
 
 <blockquote class="tip">
-  <div id="tip-continue-with-results-from-zenodo" class="box-title"><button type="button" aria-controls="tip-continue-with-results-from-zenodo-contents" aria-expanded="true" aria-label="Toggle tip box: Continue with results from Zenodo"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Continue with results from Zenodo<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-continue-with-results-from-zenodo"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-continue-with-results-from-zenodo-contents" aria-expanded="true" aria-label="Toggle tip box: Continue with results from Zenodo"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Continue with results from Zenodo<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>In case the MaxQuant run is not yet finished, the results can be downloaded from Zenodo to be able to continue the tutorial</p>
   <ol>
@@ -979,7 +973,7 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
 </blockquote>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>How many proteins were found in total?</li>
@@ -988,7 +982,7 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
   </ol>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>271 protein (groups) were found in total.</li>
@@ -1005,7 +999,7 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
 <p>To get a first overview of the MaxQuant results, the PTXQC report is helpful. Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> eye of the PTXQC pdf file to open it in <span class="notranslate">Galaxy</span>. Screening through the different plots might already give you a hint which of the samples was pure and which was depleted of abundant proteins. Both samples failed in some categories (see Figure 4 above), especially due to low peptide and protein numbers, which is expected in serum samples and therefore not a quality problem.</p>
 
 <blockquote class="question">
-  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>In which sample were more contaminantes quantified?</li>
@@ -1015,7 +1009,7 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Sample 2 has more contaminants, especially serum albumin is high abundant. <img src="../../images/maxquant_lfq_contaminants.png" alt="PTXQC_contaminants. " loading="lazy" /></li>
@@ -1032,7 +1026,7 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
 <p>To explore the proteomic composition of the two serum samples some postprocessing steps on the Protein Groups file are necessary. The Protein Groups file contains all relevant information on the protein level. The best way to explore this vast table is by clicking on the  scratch book <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-scratchbook</span> on the top menu. Clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> eye icon opens the Protein Groups file. <span class="notranslate">Galaxy</span> does not work with the names of the columns but instead with their number. Find the column numbers for: Fasta headers (includes protein ID + name + species), LFQ intensities for each sample and reverse proteins. First we remove “decoy” proteins, which are named “reverse” in MaxQuant. Next, we remove contaminants. For non-human samples, we could just remove all proteins, that are marked with a “+” in the “potential contaminant” column. We have seen before that many human proteins were marked as contaminant and as we study a human sample we don’t want to remove them. Therefore, we only remove non-human contaminant proteins. Then, we shrink the file to keep only columns that are interesting in the next steps: the fasta header and the columns with LFQ intensities for both files. To find the most abundant proteins per sample, the LFQ intensities can be sorted. On this sorted dataset we will explore the composition of the serum proteins within both samples using an interactive pie charts diagram.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-exploring-serum-composition" class="box-title" aria-label="hands-on box: Exploring serum composition"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Exploring serum composition</div>
+  <div class="box-title hands-on-title" id="hands-on-exploring-serum-composition" aria-label="hands-on box: Exploring serum composition"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Exploring serum composition</div>
 
   <ol>
     <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
@@ -1101,7 +1095,7 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
 <figure id="figure-5"><img src="../../images/maxquant_lfq_serum_composition.png" alt="serum_composition. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Quantitative serum composition. In <span class="notranslate">Galaxy</span> one can hover over the graph to see the protein names</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>How many decoy proteins were removed?</li>
@@ -1111,7 +1105,7 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>2 (272 lines (Protein Groups) minus 272 lines (Filter))</li>
@@ -1129,7 +1123,7 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
 <p>After analyzing the composition of each sample separately, the intensities between both samples are compared. For this, the intensity values are log2-transform and the normal distribution is visualized as boxplots, this requires cutting only the relevant columns before visualization. Next the log2 fold change is calculated and its distribution visualized as histogram. The log2 fold change helps to find proteins with abundances changes between the samples.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-quantitative-assessment" class="box-title" aria-label="hands-on box: Quantitative Assessment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Quantitative Assessment</div>
+  <div class="box-title hands-on-title" id="hands-on-quantitative-assessment" aria-label="hands-on box: Quantitative Assessment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Quantitative Assessment</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0"><strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0</span></span>  with the following parameters:
@@ -1196,7 +1190,7 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Describe the distribution of the log2 intensities in the box plots.</li>
@@ -1205,7 +1199,7 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The log2 transformation leads to a close to normal intensity distribution for both samples. Intensities in the depleted sample are shifted towards higher values compared to the non-depleted samples. The big difference comes from artificially depleting (changing) protein intensities. <img src="../../images/maxquant_lfq_boxplots.png" alt="boxplots. " loading="lazy" /></li>
@@ -1218,7 +1212,7 @@ https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
 </blockquote>
 
 <blockquote class="tip">
-  <div id="tip-analyzing-your-own-data" class="box-title"><button type="button" aria-controls="tip-analyzing-your-own-data-contents" aria-expanded="true" aria-label="Toggle tip box: Analyzing your own data"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Analyzing your own data<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-analyzing-your-own-data"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-analyzing-your-own-data-contents" aria-expanded="true" aria-label="Toggle tip box: Analyzing your own data"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Analyzing your own data<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>For this training we have chosen two small example files to keep analysis time minimal. Real proteomic projects comprise more samples leading to longer MaxQuant run times from many hours to several days (depending on input file size, number of input files and parameters). Real projects also require different follow up analysis. Here are some things to consider for your proteomic project:</p>
   <ol>

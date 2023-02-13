@@ -740,15 +740,9 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
             Human Cell Atlas
         </a>
-        
-    
-        
-    
         
     
         
@@ -887,7 +881,7 @@
 <p>We will use <em>scater</em> (<span class="citation"><a href="#10.1093/bioinformatics/btw777">McCarthy <i>et al.</i> 2017</a></span>) to visualise sc<span class="notranslate">RNA</span>-seq data, obtaining information about the factors mentioned above, filter out low-quality cells and confirm that filtering has worked. We’ll then look at confounding factors such as batch effect to see if the data is biased to any technical artifacts.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -914,7 +908,7 @@
 <h1 id="data-upload">Data upload</h1>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -927,9 +921,9 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-data-from-a-data-library" class="box-title"><button type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -946,7 +940,7 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-calculate-qc-metrics" class="box-title" aria-label="hands-on box: Calculate QC metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Calculate QC metrics</div>
+  <div class="box-title hands-on-title" id="hands-on-calculate-qc-metrics" aria-label="hands-on box: Calculate QC metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Calculate QC metrics</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2"><strong>Scater: Calculate QC metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2</span></span>   with the following parameters:
@@ -957,7 +951,7 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
       </ul>
 
       <blockquote class="comment">
-        <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>The output of this tool is a SingleCellExperiment object in <a href="http://loompy.org/">Loom</a> format, which contains all the information from the input files, along with a host of other quality control metrics, calculated from the input data.</p>
       </blockquote>
@@ -969,7 +963,7 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
 <p>Next, lets take a look at the data by plotting various properties to see what our data looks like.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-plot-library-qc" class="box-title" aria-label="hands-on box: Plot library QC"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot library QC</div>
+  <div class="box-title hands-on-title" id="hands-on-plot-library-qc" aria-label="hands-on box: Plot library QC"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot library QC</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2"><strong>Scater: plot library QC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2</span></span>   with the following parameters:
@@ -982,7 +976,7 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
       <figure id="figure-2"><img src="../../images/scrna-scater-qc/raw_data.png" alt="Raw data QC plots. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Raw data QC plots</figcaption></figure>
 
       <blockquote class="comment">
-        <div id="comment-1" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>There are four plots, two distribution bar plots and two scatter plots.
 The first distribution plot is the number of <span class="notranslate">reads</span> in each library (from a <span class="notranslate">single cell</span>).
@@ -1011,7 +1005,7 @@ The final scatterplot is the <strong>% MT genes</strong>, which plots the number
 Here, we’ll use the manual filtering method.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-filtering-with-scater" class="box-title" aria-label="hands-on box: Filtering with scater"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filtering with scater</div>
+  <div class="box-title hands-on-title" id="hands-on-filtering-with-scater" aria-label="hands-on box: Filtering with scater"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filtering with scater</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2"><strong>Scater: filter SCE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2</span></span>   with the following parameters:
@@ -1028,7 +1022,7 @@ Here, we’ll use the manual filtering method.</p>
       </ul>
 
       <blockquote class="comment">
-        <div id="comment-2" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-2" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>Let’s have a look at the parameters and their values:</p>
         <ol>
@@ -1044,7 +1038,7 @@ Here, we’ll use the manual filtering method.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-plot-library-qc-after-filtering" class="box-title" aria-label="hands-on box: Plot library QC after filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot library QC after filtering</div>
+  <div class="box-title hands-on-title" id="hands-on-plot-library-qc-after-filtering" aria-label="hands-on box: Plot library QC after filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot library QC after filtering</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2"><strong>Scater: plot library QC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2</span></span>   with the following parameters:
@@ -1059,7 +1053,7 @@ Here, we’ll use the manual filtering method.</p>
 <figure id="figure-3"><img src="../../images/scrna-scater-qc/post_filter.png" alt="QC plots after manual filtering. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> QC plots after manual filtering</figcaption></figure>
 
 <blockquote class="comment">
-  <div id="comment-3" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-3" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>How did the filtering go? Do you think it’s done a good job? Have you removed too many cells? Too few cells? About right?</p>
 
@@ -1074,7 +1068,7 @@ Here, we’ll use the manual filtering method.</p>
 <p>As we are using a rather small test dataset, it’s unlikely that PCA filtering will make any difference; for a larger, noisier dataset this is what we would perform instead:</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-task-description" class="box-title" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-task-description" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2"><strong>Scater: filter SCE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2</span></span>   with the following parameters:
       <ul>
@@ -1083,7 +1077,7 @@ Here, we’ll use the manual filtering method.</p>
       </ul>
 
       <blockquote class="comment">
-        <div id="comment-4" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-4" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>The data will be normalised and then PCA ran on it using the following information from the data:</p>
         <ul>
@@ -1105,7 +1099,7 @@ Here, we’ll use the manual filtering method.</p>
 <p>As discussed previously, technical artefacts can bias sc<span class="notranslate">RNA</span>-seq analyses. Strong batch effects can mask real biological differences in the data, so must be identified and removed from the data. Logging meta-data details such as date of library construction, sequencing batch, sample name, technical replicate, plate number, etc., is essential to identify batch effects in the data. We can use this information to visualise the data to examine it for clustering according to batch, rather than any real biological feature.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-pca-plot" class="box-title" aria-label="hands-on box: PCA plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: PCA plot</div>
+  <div class="box-title hands-on-title" id="hands-on-pca-plot" aria-label="hands-on box: PCA plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: PCA plot</div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2"><strong>Scater: PCA plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2</span></span>   with the following parameters:
       <ul>
@@ -1121,7 +1115,7 @@ Here, we’ll use the manual filtering method.</p>
 <figure id="figure-4"><img src="../../images/scrna-scater-qc/PCAplot.png" alt="PCA plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> PCA plot</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Do you see any obvious batch effect?</li>
@@ -1129,7 +1123,7 @@ Here, we’ll use the manual filtering method.</p>
   </ol>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>We can see that the <strong>S</strong> and <strong>G2M</strong> categories in <strong>Cell_Cycle</strong> cluster away from the rest of the data. Spend some time thinking about whether this might be a batch effect or biologically significant.</li>

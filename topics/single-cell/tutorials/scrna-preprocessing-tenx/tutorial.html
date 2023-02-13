@@ -879,15 +879,9 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://galaxy.hyphy.org/" title="HyPhy HIV NGS Tools">
             HyPhy HIV NGS Tools
         </a>
-        
-    
-        
-    
         
     
         
@@ -1016,7 +1010,7 @@ The cellular resolution and genome wide scope make it possible to draw new concl
 <p>Though there are approximately 3 million 10x gel barcodes used, the amount actually qualitatively profiled in a sample is ~10,000 due to majority of droplets (&gt;90%) being empty in order to ensure that the remainder contains only one cell.</p>
 
 <blockquote class="details">
-  <div id="details-whitelist-barcodes" class="box-title"><button type="button" aria-controls="details-whitelist-barcodes-contents" aria-expanded="true" aria-label="Toggle details box: Whitelist Barcodes"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Whitelist Barcodes<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-whitelist-barcodes"><button class="gtn-boxify-button details" type="button" aria-controls="details-whitelist-barcodes-contents" aria-expanded="true" aria-label="Toggle details box: Whitelist Barcodes"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Whitelist Barcodes<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>There are actually two sets of barcodes for the different chemistries provided; one which has 737,000 barcodes, and one with ~3,7 million barcodes.</p>
 
@@ -1037,7 +1031,7 @@ The cellular resolution and genome wide scope make it possible to draw new concl
 <p>The tutorial is structured into two parts:</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will deal with:</p>
 
@@ -1071,7 +1065,7 @@ The cellular resolution and genome wide scope make it possible to draw new concl
 <p>Since STARsolo is a drop-in solution to the <em>Cell Ranger</em> pipeline, the first part of the tutorial is a one-click solution where users are encouraged to launch their <strong><span class="notranslate">RNA</span> STARsolo</strong> jobs and spend the time familiarising themselves with the pre-processing training materials mentioned above.</p>
 
 <blockquote class="details">
-  <div id="details-benchmark-of-cell-ranger-to-others" class="box-title"><button type="button" aria-controls="details-benchmark-of-cell-ranger-to-others-contents" aria-expanded="true" aria-label="Toggle details box: Benchmark of Cell Ranger to others"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Benchmark of Cell Ranger to others<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-benchmark-of-cell-ranger-to-others"><button class="gtn-boxify-button details" type="button" aria-controls="details-benchmark-of-cell-ranger-to-others-contents" aria-expanded="true" aria-label="Toggle details box: Benchmark of Cell Ranger to others"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Benchmark of Cell Ranger to others<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <figure id="figure-4"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_runtimes.jpg" alt="tenx_runtimes. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Benchmark of different <span class="notranslate">mapping</span> software.</figcaption></figure>
 
@@ -1103,20 +1097,20 @@ The cellular resolution and genome wide scope make it possible to draw new concl
 <p>The barcodes in the R1 FASTQ data are checked against these known cell barcodes in order assign a specific read to a specific known cell. The barcodes are designed in such a manner that there is virtually no chance that they will align to a place in the reference genome. In this tutorial we will be using hg19 (GRCh37) version of the human genome, and will therefore also need to use a hg19 GTF file to annotate our <span class="notranslate">reads</span>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload-and-organization" class="box-title" aria-label="hands-on box: Data upload and organization"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload and organization</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-and-organization" aria-label="hands-on box: Data upload and organization"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload and organization</div>
 
   <ol>
     <li>
       <p>Create a new history and rename it (e.g. sc<span class="notranslate">RNA</span>-seq 10X dataset tutorial)</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the sub-sampled FASTQ data from <a href="https://zenodo.org/record/3457880"><code class="language-plaintext highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-data-from-a-data-library" class="box-title"><button type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz
 https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz
@@ -1125,7 +1119,7 @@ https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L002_R2_001.fastq.g
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Import the Gene Annotations and Cell Barcodes from <a href="https://zenodo.org/record/3457880"><code class="language-plaintext highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)</p>
@@ -1174,7 +1168,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 <p>The table above gives a summary of the primers used in the image and the number of basepairs occupied by each.</p>
 
 <blockquote class="details">
-  <div id="details-strandedness" class="box-title"><button type="button" aria-controls="details-strandedness-contents" aria-expanded="true" aria-label="Toggle details box: Strandedness"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Strandedness<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-strandedness"><button class="gtn-boxify-button details" type="button" aria-controls="details-strandedness-contents" aria-expanded="true" aria-label="Toggle details box: Strandedness"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Strandedness<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Unstranded protocols do not distinguish between whether a fragment was sequenced from the forward or the reverse strand, which can lead to some ambiguity if the fragment overlaps two transcripts. In the image below, it is not clear whether the fragment is derived from GeneF or GeneR due to this overlap.</p>
 
@@ -1185,7 +1179,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 </blockquote>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>What has stayed constant between the chemistry versions?</li>
@@ -1196,7 +1190,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
   </ol>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The Cell Barcode (CB) has remained at 16bp for both chemistries.</li>
@@ -1220,7 +1214,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 <p>To perform the demultiplexing, we need to tell <strong><span class="notranslate">RNA</span> STARsolo</strong> where to look in the R1 FASTQ to find the cell barcodes. We can do this by simply counting the number of basepairs in any read of the R1 files.</p>
 
 <blockquote class="question">
-  <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
   <p>Peek at one of the R1 FASTQ files using the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> symbol below the dataset name.</p>
 
   <ol>
@@ -1229,7 +1223,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>There are 28 basepairs.</li>
       <li>The v2 has 26 basepairs, but the v3 has 28 basepairs. Therefore the <span class="notranslate">reads</span> we have here use the Chromium v3 chemistry.</li>
@@ -1242,13 +1236,13 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 <p>We will now proceed to demultiplex, map, and quantify both sets of <span class="notranslate">reads</span> using the correct chemistry discovered in the previous sub-section.</p>
 
 <blockquote class="comment">
-  <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a"><strong><span class="notranslate">RNA</span> STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/<span class="notranslate">rna</span>_starsolo/<span class="notranslate">rna</span>_starsolo/2.7.8a</span></span>  consumes a large amount of memory. During the Smörgåsbord training please use <code class="language-plaintext highlighter-rouge">Human (Homo Sapiens): hg19 chrX</code> as the reference genome if you follow this tutorial on <a href="https://usegalaxy.org">use<span class="notranslate">galaxy</span>.org</a>. This performs the <span class="notranslate">mapping</span> only against chromosome X. The full output dataset is available at <a href="https://zenodo.org/record/3581213/files/matrix.mtx">zenodo</a> and will be the starting point for the next tutorial.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on" class="box-title" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
   <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a"><strong><span class="notranslate">RNA</span> STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/<span class="notranslate">rna</span>_starsolo/<span class="notranslate">rna</span>_starsolo/2.7.8a</span></span>   with the following parameters:</p>
   <ul>
@@ -1286,7 +1280,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
   </ul>
 
   <blockquote class="comment">
-    <div id="comment-1" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+    <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
     <p>The in-built Cell filtering is a relatively new feature that emulates the CellRanger pipeline. Here, we set the filtering options to not filter because we will use our own methods to better understand how this works. For your own future datasets, you may wish to enable the filtering parameter.</p>
   </blockquote>
@@ -1312,7 +1306,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 <p>Let us investigate the output log. This type of quality control is essential in any <span class="notranslate">RNA</span>-based analysis and it is strongly recommended that you familiarise yourself with the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control</a> tutorial.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-1" class="box-title" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on-1" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
   <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:</p>
   <ul>
@@ -1339,12 +1333,12 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>What percentage of <span class="notranslate">reads</span> are uniquely mapped?</p>
 
   <blockquote class="solution">
-    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>87.5%</p>
     <ul>
       <li>This is good, and is expected of 10x datasets.</li>
@@ -1362,7 +1356,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 <p>We can look at this directly by clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> symbol of the <em>Feature Statistic Summaries</em> file.</p>
 
 <blockquote class="comment">
-  <div id="comment-rna-starsolo-log-output" class="box-title" aria-label="comment box: RNA STARsolo log output"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: <span class="notranslate">RNA</span> STARsolo log output</div>
+  <div class="box-title comment-title" id="comment-rna-starsolo-log-output" aria-label="comment box: RNA STARsolo log output"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: <span class="notranslate">RNA</span> STARsolo log output</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Barcodes:
                   nNoAdapter              0
                       nNoUMI              0
@@ -1394,7 +1388,7 @@ Genes:
 <p>The explanation of these parameters can be seen in the <a href="https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf"><span class="notranslate">RNA</span> STAR Manual</a> under the <em>STARsolo</em> section, with most of the information given in the details box below.</p>
 
 <blockquote class="details">
-  <div id="details-explanation-of-parameters" class="box-title"><button type="button" aria-controls="details-explanation-of-parameters-contents" aria-expanded="true" aria-label="Toggle details box: Explanation of parameters"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Explanation of parameters<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-explanation-of-parameters"><button class="gtn-boxify-button details" type="button" aria-controls="details-explanation-of-parameters-contents" aria-expanded="true" aria-label="Toggle details box: Explanation of parameters"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Explanation of parameters<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <table>
     <thead>
@@ -1487,7 +1481,7 @@ Genes:
 <h2 id="cell-ranger-method">Cell Ranger Method</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-default-method" class="box-title" aria-label="hands-on box: Default Method"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Default Method</div>
+  <div class="box-title hands-on-title" id="hands-on-default-method" aria-label="hands-on box: Default Method"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Default Method</div>
 
   <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1"><strong>DropletUtils</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+<span class="notranslate">galaxy</span>1</span></span>   with the following parameters:</p>
   <ul>
@@ -1513,7 +1507,7 @@ Genes:
   </ul>
 
   <blockquote class="comment">
-    <div id="comment-default-parameter" class="box-title" aria-label="comment box: Default Parameter"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Default Parameter</div>
+    <div class="box-title comment-title" id="comment-default-parameter" aria-label="comment box: Default Parameter"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Default Parameter</div>
 
     <p>The <em>“Expected Number of Cells”</em> parameter is the number of cells you expect to see in your sample, but does not correspond to how many cells you expect to see in a sub-sampled dataset like this one. The default is 3000 for <em>Cell Ranger</em>, which will yield ~300 cells here, but users are encouraged to experiment with this value when dealing with their own data, to recover the desired number of cells.</p>
 
@@ -1521,7 +1515,7 @@ Genes:
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>How many cells were detected?</li>
@@ -1529,7 +1523,7 @@ Genes:
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>By clicking on the title of the output dataset in the history we can expand the box to see the output says that there are <code class="language-plaintext highlighter-rouge">272</code> cells in the output table.</li>
@@ -1541,7 +1535,7 @@ Genes:
 <p>This will produce a count matrix in a human readable tabular format which can be used in <span class="notranslate">downstream</span> analysis tools, such as those used in the <a href="/training-material/topics/single-cell/tutorials/scrna-raceid/tutorial.html"><em><span class="notranslate">Downstream</span> <span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span> analysis with RaceID</em></a> tutorial.</p>
 
 <blockquote class="details">
-  <div id="details-file-formats-in-scrna-seq" class="box-title"><button type="button" aria-controls="details-file-formats-in-scrna-seq-contents" aria-expanded="true" aria-label="Toggle details box: File Formats in scRNA-seq"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: File Formats in sc<span class="notranslate">RNA</span>-seq<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-file-formats-in-scrna-seq"><button class="gtn-boxify-button details" type="button" aria-controls="details-file-formats-in-scrna-seq-contents" aria-expanded="true" aria-label="Toggle details box: File Formats in scRNA-seq"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: File Formats in sc<span class="notranslate">RNA</span>-seq<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The tabular outputs here are selected mostly for transparency, since they are easy to inspect. However, the datasets produced with 10x data are very large and very sparse, meaning there is much data redundancy due to the repetition of zeroes everywhere in the data.</p>
 
@@ -1563,7 +1557,7 @@ Genes:
 <p>A useful diagnostic for droplet-based data is the barcode rank plot, which shows the (log-)total UMI count for each barcode on the y-axis and the (log-)rank on the x-axis. This is effectively a transposed empirical cumulative density plot with log-transformed axes. It is useful as it allows users to examine the distribution of total counts across barcodes, focusing on those with the largest counts.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-rank-barcodes" class="box-title" aria-label="hands-on box: Rank Barcodes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Rank Barcodes</div>
+  <div class="box-title hands-on-title" id="hands-on-rank-barcodes" aria-label="hands-on box: Rank Barcodes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Rank Barcodes</div>
 
   <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1"><strong>DropletUtils</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+<span class="notranslate">galaxy</span>1</span></span>   with the following parameters:</p>
   <ul>
@@ -1597,7 +1591,7 @@ Genes:
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>We see the blue knee line cross the threshold of barcodes at just below than the 10000 Rank on the horizontal log scale, which is shown in the expanded view of our data as <code class="language-plaintext highlighter-rouge">"knee = 5300"</code>. This is in good accordance with the <code class="language-plaintext highlighter-rouge">6101</code> cells shown in the STARsolo log output previously.</li>
       <li>This threshold is given by the inflection line, which is given at <code class="language-plaintext highlighter-rouge">"inflection = 260"</code>, so 260 cells.</li>
@@ -1609,7 +1603,7 @@ Genes:
 <p>On large 10x datasets we can use these thresholds as metrics to utilise in our own custom filtering, which is once again provided by the <strong>DropletUtils</strong> tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-custom-filtering" class="box-title" aria-label="hands-on box: Custom Filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Custom Filtering</div>
+  <div class="box-title hands-on-title" id="hands-on-custom-filtering" aria-label="hands-on box: Custom Filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Custom Filtering</div>
 
   <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1"><strong>DropletUtils</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+<span class="notranslate">galaxy</span>1</span></span>   with the following parameters:</p>
   <ul>

@@ -722,12 +722,6 @@
         
     
         
-    
-        
-    
-        
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -794,7 +788,7 @@
 <p>In this tutorial, you will learn how to manipulate <a href="https://en.wikipedia.org/wiki/NetCDF">netCDF</a> data files using <a href="https://xarray.pydata.org/en/stable/">Xarray</a> <span class="notranslate">Galaxy</span> Tools.  NetCDF stands for <strong>network Common Data Form</strong> and is one of the most popular file format in climate science. It is used for storing multidimensional scientific data variables such as temperature or humidity, and metadata can be added to facilitate sharing of netCDF data. netCDF is widely used outside the Climate Science community and each community has its own set of conventions, especially for metadata. The <a href="https://cfconventions.org/">Climate and Forecast metadata convention</a>, also called CF-convention is used by the Climate community and is designed to promote the processing and sharing of netCDF files.</p>
 
 <blockquote class="comment">
-  <div id="comment-xarray-and-earth-science" class="box-title" aria-label="comment box: Xarray and Earth Science"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Xarray and Earth Science</div>
+  <div class="box-title comment-title" id="comment-xarray-and-earth-science" aria-label="comment box: Xarray and Earth Science"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Xarray and Earth Science</div>
   <p>Xarray works with labelled multi-dimensional arrays and can be used for a very wide range of data and data formats. In this training material, we focus on the usage of Xarray for Earth Science data following the <a href="https://cfconventions.org/">CF-Convention</a>. However, some <span class="notranslate">Galaxy</span> Tools also work for non Earth Science datasets, and if needed current Xarray <span class="notranslate">Galaxy</span> Tools could be extended to accommodate new usage.</p>
 </blockquote>
 
@@ -807,7 +801,7 @@ It is produced from an ensemble of nine air quality forecasting models across Eu
 The dataset we will be using in this tutorial is very small and there is no need to parallelize our data analysis. Parallel data analysis with Pangeo is not covered in this tutorial.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -833,20 +827,20 @@ The dataset we will be using in this tutorial is very small and there is no need
 <h1 id="create-a-history">Create a history</h1>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-create-history" class="box-title" aria-label="hands-on box: Create history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create history</div>
+  <div class="box-title hands-on-title" id="hands-on-create-history" aria-label="hands-on box: Create history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create history</div>
 
   <ol>
     <li>
       <p>Make sure you start from an empty analysis history.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p><strong>Rename your history</strong> to be meaningful and easy to find. For instance, you can choose <strong>Pangeo 101 for everyone - Xarray</strong> as the name of your new history.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-history" class="box-title"><button type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
   </ol>
 
@@ -855,7 +849,7 @@ The dataset we will be using in this tutorial is very small and there is no need
 <h2 id="upload-cams-pm25-data">Upload CAMS PM2.5 data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>
@@ -867,23 +861,23 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-data-from-a-data-library" class="box-title"><button type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li>If needed rename the datasets to <code class="language-plaintext highlighter-rouge">CAMS-PM2_5-20211222.netcdf</code></li>
     <li>
       <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">netcdf</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-changing-the-datatype" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Add a tag corresponding to ads (for Atmosphere Data Service)</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-adding-a-tag" class="box-title"><button type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -892,7 +886,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 <h1 id="understanding-our-dataset">Understanding our dataset</h1>
 
 <blockquote class="details">
-  <div id="details-more-information-about-cams-pm2-5-forecast-datasets" class="box-title"><button type="button" aria-controls="details-more-information-about-cams-pm2-5-forecast-datasets-contents" aria-expanded="true" aria-label="Toggle details box: More information about CAMS PM2.5 forecast datasets"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: More information about CAMS PM2.5 forecast datasets<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-more-information-about-cams-pm2-5-forecast-datasets"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-information-about-cams-pm2-5-forecast-datasets-contents" aria-expanded="true" aria-label="Toggle details box: More information about CAMS PM2.5 forecast datasets"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: More information about CAMS PM2.5 forecast datasets<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Our CAMS PM2.5 forecast dataset is in <a href="https://en.wikipedia.org/wiki/NetCDF">netCDF</a> format. You could find the same dataset in different formats such as <a href="https://en.wikipedia.org/wiki/GRIB">GRIdded Binary or General Regularly-distributed Information in Binary form (GRIB)</a> or <a href="https://en.wikipedia.org/wiki/GeoTIFF">geoTIFF</a>. The same Xarray Tools can be used with these other data formats. More information about this particular data set can be found on the <a href="https://ads.atmosphere.copernicus.eu/cdsapp#!/dataset/cams-europe-air-quality-forecasts?tab=overview">CAMS European air quality forecast webpage</a>. As mentioned earlier, we use netCDF data format because it is the most popular among climate scientists.</p>
 </blockquote>
@@ -904,7 +898,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 <h3 id="global-metadata-information">Global metadata information</h3>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-netcdf-dataset-with-xarray-metadata-galaxy-tool" class="box-title" aria-label="hands-on box: netCDF dataset with Xarray metadata Galaxy Tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: netCDF dataset with Xarray metadata <span class="notranslate">Galaxy</span> Tool</div>
+  <div class="box-title hands-on-title" id="hands-on-netcdf-dataset-with-xarray-metadata-galaxy-tool" aria-label="hands-on box: netCDF dataset with Xarray metadata Galaxy Tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: netCDF dataset with Xarray metadata <span class="notranslate">Galaxy</span> Tool</div>
 
   <ol>
     <li>
@@ -933,12 +927,12 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 </ol>
 
 <blockquote class="question">
-  <div id="question-cam-pm2-5-dataset" class="box-title" aria-label="question box: CAM PM2.5 Dataset"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: CAM PM2.5 Dataset</div>
+  <div class="box-title question-title" id="question-cam-pm2-5-dataset" aria-label="question box: CAM PM2.5 Dataset"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: CAM PM2.5 Dataset</div>
 
   <p>What is the name of the variable for Particle matter &lt; 2.5 μm and its physical units?</p>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Information about variable names and units can be found in <strong>info file</strong> that was generated by Xarray metadata <span class="notranslate">Galaxy</span> Tool.
         <ul>
@@ -949,7 +943,7 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
     </ol>
 
     <blockquote class="code-out">
-      <div id="code-out" class="box-title" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+      <div class="box-title code-out-title" id="code-out" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xarray.Dataset <span class="o">{</span>
 dimensions:
 	latitude <span class="o">=</span> 400 <span class="p">;</span>
@@ -992,7 +986,7 @@ variables:
 <h3 id="coordinates-information">Coordinates information</h3>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-get-coordinate-information-with-xarray-coordinate" class="box-title" aria-label="hands-on box: Get Coordinate information with Xarray Coordinate"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get Coordinate information with Xarray Coordinate</div>
+  <div class="box-title hands-on-title" id="hands-on-get-coordinate-information-with-xarray-coordinate" aria-label="hands-on box: Get Coordinate information with Xarray Coordinate"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get Coordinate information with Xarray Coordinate</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.18.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.18.2+galaxy0"><strong>NetCDF xarray Coordinate Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.18.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1010,7 +1004,7 @@ variables:
       </ul>
 
       <blockquote class="comment">
-        <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>This tool returns as many tabular files as the number of coordinate variables present in your input file. The values are decoded from the netCDF input file and no further processing is done. So units for instance for latitudes, longitudes, level and time may vary from one file to another depending on how it was coded in the original input file.</p>
       </blockquote>
@@ -1020,7 +1014,7 @@ variables:
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-understanding-pm2-5-forecast-coordinates" class="box-title" aria-label="question box: Understanding PM2.5 forecast coordinates"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Understanding PM2.5 forecast coordinates</div>
+  <div class="box-title question-title" id="question-understanding-pm2-5-forecast-coordinates" aria-label="question box: Understanding PM2.5 forecast coordinates"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Understanding PM2.5 forecast coordinates</div>
 
   <ol>
     <li>What is the unit of the <code class="language-plaintext highlighter-rouge">time</code> coordinate?</li>
@@ -1029,13 +1023,13 @@ variables:
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li><code class="language-plaintext highlighter-rouge">info file</code> tells us that <code class="language-plaintext highlighter-rouge">time</code> is coded as <code class="language-plaintext highlighter-rouge">timedelta64[ns]</code> e.g. as differences in times (here in nanoseconds). Here the reference time is December 22, 2021. If we look at the tabular file named <code class="language-plaintext highlighter-rouge">time</code> (generated by <code class="language-plaintext highlighter-rouge">NetCDF xarray Coordinate Info</code>), we see that these times are automatically converted to human readable time format when printed:</li>
     </ol>
 
     <blockquote class="code-out">
-      <div id="code-out-1" class="box-title" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+      <div class="box-title code-out-title" id="code-out-1" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0	0 days 00:00:00
 1	0 days 01:00:00
 2	0 days 02:00:00
@@ -1050,7 +1044,7 @@ variables:
 <h1 id="plotting-our-dataset-on-a-geographical-map">Plotting our dataset on a geographical map</h1>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-map-plot" class="box-title" aria-label="hands-on box: Map plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Map plot</div>
+  <div class="box-title hands-on-title" id="hands-on-map-plot" aria-label="hands-on box: Map plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Map plot</div>
   <p>We will use Xarray mapplot <span class="notranslate">Galaxy</span> Tool to plot PM2.5 on December 22, 2021.</p>
 
   <ol>
@@ -1080,7 +1074,7 @@ variables:
   <p><img src="../../images/PM2_5_galaxy_20211222-00UTC.png" alt="CAMS PM2.5 December, 22th 2021 at 00:00 UTC. " loading="lazy" /></p>
 
   <blockquote class="comment">
-    <div id="comment-why-shifting-longitudes" class="box-title" aria-label="comment box: Why shifting longitudes?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Why shifting longitudes?</div>
+    <div class="box-title comment-title" id="comment-why-shifting-longitudes" aria-label="comment box: Why shifting longitudes?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Why shifting longitudes?</div>
 
     <p>Longitudes are coded from 0 to 360 degrees. As we do not have global data but only covering Europe, we need to shift longitudes so that <code class="language-plaintext highlighter-rouge">NetCDF xarray map plotting</code> can plot properly our dataset.</p>
   </blockquote>
@@ -1088,12 +1082,12 @@ variables:
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-visualize-and-compare" class="box-title" aria-label="question box: Visualize and Compare"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Visualize and Compare</div>
+  <div class="box-title question-title" id="question-visualize-and-compare" aria-label="question box: Visualize and Compare"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Visualize and Compare</div>
 
   <p>Make a plot to Visualize the forecast for December, 24th 2021 at 12:00 UTC. Do you see any obvious differences with the plot from December 22, 2021 at 00:00 UTC?</p>
 
   <blockquote class="solution">
-    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>Data starts on December, 22nd 2021 at 00:00 UTC so we need to add 2 days and 12 hours to select the correct time index. We reuse the same <code class="language-plaintext highlighter-rouge">NetCDF xarray map plotting</code> with a different selection for time:</p>
 
@@ -1124,7 +1118,7 @@ variables:
 <h1 id="select--subset-from-coordinates">Select / Subset from coordinates</h1>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-netcdf-xarray-operations-manipulate-xarray-from-netcdf-and-save-back-to-netcdf" class="box-title" aria-label="hands-on box: NetCDF xarray operations manipulate xarray from netCDF and save back to netCDF"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: NetCDF xarray operations manipulate xarray from netCDF and save back to netCDF</div>
+  <div class="box-title hands-on-title" id="hands-on-netcdf-xarray-operations-manipulate-xarray-from-netcdf-and-save-back-to-netcdf" aria-label="hands-on box: NetCDF xarray operations manipulate xarray from netCDF and save back to netCDF"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: NetCDF xarray operations manipulate xarray from netCDF and save back to netCDF</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0"><strong>NetCDF xarray operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
@@ -1160,7 +1154,7 @@ variables:
       <p>Check the generated outputs and in particular <code class="language-plaintext highlighter-rouge">time</code>. We see that the tabular file <code class="language-plaintext highlighter-rouge">time</code> only contains <strong>24</strong> lines with times from <code class="language-plaintext highlighter-rouge">0 days 00:00:00</code> to <code class="language-plaintext highlighter-rouge">0 days 23:00:00</code></p>
 
       <blockquote class="comment">
-        <div id="comment-slice-i-threshold2-i-not-included-in-selection" class="box-title" aria-label="comment box: slice &lt;i&gt;threshold2&lt;/i&gt; not included in selection"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: slice <i>threshold2</i> not included in selection</div>
+        <div class="box-title comment-title" id="comment-slice-i-threshold2-i-not-included-in-selection" aria-label="comment box: slice &lt;i&gt;threshold2&lt;/i&gt; not included in selection"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: slice <i>threshold2</i> not included in selection</div>
 
         <p>You may have noticed already but when selecting a range with <code class="language-plaintext highlighter-rouge">slice</code> the upper limit (here <code class="language-plaintext highlighter-rouge">1 days 00:00:00</code>) is not included.</p>
       </blockquote>
@@ -1170,12 +1164,12 @@ variables:
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-pm2-5-over-italy-region" class="box-title" aria-label="question box: PM2.5 over Italy region"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: PM2.5 over Italy region</div>
+  <div class="box-title question-title" id="question-pm2-5-over-italy-region" aria-label="question box: PM2.5 over Italy region"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: PM2.5 over Italy region</div>
 
   <p>Using a selection and making plots of PM2.5 over Italy (latitudes: 43.N, 40.N and longitudes: 11.E,15.E), can you tell us if the forecasted PM2.5 will increase or decrease during the next 24 hours between 10:00 UTC and 17:00 UTC? Over which town in Italy do you see high values?</p>
 
   <blockquote class="solution">
-    <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+galaxy0"><strong>NetCDF xarray operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_netcdf2netcdf/xarray_netcdf2netcdf/0.18.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
         <ul>
@@ -1265,7 +1259,7 @@ variables:
 </blockquote>
 
 <blockquote class="comment">
-  <div id="comment-latitude-slice-43-05-40-05-and-not-latitude-slice-40-05-43-05" class="box-title" aria-label="comment box:  `latitude=slice(43.05, 40.05)` and not `latitude=slice(40.05, 43.05)`"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment:  `latitude=slice(43.05, 40.05)` and not `latitude=slice(40.05, 43.05)`</div>
+  <div class="box-title comment-title" id="comment-latitude-slice-43-05-40-05-and-not-latitude-slice-40-05-43-05" aria-label="comment box:  `latitude=slice(43.05, 40.05)` and not `latitude=slice(40.05, 43.05)`"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment:  `latitude=slice(43.05, 40.05)` and not `latitude=slice(40.05, 43.05)`</div>
   <p>Why did we slice latitudes with <code class="language-plaintext highlighter-rouge">latitude=slice(43.05, 40.05)</code> and not <code class="language-plaintext highlighter-rouge">latitude=slice(40.05, 43.05)</code>?</p>
   <ul>
     <li>because when using slice, you need to specify values using the same order as in the coordinates. Latitudes are specified in 
@@ -1282,7 +1276,7 @@ decreasing order for CAMS.</li>
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-plot-where-pm2-5-is-greater-than-30-μm-m-sup-3-sup" class="box-title" aria-label="hands-on box: Plot where PM2.5 is greater than 30 μm.m&lt;sup&gt;-3&lt;/sup&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot where PM2.5 is greater than 30 μm.m<sup>-3</sup></div>
+  <div class="box-title hands-on-title" id="hands-on-plot-where-pm2-5-is-greater-than-30-μm-m-sup-3-sup" aria-label="hands-on box: Plot where PM2.5 is greater than 30 μm.m&lt;sup&gt;-3&lt;/sup&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot where PM2.5 is greater than 30 μm.m<sup>-3</sup></div>
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0"><strong>NetCDF xarray map plotting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
@@ -1310,14 +1304,14 @@ Now we clearly see that values of PM2.5 &gt;  30 μm.m<sup>-3</sup> are only fou
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-pm2-5-over-italy-over-30-μm-m-sup-3-sup" class="box-title" aria-label="question box: PM2.5 over Italy over 30 μm.m&lt;sup&gt;-3&lt;/sup&gt;"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: PM2.5 over Italy over 30 μm.m<sup>-3</sup></div>
+  <div class="box-title question-title" id="question-pm2-5-over-italy-over-30-μm-m-sup-3-sup" aria-label="question box: PM2.5 over Italy over 30 μm.m&lt;sup&gt;-3&lt;/sup&gt;"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: PM2.5 over Italy over 30 μm.m<sup>-3</sup></div>
 
   <p>Using the same geographical region over Italy, can you tell us if the forecasted PM2.5 will exceed
 30 μm.m<sup>-3</sup> 
 between 10:00 UTC and 17:00 UTC on december 22, 2021?</p>
 
   <blockquote class="solution">
-    <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+galaxy0"><strong>NetCDF xarray map plotting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.18.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
         <ul>
@@ -1357,7 +1351,7 @@ Using thresholds, we can clearly identify areas if anywhere there are “high”
 <h1 id="from-xarray-to-tabular-data">From Xarray to Tabular Data</h1>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-xarray-selection" class="box-title" aria-label="hands-on box: Xarray selection"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Xarray selection</div>
+  <div class="box-title hands-on-title" id="hands-on-xarray-selection" aria-label="hands-on box: Xarray selection"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Xarray selection</div>
 
   <p>We will select a single location: Naples (40.8518° N, 14.2681° E) and select the grid point that is closest to Naples.</p>
   <ol>
@@ -1417,7 +1411,7 @@ Using thresholds, we can clearly identify areas if anywhere there are “high”
       <p>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the generated file. It is a tabular with timeseries of PM2.4 concentrations over Naples. The total number of lines is 97 but we only print the first 5 lines.</p>
 
       <blockquote class="code-out">
-        <div id="code-out-2" class="box-title" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+        <div class="box-title code-out-title" id="code-out-2" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nb">time	</span>level	latitude	longitude	pm2p5_conc
 	0	0 days 00:00:00.000000000	0.0	40.95000076293945	14.25	24.00212
 	1	0 days 01:00:00.000000000	0.0	40.95000076293945	14.25	23.5767
@@ -1432,12 +1426,12 @@ Using thresholds, we can clearly identify areas if anywhere there are “high”
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-pm2-5-at-naples-over-the-4-forecasted-days" class="box-title" aria-label="question box: PM2.5 at Naples over the 4 forecasted days"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: PM2.5 at Naples over the 4 forecasted days</div>
+  <div class="box-title question-title" id="question-pm2-5-at-naples-over-the-4-forecasted-days" aria-label="question box: PM2.5 at Naples over the 4 forecasted days"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: PM2.5 at Naples over the 4 forecasted days</div>
 
   <p>From a qualitative point of view, can you say if PM2.5 may increase or decrease over the 4 forecasted days?</p>
 
   <blockquote class="solution">
-    <div id="solution-5" class="box-title"><button type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>We can make a simple plot using Scatterplot with ggplot2 ot climate stripes:</p>
     <ol>
       <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy2"><strong>Scatterplot with ggplot2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:

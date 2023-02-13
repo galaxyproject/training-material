@@ -770,12 +770,6 @@
         
     
         
-    
-        
-    
-        
-    
-        
         <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
             UseGalaxy.be
         </a>
@@ -839,7 +833,7 @@ In this tutorial we introduce successively the tools of this pipeline, and guide
 pipeline on a concrete example. This strategy is described by <span class="citation"><a href="#Nguyen2019">Nguyen <i>et al.</i> 2019</a></span>.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -872,7 +866,7 @@ Our use-case here is to identify candidate biomarkers for myocardial infarction 
 <figure id="figure-1"><img src="../../images/pipeline.png" alt="Overview of the pipeline described in this tutorial. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Pipeline of the tutorial, from Nguyen et al., as of in 2019.</figcaption></figure>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div id="comment-results-may-vary" class="box-title" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or because of stochastic processes in the algorithms.</p> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or because of stochastic processes in the algorithms.</p> </blockquote>
 
 <h1 id="selection-of-tissue-specific-proteins">Selection of tissue-specific proteins</h1>
 
@@ -880,14 +874,14 @@ Our use-case here is to identify candidate biomarkers for myocardial infarction 
 <a href="https://www.proteinatlas.org/">The Human Protein Atlas</a> (HPA) (Publication: <span class="citation"><a href="#Uhln2005">Uhlén <i>et al.</i> 2005</a></span>)</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-build-tissue-specific-expression-dataset-based-on-immunohistochemistry" class="box-title" aria-label="hands-on box: Build tissue-specific expression dataset based on ImmunoHistoChemistry"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Build tissue-specific <span class="notranslate">expression</span> dataset based on ImmunoHistoChemistry</div>
+  <div class="box-title hands-on-title" id="hands-on-build-tissue-specific-expression-dataset-based-on-immunohistochemistry" aria-label="hands-on box: Build tissue-specific expression dataset based on ImmunoHistoChemistry"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Build tissue-specific <span class="notranslate">expression</span> dataset based on ImmunoHistoChemistry</div>
 
   <ol>
     <li>
       <p><strong>Create a new history</strong> and give it a name.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p><strong>Build tissue-specific <span class="notranslate">expression</span> dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
@@ -912,7 +906,7 @@ Our use-case here is to identify candidate biomarkers for myocardial infarction 
 <p>We will now rerun the same tool but to select transcripts according to their <span class="notranslate">expression</span> profile.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-build-tissue-specific-expression-dataset-based-on-rnaseq" class="box-title" aria-label="hands-on box: Build tissue-specific expression dataset based on RNAseq"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Build tissue-specific <span class="notranslate">expression</span> dataset based on <span class="notranslate">RNA</span>seq</div>
+  <div class="box-title hands-on-title" id="hands-on-build-tissue-specific-expression-dataset-based-on-rnaseq" aria-label="hands-on box: Build tissue-specific expression dataset based on RNAseq"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Build tissue-specific <span class="notranslate">expression</span> dataset based on <span class="notranslate">RNA</span>seq</div>
 
   <ol>
     <li><strong>Build tissue-specific <span class="notranslate">expression</span> dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -937,7 +931,7 @@ To do so, a filter is applied on the <span class="notranslate">expression</span>
 In ProteoRE we’ll use the “Filter by keywords and/or numerical value” tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-filter-on-expression-value-criterion" class="box-title" aria-label="hands-on box: Filter on expression value criterion"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter on <span class="notranslate">expression</span> value criterion</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-on-expression-value-criterion" aria-label="hands-on box: Filter on expression value criterion"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter on <span class="notranslate">expression</span> value criterion</div>
 
   <ol>
     <li><strong>Filter by keywords and/or numerical value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -965,13 +959,13 @@ In ProteoRE we’ll use the “Filter by keywords and/or numerical value” tool
   </ol>
 
   <blockquote class="question">
-    <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
     <p>How many lines are there in the file of heart transcripts
 with a TPM value &gt;10 ?</p>
 
     <blockquote class="solution">
-      <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
       <p>5257 lines.</p>
     </blockquote>
   </blockquote>
@@ -983,7 +977,7 @@ with a TPM value &gt;10 ?</p>
 <p>We want now to select candidate biomarkers that are expressed in the heart muscle according to <strong>both</strong> IHC and <span class="notranslate">RNA</span>-seq data, using the Jvenn tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-venn-diagram" class="box-title" aria-label="hands-on box: Venn diagram"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Venn diagram</div>
+  <div class="box-title hands-on-title" id="hands-on-venn-diagram" aria-label="hands-on box: Venn diagram"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Venn diagram</div>
 
   <ol>
     <li><strong>Venn diagram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1020,10 +1014,10 @@ with a TPM value &gt;10 ?</p>
       <p><img src="../../images/biomarker-selection/jVenn_chart-tuto2.png" alt="Venn diagram output. " loading="lazy" /></p>
 
       <blockquote class="question">
-        <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
         <p>How many IDs are common to both IHC and <span class="notranslate">RNA</span>-seq data?</p>
         <blockquote class="solution">
-          <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>931 candidate biomarkers are detected by both IHC and <span class="notranslate">RNA</span>-seq data.</p>
         </blockquote>
       </blockquote>
@@ -1035,7 +1029,7 @@ with a TPM value &gt;10 ?</p>
 rest of our pipeline.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-obtain-list-of-candidate-biomarkers" class="box-title" aria-label="hands-on box: Obtain list of candidate biomarkers"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Obtain list of candidate biomarkers</div>
+  <div class="box-title hands-on-title" id="hands-on-obtain-list-of-candidate-biomarkers" aria-label="hands-on box: Obtain list of candidate biomarkers"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Obtain list of candidate biomarkers</div>
 
   <ol>
     <li><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1079,7 +1073,7 @@ rest of our pipeline.</p>
       <p>Let’s rename the 931 IDs dataset in “heart931” for simplification.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-dataset" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1089,7 +1083,7 @@ rest of our pipeline.</p>
 highly specific to the heart using additional <span class="notranslate">expression</span> data (still from HPA).</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-add-expression-data" class="box-title" aria-label="hands-on box: Add expression data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add <span class="notranslate">expression</span> data</div>
+  <div class="box-title hands-on-title" id="hands-on-add-expression-data" aria-label="hands-on box: Add expression data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add <span class="notranslate">expression</span> data</div>
 
   <ol>
     <li><strong>Add <span class="notranslate">expression</span> data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1130,7 +1124,7 @@ highly specific to the heart using additional <span class="notranslate">expressi
 <em>“<span class="notranslate">RNA</span> tissue category”</em> criterion.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-filter-by-keywords-and-or-numerical-value" class="box-title" aria-label="hands-on box: Filter by keywords and/or numerical value"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter by keywords and/or numerical value</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-by-keywords-and-or-numerical-value" aria-label="hands-on box: Filter by keywords and/or numerical value"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter by keywords and/or numerical value</div>
 
   <ol>
     <li><strong>Filter by keywords and/or numerical value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1175,7 +1169,7 @@ containing “enriched” or “enhanced” (115 lines = what we are interested 
       <p>Let’s rename the filtered dataset <strong>heart115</strong></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-dataset-1" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1192,7 +1186,7 @@ Thus we will retrieve protein features from neXtProt to retrieve those informati
 candidates to their corresponding UniProt accession number. The tool <strong>ID Converter</strong> is what we need to do so.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-id-converter" class="box-title" aria-label="hands-on box: ID Converter"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: ID Converter</div>
+  <div class="box-title hands-on-title" id="hands-on-id-converter" aria-label="hands-on box: ID Converter"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: ID Converter</div>
 
   <ol>
     <li><strong>ID Converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1231,7 +1225,7 @@ according to the version number of Uniprot.</p>
 For this purpose, we use the <strong>Add protein features</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> ProteoRE tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-add-protein-features" class="box-title" aria-label="hands-on box: Add protein features"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add protein features</div>
+  <div class="box-title hands-on-title" id="hands-on-add-protein-features" aria-label="hands-on box: Add protein features"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add protein features</div>
 
   <ol>
     <li><strong>Add protein features</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1272,7 +1266,7 @@ were added (at the end). These columns present TMDomains, Subcell Location and D
 no transmembrane domains by running the Filter by keywords and/or numerical value tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-filter-by-keywords-and-or-numerical-value-1" class="box-title" aria-label="hands-on box: Filter by keywords and/or numerical value"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter by keywords and/or numerical value</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-by-keywords-and-or-numerical-value-1" aria-label="hands-on box: Filter by keywords and/or numerical value"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter by keywords and/or numerical value</div>
 
   <ol>
     <li><strong>Filter by keywords and/or numerical value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1330,7 +1324,7 @@ LS MS/MS experiments.</p>
 <h1 id="check-for-previous-detection-by-lc-msms-experiments">Check for previous detection by LC-MS/MS experiments</h1>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-get-ms-ms-observations-in-tissue-fluid" class="box-title" aria-label="hands-on box: Get MS/MS observations in tissue/fluid"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get MS/MS observations in tissue/fluid</div>
+  <div class="box-title hands-on-title" id="hands-on-get-ms-ms-observations-in-tissue-fluid" aria-label="hands-on box: Get MS/MS observations in tissue/fluid"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get MS/MS observations in tissue/fluid</div>
 
   <ol>
     <li><strong>Get MS/MS observations in tissue/fluid</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1361,7 +1355,7 @@ were added with the info of number of times peptides were seen by MS/MS.</p>
 <p>Let’s now keep only proteins that have already been seen by MS/MS in the plasma (last column of the file).</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-filter-for-proteins-seen-in-the-plasma" class="box-title" aria-label="hands-on box: Filter for proteins seen in the plasma"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter for proteins seen in the plasma</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-for-proteins-seen-in-the-plasma" aria-label="hands-on box: Filter for proteins seen in the plasma"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter for proteins seen in the plasma</div>
 
   <ol>
     <li><strong>Filter by keywords and/or numerical value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:

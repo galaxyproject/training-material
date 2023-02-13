@@ -844,12 +844,6 @@
         
     
         
-        <a class="dropdown-item" href="https://galaxy.pasteur.fr/" title="Galaxy@Pasteur">
-            Galaxy@Pasteur
-        </a>
-        
-    
-        
         <a class="dropdown-item" href="https://galaxytrakr.org/" title="GalaxyTrakr">
             GalaxyTrakr
         </a>
@@ -894,12 +888,6 @@
         
         <a class="dropdown-item" href="http://mem.rcees.ac.cn:8081/" title="IDENAP">
             IDENAP
-        </a>
-        
-    
-        
-        <a class="dropdown-item" href="https://galaxy-web.ipk-gatersleben.de" title="IPK Galaxy Blast Suite">
-            IPK Galaxy Blast Suite
         </a>
         
     
@@ -966,12 +954,6 @@
         
         <a class="dropdown-item" href="http://pepsimili.e-nios.com:8080/" title="PepSimili">
             PepSimili
-        </a>
-        
-    
-        
-        <a class="dropdown-item" href="https://galaxy.bio.di.uminho.pt/" title="PhagePromotor">
-            PhagePromotor
         </a>
         
     
@@ -1100,7 +1082,7 @@
 <p>In this tutorial, we will use bulk and <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span>-seq data, including matrices of similar tissues from different sources, to illustrate how to infer cell type abundances from bulk <span class="notranslate">RNA</span>-seq.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -1129,7 +1111,7 @@
 <p>The heterogeneity that exists in the cellular composition of bulk <span class="notranslate">RNA</span>-seq can add bias to the results from differential <span class="notranslate">expression</span> analysis. In order to circumvent this limitation, <span class="notranslate">RNA</span>-seq deconvolution aims to infer cell type abundances by modelling the gene <span class="notranslate">expression</span>s levels as ‘weighted sums’ of cell type specific <span class="notranslate">expression</span> profiles.</p>
 
 <blockquote class="details">
-  <div id="details-more-details-on-sums" class="box-title"><button type="button" aria-controls="details-more-details-on-sums-contents" aria-expanded="true" aria-label="Toggle details box: More details on 'Sums'"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: More details on 'Sums'<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-more-details-on-sums"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-details-on-sums-contents" aria-expanded="true" aria-label="Toggle details box: More details on 'Sums'"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: More details on 'Sums'<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p><strong>So…</strong> You fancy some maths do you? Good! This is important, as you’ll see variations of the phrase ‘weighted sums’ if you ever look at any papers in the field! Let’s think about just the ‘sums’ here.
 If we think about the total <span class="notranslate">expression</span> of a given gene you might get from bulk <span class="notranslate">RNA</span>-seq, you could also think about it as the sum of the <span class="notranslate">expression</span> of each cell, for example,</p>
@@ -1160,14 +1142,14 @@ or some fancier formulas…(read more <a href="https://academic.oup.com/bioinfor
 <p>MuSiC uses cell-type specific gene <span class="notranslate">expression</span> from <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span> seq data to characterize cell type compositions (proportions) from bulk <span class="notranslate">RNA</span>-seq data in complex tissues. By appropriate weighting of genes showing cross-subject (sample to sample) and cross-cell (cells of the same cell type within a sample) consistency, MuSiC enables the transfer of cell type-specific gene <span class="notranslate">expression</span> information from one dataset to another.</p>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>What is a weighted sum? <em>Hint</em>: What kinds of genes would be best for distinguishing cell types, and what kinds of genes would make it difficult?</li>
   </ol>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>So you know what the <em>Sum</em> is from above - the total <span class="notranslate">expression</span> of a given gene in a bulk <span class="notranslate">RNA</span>-seq sample depends on the proportion of cell types and the average <span class="notranslate">expression</span> level of each of those cell types (<strong>T = C x P</strong>). However, <span class="notranslate">single cell</span> <span class="notranslate">RNA</span>-seq data is highly variable. Cell-type specific <span class="notranslate">expression</span> in genes with lower variation from sample to sample (i.e. person to person or organism to organism) and cell to cell (i.e. within a sample) will be the most useful for distinguishing cells, while genes that vary heavily (i.e. high in cell type<sub>a</sub> in one sample, but low in cell type<sub>a</sub> in another sample) will be the least useful in accurately distinguishing cells. Therefore, to accurately use the mean <span class="notranslate">expression</span> level in a cell_type, MusiC weights the sums, favouring more consistently expressed genes in cell types.</li>
@@ -1187,7 +1169,7 @@ or some fancier formulas…(read more <a href="https://academic.oup.com/bioinfor
 <h2 id="get-data">Get data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial <em>“Deconvolution: Cell Type inference of Human Pancreas Data”</em></li>
@@ -1213,10 +1195,10 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-data-from-a-data-library" class="box-title"><button type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename the datasets</p>
@@ -1225,13 +1207,13 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
       <p>Check the datatype</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-changing-the-datatype" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Add to each <code class="language-plaintext highlighter-rouge"><span class="notranslate">expression</span></code> file a tag corresponding to <code class="language-plaintext highlighter-rouge">#bulk</code> and <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-adding-a-tag" class="box-title"><button type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1248,7 +1230,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
 <p>But what does this actually look like in the data?</p>
 
 <blockquote class="comment">
-  <div id="comment-inspecting-datasets" class="box-title" aria-label="comment box: Inspecting Datasets"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Inspecting Datasets</div>
+  <div class="box-title comment-title" id="comment-inspecting-datasets" aria-label="comment box: Inspecting Datasets"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Inspecting Datasets</div>
 
   <p>Note that at any time you can visually inspect the input datasets yourself by either:</p>
   <ul>
@@ -1260,14 +1242,14 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
 <p>Let’s start exploring the datasets.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-exploring-the-datasets" class="box-title" aria-label="hands-on box: Exploring the Datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Exploring the Datasets</div>
+  <div class="box-title hands-on-title" id="hands-on-exploring-the-datasets" aria-label="hands-on box: Exploring the Datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Exploring the Datasets</div>
 
   <ol>
     <li>
       <p>Inspect the <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> <span class="notranslate">expression</span> file</p>
 
       <blockquote class="question">
-        <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <ol>
           <li>What do the rows and columns correspond to?</li>
@@ -1277,7 +1259,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
         </ol>
 
         <blockquote class="solution">
-          <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <figure id="figure-2"><img src="../../images/bulk-music/peek_tabular_scrna_expr.png" alt="expr_tab. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Peeking at the tabular sc<span class="notranslate">RNA</span> <span class="notranslate">expression</span> dataset</figcaption></figure>
 
@@ -1295,7 +1277,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
       <p>Inspect the <code class="language-plaintext highlighter-rouge">#bulk</code> <span class="notranslate">expression</span> file</p>
 
       <blockquote class="question">
-        <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <ol>
           <li>What do the rows and columns correspond to?</li>
@@ -1303,7 +1285,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
         </ol>
 
         <blockquote class="solution">
-          <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <figure id="figure-3"><img src="../../images/bulk-music/peek_tabular_bulk_expr.png" alt="bulk_tab. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Peeking at the tabular bulk <span class="notranslate">RNA</span>-seq <span class="notranslate">expression</span> dataset</figcaption></figure>
 
@@ -1319,7 +1301,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
       <p>Inspect the <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> phenotype file</p>
 
       <blockquote class="question">
-        <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <ol>
           <li>Does the phenotypes file describe genes or cells?</li>
@@ -1328,7 +1310,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
         </ol>
 
         <blockquote class="solution">
-          <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <figure id="figure-4"><img src="../../images/bulk-music/peek_tabular_scrna_pheno.png" alt="peek_tabular_scrna_pheno.png. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Peeking at the tabular sc<span class="notranslate">RNA</span> phenotype dataset</figcaption></figure>
 
@@ -1345,7 +1327,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
       <p>Inspect the <code class="language-plaintext highlighter-rouge">#bulk</code> phenotype file</p>
 
       <blockquote class="question">
-        <div id="question-4" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <ol>
           <li>Does the phenotypes file describe genes or samples?</li>
@@ -1355,7 +1337,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
         </ol>
 
         <blockquote class="solution">
-          <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <figure id="figure-5"><img src="../../images/bulk-music/peek_tabular_bulk_pheno.png" alt="peek_tabular_bulk_pheno.png. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Peeking at the tabular bulk <span class="notranslate">RNA</span>-seq phenotype dataset</figcaption></figure>
 
@@ -1378,12 +1360,12 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
 <h2 id="building-the-expression-set-objects">Building the <span class="notranslate">Expression</span> Set objects</h2>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div id="tip-using-tutorial-mode" class="box-title"><button type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul> </blockquote>
 
 <p>For now we need to construct our <span class="notranslate">Expression</span> set objects that will be consumed by MuSiC.</p>
 
 <blockquote class="details">
-  <div id="details-expression-set" class="box-title"><button type="button" aria-controls="details-expression-set-contents" aria-expanded="true" aria-label="Toggle details box: Expression Set"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: <span class="notranslate">Expression</span> Set<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-expression-set"><button class="gtn-boxify-button details" type="button" aria-controls="details-expression-set-contents" aria-expanded="true" aria-label="Toggle details box: Expression Set"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: <span class="notranslate">Expression</span> Set<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <figure id="figure-6"><img src="../../images/bulk-music/expressionset.png" alt="expression_set. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Image from Stefano Monti</figcaption></figure>
 
@@ -1411,7 +1393,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
 <h3 id="construct-expression-set-object"><strong>Construct <span class="notranslate">Expression</span> Set Object</strong></h3>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-build-the-expression-set-inputs" class="box-title" aria-label="hands-on box: Build the Expression Set inputs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Build the <span class="notranslate">Expression</span> Set inputs</div>
+  <div class="box-title hands-on-title" id="hands-on-build-the-expression-set-inputs" aria-label="hands-on box: Build the Expression Set inputs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Build the <span class="notranslate">Expression</span> Set inputs</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3"><strong>Construct <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
@@ -1421,7 +1403,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
       </ul>
 
       <blockquote class="comment">
-        <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>An <span class="notranslate">Expression</span>Set object has many data slots, the principle of which are the experiment data (<em>exprs</em>), the phenotype data (<em>pData</em>), as well metadata pertaining to experiment information and additional annotations (<em>fData</em>).</p>
       </blockquote>
@@ -1441,7 +1423,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
 <p>We will now inspect these objects we just created to see what information we can extract out of them, and how these multiple datasets are summarized within the object.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-inspect-and-describe-the-scrna-expressionset-object" class="box-title" aria-label="hands-on box: Inspect and Describe the scRNA ExpressionSet Object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Inspect and Describe the sc<span class="notranslate">RNA</span> <span class="notranslate">Expression</span>Set Object</div>
+  <div class="box-title hands-on-title" id="hands-on-inspect-and-describe-the-scrna-expressionset-object" aria-label="hands-on box: Inspect and Describe the scRNA ExpressionSet Object"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Inspect and Describe the sc<span class="notranslate">RNA</span> <span class="notranslate">Expression</span>Set Object</div>
 
   <ol>
     <li>Obtain General Info about the data set
@@ -1453,14 +1435,14 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
       <ul>
         <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+galaxy3"><strong>Inspect <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_inspect_eset/music_inspect_eset/0.1.1+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
           <blockquote class="warning">
-            <div id="warning-danger-this-tool-has-needs" class="box-title" aria-label="warning box: Danger: This tool has needs!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Danger: This tool has needs!</div>
+            <div class="box-title warning-title" id="warning-danger-this-tool-has-needs" aria-label="warning box: Danger: This tool has needs!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Danger: This tool has needs!</div>
             <p>You may need to click the dataset from your history and drag it into the input of this tool. Some browsers don’t allow this.</p>
           </blockquote>
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“ESet Dataset”</em>: <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code> (output of <strong>Construct <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
             <li><em>“Inspect”</em>: <code class="language-plaintext highlighter-rouge">Feature Data Table</code>
               <blockquote class="comment">
-                <div id="comment-features-or-genes" class="box-title" aria-label="comment box: Features or Genes?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Features or Genes?</div>
+                <div class="box-title comment-title" id="comment-features-or-genes" aria-label="comment box: Features or Genes?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Features or Genes?</div>
 
                 <p>“Features” are synonymous with “Genes” in a genomic setting, but data scientists tend to prefer to use the former term, as it can be used in other non-genomic settings.</p>
 
@@ -1486,7 +1468,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
 </blockquote>
 
 <blockquote class="question">
-  <div id="question-5" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-5" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>How many samples are in the dataset, and how many genes?</li>
@@ -1494,7 +1476,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-5" class="box-title"><button type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>1097 samples and 25 453 genes</li>
@@ -1521,14 +1503,14 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
 <p>It’s also important that input sc<span class="notranslate">RNA</span>-seq datasets (ideally) have some representation of cell populations from diseased patients.</p>
 
 <blockquote class="question">
-  <div id="question-6" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-6" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Why should the sc<span class="notranslate">RNA</span>-seq dataset contain diseased cells and healthy cells?</li>
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-6" class="box-title"><button type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>For instance, there might be a weird extra cell type that appears in the disease phenotype. Or perhaps there is a missing cell type in the disease phenotype. Without both healthy &amp; diseased datasets, the cells in the bulk datasets might not be fully identifiable. Saying that, such datasets are not always available - something to keep in mind when interpreting the results!</li>
@@ -1539,7 +1521,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-task-description" class="box-title" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-task-description" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy3"><strong>MuSiC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
@@ -1569,7 +1551,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
       </ul>
 
       <blockquote class="comment">
-        <div id="comment-1" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>It’s important to set a phenotype target threshold, otherwise no cells will be matched for the phenotype target. In this case, when the HbA1c level is greater than 6.5%, the patient is diagnosed as T2D.</p>
       </blockquote>
@@ -1589,7 +1571,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
 <p>As stated previously, it is well known that the beta cell proportions are related to T2D disease status. As T2D progresses, the number of beta cells decreases. In the above image we can see in (a) that we have the same information as previous, but we also distinguish between cells that from patients with T2D status over the Normal cell phenotypes. Section (b) further explores this with a linear regression showing the cell type proportion of cells with HbA1c <span class="notranslate">expression</span>, where we see that there is a significant negative correlation between HbA1c level and beta cell proportions.</p>
 
 <blockquote class="comment">
-  <div id="comment-2" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-2" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>We can extract the coefficients of this fitting by looking at the <code class="language-plaintext highlighter-rouge">Log of Music Fitting Data</code> in the <code class="language-plaintext highlighter-rouge">Summaries and Logs</code> output collection:</p>
 
@@ -1616,7 +1598,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
 <figure id="figure-9"><img src="../../images/bulk-music/subject_heatmap.png" alt="subject_heatmap. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Heatmap of cell type proportions at the <span class="notranslate">RNA</span> sample level.</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question-7" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-7" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Which cell types are under-represented in the NNLS method?</li>
@@ -1624,7 +1606,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-7" class="box-title"><button type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>Here it is evident that the previous NNLS method over-represents the Alpha cell type compared to the MuSiC method which gives more weight to the Beta and Ductal cell types, which were under-represented in the NNLS method.</li>
@@ -1648,7 +1630,7 @@ https://zenodo.org/record/5719228/files/EMTABesethealthy.phenotype.tabular
 <h2 id="get-data-1">Get data</h2>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload-1" class="box-title" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-1" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial <em>“Deconvolution: Dendrogram of Mouse Data”</em></li>
@@ -1674,10 +1656,10 @@ https://zenodo.org/record/5719228/files/Mousesubeset.phenotype.tabular
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links-1" class="box-title"><button type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-data-from-a-data-library-1" class="box-title"><button type="button" aria-controls="tip-importing-data-from-a-data-library-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename the datasets</p>
@@ -1686,20 +1668,20 @@ https://zenodo.org/record/5719228/files/Mousesubeset.phenotype.tabular
       <p>Check that the datatype</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-changing-the-datatype-1" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Add to each <code class="language-plaintext highlighter-rouge"><span class="notranslate">expression</span></code> file a tag corresponding to <code class="language-plaintext highlighter-rouge">#bulk</code> and <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-adding-a-tag-1" class="box-title"><button type="button" aria-controls="tip-adding-a-tag-1-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-1-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
 <blockquote class="details">
-  <div id="details-exploring-the-datasets" class="box-title"><button type="button" aria-controls="details-exploring-the-datasets-contents" aria-expanded="true" aria-label="Toggle details box: Exploring the Datasets"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Exploring the Datasets<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-exploring-the-datasets"><button class="gtn-boxify-button details" type="button" aria-controls="details-exploring-the-datasets-contents" aria-expanded="true" aria-label="Toggle details box: Exploring the Datasets"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Exploring the Datasets<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>As before, you may choose to explore the bulk and sc<span class="notranslate">rna</span> datasets and try to determine their factors from the phenotypes as well as any overlapping fields that will be used to guide the deconvolution.</p>
 
@@ -1710,7 +1692,7 @@ https://zenodo.org/record/5719228/files/Mousesubeset.phenotype.tabular
 <h3 id="construct-expression-set-object-1"><strong>Construct <span class="notranslate">Expression</span> Set Object</strong></h3>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-build-the-expression-set-inputs-1" class="box-title" aria-label="hands-on box: Build the Expression Set inputs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Build the <span class="notranslate">Expression</span> Set inputs</div>
+  <div class="box-title hands-on-title" id="hands-on-build-the-expression-set-inputs-1" aria-label="hands-on box: Build the Expression Set inputs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Build the <span class="notranslate">Expression</span> Set inputs</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy3"><strong>Construct <span class="notranslate">Expression</span> Set Object</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
@@ -1720,7 +1702,7 @@ https://zenodo.org/record/5719228/files/Mousesubeset.phenotype.tabular
       </ul>
 
       <blockquote class="comment">
-        <div id="comment-3" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-3" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>An <span class="notranslate">Expression</span>Set object has many data slots, the principle of which are the experiment data (<em>exprs</em>), the phenotype data (<em>pData</em>), as well metadata pertaining to experiment information and additional annotations (<em>fData</em>).</p>
       </blockquote>
@@ -1740,7 +1722,7 @@ https://zenodo.org/record/5719228/files/Mousesubeset.phenotype.tabular
 <p>Determining cell type similarities requires first producing a design matrix as well as a cross-subject mean of relative abundance, using a tree-based clustering method of the cell types we wish to cluster.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-task-description-1" class="box-title" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
+  <div class="box-title hands-on-title" id="hands-on-task-description-1" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy3"><strong>MuSiC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
@@ -1765,7 +1747,7 @@ https://zenodo.org/record/5719228/files/Mousesubeset.phenotype.tabular
 <figure id="figure-10"><img src="../../images/bulk-music/dendrogram.png" alt="dendrogram. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Dendrogram of Design Matrix and Cross-Subject Mean of Relative Abundance</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question-8" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-8" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>What do you notice about the cells clustering?</li>
@@ -1773,7 +1755,7 @@ https://zenodo.org/record/5719228/files/Mousesubeset.phenotype.tabular
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-8" class="box-title"><button type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The immune cells are clustered together and the kidney specific cells are clustered together. Notice that DCT and PT are within the same high-level grouping.</li>
@@ -1797,7 +1779,7 @@ C4: Fib, Macro, NK, B lymph, T lymph
 <p>We shall use the 4 cell type groups determined by the cut off threshold in the above question box. To guide the clustering, we shall upload known epithelial and immune cell markers to improve the more diverse collection of cell types in the C3 and C4 groups.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-upload-marker-genes-and-generate-heatmap" class="box-title" aria-label="hands-on box: Upload marker genes and generate heatmap"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Upload marker genes and generate heatmap</div>
+  <div class="box-title hands-on-title" id="hands-on-upload-marker-genes-and-generate-heatmap" aria-label="hands-on box: Upload marker genes and generate heatmap"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Upload marker genes and generate heatmap</div>
   <ol>
     <li>
       <p>Import the files from <a href="https://zenodo.org/record/5719228">Zenodo</a> or from
@@ -1808,17 +1790,17 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
 https://zenodo.org/record/5719228/files/immune.markers
 </code></pre></div>      </div>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links-2" class="box-title"><button type="button" aria-controls="tip-importing-via-links-2-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-2-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-data-from-a-data-library-2" class="box-title"><button type="button" aria-controls="tip-importing-data-from-a-data-library-2-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-2-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li>
       <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+galaxy3"><strong>MuSiC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_deconvolution/music_deconvolution/0.1.1+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:</p>
       <ul>
         <li><strong>Note</strong>
           <blockquote class="warning">
-            <div id="warning-shortcut" class="box-title" aria-label="warning box: Shortcut!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Shortcut!</div>
+            <div class="box-title warning-title" id="warning-shortcut" aria-label="warning box: Shortcut!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Shortcut!</div>
 
             <p>Here we need to re-use all the inputs from the previous <strong>MuSiC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step, plus add a few extra. To speed this up, you can simply click on the re-run icon <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> under any of its outputs.</p>
           </blockquote>
@@ -1871,7 +1853,7 @@ https://zenodo.org/record/5719228/files/immune.markers
       </ul>
 
       <blockquote class="comment">
-        <div id="comment-4" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-4" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>The C1 (Neutrophil) and C2 (Podocyte) clusters do not use marker genes for the dendrogram clustering in this dataset.</p>
       </blockquote>
@@ -1883,7 +1865,7 @@ https://zenodo.org/record/5719228/files/immune.markers
 <figure id="figure-11"><img src="../../images/bulk-music/dendro_jitboxheat.png" alt="dendro_jitboxheat. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Jitter and Boxplots of all cell types followed by a heatmap of each <span class="notranslate">RNA</span> sample against cell type. Note that the y-axis for each of the plots above are not constant across cell types.</figcaption></figure>
 
 <blockquote class="question">
-  <div id="question-9" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-9" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <p>Most of the <span class="notranslate">expression</span> in the above plot appears to be derived from one cell type.</p>
 
@@ -1893,7 +1875,7 @@ https://zenodo.org/record/5719228/files/immune.markers
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-9" class="box-title"><button type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The PT cells appear to dominate.</li>

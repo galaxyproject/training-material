@@ -470,7 +470,7 @@
                 <p><a href="https://docs.python.org/3/library/argparse.html"><code class="language-plaintext highlighter-rouge">argparse</code></a> is an argument parsing library for Python that’s part of the stdlib. It lets you make command line tools significantly nicer to work with.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -491,7 +491,7 @@
 <p>In the coding world, whenever you run a Python script on the command line, it has a special variable available to it named <code class="language-plaintext highlighter-rouge">argv</code>. This is a list of all of the arguments used when you run a command line program.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-print-out-argv" class="box-title" aria-label="hands-on box: Print out argv"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Print out argv</div>
+  <div class="box-title hands-on-title" id="hands-on-print-out-argv" aria-label="hands-on box: Print out argv"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Print out argv</div>
 
   <ol>
     <li>Create / open the file <code class="language-plaintext highlighter-rouge">run.py</code> in your text editor of choice</li>
@@ -501,7 +501,7 @@
   </ol>
 
   <blockquote class="solution">
-    <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">)</span>
@@ -522,10 +522,10 @@ python run.py --help
 </blockquote>
 
 <blockquote class="question">
-  <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
   <p>What did you notice about the output? There are two main points.</p>
   <blockquote class="solution">
-    <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>The name of the script (<code class="language-plaintext highlighter-rouge">run.py</code>) is included as the first value every time.</li>
       <li>All of the arguments are passed as strings, no numbers.</li>
@@ -538,7 +538,7 @@ python run.py --help
 <p>Let’s sum up all of the numbers passed on the command line. We’ll do this by hand, and then we’ll replace it with <code class="language-plaintext highlighter-rouge">argparse</code> to see how much effort that saves us.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on" class="box-title" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
+  <div class="box-title hands-on-title" id="hands-on" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
   <p>Update your script to sum up every number passed to it on the command line.</p>
 
   <p>It should handle:</p>
@@ -555,12 +555,12 @@ python run.py --help
   </ul>
 
   <blockquote class="question">
-    <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
     <p>How does your updated script look?</p>
 
     <blockquote class="solution">
-      <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">sys</span>
 
@@ -636,7 +636,7 @@ args.sum # A boolean, True or False.
 <p>Let’s go back to our script, and replace <code class="language-plaintext highlighter-rouge">sys</code> with argparse.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-replacing-argv" class="box-title" aria-label="hands-on box: Replacing argv."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Replacing argv.</div>
+  <div class="box-title hands-on-title" id="hands-on-replacing-argv" aria-label="hands-on box: Replacing argv."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Replacing argv.</div>
 
   <ol>
     <li>
@@ -663,10 +663,10 @@ args.sum # A boolean, True or False.
       <p>And print out the sum of those numbers.</p>
 
       <blockquote class="question">
-        <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+        <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
         <p>How does your final script look?</p>
         <blockquote class="solution">
-          <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">argparse</span>
 
 <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="p">.</span><span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s">'Sum some numbers'</span><span class="p">)</span>
@@ -723,7 +723,7 @@ python run.py <span class="nt">--help</span>
 <p>With the <code class="language-plaintext highlighter-rouge">argparse2tool</code> project, and eventually <code class="language-plaintext highlighter-rouge">pyGalGen</code> which will be merged into <code class="language-plaintext highlighter-rouge">planemo</code>, you can generate <span class="notranslate">Galaxy</span> tools automatically from <code class="language-plaintext highlighter-rouge">argparse</code> based Python scripts.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-generate-a-galaxy-tool-wrapper-from-your-script" class="box-title" aria-label="hands-on box: Generate a Galaxy tool wrapper from your script"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate a <span class="notranslate">Galaxy</span> tool wrapper from your script</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-a-galaxy-tool-wrapper-from-your-script" aria-label="hands-on box: Generate a Galaxy tool wrapper from your script"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate a <span class="notranslate">Galaxy</span> tool wrapper from your script</div>
   <ol>
     <li>
       <p>Write out the python script to a file named <code class="language-plaintext highlighter-rouge">main.py</code></p>
@@ -755,13 +755,13 @@ python run.py <span class="nt">--help</span>
       <p>Generate the tool interface:</p>
 
       <blockquote class="code-in">
-        <div id="code-in-command" class="box-title" aria-label="code-in box: Command"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Command</div>
+        <div class="box-title code-in-title" id="code-in-command" aria-label="code-in box: Command"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Command</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PYTHONPATH=$(argparse2tool) python main.py --generate_<span class="notranslate">galaxy</span>_xml
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div id="code-out-galaxy-xml" class="box-title" aria-label="code-out box: Galaxy XML"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: <span class="notranslate">Galaxy</span> XML</div>
+        <div class="box-title code-out-title" id="code-out-galaxy-xml" aria-label="code-out box: Galaxy XML"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: <span class="notranslate">Galaxy</span> XML</div>
         <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"main.py"</span> <span class="na">id=</span><span class="s">"main.py"</span> <span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;description&gt;</span>Sum some numbers<span class="nt">&lt;/description&gt;</span>
   <span class="nt">&lt;stdio&gt;</span>

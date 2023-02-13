@@ -746,7 +746,7 @@ developed by the <a href="http://workflow4metabolomics.org/">Wokflow4metabolomic
 <p><a href="../../images/lcmspreproc_wf.png"><img src="../../images/lcmspreproc_wf.png" alt="The full tutorial workflow. " loading="lazy" /></a></p>
 
 <blockquote class="comment">
-  <div id="comment-workflow4metabolomics-public-history" class="box-title" aria-label="comment box: Workflow4Metabolomics public history"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Workflow4Metabolomics public history</div>
+  <div class="box-title comment-title" id="comment-workflow4metabolomics-public-history" aria-label="comment box: Workflow4Metabolomics public history"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Workflow4Metabolomics public history</div>
 
   <p>This training material can be followed running it on any <span class="notranslate">Galaxy</span> instance holding the <span class="notranslate">Galaxy</span> modules needed.
 Nonetheless, if you happen to be a W4M user and do not want to run the hands-on yourself, please note that
@@ -771,7 +771,7 @@ As an example, <a href="../../tutorials/lcms-preprocessing/slides.html#raw-to-ma
 for complementary material about XCMS R package.</p>
 
 <blockquote class="agenda">
-  <div id="agenda" class="box-title" aria-label="agenda box: ">Agenda</div>
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
   <p>In this tutorial, we will cover:</p>
 
@@ -817,14 +817,14 @@ pre-processing, since the initial actions in the extraction process treat files 
 having to launch jobs manually for each sample. You can start using the dataset collection option from the very beginning of your analysis, when uploading your data into <span class="notranslate">Galaxy</span>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-data-upload-the-mzxml-with-b-get-data-b" class="box-title" aria-label="hands-on box: Data upload the mzXML with &lt;b&gt;Get data&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload the mzXML with <b>Get data</b></div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-the-mzxml-with-b-get-data-b" aria-label="hands-on box: Data upload the mzXML with &lt;b&gt;Get data&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload the mzXML with <b>Get data</b></div>
 
   <ol>
     <li>
       <p>Create a new history for this tutorial</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-new-history" class="box-title"><button type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>Import the 12 <code class="language-plaintext highlighter-rouge">mzXML</code> files into a collection named <code class="language-plaintext highlighter-rouge">mzML</code>
       <ul>
@@ -850,10 +850,10 @@ https://zenodo.org/record/3757956/files/QC1_014.mzML
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links" class="box-title"><button type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>     <p>Click on <strong>Collection</strong> on the top</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">mzml</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li>     <p>Click on <strong>Build</strong> when available</p>   </li>   <li>     <p>Enter a name for the collection</p>     <ul>       <li>mzML</li>     </ul>   </li>   <li>Click on <strong>Create list</strong> (and wait a bit)</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>     <p>Click on <strong>Collection</strong> on the top</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">mzml</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li>     <p>Click on <strong>Build</strong> when available</p>   </li>   <li>     <p>Enter a name for the collection</p>     <ul>       <li>mzML</li>     </ul>   </li>   <li>Click on <strong>Create list</strong> (and wait a bit)</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-data-from-a-data-library" class="box-title"><button type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as a Collection</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as a Collection</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li>Make sure your data is in a <strong>collection</strong>. Make sure it is named <code class="language-plaintext highlighter-rouge">mzML</code>
       <ul>
@@ -861,12 +861,12 @@ https://zenodo.org/record/3757956/files/QC1_014.mzML
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-creating-a-dataset-collection" class="box-title"><button type="button" aria-controls="tip-creating-a-dataset-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a dataset collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a dataset collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
     </li>
   </ol>
 
   <blockquote class="tip">
-    <div id="tip-comment-to-w4m-users" class="box-title"><button type="button" aria-controls="tip-comment-to-w4m-users-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-comment-to-w4m-users"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>If you happen to be a W4M user, please note that you can find at the following link a ready-to-start history:
 <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingmzml">GTN_LCMSpreprocessing_mzML</a>.
@@ -889,7 +889,7 @@ this step corresponds to the dataset collection number 13.</p>
 <p><strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> takes as input your raw files and prepares <code class="language-plaintext highlighter-rouge">RData</code> files for the first XCMS step.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-msnbase-readmsdata" class="box-title" aria-label="hands-on box: MSnbase readMSData"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: MSnbase readMSData</div>
+  <div class="box-title hands-on-title" id="hands-on-msnbase-readmsdata" aria-label="hands-on box: MSnbase readMSData"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: MSnbase readMSData</div>
 
   <ol>
     <li>Run <strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -898,24 +898,24 @@ this step corresponds to the dataset collection number 13.</p>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-selecting-a-dataset-collection-as-input" class="box-title"><button type="button" aria-controls="tip-selecting-a-dataset-collection-as-input-contents" aria-expanded="true" aria-label="Toggle tip box: Selecting a dataset collection as input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a dataset collection as input<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-selecting-a-dataset-collection-as-input"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-selecting-a-dataset-collection-as-input-contents" aria-expanded="true" aria-label="Toggle tip box: Selecting a dataset collection as input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a dataset collection as input<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
     </li>
   </ol>
 
   <blockquote class="tip">
-    <div id="tip-comment-to-w4m-users-1" class="box-title"><button type="button" aria-controls="tip-comment-to-w4m-users-1-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-comment-to-w4m-users-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-1-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a> history,
 this step corresponds to the dataset collection number 14.</p>
   </blockquote>
 
   <blockquote class="question">
-    <div id="question" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
     <p>What do you get as output?</p>
 
     <blockquote class="solution">
-      <div id="solution" class="box-title"><button type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>A <strong>Dataset collection</strong> containing 12 datasets.</li>
@@ -962,7 +962,7 @@ Note that you can either:</p>
 </ul>
 
 <blockquote class="tip">
-  <div id="tip-optional-generate-the-right-template-with-b-xcms-get-a-samplemetadata-file-b" class="box-title"><button type="button" aria-controls="tip-optional-generate-the-right-template-with-b-xcms-get-a-samplemetadata-file-b-contents" aria-expanded="true" aria-label="Toggle tip box: Optional: Generate the right template with &lt;b&gt;xcms get a sampleMetadata file&lt;/b&gt;"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Optional: Generate the right template with <b>xcms get a sampleMetadata file</b><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-optional-generate-the-right-template-with-b-xcms-get-a-samplemetadata-file-b"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-optional-generate-the-right-template-with-b-xcms-get-a-samplemetadata-file-b-contents" aria-expanded="true" aria-label="Toggle tip box: Optional: Generate the right template with &lt;b&gt;xcms get a sampleMetadata file&lt;/b&gt;"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Optional: Generate the right template with <b>xcms get a sampleMetadata file</b><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>In the case of this tutorial, we already prepared a <em>sampleMetadata</em> file with all the necessary information.
 Below is an optional hands-on explaining how to get a template to fill, with the two following advantages:</p>
@@ -972,7 +972,7 @@ Below is an optional hands-on explaining how to get a template to fill, with the
   </ol>
 
   <blockquote class="notranslate hands_on">
-    <div id="hands-on-xcms-get-a-samplemetadata-file" class="box-title" aria-label="hands-on box: xcms get a sampleMetadata file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms get a sampleMetadata file</div>
+    <div class="box-title hands-on-title" id="hands-on-xcms-get-a-samplemetadata-file" aria-label="hands-on box: xcms get a sampleMetadata file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms get a sampleMetadata file</div>
 
     <p><strong>xcms get a sampleMetadata file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
     <ul>
@@ -980,7 +980,7 @@ Below is an optional hands-on explaining how to get a template to fill, with the
     </ul>
 
     <blockquote class="tip">
-      <div id="tip-comment-to-w4m-users-2" class="box-title"><button type="button" aria-controls="tip-comment-to-w4m-users-2-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title tip-title" id="tip-comment-to-w4m-users-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-2-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a> history,
 this step corresponds to the dataset number 27.</p>
@@ -1002,7 +1002,7 @@ software you find appropriate to construct your table, as long as you save your 
 use a sp<span class="notranslate">reads</span>heet software such as Microsoft Excel or LibreOffice.</p>
 
 <blockquote class="warning">
-  <div id="warning-important-save-your-table-in-the-correct-format" class="box-title" aria-label="warning box: Important: Save your table in the correct format"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Important: Save your table in the correct format</div>
+  <div class="box-title warning-title" id="warning-important-save-your-table-in-the-correct-format" aria-label="warning box: Important: Save your table in the correct format"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Important: Save your table in the correct format</div>
 
   <p>The file has to be a <code class="language-plaintext highlighter-rouge">.txt</code> or a <code class="language-plaintext highlighter-rouge">.tsv</code> (tab-separated values). Neither <code class="language-plaintext highlighter-rouge">.xlsx</code> nor <code class="language-plaintext highlighter-rouge">.odt</code> are supported.
 If you use a sp<span class="notranslate">reads</span>heet software, be sure to change the default format to <strong>Text (Tab delimited)</strong> or equivalent.</p>
@@ -1011,7 +1011,7 @@ If you use a sp<span class="notranslate">reads</span>heet software, be sure to c
 <p>Once your sampleMetadata table is ready, you can proceed to the upload. In this tutorial we already prepared the table for you ;)</p>
 
 <blockquote class="tip">
-  <div id="tip-optional-filling-the-i-samplemetadata-i-using-the-template-obtained-from-galaxy" class="box-title"><button type="button" aria-controls="tip-optional-filling-the-i-samplemetadata-i-using-the-template-obtained-from-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: Optional: Filling the &lt;i&gt;sampleMetadata&lt;/i&gt; using the template obtained from Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Optional: Filling the <i>sampleMetadata</i> using the template obtained from <span class="notranslate">Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-optional-filling-the-i-samplemetadata-i-using-the-template-obtained-from-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-optional-filling-the-i-samplemetadata-i-using-the-template-obtained-from-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: Optional: Filling the &lt;i&gt;sampleMetadata&lt;/i&gt; using the template obtained from Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Optional: Filling the <i>sampleMetadata</i> using the template obtained from <span class="notranslate">Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>For this tutorial, we already provide the <em>sampleMetadata</em> file, so you only have to upload it to <span class="notranslate">Galaxy</span>. Below we
 explain how we filled this file from the template we generated in <span class="notranslate">Galaxy</span>.</p>
@@ -1318,7 +1318,7 @@ be uploaded into <span class="notranslate">Galaxy</span>.</p>
 <h4 id="upload-the-samplemetada-file-with-get-data">Upload the sampleMetada file with ‘Get data’</h4>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-upload-the-samplemetada" class="box-title" aria-label="hands-on box: Upload the sampleMetada"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Upload the sampleMetada</div>
+  <div class="box-title hands-on-title" id="hands-on-upload-the-samplemetada" aria-label="hands-on box: Upload the sampleMetada"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Upload the sampleMetada</div>
 
   <ol>
     <li>Import the <code class="language-plaintext highlighter-rouge">sampleMetadata_completed.tsv</code> file from your computer, from Zenodo or from a shared data library
@@ -1326,10 +1326,10 @@ be uploaded into <span class="notranslate">Galaxy</span>.</p>
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-via-links-1" class="box-title"><button type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-importing-data-from-a-data-library-1" class="box-title"><button type="button" aria-controls="tip-importing-data-from-a-data-library-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li>Check the data type of your imported files.
       <ul>
@@ -1337,10 +1337,10 @@ be uploaded into <span class="notranslate">Galaxy</span>.</p>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-changing-the-datatype" class="box-title"><button type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
 
       <blockquote class="comment">
-        <div id="comment" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>Here we provided the sampleMetadata file so we know that the upload led to a ‘tabular’ file. But from experience we also know that
 it can happen that, when uploading a sampleMetadata table, user obtained other inappropriate types of data. This is generally due to the file
@@ -1353,19 +1353,19 @@ right away if you appear to get one of these obvious issues.</p>
       <p>Rename your sampleMetadata file with a shorter name ‘sampleMetadata_completed.tsv’</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div id="tip-renaming-a-dataset" class="box-title"><button type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
   <blockquote class="tip">
-    <div id="tip-comment-to-w4m-users-3" class="box-title"><button type="button" aria-controls="tip-comment-to-w4m-users-3-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-comment-to-w4m-users-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-3-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a> history,
 this step corresponds to the dataset number 28.</p>
   </blockquote>
 
   <blockquote class="question">
-    <div id="question-1" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
     <ol>
       <li>How many columns should I have in my sampleMetadata file?</li>
@@ -1373,7 +1373,7 @@ this step corresponds to the dataset number 28.</p>
     </ol>
 
     <blockquote class="solution">
-      <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
         <li>At least 2, with the identifiers and the class column. But as many as you need to describe the potential variability of your samples
@@ -1404,7 +1404,7 @@ The tool automatically takes the second column as colour groups when a file is p
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-xcms-plot-chromatogram" class="box-title" aria-label="hands-on box: xcms plot chromatogram"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms plot chromatogram</div>
+  <div class="box-title hands-on-title" id="hands-on-xcms-plot-chromatogram" aria-label="hands-on box: xcms plot chromatogram"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms plot chromatogram</div>
 
   <ol>
     <li><strong>xcms plot chromatogram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1414,7 +1414,7 @@ The tool automatically takes the second column as colour groups when a file is p
       </ul>
 
       <blockquote class="comment">
-        <div id="comment-1" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>If you use this tool at a later step of XCMS <span class="notranslate">workflow</span> and provided in the Merger step a sampleMetadata with a second column containing groups
 (see further in this tutorial), you will get colouring according to these groups even without providing a sampleMetadata file as a ‘plot chromatogram’ parameter.</p>
@@ -1423,7 +1423,7 @@ The tool automatically takes the second column as colour groups when a file is p
   </ol>
 
   <blockquote class="tip">
-    <div id="tip-comment-to-w4m-users-4" class="box-title"><button type="button" aria-controls="tip-comment-to-w4m-users-4-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-comment-to-w4m-users-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-4-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a> history,
 this step corresponds to the datasets number 29 and 30.</p>
@@ -1455,7 +1455,7 @@ other side, the <strong>centWave</strong> algorithm (<span class="citation"><a h
 data in centroid mode. In this tutorial, you will practice using the centWave algorithm.</p>
 
 <blockquote class="comment">
-  <div id="comment-how-the-centwave-algorithm-works" class="box-title" aria-label="comment box: How the centWave algorithm works"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: How the centWave algorithm works</div>
+  <div class="box-title comment-title" id="comment-how-the-centwave-algorithm-works" aria-label="comment box: How the centWave algorithm works"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: How the centWave algorithm works</div>
 
   <p><a href="../../tutorials/lcms-preprocessing/slides.html#findchrompeaks">Check the next 7 slides</a>
 to help you understand how the centWave algorithm works.
@@ -1477,7 +1477,7 @@ pre-processing.</p>
 <p>Let’s try performing the peakpicking step with the <strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-xcms-findchrompeaks-xcmsset" class="box-title" aria-label="hands-on box: xcms findChromPeaks (xcmsSet)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms findChromPeaks (xcmsSet)</div>
+  <div class="box-title hands-on-title" id="hands-on-xcms-findchrompeaks-xcmsset" aria-label="hands-on box: xcms findChromPeaks (xcmsSet)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms findChromPeaks (xcmsSet)</div>
 
   <p><strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
@@ -1499,7 +1499,7 @@ pre-processing.</p>
   <p>You can leave the other parameters with their default values.</p>
 
   <blockquote class="comment">
-    <div id="comment-2" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+    <div class="box-title comment-title" id="comment-2" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
     <p>Along with the parameters used in the core centWave algorithm, XCMS provides other filtering options allowing you to get
 rid of ions that you don’t want to consider. For example, you can use <em>Spectra Filters</em> allowing you to discard some RT or m/z
@@ -1507,7 +1507,7 @@ ranges, or <em>Noise filter</em> (as in this hands-on) not to use low intensity 
   </blockquote>
 
   <blockquote class="tip">
-    <div id="tip-comment-to-w4m-users-5" class="box-title"><button type="button" aria-controls="tip-comment-to-w4m-users-5-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-comment-to-w4m-users-5"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-5-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
 the dataset collections number 31 and 32.</p>
@@ -1539,7 +1539,7 @@ We will consider these three classes for the grouping step. Thus, we need to pro
 with the second column defining theses classes.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-xcms-findchrompeaks-merger" class="box-title" aria-label="hands-on box: xcms findChromPeaks Merger"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms findChromPeaks Merger</div>
+  <div class="box-title hands-on-title" id="hands-on-xcms-findchrompeaks-merger" aria-label="hands-on box: xcms findChromPeaks Merger"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms findChromPeaks Merger</div>
 
   <ol>
     <li><strong>xcms findChromPeaks Merger</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1551,7 +1551,7 @@ with the second column defining theses classes.</p>
   </ol>
 
   <blockquote class="tip">
-    <div id="tip-comment-to-w4m-users-6" class="box-title"><button type="button" aria-controls="tip-comment-to-w4m-users-6-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-comment-to-w4m-users-6"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-6-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
 the dataset number 57.</p>
@@ -1585,7 +1585,7 @@ on the resulting matrix. It must be chosen according to the quality of the chrom
 than a given number of samples. Either a percentage of the total number of samples or an absolute number of samples can be given. This is defined by the user.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-xcms-groupchrompeaks-group" class="box-title" aria-label="hands-on box: xcms groupChromPeaks (group)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms groupChromPeaks (group)</div>
+  <div class="box-title hands-on-title" id="hands-on-xcms-groupchrompeaks-group" aria-label="hands-on box: xcms groupChromPeaks (group)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms groupChromPeaks (group)</div>
 
   <p><strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
@@ -1605,7 +1605,7 @@ than a given number of samples. Either a percentage of the total number of sampl
   </ul>
 
   <blockquote class="comment">
-    <div id="comment-minimum-fraction-of-samples" class="box-title" aria-label="comment box: Minimum fraction of samples"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Minimum fraction of samples</div>
+    <div class="box-title comment-title" id="comment-minimum-fraction-of-samples" aria-label="comment box: Minimum fraction of samples"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Minimum fraction of samples</div>
 
     <p>This parameter sets the minimum proportion of samples in a class where a peak should be found to keep the corresponding ion in the peaktable.
 The idea is to look inside each class (<em>i.e.</em> each group of samples defined in the second column of the sampleMetadata file) and to keep
@@ -1630,7 +1630,7 @@ we may consider to lower a little this threshold, for example using a proportion
   </blockquote>
 
   <blockquote class="tip">
-    <div id="tip-comment-to-w4m-users-7" class="box-title"><button type="button" aria-controls="tip-comment-to-w4m-users-7-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-comment-to-w4m-users-7"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-7-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
 the datasets number 58 to 61.</p>
@@ -1651,7 +1651,7 @@ The grey areas’ width is associated with the bandwidth parameter.</p>
 <p><img src="../../images/lcmspreproc_group12samp.png" alt="plotChromPeakDensity.pdf. " loading="lazy" /></p>
 
 <blockquote class="question">
-  <div id="question-2" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Look at the <code class="language-plaintext highlighter-rouge">283.1127 - 283.1163</code> m/z slice. How many peak groups are considered? Can you explain why some peaks are not affected to peak groups?</li>
@@ -1659,7 +1659,7 @@ The grey areas’ width is associated with the bandwidth parameter.</p>
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-2" class="box-title"><button type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>There are 3 peak groups in this m/z slice. The two peaks that are not assigned to peak groups are alone in their retention time area. Thus,
@@ -1695,7 +1695,7 @@ as done in this tutorial hands-on. This option generates two additional tables:<
 using the <strong>Intensity Check</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> module.</p>
 
 <blockquote class="tip">
-  <div id="tip-optional-getting-an-overview-of-the-proportion-of-na-in-your-data" class="box-title"><button type="button" aria-controls="tip-optional-getting-an-overview-of-the-proportion-of-na-in-your-data-contents" aria-expanded="true" aria-label="Toggle tip box: Optional: Getting an overview of the proportion of NA in your data"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Optional: Getting an overview of the proportion of NA in your data<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-optional-getting-an-overview-of-the-proportion-of-na-in-your-data"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-optional-getting-an-overview-of-the-proportion-of-na-in-your-data-contents" aria-expanded="true" aria-label="Toggle tip box: Optional: Getting an overview of the proportion of NA in your data"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Optional: Getting an overview of the proportion of NA in your data<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>When you choose to export the peak list while using the <strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> module, you can have a first level of
 information regarding the proportion of NA by looking at the columns of classes you specified (or the <code class="language-plaintext highlighter-rouge">.</code> column when no class were given) in
@@ -1705,7 +1705,7 @@ Thus, one way to go is to use the variableMetadata to check specific ions (ones 
 outstanding behaviour), and to use the <strong>Intensity Check</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> module to get an overview of the whole dataset.</p>
 
   <blockquote class="notranslate hands_on">
-    <div id="hands-on-intensity-check" class="box-title" aria-label="hands-on box: Intensity Check"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Intensity Check</div>
+    <div class="box-title hands-on-title" id="hands-on-intensity-check" aria-label="hands-on box: Intensity Check"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Intensity Check</div>
 
     <p><strong>Intensity Check</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
     <ul>
@@ -1722,7 +1722,7 @@ outstanding behaviour), and to use the <strong>Intensity Check</strong> <i class
     </ul>
 
     <blockquote class="tip">
-      <div id="tip-comment-to-w4m-users-8" class="box-title"><button type="button" aria-controls="tip-comment-to-w4m-users-8-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title tip-title" id="tip-comment-to-w4m-users-8"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-8-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
 the datasets number 62 and 63.</p>
@@ -1737,12 +1737,12 @@ that have not been found, in any blank.</p>
   <p><img src="../../images/lcmspreproc_ICgp1.png" alt="IC_Graphs.pdf. " loading="lazy" /></p>
 
   <blockquote class="question">
-    <div id="question-3" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+    <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
     <p>How many ions in the table have been found in all the pools?</p>
 
     <blockquote class="solution">
-      <div id="solution-3" class="box-title"><button type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <p>Knowing that there are 3 pools in the QC class, we can determine there are 4746 ions that have been found in all pools.</p>
 
@@ -1779,7 +1779,7 @@ peaks’ parameter to put them aside.</p>
 <p>The algorithm uses statistical smoothing methods. You can choose between linear or loess regression.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-xcms-adjustrtime-retcor" class="box-title" aria-label="hands-on box: xcms adjustRtime (retcor)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms adjustRtime (retcor)</div>
+  <div class="box-title hands-on-title" id="hands-on-xcms-adjustrtime-retcor" aria-label="hands-on box: xcms adjustRtime (retcor)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms adjustRtime (retcor)</div>
 
   <p><strong>xcms adjustRtime (retcor)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
@@ -1794,7 +1794,7 @@ peaks’ parameter to put them aside.</p>
   <p>You can leave the other parameters to default values.</p>
 
   <blockquote class="comment">
-    <div id="comment-3" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+    <div class="box-title comment-title" id="comment-3" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
     <p>If you have a very large number of samples (<em>e.g.</em> a thousand), it might be impossible to find peaks that are present in 100% of your samples.
    If that is the case and you still set a very high value for the minimum required fraction of samples, the tool can not complete successfully the retention
@@ -1804,7 +1804,7 @@ peaks’ parameter to put them aside.</p>
   </blockquote>
 
   <blockquote class="tip">
-    <div id="tip-comment-to-w4m-users-9" class="box-title"><button type="button" aria-controls="tip-comment-to-w4m-users-9-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-comment-to-w4m-users-9"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-9-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
 the datasets number 64 and 65.</p>
@@ -1816,13 +1816,13 @@ the datasets number 64 and 65.</p>
 It also allows you to check whether the well behaved peaks were distributed homogeneously along the chromatogram.</p>
 
 <blockquote class="tip">
-  <div id="tip-check-the-impact-of-rt-correction-using-xcms-plot-chromatogram" class="box-title"><button type="button" aria-controls="tip-check-the-impact-of-rt-correction-using-xcms-plot-chromatogram-contents" aria-expanded="true" aria-label="Toggle tip box: Check the impact of RT correction using 'xcms plot chromatogram'"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Check the impact of RT correction using 'xcms plot chromatogram'<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-check-the-impact-of-rt-correction-using-xcms-plot-chromatogram"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-check-the-impact-of-rt-correction-using-xcms-plot-chromatogram-contents" aria-expanded="true" aria-label="Toggle tip box: Check the impact of RT correction using 'xcms plot chromatogram'"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Check the impact of RT correction using 'xcms plot chromatogram'<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Apart from the plots generated by the adjustRtime tool, you can check the impact of the retention time
 correction by comparing the chromatogram you obtained previously to a new one generated after correction.</p>
 
   <blockquote class="notranslate hands_on">
-    <div id="hands-on-xcms-plot-chromatogram-1" class="box-title" aria-label="hands-on box: xcms plot chromatogram"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms plot chromatogram</div>
+    <div class="box-title hands-on-title" id="hands-on-xcms-plot-chromatogram-1" aria-label="hands-on box: xcms plot chromatogram"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms plot chromatogram</div>
 
     <p><strong>xcms plot chromatogram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
     <ul>
@@ -1830,13 +1830,13 @@ correction by comparing the chromatogram you obtained previously to a new one ge
     </ul>
 
     <blockquote class="comment">
-      <div id="comment-4" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+      <div class="box-title comment-title" id="comment-4" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
       <p>As in the previous ‘plot chromatogram’, you can use your completed sampleMetadata file to get colours.</p>
     </blockquote>
 
     <blockquote class="tip">
-      <div id="tip-comment-to-w4m-users-10" class="box-title"><button type="button" aria-controls="tip-comment-to-w4m-users-10-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title tip-title" id="tip-comment-to-w4m-users-10"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-10-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
 the datasets number 66 and 67.</p>
@@ -1858,7 +1858,7 @@ lower a little the bandwidth parameter.</p>
 to get an illustration of grouping before/after retention time correction.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-second-xcms-groupchrompeaks-group" class="box-title" aria-label="hands-on box: second 'xcms groupChromPeaks (group)'"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: second 'xcms groupChromPeaks (group)'</div>
+  <div class="box-title hands-on-title" id="hands-on-second-xcms-groupchrompeaks-group" aria-label="hands-on box: second 'xcms groupChromPeaks (group)'"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: second 'xcms groupChromPeaks (group)'</div>
 
   <p><strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
@@ -1880,7 +1880,7 @@ to get an illustration of grouping before/after retention time correction.</p>
   </ul>
 
   <blockquote class="comment">
-    <div id="comment-5" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+    <div class="box-title comment-title" id="comment-5" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
     <p>When performing this second grouping, similarly to the first grouping you can take this opportunity to check how your peak table
 looks at this point of the XCMS extraction, setting the ‘Get the Peak List’ option to <code class="language-plaintext highlighter-rouge">Yes</code>. As previously explained, you can
@@ -1888,7 +1888,7 @@ look at your variableMetadata file as well as perform an NA diagnostic using the
   </blockquote>
 
   <blockquote class="tip">
-    <div id="tip-comment-to-w4m-users-11" class="box-title"><button type="button" aria-controls="tip-comment-to-w4m-users-11-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-comment-to-w4m-users-11"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-11-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
 the datasets from number 68 to number 71.</p>
@@ -1900,7 +1900,7 @@ the datasets from number 68 to number 71.</p>
 last adjustRtime step and thus your last grouping step, you will obtain your final peak list (<em>i.e.</em> final list of ions).</p>
 
 <blockquote class="question">
-  <div id="question-4" class="box-title" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+  <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>How many ions did you obtained with the final grouping step?</li>
@@ -1909,7 +1909,7 @@ sample. What do you notice when looking at the intensity of the fourth ion regar
   </ol>
 
   <blockquote class="solution">
-    <div id="solution-4" class="box-title"><button type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
       <li>The final grouping step led to 5100 ions.</li>
@@ -1929,7 +1929,7 @@ step.</p>
 <p>To be able to get the information that may actually exist behind NAs, there is an additional XCMS step that is called <em>fillChromPeaks</em>.</p>
 
 <blockquote class="comment">
-  <div id="comment-6" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <div class="box-title comment-title" id="comment-6" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
   <p>Before performing the ‘fillChromPeaks’ step, it is highly recommended to first have a look at your data concerning the distribution
 of NAs in your data. Indeed, this will allow you to check whether your results are consistent with your expectations; if not you
@@ -1958,7 +1958,7 @@ proceeding to the integration of missing peak areas.</p>
 <p>Once you are satisfied with the optimisation of previous extraction parameters, you can proceed to the integration of missing peak areas.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-xcms-fillchrompeaks-fillpeaks" class="box-title" aria-label="hands-on box: xcms fillChromPeaks (fillPeaks)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms fillChromPeaks (fillPeaks)</div>
+  <div class="box-title hands-on-title" id="hands-on-xcms-fillchrompeaks-fillpeaks" aria-label="hands-on box: xcms fillChromPeaks (fillPeaks)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms fillChromPeaks (fillPeaks)</div>
 
   <p><strong>xcms fillChromPeaks (fillPeaks)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
@@ -1972,7 +1972,7 @@ proceeding to the integration of missing peak areas.</p>
   </ul>
 
   <blockquote class="comment">
-    <div id="comment-7" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+    <div class="box-title comment-title" id="comment-7" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
     <p>The <em>“Reported intensity values”</em> parameter is important here. It defines how the intensity will be computed. You have three choices:</p>
     <ul>
@@ -1983,7 +1983,7 @@ proceeding to the integration of missing peak areas.</p>
   </blockquote>
 
   <blockquote class="tip">
-    <div id="tip-comment-to-w4m-users-12" class="box-title"><button type="button" aria-controls="tip-comment-to-w4m-users-12-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-comment-to-w4m-users-12"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-12-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
 the datasets number 72 to 74.</p>
@@ -2025,7 +2025,7 @@ for a first attempt to run this function. Nevertheless, a few parameters have to
 </ul>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-camera-annotate" class="box-title" aria-label="hands-on box: CAMERA.annotate"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: CAMERA.annotate</div>
+  <div class="box-title hands-on-title" id="hands-on-camera-annotate" aria-label="hands-on box: CAMERA.annotate"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: CAMERA.annotate</div>
 
   <ol>
     <li><strong>CAMERA.annotate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -2046,7 +2046,7 @@ for a first attempt to run this function. Nevertheless, a few parameters have to
       </ul>
 
       <blockquote class="comment">
-        <div id="comment-8" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-8" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>As said previously, there are quite a few parameters in this tool, some of them having very high impact on your annotations.
 In particular, the <strong>Mode</strong> parameter will influence a lot your results regarding pcgroups, and adducts (that will not be computed otherwise).</p>
@@ -2055,7 +2055,7 @@ In particular, the <strong>Mode</strong> parameter will influence a lot your res
   </ol>
 
   <blockquote class="tip">
-    <div id="tip-comment-to-w4m-users-13" class="box-title"><button type="button" aria-controls="tip-comment-to-w4m-users-13-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-comment-to-w4m-users-13"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-13-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
 the datasets number 75 and 76.</p>
@@ -2074,7 +2074,7 @@ corresponding information in your variableMetadata file for later use.</p>
 With only one single HTML file generated, you have access to all this information.</p>
 
 <blockquote class="notranslate hands_on">
-  <div id="hands-on-xcms-process-history" class="box-title" aria-label="hands-on box: xcms process history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms process history</div>
+  <div class="box-title hands-on-title" id="hands-on-xcms-process-history" aria-label="hands-on box: xcms process history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms process history</div>
 
   <ol>
     <li><strong>xcms process history</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -2083,7 +2083,7 @@ With only one single HTML file generated, you have access to all this informatio
       </ul>
 
       <blockquote class="comment">
-        <div id="comment-9" class="box-title" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+        <div class="box-title comment-title" id="comment-9" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>This module can be used after any XCMS step using the generated .RData file.</p>
       </blockquote>
@@ -2091,7 +2091,7 @@ With only one single HTML file generated, you have access to all this informatio
   </ol>
 
   <blockquote class="tip">
-    <div id="tip-comment-to-w4m-users-14" class="box-title"><button type="button" aria-controls="tip-comment-to-w4m-users-14-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <div class="box-title tip-title" id="tip-comment-to-w4m-users-14"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-14-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
 the dataset number 77.</p>
@@ -2103,14 +2103,14 @@ the dataset number 77.</p>
 this pre-processing <span class="notranslate">workflow</span>.</p>
 
 <blockquote class="tip">
-  <div id="tip-switch-your-identifiers-with-b-id-choice-b" class="box-title"><button type="button" aria-controls="tip-switch-your-identifiers-with-b-id-choice-b-contents" aria-expanded="true" aria-label="Toggle tip box: Switch your identifiers with &lt;b&gt;ID choice&lt;/b&gt;"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Switch your identifiers with <b>ID choice</b><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-switch-your-identifiers-with-b-id-choice-b"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-switch-your-identifiers-with-b-id-choice-b-contents" aria-expanded="true" aria-label="Toggle tip box: Switch your identifiers with &lt;b&gt;ID choice&lt;/b&gt;"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Switch your identifiers with <b>ID choice</b><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>You may have noticed the option provided in XCMS modules to specify a number of decimal places for m/z and RT values reported in
 ions’ identifiers. This option, available for modules generating variableMetadata files, creates an additional column named <em>namecustom</em>.
 You can use this column to switch automatic ion IDs to these customised ones, using the <strong>ID choice</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
 
   <blockquote class="notranslate hands_on">
-    <div id="hands-on-id-choice" class="box-title" aria-label="hands-on box: ID choice"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: ID choice</div>
+    <div class="box-title hands-on-title" id="hands-on-id-choice" aria-label="hands-on box: ID choice"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: ID choice</div>
 
     <ol>
       <li><strong>ID choice</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -2124,7 +2124,7 @@ You can use this column to switch automatic ion IDs to these customised ones, us
     </ol>
 
     <blockquote class="tip">
-      <div id="tip-comment-to-w4m-users-15" class="box-title"><button type="button" aria-controls="tip-comment-to-w4m-users-15-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title tip-title" id="tip-comment-to-w4m-users-15"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-15-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a> history,
 this step corresponds to the datasets number 78 and 79.</p>
