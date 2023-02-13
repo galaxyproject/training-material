@@ -213,7 +213,7 @@ When you have finished your changes, it all looks good in the preview, you want 
 >    - If you used option 1 and want to do that right away, you can click on the link in the terminal:
 >      ![link in the terminal to open a PR](../../images/gitpod/push.png)
 >
-> > ### Note: GitPod Permissions
+> > <tip-title>GitPod Permissions</tip-title>
 > > If this is your first time using GitPod, you may need to grant permissions to let GitPod push to your GitHub fork
 > > ![prompt to changes permissions](../../images/gitpod/access.png)
 > > This will take you through a process to authorize GitPod, and set permissions

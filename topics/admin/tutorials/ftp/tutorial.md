@@ -87,8 +87,8 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    +++ b/requirements.yml
 >    @@ -38,3 +38,5 @@
 >       version: 0.12.0
->     - src: usegalaxy_eu.tiaas2
->       version: 0.0.8
+>     - src: galaxyproject.tiaas2
+>       version: 2.1.3
 >    +- src: galaxyproject.proftpd
 >    +  version: 0.3.1
 >    {% endraw %}
@@ -216,9 +216,9 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -31,6 +31,7 @@
->           become_user: "{{ galaxy_user.name }}"
+>    @@ -32,6 +32,7 @@
 >         - usegalaxy_eu.rabbitmq
+>         - galaxyproject.tiaas2
 >         - galaxyproject.nginx
 >    +    - galaxyproject.proftpd
 >         - galaxyproject.tusd

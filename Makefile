@@ -211,11 +211,6 @@ _site/%/tutorial.pdf: _site/%/tutorial.html
 	fi
 
 
-_site/%/introduction.pdf: _site/%/introduction.html
-	$(ACTIVATE_ENV) && \
-	$(shell npm bin)/http-server _site -p 9876 & \
-	docker run --rm --network host -v $(shell pwd):/slides astefanutti/decktape  automatic -s 1920x1080 http://127.0.0.1:9876/$(<:_site/%=%) /slides/$@
-
 _site/%/slides.pdf: _site/%/slides.html
 	$(ACTIVATE_ENV) && \
 	$(shell npm bin)/http-server _site -p 9876 & \
@@ -234,7 +229,7 @@ _site/%/slides_CAT_ES.pdf: _site/%/slides_CAT_ES.html
 video: ## Build all videos
 	bash bin/ari-make.sh
 
-annotate: ## annotate the tutorials with usable Galaxy instances and generate badges
+annotate: ## annotate the tutorials with usable Galaxy instances
 	${ACTIVATE_ENV} && \
 	bash bin/workflow_to_tool_yaml.sh && \
 	python bin/add_galaxy_instance_annotations.py

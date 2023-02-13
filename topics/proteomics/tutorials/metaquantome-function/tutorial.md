@@ -188,12 +188,12 @@ In function mode, the following information is required apart from metaQuantome 
 >
 >
 >    > <comment-title></comment-title>
->    >The structure of the output file depends on the analysis mode and the experimental design, but the columns generally look like this, with one row for each term:
+>    > The structure of the output file depends on the analysis mode and the experimental design, but the columns generally look like this, with one row for each term:
 >    >
-| term id | info about term. (one or more columns) | mean term intensity (by sample group)            | term intensity (by sample)                                                      | number of unique peptides (by sample) | number of sample children in each sample |
-|---------|----------------------------------------|--------------------------------------------------|---------------------------------------------------------------------------------|---------------------------------------|------------------------------------------|
-| term1   | name, rank, etc.                       | note that this is the log2 of the mean intensity | this is the log2 of term intensity in each sample. Missing data is coded as NA. | integer. 0 is coded as NA             | integer. 0 is coded as NA                |
-|         |                                        |                                                  |                                                                                 |                                       |                                          |
+>    > | term id | info about term. (one or more columns) | mean term intensity (by sample group)            | term intensity (by sample)                                                      | number of unique peptides (by sample) | number of sample children in each sample |
+>    > |---------|----------------------------------------|--------------------------------------------------|---------------------------------------------------------------------------------|---------------------------------------|------------------------------------------|
+>    > | term1   | name, rank, etc.                       | note that this is the log2 of the mean intensity | this is the log2 of term intensity in each sample. Missing data is coded as NA. | integer. 0 is coded as NA             | integer. 0 is coded as NA                |
+>    > |         |                                        |                                                  |                                                                                 |                                       |                                          |
 >    {: .comment}
 >
 {: .hands_on}

@@ -155,7 +155,7 @@ having to launch jobs manually for each sample. You can start using the dataset 
 > > We highly recommend to get started by importing this history.
 > >
 > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing) history,
-this step corresponds to the dataset collection number 13.
+> > this step corresponds to the dataset collection number 13.
 > {: .tip}
 >
 {: .hands_on}
@@ -180,7 +180,7 @@ This first step is only meant to read your `mzXML` file and generate an object u
 >  > <tip-title>Comment to W4M users</tip-title>
 >  >
 >  > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing) history,
-this step corresponds to the dataset collection number 14.
+>  > this step corresponds to the dataset collection number 14.
 >  {: .tip}
 >
 >  > <question-title></question-title>
@@ -228,7 +228,7 @@ Note that you can either:
 > <tip-title>Optional: Generate the right template with <b>xcms get a sampleMetadata file</b></tip-title>
 >
 > In the case of this tutorial, we already prepared a *sampleMetadata* file with all the necessary information.
-Below is an optional hands-on explaining how to get a template to fill, with the two following advantages:
+> Below is an optional hands-on explaining how to get a template to fill, with the two following advantages:
 >   1. You will have the exact list of the samples you used in Galaxy, with the exact identifiers (*i.e.* exact sample names)
 >   2. You will have a file with the right format (tabulation-separated text file) that only needs to be filled with the information you want.
 >
@@ -240,7 +240,7 @@ Below is an optional hands-on explaining how to get a template to fill, with the
 > > > <tip-title>Comment to W4M users</tip-title>
 > > >
 > > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing) history,
-this step corresponds to the dataset number 27.
+> > > this step corresponds to the dataset number 27.
 > > {: .tip}
 > >
 > {: .hands_on}
@@ -248,7 +248,7 @@ this step corresponds to the dataset number 27.
 > An easy step for an easy sampleMetadata filling!
 >
 > From this tool, you will obtain a `tabular` file (meaning a tab-separated text file) with a first column of identifiers and a
-second column called *class* which is empty for the moment (only '.' for each sample). You can now download this file by clicking on the {% icon galaxy-save %} icon.
+> second column called *class* which is empty for the moment (only '.' for each sample). You can now download this file by clicking on the {% icon galaxy-save %} icon.
 >
 {: .tip}
 
@@ -259,7 +259,7 @@ The sampleMetadata file is a tab-separated table, in text format. This table has
 software you find appropriate to construct your table, as long as you save your file in a compatible format. For example, you can
 use a spreadsheet software such as Microsoft Excel or LibreOffice.
 
-> <comment-title>Important: Save your table in the correct format</comment-title>
+> <warning-title>Important: Save your table in the correct format</warning-title>
 >
 > The file has to be a `.txt` or a `.tsv` (tab-separated values). Neither `.xlsx` nor `.odt` are supported.
 > If you use a spreadsheet software, be sure to change the default format to **Text (Tab delimited)** or equivalent.
@@ -270,7 +270,7 @@ Once your sampleMetadata table is ready, you can proceed to the upload. In this 
 > <tip-title>Optional: Filling the <i>sampleMetadata</i> using the template obtained from Galaxy</tip-title>
 >
 > For this tutorial, we already provide the *sampleMetadata* file, so you only have to upload it to Galaxy. Below we
-explain how we filled this file from the template we generated in Galaxy.
+> explain how we filled this file from the template we generated in Galaxy.
 >
 > First, we used **xcms get a sampleMetadata file** {% icon tool %} as mentioned in the previous tip box.
 >
@@ -292,7 +292,7 @@ explain how we filled this file from the template we generated in Galaxy.
 > Blanc05 | .
 >
 > We used a spreadsheet software to open the file. First, we completed the class column. You will see in further XCMS steps that this
-second column matters.
+> second column matters.
 >
 > sample_name | class
 > --- | ---
@@ -328,10 +328,10 @@ second column matters.
 > Blanc05 | blk | blank | 29 | ne1 | NA | NA | NA | NA | NA
 >
 > In particular, the `batch`, `sampleType` and `injectionOrder` columns are mandatory to correct the data from signal drift during later quality processing
-(see the [Mass spectrometry: LC-MS analysis](../../tutorials/lcms/tutorial.html)
-Galaxy training material for more information).
+> (see the [Mass spectrometry: LC-MS analysis](../../tutorials/lcms/tutorial.html)
+> Galaxy training material for more information).
 > Once we completed the table filling, we saved the file, minding to stick with the original format. Then, our *sampleMetadata* was ready to
-be uploaded into Galaxy.
+> be uploaded into Galaxy.
 >
 {: .tip}
 
@@ -357,10 +357,10 @@ be uploaded into Galaxy.
 >    > <comment-title></comment-title>
 >    >
 >    > Here we provided the sampleMetadata file so we know that the upload led to a 'tabular' file. But from experience we also know that
-it can happen that, when uploading a sampleMetadata table, user obtained other inappropriate types of data. This is generally due to the file
-not following all the requirements about the format (*e.g.* wrong separator, or lines with different numbers of columns).
+>    > it can happen that, when uploading a sampleMetadata table, user obtained other inappropriate types of data. This is generally due to the file
+>    > not following all the requirements about the format (*e.g.* wrong separator, or lines with different numbers of columns).
 >    > Thus, we highly recommend that you always take a second to check the data type after the upload. This way you can handle the problem
-right away if you appear to get one of these obvious issues.
+>    > right away if you appear to get one of these obvious issues.
 >    {: .comment}
 >
 > 3. Rename your sampleMetadata file with a shorter name 'sampleMetadata_completed.tsv'
@@ -370,7 +370,7 @@ right away if you appear to get one of these obvious issues.
 > > <tip-title>Comment to W4M users</tip-title>
 > >
 > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing) history,
-this step corresponds to the dataset number 28.
+> > this step corresponds to the dataset number 28.
 > {: .tip}
 >
 >
@@ -414,13 +414,13 @@ Note that you can also check the chromatograms at any moment during the workflow
 >    > <comment-title></comment-title>
 >    >
 >    > If you use this tool at a later step of XCMS workflow and provided in the Merger step a sampleMetadata with a second column containing groups
-(see further in this tutorial), you will get colouring according to these groups even without providing a sampleMetadata file as a 'plot chromatogram' parameter.
+>    > (see further in this tutorial), you will get colouring according to these groups even without providing a sampleMetadata file as a 'plot chromatogram' parameter.
 >    {: .comment}
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
 > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing) history,
-this step corresponds to the datasets number 29 and 30.
+> > this step corresponds to the datasets number 29 and 30.
 > {: .tip}
 >
 {: .hands_on}
@@ -485,14 +485,14 @@ Let's try performing the peakpicking step with the **xcms findChromPeaks (xcmsSe
 > > <comment-title></comment-title>
 > >
 > > Along with the parameters used in the core centWave algorithm, XCMS provides other filtering options allowing you to get
-rid of ions that you don't want to consider. For example, you can use *Spectra Filters* allowing you to discard some RT or m/z
-ranges, or *Noise filter* (as in this hands-on) not to use low intensity measures in the ROI detection step.
+> > rid of ions that you don't want to consider. For example, you can use *Spectra Filters* allowing you to discard some RT or m/z
+> > ranges, or *Noise filter* (as in this hands-on) not to use low intensity measures in the ROI detection step.
 > {: .comment}
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
 > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
-the dataset collections number 31 and 32.
+> > the dataset collections number 31 and 32.
 > {: .tip}
 >
 {: .hands_on}
@@ -530,7 +530,7 @@ with the second column defining theses classes.
 > > <tip-title>Comment to W4M users</tip-title>
 > >
 > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
-the dataset number 57.
+> > the dataset number 57.
 > {: .tip}
 >
 {: .hands_on}
@@ -598,7 +598,7 @@ than a given number of samples. Either a percentage of the total number of sampl
 > > <tip-title>Comment to W4M users</tip-title>
 > >
 > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
-the datasets number 58 to 61.
+> > the datasets number 58 to 61.
 > {: .tip}
 >
 {: .hands_on}
@@ -625,11 +625,11 @@ Here is an example of two m/z slices obtained from the hands-on:
 > > <solution-title></solution-title>
 > >
 > > 1. There are 3 peak groups in this m/z slice. The two peaks that are not assigned to peak groups are alone in their retention time area. Thus,
-the number of samples under the corresponding density peaks does not reach the minimum fraction of samples set by the user (0.9) to consider a peak group,
+> >    the number of samples under the corresponding density peaks does not reach the minimum fraction of samples set by the user (0.9) to consider a peak group,
 > > in any specified class.
 > > 2. If the bandwidth value had been set to a smaller value, the density peak width would have been smaller. With a small-enough bandwidth value,
-there could have been two density peaks instead of one under the current first density peak. Thus, the sample in line 5 would have been out of the
-previous peak group, thus not assigned to any peak group due to the 0.9 minimum fraction limit.
+> >    there could have been two density peaks instead of one under the current first density peak. Thus, the sample in line 5 would have been out of the
+> >    previous peak group, thus not assigned to any peak group due to the 0.9 minimum fraction limit.
 > >
 > {: .solution}
 >
@@ -674,7 +674,7 @@ using the **Intensity Check** {% icon tool %} module.
 > > > <tip-title>Comment to W4M users</tip-title>
 > > >
 > > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
-the datasets number 62 and 63.
+> > > the datasets number 62 and 63.
 > > {: .tip}
 > >
 > {: .hands_on}
@@ -738,16 +738,16 @@ The algorithm uses statistical smoothing methods. You can choose between linear 
 >    > <comment-title></comment-title>
 >    >
 >    > If you have a very large number of samples (*e.g.* a thousand), it might be impossible to find peaks that are present in 100% of your samples.
-If that is the case and you still set a very high value for the minimum required fraction of samples, the tool can not complete successfully the retention
-time correction.
-A special attention should also be given to this parameter when you expect a large number of peaks not to be present in part of your samples
-(*e.g.* when dealing with some blank samples).
+>    If that is the case and you still set a very high value for the minimum required fraction of samples, the tool can not complete successfully the retention
+>    time correction.
+>    A special attention should also be given to this parameter when you expect a large number of peaks not to be present in part of your samples
+>    (*e.g.* when dealing with some blank samples).
 >    {: .comment}
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
 > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
-the datasets number 64 and 65.
+> > the datasets number 64 and 65.
 > {: .tip}
 >
 {: .hands_on}
@@ -759,7 +759,7 @@ It also allows you to check whether the well behaved peaks were distributed homo
 > <tip-title>Check the impact of RT correction using 'xcms plot chromatogram'</tip-title>
 >
 > Apart from the plots generated by the adjustRtime tool, you can check the impact of the retention time
-correction by comparing the chromatogram you obtained previously to a new one generated after correction.
+> correction by comparing the chromatogram you obtained previously to a new one generated after correction.
 >
 > > <hands-on-title>xcms plot chromatogram</hands-on-title>
 > >
@@ -774,7 +774,7 @@ correction by comparing the chromatogram you obtained previously to a new one ge
 > > > <tip-title>Comment to W4M users</tip-title>
 > > >
 > > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
-the datasets number 66 and 67.
+> > > the datasets number 66 and 67.
 > > {: .tip}
 > >
 > {: .hands_on}
@@ -810,14 +810,14 @@ to get an illustration of grouping before/after retention time correction.
 >    > <comment-title></comment-title>
 >    >
 >    > When performing this second grouping, similarly to the first grouping you can take this opportunity to check how your peak table
-looks at this point of the XCMS extraction, setting the 'Get the Peak List' option to `Yes`. As previously explained, you can
-look at your variableMetadata file as well as perform an NA diagnostic using the **Intensity Check** {% icon tool %} module.
+>    > looks at this point of the XCMS extraction, setting the 'Get the Peak List' option to `Yes`. As previously explained, you can
+>    > look at your variableMetadata file as well as perform an NA diagnostic using the **Intensity Check** {% icon tool %} module.
 >    {: .comment}
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
 > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
-the datasets from number 68 to number 71.
+> > the datasets from number 68 to number 71.
 > {: .tip}
 >
 {: .hands_on}
@@ -829,13 +829,13 @@ last adjustRtime step and thus your last grouping step, you will obtain your fin
 >
 > 1. How many ions did you obtained with the final grouping step?
 > 2. Open the dataMatrix file you obtained with the final grouping. This table corresponds to intensities for each ion and each
-sample. What do you notice when looking at the intensity of the fourth ion regarding the first sample?
+>    sample. What do you notice when looking at the intensity of the fourth ion regarding the first sample?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. The final grouping step led to 5100 ions.
 > > 2. The fourth ion (M74T317) has a 'NA' value for the first sample (QC1_014). This is also the case for several other ions
-and samples.
+> >    and samples.
 > >
 > {: .solution}
 >
@@ -851,13 +851,13 @@ To be able to get the information that may actually exist behind NAs, there is a
 > <comment-title></comment-title>
 >
 > Before performing the 'fillChromPeaks' step, it is highly recommended to first have a look at your data concerning the distribution
-of NAs in your data. Indeed, this will allow you to check whether your results are consistent with your expectations; if not you
-may want to go back to some of your parameter choices in previous XCMS steps.
+> of NAs in your data. Indeed, this will allow you to check whether your results are consistent with your expectations; if not you
+> may want to go back to some of your parameter choices in previous XCMS steps.
 > To perform your NA diagnosis, you can use the variableMetadata file and dataMatrix file that you obtained with the last grouping step
-with the 'Get the Peak List' option to `Yes`. The variableMetadata file contains information about your ions: you will find information
-about the number of peaks detected for each ion. The dataMatrix files contains the intensities for each ion and each sample.
-As suggested previously (after the first grouping step), you can use the **Intensity Check** {% icon tool %} module to get an overview
-of the proportion of NA in your dataset at this step.
+> with the 'Get the Peak List' option to `Yes`. The variableMetadata file contains information about your ions: you will find information
+> about the number of peaks detected for each ion. The dataMatrix files contains the intensities for each ion and each sample.
+> As suggested previously (after the first grouping step), you can use the **Intensity Check** {% icon tool %} module to get an overview
+> of the proportion of NA in your dataset at this step.
 {: .comment}
 
 
@@ -896,7 +896,7 @@ Once you are satisfied with the optimisation of previous extraction parameters, 
 > > <tip-title>Comment to W4M users</tip-title>
 > >
 > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
-the datasets number 72 to 74.
+> > the datasets number 72 to 74.
 > {: .tip}
 >
 {: .hands_on}
@@ -943,13 +943,13 @@ for a first attempt to run this function. Nevertheless, a few parameters have to
 >    > <comment-title></comment-title>
 >    >
 >    > As said previously, there are quite a few parameters in this tool, some of them having very high impact on your annotations.
-In particular, the **Mode** parameter will influence a lot your results regarding pcgroups, and adducts (that will not be computed otherwise).
+>    > In particular, the **Mode** parameter will influence a lot your results regarding pcgroups, and adducts (that will not be computed otherwise).
 >    {: .comment}
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
 > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
-the datasets number 75 and 76.
+> > the datasets number 75 and 76.
 > {: .tip}
 >
 {: .hands_on}
@@ -978,7 +978,7 @@ With only one single HTML file generated, you have access to all this informatio
 > > <tip-title>Comment to W4M users</tip-title>
 > >
 > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
-the dataset number 77.
+> > the dataset number 77.
 > {: .tip}
 >
 {: .hands_on}
@@ -989,8 +989,8 @@ this pre-processing workflow.
 > <tip-title>Switch your identifiers with <b>ID choice</b></tip-title>
 >
 > You may have noticed the option provided in XCMS modules to specify a number of decimal places for m/z and RT values reported in
-ions' identifiers. This option, available for modules generating variableMetadata files, creates an additional column named *namecustom*.
-You can use this column to switch automatic ion IDs to these customised ones, using the **ID choice** {% icon tool %} tool.
+> ions' identifiers. This option, available for modules generating variableMetadata files, creates an additional column named *namecustom*.
+> You can use this column to switch automatic ion IDs to these customised ones, using the **ID choice** {% icon tool %} tool.
 >
 > > <hands-on-title>ID choice</hands-on-title>
 > >
@@ -1003,13 +1003,13 @@ You can use this column to switch automatic ion IDs to these customised ones, us
 > > > <tip-title>Comment to W4M users</tip-title>
 > > >
 > > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing) history,
-this step corresponds to the datasets number 78 and 79.
+> > > this step corresponds to the datasets number 78 and 79.
 > > {: .tip}
 > >
 > {: .hands_on}
 >
 > Note that the **ID choice** {% icon tool %} module can be used on sample identifiers too. This can be particularly useful when
-the raw files (used to determine sample IDs in XCMS) have automatically-generated names that can be unfriendly and excessively long.
+> the raw files (used to determine sample IDs in XCMS) have automatically-generated names that can be unfriendly and excessively long.
 >
 {: .tip}
 

@@ -68,7 +68,7 @@ The Galaxy interface consists of three main parts:
 
 # Create a history and load data into it
 
-Each analysis in Galaxy starts by creating a new analysis history and loading data into it. Galaxy supports a huge variety of data types and data sources. Different ways of bringing data into Galaxy are explained [here]({{site.baseurl}}/topics/galaxy-interface/tutorials/get-data/slides.html#1). To reproduce published results, the data needs to be loaded from the public repository where the authors have deposited the data. This is most often done by importing data via a web link.
+Each analysis in Galaxy starts by creating a new analysis history and loading data into it. Galaxy supports a huge variety of data types and data sources. Different ways of bringing data into Galaxy are explained [in the interface slides]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}). To reproduce published results, the data needs to be loaded from the public repository where the authors have deposited the data. This is most often done by importing data via a web link.
 
 
 > <hands-on-title>Create history</hands-on-title>
@@ -132,7 +132,7 @@ Each analysis in Galaxy starts by creating a new analysis history and loading da
 >
 > {% snippet faqs/galaxy/collections_build_list.md %}
 >
-> In case you want to run a published Galaxy workflow on your own data, you can find explanations about the options to upload your own data [here](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/get-data/slides.html#1).
+> In case you want to run a published Galaxy workflow on your own data, you can find explanations about the options to upload your own data [in the interface slides]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}).
 {: .details}
 
 
@@ -252,7 +252,7 @@ However, sometimes you may wish to do more, like...
 
 # Manipulating the analysis
 
-Maybe you are interested in changing some of the original tool parameters and see how this changes the result. The parameter changes can be either done inside the workflow editor, which makes it easy to change many parameters at once (training on [Using Workflow Parameters](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/workflow-parameters/tutorial.html)) or directly in the history. To repeat a single analysis step with new parameters this can be done directly in the Galaxy history with the `re-run` option.
+Maybe you are interested in changing some of the original tool parameters and see how this changes the result. The parameter changes can be either done inside the workflow editor, which makes it easy to change many parameters at once (training on [Using Workflow Parameters]({% link topics/galaxy-interface/tutorials/workflow-parameters/tutorial.md %})) or directly in the history. To repeat a single analysis step with new parameters this can be done directly in the Galaxy history with the `re-run` option.
 
 > <hands-on-title>Manipulate the analysis steps</hands-on-title>
 >

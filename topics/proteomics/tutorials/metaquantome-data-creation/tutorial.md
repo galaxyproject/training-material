@@ -189,7 +189,7 @@ The mgf file type can then be used as the Input Peak Lists when running SearchGU
 
 ##  *Search GUI*
 SearchGUI is a tool that searches sequence databases on any number of MGF files. In this case, the previously made collection of three MGF files (entitles MGF files) will be used as the MS/MS input. This tool will produce an output file, called a SearchGUI archive file. This file will serve as in input for the next tool used, PeptideShaker.
->
+
 > <hands-on-title>Search sequence databases</hands-on-title>
 > 1. {% tool [Search GUI](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/3.3.10.1) %} with the following parameters:
 >    - {% icon param-file %} *"Protein Database"*: `ProteinDB_cRAP.fasta`
@@ -248,7 +248,7 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 ##  *Peptide Shaker*
 
 [PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html) is a post-processing software tool that processes data from the SearchGUI software tool. PeptideShaker is a search engine for interpretation of proteomics identification results from multiple search engines, currently supporting X!Tandem, MS-GF+, MS Amanda, OMSSA, MyriMatch, Comet, Tide, Mascot, Andromeda and mzIdentML. More specifically, PeptideShaker processes data from  the SearchGUI tool through the organization of Peptide-Spectral Matches (PSMs) generated. In addition to organization, it provides an assessment of confidence of the data and generates outputs that can be visualized by users to interpret the results.
->
+
 > <hands-on-title>Interpretation of SearchGUI</hands-on-title>
 > 1. {% tool [Peptide Shaker](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.16.36.3) %} with the following parameters:
 >    - {% icon param-file %} *"Compressed SearchGUI results"*: `searchgui_results` (output of **Search GUI** {% icon tool %})
@@ -266,14 +266,14 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >
 >    > <comment-title></comment-title>
 >    >
->    >  There are a number of choices for different data files that can be generated using
- PeptideShaker. A compressed file can be made containing all information needed to view the
-results in the standalone PeptideShaker viewer. A `mzidentML` file can be created that contains
-all peptide sequence matching information and can be utilized by compatible downstream
-software. Other outputs are focused on the inferred proteins identified from the PSMs, as well
-as phosphorylation reports, relevant if a phosphoproteomics experiment has been undertaken.
-More detailed information on peptide inference using SearchGUI and PeptideShaker can be found in
-our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html).
+>    > There are a number of choices for different data files that can be generated using
+>    > PeptideShaker. A compressed file can be made containing all information needed to view the
+>    > results in the standalone PeptideShaker viewer. A `mzidentML` file can be created that contains
+>    > all peptide sequence matching information and can be utilized by compatible downstream
+>    > software. Other outputs are focused on the inferred proteins identified from the PSMs, as well
+>    > as phosphorylation reports, relevant if a phosphoproteomics experiment has been undertaken.
+>    > More detailed information on peptide inference using SearchGUI and PeptideShaker can be found in
+>    > our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html).
 >    {: .comment}
 >
 {: .hands_on}
@@ -308,9 +308,9 @@ our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tuto
 >    > <comment-title></comment-title>
 >    >
 >    > In Proteomics, contamination is generally detected as peaks in spectra that did not originate
-from the samples and can be introduced in the sample from a variety of environmental sources or human error. Identification of these
-contaminants is critical to enable their removal before data analysis, mainly, to maintain the validity of conclusions
-drawn from statistical analyses. Thus, this selection tool helps us remove the contaminants that were identified in the spectral data.
+>    > from the samples and can be introduced in the sample from a variety of environmental sources or human error. Identification of these
+>    > contaminants is critical to enable their removal before data analysis, mainly, to maintain the validity of conclusions
+>    > drawn from statistical analyses. Thus, this selection tool helps us remove the contaminants that were identified in the spectral data.
 >    {: .comment}
 >
 {: .hands_on}
@@ -347,7 +347,7 @@ This is a data manipulation step to make the data compatible with other downstre
 >    > <comment-title></comment-title>
 >    >
 >    > Replace Text searches given columns and finds and replaces patterns provided by the user.
-This tool is removing the extensions (.raw,.mzml,.mgf) in the spectral file column provided by the PeptideShaker tool. This step is critical for FlashLFQ to work.
+>    > This tool is removing the extensions (.raw,.mzml,.mgf) in the spectral file column provided by the PeptideShaker tool. This step is critical for FlashLFQ to work.
 >    {: .comment}
 >
 {: .hands_on}
@@ -355,7 +355,7 @@ This tool is removing the extensions (.raw,.mzml,.mgf) in the spectral file colu
 ## *Extracting Peptide list*
 
 > <hands-on-title>Selecting peptide list</hands-on-title>
-This step selects the peptide column from the Select output ( where we have removed the contaminants)
+> This step selects the peptide column from the Select output ( where we have removed the contaminants)
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c6`
@@ -370,7 +370,7 @@ In this tutorial, we are using FlashLFQ as the quantitation tool. The user can c
 
 ### *FlashLFQ*
 [FlashLFQ](https://github.com/smith-chem-wisc/FlashLFQ) can quantify MS peaks in order to find the abundances of peptides. FlashLFQ is a fast label-free quantification algorithm. Additionally, the abundances of peptides within the sample can be compared between samples as further analysis beyond this workflow.
->
+
 > <hands-on-title>Quantification</hands-on-title>
 >
 > 1. {% tool [FlashLFQ](toolshed.g2.bx.psu.edu/repos/galaxyp/flashlfq/flashlfq/1.0.3.0) %} with the following parameters:
@@ -529,7 +529,7 @@ Unipept is used to match tryptic peptides and find the taxonomy and Functional a
 >    > There are two Unipept in this workflow, One for taxonomy and other for function. Please select all the output options from Unipept.
 >    {: .comment}
 >
-The JSON output from the Taxonomy can be visualized using the visualize option and Select the Unipept Taxonomyviewer.
+> The JSON output from the Taxonomy can be visualized using the visualize option and Select the Unipept Taxonomyviewer.
 >
 >
 {: .hands_on}
@@ -537,7 +537,7 @@ The JSON output from the Taxonomy can be visualized using the visualize option a
 ## *Extracting EC values*
 
 > <hands-on-title>Extract EC numbers</hands-on-title>
-The cut tool cuts out specific columns from the dataset. In this case, the cut tool is being used to extract columns 1 (peptide) and 3 (EC number) from the dataset peptinfo EC.tsv output. This is a manipulation tool for metaQuantome's convenience.
+> The cut tool cuts out specific columns from the dataset. In this case, the cut tool is being used to extract columns 1 (peptide) and 3 (EC number) from the dataset peptinfo EC.tsv output. This is a manipulation tool for metaQuantome's convenience.
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1,c3`
@@ -560,11 +560,11 @@ Query Tabular is a tool that can load tabular data into a SQLite database. This 
 >                - *"Specify Name for Table"*: `Goterm`
 >                - *"Specify Column Names (comma-separated list)"*: `peptide,total_protein_count,go_term,protein_count,go_name,go_funct`
 >    - *"SQL Query to generate tabular output"*:
-```
-SELECT Goterm.*
-FROM Goterm
-WHERE ((1.0*Goterm.protein_count)/(1.0*Goterm.total_protein_count)) >= 0.05
-```
+>      ```
+>      SELECT Goterm.*
+>      FROM Goterm
+>      WHERE ((1.0*Goterm.protein_count)/(1.0*Goterm.total_protein_count)) >= 0.05
+>      ```
 >    - *"include query result column headers"*: `Yes`
 >
 > 2. Rename as Unipept_Function.
@@ -607,8 +607,10 @@ We are using this Query tabular to rename the output that we obtained from the C
 >                - *"Specify Name for Table"*: `ec`
 >                - *"Specify Column Names (comma-separated list)"*: `peptide,go_ec`
 >    - *"SQL Query to generate tabular output"*:
-`SELECT *
-FROM ec`
+>      ```sql
+>      SELECT *
+>      FROM ec
+>      ```
 >    - *"include query result column headers"*: `Yes`
 >
 > 2. Rename file as go_ec

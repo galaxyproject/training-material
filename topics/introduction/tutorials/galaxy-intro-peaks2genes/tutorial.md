@@ -64,6 +64,7 @@ The goal of this exercise is to **turn this list of genomic regions into a list 
 # Pretreatments
 
 > <hands-on-title>Open Galaxy</hands-on-title>
+>
 > 1. Browse to a Galaxy instance: the one recommended by your instructor or one in the list **Galaxy instance** on the head of this page
 > 2. Log in or register (top panel)
 >
@@ -75,6 +76,7 @@ The Galaxy interface consist of three main parts. The available tools are listed
 ![Galaxy interface screenshot showing history panel on the right, tools panel on the left, and main panel at the center](../../images/galaxy_interface.png "The Galaxy interface")
 
 Let's start with a fresh history.
+
 
 > <hands-on-title>Create history</hands-on-title>
 >
@@ -102,11 +104,11 @@ Let's start with a fresh history.
 > <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Download the list of peak regions (the file [`GSE37268_mof3.out.hpeak.txt.gz`](https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE37268&format=file&file=GSE37268%5Fmof3%2Eout%2Ehpeak%2Etxt%2Egz)) from [GEO](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE37268) to your computer
-> 2. Click on the upload button in the upper left ot the interface
+> 2. Click on the upload button in the upper left of the interface
 >
 >    ![Upload data icon](../../../galaxy-interface/images/upload_button.png)
 >
-> 3. Press **Choose local file** and search for your file on your computer
+> 3. Press **Choose local files** and search for your file on your computer
 > 4. Select `interval` as **Type**
 > 5. Press **Start**
 > 6. Press **Close**
@@ -157,6 +159,9 @@ Let's start with a fresh history.
 >    A form to edit dataset attributes is displayed in the central panel
 >
 > 4. Search for `mm9` in **Database/Build** attribute and select `Mouse July 2007 (NCBI37/mm9)` (the paper tells us the peaks are from `mm9`)
+>
+>    ![The database/build version can be selected from a dropdown menu. Users can start typing the database name to filter the list](../../images/Search-for-mm9.PNG)
+>
 > 5. Click on **Save** on the top
 > 6. Add a tag called `#peaks` to the dataset to make it easier to track in the history
 >
@@ -277,7 +282,7 @@ As we can see, the peak file lacks `chr` before any chromosome number. But what 
 >     - *"Text file"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
 >     - *"Operation"*: `Keep last lines`
 >     - *"Number of lines"*: Choose a value, e.g. `100`
-> 2. Click **Execute**
+> 2. Click **Run Tool**
 > 3. Wait for the job to finish
 > 4. Inspect the file through the {% icon galaxy-eye %} (eye) icon (**View data**)
 >
@@ -694,6 +699,7 @@ One of the most important features of Galaxy comes at the end of an analysis. Wh
 
 To share a history, click on the {% icon galaxy-gear %} (gear) symbol in the history pane and select `Share or Publish`. On this page you can do 3 things:
 
+
 1. **Make accessible via Link**
 
     This generates a link that you can give out to others. Anybody with this link will be able to view your history.
@@ -706,6 +712,7 @@ To share a history, click on the {% icon galaxy-gear %} (gear) symbol in the his
 
     This will share the history only with specific users on the Galaxy instance.
 
+![The menu for sharing histories includes buttons for making the history accessible, publishing it on this Galaxy server, and displays a sharable link to the history. At the bottom is a button for sharing the history with individual users.](../../images/publish.PNG)
 
 > <hands-on-title>Share history and workflow</hands-on-title>
 >

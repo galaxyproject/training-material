@@ -265,7 +265,7 @@ element is 1, corresponding to the digit, and the rest are 0's.
 >    - *"Input file"* : Select `y_train`
 >    - *"Does the dataset contain header?"* : Select `No`
 >    - *"Total number of classes"*: Select `10`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
@@ -303,7 +303,7 @@ element is 1, corresponding to the digit, and the rest are 0's.
 >            - *"Choose the type of layer"*: `Core -- Dense`
 >                - *"units"*": `10`
 >                - *"Activation function"*: `softmax`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 {: .hands_on}
 
 Each image is passed in as a 784 dimensional vector (28 x 28 = 784). The reshape layer reshapes it into (28, 28, 1) dimensions -- 28 rows (image height), 28 columns (image width), and
@@ -329,7 +329,7 @@ probability is predicted by CNN. The model config can be downloaded as a JSON fi
 >    - In *"Fit Parameters"*:
 >        - *"epochs"*: `2`
 >        - *"batch_size"*: `500`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 {: .hands_on}
 
 A loss function measures how different the predicted output is versus the expected output. For multi-class classification problems, we use
@@ -343,7 +343,7 @@ The model builder can be downloaded as a zip file.
 
 > <hands-on-title>Training the model</hands-on-title>
 >
-> - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.2) %}
+> - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3) %}
 >    - *"Select a scheme"*: `Train and Validate`
 >    - *"Choose the dataset containing pipeline/estimator object"*: Select the *Keras Model Builder* from the previous step.
 >    - *"Select input type:"*: `tabular data`
@@ -351,7 +351,7 @@ The model builder can be downloaded as a zip file.
 >        - *"Choose how to select data by column:"*: `All columns`
 >        - *"Dataset containing class labels or target values"*: Select the OHE representation of `y_train` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 >
 {: .hands_on}
@@ -363,14 +363,14 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 
 > <hands-on-title>Testing the model</hands-on-title>
 >
-> - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.2) %}
+> - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3) %}
 >    - *"Choose the dataset containing pipeline/estimator object"* : Select the trained model from the previous step.
 >    - *"Choose the dataset containing weights for the estimator above"* : Select the trained model weights from the previous step.
 >    - *"Select invocation method"*: `predict`
 >    - *"Select input data type for prediction"*: `tabular data`
 >    - *"Training samples dataset"*: Select `X_test` dataset
 >    - *"Choose how to select data by column:"*: `All columns`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
@@ -380,13 +380,13 @@ The prediction step generates 1 dataset. It's a file that has predictions (0 to 
 
 > <hands-on-title>Creating the confusion matrix</hands-on-title>
 >
-> - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.2) %}
+> - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.3) %}
 >    - *"Select a plotting type"*: `Confusion matrix for classes`
 >    - *"Select dataset containing the true labels"*": `y_test`
 >    - *"Choose how to select data by column:"*: `All columns`
 >    - *"Select dataset containing the predicted labels"*": Select `Model Prediction` from the previous step
 >    - *"Does the dataset contain header:"*: `Yes`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 

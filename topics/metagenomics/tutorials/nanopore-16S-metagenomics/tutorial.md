@@ -68,7 +68,6 @@ In this example, we will use a dataset originally hosted in the __NCBI SRA datab
 	- Surface sample (0-5 cm): `rhizosphere_top.fastq.gz`
 	- Deep sample (10-15 cm): `rhizosphere_bottom.fastq.gz`
 
->
 > <question-title></question-title>
 >
 >  Why do we sequence the 16S rRNA genes for analyzing microbial communities?
@@ -165,7 +164,6 @@ If we examine figure 3, we can see that up to 3000 bp the quality of our sequenc
 
 Let's have a look at figure 4, which shows the content of the GC by sequence.
 
->
 > <question-title></question-title>
 >
 > What can cause GC content to show a bimodal peak?
@@ -179,7 +177,7 @@ Let's have a look at figure 4, which shows the content of the GC by sequence.
 {: .question}
 
 > <comment-title></comment-title>
-> For more information on the topic of quality control, please see our training materials [here](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html).
+> For more information on the topic, please see [the quality control tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 {: .comment}
 
 
@@ -216,7 +214,7 @@ To increase the specificity of the analysis, we will select the reads with lengt
 >
 > 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired reads"*: `Single-end`
-     - {% icon param-collection %} *"Dataset collection"*: `soil collection trimmed`
+>    - {% icon param-collection %} *"Dataset collection"*: `soil collection trimmed`
 >        - In *"Adapter Trimming Options"*:
 >            - *"Disable adapter trimming"*: `Yes`
 >    - In *"Filter Options"*:

@@ -295,8 +295,7 @@ Although we are not using `splithour` here, you can find below the syntax for fu
 > The air temperatures corresponding to the 744th time step from the original netCDF file, namely `23:00:00` for 31st May 2022 is plotted here :
 >
 > 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %}
-*"Netcdf file"*: `outfile.netcdf`
+>    - {% icon param-file %} *"Netcdf file"*: `outfile.netcdf`
 >    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile.netcdf` (output of **NetCDF xarray Metadata Info** >{% icon tool %})
 >    - *"Choose the variable to plot"*: `air_temperature_at_2_metres`
 >    - *"Name of latitude coordinate"*: `lat`
@@ -310,7 +309,7 @@ Although we are not using `splithour` here, you can find below the syntax for fu
 >    - *"Specify which colormap to use for plotting (optional)"*: `lajolla`
 >    - *"Specify the projection (proj4) on which we draw e.g. {"proj":"PlateCarree"} with double quote (optional)"*: `{'proj': 'Mercator'}`
 >
->![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 UTC](../../images/x-array-map-plot/plot1.png)
+> ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 UTC](../../images/x-array-map-plot/plot1.png)
 >
 >
 {: .hands_on}
@@ -465,18 +464,17 @@ Although we are not using `splithour` here, you can find below the syntax for fu
 
 > <question-title></question-title>
 >
-> 1. What are the different kinds of projections that can be used?
+> What are the different kinds of projections that can be used?
 >
 > > <solution-title></solution-title>
 > >
-> > 1.There are many projections which can be used in the `NetCDF xarray map plotting` tool. Different projections have different purposes and need to be carefully chosen.
+> > There are many projections which can be used in the `NetCDF xarray map plotting` tool. Different projections have different purposes and need to be carefully chosen.
 > >
-> > ## Plotting different projections using **NetCDF xarray map plotting**
+> > Plotting different projections using **NetCDF xarray map plotting**:
 > > > <hands-on-title>Plotting the major projections using the xarray tool.</hands-on-title>
 > > >
 > > > 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0) %} with the following parameters:
-> > >    - {% icon param-file %}
-*"Netcdf file"*: `outfile.netcdf`
+> > >    - {% icon param-file %} *"Netcdf file"*: `outfile.netcdf`
 > > >    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile.netcdf` (output of **NetCDF xarray Metadata Info** {% icon tool %})
 > > >    - *"Choose the variable to plot"*: `air_temperature_at_2_metres`
 > > >    - *"Name of latitude coordinate"*: `lat`
@@ -492,32 +490,28 @@ Although we are not using `splithour` here, you can find below the syntax for fu
 > > >
 > > >
 > > >
-> > >The final plot is shown below:
+> > > The final plot is shown below:
 > > >
 > > > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Interrupted_GoodeHomolosine](../../images/x-array-map-plot/Interrupted_GoodeHomolosine.png)
 > > >
 > > >
 > > >
-> > >Some other potentially interesting types of projections can be found below :
+> > > Some other potentially interesting types of projections can be found below :
 > > >
-> > > - *{"proj":"LambertCylindrical" }*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : LambertCylindrical](../../images/x-array-map-plot/Lam.png)
-> > >  - *{"proj":"Orthographic"  }*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Orthographic](../../images/x-array-map-plot/Ortho.png)
-> > >  - *{"proj":"Sinusoidal" }*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Sinusoidal](../../images/x-array-map-plot/sinu.png)
-> > > - *{"proj":"EquidistantConic"}*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : EquidistantConic](../../images/x-array-map-plot/Equidi.png)
-> > > - *{"proj":"LambertConformal" }*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : LambertConformal](../../images/x-array-map-plot/Lamcon.png)
-> > > - *{"proj":"AzimuthalEquidistant" }*
-> > >![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : AzimuthalEquidistant](../../images/x-array-map-plot/Azi.png)
+> > > *{"proj":"LambertCylindrical" }*
+> > > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : LambertCylindrical](../../images/x-array-map-plot/Lam.png)
+> > > *{"proj":"Orthographic"  }*
+> > > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Orthographic](../../images/x-array-map-plot/Ortho.png)
+> > > *{"proj":"Sinusoidal" }*
+> > > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : Sinusoidal](../../images/x-array-map-plot/sinu.png)
+> > > *{"proj":"EquidistantConic"}*
+> > > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : EquidistantConic](../../images/x-array-map-plot/Equidi.png)
+> > > *{"proj":"LambertConformal" }*
+> > > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : LambertConformal](../../images/x-array-map-plot/Lamcon.png)
+> > > *{"proj":"AzimuthalEquidistant" }*
+> > > ![ECMWF Reanalysis Air temperature a 2 metres on 2022-05-31 at 23:00:00 : AzimuthalEquidistant](../../images/x-array-map-plot/Azi.png)
 > > {: .hands_on}
-> >
-> >
-> >
 > {: .solution}
->
 {: .question}
 
 
@@ -833,8 +827,7 @@ Although we are not using `splithour` here, you can find below the syntax for fu
  > > > <hands-on-title>Plotting the major colormaps using the xarray tool.</hands-on-title>
 > > >
 > > > 1. {% tool [NetCDF xarray map plotting](toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0) %} with the following parameters:
-> > >    - {% icon param-file %}
-*"Netcdf file"*: `outfile.netcdf`
+> > >    - {% icon param-file %} *"Netcdf file"*: `outfile.netcdf`
 > > >    - {% icon param-file %} *"Tabular of variables"*: `Metadata infos from outfile.netcdf` (output of **NetCDF xarray Metadata Info** {% icon tool %})
 > > >    - *"Choose the variable to plot"*: `air_temperature_at_2_metres`
 > > >    - *"Name of latitude coordinate"*: `lat`

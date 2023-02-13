@@ -354,7 +354,7 @@ Similarly,
 we know that `/Users` is stored inside the root directory `/`
 because its name begins with `/`.
 
-> ## Slashes
+> <tip-title>Slashes</tip-title>
 >
 > Notice that there are two meanings for the `/` character.
 > When it appears at the front of a file or directory name,
@@ -830,7 +830,7 @@ Run `cd -` again and you're back in `~/Desktop/shell-lesson-data/creatures`
 > 8. `cd`
 > 9. `cd ..`
 >
-> > <question-title>Solution</question-title>
+> > <solution-title></solution-title>
 > > 1. No: `.` stands for the current directory.
 > > 2. No: `/` stands for the root directory.
 > > 3. No: Amanda's home directory is `/Users/amanda`.
@@ -1490,7 +1490,7 @@ We can confirm the file has gone using `ls`:
 ls quotes.txt
 ```
 
-> ## Deleting Is Forever
+> <tip-title>Deleting Is Forever</tip-title>
 >
 > The Unix shell doesn't have a trash bin that we can recover deleted
 > files from (though most graphical interfaces to Unix do).  Instead,

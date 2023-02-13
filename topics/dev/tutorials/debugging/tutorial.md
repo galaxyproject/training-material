@@ -206,14 +206,14 @@ Most of Galaxy unit tests are designed to test a separate component or function,
 >
 >    Can you see what's causing this behavior?
 >
->    > > <solution-title></solution-title>
->    > > The genexp is evaluated and subsequently joined using a space as a delimiter. The space is, obviously, a typo: we don't want to _add_ anything to the string, so the delimiter should be the empty string instead:
->    > > ```python
->    > > return "".join(c for c in unicodify(s) if unicodedata.category(c) != "Cc")
->    > > ```
->    > {: .solution }
+>    > <solution-title></solution-title>
+>    > The genexp is evaluated and subsequently joined using a space as a delimiter. The space is, obviously, a typo: we don't want to _add_ anything to the string, so the delimiter should be the empty string instead:
+>    > ```python
+>    > return "".join(c for c in unicodify(s) if unicodedata.category(c) != "Cc")
+>    > ```
+>    {: .solution }
 >
->    > Make the change, save the file, run the same test. Now it should pass.
+>    Make the change, save the file, run the same test. Now it should pass.
 >
 > 4. **Finishing up**
 >

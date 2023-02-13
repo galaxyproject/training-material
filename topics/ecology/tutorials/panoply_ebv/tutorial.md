@@ -58,10 +58,8 @@ In this tutorial, you will learn to:
 
 > <comment-title>Background</comment-title>
 >
->There are many online services to get climate data, and it is often difficult to know which ones are up-to date and which resources to trust.
-> Different services provide different Application Programming Interfaces (API), use different terminologies, different file formats etc., which make it difficult for new users to master them all.
-> Therefore in this tutorial, we will be focusing on the usage of Climate data in [Network Common data Form](https://en.wikipedia.org/wiki/NetCDF) (netCDF) because it is the most common data format for storing Climate data.
-> We will be using a freely available dataset containing Essential Climate Variables (sea ice area fraction, surface temperature) from [Copernicus Climate Data Store](https://cds.climate.copernicus.eu/#!/home). We will learn to use panoply to visualize the sea ice area fraction over the poles (southern and northern poles) and surface temperatures for two different years (1979 and 2018).
+> In this tutorial, we will be focusing on the usage of Biodiversity data in [Network Common data Form](https://en.wikipedia.org/wiki/NetCDF) (netCDF) because it is the data format used to store data on the EBV data portal.
+> We will be using a freely available dataset representing Essential Biodiversity Variables from [GEO BON data portal](https://portal.geobon.org/home). We will learn to use panoply to visualize the Local bird diversity for last century.
 {:  .comment}
 
 ## NetCDF format
@@ -121,7 +119,7 @@ In this tutorial, we will be using data from the [GEO BON EBV data portal](https
 > >
 > > 1. Open the {% tool [Panoply](interactive_tool_panoply) %} by clicking [on the Panoply interactive tool shortcut](https://usegalaxy.eu/?tool_id=interactive_tool_panoply)
 > > 2. Check **martins_comcom_id1_20220208_v1.nc** dataset selected in the netcdf input field
-> > 3. Click Execute
+> > 3. Click Run Tool
 > > 4. The tool will start running and will stay running permanently
 > > 5. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the Panoply instance you started.
 > > 6. Click on your Panoply instance

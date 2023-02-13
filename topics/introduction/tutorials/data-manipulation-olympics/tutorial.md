@@ -88,6 +88,7 @@ Here is an overview table of the different data manipulations in this tutorial, 
 
 If you've opened this tutorial via the {% icon level %} icon in Galaxy (top menu bar), you can click on the tool names in the last column to quickly open them in Galaxy and start using them on your own!
 
+<!-- GTN:IGNORE:006 -->
 
 | Operation              | Description                        | Galaxy Tool    |
 |------------------------|------------------------------------|----------------|

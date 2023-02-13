@@ -44,7 +44,7 @@ The workflow scheme we will use is shown below. First, we will run the steps of 
 
 ![Genetic Design - BASIC Assembly Workflow](../../images/basic_assembly_workflow.png)
 
-> <agenda-title></agenda-title>
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -65,7 +65,7 @@ First we need to upload and prepare the following inputs to analyze:
 
 ## Get data
 
-> <hands-on-title>Data upload</hands-on-title>
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial named *Genetic Design - BASIC Assembly Analysis*.
 > 2. Import the input files from [Zenodo]({{ page.zenodo_link }}):
@@ -93,7 +93,7 @@ The tool provides several scores that can be combined in order to define an over
 
 ![Selenzyme Results](../../images/selenzy_tool.png)
 
-> <hands-on-title>Annotate enzymes with Uniprot IDs from a SBML pathway</hands-on-title>
+> <hands-on-title>Annotate enzymes with Uniprot IDs from a SBML pathway</hands-on-title>
 >
 > 1. Run {% tool [Selenzyme](toolshed.g2.bx.psu.edu/repos/tduigou/selenzy/selenzy-wrapper/0.2.0) %} with the following parameters:
 >    - {% icon param-file %} *"Pathway (SBML)"*: Select `pathway.xml` from your current history
@@ -133,7 +133,7 @@ For **linkers**, the type annotation should be one of *neutral linker*, *methyla
 
 BasicDesign converts the SBML file into CSV files describing the DNA-parts to be included into each construct (in an operon format, i.e. with only one promoter) and enumerate possible combinations of promoters, RBSs and enzymes into constructs. Depending on the numbers of enzymes per reaction, of RBSs and promoters available, and whether or not to perform CDS permutation within the operon, the number of constructs may vary.
 
-> <hands-on-title>Generate genetic constructs from the previously annotated SBML file</hands-on-title>
+> <hands-on-title>Generate genetic constructs from the previously annotated SBML file</hands-on-title>
 >
 > 1. Run {% tool [BasicDesign](toolshed.g2.bx.psu.edu/repos/tduigou/rpbasicdesign/rpbasicdesign/0.3.4) %} with the following parameters:
 >    - {% icon param-file %} *"rpSBML file": `uniprot_ids` (output of **Selenzyme** {% icon tool %} in xml format)*
@@ -163,7 +163,7 @@ BasicDesign converts the SBML file into CSV files describing the DNA-parts to be
 
  In the last step, the DNA-Bot tool ({% cite Storch2020 %}) reads the list of constructs (previously produced by BasicDesign) and the DNA-parts position on the source plates and generates a set of python scripts to drive an Opentrons liquid handling robot for building the the plasmids. Optional parameters can be set by the user to define the plastic labwares to be used, and set protocol parameters such as washing or incubation times for purification step (`dnabot_paris_settings.yaml`).
 
-> <hands-on-title>Generate DNA Bot python scripts</hands-on-title>
+> <hands-on-title>Generate DNA Bot python scripts</hands-on-title>
 >
 > 1. Run {% tool [DNA-Bot](toolshed.g2.bx.psu.edu/repos/tduigou/dnabot/dnabot/3.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Source Construct"*: `Constructs` (output of **BasicDesign** {% icon tool %})
@@ -197,7 +197,7 @@ BasicDesign converts the SBML file into CSV files describing the DNA-parts to be
 
 In this section, you can run the Genetic Design - BASIC Assembly Workflow more easily and fastly following these instructions:
 
-> <hands-on-title>Execute the entire workflow in one go.</hands-on-title>
+> <hands-on-title>Execute the entire workflow in one go.</hands-on-title>
 >
 > 1. Import your **Genetic Design - Basic Assembly Workflow** by uploading the [**workflow file**](https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/basic_assembly_analysis/workflows/Genetic_Design_BASIC_Assembly.ga).
 >

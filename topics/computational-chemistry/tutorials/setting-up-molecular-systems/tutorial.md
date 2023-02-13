@@ -177,7 +177,7 @@ Go to the correct section depending on which MD engine you will be using.
 
 > <hands-on-title>Upload the PDB to CHARMM-GUI</hands-on-title>
 > Retrieve the modelled PDB structure from [Zenodo](https://doi.org/10.5281/zenodo.2600690).
-[Navigate to CHARMM-GUI](http://www.charmm-gui.org/?doc=input/mdsetup) and use the Input Generator, specifically the Solution Builder tool. Upload the PDB file, selecting 'CHARMM' as the file format. Press 'Next Step: Select Model/Chain' in the bottom right corner.
+> [Navigate to CHARMM-GUI](http://www.charmm-gui.org/?doc=input/mdsetup) and use the Input Generator, specifically the Solution Builder tool. Upload the PDB file, selecting 'CHARMM' as the file format. Press 'Next Step: Select Model/Chain' in the bottom right corner.
 > ![Snapshot of CHARMM-GUI Solution Builder tool ]({% link topics/computational-chemistry/images/charmmgui-mdsimulator-solution-builder.png %} "The CHARMM-GUI Solution Builder tool")
 {: .hands_on}
 

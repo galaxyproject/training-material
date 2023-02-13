@@ -222,7 +222,7 @@ Watch your new history item.  It will go through three statuses before it's done
 | **Red**  | Cross | The job has failed. There can be [many reasons](https://galaxyproject.org/support/tool-error/). | ![Status: Failed](../../images/status_failed.png) |
 | ---- | ---- | ---- |
 
-You can find more information in the [Undestanding Galaxy history system](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html) training.
+You can find more information in the [Undestanding Galaxy history system]({% link topics/galaxy-interface/tutorials/history/tutorial.md %}) training.
 
 ## Examine the data
 
@@ -365,14 +365,14 @@ Now we want to get the genes on the reverse strand.  There are actually many way
 > 1. *Click* the **looping arrow** ("Run this job again") icon.  This won't actually run the job again.  What it will do is bring up the Filter tool form with *the exact same settings that were used to produce this dataset.*
 > 1. Rerun {% tool [Filter](Filter1) %} but with
 >    - *"Condition"*:  `c6 == "-" `
-> 1. *Click* the **Execute** button.
+> 1. *Click* the **Run Tool** button.
 >
 > **Method 2**
 > 1. *Click* on {% tool [Filter](Filter1) %} in the tool panel to open the Filter tool in the central panel.
 > 1. *Fill* the form as before, *except*:
 >    * Make sure the **Dataset** pulldown is set to the `Genes chr22` dataset.
 >    * *Set* **Condition** to `c6 == "-"`.
-> 1. *Click* the **Execute** button.
+> 1. *Click* the **Run Tool** button.
 >
 > **Both Methods**
 > 1. *Rename* your new dataset to something like `Genes, reverse strand`
@@ -418,7 +418,7 @@ Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and parti
 
 > <hands-on-title>Genomic Interval Tools</hands-on-title>
 >
-> 1. {% tool [Intersect](toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0) %} with the following parameters:
+> 1. {% tool [Intersect](toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/0.0.1) %} with the following parameters:
 >     - *"Return"*:  `Overlapping Intervals`.
 >       This looks like it might return whole genes, while `Overlapping pieces` may return only the parts that overlap.  We suspect that whole genes might be more useful.
 >     - {% icon param-files %}*"of"*:  `Genes, forward strand` (the first dataset)
@@ -426,7 +426,7 @@ Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and parti
 >     - *"for at least"*: `1`
 >       
 >       This will return genes with even just one position overlapping.
->     - *Click* **Execute**.
+>     - *Click* **Run Tool**.
 >
 >     ![Run Intersect](../../images/genes_human_intersect_strands.png)
 >
@@ -464,7 +464,7 @@ It turns out that **Lift-Over** and **Collection Operations** are not what we wa
 >
 >      - In *"1: Dataset"*      
 >         - {% icon param-files %} *"Select"*: `Overlapping forward genes` as the second dataset.
-> 4. *Click* **Execute**
+> 4. *Click* **Run Tool**
 > 5. *Rename* the resulting dataset something informative like `Overlapping genes`
 {: .hands_on}
 
@@ -620,7 +620,6 @@ All steps in the history will be green when the workflow is done. Once that happ
 Probably.  Note that we can no longer say what percentage of *genes* overlap.  We *can* say what percentage of exons overlap, and that is probably close enough for our goals.  If it isn't and we actually need to say what percentage of genes overlap, then we will have to do some extra work.  This can be done is several ways, but the Galaxy 101 tutorial may give you some ideas on how to follow this question all the way to genes.
 
 # Conclusion
-{: .no_toc}
 
 {% icon trophy %} Well done! You have just performed your first analysis in Galaxy!
 

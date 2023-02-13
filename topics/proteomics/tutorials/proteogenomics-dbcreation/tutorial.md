@@ -52,7 +52,6 @@ Proteogenomics integrates **RNA-Seq** data for generating customized protein seq
 {: .agenda}
 
 # Overview
-{: .no_toc}
 
 This tutorial focuses on creating a **FASTA** database generated from RNA-seq data. There are two outputs from this workflow: (1) a **sequence database** consisting of variants and known reference sequences and (2) mapping files containing **genomic** and **variant** mapping data.
 
@@ -116,7 +115,7 @@ UCSC prefaces chromosome names with chr while Ensembl does not. To perform this 
 >    - {% icon param-select %} *"in column"*: `1`
 >    - {% icon param-select %} *"Find pattern"*: `^MT$`
 >    - {% icon param-select %} *"Replace with*: `chrM`
-
+>
 >  6. Rename the output to `Mus_musculus.GRCm38.86.fixed.gtf`
 >
 >
@@ -397,7 +396,7 @@ In this section we will perform the following tasks:
 along with the UniProt and cRAP databases.
 - The **Regex Text Manipulation** tool is used to manipulate the FASTA file to make it SearchGUI-compatible.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. **FASTA Merge Files and Filter Unique Sequences** {% icon tool %}
 >   - Click {% icon param-repeat %} *"Insert Input FASTA File(s)"* twice so that there are a total of three *"Input FASTA File(s)"* blocks.
@@ -586,7 +585,7 @@ Finally, we can create a database which can be used to search Mass spectrometry 
 
 To do so:
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. **FASTA Merge Files and Filter Unique Sequences** {% icon tool %} with the following parameters:
 >   - {% icon param-check %} *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
@@ -656,5 +655,3 @@ This workflow was developed by the Galaxy-P team at the University of Minnesota.
 
 
 {: .comment}
-
-

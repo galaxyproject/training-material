@@ -69,7 +69,7 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    +        dest: /libraries/
 >       roles:
 >         - galaxyproject.postgresql
->         - role: natefoo.postgresql_objects
+>         - role: galaxyproject.postgresql_objects
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the git repository to the pre-tasks"}
@@ -227,7 +227,7 @@ Let's try setting that up in our Galaxy!
 
 {% snippet faqs/galaxy/preferences_admin_api_key.md admin=true %}
 
-> <hands-on-title>hands-on: importing data library yaml.</hands-on-title>
+> <hands-on-title>importing data library yaml.</hands-on-title>
 >
 > 1. re-activate the virtualenv you created for the [ephemeris tool management tutorial]({% link topics/admin/tutorials/tool-management/tutorial.md %}).
 >

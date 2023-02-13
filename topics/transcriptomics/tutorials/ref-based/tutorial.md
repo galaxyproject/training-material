@@ -154,7 +154,7 @@ We will first need to transform our the list of pairs to a simple list.
 > The current situation is on top and the **Flatten collection** tool will transform it to the situation displayed on bottom:
 > ![Flatten](../../images/ref-based/flatten.png "Flatten the list of pairs to list")
 {: .details}
->
+
 > <hands-on-title>Quality control</hands-on-title>
 >
 > 1. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters convert the list of pairs into a simple list:
@@ -293,7 +293,7 @@ With eukaryotic transcriptomes most reads originate from processed mRNAs lacking
 
 Therefore they cannot be simply mapped back to the genome as we normally do for DNA data. Spliced-awared mappers have been developed to efficiently map transcript-derived reads against a reference genome:
 
-![Splice-aware alignment](../../images/splice_aware_alignment.png "Principle of spliced mappers: (1) identification of the reads spanning a single exon, (2) identification of the splicing junctions on the unmapped reads")
+![Splice-aware alignment](../../images/transcriptomics_images/splice_aware_alignment.png "Principle of spliced mappers: (1) identification of the reads spanning a single exon, (2) identification of the splicing junctions on the unmapped reads")
 
 > <details-title>More details on the different spliced mappers</details-title>
 >
@@ -301,21 +301,21 @@ Therefore they cannot be simply mapped back to the genome as we normally do for 
 >
 > [**TopHat**](https://ccb.jhu.edu/software/tophat/index.shtml) ({% cite trapnell2009tophat %}) was one of the first tools designed specifically to address this problem. In **TopHat** reads are mapped against the genome and are separated into two categories: (1) those that map, and (2) those that are initially unmapped (IUM). "Piles" of reads representing potential exons are extended in search of potential donor/acceptor splice sites and potential splice junctions are reconstructed. IUMs are then mapped to these junctions.
 >
-> ![TopHat](../../images/tophat.png "TopHat (Figure 1 from {% cite trapnell2009tophat %})")
+> ![TopHat](../../images/transcriptomics_images/tophat.png "TopHat (Figure 1 from {% cite trapnell2009tophat %})")
 >
 > **TopHat** has been subsequently improved with the development of **TopHat2** ({% cite kim2013tophat2 %}):
 >
-> ![TopHat2](../../images/13059_2012_Article_3053_Fig6_HTML.jpg "TopHat2 (Figure 6 from {% cite kim2013tophat2 %})")
+> ![TopHat2](../../images/transcriptomics_images/13059_2012_Article_3053_Fig6_HTML.jpg "TopHat2 (Figure 6 from {% cite kim2013tophat2 %})")
 >
 > To further optimize and speed up spliced read alignment, [**HISAT2**](https://ccb.jhu.edu/software/hisat2/index.shtml) ({% cite kim2019graph %}) was developed. It uses a hierarchical graph [FM](https://en.wikipedia.org/wiki/FM-index) (HGFM) index, representing the entire genome and eventual variants, together with overlapping local indexes (each spanning ~57 kb) that collectively cover the genome and its variants. This allows to find initial seed locations for potential read alignments in the genome using global index and to rapidly refine these alignments using a corresponding local index:
 >
-> ![Hierarchical Graph FM index in HISAT/HISAT2](../../images/hisat.png "Hierarchical Graph FM index in HISAT/HISAT2 (Figure S8 from {% cite kim2015hisat %})")
+> ![Hierarchical Graph FM index in HISAT/HISAT2](../../images/transcriptomics_images/hisat.png "Hierarchical Graph FM index in HISAT/HISAT2 (Figure S8 from {% cite kim2015hisat %})")
 >
 > A part of the read (blue arrow) is first mapped to the genome using the global FM index. **HISAT2** then tries to extend the alignment directly utilizing the genome sequence (violet arrow). In (**a**) it succeeds and this read is aligned as it completely resides within an exon. In (**b**) the extension hits a mismatch. Now **HISAT2** takes advantage of the local FM index overlapping this location to find the appropriate mapping for the remainder of this read (green arrow). The (**c**) shows a combination these two strategies: the beginning of the read is mapped using global FM index (blue arrow), extended until it reaches the end of the exon (violet arrow), mapped using local FM index (green arrow) and extended again (violet arrow).
 >
 > [**STAR** aligner](https://github.com/alexdobin/STAR) ({% cite dobin2013star %}) is a fast alternative for mapping RNA-Seq reads against a reference genome utilizing an uncompressed [suffix array](https://en.wikipedia.org/wiki/Suffix_array). It operates in two stages. In the first stage it performs a seed search:
 >
-> ![STAR's seed search](../../images/star.png "STAR's seed search (Figure 1 from {% cite dobin2013star %})")
+> ![STAR's seed search](../../images/transcriptomics_images/star.png "STAR's seed search (Figure 1 from {% cite dobin2013star %})")
 >
 > Here a read is split between two consecutive exons. **STAR** starts to look for a maximum mappable prefix (MMP) from the beginning of the read until it can no longer match continuously. After this point it starts to look for a MMP for the unmatched portion of the read (**a**). In the case of mismatches (**b**) and unalignable regions (**c**) MMPs serve as anchors from which to extend alignments.
 >
@@ -398,7 +398,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 > <hands-on-title>Inspection of mapping results</hands-on-title>
 >
 > 1. Install [**IGV**](https://software.broadinstitute.org/software/igv/download) (if not already installed)
-> 2. Start IGV locally 
+> 2. Start IGV locally
 > 3. Click on the collection `RNA STAR on collection N: mapped.bam` (output of **RNA STAR** {% icon tool %})
 > 4. Expand the {% icon param-file %} `GSM461177_untreat_paired` file.
 > 5. Click on the {% icon galaxy-barchart %} visualize icon in the `GSM461177` file block.
@@ -416,7 +416,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 >    > <question-title></question-title>
 >    >
->    > ![Screenshot of the IGV view on Chromosome 4](../../images/junction_igv_screenshot.png "Screenshot of IGV on Chromosome 4")
+>    > ![Screenshot of the IGV view on Chromosome 4](../../images/transcriptomics_images/junction_igv_screenshot.png "Screenshot of IGV on Chromosome 4")
 >    >
 >    > 1. What information appears at the top as grey peaks?
 >    > 2. What do the connecting lines between some of the aligned reads indicate?
@@ -440,7 +440,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 >    >
 >    > <question-title></question-title>
 >    >
->    > ![Screenshot of a Sashimi plot of Chromosome 4](../../images/star_igv_sashimi.png "Screenshot of a Sashimi plot of Chromosome 4")
+>    > ![Screenshot of a Sashimi plot of Chromosome 4](../../images/transcriptomics_images/star_igv_sashimi.png "Screenshot of a Sashimi plot of Chromosome 4")
 >    >
 >    > 1. What does the vertical red bar graph represent? What about the arcs with numbers?
 >    > 2. What do the numbers on the arcs mean?
@@ -639,7 +639,7 @@ Here we will focus on the genes, as we would like to identify the ones that are 
 
 To compare the expression of single genes between different conditions (*e.g.* with or without PS depletion), an essential first step is to quantify the number of reads per gene, or more specifically the number of reads mapping to the exons of each gene.
 
-![Counting the number of reads per annotated gene](../../images/gene_counting.png "Counting the number of reads per annotated gene")
+![Counting the number of reads per annotated gene](../../images/transcriptomics_images/gene_counting.png "Counting the number of reads per annotated gene")
 
 > <question-title></question-title>
 >
@@ -685,7 +685,7 @@ Some library preparation protocols create so-called *stranded* RNA-Seq libraries
 
 > <details-title>More details about strandness</details-title>
 >
-> ![Relationship between DNA and RNA orientation](../../images/dna_rna.png "Relationship between DNA and RNA orientation")
+> ![Relationship between DNA and RNA orientation](../../images/transcriptomics_images/dna_rna.png "Relationship between DNA and RNA orientation")
 >
 > The implication of stranded RNA-Seq is that you can distinguish whether the reads are derived from forward or reverse-encoded transcripts. In the following example, the counts for the gene Mrpl43 can only be efficiently estimated in a stranded library as most of it overlap the gene Peo1 in the reverse orientation:
 >
@@ -693,7 +693,7 @@ Some library preparation protocols create so-called *stranded* RNA-Seq libraries
 >
 > Depending on the approach, and whether one performs single-end or paired-end sequencing, there are multiple possibilities on how to interpret the results of the mapping of these reads to the genome:
 >
-> ![Effects of RNA-Seq library types](../../images/rnaseq_library_type.png "Effects of RNA-Seq library types (Figure adapted from Sailfish documentation)")
+> ![Effects of RNA-Seq library types](../../images/transcriptomics_images/rnaseq_library_type.png "Effects of RNA-Seq library types (Figure adapted from Sailfish documentation)")
 {: .details}
 
 This information should be provided with your FASTQ files, ask your sequencing facility! If not, try to find it on the site where you downloaded the data or in the corresponding publication.
@@ -1433,7 +1433,6 @@ DESeq2 requires to provide for each factor, counts of samples in each category. 
 
 We can now run DESeq2:
 
->
 > <hands-on-title>Determine differentially expressed features</hands-on-title>
 >
 > 1. {% tool [DESeq2](toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.7+galaxy1) %} with the following parameters:
@@ -1881,9 +1880,15 @@ We have extracted genes that are differentially expressed in treated (PS gene-de
 
 > <hands-on-title>Prepare the first dataset for goseq</hands-on-title>
 >
-> 1. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} an expression on every row with the following parameters:
->    - *"Add expression"*: `bool(c7<0.05)`
->    - {% icon param-file %} *"as a new column to"*: the `DESeq2 result file` (output of **DESeq2** {% icon tool %})
+> 1. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0) %} on rows with the following parameters:
+>    - {% icon param-file %} *"Input file"*: the `DESeq2 result file` (output of **DESeq2** {% icon tool %})
+>    - In *"Expressions"*:
+>      - {% icon param-text %} *"Add expression"*: `bool(float(c7)<0.05)`
+>      - {% icon param-select %} *"Mode of the operation?"*: `Append`
+>    - Under *"Error handling"*:
+>      - {% icon param-toggle %} *"Autodetect column types"*: `No`
+>      - {% icon param-select %} *"If an expression cannot be computed for a row"*: `Fill in a replacement value`
+>      - {% icon param-select %} *"Replacement value"*: `False`
 >
 > 2. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
 >    - *"Cut columns"*: `c1,c8`
@@ -2168,7 +2173,7 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 - The results of running DEXSeq-count in 'Prepare annotation' mode
 - Seven count files generated in 'Count reads' mode
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. Create a new history
 > 2. Import the seven count files from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
@@ -2236,7 +2241,7 @@ Similarly to DESeq2, DEXSeq generates a table with:
 7. *p*-value for the statistical significance of this change
 8. *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [Filter](Filter1) %} to extract exons with a significant differential usage (adjusted *p*-value equal or below 0.05) between treated and untreated samples
 >

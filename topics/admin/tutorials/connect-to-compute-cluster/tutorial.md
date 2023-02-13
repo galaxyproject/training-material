@@ -112,7 +112,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    +    - galaxyproject.repos
 >    +    - galaxyproject.slurm
 >         - galaxyproject.postgresql
->         - role: natefoo.postgresql_objects
+>         - role: galaxyproject.postgresql_objects
 >           become: true
 >    {% endraw %}
 >    ```

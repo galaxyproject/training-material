@@ -334,7 +334,7 @@ We can run an trimming tool such as Cutadapt to remove this adapter. We will exp
 > The other plots give us information to more deeply understand the quality of the data, and to see if changes could be made in the lab to get higher-quality data in the future.
 > These sections are **optional**, and if you would like to skip these you can:
 >   - Jump straight to the [next section](#trim-and-filter---short-reads) to learn about trimming paired-end data
-{: .comment}
+{: .tip}
 
 #### Per tile sequence quality
 

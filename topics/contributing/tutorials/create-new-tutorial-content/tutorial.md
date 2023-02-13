@@ -498,7 +498,7 @@ We find that having users walk through the tutorial, doing all of the steps is i
 >      - *"Which tool was used generate logs?"*: `STAR`
 >      - *"Type of FastQC output?"*: `Log`
 >      - *"STAR log output"*: the generated `log` files (multiple datasets)
-{: .hands_on}
+{: .hands​_on}
 ```
 {% endraw %}
 
@@ -550,7 +550,7 @@ The available icons are:
 >    - {% icon param-toggle %} *"My toggle button"*: `Yes`
 >    - {% icon param-repeat %} **My repeat parameter**
 >      - *"param1"*: `42`
-{: .hands_on}
+{: .hands​_on}
 ```
 {% endraw %}
 
@@ -581,7 +581,7 @@ They can also help the instructors by exposing and clarifying common scenarios, 
 > 1. Why are some tests filtered?
 > 2. Does it improve the *p*-value distribution?
 >
-> > <solution-title></solution-title>
+> > <solution​-title></solution​-title>
 > >
 > > 1. Sol for the first question
 > > 2. Sol for the second question
@@ -625,7 +625,7 @@ Tips boxes are really just for 'tips', usually hints regarding Galaxy operations
 > * Select **Paste/Fetch Data**
 > * Paste the link into the text field
 > * Press **Start**
-{: .tip}
+{: .tip​}
 ```
 {% endraw %}
 
@@ -668,7 +668,7 @@ The detail box is used to give more background explanation on the subject. By de
 >
 > Add more details in Markdown...
 >
-{: .details}
+{: .details​}
 ```
 {% endraw %}
 
@@ -722,9 +722,9 @@ Boxes can be nested, *e.g.* for having tips inside a hands-on:
 >    > >
 >    > > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
 >    > > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
->    > {: .solution}
->    {: .question}
-{: .hands_on}
+>    > {: .solution​}
+>    {: .question​}
+{: .hands​_on}
 ```
 {% endraw %}
 
@@ -736,13 +736,13 @@ Normally a single column, with the boxes above one another, it will automaticall
 
 {% raw %}
 ```markdown
-> > <code-in-title>Bash</code-in-title>
+> > <code​-in-title>Bash</code​-in-title>
 > > ```bash
 > > cat /tmp/test.ini
 > > ```
 > {: .code-in}
 >
-> > <code-out-title></code-out-title>
+> > <code​-out-title></code​-out-title>
 > > The file should look like:
 > >
 > > ```ini

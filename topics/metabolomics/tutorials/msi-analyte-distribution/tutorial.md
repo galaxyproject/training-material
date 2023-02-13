@@ -55,11 +55,11 @@ In this tutorial we will determine analytes with a localized distribution in a c
 
 # Chilli dataset
 
-In this tutorial we will use the chilli dataset generated in the lab of Robert Winkler at the CINVESTAV institute in Irapuato (Mexico) and deposited at [Zenodo](https://zenodo.org/record/484496). The data was acquired to demonstrate their self-made low-cost 'plug and play' MSI system as well as their open source R scripts and to show they allow the direct spatially resolved detection of volatile organic compounds (VOCs) from plant tissue ([Maldonado-Torres et al.](https://doi.org/10.1016/j.jprot.2014.03.003) and [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9)). 
+In this tutorial we will use the chilli dataset generated in the lab of Robert Winkler at the CINVESTAV institute in Irapuato (Mexico) and deposited at [Zenodo](https://zenodo.org/record/484496). The data was acquired to demonstrate their self-made low-cost 'plug and play' MSI system as well as their open source R scripts and to show they allow the direct spatially resolved detection of volatile organic compounds (VOCs) from plant tissue ({% cite Maldonado_Torres_2014 %} and {% cite Gamboa_Becerra_2015 %}). 
 
 The mass spectrometer consisted of a low-temperature plasma (LTP) ionization source coupled to a quadrupole mass analyzer. This ionization source allows measurement of semi-volatile organic compunds directly from fresh material under ambient conditions without destruction of the sample. To get an idea how this set up and the chilli looks, have a look at their [video](https://www.youtube.com/watch?v=NbZ1QqTZvXM) and [website](http://lababi.bioprocess.org/). The chilli (*Capsicum annuum*) was purchased from a local market in Irapuato, Mexico and longitudinally cut into a slice of 80 x 35 mm and 4 mm thickness and laid onto a glass slide. Mass spectra were acquired with a spatial resolution of 1 mm and in a mass range from 15 – 2000 m/z to measure semi-volatile and volatile organic compounds (VOCs). 
 
-We will check the properties of the dataset and then perform a similar analysis to that described by [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9): plotting an average mass spectrum, filtering the dataset for the relevant m/z range, automatical generation of m/z images to find analytes that correspond to morphological features and generating an image that overlays three different analytes. 
+We will check the properties of the dataset and then perform a similar analysis to that described by {% cite Gamboa_Becerra_2015 %}: plotting an average mass spectrum, filtering the dataset for the relevant m/z range, automatical generation of m/z images to find analytes that correspond to morphological features and generating an image that overlays three different analytes. 
 
 ![Chilli](../../images/msi_distribution_chilli.png "Cross section of a chilli in a similar orientation as in the publication by Gamboa-Becerra")
 
@@ -130,7 +130,7 @@ Before starting any analysis it is important to check the characteristics and qu
 >        - *"Mass accuracy to which the m/z values will be binned"*: `0.2`
 >        - *"Unit of the mass accuracy"*: `mz`
 >    - *"PCA with 2 components"*: `Yes`
->    - Press **Execute**
+>    - Press **Run Tool**
 >
 >    > <comment-title>Properties of the imzML file</comment-title>
 >    > To set the parameters for the mass spectrometry imaging tools correctly the following three parameters should be known about the dataset: 1) is the imzML file type processed or continuous, 2) are the spectra in profile or centroided mode and 3) the accuracy of the mass spectrometer. For the chilli dataset the publication states that it is a processed imzML type in centroided mode. This information can also be extracted by opening the local imzML component of the file in a text editor or web browser. Line 10 and 11 state: 
@@ -238,7 +238,7 @@ We will follow up on the average mass spectra plots from the quality control rep
 >
 {: .question}
 
-In the average spectrum of the complete m/z range there are no visible peaks above 800 m/z. Most of the high intensity peaks are below 300 Th, which corresponds to the typical masses of VOCs. Even in the zoomed mass spectra between 1500 and 2000 m/z only a few distinct peaks can be identified in the noise. In accordance with [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9), we will restrict further analysis to the m/z range between 15 and 1000. 
+In the average spectrum of the complete m/z range there are no visible peaks above 800 m/z. Most of the high intensity peaks are below 300 Th, which corresponds to the typical masses of VOCs. Even in the zoomed mass spectra between 1500 and 2000 m/z only a few distinct peaks can be identified in the noise. In accordance with {% cite Gamboa_Becerra_2015 %}, we will restrict further analysis to the m/z range between 15 and 1000. 
 
 ![Average plots](../../images/msi_distribution_average_spectra.png "Complete and zoomed in average mass spectra")
 
@@ -247,11 +247,12 @@ We will rerun the MSI plot spectra tool and add annotation to the pixels that co
 > <hands-on-title>Mass spectra of different chilli compartments</hands-on-title>
 >
 > 1. Create a tabular file with the coordinates of interest and rename it to 'annotations':
+>
 >    ```
-x     y     compartment
-39    53    seeds
-50    44    placenta
-25    60    pericarp
+>    x     y     compartment
+>    39    53    seeds
+>    50    44    placenta
+>    25    60    pericarp
 >    ```
 >
 >    > <tip-title>Creating a new file</tip-title>
@@ -328,7 +329,7 @@ The MSI tools are only able to write outputs as continuous imzML format; therefo
 
 ## Automatic generation of analyte images
 
-The main question for the chilli dataset is which m/z features have a localized distribution in the fruit. This question can be addressed by automatically generating distribution images for all analytes (m/z features) and then visually identifying which features are localized in specific compartments of the fruit. [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9) scan the m/z range with a step size of 0.2 m/z and a tolerance of 0.4 Th, which resulted in more than 2000 images which they visually explored for localized features. In this training we will only generate images for the two mass ranges where we have already seen high intensity peaks in the spectra plots: around 60 and 80 m/z. 
+The main question for the chilli dataset is which m/z features have a localized distribution in the fruit. This question can be addressed by automatically generating distribution images for all analytes (m/z features) and then visually identifying which features are localized in specific compartments of the fruit. {% cite Gamboa_Becerra_2015 %} scan the m/z range with a step size of 0.2 m/z and a tolerance of 0.4 Th, which resulted in more than 2000 images which they visually explored for localized features. In this training we will only generate images for the two mass ranges where we have already seen high intensity peaks in the spectra plots: around 60 and 80 m/z. 
 
 This requires three steps. Firstly, all m/z features of the dataset with the MSI data exporter are extracted. Secondly, all m/z features are filtered in the m/z ranges that we are interested in: between 55 and 65 Th, as well as between 75 and 85 m/z (this step can be skipped to obtain distribution images for all features). Thirdly, the MSI m/z image tool is used to automatically generate distribution images for each of the m/z from the second step. As the data is already binned to 0.2 Th, only the m/z tolerance of 0.4 m/z has to be specified. The large tolerance was chosen to obtain images from overlapping m/z ranges to make the signal intensity more robust against small m/z inaccuracies in individual mass spectra.
 
@@ -371,9 +372,9 @@ This requires three steps. Firstly, all m/z features of the dataset with the MSI
 
 ![best images](../../images/msi_distribution_auto_images.png "Distribution images for the analytes with the most localized distribution")
 
-In this tutorial we only evaluated 102 features, while the authors of this study evaluated more than 2000 images visually. This process is time-consuming and biased by the judgment of the scientist, but seems to still be used sometimes. Several attempts have been made to circumvent this process and obtain m/z features with localized distribution automatically, for example by [Alexandrov and Bartels](https://doi.org/10.1093/bioinformatics/btt388) and [Ingelese et al.](https://doi.org/10.1093/bioinformatics/bty622).
+In this tutorial we only evaluated 102 features, while the authors of this study evaluated more than 2000 images visually. This process is time-consuming and biased by the judgment of the scientist, but seems to still be used sometimes. Several attempts have been made to circumvent this process and obtain m/z features with localized distribution automatically, for example by {% cite Alexandrov_2013 %} and {% cite Inglese_2018 %}
 
-After m/z features with a localized distribution have been found, it is interesting to identify them. [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9) performed additional gas and liquid chromatography mass spectrometry (GC-MS and LC-MS) which enabled the identification of several features with high certainty. Unfortunately the highly localized features at 62.2 and 84.2 m/z could not be identified, but the defined localization implies their biological importance. Several capsaicinoids could be identified, amongst them capsaicin (306.6 m/z).
+After m/z features with a localized distribution have been found, it is interesting to identify them. {% cite Gamboa_Becerra_2015 %} performed additional gas and liquid chromatography mass spectrometry (GC-MS and LC-MS) which enabled the identification of several features with high certainty. Unfortunately the highly localized features at 62.2 and 84.2 m/z could not be identified, but the defined localization implies their biological importance. Several capsaicinoids could be identified, amongst them capsaicin (306.6 m/z).
 
 > <comment-title>Identification of m/z features</comment-title>
 > The identification of m/z features in MSI experiments is not always necessary, but can increase the confidence in the analysis and the molecular understanding. m/z features are either matched to databases or for more confidence another experiment is performed on the same sample to restrict the identification possibilities to analytes that are actually present in the sample. In this study other mass spectrometry techniques were applied, allowing identification of several m/z features, but at the same time features with defined localization could not be identified (e.g. 62.2 m/z and 84.2 m/z). These molecules may be fragments, metabolites or contaminants that are not available with the used mass spectrometry techniques.

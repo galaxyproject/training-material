@@ -1,3 +1,6 @@
+---
+layout: none
+---
 {% if include.short %}
   {% assign other_tutorial = "../mothur-miseq-sop/tutorial.html" %}
   {% assign other_tutorial_name = "extended" %}
@@ -8,7 +11,6 @@
 
 
 # Overview
-{:.no_toc}
 
 In this tutorial we will perform an analysis based on the
 [Standard Operating Procedure (SOP) for MiSeq data](https://www.mothur.org/wiki/MiSeq_SOP), developed by the [Schloss lab](http://www.schlosslab.org/), the creators of the mothur software package {% cite Schloss2009 %}.
@@ -204,9 +206,7 @@ convention, so that our tools will know which files belong together. We do this 
 >    of files that differ only by a `_1` and `_2` part in their names. In our case however, these
 >    should be `_R1` and `_R2`.
 >
-> 3. Change these values accordingly
->    - Change `_1` to `_R1` in the text field on the top left
->    - Change `_2` to `_R2` om the text field on the top right
+> 3. Click on "Choose Filters" and select `Forward: _R1, Reverse: _R2` (note that you can also enter Filters manually in the text fields on the top)
 >
 >    You should now see a list of pairs suggested by Galaxy:
 >    ![List of suggested paired datasets](../../images/create_collection.png)
@@ -234,8 +234,7 @@ convention, so that our tools will know which files belong together. We do this 
 # Quality Control
 {% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="quality-control" %}
 
-For more information on the topic of quality control, please see our training materials
-[here]({% link topics/sequence-analysis/index.md %}).
+For more information on the topic of quality control, please see our [dedicated QC training materials]({% link topics/sequence-analysis/index.md %}).
 
 Before starting any analysis, it is always a good idea to assess the quality of your input data and improve it
 where possible by trimming and filtering reads. The mothur toolsuite contains several tools to assist with this task.
@@ -296,7 +295,8 @@ Next, we want to improve the quality of our data. To this end we will run a work
    We will also remove any contigs containing too many ambiguous base calls. This is also done in the **Screen.seqs** {% icon tool %} tool.
 3. **Deduplicate sequences** \\
    Since we are sequencing many of the same organisms, there will likely be many identical contigs. To speed up downstream analysis we will determine the set of unique contigs using **Unique.seqs** {% icon tool %}.
-
+4. **Counting sequences**
+   Finally we count how often each of the unique sequences occurs in the given samples. These counts are stored in the *count_table*.
 
 > <hands-on-title>Perform data cleaning</hands-on-title>
 >
@@ -480,7 +480,7 @@ the number of duplicates of this sequence observed in each sample.
 > From now on, we will only work with the set of *unique sequences*, but it's important to remember that these represent a larger
 > number of *total sequences*, which we keep track of in the *count table*.
 >
-> The **Summary.seqs** {% icon tool %} tool will
+> In the following we will use the *unique sequences* together with the *count table* as input to tools instead of the complete set of sequences. If this is done for the **Summary.seqs** {% icon tool %} tool it will
 > report both the number of unique *representative sequences* as well as the *total sequences* they represent.
 {: .comment}
 
@@ -489,10 +489,9 @@ the number of duplicates of this sequence observed in each sample.
 # Sequence Alignment
 {% include topics/metagenomics/tutorials/mothur-miseq-sop/switch_tutorial.md section="sequence-alignment" %}
 
-For more information on the topic of alignment, please see our training materials
-[here]({% link topics/sequence-analysis/index.md %})
+For more information on the topic of alignment, please see our [dedicated alignment training materials]({% link topics/sequence-analysis/index.md %})
 
-We are now ready to align our sequences to the reference. This is an important
+We are now ready to align our sequences to the reference alignment. This is an important
 step to improve the clustering of your OTUs {% cite Schloss2012 %}.
 
 In mothur this is done by determining for each unique sequence the entry of the reference database that
@@ -575,8 +574,9 @@ To ensure that all our reads overlap our region of interest, we will:
 1. Remove any reads not overlapping the region V4 region {% unless include.short %}(position 1968 to 11550){% endunless %} using **Screen.seqs** {% icon tool %}.
 2. Remove any overhang on either end of the V4 region to ensure our sequences overlap *only* the V4 region, using **Filter.seqs** {% icon tool %}.
 3. Clean our alignment file by removing any columns that have a gap character (`-`, or `.` for terminal gaps) at that position in every sequence (also using **Filter.seqs** {% icon tool %}).
-4. Group near-identical sequences together with **Pre.cluster** {% icon tool %}. Sequences that only differ by one or two bases at this point are likely to represent sequencing errors rather than true biological variation, so we will cluster such sequences together.
-{% if include.short %} 5. Remove Sequencing artefacts known as *chimeras* (discussed in next section). {% endif %}
+4. Remove redundancy in the aligned sequences that might have been introduced by filtering columns by running **Unique.seqs** once more.
+5. Group near-identical sequences together with **Pre.cluster** {% icon tool %}. Sequences that only differ by one or two bases at this point are likely to represent sequencing errors rather than true biological variation, so we will cluster such sequences together.
+{% if include.short %} 6. Remove Sequencing artefacts known as *chimeras* (discussed in next section) from the counts file using **Chimera.vsearch** and from the fasta file with **remove.seqs**. {% endif %}
 
 {% unless include.short %}
 
@@ -812,8 +812,8 @@ and want to remove them from our dataset.
 >
 > 2. Run **Workflow 3: Classification** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
->    - {% icon param-file %} *"1: Cleaned sequences"*: the `fasta` output from **Remove.seqs** {% icon tool %}
->    - {% icon param-file %} *"2: Count Table"*: the `count table` from **Remove.seqs** {% icon tool%}
+>    - {% icon param-file %} *"1: Cleaned sequences"*: the `fasta` output from **Remove.seqs** (i.e. pick.fasta) {% icon tool %}
+>    - {% icon param-file %} *"2: Count Table"*: the `count table` from **Remove.seqs** (i.e. pick.count) {% icon tool%}
 >    - {% icon param-file %} *"3: Training set Taxonomy"*: `trainset9_032012.pds.tax` file you imported from Zenodo
 >    - {% icon param-file %} *"4: Training set FASTA"*: `trainset9_032012.pds.fasta` file from Zenodo
 >
@@ -886,7 +886,7 @@ our sequencing and bioinformatics pipeline is.
 > The mock community analysis is optional. If you are low on time or want to skip ahead, you can jump straight to [the next section](#otu-clustering)
 > where we will cluster our sequences into OTUs, classify them and perform some visualisations.
 > <br><br>
-> Click [here](#otu-clustering) to skip this section and continue with the analysis.
+> If you wish to skip the mock community analysis, you can go [directly to the next section](#otu-clustering) and continue with the analysis.
 >
 {: .comment}
 
@@ -1361,8 +1361,8 @@ We calculate rarefaction curves with the **Rarefaction.single** {% icon tool %} 
 {: .hands_on}
 
 Note that we used the default diversity measure here (*sobs*; observed species richness), but there are many
-more options available under the *calc* parameter. The mothur wiki describes some of these calculators
-[here](https://mothur.org/wiki/Calculators).
+more options available under the *calc* parameter. Descriptions of some of these calculators can be found on
+[the mothur wiki](https://mothur.org/wiki/Calculators).
 
 Examine the rarefaction curve output.
 
@@ -1424,8 +1424,8 @@ will randomly subsample down to 2389 sequences, repeat this process 1000 times, 
 
 View the `summary` output from **Summary.single** {% icon tool %}. This shows several alpha diversity metrics:
 - [sobs](https://www.mothur.org/wiki/Sobs): observed richness (number of OTUs)
-- [coverage](https://mothur.org/wiki/Coverage): Good's coverage index
-- [invsimpson](https://en.wikipedia.org/wiki/Diversity_index#Simpson_index): Inverse Simpson Index
+- [coverage](https://mothur.org/wiki/Coverage): Good's coverage index (1 - (number of OTUs containing a single sequence / total number of sequences ))
+- [invsimpson](https://en.wikipedia.org/wiki/Diversity_index#Simpson_index): Inverse Simpson Index (1 / probability that two random individuals represent the OTU)
 - [nseqs](https://www.mothur.org/wiki/Nseqs): number of sequences
 
 
@@ -1705,7 +1705,6 @@ view it in a platform like [Phinch](http://www.phinch.org/).
 
 
 # Conclusion
-{:.no_toc}
 
 Well done! {% icon trophy %} You have completed the basics of the Schloss lab's [Standard Operating Procedure for Illumina MiSeq data](https://www.mothur.org/wiki/MiSeq_SOP). You have worked your way through the following pipeline:
 

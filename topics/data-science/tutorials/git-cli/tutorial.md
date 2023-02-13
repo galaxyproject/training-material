@@ -29,7 +29,7 @@ requirements:
 
 > <comment-title>Source</comment-title>
 > This tutorial contains text from [this tutorial](https://github.com/rdadolf/git-tutorial/) by Robert Adolf ([@rdadolf](https://github.com/rdadolf)), which is licensed CC-BY.
-{: .tip}
+{: .comment}
 
 Version control is a way of tracking the change history of a project. Even if you have never used a version control tool, you've probably already done it manually: copying and renaming project folders ("paper-1.doc", "paper-2.doc", etc.) is a form of version control. Within bioinformatics (from research, to development, to sysadmin) a lot of us are using `git` as our primary method of source control for everything we do: notes, slides, tutorials, code, notebooks, ansible, system configuration, and more.
 
@@ -296,7 +296,7 @@ But currently this log is pretty boring, so let's replace a line and see how tha
 >
 > 2. Check what happened with the `git log -p`:
 >
->    > <code-in-title>Output</code-in-title>
+>    > <code-out-title>Output</code-out-title>
 >    > ```bash
 >    > $ git log -p
 >    > commit 416a121dfcda14de0c2cb181f298b2c08950475f (HEAD -> main)

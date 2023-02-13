@@ -128,7 +128,7 @@ https://zenodo.org/record/5119008/files/chrM.fa.gz
 >
 > ------
 >
->    - Click **Execute** button
+>    - Click **Run Tool** button
 >
 {: .hands_on}
 
@@ -157,7 +157,7 @@ After we mapped reads against the mitochondrial genome, we can now call variants
 >
 > ------
 >
->    - Click **Execute** button
+>    - Click **Run Tool** button
 >
 {: .hands_on}
 
@@ -181,7 +181,7 @@ We will now convert VCF datasets into tab delimited format as it will be easier 
 >
 > ------
 >
->    - Click **Execute** button
+>    - Click **Run Tool** button
 >
 {: .hands_on}
 
@@ -210,7 +210,7 @@ We now extracted meaningful fields from VCF datasets. But they still exist as a 
 >
 > ------
 >
->    - Click **Execute** button
+>    - Click **Run Tool** button
 >
 {: .hands_on}
 
@@ -329,7 +329,7 @@ This tool combines individual datasets or collections into a new collection. The
 
 This tools allow filtering elements from a data collection.  It takes an input collection and a text file with names (i.e. identifiers). The tool behaviour is controlled by **How should the elements to remove be determined?** drop-down. It has the following options:
 
-**Remove if identifiers are ABSENT from file**
+#### Remove if identifiers are ABSENT from file
 
 Given a collection:
 
@@ -358,7 +358,7 @@ the tool will return two collections:
  (discarded): [Dataset X]
 ```
 
-**Remove if identifiers are PRESENT in file**
+#### Remove if identifiers are PRESENT in file
 
 Given a collection:
 
@@ -391,7 +391,7 @@ the tool will return two collections:
 
 New identifiers can be supplied as either a simple list or a tab-delimited file mapping old identifier to the new ones. This is controlled using **How should the new identifiers be specified?** drop-down:
 
-**Using lines in a simple text file**
+#### Using lines in a simple text file
 
 Given a collection:
 
@@ -418,7 +418,7 @@ the tool will return:
              [Dataset Gamma]
 ```
 
-**Map original identifiers to new ones using a two column table**
+#### Map original identifiers to new ones using a two column table
 
 Given a collection:
 
@@ -449,7 +449,7 @@ the tool will return:
 
 {% icon tool %} **Sort collection** sorts dataset collection alphabetically, numerically, or using predetermined order from a supplied file.
 
-**Numeric sort**
+#### Numeric sort
 
 The tool sort in ascending order. When *numeric* sort is chosen, the tool ignores non-numeric characters. For example, if a collection contains the following elements:
 
@@ -467,7 +467,7 @@ The tool will output:
              [Donkey543] 
 ```
 
-**Sorting from file**
+#### Sorting from file
 
 Alternative, one can supply a single column text file containing elements identifiers in the desired sort order. For example, suppose there a collection:
 
@@ -544,7 +544,7 @@ Merging them will produce a single collection with only two datasets:
 
 This behavior can be changed by clicking on "*Advanced Options*" link. The following options are available:
 
-**Keep first instance (Default behavior)**
+#### Keep first instance (Default behavior)
 
 Input:
 
@@ -569,7 +569,7 @@ Output:
 Here if two collection have identical dataset names, a dataset is chosen from the *first* collection.
 
 
-**Keep last instance**
+#### Keep last instance
 
 Input:
 
@@ -594,7 +594,7 @@ Output:
 Here if two collection have identical dataset names, a dataset is chosen from the *last* collection.
 
 
-**Append suffix to conflicted element identifiers**
+#### Append suffix to conflicted element identifiers
 
 Input:
 
@@ -619,7 +619,7 @@ Output:
 ```
 
 
-**Append suffix to conflicted element identifiers after first on encountered**
+#### Append suffix to conflicted element identifiers after first on encountered
 
 Input:
 
@@ -644,7 +644,7 @@ Output:
                     [Dataset Y]
 ```
 
-**Append suffix to every element identifier**
+#### Append suffix to every element identifier
 
 Input:
 
@@ -668,7 +668,7 @@ Output:
                     [Dataset Y_2]
 ```
 
-**Fail collection creation**
+#### Fail collection creation
 
 This option will simply trigger an error.
 
@@ -704,3 +704,4 @@ If you have a collection with three elements (image below), merging it on the fi
 
 ![Collapse collection](../../images/collections/collapse_collection.svg)
 
+<!-- GTN:IGNORE:002 -->
