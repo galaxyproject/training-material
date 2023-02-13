@@ -99,7 +99,7 @@ footer: no
             {% assign tuto_has_zenodo = true %}
         {% endif %}
 
-        {% if associated_slides or intro_link or tuto_has_zenodo or own_material.workflows or own_material.tours or tuto_has_docker or material.notebook %}
+        {% if associated_slides or intro_link or tuto_has_zenodo or own_material.workflows or own_material.tours or tuto_has_docker or own_material.notebook %}
         <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> {{ locale['supporting-materials'] | default: "Supporting Materials" }}:</strong></div>
         <ul class="supporting_material">
             {% if associated_slides %}
@@ -124,8 +124,8 @@ footer: no
                 <li class="btn btn-default supporting_material">{% include _includes/resource-tours.html material=own_material topic=topic.name label=true %}</li>
             {% endif %}
 
-            {% if material.notebook %}
-                <li class="btn btn-default supporting_material">{% include _includes/resource-notebooks.html material=material topic=topic.name label=true %}</li>
+            {% if own_material.notebook %}
+                <li class="btn btn-default supporting_material">{% include _includes/resource-notebooks.html material=own_material topic=topic.name label=true %}</li>
             {% endif %}
 
             {% assign faqpage = page.dir | append: 'faqs/index.md' | remove_first: '/' %}
@@ -162,15 +162,15 @@ footer: no
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
-                 {% if page.notebook %}
+                 {% if own_material.notebook %}
                      {% capture ipynbpath %}{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", "" }}{{ page.topic_name }}-{{ own_material.tutorial_name }}.ipynb{% endcapture %}
                      {% capture ipynbpathnosoln %}{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", "" }}{{ page.topic_name }}-{{ own_material.tutorial_name }}-course.ipynb{% endcapture %}
                      {% capture ipynbpathsimple %}{{ page.topic_name }}-{{ own_material.tutorial_name }}.ipynb{% endcapture %}
                      {% capture ipynbpathsimplenosoln %}{{ page.topic_name }}-{{ own_material.tutorial_name }}-course.ipynb{% endcapture %}
-                    {% if page.notebook.snippet %}
-                        {% assign pagesnippet = page.notebook.snippet %}
+                    {% if own_material.notebook.snippet %}
+                        {% assign pagesnippet = own_material.notebook.snippet %}
                         {% snippet pagesnippet %}
-                    {% elsif page.notebook.language ==  "r" %}
+                    {% elsif own_material.notebook.language ==  "r" %}
                         <blockquote class="comment">
                             <div class="box-title" aria-label="comment box">{{locale['best-in-rstudio'] | default: "Best viewed in RStudio" }}</div>
                             <p>

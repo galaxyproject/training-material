@@ -249,8 +249,6 @@ module TopicFilter
 
     if page.nil? then
       puts "[GTN/TopicFilter] Could not process material"
-      require 'pp'
-      pp material
       return {}
     end
 
@@ -477,9 +475,6 @@ module TopicFilter
       v["tutorials"].sort!
       [k, v]
     }.to_h
-
-    require 'pp'
-    pp tool_map['iuc/multiqc']
 
     # Order by most popular tool
     t.sort_by{|k, v| v["tutorials"].length}.reverse.to_h
