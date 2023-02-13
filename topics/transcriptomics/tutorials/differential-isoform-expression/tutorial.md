@@ -168,7 +168,7 @@ Repeat with the other collection.
 
 ![figX:FASTQ adapter content](../../images/differential_isoform/fastqc_adapter_content.png "FASTQ adapter content")
 
-# Quality assessment
+# Preprocessing of sequencing reads
 
 ## Sub-step with **fastp**
 
@@ -221,7 +221,7 @@ Repeat with the other collection
 ![figX:Sequence quality](../../images/differential_isoform/fastp_sequence_quality.png "Sequence quality")
 
 
-# RNA-seq assembly
+# Transcriptome assembly and quantification 
 
 ## Sub-step with **RNA STAR**
 
@@ -244,8 +244,6 @@ Repeat with the other collection
 >        - *"Configure seed, alignment and limits options"*: `Use Defaults`
 >
 {: .hands_on}
-
-## Post-alignment RNA-seq analysis
 
 ## Sub-step with **Junction Annotation**
 
@@ -372,7 +370,6 @@ This program is used to “guess” how RNA-seq sequencing were configured, part
 
 ![figX:RSeQC read distribution](../../images/differential_isoform/rseqc_read_distribution_plot.png "RSeQC read distribution")
 
-## Transcriptome assembly
 
 ## Sub-step with **StringTie**
 
