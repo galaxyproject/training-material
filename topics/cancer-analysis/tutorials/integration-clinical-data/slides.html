@@ -1,5 +1,6 @@
 ---
 layout: tutorial_slides
+logo: "GTN"
 
 title: "Module 10: Clinical Integration"
 questions: []
@@ -204,7 +205,10 @@ Lead to identification of proneural, neural, classical and mesenchymal groups
 - First presented by Rousseeuw (1987) to show graphically how well each pattern (observation) is classified to a cluster
 - For each pattern *i* in Class Cr:
 
-![](images/CBW_CG2021_Erdman_v3-22_1.jpg)
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>S</mi><mi>i</mi><msub><mi>l</mi><mi>j</mi></msub><mo>=</mo><mfrac><mrow><mi>b</mi><mo>(</mo><mi>i</mi><mo>)</mo><mo>-</mo><mi>a</mi><mo>(</mo><mi>i</mi><mo>)</mo></mrow><mrow><mtext>max</mtext><mo>{</mo><mi>b</mi><mo>(</mo><mi>i</mi><mo>)</mo><mo>,</mo><mi>a</mi><mo>(</mo><mi>i</mi><mo>)</mo><mo>}</mo></mrow></mfrac></math>
+
+- a(i) is the average distance to all other patterns in Cr
+- b(i) is the average distance to all other patterns in other clusters
 
 .pull-left[
 - -1≤ <i>sil</i><sub>i</sub>≤1
@@ -218,112 +222,79 @@ Lead to identification of proneural, neural, classical and mesenchymal groups
 
 ---
 
-# 23
+# iCluster ({% cite Shen_2010 %})
+
+- Gaussian latent variable model
+- Sparsity regularization (Lasso-type)
+- Latent variables Z (embedding is shared)
 
 ![](images/CBW_CG2021_Erdman_v3-23_1.jpg)
 
-# iCluster  (Shen et al, 2009)
-• Gaussian latent variable model
-• Sparsity regularization (Lasso-type)
-• Latent variables Z (embedding is shared)
 Package on CRAN: iCluster
 
 ---
-# 24
-
 
 # Drawbacks of existing methods
-• A lot of manual processing (e.g. need to pre-filter genes
-for iCluster – takes ~1500 genes max)
-• Many steps in the pipeline
-• Integration mostly done in the feature space – if there is
-signal in a combination of features, it’ll be lost
-• Focusing on similarity across data types – what if there is
-complementary information?
+
+- A lot of manual processing (e.g. need to pre-filter genes for iCluster – takes ~1500 genes max)
+- Many steps in the pipeline
+- Integration mostly done in the feature space – if there is signal in a combination of features, it’ll be lost
+- Focusing on similarity across data types – what if there is complementary information?
 
 ---
-# 25
 
+# Similarity Network Fusion ({% cite Wang_2014 %})
 
-# Similarity Network Fusion 
-# (Wang et al, 2014)
 Integrate data in the patient space
+
 1. Construct patient similarity matrix
 2. Fuse multiple matrices
 
 ---
-# 26
 
-![](images/CBW_CG2021_Erdman_v3-26_1.jpg)
-![](images/CBW_CG2021_Erdman_v3-26_2.jpg)
-![](images/CBW_CG2021_Erdman_v3-26_3.jpg)
+# 1. Create Data Type-Specific
 
-1. Create Data Type-Specific
+![](images/data-specific.png)
+
 Similarity Networks
 
 ---
-# 27
 
-![](images/CBW_CG2021_Erdman_v3-27_1.jpg)
-![](images/CBW_CG2021_Erdman_v3-27_2.jpg)
-![](images/CBW_CG2021_Erdman_v3-27_3.jpg)
-![](images/CBW_CG2021_Erdman_v3-27_4.jpg)
-![](images/CBW_CG2021_Erdman_v3-27_5.jpg)
+# 1. Create Data Type-Specific
 
-p1
-p2
-p8
-p9
-1. Create Data Type-Specific
-Similarity Networks
+![](images/data-specific2.png)
 
 ---
-# 28
 
-![](images/CBW_CG2021_Erdman_v3-28_1.png)
-![](images/CBW_CG2021_Erdman_v3-28_2.png)
+# 2. Combine networks
 
-2.
-# Combine networks
-      Similarity Networks
+![](images/combine1.png)
 
 ---
-# 29
 
-![](images/CBW_CG2021_Erdman_v3-29_1.png)
-![](images/CBW_CG2021_Erdman_v3-29_2.png)
-![](images/CBW_CG2021_Erdman_v3-29_3.jpg)
+# 2. Combine networks
 
-Fusion Iterations       Similarity Networks
-2.
-# Combine networks
+![](images/combine2.png)
 
 ---
-# 30
 
-![](images/CBW_CG2021_Erdman_v3-30_1.png)
-![](images/CBW_CG2021_Erdman_v3-30_2.jpg)
-![](images/CBW_CG2021_Erdman_v3-30_3.jpg)
-![](images/CBW_CG2021_Erdman_v3-30_4.jpg)
-![](images/CBW_CG2021_Erdman_v3-30_5.png)
+# 2. Combine networks
 
-Fused
-Similarity
-Network
-2.
-# Combine networks
-      Similarity Networks Fusion Iterations
+![](images/combine3.png)
 
 ---
-# 31
-
-![](images/CBW_CG2021_Erdman_v3-31_1.jpg)
 
 # Case study: Glioblastoma
-mRNA expression data
-DNA methylation data
-mRNA expression
-miRNA expression
+
+.pull-left[
+![](images/case.png)
+]
+
+--
+
+.pull-left[
+![](images/case2.png)
+]
 
 ---
 # 32
@@ -331,16 +302,6 @@ miRNA expression
 ![](images/CBW_CG2021_Erdman_v3-32_1.jpg)
 ![](images/CBW_CG2021_Erdman_v3-32_2.jpg)
 ![](images/CBW_CG2021_Erdman_v3-32_3.jpg)
-
-# Case study: Glioblastoma
-FUSED
-Bo
-Wang
-Cytoscape
-mRNA expression data
-DNA methylation data
-mRNA expression
-miRNA expression
 
 ---
 # 33
