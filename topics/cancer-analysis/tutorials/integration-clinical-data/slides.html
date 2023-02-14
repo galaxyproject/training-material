@@ -348,174 +348,126 @@ the study – such data is called **right censored** (*i.e. death occurred to th
 ---
 # Survival data example
 
-![](images/CBW_CG2021_Erdman_v3-38_1.jpg)
-![](images/CBW_CG2021_Erdman_v3-38_2.jpg)
+![](images/survival.png)
 
 ---
-# 39
 
 
 # Two important statistics
-• Event time: t
-• Survival function
-<i>S(t) = </i> P( <i>T &gt; t</i> ) <i> </i> – probability of a person being alive at  <i>t</i>
-• Hazard rate
-H(t) = lim
-<i>&#916;t</i> ->0
- P( <i>t &#8804; T &#8804; t + &#916;t</i> | <i>T &gt; t</i> )
-Probability of a person dying (failing) in the next instant
+
+- Event time: t
+- Survival function (probability of a person being alive at time t)
+
+  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>S</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mi>P</mi><mo>(</mo><mi>T</mi><mo>></mo><mi>t</mi><mo>)</mo></math>
+
+- Hazard rate (Probability of a person dying (failing) in the next instant)
+
+  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>H</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><munder><mi>lim</mi><mrow><mi mathvariant="normal">Δ</mi><mi>t</mi><mo>→</mo><mn>0</mn></mrow></munder><mi>P</mi><mo>(</mo><mi>t</mi><mo>≤</mo><mi>T</mi><mo>≤</mo><mi>t</mi><mo>+</mo><mi mathvariant="normal">Δ</mi><mi>t</mi><mo>|</mo><mi>T</mi><mo>></mo><mi>t</mi><mo>)</mo></math>
+
 
 ---
-# 40
-
 
 # Some examples of the hazard rate
-• Constant hazard rate – no aging
-• Positive hazard rate – the older you are the more
-likely you are to die
-• Negative hazard rate – e.g. dying risk is the highest
-at birth (infant mortality)
+
+- Constant hazard rate – no aging
+- Positive hazard rate – the older you are the more likely you are to die
+- Negative hazard rate – e.g. dying risk is the highest at birth (infant mortality)
 
 ---
-# 41
-
-![](images/CBW_CG2021_Erdman_v3-41_1.jpg)
 
 # Kaplan Meier Estimator
-• Basic estimator Kaplan-Meier (1958)
-• S(t) – probability that a member from a given population
-will have a lifetime exceeding t
-• <i>n</i>
-<i>i</i>
- – number of people at risk of dying at time t
-• <i>d</i>
-<i>i</i>
- – number of actual deaths at time t
+
+- Basic estimator {% cite Kaplan1958 %}
+- S(t) – probability that a member from a given population will have a lifetime exceeding t
+- <i>n<sub>i</sub></i> – number of people at risk of dying at time t
+- <i>d<sub>i</sub></i> – number of actual deaths at time t
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>S</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><munder><mo>∏</mo><mrow><msub><mi>t</mi><mi>i</mi></msub><mo><</mo><mi>t</mi></mrow></munder><mfrac><mrow><msub><mi>n</mi><mi>i</mi></msub><mo>-</mo><msub><mi>d</mi><mi>i</mi></msub></mrow><msub><mi>n</mi><mi>i</mi></msub></mfrac></math>
 
 ---
-# 42
+
+# Kaplan-Meier Curve
 
 ![](images/CBW_CG2021_Erdman_v3-42_1.png)
 
-# Kaplan-Meier Curve
+.footnote[
 https://www.graphpad.com/guides/prism/latest/statistics/stat_determining_the_median_followu.htm
+]
 
 ---
-# 43
 
-![](images/CBW_CG2021_Erdman_v3-43_1.jpg)
-![](images/CBW_CG2021_Erdman_v3-43_2.jpg)
-![](images/CBW_CG2021_Erdman_v3-43_3.jpg)
+# Are Kaplan Meier curves significantly different? ⇒ Log-rank test
 
-# Are Kaplan Meier curves significantly 
-# different?  Log-rank test
-• Comparing 2 groups
-• j = 1..J be the distinct events in either group
-• For each j, N
-1j
- and N
-2j
- – numbers of people at risk in groups 1 and 2 respectively
-at the start of period j (N
-j
- = N
-1j
-+N
-2j
-)
-• O
-1J
- and O
-2J
- - observed number of events in each group (corresponds to variable
-d
-i
- above). O
-j
- = O
-1J
- + O
-2J
-• Null hypothesis: the distributions (2 curves) are the same. Given that O
-j
+- Comparing 2 groups
+- j = 1..J be the distinct events in either group
+- For each j, N<sub>1j</sub> and N<sub>2j</sub> – numbers of people at risk in groups 1 and 2 respectively at the start of period j (N<sub>j</sub> = N<sub>1j</sub> + N<sub>2j</sub>)
+- O<sub>1J</sub> and O<sub>2J</sub> - observed number of events in each group (corresponds to variable d<sub>i</sub> above). (O<sub>j</sub> = O<sub>1J</sub> + O<sub>2J</sub>)
+- Null hypothesis: the distributions (2 curves) are the same. Given that O<sub>j</sub> happened across both groups at time j, O<sub>1J</sub> is hypergeometric with expected value and variance:
 
-happened across both groups at time j, O
-1J
- is hypergeometric with expected
-value and variance:
-get p-value from
-look up table
+.pull-left[
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>E</mi><mrow><mn>1</mn><mi>j</mi></mrow></msub><mo>=</mo><mfrac><msub><mi>O</mi><mi>j</mi></msub><msub><mi>N</mi><mi>j</mi></msub></mfrac><msub><mi>N</mi><mrow><mn>1</mn><mi>j</mi></mrow></msub></math>
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>V</mi><mi>j</mi></msub><mo>=</mo><mfrac><mrow><msub><mi>O</mi><mi>j</mi></msub><mo>(</mo><mfrac><msub><mi>N</mi><mrow><mn>1</mn><mi>j</mi></mrow></msub><msub><mi>N</mi><mi>j</mi></msub></mfrac><mo>)</mo><mo>(</mo><mn>1</mn><mo>-</mo><mfrac><msub><mi>N</mi><mrow><mn>1</mn><mi>j</mi></mrow></msub><msub><mi>N</mi><mi>j</mi></msub></mfrac><mo>)</mo><mo>(</mo><msub><mi>N</mi><mi>j</mi></msub><mo>-</mo><msub><mi>O</mi><mi>j</mi></msub><mo>)</mo></mrow><mrow><msub><mi>N</mi><mi>j</mi></msub><mo>-</mo><mn>1</mn></mrow></mfrac></math>
+]
+
+.pull-right[
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>Z</mi><mo>=</mo><mfrac><mrow><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>J</mi></munderover><mo>(</mo><msub><mi>O</mi><mrow><mn>1</mn><mi>j</mi></mrow></msub><mo>-</mo><msub><mi>E</mi><mrow><mn>1</mn><mi>j</mi></mrow></msub><mo>)</mo></mrow><msqrt><mrow><munderover><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>J</mi></munderover><msub><mi>V</mi><mi>j</mi></msub></mrow></msqrt></mfrac><mi mathvariant="normal">~</mi><mi>N</mi><mo>(</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo>)</mo></math>
+
+get p-value from look up table
+]
 
 ---
-# 44
-
-![](images/CBW_CG2021_Erdman_v3-44_1.jpg)
 
 # Hazard ratio
 
----
-# 45
+Hazard ratio compares two groups diffing in treatments or prognostic variables, etc. Measures relative survival in two groups based on the complete period studied.
 
-![](images/CBW_CG2021_Erdman_v3-45_1.jpg)
-![](images/CBW_CG2021_Erdman_v3-45_2.png)
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>R</mi><mo>=</mo><mfrac><mfrac><msub><mi>O</mi><mn>1</mn></msub><msub><mi>E</mi><mn>1</mn></msub></mfrac><mfrac><msub><mi>O</mi><mn>2</mn></msub><msub><mi>E</mi><mn>2</mn></msub></mfrac></mfrac></math>
+
+R = 0.43 - relative risk (hazard) of poor outcome under the condition of group 1 is 43% of that of group2
+R = 2.0 then the rate of failure in group 1 is twice the rate in group 2.
+
+
+---
 
 # Cox proportional hazard (Cox PH) model
-• Captures how well multiple variables x
-1
-…x
-p
-(e.g. genes,
-clinical variables, etc) affect survival
-• Estimates the ratio of the risks
-Cox regression:
-h
-0
-(t) – baseline hazard
-other predictors are exponentially increasing the hazard
-prognostic index
+
+- Captures how well multiple variables x<sub>1</sub>…x<sub>p</sub> (e.g. genes, clinical variables, etc) affect survival
+- Estimates the ratio of the risks
+- h<sub>0</sub>(t) - baseline hazard
+- other predictors are exponentially increasing the hazard prognostic index (β<sub>1</sub>x<sub>i1</sub> ...)
+- Cox regression:
+
+  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>h</mi><mi>i</mi></msub><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><msub><mi>h</mi><mn>0</mn></msub><mo>(</mo><mi>t</mi><mo>)</mo><msup><mi>e</mi><mrow><msub><mi>β</mi><mn>1</mn></msub><msub><mi>x</mi><mrow><mi>i</mi><mn>1</mn></mrow></msub><mo>+</mo><mo>…</mo><mo>+</mo><msub><mi>β</mi><mi>p</mi></msub><msub><mi>x</mi><mrow><mi>i</mi><mi>p</mi></mrow></msub></mrow></msup></math>
 
 ---
-# 46
-
-![](images/CBW_CG2021_Erdman_v3-46_1.jpg)
-![](images/CBW_CG2021_Erdman_v3-46_2.jpg)
-![](images/CBW_CG2021_Erdman_v3-46_3.jpg)
-![](images/CBW_CG2021_Erdman_v3-46_4.jpg)
 
 # Some intuition behind the model
-- represents log hazard ratio increase for one unit
-increase of the predictor ( <i>x</i>
-<i>j</i>
-) holding all other
-predictors constant
-- Hazard ratio increase for one unit increase of x
-j
-- Means increasing x
-j
- is associated with decreased
-hazard and longer survival times
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>h</mi><mi>i</mi></msub><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><msub><mi>h</mi><mn>0</mn></msub><mo>(</mo><mi>t</mi><mo>)</mo><msup><mi>e</mi><mrow><msub><mi>β</mi><mn>1</mn></msub><msub><mi>x</mi><mrow><mi>i</mi><mn>1</mn></mrow></msub><mo>+</mo><mo>…</mo><mo>+</mo><msub><mi>β</mi><mi>p</mi></msub><msub><mi>x</mi><mrow><mi>i</mi><mi>p</mi></mrow></msub></mrow></msup></math>
+
+- β<sub>j</sub> represents log hazard ratio increase for one unit increase of the predictor ( <i>x<sub>j</sub></i>) holding all other predictors constant
+- <i>e<sup>β<sub>j</sub></sup></i> Hazard ratio increase for one unit increase of x<sub>j</sub>
+- β<sub>j</sub> < 0 Means increasing x<sub>j</sub> is associated with decreased hazard and longer survival times
 
 ---
-# 47
-
-![](images/CBW_CG2021_Erdman_v3-47_1.jpg)
 
 # Using and interpreting Cox PH
-1. Hazard ratio for a subject i with a set of predictors X
-compared to a subject j with a set of predictors X*:
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>H</mi><mi>R</mi><mo>=</mo><mfrac><mrow><msub><mi>h</mi><mi>i</mi></msub><mo>(</mo><mi>t</mi><mo>)</mo></mrow><mrow><msub><mi>h</mi><mi>j</mi></msub><mo>(</mo><mi>t</mi><mo>)</mo></mrow></mfrac><mo>=</mo><mfrac><msup><mi>e</mi><mrow><mi>β</mi><mi>X</mi></mrow></msup><msup><mi>e</mi><mrow><mi>β</mi><mi>X</mi><mo>*</mo></mrow></msup></mfrac><mo>=</mo><msup><mi>e</mi><mrow><mi>β</mi><mo>(</mo><mi>X</mi><mo>-</mo><mi>X</mi><mo>*</mo><mo>)</mo></mrow></msup></math>
+
+1. Hazard ratio for a subject i with a set of predictors X compared to a subject j with a set of predictors X*:
 2. HR can be interpreted as a percentage change in risk
+
 Example:  Let x = 1 when treatment is active and x=0 when
-treatment is placebo. If HR = e β =0.8, it means 20% decrease
+treatment is placebo. If HR = e<sup>β</sup> =0.8, it means 20% decrease
 in mortality risk if using treatment compared to placebo
 
 ---
-# 48
-
 
 # Concordance index (C-index)
-• Captures the ability of the model to order individuals
-correctly with respect to their survival time
+
+- Captures the ability of the model to order individuals correctly with respect to their survival time
+- Important – no other metric captures the ordering of individuals
 
 C-index = (#concordant pairs of indiv. + 0.5 * ties)/ all pairs
-• Important – no other metric captures the ordering of
-individuals
