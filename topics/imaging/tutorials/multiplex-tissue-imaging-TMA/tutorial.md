@@ -32,7 +32,7 @@ Multiplex tissue images are large, multi-channel images that contain intensity d
 
 Find a full [example history](https://cancer.usegalaxy.org/u/watsocam/h/gtnexemplar002tma)
 
-![Aviator screenshot](../../images/multiplex-tissue-imaging-TMA/ex2_combined_avivator.png "Fully registered image of the MCMICRO Exemplar-002 Tissue microarray. Exemplar-002 consists of four cores, each with a distinct tissue organization and expression of biomarkers. In the image, there are six biomarkers shown: DNA (white), CD163 (yellow), CD3D (blue), CD31 (red), VDAC1 (green), and Keratin (orange). This image is being viewed using Avivator, an interactive tool that allows the user to selectively view channels and adjust channel intensities.")
+![Aviator screenshot, described in figure caption](../../images/multiplex-tissue-imaging-TMA/ex2_combined_avivator.png "Fully registered image of the MCMICRO Exemplar-002 Tissue microarray. Exemplar-002 consists of four cores, each with a distinct tissue organization and expression of biomarkers. In the image, there are six biomarkers shown: DNA (white), CD163 (yellow), CD3D (blue), CD31 (red), VDAC1 (green), and Keratin (orange). This image is being viewed using Avivator, an interactive tool that allows the user to selectively view channels and adjust channel intensities.")
 
 
 > ### Agenda
@@ -362,12 +362,12 @@ Galaxy-ME includes additional tools from **Scimap** and tools from the **Squidpy
 >
 > 1. {% tool **Squidpy Graph and Plotting** %} generate a spatial neighborhood graph with the following parameters:
 >
->    - {% icon param-file %} *"Select the input anndata"*: Anndata file containing phenotype information (or other variable of interest)
+>    - {% icon param-collection %} *"Select the input anndata"*: Anndata file containing phenotype information (or other variable of interest)
 >    - *"Select an analysis"*: `Spatial neighbors -- Create a graph from spatial coordinates`
 >
 > 2. {% tool **Squidpy Graph and Plotting** %} compute and plot a neighborhood enrichment analysis with the following parameters:
 >
->    - {% icon param-file %} *"Select the input anndata"*: Output of step 1 (anndata file with spatial neighborhood graph)
+>    - {% icon param-collection %} *"Select the input anndata"*: Output of step 1 (anndata file with spatial neighborhood graph)
 >    - *"Select an analysis"*: `nhood_enrichment -- Compute neighborhood enrichment by permutation test`
 >    - *"Key in anndata.AnnData.obs where clustering is stored"*: `phenotype`
 >
@@ -381,7 +381,7 @@ Galaxy-ME includes additional tools from **Scimap** and tools from the **Squidpy
 >
 > 3. {% tool **Squidpy Graph and Plotting** %} calculate Ripley's L curves for each phenotype with the following parameters:
 >
->    - {% icon param-file %} *"Select the input anndata"*: Output of step 1 (anndata file with spatial neighborhood graph)
+>    - {% icon param-collection %} *"Select the input anndata"*: Output of step 1 (anndata file with spatial neighborhood graph)
 >    - *"Select an analysis"*: `nhood_enrichment -- Compute neighborhood enrichment by permutation test`
 >    - *"Key in anndata.AnnData.obs where clustering is stored"*: `phenotype`
 >    - In *"Advanced Graph Options"*:
