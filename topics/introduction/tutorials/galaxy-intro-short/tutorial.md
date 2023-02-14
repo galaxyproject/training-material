@@ -14,6 +14,7 @@ objectives:
   - "Learn how to view results"
   - "Learn how to view histories"
   - "Learn how to extract and run a workflow"
+  - "Learn how to share a history"
 time_estimation: "40m"
 key_points:
   - "The Galaxy interface has tools on the left, viewing pane in the middle, and a history of your data analysis on the right."
@@ -281,6 +282,12 @@ We can now try to filter our input reads to an even higher standard, and see how
 {: .question}
 
 You can re-run a tool many times with different settings. Each time you re-run the tool, its new output datasets will appear at the top of your current history.
+
+## Share your history
+
+Finally, let's imagine that you had a problem in your analysis and you want to ask for help. The easiest way to ask for help is to share your history. Try and create a link for your history and share it with...yourself!
+
+{% snippet faqs/galaxy/histories_sharing.md %}
 
 
 ## Convert your analysis history into a workflow
