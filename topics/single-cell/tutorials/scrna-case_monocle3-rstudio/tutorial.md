@@ -62,7 +62,7 @@ While the installation in running in the Terminal tab, you can work on other thi
 
 ><hands-on-title>Files upload</hands-on-title>
 >
-> 1. In the folder window, {% icon galaxy-upload %} Upload the `single-cell-scrna-case_monocle3-rstudio.ipynb` and three data files that you had downloaded from your computer. 
+> 1. In the folder window, Upload the `single-cell-scrna-case_monocle3-rstudio.ipynb` and three data files that you had downloaded from your computer. 
 >
 > 2. Right-click on the files and rename them so that it’s easier to refer to them:
 > - `GalaxyX-[Extracted_cell_annotations_(obs)]` to `cells`
@@ -81,6 +81,10 @@ Once the installation is done, we should load the needed packages into our noteb
 ```r
 library(monocle3)
 library(biomaRt)
+#install.packages("Rcpp") <- fixes reduce dim
+library(Rcpp)
+# library(dplyr) <- check if needed
+# library("magrittr") <- might be needed for %>%
 ```
 Alright, the libraries are here - so now let's read in our data files. 
 
@@ -489,11 +493,6 @@ cds_annotated <- cds_clustered
 ```r
 # create a new column ‘cell_type’ and initialise it with clusters values
 colData(cds_annotated)$cell_type <- as.character(clusters(cds_annotated)) 	
-```
-```r
-# install and load dplyr package
-install.packages("dplyr")	 
-library(dplyr)
 ```
 ```r
 # annotate clusters
