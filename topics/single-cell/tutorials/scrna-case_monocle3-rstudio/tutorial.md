@@ -48,30 +48,41 @@ tags:
 contributions:
   authorship:
     - wee-snufkin
+  editing:
+    - hexylena
 
 notebook:
   language: r
   snippet: topics/single-cell/tutorials/scrna-case_monocle3-rstudio/preamble.md 
 ---
 
-# Working in RStudio
+## Files upload
 
-## Uploading files
+While the installation in running in the Terminal tab, you can work on other things in JupyterLab. Let's upload the files you downloaded from Galaxy: the notebook and three data files - cell annotations, gene annotations and unprocessed expression matrix.
 
-If you are using RStudio locally, then you don’t have to bother about uploading the files – just skip to ```file.choose()``` and navigate to your files using the pop-up window. 
+><hands-on-title>Files upload</hands-on-title>
+>
+> 1. In the folder window, {% icon galaxy-upload %} Upload the `single-cell-scrna-case_monocle3-rstudio.ipynb` and three data files that you had downloaded from your computer. 
+>
+> 2. Right-click on the files and rename them so that it’s easier to refer to them:
+> - `GalaxyX-[Extracted_cell_annotations_(obs)]` to `cells`
+> - `GalaxyX-[Extracted gene annotations (var)]` to `genes`
+> - `GalaxyX-[Unprocessed expression matrix]` to `expression`
+>
+> 3. Open the notebook by double clicking it in the file window.
+>
+{: .hands_on}
 
-If you are working in RStudio Cloud, you have to download the generated files from your history first. To do so, just click on the {% icon galaxy-save %} save icon for `Cell metadata (obs)`, `Gene metadata (var)` and `Expression matrix`. Then, return to the RStudio and click on ‘Upload’ button in the right bottom window toolbar and choose already downloaded files to upload. You should now see all three files in this window. You might want to rename the files to make their names shorter.
+From now on, you can switch to the notebook you just opened in JuyterLab and follow the tutorial in there! 
 
-![Screenshot of Files tab in RStudio, highlighting 'Upload' and 'Rename' buttons and listing three uploaded and renamed files: 'cell_metadata', 'gene_metadata', 'expression_matrix'.](../../images/scrna-casestudy-monocle/r_files_tab.png "The view of the Files tab with uploaded files and highlighted relevant buttons.")
 
-If you are using RStudio Galaxy tool, you can get data directly from your history by running:
+## Setting the environment
+Once the installation is done, we should load the needed packages into our notebook. 
 ```r
-# get the files from Galaxy history
-file.copy(gx_get(2), "cell_metadata")
-file.copy(gx_get(3), "gene_metadata")
-file.copy(gx_get(4), "expression_matrix")
+library(monocle3)
+library(biomaRt)
 ```
-The number in the brackets corresponds to the dataset number in your history, so make sure you put the right number for the corresponding file. We can specify the name of the fetched files in the quotation marks, as shown above. All three files should appear in the Files tab window.
+Alright, the libraries are here - so now let's read in our data files. 
 
 > <question-title></question-title>
 >
@@ -85,24 +96,13 @@ The number in the brackets corresponds to the dataset number in your history, so
 >
 {: .question}
 
-Once we have our data loaded, let's specify paths to access the files. There is a strightforward way of getting the correct path without the concern of making typos or getting the path wrong. Just run `file.choose()` and choose the corresponding file which you want to get path to:
-```r
-# get the file path
-cells_path <- file.choose() 
-genes_path <- file.choose() 
-expression_path <- file.choose() 
-```
-You should now see the new variables in the Environment tab window. 
-
-As mentioned above, the datatype of our files is tabular, so we will use ```read.delim()``` function to read them in. The first argument is the file path and the second one, `row.names=1` takes the column number of the data file from which to take the row names. 
+As mentioned above, the datatype of our files is tabular, so we will use `read.delim()` function to read them in. In this function, the first argument is the file path - in our case, the files are in the same folder as the notebook, so the file path is the same as the file name. You can always check that by right-clicking on the file and choosing `Copy path`. The second argument, `row.names=1` takes the column number of the data file from which to take the row names. 
 ```r
 # read in the files
-cell_metadata <- read.delim(cells_path, row.names=1)
-gene_metadata <- read.delim(genes_path, row.names=1)
-expression_matrix <- read.delim(expression_path, row.names=1)
+cell_metadata <- read.delim('cells.tabular', row.names=1)
+gene_metadata <- read.delim('genes.tabular', row.names=1)
+expression_matrix <- read.delim('expression.tabular', row.names=1)
 ```
-
-We have now three dataframes that we will use to generate cell_data_set object.
 
 > <question-title></question-title>
 >
@@ -116,56 +116,56 @@ We have now three dataframes that we will use to generate cell_data_set object.
 >
 {: .question}
 
-## View and modify files
+
+><tip-title>Reading in the files for RStudio users</tip-title>
+>
+> If you are working in RStudio Cloud, you have to click on ‘Upload’ button in the right bottom window toolbar and choose already downloaded data files to upload. You should now see all three files in this window. You might want to rename the files to make their names shorter.
+>
+> ![Screenshot of Files tab in RStudio, highlighting 'Upload' and 'Rename' buttons and listing three uploaded and renamed files: 'cell_metadata', 'gene_metadata', 'expression_matrix'.](../../images/scrna-casestudy-monocle/r_files_tab.png "The view of the Files tab with uploaded files and highlighted relevant buttons.")
+>
+> If you are using RStudio Galaxy tool, you can get data directly from your history by running:
+> ```
+># get the files from Galaxy history
+>file.copy(gx_get(2), "cell_metadata")
+>file.copy(gx_get(3), "gene_metadata")
+>file.copy(gx_get(4), "expression_matrix")
+>```
+>The number in the brackets corresponds to the dataset number in your history, so make sure you put the right number for the corresponding file. We can specify the name of the fetched files in the quotation marks, as shown above. All three files should appear in the Files tab window.
+>
+> If you are using RStudio locally, then you don’t have to bother about uploading the files – just run `file.choose()` and choose the corresponding file which you want to get path to:
+>```
+># get the file path
+>cells_path <- file.choose() 
+>genes_path <- file.choose() 
+>expression_path <- file.choose() 
+>```
+> You should now see the new variables in the Environment tab window. 
+>
+{: .tip}
+
+
+## View and modify the files
 
 According to [Monocle3 documentation](https://cole-trapnell-lab.github.io/monocle3/docs/starting/), `expression_matrix` should have genes as rows and cells as columns. Let's check if that's the case here.
 ```r
-View(expression_matrix)     # preview the content of the expression matrix
-expression_matrix           # or just call the name of the file
+expression_matrix           # preview the content of the file by calling its name
 ```
-`View()` opens a new tab with a preview of the content of the file. We can see that in our matrix rows are cells and genes are columns, so we have to transpose the matrix simply using function `t()`. But before doing so, we will change its type from dataframe to matrix - this is Monocle's requirement to generate cell_data_set afterwards.
+We can see that in our matrix rows are cells and genes are columns, so we have to transpose the matrix simply using function `t()`. But before doing so, we will change its type from dataframe to matrix - this is Monocle's requirement to generate cell_data_set afterwards.
 ```r
 expression_matrix <- as.matrix(expression_matrix)   # change the type to matrix
 expression_matrix <- t(expression_matrix)           # transpose the matrix
 ```
 Another condition we have to satisfy if that one of the columns of the `gene_metadata` should be named "gene_short_name", which represents the gene symbol for each gene. Some functions won't work without that. Do we have such a column? Let's check.
 ```r
-gene_metadata             # check the name of the column containing gene symbols
+gene_metadata             # preview the content of the file to check the name of the column containing gene symbols
 ```
 
-The second column indeed contains gene symbols, but is called "Symbol" instead of "gene_short_name". That can be easily changed by a simple assignment, as long as we know the number of the column that we want to modify. We can access the column names by `colnames()`.
+The second column indeed contains gene symbols, but is called "Symbol" instead of "gene_short_name". That can be easily changed by a simple assignment, as long as we know the number of the column that we want to modify. In our case the gene symbols are stored in column 2. We can access the column names by `colnames()`.
 ```r
 colnames(gene_metadata)[2] <- 'gene_short_name'     # change the column name
 colnames(gene_metadata)                             # see the changes
 ```
 
-It looks like our data fulfils the requirements to generate the cell_data_set file, but before that…
-
-
-## Loading Monocle3
-
-First things first, we need to load Monocle3! Generally, it is a good practice to load all the packages at the very beginning of the script, but for the purpose of this tutorial, we will load the needed packages on the way, to make you aware of which library is needed and when. 
-Monocle 3 runs in the R statistical computing environment. You will need R version 4.1.0 or higher, Bioconductor version 3.14, and monocle3 1.2.7 or higher to have access to the latest features.
-```r
-# Install Bioconductor and some of required dependencies
-if (!requireNamespace("BiocManager", quietly = TRUE))
-install.packages("BiocManager")
-BiocManager::install(version = "3.14")
-BiocManager::install(c('BiocGenerics', 'DelayedArray', 'DelayedMatrixStats',
-                       'limma', 'lme4', 'S4Vectors', 'SingleCellExperiment',
-                       'SummarizedExperiment', 'batchelor', 'HDF5Array',
-                       'terra', 'ggrastr'))
-
-# Install monocle3 through the cole-trapnell-lab GitHub:
-install.packages("devtools")
-devtools::install_github('cole-trapnell-lab/monocle3')
-library(monocle3)
-```
-
-> <warning-title>Installation errors</warning-title>
-> Sometimes there might be some changes in repositories, packages or dependencies and you might also use different versions of them. Therefore, it might happen that you would need to carefully read the error messages and follow the suggestions. If you are facing any difficulties with installation process, it is recommended that you consult your problem with additional online resources. It is more likely that RStudio Cloud or Galaxy tool would fail rather than local RStudio.
->
-{: .warning}
 
 ## Generating CDS object
 Now let’s store our files in one object – the cell_data_set. This is the main class used by Monocle to hold single cell expression data. The class is derived from the Bioconductor SingleCellExperiment class. It's similar to Python's AnnData storing a data matrix together with annotations of observations and variables. There are three ways of creating CDS object in monocle:
@@ -198,7 +198,8 @@ But what if we didn’t have the genes symbols in our CDS object and wanted to a
 ```r
 cds_extra <- cds                                        # assign our CDS to a new object for the demonstration purpose
 rownames(fData(cds_extra))                              # preview of the gene IDs as rownames
-
+```
+```r
 # get relevant gene names
 library("biomaRt")                                      # load the BioMart library
 ensembl.ids <- rownames(fData(cds_extra))               # fData() allows to access cds rowData table
@@ -209,8 +210,8 @@ ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl", host='https://n
 # In our case we choose the mus musculus database and to get the desired Genome assembly GRCm38, 
 # we specify the host with this archive. If you want to use the most recent version of the dataset, just run:
 # ensembl_m = useMart("ensembl", dataset="mmusculus_gene_ensembl")
-
-
+```
+```r
 genes <- getBM(attributes=c('ensembl_gene_id','external_gene_name'),
                filters = 'ensembl_gene_id', 
                values = ensembl.ids, 
@@ -219,10 +220,12 @@ genes <- getBM(attributes=c('ensembl_gene_id','external_gene_name'),
 # The line above retrieves the specified attributes from the connected BioMart database; 
 # 'ensembl_gene_id' are genes IDs, 
 # 'external_gene_name' are the genes symbols that we want to get for our values stored in ‘ensembl.ids’.
-
+```
+```r
 # see the resulting data
 genes                             
-
+```
+```r
 # replace IDs for gene names 
 gene_names <- ensembl.ids	 
 count = 1 	 
@@ -239,10 +242,12 @@ for (geneID in gene_names)
   }
  count = count + 1                # increased count so that every element in gene_names is replaced
 }
-
+```
+```r
 # store the gene names in our CDS object in a new column gene_short_name_extra
 fData(cds_extra)$gene_short_name_extra <- gene_names
-
+```
+```r
 # see the changes
 fData(cds_extra)                    
 ```
@@ -262,12 +267,13 @@ Do you remember the Monocle workflow introduced in the previous tutorial? Here i
 ![Monocle workflow: scRNA-seq dataset, pre-process data (normalise, remove batch effects), non-linear dimensionality reduction (t-SNE, UMAP), cluster cells, compare clusters (identify top markers, targeted contrasts), trajectory analysis](../../images/scrna-casestudy-monocle/monocle3_new_workflow.png "Workflow provided by Monocle3 documentation")
 
 ## Pre-processing
-Therefore, let’s start with normalisation and pre-processing that can be performed using the function `preprocess_cds()`. The argument `num_dim` is the number of principal components that will be computed when using PCA during normalisation. Then you can check that you're using enough PCs to capture most of the variation in gene expression across all the cells in the data set. Note that “PCA” is the default method of pre-processing in Monocle3, so although we can specify this in our function, we don’t have to.
+Let’s start with normalisation and pre-processing that can be performed using the function `preprocess_cds()`. The argument `num_dim` is the number of principal components that will be computed when using PCA during normalisation. Then you can check that you're using enough PCs to capture most of the variation in gene expression across all the cells in the data set. Note that “PCA” is the default method of pre-processing in Monocle3, so although we can specify this in our function, we don’t have to.
 
 ```r
 # PCA pre-processing with 210 principal components
 cds_preprocessing <- preprocess_cds(cds, method = "PCA", num_dim = 210) 
-
+```
+```r
  # plot the variation in gene expression vs PCA components
 plot_pc_variance_explained(cds_preprocessing)                              		                            
 ```
@@ -289,8 +295,9 @@ In our case it’s indeed ‘batch’, but your data might have another name (eg
 Then, we have to reduce dimension before attempting to plot. The [previous tutorial]({% link topics/single-cell/tutorials/scrna-case_monocle3-trajectories/tutorial.md %}) introduced the methods of dimensionality reduction in Monocle. Of course you can replicate what we did in Galaxy to compare the output of dimensionality reduction using different methods, simply by changing the `reduction_method` argument. Options currently supported by Monocle are "UMAP", "tSNE", "PCA", "LSI", and "Aligned". However, as for now, let’s just recall that UMAP gave the best results, so we will use UMAP here as well. 
 ```r
 # reduce dimension first
-cds_preprocessing_UMAP <- reduce_dimension(cds_preprocessing, reduction_method = "UMAP", preprocess_method = 'PCA')
-
+cds_preprocessing_UMAP <- reduce_dimension(cds_preprocessing, reduction_method = "UMAP", preprocess_method = "PCA")
+```
+```r
 # then produce a plot to check for batch effects
 plot_cells(cds_preprocessing_UMAP, color_cells_by="batch", label_cell_groups=FALSE)
 ```
@@ -305,7 +312,8 @@ To see the changes, we have to run UMAP again, but this time on the aligned data
 ```r
 # dimensionality reduction after alignment
 cds_red_dim <- reduce_dimension(cds_batch, preprocess_method = "Aligned", reduction_method = "UMAP")  
-
+```
+```r
 # see the batch correction effect on a plot
 plot_cells(cds_red_dim, color_cells_by="batch", label_cell_groups=FALSE)		
 ```
@@ -343,7 +351,8 @@ Therefore, let’s perform clustering and visualise the resulting clusters.
 ```r
 # clustering 
 cds_auto_cluster <- cluster_cells(cds_red_dim, reduction_method = "UMAP") 
-
+```
+```r
 # see the clusters
 plot_cells(cds_auto_cluster, reduction_method = "UMAP", color_cells_by = 'cluster', group_label_size = 5)     
 ```
@@ -353,7 +362,8 @@ When using standard igraph louvain clustering, the value of resolution parameter
 ```r
 # clustering with changed resolution value
 cds_clustered <- cluster_cells(cds_red_dim, reduction_method = "UMAP", resolution = 0.0002) 
-
+```
+```r
 # see the new clusters
 plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'cluster', group_label_size = 5) 	
 ```
@@ -373,10 +383,12 @@ We can see that there are 3 partitions identified in `cds_clustered` object. Ide
 ```r
 # changing the partition q-value
 cds_clustered <- cluster_cells(cds_red_dim, reduction_method = "UMAP", resolution = 0.0002, partition_qval = 1) 
-
+```
+```r
 # see the partitions with the changed q-value
 plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'partition', label_cell_groups=FALSE)	
-
+```
+```r
 # check if clusters didn't change
 plot_cells(cds_clustered, reduction_method = "UMAP", color_cells_by = 'cluster', label_cell_groups=FALSE)	
 ```
@@ -392,22 +404,28 @@ Let’s assume we have 4 partitions that cannot be extended to one big partition
 ```r
 # simulate the dataset
 cds_partitions_extra <- cluster_cells(cds_red_dim, reduction_method = "UMAP", partition_qval = 0.0001)		
-
+```
+```r
 # see the simulated partitions
 plot_cells(cds_partitions_extra, reduction_method = "UMAP", color_cells_by = 'partition', label_cell_groups=FALSE)	
-
+```
+```r
 # store ‘1’ the number of times equal to the number of cells
 big_partition <- c(rep(1,length(cds_partitions_extra@colData@rownames))) 	
-
+```
+```r
 # take the barcode of each cell and assign ‘1’ to each of them (now the ‘ones’ are named) 
 names(big_partition) <- cds_partitions_extra@colData@rownames 	
-
+```
+```r
 # convert from numeric to factor
 big_partition <- as.factor(big_partition)	
-
+```
+```r
 # assign the created barcodes-partition list to the location where information about partitions is stored in CDS object
 cds_partitions_extra@clusters$UMAP$partitions <- big_partition 	
-
+```
+```r
 # see the new partition assignment
 plot_cells(cds_partitions_extra, reduction_method = "UMAP", color_cells_by = 'partition', label_cell_groups=FALSE)	
 ```
@@ -467,14 +485,17 @@ Having identified which cluster corresponds to a specific cell type, we can fina
 ```r
 # just to keep the objects tidy and not overwrite them so that you can come back to any point of the analysis 
 cds_annotated <- cds_clustered 	
-
+```
+```r
 # create a new column ‘cell_type’ and initialise it with clusters values
 colData(cds_annotated)$cell_type <- as.character(clusters(cds_annotated)) 	
-
+```
+```r
 # install and load dplyr package
 install.packages("dplyr")	 
 library(dplyr)
-
+```
+```r
 # annotate clusters
 colData(cds_annotated)$cell_type <- dplyr::recode(colData(cds_annotated)$cell_type,
                                                        '1'='DP-M1',   # double positive – middle T-cell (1st cluster)
@@ -484,7 +505,8 @@ colData(cds_annotated)$cell_type <- dplyr::recode(colData(cds_annotated)$cell_ty
                                                        '5'='DP-L',	  # double positive – late middle T-cell
                                                        '6'='DP-M3',	  # double positive – middle T-cell (3rd cluster)
                                                        '7'='Unknown') # no info for now, so call it ‘Unknown’
-
+```
+```r
 # check the annotation 
 plot_cells(cds_annotated, color_cells_by="cell_type", label_cell_groups=FALSE)    
 ```
@@ -530,7 +552,8 @@ top_specific_markers <- marker_test %>%
                             filter(fraction_expressing >= 0.10) %>%
                             group_by(cell_group) %>%
                             top_n(2, pseudo_R2)
-
+```
+```r
 # store the names of the marker genes
 # you can also use IDs, the conversion to gene names should happen automatically when plotting  
 top_marker_names <- unique(top_specific_markers %>% pull(gene_short_name)) 	
@@ -564,18 +587,21 @@ assigned_marker_test <- top_markers(cds_annotated,
                                              group_cells_by="cell_type",
                                              reference_cells=1000,
                                              cores=8)
-
+```
+```r
 # filter these markers according to how stringent you want to be
 garnett_markers <- assigned_marker_test %>%
                         filter(marker_test_q_value < 0.05 & specificity >= 0.25) %>%
                         group_by(cell_group) %>%
                         top_n(5, marker_score)
-
+```
+```r
 # exclude genes that are good markers for more than one cell type:
 garnett_markers_filtered <- garnett_markers %>% 
                         group_by(gene_short_name) %>%
                         filter(n() == 1)
-
+```
+```r
 # generate a file of marker genes
 generate_garnett_marker_file(garnett_markers_filtered, file="./marker_file.txt")
 ```
@@ -602,7 +628,8 @@ In one of the previous sections we've already prepared the partitions for trajec
 ```r
 # learn trajectory graph
 cds_trajectory <- learn_graph(cds_annotated, use_partition=TRUE)
-
+```
+```r
 # visualise the learned trajectory
 plot_cells(cds_trajectory,
            color_cells_by = "cell_type",
@@ -681,10 +708,12 @@ There are a couple of ways to specify the root cells:
     starting_cell_type <- 'DN'
     index <- which(cds_trajectory@colData$cell_type == starting_cell_type)
     DN_cells <- colnames(cds_trajectory)[index]
-
+    ```
+    ```r
     # alternatively, if you work on unannotated data, you can use the number of the cluster that should be used as the beginning of the trajectory and pass it in the ‘root_cells’ argument
     starting_cluster <- colnames(cds_trajectory[,clusters(cds_trajectory) == 4])
-
+    ```
+    ```r
     # order cells 
     cds_order_3 <- order_cells(cds_trajectory, root_cells = DN_cells)
     ```
@@ -705,7 +734,8 @@ plot_cells(cds_order,
            label_cell_groups=FALSE,
            label_leaves=FALSE,
            label_branch_points=FALSE)
-
+```
+```r
 # access pseudotime calculated for each cell and store it alongside cell metadata 
 pseudotime <- pseudotime(cds_order) 	
 cds_order@colData$pseudotime <- pseudotime 		 
@@ -755,10 +785,12 @@ We will use a function which fits a generalized linear model for each gene in a 
 ```r
 # fit a generalized linear model for each gene
 gene_fits <- fit_models(cds_subset, model_formula_str = "~cell_type + batch") 
-
+```
+```r
 # extract a table of coefficients
 fit_coefs <- coefficient_table(gene_fits) 	
-
+```
+```r
 # see the 'fit_coefs' structure
 fit_coefs
 ```
@@ -767,14 +799,17 @@ If you inspect the `fit_coefs` object, you will notice that the table includes o
 ```r
 # filter out Intercept term
 no_intercept_coefs <- fit_coefs %>% filter(term != "(Intercept)") 	
-
+```
+```r
 # extract results for DP-M1 cells only
 DP_M1_coefs <- fit_coefs %>% filter(term == "cell_typeDP-M1") 	
-
+```
+```r
 # control the false discovery rate and choose only several variables to store
 DP_M1_coefs_filtered <- DP_M1_coefs %>% filter (q_value < 0.05) %>%
   select(gene_short_name, term, q_value, estimate)		
-
+```
+```r
 # see the resulting table
 DP_M1_coefs_filtered
 ```
@@ -794,7 +829,8 @@ We will now try to associate genes with clusters by grouping genes into modules 
 ```r
 # get gene IDs for which q-value < 0.05
 pr_deg_ids <- row.names(subset(graph_test_res, q_value < 0.05)) 	
-
+```
+```r
 # group genes into modules
 gene_module_df <- find_gene_modules(cds_order[pr_deg_ids,], resolution=1e-2) 	
 ```
@@ -807,7 +843,8 @@ cell_group_df <- tibble::tibble(cell=row.names(colData(cds_order)),
 agg_mat <- aggregate_gene_expression(cds_order, gene_module_df, cell_group_df)
 row.names(agg_mat) <- stringr::str_c("Module ", row.names(agg_mat))
 colnames(agg_mat) <- stringr::str_c("Cluster ", colnames(agg_mat))
-
+```
+```r
 # create a heatmap
 pheatmap::pheatmap(agg_mat, cluster_rows=TRUE, cluster_cols=TRUE,
                    scale="column", clustering_method="ward.D2",
@@ -836,7 +873,8 @@ Essentially the workflow is the same as we followed in two dimensions. The cruci
 ```r
 # reduce dimension to 3D
 cds_3d <- reduce_dimension(cds_order, preprocess_method = 'Aligned', max_components = 3)
-
+```
+```r
 # see the resulting 3D plot
 plot_cells_3d(cds_3d, color_cells_by="cell_type")
 ```
