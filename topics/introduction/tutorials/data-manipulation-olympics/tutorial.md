@@ -16,7 +16,7 @@ objectives:
 time_estimation: 1h
 key_points:
 - There are a lot of tools available in Galaxy for performing basic data manipulation tasks
-- Bacis data manipulation is often needed between steps in a larger scientific analysis in order to connect outputs from one tool to input of another.
+- Basic data manipulation is often needed between steps in a larger scientific analysis in order to connect outputs from one tool to input of another.
 - There are often multiple ways/tools to achieve the same end result
 - Having a basic understanding of data manipulation tools will make it easier to do exploratory data analysis
 - Always read the help text of the tool before using it to get a full understanding of its workings
