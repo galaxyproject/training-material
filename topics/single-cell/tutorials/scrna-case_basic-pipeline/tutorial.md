@@ -661,7 +661,6 @@ Nearly plotting time! But one final piece is to add in SOME gene information. Le
 >
 > 1. {% tool [Scanpy FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindClusters** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `Yes` <--- trust me, there's an odd glitch here in some tool versions that is solved by simply ticking `Yes`
 >
 > 2. **Rename** {% icon galaxy-pencil %} output table (not h5ad) `Markers - cluster`
 >
