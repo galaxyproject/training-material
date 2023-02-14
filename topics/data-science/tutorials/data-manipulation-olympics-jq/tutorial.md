@@ -74,13 +74,13 @@ Filter                   | Remove objects based on values                       
 Group on a column        | And perform simple operations (count, mean, min, max etc)           | `group_by(.key1, -.key2)`
 Compute an expression    | Over each row, add it as a new column                               | `.key1 * .key2`
 Find and Replace         | in a specific column                                                | `gsub("(?<a>...)", "xyz\\(.a)abc")`
-Join two Datasets        | side by side on a specified field                                   |
+Join two Datasets        | side by side on a specified field                                   | `[JOIN(INDEX(input[]; .right); .[]; .left; add)]`
 Concatenate datasets     | one after the other                                                 | `cat *.json | jq`
 Remove Beginning         | Good for removing header lines                                      | `last`, `index`
 Select First lines       | Good for finding top 10s or saving header lines                     | `first`, `index`
 Cut Columns              | By header name                                                      | `.key`
-Paste                    | Two files side by side                                              |
-Split file               | Based on values of a column                                         |
+Paste                    | Two files side by side                                              | `-s '[.[][]]'`
+Split file               | Based on values of a column                                         | n/a (requires bash/awk/etc.)
 Unique                   | Remove duplicate rows                                               | `unique`
 
 In this tutorial, these functions are explained in more detail, and we provide some exercises for you to practice.
