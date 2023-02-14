@@ -9,11 +9,11 @@
 		<img class="funder-avatar" src="https://avatars.githubusercontent.com/{{ id }}" alt="Logo">
 		{% endif %}
 		</div>
-		<div>
 		{% if site.data.contributors[id].funding_id %}
+		<div>
 		{{ site.data.contributors[id].funding_id }}
-		{% endif %}
 		</div>
+		{% endif %}
 	</div>
 {% endfor %}
 {% endif %}
