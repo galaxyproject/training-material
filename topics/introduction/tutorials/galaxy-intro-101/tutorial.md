@@ -414,7 +414,9 @@ A good way to learn about these exons is to look at their genomic surrounding. T
 >
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="bed" %}
 >
-> 3. To **visualize the data in UCSC genome browser**, click on `display at UCSC main` option visible when you expand the history item.
+> 3. Click on the {% icon galaxy-barchart %} (**Visualize**) icon
+>
+> 4. To **visualize the data in UCSC genome browser**, click on `display at UCSC main` now visible in the Visualize menu.
 >
 >    ![`display at UCSC main` link](../../images/101_displayucsc.png)
 >
@@ -452,7 +454,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 
 > <hands-on-title>Extract workflow</hands-on-title>
 >
-> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-cross %} button.
+> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-delete %} button.
 >
 >    This will make the creation of the workflow easier.
 >

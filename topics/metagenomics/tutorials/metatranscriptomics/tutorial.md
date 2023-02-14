@@ -34,7 +34,4 @@ contributors:
 
 ---
 
-
-
-
-{% include {{ page.dir }}content.md short=false %}
+{% include topics/metagenomics/tutorials/metatranscriptomics/content.md short=false %}

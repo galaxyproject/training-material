@@ -2,7 +2,26 @@ require './_plugins/gtn/boxify'
 require './_plugins/gtn/mod'
 require './_plugins/gtn/synthetic'
 require './_plugins/gtn/metrics'
+require './_plugins/gtn/scholar'
 
+
+def get_authors(material)
+  if material.key?('contributors') then
+    material['contributors']
+  elsif material.key?('contributions') then
+    material['contributions']['authorship']
+  else
+    []
+  end
+end
+
+def lookup_name(user, site)
+  if site.data['contributors'].has_key?(user) then
+    site.data['contributors'][user].fetch('name', user)
+  else
+    user
+  end
+end
 
 module Jekyll
   module GtnFunctions
@@ -38,6 +57,16 @@ module Jekyll
 
     def elixirnode2name(name)
       ELIXIR_NODES[name]
+    end
+
+    def top_citations(citations)
+      if citations.nil?
+        {}
+      else
+        citations.sort_by{|k, v| v}.reverse.to_h.first(20).map{|k, v| 
+          [k, {"count" => v, "text" => Gtn::Scholar.render_citation(k)}]
+        }.to_h
+      end
     end
 
     def slugify_unsafe(text)
@@ -79,12 +108,26 @@ module Jekyll
       feedback.select{|x| x["tutorial"] == name}.length
     end
 
+    def fix_box_titles(content, lang, key)
+      Gtn::Boxify.replace_elements(content, lang, key)
+    end
+
     def filter_authors(contributors, contributions)
       if not contributors.nil?
         return contributors
       else
         return contributions["authorship"]
       end
+    end
+
+    def regex_replace(str, regex_search, value_replace)
+      regex = /#{regex_search}/m
+      return str.gsub(regex, value_replace)
+    end
+
+    def regex_replace_once(str, regex_search, value_replace)
+      regex = /#{regex_search}/m
+      return str.sub(regex, value_replace)
     end
 
     def get_default_link(material)
@@ -102,11 +145,16 @@ module Jekyll
 
       url
     end
-
   end
 end
 
 Liquid::Template.register_filter(Jekyll::GtnFunctions)
+
+
+Jekyll::Hooks.register :posts, :pre_render do |post, out|
+  post.data['author'] = get_authors(post.data).map{|c| lookup_name(c, post.site)}.join(", ")
+  post.data['image'] = post.data['cover']
+end
 
 if $0 == __FILE__
   result = Gtn::ModificationTimes.obtain_time(ARGV[0].gsub(/^\//, ''))

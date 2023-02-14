@@ -209,6 +209,7 @@ module TopicFilter
 
       page.data['topic_name'] = material_meta['topic_name']
       page.data['tutorial_name'] = material_meta['tutorial_name']
+      page.data['dir'] = material_meta['dir']
 
       interesting[mk]["resources"].push([material_meta["type"], page])
     end
@@ -248,8 +249,6 @@ module TopicFilter
 
     if page.nil? then
       puts "[GTN/TopicFilter] Could not process material"
-      require 'pp'
-      pp material
       return {}
     end
 
@@ -305,7 +304,7 @@ module TopicFilter
     end
 
     # Similar as above.
-    workflows = Dir.glob("#{folder}/workflwos/*.ga") # TODO: support gxformat2
+    workflows = Dir.glob("#{folder}/workflows/*.ga") # TODO: support gxformat2
     if workflows.length > 0
       workflow_names = workflows.map{ |a| a.split('/')[-1] }
       page_obj['workflows'] = workflow_names.map{|wf|
@@ -371,6 +370,10 @@ module TopicFilter
     materials
   end
 
+  def self.list_all_materials(site)
+    self.process_pages(site, site.pages)
+  end
+
   def self.list_all_tags(site)
     materials = self.process_pages(site, site.pages)
     materials.map{|x| x.fetch('tags', [])}.flatten.sort.uniq
@@ -427,6 +430,55 @@ module TopicFilter
       .map{|k, v| v['materials']}.flatten # Not 100% sure why this flatten is needed? Probably due to the map over hash
       .map{|mat| get_contributors(mat) }.flatten.uniq.shuffle
   end
+
+  def self.get_version(tool)
+    if tool.count('/') > 4 then
+      tool.split('/')[-1]
+    else
+      tool
+    end
+  end
+
+  def self.short_tool(tool)
+    if tool.count('/') > 4 then
+      short_tool = tool.split('/')[2] + '/' + tool.split('/')[4]
+    else
+      short_tool = tool
+    end
+    short_tool
+  end
+
+  def self.list_materials_by_tool(site)
+    tool_map = Hash.new
+
+    self.list_all_materials(site).each do |m|
+      m.fetch('tools', []).each do |tool|
+        sid = self.short_tool(tool)
+        if ! tool_map.has_key?(sid)
+          tool_map[sid] = {"tool_id" => [], "tutorials" => []}
+        end
+
+        tool_map[sid]["tool_id"].push([tool, self.get_version(tool)])
+        tool_map[sid]["tutorials"].push([
+          m['id'], m['title'], site.data[m['topic_name']]['title'], m['url']
+        ])
+      end
+    end
+
+    # Uniqueify/sort
+    t = tool_map.map{|k, v| 
+      v["tool_id"].uniq!
+      v["tool_id"].sort_by!{|k| k[1]}
+      v["tool_id"].reverse!
+
+      v["tutorials"].uniq!
+      v["tutorials"].sort!
+      [k, v]
+    }.to_h
+
+    # Order by most popular tool
+    t.sort_by{|k, v| v["tutorials"].length}.reverse.to_h
+  end
 end
 
 
@@ -479,6 +531,10 @@ module Jekyll
       q = q.sort{|a, b| a[1]['title'] <=> b[1]['title'] }
 
       q
+    end
+
+    def list_materials_by_tool(site)
+      TopicFilter.list_materials_by_tool(site)
     end
 
     def list_materials_structured(site, topic_name)

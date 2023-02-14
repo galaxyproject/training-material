@@ -12,6 +12,7 @@ layout: base
         <tr>
             <th>Workflow</th>
             <th>Updated</th>
+            <th>Import</th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +25,10 @@ layout: base
         <tr>
             <td><a href="{{ site.baseurl }}{{ file.url }}">{{ file.name }}</a></td>
             <td>{{ file.url | gtn_mod_date | date: "%b %-d, %Y" }}</td>
+            <td>
+                <a href="https://usegalaxy.org/workflows/trs_import?trs_url=https://training.galaxyproject.org/api/ga4gh/trs/v2/tools/{{page.topic_name}}-{{page.tutorial_name}}/versions/main?gtn=true"
+                class="btn btn-primary">Import to UseGalaxy.org</a> (Experimental!)
+            </td>
         </tr>
         {% endif %}
     {% enddirectory %}

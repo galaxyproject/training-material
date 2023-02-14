@@ -88,7 +88,7 @@ The heterogeneity that exists in the cellular composition of bulk RNA-seq can ad
 > **T = C x P**
 > or some fancier formulas...(read more [in-depth here](https://academic.oup.com/bioinformatics/article/34/11/1969/4813737) if you like!)
 >
-> The point is, if we have an idea of what the average expression should be for each gene (what we can get from single cell RNA-seq data, *C*), and we have the total expression (from the bulk RNA-seq, *C*), then we can infer the cell proportions (*P*).
+> The point is, if we have an idea of what the average expression should be for each gene (what we can get from single cell RNA-seq data, *C*), and we have the total expression (from the bulk RNA-seq, *T*), then we can infer the cell proportions (*P*).
 >
 {: .details}
 
@@ -574,7 +574,7 @@ You will need to again create ExpressionSet objects, as before.
 
 ### Heatmap of Cell Type Similarities using **MuSiC**
 
-We shall use the 4 cell type groups determined by the cut off threshold in the above question box. To guide the clustering, we shall upload known epithelial and immune cell markers to improve the more diverse collection of cell types in the C3 and C3 groups.
+We shall use the 4 cell type groups determined by the cut off threshold in the above question box. To guide the clustering, we shall upload known epithelial and immune cell markers to improve the more diverse collection of cell types in the C3 and C4 groups.
 
 > <hands-on-title>Upload marker genes and generate heatmap</hands-on-title>
 > 1. Import the files from [Zenodo]({{ page.zenodo_link }}) or from

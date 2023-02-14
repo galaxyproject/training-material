@@ -6,10 +6,10 @@ layout: faq
 contributors: [annefou,shiltemann,nomadscientist]
 ---
 
-> ### {% icon tip %} Tip: Launch JupyterLab in Galaxy
+> <tip-title>Launch JupyterLab in Galaxy</tip-title>
 > Currently JupyterLab in Galaxy is available on [Live.useGalaxy.eu](https://live.usegalaxy.eu), [usegalaxy.org](https://usegalaxy.org) and [usegalaxy.eu](https://usegalaxy.eu).
 >
-> > ### {% icon hands_on %} Hands-on: Run JupyterLab
+> > <hands-on-title>Run JupyterLab</hands-on-title>
 > >
 > > 1. {% tool [Interactive Jupyter Notebook](interactive_tool_jupyter_notebook) %}:
 > > 2. Click Run Tool
@@ -20,10 +20,8 @@ contributors: [annefou,shiltemann,nomadscientist]
 > {: .hands_on}
 {: .tip}
 
-> ### {% icon tip %} Tip: Launch Try JupyterLab if not available on Galaxy
+> <tip-title>Launch Try JupyterLab if not available on Galaxy</tip-title>
 >
 > If JupyterLab is not available on the Galaxy instance:
 > 1. Start [Try JupyterLab](https://mybinder.org/v2/gh/jupyterlab/jupyterlab-demo/try.jupyter.org?urlpath=lab)
 {: .tip}
-
-<!-- GTN:IGNORE:010 -->

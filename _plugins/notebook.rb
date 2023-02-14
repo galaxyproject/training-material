@@ -443,7 +443,15 @@ module GTNNotebooks
         cell['source'] = self.markdownify(site, source)
 
         ICONS.each{ |key, val|
-          cell['source'].gsub!(/{% icon #{key} %}/, val)
+          # Replace the new box titles with h3s.
+          cell['source'].gsub!(/<div class="box-title #{key}-title".*?<\/span>(.*?)<\/div>/, "<div style=\"font-weight:900;font-size: 125%\">#{val} " + '\1</div>')
+
+          # Remove the fa-icon spans
+          cell['source'].gsub!(/<span role="button" class="fold-unfold fa fa-minus-square"><\/span>/, '')
+
+          # just removing the buttons from solutions since they'll be changed
+          # into summary/details in the parent notebook-jupyter.
+          cell['source'].gsub!(/<button class="gtn-boxify-button solution".*?<\/button>/, '')
         }
 
         if metadata.key?('abbreviations')

@@ -36,6 +36,7 @@ contributors:
 priority: 9
 notebook:
   language: python
+  pyolite: true
 
 abbreviations:
   ORF: Open Reading Frame

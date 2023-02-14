@@ -165,7 +165,7 @@ First, we will convert the file from comma-separated to tab-separated format. Ga
 >
 > 1. **Convert** {% icon galaxy-pencil %} the CSV file (comma-separated values) to tabular format (tsv; tab-separated values)
 >
->    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="Convert CSV to Tabular" %}
+>    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="tabular (using csv-to-tabular)" %}
 >
 > 2. **Rename** {% icon galaxy-pencil %} the resulting dataset to `iris tabular`
 >
@@ -526,7 +526,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 
 > <hands-on-title>Extract workflow</hands-on-title>
 >
-> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-cross %} button.
+> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-delete %} button.
 >
 >    This will make the creation of the workflow easier.
 >

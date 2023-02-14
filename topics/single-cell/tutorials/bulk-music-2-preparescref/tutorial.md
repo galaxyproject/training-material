@@ -15,9 +15,12 @@ time_estimation: 1H
 key_points:
 - The EMBL-EBI Single-cell expression atlas contains high quality datasets.
 - Metadata manipulation is key for generating the correctly formatted resource.
-contributors:
-- nomadscientist
-- mtekman
+contributions:
+  authorship:
+    - nomadscientist
+    - mtekman
+  testing:
+    - MarisaJL
 
 requirements:
   -
@@ -96,7 +99,7 @@ This tool will retrieve four files: a barcodes list, a genes list, an experiment
 
 ## Prepare the experimental design file
 
-Let's get rid of a bunch of repetitive columns in the metadata we don't need. You can find out what each columns is by inspecting the dataset {% icon galaxy-eye %} in the history window.
+Let's get rid of a bunch of repetitive columns in the metadata we don't need. You can find out what each column is by inspecting the dataset {% icon galaxy-eye %} in the history window.
 
 > <hands-on-title>Cutting necessary metadata columns</hands-on-title>
 >
@@ -130,11 +133,11 @@ Now, there might be a better way to do this in Galaxy (or you might consider dow
 >            - *"Find Regex"*: `"Sample Characteristic\[body mass index\]"`
 >            - *"Replacement"*: `BMI`
 >        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: ` kilogram per square meter`
+>            - *"Find Regex"*: `kilogram per square meter`
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `HbA1c `
 >        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `"Sample Characteristic\[clinical information\"]`
+>            - *"Find Regex"*: `"Sample Characteristic\[clinical information\]"`
 >            - *"Replacement"*: `HbA1c`
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `%`
@@ -148,22 +151,22 @@ Now, there might be a better way to do this in Galaxy (or you might consider dow
 >            - *"Find Regex"*: `"Sample Characteristic\[submitted single cell quality\]"`
 >            - *"Replacement"*: `"Submitted single cell quality"`
 >        - {% icon param-repeat %} *"Insert Check"*
->            - *"Find Regex"*: `Factor Value\[inferred cell type - ontology labels\]`
->            - *"Replacement"*: `"Inferred cell type - ontology label"`
+>            - *"Find Regex"*: `"Factor Value\[inferred cell type - ontology labels\]"`
+>            - *"Replacement"*: `Inferred cell type - ontology label`
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `"Factor Value\[inferred cell type - authors labels\]"`
 >            - *"Replacement"*: `Inferred cell type - author labels`
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `""`
->            - *"Replacement"*: ``
+>            - *"Replacement"*: 
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `"`
->            - *"Replacement"*: ``
+>            - *"Replacement"*: 
 >
 >    > <comment-title></comment-title>
 >    >
 >    > What's with the `\` everywhere? That's because the `[]` symbols usually call the code to do something, rather than just read it as a normal character. the `\` prevents this.
->    {: .comment}\
+>    {: .comment}
 >
 > 2. Change the datatype to tabular.
 >
@@ -180,7 +183,11 @@ Great, this file is now ready to go! But, it contains all those extra cells that
 > 1. {% tool [Add line to file](toolshed.g2.bx.psu.edu/repos/bgruening/add_line_to_file/add_line_to_file/0.1.0) %} with the following parameters:
 >    - *"text to add"*: `Cell`
 >    - {% icon param-file %} *"input file"*: `barcode_tsv` (output of **EBI SCXA Data Retrieval** {% icon tool %})
+> 
+> 2. Change the datatype to tabular.
 >
+>    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="tabular" %}
+> 
 >    > <comment-title></comment-title>
 >    >
 >    > This is an annoying step we have to do to get the right format, otherwise future steps won't work.
@@ -199,7 +206,10 @@ Great, this file is now ready to go! But, it contains all those extra cells that
 >    - *"and column"*: `c1`
 >    - *"Fill empty columns"*: `No`
 >    - *"Keep the header lines"*: `Yes`
->
+>    > <comment-title></comment-title>
+>    >
+>    > Make sure that you join the files in the same order as above - put the output of Add line to file in first - otherwise your columns will be in a different order for the next step. Everything will still work, but you would need to change the number of the column you remove using Advanced Cut. 
+>    {: .comment}
 {: .hands_on}
 
 > <question-title></question-title>
@@ -222,7 +232,11 @@ Great, this file is now ready to go! But, it contains all those extra cells that
 >    - *"Operation"*: `Discard`
 >    - *"Cut by"*: `fields`
 >        - *"List of Fields"*: `c1`
->
+>        
+>    > <comment-title></comment-title>
+>    >
+>    > Advanced cut works slightly differently in a workflow versus running the tool independently. Independently, there is a list and you can click through the list to note your columns, while in a workflow it appears as a text option and you put each column on a different line. The point is, each number above represents a column, so remove them!
+>    {: .comment}
 {: .hands_on}
 
 Fantastic! You've completed part 1 - making the single cell metadata file. It should now look like this:
@@ -234,7 +248,7 @@ You can use the [workflow for this portion of the tutorial](https://usegalaxy.eu
 
 # Manipulate the expression matrix
 
-Currently, the matrix data is in a 3-column format common in 10x outputs, where you need the barcodes and the genes files to interpret the matrix. What you actually need is an expression matrix with cells on one axis and genes on another. While we aren't runny a Scanpy analysis, we can still use our Scanpy tools to get this format.
+Currently, the matrix data is in a 3-column format common in 10x outputs, where you need the barcodes and the genes files to interpret the matrix. What you actually need is an expression matrix with cells on one axis and genes on another. While we aren't running a Scanpy analysis, we can still use our Scanpy tools to get this format.
 
 ## Reformat the matrix
 
@@ -341,7 +355,7 @@ We're nearly there! We have three more tasks to do: first, we need to create the
 >
 > > <div id="solution-1" class="box-title"><button type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 > >
-> > 1. If you select the {% icon galaxy-eye %} of the output **General Info** dataset in the history, you will find it contains 21671 features and 2914 samples, or rather, `21671` genes and 2914 cells. That's a huge reduction in genes thanks to the ENS ID collapsing!
+> > 1. If you select the {% icon galaxy-eye %} of the output **General Info** dataset in the history, you will find it contains 21671 features and 2914 samples, or rather, `21671` genes and `2914` cells. That's a huge reduction in genes thanks to the ENS ID collapsing!
 > >
 > {: .solution}
 {: .question}
@@ -356,7 +370,7 @@ We're nearly there! We have three more tasks to do: first, we need to create the
 >            - In *"Filter Samples by Condition"*:
 >                - {% icon param-repeat %} *"Insert Filter Samples by Condition"*
 >                    - *"Name of phenotype column"*: `Disease`
->                    - *"List of values in this column to filter for, comma-delimited"*: `normal`
+>                    - *"List of values in this column to filter for, comma-delimited"*: `type II diabetes mellitus`
 >
 > 2. Remove the `#combined` tag from the output **RData ESet Object**
 >
@@ -378,7 +392,7 @@ You can either re-run this tool or set it up again to create the healthy-only ob
 >            - In *"Filter Samples by Condition"*:
 >                - {% icon param-repeat %} *"Insert Filter Samples by Condition"*
 >                    - *"Name of phenotype column"*: `Disease`
->                    - *"List of values in this column to filter for, comma-delimited"*: `type II diabetes mellitus`
+>                    - *"List of values in this column to filter for, comma-delimited"*: `normal`
 >
 > 2. Remove the `#combined` tag from the output **RData ESet Object**
 >

@@ -1,46 +1,43 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="{% if page.lang %}{{ page.lang }}{% else %}en{% endif %}">
 {% assign topic = site.data[page.topic_name] %}
-{% assign topic_material = site | topic_filter:page.topic_name %}
-{% assign title = topic.title %}
-
-{% assign tutorial = page %}
-{% assign title = tutorial.title %}
-{% assign contributors = site.data['contributors'] %}
-
 {% assign locale = site.data.lang[page.lang] %}
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{{ page.title | default: site.title }}</title>
+        {% if jekyll.environment == 'production' %}
+            {% include _includes/analytics.html %}
+        {% endif %}
+        <link rel="stylesheet" href="{{ "/assets/css/main.css?v=2" | prepend: site.baseurl }}">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{{ "/assets/css/academicons.css" | prepend: site.baseurl }}">
+        <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="{{ "/feed.xml" | prepend: site.baseurl }}" />
+        <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}" />
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
 
-  <head>
-    <meta charset="utf-8">
-    <title>{{ title | strip_html }}</title>
-    {% if jekyll.environment == 'production' %}
-        {% include _includes/analytics.html %}
-    {% endif %}
-    <link rel="stylesheet" href="{{ "/assets/css/slides.css" | prepend: site.baseurl }}">
-    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon" />
+        {{ page | generate_dublin_core: site }}
 
-    {% assign topic = site.data[page.topic_name] %}
-    {% assign og_title = topic.title %}
-    {% if page.title %}
-        {% assign og_title = page.title %}
-    {% endif %}
-    {% assign og_desc = topic.summary %}
-    <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}" />
-    <meta property="og:title" content="Galaxy Training: {{ og_title | truncate: 60}}" />
-    <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
-    <meta property="og:image" content="{{ "/assets/images/GTNLogo1000.png" | prepend: site.baseurl }}" />
+        {% assign topic = site.data[page.topic_name] %}
+        {% assign og_title = topic.title %}
+        {% if page.title %}
+            {% assign og_title = page.title %}
+        {% endif %}
+        {% assign og_desc = topic.summary | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
+        <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}" />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}" />
+        <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
+        <meta property="og:image" content="{{ "/assets/images/GTNLogo1000.png" | prepend: site.baseurl }}" />
 
-    <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}" />
-
-    <script type="application/ld+json">
-      {% include _includes/material.jsonld material=page topic=topic site=site %}
-    </script>
-    <script type="text/javascript" src="{{ "/assets/js/jquery.slim.min.js" | prepend: site.baseurl }}"></script>
-  </head>
+        <script type="application/ld+json">
+            {% include _includes/material.jsonld material=page topic=topic site=site %}
+        </script>
+    </head>
   <body>
+    <script type="text/javascript" src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
     <textarea id="source">
 name: inverse
 layout: true
@@ -82,7 +79,7 @@ class: center, middle, inverse
   {% endif %}
 {% endif %}
 
-# {{ title }}
+# {{ page.title | default: topic.title }}
 
 
 {% include _includes/contributors-line.html page=page authorsonly=true %}
@@ -168,7 +165,6 @@ Useful when presenting."
 {% endif %}
     </textarea>
 	<script src="{{ "/assets/js/remark-latest.min.js" | prepend: site.baseurl }}" type="text/javascript"></script>
-    <script type="text/javascript" src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
     <script type="text/javascript" src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
     <script type="text/javascript">
       var slideshow = remark.create({navigation: {scroll: false}, ratio: '16:9'});
@@ -194,6 +190,15 @@ Useful when presenting."
 
         }
     </script>
+        <script type="text/javascript" src="{{ "/assets/js/jquery.slim.min.js" | prepend: site.baseurl }}"></script>
+        <script type="text/javascript" src="{{ "/assets/js/popper.min.js" | prepend: site.baseurl }}"></script>
+        <script type="text/javascript" src="{{ "/assets/js/bootstrap.min.js?v=3" | prepend: site.baseurl }}"></script>
+        <script type="text/javascript" src="{{ "/assets/js/details-element-polyfill.js" | prepend: site.baseurl }}"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="{{ "/assets/js/bootstrap-toc.min.js" | prepend: site.baseurl }}"></script>
+        <script type="text/javascript" src="{{ "/assets/js/main.js" | prepend: site.baseurl }}"></script>
+        <script type="text/javascript" src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
+        <script type="text/javascript" src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
 
-  </body>
+    </body>
 </html>

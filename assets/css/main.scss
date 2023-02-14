@@ -32,28 +32,56 @@
 $font-size: 15px;
 $tutorial-box-spacing: 1rem;
 
+
+:root {
+	--color-background: #fff;
+	--text-color: #292b2c;
+	--text-color-muted: #555; // AA :(
+        --text-color-inverted: #eee;
+	 // Allow overriding this separately, should generally default to same
+	 // as textcolour because box titles are still light in every theme.
+	--text-color-boxtitle: var(--text-color);
+	--slide-heading-color: var(--text-color); // Slides
+
+	--code-foreground: #fff;
+	--code-background: #000;
+
+	--border-light: #ddd;
+	--hyperlink: #0067d6;
+	--hyperlink-hover: #004590;
+
+	// From Galaxy
+	--brand-color: #2c3143;
+	--brand-color-contrast: #fff;
+	--navbar-border-size: 0px;
+	--navbar-border-color: white;
+	--navbar-item-background: transparent;
+	--navbar-item-hover: transparent;
+
+	// Basically only for the breadcrumbs.
+	--secondary-color: #e9ecef;
+	--secondary-color-text: #000;
+
+	// A11y
+	--outline-color: red;
+
+
+	--h1-theme-before: "";
+	--h1-theme-after: "";
+	--h2-theme-before: "";
+	--h2-theme-after: "";
+}
+
+/* SLIDES */
+@import "./slides.scss";
+/* SYNTAX */
+@import "./syntax_highlighting.scss";
+/* THEMES */
+@import "./themes.scss";
+
 // palette
-$white: #fff;
-$gray: #555; // WCAG2 AA
-$light-gray: #ddd;
-$text-color: #292b2c;
-
-$red: #f00000;
-$orange: #f06d00;
-$yellow: #be9900;
-$green: #339e3a;
-$blue: #009090;
-$dark-blue: #2c3143;
-$light-blue: #5daadd;
-$purple: #882d60;
-$mid-gray: #9d9d9d;
-
-
-// colors general
-$bg-color: $dark-blue;
-$menu-color: $dark-blue;
-
-// colors tutorial boxes
+// These remain SASS variables because they're used in mixins.
+// Boxes
 $overview-color: #8A9AD0;
 $agenda-color: #86D486;
 $keypoints-color: #FFA1A1;
@@ -63,7 +91,7 @@ $comment-color: #ffecc1;
 $handson-color: #dfe5f9;
 $question-color: #8A9AD0;
 $solution-color: #B8C3EA;
-$details-color: $light-gray;
+$details-color: #ddd;
 $feedback-color: #86D486;
 $code-color: #86D486;
 $code-out-color: #fb99d0;
@@ -85,12 +113,21 @@ $code-out-color: #fb99d0;
 
 body {
 	font-family: "Atkinson Hyperlegible",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+
+	background: var(--color-background);
+	color: var(--text-color);
+
+	h1::before { content: var(--h1-theme-before) };
+	h1::after { content: var(--h1-theme-after) };
+	h2::before { content: var(--h2-theme-before) };
+	h2::after { content: var(--h2-theme-after) };
+
+	font-size: $font-size;
+	word-wrap: break-word;
+	position: relative;
 }
 
-
-$hyperlink: #0067d6;
-
-@mixin tutorial-box ($bg-color, $color: rgba(255,255,255,.75)) {
+@mixin tutorial-box ($bg-color) {
     margin-top: 4 * $tutorial-box-spacing;
 
     // Legacy
@@ -110,7 +147,7 @@ $hyperlink: #0067d6;
         padding-left: $tutorial-box-spacing;
         padding-right: $tutorial-box-spacing;
         background-color: $bg-color;
-        color: $color;
+        color: var(--text-color-boxtitle);
         vertical-align: 1em;
         float: left;
         border: 1px solid $bg-color;
@@ -156,389 +193,25 @@ $hyperlink: #0067d6;
 }
 
 
-body {
-    font-size: $font-size;
-    word-wrap: break-word;
-    position: relative;
-}
-
-
-@import "./syntax_highlighting-dark.scss";
-
 div#theme-selector,div#lang-selector,div#archive-selector {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	width: 200px;
 	justify-content: flex-start;
-    margin-left: 1em;
+	margin-left: 1em;
 
-	label.btn,a.btn {
+	label.btn,a.btn,button.btn {
 		margin: 0.1em;
+		border: 1px solid var(--theme-color);
 	}
 }
 
 
 @mixin input-nicer($color) {
-	background: transparent;
-	color: $color;
-	border: none;
-	border-bottom: 2px solid $color;
-	border-radius: 0px;
-	padding: 0.4em 0 0 0;
-
-	&::placeholder {
-		color: $color;
-	}
-
-	&:focus,
-	&:active {
-		color: $color;
-		background: #fff2;
-		border-bottom: 2px solid $color;
-		text-decoration: underline;
-	}
 }
 
-body.theme-night {
-    color: #eee;
-    background-color: #444444;
-    @include syntax-dark;
-
-    .contributors-line{
-        color: #eee;
-    }
-	img {
-		background: #aaa;
-	}
-
-	.navbar-brand {
-		img{
-			background: none;
-		}
-	}
-    .navbar {
-        background-color: #424a66 !important;
-    }
-
-	div[data-toggle="toc"] .nav > li > a {
-		color: #ccc;
-	}
-	div[data-toggle="toc"] .nav li .active {
-		color: #eee;
-	}
-
-    a {
-		color: #7bf;
-	}
-
-    :not(a) > code {
-        background-color: #333333;
-        color: #ffa0a0;
-    }
-
-	.card {
-		background-color: transparent;
-		border: 1px solid rgba(255, 255, 255, .125);
-	}
-
-	#search-container input.nicer {
-		@include input-nicer(white);
-	}
-
-}
-
-body.theme-midnight {
-    color: #eee;
-    background-color: #222;
-    @include syntax-dark;
-
-    .contributors-line{
-        color: #eee;
-    }
-	img {
-		background: #aaa;
-	}
-
-	.navbar-brand {
-		img{
-			background: none;
-		}
-	}
-    .navbar {
-        background-color: #424a66 !important;
-    }
-
-	div[data-toggle="toc"] .nav > li > a {
-		color: #ccc;
-	}
-	div[data-toggle="toc"] .nav li .active {
-		color: #eee;
-	}
-
-    a {
-		color: #7bf;
-	}
-
-    :not(a) > code {
-        background-color: #333333;
-        color: #ffa0a0;
-    }
-
-	.card {
-		background-color: transparent;
-		border: 1px solid rgba(255, 255, 255, .125);
-	}
-
-	#search-container input.nicer {
-		@include input-nicer(white);
-	}
-
-}
-
-body.theme-halloween {
-    color: #eee;
-    background-color: #222;
-    @include syntax-dark;
-
-    .contributors-line{
-        color: #eee;
-    }
-	img {
-		background: #aaa;
-	}
-
-	h1, h2, h3, h4 {
-		color: orange;
-	}
-
-	h1::before {
-		content: "🎃 ";
-	}
-	h1::after {
-		content: " 🎃";
-	}
-	h2::before {
-		content: "👻 ";
-	}
-	h2::after {
-		content: " 👻";
-	}
-
-	.navbar-brand {
-		img{
-			background: none;
-		}
-	}
-    .navbar {
-        background-color: orange !important;
-    }
-
-	div[data-toggle="toc"] .nav > li > a {
-		color: #ccc;
-	}
-	div[data-toggle="toc"] .nav li .active {
-		color: #eee;
-
-		&::after {
-			content: " 🧙‍♀️";
-		}
-	}
-	.navbar-brand, .navbar-dark .navbar-nav .nav-link {
-		color: black;
-	}
-	.navbar-brand:hover, .navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
-		color: black;
-		text-decoration: underline;
-	}
-
-	a {
-		color: $hyperlink;
-	}
-
-	:not(a) > code {
-		background-color: #333333;
-		color: #ffa0a0;
-	}
-
-	.card {
-		background-color: transparent;
-		border: 1px solid rgba(255, 255, 255, .125);
-	}
-
-	#search-container input.nicer {
-		@include input-nicer(black);
-	}
-
-}
-
-
-body.downunder {
-	transform:rotate(180deg);
-}
-
-body.theme-straya {
-	h1::before {
-		content: "🇳🇿 ";
-	}
-	h1::after {
-		content: " 🇳🇿";
-	}
-	h2::before {
-		content: "🦘 ";
-	}
-	h2::after {
-		content: " 🐨";
-		display: inline-block;
-		transform: scale(-1, 1) translateX(-1rem);
-	}
-}
-
-body.theme-rainbow {
-	h1::before {
-		content: "🌈 "
-	}
-	h1::after {
-		content: " 🌈 ";
-		display: inline-block;
-		transform: scale(-1, 1) translateX(-1rem);
-	}
-	header {
-		nav.navbar {
-			background: linear-gradient(to bottom,#e2453c 0,#e2453c 16%,#e07e39 16%,#e07e39 32%,#e5d667 32%,#e5d667 48%,#51b95b 48%,#51b95b 66%,#1e72b7 66%,#1e72b7 86%,#6f5ba7 86%) no-repeat !important;
-			padding: 0;
-		}
-
-		.navbar-brand {
-			background: #3337;
-			height: 100%;
-			left: 0px;
-			padding: .5rem 0rem;
-			width: 17rem;
-
-		}
-		.navbar-nav > li .nav-link {
-			color: white;
-
-		}
-		.navbar-nav > li {
-			background: #3337;
-			height: 100%;
-			left: 0px;
-			padding: .5rem 0rem;
-
-		}
-	}
-
-	.tutorials-list:not(.topic-type-use) table.table-striped {
-		tbody tr:nth-of-type(5n+1) td:not(:first-child) { color: red; i{color: red} }
-		tbody tr:nth-of-type(5n+2) td:not(:first-child) { color: orange; i{color: orange} }
-		tbody tr:nth-of-type(5n+3) td:not(:first-child) { color: green; i{color: green} }
-		tbody tr:nth-of-type(5n+4) td:not(:first-child) { color: blue; i{color: blue} }
-		tbody tr:nth-of-type(5n+5) td:not(:first-child) { color: purple; i{color: purple} }
-	}
-	.tutorials-list.topic-type-use table.table-striped {
-		tbody tr td:nth-of-type(6n+2) { color: red; i{color: red} }
-		tbody tr td:nth-of-type(6n+3) { color: orange; i{color: orange} }
-		tbody tr td:nth-of-type(6n+4) { color: green; i{color: green} }
-		tbody tr td:nth-of-type(6n+5) { color: blue; i{color: blue} }
-		tbody tr td:nth-of-type(6n+6) { color: purple; i{color: purple} }
-
-        thead th:nth-of-type(6n+2) { color: red }
-		thead th:nth-of-type(6n+3) { color: orange }
-		thead th:nth-of-type(6n+4) { color: green }
-		thead th:nth-of-type(6n+5) { color: blue }
-		thead th:nth-of-type(6n+6) { color: purple }
-
-	}
-
-}
-
-
-body.theme-progress {
-	h1::before {
-		content: "🌈 "
-	}
-	h1::after {
-		content: " 🌈 ";
-		display: inline-block;
-		transform: scale(-1, 1) translateX(-1rem);
-	}
-	header {
-		nav.navbar {
-			background: linear-gradient(120deg,#2c3143 0px 130px,#fdda0f 131px 139px,#fff 140px 148px,#f4b0c9 149px 157px,#7ccee6 158px 166px,#93540c 167px 175px,#000 176px 184px,transparent 185px),linear-gradient(45deg,#2c3143 0px 110px,#2c314300 110px),linear-gradient(180deg,#FE0000 16.66%,#FD8C00 16.66% 33.32%,#FFE500 33.32% 49.98%,#119F0B 49.98% 66.64%,#0644B3 66.64% 83.3%,#C22EDC 83.3%);
-			padding: 0;
-		}
-
-		.navbar-brand {
-			background: #3337;
-			height: 100%;
-			left: 0px;
-			padding: .5rem 0rem;
-			width: 17rem;
-
-		}
-		.navbar-nav > li .nav-link {
-			color: white;
-
-		}
-		.navbar-nav > li {
-			background: #3337;
-			height: 100%;
-			left: 0px;
-			padding: .5rem 0rem;
-
-		}
-	}
-
-    .contributor-hexylena {background: linear-gradient(to right, #cfe4f777 0%, #cfe4f777 20%, #f7d7dc77 20%, #f7d7dc77 40%, white 40%, white 60%, #f7d7dc77 60%, #f7d7dc77 80%, #cfe4f777 80%, #cfe4f777 100%);}
-
-	.tutorials-list:not(.topic-type-use) table.table-striped {
-		tbody tr:nth-of-type(5n+1) td:not(:first-child) { color: red; i{color: red} }
-		tbody tr:nth-of-type(5n+2) td:not(:first-child) { color: orange; i{color: orange} }
-		tbody tr:nth-of-type(5n+3) td:not(:first-child) { color: green; i{color: green} }
-		tbody tr:nth-of-type(5n+4) td:not(:first-child) { color: blue; i{color: blue} }
-		tbody tr:nth-of-type(5n+5) td:not(:first-child) { color: purple; i{color: purple} }
-	}
-
-	.tutorials-list.topic-type-use table.table-striped {
-		tbody tr td:nth-of-type(6n+2) { color: red; i{color: red} }
-		tbody tr td:nth-of-type(6n+3) { color: orange; i{color: orange} }
-		tbody tr td:nth-of-type(6n+4) { color: green; i{color: green} }
-		tbody tr td:nth-of-type(6n+5) { color: blue; i{color: blue} }
-		tbody tr td:nth-of-type(6n+6) { color: purple; i{color: purple} }
-
-        thead th:nth-of-type(6n+2) { color: red }
-		thead th:nth-of-type(6n+3) { color: orange }
-		thead th:nth-of-type(6n+4) { color: green }
-		thead th:nth-of-type(6n+5) { color: blue }
-		thead th:nth-of-type(6n+6) { color: purple }
-
-	}
-
-	p:nth-child(8n+7)::selection {background: hsl(285,76%,57%)}
-	p:nth-child(8n+0)::selection {background: hsl(330,76%,57%)}
-	p:nth-child(8n+1)::selection {background: hsl(15,76%,57%)}
-	p:nth-child(8n+2)::selection {background: hsl(60,76%,57%)}
-	p:nth-child(8n+3)::selection {background: hsl(105,76%,57%)}
-	p:nth-child(8n+4)::selection {background: hsl(150,76%,57%)}
-	p:nth-child(8n+5)::selection {background: hsl(195,76%,57%)}
-	p:nth-child(9n+6)::selection {background: hsl(240,76%,57%)}
-	li:nth-child(8n+7)::selection {background: hsl(285,76%,57%)}
-	li:nth-child(8n+0)::selection {background: hsl(330,76%,57%)}
-	li:nth-child(8n+1)::selection {background: hsl(15,76%,57%)}
-	li:nth-child(8n+2)::selection {background: hsl(60,76%,57%)}
-	li:nth-child(8n+3)::selection {background: hsl(105,76%,57%)}
-	li:nth-child(8n+4)::selection {background: hsl(150,76%,57%)}
-	li:nth-child(8n+5)::selection {background: hsl(195,76%,57%)}
-	li:nth-child(9n+6)::selection {background: hsl(240,76%,57%)}
-
-}
-
-h1,
-h2,
-h3,
-h4 {
+h1, h2, h3, h4 {
     margin-top: 2rem;
 }
 
@@ -547,9 +220,19 @@ img {
     margin: 2.5%;
 }
 
-pre {
+:not(pre) > code {
+    color: var(--code-foreground);
+    background: var(--code-background);
+    border: 1px solid var(--text-color-muted);
+    border-radius: 0.25rem;
+}
+
+pre.highlight {
     padding: 1rem;
-    background-color: lighten($gray, 40%);
+    background-color: var(--code-background);
+    color: var(--code-foreground);
+    border: 1px solid var(--text-color-muted);
+    @include syntax-dark;
 }
 
 figure {
@@ -561,7 +244,7 @@ figure {
   }
 
   .figcaption-prefix {
-      font-weight: 600;
+      font-weight: bold;
   }
 
   figcaption {
@@ -572,7 +255,7 @@ figure {
 footer {
     margin-top: 3em;
     text-align: center;
-    color: $gray;
+    color: var(--text-color-muted);
     font-size: $font-size - 2;
 }
 
@@ -582,8 +265,31 @@ footer {
     }
 }
 
-.navbar {
-    background-color: $bg-color!important;
+nav.navbar {
+    background-color: var(--brand-color) !important;
+    color: var(--brand-color-contrast);
+    border-bottom-style: solid;
+    border-bottom-width: var(--navbar-border-size);
+    border-bottom-color: var(--navbar-border-color);
+    padding: 0;
+
+    &.navbar-dark .navbar-brand,
+    &.navbar-dark .navbar-nav .nav-link{
+        color: var(--brand-color-contrast);
+    }
+
+    .navbar-brand, .navbar-nav li {
+	padding: 0.5em;
+	background: var(--navbar-item-background);
+
+	&:hover {
+		background: var(--navbar-item-hover);
+	}
+    }
+
+    a.navbar-brand {
+	padding-right: 2.5em; // the image seems to work poorly with parent size calculations.
+    }
 
     .navbar-collapse {
         justify-content: flex-end;
@@ -594,17 +300,45 @@ footer {
 }
 
 
+input.nicer {
+	background: transparent;
+	border: none;
+	border-radius: 0px;
+	padding: 0.4em 0 0 0;
+	color: var(--text-color);
+	border-bottom: 2px solid var(--text-color);
+	&::placeholder {
+		color: var(--text-color-muted);
+	}
+
+	&:focus, &:active {
+		background: #fff2;
+		text-decoration: underline;
+	}
+}
+
 nav input.nicer {
-	@include input-nicer(white);
-}
+	color: var(--brand-color-contrast);
+	border-bottom: 2px solid var(--brand-color-contrast);
+	&::placeholder {
+		color: var(--brand-color-contrast);
+	}
 
-#search-container input.nicer {
-	@include input-nicer(black);
+	&:focus, &:active {
+		color: var(--brand-color-contrast);
+		border-bottom: 2px solid var(--brand-color-contrast);
+	}
 }
-
 #search-input {
 	margin-right:1em;
 }
+
+/*
+#search-container input.nicer {
+	@include input-nicer(black);
+}
+*/
+
 
 .main-content {
     padding-top: 1rem;
@@ -628,14 +362,14 @@ nav input.nicer {
 
 .faqs{
   h4.faq-area{
-    color: #888888;
+    color: var(--text-color-muted);
     i {
      font-size: 0.5em;
     }
   }
   h3{
    a{
-     color: black;
+     color: var(--text-color);
     }
   }
 }
@@ -694,23 +428,23 @@ blockquote {
     }
 
     &.agenda {
-        @include tutorial-box($agenda-color, $text-color);
+        @include tutorial-box($agenda-color);
     }
 
     &.tip {
-        @include tutorial-box($tip-color, $text-color);
+        @include tutorial-box($tip-color);
     }
 
     &.question {
-        @include tutorial-box($question-color, $text-color);
+        @include tutorial-box($question-color);
     }
 
     &.code-in {
-        @include tutorial-box($code-color, $text-color);
+        @include tutorial-box($code-color);
     }
 
     &.code-out {
-        @include tutorial-box($code-out-color, $text-color);
+        @include tutorial-box($code-out-color);
     }
 
     &.code-max-300 {
@@ -720,36 +454,36 @@ blockquote {
     }
 
     &.solution {
-        @include tutorial-box($solution-color, $text-color);
+        @include tutorial-box($solution-color);
     }
 
     &.comment {
-        @include tutorial-box($comment-color, $text-color);
+        @include tutorial-box($comment-color);
     }
 
     &.hands_on, &.hands-on {
-        @include tutorial-box($handson-color, $text-color);
+        @include tutorial-box($handson-color);
     }
 
     &.key_points {
-        @include tutorial-box($keypoints-color, $text-color);
+        @include tutorial-box($keypoints-color);
     }
 
     &.overview {
-        @include tutorial-box($overview-color, $text-color);
+        @include tutorial-box($overview-color);
         margin-top: 5rem;
     }
 
     &.warning {
-        @include tutorial-box($warning-color, $text-color);
+        @include tutorial-box($warning-color);
     }
 
     &.details {
-        @include tutorial-box($details-color, $text-color);
+        @include tutorial-box($details-color);
     }
 
     &.quote {
-        border-left: 5px solid #eee;
+        border-left: 5px solid var(--brand-color);
         padding-left: 1em;
     }
 
@@ -766,7 +500,7 @@ blockquote {
     }
 
     &.feedback{
-        @include tutorial-box($feedback-color, $text-color);
+        @include tutorial-box($feedback-color);
     }
 }
 
@@ -775,6 +509,21 @@ blockquote {
 }
 .pre-break-lines code {
     white-space: pre-wrap;
+}
+
+.card {
+	background: transparent;
+	border: 1px solid var(--border-light);
+	.card-title {
+		background: var(--brand-color);
+		border-bottom: 1px solid var(--border-light);
+		padding: 1.25rem;
+		color: var(--brand-color-contrast);
+	}
+
+	.card-body {
+		padding: 0em;
+	}
 }
 
 
@@ -787,6 +536,12 @@ blockquote {
 
     .newsitem {
       width: 100%;
+      background: transparent;
+      border: 1px solid var(--border-light);
+      .card-header {
+	background: var(--brand-color);
+	border-bottom: 1px solid var(--border-light);
+      }
     }
     .newscover {
         width: 100%;
@@ -795,7 +550,6 @@ blockquote {
         margin-bottom: auto;
         background-color: white;
         border-radius: 2rem;;
-        //border: 1px solid $light-gray;
         padding: 1rem;
         -webkit-transition: border 0.2s ease-in-out;
         -o-transition: border 0.2s ease-in-out;
@@ -808,17 +562,23 @@ blockquote {
 
 
 .newstable{
-  div {
-    margin-top: 0px;
-    color: $text-color !important;
-    font-weight: bold;
-  }
-  a.newstitle{
-    font-color: $text-color;
-  }
-  p {
-    margin: 0px;
-  }
+	div {
+		margin-top: 0px;
+		color: var(--text-color) !important;
+		font-weight: bold;
+		background: transparent;
+
+		a {
+			background: transparent;
+			border: 1px solid var(--border-light);
+		}
+		a:hover {
+			border: 1px solid var(--hyperlink);
+		}
+	}
+	p {
+		margin: 0px;
+	}
 }
 
 .contributors {
@@ -853,7 +613,7 @@ blockquote {
 	border: 5px solid transparent;
 
 	&:hover {
-		border: 5px solid $hyperlink;
+		border: 5px solid var(--hyperlink);
 	}
 
 	img {
@@ -889,7 +649,7 @@ blockquote {
         img {
             background-color: white;
             border-radius: 20px;
-            border: 1px solid $light-gray;
+            border: 1px solid var(--border-light);
             padding: 5px;
             width: 100%;
             -webkit-transition: border 0.2s ease-in-out;
@@ -903,7 +663,7 @@ blockquote {
         &:focus,
         &:active {
             img {
-                border-color: $menu-color;
+                border-color: var(--brand-color);
             }
         }
     }
@@ -929,13 +689,13 @@ blockquote {
         }
 
         .dropdown-item {
-            color: rgba($white, .5);
+            color: var(--text-color-muted);
 
             &:hover,
             &:focus,
             &:active {
                 background-color: transparent;
-                color: rgba($white, .75);
+                color:  var(--text-color);
             }
         }
 
@@ -965,22 +725,32 @@ blockquote {
     }
 }
 
+:root {
+	--color-primary: #999;
+	--color-darker: #777;
+	--color-dimmed: #555;
+}
+
 .label {
     display: inline;
     padding: .2em .6em .3em;
     font-size: 75%;
-    font-weight: bold;
     line-height: 1;
-    color: #fff;
+    color: #000;
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
     border-radius: .25em;
+    border-style: solid;
+    border-width: 0 2px 1px 0;
+    background-color: var(--color-primary);
+    border-color: var(--color-darker);
     cursor: pointer;
-}
 
-.label-default {
-    background-color: #999999;
+    &:hover {
+        color: #000;
+        background-color: var(--color-dimmed);
+    }
 }
 
 .level {
@@ -1017,19 +787,19 @@ blockquote {
 
 /* WCAG Contrast. These aim to pass AA level for normal sized text. */
 a {
-    color: $hyperlink;
+    color: var(--hyperlink);
 
     &:hover,
     &:focus,
     &:active {
-        color: #004590;
+        color: var(--hyperlink-hover);
         text-decoration: underline;
     }
 }
 
 // More a11y stuff
 .text-muted {
-	color: $gray !important;
+	color: var(--text-color-muted) !important;
 }
 .navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
 	text-decoration: underline;
@@ -1038,60 +808,42 @@ a {
 	color: white;
 }
 .gitter-open-chat-button {
-    background-color: $dark-blue !important;
+    background-color: var(--brand-color) !important;
+    color: var(--brand-color-contrast) !important;
 }
 
-code {
-    color: #8b3035;
-}
 
 
 nav[data-toggle='toc'] {
-    margin-top: 30px;
-    margin-bottom: 30px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	.nav-link:focus, .nav-link:hover {
+		text-decoration: underline;
+	}
+
+	.nav-link.active,
+	.nav-link.active:focus,
+	.nav-link.active:hover {
+		color: var(--hyperlink);
+		border-left: 2px solid var(--hyperlink);
+	}
+
+
     .nav {
         li {
             a {
+		color: var(--text-color-muted);
                 padding-left: 0px;
                 &:hover,
                 &:focus,
-                &:active{
+                &:active {
                     padding-left: 0px;
-                    color: #004590;
+                    color: var(--hyperlink);
                     border-left: none;
+                    text-decoration: underline;
                 }
             }
-
-            .active {
-                padding-left: 0px;
-                color: #004590;
-                border-left: none;
-            }
         }
-
-        .nav li {
-            a,
-            .active {
-                padding-left: 10px;
-                &:hover,
-                &:focus,
-                &:active{
-                    padding-left: 10px;
-                }
-            }
-
-            &:hover,
-            &:focus,
-            &:active{
-                padding-left: 10px;
-            }
-        }
-    }
-
-    .nav-link.active:hover {
-        padding-left: 0px;
-        color: #004590;
-        border-left: none;
     }
 }
 
@@ -1111,7 +863,7 @@ nav[data-toggle='toc'] {
 }
 
 .contributors-line {
-    color: $gray;
+    color: var(--text-color-muted);
     font-size: 1.2em;
 
     display: flex;
@@ -1141,7 +893,7 @@ nav[data-toggle='toc'] {
     flex-direction: row;
     align-items: center;
     border-radius: 1em;
-    border: 1px solid #b7daff;
+    border: 1px solid var(--hyperlink);
     padding-right: 0.5em;
     margin: 0.2em;
     line-height: 1em;
@@ -1151,6 +903,10 @@ nav[data-toggle='toc'] {
         height: 1em;
         border-radius: 50%;
         margin: 0 0.25em 0 0;
+    }
+
+    &:hover {
+	border: 1px solid var(--hyperlink-hover);
     }
 }
 
@@ -1242,15 +998,15 @@ span.tool {
 
 	&.galaxy-proxy-active {
 		cursor: pointer;
-		color:#fff;
-		background-color:#007bff;
-		border-color:#007bff;
+		color: var(--brand-color-contrast);
+		background-color: var(--brand-color);
+		border-color: var(--brand-color);
 		padding: 0.2em 0.5em;
 	}
 
 	&.galaxy-proxy-active:hover {
-		background-color:$hyperlink;
-		border-color:$hyperlink;
+		background-color: var(--hyperlink);
+		border-color: var(--hyperlink);
 	}
 }
 
@@ -1303,7 +1059,7 @@ video::cue {
 
     tr td:nth-child(1) {
         padding-right: 1em;
-        color: $gray;
+        color: var(--text-color-muted);
     }
 }
 
@@ -1402,7 +1158,7 @@ $btn-pink:$keypoints-color;
 
 .btn-purple{
  background-color: $btn-purple;
- color: white;
+ color: black;
 }
 
 .btn-pink{
@@ -1466,7 +1222,7 @@ $btn-pink:$keypoints-color;
     }
 
     .btn-secondary {
-        color: $text-color;
+        color: var(--text-color);
         background-color: $handson-color;
         border-color: transparent;
         &:hover {
@@ -1522,9 +1278,29 @@ ul.text-list, ol.text-list {
     }
 }
 
-.dropdown-item:focus-visible {
-	outline: red 3px solid;
+
+.dropdown-item {
+	&:focus-visible {
+		outline: var(--outline-color) 3px solid;
+	}
+
+	&:focus, &:hover {
+		background: var(--brand-color);
+		color: var(--brand-color-contrast);
+	}
 }
+.dropdown-item:focus-visible {
+}
+
+ol.breadcrumb {
+	background: var(--secondary-color);
+
+	.breadcrumb-item.active {
+		color: var(--secondary-color-text);
+	}
+}
+
+
 
 a[target="_blank"]::after {
   content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAQElEQVR42qXKwQkAIAxDUUdxtO6/RBQkQZvSi8I/pL4BoGw/XPkh4XigPmsUgh0626AjRsgxHTkUThsG2T/sIlzdTsp52kSS1wAAAABJRU5ErkJggg==) " (opens in new tab)";
