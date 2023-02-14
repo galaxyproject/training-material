@@ -59,17 +59,34 @@ There are several ways in which you can complete this tutorial – check the {% 
 
 {% snippet topics/single-cell/tutorials/scrna-case_monocle3-rstudio/faqs/tip_rstudio.md %} 
 
-We will now present the workflow following using JupyterLab, but there will be advice for those using RStudio as well.
+We will now present the workflow following using JupyterLab, but there will be advice for those using RStudio as well. 
+So let's get our JupyterLab instance up and running and crack on! 
 
-## Installing packages
-Describe installation in terminal
+## Installation and files upload
+
+If you followed the {% icon tip %} tip above, you should already have your JupyterLab instance open. Before we start working on the tutorial notebook, we need to install required packages. 
+
+><hands-on-title>Installing the packages</hands-on-title>
+>
+> 1. Nawigate to JupyterLab window. You will see the Launcher tab. 
+> 2. Find the `Terminal` and click on that.
+> ![Screenshot of the Launcher tab with an arrow indicating where to find Terminal.](../../images/scrna-casestudy-monocle/terminal_choose.jpg "This is how the Launcher tab looks like and where you can find Terminal.")
+> 3. In the Terminal tab open, write the following, preferably one line at a time:
+> ```
+>conda install -c conda-forge -c bioconda r-monocle3
+>conda install -c conda-forge r-viridislite
+>conda install -c conda-forge bioconductor-biomart
+>```
+> 4. If you are asked at any point `Proceed ([y]/n)?`, type `y` - surely we want to proceed!
+>
+{: .hands_on}
 
 
-In the meantime, when installation is running…
+Installation will take a while, so in the meantime, when it's running, you can upload the files you downloaded: the notebook and three data files - cell annotations, gene annotations and unprocessed expression matrix.
 
 ><hands-on-title>Files upload</hands-on-title>
 >
-> 1. In the folder window, {% icon galaxy-upload %} Upload the `single-cell-scrna-case_monocle3-rstudio.ipynb` and three data files that you had downloaded from your computer. They should appear in the file window.
+> 1. In the folder window, {% icon galaxy-upload %} Upload the `single-cell-scrna-case_monocle3-rstudio.ipynb` and three data files that you had downloaded from your computer. 
 >
 > 2. Right-click on the files and rename them so that it’s easier to refer to them:
 > - `GalaxyX-[Extracted_cell_annotations_(obs)]` to `cells`
@@ -80,4 +97,26 @@ In the meantime, when installation is running…
 >
 {: .hands_on}
 
-From now on, you can switch to JuyterLab and follow the tutorial in there!
+
+From now on, you can switch to the notebook you just opened in JuyterLab and follow the tutorial in there! 
+
+><tip-title>Installation for RStudio users</tip-title>
+>
+> Monocle 3 runs in the R statistical computing environment. You will need R version 4.1.0 or higher, Bioconductor version 3.14, and monocle3 1.2.7 or higher to have access to the latest features. Here is the original code that you should run to install BiocManager and monocle3. 
+>```r
+># Install Bioconductor and some of its dependencies
+>if (!requireNamespace("BiocManager", quietly = TRUE))
+>install.packages("BiocManager")
+>BiocManager::install(version = "3.14")
+>BiocManager::install(c('BiocGenerics', 'DelayedArray', 'DelayedMatrixStats',
+                       'limma', 'lme4', 'S4Vectors', 'SingleCellExperiment',
+                       'SummarizedExperiment', 'batchelor', 'HDF5Array',
+                       'terra', 'ggrastr'))
+>
+># Install monocle3 through the cole-trapnell-lab GitHub:
+>install.packages("devtools")
+>devtools::install_github('cole-trapnell-lab/monocle3')
+>library(monocle3)
+>```
+>
+{: .tip}
