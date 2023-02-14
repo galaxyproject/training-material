@@ -1220,7 +1220,7 @@ Different tools may expect different ways of handling missing data. So you may h
 
 > <hands-on-title>Fill empty cells</hands-on-title>
 >
-> We will now replace empty cells in the `birth_place` column, do use `NA` instead
+> We will now replace empty cells in the `birth_place` column, to use `NA` instead
 >
 > 1. Open {% tool [Column Regex Find and Replace]({{version_replace_text_column}}) %}
 >    - Read the help text at the bottom, what settings do you think we need to use?
