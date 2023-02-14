@@ -19,7 +19,19 @@ contributors:
 
 <!-- Needs to be edited! -->
 
+Alternative splicing, alternative transcription start- and termination sites (here, for simplicity, jointly referred to as alternative splicing) expand the RNA repertoire of most human genes (Forrest et al., 2014; The ENCODE Project Consortium, 2012). Changes in which isoform(s) are used in different conditions are common, and examples of such isoform switches with important functional consequences have been described in many biological processes [reviewed in Baralle and Giudice (2017) and Urbanski et al. (2018)]. This has motivated genome-wide screens for isoform switches with predicted functional consequences, resulting in identification of hundreds of cases (Climente-Gonza´lez et al., 2017; Sebestyen et al., 2015; Vitting-Seerup and Sandelin, 2017). The abundance of isoform switches may reflect important genome-wide changes and indeed, large-scale changes, such as systematic shortening of 3’UTRs in cancers, have been reported (e.g. Miura et al., 2013; Xia et al., 2014). Despite these findings, most studies only focus on individual genes and/or isoform switches {% cite VittingSeerup2019 %}.
+
+The ability to produce different transcripts (gene isoforms) through alternative splicing (AS), alternative transcription start sites (aTSS), and alternative transcription termination sites (aTTS) is a major determinant of the increased complexity of higher vertebrates (1). A large majority of human genes uses alternative isoforms: approximately 95% of multi-exon genes show evidence of AS (2) and approximately 60% of genes have at least one aTSS (3). Recently, the ENCODE project estimated that, on average, each gene has 6.3 isoforms (3.9 different protein-coding isoforms; ref. 4). It is therefore no surprise that gene isoform usage has an important role in many biological processes, including development, homeostasis, pluripotency, and apoptosis (5–9). Moreover, isoforms are often tissue-specific and may alter the function, cellular localization, and stability of the corresponding RNA or protein (10, 11) {% cite VittingSeerup2017 %}.
+
+Differential usage of isoforms in different conditions, often referred to as isoform switching (Fig. 1A), can have substantial biological impact, caused by the difference in the functional potential of the two isoforms. Isoform switches are implicated in many diseases (11) and are especially prominent in cancer (12). A well-described example is the isoform switch in the ALK gene, occurring in 11% of melanoma patients, caused by the differential usage of aTSSs. The switch results in the production of a truncated protein lacking extracellular domains (13), which in turn promotes cell proliferation and drives tumorigenesis in vitro (13). Many such examples exist in the literature and include genes central to all eight cancer hallmarks (reviewed in refs. 14, 15). This has resulted in an increasing interest in targeting both general and specific splicing events for therapeutic purposes (16, 17) {% cite VittingSeerup2017 %}.
+
+Over the past decade, numerous studies have revealed an increasing degree of diversity in the transcriptomes of higher eukaryotes1. Most transcribed elements are never translated into proteins and are encoded by a myriad of non-protein-coding RNA genes (ncRNAs) that have complex patterns of expression and regulation2. Further complicating the picture, more than 90% of transcripts of multi-exon protein-coding genes, and about 30% of ncRNAs, undergo alternative splicing3,4. We currently have a far from complete picture of the exon-intron structure of all transcripts in the human genome. For non-human species, the landscape of alternative splicing is even less clear.
+
 Hepatoblastoma (HB) is the most common malignant pediatric liver tumor and one of the fastest-rising cancers in children younger than 5 years {% cite Nagae2021 %}.
+
+Cancer is a complex disease which can be caused by various factors. It has been determined that gene expression profiles of tumor cells are different from normal samples. Instable cellular homeostasis is an important cause of cancer, and has been reported to be closely related to aberrant alternative splicing. Since alternative splicing plays a key role in post-transcriptional regulation and controls the formation of spliced variants, the mutations and changed level of splice factors may contribute to tumorigenesis {% cite Liu2022 %}.
+
+Alternative precursor messenger RNA (pre-mRNA) splicing is the process by which the exons of pre-mRNA are spliced in different arrangements to produce structurally and functionally distinct mRNAs and proteins ( Figure 1A ) ( 3 ). After the completion of the Human Genome Project in 2004, alternative splicing has been recognized as one of the most important mechanisms that maintains genomic and functional diversity. It is well known that >95% of human genes encode splice isoforms ( 4 ), some of which exert antagonistic functions. A recent study revealed that alterations of the splicing machinery can cause the development of myeloid neoplasms ( 5 ), and understanding the splicing machinery is crucial for the development of novel therapeutic strategies for malignancies {% cite Miura2012 %}.
 
 > <agenda-title></agenda-title>
 >
@@ -30,9 +42,17 @@ Hepatoblastoma (HB) is the most common malignant pediatric liver tumor and one o
 >
 {: .agenda}
 
-# Experimental design
+# Phenotypic plasticity and alternative splicing
 
-Text about experimental design.
+<!-- Needs to be modified!-->
+
+Phenotypic plasticity is the ability of a genotype to display phenotypic variation in heterogeneous environments (West-Eberhard, 1989). It is now recognised that plasticity followed by genetic assimilation can result in population divergence, adaptation and speciation (Ehrenreich & Pfennig, 2015). The contribution of gene expression to plasticity is well studied (Schlichting & Pigliucci, 1998) but few studies have investigated the contribution of alternative splicing to this process, especially in animals (Somero, 2018). Alternative splicing has the potential to generate phenotypic diversity extremely rapidly (Pleiss et al., 2007) by drawing upon standing and cryptic genetic variation present in populations. To this end, alternative splicing has been linked to response to several instances of phenotypic plastic responses {% cite Singh2022 %}.
+
+Discovered over 40 years ago, alternative splicing formed a large part of the puzzle explaining how proteomic complexity can be achieved with a limited set of genes (Alt et al., 1980; Nilsen & Graveley, 2010). Alternative splicing was considered an anomaly until high-throughput sequencing data revealed that almost all multiexonic genes in model vertebrates and up to 70% of multiexonic genes in plants are spliced (Chaudhary et al., 2019; Merkin et al., 2012). In fungi, the extent of alternative splicing can range from 0.2% to 18.2% in fungi (Fang et al., 2020). Traditionally, alternative splicing was thought to be a form of post-transcriptional regulation; however, a large body of evidence has found that splicing occurs co-transcriptionally due to the influence of chromatin structure on the splicing process (Jabre et al., 2019; Luco et al., 2011). The coupling of transcription and splicing suggests that epigenetic regulation shapes not just how genes are expressed but also how they are spliced {% cite Singh2022 %}.
+
+The majority of eukaryote genes have multiple transcriptional isoforms. Originating from the same locus, mRNA isoforms are molecules of different exon composition and length, which may code for different forms of the corresponding protein. These isoforms may be produced from different transcriptional starting sites and terminated at different polyadenylation sites, or may be a consequence of alternative splicing (AS) [1]. AS is a ubiquitous regulatory mechanism of gene expression that has functions in developmental processes, regulating tissue and organ development and disease [2]. AS may affect mRNA localization, stability, translation, or may change the reading frame, resulting in different protein isoforms with diverse functions and/or localizations [3]. Sequences of isoforms found on the basis of experimental evidence are deposited in public databases and are available through the Ensembl genome browser (www.ensembl.org). However, there are many isoforms produced by AS that are not documented, but could be functionally important [4]. Isoform changes may be masked by gene-level measurements. Thus, the examination of developmental dynamics, estimating isoform expression and new AS events offers improved resolution over gene expression {% cite Planells2019 %}.
+
+Alternative splicing is an essential process in post-transcriptional mRNA processing, and produces various mature mRNAs with different structures and functions. In this process, exons are taken together in different combinations and introns are removed. Recent data indicate that each transcript of protein-coding genes contain 11 exons and produce 5.4 mRNAs on average [1]. So far, seven basic types of alternative splicing have been identified, including exon skipping, alternative 5′-splice site, alternative 3′-splice site, mutually exclusive exons, intron retention, alternative promoter, and alternative polyadenylation [2] (Figure 1). A notable example of alternative splicing is the human gene TTN which encodes muscle protein titin and contains 364 coding-exons and 4039 different splicing events which have been identified by RNA-sequencing [3]. Most genes generate at least two transcript variants. The alternative spliced mRNAs are further translated into many protein variants which differ in function and structure. The precision and diversity of alternative splicing events are aided by many significant factors, such as the strength or weakness of splice sites, the concentration and combination of enhancing and silencing splicing factors, chromatin modifications, and RNA secondary architectures [3]. Since the activity of splicing factors and the spliced variants change the developing process of diseases, they can also serve as experimental indicators or biomarkers for diagnosis {% cite Liu2022 %}.
 
 # Background on data
 
@@ -126,7 +146,7 @@ Next we will retrieve the remaining datasets.
 
 Quality assessment text.
 
-## Sub-step with **FASTQ interlacer**
+## Inicial quality evaluation
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -134,26 +154,15 @@ Quality assessment text.
 >    - *"Type of paired-end datasets"*: `1 paired dataset collection`
 >        - {% icon param-collection %} *"Paired-end reads collection"*: `output` (Input dataset collection)
 >
-{: .hands_on}
-
-Repeat with the other collection.
-
-## Sub-step with **FastQC**
-
-> <hands-on-title> Task description </hands-on-title>
+> 2. Repeat the previos step
 >
-> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
+> 3. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Raw read data from your current history"*: `outfile_pairs_from_coll` (output of **FASTQ interlacer** {% icon tool %})
 >
-{: .hands_on}
-
-Repeat with the other collection.
-
-## Sub-step with **MultiQC**
-
-> <hands-on-title> Task description </hands-on-title>
+> 4. Repeat the previous step
 >
-> 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
+>
+> 5. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
 >    - In *"Results"*:
 >        - {% icon param-repeat %} *"Insert Results"*
 >            - *"Which tool was used generate logs?"*: `FastQC`
@@ -168,7 +177,7 @@ Repeat with the other collection.
 
 ![figX:FASTQ adapter content](../../images/differential_isoform/fastqc_adapter_content.png "FASTQ adapter content")
 
-## Sub-step with **fastp**
+## RNA-seq data pre-processsing
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -184,18 +193,13 @@ Repeat with the other collection.
 >        - In *"Quality filtering options"*:
 >            - *"Qualified quality phred"*: `20`
 >    - In *"Output Options"*:
->        - *"Output HTML report"*: `Yes`
+>        - *"Output HTML report"*: `No`
 >        - *"Output JSON report"*: `Yes`
->
 {: .hands_on}
 
-Repeat with the other collection
-
-## Sub-step with **MultiQC**
 
 > <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
 >    - In *"Results"*:
 >        - {% icon param-repeat %} *"Insert Results"*
 >            - *"Which tool was used generate logs?"*: `fastp`
@@ -219,9 +223,25 @@ Repeat with the other collection
 ![figX:Sequence quality](../../images/differential_isoform/fastp_sequence_quality.png "Sequence quality")
 
 
-# Transcriptome assembly and quantification 
+# RNA-seq mapping and quantification 
+
+RNA-seq analysis begins by mapping reads against a reference genome to identify their genomic positions. This mapping information allows us to collect subsets of the reads corresponding to each gene, and then to assemble and quantify transcripts represented by those reads.
+
+Using a mapping of reads to the reference genome, genome-guided transcript assemblers cluster the reads and build graph models representing all possible isoforms for each gene. One such model is a splice graph, in which nodes represent exons or parts of exons, and paths through the graph represent possible splice variants
+
+StringTie uses a genome-guided transcriptome assembly approach along with concepts from de novo genome assembly to improve transcript assembly. Specifically, the inputs to StringTie can include not only spliced read alignments, but also the alignments of contigs that StringTie pre-assembles from read pairs.
 
 ## Sub-step with **RNA STAR**
+
+RNA-seq mappers need to solve an additional problem that is not encountered in DNA-only alignment: many RNA-seq reads will span introns. The RNA-seq processing captures and sequences mature mRNA molecules, from which introns have been removed by splicing. Thus, a single short read might align to two locations that are separated by 10,000 bp or more (the average human intron length is >6,000 bp, and some introns are >1 Mbp in length). For a typical human RNA-seq data set using 100-bp reads, >35% of the reads will span multiple exons. Aligning these multiexon spanning reads is a much more difficult task than aligning reads contained within one exon.
+
+Two-pass alignment, a framework in which splice junctions are separately discovered and quantified, has recently gained traction owing largely to massive speed enhancements achieved by new aligners, which make aligning twice computationally feasible (Dobin et al., 2013; Engstrom et al., 2013). The rationale behind two-pass alignment is elegant: splice junctions are discovered in a first alignment pass with high stringency, and are used as annotation in a second pass to permit lower stringency alignment, and therefore higher sensitivity. In the absence of annotation, compared to traditional single-pass alignment, an independent analysis demonstrated that two-pass alignment with STAR provides comparable mapping rates (though more multimapping), similar mismatch alignment rates, reduced read truncation, superior read placement accuracy, comparable indel accuracy, improved splice junction recall, and better annotated splice junction detection, with comparable discovery of true novel splice junctions at the cost of more false positive discoveries (Engstrom et al., 2013). While the effects of two-pass alignment on transcript assembly and transcript quantification have also been investigated, our primary interest is in splice junction expression quantification, which is relevant to ascertaining the validity of discovered splice junctions, and has not yet been thoroughly investigated (Steijger et al., 2013). In light of the evidence that two-pass alignment can improve alignment rate and sensitivity, we investigated what advantages and disadvantages this approach might yield for splice junction quantification (Engstrom et al., 2013) {% cite Veeneman2015 %}.
+
+![figX:Sequence quality](../../images/differential_isoform/RNASTAR_twopass_mode.png "Two-pass alignment flowchart. Center and right, stepwise progression of two-pass alignment. First, the genome is indexed with gene annotation. Next, novel splice junctions are discovered from RNA sequencing data at a relatively high stringency (12 nt minimum spanning length). Third, these discovered splice junctions, and expressed annotated splice junctions are used to re-index the genome. Finally, alignment is performed a second time, quantifying novel and annotated splice junctions using the same, relatively lower stringency (3 nt minimum spanning length), producing splice junction expression.")
+
+Consistent with parameter selection, we found that two-pass alignment enables sequence reads to span novel splice junctions by fewer nucleotides, which confers greater read depth over those splice junctions, and this effect disproportionately benefits samples with shorter reads. The expected read depth benefit from enabling shorter spanning lengths closely matched observed read depth increases across a variety of RNA-seq samples, and affected nearly every splice junction per sample. Further, by aligning significantly more reads to splice junctions, two-pass alignment provides significantly more accurate quantification of novel splice junctions that one-pass alignment, as evidenced by its tight concordance with gene annotation-driven alignment. This quantification is mostly very good, but non-canonical novel splice junctions are likely to be missed using default parameters. Finally, while we observe splice junctions which are likely alignment errors, we demonstrate that these are simple to identify using the distribution of reads spanning the splice junction by short lengths, here less than or equal to twelve nucleotides. In our experience, alignment errors are consistent between samples, underscoring both their sequence-driven nature, and their ease of identification. A similar alignment error classification method is utilized by FineSplice, which also works by modeling splice junction spanning length distributions, and would likely improve on the simple classifier presented here if extended from Tophat results to STAR results (Gatto et al., 2014) {% cite Veeneman2015 %}.
+
+Beyond these practical benefits, in the context of cancer transcriptomics we anticipate great value in comparing known and novel splice junctions on equal footing, which is enabled only by two-pass alignment. While two-pass alignment particularly benefits shorter read sequences, and technology advances continue to extend read length, much 50 nt-100nt read data already exists and stands to benefit from more sensitive reanalysis. In addition to increased sensitivity for rare and low-expressed splice variants, applications include resolving isoform structures of novel non-coding RNAs and genes in non-human organisms, and supplying more confident novel isoforms for proteogenomic database searching. Successful application here to Arabidopsis RNA-seq data bolsters our optimism that the sequence-driven nature of two-pass alignment would benefit analysis of other organisms as well. While we used STAR here, any sequence alignment algorithm which permits scoring differences between annotated and unannotated splice junctions could be run in a two-pass alignment configuration, and should expect to see similar novel splice junction performance improvements {% cite Veeneman2015 %}.
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -243,9 +263,15 @@ Repeat with the other collection
 >
 {: .hands_on}
 
-## Sub-step with **Junction Annotation**
+## RNA-seq specific quality control metrics with **RSeQC**
+
+Current RNA-seq protocols still possess several intrinsic biases and limitations, such as nucleotide composition bias, GC bias and PCR bias. These biases directly affect the accuracy of many RNA-seq applications (Benjamini and Speed, 2012; Hansen and Brenner, 2010) and can be directly checked from raw sequences using tools like FastQC. However, these raw sequence-based metrics are not sufficient to ensure the usability of RNA-seq data; other RNA-seq-specific quality control (QC) metrics, such as sequencing depth, read distribution and coverage uniformity, are even more important. For instance, sequencing depth must be saturated before carrying out many RNA-seq applications, including expression profiling, alternative splicing analysis, novel isoform identification and transcriptome reconstruction. The use of RNA-seq with unsaturated sequencing depth gives imprecise estimations (such as for RPKM and splicing index) and fails to detect low abundance splice junctions, thereby limit the precision of many analyses {% cite Wang2012 %}.
+
+### Sub-step with **Junction Annotation**
 
 <!-- Needs to be edited -->
+
+It separates all detected splice junctions into ‘known’, ‘complete novel’ and ‘partial novel’ by comparing them with the reference gene model {% cite Wang2012 %}.
 
 It compare detected splice junctions to reference gene model. splicing annotation is performed in two levels: splice event level and splice junction level.
 
@@ -275,11 +301,13 @@ Detected junctions were divided to 3 exclusive categories:
 >
 {: .hands_on}
 
-## Sub-step with **Junction Saturation**
+### Sub-step with **Junction Saturation**
 
 <!-- Needs to be edited -->
 
 It’s very important to check if current sequencing depth is deep enough to perform alternative splicing analyses. For a well annotated organism, the number of expressed genes in particular tissue is almost fixed so the number of splice junctions is also fixed. The fixed splice junctions can be predetermined from reference gene model. All (annotated) splice junctions should be rediscovered from a saturated RNA-seq data, otherwise, downstream alternative splicing analysis is problematic because low abundance splice junctions are missing. This module checks for saturation by resampling 5%, 10%, 15%, …, 95% of total alignments from BAM or SAM file, and then detects splice junctions from each subset and compares them to reference gene model.
+
+ The junction saturation test is very important for alternative splicing analysis, as using an unsaturated sequencing depth would miss many rare splice junctions {% cite Wang2012 %}.
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -291,7 +319,7 @@ It’s very important to check if current sequencing depth is deep enough to per
 >
 {: .hands_on}
 
-## Sub-step with **Read Distribution**
+### Sub-step with **Read Distribution**
 
 <!-- Needs to be edited -->
 
@@ -305,7 +333,7 @@ Provided a BAM/SAM file and reference gene model, this module will calculate how
 >
 {: .hands_on}
 
-## Sub-step with **Infer Experiment**
+### Sub-step with **Infer Experiment**
 
 <!-- Needs to be edited -->
 
@@ -319,7 +347,7 @@ This program is used to “guess” how RNA-seq sequencing were configured, part
 >
 {: .hands_on}
 
-## Sub-step with **MultiQC**
+### Sub-step with **MultiQC**
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -373,7 +401,17 @@ This program is used to “guess” how RNA-seq sequencing were configured, part
 
 <!-- Needs to be edited -->
 
-StringTie is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts. It uses a novel network flow algorithm as well as an optional de novo assembly step to assemble and quantitate full-length transcripts representing multiple splice variants for each gene locus. Its input can include not only alignments of short reads that can also be used by other transcript assemblers, but also alignments of longer sequences that have been assembled from those reads.
+StringTie is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts. It uses a novel network flow algorithm as well as an optional de novo assembly step to assemble and quantitate full-length transcripts representing multiple splice variants for each gene locus. Its input can include not only alignments of short reads that can also be used by other transcript assemblers, but also alignments of longer sequences that have been assembled from those reads {% cite Pertea2015 %}.
+
+StringTie assembles transcripts and estimates their expression levels simultaneously. StringTie first groups the reads into clusters, then creates a splice graph for each cluster from which it identifies transcripts, and then for each transcript it creates a separate flow network to estimate its expression level using a maximum flow algorithm {% cite Pertea2015 %}.
+
+![figX:Stringtie algorithm](../../images/differential_isoform/stringtie_algorithm.png "Transcript assembly pipeline for StringTie. It begin with a set of RNA-seq reads that have been mapped to the genome. StringTie iteratively extracts the heaviest path from a splice graph, constructs a flow network, computes maximum flow to estimate abundance, and then updates the splice graph by removing reads that were assigned by the flow algorithm. This process repeats until all reads have been assigned.")
+
+The main reason underlying the greater accuracy of StringTie most likely derives from its optimization criteria. By balancing the coverage (or flow) of each transcript across each assembly, it incorporates depth of coverage constraints into the assembly algorithm itself. When assembling a whole genome, coverage is a crucial parameter that must be used to constrain the algorithm; otherwise an assembler may incorrectly collapse repetitive sequences. Similarly, when assembling a transcript, each exon within an isoform should have similar coverage, and ignoring this parameter may produce sets of transcripts that are parsimonious but wrong {% cite Pertea2015 %}.
+
+StringTie is a transcript assembler that uses the optimization technique of maximum flow in a specially constructed flow network to determine gene expression levels, and does so while simultaneously assembling each isoform of a gene. And unlike other transcript assemblers, it incorporates alignment to both a genome and a de novo assembly of reads {% cite Pertea2015 %}.
+
+StringTie takes as input a SAM, BAM or CRAM file sorted by coordinate (genomic location). Any SAM record with a spliced alignment (i.e. having a read alignment across at least one junction) should have the XS tag (or the ts tag, see below) which indicates the transcription strand, the genomic strand from which the RNA that produced the read originated . 
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -388,7 +426,31 @@ StringTie is a fast and highly efficient assembler of RNA-Seq alignments into po
 >
 {: .hands_on}
 
-# Isoform analysis
+Stringtie generates different table files; in our case, we are only interested in the collection called **transcript-level expression measurements** (t_tab.ctab files). Each file includes one row per transcript, with the following columns:
+
+- t_id: numeric transcript id
+- chr, strand, start, end: genomic location of the transcript
+- t_name: generated transcript id
+- num_exons: number of exons comprising the transcript
+- length: transcript length, including both exons and introns
+- gene_id: gene the transcript belongs to
+- gene_name: HUGO gene name for the transcript, if known
+- cov: per-base coverage for the transcript (available for each sample)
+- FPKM: Estimated FPKM for the transcript (available for each sample)
+
+# Genome-wide isoform expression analysis
+
+IsoformSwitchAnalyzeR enables analysis of changes in genome-wide patterns of alternative splicing and isoform switch consequences.
+
+![figX:Isoform usage](../../images/differential_isoform/isoformSwitcher_splicing_patterns.png "Splicing patterns. The observed splice patterns (left colum) of two isoforms compared as indicated by the color of the splice patterns. The corresponding classification of the event (middle column) and the abreviation used (right column).")
+
+A genome-wide analysis is both useful for getting an overview of the extent of isoform switching as well as discovering general patterns. IsoformSwitchAnalyzeR supports this by providing four different summaries/analyses for both the analysis of alternative splicing and isoform switches with predicted consequences. All functions provide a visual overview as well as a data.frame with the summary statistics. The four analysis types supported are:
+
+- Global summary statistics, implemented in the extractConsequenceSummary() and extractSplicingSummary() functions, which summarizes the number of switches with predicted consequences and the number of splicing events occurring in the different comparisons, respectively.
+- Analysis of splicing/consequence enrichment, implemented in the extractConsequenceEnrichment() and extractSplicingEnrichment() functions, which analyzes whether a particular consequence/splice type occurs more frequently than the opposite event (e.g. domain loss vs domain gain) in a giving comparison (e.g. WT->KO1).
+- Comparison of enrichment, implemented in extractConsequenceEnrichmentComparison() and extractSplicingEnrichmentComparison() functions, which compares the enrichment of a particular consequence/splice type between comparisons (e.g. compares the changes in WT->KO1 vs WT->KO2)
+- Analysis of genome-wide changes in isoform usage, implemented in extractConsequenceGenomeWide() and extractSplicingGenomeWide() functions, which analyses the genome-wide changes in isoform usage for all isoforms with particular opposite pattern events. This type of analysis is particular interesting if the expected difference between conditions is large, since such effects could result in genome-wide changes. The analysis works by simultaneously analyzing all isoforms with a specific feature (e.g. intron retention) for changes in isoform usage.
+
 
 ## Sub-step with **IsoformSwitchAnalyzeR**
 
@@ -411,6 +473,29 @@ StringTie is a fast and highly efficient assembler of RNA-Seq alignments into po
 
 ## Sub-step with **IsoformSwitchAnalyzeR**
 
+### Filtering
+
+Once you have a switchAnalyzeRlist, there is a good chance that it contains a lot of genes/isoforms that are irrelevant for an analysis of isoform switches. Examples of such could be single isoform genes or non-expressed isoforms. These extra genes/isoforms will make the downstream analysis take (much) longer than necessary. Therefore we have implemented a pre-filtering step to remove these features before continuing with the analysis. Importantly, filtering can enhance the reliability of the downstream analysis as described in detail below.
+
+By using preFilter() it is possible to remove genes and isoforms from all aspects of the switchAnalyzeRlist by filtering on:
+
+- Multi-isoform genes
+- Gene expression
+- Isoform expression
+- Isoform Fraction (isoform usage)
+- Unwanted isoform classes
+- Unwanted gene biotypes
+- Genes without differential isoform usage
+- Removal of single isoform genes is the default setting in preFilter() since these genes, per definition, cannot have changes in isoform usage.
+
+Filtering on isoform expression allows removal of non-used isoforms that only appear in the switchAnalyzeRlist because they were in the isoform/gene annotation used. Furthermore, the expression filtering allows removal of lowly expressed isoforms where the expression levels might be untrustworthy. 
+
+### Testing for Isoform Switches via DEXSeq
+
+Two major challenges in testing differential isoform usage have been controlling false discovery rates (FDR) and applying effect size cutoffs in experimental setups with confounding effects. Recent studies such as Love at al highlights DEXSeq (developed by Anders et al., see What To Cite — please remember to cite it) as being a good solution as it controls FDR quite well. We have therefore implemented a DEXSeq based test as the default in IsoformSwitchAnalyzeR. This test furthermore utilizes limma to produce effect sizes corrected for confounding effects.
+
+An important argument in isoformSwitchTestDEXSeq is the ‘reduceToSwitchingGenes’. When TRUE this argument will cause the function to reduce/subset the switchAnalyzeRlist to the genes which each contains at least one differential used isoform, as indicated by the alpha and dIFcutoff cutoffs. This option ensures the rest of the workflow runs significantly faster since isoforms from genes without isoform switching are not analyzed.
+
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy0) %} with the following parameters:
@@ -420,6 +505,10 @@ StringTie is a fast and highly efficient assembler of RNA-Seq alignments into po
 {: .hands_on}
 
 ## Sub-step with **PfamScan**
+
+PfamScan is used to search a FASTA sequence against a library of Pfam HMM.
+
+Pfam is a database of protein families and domains that is widely used to analyse novel genomes, metagenomes and to guide experimental work on particular proteins and systems (1,2). Each Pfam family has a seed alignment that contains a representative set of sequences for the entry. A profile hidden Markov model (HMM) is automatically built from the seed alignment and searched against a sequence database called pfamseq using the HMMER software (http://hmmer.org/). All sequence regions that satisfy a family-specific curated threshold, also known as the gathering threshold, are aligned to the profile HMM to create the full alignment {% cite Mistry2020 %}.
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -433,6 +522,15 @@ StringTie is a fast and highly efficient assembler of RNA-Seq alignments into po
 {: .hands_on}
 
 ## Sub-step with **CPAT**
+
+CPAT is a bioinformatics tool to predict RNA’s coding probability based on the RNA sequence characteristics. To achieve this goal, CPAT calculates scores of these 4 linguistic features from a set of known protein-coding genes and another set of non-coding genes.
+
+- ORF size
+- ORF coverage
+- Fickett TESTCODE
+- Hexamer usage bias
+
+CPAT will then builds a logistic regression model using these 4 features as predictor variables and the “protein-coding status” as the response variable. After evaluating the performance and determining the probability cutoff, the model can be used to predict new RNA sequences.
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -464,6 +562,14 @@ StringTie is a fast and highly efficient assembler of RNA-Seq alignments into po
 {: .hands_on}
 
 ## Sub-step with **IsoformSwitchAnalyzeR**
+
+**Predicting Switch Consequences**
+
+If an isoform has a significant change in its contribution to gene expression, there must per definition be reciprocal changes in one (or more) isoforms in the opposite direction, compensating for the change in the first isoform. We utilize this by extracting the isoforms that are significantly differentially used and compare them to the isoforms that are compensating. Using all the information gathered through the workflow described above, the annotation of the isoform(s) used more (positive dIF) can be compared to the isoform(s) used less (negative dIF) and by systematically identify differences annotation we can identify potential function consequences of the isoform switch.
+
+Specifically, IsoformSwitchAnalyzeR contains a function analyzeSwitchConsequences() which extracts the isoforms with significant changes in their isoform usage (defined by the alpha and dIFcutoff parameters, see Identifying Isoform Switches for details) and the isoform, with a large opposite change in isoform usage (also controlled via the dIFcutoff parameters) that compensate for the changes. Note that if an isoform-level test was not used, the gene is require to be significant (defined by the alpha parameter); but, isoforms are then selected purely based on their changes in dIF values.
+
+These isoforms are then divided into the isoforms that increase their contribution to gene expression (positive dIF values larger than dIFcutoff) and the isoforms that decrease their contribution (negative dIF values smaller than -dIFcutoff). The isoforms with increased contribution are then (in a pairwise manner) compared to the isoform with decreasing contribution. In each of these comparisons the isoforms compared are analyzed for differences in their annotation (controlled by the consequencesToAnalyze parameter). Currently 22 different features of the isoforms can be compared, which include features such as intron retention, coding potential, NMD status, protein domains and the sequence similarity of the amino acid sequence of the annotated ORFs. 
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -502,5 +608,6 @@ Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+Despite the large amount of RNA-seq data and computational methods available, isoform-based expression analysis is rare. This means that the potential of existing RNA-seq data is untapped, and as a consequence, our general understanding of differential isoform usage is poor. The few efforts at analyzing individual isoform switches have typically dealt with isoforms by describing their frequent occurrence rather than trying to systematically predict their consequence. Overall, this is unsatisfying, as isoform usage is important in disease and especially cancer, where many individual isoform switches have been described {% cite VittingSeerup2017 %}.
+
+Here we present methods for the statistical identification and analysis of isoform switches with predicted functional consequences {% cite VittingSeerup2017 %}.
