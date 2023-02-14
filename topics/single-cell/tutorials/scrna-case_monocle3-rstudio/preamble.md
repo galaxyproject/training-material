@@ -82,7 +82,7 @@ If you followed the {% icon tip %} tip above, you should already have your Jupyt
 {: .hands_on}
 
 
-Installation will take a while, so in the meantime, when it's running, you can upload the files you downloaded: the notebook and three data files.
+Installation will take a while, so in the meantime, when it's running, you can upload the files you downloaded: the notebook and three data files - cell annotations, gene annotations and unprocessed expression matrix.
 
 ><tip-title>Installation for RStudio users</tip-title>
 >
@@ -102,5 +102,8 @@ Installation will take a while, so in the meantime, when it's running, you can u
 >devtools::install_github('cole-trapnell-lab/monocle3')
 >library(monocle3)
 >```
+> > <warning-title>Installation errors</warning-title>
+> > It may happen that you will encounter some problems with installation of monocle3 when using RStudio Galaxy instance or RStudio Cloud. It might be due to using older versions of R or required packages or lack of required dependencies. If it happens, you would need to carefully read the error messages and follow the suggestions. If you are facing any difficulties with installation process, it is recommended that you consult your problem with additional online resources. It is more likely that RStudio Cloud or Galaxy tool would fail rather than local RStudio. To make your analysis stress-free, you can follow the Jupyter Notebook instead, which should not give you installation issues. 
+> {: .warning}
 >
 {: .tip}
