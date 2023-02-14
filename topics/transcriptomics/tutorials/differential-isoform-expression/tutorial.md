@@ -225,6 +225,8 @@ Quality assessment text.
 
 # RNA-seq mapping and quantification 
 
+<!-- Needs to be edited! -->
+
 RNA-seq analysis begins by mapping reads against a reference genome to identify their genomic positions. This mapping information allows us to collect subsets of the reads corresponding to each gene, and then to assemble and quantify transcripts represented by those reads.
 
 Using a mapping of reads to the reference genome, genome-guided transcript assemblers cluster the reads and build graph models representing all possible isoforms for each gene. One such model is a splice graph, in which nodes represent exons or parts of exons, and paths through the graph represent possible splice variants
@@ -232,6 +234,8 @@ Using a mapping of reads to the reference genome, genome-guided transcript assem
 StringTie uses a genome-guided transcriptome assembly approach along with concepts from de novo genome assembly to improve transcript assembly. Specifically, the inputs to StringTie can include not only spliced read alignments, but also the alignments of contigs that StringTie pre-assembles from read pairs.
 
 ## Sub-step with **RNA STAR**
+
+<!-- Needs to be edited! -->
 
 RNA-seq mappers need to solve an additional problem that is not encountered in DNA-only alignment: many RNA-seq reads will span introns. The RNA-seq processing captures and sequences mature mRNA molecules, from which introns have been removed by splicing. Thus, a single short read might align to two locations that are separated by 10,000 bp or more (the average human intron length is >6,000 bp, and some introns are >1 Mbp in length). For a typical human RNA-seq data set using 100-bp reads, >35% of the reads will span multiple exons. Aligning these multiexon spanning reads is a much more difficult task than aligning reads contained within one exon.
 
@@ -265,7 +269,19 @@ Beyond these practical benefits, in the context of cancer transcriptomics we ant
 
 ## RNA-seq specific quality control metrics with **RSeQC**
 
+<!-- Needs to be edited! -->
+
 Current RNA-seq protocols still possess several intrinsic biases and limitations, such as nucleotide composition bias, GC bias and PCR bias. These biases directly affect the accuracy of many RNA-seq applications (Benjamini and Speed, 2012; Hansen and Brenner, 2010) and can be directly checked from raw sequences using tools like FastQC. However, these raw sequence-based metrics are not sufficient to ensure the usability of RNA-seq data; other RNA-seq-specific quality control (QC) metrics, such as sequencing depth, read distribution and coverage uniformity, are even more important. For instance, sequencing depth must be saturated before carrying out many RNA-seq applications, including expression profiling, alternative splicing analysis, novel isoform identification and transcriptome reconstruction. The use of RNA-seq with unsaturated sequencing depth gives imprecise estimations (such as for RPKM and splicing index) and fails to detect low abundance splice junctions, thereby limit the precision of many analyses {% cite Wang2012 %}.
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} with the following parameters:
+>    - {% icon param-file %} *"GTF File to convert"*: `output` (Input dataset)
+>    - *"Advanced options"*: `Set advanced options`
+>        - *"Ignore groups without exons"*: `Yes`
+>
+{: .hands_on}
+
 
 ### Sub-step with **Junction Annotation**
 
@@ -283,15 +299,6 @@ Detected junctions were divided to 3 exclusive categories:
 - Annotated (known): The junction is part of the gene model. Both splice sites, 5’ splice site (5’SS) and 3’splice site (3’SS) are annotated by reference gene model.
 - Complete_novel: Both 5’SS and 3’SS are novel.
 - Partial_novel: One of the splice site (5’SS or 3’SS) is novel, and the other splice site is annotated.
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Convert GTF to BED12](toolshed.g2.bx.psu.edu/repos/iuc/gtftobed12/gtftobed12/357) %} with the following parameters:
->    - {% icon param-file %} *"GTF File to convert"*: `output` (Input dataset)
->    - *"Advanced options"*: `Set advanced options`
->        - *"Ignore groups without exons"*: `Yes`
->
-{: .hands_on}
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -440,6 +447,8 @@ Stringtie generates different table files; in our case, we are only interested i
 
 # Genome-wide isoform expression analysis
 
+<!-- Needs to be edited! -->
+
 IsoformSwitchAnalyzeR enables analysis of changes in genome-wide patterns of alternative splicing and isoform switch consequences.
 
 ![figX:Isoform usage](../../images/differential_isoform/isoformSwitcher_splicing_patterns.png "Splicing patterns. The observed splice patterns (left colum) of two isoforms compared as indicated by the color of the splice patterns. The corresponding classification of the event (middle column) and the abreviation used (right column).")
@@ -475,6 +484,8 @@ A genome-wide analysis is both useful for getting an overview of the extent of i
 
 ### Filtering
 
+<!-- Needs to be edited! -->
+
 Once you have a switchAnalyzeRlist, there is a good chance that it contains a lot of genes/isoforms that are irrelevant for an analysis of isoform switches. Examples of such could be single isoform genes or non-expressed isoforms. These extra genes/isoforms will make the downstream analysis take (much) longer than necessary. Therefore we have implemented a pre-filtering step to remove these features before continuing with the analysis. Importantly, filtering can enhance the reliability of the downstream analysis as described in detail below.
 
 By using preFilter() it is possible to remove genes and isoforms from all aspects of the switchAnalyzeRlist by filtering on:
@@ -492,6 +503,8 @@ Filtering on isoform expression allows removal of non-used isoforms that only ap
 
 ### Testing for Isoform Switches via DEXSeq
 
+<!-- Needs to be edited! -->
+
 Two major challenges in testing differential isoform usage have been controlling false discovery rates (FDR) and applying effect size cutoffs in experimental setups with confounding effects. Recent studies such as Love at al highlights DEXSeq (developed by Anders et al., see What To Cite — please remember to cite it) as being a good solution as it controls FDR quite well. We have therefore implemented a DEXSeq based test as the default in IsoformSwitchAnalyzeR. This test furthermore utilizes limma to produce effect sizes corrected for confounding effects.
 
 An important argument in isoformSwitchTestDEXSeq is the ‘reduceToSwitchingGenes’. When TRUE this argument will cause the function to reduce/subset the switchAnalyzeRlist to the genes which each contains at least one differential used isoform, as indicated by the alpha and dIFcutoff cutoffs. This option ensures the rest of the workflow runs significantly faster since isoforms from genes without isoform switching are not analyzed.
@@ -505,6 +518,8 @@ An important argument in isoformSwitchTestDEXSeq is the ‘reduceToSwitchingGene
 {: .hands_on}
 
 ## Sub-step with **PfamScan**
+
+<!-- Needs to be edited! -->
 
 PfamScan is used to search a FASTA sequence against a library of Pfam HMM.
 
@@ -522,6 +537,8 @@ Pfam is a database of protein families and domains that is widely used to analys
 {: .hands_on}
 
 ## Sub-step with **CPAT**
+
+<!-- Needs to be edited! -->
 
 CPAT is a bioinformatics tool to predict RNA’s coding probability based on the RNA sequence characteristics. To achieve this goal, CPAT calculates scores of these 4 linguistic features from a set of known protein-coding genes and another set of non-coding genes.
 
@@ -564,6 +581,8 @@ CPAT will then builds a logistic regression model using these 4 features as pred
 ## Sub-step with **IsoformSwitchAnalyzeR**
 
 **Predicting Switch Consequences**
+
+
 
 If an isoform has a significant change in its contribution to gene expression, there must per definition be reciprocal changes in one (or more) isoforms in the opposite direction, compensating for the change in the first isoform. We utilize this by extracting the isoforms that are significantly differentially used and compare them to the isoforms that are compensating. Using all the information gathered through the workflow described above, the annotation of the isoform(s) used more (positive dIF) can be compared to the isoform(s) used less (negative dIF) and by systematically identify differences annotation we can identify potential function consequences of the isoform switch.
 
