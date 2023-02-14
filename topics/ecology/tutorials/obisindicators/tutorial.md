@@ -27,7 +27,7 @@ This tutorial will guide you on getting obis marine data and processing them in 
 
 This tool for obisindicators is composed of 5 indicators : Number of record, Shannon, Simpson, Es50 and Hill which will be explained in more details later on.
 
-In this tutorial, we'll be working on obis data extracted from .  First those data will be prepared. 
+In this tutorial, highly based on [OBIS indicators documentation](https://obis.org/indicators/documentation/) we'll be working on OBIS data extracted from [OBIS mapper](https://mapper.obis.org/). First those data will be prepared. 
 
 
 > ### Agenda
@@ -54,7 +54,7 @@ This first step consist of downloading and uploading obis data onto galaxy.
 >
 >    ![Obis portal welcome page](../../images/obisindicators/portal.png "Obis portal")
 >
->     > <details-title>Download data on the obis portal</details-title>
+>     > <details-title>Download data from the obis portal</details-title>
 >     > * Go on the right panel and enter the criteria of your choise here in "Area" write down **Mediterranean** and select "France: Mediterranean Sea".
 >     > * Click on save on the top right
 >     > ![Guide to download obis data](../../images/obisindicators/download.png "Obis download")
@@ -63,7 +63,7 @@ This first step consist of downloading and uploading obis data onto galaxy.
 >     > ![The obis portal while you wait for the download](../../images/obisindicators/waiting.png "Waiting download")
 >     > * The download can take a while depending on the size of your dataset (here less than 15min) 
 >     > * Then click on **Download ZIP file**
->     > * Don't forget to unzip your file on your machine 
+>     > * Don't forget to unzip your file on your machine.
 >     {: .details}
 >
 > In the downloaded folder you should have your data either csv format (Occurence.csv) and you must have at least 4 columns containing: latitude, longitude, species and record.
@@ -139,7 +139,7 @@ The Shannon index expresses the uncertainty associated with the prediction of th
 
 Warning: OBIS uses records as a proxy for individuals and sampling is generally not random, the community is not infinitely large and not all species are represented in the sample.
 
-The Shannon diversity index, also known as the Shannon-Wiener diversity index, is defined in OBIS as the sum over all species of -fi*log(fi) with fi defined as n/ni with n as the total number of records in the raster cell and ni as the total number of records for the ith-species in the raster cell.
+The Shannon diversity index, also known as the Shannon-Wiener diversity index, is defined in OBIS as the sum over all species of $-fi*log(fi)$ with fi defined as $n/ni$ with n as the total number of records in the raster cell and ni as the total number of records for the ith-species in the raster cell.
 ![Map showing the shannon indice](../../images/obisindicators/shannon.png "Shannon map")
 
 
@@ -150,7 +150,7 @@ where is richness (the total number of types in the dataset) and is the proporti
 
 Simpson’s index expresses the probability that any two individuals drawn at random from an infinitely large community belong to the same species. Note that small values are obtained in cells of high diversity and large values in cells of low diversity. This counterintuitive behavior is adressed with the Hill 2 number, which is the inverse of the Simpson index.
 
-The Simpson biodiversity index is defined in OBIS as the sum over all species of (ni/n)^2 with n as the total number of records in the cell and ni the total number of records for the ith species.
+The Simpson biodiversity index is defined in OBIS as the sum over all species of $(ni/n)^2$ with n as the total number of records in the cell and ni the total number of records for the ith species.
 
 Warning: The Simpson index has the same assumptions as the Shannon index.
 ![Map showing the simpson indice](../../images/obisindicators/simpson.png "Simpson map")
@@ -159,11 +159,11 @@ Warning: The Simpson index has the same assumptions as the Shannon index.
 
 The expected number of marine species in a random sample of 50 individuals (records) is an indicator on marine biodiversity richness.
 
-The ES50 is defined in OBIS as the sum(esi) over all species of the following per species calculation:
+The ES50 is defined in OBIS as the $sum(esi)$ over all species of the following per species calculation:
 
-    when n - ni >= 50 (with n as the total number of records in the cell and ni the total number of records for the ith-species)
+    when $n$ - ni$ $\ge$ $50$ (with n as the total number of records in the cell and ni the total number of records for the ith-species)
         $$ esi = 1 - exp(lngamma(n-ni+1) + lngamma(n-50+1) - lngamma(n-ni-50+1) - lngamma(n+1)) $$
-    when n >= 50
+    when $n$ $\ge$ $50$
         $$ esi = 1 $$
     else
         $$ esi = NULL $$
