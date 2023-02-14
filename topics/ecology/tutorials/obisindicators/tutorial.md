@@ -119,6 +119,8 @@ This first step consist of downloading and uploading obis data onto galaxy.
 >    - *"Select column containing the decimal value of the latitude "*: `c3`
 >    - *"Select column containing the species "*: `c4`
 >    - *"Select column containing the number of records"*: `c5`
+>    - *"Type of projection for the map : select your coordinate reference system (CRS)"*: Robinson Projection
+>    - *"Write a number between 1 and 30"*: 9
 >
 >
 > 2. Click on **Execute** 
