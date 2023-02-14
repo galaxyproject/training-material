@@ -1,22 +1,22 @@
 ---
 layout: tutorial_hands_on
 
-title: Data Manipulation Olympics
+title: 'Data Manipulation Olympics - JQ'
 zenodo_link: 'https://zenodo.org/record/6803028'
 tags:
 - cyoa
 questions:
-- How can I do basic data manipulation in Galaxy?
-- Which tools are available to convert, reformat, filter, sort etc my text-based data?
+- How can I do basic data manipulation with JQ?
+- Which functions are available to convert, reformat, filter, sort etc my JSON-based data?
 objectives:
-- Familiarize yourself with data manipulation tools in Galaxy
-- Perform basic text manipulation tasks in Galaxy
-- Become comfortable converting text-based files in a variety of ways.
+- Familiarize yourself with data manipulation filters in JQ
+- Perform basic data manipulation tasks in JQ
+- Become comfortable converting JSON-based files in a variety of ways.
 - Reason about the expected outcome of tools
 time_estimation: 1h
 key_points:
-- There are a lot of tools available in Galaxy for performing basic data manipulation tasks
-- Bacis data manipulation is often needed between steps in a larger scientific analysis in order to connect outputs from one tool to input of another.
+- There are a lot of functions available in JQ for performing basic data manipulation tasks
+- Basic data manipulation is often needed between steps in a larger scientific analysis in order to connect outputs from one tool to input of another.
 - There are often multiple ways/tools to achieve the same end result
 - Having a basic understanding of data manipulation tools will make it easier to do exploratory data analysis
 - Always read the help text of the tool before using it to get a full understanding of its workings
@@ -24,7 +24,6 @@ key_points:
 contributions:
   authorship:
     - shiltemann
-  editing:
     - hexylena
   funding:
     - erasmusplus
