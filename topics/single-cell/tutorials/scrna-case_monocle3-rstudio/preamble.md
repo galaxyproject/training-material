@@ -62,7 +62,7 @@ There are several ways in which you can complete this tutorial – check the {% 
 We will now present the workflow following using JupyterLab, but there will be advice for those using RStudio as well. 
 So let's get our JupyterLab instance up and running and crack on! 
 
-## Installation and files upload
+## Installation
 
 If you followed the {% icon tip %} tip above, you should already have your JupyterLab instance open. Before we start working on the tutorial notebook, we need to install required packages. 
 
@@ -83,22 +83,6 @@ If you followed the {% icon tip %} tip above, you should already have your Jupyt
 
 
 Installation will take a while, so in the meantime, when it's running, you can upload the files you downloaded: the notebook and three data files - cell annotations, gene annotations and unprocessed expression matrix.
-
-><hands-on-title>Files upload</hands-on-title>
->
-> 1. In the folder window, {% icon galaxy-upload %} Upload the `single-cell-scrna-case_monocle3-rstudio.ipynb` and three data files that you had downloaded from your computer. 
->
-> 2. Right-click on the files and rename them so that it’s easier to refer to them:
-> - `GalaxyX-[Extracted_cell_annotations_(obs)]` to `cells`
-> - `GalaxyX-[Extracted gene annotations (var)]` to `genes`
-> - `GalaxyX-[Unprocessed expression matrix]` to `expression`
->
-> 3. Open the notebook by double clicking it in the file window.
->
-{: .hands_on}
-
-
-From now on, you can switch to the notebook you just opened in JuyterLab and follow the tutorial in there! 
 
 ><tip-title>Installation for RStudio users</tip-title>
 >
