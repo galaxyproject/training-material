@@ -61,10 +61,17 @@ From now on, you can view this tutorial in the Jupyter notebook, which will allo
 
 ```python
 pip install scanpy
+```
+```python
 pip install fa2
+```
+```python
 pip install python-igraph
+```
+```python
 pip install louvain
-
+```
+```python
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as pl
@@ -129,11 +136,6 @@ sc.pl.draw_graph(adata, color='cell_type', legend_loc='on data', save = 'Plot2.p
 Oh dear! This doesn't look great. Maybe the DP-M4 cells are a whole other trajectory? That doesn't seem right. Saying that, this spreads out our T-mature cells, which makes a lot more sense when it comes to T-cell biology (we expect T-cells to differentiate into two types of T-cells, Cd8+Cd4- and Cd4+Cd8-). If you wanted to, you could also re-cluster your cells (since you've changed the neighborhood graph on which the clusterisation depends). You could use this: 
 `sc.tl.louvain(adata, resolution=0.6)`
 However, we tried that, and it called far too many clusters given the depth of sequencing in this dataset. Let's stick with our known cell types and move from there.
-
-> <comment-title> FUN FACT </comment-title>
-> You can share the link to your JupyLab with anyone and they'll be able to access it
-{: .comment}
-
 
 ## Working in a group? Decision-time!
 If you are working in a group, you can now divide up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
@@ -244,7 +246,8 @@ Now you can export it, as well as all your lovely plots! If you go into the *fig
 
 ```python
 put("Trajectorythymus.h5ad")
-
+```
+```python
 put("figures/draw_graph_faPlot1.png")
 put("figures/draw_graph_faPlot2.png")
 put("figures/draw_graph_faPlot5.png")
@@ -253,8 +256,10 @@ put("figures/draw_graph_faPlot7.png")
 put("figures/draw_graph_faPlot8.png")
 put("figures/paga_compare.pdf")
 put("figures/pagaPlot4.png")
-
-put("Trajectories_Instructions.ipynb")
+```
+The cell below will only work if you haven't changed the name of the notebook. If you renamed it, simply type its new name in the parenthesis.
+```python
+put("single-cell-scrna-case_JUPYTER-trajectories.ipynb")       
 ```
 
 This may take a moment, so go check your Galaxy history to make sure your images, anndata object, and notebook (.ipynb) have all made it back into your Galaxy history. Once they are all there, you can exit this browser and return to the Galaxy tutorial!
