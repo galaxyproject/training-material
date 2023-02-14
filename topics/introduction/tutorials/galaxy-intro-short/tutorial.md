@@ -140,6 +140,18 @@ When the file has uploaded to Galaxy, it will turn green.
 >
 {: .comment}
 
+> <details-title>Is this step taking a while?</details-title>
+>
+> Sometimes during courses, data upload gets a little slow. You can also import data through a history link.
+>
+> 1. Import history from: [example input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/short-introduction-to-galaxy--input)
+> {% snippet faqs/galaxy/histories_import.md %}
+>
+> 2. **Rename** {% icon galaxy-pencil %} the the history to your name of choice.
+>
+{: .details}
+
+
 What is this file?
 
 > <hands-on-title>View the dataset content</hands-on-title>
