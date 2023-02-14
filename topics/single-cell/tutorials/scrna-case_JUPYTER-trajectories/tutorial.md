@@ -76,7 +76,9 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 > <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
 >
 > 1. Import history from: [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferred-trajectory-analysis-using-python-jupyter-notebook-in-galaxy---input)
-> {% snippet faqs/galaxy/histories_import.md %}
+>
+>
+>    {% snippet faqs/galaxy/histories_import.md %}
 >
 > 2. **Rename** {% icon galaxy-pencil %} the the history to your name of choice.
 >
@@ -107,6 +109,15 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 > 6. Check that the datatype is `.ipynb`
 >
 {: .hands_on}
+
+# Important tips for easier analysis
+
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
+> <comment-title></comment-title>
+> - The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
+> - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [https://humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
+{: .comment}
 
 ## Filtering for T-cells
 

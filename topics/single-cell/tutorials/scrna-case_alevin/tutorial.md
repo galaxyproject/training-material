@@ -107,7 +107,9 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 > <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
 >
 > 1. Import history from: [example input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1)
-> {% snippet faqs/galaxy/histories_import.md %}
+>
+>
+>    {% snippet faqs/galaxy/histories_import.md %}
 >
 > 2. **Rename** {% icon galaxy-pencil %} the the history to your name of choice.
 >
@@ -147,13 +149,13 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 > {: .solution}
 {: .question}
 
-# Important tips that will make your bioinformatics life easier
+# Important tips for easier analysis
 
 {% snippet faqs/galaxy/tutorial_mode.md %}
 
-<comment-title></comment-title>
-- The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
-- You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the https://humancellatlas.usegalaxy.eu
+> <comment-title></comment-title>
+> - The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
+> - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [https://humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
 {: .comment}
 
 ## Generate a transcript to gene map

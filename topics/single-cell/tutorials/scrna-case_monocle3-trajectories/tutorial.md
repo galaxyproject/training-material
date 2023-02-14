@@ -71,7 +71,8 @@ You have two options for uploading these datasets. Importing via history is ofte
 >
 > 1. Import history from: [input history](https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/monocle3-input-files)
 >
-> {% snippet faqs/galaxy/histories_import.md %}
+>
+>    {% snippet faqs/galaxy/histories_import.md %}
 >
 > 2. **Rename** {% icon galaxy-pencil %} the the history to your name of choice.
 >
