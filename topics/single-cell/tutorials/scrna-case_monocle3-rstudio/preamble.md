@@ -82,7 +82,7 @@ If you followed the {% icon tip %} tip above, you should already have your Jupyt
 {: .hands_on}
 
 
-Installation will take a while, so in the meantime, when it's running, you can upload the files you downloaded: the notebook and three data files - cell annotations, gene annotations and unprocessed expression matrix.
+Installation will take a while, so in the meantime, when it's running, you can upload the files you downloaded: the notebook and three data files.
 
 ><tip-title>Installation for RStudio users</tip-title>
 >
