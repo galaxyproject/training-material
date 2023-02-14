@@ -548,14 +548,14 @@ We can now use data in `marker_test` to rank the cells based on one of the speci
 ```r
 # filter the ‘marker_test’ data frame
 top_specific_markers <- marker_test %>%
-                            filter(fraction_expressing >= 0.10) %>%
-                            group_by(cell_group) %>%
-                            top_n(2, pseudo_R2)
+                            dplyr::filter(fraction_expressing >= 0.10) %>%
+                            dplyr::group_by(cell_group) %>%
+                            dplyr::top_n(2, pseudo_R2)
 ```
 ```r
 # store the names of the marker genes
-# you can also use IDs, the conversion to gene names should happen automatically when plotting  
-top_marker_names <- unique(top_specific_markers %>% pull(gene_short_name)) 	
+# you can also use IDs, the conversion to gene names should happen automatically when plotting
+top_marker_names <- unique(top_specific_markers %>% dplyr::pull(gene_short_name))
 ```
 
 Now we have all elements to plot the expression and fraction of cells that express found markers in each group. 
@@ -590,15 +590,15 @@ assigned_marker_test <- top_markers(cds_annotated,
 ```r
 # filter these markers according to how stringent you want to be
 garnett_markers <- assigned_marker_test %>%
-                        filter(marker_test_q_value < 0.05 & specificity >= 0.25) %>%
-                        group_by(cell_group) %>%
-                        top_n(5, marker_score)
+                        dplyr::filter(marker_test_q_value < 0.05 & specificity >= 0.25) %>%
+                        dplyr::group_by(cell_group) %>%
+                        dplyr::top_n(5, marker_score)
 ```
 ```r
 # exclude genes that are good markers for more than one cell type:
-garnett_markers_filtered <- garnett_markers %>% 
-                        group_by(gene_short_name) %>%
-                        filter(n() == 1)
+garnett_markers_filtered <- garnett_markers %>%
+                        dplyr::group_by(gene_short_name) %>%
+                        dplyr::filter(dplyr::n() == 1)
 ```
 ```r
 # generate a file of marker genes
@@ -612,6 +612,7 @@ A new file should appear in the ‘Files’ window. If you click on it, you will
 >  Note that you can use the above block of code to generate file with the marker genes for unannotated CDS object to help you identify and check specifically expressed genes – you’d only have to change `group_cells_by` parameter from "cell_type" to “cluster”. 
 {: .tip}
 
+# EDIT NEEDED - ONLY FOR RSTUDIO - (INTERACTIVE TOOL) - MAKE A TIP
 You may also want to investigate certain clusters more in-depth. Then, you can make a subset of the CDS object containing only cells of interest. If you call `choose_cells()`, then a pop-up window will appear where you can choose cells to subset. 
 ```r
 # create a CDS subset
@@ -643,6 +644,7 @@ plot_cells(cds_trajectory,
 We have to tell Monocle where to start ordering the cells, ie. when we expect the analysed biological process to begin. Thanks to our biological knowledge, we know that the beginning of the trajectory should be at DN cluster. 
 There are a couple of ways to specify the root cells:
 
+# EDIT NEEDED - COMPLETE MESS
 - Use the pop-up window and simply select root nodes in the cluster with the cell type identified as the beginning of the trajectory.
 
   ```r
