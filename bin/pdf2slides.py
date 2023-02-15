@@ -4,6 +4,7 @@
 #   and then the text as well.
 
 import sys
+import shutil
 import tempfile
 import subprocess
 import os
@@ -27,18 +28,26 @@ contributions:
 
 
 PDF = os.path.abspath(sys.argv[1])
+pdf_dir = os.path.dirname(PDF)
 
 # pdftohtml -xml -q -stdout CAN_Module1_Lecture.pdf
+sys.stderr.write("Converting PDF to XML\n")
 xml = subprocess.check_output(['pdftohtml', '-xml', '-q', '-stdout', PDF]).decode('utf-8')
 tree = ET.fromstring(xml)
 for kid in tree:
-    sys.stdout.write(f"\n\n--- \n# {kid.attrib['number']}\n\n")
+    sys.stdout.write(f"\n\n---\n\n# {kid.attrib['number']}\n\n")
+    sys.stderr.write(f"Processing slide {kid.attrib['number']}\n")
     lasttop = 0
     for e in kid:
         if e.tag == 'fontspec': continue
 
         if e.tag == "image":
             print(f"![](images/{os.path.basename(e.attrib['src'])})")
+            image_name = os.path.basename(e.attrib['src'])
+            src_img = os.path.join(pdf_dir, image_name)
+            dst_img = os.path.join("images", image_name)
+            os.makedirs("images", exist_ok=True)
+            shutil.move(src_img, dst_img)
         elif e.tag == 'text':
             if e.text is not None:
                 if abs(int(e.attrib['top']) - lasttop) < 5:
