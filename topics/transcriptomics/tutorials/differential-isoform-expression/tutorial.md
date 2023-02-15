@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Differential isoform expression
+title: Genome-wide isoform switching analysis in cancer
 zenodo_link: ''
 questions:
 - Which isoform switching events are preemitant in hepatoblastoma?
@@ -17,21 +17,11 @@ contributors:
 
 # Introduction
 
-<!-- Needs to be edited! -->
+Hepatoblastoma (HB) is the most common malignant pediatric liver tumor and one of the fastest-rising cancers in children younger than 5 years (incidence has tripled in the last 30 years) ({% cite Nagae2021 %}, {% cite Zhang2021 %}). The origin of HB is largely unknown; nearly all cases of hepatoblastoma occur in children with no previous known family history of hepatoblastoma ({% cite Tomlinson2012 %}). The molecular analysis has shown that mutations of the Wnt/β-catenin cascade (a key regulator of cell fate and proliferation during liver development and regeneration) occur in the vast majority of human HB samples, and almost exclusively affect the CTNNB1 gene (encoding β-catenin), suggesting that β-catenin pathway activation is the driver event in HB ({% cite Bell2017 %}). Epigenetic profile analysis indicates HB tumors are characterized by genome-wide RNA editing and DNA methylation dysregulation ({% cite CarrilloReixach2020 %}). Diverse studies have demonstrated the influence of aberrant methylation in hepatoblastoma biology by affecting genes involved in signaling and tumor suppression as well as its clinical relevance ({% cite Zhang2021 %}).
 
-Alternative splicing, alternative transcription start- and termination sites (here, for simplicity, jointly referred to as alternative splicing) expand the RNA repertoire of most human genes (Forrest et al., 2014; The ENCODE Project Consortium, 2012). Changes in which isoform(s) are used in different conditions are common, and examples of such isoform switches with important functional consequences have been described in many biological processes [reviewed in Baralle and Giudice (2017) and Urbanski et al. (2018)]. This has motivated genome-wide screens for isoform switches with predicted functional consequences, resulting in identification of hundreds of cases (Climente-Gonza´lez et al., 2017; Sebestyen et al., 2015; Vitting-Seerup and Sandelin, 2017). The abundance of isoform switches may reflect important genome-wide changes and indeed, large-scale changes, such as systematic shortening of 3’UTRs in cancers, have been reported (e.g. Miura et al., 2013; Xia et al., 2014). Despite these findings, most studies only focus on individual genes and/or isoform switches {% cite VittingSeerup2019 %}.
+Although DNA methylation was originally thought to only affect transcription, emerging evidence shows that it also regulates alternative splicing, an evolutionarily conserved mechanism that increases transcriptome and proteome diversity by allowing the generation of multiple mRNA products from a single gene ({% cite LevMaor2015 %}). More than 90% of human genes were shown to undergo alternative splicing, and its regulation is essential for providing cells and tissues their specific features, and for their response to environmental changes ({% cite Wang2008 %}, {% cite Kalsotra2011 %}). Differential usage of isoforms in different conditions, often referred to as isoform switching, can have substantial biological impact, caused by the difference in the functional potential of the two isoforms ({% cite {% cite VittingSeerup2017 %}). Isoform switches are implicated in many diseases and are especially prominent in cancer; this fact has  has motivated genome-wide screens for isoform switches with predicted functional consequences ({% cite VittingSeerup2019 %}).
 
-The ability to produce different transcripts (gene isoforms) through alternative splicing (AS), alternative transcription start sites (aTSS), and alternative transcription termination sites (aTTS) is a major determinant of the increased complexity of higher vertebrates (1). A large majority of human genes uses alternative isoforms: approximately 95% of multi-exon genes show evidence of AS (2) and approximately 60% of genes have at least one aTSS (3). Recently, the ENCODE project estimated that, on average, each gene has 6.3 isoforms (3.9 different protein-coding isoforms; ref. 4). It is therefore no surprise that gene isoform usage has an important role in many biological processes, including development, homeostasis, pluripotency, and apoptosis (5–9). Moreover, isoforms are often tissue-specific and may alter the function, cellular localization, and stability of the corresponding RNA or protein (10, 11) {% cite VittingSeerup2017 %}.
-
-Differential usage of isoforms in different conditions, often referred to as isoform switching (Fig. 1A), can have substantial biological impact, caused by the difference in the functional potential of the two isoforms. Isoform switches are implicated in many diseases (11) and are especially prominent in cancer (12). A well-described example is the isoform switch in the ALK gene, occurring in 11% of melanoma patients, caused by the differential usage of aTSSs. The switch results in the production of a truncated protein lacking extracellular domains (13), which in turn promotes cell proliferation and drives tumorigenesis in vitro (13). Many such examples exist in the literature and include genes central to all eight cancer hallmarks (reviewed in refs. 14, 15). This has resulted in an increasing interest in targeting both general and specific splicing events for therapeutic purposes (16, 17) {% cite VittingSeerup2017 %}.
-
-Over the past decade, numerous studies have revealed an increasing degree of diversity in the transcriptomes of higher eukaryotes1. Most transcribed elements are never translated into proteins and are encoded by a myriad of non-protein-coding RNA genes (ncRNAs) that have complex patterns of expression and regulation2. Further complicating the picture, more than 90% of transcripts of multi-exon protein-coding genes, and about 30% of ncRNAs, undergo alternative splicing3,4. We currently have a far from complete picture of the exon-intron structure of all transcripts in the human genome. For non-human species, the landscape of alternative splicing is even less clear.
-
-Hepatoblastoma (HB) is the most common malignant pediatric liver tumor and one of the fastest-rising cancers in children younger than 5 years {% cite Nagae2021 %}.
-
-Cancer is a complex disease which can be caused by various factors. It has been determined that gene expression profiles of tumor cells are different from normal samples. Instable cellular homeostasis is an important cause of cancer, and has been reported to be closely related to aberrant alternative splicing. Since alternative splicing plays a key role in post-transcriptional regulation and controls the formation of spliced variants, the mutations and changed level of splice factors may contribute to tumorigenesis {% cite Liu2022 %}.
-
-Alternative precursor messenger RNA (pre-mRNA) splicing is the process by which the exons of pre-mRNA are spliced in different arrangements to produce structurally and functionally distinct mRNAs and proteins ( Figure 1A ) ( 3 ). After the completion of the Human Genome Project in 2004, alternative splicing has been recognized as one of the most important mechanisms that maintains genomic and functional diversity. It is well known that >95% of human genes encode splice isoforms ( 4 ), some of which exert antagonistic functions. A recent study revealed that alterations of the splicing machinery can cause the development of myeloid neoplasms ( 5 ), and understanding the splicing machinery is crucial for the development of novel therapeutic strategies for malignancies {% cite Miura2012 %}.
+In this tutorial, we aim to perform a genome-wide analysis of the isoform switching phaenomena in hepatoblasmoma with the objective of identify genes of clinical relevance.
 
 > <agenda-title></agenda-title>
 >
@@ -42,9 +32,15 @@ Alternative precursor messenger RNA (pre-mRNA) splicing is the process by which 
 >
 {: .agenda}
 
-# Phenotypic plasticity and alternative splicing
+# Alternative splicing and phenotypic plasticity
 
 <!-- Needs to be modified!-->
+
+Alternative splicing, alternative transcription start- and termination sites (here, for simplicity, jointly referred to as alternative splicing) expand the RNA repertoire of most human genes (Forrest et al., 2014; The ENCODE Project Consortium, 2012). Changes in which isoform(s) are used in different conditions are common, and examples of such isoform switches with important functional consequences have been described in many biological processes [reviewed in Baralle and Giudice (2017) and Urbanski et al. (2018)]. This has motivated genome-wide screens for isoform switches with predicted functional consequences, resulting in identification of hundreds of cases (Climente-Gonza´lez et al., 2017; Sebestyen et al., 2015; Vitting-Seerup and Sandelin, 2017). The abundance of isoform switches may reflect important genome-wide changes and indeed, large-scale changes, such as systematic shortening of 3’UTRs in cancers, have been reported (e.g. Miura et al., 2013; Xia et al., 2014). Despite these findings, most studies only focus on individual genes and/or isoform switches ({% cite VittingSeerup2019 %}).
+
+The ability to produce different transcripts (gene isoforms) through alternative splicing (AS), alternative transcription start sites (aTSS), and alternative transcription termination sites (aTTS) is a major determinant of the increased complexity of higher vertebrates (1). A large majority of human genes uses alternative isoforms: approximately 95% of multi-exon genes show evidence of AS (2) and approximately 60% of genes have at least one aTSS (3). Recently, the ENCODE project estimated that, on average, each gene has 6.3 isoforms (3.9 different protein-coding isoforms; ref. 4). It is therefore no surprise that gene isoform usage has an important role in many biological processes, including development, homeostasis, pluripotency, and apoptosis (5–9). Moreover, isoforms are often tissue-specific and may alter the function, cellular localization, and stability of the corresponding RNA or protein (10, 11) {% cite VittingSeerup2017 %}.
+
+Alternative precursor messenger RNA (pre-mRNA) splicing is the process by which the exons of pre-mRNA are spliced in different arrangements to produce structurally and functionally distinct mRNAs and proteins ( Figure 1A ) ( 3 ). After the completion of the Human Genome Project in 2004, alternative splicing has been recognized as one of the most important mechanisms that maintains genomic and functional diversity. It is well known that >95% of human genes encode splice isoforms ( 4 ), some of which exert antagonistic functions. A recent study revealed that alterations of the splicing machinery can cause the development of myeloid neoplasms ( 5 ), and understanding the splicing machinery is crucial for the development of novel therapeutic strategies for malignancies {% cite Miura2012 %}.
 
 Phenotypic plasticity is the ability of a genotype to display phenotypic variation in heterogeneous environments (West-Eberhard, 1989). It is now recognised that plasticity followed by genetic assimilation can result in population divergence, adaptation and speciation (Ehrenreich & Pfennig, 2015). The contribution of gene expression to plasticity is well studied (Schlichting & Pigliucci, 1998) but few studies have investigated the contribution of alternative splicing to this process, especially in animals (Somero, 2018). Alternative splicing has the potential to generate phenotypic diversity extremely rapidly (Pleiss et al., 2007) by drawing upon standing and cryptic genetic variation present in populations. To this end, alternative splicing has been linked to response to several instances of phenotypic plastic responses {% cite Singh2022 %}.
 
@@ -54,9 +50,20 @@ The majority of eukaryote genes have multiple transcriptional isoforms. Originat
 
 Alternative splicing is an essential process in post-transcriptional mRNA processing, and produces various mature mRNAs with different structures and functions. In this process, exons are taken together in different combinations and introns are removed. Recent data indicate that each transcript of protein-coding genes contain 11 exons and produce 5.4 mRNAs on average [1]. So far, seven basic types of alternative splicing have been identified, including exon skipping, alternative 5′-splice site, alternative 3′-splice site, mutually exclusive exons, intron retention, alternative promoter, and alternative polyadenylation [2] (Figure 1). A notable example of alternative splicing is the human gene TTN which encodes muscle protein titin and contains 364 coding-exons and 4039 different splicing events which have been identified by RNA-sequencing [3]. Most genes generate at least two transcript variants. The alternative spliced mRNAs are further translated into many protein variants which differ in function and structure. The precision and diversity of alternative splicing events are aided by many significant factors, such as the strength or weakness of splice sites, the concentration and combination of enhancing and silencing splicing factors, chromatin modifications, and RNA secondary architectures [3]. Since the activity of splicing factors and the spliced variants change the developing process of diseases, they can also serve as experimental indicators or biomarkers for diagnosis {% cite Liu2022 %}.
 
+The term “epigenetics” refers to all stable changes of phenotypic traits that are not coded in the DNA sequence itself [7], [8], [9], [10]. Epigenetic mechanisms can be viewed as an interface between the genome and risk factor/life style/environmental influence. Aberrant epigenetic events associated with any of these stressors likely play an important role in the onset and progression of different human malignancies. The field of epigenetics has been receiving remarkable attention recently, owing to our increased awareness that epigenetic inheritance is essential for the development of critical cellular processes such as gene transcription, differentiation and protection against viral genomes. Aberrant epigenetic states may predispose to genetic changes, but genetic changes may also initiate aberrant epigenetic events. Epigenetic and genetic mechanisms may thus work together to silence key cellular genes and destabilize the genome, leading to oncogenic transformation and observed the complexity and heterogeneity in human cancers, including HCC {% cite Herceg2011 %}.
+
 # Background on data
 
-Text about data background.
+ssRNA-seq of Homo sapiens:hepatoblastoma tissue
+1 ILLUMINA (Illumina HiSeq 4000) run: 63.6M spots, 19.1G bases, 6.3Gb downloads
+
+Design: depletion of ribosomal RNA by oligo hybridization and strand-specific RNA sequencing
+
+Instrument: Illumina HiSeq 4000
+Strategy: RNA-Seq
+Source: TRANSCRIPTOMIC
+Selection: Inverse rRNA
+Layout: PAIRED
 
 ## Get data
 
@@ -233,7 +240,7 @@ Using a mapping of reads to the reference genome, genome-guided transcript assem
 
 StringTie uses a genome-guided transcriptome assembly approach along with concepts from de novo genome assembly to improve transcript assembly. Specifically, the inputs to StringTie can include not only spliced read alignments, but also the alignments of contigs that StringTie pre-assembles from read pairs.
 
-## Sub-step with **RNA STAR**
+## RNA-seq mapping with **RNA STAR**
 
 <!-- Needs to be edited! -->
 
@@ -282,8 +289,25 @@ Current RNA-seq protocols still possess several intrinsic biases and limitations
 >
 {: .hands_on}
 
+### Sequencing depth analysis with **Junction Saturation**
 
-### Sub-step with **Junction Annotation**
+<!-- Needs to be edited -->
+
+It’s very important to check if current sequencing depth is deep enough to perform alternative splicing analyses. For a well annotated organism, the number of expressed genes in particular tissue is almost fixed so the number of splice junctions is also fixed. The fixed splice junctions can be predetermined from reference gene model. All (annotated) splice junctions should be rediscovered from a saturated RNA-seq data, otherwise, downstream alternative splicing analysis is problematic because low abundance splice junctions are missing. This module checks for saturation by resampling 5%, 10%, 15%, …, 95% of total alignments from BAM or SAM file, and then detects splice junctions from each subset and compares them to reference gene model.
+
+ The junction saturation test is very important for alternative splicing analysis, as using an unsaturated sequencing depth would miss many rare splice junctions {% cite Wang2012 %}.
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Junction Saturation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_saturation/5.0.1+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Input BAM/SAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
+>    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
+>    - *"Sampling bounds and frequency"*: `Default sampling bounds and frequency`
+>    - *"Output R-Script"*: `Yes`
+>
+{: .hands_on}
+
+### Splice junction classification with **Junction Annotation**
 
 <!-- Needs to be edited -->
 
@@ -308,25 +332,9 @@ Detected junctions were divided to 3 exclusive categories:
 >
 {: .hands_on}
 
-### Sub-step with **Junction Saturation**
 
-<!-- Needs to be edited -->
 
-It’s very important to check if current sequencing depth is deep enough to perform alternative splicing analyses. For a well annotated organism, the number of expressed genes in particular tissue is almost fixed so the number of splice junctions is also fixed. The fixed splice junctions can be predetermined from reference gene model. All (annotated) splice junctions should be rediscovered from a saturated RNA-seq data, otherwise, downstream alternative splicing analysis is problematic because low abundance splice junctions are missing. This module checks for saturation by resampling 5%, 10%, 15%, …, 95% of total alignments from BAM or SAM file, and then detects splice junctions from each subset and compares them to reference gene model.
-
- The junction saturation test is very important for alternative splicing analysis, as using an unsaturated sequencing depth would miss many rare splice junctions {% cite Wang2012 %}.
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Junction Saturation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_saturation/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM/SAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
->    - *"Sampling bounds and frequency"*: `Default sampling bounds and frequency`
->    - *"Output R-Script"*: `Yes`
->
-{: .hands_on}
-
-### Sub-step with **Read Distribution**
+### Genome features analysis with **Read Distribution**
 
 <!-- Needs to be edited -->
 
@@ -340,7 +348,7 @@ Provided a BAM/SAM file and reference gene model, this module will calculate how
 >
 {: .hands_on}
 
-### Sub-step with **Infer Experiment**
+### RNA-seq configuration analysis with **Infer Experiment**
 
 <!-- Needs to be edited -->
 
@@ -354,7 +362,7 @@ This program is used to “guess” how RNA-seq sequencing were configured, part
 >
 {: .hands_on}
 
-### Sub-step with **MultiQC**
+### Aggregate results with **MultiQC**
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -404,7 +412,7 @@ This program is used to “guess” how RNA-seq sequencing were configured, part
 ![figX:RSeQC read distribution](../../images/differential_isoform/rseqc_read_distribution_plot.png "RSeQC read distribution")
 
 
-## Sub-step with **StringTie**
+## Transcripts quantification with **StringTie**
 
 <!-- Needs to be edited -->
 
@@ -445,7 +453,7 @@ Stringtie generates different table files; in our case, we are only interested i
 - cov: per-base coverage for the transcript (available for each sample)
 - FPKM: Estimated FPKM for the transcript (available for each sample)
 
-# Genome-wide isoform expression analysis
+# Genome-wide isoform switch analysis with **IsoformSwitchAnalyzeR**
 
 <!-- Needs to be edited! -->
 
@@ -460,8 +468,8 @@ A genome-wide analysis is both useful for getting an overview of the extent of i
 - Comparison of enrichment, implemented in extractConsequenceEnrichmentComparison() and extractSplicingEnrichmentComparison() functions, which compares the enrichment of a particular consequence/splice type between comparisons (e.g. compares the changes in WT->KO1 vs WT->KO2)
 - Analysis of genome-wide changes in isoform usage, implemented in extractConsequenceGenomeWide() and extractSplicingGenomeWide() functions, which analyses the genome-wide changes in isoform usage for all isoforms with particular opposite pattern events. This type of analysis is particular interesting if the expected difference between conditions is large, since such effects could result in genome-wide changes. The analysis works by simultaneously analyzing all isoforms with a specific feature (e.g. intron retention) for changes in isoform usage.
 
+## Import data into **IsoformSwitchAnalyzeR**
 
-## Sub-step with **IsoformSwitchAnalyzeR**
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -480,9 +488,8 @@ A genome-wide analysis is both useful for getting an overview of the extent of i
 >
 {: .hands_on}
 
-## Sub-step with **IsoformSwitchAnalyzeR**
 
-### Filtering
+## Filtering and isoform switching identification
 
 <!-- Needs to be edited! -->
 
@@ -501,7 +508,6 @@ By using preFilter() it is possible to remove genes and isoforms from all aspect
 
 Filtering on isoform expression allows removal of non-used isoforms that only appear in the switchAnalyzeRlist because they were in the isoform/gene annotation used. Furthermore, the expression filtering allows removal of lowly expressed isoforms where the expression levels might be untrustworthy. 
 
-### Testing for Isoform Switches via DEXSeq
 
 <!-- Needs to be edited! -->
 
@@ -517,7 +523,9 @@ An important argument in isoformSwitchTestDEXSeq is the ‘reduceToSwitchingGene
 >
 {: .hands_on}
 
-## Sub-step with **PfamScan**
+### Importing external sequence analysis and genome-wide analysis
+
+### Protein domain identification with **PfamScan**
 
 <!-- Needs to be edited! -->
 
@@ -536,7 +544,7 @@ Pfam is a database of protein families and domains that is widely used to analys
 >
 {: .hands_on}
 
-## Sub-step with **CPAT**
+### RNA coding probablity prediction with **CPAT**
 
 <!-- Needs to be edited! -->
 
@@ -578,12 +586,6 @@ CPAT will then builds a logistic regression model using these 4 features as pred
 >
 {: .hands_on}
 
-## Sub-step with **IsoformSwitchAnalyzeR**
-
-**Predicting Switch Consequences**
-
-
-
 If an isoform has a significant change in its contribution to gene expression, there must per definition be reciprocal changes in one (or more) isoforms in the opposite direction, compensating for the change in the first isoform. We utilize this by extracting the isoforms that are significantly differentially used and compare them to the isoforms that are compensating. Using all the information gathered through the workflow described above, the annotation of the isoform(s) used more (positive dIF) can be compared to the isoform(s) used less (negative dIF) and by systematically identify differences annotation we can identify potential function consequences of the isoform switch.
 
 Specifically, IsoformSwitchAnalyzeR contains a function analyzeSwitchConsequences() which extracts the isoforms with significant changes in their isoform usage (defined by the alpha and dIFcutoff parameters, see Identifying Isoform Switches for details) and the isoform, with a large opposite change in isoform usage (also controlled via the dIFcutoff parameters) that compensate for the changes. Note that if an isoform-level test was not used, the gene is require to be significant (defined by the alpha parameter); but, isoforms are then selected purely based on their changes in dIF values.
@@ -615,15 +617,27 @@ These isoforms are then divided into the isoforms that increase their contributi
 
 ![figX:Isoform usage](../../images/differential_isoform/isoformSwitchAnalyzer_isoform_usage.png "Isoform usage")
 
+### Analysis of individual isoform switching
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [IsoformSwitchAnalyzeR](toolshed.g2.bx.psu.edu/repos/iuc/isoformswitchanalyzer/isoformswitchanalyzer/1.20.0+galaxy0) %} with the following parameters:
+>    - *"Tool function mode"*: `Analysis part two: Plot all isoform switches and their annotation`
+>        - {% icon param-file %} *"IsoformSwitchAnalyzeR R object"*: `switchList` (output of **IsoformSwitchAnalyzeR** {% icon tool %})
+>        - *"Analysis mode"*: `Analyze specific gene`
+>        - *"Gene name"*: `Example name`
+>        - *"Include prediction of coding potential information"*: `CPAT`
+>            - {% icon param-file %} *"CPAT result file"*: `orf_seqs_prob_best` (output of **CPAT** {% icon tool %})
+>        - *"Include Pfam information"*: `Enabled`
+>            - {% icon param-file %} *"Include Pfam results (sequence analysis of protein domains)"*: `output` (output of **PfamScan** {% icon tool %})
+>        - *"Include SignalP results"*: `Disabled`
+>        - *"Include prediction of intrinsically disordered Regions (IDR) information"*: `Disabled`
+>
+{: .hands_on}
+
+
 ![figX:Isoform usage](../../images/differential_isoform/isoformSwitchAnalyzer_gene.png "PHLPP2 isoform expression profile")
 
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 
