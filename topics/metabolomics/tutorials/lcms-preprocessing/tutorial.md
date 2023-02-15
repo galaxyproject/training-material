@@ -172,7 +172,7 @@ This first step is only meant to read your `mzXML` file and generate an object u
 
 > <hands-on-title>MSnbase readMSData</hands-on-title>
 >
-> 1. Run **MSnbase readMSData** {% icon tool %} with the following parameters:
+> 1. Run {% tool [MSnbase readMSData](toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0) %} with the following parameters:
 >    - *"File(s) from your history containing your chromatograms"*: the `mzML` dataset collection
 >
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
@@ -234,7 +234,7 @@ Note that you can either:
 >
 > > <hands-on-title>xcms get a sampleMetadata file</hands-on-title>
 > >
-> > **xcms get a sampleMetadata file** {% icon tool %} with the following parameters:
+> > {% tool [xcms get a sampleMetadata file](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_export_samplemetadata/xcms_export_samplemetadata/3.12.0+galaxy0) %} with the following parameters:
 > >    - {% icon param-collection %} *"RData file"*: the `mzML.raw.RData` collection output from **MSnbase readMSData** {% icon tool %}
 > >
 > > > <tip-title>Comment to W4M users</tip-title>
@@ -415,7 +415,7 @@ Note that you can also check the chromatograms at any moment during the workflow
 
 > <hands-on-title>xcms plot chromatogram</hands-on-title>
 >
-> 1. **xcms plot chromatogram** {% icon tool %} with the following parameters:
+> 1. {% tool [xcms plot chromatogram](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_plot_chromatogram/xcms_plot_chromatogram/3.12.0+galaxy0) %} with the following parameters:
 >   - *"RData file"*: `mzML.raw.RData` (collection)
 >   - *"Sample metadata file"*: `sampleMetadata_completed.tsv` that you uploaded previously
 >
@@ -479,7 +479,7 @@ Let's try performing the peakpicking step with the **xcms findChromPeaks (xcmsSe
 
 > <hands-on-title>xcms findChromPeaks (xcmsSet)</hands-on-title>
 >
-> **xcms findChromPeaks (xcmsSet)** {% icon tool %} with the following parameters:
+> {% tool [xcms findChromPeaks (xcmsSet)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0) %} with the following parameters:
 >   - *"RData file"*: `mzML.raw.RData` (collection)
 >   - *"Extraction method for peaks detection"*: `CentWave - chromatographic peak detection using the centWave method`
 >     - *"Max tolerated ppm m/z deviation in consecutive scans in ppm"*: `3`
@@ -531,7 +531,7 @@ with the second column defining theses classes.
 
 > <hands-on-title>xcms findChromPeaks Merger</hands-on-title>
 >
-> 1. **xcms findChromPeaks Merger** {% icon tool %} with the following parameters:
+> 1. {% tool [xcms findChromPeaks Merger](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0) %} with the following parameters:
 >   - *"RData file"*: `mzML.raw.xset.RData` (collection)
 >   - *"Sample metadata file"*: `sampleMetadata_completed.tsv`
 >
@@ -570,7 +570,7 @@ than a given number of samples. Either a percentage of the total number of sampl
 
 > <hands-on-title>xcms groupChromPeaks (group)</hands-on-title>
 >
-> **xcms groupChromPeaks (group)** {% icon tool %} with the following parameters:
+> {% tool [xcms groupChromPeaks (group)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0) %} with the following parameters:
 >   - *"RData file"*: `xset.merged.RData`
 >   - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
 >     - *"Bandwidth"*: `5.0`
@@ -670,7 +670,7 @@ using the **Intensity Check** {% icon tool %} module.
 >
 > > <hands-on-title>Intensity Check</hands-on-title>
 > >
-> > **Intensity Check** {% icon tool %} with the following parameters:
+> > {% tool [Intensity Check](toolshed.g2.bx.psu.edu/repos/melpetera/intensity_checks/intens_check/1.2.8) %} with the following parameters:
 > >   - *"Data matrix file"*: `xset.merged.group.dataMatrix.tsv`
 > >   - *"Sample metadata file"*: `sampleMetadata_completed.tsv`
 > >   - *"Variable metadata file"*: `xset.merged.group.variableMetadata.tsv`
@@ -736,7 +736,7 @@ The algorithm uses statistical smoothing methods. You can choose between linear 
 
 > <hands-on-title>xcms adjustRtime (retcor)</hands-on-title>
 >
-> **xcms adjustRtime (retcor)** {% icon tool %} with the following parameters:
+> {% tool [xcms adjustRtime (retcor)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_retcor/abims_xcms_retcor/3.12.0+galaxy0) %} with the following parameters:
 >    - *"RData file"*: `xset.merged.groupChromPeaks.RData`
 >    - *"Method to use for retention time correction"*: `PeakGroups - retention time correction based on aligment of features (peak groups) present in most/all samples.`
 >        - *"Minimum required fraction of samples in which peaks for the peak group were identified"*: `0.7`
@@ -771,7 +771,7 @@ It also allows you to check whether the well behaved peaks were distributed homo
 >
 > > <hands-on-title>xcms plot chromatogram</hands-on-title>
 > >
-> > **xcms plot chromatogram** {% icon tool %} with the following parameters:
+> > {% tool [xcms plot chromatogram](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_plot_chromatogram/xcms_plot_chromatogram/3.12.0+galaxy0) %} with the following parameters:
 > >    - *"RData file"*: `xset.merged.groupChromPeaks.adjustRtime.RData`
 > >
 > >    > <comment-title></comment-title>
@@ -804,7 +804,7 @@ to get an illustration of grouping before/after retention time correction.
 
 > <hands-on-title>second 'xcms groupChromPeaks (group)'</hands-on-title>
 >
-> **xcms groupChromPeaks (group)** {% icon tool %} with the following parameters:
+> {% tool [xcms groupChromPeaks (group)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0) %} with the following parameters:
 >    - *"RData file"*: `xset.merged.groupChromPeaks.adjustRtime.RData`
 >    - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
 >        - *"Bandwidth"*: `5.0`
@@ -887,7 +887,7 @@ Once you are satisfied with the optimisation of previous extraction parameters, 
 
 > <hands-on-title>xcms fillChromPeaks (fillPeaks)</hands-on-title>
 >
-> **xcms fillChromPeaks (fillPeaks)** {% icon tool %} with the following parameters:
+> {% tool [xcms fillChromPeaks (fillPeaks)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0) %} with the following parameters:
 >    - *"RData file"*: `xset.merged.groupChromPeaks.*.RData` (last step of your previous XCMS step)
 >    - In *"Peak List"*:
 >        - *"Convert retention time (seconds) into minutes"*: `Yes`
@@ -939,7 +939,7 @@ for a first attempt to run this function. Nevertheless, a few parameters have to
 
 > <hands-on-title>CAMERA.annotate</hands-on-title>
 >
-> 1. **CAMERA.annotate** {% icon tool %} with the following parameters:
+> 1. {% tool [CAMERA.annotate](toolshed.g2.bx.psu.edu/repos/lecorguille/camera_annotate/abims_CAMERA_annotateDiffreport/2.2.6+camera1.48.0-galaxy0) %} with the following parameters:
 >    - *"RData file"*: `xset.merged.groupChromPeaks.*.fillChromPeaks.RData`
 >    - In *"Annotate Isotopes [findIsotopes]"*:
 >        - *"Max. ion charge"*: `2`
@@ -975,7 +975,7 @@ With only one single HTML file generated, you have access to all this informatio
 
 > <hands-on-title>xcms process history</hands-on-title>
 >
-> 1. **xcms process history** {% icon tool %} with the following parameters:
+> 1. {% tool [xcms process history](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_summary/abims_xcms_summary/3.12.0+galaxy0) %} with the following parameters:
 >    - *"xset RData file"*: `xset.merged.[...].fillChromPeaks.RData`
 >
 >    > <comment-title></comment-title>
@@ -1002,7 +1002,7 @@ this pre-processing workflow.
 >
 > > <hands-on-title>ID choice</hands-on-title>
 > >
-> > 1. **ID choice** {% icon tool %} with the following parameters:
+> > 1. {% tool [ID choice](toolshed.g2.bx.psu.edu/repos/melpetera/idchoice/idchoice/19.12) %} with the following parameters:
 > >    - *"Data matrix file"*: the `xset.merged[...].dataMatrix.tsv` dataset from your last XCMS step
 > >    - *"Metadata file containing your new IDs"*: the `xset.merged[...].variableMetadata.tsv` dataset from your last XCMS or CAMERA step
 > >    - *"Which ID do you want to change?"*: `Variables`
