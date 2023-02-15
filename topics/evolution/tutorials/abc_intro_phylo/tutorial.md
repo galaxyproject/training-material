@@ -102,17 +102,17 @@ This tutorial has the following structure:
 
 There are many ways in which we can use phylogenetic analyses: from the most fundamental understanding of the evolutionary relationships that exist between a set of species, as in Charles Darwin's famous sketch in Origin of Species
 
-![IThink](./images/Darwin_tree.png){:width="400"}
+![IThink](./images/Darwin_tree.png){:align="center", :width="400"}
 
 **needs a reference**
 
 all birds
-![AllBirds](./images/nature11631-f2.jpg){:align="center" :width="400"}
+![AllBirds](./images/nature11631-f2.jpg){:align="center", :width="400"}
 (from from Jetz *et al.* 2012, Nature (491):444–448)
 
 and much bigger projects across all of life:
 
-![UnderstandinEvolTree](./images/nmicrobiol201648-f1.jpg){:align="center" :width="500"}
+![UnderstandinEvolTree](./images/nmicrobiol201648-f1.jpg){:align="center", :width="500"}
 
 (from Understanding Evolution. 2019. University of California Museum of Paleontology. 4th November 2019; http://evolution.berkeley.edu)
 
@@ -149,7 +149,7 @@ Finding an optimal tree is *hard*!
 
 All we start with is something like this:
 
-[!We Just Have The Leaf Data](./images/WeJustHaveLeaves.png){:align="center"}
+![We Just Have The Leaf Data](./images/WeJustHaveLeaves.png){:align="center"}
 
 So, how do we do it?
 
@@ -229,7 +229,7 @@ Here is a flow-chart of the process:
 Phylogenetic Inference is **Hard**.
 One of the many challenges that make it hard is the sheer number of possible trees that can describe relationships among species.
 
-The number of rooted binary trees grows as 1, 3, 15, 105, 945, 10395... in fact the formula for this number is $$(2n-3)!! = (2n-3)(2n-5)...(3)(1),$$ which grows as fast as $$2^{n}n!$$.
+The number of rooted binary trees grows as 1, 3, 15, 105, 945, 10395... in fact the formula for this number for $$n$$ taxa (we use `taxa' in general, since not all phylogenetic inference is at the species level) is $$(2n-3)!! = (2n-3)(2n-5)...(3)(1),$$ which grows as fast as $$2^{n}n!$$.
 
 ### The Number of Rooted Binary Trees
 
@@ -280,7 +280,7 @@ This workshop will use some recent SARS-CoV-2 nucleotide sequence data, from NCB
 
 The SARS-CoV-2 virus has caused the largest pandemic in modern history (in absolute terms of population affected, in all history) and understanding its evolution is key to managing it.
 
-![SARS-CoV-2](./images/SARS-CoV-2-www.ncbi.nlm.nih.png){:width="500" :align="center"}
+![SARS-CoV-2](./images/SARS-CoV-2-www.ncbi.nlm.nih.png){:width="500"}
 *Source: /www.ncbi.nlm.nih.gov; CC BY-SA • Alexey Solodovnikov*
 
 The sequences we have chosen for this workshop are complete SARS-CoV2 sequences, publicly available from nextStrain (http).
