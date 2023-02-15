@@ -22,7 +22,7 @@ contributors:
 
 # Introduction
 
-This tutorial is based on a workshop that was run in 2019 under the auspices of... by ... and attended by hundreds of people etc. etc.
+This tutorial is based on a workshop that was run in 2019 under the auspices of Australian BioCommons by Michael Charleston, and attended online by hundreds of people across Australia.
 
 The title of that workshop was "Phylogenetics - Back To Basics" and it was aimed at helping you understand how phylogenetic inference works, some of the tools used, and what you can learn from phylogenetic estimation.
 
@@ -91,7 +91,7 @@ This tutorial has the following structure:
 - Sequence alignment (including manual methods, automatic methods, complexity issues / heuristics) + exercise
 - Distances based on sequence alignment
 - The Neighbor-Joining method & FastME2.0 (https://doi.org/10.1093/molbev/msv150) **needs an update** **not sure that there is a FastME implementation in Galaxy; there is an R package though**
-- Building the first tree (on Galaxy)
+- Building your first tree (on Galaxy)
 - Models of sequence evolution: from the sublime to the ridiculous
 - Phylogenetic Networks (**SplitsTree needs install**), Neighbor-Net
 - Assessing the quality of the tree(s): Bootstrapping, branch lengths; conflict in the networks
@@ -127,7 +127,7 @@ Aside from fundamental understanding, there are other strong motivators for infe
 > 
 > It's worth noting that getting the phylogeny from a set of genes -- what we often call a *gene tree* -- might *not* > give us the phylogeny of the species that house those genes, *even if we get everything right!*
 >
-> This happens because there are other processes that can lead to the so-called gene tree not being the same as the species tree:
+> This happens because there are other processes that can lead to the so-called "gene tree" not being the same as the species tree:
 >	- lateral gene transfer events
 >	- gene duplication
 >	- gene loss and incomplete lineage sorting
@@ -135,7 +135,7 @@ Aside from fundamental understanding, there are other strong motivators for infe
 >
 > This could send us off down a very deep and difficult rabbit-hole: that of the gene-tree / species tree problem: but today we will work under the assumption (which is reasonable in this case) that the gene tree will reflect the species relationships.
 >
-> **The situation where gene trees and species trees differ is often called the "gene tree / species tree reconciliation problem", and while it is very interesting and important, it is beyond the scope of this tutorial.  The interested reader is directed to...**
+> **The situation where gene trees and species trees differ is often called the "gene tree / species tree reconciliation problem", and while it is very interesting and important, it is beyond the scope of this tutorial.**
 >
 {: .comment}
 
@@ -151,10 +151,10 @@ So, how do we do it?
 
 There are several ways to estimate a tree, such as:
 
-1. Go with what we think is the case already (not recommended!)
+1. Go with what we think is the case already (this is not recommended!)
 2. Attempt to build a tree based on similarity and dissimilarity, with such tools as Neighbor-Joining (NJ) or FastME;
-3. Choose some kind of score function such as Parsimony, or Maximum Likelihood to potential trees and find the best one
-4. Something else entirely (networks? inference based on their parasites)
+3. Choose some kind of score function, such as Parsimony or Maximum Likelihood, to potential trees and find the best one;
+4. Something else entirely (networks? inference based on their parasites?).
 
 
 This is a link [introduction to phylogenetics](https://www.ebi.ac.uk/training/online/courses/introduction-to-phylogenetics/).
@@ -163,14 +163,15 @@ This is a link [introduction to phylogenetics](https://www.ebi.ac.uk/training/on
 > 
 >  These may help your understanding of why things are done this way:
 >
-> 1. Evolution is “memoryless” (which means we can use the powerful mathematics of Markov processes);
+> 1. Evolution is “memoryless” (which means we can use the powerful mathematics of Markov processes). 
+This assumption means that the future evolutionary trajectory of an organism is not affected by its past: how we got here is not important, only how we adapt and evolve now.
 > 
-> 2. Phylogenetic relationships can be correctly represented by a tree! (This isn't always assumed, but it is very common.)
-> 3. The *Molecular clock* assumption: sequences in a clade evolve at about the same rate as each other (this is easily tested);
-> 4. Lineages don’t interact – once they have speciated, they are independent of each other.
+> 2. Phylogenetic relationships can be correctly represented by a tree! (This isn't *always* assumed, but it is very common.)  Trees are a very attractive representation of evolution, and it is part of our language: "The tree of life" is a common phrase.  However it is not always the case that evolution is best explained by a tree-like, "branching" process, as there can be hybridisation events, and species can share genetic material, or even envelop each other, creating organelles.
+> 3. The *Molecular clock* assumption: sequences in a clade evolve at about the same rate as each other (this is easily tested). This is of those models that are known to be wrong, but which are useful. For instance, there is commonly variation in evolutionary rate between lineages, but if this variation is not significant, we can ignore it and use simpler models, to better leverage the phylogenetic information there is in the data.
+> 4. Lineages don’t interact – once they have speciated, they are independent of each other.  Again, this isn't always the case, but the vast majority of methods assume this, particularly if the evolution is also assumed to be tree-like. We also know that biological lineages *do* interact with each other -- but our methods are not able to manage such complexity in general.
 >
-> We do know that these assumptions do not always hold!  For instance, there is commonly variation in evolutionary rate between lineages, but if this variation is not significant, we can ignore it and use simpler models, to better leverage the phylogenetic information there is in the data.
-> We also know that biological lineages *do* interact with each other
+> We will mostly make all these assumptions in this tutorial!
+> 
 > 
 {: .comment}
 

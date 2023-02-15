@@ -39,7 +39,7 @@ This tutorial provides an introduction to phylogenetic trees in the context of w
 Below are two phylogenies of the *Mycobacterium tuberculosis* complex (MTBC) to illustrate some basic vocabulary and concepts. If the following sounds a bit too esoteric, revisit the previous step of the course, the [introduction to phylogenetics](https://www.ebi.ac.uk/training/online/courses/introduction-to-phylogenetics/).
 
 ## Rooted trees and tree topology
-These trees look rather different at a first glance, but they are identical except for one key aspect: tree A is **rooted** while tree B is not.
+These trees look rather different at a first glance, but they are identical except for one key aspect: tree 'A' is **rooted** while tree 'B' is not.
 
 What is the difference between the two? First, let's state what is the same in the two trees: the tree **topology**, that is, the relative branching order. The same groupings are present in the two trees: they both contain the same information about the **relatedness** of strains. An example: TB isolated from Peruvian mummies is most similar to *M. pinnipedii* known from marine mammals; they share a most recent common ancestor. This can be seen in the rooted as well as in the unrooted tree.
 
