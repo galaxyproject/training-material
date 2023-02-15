@@ -55,9 +55,37 @@ Monocle uses cell_data_set class to hold expression data; it requires three inpu
 
 There are several ways in which you can complete this tutorial – check the {% icon tip %} Tip boxes below and choose your option!
 
-{% snippet topics/single-cell/tutorials/scrna-case_monocle3-rstudio/faqs/tip_jupyter.md %} 
+> <tip-title>Jupyter Notebook & Jupyter Lab - recommended</tip-title>
+>
+> This is the most recommended way to complete this tutorial (unless you have monocle3 already installed) as it is the most reliable and visually appealing. 
+>
+> > <hands-on-title>Downloading the tutorial notebook</hands-on-title>
+> > 1. You will need to download the tutorial notebook locally to your own computer. Simply go to the `Supporting Materials` section in the Overview box at the very beginning of this tutorial and click on `Jupyter Notebook`. It will be downloaded to your computer as `single-cell-scrna-case_monocle3-rstudio.ipynb` file. 
+> {: .hands_on}
+>
+> {% snippet faqs/galaxy/interactive_tools_jupyter_launch.md %}
+>
+{: .tip}
 
-{% snippet topics/single-cell/tutorials/scrna-case_monocle3-rstudio/faqs/tip_rstudio.md %} 
+
+> <tip-title>RMarkdown & RStudio</tip-title>
+>
+> As monocle3 is originally written in R, you can follow this tutorial simply by copying and pasting code from the GTN, but to make things easier, you can use the RMarkdown Notebook instead to be able to run the code directly as it was written, inside RStudio! This is recommended for users working locally in RStudio due to installation errors that might appear, but our interactive tools allow you to launch RStudio in Galaxy as well. 
+>
+> > <hands-on-title>Downloading the tutorial notebook</hands-on-title>
+> > 1. You will need to download the tutorial notebook locally to your own computer. Simply go to the `Supporting Materials` section in the Overview box at the very beginning of this tutorial and click on `RMarkdown Notebook`. It will be downloaded to your computer as `single-cell-scrna-case_monocle3-rstudio.Rmd` file. 
+> {: .hands_on}
+>
+> Now you just have to open the notebook in RStudio. 
+> 
+> {% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
+>
+> {% snippet faqs/galaxy/interactive_tools_rstudio_rmarkdown.md %}
+>
+> {% snippet faqs/galaxy/interactive_tools_jupyter_launch.md %}
+>
+{: .tip}
+
 
 We will now present the workflow following using JupyterLab, but there will be advice for those using RStudio as well. 
 So let's get our JupyterLab instance up and running and crack on! 
