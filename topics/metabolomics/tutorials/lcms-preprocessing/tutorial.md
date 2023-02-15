@@ -55,7 +55,7 @@ biological samples) and 3 blank samples ('blanks' - solvent injection).
 To analyze these data, we will then follow a Galaxy workflow
 developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/) ({% cite Giacomoni2014 %}, {% cite Guitton2017 %}).
 
-[![The full tutorial workflow](../../images/lcmspreproc_wf.png)](../../images/lcmspreproc_wf.png)
+[![The full tutorial workflow represented as boxes linked with arrows, each box being labeled with the corresponding galaxy tool name](../../images/lcmspreproc_wf.png)](../../images/lcmspreproc_wf.png "The tutorial workflow")
 
 > <comment-title>Workflow4Metabolomics public history</comment-title>
 >
@@ -436,7 +436,7 @@ Note that you can also check the chromatograms at any moment during the workflow
 This tool generates Base Peak Intensity Chromatograms (BPIs) and Total Ion Chromatograms (TICs). If you provide groups as we do here, you obtain two plots:
 one with colours based on provided groups, one with one colour per sample.
 
-![Base Peak Intensity Chromatograms](../../images/lcmspreproc_BPC12samp.png)
+![Screenshot of the PDF output corresponding to the Base Peak Intensity Chromatograms. It is composed of the layering of BPIs: one drawn line per sample.](../../images/lcmspreproc_BPC12samp.png "Base Peak Intensity Chromatograms")
 
 How BPIs and TICs look like is dependant of the kind of data you have: LC-MS technology used, study design, type of samples, events that may have occured during the analysis...
 It can vary a lot from one experiment to another due to these characteristics.
@@ -622,7 +622,7 @@ The grey areas' width is associated with the bandwidth parameter.
 
 Here is an example of two m/z slices obtained from the hands-on:
 
-![plotChromPeakDensity.pdf](../../images/lcmspreproc_group12samp.png)
+![Picture with two plots extracted from the plotChromPeakDensity.pdf output, one representing the 283.1127-283.1163 m/z slice and the other the 284.1198-284.1253 m/z slice](../../images/lcmspreproc_group12samp.png "Extract from plotChromPeakDensity.pdf")
 
 
 > <question-title></question-title>
@@ -691,7 +691,7 @@ using the **Intensity Check** {% icon tool %} module.
 > With the example provided in this tutorial, you can notice that the blk class containing blanks has a high number of NA with 4394 ions
 > that have not been found, in any blank.
 >
-> ![IC_Graphs.pdf](../../images/lcmspreproc_ICgp1.png)
+> ![Picture representing the proportions of NA in the 3 groups of the class column (blk, QC and sample). It is displayed as number of ions having given proportions of NA - proportions being grouped from 0 to 100 percents by classes of 20 percents.](../../images/lcmspreproc_ICgp1.png "Content of IC_Graphs.pdf")
 >
 > > <question-title></question-title>
 > >
