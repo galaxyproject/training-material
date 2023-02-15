@@ -222,7 +222,7 @@ Distances have very desirable properties, that can be summarised as follows, for
 
 Here is a flow-chart of the process:
 
-![Tree Construction](.images/TreeConstruction.png){:align="center"}
+![Tree Construction](./images/TreeConstruction.png){:align="center"}
 
 ## Challenges
 
