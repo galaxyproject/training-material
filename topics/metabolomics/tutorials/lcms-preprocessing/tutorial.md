@@ -62,7 +62,7 @@ developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/)
 > This training material can be followed running it on any Galaxy instance holding the Galaxy modules needed.
 > Nonetheless, if you happen to be a W4M user and do not want to run the hands-on yourself, please note that
 > you can find the entire history in the 'published histories' section:
-> [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing)
+> [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms)
 >
 {: .comment}
 
@@ -154,7 +154,7 @@ having to launch jobs manually for each sample. You can start using the dataset 
 > > [GTN_LCMSpreprocessing_mzML](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingmzml).
 > > We highly recommend to get started by importing this history.
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing) history,
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms) history,
 > > this step corresponds to the dataset collection number 13.
 > {: .tip}
 >
@@ -179,7 +179,7 @@ This first step is only meant to read your `mzXML` file and generate an object u
 >
 >  > <tip-title>Comment to W4M users</tip-title>
 >  >
->  > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing) history,
+>  > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms) history,
 >  > this step corresponds to the dataset collection number 14.
 >  {: .tip}
 >
@@ -239,7 +239,7 @@ Note that you can either:
 > >
 > > > <tip-title>Comment to W4M users</tip-title>
 > > >
-> > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing) history,
+> > > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms) history,
 > > > this step corresponds to the dataset number 27.
 > > {: .tip}
 > >
@@ -377,7 +377,7 @@ Once your sampleMetadata table is ready, you can proceed to the upload. In this 
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing) history,
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms) history,
 > > this step corresponds to the dataset number 28.
 > {: .tip}
 >
@@ -427,7 +427,7 @@ Note that you can also check the chromatograms at any moment during the workflow
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing) history,
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms) history,
 > > this step corresponds to the datasets number 29 and 30.
 > {: .tip}
 >
@@ -499,7 +499,7 @@ Let's try performing the peakpicking step with the **xcms findChromPeaks (xcmsSe
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > the dataset collections number 31 and 32.
 > {: .tip}
 >
@@ -537,7 +537,7 @@ with the second column defining theses classes.
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > the dataset number 57.
 > {: .tip}
 >
@@ -605,7 +605,7 @@ than a given number of samples. Either a percentage of the total number of sampl
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > the datasets number 58 to 61.
 > {: .tip}
 >
@@ -681,7 +681,7 @@ using the **Intensity Check** {% icon tool %} module.
 > >
 > > > <tip-title>Comment to W4M users</tip-title>
 > > >
-> > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > > the datasets number 62 and 63.
 > > {: .tip}
 > >
@@ -754,7 +754,7 @@ The algorithm uses statistical smoothing methods. You can choose between linear 
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > the datasets number 64 and 65.
 > {: .tip}
 >
@@ -781,7 +781,7 @@ It also allows you to check whether the well behaved peaks were distributed homo
 > >
 > > > <tip-title>Comment to W4M users</tip-title>
 > > >
-> > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > > the datasets number 66 and 67.
 > > {: .tip}
 > >
@@ -824,7 +824,7 @@ to get an illustration of grouping before/after retention time correction.
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > the datasets from number 68 to number 71.
 > {: .tip}
 >
@@ -903,7 +903,7 @@ Once you are satisfied with the optimisation of previous extraction parameters, 
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > the datasets number 72 to 74.
 > {: .tip}
 >
@@ -956,7 +956,7 @@ for a first attempt to run this function. Nevertheless, a few parameters have to
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > the datasets number 75 and 76.
 > {: .tip}
 >
@@ -985,7 +985,7 @@ With only one single HTML file generated, you have access to all this informatio
 >
 > > <tip-title>Comment to W4M users</tip-title>
 > >
-> > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing), this step corresponds to
+> > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms), this step corresponds to
 > > the dataset number 77.
 > {: .tip}
 >
@@ -1010,7 +1010,7 @@ this pre-processing workflow.
 > >
 > > > <tip-title>Comment to W4M users</tip-title>
 > > >
-> > > In the [GTN_LCMSpreprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing) history,
+> > > In the [GTN_LCMSpreprocessingXCMS](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms) history,
 > > > this step corresponds to the datasets number 78 and 79.
 > > {: .tip}
 > >
