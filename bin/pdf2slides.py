@@ -11,11 +11,11 @@ import os
 import xml.etree.ElementTree as ET
 
 
-print("""
----
+print("""---
 layout: tutorial_slides
+logo: GTN
 
-title: ""
+title: "Slides!"
 questions:
 objectives:
 key_points:
