@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Trajectory Analysis using Monocle3 " />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-02-09 13:32:12 +0000" />
+<meta name="DC.date" content="2023-02-14 23:04:54 +0000" />
 <meta name="DC.creator" content="Julia Jakiela" />
 
         
@@ -63,7 +63,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-02-09 13:32:12 +0000",
+  "dateModified": "2023-02-14 23:04:54 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Trajectory Analysis using Monocle3 ",
   "interactivityType": "mixed",
@@ -949,7 +949,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 9, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 14, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -974,15 +974,32 @@
 <p>In this tutorial we will perform trajectory analysis using <a href="https://cole-trapnell-lab.github.io/monocle3/">monocle3</a>. You can find out more about the theory behind trajectory analysis in our <a href="/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/slides.html">slide deck</a>. We have already analysed the trajectory of our sample using the ScanPy toolkit in another tutorial: <a href="/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html">Trajectory Analysis using Python (Jupyter Notebook) in <span class="notranslate">Galaxy</span></a>. However, trajectory analysis is quite sensitive and some methods work better for specific datasets. In this tutorial, you will perform the same steps but using a different method for inferring trajectories. You will then compare the results, usability and outcomes! Sounds exciting, let’s dive into that!</p>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-not-all-browsers-work" aria-label="warning box: Not all browsers work!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Not all browsers work!</div>   <ul>     <li>We’ve had some issues with Tutorial mode on Safari for Mac users.</li>     <li>Try a <strong>different browser</strong> if you aren’t seeing the button.</li>   </ul> </blockquote> </blockquote>
 
 <h2 id="get-data">Get data</h2>
 <p>We will continue to work on the case study data from a mouse model of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span> (see <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">the study in <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas</a> and <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">the project submission</a>).
 Monocle3 works great with annotated data, so we will make use of our annotated AnnData object, generated in the previous <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">tutorial</a>. So you see - all the hard work of processing data was not in vain! We will also need a ‘clean’ <span class="notranslate">expression</span> matrix, extracted from the AnnData object just before we started the processing.
-You can find both datasets in this <a href="https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/monocle3-input-files">input history</a> or download from Zenodo below.</p>
+You have two options for uploading these datasets. Importing via history is often faster.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-option-1-data-upload-import-history" aria-label="hands-on box: Option 1: Data upload - Import history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Option 1: Data upload - Import history</div>
+
+  <ol>
+    <li>
+      <p>Import history from: <a href="https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/monocle3-input-files">input history</a></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open the link to the shared history</li>   <li>Click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>Import history</em> button on the top right</li>   <li>Enter a title for the new history</li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the the history to your name of choice.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-option-2-data-upload-add-to-history" aria-label="hands-on box: Option 2: Data upload - Add to history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Option 2: Data upload - Add to history</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>

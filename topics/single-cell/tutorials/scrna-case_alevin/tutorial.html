@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Generating a single cell matrix using Alevin" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-01-23 14:28:11 +0000" />
+<meta name="DC.date" content="2023-02-14 23:04:54 +0000" />
 <meta name="DC.creator" content="Wendi Bacon" />
 <meta name="DC.creator" content="Jonathan Manning" />
 
@@ -64,7 +64,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-01-23 14:28:11 +0000",
+  "dateModified": "2023-02-14 23:04:54 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Generating a single cell matrix using Alevin",
   "interactivityType": "mixed",
@@ -848,7 +848,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 23, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 14, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -881,6 +881,9 @@
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
   <li><a href="#generating-a-matrix" id="markdown-toc-generating-a-matrix">Generating a matrix</a>    <ol>
       <li><a href="#get-data" id="markdown-toc-get-data">Get Data</a></li>
+    </ol>
+  </li>
+  <li><a href="#important-tips-for-easier-analysis" id="markdown-toc-important-tips-for-easier-analysis">Important tips for easier analysis</a>    <ol>
       <li><a href="#generate-a-transcript-to-gene-map" id="markdown-toc-generate-a-transcript-to-gene-map">Generate a transcript to gene map</a></li>
       <li><a href="#generate-a-transcriptome-index--quantify" id="markdown-toc-generate-a-transcriptome-index--quantify">Generate a transcriptome index &amp; quantify!</a></li>
     </ol>
@@ -924,11 +927,29 @@
 
 <p>We’ve provided you with some example data to play with, a small subset of the <span class="notranslate">reads</span> in a mouse dataset of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span> (see the <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">study in <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas</a> and the <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">project submission</a>). This is a study using the Drop-seq chemistry, however this tutorial is almost identical to a 10x chemistry. We will point out the one tool parameter change you will need to run 10x samples. This data is not carefully curated, standard tutorial data - it’s real, it’s messy, it desperately needs filtering, it has background <span class="notranslate">RNA</span> running around, and most of all it will give you a chance to practice your analysis as if this data were yours.</p>
 
-<p>Down-sampled <span class="notranslate">reads</span> and some associated annotation can be downloaded from Zenodo below, or you can import this <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1">example input history</a>. How did I downsample these FASTQ files? Check out <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---how-to-downsample">this history</a> to find out!
-Additionally, to map your <span class="notranslate">reads</span>, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. You can download these for your species of interest <a href="https://www.ensembl.org/info/data/ftp/index.html">from Ensembe</a>. Additionally, these files are available in the above history as well as the Zenodo links below. Keep in mind, these are big files, so they may take a bit to import!</p>
+<p>Down-sampled <span class="notranslate">reads</span> and some associated annotation can be imported below. How did I downsample these FASTQ files? Check out <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---how-to-downsample">this history</a> to find out!</p>
+
+<p>Additionally, to map your <span class="notranslate">reads</span>, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. You can download these for your species of interest <a href="https://www.ensembl.org/info/data/ftp/index.html">from Ensembe</a>. These files are included in the data import step below. Keep in mind, these are big files, so the fastest way to get these into your <span class="notranslate">Galaxy</span> account is through importing them by history.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload-part-1" aria-label="hands-on box: Data upload - Part 1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload - Part 1</div>
+  <div class="box-title hands-on-title" id="hands-on-option-1-data-upload-import-history" aria-label="hands-on box: Option 1: Data upload - Import history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Option 1: Data upload - Import history</div>
+
+  <ol>
+    <li>
+      <p>Import history from: <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1">example input history</a></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open the link to the shared history</li>   <li>Click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>Import history</em> button on the top right</li>   <li>Enter a title for the new history</li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the the history to your name of choice.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-option-2-data-upload-add-to-history" aria-label="hands-on box: Option 2: Data upload - Add to history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Option 2: Data upload - Add to history</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -971,6 +992,19 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   </blockquote>
 </blockquote>
 
+<h1 id="important-tips-for-easier-analysis">Important tips for easier analysis</h1>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-not-all-browsers-work" aria-label="warning box: Not all browsers work!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Not all browsers work!</div>   <ul>     <li>We’ve had some issues with Tutorial mode on Safari for Mac users.</li>     <li>Try a <strong>different browser</strong> if you aren’t seeing the button.</li>   </ul> </blockquote> </blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <ul>
+    <li>The <span class="notranslate">Galaxy</span> tool search panel sometimes doesn’t find the tools we need from the thousands available.</li>
+    <li>You’ll have a much easier time selecting tools from the panel (if you aren’t using tutorial mode!) if you are on the <a href="https://humancellatlas.usegalaxy.eu">https://humancellatlas.use<span class="notranslate">galaxy</span>.eu</a></li>
+  </ul>
+</blockquote>
+
 <h2 id="generate-a-transcript-to-gene-map">Generate a transcript to gene map</h2>
 
 <p>Gene-level, rather than transcript-level, quantification is standard in sc<span class="notranslate">RNA</span>-seq, which means that the <span class="notranslate">expression</span> level of alte<span class="notranslate">rna</span>tively spliced <span class="notranslate">RNA</span> molecules are combined to create gene-level values. Droplet-based sc<span class="notranslate">RNA</span>-seq techniques only sample one end each transcript, so lack the full-molecule coverage that would be required to accurately quantify different transcript isoforms.</p>
@@ -997,9 +1031,6 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 </blockquote>
 
 <p>It’s now time to parse the GTF file using the <a href="https://bioconductor.org/packages/release/bioc/html/rtracklayer.html">rtracklayer</a> package in R. This parsing will give us a conversion table with a list of transcript identifiers and their corresponding gene identifiers for counting. Additionally, because we will be generating our own binary index (more later!), we also need to input our FASTA so that it can be filtered to only contain transcriptome information found in the GTF.</p>
-
-<!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul> </blockquote>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-generate-a-filtered-fasta-and-transcript-gene-map" aria-label="hands-on box: Generate a filtered FASTA and transcript-gene map"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate a filtered FASTA and transcript-gene map</div>

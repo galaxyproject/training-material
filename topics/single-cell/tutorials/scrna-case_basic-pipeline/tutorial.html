@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Filter, Plot and Explore Single-cell RNA-seq Data" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-02-14 12:55:01 +0000" />
+<meta name="DC.date" content="2023-02-14 23:04:54 +0000" />
 <meta name="DC.creator" content="Wendi Bacon" />
 
         
@@ -63,7 +63,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-02-14 12:55:01 +0000",
+  "dateModified": "2023-02-14 23:04:54 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Filter, Plot and Explore Single-cell RNA-seq Data",
   "interactivityType": "mixed",
@@ -901,6 +901,7 @@
       <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
     </ol>
   </li>
+  <li><a href="#important-tips-for-easier-analysis" id="markdown-toc-important-tips-for-easier-analysis">Important tips for easier analysis</a></li>
   <li><a href="#filtering" id="markdown-toc-filtering">Filtering</a>    <ol>
       <li><a href="#generate-qc-plots" id="markdown-toc-generate-qc-plots">Generate QC Plots</a></li>
       <li><a href="#analysing-the-plots" id="markdown-toc-analysing-the-plots">Analysing the plots</a></li>
@@ -934,8 +935,28 @@
 
 <p>We’ve provided you with experimental data to analyse from a mouse dataset of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span>. This is the full dataset generated from <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html">this tutorial</a> if you used the full FASTQ files rather than the subsampled ones (see the <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">study in <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas</a> and the <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">project submission</a>). You can find this dataset in this <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs3-answerkey">input history</a> or download from Zenodo below.</p>
 
+<p>You can access the data for this tutorial in multiple ways:</p>
+
+<ol>
+  <li>
+    <p><strong>Your own history</strong> - If you’re feeling confident that you successfully ran a <span class="notranslate">workflow</span> on all 7 samples from the previous tutorial, and that your resulting 7 AnnData objects look right (you can compare with the <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1">answer key history</a>), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history</p>
+
+    <!--SNIPPET-->
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-copy-a-dataset-between-histories"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-a-dataset-between-histories-contents" aria-expanded="true" aria-label="Toggle tip box: Copy a dataset between histories"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Copy a dataset between histories<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>There 3 ways to copy datasets between histories</p>   <ol>   <li>     <p>From the original history</p>     <ol>       <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>       <li>Click on <strong>Copy Dataset</strong></li>       <li>         <p>Select the desired files</p>       </li>       <li>         <p>Give a relevant name to the “New history”</p>       </li>       <li>Click on the new history name in the green box that have just appear to switch to this history</li>     </ol>   </li>   <li>     <p>From the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong></p>     <ol>       <li>Click on <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong> on the top right</li>       <li>Switch to the history in which the dataset should be copied</li>       <li>Drag the dataset to copy from its original history</li>       <li>Drop it in the target history</li>     </ol>   </li>   <li>     <p>From the target history</p>     <ol>       <li>Click on <strong>User</strong> in the top bar</li>       <li>Click on <strong>Datasets</strong></li>       <li>Search for the dataset to copy</li>       <li>Click on it</li>       <li>Click on <strong>Copy to History</strong></li>     </ol>   </li> </ol> </blockquote>
+  </li>
+  <li>
+    <p><strong>Importing from a history</strong> - You can import <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs3-answerkey">this history</a></p>
+
+    <!--SNIPPET-->
+    <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open the link to the shared history</li>   <li>Click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>Import history</em> button on the top right</li>   <li>Enter a title for the new history</li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+  </li>
+  <li>
+    <p><strong>Uploading from Zenodo</strong> (see below)</p>
+  </li>
+</ol>
+
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-option-3-uploading-from-zenodo" aria-label="hands-on box: Option 3: Uploading from Zenodo"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Option 3: Uploading from Zenodo</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
@@ -959,12 +980,25 @@
 
 </blockquote>
 
+<h1 id="important-tips-for-easier-analysis">Important tips for easier analysis</h1>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-not-all-browsers-work" aria-label="warning box: Not all browsers work!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Not all browsers work!</div>   <ul>     <li>We’ve had some issues with Tutorial mode on Safari for Mac users.</li>     <li>Try a <strong>different browser</strong> if you aren’t seeing the button.</li>   </ul> </blockquote> </blockquote>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <ul>
+    <li>The <span class="notranslate">Galaxy</span> tool search panel sometimes doesn’t find the tools we need from the thousands available.</li>
+    <li>You’ll have a much easier time selecting tools from the panel (if you aren’t using tutorial mode!) if you are on the <a href="https://humancellatlas.usegalaxy.eu">https://humancellatlas.use<span class="notranslate">galaxy</span>.eu</a></li>
+  </ul>
+</blockquote>
+
 <h1 id="filtering">Filtering</h1>
 
 <p>You have generated an annotated AnnData object from your raw sc<span class="notranslate">RNA</span>-seq fastq files. However, you have only completed a ‘rough’ filter of your dataset - there will still be a number of ‘cells’ that are actually just background from empty droplets or simply low-quality. There will also be genes that could be sequencing artifacts or that appear with such low frequency that statistical tools will fail to analyse them. This background garbage of both cells and genes not only makes it harder to distinguish real biological information from the noise, but also makes it computationally heavy to analyse. These spurious <span class="notranslate">reads</span> take a lot of computational power to analyse! First on our agenda is to filter this matrix to give us cleaner data to extract meaningful insight from, and to allow faster analysis.</p>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-1-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-not-all-browsers-work-1" aria-label="warning box: Not all browsers work!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Not all browsers work!</div>   <ul>     <li>We’ve had some issues with Tutorial mode on Safari for Mac users.</li>     <li>Try a <strong>different browser</strong> if you aren’t seeing the button.</li>   </ul> </blockquote> </blockquote>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
