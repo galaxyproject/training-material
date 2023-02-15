@@ -1,6 +1,6 @@
 ---
 layout: tutorial_slides
-logo: "topics/cancer-analysis/images/bioca-logo.png"
+logo: "topics/cancer-analysis/images/bioinformatics-ca.svg"
 
 title: "Multi-Modal Data Integration"
 questions:
@@ -81,11 +81,11 @@ Invasive Breast Cancer
 ---
 
 .pull-left[
-Much data, many consortia
+.enlarge120[Much data, many consortia]
 ![](images/CAN_Module11_DataIntegration-12_2.png)
 ]
 .pull-right[
-Doctor’s clinic of the future
+.enlarge120[Doctor’s clinic of the future]
 ![](images/CAN_Module11_DataIntegration-12_1.png)
 ]
 
@@ -95,819 +95,335 @@ Doctor’s clinic of the future
 
 ---
 
-# 13
+## Data integration is important for risk models and clinical decision-making
 
-![](images/CAN_Module11_DataIntegration-13_1.jpg)
-![](images/CAN_Module11_DataIntegration-13_2.jpg)
-![](images/CAN_Module11_DataIntegration-13_3.jpg)
-![](images/CAN_Module11_DataIntegration-13_4.jpg)
-![](images/CAN_Module11_DataIntegration-13_5.jpg)
-![](images/CAN_Module11_DataIntegration-13_6.jpg)
-![](images/CAN_Module11_DataIntegration-13_7.jpg)
-![](images/CAN_Module11_DataIntegration-13_8.jpg)
-![](images/CAN_Module11_DataIntegration-13_9.jpg)
-![](images/CAN_Module11_DataIntegration-13_10.jpg)
-![](images/CAN_Module11_DataIntegration-13_11.jpg)
-
-13 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Data integration is important for risk models 
-and clinical decision-making
-<b>Model name</b>
-<b>Family </b>
-<b>history</b>
-<b>Medical </b>
-<b>history</b>
-<b>Lifestyle </b>
-<b>factors</b>
-<b>Pathology </b>
-<b>or physiol. </b>
-<b>measures</b>
-<b>High-risk</b>
-<b>genotypes</b>
-<b>Polygenic </b>
-<b>risk score</b>
-Framingham Risk 
-Score
-<i>(cardiovascular disease </i>
-<i>events)</i>
-✓ ✓ ✓ ✓
-Atherosclerosis Risk 
-in Communities Study 
-<i>(type 2 diabetes)</i>
-✓ ✓ ✓ ✓
-Prostate cancer BPC3
-✓
-BOADICEA 
-<i>(breast cancer)</i>
-✓ ✓ ✓ ✓ ✓ ✓
-Schizophrenia, ADHD
-✓
+Model Name                                                         | Family History | Medical History | Lifestyle Factors | Pathology or physiol. measures | High risk Genotypes | Polygenic risk score
+----------                                                         | -------------- | --------------- | ----------------- | ------------------------------ | ------------------- | --------------------
+Framingham Risk score<br/>(*cardiovascular disease events*)        | ✅             | ✅              | ✅                | ✅                             |                     |
+Atherosclerosis Risk in Communities Study <br/>(*type 2 diabetes*) | ✅             | ✅              | ✅                | ✅                             |                     |
+Prostate cancer BPC3                                               |                |                 |                   | ✅                             |                     |
+BOADICEA<br/>(*breast cancer*)                                     | ✅             | ✅              | ✅                | ✅                             | ✅                  | ✅
+Schizophrenia, ADHD                                                |                |                 |                   |                                |                     | ✅
 
 ---
 
-# 14
-
-
-14 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Outline
-•
-Precision medicine and need for data integration
-•
-Where do I find multi-modal datasets?
-•
-Patient classifiers that integrate data: netDx
-•
-Machine learning: key concepts
-•
-netDx workflow
-•
-Need for interpretability
-•
-Pathway-level features
-•
-Lab
+# Where do I find multi-modal datasets?
 
 ---
 
-# 15
+## Where to find multi-modal datasets
 
+
+.pull-left[
 ![](images/CAN_Module11_DataIntegration-15_1.jpg)
-![](images/CAN_Module11_DataIntegration-15_2.jpg)
-![](images/CAN_Module11_DataIntegration-15_3.jpg)
 
-15 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Where to find multi-modal datasets
-https://dcc.icgc.org curatedTCGAData
-Gene Expression Omnibus 
+[https://dcc.icgc.org](https://dcc.icgc.org)
+
+Gene Expression Omnibus
+
 dbGaP
+]
+
+.pull-right[
+![](images/CAN_Module11_DataIntegration-15_2.jpg)
+
+curatedTCGAData
+
+.reduce90[
+```r
+if (!requireNamespace("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("curatedTCGAData")
+```
+]
+]
+
 
 ---
 
-# 16
-
-
-16 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Outline
-•
-Precision medicine and need for data integration
-•
-Where do I find multi-modal datasets?
-•
-Patient classifiers that integrate data
-•
-Machine learning: key concepts
-•
-netDx workflow
-•
-Need for interpretability
-•
-Pathway-level features
-•
-Lab
+# Patient classifiers that integrate data
 
 ---
 
-# 17
+## Tools for integration & classification
 
-![](images/CAN_Module11_DataIntegration-17_1.png)
-![](images/CAN_Module11_DataIntegration-17_2.jpg)
-![](images/CAN_Module11_DataIntegration-17_3.jpg)
 
-17 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Tools for integration & 
-classification
+.pull-left[
+![](images/groupings.png)
 Patient similarity networks,
 Variable groupings
+
+.image-70[![](images/CAN_Module11_DataIntegration-17_3.jpg)]
+]
+
+.pull-right[
+image-70[![](images/CAN_Module11_DataIntegration-17_2.jpg)]
+
 Latent variable analysis,
 Individual variables
-Pai et al. (2019).  <i>Mol Sys Biol.</i>
-Rohart F et al. (2017).  <i>PLoS Comp Biol.</i>
+
+{% cite Pai_2019 %}
+{% cite Rohart_2017 %}
+]
 
 ---
 
-# 18
+## Patient similarity networks help integrate data
 
+.pull-left-66[
 ![](images/CAN_Module11_DataIntegration-18_1.png)
+]
 
-18 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Patient similarity networks help 
-integrate data
-<b>What is &#8220;similarity&#8221;? </b>
-• Correlation
-• Normalized diff.
-• Distance-based 
-<i><b>&#8230; any metric that is    </b></i>
-<i><b>meaningful !</b></i>
+.pull-right-33[
+**What is "similarity"?**
+- Correlation
+- Normalized diff.
+- Distance-based
+- … *any metric that is meaningful!*
+]
+
 
 ---
 
-# 19
+## Similarity to predict outcome
 
-![](images/CAN_Module11_DataIntegration-19_1.png)
-![](images/CAN_Module11_DataIntegration-19_2.png)
-![](images/CAN_Module11_DataIntegration-19_3.jpg)
-![](images/CAN_Module11_DataIntegration-19_4.jpg)
-![](images/CAN_Module11_DataIntegration-19_5.jpg)
-![](images/CAN_Module11_DataIntegration-19_6.jpg)
-![](images/CAN_Module11_DataIntegration-19_7.png)
-![](images/CAN_Module11_DataIntegration-19_8.jpg)
-![](images/CAN_Module11_DataIntegration-19_9.png)
-![](images/CAN_Module11_DataIntegration-19_10.png)
-![](images/CAN_Module11_DataIntegration-19_11.png)
+![](images/predict.png)
 
-19 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Similarity to predict outcome
-“ Recommend movies 
-similar to 
-those I enjoy ”
-• General-purpose
-• Uses machine learning (type of AI)
-Pai et al. (2019).  <i>Mol Sys Biol</i>
-“ Recommend patients 
-similar to 
-treatment non-responders ”
+- General-purpose
+- Uses machine learning (type of AI)
+
+.footnote[{% cite Pai_2019 %}]
 
 ---
 
-# 20
-
-
-20 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Outline
-•
-Precision medicine and need for data integration
-•
-Where do I find multi-modal datasets?
-•
-Patient classifiers that integrate data: netDx
-•
-Machine learning: key concepts
-•
-netDx workflow
-•
-Need for interpretability
-•
-Pathway-level features
-•
-Lab
+# Machine learning: key concepts
 
 ---
 
-# 21
+## Machine Learning
 
-![](images/CAN_Module11_DataIntegration-21_1.jpg)
-![](images/CAN_Module11_DataIntegration-21_2.jpg)
-![](images/CAN_Module11_DataIntegration-21_3.jpg)
-
-21 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Machine learning
+![](images/ml.png)
 
 ---
 
-# 22
+## Machine Learning
 
+Computational algorithms that **learn generalizable patterns in known** data
 
-22 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Machine learning
-Computational algorithms that 
-learn generalizable patterns 
-in known  data 
 &
-predict / make choices 
-for new  data
+
+**predict / make choices for new** data
 
 ---
 
-# 23
 
-![](images/CAN_Module11_DataIntegration-23_1.png)
-![](images/CAN_Module11_DataIntegration-23_2.jpg)
-![](images/CAN_Module11_DataIntegration-23_3.jpg)
-![](images/CAN_Module11_DataIntegration-23_4.png)
-![](images/CAN_Module11_DataIntegration-23_5.jpg)
-
-23 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Unsupervised
-learning
-Supervised 
-learning
-(e.g. classification)
-Reinforcement
-Learning
-Find structure
-Predict label 
-or value
-Take action to 
-alter environment
+Unsupervised learning | Supervised learning (e.g. classification) | Reinforcement Learning
+---                   | ---                                       | ---
+Find structure        | Predict label or value                    | Take action to alter environment
+![](images/ml2a.png)  | ![](images/ml2b.png)                      | ![](images/ml2c.png)
 
 ---
 
-# 24
+## Machine learning in medicine
 
 ![](images/CAN_Module11_DataIntegration-24_1.jpg)
 
-24 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Machine learning in medicine
-https://medicalfuturist.com/fda-approved-ai-based-algorithms/
+.footnote[
+https://medicalfuturist.com/fda-approved-ai-based-algorithms/ <br/>
 https://medicalfuturist.com/fda-approvals-for-algorithms-in-medicine/
+]
 
 ---
 
-# 25
+## Simple classifier workflow
 
 ![](images/CAN_Module11_DataIntegration-25_1.jpg)
 
-25 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Simple classifier workflow
-• Training data, test data (held-out / blind test)
-• Cross-validation
+- Training data, test data (held-out / blind test)
+- Cross-validation
 
 ---
 
-# 26
+# Simple classifier workflow
 
-![](images/CAN_Module11_DataIntegration-26_1.jpg)
+.pull-left[
+  ![](images/classifier.png)
+]
 
-26 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Simple classifier workflow
-Held-out / test data
-Training data
-<b>Features</b>
-<b>Feature design</b>
-<i>Adjust model</i>
-<i>weights</i>
-Select features & 
-predict 
-Final model
+.pull-right[
+  ![](images/CAN_Module11_DataIntegration-26_1.jpg)
+]
+
 
 ---
 
-# 27
+## Overfitting results in models that don’t generalize
 
 ![](images/CAN_Module11_DataIntegration-27_1.jpg)
 
-27 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Overfitting results in models 
-that don’t generalize
-
 ---
 
-# 28
+## Evaluating model performance
 
 ![](images/CAN_Module11_DataIntegration-28_1.jpg)
 
-28 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Evaluating model performance
-
 ---
 
-# 29
+## Evaluating model performance
 
-![](images/CAN_Module11_DataIntegration-29_1.jpg)
+.pull-left[
 ![](images/CAN_Module11_DataIntegration-29_2.jpg)
+]
 
-29 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Evaluating model performance
-• Accuracy
-• Sensitivity
-• Specificity 
-• Precision, recall, F1
-• Percent Positivity Rate 
-• AUROC, AUPR
-<b>Key messages: </b>
-1) Look at multiple metrics!
-2) Particularly if you have  <b>unbalanced</b>
-<b>classes</b>
+.pull-right[
+- Accuracy
+- Sensitivity
+- Specificity 
+- Precision, recall, F1
+- Percent Positivity Rate 
+- AUROC, AUPR
 
----
+.tip[
+<tip-title>Key messages</tip-title>
+1. Look at multiple metrics!
+2. Particularly if you have  **unbalanced classes**
+]
 
-# 30
-
-![](images/CAN_Module11_DataIntegration-30_1.jpg)
-
-30 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Confusion matrix
-Tr
-ue
- la
-be
-l
-(g
-ro
-un
-d 
-tru
-th
-)
-Predicted label
+]
 
 ---
 
-# 31
+## Confusion matrix
+
+![](images/confusion.png)
+
+---
+
+## Learn more
 
 ![](images/CAN_Module11_DataIntegration-31_1.jpg)
 ![](images/CAN_Module11_DataIntegration-31_2.jpg)
 ![](images/CAN_Module11_DataIntegration-31_3.jpg)
 ![](images/CAN_Module11_DataIntegration-31_4.jpg)
 
-31 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Learn more
+---
+
+# netDx workflow
 
 ---
 
-# 32
+## netDx classifies patients by integrating multi-modal data
 
+![](images/netdx.png)
 
-32 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Outline
-•
-Precision medicine and need for data integration
-•
-Where do I find multi-modal datasets?
-•
-Patient classifiers that integrate data
-•
-Machine learning: key concepts
-•
-netDx workflow
-•
-Need for interpretability
-•
-Pathway-level features
-•
-Lab
+.footnote[{% cite Pai_2019 %}]
 
 ---
 
-# 33
+## How netDx works
 
-![](images/CAN_Module11_DataIntegration-33_1.png)
-![](images/CAN_Module11_DataIntegration-33_2.png)
-![](images/CAN_Module11_DataIntegration-33_3.png)
-
-33 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Patient 
-data
-Pa)ent 
-similarity 
-networks
-Integrated 
-network
-Feature selection
-• Classify new patients
-• Identify predictive features
-netDx classifies patients by integrating 
-multi-modal data
-?
-Pai et al. (2019)  <i>Mol Sys Biol.</i>
+![](images/netdx-3.png)
 
 ---
 
-# 34
 
-![](images/CAN_Module11_DataIntegration-34_1.png)
-![](images/CAN_Module11_DataIntegration-34_2.png)
-![](images/CAN_Module11_DataIntegration-34_3.png)
-![](images/CAN_Module11_DataIntegration-34_4.png)
-![](images/CAN_Module11_DataIntegration-34_5.png)
+## How netDx works
 
-34 <b>CAN Module 11 &#8211; Mul--modal Data Integra-on</b> <b>bio</b> informatics
-.ca
-Dataset
-Training
-Test
-How netDx works
+![](images/netdx-4.png)
+---
+
+
+## How netDx works
+
+![](images/netdx-5.png)
 
 ---
 
-# 35
 
-![](images/CAN_Module11_DataIntegration-35_1.png)
-![](images/CAN_Module11_DataIntegration-35_2.png)
-![](images/CAN_Module11_DataIntegration-35_3.png)
-![](images/CAN_Module11_DataIntegration-35_4.png)
-![](images/CAN_Module11_DataIntegration-35_5.png)
-![](images/CAN_Module11_DataIntegration-35_6.png)
-![](images/CAN_Module11_DataIntegration-35_7.png)
-![](images/CAN_Module11_DataIntegration-35_8.png)
-![](images/CAN_Module11_DataIntegration-35_9.png)
-![](images/CAN_Module11_DataIntegration-35_10.png)
-![](images/CAN_Module11_DataIntegration-35_11.png)
-![](images/CAN_Module11_DataIntegration-35_12.png)
-![](images/CAN_Module11_DataIntegration-35_13.png)
-![](images/CAN_Module11_DataIntegration-35_14.png)
-![](images/CAN_Module11_DataIntegration-35_15.jpg)
-![](images/CAN_Module11_DataIntegration-35_16.jpg)
+## How netDx works
 
-35 <b>CAN Module 11 &#8211; Mul--modal Data Integra-on</b> <b>bio</b> informatics
-.ca
-Pai et al. (2019)  <i>Mol Sys Biol.</i>
-Dataset
-Training
-Test
-Create features, 
-convert to similarity nets
-Integrate nets using
-regularized regression
-Nets with wt.>0  => score++
-How netDx works
-<b>1</b>
-<b>Feature </b>
-<b>selection</b>
-Feature score 
-from zero to K
-Cross 
-validation
-2.3
-0
-0
-0.2
+![](images/netdx-6.png)
+
 
 ---
 
-# 36
+## Benchmarking: PanCancer survival prediction
 
-![](images/CAN_Module11_DataIntegration-36_1.png)
-![](images/CAN_Module11_DataIntegration-36_2.png)
-![](images/CAN_Module11_DataIntegration-36_3.png)
-![](images/CAN_Module11_DataIntegration-36_4.png)
-![](images/CAN_Module11_DataIntegration-36_5.png)
-![](images/CAN_Module11_DataIntegration-36_6.png)
-![](images/CAN_Module11_DataIntegration-36_7.png)
-![](images/CAN_Module11_DataIntegration-36_8.png)
-![](images/CAN_Module11_DataIntegration-36_9.png)
-![](images/CAN_Module11_DataIntegration-36_10.png)
-![](images/CAN_Module11_DataIntegration-36_11.png)
-![](images/CAN_Module11_DataIntegration-36_12.png)
-![](images/CAN_Module11_DataIntegration-36_13.png)
-![](images/CAN_Module11_DataIntegration-36_14.png)
-![](images/CAN_Module11_DataIntegration-36_15.png)
-![](images/CAN_Module11_DataIntegration-36_16.png)
-![](images/CAN_Module11_DataIntegration-36_17.png)
-![](images/CAN_Module11_DataIntegration-36_18.png)
-![](images/CAN_Module11_DataIntegration-36_19.png)
-![](images/CAN_Module11_DataIntegration-36_20.png)
-![](images/CAN_Module11_DataIntegration-36_21.png)
+![](images/bench.png)
 
-36 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-I
-Pai et al. (2019)  <i>Mol Sys Biol.</i>
-Dataset
-Training
-Test
-Create features, 
-convert to similarity nets
-Integrate nets using
-regularized regression
-Nets with wt.>0  => score++
-How netDx works
-Label patient by most similar class
-Create one PSN with train & test
-F
-top
-=Score >= T
-<b>2</b>
-<b>Test patient </b>
-<b>classification</b>
-Feature score 
-from zero to K
-Evaluate performance
+- KIRC: Renal clear cell carcinoma (N=150)
+- OV: Ovarian serous cysteadenocarcinoma (N=252)
+- GBM: Glioblastoma multiforme (N=155)
+- LUSC: Lung squamous cell carcinoma (N=77)
+
+.footnote[
+{% cite Pai_2019 %} | Data from {% cite Yuan_2014 %}
+]
 
 ---
 
-# 37
+## netDx performance
 
-![](images/CAN_Module11_DataIntegration-37_1.png)
-![](images/CAN_Module11_DataIntegration-37_2.png)
-![](images/CAN_Module11_DataIntegration-37_3.png)
-![](images/CAN_Module11_DataIntegration-37_4.png)
-![](images/CAN_Module11_DataIntegration-37_5.png)
-![](images/CAN_Module11_DataIntegration-37_6.png)
-![](images/CAN_Module11_DataIntegration-37_7.png)
-![](images/CAN_Module11_DataIntegration-37_8.png)
-![](images/CAN_Module11_DataIntegration-37_9.png)
-![](images/CAN_Module11_DataIntegration-37_10.png)
-![](images/CAN_Module11_DataIntegration-37_11.png)
-![](images/CAN_Module11_DataIntegration-37_12.png)
+![](images/netdx-perf.png)
 
-37 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Pai et al. (2019)  <i>Mol Sys Biol.</i>
-How netDx works
-Dataset
-Training
-Test
-Create features, 
-convert to similarity nets
-Integrate nets using
-regularized regression
-Nets with wt.>0  => score++
-Feature score 
-from zero to K
-Repeat for multiple random splits (e.g. N=10 or N=100)
-<i>Fe</i>
-<i>at</i>
-<i>ur</i>
-<i>es</i>
-<i>Split #</i>
-<b>Consistently</b>
-<b>top-scoring features</b>
-<b>(Fscore &gt;= X for Y% splits)</b>
-<i>P</i>
-<i>er</i>
-<i>fo</i>
-<i>rm</i>
-<i>an</i>
-<i>ce</i>
-<i>Split #</i>
-<b>Mean+/- SD </b>
-<b>performance</b>
+.pull-left[
+- Each dot shows avg perf for a given design
+- 10X train-test splits
+- Feature scores 0 – 10
+]
+.pull-right[
+.image-40[
+![](images/netdx-perf-legend.png)
+]
+]
+
+.footnote[{% cite Pai_2019 %}]
 
 ---
 
-# 38
-
-![](images/CAN_Module11_DataIntegration-38_1.png)
-
-38 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Benchmarking: PanCancer survival 
-prediction
-Pai et al. (2019)  <i>Mol Sys Biol.</i> Data from Yuan et al. (2014)  <i>Nat Biotech</i>
-• KIRC: Renal clear cell carcinoma (N=150)
-• OV: Ovarian serous cysteadenocarcinoma (N=252)
-• GBM: Glioblastoma multiforme (N=155)
-• LUSC: Lung squamous cell carcinoma (N=77)
+# Need for interpretability
 
 ---
 
-# 39
+## Genomic classifiers need interpretability
 
-![](images/CAN_Module11_DataIntegration-39_1.png)
-![](images/CAN_Module11_DataIntegration-39_2.png)
-
-39 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-netDx performance
-• Each dot shows avg perf for a given design
-• 10X train-test splits
-• Feature scores 0 – 10
-Pai et al. (2019)  <i>Mol Sys Biol.</i>
-
----
-
-# 40
-
-
-40 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Outline
-•
-Precision medicine and need for data integration
-•
-Where do I find multi-modal datasets?
-•
-Patient classifiers that integrate data
-•
-Machine learning: key concepts
-•
-netDx workflow
-•
-Need for interpretability
-•
-Pathway-level features
-•
-Lab
-
----
-
-# 41
-
-![](images/CAN_Module11_DataIntegration-41_1.jpg)
-![](images/CAN_Module11_DataIntegration-41_2.png)
-![](images/CAN_Module11_DataIntegration-41_3.png)
-![](images/CAN_Module11_DataIntegration-41_4.png)
-
-41 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Genomic classifiers need 
-interpretability
-Review: Pai S. & GD Bader (2018)
 Identifying plausible mechanism helps:
-⬇
-overfitting due to small sample size
-⬆
-confidence for high-risk decisions
-🔎
-mechanism for drug discovery
+
+⬇ overfitting due to small sample size <br/>
+⬆ confidence for high-risk decisions<br/>
+🔎mechanism for drug discovery
+
+.footnote[{% cite PaiBader_2018 %}]
 
 ---
 
-# 42
-
-
-42 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Outline
-•
-Precision medicine and need for data integration
-•
-Where do I find multi-modal datasets?
-•
-Patient classifiers that integrate data
-•
-Machine learning: key concepts
-•
-netDx workflow
-•
-Need for interpretability
-•
-Pathway-level features
-•
-Lab
+# Pathway-level features
 
 ---
 
-# 43
+## Pathway-level features for breast cancer subtype classification
 
-![](images/CAN_Module11_DataIntegration-43_1.png)
-![](images/CAN_Module11_DataIntegration-43_2.png)
-![](images/CAN_Module11_DataIntegration-43_3.jpg)
-![](images/CAN_Module11_DataIntegration-43_4.jpg)
+![](images/pathways.png)
 
-43 <b>CAN Module 11 &#8211; Multi-modal Data Integration</b> <b>bio</b> informatics
-.ca
-Gene expression
-Curated pathway DB
-(Reactome, NCI, 
-Panther, …)
-<b>Goal: </b> Classify as “Luminal A” vs. other subtype (binary)
-• ER+, HER2- tumours ; good prognosis
-• N=384 samples
-• Pathway-level features
-Pathway-level features for 
-breast cancer subtype classification
-Pai et al. (2019)  <i>Mol Sys Biol.</i>
-AUROC = 0.97, AUPR = 0.92
-Data from TCGA (2012)
+.pull-left[
+Data from TCGA (2012)<br/>
 100 splits; features scored 0-10
-~2,000 pathway 
-features
+]
+.pull-right[
+AUROC = 0.97, AUPR = 0.92 <br/>
+{% cite Pai_2019 %}
+]
 
 ---
 
-# 44
-
-![](images/CAN_Module11_DataIntegration-44_1.png)
-
-44 <b>CAN Module 11 &#8211; Mul--modal Data Integra-on</b> <b>bio</b> informatics
-.ca
-Top pathway features capture 
-dysregulated processes in 
-breast tumours 
-This is a visualization 
-of top features, an 
-Enrichment Map.
-Nodes in this figure
-show pathway 
-features, not patients.
-
----
-
-# 45
+## Top pathway features capture dysregulated processes in breast tumours 
 
 
-45 <b>CAN Module 11 &#8211; Mul--modal Data Integra-on</b> <b>bio</b> informatics
-.ca
-Outline
-•
-Precision medicine and need for data integration
-•
-Where do I find multi-modal datasets?
-•
-Patient classifiers that integrate data
-•
-Machine learning: key concepts
-•
-netDx workflow
-•
-Need for interpretability
-•
-Pathway-level features
-•
-Lab
-
----
-
-# 46
-
-
-46 <b>CAN Module 11 &#8211; Mul--modal Data Integra-on</b> <b>bio</b> informatics
-.ca
-Outline
-•
-Precision medicine and need for data integration
-•
-Where do I find multi-modal datasets?
-•
-Patient classifiers that integrate data
-•
-Machine learning: key concepts
-•
-netDx workflow
-•
-Need for interpretability
-•
-Pathway-level features
-•
-Lab
-
----
-
-# 47
-
-
-47 <b>CAN Module 11 &#8211; Mul--modal Data Integra-on</b> <b>bio</b> informatics
-.ca
-Lab Component
-Use netDx to: 
-1. Build a three-way tumour classifier by integrating 4 
-genomic data types.
-2. Build binary classifier with pathway-level features + 
-custom similarity metrics.
-
----
-
-# 48
-
-![](images/CAN_Module11_DataIntegration-48_1.png)
-![](images/CAN_Module11_DataIntegration-48_2.png)
-![](images/CAN_Module11_DataIntegration-48_3.png)
-![](images/CAN_Module11_DataIntegration-48_4.png)
-
-48 <b>CAN Module 11 &#8211; Mul--modal Data Integra-on</b> <b>bio</b> informatics
-.ca
-We are on a Break 
-Workshop Sponsors:
+.pull-left-66[
+  ![](images/pathways2.png)
+]
+.pull-left-33[
+  This is a visualization of top features, an Enrichment Map. Nodes in this
+  figure show pathway features, not patients.
+]
