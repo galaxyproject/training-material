@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Trajectory Analysis: Monocle3 in RStudio'
+title: 'Trajectory Analysis: Monocle3 in R'
 subtopic: single-cell-CS
 priority: 6
 zenodo_link: 'https://zenodo.org/record/7455590'
@@ -16,16 +16,16 @@ questions:
 
 objectives:
 - Identify which operations to perform on an AnnData object to obtain the files needed for Monocle and why to do it this way
-- Become familiar with Monocle3 functions in R and be able to switch between Galaxy and RStudio fluently
+- Become familiar with Monocle3 functions in R and be able to switch between Galaxy and R fluently
 - Learn about steps that can only be performed in R, but not with Galaxy tools
 - Follow the Monocle3 workflow and choose the right parameter values
-- Compare the outputs from Scanpy, Monocle in Galaxy and Monocle in RStudio
+- Compare the outputs from Scanpy, Monocle in Galaxy and Monocle in R
 - Learn about differential expression analysis methods
 
 time_estimation: 2H
 
 key_points:
-- Being able to switch between Galaxy and RStudio when using Monocle is very useful, particularly when you need to modify the CDS object manually. 
+- Being able to switch between Galaxy and R when using Monocle is very useful, particularly when you need to modify the CDS object manually. 
 - Monocle3 in R gives more flexibility when it comes to differential expression analysis and plotting, but Galaxy offers great reproducibility and ease of analysis.
 - Comparing the output of several different methods applied on the same dataset might be useful to confirm the results, to ensure that the findings are reliable and even sometimes to find a new piece of information.
 
@@ -81,10 +81,8 @@ Once the installation is done, we should load the needed packages into our noteb
 ```r
 library(monocle3)
 library(biomaRt)
-#install.packages("Rcpp") <- fixes reduce dim
-library(Rcpp)
-# library(dplyr) <- check if needed
-# library("magrittr") <- might be needed for %>%
+library(Rcpp)         # needed for reduce_dimension to avoid AnnoyAngular error
+library(magrittr)     # needed for %>%
 ```
 Alright, the libraries are here - so now let's read in our data files. 
 
@@ -284,7 +282,7 @@ plot_pc_variance_explained(cds_preprocessing)
 
 ![Plot of variation in gene expression vs PCA components, decreasing exponentially.](../../images/scrna-casestudy-monocle/pca_plot.jpg " Plot of variation in gene expression vs PCA components.")
 
-The plot shows that actually using more than ~100 PCs captures only a small amount of additional variation. However, if we look at how the cells are plotted on 2D graph when using different values of PCs, it is easier to imagine how the `num_dim` actually affects the output. Therefore, for this demonstration we will use the value of 210, which, compared to the results from the previous tutorial, makes the most sense for our dataset. However, it will take quite some time to run this, and this is why generally smaller PCs are preferable. 
+The plot shows that actually using more than ~100 PCs captures only a small amount of additional variation. However, if we look at how the cells are plotted on 2D graph when using different values of PCs, it is easier to imagine how the `num_dim` actually affects the output. Therefore, for this demonstration we will use the value of 210, which, compared to the results from the previous tutorial, makes the most sense for our dataset. However, it will take quite some time to run this, and this is why generally smaller PCs are preferable, so feel free to use `num_dim` value around 100 to accelerate preprocessing and compare the results.
 
 ![Six plots showing only the shaded shape of how the cells are clustered depending on the num_dim argument. The general trend is maintained though.](../../images/scrna-casestudy-monocle/num_dim.jpg "The "shape" of the plot showing how the cells are clustered depending on the 'num_dim' argument.")
 
@@ -612,13 +610,17 @@ A new file should appear in the ‘Files’ window. If you click on it, you will
 >  Note that you can use the above block of code to generate file with the marker genes for unannotated CDS object to help you identify and check specifically expressed genes – you’d only have to change `group_cells_by` parameter from "cell_type" to “cluster”. 
 {: .tip}
 
-# EDIT NEEDED - ONLY FOR RSTUDIO - (INTERACTIVE TOOL) - MAKE A TIP
-You may also want to investigate certain clusters more in-depth. Then, you can make a subset of the CDS object containing only cells of interest. If you call `choose_cells()`, then a pop-up window will appear where you can choose cells to subset. 
-```r
-# create a CDS subset
-cds_subset <- choose_cells(cds_clustered)
-```
-Now the chosen cluster is stored as a separate CDS object and you can analyse it independently, using the methods described above.
+
+> <tip-title>Only for users of local RStudio</tip-title>
+>
+> If you are working in RStudio locally, you might want to try a great function `choose_cells()`, which allows you to make a subset of the CDS object containing only cells of interest to investigate certain clusters more in-depth. It only works in interactive mode, so can be only used locally - when you call it, then a pop-up window will appear where you can choose cells to subset. 
+>```r
+># create a CDS subset
+>cds_subset <- choose_cells(cds_clustered)
+>```
+>Now the chosen cluster is stored as a separate CDS object and you can analyse it independently, using the methods described above.
+>
+{: .tip}
 
 # Trajectory inference 
 It’s time to perform trajectory analysis! First, let’s learn the trajectory graph. With an argument `use_partition` we can specify if we want to learn a disjoint graph (value TRUE - default) in each partition, or to learn a single graph (value FALSE) across all partitions. The thing is, we can visualise the cells in pseudotime only if they belong to one partition. This is why it is important to make sure that all the cells that you want to analyse in pseudotime belong to one partition. 
@@ -644,86 +646,85 @@ plot_cells(cds_trajectory,
 We have to tell Monocle where to start ordering the cells, ie. when we expect the analysed biological process to begin. Thanks to our biological knowledge, we know that the beginning of the trajectory should be at DN cluster. 
 There are a couple of ways to specify the root cells:
 
-# EDIT NEEDED - COMPLETE MESS
-- Use the pop-up window and simply select root nodes in the cluster with the cell type identified as the beginning of the trajectory.
+1. Use `root_pr_nodes` argument in `order_cells()` function.
 
-  ```r
-  # specifying root cells: pop up window
-  cds_order_1 <- order_cells(cds_trajectory)
-  ```
+To find the names of the principal points, you have to plot the learned trajectory again, specifying `label_principal_points = TRUE`
+```r
+# specifying root cells: `root_pr_nodes` argument - check the principal points
+plot_cells(cds_trajectory,
+          color_cells_by = "cell_type",
+          label_cell_groups=FALSE,
+          label_groups_by_cluster=FALSE,
+          label_leaves=FALSE,
+          label_branch_points=FALSE,
+          label_principal_points = TRUE,       # set this to TRUE
+          graph_label_size=3)
+```
+You can see now the principal points and their labels in the form `Y_number`. Pick the principal point in the cluster that you expect to be the beginning of the trajectory and type its name in the `root_pr_nodes` argument when calling `order_cells()` function.
 
+```r
+# specifying root cells: `root_pr_nodes` argument - use the relevant principal point
+cds_order_1 <- order_cells(cds_trajectory, root_pr_nodes='Y_14')
+```
 
-- Use `root_pr_nodes` argument in `order_cells()` function.
+There is also a helper function to identify the root principal points based on the annotated cell types. This function uses `pr_graph_cell_proj_closest_vertex` which is just a matrix with a single column that stores for each cell, the ID of the principal graph node it's closest to.
 
-  To find the names of the principal points, you have to plot the learned trajectory again, specifying `label_principal_points = TRUE`
-  ```r
-  # specifying root cells: `root_pr_nodes` argument - check the principal points
-  plot_cells(cds_trajectory,
-            color_cells_by = "cell_type",
-            label_cell_groups=FALSE,
-            label_groups_by_cluster=FALSE,
-            label_leaves=FALSE,
-            label_branch_points=FALSE,
-            label_principal_points = TRUE,       # set this to TRUE
-            graph_label_size=3)
-  ```
-  You can see now the principal points and their labels in the form `Y_number`. Pick the principal point in the cluster that you expect to be the beginning of the trajectory and type its name in the `root_pr_nodes` argument when calling `order_cells()` function.
-
-    ```r
-    # specifying root cells: `root_pr_nodes` argument - use the relevant principal point
-    cds_order_2 <- order_cells(cds_trajectory, root_pr_nodes='Y_14')
-    ```
-
-    - There is also a helper function to identify the root principal points based on the annotated cell types. This function uses `pr_graph_cell_proj_closest_vertex` which is just a matrix with a single column that stores for each cell, the ID of the principal graph node it's closest to.
-
-    ```r
-      # a helper function to identify the root principal points
-      get_correct_root_state <- function(cds, cell_phenotype, root_type){
-        cell_ids <- which(pData(cds)[, cell_phenotype] == root_type)
+```r
+# a helper function to identify the root principal points
+get_correct_root_state <- function(cds, cell_phenotype, root_type){
+      cell_ids <- which(pData(cds)[, cell_phenotype] == root_type)
         
-        closest_vertex <-
-          cds@principal_graph_aux[["UMAP"]]$pr_graph_cell_proj_closest_vertex
-        closest_vertex <- as.matrix(closest_vertex[colnames(cds), ])
-        root_pr_nodes <-
-          igraph::V(principal_graph(cds)[["UMAP"]])$name[as.numeric(names
-                                                                    (which.max(table(closest_vertex[cell_ids,]))))]
-        
-        root_pr_nodes
+      closest_vertex <- cds@principal_graph_aux[["UMAP"]]$pr_graph_cell_proj_closest_vertex
+      closest_vertex <- as.matrix(closest_vertex[colnames(cds), ])
+      root_pr_nodes <- igraph::V(principal_graph(cds)[["UMAP"]])$name[as.numeric(names
+                                                                    (which.max(table(closest_vertex[cell_ids,]))))]       
+      root_pr_nodes
       }
+```
+```r
+# call the function to automatically find the node in the principal graph where our DN cells reside
+DN_node_id = get_correct_root_state(cds_trajectory, cell_phenotype = 'cell_type', "DN")
 
-      # call the function to automatically find the node in the principal graph where our DN cells reside
-      DN_node_id = get_correct_root_state(cds_trajectory,
-                                            cell_phenotype = 'cell_type', "DN")
+DN_node_id      # check the node found
+```
+```r
+# order cells using the helper function output
+cds_order_1_helper <- order_cells(cds_trajectory, root_pr_nodes = DN_node_id)
+```
 
-      # order cells using the helper function output
-      cds_order_2_helper <- order_cells(cds_trajectory, root_pr_nodes = DN_node_id)
-    ```
+2. Use `root_cells` argument in `order_cells()` function. 
 
+Specify a vector of starting cell IDs. You can provide only one cell as well as all cells of a given type.
 
--	Use `root_cells` argument in `order_cells()` function. 
+```r
+# find the names of all cells belonging to a certain type, identified as a beginning of a trajectory
+starting_cell_type <- 'DN'
+index <- which(cds_trajectory@colData$cell_type == starting_cell_type)
+DN_cells <- colnames(cds_trajectory)[index]
+```
+```r
+# alternatively, if you work on unannotated data, you can use the number of the cluster that should be used as the beginning of the trajectory and pass it in the ‘root_cells’ argument
+starting_cluster <- colnames(cds_trajectory[,clusters(cds_trajectory) == 4])
+```
+```r
+# order cells 
+cds_order_2 <- order_cells(cds_trajectory, root_cells = DN_cells)
+```
 
-    Specify a vector of starting cell IDs. You can provide only one cell as well as all cells of a given type.
-
-    ```r
-    # find the names of all cells belonging to a certain type, identified as a beginning of a trajectory
-    starting_cell_type <- 'DN'
-    index <- which(cds_trajectory@colData$cell_type == starting_cell_type)
-    DN_cells <- colnames(cds_trajectory)[index]
-    ```
-    ```r
-    # alternatively, if you work on unannotated data, you can use the number of the cluster that should be used as the beginning of the trajectory and pass it in the ‘root_cells’ argument
-    starting_cluster <- colnames(cds_trajectory[,clusters(cds_trajectory) == 4])
-    ```
-    ```r
-    # order cells 
-    cds_order_3 <- order_cells(cds_trajectory, root_cells = DN_cells)
-    ```
-
-
+> <tip-title>Only for users of local RStudio</tip-title>
+>
+> If you are working in RStudio locally, you can use `order_cells()` function in the interactive mode. The pop-up window should appear and then you can simply select root nodes in the cluster with the cell type identified as the beginning of the trajectory.
+>
+> ```r
+># specifying root cells: pop up window
+>cds_order_1 <- order_cells(cds_trajectory)
+>```
+>
+{: .tip}
 
 You can use any `cds_order` object for the downstream analysis. Let’s pick one and assign it to an object with a shorter and more general name. 
 ```r
-cds_order <- cds_order_2_helper
+cds_order <- cds_order_1_helper
 ```
 
 The function `order_cells()` calculates pseudotime for each cell, so we can now visualise the T-cell maturation process in pseudotime! Additionally, we can access it and store in our CDS object for further analysis.
@@ -762,7 +763,7 @@ cds_subset <- cds_order[rowData(cds_order)$gene_short_name %in% test_genes,]
 Monocle also provides some easy ways to plot the expression of a small set of genes grouped by the factors you use during differential analysis.
 For example `plot_genes_violin()` allows us to create violin plots which are quite common in the field. Therefore let’s visualise how the gene expression changes between the cell types.
 ```r
-# produce violin plot
+# produce violin plots
 plot_genes_violin(cds_subset, group_cells_by="cell_type", ncol=2)
 ```
 
@@ -772,9 +773,7 @@ When analysing the above violin plots, we will realise that the results are cons
 
 Another great function `plot_genes_in_pseudotime()` takes a small set of genes and shows their dynamics as a function of pseudotime. 
 ```r
-genes_in_pseudotime_plot <- plot_genes_in_pseudotime(cds_subset,
-                           color_cells_by="cell_type",
-                           min_expr=0.5)
+plot_genes_in_pseudotime(cds_subset, color_cells_by="cell_type", min_expr=0.5)
 ```
 
 ![On the left hand side scatter plots of expression of the specified genes in pseudotime. On the right hand side also the expression of specified genes as a function of pseudotime but shown with the cell type data superimposed. Again the trends are consistent with the previous biological interpretation and assignment](../../images/scrna-casestudy-monocle/genes_in_pseudotime.png " A visualisation of how specified genes change in the pseudotime.")
@@ -792,26 +791,26 @@ gene_fits <- fit_models(cds_subset, model_formula_str = "~cell_type + batch")
 fit_coefs <- coefficient_table(gene_fits) 	
 ```
 ```r
-# see the 'fit_coefs' structure
-fit_coefs
+# preview the content of 'fit_coefs'
+head(fit_coefs)
 ```
 If you inspect the `fit_coefs` object, you will notice that the table includes one row for each term of each gene's model. We generally don't care about the intercept term, so we can filter it out. In this way, we will be able to control for the chosen factors. To focus on only one variable, you have to check the `term` column in the `fit_coefs` and pass this as an argument for filtering. Then, you should also filter the results with q_value < 0.05 to control the false discovery rate. 
 
 ```r
 # filter out Intercept term
-no_intercept_coefs <- fit_coefs %>% filter(term != "(Intercept)") 	
+no_intercept_coefs <- fit_coefs %>% dplyr::filter(term != "(Intercept)") 	
 ```
 ```r
 # extract results for DP-M1 cells only
-DP_M1_coefs <- fit_coefs %>% filter(term == "cell_typeDP-M1") 	
+DP_M1_coefs <- fit_coefs %>% dplyr::filter(term == "cell_typeDP-M1") 	
 ```
 ```r
 # control the false discovery rate and choose only several variables to store
-DP_M1_coefs_filtered <- DP_M1_coefs %>% filter (q_value < 0.05) %>%
-  select(gene_short_name, term, q_value, estimate)		
+DP_M1_coefs_filtered <- DP_M1_coefs %>% dplyr::filter (q_value < 0.05) %>%
+  dplyr::select(gene_short_name, term, q_value, estimate)		
 ```
 ```r
-# see the resulting table
+# view the resulting table
 DP_M1_coefs_filtered
 ```
 The resulting table shows the genes that differ depending on the chosen term. Maybe this function is not very helpful in the case of our dataset, but may be useful when analysing unannotated data or choosing another term from `colData()`.
@@ -845,6 +844,7 @@ agg_mat <- aggregate_gene_expression(cds_order, gene_module_df, cell_group_df)
 row.names(agg_mat) <- stringr::str_c("Module ", row.names(agg_mat))
 colnames(agg_mat) <- stringr::str_c("Cluster ", colnames(agg_mat))
 ```
+We can now use this data to create a heatmap. Don't worry if yours look a little bit different that the one shown in this tutorial. The general features should be maintained though. 
 ```r
 # create a heatmap
 pheatmap::pheatmap(agg_mat, cluster_rows=TRUE, cluster_cols=TRUE,
@@ -857,7 +857,7 @@ You can also visualise the modules using `plot_cells()` function. We've chosen s
 ```r
 # see the chosen modules across the whole sample
 plot_cells(cds_order, 
-           genes=gene_module_df %>% filter(module %in% c(40, 39, 36, 17)),
+           genes=gene_module_df %>% dplyr::filter(module %in% c(40, 39, 36, 17)),
            group_cells_by="cluster",
            color_cells_by="cluster",
            show_trajectory_graph=FALSE)
@@ -869,7 +869,7 @@ With the visualisation methods above, you can now come back to the generated dat
 
 # 3D plotting
 Let’s have some fun at the end! That was quite a long and insightful analysis – you definitely deserve to look at some nice, rotatable, cool plot now! 
-Essentially the workflow is the same as we followed in two dimensions. The crucial part is to specify the dimensionality of the reduced space with the `max_components` parameter in `reduce_dimension()` function. The default is 2, but if we want to see our data in 3D, we will change that value to 3. From there, you can just repeat the next steps in 3D… or just reward yourself by toggling the 3D plot for completing this tutorial!
+Essentially the workflow is the same as we followed in two dimensions. The crucial part is to specify the dimensionality of the reduced space with the `max_components` parameter in `reduce_dimension()` function. The default is 2, but if we want to see our data in 3D, we will change that value to 3. From there, you can just repeat the next steps in 3D… or just reward yourself for completing this tutorial by toggling this beautiful 3D plot!
 
 ```r
 # reduce dimension to 3D
