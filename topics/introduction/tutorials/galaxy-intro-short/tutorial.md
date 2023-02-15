@@ -14,6 +14,7 @@ objectives:
   - "Learn how to view results"
   - "Learn how to view histories"
   - "Learn how to extract and run a workflow"
+  - "Learn how to share a history"
 time_estimation: "40m"
 key_points:
   - "The Galaxy interface has tools on the left, viewing pane in the middle, and a history of your data analysis on the right."
@@ -138,6 +139,16 @@ When the file has uploaded to Galaxy, it will turn green.
 > the gray (preparing/queued) and yellow (running) states to become green (success).
 >
 {: .comment}
+
+> <details-title>Is this step taking a while?</details-title>
+>   Sometimes during courses, data upload gets a little slow. You can also import data through a history link.
+>
+> 1. Import history from: [example input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/short-introduction-to-galaxy--input)
+>
+>    {% snippet faqs/galaxy/histories_import.md %}
+> 2. **Rename** {% icon galaxy-pencil %} the the history to your name of choice.
+>
+{: .details}
 
 What is this file?
 
@@ -281,6 +292,12 @@ We can now try to filter our input reads to an even higher standard, and see how
 {: .question}
 
 You can re-run a tool many times with different settings. Each time you re-run the tool, its new output datasets will appear at the top of your current history.
+
+## Share your history
+
+Finally, let's imagine that you had a problem in your analysis and you want to ask for help. The easiest way to ask for help is to share your history. Try and create a link for your history and share it with...yourself!
+
+{% snippet faqs/galaxy/histories_sharing.md %}
 
 
 ## Convert your analysis history into a workflow

@@ -873,6 +873,13 @@ module GtnLinter
           )
       end
     }
+    self.enumerate_type(/data[_-]library.ya?ml/).each{|path|
+      if path.split('/')[-1] != "data-library.yaml" then
+        self.format_reviewdog_output(
+          ReviewDogEmitter.file_error(path: path, message: "This file must be named data-library.yaml. Please rename it.", code: "GTN:023")
+        )
+      end
+    }
     self.enumerate_type(/\.ga$/).each{|path|
       self.fix_file(path)
     }
