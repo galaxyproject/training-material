@@ -63,6 +63,7 @@ While the installation in running in the Terminal tab, you can work on other thi
 ><hands-on-title>Files upload</hands-on-title>
 >
 > 1. In the folder window, Upload the `single-cell-scrna-case_monocle3-rstudio.ipynb` and three data files that you had downloaded from your computer. 
+> ![Screenshot of the folder window in JupyterLab, highlighting 'Upload' button.](../../images/scrna-casestudy-monocle/upload_notebook.jpg "Click here to upload the files.")
 >
 > 2. Right-click on the files and rename them so that it’s easier to refer to them:
 > - `GalaxyX-[Extracted_cell_annotations_(obs)]` to `cells`
