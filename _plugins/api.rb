@@ -1,5 +1,7 @@
 require 'json'
 require './_plugins/jekyll-topic-filter.rb'
+require './_plugins/gtn/metrics'
+require './_plugins/gtn/scholar'
 
 module Jekyll
   class APIGenerator < Generator
@@ -15,11 +17,18 @@ module Jekyll
     def generate(site)
 
       # Full Bibliography
+      Gtn::Scholar.load_bib(site)
       puts "[GTN/API] Bibliography"
       page3 = PageWithoutAFile.new(site, "", "api/", "gtn.bib")
       page3.content = site.config['cached_global_bib'].to_s
       page3.data["layout"] = nil
       site.pages << page3
+
+      # Metrics endpoint, /metrics
+      page2 = PageWithoutAFile.new(site, "", "", "metrics")
+      page2.content = "{% raw %}\n" + Gtn::Metrics.generate_metrics(site) + "{% endraw %}"
+      page2.data["layout"] = nil
+      site.pages << page2
 
       def markdownify(site, text)
         site.find_converter_instance(
@@ -133,13 +142,60 @@ module Jekyll
         page5.data["layout"] = nil
         site.pages << page5
       }
+
       # Deploy the feedback file as well
       page2 = PageWithoutAFile.new(site, "", "api/", "feedback.json")
       page2.content = JSON.pretty_generate(site.data['feedback'])
       page2.data["layout"] = nil
       site.pages << page2
 
+      # Top Tools
+      puts "[GTN/API] Top Tools"
+      page2 = PageWithoutAFile.new(site, "", "api/", "top-tools.json")
+      page2.content = JSON.pretty_generate(TopicFilter.list_materials_by_tool(site))
+      page2.data["layout"] = nil
+      site.pages << page2
+
+      # Not really an API
+      TopicFilter.list_materials_by_tool(site).each do |tool, tutorials|
+        page2 = PageWithoutAFile.new(site, "", "by-tool/", "#{tool.gsub('%20', ' ')}.html")
+        page2.content = nil
+        page2.data["layout"] = "by_tool"
+        page2.data["short_tool"] = tool
+        page2.data["observed_tool_ids"] = tutorials["tool_id"]
+        page2.data["tutorial_list"] = tutorials["tutorials"]
+        site.pages << page2
+      end
+
+      # GA4GH TRS Endpoint
+      # Please note that this is all a fun hack
+      TopicFilter.list_all_materials(site).select{|m| m['workflows']}.each do |material|
+        material['workflows'].each do |workflow|
+          wfid = "#{material['topic_name']}-#{material['tutorial_name']}"
+
+          page2 = PageWithoutAFile.new(site, "", "api/ga4gh/trs/v2/tools/#{wfid}/versions/", "main?gtn=true")
+          page2.content = JSON.pretty_generate({
+            "id" => "main",
+            "url" => site.config['url'] + site.config['baseurl'] + material["url"],
+            "name" => "v1",
+            "author" => [],
+            "descriptor_type" => ["GALAXY"],
+          })
+          page2.data["layout"] = nil
+          site.pages << page2
+
+          page2 = PageWithoutAFile.new(site, "", "api/ga4gh/trs/v2/tools/#{wfid}/versions/main/GALAXY", "descriptor")
+          page2.content = JSON.pretty_generate({
+            "content" => File.open(material['dir'] + '/workflows/' + workflow['workflow']).read,
+            "checksum" => [],
+            "url" => nil,
+          })
+          page2.data["layout"] = nil
+          site.pages << page2
+        end
+      end
+
+
     end
   end
 end
-

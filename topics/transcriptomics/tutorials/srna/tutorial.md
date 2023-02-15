@@ -55,12 +55,12 @@ Due to the large size of the original sRNA-seq datasets, we have downsampled the
 > 2. Import the 3 `Blank_RNAi_sRNA-seq` and 3 `Symp_RNAi_sRNA-seq` FASTQ files from [Zenodo](https://zenodo.org/record/1324070) or from the data library (ask your instructor)
 >
 >    ```
-https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep1_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep2_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep3_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep1_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep2_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep3_downsampled.fastqsanger.gz
+>    https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep1_downsampled.fastqsanger.gz
+>    https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep2_downsampled.fastqsanger.gz
+>    https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep3_downsampled.fastqsanger.gz
+>    https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep1_downsampled.fastqsanger.gz
+>    https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep2_downsampled.fastqsanger.gz
+>    https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep3_downsampled.fastqsanger.gz
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -78,10 +78,10 @@ https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep3_downsampled.fastq
 > 3. Import the remaining files from [Zenodo](https://zenodo.org/record/1324070) or from the data library (ask your instructor)
 >
 >    ```
-https://zenodo.org/record/826906/files/dm3_transcriptome_Tx2Gene_downsampled.tab.gz
-https://zenodo.org/record/826906/files/dm3_transcriptome_sequences_downsampled.fa.gz
-https://zenodo.org/record/826906/files/dm3_miRNA_hairpin_sequences.fa.gz
-https://zenodo.org/record/826906/files/dm3_rRNA_sequences.fa.gz
+>    https://zenodo.org/record/826906/files/dm3_transcriptome_Tx2Gene_downsampled.tab.gz
+>    https://zenodo.org/record/826906/files/dm3_transcriptome_sequences_downsampled.fa.gz
+>    https://zenodo.org/record/826906/files/dm3_miRNA_hairpin_sequences.fa.gz
+>    https://zenodo.org/record/826906/files/dm3_rRNA_sequences.fa.gz
 >    ```
 >
 >    - Set the datatype of the annotation file to **tab** and assign the Genome as **dm3**

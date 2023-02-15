@@ -18,23 +18,10 @@
   </thead>
   <tbody class="list">
 
-  {% assign topic_material = topic_material | sort: 'priority'%}
-  {% for material in topic_material %}
-    {% if include.sub and include.sub.id == material.subtopic %}
-      {% assign show = true %}
-    {% elsif include.sub.id == "other" and material.subtopic == nil %}
-      {% assign show = true %}
-    {% else %}
-      {% assign show = false %}
-    {% endif %}
-
-    {% if include.sub == nil or show == true %}
+  {% assign subtopic_materials = include.sub[1].materials %}
+  {% for material in subtopic_materials %}
+        <!-- MAT: {{ material.id }} -->
       {% if material.enable != false or jekyll.environment != "production" %}
-        {% if material.type == 'introduction' %}
-          {% assign subfolder = 'slides' %}
-        {% else %}
-          {% assign subfolder = 'tutorials' %}
-        {% endif %}
 
         <tr>
           <td class="tutorial_title">
@@ -48,69 +35,52 @@
             {% endif %}
 
 
-          <div class="">
-          {% if material.level %}
-            {% include _includes/difficulty-indicator.html level=material.level %}
-          {% endif %}
-          {% if material.tags %}
-            {% for tag in material.tags %}
-            <a href="{{site.baseurl}}/search?query={{ tag }}" class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}" title="Click to show all tutorials tagged {{tag}}">{{ tag }}</a>
-            {% endfor %}
-          {% endif %}
-          </div>
-
-          <div class="duplicate">
-          {% if material.type == "introduction" %}
-            {% if material.slides %}
-              {% include _includes/resource-slides.html material=material topic=topic.name %}
+            <div class="extra">
+            {% if material.level %}
+              {% include _includes/difficulty-indicator.html level=material.level %}
             {% endif %}
-          {% elsif material.type == "tutorial" %}
-            <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
-            {% include _includes/resource-slides.html material=material topic=topic.name %}
-            {% include _includes/resource-handson.html material=material topic=topic.name %}
-            {% include _includes/resource-video-library.html material=material topic=topic.name %}
-            {% include _includes/resource-zenodo.html material=material topic=topic.name %}
-            {% include _includes/resource-workflows.html material=material topic=topic.name %}
-            {% if instances[topic.name].supported %}
-              {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=material.tutorial_name %}
+            {% if material.tags %}
+              {% for tag in material.tags %}
+              <a href="{{site.baseurl}}/search?query={{ tag }}" class="label label-default tutorial_tag" id="{{ tag }}" style="{{ tag | colour_tag }}" title="Click to show all tutorials tagged {{tag}}">{{ tag }}</a>
+              {% endfor %}
             {% endif %}
             </div>
-          {% endif %}
-          </div>
 
-          </td>
-          {% if material.type == "introduction" %}
-            <td>
-            {% if material.slides %}
+            <div class="duplicate">
+              <div class="btn-group" role="group" aria-label="Supporting materials for this resource">
               {% include _includes/resource-slides.html material=material topic=topic.name %}
-            {% endif %}
-            </td>
-            <td></td>
-            <td></td>
-            {% if topic.type == "use" %}
-              <td></td>
-              <td></td>
-            {% endif %}
-            {% if instances[topic.name].supported %}
-              <td></td>
-            {% endif %}
-          {% elsif material.type == "tutorial" %}
-            <td> {% include _includes/resource-slides.html material=material topic=topic.name %} </td>
-            <td> {% include _includes/resource-handson.html material=material topic=topic.name %} </td>
-            <td> {% include _includes/resource-video-library.html material=material topic=topic.name %}</td>
-            {% if topic.type == "use" %}
-              <td> {% include _includes/resource-zenodo.html material=material topic=topic.name %} </td>
-              <td> {% include _includes/resource-workflows.html material=material topic=topic.name %} </td>
-            {% endif %}
-            {% if instances[topic.name].supported %}
-              <td> {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=material.tutorial_name %} </td>
-            {% endif %}
+              {% include _includes/resource-handson.html material=material topic=topic.name %}
+              {% include _includes/resource-video-library.html material=material topic=topic.name %}
+
+              {% if topic.type == "use" %}
+                  {% include _includes/resource-zenodo.html material=material topic=topic.name %}
+                  {% include _includes/resource-workflows.html material=material topic=topic.name %}
+              {% endif %}
+
+              {% if instances[topic.name].supported %}
+                  {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=material.tutorial_name %}
+              {% endif %}
+              </div>
+            </div>
+          </td>
+
+          <td> {% include _includes/resource-slides.html material=material topic=topic.name %} </td>
+          <td> {% include _includes/resource-handson.html material=material topic=topic.name %} </td>
+          <td> {% include _includes/resource-video-library.html material=material topic=topic.name %} </td>
+
+          {% if topic.type == "use" %}
+          <td> {% include _includes/resource-zenodo.html material=material topic=topic.name %} </td>
+          <td> {% include _includes/resource-workflows.html material=material topic=topic.name %} </td>
+          {% endif %}
+
+          {% if instances[topic.name].supported %}
+          <td> {% include _includes/instance-dropdown.html instances=instances topic=topic.name tuto=material.tutorial_name %} </td>
           {% endif %}
          </tr>
-         {% endif %}
        {% endif %}
     {% endfor %}
   </tbody>
 </table>
+
 
 

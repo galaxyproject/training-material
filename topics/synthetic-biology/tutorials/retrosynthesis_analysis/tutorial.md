@@ -232,7 +232,7 @@ We need to split the network and perform some adjustments to these pathways.
 >    >
 >    > Each reaction rule can correspond to several template reactions, the task here is to enumerate the different possible transformations according to these templates.
 >    > Because the RetroRules reaction rules consider only one substrate at a time, some compounds are by purpose omitted: the task here is to complete the predicted reactions by putting back these omitted compounds (mostly  cofactors).
-The node converts each predicted pathway to distinct SBML files.
+>    > The node converts each predicted pathway to distinct SBML files.
 >    {: .comment}
 {: .hands_on}
 

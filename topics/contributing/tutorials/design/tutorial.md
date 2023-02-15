@@ -1260,7 +1260,7 @@ development of communities of best practice, and can support both learning and
 the success of a course.**
 
 <!--
->> <hands-on-title>Apply - _⏰ 5 min_</hands-on-title>
+> <hands-on-title>Apply - _⏰ 5 min_</hands-on-title>
 >
 > - Articulate a goal of good teaching practice that you are ready to apply for
 >   your next training

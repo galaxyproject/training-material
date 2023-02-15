@@ -228,10 +228,10 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 >    - *"MZ threshold in Thomson for precursor ion selection"*: `0.015`
 >    - *"upper MZ limit for precursor ions"*: `1000.0`
 >    - *"MZ threshold in Thomson for fragment ion annotation"*: `0.015`
-
+>
 >
 >    > <comment-title>Adjustment of the Spectral library</comment-title>
->    >The spectral library coming from **diapysef library generation** contains all observed fragment ions from the DDA runs resulting in a relativly large spectral library. Large libraries can lead to inceased processing times as well as fewer identifications after adjusting based on the False Discovery Rate (FDR). Thus, it is recommened to optimize and refine the spectral library by e.g. filtering for peptides with at least 6 transitions (increased confidence) and limiting the maximum also to 6 transitions (avoiding inflated libraries). Furthermore, the scan range can be adjusted (here between 400 - 1000 m/z) covering the same m/z range as in the DIA measurements.
+>    > The spectral library coming from **diapysef library generation** contains all observed fragment ions from the DDA runs resulting in a relativly large spectral library. Large libraries can lead to inceased processing times as well as fewer identifications after adjusting based on the False Discovery Rate (FDR). Thus, it is recommened to optimize and refine the spectral library by e.g. filtering for peptides with at least 6 transitions (increased confidence) and limiting the maximum also to 6 transitions (avoiding inflated libraries). Furthermore, the scan range can be adjusted (here between 400 - 1000 m/z) covering the same m/z range as in the DIA measurements.
 >    {: .comment}
 >
 {: .hands_on}
@@ -259,8 +259,8 @@ The PTXQC software ({% cite Bielow2015 %}) was built to enable direct proteomcs 
 >        - *"MZ threshold in Thomson for fragment ion annotation"*: `0.015`
 >
 >    > <comment-title><i>Decoy</i> transitions</comment-title>
->    >To enable correct false discovery rate (FDR) computation later on, we add computanionally generated decoy sequences to the spectral library. Those "non-observed" sequences can be generated based on the observed sequences with slight modifications. The most commonly used methods are either **shuffle** (randomly altering the amino acid sequence of each observed transition) or **reverse** (by reversing the actually obeserved transitions). Those artificially generated transitions were labelled as **decoy** and are later on considered as known false positives.
-Example: By applying an FDR of 1 % we only allow for e.g only 1 such decoy transition out of 100 identifications. Thus one could estimate that the remaining 99 non-labeled identifications contain also 1 % false positive hits.
+>    > To enable correct false discovery rate (FDR) computation later on, we add computanionally generated decoy sequences to the spectral library. Those "non-observed" sequences can be generated based on the observed sequences with slight modifications. The most commonly used methods are either **shuffle** (randomly altering the amino acid sequence of each observed transition) or **reverse** (by reversing the actually obeserved transitions). Those artificially generated transitions were labelled as **decoy** and are later on considered as known false positives.
+>    > Example: By applying an FDR of 1 % we only allow for e.g only 1 such decoy transition out of 100 identifications. Thus one could estimate that the remaining 99 non-labeled identifications contain also 1 % false positive hits.
 >    {: .comment}
 >
 {: .hands_on}

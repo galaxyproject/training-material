@@ -193,7 +193,7 @@ For that, you can install from a YAML file:
 
 Occasionally the tool installation may fail due to network issues; if it does, just re-run the `shed-tools` installation process until it succeeds. This is a known issue the developers are working on.
 
-> ###  {% icon tip %} Tip: Opening a split screen in byobu
+> <tip-title>Opening a split screen in byobu</tip-title>
 > <kbd>Shift-F2</kbd>: Create a horizontal split
 >
 > <kbd>Shift-Left/Right/Up/Down</kbd>: Move focus among splits

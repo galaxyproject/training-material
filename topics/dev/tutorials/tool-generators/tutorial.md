@@ -129,8 +129,7 @@ The ToolFactory implements an automated, form driven wrapper code generator, and
 in Galaxy. The ToolFactory is distributed as a Docker appliance and can be "popped up" and ready to run in a few minutes - well, 5 or 10 perhaps.
 
 > <tip-title>The ToolFactory appliance provides a fully featured Galaxy server.</tip-title>
-> - It is a private local desktop Galaxy server, ideal for tinkering and experimentation, learning how the Galaxy server works
-and for developing new tools for new kinds of scientists using Galaxy.
+> - It is a private local desktop Galaxy server, ideal for tinkering and experimentation, learning how the Galaxy server works and for developing new tools for new kinds of scientists using Galaxy.
 > - Any Galaxy tool from the toolshed can be installed and used.
 > - Any simple script can have a tool wrapper generated and installed as a new tool in the Appliance.
 > - Newly generated tools appear in the tool menu after a refresh, and can be viewed and used as the user will see them.

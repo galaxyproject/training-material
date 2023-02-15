@@ -349,9 +349,9 @@ layout: base
                                         </div>
                                     </div>
                                     {% if lang != '' %}
-                                    <a href="{% link topics/{{topic_name}}/tutorials/{{tuto_base}}/{{tuto_metadata['name']}} %}">View this Tutorial</a>
+                                    <a href="{{ site.baseurl }}/topics/{{ topic_name }}/tutorials/{{tuto_base}}/{{tuto_metadata['name'] | replace: ".md", ".html"}}">View this Tutorial</a>
                                     {% else %}
-                                    <a href="{% link topics/{{topic_name}}/tutorials/{{tuto_name}}/tutorial.md %}">View this Tutorial</a>
+                                    <a href="{{ site.baseurl }}/topics/{{ topic_name }}/tutorials/{{tuto_name}}/tutorial.html">View this Tutorial</a>
                                     {% endif %}
 
                                     <div class="row">

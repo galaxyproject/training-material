@@ -32,7 +32,7 @@ In this section we will look at practical aspects of manipulation of next-genera
 
 ## FASTQ manipulation and quality control
 
-[FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret FASTQ as they saw fit, resulting in a multitude of FASTQ flavors. This variation stemmed primarily from different ways of encoding quality values as described [here](https://en.wikipedia.org/wiki/FASTQ_format) (below you will find an explanation of quality scores and their meaning). Today, the [FASTQ Sanger](https://www.ncbi.nlm.nih.gov/pubmed/20015970) version of the format is considered to be the standard form of FASTQ. Galaxy is using FASTQ Sanger as the only legitimate input for downstream processing tools and provides [a number of utilities for converting FASTQ files](https://www.ncbi.nlm.nih.gov/pubmed/20562416) into this form (see **FASTQ Quality Control** section of Galaxy tools).
+[FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret FASTQ as they saw fit, resulting in a multitude of FASTQ flavors. This variation stemmed primarily from different ways of encoding quality values as described [on the Wikipedia article for FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) (below you will find an explanation of quality scores and their meaning). Today, the [FASTQ Sanger](https://www.ncbi.nlm.nih.gov/pubmed/20015970) version of the format is considered to be the standard form of FASTQ. Galaxy is using FASTQ Sanger as the only legitimate input for downstream processing tools and provides [a number of utilities for converting FASTQ files](https://www.ncbi.nlm.nih.gov/pubmed/20562416) into this form (see **FASTQ Quality Control** section of Galaxy tools).
 
 The FASTQ format looks like this:
 
@@ -75,7 +75,7 @@ Thus in both cases (paired-end and mate-pair) a single physical piece of DNA (or
 
 #### Two single files
 
-**File 1**
+File 1
 
 ```
  @M02286:19:000000000-AA549:1:1101:12677:1273 1:N:0:23
@@ -88,7 +88,7 @@ Thus in both cases (paired-end and mate-pair) a single physical piece of DNA (or
  ABC@CC77CFCEG;F9<F89<9--C,CE,--C-6C-,CE:++7:,CF
 ```
 
- **File 2**
+File 2
 
 ```
 @M02286:19:000000000-AA549:1:1101:12677:1273 2:N:0:23
@@ -424,7 +424,7 @@ First we need to find a good dataset to play with. The [Sequence Read Archive (S
 >
 > 1. Go to NCBI's SRA page by pointing your browser to https://www.ncbi.nlm.nih.gov/sra
 > 2. In the search box enter `SARS-CoV-2 Patient Sequencing From Partners / MGH`:
-> ![Find data](../../images/find_mgh_data.png) (Alternatively, you simply click on this [link](https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH))
+>    ![Find data](../../images/find_mgh_data.png) (Alternatively, you simply click on this [link directly to the data](https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH))
 > 3. The web page will show a large number of SRA datasets (at the time of writing there were 2,223). This is data from a [study](https://science.sciencemag.org/content/early/2020/12/09/science.abe3261) describing analysis of SARS-CoV-2 in Boston area.
 > 4. Download metadata describing these datasets by:
 >   - clicking on **Send to:** dropdown
@@ -471,13 +471,13 @@ Galaxy can process all 2,000+ datasets, but to make this tutorial bearable we ne
 >    {: .tip}
 > 1. Make sure the `SraRunInfo.csv` dataset we just uploaded is listed in the {% icon param-file %} "*Select lines from*" field of the tool form.
 > 1. In "*the pattern*" field enter the following expression &rarr; `SRR12733957|SRR11954102`. These are two accession we want to find separated by the pipe symbol `|`. The `|` means `or`: find lines containing `SRR12733957` **or** `SRR11954102`.
-> 1. Click `Execute` button.
+> 1. Click the `Run Tool` button.
 > 1. This will generate a file containing two lines (well ... one line is also used as the header, so it will appear the the file has three lines. It is OK.)
-> 1. Cut the first column from the file using {% tool [Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} tool, which you will find in **Text Manipulation** section of the tool pane.
+> 1. Cut the first column from the file using {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} tool, which you will find in **Text Manipulation** section of the tool pane.
 > 1. Make sure the dataset produced by the previous step is selected in the "*File to cut*" field of the tool form.
 > 1. Change "*Delimited by*" to `Comma`
 > 1. In "*List of fields*" select `Column: 1`.
-> 1. Hit `Execute`
+> 1. Hit `Run Tool`
 > This will produce a text file with just two lines:
 > ```
 > SRR12733957
@@ -493,8 +493,8 @@ Now that we have identifiers of datasets we want we need to download the actual 
 >
 > 1. Run {% tool [Faster Download and Extract Reads in FASTQ](toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.9+galaxy0) %} with the following parameters:
 >    - *"select input type"*: `List of SRA accession, one per line`
->        - The parameter {% icon param-file %} *"sra accession list"* should point the output of the {% icon tool %} "**Cut**" from the previous step.
->    - **Click** the `Execute` button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the `SRA` dataset. It may take some time. So this may be a good time to take a break.
+>        - The parameter {% icon param-file %} *"sra accession list"* should point the output of the {% icon tool %} "**Advanced Cut**" from the previous step.
+>    - **Click** the `Run Tool` button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the `SRA` dataset. It may take some time. So this may be a good time to take a break.
 >
 > 2. Several entries are created in your history panel when you submit this job:
 >    - **`Pair-end data (fasterq-dump)`**: Contains Paired-end datasets (if available)
@@ -503,7 +503,7 @@ Now that we have identifiers of datasets we want we need to download the actual 
 >    - **`fasterq-dump log`** Contains Information about the tool execution
 {: .hands_on}
 
-The first three items are actually *collections* of datasets. *Collections* in Galaxy are logical groupings of datasets that reflect the semantic relationships between them in the experiment / analysis. In this case the tool creates separate collections for paired-end reads, single reads, and *other*. See the [Collections tutorial](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html) and watch [videos](https://youtube.com/playlist?list=PLNFLKDpdM3B9UaxWEXgziHXO3k-003FzE) (with names beginning with "Dataset Collections") for more information.
+The first three items are actually *collections* of datasets. *Collections* in Galaxy are logical groupings of datasets that reflect the semantic relationships between them in the experiment / analysis. In this case the tool creates separate collections for paired-end reads, single reads, and *other*. See the [Collections tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}) and watch [videos](https://youtube.com/playlist?list=PLNFLKDpdM3B9UaxWEXgziHXO3k-003FzE) (with names beginning with "Dataset Collections") for more information.
 
 Explore the collections by first **clicking** on the collection name in the history panel. This takes you inside the collection and shows you the datasets in it.  You can then navigate back to the outer level of your history.
 
@@ -532,7 +532,7 @@ In this part of the tutorial we will perform variant calling and basic analysis 
 
 The reference genome data for today is for SARS-CoV-2, "Severe acute respiratory syndrome coronavirus 2 isolate Wuhan-Hu-1, complete genome", having the accession ID of NC_045512.2.
 
-This data is available from directly from GenBank using the following [link](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.fna.gz).
+This data is [available from directly from GenBank](https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.fna.gz).
 
 > <hands-on-title>Get the reference genome data</hands-on-title>
 >
@@ -562,11 +562,11 @@ Removing sequencing adapters improves alignments and variant calling. **fastp** 
 
 ## Alignment with  **Map with BWA-MEM**
 
-**BWA-MEM** {% icon tool %} is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial.
+**Map with BWA-MEM** {% icon tool %} is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial.
 
 > <hands-on-title>Map sequencing reads to reference genome</hands-on-title>
 >
-> Run {% tool [BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
+> Run {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `output` (Input dataset)
 >    - *"Single or Paired-end reads"*: `Paired Collection`
@@ -660,13 +660,13 @@ We are now ready to call variants.
 
 The output of this step is a collection of VCF files that can be visualized in a genome browser.
 
-## Annotate variant effects with **SnpEff eff:**
+## Annotate variant effects with **SnpEff eff: annotate variants for SARS-CoV-2**
 
 We will now annotate the variants we called in the previous step with the effect they have on the SARS-CoV-2 genome.
 
 > <hands-on-title>Annotate variant effects</hands-on-title>
 >
-> Run {% tool [SnpEff](toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19) %} with the following parameters:
+> Run {% tool [SnpEff eff: annotate variants for SARS-CoV-2](toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19) %} with the following parameters:
 >    - {% icon param-file %} *"Sequence changes (SNPs, MNPs, InDels)"*: `variants` (output of **Call variants** {% icon tool %})
 >    - *"Output format"*: `VCF (only if input is VCF)`
 >    - *"Create CSV report, useful for downstream analysis (-csvStats)"*: `Yes`
@@ -685,7 +685,7 @@ We will now select various effects from the VCF and create a tabular file that i
 > <hands-on-title>Create table of variants</hands-on-title>
 >
 > Run {% tool [SnpSift Extract Fields](toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Variant input file in VCF format"*: `snpeff_output` (output of **SnpEff eff:** {% icon tool %})
+>    - {% icon param-file %} *"Variant input file in VCF format"*: `snpeff_output` (output of **SnpEff eff: annotate variants for SARS-CoV-2** {% icon tool %})
 >    - *"Fields to extract"*: `CHROM POS REF ALT QUAL DP AF SB DP4 EFF[*].IMPACT EFF[*].FUNCLASS EFF[*].EFFECT EFF[*].GENE EFF[*].CODON`
 >    - *"One effect per line"*: `Yes`
 >    - *"empty field text"*: `.`
@@ -723,9 +723,7 @@ The above state allows us to judge the quality of the data. In this particular c
 
 ## Collapse data into a single dataset
 
-We now extracted meaningful fields from VCF datasets. But they still exist as a collection. To move towards secondary analysis we need to **collapse** this collection into a single dataset. For more information about collapsing collections see this video:
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ypuFZ1RKMIY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+We now extracted meaningful fields from VCF datasets. But they still exist as a collection. To move towards secondary analysis we need to **collapse** this collection into a single dataset. For more information about collapsing collections see [this video on collections](https://www.youtube.com/embed/ypuFZ1RKMIY).
 
 > <hands-on-title>Collapse a collection</hands-on-title>
 >
@@ -796,10 +794,12 @@ After a dataset is converted into an intermediary result (such as variant table 
 > 1. Open {% icon tool %} **Interactive Jupyter Notebook** from section **Interactive Tools**
 > 1. *"Do you already have a notebook?"*: `Start with a fresh notebook`
 > 1. *"Include data into the environment"*: Select history dataset containing the output of the collection collapse step
-> 1. Click `Execute`
+> 1. Click `Run Tool`
 > 1. It will create a dataset in the history that will be permanently yellow (running)
 > 1. You will see the following banner:
-> ![Jupyter startup banner](../../images/jupyter_start.png)
+>
+>    ![Jupyter startup banner](../../images/jupyter_start.png)
+>
 > 1. Click on `User menu`. You may need to wait a bit (go get coffee quickly). In the end you will a `Jupyter Interactive Tool` link. Click on it.
 > 1. This will open a new tab with a fully functional Jupyter environment:
 > ![Jupyter running](../../images/jupyter_running.png)
@@ -807,25 +807,31 @@ After a dataset is converted into an intermediary result (such as variant table 
 > 1. Type `!ls data/` in the first cell and you will see a file from Galaxy history.
 > 1. Upgrade [Pandas](https://pandas.pydata.org/) and [Seaborn](https://seaborn.pydata.org/index.html): `!pip install -U pandas seaborn`
 > 1. Read data into a dataframe:
->```
-> import pandas as pd
-> df = pd.read_csv('data/Collapsed_collection',sep='\t')
-> # Drop duplicates is required to get rid of SnpEff artifacts
-> df = df.drop_duplicates(ignore_index=True)
-```
-> {% icon warning %} Note that your file may be named differently! Use it exact name instead of `Collapsed_collection` above.
+>
+>    ```
+>    import pandas as pd
+>    df = pd.read_csv('data/Collapsed_collection',sep='\t')
+>    # Drop duplicates is required to get rid of SnpEff artifacts
+>    df = df.drop_duplicates(ignore_index=True)
+>    ```
+>    {% icon warning %} Note that your file may be named differently! Use it exact name instead of `Collapsed_collection` above.
+>
 > 1. Filter variants with intermediate frequencies between 20% and 80%:
->```
->df = df[ (df['AF']>=0.05) & (df['AF']<=0.8) ]
->```
+>
+>    ```
+>    df = df[ (df['AF']>=0.05) & (df['AF']<=0.8) ]
+>    ```
+>
 > 1. Plot relationship between variant position and alternative allele frequency:
->```
->import seaborn as sns
->%matplotlib inline
->sns.relplot(x='POS',y='AF',hue='EFF[*].FUNCLASS',data=df,height=5,aspect=2,s=100,style='Sample')
->```
-> This plot shows how variants are distributed across the SARS-CoV-2 genome:
-> ![Seaborn plot](../../images/sns_plot.png)
+>
+>    ```
+>    import seaborn as sns
+>    %matplotlib inline
+>    sns.relplot(x='POS',y='AF',hue='EFF[*].FUNCLASS',data=df,height=5,aspect=2,s=100,style='Sample')
+>    ```
+>
+>    This plot shows how variants are distributed across the SARS-CoV-2 genome:
+>    ![Seaborn plot](../../images/sns_plot.png)
 > 1. Play with it!
 {: .hands_on}
 
@@ -874,3 +880,5 @@ We can also import data directly into Google Colab:
 
 
 Congratulations, you now know how to import sequence data from the SRA and how to run an example analysis on these datasets.
+
+<!-- GTN:IGNORE:002 -->

@@ -35,6 +35,7 @@ contributors:
 priority: 4
 notebook:
   language: python
+  pyolite: true
 ---
 
 
@@ -145,7 +146,7 @@ returns a `IndexError: list index out of range`.
 > 4. Here an arrow points to the line number where something has broken. 1 shows that it's the first line within the cell, and it points to the print statement. Really it's pointing at the `weekdays[9]` within the print statement.
 > 5. Blank
 > 6. This is where we normally look for the **most important part of the Traceback**. The error message. An `IndexError`, namely that the list index (9) is out of the range of possible values (the length of the list.)
-{: .question}
+{: .tip}
 
 However, sometimes you want to access the very end of a list! You can either start at the beginning and count along to find the last item or second to last item, or you can use Negative Indices
 

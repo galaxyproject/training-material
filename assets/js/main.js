@@ -44,7 +44,17 @@ $("blockquote.solution,blockquote.details,blockquote.tip").each(function() {
     $(">.box-title>button", this).click();
 });
 
-$("section.tutorial .hands_on,section.tutorial .hands-on").append('<p class="text-muted" style="text-align:right;font-size:0.9rem;"><i class="far fa-question-circle" aria-hidden="true"></i> <a href="./faqs/">FAQs</a> | <a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter Chat</a> | <a href="https://help.galaxyproject.org">Help Forum</a></p>');
+$("section.tutorial .hands_on,section.tutorial .hands-on").each((idx, el) => {
+	var box_id = $(".box-title", el).attr("id");
+	$(el).append(`
+		<p class="text-muted" style="text-align:right;font-size:0.9rem;">
+			<a href="#${box_id}">Link to here</a> |
+			<i class="far fa-question-circle" aria-hidden="true"></i> <a href="./faqs/">FAQs</a> |
+			<a href="https://gitter.im/Galaxy-Training-Network/Lobby">Gitter Chat</a> |
+			<a href="https://help.galaxyproject.org">Help Forum</a>
+		</p>`
+	);
+})
 
 // CYOA Support
 function cyoaChoice(text){
@@ -107,18 +117,23 @@ function cyoaDefault(defaultOption){
         var withAnswers = (new URL(document.location)).searchParams.get("with-answers");
         if (withAnswers !== null) {
             // Same as above selector
-            $(".solution>h3,.details>h3").click();
+            $(".solution>.box-title button,.details>.box-title button").click();
         }
 
         var expandAll = (new URL(document.location)).searchParams.get("expand-all");
         if (expandAll !== null) {
-            $(".solution>.box-title,.details>.box-title,.tip>.box-title").click();
+            $(".solution>.box-title button,.details>.box-title button,.tip>.box-title button").click();
 
         }
         // collapse all boxes on the faq overview pages
         if (window.location.href.indexOf("faqs") > -1) {
             $(".hands_on>.box-title,.question>.box-title,.comment>.box-title").click();
         }
+
+        var handsOnOnly = (new URL(document.location)).searchParams.get("only-hands-on");
+		if(handsOnOnly !== null) {
+			$(".tutorial .container .col-sm-10>:not(.hands_on)").hide()
+		}
     });
 
 })(window, document);
@@ -140,3 +155,14 @@ function fixDiffPresentation(codeBlock){
 <!--  For admin training -->
 document.querySelectorAll("section.tutorial.topic-admin div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
 document.querySelectorAll("section.tutorial.topic-data-science div.language-diff pre code").forEach(codeBlock => fixDiffPresentation(codeBlock))
+
+$("#theme-selector button").click(function(evt){
+	var theme = $(evt.target).data('theme');
+	setTheme(theme);
+	if(theme === "straya"){
+		$("body").addClass('downunder');
+		setTimeout(function(){
+			$("body").removeClass('downunder');
+		}, 8000);
+	}
+})

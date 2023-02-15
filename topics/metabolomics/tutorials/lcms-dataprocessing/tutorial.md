@@ -34,8 +34,7 @@ Metabolomics analyses can be quite complex to conduct, especially when dealing w
 **Liquid-Chromatography Mass Spectrometry** (LC-MS) is one of the three main technologies used to perform this kind of approach. 
 Data analysis for this technology requires a large variety of steps, ranging from extracting information from the raw data to statistical analysis and annotation. 
 One of these steps is called "data processing". It takes place after the pre-processing step (extraction of the peak list from raw data) and before any statistical analysis.
-You can get an overview of a complete LC-MS untargeted metabolomic workflow by following the dedicated 
-training material [here](https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/lcms/tutorial.html).
+You can get an overview of a complete LC-MS untargeted metabolomic workflow by following [the dedicated training material]({% link topics/metabolomics/tutorials/lcms/tutorial.md %}).
 
 After the pre-processing step, what you have at your disposal is a list of ions (hereafter in the form of a "variableMetadata" file) and the corresponding intensities ("dataMatrix" file).
 What you may want now is to get some relevant information from your tables. However, your data may not be suitable yet for statistical analysis.
@@ -130,7 +129,7 @@ To perform the different exercices of this tutorial, you need to create a new hi
 > > <tip-title>Comment to W4M users</tip-title>
 > >
 > > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
-this step corresponds to the datasets number 1 to 3.
+> > this step corresponds to the datasets number 1 to 3.
 > {: .tip}
 >
 {: .hands_on}
@@ -179,7 +178,7 @@ We can then use this column to filter the dataset.
 >    > <tip-title>Comment to W4M users</tip-title>
 >    >
 >    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
-this step corresponds to the datasets number 4 to 6.
+>    > this step corresponds to the datasets number 4 to 6.
 >    {: .tip}
 >
 {: .hands_on}
@@ -196,8 +195,8 @@ By "filtering", it means removing from the dataset some variables (ions) and/or 
 > >
 > >  The sampleMetadata output is identical to the input one since no filter on samples has been applied.
 > >  The variableMetadata output contains less lines than the input one: some ions has been removed from the table.
-The same happened with the dataMatrix table, corresponding ions being removed from the file.
-Thus, these two files went from 201 lines (header included) to 172 lines, meaning only 171 ions remained in the dataset.
+> > The same happened with the dataMatrix table, corresponding ions being removed from the file.
+> > Thus, these two files went from 201 lines (header included) to 172 lines, meaning only 171 ions remained in the dataset.
 > >
 > {: .solution}
 >
@@ -249,7 +248,7 @@ The mean fold change ("fold") for each ion can be calculated using the **Intensi
 >    > <tip-title>Comment to W4M users</tip-title>
 >    >
 >    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
-this step corresponds to the datasets number 7 and 8.
+>    > this step corresponds to the datasets number 7 and 8.
 >    {: .tip}
 >
 {: .hands_on}
@@ -261,17 +260,17 @@ In our case, it generated a column named *fold_Other_VS_blank* that we will use 
 > <question-title></question-title>
 >
 > What does a value of "4" mean in the *fold_Other_VS_blank* column?
-Remember that we used as parameter *"Selected class"*=`blank` and
-*"Where should the class be placed for the mean fold change calculation?"*=`Denominator (Bottom)`.
+> Remember that we used as parameter *"Selected class"*=`blank` and
+> *"Where should the class be placed for the mean fold change calculation?"*=`Denominator (Bottom)`.
 >
 > > <solution-title></solution-title>
 > >
 > > Since *"Selected class"*=`blank`, the samples are devided in two groups: the blank samples on one hand
-and all the other samples on the other hand. 
-To calculate a mean fold change (*i.e.* a ratio of means) between the two classes, we need to define which mean will be used as numerator 
-and which one will be used as denominator. Since we defined that the selected class should be the denominator, the values we will get are 
-(mean of non-blank samples)/(mean of blank samples). 
-Thus, a value of "4" for a given ion means that the ion has a mean 4-times higher in non-blank samples compared to blank samples. 
+> > and all the other samples on the other hand. 
+> > To calculate a mean fold change (*i.e.* a ratio of means) between the two classes, we need to define which mean will be used as numerator 
+> > and which one will be used as denominator. Since we defined that the selected class should be the denominator, the values we will get are 
+> > (mean of non-blank samples)/(mean of blank samples). 
+> > Thus, a value of "4" for a given ion means that the ion has a mean 4-times higher in non-blank samples compared to blank samples. 
 > >
 > {: .solution}
 >
@@ -301,8 +300,7 @@ to be resulting from relevant compounds.
 >
 >    > <tip-title>Comment to W4M users</tip-title>
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
-this step corresponds to the datasets number 9 to 11.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history, this step corresponds to the datasets number 9 to 11.
 >    {: .tip}
 >
 {: .hands_on}
@@ -316,7 +314,7 @@ As for the previous use of **Generic Filter**, we now have a dataset filtered fr
 > > <solution-title></solution-title>
 > >
 > > From a dataset containing originally 200 ions, the two successive filters lead to a dataset containing only 131 ions.
-The number of samples did not change, so we still have 30 biological samples, 8 QC pools and 6 blanks. 
+> > The number of samples did not change, so we still have 30 biological samples, 8 QC pools and 6 blanks. 
 > >
 > {: .solution}
 >
@@ -345,8 +343,7 @@ Here, we will use a tool that is called **Quality Metrics** to have an overview 
 >
 >    > <tip-title>Comment to W4M users</tip-title>
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
-this step corresponds to the datasets number 12 to 15.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history, this step corresponds to the datasets number 12 to 15.
 >    {: .tip}
 >
 {: .hands_on}
@@ -385,13 +382,12 @@ Again, this can be done running the **Generic Filter** {% icon tool %} tool, usi
 >    > <comment-title></comment-title>
 >    >
 >    > The tabular outputs of the previous **Quality Metrics** job are not needed here.
-This is why what we use as input here are the outputs from the last **Generic Filter** job.
+>    > This is why what we use as input here are the outputs from the last **Generic Filter** job.
 >    {: .comment}
 >
 >    > <tip-title>Comment to W4M users</tip-title>
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
-this step corresponds to the datasets number 16 to 18.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history, this step corresponds to the datasets number 16 to 18.
 >    {: .tip}
 >
 {: .hands_on}
@@ -455,14 +451,12 @@ This can be done using the **Multivariate** {% icon tool %} tool.
 >
 >    > <comment-title></comment-title>
 >    >
->    > Changing the `0.8` value to `0.4` makes the text size of labels on the score plot smaller.
-Since the plot box size by default is tiny, this enhances the readability of the plot. 
+>    > Changing the `0.8` value to `0.4` makes the text size of labels on the score plot smaller. Since the plot box size by default is tiny, this enhances the readability of the plot. 
 >    {: .comment}
 >
 >    > <tip-title>Comment to W4M users</tip-title>
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
-this step corresponds to the datasets number 19 to 22.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history, this step corresponds to the datasets number 19 to 22.
 >    {: .tip}
 >
 {: .hands_on}
@@ -501,12 +495,12 @@ the analytical effects we want to correct, since biologically they are supposed 
 > ![An example plot with the normalisation formula](../../images/lcms_BC_theo.png "How this works")
 >
 > You can see a plot representing 6 sample measures (blue points) in a batch for a given extracted ion. 
-The yellow line represents a model for the signal drift that can be used to normalise the data.
-This line is determined using the pools only (red squares). 
-With the given formula, we can correct the signal drift. 
+> The yellow line represents a model for the signal drift that can be used to normalise the data.
+> This line is determined using the pools only (red squares). 
+> With the given formula, we can correct the signal drift. 
 >
 > This work has to be done for each batch. 
-Thus, if your sequence is divided into several batches, the idea is to obtain something similar to the following picture:
+> Thus, if your sequence is divided into several batches, the idea is to obtain something similar to the following picture:
 >
 > ![A before/after plot showing an example of intensities before correction, with clear signal drift and batch effects, and after correction, where the effects have been erased thanks to the correction process](../../images/lcms_BC_theo2.png "Before/after picture")
 >
@@ -532,13 +526,12 @@ We can then use the **Batch correction** {% icon tool %} tool to perform the cor
 >    > <comment-title></comment-title>
 >    >
 >    > The tabular outputs of the previous **Multivariate** job are not needed here.
-This is why what we use as input here are the outputs from the last **Generic Filter** job.
+>    > This is why what we use as input here are the outputs from the last **Generic Filter** job.
 >    {: .comment}
 >
 >    > <tip-title>Comment to W4M users</tip-title>
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
-this step corresponds to the datasets number 23 to 25.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history, this step corresponds to the datasets number 23 to 25.
 >    {: .tip}
 >
 {: .hands_on}
@@ -566,17 +559,17 @@ plus 3 additional pages at the end that display overall before/after indicators 
 > <question-title></question-title>
 >
 > Look at the penultimate page of the PDF output (page n°133).
-This page represents before/after PCA plots with various colouring.
-We will only focus on the two first lines, in particular looking at the first column.
-The two corresponding plots represent PCA score plots before (first line) and after (second line) the correction process.
-The two plots are coloured according to the batch information (B1 and B2).
-What can you say about the batch effect after the correction process compared to before?
+> This page represents before/after PCA plots with various colouring.
+> We will only focus on the two first lines, in particular looking at the first column.
+> The two corresponding plots represent PCA score plots before (first line) and after (second line) the correction process.
+> The two plots are coloured according to the batch information (B1 and B2).
+> What can you say about the batch effect after the correction process compared to before?
 >
 > > <solution-title></solution-title>
 > >
 > > Compared to the batch effect that was highlighted as the main effect in the data before the correction process,
-we can see that after correction, the batch effect is no longer explaining the first PCA component.
-This result is awaited since the reduction of the batch effect is one of the aim of the Batch correction step.  
+> > we can see that after correction, the batch effect is no longer explaining the first PCA component.
+> > This result is awaited since the reduction of the batch effect is one of the aim of the Batch correction step.  
 > >
 > {: .solution}
 >
@@ -636,15 +629,14 @@ Thus, for these two indicators the tool can be run without specific parameters t
 >    > <comment-title></comment-title>
 >    >
 >    > You may have noticed that we already used this tool previously in the tutorial.
-Although CV columns were already available at that time, here you need to use this tool again since this time indicators will be computed on intensities
-corrected from the signal drifts and batch effects. 
-Note that what we are going to use this time is the tabular output, but while you are at it you can always check the pdf file if you want.
+>    > Although CV columns were already available at that time, here you need to use this tool again since this time indicators will be computed on intensities
+>    > corrected from the signal drifts and batch effects. 
+>    > Note that what we are going to use this time is the tabular output, but while you are at it you can always check the pdf file if you want.
 >    {: .comment}
 >
 >    > <tip-title>Comment to W4M users</tip-title>
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
-this step corresponds to the datasets number 26 to 29.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history, this step corresponds to the datasets number 26 to 29.
 >    {: .tip}
 >
 {: .hands_on}
@@ -684,7 +676,7 @@ This means that we will need to set two distinct thresholds, and to add two nume
 >    > <comment-title></comment-title>
 >    >
 >    > Here, we took the opportunity of this filter to remove the pools from the dataset. 
-Indeed, pools will be no longer used in this tutorial's steps, so we can remove them from the dataset. 
+>    > Indeed, pools will be no longer used in this tutorial's steps, so we can remove them from the dataset. 
 >    {: .comment}
 >
 >
@@ -695,8 +687,7 @@ Indeed, pools will be no longer used in this tutorial's steps, so we can remove 
 >
 >    > <tip-title>Comment to W4M users</tip-title>
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
-this step corresponds to the datasets number 30 to 32.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history, this step corresponds to the datasets number 30 to 32.
 >    {: .tip}
 >
 {: .hands_on}
@@ -710,12 +701,12 @@ this step corresponds to the datasets number 30 to 32.
 > > <solution-title></solution-title>
 > >
 > > 1. The *0.3* value corresponds to the maximum value kept in the dataset ('Interval of values to remove: *upper*') regarding the
-*pool_CV* column in your *Variable metadata* file. 
-Thus, ions with pool CV values superior to 0.3 are excluded from the dataset.
-To note, pool CV values are commonly considered as reflecting unstable ions when superior to 0.3.
+> >    *pool_CV* column in your *Variable metadata* file. 
+> >    Thus, ions with pool CV values superior to 0.3 are excluded from the dataset.
+> >    To note, pool CV values are commonly considered as reflecting unstable ions when superior to 0.3.
 > > 2. The *1.0* value corresponds to the maximum value kept in the dataset ('Interval of values to remove: *upper*') regarding the
-*poolCV_over_sampleCV* column in your *Variable metadata* file. This means that any ion with a pool CV / sample CV ratio above 1
-(*i.e.* a pool CV greater than the sample CV) is discarded from the dataset.
+> >    *poolCV_over_sampleCV* column in your *Variable metadata* file. This means that any ion with a pool CV / sample CV ratio above 1
+> >    (*i.e.* a pool CV greater than the sample CV) is discarded from the dataset.
 > > 3. Filtering led to 102 ions and 30 samples.
 > >
 > {: .solution}
@@ -780,8 +771,7 @@ Let's try to colour the PCA score plots according to that variable. For this, we
 >
 >    > <tip-title>Comment to W4M users</tip-title>
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
-this step corresponds to the datasets number 33 to 36.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history, this step corresponds to the datasets number 33 to 36.
 >    {: .tip}
 >
 {: .hands_on}
@@ -840,8 +830,7 @@ In our example, what we are interested in is a normalisation based on the *Osmo*
 >
 >    > <tip-title>Comment to W4M users</tip-title>
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
-this step corresponds to the datasets number 37 and 38.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history, this step corresponds to the datasets number 37 and 38.
 >    {: .tip}
 >
 {: .hands_on}
@@ -875,8 +864,7 @@ Thus, we can compute a similar PCA using the normalised intensities and see whet
 >
 >    > <tip-title>Comment to W4M users</tip-title>
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
-this step corresponds to the datasets number 39 to 42.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history, this step corresponds to the datasets number 39 to 42.
 >    {: .tip}
 >
 {: .hands_on}
@@ -906,14 +894,12 @@ Let's see how theses groups are projected on the final PCA we have.
 >
 >    > <comment-title></comment-title>
 >    >
->    > To run this exercice, you can choose to re-run the previous one and simply change the *"Sample colors"* parameter
-from `Osmo` to`Group`.
+>    > To run this exercice, you can choose to re-run the previous one and simply change the *"Sample colors"* parameter from `Osmo` to`Group`.
 >    {: .comment}
 >
 >    > <tip-title>Comment to W4M users</tip-title>
 >    >
->    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history,
-this step corresponds to the datasets number 43 to 46.
+>    > In the [GTN_LCMSprocessing](https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmsdataprocessing) history, this step corresponds to the datasets number 43 to 46.
 >    {: .tip}
 >
 {: .hands_on}
@@ -926,11 +912,11 @@ this step corresponds to the datasets number 43 to 46.
 > > <solution-title></solution-title>
 > >
 > > We can see that the groups that seemed to be shown on the first PCA component match perfectly the biological categories available in the *Group*
-column of the sampleMetadata file. 
-We could say that the normalisation process enabled to highlight a distinct effect of the biological groups. 
-Note that it is possible that this effect would be already noticeable without the normalisation process,
-however the perfect separation on the first component after normalisation is promising to be able to extract 
-clear information about the source of this separation. 
+> > column of the sampleMetadata file. 
+> > We could say that the normalisation process enabled to highlight a distinct effect of the biological groups. 
+> > Note that it is possible that this effect would be already noticeable without the normalisation process,
+> > however the perfect separation on the first component after normalisation is promising to be able to extract 
+> > clear information about the source of this separation. 
 > >
 > {: .solution}
 >

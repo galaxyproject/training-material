@@ -154,7 +154,7 @@ Enter `q` to exit the view results page, and space to see the next results page.
 
 ### Table “galaxy_user”
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 >    ```sql
 >        select * from galaxy_user;
@@ -163,7 +163,7 @@ Enter `q` to exit the view results page, and space to see the next results page.
 
 As described in Björn’s introduction, an Admin user is already pre-set (email: ‘admin@galaxy.org’, password: ‘admin’). Now let’s add (i.e. register) a new user via the Galaxy website. And check the database:
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 >    ```sql
 >        select * from galaxy_user;
@@ -172,7 +172,7 @@ As described in Björn’s introduction, an Admin user is already pre-set (email
 
 ### Table “job”
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 >    ```sql
 >        select * from job;
@@ -181,7 +181,7 @@ As described in Björn’s introduction, an Admin user is already pre-set (email
 
 Run a few jobs on the galaxy website (e.g _upload file_ a simple table and _add column_ with ‘Iterate’ no and yes) and check the database again:
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 >    ```sql
 >        select * from job \x\g\x
@@ -190,7 +190,7 @@ Run a few jobs on the galaxy website (e.g _upload file_ a simple table and _add 
 
 ### Table “job_parameter”
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 >   ```sql
 >       select * from job_parameter;
@@ -200,7 +200,7 @@ Run a few jobs on the galaxy website (e.g _upload file_ a simple table and _add 
 
 ### Table “history”
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 >   ```sql
 >       select * from history;
@@ -212,7 +212,7 @@ Give your current history a name and check the database again.
 
 ### Table “dataset”
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 >   ```sql
 >       select * from dataset;
@@ -221,7 +221,7 @@ Give your current history a name and check the database again.
 
 ### Table “history_dataset_association”
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 >   ```sql
 >       select * from history_dataset_association;
@@ -241,7 +241,7 @@ Depending on your local needs, some queries are missing, like:
 
 You can add the numbers per month from the reports, or:
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >   ```sql
 >       select j.id, j.create_time from job j limit 5;
 >   ```

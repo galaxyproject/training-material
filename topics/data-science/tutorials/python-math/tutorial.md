@@ -27,6 +27,7 @@ contributors:
 priority: 1
 notebook:
   language: python
+  pyolite: true
 ---
 
 Here we'll learn some of the fundamentals of python and how to do basic maths in Python.
@@ -206,7 +207,7 @@ math.sqrt(9)
 
 > <solution-title>Tip: Why `math.`?</solution-title>
 > When we import a module like `import math`, we need to use that as a prefix. Imagine we had two different modules, `math` and `other_math`, and both have a `sqrt` function. How would Python know which `sqrt` function we wanted? So we use `math.sqrt` to be explicit about which function we need.
-{: .tip}
+{: .solution}
 
 You might also have done powers (e.g. 2 cubed, or $$2^3$$) in the past, too:
 

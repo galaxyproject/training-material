@@ -174,7 +174,7 @@ Now that we have our name tags in place, let's see them in action!
 > <hands-on-title>Some analysis steps</hands-on-title>
 > 1. **Select first** {% icon tool %} lines from a dataset (head)
 >      - {% icon param-files %} *"File to select"*: Select everything starting with `GSM`
-> 2. Click **Execute**
+> 2. Click **Run Tool**
 {: .hands_on}
 
 We can already see the benefits of name tags. Even though our outputs are named things like "Select first on data 8", they're also visibly tagged with the name of the original input.
@@ -189,7 +189,7 @@ Next we'll join two of these datasets together, to see the tagging behaviour on 
 > 1. **Join two datasets** {% icon tool %} side by side on a specified field
 >      - {% icon param-file %} *"Join"*: Click the select box and type "461181" to filter the list and use the "Select first on data ..." file
 >      - {% icon param-file %} *"With"*: Click the select box and type "461182" to filter the list and use the "Select first on data ..." file
-> 2. Click **Execute**
+> 2. Click **Run Tool**
 {: .hands_on}
 
 The output will include all of the name tags from all of the inputs:

@@ -122,7 +122,9 @@ The main goal of the **Infinium Human Methylation BeadChip** analysis is to simp
 > <comment-title>Phenotype table</comment-title>
 > Phenotype table can be in different sizes with different arguments, however the second column is required to contain phenotype covariate information for each sample.
 {: .comment}
+
 However, for the purpose of this tutorial we would like you to upload phenotype table from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) repository.
+
 > <hands-on-title>Import `phenotypeTable.txt` from [Zenodo](https://zenodo.org/record/1251211#.WwREQ1Mvz-Y) or data library:</hands-on-title>
 >    ```
 >    https://zenodo.org/record/1251211/files/phenotypeTable.txt
@@ -139,7 +141,7 @@ However, for the purpose of this tutorial we would like you to upload phenotype 
 > Default value 0 for permutation method apply selection of randomized cases with replacement from the original data while using 'bootstrap' method.
 >    - *"nullMethod"*:`permutation`
 > Method used to generate null candidate regions, must be one of ‘bootstrap’ or
-‘permutation’ (defaults to ‘permutation’).
+> ‘permutation’ (defaults to ‘permutation’).
 >    - *"Phenotype Type"*:`categorical`
 > Identify regions where methylation is associated with a continuous or categorical phenotype.
 >

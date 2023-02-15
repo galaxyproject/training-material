@@ -53,7 +53,7 @@ layout: base
            {{ page.description }}
 
 
-           {{ content | regex_replace: '<hr.*—<\/p>', '' }}
+           {{ content | fix_box_titles:page.lang,page.path | regex_replace: '<hr.*—<\/p>', '' }}
 
         </div>
         <div class="col-md-4">

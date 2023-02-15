@@ -21,11 +21,6 @@ footer: no
                 {% assign associated_slides = true %}
             {% endif %}
         {% endif %}
-        {% if material.type == "introduction" %}
-            {% assign intro_link = true %}
-            {% assign intro_target = material.tutorial_name | append: '.html' %}
-
-        {% endif %}
     {% endif %}
 {% endfor %}
 
@@ -46,10 +41,6 @@ footer: no
   };
 </script>
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-
-<script type="application/ld+json">
-    {% include _includes/material.jsonld material=page topic=topic site=site %}
-</script>
 
 <section class="tutorial topic-{{ page.topic_name }}">
     <h1 data-toc-skip>{{ page.title }}</h1>
@@ -108,7 +99,7 @@ footer: no
             {% assign tuto_has_zenodo = true %}
         {% endif %}
 
-        {% if associated_slides or intro_link or tuto_has_zenodo or own_material.workflows or own_material.tours or tuto_has_docker or material.notebook %}
+        {% if associated_slides or intro_link or tuto_has_zenodo or own_material.workflows or own_material.tours or tuto_has_docker or own_material.notebook %}
         <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> {{ locale['supporting-materials'] | default: "Supporting Materials" }}:</strong></div>
         <ul class="supporting_material">
             {% if associated_slides %}
@@ -133,8 +124,8 @@ footer: no
                 <li class="btn btn-default supporting_material">{% include _includes/resource-tours.html material=own_material topic=topic.name label=true %}</li>
             {% endif %}
 
-            {% if material.notebook %}
-                <li class="btn btn-default supporting_material">{% include _includes/resource-notebooks.html material=material topic=topic.name label=true %}</li>
+            {% if own_material.notebook %}
+                <li class="btn btn-default supporting_material">{% include _includes/resource-notebooks.html material=own_material topic=topic.name label=true %}</li>
             {% endif %}
 
             {% assign faqpage = page.dir | append: 'faqs/index.md' | remove_first: '/' %}
@@ -171,15 +162,15 @@ footer: no
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
-                 {% if page.notebook %}
+                 {% if own_material.notebook %}
                      {% capture ipynbpath %}{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", "" }}{{ page.topic_name }}-{{ own_material.tutorial_name }}.ipynb{% endcapture %}
                      {% capture ipynbpathnosoln %}{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", "" }}{{ page.topic_name }}-{{ own_material.tutorial_name }}-course.ipynb{% endcapture %}
                      {% capture ipynbpathsimple %}{{ page.topic_name }}-{{ own_material.tutorial_name }}.ipynb{% endcapture %}
                      {% capture ipynbpathsimplenosoln %}{{ page.topic_name }}-{{ own_material.tutorial_name }}-course.ipynb{% endcapture %}
-                    {% if page.notebook.snippet %}
-                        {% assign pagesnippet = page.notebook.snippet %}
+                    {% if own_material.notebook.snippet %}
+                        {% assign pagesnippet = own_material.notebook.snippet %}
                         {% snippet pagesnippet %}
-                    {% elsif page.notebook.language ==  "r" %}
+                    {% elsif own_material.notebook.language ==  "r" %}
                         <blockquote class="comment">
                             <div class="box-title" aria-label="comment box">{{locale['best-in-rstudio'] | default: "Best viewed in RStudio" }}</div>
                             <p>
@@ -293,7 +284,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                 {% endif %}
 
 
-                {% if material.cited %}
+                {% if page.cited %}
                 <h1 id="bibliography">{{locale['references']| default: "References" }}</h1>
                 {% bibliography --cited %}
                 {% endif %}
@@ -379,19 +370,21 @@ day = "{{ page.last_modified_at | date: "%d" }}"
 url = "{% raw %}\url{{% endraw %}{{ site.url }}{{ site.baseurl }}{{page.url}}{% raw %}}{% endraw %}",
 note = "[Online; accessed TODAY]"
 }
-@article{Batut_2018,
-    doi = {10.1016/j.cels.2018.05.012},
-    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-    year = 2018,
-    month = {jun},
-    publisher = {Elsevier {BV}},
-    volume = {6},
-    number = {6},
-    pages = {752--758.e1},
-    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-    title = {Community-Driven Data Analysis Training for Biology},
-    journal = {Cell Systems}
-}</code>
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
                    </pre></div></div>
                    </p>
                 </blockquote>
@@ -418,15 +411,11 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                     <ol>
                     {% for material in topic_material %}
                         {% if material.enable != "false" or jekyll.environment != "production" %}
-                            {% if material.type == "introduction" %}
-                    <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">{{ material.title }}</a></li>
-                            {% elsif material.type == "tutorial" %}
                                 {% if material.hands_on %}
                     <li><a href="{{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.tutorial_name }}/tutorial.html">{{ material.title }}</a></li>
                                 {% elsif material.slides %}
                     <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/slides.html">{{ material.title }}</a></li>
                                 {% endif %}
-                            {% endif %}
                         {% endif %}
                     {% endfor %}
                     </ol>

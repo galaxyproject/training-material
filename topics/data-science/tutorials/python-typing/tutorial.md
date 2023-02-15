@@ -34,6 +34,7 @@ contributions:
 priority: 10
 notebook:
   language: python
+  pyolite: true
 ---
 
 In some languages type annotations are a core part of the language and types are checked at compile time, to ensure your code can never use the incorrect type of object. Python, and a few other dynamic languages, instead use ["Duck Typing"](https://en.wikipedia.org/wiki/Duck_typing) wherein the type of the object is less important than whether or not the correct methods or attributes are available.

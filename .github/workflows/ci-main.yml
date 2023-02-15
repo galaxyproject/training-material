@@ -61,8 +61,9 @@ jobs:
           make check-contributors ACTIVATE_ENV=pwd
           python bin/mergeyaml.py --nondocker > /dev/null
 
-      - name: Check Citations
+      - name: Check Tutorial Formatting
         run: |
-          bundle exec ruby bin/lint.rb | reviewdog -filter-mode=file -reporter=github-pr-review -f=rdjsonl -fail-on-error
+          find topics/ -name tutorial.md | xargs -n 1 python bin/check-broken-boxes.py | reviewdog -efm="%f:%l: %m" -filter-mode=file -reporter=github-pr-review
+          bundle exec ruby bin/lint.rb --format rdjson | reviewdog -filter-mode=file -reporter=github-pr-review -f=rdjsonl -fail-on-error
         env:
             REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}

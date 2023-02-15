@@ -165,8 +165,8 @@ The alignment process consists of two steps:
 > <hands-on-title>Align reads to reference genome</hands-on-title>
 >
 > The alignment process consists of choosing an appropriate reference genome to map our reads against and then deciding on an
-aligner. We will use the BWA-MEM algorithm, which is the latest and is generally recommended for high-quality queries as it
-is faster and more accurate.
+> aligner. We will use the BWA-MEM algorithm, which is the latest and is generally recommended for high-quality queries as it
+> is faster and more accurate.
 >
 > An example of what a `bwa` command looks like is below. This command will not run, as we do not have the files `ref_genome.fa`, `input_file_R1.fastq`, or `input_file_R2.fastq`.
 >
@@ -189,7 +189,7 @@ is faster and more accurate.
 > > $ bwa mem data/ref_genome/ecoli_rel606.fasta data/trimmed_fastq_small/SRR2584866_1.trim.sub.fastq data/trimmed_fastq_small/SRR2584866_2.trim.sub.fastq > results/sam/SRR2584866.aligned.sam
 > > ```
 > {: .code-in}
-> >
+>
 > > <code-out-title></code-out-title>
 > > ```
 > > [M::bwa_idx_load_from_disk] read 0 ALT contigs
@@ -308,9 +308,9 @@ Image from ["Data Wrangling and Processing for Genomics"](https://datacarpentry.
 > <hands-on-title>Step 1: Calculate the read coverage of positions in the genome</hands-on-title>
 >
 > Do the first pass on variant calling by counting read coverage with
-[bcftools](https://samtools.github.io/bcftools/bcftools.html). We will
-use the command `mpileup`. The flag `-O b` tells bcftools to generate a
-bcf format output file, `-o` specifies where to write the output file, and `-f` flags the path to the reference genome:
+> [bcftools](https://samtools.github.io/bcftools/bcftools.html). We will
+> use the command `mpileup`. The flag `-O b` tells bcftools to generate a
+> bcf format output file, `-o` specifies where to write the output file, and `-f` flags the path to the reference genome:
 > > <code-in-title>`mpileup` command</code-in-title>
 > > ```bash
 > > $ bcftools mpileup -O b -o results/bcf/SRR2584866_raw.bcf -f data/ref_genome/ecoli_rel606.fasta results/bam/SRR2584866.aligned.sorted.bam

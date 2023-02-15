@@ -442,7 +442,7 @@ the dedicated [Mapping tutorial]({% link topics/sequence-analysis/tutorials/mapp
 >    > multisample analysis. Choose descriptive, but short and easy to
 >    > remember sample names since you will have to type them in again!
 >    >
->    {: .comment}
+>    {: .warning}
 >
 > 2. **Map with BWA-MEM** {% icon tool %} to map the reads from the **mother** sample to the reference genome **using the same parameters as before** except
 >

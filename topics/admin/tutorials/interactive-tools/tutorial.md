@@ -337,8 +337,8 @@ As explained in the previous section, we will proxy the Interactive Tools Proxy 
 >        server_name  *.interactivetool.{{ inventory_hostname }};
 >
 >        # Our log files will go here.
->        access_log  /var/log/nginx/galaxy-gie-proxy-access.log;
->        error_log   /var/log/nginx/galaxy-gie-proxy-error.log;
+>        access_log  syslog:server=unix:/dev/log;
+>        error_log   syslog:server=unix:/dev/log;
 >
 >        # Proxy all requests to the GIE Proxy application
 >        location / {
