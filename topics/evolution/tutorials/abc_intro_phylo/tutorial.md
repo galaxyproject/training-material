@@ -107,12 +107,12 @@ There are many ways in which we can use phylogenetic analyses: from the most fun
 **needs a reference**
 
 all birds
-![AllBirds](./images/nature11631-f2.jpg){:width="400"}
+![AllBirds](./images/nature11631-f2.jpg){:align="center" :width="400"}
 (from from Jetz *et al.* 2012, Nature (491):444–448)
 
 and much bigger projects across all of life:
 
-![UnderstandinEvolTree](./images/nmicrobiol201648-f1.jpg){:width="500"}
+![UnderstandinEvolTree](./images/nmicrobiol201648-f1.jpg){:align="center" :width="500"}
 
 (from Understanding Evolution. 2019. University of California Museum of Paleontology. 4th November 2019; http://evolution.berkeley.edu)
 
@@ -147,13 +147,17 @@ It is not generally possible to prove that any tree inferred is *correct* -- sin
 One obvious consequence of this is that different estimates of the phylogenetic tree relating a given set of species may differ, even if no errors were made.  
 Finding an optimal tree is *hard*!
 
+All we start with is something like this:
+
+[!We Just Have The Leaf Data](./images/WeJustHaveLeaves.png){:align="center"}
+
 So, how do we do it?
 
 There are several ways to estimate a tree, such as:
 
 1. Go with what we think is the case already (this is not recommended!)
-2. Attempt to build a tree based on similarity and dissimilarity, with such tools as Neighbor-Joining (NJ) or FastME;
-3. Choose some kind of score function, such as Parsimony or Maximum Likelihood, to potential trees and find the best one;
+2. Attempt to build a tree based on similarity and dissimilarity, with such tools as Neighbor-Joining (NJ) or FastME (we will do this first thing after getting the alignment!)
+3. Choose some kind of score function, such as Parsimony or Maximum Likelihood, to potential trees and find the best one (we will do this second!)
 4. Something else entirely (networks? inference based on their parasites?).
 
 
@@ -170,7 +174,7 @@ This assumption means that the future evolutionary trajectory of an organism is 
 > 3. The *Molecular clock* assumption: sequences in a clade evolve at about the same rate as each other (this is easily tested). This is of those models that are known to be wrong, but which are useful. For instance, there is commonly variation in evolutionary rate between lineages, but if this variation is not significant, we can ignore it and use simpler models, to better leverage the phylogenetic information there is in the data.
 > 4. Lineages don’t interact – once they have speciated, they are independent of each other.  Again, this isn't always the case, but the vast majority of methods assume this, particularly if the evolution is also assumed to be tree-like. We also know that biological lineages *do* interact with each other -- but our methods are not able to manage such complexity in general.
 >
-> We will mostly make all these assumptions in this tutorial!
+> We will (mostly) make *all* these assumptions in this tutorial!
 > 
 > 
 {: .comment}
@@ -179,7 +183,9 @@ This assumption means that the future evolutionary trajectory of an organism is 
 
 We need to define some terms, which may be new to you.
 
-### need a picture of a tree in here
+![Anatomy of a Tree](./images/TreeAnatomy.png){:align="center"}
+
+**how to get a figure label on this? Call it Fig 1. Tree Anatomy**
 
 Mathematically a *Tree* is a kind of *graph*, which has objects called *nodes* or *vertices*, connected in pairs by things called *edges*.  
 Trees are a natural way to think about phylogenetic relationships, where the nodes correspond to *taxa*, and the edges, also called *branches*, show the relationships between them. 
@@ -193,10 +199,14 @@ Many phylogenies have a special node assigned as the common ancestor of all the 
 If that's the case then there is a natural direction implied from the root to the tips, going forward in time.
 Such trees and phylogenies are called *rooted*; if there is no such root then they are called *unrooted*. 
 
-In a rooted phylogeny, all the leaves that are descendant from any given node form a *monophyletic clade*. 
-(Monophyletic means "one tribe origin" from the Greek.)
+In a rooted phylogeny, all the leaves that are descendant from any given node form a *monophyletic clade* (or often just "*clade*"). 
+(Monophyletic means "one tribe (of) origin" from the Greek.)
 
 Phylogeny estimation can be thought of as inferring a collection of compatible hypotheses about monophyly -- that is, statements that groups of taxa descendant from a common ancestor are each others' closest relatives in the tree.
+
+The tree above is called a *binary* tree, because each internal node branches into *two* descendants.
+It is a very common assumption that our trees will be binary, and we will make that assumption here.  In fact it is often very hard to come to a means by which a phylogeny could be truly *non*-binary: in most cases this is just due to our inability to resolve the tree completely.
+In this tutorial we will only be considering trees that are binary.
 
 ## Building a Tree
 
@@ -206,10 +216,50 @@ Distances have very desirable properties, that can be summarised as follows, for
  * *symmetry* -- the distance from $$x$$ to $$y$$ is the same as the distance from $$y$$ to $$x$$; that is, $$d(x,y) = d(y,x)$$.
  * the *triangle inequality* -- there are no short-cuts!  The distance from $$x$$ to $$z$$ is always *at most* the distance from $$x$$ to $$y$$ plus that from $$y$$ to $$y$$; that is, $$ d(x,y) + d(y,z) \leq d(x,z)$$.
 
- In phylogenetics terms we like distances to represent something like time, and we can assign lengths to branches.
+ In phylogenetics terms we like distances to represent something like time, and we can assign lengths to branches (see "Tree Anatomy" diagram above).
 
+<break>
+
+Here is a flow-chart of the process:
+
+![Tree Construction](.images/TreeConstruction.png){:align="center"}
 
 ## Challenges
+
+Phylogenetic Inference is **Hard**.
+One of the many challenges that make it hard is the sheer number of possible trees that can describe relationships among species.
+
+The number of rooted binary trees grows as 1, 3, 15, 105, 945, 10395... in fact the formula for this number is $$(2n-3)!! = (2n-3)(2n-5)...(3)(1),$$ which grows as fast as $$2^{n}n!$$.
+
+### The Number of Rooted Binary Trees
+
+> | Sample       | Cluster_id | DR profile | Clustering  |
+> |--------------|------------|------------|-------------|
+> | ERR5987352   | 10         | Pre-MDR    | Clustered   |
+> | ERR6362484   | 10         | Pre-MDR    | Clustered   |
+> | ERR6362138   | 12         | MDR        | Clustered   |
+> | ERR6362156   | 12         | Pre-XDR    | Clustered   |
+> | ERR6362253   | 12         | MDR        | Clustered   |
+
+> | testing | 231 |
+> |---|:--|
+> | thing1 | thing2 |
+> | iuh | pouihpoiuhpoiubnpiubn |
+
+> | $n$          | # trees    | notes       |
+> |--------------|------------|-------------|
+> | 3    | 3       | trivial to check |
+> | 4    | 15       | enumerable by hand |
+> | 5    | 105       | enumerable by hand on a rainy day |
+> | 6    | 945       | enumerable by hand during lockdown |
+> | 7    | 10395       | easily searched by computer |
+> | 8    | 135135       | a bit more than the number of hairs on your head |
+> | 9    | 2027025       | population of Sydney living west of Paramatta |
+> | 10   | 34459425                      | comparable with the number of possible tickets in a typical lottery |
+> | 20   | $\approx 8.2\times 10^{21}$       | getting slow for computers even with branch-and-bound |
+> | 48  | $\approx 3.21\times 10^{70}$       | number of particles in the universe-ish |
+> | 136  | $\approx 2.11\times 10^{267}$       | number of trees to choose from in the first "Out of Africa" data set |
+> |---|---|---|
 
 
 > <comment-title>This is a comment section</comment-title>
