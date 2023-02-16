@@ -218,11 +218,9 @@ Distances have very desirable properties, that can be summarised as follows, for
 
  In phylogenetics terms we like distances to represent something like time, and we can assign lengths to branches (see "Tree Anatomy" diagram above).
 
-<break>
-
 Here is a flow-chart of the process:
 
-![Tree Construction](./images/TreeConstruction.png){:align="center"}
+![Tree Construction](./images/WeJustHaveLeaves.png){:align="center"}
 
 ## Challenges
 
@@ -233,20 +231,7 @@ The number of rooted binary trees grows as 1, 3, 15, 105, 945, 10395... in fact 
 
 ### The Number of Rooted Binary Trees
 
-> | Sample       | Cluster_id | DR profile | Clustering  |
-> |--------------|------------|------------|-------------|
-> | ERR5987352   | 10         | Pre-MDR    | Clustered   |
-> | ERR6362484   | 10         | Pre-MDR    | Clustered   |
-> | ERR6362138   | 12         | MDR        | Clustered   |
-> | ERR6362156   | 12         | Pre-XDR    | Clustered   |
-> | ERR6362253   | 12         | MDR        | Clustered   |
-
-> | testing | 231 |
-> |---|:--|
-> | thing1 | thing2 |
-> | iuh | pouihpoiuhpoiubnpiubn |
-
-> | $n$          | # trees    | notes       |
+> | *n*          | # trees    | notes       |
 > |--------------|------------|-------------|
 > | 3    | 3       | trivial to check |
 > | 4    | 15       | enumerable by hand |
@@ -256,9 +241,9 @@ The number of rooted binary trees grows as 1, 3, 15, 105, 945, 10395... in fact 
 > | 8    | 135135       | a bit more than the number of hairs on your head |
 > | 9    | 2027025       | population of Sydney living west of Paramatta |
 > | 10   | 34459425                      | comparable with the number of possible tickets in a typical lottery |
-> | 20   | $\approx 8.2\times 10^{21}$       | getting slow for computers even with branch-and-bound |
-> | 48  | $\approx 3.21\times 10^{70}$       | number of particles in the universe-ish |
-> | 136  | $\approx 2.11\times 10^{267}$       | number of trees to choose from in the first "Out of Africa" data set |
+> | 20   | $$\approx 8.2\times 10^{21}$$       | getting slow for computers even with branch-and-bound |
+> | 48  | $$\approx 3.21\times 10^{70}$$       | number of particles in the universe-ish |
+> | 136  | $$\approx 2.11\times 10^{267}$$       | number of trees to choose from in the first "Out of Africa" data set |
 > |---|---|---|
 
 
@@ -281,6 +266,7 @@ This workshop will use some recent SARS-CoV-2 nucleotide sequence data, from NCB
 The SARS-CoV-2 virus has caused the largest pandemic in modern history (in absolute terms of population affected, in all history) and understanding its evolution is key to managing it.
 
 ![SARS-CoV-2](./images/SARS-CoV-2-www.ncbi.nlm.nih.png){:width="500"}
+
 *Source: /www.ncbi.nlm.nih.gov; CC BY-SA • Alexey Solodovnikov*
 
 The sequences we have chosen for this workshop are complete SARS-CoV2 sequences, publicly available from nextStrain (http).
@@ -288,6 +274,7 @@ We are using a relatively small set of sequences because phylogenetic estimation
 
 
 ## Get the data
+
 > <hands-on-title>Obtain your data</hands-on-title>
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
@@ -295,14 +282,22 @@ We are using a relatively small set of sequences because phylogenetic estimation
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
 > 2. Import the following files from [Zenodo](https://tinyurl.com/phylo-trees-1-data) or from the shared data library
->     Note: Current link is to google drive. Update to Zenodo for final release.
+>     Note: Current link is to google drive. Update to Zenodo for final release.  For testing use https://drive.google.com/file/d/1j96miOPD41no5S8BSqRNG1Ru_-p7w1gg/view?usp=share_link; upload to galaxy from computer.
 >
 >    ```
 >    exon7-unaligned.fst
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+>  
+> You can click on the `eye' icon on the right to see the unaligned data (go ahead!) but the view isn't very helpful.  This is just the raw FASTA file, with lower case symbols a, c, g, t for the nucleotides.  You can see that the sequences are of different lengths though, since the last lines of each sequence are of different lengths.
 >
+> Now let's view the unaligned sequence in a more understandable form.  Click on the green data on its name; the green bar will open up and show you more options, including the little "Visualise" one.  Click that and then select the Mulitple Sequence Alignment tool.
+> You should see something like this:
+>
+> ![Unaligned Sequences](./images/UnalignedSequences.png){:width="400"}
+> 
+> Play around with the view: you can change colour schemes and add or remove various elements.  If you cannot see the slider at the top (for moving left or right in the view) you will need to check the "Show residues indices" in the "Vis. elements" drop-down menu.
 {: .hands_on}
 
 This is a file in **FASTA** format, which has a very simple structure, as follows:
@@ -313,7 +308,14 @@ GAGCTATACGACGT
 >SEQUENCE_2
 TTACTAGCTACTACT
 ```
+
 The above toy file has two sequences in it named SEQUENCE_1 and SEQUENCE_2, each with a short set of characters which we can assume are DNA.
+
+> <question-title>Understanding the FASTA file</question-title>
+> 1. How many sequences are there?
+> 2. How long is the longest sequence, and what is it?
+> 3. What about the shortest sequence? 
+{: .question}
 
 FASTA format is very simple and is commonly used as input to phylogenetic inference programs.
 
@@ -344,14 +346,15 @@ Today you will be aligning sequences using a modern multiple alignment program c
 > <hands-on-title>Sequence alignment with MAFFT</hands-on-title>
 >
 > 1. in Galaxy, search for and select the MAFFT tool from the tool finder on the left.
-> 2. View alignment
+> 2. When you select it, the "Sequences to align" field should already be filled with your data.  If it isn't, select it using the drop-down menu.
 >
 {: .hands_on}
 
-Here is an embedded image
+Here is an embedded image of the resulting alignment:
 
 ![Alignment](./images/MEGA_alignment.png){:width="500"}
 
+## Need to get image of alignment in
 
 # Distance-based phylogenetic inference
 
