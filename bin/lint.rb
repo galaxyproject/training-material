@@ -821,15 +821,29 @@ module GtnLinter
 
       bib = BibTeX.open(path)
       results = fix_bib(contents, bib)
+
+      results = filter_results(results, ignores)
       emit_results(results)
     elsif path.match(/.ga$/)
       handle = File.open(path, 'r')
       begin
         contents = handle.read
         data = JSON.parse(contents)
+        results = []
+
+        # Check if there's a missing workflow test
+        test_name_yml = path.gsub(/.ga$/, '-test.yml')
+        test_name_yaml = path.gsub(/.ga$/, '-test.yml')
+        if not File.exists?(test_name_yml) and not File.exists?(test_name_yaml)
+          results += [
+            ReviewDogEmitter.file_error(path: path, message: "This workflow is missing a test, which is now mandatory. Please see [the FAQ on how to add tests to your workflows](https://training.galaxyproject.org/training-material/faqs/gtn/gtn_workflow_testing.html).", code: "GTN:027")
+          ]
+        end
+
+        # Check if they use TS tools, we do this here because it's easier to look at the plain text.
         contents.split("\n").each.with_index{|text, linenumber|
           if text.match(/testtoolshed/)
-            emit_results([
+            results += [
               ReviewDogEmitter.error(
                 path: @path,
                 idx: linenumber,
