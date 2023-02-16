@@ -783,6 +783,23 @@ module GtnLinter
     contents.select{|x| x.match(/GTN:IGNORE:(\d\d\d)/)}.map{|x| "GTN:" + x.match(/GTN:IGNORE:(\d\d\d)/)[1] }.uniq
   end
 
+  def self.filter_results(results, ignores)
+    if ! results.nil?
+      # Remove any empty lists
+      results = results.select{|x| !x.nil? && x.length > 0 }.flatten
+      # Before ignoring anything matching GTN:IGNORE:###
+      if ignores.nil?
+        return results
+      end
+
+      if results.length > 0
+          results = results.select{|x| ignores.index(x['code']['value']).nil?}
+      end
+      return results
+    end
+    return nil
+  end
+
   def self.fix_file(path)
     @path = path
 
@@ -796,14 +813,7 @@ module GtnLinter
       ignores = should_ignore(contents)
       results = fix_md(contents)
 
-      if ! results.nil?
-        # Remove any empty lists
-        results = results.select{|x| !x.nil? && x.length > 0 }.flatten
-        # Before ignoring anything matching GTN:IGNORE:###
-        if results.length > 0
-            results = results.select{|x| ignores.index(x['code']['value']).nil?}
-        end
-      end
+      results = filter_results(results, ignores)
       emit_results(results)
     elsif path.match(/.bib$/)
       handle = File.open(path, 'r')
@@ -829,10 +839,12 @@ module GtnLinter
                 message: "This step uses a tool from the testtoolshed. These are not permitted in GTN tutorials.",
                 code: "GTN:017",
               )
-            ])
+            ]
           end
         }
-        results = fix_ga_wf(data)
+        results += fix_ga_wf(data)
+
+        results = filter_results(results, ignores)
         emit_results(results)
       rescue
         emit_results([ReviewDogEmitter.file_error(path: path, message: "Unparseable JSON in this workflow file.", code: "GTN:019")])
