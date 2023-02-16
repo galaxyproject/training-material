@@ -691,6 +691,8 @@ The mapping tool can differ from one pipeline to another, depending on read leng
 
 </div>
 
+### Mapping statistics
+
 The output of **bwa-mem** is a BAM file: a compressed binary file storing the read sequences, whether they have been aligned to a reference sequence (e.g. a chromosome), and if so, the position on the reference sequence at which they have been aligned.
 
 It can not be easily parsed. We can use a tool from **Samtools** suite to collects statistics from BAM files and then display them with **MulitQC**.
@@ -731,6 +733,8 @@ It can not be easily parsed. We can use a tool from **Samtools** suite to collec
 >
 {: .question}
 
+### Mapping processing
+
 Some mapping tools generate 2 BAM files: one with mapped reads and one with either all reads or just the unmapped ones. Here **bwa-mem** generates only one BAM file with all reads. So to get information about only the mapped reads with a good mapping quality, we need to filter the BAM file using **Samtools**.
 
 <div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
@@ -765,7 +769,7 @@ Mapping results need afterward to be **processed**, steps that are not always in
 
    <div class="Metatranscriptomic-Long" markdown="1">
 
-   > <hands-on-title> Mark duplicated reads </hands-on-title>
+   > <hands-on-title>Mark duplicated reads</hands-on-title>
    >
    > 1. {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3) %} with the following parameters:
    >    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: output of **Samtools view** {% icon tool %}
@@ -773,27 +777,26 @@ Mapping results need afterward to be **processed**, steps that are not always in
    >
    > 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1) %} with the following parameters:
    >    - In *"Results"*:
-   >        - {% icon param-repeat %} *"Insert Results"*
-   >            - *"Which tool was used generate logs?"*: `Picard`
-   >                - In *"Picard output"*:
-   >                    - {% icon param-repeat %} *"Insert Picard output"*
-   >                        - *"Type of Picard output?"*: `Markdups`
-   >                        - {% icon param-collection %} *"Picard output"*: `metrics_file` (output of **MarkDuplicates** {% icon tool %})
+   >      - *"Which tool was used generate logs?"*: `Picard`
+   >        - In *"Picard output"*:
+   >          - {% icon param-repeat %} *"Insert Picard output"*
+   >            - *"Type of Picard output?"*: `Markdups`
+   >            - {% icon param-collection %} *"Picard output"*: output of **MarkDuplicates** {% icon tool %}
    {: .hands_on}
 
    </div>
 
    > <question-title></question-title>
    >
-   > Inspect the Samtools section with all sample information in **MultiQC** HTML report
+   > Inspect the Picard section with all sample information in **MultiQC** HTML report
    >
-   > 1. Question1?
-   > 2. Question2?
+   > 1. How much reads are duplicated for SRR12596165
+   > 2. What are the minimum and maximum percentage of duplication?
    >
    > > <solution-title></solution-title>
    > >
-   > > 1. Answer for question1
-   > > 2. Answer for question2
+   > > 1. 40.8%
+   > > 2. 1.3% for SRR12596171 and 51.1% for SRR12596173
    > >
    > {: .solution}
    >
@@ -807,7 +810,7 @@ Mapping results need afterward to be **processed**, steps that are not always in
 
    <div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
 
-   > <hands-on-title> Task description </hands-on-title>
+   > <hands-on-title>Read realignment</hands-on-title>
    >
    > 1. {% tool [Realign reads](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_viterbi/lofreq_viterbi/2.1.5+galaxy0) %} with the following parameters:
    >
@@ -822,266 +825,132 @@ Mapping results need afterward to be **processed**, steps that are not always in
    >
    {: .hands_on}
 
-   > <question-title></question-title>
-   >
-   > Inspect the Picard section with all sample information in **MultiQC** HTML report
-   >
-   > 1. Question1?
-   > 2. Question2?
-   >
-   > > <solution-title></solution-title>
-   > >
-   > > 1. Answer for question1
-   > > 2. Answer for question2
-   > >
-   > {: .solution}
-   >
-   {: .question}
+   <!-- How to evaluate the results?-->
 
    </div>
 
 - **Indel quality insertion**
 
-   This step, which is not present everywhere, is helpful due to potential ambiguity, while indels are not parsed when they overlap the beginning or end of alignment boundaries. Input insertions and deletions must be homogenized with left realignment in order to gain a more homogeneous distribution. Left realignment will place all indels in homopolymer and microsatellite repeats at the same position, provided that doing so does not introduce mismatches between the read and reference other than the indel ({% cite garrison2012haplotype %}). Basically, this step is considered to correct mapping errors and prepare reads for further variant calling.
+   Indels, i.e. short insertions or deletions, are not parsed when they overlap the beginning or end of alignment boundaries. Thezy can cuause potential ambiguity. Input insertions and deletions must be homogenized with left realignment in order to gain a more homogeneous distribution. Left realignment will place all indels in homopolymer and microsatellite repeats at the same position, provided that doing so does not introduce mismatches between the read and reference other than the indel ({% cite garrison2012haplotype %}). Basically, this step, which is not present everywhere, is considered to correct mapping errors and prepare reads for further variant calling.
+
+   Here we use a tool from LoFreq suite and Dindel ({% cite albers2011dindel %}) to insert indel qualities
 
    <div class="Amplicon-Long Metatranscriptomic-long" markdown="1">
 
-   > <hands-on-title> Task description </hands-on-title>
+   > <hands-on-title>Indel quality insertion</hands-on-title>
    >
    > 1. {% tool [Insert indel qualities](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_indelqual/lofreq_indelqual/2.1.5+galaxy0) %} with the following parameters:
-   >    - {% icon param-file %} *"Reads"*: `realigned` (output of **Realign reads** {% icon tool %})
+   >    - {% icon param-collection %} *"Reads"*: output of **Realign reads** {% icon tool %}
    >    - *"Indel calculation approach"*: `Dindel`
    >        - *"Choose the source for the reference genome"*: `History`
-   >            - {% icon param-file %} *"Reference"*: `output` (Input dataset)
-   >
-   >    ***TODO***: *Check parameter descriptions*
-   >
-   >    ***TODO***: *Consider adding a comment or tip box*
-   >
-   >    > <comment-title> short description </comment-title>
-   >    >
-   >    > A comment about the tool or something else. This box can also be in the main text
-   >    {: .comment}
+   >            - {% icon param-file %} *"Reference"*: `NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta`, reference genome for SARS-CoV-2
    >
    {: .hands_on}
 
-   ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-   > <question-title></question-title>
-   >
-   > 1. Question1?
-   > 2. Question2?
-   >
-   > > <solution-title></solution-title>
-   > >
-   > > 1. Answer for question1
-   > > 2. Answer for question2
-   > >
-   > {: .solution}
-   >
-   {: .question}
-
    </div>
 
-
-<div class="Metatranscriptomic-long" markdown="1">
-
-> <hands-on-title> Task description </hands-on-title>
->
->
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-</div>
-
-## Variant calling
-
-Sensitive allelic-variant (AV) calling across a wide range of AFs with **lofreq** ({% cite wilm2012lofreq %})
+   <!-- How to evaluate the results?-->
 
 <div class="Amplicon-Short Amplicon-Long" markdown="1">
-adds extra logic operators for trimming ARTIC primer sequences off reads with the **ivar** package. In addition, this workflow uses **ivar** also to identify amplicons affected by ARTIC primer-binding site mutations and excludes reads derived from such "tainted" amplicons when calculating alternative allele frequences (AFs) of other AVs.
+With data generated using the ARTIC protocol, the ARTIC primer sequences need be trimmed. **ivar** ({% cite grubaugh2019amplicon-based %}) is used to identify amplicons affected by ARTIC primer-binding site mutations and excludes reads derived from such "tainted" amplicons for downstream analyses.
+
+To be able to identify the primers, we need 2 files:
+- A BED file with ARTIC primer positions
+- A Table with ARTIC primers to amplicon assignments
 
 <div class="Amplicon-long" markdown="1">
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title>ARTIC primer trimming</hands-on-title>
 >
 > 1. {% tool [ivar trim](toolshed.g2.bx.psu.edu/repos/iuc/ivar_trim/ivar_trim/1.3.1+galaxy2) %} with the following parameters:
->    - {% icon param-file %} *"Bam file"*: `output` (output of **Insert indel qualities** {% icon tool %})
+>    - {% icon param-collection %} *"Bam file"*: output of **Insert indel qualities** {% icon tool %}
 >    - *"Source of primer information"*: `History`
->        - {% icon param-file %} *"BED file with primer sequences and positions"*: `output` (Input dataset)
+>        - {% icon param-file %} *"BED file with primer sequences and positions"*: ARTIC primer position BED file
 >    - *"Filter reads based on amplicon info"*: `Yes, drop reads that extend beyond amplicon boundaries and use my amplicon info file`
->        - {% icon param-file %} *""*: `output` (Input dataset)
+>        - {% icon param-file %} *"amplicon_info"*: ARTIC primers to amplicon assignments
 >    - *"Include reads not ending in any primer binding sites?"*: `Yes`
 >    - *"Minimum length of read to retain after trimming"*: `1`
 >    - *"Minimum quality threshold for sliding window to pass"*: `0`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [QualiMap BamQC](toolshed.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bamqc/2.2.2d+galaxy3) %} with the following parameters:
->    - {% icon param-file %} *"Mapped reads input dataset"*: `output_bam` (output of **ivar trim** {% icon tool %})
->    - *"Reference genome regions to calculate mapping statistics for"*: `All (whole genome)`
->    - *"Skip duplicate reads"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Samtools depth](toolshed.g2.bx.psu.edu/repos/iuc/samtools_depth/samtools_depth/1.15.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"BAM file(s)"*: `output_bam` (output of **ivar trim** {% icon tool %})
->    - *"Filter by regions"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters:
->    - In *"Results"*:
->        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `fastp`
->                - {% icon param-file %} *"Output of fastp"*: `report_json` (output of **fastp** {% icon tool %})
->        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `Samtools`
->                - In *"Samtools output"*:
->                    - {% icon param-repeat %} *"Insert Samtools output"*
->                        - *"Type of Samtools output?"*: `stats`
->                            - {% icon param-file %} *"Samtools stats output"*: `output` (output of **Samtools stats** {% icon tool %})
->        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `Qualimap (BamQC or RNASeq output)`
->                - {% icon param-file %} *"Output of Qualimap BamQC"*: `output` (output of **Flatten collection** {% icon tool %})
->    - *"Output the multiQC plots raw data?"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 </div>
 
 </div>
+
+### Mapping quality evaluation
+
+Finally, we evaluate the quality of the alignments on the reference genome, i.e. the coverage, in the BAM files using **QualiMap** ({% cite okonechnikov2016qualimap %})
 
 <div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
 
 > <hands-on-title> Task description </hands-on-title>
 >
+> 1. {% tool [QualiMap BamQC](toolshed.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bamqc/2.2.2d+galaxy3) %} with the following parameters:
+>
+>    <div class="Amplicon-Long" markdown="1">
+>    - {% icon param-collection %} *"Mapped reads input dataset"*: output of **ivar trim** {% icon tool %}
+>    </div>
+>
+>    <div class="Metatranscriptomic-Long" markdown="1">
+>    - {% icon param-collection %} *"Mapped reads input dataset"*: output of **Insert indel qualities** {% icon tool %}
+>    </div>
+>
+>    - *"Reference genome regions to calculate mapping statistics for"*: `All (whole genome)`
+>    - *"Skip duplicate reads"*: Nothing selected
+>
+> 2. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters:
+>    - {% icon param-collection %} *"Input Collection"*: output of **Qualimap** {% icon tool %}
+>
+> 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters:
+>    - In *"Results"*:
+>      - *"Which tool was used generate logs?"*: `Qualimap (BamQC or RNASeq output)`
+>        - {% icon param-collection %} *"Output of Qualimap BamQC"*: output of **Flatten collection** {% icon tool %}
+{: .hands_on}
+
+</div>
+
+> <question-title></question-title>
+>
+> Inspect the Qualimap section with all sample information in **MultiQC** HTML report
+>
+> 1. What is the coverage?
+> 2. What is the range for the mean coverage in all samples?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. The coverage describes the number of sequencing reads that are uniquely mapped to a reference and "cover" a known part of the genome.
+> > <div class="Amplicon-Long Amplicon-short" markdown="1">
+> > 2. The mean coverage ranges from ...X to ..X, i.e. each region of genome being covered 1.6 times to 116 times.
+> > </div>
+> > <div class="Metatranscriptomic-Long Metatranscriptomic-short" markdown="1">
+> > 2. The mean coverage ranges from 1.6X to 116X, i.e. each region of genome being covered 1.6 times to 116 times.
+> > </div>
+> >
+> {: .solution}
+>
+{: .question}
+
+
+## Variant calling
+
+Now that mapping results have been clean, we want to identify the SARS-CoV-2 allelic variants (AVs), i.e. identify of positions where the sequenced sample is different from the reference sequence. We call sensitive AV across a wide range of allele frequences (AFs) using **Lofreq** ({% cite wilm2012lofreq %}).
+
+<div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
+
+> <hands-on-title>Variant calling</hands-on-title>
+>
 > 1. {% tool [Call variants](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy0) %} with the following parameters:
 >
 >    <div class="Amplicon-Long" markdown="1">
->    - {% icon param-file %} *"Input reads in BAM format"*: `output_bam` (output of **ivar trim** {% icon tool %})
+>    - {% icon param-collection %} *"Input reads in BAM format"*: output of **ivar trim** {% icon tool %}
 >    </div>
 >    <div class="Metatranscriptomic-Long" markdown="1">
->    - {% icon param-file %} *"Input reads in BAM format"*: `output` (output of **Insert indel qualities** {% icon tool %})
+>    - {% icon param-collection %} *"Input reads in BAM format"*: output of **Insert indel qualities** {% icon tool %}
 >    </div>
 >
 >    - *"Choose the source for the reference genome"*: `History`
->        - {% icon param-file %} *"Reference"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Reference"*: `NC_045512.2_FASTA_sequence_of_SARS-CoV-2.fasta`, reference genome for SARS-CoV-2
 >    - *"Call variants across"*: `Whole reference`
 >    - *"Types of variants to call"*: `SNVs and indels`
 >    - *"Variant calling parameters"*: `Configure settings`
@@ -1096,110 +965,129 @@ adds extra logic operators for trimming ARTIC primer sequences off reads with th
 >        - *"Significance threshold for calls"*: `0.0005`
 >        - *"Apply default coverage and strand-bias filter?"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    <!-- Why these values and not the default ones -->
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 
 </div>
 
-
-<div class="Metatranscriptomic-Long" markdown="1">
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Lofreq filter](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_filter/lofreq_filter/2.1.5+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"List of variants to filter"*: `variants` (output of **Call variants** {% icon tool %})
->        - In *"Quality-based filter options"*:
->            - *"Filter SNVs based on call quality?"*: `No, don't apply call quality filter`
->            - *"Filter indels based on call quality?"*: `No, don't apply call quality filter`
->    - In *"Coverage-based filter options"*:
->        - *"Minimum coverage"*: `0`
->    - In *"Strand bias filter options"*:
->        - *"Filter variants based on supporting strand bias?"*: `Yes, filter on multiple testing corrected strand-bias p-value (lofreq default)`
->    - *"Action to be taken for variants that do not pass the filters defined above"*: `Keep variants, but indicate failed filters in output FILTER column`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+**Lofreq** generates VCF files, i.e. tabular files containing:
+1. meta-information lines,
+2. a header line,
+3. data lines each containing information about a position in the genome:
+   1. `CHROM` - chromosome: An identifier from the reference genome or an angle-bracketed ID String  pointing to a contig in the assembly file
+   2. `POS` - position: The reference position, with the 1st base having position 1
+   3. `ID` - identifier: Semicolon-separated list of unique identifiers where available
+   4. `REF` - reference base(s): Each base must be one of A,C,G,T,N (case insensitive)
+   5. `ALT` - alternate base(s): Comma separated list of alternate non-reference alleles
+   6. `QUAL` - quality: Phred-scaled quality score for the assertion made in ALT.
+   7. `FILTER` - filter status:
+      - PASS if this position has passed all filters
+      - A semicolon-separated list of codes for filters that fail
+   8. `INFO` - additional information
 
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> Inspect the collection of variants
+>
+> <div class="Amplicon-Short Amplicon-Long" markdown="1">
+>
+> 1. How many variants have been called for sample 1?
+> 2. And for sample 10?
+> 3. And for sample 21?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. There are 89 lines in SRR12596165 dataset so 89 called variants
+> > 2. 130 variants
+> > 3. 96 variants
+> >
+> {: .solution}
+>
+> </div>
+>
+> <div class="Metatranscriptomic-Short Metatranscriptomic-Long" markdown="1">
+>
+> 1. How many variants have been called for SRR12596165?
+> 2. And for SRR12596170?
+> 3. And for SRR12596175?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. There are 0 lines in SRR12596165 dataset so 0 called variant
+> > 2. 15 variants
+> > 3. 47 variants
+> >
+> {: .solution}
+>
+> </div>
+>
+{: .question}
+
+
+<div class="Metatranscriptomic-Short Metatranscriptomic-Long" markdown="1">
+<!-- Why not for amplicon data ?? -->
+
+Once variants have been called, we need to eliminate false-positive calls. To do that, we use **Lofreq filter** from a list of variants in VCF format.
+
+<div class="Metatranscriptomic-Long" markdown="1">
+
+> <hands-on-title>Variant filtering</hands-on-title>
+>
+> 1. {% tool [Lofreq filter](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_filter/lofreq_filter/2.1.5+galaxy0) %} with the following parameters:
+>    - {% icon param-collection %} *"List of variants to filter"*: output of **Call variants** {% icon tool %}
+>    - *"Types of variants to keep"*: `SNVs and Indels`
+>      - In *"Coverage-based filter options"*:
+>        - *"Minimum coverage"*: `0`
+>    - *"Action to be taken for variants that do not pass the filters defined above"*: `Keep variants, but indicate failed filters in output FILTER column`
+>
+{: .hands_on}
+
+</div>
+
+> <question-title></question-title>
+>
+> 1. How many variants have been kept for SRR12596170? How many have been removed?
+> 2. And for SRR12596175?
+> 3. Are these results expected?
+> 4. By inspecting the VCF file for SRR12596170, is there any variant annotated as failed?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. There are 15 variants before filtering and 15 after. So no variants have been removed
+> > 2. 47 variants before filtering, 47 after so none removed.
+> > 3. The results are expected because we selected the option to `Keep variants, but indicate failed filters in output FILTER column`
+> > 4. The 15 variants have `PASS` in the `FILTER` column
 > >
 > {: .solution}
 >
 {: .question}
 
-> <hands-on-title> Task description </hands-on-title>
+In the VCF files, we do not have so much information about the variants. We use **SnpEff** ({% cite cingolani2012program %}) to annotate and predict the effects of genetic variants (such as amino acid changes), with a special edition of SnpEff tweaked for SARS-CoV-2 variant annotation.
+
+<div class="Metatranscriptomic-Long" markdown="1">
+
+> <hands-on-title>Variant annotation</hands-on-title>
 >
-> 1. {% tool [SnpEff eff:](toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19) %} with the following parameters:
->    - {% icon param-file %} *"Sequence changes (SNPs, MNPs, InDels)"*: `outvcf` (output of **Lofreq filter** {% icon tool %})
->    - *"Output format"*: `VCF (only if input is VCF)`
->    - *"Annotation options"*: ``
->    - *"Filter output"*: ``
->    - *"Filter out specific Effects"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 1. {% tool [SnpEff eff: annotate variants for SARS-CoV-2](toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19) %} with the following parameters:
+>    - {% icon param-collection %} *"Sequence changes (SNPs, MNPs, InDels)"*: output of **Lofreq filter** {% icon tool %}
+>    - *"Select an annotated Coronavirus genome"*: `NC_045512.2`
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+</div>
 
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Where can we find the information about the variant annotation for SRR12596170?
+> 2. Looking at the HTML report for SRR12596170, what are the types of the 15?
+> 3. Where are the variants located?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. In the VCF file generated by SnpEff in the column `INFO`, there are more information, e.g. `ANN`
+> > 2. 9 are SNP and 6 insertions
+> > 3. Mostly in Exons.
 > >
 > {: .solution}
 >
@@ -1209,49 +1097,117 @@ adds extra logic operators for trimming ARTIC primer sequences off reads with th
 
 ## SARS-CoV-2 lineage abundance computation
 
+The next step is to evaluate from the variants the SARS-CoV-2 lineages and their abundance.
+
 <div class="Amplicon-Short Amplicon-Long" markdown="1">
-**Freyja** {% cite karthikeyan2022wastewater %} and **COJAC** {% cite jahn2022early %} in two different branches.
+To do that, we use **Freyja** {% cite karthikeyan2022wastewater %} and **COJAC** {% cite jahn2022early %}.
 </div>
 
 <div class="Metatranscriptomic-Short Metatranscriptomic-Long" markdown="1">
-**Freyja** {% cite karthikeyan2022wastewater %}
+To do that, we use **Freyja** {% cite karthikeyan2022wastewater %}.
 </div>
 
 <div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
 
-> <hands-on-title> Task description </hands-on-title>
+Before running **Freyja**, we need to compute the depth at each position or region, using **Samtools depth**
+
+> <hands-on-title>Depth computation</hands-on-title>
+>
+> 1. {% tool [Samtools depth](toolshed.g2.bx.psu.edu/repos/iuc/samtools_depth/samtools_depth/1.15.1+galaxy0) %} with the following parameters:
+>
+>    <div class="Amplicon-Long" markdown="1">
+>    - {% icon param-collection %} *"BAM file(s)"*: output of **ivar trim** {% icon tool %}
+>    </div>
+>    <div class="Metatranscriptomic-Long" markdown="1">
+>    - {% icon param-collection %} *"BAM file(s)"*: output of **Insert indel qualities** {% icon tool %}
+>    </div>
+>
+{: .hands_on}
+
+</div>
+
+<!-- Generate only one file for all sample and not a collection. Expected?? -->
+
+We can then run **Freyja** by first running **Freyja demix** which estimates lineage abundances in a potentially multi-lineage input sample.
+
+<div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
+
+> <hands-on-title>Lineage abundance estimation</hands-on-title>
 >
 > 1. {% tool [Freyja: Demix](toolshed.g2.bx.psu.edu/repos/iuc/freyja_demix/freyja_demix/1.3.8+galaxy0) %} with the following parameters:
 >
 >    <div class="Amplicon-Long" markdown="1">
->    - {% icon param-file %} *"Dataset with input variant calls"*: `variants` (output of **Call variants** {% icon tool %})
+>    - {% icon param-collection %} *"Dataset with input variant calls"*: `output of **Call variants** {% icon tool %}
 >    </div>
 >    <div class="Metatranscriptomic-Long" markdown="1">
->    - {% icon param-file %} *"Dataset with input variant calls"*: `outvcf` (output of **Lofreq filter** {% icon tool %})
+>    - {% icon param-collection %} *"Dataset with input variant calls"*: output of **Lofreq filter** {% icon tool %}
 >    </div>
-
+>
 >    - *"Set sample name"*: `Autodetect sample name`
->    - {% icon param-file %} *"Sequencing depth file"*: `output` (output of **Samtools depth** {% icon tool %})
+>    - {% icon param-file %} *"Sequencing depth file"*: output of **Samtools depth** {% icon tool %}
 >    - *"Source of UShER barcodes data"*: `Use data shipped with the tool (can be outdated)`
 >
->    ***TODO***: *Check parameter descriptions*
+{: .hands_on}
+
+</div>
+
+The output of **Freyja demix** is a tabular 5 lines:
+1. `summarized`: sum of all lineage abundances in a particular WHO designation (i.e. B.1.617.2 and AY.6 abundances are summed in the above example), otherwise they are grouped into "Other".
+2. `lineages`: lists of the identified lineages in descending order
+3. `abundances`: corresponding abundances estimates
+4. `resid`: the residual of the weighted least absolute devation problem used to estimate lineage abundances
+5. `coverage`: 10x coverage estimate (percent of sites with 10 or greater reads- 10 is the default but can be modfied in the options)
+
+> <question-title></question-title>
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> <div class="Amplicon-Short Amplicon-Long" markdown="1">
 >
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+> 1. Which lineages have been identified for sample 1?
+> 2. And for sample 10?
+> 3. And for sample 21?
 >
+> > <solution-title></solution-title>
+> >
+> > 1. There are 89 lines in SRR12596165 dataset so 89 called variants
+> > 2. 84% Omicron, 9% Delta: BA.1.18 BA.1.15.1 BA.1.10 BA.1.1.13 BA.1.16 AY.4.9 AY.9 B.20 B.27 B AY.4 AY.9.2 BA.1.1.9 BA.1.1.15 BA.1.1.10 miscDeltaBA1Post4k BA.1.1.1
+> > 3. 90% Omicron: BA.1.10 BA.1.18 BA.1.1 BA.1.15.1 BA.1.1.13 BA.1.19 BA.1.3 B.20 B.27 B BA.1.16 BA.1 BA.1.1.1 BA.1.14 BA.1.12 B.1.1.33 B.1.1.378 B.1.1 B.1.78 B.1
+> >
+> {: .solution}
+>
+> </div>
+>
+> <div class="Metatranscriptomic-Short Metatranscriptomic-Long" markdown="1">
+>
+> 1. Which lineages have been identified for SRR12596165?
+> 2. And for SRR12596170?
+> 3. And for SRR12596175?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Failing
+> > 2. Others: B.1.370 B.1.301 B.1.533 B.1.111 B.1.479 B.1.201 B.1 B.1.215 B.1.378 B.1.199 B.10 B.47 B.23 B.26 B.1.14 B.20 B
+> > 3. Others: B.1.509 B.1.2 B.1.111 B.1.479 B.1.382 B.10 B.47 B.23 B.26 B.1.14 B.20 B
+> >
+> {: .solution}
+>
+> </div>
+>
+{: .question}
+
+The demix outputs are not easy to inspect one by one. We use another tool from **Freyja** to aggregate and visualize the results.
+
+<div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
+
+> <hands-on-title>Lineage visualization</hands-on-title>
 > 1. {% tool [Freyja: Aggregate and visualize](toolshed.g2.bx.psu.edu/repos/iuc/freyja_aggregate_plot/freyja_aggregate_plot/1.3.8+galaxy0) %} with the following parameters:
 >    - *"Aggregate demixed data or provide aggregated data file?"*: `aggregate demixed data`
->        - {% icon param-file %} *"Lineages abundances summary file(s)"*: `abundances` (output of **Freyja: Demix** {% icon tool %})
+>        - {% icon param-collection %} *"Lineages abundances summary file(s)"*: output of **Freyja: Demix** {% icon tool %}
 >    - *"Report(s) to generate"*: `non-interactive plot`
 >        - *"Provide a sample metadata file for plotting data over time?"*: `No`
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+</div>
 
 > <question-title></question-title>
 >
@@ -1267,7 +1223,12 @@ adds extra logic operators for trimming ARTIC primer sequences off reads with th
 >
 {: .question}
 
-</div>
+<div class="Amplicon-Long Amplicon-Short" markdown="1">
+
+**COJAC** can also be used on variants from amplicon data:
+1. Scanning the alignment files for mutation co-occurrences using **mutbamscan**
+2. Combining files from all samples in one table
+3. Export coocurrence mutations as a table using **tabmut**
 
 <div class="Amplicon-Long" markdown="1">
 
@@ -1275,36 +1236,28 @@ adds extra logic operators for trimming ARTIC primer sequences off reads with th
 >
 > 1. {% tool [Cojac: mutbamscan](toolshed.g2.bx.psu.edu/repos/iuc/cooc_mutbamscan/cooc_mutbamscan/0.2+galaxy0) %} with the following parameters:
 >    - *"Source of YAML files with definition of the variant of concerns"*: `Definitions shipped with the tool (can be outdated)`
->    - {% icon param-file %} *"BED file defining the amplicons"*: `output` (Input dataset)
->    - {% icon param-file %} *"Alignment BAM/CRAM/SAM file"*: `output_bam` (output of **ivar trim** {% icon tool %})
+>    - {% icon param-file %} *"BED file defining the amplicons"*: `BED defining amplicons for COJAC`
+>    - {% icon param-file %} *"Alignment BAM/CRAM/SAM file"*: Mutation coocurrence output of **ivar trim** {% icon tool %}
 >    - *"Source of amplicons YAML file"*: `Build from BED + set of YAMLs for variants of concern`
->    - *"Output files"*: ``
+>    - *"Output files"*: `YAML`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-> 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
->    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: `cooc_yaml` (output of **Cojac: mutbamscan** {% icon tool %})
+> 2. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: output of **Cojac: mutbamscan** {% icon tool %}
 >    - *"Prepend File name"*: `Yes`
 >
-> 1. {% tool [Cojac: tabmut](toolshed.g2.bx.psu.edu/repos/iuc/cooc_tabmut/cooc_tabmut/0.2+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Results generated by mutbamscan"*: `output` (output of **Collapse Collection** {% icon tool %})
+> 3. {% tool [Cojac: tabmut](toolshed.g2.bx.psu.edu/repos/iuc/cooc_tabmut/cooc_tabmut/0.2+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Results generated by mutbamscan"*: output of **Collapse Collection** {% icon tool %}
 >    - *"Output table orientation"*: `Column-oriented table (default)`
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+</div>
 
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Which lineages have been identified for sample 1?
+> 2. And for sample 10?
+> 3. And for sample 21?
 >
 > > <solution-title></solution-title>
 > >
@@ -1317,7 +1270,6 @@ adds extra logic operators for trimming ARTIC primer sequences off reads with th
 
 
 </div>
-
 
 
 # Results interpretation
