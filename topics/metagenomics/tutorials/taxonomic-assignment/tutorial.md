@@ -181,9 +181,9 @@ As both files contain a lot of information, we will use __Krona__ {% cite Ondov.
  
 # Hands on: estimating species abundance
 
-A "simple and worthwile addition to Kraken for better abundance estimates" {% cite Ye.2019 %} is called Bracken (Bayesian Reestimation of Abundance after Classification with Kraken). Instead of only using proportions of classified reads, it takes a probabilistic approach to generate final abundance profiles. It works by re-distributing reads in the taxonomic tree: "Reads assigned to nodes above the species level are distributed down to the species nodes, while reads assigned at the strain level are re-distributed upward to their parent species." {% cite Lu.2017 %}
+A "simple and worthwile addition to Kraken for better abundance estimates" {% cite Ye.2019 %} is called __Bracken__ (Bayesian Reestimation of Abundance after Classification with Kraken). Instead of only using proportions of classified reads, it takes a probabilistic approach to generate final abundance profiles. It works by re-distributing reads in the taxonomic tree: "Reads assigned to nodes above the species level are distributed down to the species nodes, while reads assigned at the strain level are re-distributed upward to their parent species." {% cite Lu.2017 %}
 
-> ### {% icon hands_on %} Hands-on: estimate species abundance with Bracken xxx
+> ### {% icon hands_on %} Hands-on: estimate species abundance with Bracken (Name in Galaxy: Estimate Abundance at Taxonomic Level)
 >
 > 1. {% tool [Bracken](https://toolshed.g2.bx.psu.edu/view/iuc/bracken/79450f7fd718) %} with the following parameters:
       - *"Kraken report file"*: Report: Kraken2 on dataset collection  (! do not use the classification file)
