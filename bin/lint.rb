@@ -832,9 +832,12 @@ module GtnLinter
         results = []
 
         # Check if there's a missing workflow test
-        test_name_yml = path.gsub(/.ga$/, '-test.yml')
-        test_name_yaml = path.gsub(/.ga$/, '-test.yml')
-        if not File.exists?(test_name_yml) and not File.exists?(test_name_yaml)
+        folder = File.dirname(path)
+        basename = File.basename(path).gsub(/.ga$/, '')
+        possible_tests = Dir.glob("#{folder}/#{basename}*ym*")
+        possible_tests = possible_tests.select{|f| f =~ /#{basename}[_-]tests?.ya?ml/}
+
+        if possible_tests.length == 0
           results += [
             ReviewDogEmitter.file_error(path: path, message: "This workflow is missing a test, which is now mandatory. Please see [the FAQ on how to add tests to your workflows](https://training.galaxyproject.org/training-material/faqs/gtn/gtn_workflow_testing.html).", code: "GTN:027")
           ]
