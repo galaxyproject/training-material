@@ -311,6 +311,7 @@ module TopicFilter
         x = {
           "workflow" => wf,
           "tests" => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length > 0,
+          "url" => "#{site.config['url']}#{site.config['baseurl']}/#{folder}/workflows/#{wf}",
         }
         x
       }
