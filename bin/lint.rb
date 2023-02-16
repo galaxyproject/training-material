@@ -646,11 +646,33 @@ module GtnLinter
     end
 
     if ! contents.has_key?("annotation")
-      topic = @path.split('/')[1]
       results.push(ReviewDogEmitter.file_error(
         path: @path, message: "This workflow is missing an annotation. Please add `\"annotation\": \"title of tutorial\"`", code: "GTN:016"))
     end
 
+    if ! contents.has_key?("license")
+      results.push(ReviewDogEmitter.file_error(
+        path: @path, message: "This workflow is missing a license. Please select a valid OSI license. You can correct this in the Galaxy workflow editor.", code: "GTN:026"))
+    end
+
+    if ! contents.has_key?("creator")
+      results.push(ReviewDogEmitter.file_error(
+        path: @path, message: "This workflow is missing a Creator. Please edit this workflow in Galaxy to add the correct creator entities", code: "GTN:024"))
+    else
+      contents['creator']
+        .select{|c| c["class"] == "Person"}
+        .each{|p|
+          if ! p.has_key?("identifier") or p["identifier"] == ""
+            results.push(ReviewDogEmitter.file_error(
+              path: @path, message: "This workflow has a creator but is missing an identifier for them. Please ensure all creators have valid ORCIDs.", code: "GTN:025"))
+          end
+
+          if ! p.has_key?("name") or p["name"] == ""
+            results.push(ReviewDogEmitter.file_error(
+              path: @path, message: "This workflow has a creator but is a name, please add it.", code: "GTN:025"))
+          end
+        }
+    end
     results
   end
 
