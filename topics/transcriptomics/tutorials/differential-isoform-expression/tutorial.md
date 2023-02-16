@@ -39,7 +39,7 @@ In this tutorial, we aim to perform a genome-wide analysis of the isoform switch
 
 # Background on data
 
-The datasets consist of ten FASTQ files, generated through the Illumina HiSeq 4000 sequencing system. The samples were obtaned by strand-specific RNA sequencing on hepatoblastoma paired samples. The procotol used for extracting the samples includes the depletion of rRNAs by subtractive hybridization, a general strategy for mRNA enrichment in RNA-seq samples. The original datasets are available in the NCBI SRA database, with the accession number PRJNA416439. For this tutorial, subsets from the original data were generated in order to reduce the analysis run time.
+The datasets consist of ten FASTQ files, generated through the Illumina HiSeq 4000 sequencing system. The samples were obtaned by strand-specific RNA sequencing on hepatoblastoma paired samples. The procotol used for extracting the samples includes the depletion of rRNAs by subtractive hybridization, a general strategy for mRNA enrichment in RNA-seq samples. The original datasets are available in the NCBI SRA database, with the accession number [PRJNA416439](https://www.ncbi.nlm.nih.gov/bioproject/?term=PRJNA416439). For this tutorial, subsets from the original data were generated in order to reduce the analysis run time.
 
 ## Get data
 
