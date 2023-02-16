@@ -297,7 +297,8 @@ We are using a relatively small set of sequences because phylogenetic estimation
 >
 > ![Unaligned Sequences](./images/UnalignedSequences.png){:width="400"}
 > 
-> Play around with the view: you can change colour schemes and add or remove various elements.  If you cannot see the slider at the top (for moving left or right in the view) you will need to check the "Show residues indices" in the "Vis. elements" drop-down menu.
+> Play around with the view: you can change colour schemes and add or remove various elements.  Good colour schemes for nucleotide data are "Clustal2" and "nucleotide".  
+> If you cannot see the slider at the top (for moving left or right in the view) you will need to check the "Show residues indices" in the "Vis. elements" drop-down menu.
 {: .hands_on}
 
 This is a file in **FASTA** format, which has a very simple structure, as follows:
@@ -320,7 +321,7 @@ The above toy file has two sequences in it named SEQUENCE_1 and SEQUENCE_2, each
 FASTA format is very simple and is commonly used as input to phylogenetic inference programs.
 
 > <comment-title>FASTA format</comment-title>
-> The FASTA (pronounced like "faster" (not sounding the 'r'!) or Fast-Eh) format work as follows:
+> The FASTA (pronounced like "faster" (not sounding the 'r'!) or Fast-Eh to rhyme with the first letter of the alphabet) format works as follows:
 > 1. each sequence has a name, which appears one its own line after a "greater-than" sign '>'
 > 2. the next line(s) contain the sequence for that name; continuing either until the next sequence name line, or the end of the file.
 >
@@ -362,7 +363,7 @@ Calculating distances from an alignment
 
 ## Building a Neighbor-Joining Tree 
 
-> <hands-on-title>Build a Neighbour-Joining Tree with Splitstree</hands-on-title>
+> <hands-on-title>Build a Neighbour-Joining Tree with cleancut</hands-on-title>
 >
 > 1. Step 1
 > 2. Step 2
