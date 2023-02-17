@@ -56,16 +56,26 @@ The first step of our analysis consists of retrieving the RNA-seq datasets from 
 >    - Copy the following tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
->      SRR11611349	Control miRNA	https://zenodo.org/record/4710649/files/SRR11611349_MIRNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
->      SRR11611350	Control miRNA	https://zenodo.org/record/4710649/files/SRR11611350_MIRNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
->      SRR11611351	Control miRNA	https://zenodo.org/record/4710649/files/SRR11611351.MIRNASEQ_CTLfastqsanger.gz	fastqsanger.gz
->      SRR11611352	BR treated miRNA	https://zenodo.org/record/4710649/files/SRR11611352_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
->      SRR11611353	BR treated miRNA	https://zenodo.org/record/4710649/files/SRR11611353_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
->      SRR11611354	BR treated miRNA	https://zenodo.org/record/4710649/files/SRR11611354_MIRNASEQ_BL.fastqsanger.gz	fastqsanger.gz
->      SRR1019436	Control mRNA	https://zenodo.org/record/4710649/files/SRR1019436_RNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
->      SRR1019437	Control mRNA	https://zenodo.org/record/4710649/files/SRR1019437_RNASEQ_CTL.fastqsanger.gz	fastqsanger.gz
->      SRR1019438	BR treated mRNA	https://zenodo.org/record/4710649/files/SRR1019438_RNASEQ_BL.fastqsanger.gz	fastqsanger.gz
->      SRR1019439	BR treated mRNA	https://zenodo.org/record/4710649/files/SRR1019439_RNASEQ_BL.fastqsanger.gz	fastqsanger.gz
+>      SRR6263336	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263336_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR6263336	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263336_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR6263339	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263339_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR6263339	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263339_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR6263341	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263341_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR6263341	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263341_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR6263343	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263343_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR6263343	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263343_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR6263345	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263345_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR6263345	Health tissue	https://zenodo.org/record/7649293/files/sub_SRR6263345_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR6263371	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263371_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR6263371	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263371_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR6263373	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263373_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR6263373	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263373_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR6263375	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263375_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR6263375	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263375_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR6263379	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263379_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR6263379	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263379_reverse.fastqsanger.gz	fastqsanger.gz	2
+>      SRR6263381	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263381_forward.fastqsanger.gz	fastqsanger.gz	1
+>      SRR6263381	Hepatoblastoma tissue	https://zenodo.org/record/7649293/files/sub_SRR6263381_reverse.fastqsanger.gz	fastqsanger.gz	2
 >      ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
@@ -78,6 +88,7 @@ The first step of our analysis consists of retrieving the RNA-seq datasets from 
 >       - Click `Add Definition` button and select `Collection Name`: column `B`
 >       - Click `Add Definition` button and select `URL`: column `C`
 >       - Click `Add Definition` button and select `Type`: column `D`
+>       - Click `Add Definition` button and select `Pair-end Indicator`: column `E`
 >
 >    - Click `Apply` and press <kbd>Upload</kbd>
 >
@@ -95,11 +106,14 @@ Next we will retrieve the remaining datasets.
 >    - Once again, copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
->      annotation_AtRTD2.gtf	https://zenodo.org/record/4710649/files/annotation_AtRTD2_19April2016.gtf.gz
->      transcriptome.fasta	https://zenodo.org/record/4710649/files/transcriptome_AtRTD2_12April2016.fasta.gz
->      star_miRNA_seq.fasta	https://zenodo.org/record/4710649/files/star_miRNA_seq.fasta
->      mature_miRNA_AT.fasta	https://zenodo.org/record/4710649/files/mature_miRNA_AT.fasta
->      miRNA_stem-loop_seq.fasta	https://zenodo.org/record/4710649/files/miRNA_stem-loop_seq.fasta
+>      active_site.dat.gz	https://zenodo.org/record/7649293/files/active_site.dat.gz
+>      gencode.v42.lncRNA_transcripts.fa.gz	https://zenodo.org/record/7649293/files/gencode.v42.lncRNA_transcripts.fa.gz
+>      gencode.v42.pc_transcripts.fa.gz	https://zenodo.org/record/7649293/files/gencode.v42.pc_transcripts.fa.gz
+>      gencode.v43.annotation.gtf.gz	https://zenodo.org/record/7649293/files/gencode.v43.annotation.gtf.gz
+>      gencode.v43.transcripts.fa.gz	https://zenodo.org/record/7649293/files/gencode.v43.transcripts.fa.gz
+>      GRCh38.p13.genome.fa.gz	https://zenodo.org/record/7649293/files/GRCh38.p13.genome.fa.gz
+>      Pfam-A.hmm.dat.gz	https://zenodo.org/record/7649293/files/Pfam-A.hmm.dat.gz
+>      Pfam-A.hmm.gz	https://zenodo.org/record/7649293/files/Pfam-A.hmm.gz
 >      ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
@@ -127,7 +141,8 @@ Next we will retrieve the remaining datasets.
 
 # Quality assessment
 
-Quality assessment text.
+Once we have got the datasets, we can start with the analysis. The first step is to perform the quality assessment. Since this step is deeply covered in the tutorial [Quality control](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html), we won't describe this section in detail.
+
 
 ## Inicial quality evaluation
 
