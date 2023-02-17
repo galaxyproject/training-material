@@ -191,7 +191,6 @@ module Jekyll
       # Please note that this is all a fun hack
       TopicFilter.list_all_materials(site).select{|m| m['workflows']}.each do |material|
         material['workflows'].each do |workflow|
-          puts "WF #{workflow}"
           wfid = "#{material['topic_name']}-#{material['tutorial_name']}"
           wfname = workflow['workflow'].gsub(/.ga/, '').downcase
 
