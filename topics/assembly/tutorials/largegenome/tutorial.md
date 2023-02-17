@@ -441,7 +441,7 @@ Assembly polishing:
 >   * using polished assembly 2 as input, repeat minimap2 + racon => polished assembly 3
 >   * using polished assembly 3 as input, repeat minimap2 + racon => polished assembly 4
 >   * Racon long-read polished assembly => Fasta statistics
->   * Note: The Racon tool panel can be a bit confusing and is under review for improvement. Presently it requires sequences (= long reads), overlaps (= the paf file created by minimap2), and target sequences (= the contigs to be polished) as per "usage" described [here](https://github.com/isovic/racon/blob/master/README.md)
+>   * Note: The Racon tool panel can be a bit confusing and is under review for improvement. Presently it requires sequences (= long reads), overlaps (= the paf file created by minimap2), and target sequences (= the contigs to be polished) as per "usage" described at this link [https://github.com/isovic/racon/blob/master/README.md](https://github.com/isovic/racon/blob/master/README.md)
 >   * Note: Racon: the default setting for "output unpolished target sequences?" is No. This has been changed to Yes for all Racon steps in these polishing workflows.  This means that even if no polishes are made in some contigs, they will be part of the output fasta file. 
 >   * Note: the contigs output by Racon have new tags in their headers. For more on this see [this issue](https://github.com/isovic/racon/issues/85).
 > * Workflow steps for Part 2, Polish with long reads: using Medaka
@@ -526,12 +526,12 @@ For more about the Icarus browser see {% cite Mikheenko2016 %}.
 >   * **Gene prediction:** 
 >   * Change tool used by Busco to predict genes in the assembly: instead of Metaeuk, use Augustus (Metaeuk is meant to be faster; unsure which is better). 
 >   * select: Use Augustus; Use another predefined species model; then choose from the drop down list. 
->  select from a database of trained species models. list here:  https://github.com/Gaius-Augustus/Augustus/tree/master/config/species
+>  select from a database of trained species models. Link to lists of species models: [https://github.com/Gaius-Augustus/Augustus/tree/master/config/species](https://github.com/Gaius-Augustus/Augustus/tree/master/config/species)
 >   * Note: if using Augustus: it may fail if the input assembly is too small (e.g. a test-size data assembly). It can't do the training part properly. 
 >   * **Compare genes found to other lineage:**
 >   * Busco has databases of lineages and their expected genes. Option to change lineage. Not all lineages are available - there is a mix of broader and narrower lineages.
->   * list of lineages [here](https://busco.ezlab.org/list_of_lineages.html) 
->   * To see the groups in taxonomic hierarchies see [here](https://busco.ezlab.org/frames/euka.htm)
+>   * link to list of lineages [https://busco.ezlab.org/list_of_lineages.html](https://busco.ezlab.org/list_of_lineages.html) 
+>   * link to groups in taxonomic hierarchies [https://busco.ezlab.org/frames/euka.htm](https://busco.ezlab.org/frames/euka.htm)
 >   * For example,  if you have a plant species from Fabales, you could set that as the lineage. 
 >   * The narrower the taxonomic group, the more total genes are expected. 
 {: .hands_on}
