@@ -39,7 +39,7 @@ Single-cell RNA sequencing can be sensitive to both biological and technical var
 
 One common biological confounder is the cell cycle ({% cite Luecken2019 %}). Cells express different genes during different parts of the cell cycle, depending on whether they are in their growing phase (G1), duplicating their DNA (the S or Synthesis phase), or dividing in two (G2/M or Mitosis phase). If these cell cycle genes are having a big impact on your data, then you could end up with separate clusters that actually represent cells of the same type that are just at different stages of the cycle.
 
-In this tutorial, we will identify the genes whose expression is known to vary during the cell cycle so that we can use them to regress out (or remove) the effects of the cell cycle on the data.
+In this tutorial, we will identify the genes whose expression is known to vary during the cell cycle so that we can use them to regress out (or remove) the effects of the cell cycle on the clustering.
 
 > <comment-title>Other Scanpy and Seurat tutorials</comment-title>
 >
@@ -57,12 +57,27 @@ In this tutorial, we will identify the genes whose expression is known to vary d
 
 ## Get Data
 
-The data used in this tutorial is from a mouse dataset of fetal growth restriction ({% cite Bacon2018 %}). You can download the dataset below.
+The data used in this tutorial is from a mouse dataset of fetal growth restriction ({% cite Bacon2018 %}). Cell cycle regression should be performed after the data has been filtered, normalised, and scaled. You can download the dataset below or import the history with the starting data.
 
-If you've been working through the Single-cell RNA-seq: Case Study then you can use your dataset from the [Filter, Plot and Explore Single-cell RNA-seq Data]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial here. Cell cycle regression should be performed after the data has been filtered, normalised, and scaled, so you should use the dataset that was renamed as `Use_me_Scaled` in that tutorial. You should rename that dataset `Processed_Anndata` now to avoid confusion later. At the end of this tutorial, you can return to the main tutorial to plot and explore your data with reduced effects from the cell cycle.
+> <comment-title></comment-title>
+> - If you've been working through the Single-cell RNA-seq: Case Study then you can use your dataset from the [Filter, Plot and Explore Single-cell RNA-seq Data]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial here. Select the `Use_me_Scaled` dataset from your history. Rename that dataset as `Processed_Anndata`. You will still need to import the S and G2/M gene lists below through Zenodo.
+> - At the end of this tutorial, you can return to the main tutorial to plot and explore your data with reduced effects from the cell cycle.
+{: .comment}
 
+In addition to the scRNA-seq dataset, we will also need lists of the genes that are known to be expressed at different points in the cell cycle. The lists used in this tutorial are part of the HBC tinyatlas and can be downloaded from Zenodo below {% cite kirchner_hbc_2018 %}. Between them, they include 97 genes that are expressed during the S and G2/M phases. Make sure that the file type is tabular (not just the name of the file) - you can choose this when you download the files or change it after the files are in your history.
 
-> <hands-on-title>Data upload</hands-on-title>
+> <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
+>
+> 1. Import history from: [example input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1)
+>
+>
+>    {% snippet faqs/galaxy/histories_import.md %}
+>
+> 2. **Rename** {% icon galaxy-pencil %} the the history to your name of choice.
+>
+{: .hands_on}
+
+> <hands-on-title>Option 2: Data upload - Add to history</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 >
@@ -84,7 +99,7 @@ If you've been working through the Single-cell RNA-seq: Case Study then you can 
 >
 {: .hands_on}
 
-In addition to the scRNA-seq dataset, we will also need lists of the genes that are known to be expressed at different points in the cell cycle. The lists used in this tutorial are part of the HBC tinyatlas and can be downloaded from Zenodo below {% cite kirchner_hbc_2018 %}. Between them, they include 97 genes that are expressed during the S and G2/M phases. Make sure that the file type is tabular (not just the name of the file) - you can choose this when you download the files or change it after the files are in your history.
+
 
 > <hands-on-title>Data upload</hands-on-title>
 >
