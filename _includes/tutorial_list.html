@@ -21,7 +21,7 @@
   {% assign subtopic_materials = include.sub[1].materials %}
   {% for material in subtopic_materials %}
         <!-- MAT: {{ material.id }} -->
-      {% if material.enable != false or jekyll.environment != "production" %}
+      {% if material.draft != true or jekyll.environment != "production" %}
 
         <tr>
           <td class="tutorial_title">

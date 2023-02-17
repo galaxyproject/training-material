@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-enable: true
+draft: true
 
 title: MaxQuant and MSstats for the analysis of TMT data
 zenodo_link: 'https://zenodo.org/record/5195800'

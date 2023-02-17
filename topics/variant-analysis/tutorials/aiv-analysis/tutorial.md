@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Avian influenza viral strain analysis from gene segment sequencing data
-enable: false
+draft: true
 level: Intermediate
 questions:
 - With reassortment of gene segments being a common event in avian influenza virus (AIV) evolution, does it make sense to use a reference-based mapping approach for constructing consensus genome sequences for AIV samples?
