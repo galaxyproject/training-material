@@ -108,6 +108,10 @@ module TopicFilter
       out.delete("__OTHER__")
     end
 
+    out.each{|k, v|
+      v['materials'].sort_by!{|m| [m.fetch('priority', 1), m['title']] }
+    }
+
     out
   end
 
