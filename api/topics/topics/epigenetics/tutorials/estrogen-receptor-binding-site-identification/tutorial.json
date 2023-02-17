@@ -1,0 +1,130 @@
+{
+  "layout": "tutorial_hands_on",
+  "redirect_from": [
+    "/topics/chip-seq/tutorials/estrogen-receptor-binding-site-identification/tutorial"
+  ],
+  "title": "Identification of the binding sites of the Estrogen receptor",
+  "zenodo_link": "https://doi.org/10.5281/zenodo.892432",
+  "enable": false,
+  "tags": [
+    "ChIP-seq",
+    "work-in-progress"
+  ],
+  "questions": [
+    "How is raw ChIP-seq data processed and analyzed?",
+    "What are the binding sites of the Estrogen receptor?"
+  ],
+  "objectives": [
+    "Inspect read quality with FastQC",
+    "Map reads with Bowtie2",
+    "Assess the quality of an ChIP-seq experiments",
+    "Extract coverage files",
+    "Call enriched regions or peaks"
+  ],
+  "time_estimation": "3h",
+  "key_points": [
+    "ChIP-seq data requires multiple methods of quality assessment to ensure that the data is of high quality.",
+    "Multiple normalization methods exists depending on the availability of input data.",
+    "Heatmaps containing all genes of an organism can be easily plotted given a BED file and a coverage file."
+  ],
+  "contributors": [
+    {
+      "name": "Friederike Dündar",
+      "joined": "2017-09",
+      "id": "friedue",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/friedue.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/friedue/"
+    },
+    {
+      "name": "Anika Erxleben",
+      "email": "anikaerxleben@gmail.com",
+      "orcid": "0000-0002-7427-6478",
+      "joined": "2017-09",
+      "elixir_node": "de",
+      "id": "erxleben",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/erxleben.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/"
+    },
+    {
+      "name": "Bérénice Batut",
+      "email": "berenice.batut@gmail.com",
+      "twitter": "bebatut",
+      "linkedin": "berenicebatut",
+      "gitter": "bebatut",
+      "orcid": "0000-0001-9852-1987",
+      "joined": "2017-09",
+      "elixir_node": "de",
+      "id": "bebatut",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
+    },
+    {
+      "name": "Vivek Bhardwaj",
+      "joined": "2017-09",
+      "id": "vivekbhr",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/vivekbhr.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/"
+    },
+    {
+      "name": "Fidel Ramirez",
+      "joined": "2017-09",
+      "id": "fidelram",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/fidelram.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/fidelram/"
+    }
+  ],
+  "url": "/topics/epigenetics/tutorials/estrogen-receptor-binding-site-identification/tutorial.html",
+  "topic_name": "epigenetics",
+  "tutorial_name": "estrogen-receptor-binding-site-identification",
+  "dir": "topics/epigenetics/tutorials/estrogen-receptor-binding-site-identification",
+  "id": "epigenetics/estrogen-receptor-binding-site-identification",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "workflows": [
+    {
+      "workflow": "chip_seq.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/estrogen-receptor-binding-site-identification/workflows/chip_seq.ga"
+    },
+    {
+      "workflow": "qc_mapping.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/estrogen-receptor-binding-site-identification/workflows/qc_mapping.ga"
+    }
+  ],
+  "tools": [
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/2.5.1.1.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/2.5.1.1.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_gc_bias/deeptools_compute_gc_bias/2.5.1.1.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/2.5.1.1.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/2.5.1.1.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/2.5.1.1.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/2.5.1.1.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/2.5.1.1.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.3.0",
+    "toolshed.g2.bx.psu.edu/repos/devteam/bam_to_sam/bam_to_sam/2.0.1",
+    "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.3.2.2",
+    "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.69",
+    "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.0"
+  ],
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial"
+}

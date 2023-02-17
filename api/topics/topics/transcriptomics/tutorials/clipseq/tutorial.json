@@ -1,0 +1,110 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "CLIP-Seq data analysis from pre-processing to motif detection",
+  "zenodo_link": "https://zenodo.org/record/1327423",
+  "questions": [
+    "How is raw CLIP-Seq data processed and analysed?",
+    "How do I find binding motifs and targets for a protein (e.g., RBFOX2)?"
+  ],
+  "objectives": [
+    "Remove Adapters, Barcodes and Unique Molecular Identifiers (UMIs) from the reads",
+    "Align trimmed reads with STAR",
+    "De-duplicate the read library",
+    "Inspect the read mapping and de-duplication quality",
+    "Perform peak calling with PEAKachu",
+    "Analyse the peaks and find potential binding motifs and targets",
+    "Check the quality of the peak calling"
+  ],
+  "time_estimation": "6h",
+  "key_points": [
+    "Sophisticated analysis of CLIP-Seq data is possible using tools hosted by Galaxy.",
+    "Analysis of the datasets needs multiple methods to assess the quality of the data and to answer the biological question of interest.",
+    "CLIP-Seq data varies from protocol to protocol, thus flexible changes to the data anylsis are required which is supported by Galaxy.",
+    "By using the sharable and transparent Galaxy platform, data analyses can easily be shared and reproduced."
+  ],
+  "contributors": [
+    {
+      "name": "Florian Heyl",
+      "joined": "2018-08",
+      "elixir_node": "de",
+      "id": "heylf",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/heylf.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/heylf/"
+    },
+    {
+      "name": "Daniel Maticzka",
+      "joined": "2018-08",
+      "id": "dmaticzka",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/dmaticzka.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/dmaticzka/"
+    },
+    {
+      "name": "Bérénice Batut",
+      "email": "berenice.batut@gmail.com",
+      "twitter": "bebatut",
+      "linkedin": "berenicebatut",
+      "gitter": "bebatut",
+      "orcid": "0000-0001-9852-1987",
+      "joined": "2017-09",
+      "elixir_node": "de",
+      "id": "bebatut",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
+    }
+  ],
+  "url": "/topics/transcriptomics/tutorials/clipseq/tutorial.html",
+  "topic_name": "transcriptomics",
+  "tutorial_name": "clipseq",
+  "dir": "topics/transcriptomics/tutorials/clipseq",
+  "id": "transcriptomics/clipseq",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "workflows": [
+    {
+      "workflow": "init_workflow.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/clipseq/workflows/init_workflow.ga"
+    }
+  ],
+  "tools": [
+    "__MERGE_COLLECTION__",
+    "__SORTLIST__",
+    "sort1",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/3.5.1.0.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/3.5.1.0.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.5.1.0.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+    "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bctools_extract_alignment_ends/bctools_extract_alignment_ends/0.2.2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_genomecoveragebed_bedgraph/2.19.0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_slopbed/2.30.0+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/extract_genomic_dna/Extract genomic DNA 1/3.0.3+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/meme_chip/meme_chip/4.11.2+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_dedup/umi_tools_dedup/1.1.2+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/1.1.2+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/4.0+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/rnateam/peakachu/peakachu/0.1.0.2",
+    "toolshed.g2.bx.psu.edu/repos/rnateam/rcas/rcas/1.5.4",
+    "wig_to_bigWig"
+  ],
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial"
+}

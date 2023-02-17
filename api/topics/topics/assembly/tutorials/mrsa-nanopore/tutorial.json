@@ -1,0 +1,175 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "Genome Assembly of MRSA using Oxford Nanopore MinION Data",
+  "zenodo_link": "https://zenodo.org/record/4534098",
+  "questions": [
+    "How to check the quality of the MinION data?",
+    "How to perform an assembly with MinION data?",
+    "What species do I have and what is its sequence type?",
+    "Which resistance genes are on my genome?",
+    "Where are the genes located on my genome?"
+  ],
+  "objectives": [
+    "Assess your data on quality and quantity",
+    "Assemble a genome",
+    "Assess your assembly quality",
+    "Assess presence of antimicrobial resistance genes",
+    "Perform a species identification and MLST typing",
+    "Search for resistance genes on the assembly",
+    "Find a gene on your genome using Prokka + JBrowse"
+  ],
+  "time_estimation": "2h",
+  "key_points": [
+    "Nanopore produces fantastic assemblies but with low quality data",
+    "Annotation with Prokka is very easy"
+  ],
+  "tags": [
+    "nanopore",
+    "assembly",
+    "amr"
+  ],
+  "contributions": {
+    "authorship": [
+      "bazante1"
+    ],
+    "editing": [
+      "hexylena",
+      "bazante1",
+      "shiltemann",
+      "miaomiaozhou88"
+    ],
+    "funding": [
+      "avans-atgm"
+    ]
+  },
+  "follow_up_training": [
+    {
+      "type": "internal",
+      "topic_name": "visualisation",
+      "tutorials": [
+        "jbrowse"
+      ]
+    },
+    {
+      "type": "internal",
+      "topic_name": "galaxy-interface",
+      "tutorials": [
+        "history-to-workflow"
+      ]
+    }
+  ],
+  "abbreviations": {
+    "SVs": "Structural Variations"
+  },
+  "url": "/topics/assembly/tutorials/mrsa-nanopore/tutorial.html",
+  "topic_name": "assembly",
+  "tutorial_name": "mrsa-nanopore",
+  "dir": "topics/assembly/tutorials/mrsa-nanopore",
+  "id": "assembly/mrsa-nanopore",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "workflows": [
+    {
+      "workflow": "main_workflow.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/mrsa-nanopore/workflows/main_workflow.ga"
+    }
+  ],
+  "tools": [
+    "CONVERTER_bz2_to_uncompressed",
+    "Grep1",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.6",
+    "toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/filtlong/filtlong/0.2.0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/porechop/porechop/0.2.3",
+    "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2",
+    "toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+galaxy2",
+    "upload1"
+  ],
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial",
+  "contributors": [
+    {
+      "name": "Bazante Sanders",
+      "joined": "2020-12",
+      "id": "bazante1",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/bazante1.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/"
+    },
+    {
+      "name": "Helena Rasche",
+      "email": "hexylena@galaxians.org",
+      "orcid": "0000-0001-9760-8992",
+      "maintainer_contact": "gitter",
+      "gitter": "hexylena",
+      "joined": "2017-09",
+      "elixir_node": "nl",
+      "id": "hexylena",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+    },
+    {
+      "name": "Bazante Sanders",
+      "joined": "2020-12",
+      "id": "bazante1",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/bazante1.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bazante1/"
+    },
+    {
+      "name": "Saskia Hiltemann",
+      "maintainer_contact": "gitter",
+      "email": "saskia.hiltemann@gmail.com",
+      "twitter": "shiltemann",
+      "linkedin": "shiltemann",
+      "gitter": "shiltemann",
+      "orcid": "0000-0003-3803-468X",
+      "joined": "2017-09",
+      "bio": "Researcher at Erasmus Medical Center",
+      "elixir_node": "nl",
+      "id": "shiltemann",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+    },
+    {
+      "name": "Miaomiao Zhou",
+      "email": "m.zhou1@avans.nl",
+      "joined": "2020-12",
+      "orcid": "0000-0003-4426-1758",
+      "id": "miaomiaozhou88",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/miaomiaozhou88.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/miaomiaozhou88/"
+    },
+    {
+      "name": "Avans Hogeschool",
+      "joined": "2020-11",
+      "funder": true,
+      "funding_statement": "A number of our employees contribute directly to the Galaxy Training Network and seek to make our higher education learning materials more accessible to a wider audience through the GTN platform. <a href=\"https://avans.nl/\">avans.nl</a>",
+      "id": "avans-atgm",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/avans-atgm.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/avans-atgm/"
+    }
+  ]
+}

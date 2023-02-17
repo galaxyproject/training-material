@@ -1,0 +1,139 @@
+{
+  "layout": "tutorial_hands_on",
+  "redirect_from": [
+    "/topics/chip-seq/tutorials/formation_of_super-structures_on_xi/tutorial"
+  ],
+  "title": "Formation of the Super-Structures on the Inactive X",
+  "zenodo_link": "https://zenodo.org/record/1324070",
+  "tags": [
+    "ChIP-seq"
+  ],
+  "questions": [
+    "Histone modification?",
+    "How is a raw set of ChIP-seq data processed and analyzed?",
+    "Where are the enriched regions for H3K27me3, H3K4me3 and CTCF on the chrX?"
+  ],
+  "objectives": [
+    "Inspect the read quality",
+    "Trim low quality bases",
+    "Map reads on a reference genome",
+    "Assess the quality of a ChIP-seq experiment",
+    "Extract coverage files",
+    "Call enriched regions or peaks"
+  ],
+  "time_estimation": "3h",
+  "key_points": [
+    "ChIP-seq data requires multiple methods of quality assessment to ensure that the data is of high quality.",
+    "Multiple normalization methods exists depending on the availability of input data.",
+    "Heatmaps containing all genes of an organism can be easily plotted given a BED file and a coverage file."
+  ],
+  "contributors": [
+    {
+      "name": "Friederike Dündar",
+      "joined": "2017-09",
+      "id": "friedue",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/friedue.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/friedue/"
+    },
+    {
+      "name": "Anika Erxleben",
+      "email": "anikaerxleben@gmail.com",
+      "orcid": "0000-0002-7427-6478",
+      "joined": "2017-09",
+      "elixir_node": "de",
+      "id": "erxleben",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/erxleben.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/"
+    },
+    {
+      "name": "Bérénice Batut",
+      "email": "berenice.batut@gmail.com",
+      "twitter": "bebatut",
+      "linkedin": "berenicebatut",
+      "gitter": "bebatut",
+      "orcid": "0000-0001-9852-1987",
+      "joined": "2017-09",
+      "elixir_node": "de",
+      "id": "bebatut",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
+    },
+    {
+      "name": "Vivek Bhardwaj",
+      "joined": "2017-09",
+      "id": "vivekbhr",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/vivekbhr.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/vivekbhr/"
+    },
+    {
+      "name": "Fidel Ramirez",
+      "joined": "2017-09",
+      "id": "fidelram",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/fidelram.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/fidelram/"
+    },
+    {
+      "name": "Leily Rabbani",
+      "joined": "2018-09",
+      "id": "LeilyR",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/LeilyR.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/LeilyR/"
+    }
+  ],
+  "url": "/topics/epigenetics/tutorials/formation_of_super-structures_on_xi/tutorial.html",
+  "topic_name": "epigenetics",
+  "tutorial_name": "formation_of_super-structures_on_xi",
+  "dir": "topics/epigenetics/tutorials/formation_of_super-structures_on_xi",
+  "id": "epigenetics/formation_of_super-structures_on_xi",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": true,
+  "workflows": [
+    {
+      "workflow": "formation_of_super_structures_on_xi.ga",
+      "tests": true,
+      "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/formation_of_super-structures_on_xi/workflows/formation_of_super_structures_on_xi.ga"
+    }
+  ],
+  "tools": [
+    "Filter1",
+    "cat1",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_compare/deeptools_bam_compare/3.0.2.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_bam_coverage/deeptools_bam_coverage/3.0.2.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.0.2.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_multi_bam_summary/deeptools_multi_bam_summary/3.0.2.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_correlation/deeptools_plot_correlation/3.0.2.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_fingerprint/deeptools_plot_fingerprint/3.0.2.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.0.2.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.3.1",
+    "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.3.4.2",
+    "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.1.0",
+    "toolshed.g2.bx.psu.edu/repos/devteam/concat/gops_concat_1/1.0.1",
+    "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.71",
+    "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.27.0.2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_mergebed/2.27.0.0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_sortbed/2.27.0.0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.0.6",
+    "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.4"
+  ],
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial"
+}

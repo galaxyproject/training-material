@@ -1,0 +1,167 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "ATAC-Seq data analysis",
+  "zenodo_link": "https://zenodo.org/record/3862793",
+  "questions": [
+    "Which DNA regions are accessible in the human lymphoblastoid cell line GM12878?",
+    "How to analyse and visualise ATAC-Seq data?"
+  ],
+  "objectives": [
+    "Apply appropriate analysis and quality control steps for ATAC-Seq",
+    "Generate a heatmap of transcription start site accessibility",
+    "Visualise peaks for specific regions"
+  ],
+  "time_estimation": "3h",
+  "key_points": [
+    "ATAC-Seq can be used to identify accessible gene promoters and enhancers",
+    "Several filters are applied to the reads, such as removing those mapped to mitochondria",
+    "Fragment distribution can help determine whether an ATAC-Seq experiment has worked well"
+  ],
+  "contributors": [
+    {
+      "name": "Lucille Delisle",
+      "email": "lucille.delisle@epfl.ch",
+      "orcid": "0000-0002-1964-4960",
+      "joined": "2019-08",
+      "elixir_node": "ch",
+      "id": "lldelisle",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/lldelisle.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/lldelisle/"
+    },
+    {
+      "name": "Maria Doyle",
+      "joined": "2018-09",
+      "id": "mblue9",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/"
+    },
+    {
+      "name": "Florian Heyl",
+      "joined": "2018-08",
+      "elixir_node": "de",
+      "id": "heylf",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/heylf.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/heylf/"
+    }
+  ],
+  "url": "/topics/epigenetics/tutorials/atac-seq/tutorial.html",
+  "topic_name": "epigenetics",
+  "tutorial_name": "atac-seq",
+  "dir": "topics/epigenetics/tutorials/atac-seq",
+  "id": "epigenetics/atac-seq",
+  "video_library": {
+    "tutorial": {
+      "description": "This tutorial will walk you through a ATAC-Seq data analysis.",
+      "materials": [
+        {
+          "link": "topics/epigenetics/tutorials/atac-seq/tutorial.html",
+          "title": "ATAC-Seq data analysis",
+          "type": "Tutorial"
+        }
+      ],
+      "tags": [
+        "epigenetics"
+      ],
+      "type": "Tutorial",
+      "versions": [
+        {
+          "captions": [
+            "hrhotz"
+          ],
+          "date": "2021-02-15",
+          "galaxy_version": "21.01",
+          "length": "1H50M",
+          "link": "Zc-bl6ZfcX4",
+          "speakers": [
+            "heylf"
+          ]
+        }
+      ],
+      "gtn_id": "epigenetics/atac-seq",
+      "title": "ATAC-Seq data analysis",
+      "captioned": true
+    },
+    "slides": {
+      "description": "This lecture will introduce the basic concepts involved in ATAC-Seq analysis.",
+      "materials": [
+        {
+          "link": "topics/epigenetics/tutorials/atac-seq/slides.html",
+          "type": "Slides"
+        }
+      ],
+      "tags": [
+        "epigenetics"
+      ],
+      "type": "Lecture",
+      "versions": [
+        {
+          "captions": [
+            "lldelisle"
+          ],
+          "date": "2021-02-15",
+          "galaxy_version": "21.01",
+          "length": "15M",
+          "link": "2jPNNd5YJNM",
+          "speakers": [
+            "lldelisle"
+          ]
+        }
+      ],
+      "gtn_id": "epigenetics/atac-seq",
+      "title": "ATAC-Seq data analysis",
+      "captioned": true
+    },
+    "demo": null,
+    "both": null,
+    "session": {
+      "title": "Epigenetics: ATAC-Seq",
+      "description": "ATAC-seq (Assay for Transposase-Accessible Chromatin using sequencing) is a technique used in molecular biology to assess genome-wide chromatin accessibility. This session will introduce ATAC-Seq and walk you through an analysis step by step.\n",
+      "videos": [
+        "epigenetics/atac-seq/slides",
+        "epigenetics/atac-seq/tutorial"
+      ]
+    }
+  },
+  "hands_on": true,
+  "slides": true,
+  "workflows": [
+    {
+      "workflow": "main_workflow.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/epigenetics/tutorials/atac-seq/workflows/main_workflow.ga"
+    }
+  ],
+  "tools": [
+    "Cut1",
+    "Filter1",
+    "Grep1",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+    "toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1",
+    "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2",
+    "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6",
+    "toolshed.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.6",
+    "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5",
+    "ucsc_table_direct1",
+    "wig_to_bigWig"
+  ],
+  "tours": false,
+  "video": true,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": true
+  },
+  "type": "tutorial"
+}

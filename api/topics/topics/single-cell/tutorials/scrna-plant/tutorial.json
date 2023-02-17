@@ -1,0 +1,150 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "Analysis of plant scRNA-Seq Data with Scanpy",
+  "subtopic": "end-to-end",
+  "priority": 5,
+  "redirect_from": [
+    "/topics/transcriptomics/tutorials/scrna-plant/tutorial"
+  ],
+  "zenodo_link": "https://zenodo.org/record/4597857",
+  "tags": [
+    "single-cell",
+    "plants",
+    "paper-replication"
+  ],
+  "questions": [
+    "Can we reclaim cell markers using a different analysis method?",
+    "Are highly variable genes paramount to the analysis?"
+  ],
+  "objectives": [
+    "Perform filtering, dimensionality reduction, and clustering",
+    "Generate a DotPlot emulating the original paper using a different analysis tool",
+    "Determine robust clusters across scRNA-seq pipelines"
+  ],
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "single-cell",
+      "tutorials": [
+        "scrna-scanpy-pbmc3k"
+      ]
+    }
+  ],
+  "time_estimation": "2H",
+  "key_points": [
+    "Filtering parameters are dependent on the dataset, and should be explored using scatter or violin plots",
+    "A DotPlot is a fantastic way to validate clusters across different analyses"
+  ],
+  "contributors": [
+    {
+      "name": "Mehmet Tekman",
+      "email": "mtekman89@gmail.com",
+      "joined": "2018-11",
+      "elixir_node": "de",
+      "id": "mtekman",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/"
+    },
+    {
+      "name": "Beatriz Serrano-Solano",
+      "email": "beatrizserrano.galaxy@gmail.com",
+      "twitter": "BSerranoSolano",
+      "linkedin": "beatriz-serrano",
+      "gitter": "beatrizserrano",
+      "orcid": "0000-0002-5862-6132",
+      "joined": "2020-07",
+      "id": "beatrizserrano",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/beatrizserrano.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/"
+    },
+    {
+      "name": "Cristóbal Gallardo",
+      "joined": "2020-11",
+      "elixir_node": "de",
+      "id": "gallardoalba",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/gallardoalba.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/"
+    },
+    {
+      "name": "Pavankumar Videm",
+      "joined": "2017-09",
+      "id": "pavanvidem",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/pavanvidem.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/"
+    }
+  ],
+  "gitter": "Galaxy-Training-Network/galaxy-single-cell",
+  "url": "/topics/single-cell/tutorials/scrna-plant/tutorial.html",
+  "topic_name": "single-cell",
+  "tutorial_name": "scrna-plant",
+  "dir": "topics/single-cell/tutorials/scrna-plant",
+  "id": "single-cell/scrna-plant",
+  "video_library": {
+    "tutorial": {
+      "description": "This tutorial replicates the paper “Spatiotemporal Developmental Trajectories in the Arabidopsis Root Revealed Using High-Throughput Single-Cell RNA Sequencing” (Denyer et al. 2019), where the major plant cell types are recovered in the data as well as distinguishing between QC and meristematic cells. The original paper used the Seurat analysis suite (Satija et al. 2015), but here we will use the ScanPy analysis suite (Wolf et al. 2018) integrated within the single-cell resources in Galaxy (Tekman et al. 2020).",
+      "materials": [
+        {
+          "link": "topics/single-cell/tutorials/scrna-plant/tutorial.html",
+          "type": "Tutorial"
+        }
+      ],
+      "tags": [
+        "transcriptomics",
+        "single-cell"
+      ],
+      "type": "Tutorial",
+      "versions": [
+        {
+          "captions": [
+            "mtekman"
+          ],
+          "date": "2021-02-15",
+          "galaxy_version": "21.01",
+          "length": "55M",
+          "link": "yKlJ5ESri7o",
+          "speakers": [
+            "mtekman"
+          ]
+        }
+      ],
+      "gtn_id": "single-cell/scrna-plant",
+      "title": "Analysis of plant scRNA-Seq Data with Scanpy",
+      "captioned": true
+    },
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "workflows": [
+    {
+      "workflow": "main_workflow.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-plant/workflows/main_workflow.ga"
+    }
+  ],
+  "tools": [
+    "toolshed.g2.bx.psu.edu/repos/iuc/anndata_import/anndata_import/0.7.5+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.7.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_normalize/scanpy_normalize/1.7.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_remove_confounders/scanpy_remove_confounders/1.7.1+galaxy0"
+  ],
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial"
+}

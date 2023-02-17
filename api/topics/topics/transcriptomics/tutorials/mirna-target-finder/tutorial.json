@@ -1,0 +1,180 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "Whole transcriptome analysis of Arabidopsis thaliana",
+  "zenodo_link": "https://zenodo.org/record/4710649",
+  "tags": [
+    "miRNA",
+    "plants",
+    "stress tolerance"
+  ],
+  "questions": [
+    "Which miRNAs are upregulated in response to brassinosteroids?",
+    "Which genes are potential target of brassinosteroid-induced miRNAs?"
+  ],
+  "objectives": [
+    "Perform miRNA differential expression analysis",
+    "Understand the quasi-mapping-based Salmon method for quantifying the expression of transcripts using RNA-Seq data",
+    "Idenfity potential miRNAs involved in brassinosteroid-mediated regulation networks"
+  ],
+  "time_estimation": "2H",
+  "key_points": [
+    "MiRDeep2 in combination with the PmiREN database allows to quantify miRNA expression in plants",
+    "The use of the Salmon tool and the AtRTD2 transcriptome allows rapid and accurate quantification of transcripts in _Arabidopsis_",
+    "The combination of differential expression analysis and the TargetFinder tool is an effective strategy for the identification of miRNA target genes"
+  ],
+  "contributors": [
+    {
+      "name": "Cristóbal Gallardo",
+      "joined": "2020-11",
+      "elixir_node": "de",
+      "id": "gallardoalba",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/gallardoalba.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/gallardoalba/"
+    },
+    {
+      "name": "Pavankumar Videm",
+      "joined": "2017-09",
+      "id": "pavanvidem",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/pavanvidem.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/"
+    },
+    {
+      "name": "Beatriz Serrano-Solano",
+      "email": "beatrizserrano.galaxy@gmail.com",
+      "twitter": "BSerranoSolano",
+      "linkedin": "beatriz-serrano",
+      "gitter": "beatrizserrano",
+      "orcid": "0000-0002-5862-6132",
+      "joined": "2020-07",
+      "id": "beatrizserrano",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/beatrizserrano.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/beatrizserrano/"
+    }
+  ],
+  "url": "/topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html",
+  "topic_name": "transcriptomics",
+  "tutorial_name": "mirna-target-finder",
+  "dir": "topics/transcriptomics/tutorials/mirna-target-finder",
+  "id": "transcriptomics/mirna-target-finder",
+  "video_library": {
+    "tutorial": {
+      "materials": [
+        {
+          "link": "topics/transcriptomics/tutorials/mirna-target-finder/tutorial.html",
+          "type": "Tutorial"
+        }
+      ],
+      "tags": [
+        "transcriptomics"
+      ],
+      "type": "Tutorial",
+      "versions": [
+        {
+          "captions": [
+            "gallardoalba"
+          ],
+          "date": "2021-07-25",
+          "galaxy_version": "21.05",
+          "length": "1H10M",
+          "link": "wS1X_0Mgw7M",
+          "speakers": [
+            "gallardoalba"
+          ]
+        }
+      ],
+      "gtn_id": "transcriptomics/mirna-target-finder",
+      "title": "Whole transcriptome analysis of Arabidopsis thaliana",
+      "captioned": true
+    },
+    "slides": {
+      "materials": [
+        {
+          "link": "topics/transcriptomics/tutorials/mirna-target-finder/slides.html",
+          "type": "Slides"
+        }
+      ],
+      "tags": [
+        "transcriptomics"
+      ],
+      "type": "Lecture",
+      "versions": [
+        {
+          "captions": [
+            "galaxycommunity"
+          ],
+          "date": "2021-04-20",
+          "galaxy_version": "21.01",
+          "length": "10M",
+          "link": "FNmZoo2OXTU",
+          "speakers": [
+            "awspolly"
+          ]
+        },
+        {
+          "captions": [
+            "gallardoalba"
+          ],
+          "date": "2021-02-15",
+          "galaxy_version": "21.01",
+          "length": "10M",
+          "link": "7t0Gr1Jklqs",
+          "speakers": [
+            "awspolly"
+          ]
+        }
+      ],
+      "gtn_id": "transcriptomics/mirna-target-finder",
+      "title": "Whole transcriptome analysis of Arabidopsis thaliana",
+      "captioned": true
+    },
+    "demo": null,
+    "both": null,
+    "session": {
+      "title": "Whole transcriptome analysis of Arabidopsis thaliana",
+      "description": "In plants, miRNAs can silence targets through RNA degradation as well as translational repression pathways, and unlike animals, a large proportion of miRNA and their targets have less than four mismatches. This feature has been exploited for developing miRNAs target prediction tools, providing an efficient approach to elucidate the miRNA-mediated regulatory networks, which can contribute to biotechnological solutions to improve crops productivity.\n",
+      "videos": [
+        "transcriptomics/mirna-target-finder/slides",
+        "transcriptomics/mirna-target-finder/tutorial"
+      ]
+    }
+  },
+  "hands_on": true,
+  "slides": true,
+  "workflows": [
+    {
+      "workflow": "main_workflow.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/mirna-target-finder/workflows/main_workflow.ga"
+    }
+  ],
+  "tools": [
+    "Cut1",
+    "Filter1",
+    "__MERGE_COLLECTION__",
+    "cat1",
+    "sort1",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/salmon/salmon/0.14.1.2+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/trim_galore/trim_galore/0.4.3.1",
+    "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/filter_by_fasta_ids/filter_by_fasta_ids/2.1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.6+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7",
+    "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/peterjc/sample_seqs/sample_seqs/0.2.5",
+    "toolshed.g2.bx.psu.edu/repos/rnateam/mirdeep2_mapper/rbc_mirdeep2_mapper/2.0.0",
+    "toolshed.g2.bx.psu.edu/repos/rnateam/mirdeep2_quantifier/rbc_mirdeep2_quantifier/2.0.0",
+    "toolshed.g2.bx.psu.edu/repos/rnateam/targetfinder/targetfinder/1.7.0+galaxy1"
+  ],
+  "tours": false,
+  "video": true,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": true
+  },
+  "type": "tutorial"
+}

@@ -1,0 +1,116 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "Removal of human reads from SARS-CoV-2 sequencing data",
+  "questions": [
+    "How can you remove traces of human sequence data from a sequenced viral sample?"
+  ],
+  "objectives": [
+    "Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources",
+    "Organize the data into a collection",
+    "Preprocess and map the data against the human reference genome",
+    "Eliminate reads/read pairs that map to the human genome from the original data"
+  ],
+  "time_estimation": "1h",
+  "level": "Intermediate",
+  "key_points": [
+    "Before submitting raw viral sequencing data to public databases you will want to remove human sequence traces",
+    "Human reads can be identified by mapping the data to the human reference genome",
+    "After mapping, you can extract the read identifiers of the non-human reads and use these to extract just the desired original sequenced reads from the input data"
+  ],
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "sequence-analysis",
+      "tutorials": [
+        "quality-control",
+        "mapping"
+      ]
+    },
+    {
+      "type": "internal",
+      "topic_name": "galaxy-interface",
+      "tutorials": [
+        "collections"
+      ]
+    }
+  ],
+  "tags": [
+    "covid19"
+  ],
+  "contributors": [
+    {
+      "name": "Wolfgang Maier",
+      "orcid": "0000-0002-9464-6640",
+      "joined": "2017-09",
+      "elixir_node": "de",
+      "id": "wm75",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
+    }
+  ],
+  "url": "/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html",
+  "topic_name": "sequence-analysis",
+  "tutorial_name": "human-reads-removal",
+  "dir": "topics/sequence-analysis/tutorials/human-reads-removal",
+  "id": "sequence-analysis/human-reads-removal",
+  "video_library": {
+    "tutorial": {
+      "description": null,
+      "materials": [
+        {
+          "link": "topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html",
+          "title": "Removal of human reads from SARS-CoV-2 sequencing data",
+          "type": "Tutorial"
+        },
+        {
+          "external": true,
+          "link": "https://usegalaxy.eu/u/wolfgang-maier/h/removal-of-human-reads-from-sars-cov-2-sequencing-data",
+          "title": "Example History",
+          "type": "Example History"
+        }
+      ],
+      "tags": [
+        "sequence-analysis"
+      ],
+      "type": "Tutorial",
+      "gtn_id": "sequence-analysis/human-reads-removal",
+      "title": "Removal of human reads from SARS-CoV-2 sequencing data"
+    },
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "workflows": [
+    {
+      "workflow": "human-reads-removal.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/human-reads-removal/workflows/human-reads-removal.ga"
+    }
+  ],
+  "tools": [
+    "Grep1",
+    "__UNZIP_COLLECTION__",
+    "__ZIP_COLLECTION__",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2",
+    "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1",
+    "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0",
+    "toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.1"
+  ],
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial"
+}

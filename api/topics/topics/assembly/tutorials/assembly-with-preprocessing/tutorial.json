@@ -1,0 +1,148 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads",
+  "zenodo_link": "https://doi.org/10.5281/zenodo.3732358",
+  "questions": [
+    "How can a genome of interest be assembled against a background of contaminating reads from other genomes?",
+    "How can sequencing data from public sources be turned into assembly-ready polished datasets?"
+  ],
+  "objectives": [
+    "Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources",
+    "Organize the data into collections and check its quality",
+    "Detect and remove human reads",
+    "Assemble retained reads and explore the results"
+  ],
+  "time_estimation": "4h",
+  "level": "Intermediate",
+  "key_points": [
+    "Certain types of NGS samples can be heavily contaminated with sequences from other genomes",
+    "Reads from known/expected contaminating sources can be identified by mapping to the respective genomes",
+    "After mapping, use filtering tools to remove identified contaminating reads, and use conversion tools to convert remaining mapped reads back into raw sequenced reads expected by most downstream tools"
+  ],
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "assembly",
+      "tutorials": [
+        "unicycler-assembly"
+      ]
+    },
+    {
+      "type": "internal",
+      "topic_name": "sequence-analysis",
+      "tutorials": [
+        "mapping"
+      ]
+    },
+    {
+      "type": "internal",
+      "topic_name": "galaxy-interface",
+      "tutorials": [
+        "collections"
+      ]
+    }
+  ],
+  "tags": [
+    "covid19"
+  ],
+  "contributors": [
+    {
+      "name": "Wolfgang Maier",
+      "orcid": "0000-0002-9464-6640",
+      "joined": "2017-09",
+      "elixir_node": "de",
+      "id": "wm75",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
+    }
+  ],
+  "url": "/topics/assembly/tutorials/assembly-with-preprocessing/tutorial.html",
+  "topic_name": "assembly",
+  "tutorial_name": "assembly-with-preprocessing",
+  "dir": "topics/assembly/tutorials/assembly-with-preprocessing",
+  "id": "assembly/assembly-with-preprocessing",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": {
+      "description": "This tutorial guides you through the preprocessing of sequencing data of bronchoalveolar lavage fluid (BALF) samples obtained from early COVID-19 patients in China. Since such samples are expected to be contaminated signficantly with human sequenced reads, the goal is to enrich the data for SARS-CoV-2 reads by identifying and discarding reads of human origin before trying to assemble the viral genome sequence.",
+      "materials": [
+        {
+          "link": "topics/assembly/tutorials/assembly-with-preprocessing/slides.html",
+          "type": "Slides"
+        },
+        {
+          "link": "topics/assembly/tutorials/assembly-with-preprocessing/tutorial.html",
+          "type": "Tutorial"
+        }
+      ],
+      "tags": [
+        "assembly"
+      ],
+      "type": "Tutorial",
+      "versions": [
+        {
+          "captions": [
+            "mtekman"
+          ],
+          "date": "2021-02-15",
+          "galaxy_version": "21.01",
+          "length": "25M",
+          "link": "jNFLYhjgJPs",
+          "speakers": [
+            "gallardoalba"
+          ]
+        }
+      ],
+      "gtn_id": "assembly/assembly-with-preprocessing",
+      "title": "Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads",
+      "captioned": true
+    },
+    "session": null
+  },
+  "hands_on": true,
+  "slides": true,
+  "workflows": [
+    {
+      "workflow": "assembly_with_preprocessing.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/assembly-with-preprocessing/workflows/assembly_with_preprocessing.ga"
+    },
+    {
+      "workflow": "assembly_with_preprocessing_and_sra_download.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/assembly/tutorials/assembly-with-preprocessing/workflows/assembly_with_preprocessing_and_sra_download.ga"
+    }
+  ],
+  "tools": [
+    "__ZIP_COLLECTION__",
+    "toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.3.4.3+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2",
+    "toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.19.5+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7",
+    "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.25.0+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_sample/1.3.2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.4+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.8.0",
+    "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2"
+  ],
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial"
+}

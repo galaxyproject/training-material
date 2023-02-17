@@ -1,0 +1,140 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "1: RNA-Seq reads to counts",
+  "subtopic": "end-to-end",
+  "zenodo_link": "https://zenodo.org/record/4249555",
+  "tags": [
+    "collections",
+    "mouse",
+    "QC"
+  ],
+  "questions": [
+    "How to convert RNA-seq reads into counts?",
+    "How to perform quality control (QC) of RNA-seq reads?",
+    "How to do this analysis efficiently in Galaxy?"
+  ],
+  "objectives": [
+    "Learn how RNA-seq reads are converted into counts",
+    "Understand QC steps that can be performed on RNA-seq reads",
+    "Generate interactive reports to summarise QC information with MultiQC",
+    "Use the Galaxy Rule-based Uploader to import FASTQs from URLs",
+    "Make use of Galaxy Collections for a tidy analysis",
+    "Create a Galaxy Workflow that converts RNA-seq reads into counts"
+  ],
+  "time_estimation": "3h",
+  "key_points": [
+    "In RNA-seq, reads (FASTQs) are mapped to a reference genome with a spliced aligner (e.g HISAT2, STAR)",
+    "The aligned reads (BAMs) can then be converted to counts",
+    "Many QC steps can be performed to help check the quality of the data",
+    "MultiQC can be used to create a nice summary report of QC information",
+    "The Galaxy Rule-based Uploader, Collections and Workflows can help make analysis more efficient and easier"
+  ],
+  "contributors": [
+    {
+      "name": "Maria Doyle",
+      "joined": "2018-09",
+      "id": "mblue9",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/"
+    },
+    {
+      "name": "Belinda Phipson",
+      "joined": "2018-09",
+      "id": "bphipson",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/bphipson.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bphipson/"
+    },
+    {
+      "name": "Harriet Dashnow",
+      "joined": "2018-09",
+      "id": "hdashnow",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/hdashnow.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hdashnow/"
+    }
+  ],
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "transcriptomics",
+      "tutorials": [
+        "ref-based"
+      ]
+    },
+    {
+      "type": "internal",
+      "topic_name": "galaxy-interface",
+      "tutorials": [
+        "collections",
+        "upload-rules"
+      ]
+    }
+  ],
+  "follow_up_training": [
+    {
+      "type": "internal",
+      "topic_name": "transcriptomics",
+      "tutorials": [
+        "rna-seq-counts-to-genes"
+      ]
+    }
+  ],
+  "url": "/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html",
+  "topic_name": "transcriptomics",
+  "tutorial_name": "rna-seq-reads-to-counts",
+  "dir": "topics/transcriptomics/tutorials/rna-seq-reads-to-counts",
+  "id": "transcriptomics/rna-seq-reads-to-counts",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "workflows": [
+    {
+      "workflow": "qc_report.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.ga"
+    },
+    {
+      "workflow": "rna-seq-reads-to-counts.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/rna-seq-reads-to-counts.ga"
+    }
+  ],
+  "tools": [
+    "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72",
+    "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.1",
+    "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3",
+    "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.2",
+    "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4",
+    "toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3",
+    "toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/1.6.3",
+    "toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.1.0+galaxy3",
+    "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.6",
+    "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7",
+    "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.3",
+    "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.7+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3",
+    "toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1",
+    "toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/2.6.4.1"
+  ],
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial"
+}

@@ -1,0 +1,185 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "Filter, Plot and Explore Single-cell RNA-seq Data",
+  "subtopic": "single-cell-CS",
+  "priority": 3,
+  "zenodo_link": "https://zenodo.org/record/7053673",
+  "redirect_from": [
+    "/topics/transcriptomics/tutorials/scrna-seq-basic-pipeline/tutorial",
+    "/topics/transcriptomics/tutorials/scrna-case_basic-pipeline/tutorial"
+  ],
+  "questions": [
+    "Is my single cell dataset a quality dataset?",
+    "How do I generate and annotate cell clusters?",
+    "How do I pick thresholds and parameters in my analysis? What's a \"reasonable\" number, and will the world collapse if I pick the wrong one?"
+  ],
+  "objectives": [
+    "Interpret quality control plots to direct parameter decisions",
+    "Repeat analysis from matrix to clustering",
+    "Identify decision-making points",
+    "Appraise data outputs and decisions",
+    "Explain why single cell analysis is an iterative (i.e. the first plots you generate are not final, but rather you go back and re-analyse your data repeatedly) process"
+  ],
+  "time_estimation": "3H",
+  "key_points": [
+    "Single cell data is huge, and must have its many (# genes) dimensions reduced for analysis",
+    "Analysis is more subjective than we think, and biological understanding of the samples as well as many iterations of analysis are important to give us our best change of attaining real biological insights"
+  ],
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "single-cell",
+      "tutorials": [
+        "scrna-case_alevin",
+        "scrna-case_alevin-combine-datasets"
+      ]
+    }
+  ],
+  "tags": [
+    "single-cell",
+    "10x",
+    "paper-replication",
+    "español",
+    "transcriptomics"
+  ],
+  "contributions": {
+    "authorship": [
+      "nomadscientist"
+    ],
+    "editing": [
+      "hexylena"
+    ],
+    "testing": [
+      "wee-snufkin"
+    ]
+  },
+  "translations": {
+    "tutorial": [
+      "es"
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "follow_up_training": [
+    {
+      "type": "internal",
+      "topic_name": "single-cell",
+      "tutorials": [
+        "scrna-case_JUPYTER-trajectories",
+        "scrna-case_monocle3-trajectories"
+      ]
+    }
+  ],
+  "url": "/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html",
+  "topic_name": "single-cell",
+  "tutorial_name": "scrna-case_basic-pipeline",
+  "dir": "topics/single-cell/tutorials/scrna-case_basic-pipeline",
+  "id": "single-cell/scrna-case_basic-pipeline",
+  "video_library": {
+    "tutorial": {
+      "description": "You’ve done all the work to make a single cell matrix, with gene counts and mitochondrial counts and buckets of cell metadata from all your variables of interest, now it’s time to fully process our data, to remove low quality cells, to reduce the many dimensions of data that make it difficult to work with, and ultimately to try to define our clusters and to find our biological meaning and insights!",
+      "materials": [
+        {
+          "link": "topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html",
+          "type": "Tutorial"
+        }
+      ],
+      "tags": [
+        "transcriptomics",
+        "single-cell"
+      ],
+      "type": "Demo",
+      "versions": [
+        {
+          "captions": [
+            "nomadscientist"
+          ],
+          "date": "2021-02-15",
+          "galaxy_version": "21.01",
+          "length": "30M",
+          "link": "M6iepSJh0EQ",
+          "speakers": [
+            "nomadscientist"
+          ]
+        }
+      ],
+      "gtn_id": "single-cell/scrna-case_basic-pipeline",
+      "title": "Filter, Plot and Explore Single-cell RNA-seq Data",
+      "captioned": true
+    },
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "workflows": [
+    {
+      "workflow": "CS3_Filter,_Plot_and_Explore_Single-cell_RNA-seq_Data.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/workflows/CS3_Filter,_Plot_and_Explore_Single-cell_RNA-seq_Data.ga"
+    }
+  ],
+  "tools": [
+    "Cut1",
+    "interactive_tool_cellxgene",
+    "join1",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/1.8.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_compute_graph/scanpy_compute_graph/1.8.1+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_cells/scanpy_filter_cells/1.8.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_filter_genes/scanpy_filter_genes/1.8.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_cluster/scanpy_find_cluster/1.8.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.8.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_variable_genes/scanpy_find_variable_genes/1.8.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_normalise_data/scanpy_normalise_data/1.8.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_plot_embed/scanpy_plot_embed/1.8.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_pca/scanpy_run_pca/1.8.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_tsne/scanpy_run_tsne/1.8.1+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_run_umap/scanpy_run_umap/1.8.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_scale_data/scanpy_scale_data/1.8.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1"
+  ],
+  "tours": false,
+  "video": false,
+  "type": "tutorial",
+  "contributors": [
+    {
+      "name": "Wendi Bacon",
+      "email": "wendi.bacon@open.ac.uk",
+      "twitter": "WendiBacon1",
+      "gitter": "nomadscientist",
+      "joined": "2020-03",
+      "elixir_node": "uk",
+      "orcid": "0000-0002-8170-8806",
+      "bio": "Lecturer at The Open University",
+      "id": "nomadscientist",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/"
+    },
+    {
+      "name": "Helena Rasche",
+      "email": "hexylena@galaxians.org",
+      "orcid": "0000-0001-9760-8992",
+      "maintainer_contact": "gitter",
+      "gitter": "hexylena",
+      "joined": "2017-09",
+      "elixir_node": "nl",
+      "id": "hexylena",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+    },
+    {
+      "name": "Julia Jakiela",
+      "email": "juliajot36@gmail.com",
+      "joined": "2022-06",
+      "id": "wee-snufkin",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/wee-snufkin.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wee-snufkin/"
+    }
+  ]
+}

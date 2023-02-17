@@ -1,0 +1,125 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "Exome sequencing data analysis for diagnosing a genetic disease",
+  "zenodo_link": "https://doi.org/10.5281/zenodo.3054169",
+  "questions": [
+    "How do you identify genetic variants in samples based on exome sequencing data?",
+    "How do you, among the set of detected variants, identify candidate causative variants for a given phenotype/disease?"
+  ],
+  "objectives": [
+    "Jointly call variants and genotypes for a family trio from whole-exome sequencing data",
+    "Use variant annotation and the observed inheritance pattern of a phenotype to identify candidate causative variants and to prioritize them"
+  ],
+  "time_estimation": "5h",
+  "key_points": [
+    "Exome sequencing is an efficient way to identify disease-relevant genetic variants.",
+    "Freebayes is a good variant and genotype caller for the joint analysis of multiple samples. It is straightforward to use and requires only minimal processing of mapped reads.",
+    "Variant annotation and being able to exploit genotype information across family members is key to identifying candidate disease variants. SnpEff and GEMINI, in particular, are powerful tools offered by Galaxy for that purpose."
+  ],
+  "contributors": [
+    {
+      "name": "Wolfgang Maier",
+      "orcid": "0000-0002-9464-6640",
+      "joined": "2017-09",
+      "elixir_node": "de",
+      "id": "wm75",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/wm75.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/wm75/"
+    },
+    {
+      "name": "Bérénice Batut",
+      "email": "berenice.batut@gmail.com",
+      "twitter": "bebatut",
+      "linkedin": "berenicebatut",
+      "gitter": "bebatut",
+      "orcid": "0000-0001-9852-1987",
+      "joined": "2017-09",
+      "elixir_node": "de",
+      "id": "bebatut",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/bebatut.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bebatut/"
+    },
+    {
+      "name": "Torsten Houwaart",
+      "joined": "2017-09",
+      "elixir_node": "de",
+      "id": "torhou",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/torhou.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/torhou/"
+    },
+    {
+      "name": "Anika Erxleben",
+      "email": "anikaerxleben@gmail.com",
+      "orcid": "0000-0002-7427-6478",
+      "joined": "2017-09",
+      "elixir_node": "de",
+      "id": "erxleben",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/erxleben.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/erxleben/"
+    },
+    {
+      "name": "Björn Grüning",
+      "email": "bjoern.gruening@gmail.com",
+      "twitter": "bjoerngruening",
+      "gitter": "bgruening",
+      "orcid": "0000-0002-3079-6586",
+      "linkedin": "bgruening",
+      "joined": "2017-09",
+      "elixir_node": "de",
+      "id": "bgruening",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+    }
+  ],
+  "url": "/topics/variant-analysis/tutorials/exome-seq/tutorial.html",
+  "topic_name": "variant-analysis",
+  "tutorial_name": "exome-seq",
+  "dir": "topics/variant-analysis/tutorials/exome-seq",
+  "id": "variant-analysis/exome-seq",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "workflows": [
+    {
+      "workflow": "workflow_exome_seq_from_premapped.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/exome-seq/workflows/workflow_exome_seq_from_premapped.ga"
+    },
+    {
+      "workflow": "workflow_exome_seq_full.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/exome-seq/workflows/workflow_exome_seq_full.ga"
+    }
+  ],
+  "tools": [
+    "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
+    "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72",
+    "toolshed.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.1.0.46-0",
+    "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.8",
+    "toolshed.g2.bx.psu.edu/repos/devteam/samtool_filter2/samtool_filter2/1.8+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/devteam/samtools_rmdup/samtools_rmdup/2.0.1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/gemini_inheritance/gemini_inheritance/0.20.1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/gemini_load/gemini_load/0.20.1+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7",
+    "toolshed.g2.bx.psu.edu/repos/iuc/snpeff/snpEff/4.3+T.galaxy1"
+  ],
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial"
+}

@@ -1,0 +1,107 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "Debugging Galaxy",
+  "questions": [
+    "How do I debug Galaxy?"
+  ],
+  "objectives": [
+    "Fix a broken branch",
+    "Interpret the results of failed tests on GitHub",
+    "Run individual tests locally",
+    "Fix errors identified by failing tests",
+    "Debug simple runtime errors using the Python debugger",
+    "Write tests exposing the identified bug"
+  ],
+  "time_estimation": "4h",
+  "key_points": [
+    "Always run individual failing tests locally to minimize the feedback loop.",
+    "To fix a bug, start by looking for the precise location in the code where the unexpected result is being produced, starting from the failing test or the error message in the log. Once the location is identified, finding and correcting the error is often trivial.",
+    "When debugging an API test failure, first determine what endpoint is being utilized; then look in `lib/galaxy/webapps/galaxy/api/` to locate the controller that handles that enpoint. The controller will point you to a manager module, which is where you're most likely to find the bug.",
+    "To locate the probable cause of a Selenium test failure, run Selenium with `GALAXY_TEST_SELENIUM_HEADLESS=false` to watch the browser step through the test.",
+    "When debugging a runtime error, use pdb or any other interactive Python debugger to step through the code to identify the location of the error. Remember to use `GALAXY_CONFIG_DEBUG=1` to enable debugging.",
+    "If you find a bug in a code block that is not covered by a test, before you fix the bug, write a test exposing the bug; run the test to ensure it fails; then fix the bug; then run the test again to ensure it passes.",
+    "Write useful and property formatted commit messages.",
+    "Pdb is your friend."
+  ],
+  "contributors": [
+    {
+      "name": "Assunta DeSanto",
+      "email": "assuntad23@gmail.com",
+      "joined": "2021-05",
+      "id": "assuntad23",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/assuntad23.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/assuntad23/"
+    },
+    {
+      "name": "John Davis",
+      "email": "jdavcs@gmail.com",
+      "joined": "2019-06",
+      "orcid": "0000-0002-1363-1245",
+      "id": "jdavcs",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/jdavcs.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jdavcs/"
+    },
+    {
+      "name": "John Chilton",
+      "email": "jmchilton@gmail.com",
+      "joined": "2017-09",
+      "twitter": "jmchilton",
+      "gitter": "jmchilton",
+      "orcid": "0000-0002-6794-0756",
+      "id": "jmchilton",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+    }
+  ],
+  "requirements": [
+    {
+      "type": "none",
+      "title": "Familiarity with basic Git commands"
+    },
+    {
+      "type": "none",
+      "title": "Basic knowledge of Python and JavaScript"
+    },
+    {
+      "type": "none",
+      "title": "Mac OS or Linux that can run Galaxy & your favorite IDE or editor"
+    },
+    {
+      "type": "internal",
+      "topic_name": "dev",
+      "tutorials": [
+        "architecture"
+      ]
+    }
+  ],
+  "subtopic": "core",
+  "url": "/topics/dev/tutorials/debugging/tutorial.html",
+  "topic_name": "dev",
+  "tutorial_name": "debugging",
+  "dir": "topics/dev/tutorials/debugging",
+  "id": "dev/debugging",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "tools": [
+
+  ],
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial"
+}

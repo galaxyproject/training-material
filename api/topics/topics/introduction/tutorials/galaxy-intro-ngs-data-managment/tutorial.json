@@ -1,0 +1,139 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "NGS data logistics",
+  "zenodo_link": "",
+  "questions": [
+    "How to manipulate and process NGS data"
+  ],
+  "objectives": [
+    "Understand most common types of NGS-related datatypes",
+    "Learn about how Galaxy handles NGS data using Illumina data derived from patients infected with SARS-CoV-2"
+  ],
+  "time_estimation": "1H30M",
+  "key_points": [
+    "FASTQ Sanger version of the format is considered to be the standard form of FASTQ.",
+    "Paired end data can be provided as two files or as an interleaved one.",
+    "FastqQC is a tool allowing to check the quality of FASTQ datasets.",
+    "The most common tools for mapping are Bowtie, BWA, BWA-MEM. You can use in-built genome to map against or upload one if it is missing.",
+    "The standard format for storing aligned reads is SAM/BAM. The major toolsets to process these datasets are DeepTools, SAMtools, BAMtools and Picard.",
+    "Data can be uploaded directly from a computer, from EBI SRA and from NCBI SRA, also using FTP or URL.",
+    "One can retrieve NGS data from Sequence Read Archive",
+    "Galaxy can analyze massive amounts of data and make them suitable for secondary analysis"
+  ],
+  "subtopic": "next-steps",
+  "contributors": [
+    {
+      "name": "Anton Nekrutenko",
+      "email": "anton@nekrut.org",
+      "joined": "2017-09",
+      "id": "nekrut",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/"
+    },
+    {
+      "name": "Marius van den Beek",
+      "joined": "2018-06",
+      "id": "mvdbeek",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/mvdbeek.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/"
+    },
+    {
+      "name": "Dave Clements",
+      "joined": "2017-09",
+      "id": "tnabtaf",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/tnabtaf.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/"
+    },
+    {
+      "name": "Daniel Blankenberg",
+      "twitter": "dblankenberg",
+      "orcid": "0000-0002-6833-9049",
+      "joined": "2018-07",
+      "id": "blankenberg",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/blankenberg.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/"
+    }
+  ],
+  "url": "/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html",
+  "topic_name": "introduction",
+  "tutorial_name": "galaxy-intro-ngs-data-managment",
+  "dir": "topics/introduction/tutorials/galaxy-intro-ngs-data-managment",
+  "id": "introduction/galaxy-intro-ngs-data-managment",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": {
+      "description": "In this demo video, we will show how to perform an NGS data analysis, using a SARS-CoV-2 example dataset. If you would like to run the full tutorial yourself, please find the link below (duration 1h-1.5h).",
+      "materials": [
+        {
+          "link": "topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html",
+          "title": "NGS data logistics",
+          "type": "Tutorial"
+        }
+      ],
+      "tags": [
+        "introduction"
+      ],
+      "type": "Demo",
+      "versions": [
+        {
+          "captions": [
+            "nekrut"
+          ],
+          "date": "2021-02-15",
+          "galaxy_version": "21.01",
+          "length": "15M",
+          "link": "9mIL0tIfZ_o",
+          "speakers": [
+            "nekrut"
+          ]
+        }
+      ],
+      "gtn_id": "introduction/galaxy-intro-ngs-data-managment",
+      "title": "NGS data logistics",
+      "captioned": true
+    },
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "workflows": [
+    {
+      "workflow": "ngs_intro_workflow.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/workflows/ngs_intro_workflow.ga"
+    }
+  ],
+  "tools": [
+    "Grep1",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+    "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
+    "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2",
+    "toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/lofreq_indelqual/lofreq_indelqual/2.1.5+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/lofreq_viterbi/lofreq_viterbi/2.1.5+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19",
+    "toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.8+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.9+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0",
+    "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0"
+  ],
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial"
+}

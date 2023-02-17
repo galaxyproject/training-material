@@ -1,0 +1,306 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "Galaxy Installation with Ansible",
+  "questions": [
+    "How does the Galaxy Ansible module work internally?",
+    "How can I install a Galaxy server with Ansible"
+  ],
+  "objectives": [
+    "Have an understanding of how Galaxy's Ansible roles are structured and interact with one another",
+    "Be able to use an Ansible playbook to install different flavors of Galaxy for different purposes"
+  ],
+  "time_estimation": "2h30m",
+  "key_points": [
+    "Basic deployment with Ansible is surprisingly easy",
+    "Complexity can grow over time as your organisation does, no need to start with playbooks like UseGalaxy.org"
+  ],
+  "contributions": {
+    "authorship": [
+      "hexylena",
+      "natefoo",
+      "slugger70"
+    ],
+    "editing": [
+      "shiltemann",
+      "nsoranzo",
+      "gmauro",
+      "mvdbeek",
+      "martenson",
+      "jmchilton",
+      "davebx",
+      "nsoranzo",
+      "lecorguille",
+      "abretaud"
+    ],
+    "testing": [
+      "mira-miracoli"
+    ]
+  },
+  "tags": [
+    "ansible",
+    "deploying",
+    "git-gat"
+  ],
+  "subtopic": "core",
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "admin",
+      "tutorials": [
+        "ansible"
+      ]
+    },
+    {
+      "type": "none",
+      "title": "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04."
+    }
+  ],
+  "abbreviations": {
+    "DVCS": "Distributed Version Control System"
+  },
+  "url": "/topics/admin/tutorials/ansible-galaxy/tutorial.html",
+  "topic_name": "admin",
+  "tutorial_name": "ansible-galaxy",
+  "dir": "topics/admin/tutorials/ansible-galaxy",
+  "id": "admin/ansible-galaxy",
+  "video_library": {
+    "tutorial": {
+      "description": null,
+      "force_archive_materials": true,
+      "materials": [
+        {
+          "link": "topics/admin/tutorials/ansible-galaxy/tutorial.html",
+          "title": "Tutorial (All Parts)",
+          "type": "Tutorial"
+        },
+        {
+          "link": "topics/admin/tutorials/database/slides.html",
+          "title": "Database Slides",
+          "type": "Slides"
+        },
+        {
+          "link": "topics/admin/tutorials/systemd-supervisor/slides.html",
+          "title": "systemd Slides",
+          "type": "Slides"
+        },
+        {
+          "link": "topics/admin/tutorials/production/slides.html",
+          "title": "Moving Towards Production Slides",
+          "type": "Slides"
+        }
+      ],
+      "tags": [
+        "admin"
+      ],
+      "type": "Tutorial",
+      "versions": [
+        {
+          "captions": [
+            "natefoo",
+            "hexylena"
+          ],
+          "date": "2022-03-01",
+          "galaxy_version": "21.05",
+          "length": "2H50M",
+          "link": "LPK8rP_qUiA",
+          "speakers": [
+            "natefoo",
+            "hexylena"
+          ]
+        },
+        {
+          "captions": [
+            "natefoo",
+            "hexylena"
+          ],
+          "date": "2021-06-28",
+          "galaxy_version": "21.05",
+          "length": "2H47M",
+          "link": "zT70luZqPOU",
+          "speakers": [
+            "natefoo"
+          ]
+        },
+        {
+          "captions": [
+            "shiltemann",
+            "hexylena"
+          ],
+          "date": "2021-02-15",
+          "galaxy_version": "21.01",
+          "length": "53M",
+          "link": "il83uApg7Hc",
+          "speakers": [
+            "hexylena"
+          ]
+        }
+      ],
+      "gtn_id": "admin/ansible-galaxy",
+      "title": "Galaxy Installation with Ansible",
+      "captioned": true
+    },
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": true,
+  "tools": [
+
+  ],
+  "tours": false,
+  "video": true,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": true
+  },
+  "type": "tutorial",
+  "contributors": [
+    {
+      "name": "Helena Rasche",
+      "email": "hexylena@galaxians.org",
+      "orcid": "0000-0001-9760-8992",
+      "maintainer_contact": "gitter",
+      "gitter": "hexylena",
+      "joined": "2017-09",
+      "elixir_node": "nl",
+      "id": "hexylena",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hexylena/"
+    },
+    {
+      "name": "Nate Coraor",
+      "gitter": "natefoo",
+      "twitter": "natefoo",
+      "email": "nate@bx.psu.edu",
+      "joined": "2017-12",
+      "orcid": "0000-0001-8083-2963",
+      "id": "natefoo",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/natefoo.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/natefoo/"
+    },
+    {
+      "name": "Simon Gladman",
+      "email": "simon.gladman@unimelb.edu.au",
+      "joined": "2017-09",
+      "elixir_node": "au",
+      "orcid": "0000-0002-6100-4385",
+      "in_memoriam": "<a href=\"https://www.biocommons.org.au/news/simon-gladman\">Simon Gladman, system administrator of UseGalaxy.org.au, passed away on November 26, 2022</a>\n\n<a href=\"https://galaxyproject.org/news/2022-11-28-simon-gladman/\">He was a fantastic teacher, tutorial author, system administrator, and warm and welcoming friend.</a> He contributed heavily to the Galaxy Training Network and especially the Galaxy Administration community over the years, we will miss him dearly. The GTN and GAT would not be what they are today, without him.\n\n“Have I told you about my watch?”",
+      "id": "slugger70",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/slugger70/"
+    },
+    {
+      "name": "Saskia Hiltemann",
+      "maintainer_contact": "gitter",
+      "email": "saskia.hiltemann@gmail.com",
+      "twitter": "shiltemann",
+      "linkedin": "shiltemann",
+      "gitter": "shiltemann",
+      "orcid": "0000-0003-3803-468X",
+      "joined": "2017-09",
+      "bio": "Researcher at Erasmus Medical Center",
+      "elixir_node": "nl",
+      "id": "shiltemann",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+    },
+    {
+      "name": "Nicola Soranzo",
+      "gitter": "nsoranzo",
+      "orcid": "0000-0003-3627-5340",
+      "twitter": "NicolaSoranzo",
+      "joined": "2017-09",
+      "elixir_node": "uk",
+      "id": "nsoranzo",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/nsoranzo.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/"
+    },
+    {
+      "name": "Gianmauro Cuccuru",
+      "joined": "2019-03",
+      "elixir_node": "de",
+      "orcid": "0000-0002-5335-545X",
+      "id": "gmauro",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/gmauro.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/gmauro/"
+    },
+    {
+      "name": "Marius van den Beek",
+      "joined": "2018-06",
+      "id": "mvdbeek",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/mvdbeek.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/"
+    },
+    {
+      "name": "Martin Čech",
+      "email": "marten@bx.psu.edu",
+      "joined": "2017-09",
+      "id": "martenson",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/martenson.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/martenson/"
+    },
+    {
+      "name": "John Chilton",
+      "email": "jmchilton@gmail.com",
+      "joined": "2017-09",
+      "twitter": "jmchilton",
+      "gitter": "jmchilton",
+      "orcid": "0000-0002-6794-0756",
+      "id": "jmchilton",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/jmchilton.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/jmchilton/"
+    },
+    {
+      "name": "Dave B.",
+      "joined": "2021-06",
+      "id": "davebx",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/davebx.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/davebx/"
+    },
+    {
+      "name": "Nicola Soranzo",
+      "gitter": "nsoranzo",
+      "orcid": "0000-0003-3627-5340",
+      "twitter": "NicolaSoranzo",
+      "joined": "2017-09",
+      "elixir_node": "uk",
+      "id": "nsoranzo",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/nsoranzo.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/"
+    },
+    {
+      "name": "Gildas Le Corguillé",
+      "joined": "2017-09",
+      "elixir_node": "fr",
+      "id": "lecorguille",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/lecorguille.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/lecorguille/"
+    },
+    {
+      "name": "Anthony Bretaudeau",
+      "email": "anthony.bretaudeau@inra.fr",
+      "twitter": "abretau",
+      "gitter": "abretaud",
+      "orcid": "0000-0003-0914-2470",
+      "joined": "2017-09",
+      "elixir_node": "fr",
+      "id": "abretaud",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/"
+    },
+    {
+      "name": "Mira Kuntz",
+      "joined": "2022-07",
+      "id": "mira-miracoli",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/mira-miracoli.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mira-miracoli/"
+    }
+  ]
+}

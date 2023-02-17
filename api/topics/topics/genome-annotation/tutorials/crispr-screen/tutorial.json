@@ -1,0 +1,184 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "CRISPR screen analysis",
+  "zenodo_link": "https://zenodo.org/record/5750854",
+  "questions": [
+    "What are the steps to process CRISPR screen data?",
+    "How to identify essential genes across experimental conditions?"
+  ],
+  "objectives": [
+    "Apply appropriate analysis and quality control steps for CRISPR screen data",
+    "Identify differentially enriched genes across conditions",
+    "Generate volcano plot to visualise results"
+  ],
+  "time_estimation": "2H",
+  "key_points": [
+    "CRISPR screen data can be analysed using MAGeCK and standard read quality tools"
+  ],
+  "contributors": [
+    {
+      "name": "Maria Doyle",
+      "joined": "2018-09",
+      "id": "mblue9",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/"
+    },
+    {
+      "name": "Kenji Fujihara",
+      "github": false,
+      "joined": "2021-10",
+      "id": "kenjifujihara",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/kenjifujihara.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/kenjifujihara/"
+    },
+    {
+      "name": "Twishi Gulati",
+      "github": false,
+      "joined": "2021-11",
+      "id": "twishigulati",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/twishigulati.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/twishigulati/"
+    }
+  ],
+  "tags": [
+    "genome editing",
+    "CRISPR",
+    "essential genes",
+    "cell line"
+  ],
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "sequence-analysis",
+      "tutorials": [
+        "quality-control"
+      ]
+    },
+    {
+      "type": "internal",
+      "topic_name": "galaxy-interface",
+      "tutorials": [
+        "collections",
+        "upload-rules"
+      ]
+    }
+  ],
+  "abbreviations": {
+    "CRISPR": "Clustered Regularly Interspaced Short Palindromic Repeats",
+    "MAGeCK": "Model-based Analysis of Genome-wide CRISPR-Cas9 Knockout"
+  },
+  "subtopic": "eukaryote",
+  "priority": 8,
+  "url": "/topics/genome-annotation/tutorials/crispr-screen/tutorial.html",
+  "topic_name": "genome-annotation",
+  "tutorial_name": "crispr-screen",
+  "dir": "topics/genome-annotation/tutorials/crispr-screen",
+  "id": "genome-annotation/crispr-screen",
+  "video_library": {
+    "tutorial": {
+      "description": "This tutorial will walk you through a CRISPR screen analysis.",
+      "materials": [
+        {
+          "link": "topics/genome-annotation/tutorials/crispr-screen/tutorial.html",
+          "title": "CRISPR screen analysis",
+          "type": "Tutorial"
+        }
+      ],
+      "tags": [
+        "crispr"
+      ],
+      "type": "Tutorial",
+      "versions": [
+        {
+          "captions": [
+            "mblue9"
+          ],
+          "date": "2022-03-10",
+          "galaxy_version": "21.09",
+          "length": "45M",
+          "link": "wavAf_2ytWg",
+          "speakers": [
+            "mblue9"
+          ]
+        }
+      ],
+      "gtn_id": "genome-annotation/crispr-screen",
+      "title": "CRISPR screen analysis",
+      "captioned": true
+    },
+    "slides": {
+      "description": "This lecture will introduce the basic concepts involved in CRISPR screen analysis.",
+      "materials": [
+        {
+          "link": "topics/genome-annotation/tutorials/crispr-screen/slides.html",
+          "type": "Slides"
+        }
+      ],
+      "tags": [
+        "crispr"
+      ],
+      "type": "Lecture",
+      "versions": [
+        {
+          "captions": [
+            "mblue9"
+          ],
+          "date": "2022-03-10",
+          "galaxy_version": "21.09",
+          "length": "3M",
+          "link": "MNT9gB5_RMg",
+          "speakers": [
+            "awspolly"
+          ]
+        }
+      ],
+      "gtn_id": "genome-annotation/crispr-screen",
+      "title": "CRISPR screen analysis",
+      "captioned": true
+    },
+    "demo": null,
+    "both": null,
+    "session": {
+      "title": "CRISPR Screen Analysis",
+      "description": "This lecture will introduce the basic concepts involved in CRISPR screen analysis.",
+      "videos": [
+        "genome-annotation/crispr-screen/slides",
+        "genome-annotation/crispr-screen/tutorial"
+      ]
+    }
+  },
+  "hands_on": true,
+  "slides": true,
+  "workflows": [
+    {
+      "workflow": "main_workflow.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/crispr-screen/workflows/main_workflow.ga"
+    }
+  ],
+  "tools": [
+    "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+    "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/mageck_count/mageck_count/0.5.9.2.4",
+    "toolshed.g2.bx.psu.edu/repos/iuc/mageck_mle/mageck_mle/0.5.9.2.1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/mageck_test/mageck_test/0.5.9.2.1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5",
+    "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.4+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.5+galaxy0"
+  ],
+  "tours": false,
+  "video": true,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": true
+  },
+  "type": "tutorial"
+}

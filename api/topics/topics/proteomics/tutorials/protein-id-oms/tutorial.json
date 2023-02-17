@@ -1,0 +1,130 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "Peptide and Protein ID using OpenMS tools",
+  "zenodo_link": "https://zenodo.org/record/546301",
+  "level": "Advanced",
+  "questions": [
+    "How to convert LC-MS/MS raw files?",
+    "How to identify peptides?",
+    "How to identify proteins?",
+    "How to evaluate the results?"
+  ],
+  "objectives": [
+    "Protein identification from LC-MS/MS raw files."
+  ],
+  "time_estimation": "45m",
+  "requirements": [
+    {
+      "type": "internal",
+      "topic_name": "proteomics",
+      "tutorials": [
+        "database-handling"
+      ]
+    }
+  ],
+  "key_points": [
+    "LC-MS/MS raw files have to be converted to mzML before using GalaxyP on most GalaxyP servers.",
+    "OpenMS provides many tools for proteomic analysis and guarantees compatibility by using open file formats.",
+    "OpenMS provides several thirdparty search engines and Fido for protein inference."
+  ],
+  "follow_up_training": [
+    {
+      "type": "internal",
+      "topic_name": "proteomics",
+      "tutorials": [
+        "protein-quant-sil"
+      ]
+    }
+  ],
+  "contributors": [
+    {
+      "name": "Florian Christoph Sigloch",
+      "email": "sigloch+github@mailbox.org",
+      "joined": "2017-09",
+      "id": "stortebecker",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/stortebecker.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/stortebecker/"
+    },
+    {
+      "name": "Björn Grüning",
+      "email": "bjoern.gruening@gmail.com",
+      "twitter": "bjoerngruening",
+      "gitter": "bgruening",
+      "orcid": "0000-0002-3079-6586",
+      "linkedin": "bgruening",
+      "joined": "2017-09",
+      "elixir_node": "de",
+      "id": "bgruening",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/bgruening.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bgruening/"
+    }
+  ],
+  "subtopic": "id-quant",
+  "tags": [
+    "DDA",
+    "HeLa"
+  ],
+  "url": "/topics/proteomics/tutorials/protein-id-oms/tutorial.html",
+  "topic_name": "proteomics",
+  "tutorial_name": "protein-id-oms",
+  "dir": "topics/proteomics/tutorials/protein-id-oms",
+  "id": "proteomics/protein-id-oms",
+  "video_library": {
+    "tutorial": null,
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "workflows": [
+    {
+      "workflow": "workflow.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow.ga"
+    },
+    {
+      "workflow": "workflow_two-search-engines.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/protein-id-oms/workflows/workflow_two-search-engines.ga"
+    }
+  ],
+  "tools": [
+    "Grep1",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_consensusid/ConsensusID/2.2.0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.2.0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.2.0.1",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.6+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.2.0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idfilter/IDFilter/2.2.0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idmerger/IDMerger/2.2.0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idposteriorerrorprobability/IDPosteriorErrorProbability/2.2.0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idposteriorerrorprobability/IDPosteriorErrorProbability/2.6+galaxy",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idposteriorerrorprobability/IDPosteriorErrorProbability/2.6+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idscoreswitcher/IDScoreSwitcher/2.2.0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idscoreswitcher/IDScoreSwitcher/2.6+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_msgfplusadapter/MSGFPlusAdapter/2.2.0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peakpickerhires/PeakPickerHiRes/2.3.0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.2.0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.6+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_xtandemadapter/XTandemAdapter/2.2.0.1",
+    "toolshed.g2.bx.psu.edu/repos/galaxyp/openms_xtandemadapter/XTandemAdapter/2.6+galaxy0"
+  ],
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial"
+}

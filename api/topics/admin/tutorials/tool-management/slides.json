@@ -1,9 +1,5 @@
 {
   "layout": "tutorial_slides",
-  "logo": "assets/images/gat.png",
-  "redirect_from": [
-    "/topics/admin/tutorials/tool-install/slides"
-  ],
   "title": "Galaxy Tool Management with Ephemeris",
   "questions": [
     "How are tools configured on a Galaxy instance?",
@@ -11,6 +7,12 @@
     "How are Galaxy tools installed?",
     "What is ephemeris and how can it be used to manage tools on a Galaxy instance?"
   ],
+  "objectives": [
+    "Learn about Ephemeris",
+    "Extract a list of tools from a workflow",
+    "Install these tools on a given Galaxy"
+  ],
+  "time_estimation": "45m",
   "key_points": [
     "The Galaxy Tool Shed contains thousands of tools that can be installed on a Galaxy instance",
     "Galaxy administrators can choose which tools are installed and how they are arranged",
@@ -18,61 +20,134 @@
     "Tool installation with ephemeris is best practice and allows for the automation of tool management tasks"
   ],
   "contributors": [
-    {
-      "name": "Marius van den Beek",
-      "joined": "2018-06",
-      "id": "mvdbeek",
-      "url": "https://training.galaxyproject.org/training-material/api/contributors/mvdbeek.json"
-    },
-    {
-      "name": "Catherine Bromhead",
-      "gitter": "cat-bro",
-      "joined": "2019-12",
-      "elixir_node": "au",
-      "id": "cat-bro",
-      "url": "https://training.galaxyproject.org/training-material/api/contributors/cat-bro.json"
-    },
-    {
-      "name": "Martin Čech",
-      "email": "marten@bx.psu.edu",
-      "joined": "2017-09",
-      "id": "martenson",
-      "url": "https://training.galaxyproject.org/training-material/api/contributors/martenson.json"
-    },
-    {
-      "name": "Simon Gladman",
-      "email": "simon.gladman@unimelb.edu.au",
-      "joined": "2017-09",
-      "elixir_node": "au",
-      "orcid": "0000-0002-6100-4385",
-      "in_memoriam": "<a href=\"https://www.biocommons.org.au/news/simon-gladman\">Simon Gladman, system administrator of UseGalaxy.org.au, passed away on November 26, 2022</a>\n\n<a href=\"https://galaxyproject.org/news/2022-11-28-simon-gladman/\">He was a fantastic teacher, tutorial author, system administrator, and warm and welcoming friend.</a> He contributed heavily to the Galaxy Training Network and especially the Galaxy Administration community over the years, we will miss him dearly. The GTN and GAT would not be what they are today, without him.\n\n“Have I told you about my watch?”",
-      "id": "slugger70",
-      "url": "https://training.galaxyproject.org/training-material/api/contributors/slugger70.json"
-    },
-    {
-      "name": "Helena Rasche",
-      "email": "hexylena@galaxians.org",
-      "orcid": "0000-0001-9760-8992",
-      "maintainer_contact": "gitter",
-      "gitter": "hexylena",
-      "joined": "2017-09",
-      "elixir_node": "nl",
-      "id": "hexylena",
-      "url": "https://training.galaxyproject.org/training-material/api/contributors/hexylena.json"
-    },
-    {
-      "name": "Nicola Soranzo",
-      "gitter": "nsoranzo",
-      "orcid": "0000-0003-3627-5340",
-      "twitter": "NicolaSoranzo",
-      "joined": "2017-09",
-      "elixir_node": "uk",
-      "id": "nsoranzo",
-      "url": "https://training.galaxyproject.org/training-material/api/contributors/nsoranzo.json"
-    }
+    "mvdbeek",
+    "cat-bro",
+    "martenson",
+    "slugger70",
+    "hexylena",
+    "nsoranzo"
+  ],
+  "subtopic": "features",
+  "tags": [
+    "tools",
+    "git-gat"
   ],
   "url": "/topics/admin/tutorials/tool-management/slides.html",
   "topic_name": "admin",
   "tutorial_name": "tool-management",
-  "dir": "topics/admin/tutorials/tool-management"
+  "dir": "topics/admin/tutorials/tool-management",
+  "id": "admin/tool-management",
+  "video_library": {
+    "tutorial": {
+      "description": null,
+      "materials": [
+        {
+          "link": "topics/admin/tutorials/tool-management/slides.html",
+          "type": "Slides"
+        },
+        {
+          "link": "topics/admin/tutorials/tool-management/tutorial.html",
+          "type": "Tutorial"
+        }
+      ],
+      "tags": [
+        "admin"
+      ],
+      "type": "Tutorial",
+      "versions": [
+        {
+          "captions": [
+            "cat-bro"
+          ],
+          "date": "2021-06-28",
+          "galaxy_version": "21.05",
+          "length": "27M",
+          "link": "pda0v9b3vO4",
+          "speakers": [
+            "cat-bro"
+          ]
+        },
+        {
+          "captions": [
+            "eancelet"
+          ],
+          "date": "2021-02-15",
+          "galaxy_version": "21.01",
+          "length": "47M",
+          "link": "7Qqwrzn--YI",
+          "speakers": [
+            "cat-bro"
+          ]
+        }
+      ],
+      "gtn_id": "admin/tool-management",
+      "title": "Galaxy Tool Management with Ephemeris",
+      "captioned": true
+    },
+    "slides": {
+      "description": null,
+      "materials": [
+        {
+          "link": "topics/admin/tutorials/tool-management/slides.html",
+          "type": "Slides"
+        },
+        {
+          "link": "topics/admin/tutorials/tool-management/tutorial.html",
+          "type": "Tutorial"
+        }
+      ],
+      "tags": [
+        "admin"
+      ],
+      "type": "Lecture",
+      "versions": [
+        {
+          "captions": [
+            "cat-bro"
+          ],
+          "date": "2021-06-28",
+          "galaxy_version": "21.05",
+          "length": "17M",
+          "link": "8Rdho_eUeKc",
+          "speakers": [
+            "cat-bro"
+          ]
+        }
+      ],
+      "gtn_id": "admin/tool-management",
+      "title": "Galaxy Tool Management with Ephemeris",
+      "captioned": true
+    },
+    "demo": null,
+    "both": null,
+    "session": {
+      "title": "Tool Management",
+      "description": "Learn how to install and manage tools in Galaxy",
+      "videos": [
+        "admin/tool-management/slides",
+        "admin/tool-management/tutorial"
+      ]
+    }
+  },
+  "hands_on": true,
+  "slides": true,
+  "tools": [
+
+  ],
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial",
+  "logo": "assets/images/gat.png",
+  "redirect_from": [
+    "/topics/admin/tutorials/tool-install/slides"
+  ]
 }

@@ -1,0 +1,142 @@
+{
+  "layout": "tutorial_hands_on",
+  "title": "Antibiotic resistance detection",
+  "zenodo_link": "https://doi.org/10.5281/zenodo.3247504",
+  "questions": [
+    "How do I assemble a genome with Nanopore data?",
+    "How do I get more information about the structure of the genomes?",
+    "How do I get more information about the antimicrobial resistance genes?"
+  ],
+  "objectives": [
+    "Perform Quality control on your reads",
+    "Assemble a genome with Minimap2/Miniasm/Racon",
+    "Determine the structure of the genome(s)",
+    "Scan for antimicrobial resistance genes with Staramr"
+  ],
+  "time_estimation": "3h",
+  "key_points": [
+    "Minimap2, Miniasm, and Racon can be used for quickly assembling Nanopore data",
+    "Unicycler can be used to optimize settings of assembly tools",
+    "Nanopore sequencing is useful for reconstruction of genomes",
+    "Antimicrobial resistance genes are detectable after fast assembly",
+    "The CARD database is a useful resource describing antibiotic resistance genes"
+  ],
+  "contributors": [
+    {
+      "name": "Willem de Koning",
+      "joined": "2018-09",
+      "elixir_node": "nl",
+      "id": "willemdek11",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/willemdek11.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/willemdek11/"
+    },
+    {
+      "name": "Saskia Hiltemann",
+      "maintainer_contact": "gitter",
+      "email": "saskia.hiltemann@gmail.com",
+      "twitter": "shiltemann",
+      "linkedin": "shiltemann",
+      "gitter": "shiltemann",
+      "orcid": "0000-0003-3803-468X",
+      "joined": "2017-09",
+      "bio": "Researcher at Erasmus Medical Center",
+      "elixir_node": "nl",
+      "id": "shiltemann",
+      "url": "https://training.galaxyproject.org/training-material/api/contributors/shiltemann.json",
+      "page": "https://training.galaxyproject.org/training-material/hall-of-fame/shiltemann/"
+    }
+  ],
+  "tags": [
+    "nanopore",
+    "plasmids",
+    "assembly",
+    "amr"
+  ],
+  "url": "/topics/metagenomics/tutorials/plasmid-metagenomics-nanopore/tutorial.html",
+  "topic_name": "metagenomics",
+  "tutorial_name": "plasmid-metagenomics-nanopore",
+  "dir": "topics/metagenomics/tutorials/plasmid-metagenomics-nanopore",
+  "id": "metagenomics/plasmid-metagenomics-nanopore",
+  "video_library": {
+    "tutorial": {
+      "description": "This tutorial will guide you through the process of assembling your Nanopore-sequenced bacterial samples and determining the presence of antibiotic resistance genes.",
+      "materials": [
+        {
+          "link": "topics/metagenomics/tutorials/plasmid-metagenomics-nanopore/tutorial.html",
+          "title": "Antibiotic resistance detection of plasmid data",
+          "type": "Tutorial"
+        },
+        {
+          "link": "topics/metagenomics/tutorials/nanopore-16S-metagenomics/tutorial.html",
+          "title": "16S Microbial analysis with Nanopore data",
+          "type": "Related Tutorial"
+        }
+      ],
+      "tags": [
+        "metagenomics"
+      ],
+      "type": "Tutorial",
+      "versions": [
+        {
+          "captions": [
+            "bebatut"
+          ],
+          "date": "2021-02-15",
+          "galaxy_version": "21.01",
+          "length": "45M",
+          "link": "ECIl8ZU1Wko",
+          "speakers": [
+            "willemdek11"
+          ]
+        }
+      ],
+      "gtn_id": "metagenomics/plasmid-metagenomics-nanopore",
+      "title": "Antibiotic resistance detection",
+      "captioned": true
+    },
+    "slides": null,
+    "demo": null,
+    "both": null,
+    "session": null
+  },
+  "hands_on": true,
+  "slides": false,
+  "workflows": [
+    {
+      "workflow": "Workflow-plasmid-metagenomics-nanopore.ga",
+      "tests": false,
+      "url": "https://training.galaxyproject.org/training-material/topics/metagenomics/tutorials/plasmid-metagenomics-nanopore/workflows/Workflow-plasmid-metagenomics-nanopore.ga"
+    }
+  ],
+  "tools": [
+    "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.3.1.1",
+    "toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.4.13",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/miniasm/miniasm/0.2+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/miniasm/miniasm/0.3+galaxy0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17",
+    "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy2",
+    "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.25.0+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1",
+    "toolshed.g2.bx.psu.edu/repos/iuc/plasflow/PlasFlow/1.0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.7.0",
+    "toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.8.0",
+    "toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.5.1",
+    "toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+galaxy2"
+  ],
+  "tours": false,
+  "video": false,
+  "translations": {
+    "tutorial": [
+
+    ],
+    "slides": [
+
+    ],
+    "video": false
+  },
+  "type": "tutorial"
+}
