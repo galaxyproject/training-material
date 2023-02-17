@@ -102,7 +102,7 @@ We've provided you with some example data to play with, a small subset of the re
 
 Down-sampled reads and some associated annotation can be imported below. How did I downsample these FASTQ files? Check out [this history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---how-to-downsample) to find out!
 
-Additionally, to map your reads, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. You can download these for your species of interest [from Ensembe](https://www.ensembl.org/info/data/ftp/index.html). These files are included in the data import step below. Keep in mind, these are big files, so the fastest way to get these into your Galaxy account is through importing them by history.
+Additionally, to map your reads, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. You can download these for your species of interest [from Ensembl](https://www.ensembl.org/info/data/ftp/index.html). These files are included in the data import step below. Keep in mind, these are big files, so the fastest way to get these into your Galaxy account is through importing them by history.
 
 > <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
 >
