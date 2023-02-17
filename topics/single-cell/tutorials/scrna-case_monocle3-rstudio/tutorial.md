@@ -50,6 +50,7 @@ contributions:
     - wee-snufkin
   editing:
     - hexylena
+    - pavanvidem
 
 notebook:
   language: r
