@@ -192,10 +192,11 @@ module Jekyll
       TopicFilter.list_all_materials(site).select{|m| m['workflows']}.each do |material|
         material['workflows'].each do |workflow|
           wfid = "#{material['topic_name']}-#{material['tutorial_name']}"
+          wfname = workflow['workflow'].gsub(/.ga/, '').downcase
 
-          page2 = PageWithoutAFile.new(site, "", "api/ga4gh/trs/v2/tools/#{wfid}/versions/", "main?gtn=true")
+          page2 = PageWithoutAFile.new(site, "", "api/ga4gh/trs/v2/tools/#{wfid}/versions/", "#{wfname}?gtn=true")
           page2.content = JSON.pretty_generate({
-            "id" => "main",
+            "id" => wfname,
             "url" => site.config['url'] + site.config['baseurl'] + material["url"],
             "name" => "v1",
             "author" => [],
@@ -204,7 +205,7 @@ module Jekyll
           page2.data["layout"] = nil
           site.pages << page2
 
-          page2 = PageWithoutAFile.new(site, "", "api/ga4gh/trs/v2/tools/#{wfid}/versions/main/GALAXY", "descriptor")
+          page2 = PageWithoutAFile.new(site, "", "api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}/GALAXY", "descriptor")
           page2.content = JSON.pretty_generate({
             "content" => File.open(material['dir'] + '/workflows/' + workflow['workflow']).read,
             "checksum" => [],

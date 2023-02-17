@@ -1,9 +1,9 @@
---- 
-layout : tutorial_hands_on
-enable: false
+---
+layout: tutorial_hands_on
+draft: true
 
-title : 'Mass spectrometry : GC-MS analysis with metaMS package'
-level : Introductory
+title: 'Mass spectrometry : GC-MS analysis with metaMS package'
+level: Introductory
 zenodo_link : 'https://zenodo.org/record/3244991' 
 questions : 
     - What are the main steps of GC-MS datas processing for metabolomic analysis ? 

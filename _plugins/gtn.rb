@@ -5,6 +5,13 @@ require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'
 
 
+puts "[GTN] You are running #{RUBY_VERSION} released on #{RUBY_RELEASE_DATE} for #{RUBY_PLATFORM}"
+version_parts = RUBY_VERSION.split(".")
+if version_parts[0].to_i < 3
+  puts "[GTN] WARNING: This Ruby is pretty old, you might want to update."
+end
+
+
 def get_authors(material)
   if material.key?('contributors') then
     material['contributors']
