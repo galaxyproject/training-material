@@ -52,7 +52,11 @@ module Jekyll
       def mapContributor(site, c)
         x = site.data['contributors']
           .fetch(c, {})
-          .merge({"id" => c, "url" => site.config['url'] + site.config['baseurl'] + "/api/contributors/#{c}.json"})
+          .merge({
+            "id" => c,
+            "url" => site.config['url'] + site.config['baseurl'] + "/api/contributors/#{c}.json",
+            "page" => site.config['url'] + site.config['baseurl'] + "/hall-of-fame/#{c}/",
+          })
         visitAndMarkdownify(site, x)
       end
 
@@ -127,20 +131,36 @@ module Jekyll
       page2.data["layout"] = nil
       site.pages << page2
 
-      def filterInteresting(layout)
-        layout == 'tutorial_slides' or layout == 'base_slides' or layout == 'rdmbites_slides' or layout == 'tutorial_hands_on'
-      end
-
       puts "[GTN/API] Tutorial and Slide pages"
-      site.pages.select{|page| filterInteresting(page.data['layout']) }
-        .each{|page|
 
-        page5 = PageWithoutAFile.new(site, "", "api/topics/", "#{page.url[7..-6]}.json")
-        p = page.data.dup
-        p['contributors'] = get_contributors(p).dup.map{|c| mapContributor(site, c)}
-        page5.content = JSON.pretty_generate(p)
-        page5.data["layout"] = nil
-        site.pages << page5
+      TopicFilter.list_all_materials(site).each{|material|
+        directory = material['dir']
+
+        if material['slides']
+          page5 = PageWithoutAFile.new(site, "", "api/", "#{directory}/slides.json")
+          p = material.dup
+          p['contributors'] = get_contributors(p).dup.map{|c| mapContributor(site, c)}
+
+          # Here we un-do the tutorial metadata priority, and overwrite with
+          # slides metadata when available.
+          slides_data = site.pages.select{|p| p.url == "/" + directory + "/slides.html"}[0]
+          if slides_data and slides_data.data
+            p.update(slides_data.data)
+          end
+
+          page5.content = JSON.pretty_generate(p)
+          page5.data["layout"] = nil
+          site.pages << page5
+        end
+
+        if material['hands_on']
+          page5 = PageWithoutAFile.new(site, "", "api/topics/", "#{directory}/tutorial.json")
+          p = material.dup
+          p['contributors'] = get_contributors(p).dup.map{|c| mapContributor(site, c)}
+          page5.content = JSON.pretty_generate(p)
+          page5.data["layout"] = nil
+          site.pages << page5
+        end
       }
 
       # Deploy the feedback file as well

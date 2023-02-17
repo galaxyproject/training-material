@@ -646,11 +646,33 @@ module GtnLinter
     end
 
     if ! contents.has_key?("annotation")
-      topic = @path.split('/')[1]
       results.push(ReviewDogEmitter.file_error(
         path: @path, message: "This workflow is missing an annotation. Please add `\"annotation\": \"title of tutorial\"`", code: "GTN:016"))
     end
 
+    if ! contents.has_key?("license")
+      results.push(ReviewDogEmitter.file_error(
+        path: @path, message: "This workflow is missing a license. Please select a valid OSI license. You can correct this in the Galaxy workflow editor.", code: "GTN:026"))
+    end
+
+    if ! contents.has_key?("creator")
+      results.push(ReviewDogEmitter.file_error(
+        path: @path, message: "This workflow is missing a Creator. Please edit this workflow in Galaxy to add the correct creator entities", code: "GTN:024"))
+    else
+      contents['creator']
+        .select{|c| c["class"] == "Person"}
+        .each{|p|
+          if ! p.has_key?("identifier") or p["identifier"] == ""
+            results.push(ReviewDogEmitter.file_error(
+              path: @path, message: "This workflow has a creator but is missing an identifier for them. Please ensure all creators have valid ORCIDs.", code: "GTN:025"))
+          end
+
+          if ! p.has_key?("name") or p["name"] == ""
+            results.push(ReviewDogEmitter.file_error(
+              path: @path, message: "This workflow has a creator but is a name, please add it.", code: "GTN:025"))
+          end
+        }
+    end
     results
   end
 
@@ -761,6 +783,23 @@ module GtnLinter
     contents.select{|x| x.match(/GTN:IGNORE:(\d\d\d)/)}.map{|x| "GTN:" + x.match(/GTN:IGNORE:(\d\d\d)/)[1] }.uniq
   end
 
+  def self.filter_results(results, ignores)
+    if ! results.nil?
+      # Remove any empty lists
+      results = results.select{|x| !x.nil? && x.length > 0 }.flatten
+      # Before ignoring anything matching GTN:IGNORE:###
+      if ignores.nil?
+        return results
+      end
+
+      if results.length > 0
+          results = results.select{|x| ignores.index(x['code']['value']).nil?}
+      end
+      return results
+    end
+    return nil
+  end
+
   def self.fix_file(path)
     @path = path
 
@@ -774,14 +813,7 @@ module GtnLinter
       ignores = should_ignore(contents)
       results = fix_md(contents)
 
-      if ! results.nil?
-        # Remove any empty lists
-        results = results.select{|x| !x.nil? && x.length > 0 }.flatten
-        # Before ignoring anything matching GTN:IGNORE:###
-        if results.length > 0
-            results = results.select{|x| ignores.index(x['code']['value']).nil?}
-        end
-      end
+      results = filter_results(results, ignores)
       emit_results(results)
     elsif path.match(/.bib$/)
       handle = File.open(path, 'r')
@@ -789,15 +821,32 @@ module GtnLinter
 
       bib = BibTeX.open(path)
       results = fix_bib(contents, bib)
+
+      results = filter_results(results, ignores)
       emit_results(results)
     elsif path.match(/.ga$/)
       handle = File.open(path, 'r')
       begin
         contents = handle.read
         data = JSON.parse(contents)
+        results = []
+
+        # Check if there's a missing workflow test
+        folder = File.dirname(path)
+        basename = File.basename(path).gsub(/.ga$/, '')
+        possible_tests = Dir.glob("#{folder}/#{basename}*ym*")
+        possible_tests = possible_tests.select{|f| f =~ /#{basename}[_-]tests?.ya?ml/}
+
+        if possible_tests.length == 0
+          results += [
+            ReviewDogEmitter.file_error(path: path, message: "This workflow is missing a test, which is now mandatory. Please see [the FAQ on how to add tests to your workflows](https://training.galaxyproject.org/training-material/faqs/gtn/gtn_workflow_testing.html).", code: "GTN:027")
+          ]
+        end
+
+        # Check if they use TS tools, we do this here because it's easier to look at the plain text.
         contents.split("\n").each.with_index{|text, linenumber|
           if text.match(/testtoolshed/)
-            emit_results([
+            results += [
               ReviewDogEmitter.error(
                 path: @path,
                 idx: linenumber,
@@ -807,10 +856,12 @@ module GtnLinter
                 message: "This step uses a tool from the testtoolshed. These are not permitted in GTN tutorials.",
                 code: "GTN:017",
               )
-            ])
+            ]
           end
         }
-        results = fix_ga_wf(data)
+        results += fix_ga_wf(data)
+
+        results = filter_results(results, ignores)
         emit_results(results)
       rescue
         emit_results([ReviewDogEmitter.file_error(path: path, message: "Unparseable JSON in this workflow file.", code: "GTN:019")])
