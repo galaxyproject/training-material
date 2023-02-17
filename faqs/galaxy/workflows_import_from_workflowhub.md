@@ -8,7 +8,7 @@ contributors: [gallardoalba, abueg]
 
 [WorkflowHub](https://workflowhub.eu/) is a workflow management system which allows workflows to be FAIR (Findable, Accessible, Interoperable, and Reusable), citable, have managed metadata profiles, and be openly available for review and analytics.
 
-> ### {% icon hands_on %} Hands-on: Import a workflow
+> <hands-on-title> Import a workflow </hands-on-title>
 >
 > 1. Click on the **Workflow** menu, located in the top bar.
 > 2. Click on the **Import** button, located in the right corner.
