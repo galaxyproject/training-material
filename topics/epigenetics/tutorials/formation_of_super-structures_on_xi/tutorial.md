@@ -47,7 +47,7 @@ On a larger scale than nucleosomes, DNA is forming loops. DNA elements that woul
 
 In mammals, the X chromosome inactivation (XCI) balances the dosage of X-linked genes between females and males. The genes on the inactive X (Xi) chromosome are not expressed.
 
-Binding certain proteins to each of the eight histone proteins may modify the chromatin structure and may result in changes in transcription level. For example, the H3K4me3 is adding 3 methyl-group of the 4th Lysine in the histone 3 amino-acid. This modification is known to activate the transcription on nearby genes by opening the chromatin. The H3K27me3 on the other hand is inactivating the transcription of the nearby genes:
+Binding certain molecules to the histone proteins may modify the chromatin structure and may result in changes in transcription level. For example, the H3K4me3 results from adding 3 methyl-group to the 4th lysine in the histone 3 protein. This modification is known to activate the transcription on nearby genes by opening the chromatin. The H3K27me3 on the other hand is inactivating the transcription of the nearby genes:
 
 ![Fadloun et al, 2013](../../images/formation_of_super-structures_on_xi/histone_modifications.jpg "Source: Fadloun et al, 2013")
 
@@ -316,7 +316,7 @@ Since in this tutorial we are interested in assessing H3K4me3, H3K27me3 and CTCF
 >
 >           It reduces the computation time for the tutorial
 >
->    - *"Region of the genome to limit the operation to"*: `chrX`
+>    - *"Region of the genome to limit the operation to"*: `X`
 >
 >    Using these parameters, the tool will take bins of 1000 bp separated by 500 bp on the chromosome X. For each bin the overlapping reads in each sample will be computed and stored into a matrix.
 >
@@ -355,7 +355,7 @@ Similar to **multiBamSummary** {% icon tool %}, **plotFingerprint** {% icon tool
 > 1. **plotFingerprint** {% icon tool %} with the following parameters
 >    - *"Sample order matters"*: `No`
 >       - {% icon param-files %} *"BAM/CRAM file"*: `wt_input_rep1` and `wt_H3K4me3_rep1`
->    - *"Region of the genome to limit the operation to"*: `chrX`
+>    - *"Region of the genome to limit the operation to"*: `X`
 >    - *"Show advanced options"*: `Yes`
 >       - *"Number of samples"*: `10000`
 {: .hands_on}
@@ -428,7 +428,7 @@ We are using **bamCoverage** {% icon tool %}. Given a BAM file, this tool genera
 >    - *"Scaling/Normalization method"*: `Normalize coverage to 1x`
 >       - *"Effective genome size"*: `GRCm38/mm10 (2308125349)`
 >    - *"Coverage file format"*: `bedgraph`
->    - *"Region of the genome to limit the operation to"*: `chrX`
+>    - *"Region of the genome to limit the operation to"*: `X`
 >
 >    > <question-title></question-title>
 >    >
@@ -459,7 +459,7 @@ We are using **bamCoverage** {% icon tool %}. Given a BAM file, this tool genera
 
 > <question-title></question-title>
 >
-> If you zoom to `chrX:151,385,260-152,426,526`, what do you observe?
+> If you zoom to `X:151,385,260-152,426,526`, what do you observe?
 >
 > ![Output of bamCoverage](../../images/formation_of_super-structures_on_xi/bamcoverage_igv.png "bamCoverage for wt_H3K4me3_rep1 and wt_input_rep1 on chrX:151,385,260-152,426,526")
 >
@@ -480,7 +480,7 @@ To extract only the information induced by the immunoprecipitation, we normalize
 >    - *"Bin size in bases"*: `50`
 >    - *"How to compare the two files"*: `Compute log2 of the number of reads ratio`
 >    - *"Coverage file format"*: `bedgraph`
->    - *"Region of the genome to limit the operation to"*: `chrX`
+>    - *"Region of the genome to limit the operation to"*: `X`
 >
 >    > <question-title></question-title>
 >    >
@@ -525,7 +525,8 @@ We could see in the ChIP data some enriched regions (peaks). We now would like t
 >           - {% icon param-file %} *"ChIP-Seq Treatment File"*: `wt_input_rep1.bam`
 >    - *"Format of Input Files"*: `Paired-end BAM`
 >    - *"Effective genome size"*: `M.musculus (1.87e9)`
->    - *"Outputs"*: `Summary page (html)`
+>    - In *"Additional Outputs"*:
+>       - Select: `Summary page (html)`
 >
 >    > <comment-title></comment-title>
 >    > The advanced options may be adjusted, depending of the samples.
@@ -580,7 +581,7 @@ Since we already generated the required files for the H3K4me3 sample, let's make
 >    - *"Bin size in bases"*: `50`
 >    - *"How to compare the two files"*: `Compute log2 of the number of reads ratio`
 >    - *"Coverage file format"*: `bigwig`
->    - *"Region of the genome to limit the operation to"*: `chrX`
+>    - *"Region of the genome to limit the operation to"*: `X`
 > 2. Rename the output of **bamCompare** {% icon tool %} with the name of the sample
 > 3. **MACS2 callpeak** {% icon tool %} with the following parameters
 >    - *"Are you pooling Treatment Files?"*: `No`
@@ -597,13 +598,21 @@ We can now concatenate the MACS2 outputs with the location of the peaks (concate
 
 > <hands-on-title>Prepare the peak coordinates</hands-on-title>
 >
-> 1. **Concatenate two datasets into one dataset** {% icon tool %} with the following parameters
+> 1. **Concatenate datasets** tail-to-head {% icon tool %} with the following parameters
 >    - {% icon param-file %} *"Concatenate"*: output of **MACS2 callpeak** {% icon tool %} for `wt_CTCF_rep1`
 >    - {% icon param-file %} *"with"*: output of **MACS2 callpeak** {% icon tool %} for `wt_H3K4me3_rep1`
-> 2. **SortBED** {% icon tool %} with the following parameters
->    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: output of **Concatenate** {% icon tool %}
-> 3. **MergeBED** {% icon tool %} with the following parameters
->    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: output of **SortBED** {% icon tool %}
+> 2. **Replace** parts of the text {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"File to process"*: output of **Concatenate datasets** {% icon tool %}
+>    - In "*Find and Replace*":
+>       - "*Find pattern*": `^X`
+>       - *"Replace with*": `chrX`
+>    - "*Find-Pattern is a regular expression*": `Yes`
+> 3. **bedtools SortBED** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: output of **Replace** {% icon tool %}
+>    - "*Genome file*": `Locally installed Genome file`
+>    - "*Genome file*": `Mouse (Mus musculus): mm10 full`
+> 4. **bedtools MergeBED** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: output of **bedtools SortBED** {% icon tool %}
 >
 {: .hands_on}
 
@@ -627,7 +636,6 @@ Optionally, we can also use **plotProfile** {% icon tool %} to create a profile 
 > 2. **plotHeatmap** {% icon tool %} with the following parameters
 >    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: `Matrix` (output of **computeMatrix** {% icon tool %})
 >    - *"Show advanced options"*: `yes`
->       - *"Reference point label"*: select the right label
 >       - *"Did you compute the matrix with more than one groups of regions?"*: `No, I used only one group`
 >           - *"Clustering algorithm"*: `Kmeans clustering`
 >           - *"Number of clusters to compute"*: `2`
@@ -669,20 +677,28 @@ So far, we have only analyzed 2 samples, but we can do the same for all the 6 sa
 >     - {% icon param-file %} *"Concatenate Dataset"*: one output of **MACS2 callpeak** {% icon tool %}
 >     - Click *"Insert Dataset"* and {% icon param-file %} *"Select"* one other output of **MACS2 callpeak** {% icon tool %}
 >     - Redo for the 6 outputs of **MACS2 callpeak** {% icon tool %}
-> 5. **SortBED** {% icon tool %} with the following parameters
->    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: output of **Concatenate** {% icon tool %}
-> 6. **MergeBED** {% icon tool %} with the following parameters
->    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: output of **SortBED** {% icon tool %}
-> 7. **computeMatrix** {% icon tool %} with the same parameters but:
+> 5. **Replace** parts of the text {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"File to process"*: output of **Concatenate datasets** {% icon tool %}
+>    - In "*Find and Replace*":
+>       - "*Find pattern*": `^X`
+>       - *"Replace with*": `chrX`
+>    - "*Find-Pattern is a regular expression*": `Yes`
+> 6. **bedtools SortBED** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: output of **Replace** {% icon tool %}
+>    - "*Genome file*": `Locally installed Genome file`
+>    - "*Genome file*": `Mouse (Mus musculus): mm10 full`
+> 7. **bedtools MergeBED** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"Sort the following bed,bedgraph,gff,vcf file"*: output of **bedtools SortBED** {% icon tool %}
+> 8. **computeMatrix** {% icon tool %} with the same parameters but:
 >    - *"Select regions"*:
->       - {% icon param-file %} *"Regions to plot"*: output of **MergeBED** {% icon tool %}
+>       - {% icon param-file %} *"Regions to plot"*: output of **bedtools MergeBED** {% icon tool %}
 >    - *"Sample order matters"*: `No`
 >       - {% icon param-files %} *"Score file"*: the 6 `bigwig` files generated by **bamCompare** {% icon tool %} and renamed
 >    - *"computeMatrix has two main output options"*: `reference-point`
 >       - *"The reference point for the plotting"*: `center of region`
 >       - *"Distance upstream of the start site of the regions defined in the region file"*: `3000`
 >       - *"Distance downstream of the end site of the given regions"*: `3000`
-> 8. **plotHeatmap** {% icon tool %} with the following parameters
+> 9. **plotHeatmap** {% icon tool %} with the following parameters
 >    - {% icon param-file %} *"Matrix file from the computeMatrix tool"*: `Matrix` (output of **computeMatrix** {% icon tool %})
 >    - *"Show advanced options"*: `yes`
 >       - *"Reference point label"*: select the right label
