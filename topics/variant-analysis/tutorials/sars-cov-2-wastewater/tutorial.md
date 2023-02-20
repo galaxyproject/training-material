@@ -114,10 +114,10 @@ Approaches specifically developed for wastewater are either individual tools tha
 > Cowwid ({% cite jahn2022early %}) | Surveillance of SARS-CoV-2 genomic variants in wastewater | V-pipe v2.99.2, FastQC v0.73, PRINSEQ v0.20.4, VICUNA, BWA-MEM v0.7.17, ShoRAH, COJAC v0.2 | TSV table of the samples, YAML with definition of the variants, BED with amplicon positions for ARTIC, BED with amplicon description | YAML/CSV files with coocurrences, variant mutations table, plots to integrate to CoV-Spectrum
 > {% cite izquierdo2021monitoring %} | Monitoring SARS-CoV-2 Circulation and Diversity through Community Wastewater Sequencing, the Netherlands and Belgium | Porechop v0.2.4, Cutadapt v4.0, UGENE, Fastp v0.23.2, BWA-MEM v0.7.17, FreeBayes v1.1, iVar v1.3.1 | Raw reads and the additional information about used primers and adapters | VCF, MAF files, Trees visualization (Fig tree)
 >
-> ![](./images/lineagespot.png "Lineagespot ({% cite pechlivanis2022detecting %}) workflow ")
-> ![](./images/pigx.png "PiGx ({% cite schumann2022sars %}) workflow ")
-> ![](./images/cowwid.png "Cowwid ({% cite jahn2022early %}) workflow ")
-> ![](./images/Izquierdo-Lara.png "{% cite izquierdo2021monitoring %} workflow ")
+> ![Lineagespot workflow represented as boxes (white for data, yellow for step) linked by arrows from left to right: raw reads  --> QC + adapter Trimming --> Controlled reads --> Map--> Aligned Reads --> BAM file management -->  Primer trimming --> Duplicate Filtering --> Variant calling --> VCF --> Mutation Annotation --> MAF --> Compute Lineage Abundances --> Lineage assignment](./images/lineagespot.png "Lineagespot ({% cite pechlivanis2022detecting %}) workflow")
+> ![PiGx workflow represented as boxes (white for data, yellow for step) linked by arrows from left to right: raw reads ---> primenr trimming --> adapter trimming --> controlled reas --> map wih BWA --> 2 branches. Top branch: unaligned reads --> check abundance of RNA match other species --> visualization --> report. Bottom branch: aligned reads --> genome coverage quality check --> low coverage samples discarded --> variant calling --> VCF --> Mutation annotation --> MAF --> Lineage frequencies estimation --> Infer proportion of each lineage on each sample](./images/pigx.png "PiGx ({% cite schumann2022sars %}) workflow")
+> ![Cowwid workflow represented as boxes (white for data, yellow for step) linked by arrows from left to right: raw reads --> QC --> read filtering --> controlled reads --> maps --> 2 branches. Top branch: aligned reads --> mutation co-occurencence detection --> co-occurence. Bottom branch: TSV --> Jypter notebook --> variant mutation Table. Branch merge: generate heatmap plot --> heatmap json ---> Generate curves plot or Cov-spectrum generation](./images/cowwid.png "Cowwid ({% cite jahn2022early %}) workflow")
+> ![Izquierdo Lara workflow workflow represented as boxes (white for data, yellow for step) linked by arrows from left to right. Top branch: Nanopore raw reads --> demultiplexing --> adapter trimiing --> controlled reads --> map aligned reads. Botton branch: Illumina raw reads --> filtering --> controlled reads --> Map --> aligned reads --> Realignment. Branch merge: variant calling --> VCF --> Mutation annotation --> MAF --> Multiple alignment --> Tree visualisation --> Clade assignment](./images/Izquierdo-Lara.png "{% cite izquierdo2021monitoring %} workflow")
 {: .details}
 
 ## Galaxy effort to surveillance data processing
@@ -127,12 +127,12 @@ In order to address global health emergencies in an accessible and transparent m
 Since the beginning of the pandemy, the Galaxy community put effort to offer a [complete solution to the SARS-CoV-2 data analytics challenge](https://galaxyproject.org/projects/covid19/) ({% cite maier2021ready %}). In particular, four workflows were developed aimed at detecting and interpreting sequence
 variants in SARS-CoV-2 in clinical data:
 
-![](./images/maier2021.png "Analysis flow for calling SARS-CoV-2 variants using Galaxy (Source: {% cite maier2021ready %}")
+![Left: Flowchart from top to bottom. On the top in the fastq large grey box, 3 green boxes: ONT ARTIC data, Illumina ARTIC data, Illumina RNA-Seq data. Each connected to 1 or 2 green boxes in the VCF/TSV grey box below: ONT ARTIC data --> ONT ARTIC workflow, Illumina ARTIC data --> Illumina ARTIC PE workflow, Illumina RNA-Seq data --> Illumina RNA-Seq SE workflow and  Illumina RNA-Seq PE workflow. The outputs of the 4 boxes join toward a green box Reporting workflow in the TSV/consensus grey box. The output split into 2 brown boxes: Observable,, Jupyter. Right show the size and complexity of data. Top: Hundreds of gigabytes (thousands of samples) --> Stage 1 Galaxy --> 0-10MB --> Stage 2 Notebooks --> Plubishable figures and summaries](./images/maier2021.png "Analysis flow for calling SARS-CoV-2 variants using Galaxy (Source: {% cite maier2021ready %}")
 
 > <details-title>Galaxy workflows for SARS-CoV-2 clinical data surveillance</details-title>
 >
-> ![](./images/lineagespot.png "Illumina ARTIC Paired-End Galaxy workflow")
-> ![](./images/pigx.png "Illumina RNA-Seq/Metatranscriptomics Paired-End Galaxy workflow")
+> ![Illumina ARTIC Paired-End Galaxy workflow represented as boxes linked by arrows from left to right.](./images/artic-galaxy-wf.png "Illumina ARTIC Paired-End Galaxy workflow")
+> ![Illumina RNA-Seq/Metatranscriptomics Paired-End Galaxy workflow represented as boxes linked by arrows from left to right](./images/metatranscriptomics-galaxy-wf.png "Illumina RNA-Seq/Metatranscriptomics Paired-End Galaxy workflow")
 {: .details}
 
 > <comment-title>Galaxy workflows for SARS-CoV-2 clinical data surveillance</comment-title>
@@ -418,6 +418,8 @@ To identify the lineages and their aboundances, several steps have to be done to
 
 ![Here is simplified process of bioinformatics steps used to analyze sequenced data for sars-cov-2 surveillance. Tools can differ from one pipeline to another. But the main steps, in general, are more or less the same. Raw data are sequencing data. Then, primer trimming is a specific step for ampliconic datasets. The auxiliary file is used for this step - a BED file specifying the primers used during amplification. Variant calling should be run where variants from sequence data are identified. Variant calling step is followed by mutation annotation. The data is not changed; here, only format is changed to be more readable](./images/sars-surveillance-bioinf-last.png "Main steps to be done for bioinformatics of SARS-CoV-2 surveillance.")
 
+Let's run them
+
 <div class="Amplicon-Short Metatranscriptomic-Short" markdown="1">
 
 > <hands-on-title>From FASTQ to SARS-CoV-2 lineages abundances</hands-on-title>
@@ -454,7 +456,7 @@ To identify the lineages and their aboundances, several steps have to be done to
 
 </div>
 
-## Preprocessing
+# Preprocessing
 
 To prepare the data, we first need to do:
 
@@ -598,7 +600,7 @@ To prepare the data, we first need to do:
 
    </div>
 
-## Diversity evaluation
+# Diversity evaluation
 
 In wastewater, we can find not only SARS-CoV-2 sequences but also sequences of the DNA of other organisms. We can evaluate the diversity of organism sequence using tools classifying reads to taxons by comparing them to reference databases.
 
@@ -667,7 +669,7 @@ To assign reads to taxons, we use **Kraken2** {% cite Wood2014 %} with a databas
 >
 {: .question}
 
-## Mapping
+# Mapping
 
 To identify SARS-CoV-2 variants in the sample, we first map the reads to the reference SARS-CoV-2 sequence, named `NC_045512.2`and publicly available in NCBI database.
 
@@ -733,7 +735,7 @@ It can not be easily parsed. We can use a tool from **Samtools** suite to collec
 >
 {: .question}
 
-### Mapping processing
+## Mapping processing
 
 Some mapping tools generate 2 BAM files: one with mapped reads and one with either all reads or just the unmapped ones. Here **bwa-mem** generates only one BAM file with all reads. So to get information about only the mapped reads with a good mapping quality, we need to filter the BAM file using **Samtools**.
 
@@ -746,9 +748,10 @@ Some mapping tools generate 2 BAM files: one with mapped reads and one with eith
 >    - *"What would you like to look at?"*: `A filtered/subsampled selection of reads`
 >        - In *"Configure filters"*:
 >            - *"Filter by quality"*: `20`
+>            - *"Require that these flags are set"*: `Read is paired`, `Read is mapped in a proper pair`
 >        - *"What would you like to have reported?"*: `All reads retained after filtering and subsampling`
 >            - *"Output format"*: `BAM (-b)`
->    - *"Reference data"*: `No, see help (-output-fmt-option no_ref)`
+>    - *"Use a reference sequence"*: `No)`
 {: .hands_on}
 
 </div>
@@ -795,8 +798,8 @@ Mapping results need afterward to be **processed**, steps that are not always in
    >
    > > <solution-title></solution-title>
    > >
-   > > 1. 40.8%
-   > > 2. 1.3% for SRR12596171 and 51.1% for SRR12596173
+   > > 1. 41%
+   > > 2. 1.2% for SRR12596171 and 51.4% for SRR12596173
    > >
    > {: .solution}
    >
@@ -835,7 +838,7 @@ Mapping results need afterward to be **processed**, steps that are not always in
 
    Here we use a tool from LoFreq suite and Dindel ({% cite albers2011dindel %}) to insert indel qualities
 
-   <div class="Amplicon-Long Metatranscriptomic-long" markdown="1">
+   <div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
 
    > <hands-on-title>Indel quality insertion</hands-on-title>
    >
@@ -878,7 +881,7 @@ To be able to identify the primers, we need 2 files:
 
 </div>
 
-### Mapping quality evaluation
+## Mapping quality evaluation
 
 Finally, we evaluate the quality of the alignments on the reference genome, i.e. the coverage, in the BAM files using **QualiMap** ({% cite okonechnikov2016qualimap %})
 
@@ -900,7 +903,7 @@ Finally, we evaluate the quality of the alignments on the reference genome, i.e.
 >    - *"Skip duplicate reads"*: Nothing selected
 >
 > 2. {% tool [Flatten collection](__FLATTEN__) %} with the following parameters:
->    - {% icon param-collection %} *"Input Collection"*: output of **Qualimap** {% icon tool %}
+>    - {% icon param-collection %} *"Input Collection"*: output of **Qualimap** {% icon tool %} with raw data
 >
 > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0) %} with the following parameters:
 >    - In *"Results"*:
@@ -921,10 +924,10 @@ Finally, we evaluate the quality of the alignments on the reference genome, i.e.
 > >
 > > 1. The coverage describes the number of sequencing reads that are uniquely mapped to a reference and "cover" a known part of the genome.
 > > <div class="Amplicon-Long Amplicon-short" markdown="1">
-> > 2. The mean coverage ranges from ...X to ..X, i.e. each region of genome being covered 1.6 times to 116 times.
+> > 2. The mean coverage ranges from 32.7X to 936.1X, i.e. each region of genome being on average covered 33 times to 936 times.
 > > </div>
 > > <div class="Metatranscriptomic-Long Metatranscriptomic-short" markdown="1">
-> > 2. The mean coverage ranges from 1.6X to 116X, i.e. each region of genome being covered 1.6 times to 116 times.
+> > 2. The mean coverage is low: it ranges from 1.5X to 113X, i.e. each region of genome being on average covered 1.5 times to 113 times.
 > > </div>
 > >
 > {: .solution}
@@ -932,7 +935,7 @@ Finally, we evaluate the quality of the alignments on the reference genome, i.e.
 {: .question}
 
 
-## Variant calling
+# Variant calling
 
 Now that mapping results have been clean, we want to identify the SARS-CoV-2 allelic variants (AVs), i.e. identify of positions where the sequenced sample is different from the reference sequence. We call sensitive AV across a wide range of allele frequences (AFs) using **Lofreq** ({% cite wilm2012lofreq %}).
 
@@ -963,7 +966,7 @@ Now that mapping results have been clean, we want to identify the SARS-CoV-2 all
 >            - *"Minimum mapping quality"*: `20`
 >    - *"Variant filter parameters"*: `Custom filter settings/combinations`
 >        - *"Significance threshold for calls"*: `0.0005`
->        - *"Apply default coverage and strand-bias filter?"*: `Yes`
+>        - *"Apply default coverage and strand-bias filter?"*: `No`
 >
 >    <!-- Why these values and not the default ones -->
 >
@@ -1014,8 +1017,8 @@ Now that mapping results have been clean, we want to identify the SARS-CoV-2 all
 >
 > > <solution-title></solution-title>
 > >
-> > 1. There are 0 lines in SRR12596165 dataset so 0 called variant
-> > 2. 15 variants
+> > 1. There are 4 lines in SRR12596165 dataset so 4 called variants
+> > 2. 20 variants
 > > 3. 47 variants
 > >
 > {: .solution}
@@ -1054,10 +1057,10 @@ Once variants have been called, we need to eliminate false-positive calls. To do
 >
 > > <solution-title></solution-title>
 > >
-> > 1. There are 15 variants before filtering and 15 after. So no variants have been removed
+> > 1. There are 20 variants before filtering and 15 after. So no variants have been removed
 > > 2. 47 variants before filtering, 47 after so none removed.
 > > 3. The results are expected because we selected the option to `Keep variants, but indicate failed filters in output FILTER column`
-> > 4. The 15 variants have `PASS` in the `FILTER` column
+> > 4. The 20 variants have `PASS` in the `FILTER` column
 > >
 > {: .solution}
 >
@@ -1086,7 +1089,7 @@ In the VCF files, we do not have so much information about the variants. We use 
 > > <solution-title></solution-title>
 > >
 > > 1. In the VCF file generated by SnpEff in the column `INFO`, there are more information, e.g. `ANN`
-> > 2. 9 are SNP and 6 insertions
+> > 2. 12 are SNP, 7 insertions and 1 deletion
 > > 3. Mostly in Exons.
 > >
 > {: .solution}
@@ -1095,7 +1098,7 @@ In the VCF files, we do not have so much information about the variants. We use 
 
 </div>
 
-## SARS-CoV-2 lineage abundance computation
+# SARS-CoV-2 lineage abundance computation
 
 The next step is to evaluate from the variants the SARS-CoV-2 lineages and their abundance.
 
@@ -1151,7 +1154,9 @@ We can then run **Freyja** by first running **Freyja demix** which estimates lin
 
 </div>
 
-The output of **Freyja demix** is a tabular 5 lines:
+The output of **Freyja demix** is a table with aggregated information about lineages abundances for all samples. Each line in the table represents one sample:
+
+1. `Sample`: sample name
 1. `summarized`: sum of all lineage abundances in a particular WHO designation (i.e. B.1.617.2 and AY.6 abundances are summed in the above example), otherwise they are grouped into "Other".
 2. `lineages`: lists of the identified lineages in descending order
 3. `abundances`: corresponding abundances estimates
@@ -1165,12 +1170,14 @@ The output of **Freyja demix** is a tabular 5 lines:
 > 1. Which lineages have been identified for sample 1?
 > 2. And for sample 10?
 > 3. And for sample 21?
+> 4. Which proportion of BA.1.15 lineage was identified in sample 1?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. There are 89 lines in SRR12596165 dataset so 89 called variants
 > > 2. 84% Omicron, 9% Delta: BA.1.18 BA.1.15.1 BA.1.10 BA.1.1.13 BA.1.16 AY.4.9 AY.9 B.20 B.27 B AY.4 AY.9.2 BA.1.1.9 BA.1.1.15 BA.1.1.10 miscDeltaBA1Post4k BA.1.1.1
 > > 3. 90% Omicron: BA.1.10 BA.1.18 BA.1.1 BA.1.15.1 BA.1.1.13 BA.1.19 BA.1.3 B.20 B.27 B BA.1.16 BA.1 BA.1.1.1 BA.1.14 BA.1.12 B.1.1.33 B.1.1.378 B.1.1 B.1.78 B.1
+> > 4. In the 4th line of the table that corresponds to sample 1, BA.1.15 lineage is in the 2nd position in the column `lineages`. Then we look at the next column `abundances` and see in the 2nd position is the proportion of B.1.533 which is 0.13043500.
 > >
 > {: .solution}
 >
@@ -1181,12 +1188,14 @@ The output of **Freyja demix** is a tabular 5 lines:
 > 1. Which lineages have been identified for SRR12596165?
 > 2. And for SRR12596170?
 > 3. And for SRR12596175?
+> 4. Which proportion of B.1.533 lineage was identified in sample SRR12596170?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Failing
+> > 1. In the second line of the table we see 7 lineages listed in column `lineages`: B.10 B.47 B.23 B.26 B.1.14 B.20 B
 > > 2. Others: B.1.370 B.1.301 B.1.533 B.1.111 B.1.479 B.1.201 B.1 B.1.215 B.1.378 B.1.199 B.10 B.47 B.23 B.26 B.1.14 B.20 B
 > > 3. Others: B.1.509 B.1.2 B.1.111 B.1.479 B.1.382 B.10 B.47 B.23 B.26 B.1.14 B.20 B
+> > 4. In the 4th line of the table that corresponds to SRR12596170 sample, B.1.533 lineage is in the first position in the column `lineages`. Then we look at the next column `abundances` and see in the first position is the proportion of B.1.533 which is 0.15773800.
 > >
 > {: .solution}
 >
@@ -1209,17 +1218,39 @@ The demix outputs are not easy to inspect one by one. We use another tool from *
 
 </div>
 
+The generated **lineages abundances plot** provides a fractional abundance estimate for all aggregated samples. Each bar in the plot represents one sample. Different colors represent different lineages.
+
 > <question-title></question-title>
 >
-> 1. Question1?
-> 2. Question2?
+> <div class="Amplicon-Long Amplicon-Short" markdown="1">
+>
+> ![Barplot showing the variant prevalence (vertical) from 0 to 1 for 20 samples (horizontal). Samples shows prevalence of 4 variants: Delta in dark blue, Omicron in light bleu, Other in orange, BA.2*Omicron BA.2 X on light orange](./images/freyja_amplicon.png)
+>
+> 1. Which WHO designated variant is prevalent in sample1?
+> 2. What other lineages are present in this sample?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Omicron
+> > 2. Delta and Other
 > >
 > {: .solution}
+>
+> </div>
+>
+> <div class="Metatranscriptomic-Long Metatranscriptomic-Short" markdown="1">
+>
+> ![Barplot showing the variant prevalence (vertical) from 0 to 1 for 11 samples (horizontal). All sample show only 1 variant called "Other"](./images/freyja_mt.png)
+>
+> 1. Which WHO designated variant is prevalent in SRR12596165?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Other
+> >
+> {: .solution}
+>
+> </div>
 >
 {: .question}
 
@@ -1243,7 +1274,7 @@ The demix outputs are not easy to inspect one by one. We use another tool from *
 >
 > 2. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Collection of files to collapse into single dataset"*: output of **Cojac: mutbamscan** {% icon tool %}
->    - *"Prepend File name"*: `Yes`
+>    - *"Prepend File name"*: `No`
 >
 > 3. {% tool [Cojac: tabmut](toolshed.g2.bx.psu.edu/repos/iuc/cooc_tabmut/cooc_tabmut/0.2+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Results generated by mutbamscan"*: output of **Collapse Collection** {% icon tool %}
@@ -1253,102 +1284,31 @@ The demix outputs are not easy to inspect one by one. We use another tool from *
 
 </div>
 
+**COJAC** produces a table (**Mutation cooccurrence**) providing an aggregated information about lineages abundances and mutations for all samples grouped by amplicons. Each line in the table represents one sample.
+
+1. `Sample`: sample name
+2. `count`: total count of amplicons carrying the sites of interest
+3. `mut_all`: amplicons carrying mutations on all site of interest (e.g.: variant mutations observed on all sites)
+4. `mut_oneless`: amplicons where one mutation is missing (e.g.: only 2 out of 3 sites carried the variant mutation, 1 sites carries wild-type)
+5. `frac`: fraction (mut_all/count) or empty if no counts
+6. `cooc`: number of considered site (e.g.: 2 sites of interests) or empty if no counts
+
 > <question-title></question-title>
 >
-> 1. Which lineages have been identified for sample 1?
-> 2. And for sample 10?
-> 3. And for sample 21?
+> 1. Which fraction of BA.1 lineage is identified on amplicon A72 in sample1?
+> 2. How many amplicons carrying mutations on all site of interest are identified in sample 3?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. 0.8181818182
+> > 2. 3
 > >
 > {: .solution}
->
 {: .question}
 
 
 </div>
 
-
-# Results interpretation
-
-Once the jobs of previous workflows are done, we can look at the results.
-
-**Freyja** produces the following reports:
-
-1. **Aggregated data**: This table provides a aggregated information about lineages abundances for all samples. Each line in the table represents one sample.
-
-   Column | Field | Meaning
-   --- | --- | ---
-   1 | `Sample` | sample name
-   2 | `summarized` | denotes a sum of all lineage abundances in a particular WHO designation (i.e. B.1.617.2 and AY.6 abundances are summed in the above example), otherwise they are grouped into "Other"
-   3 | `lineages` | lists the identified lineages in descending order
-   4 | `abundances` | contains the corresponding abundances estimates
-   5 | `resid` | corresponds to the residual of the weighted least absolute devation problem used to estimate lineage abundances
-   6 | `coverage` | provides the 10x coverage estimate (percent of sites with 10 or greater reads
-
-   > <question-title></question-title>
-   >
-   > 1. How many lineages were identified in sample SRR12596165 in metatranscriptomic-illumina dataset provided for this tutorial?
-   > 2. Which proportion of B.1.533 lineage was identified in sample SRR12596170?
-   >
-   > > <solution-title></solution-title>
-   > >
-   > > 1. In the second line of the table we see 7 lineages listed in column "lineages": B.10 B.47 B.23 B.26 B.1.14 B.20 B
-   > >
-   > > 2. In the 9th line of the table that corresponds to SRR12596170 sample, B.1.533 lineage is in the first position in the column "lineages". Then we look at the next column "abundances" and see in the first position is the proportion of B.1.533 which is 0.15773800.
-   > >
-   > {: .solution}
-   {: .question}
-
-2. **Lineages abundances plot**: This plot provides a fractional abundance estimate for all aggregated samples. Each bar in the plot represents one sample. Different colors represent different lineages.
-
-   > <question-title></question-title>
-   >
-   > 1. Which WHO designated variant is prevalent in sample1 from ampliconic-illumina dataset provided for this tutorial?
-   > 1. What other lineages are present in this sample?
-   >
-   > > <solution-title></solution-title>
-   > >
-   > > 1. Omicron
-   > >
-   > > 2. Delta and Other
-   > >
-   > {: .solution}
-   {: .question}
-
-<div class="Amplicon-Short" markdown="1">
-
-**COJAC** produces the following report
-
-1. **Mutation cooccurrence**: This table provides a aggregated information about lineages abundances and mutations for all samples grouped by amplicons. Each line in the table represents one sample.
-
-   Column | Field | Meaning
-   --- | --- | ---
-   1 | `Sample` | sample name
-   2 | `count` | total count of amplicons carrying the sites of interest
-   3 | `mut_all` | amplicons carrying mutations on all site of interest (e.g.: variant mutations observed on all sites)
-   4 | `mut_oneless` | amplicons where one mutation is missing (e.g.: only 2 out of 3 sites carried the variant mutation, 1 sites carries wild-type)
-   5 | `frac` | fraction (mut_all/count) or empty if no counts
-   6 | `cooc` | number of considered site (e.g.: 2 sites of interests) or empty if no counts
-
-   > <question-title></question-title>
-   >
-   > 1. Which fraction of BA.1 lineage is identified on amplicon A72 in sample1 from ampliconic-illumina dataset provided for this tutorial?
-   > 2. How many amplicons carrying mutations on all site of interest are identified in sample 3?
-   >
-   > > <solution-title></solution-title>
-   > >
-   > > 1. 0.8181818182
-   > >
-   > > 2. 3
-   > >
-   > {: .solution}
-   {: .question}
-
-</div>
 
 # Conclusion
 
