@@ -66,7 +66,7 @@ developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/)
 >
 {: .comment}
 
-**Preprocessing with XCMS**
+The preprocessing steps presented in this tutorial are built around the solutions provided through the R package **XCMS**.
 
 **XCMS** ({% cite Smith2006 %}) is a free and open source software dedicated to pre-processing of any type of mass spectrometry acquisition files from low to
 high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). This software is
