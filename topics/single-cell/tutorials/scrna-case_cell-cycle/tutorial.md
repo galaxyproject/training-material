@@ -305,10 +305,10 @@ We now have a table with all the gene names in the same order as the main datase
 > 1. {% tool [Table Compute](toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0) %} with the following parameters:
 >    - *"Input Single or Multiple Tables"*: `Single Table`
 >        - {% icon param-file %} *"Table"*: `out_file1` (output of **Sort** {% icon tool %})
+>    - *"Input data has:"*: `Unselect all`
 >        - *"Type of table operation"*: `Drop, keep or duplicate rows and columns`
 >            - *"List of columns to select"*: `3`
->            - *"List of rows to select"*: `1:15395`
->    - *"Output formatting options"*: ``
+>    - *"Output formatting options"*: `Unselect all`
 >
 >
 >    > <comment-title>Removing rows for missing genes </comment-title>
@@ -320,7 +320,7 @@ We now have a table with all the gene names in the same order as the main datase
 > 2. Create a new **tabular** file from the following
 >
 >     ```
->     CC_genes
+>    CC_genes
 >     ```
 >     
 >    {% snippet faqs/galaxy/datasets_create_new_file.md format="tabular" %}
