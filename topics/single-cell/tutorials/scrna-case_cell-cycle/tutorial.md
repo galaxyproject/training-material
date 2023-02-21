@@ -362,7 +362,7 @@ We will need to add the annotation to both the annotated dataset `CellCycle_Anno
 
 ## Filter the cell cycle genes
 
-For both the newly annotated datasets, we can now filter out the cell cycle genes (the ones that have `TRUE` in their new `CC_genes` annotation). The filtered datasets will only include expression data for these 97 genes, so we'll be able to use them to clearly visualise what happens when the cell cycle genes are regressed out.  
+To demonstrate the power of cell cycle regression, we're going to reduce our expression matrices to contain only the 97 cell cycle genes. This will force our dimension reduction and plotting to be based entirely on cell cycle genes. You wouldn't do this during analysis, but for proof of principle, let's go for it! 
 
 > <hands-on-title>Filter the AnnData datasets</hands-on-title>
 >
