@@ -537,7 +537,7 @@ As outputs, we will get our **FASTA** and **Tabular** files to track genes and v
 > <hands-on-title>Gene based Pathogenic Identification</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/nanopore_gene_based_pathogenic_identification.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Nanopore-Datasets---Gene-based-pathogenic-Identification.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
@@ -1099,7 +1099,7 @@ With these two types of visualizations we can have an overview of all samples an
 > <hands-on-title>All Samples Analysis</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/nanopore_all_samples_phylogenetic_trees_and_heatmap.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Nanopore-Datasets---Reports-of-All-Samples-along-with-Full-genomes-and-VF-genes-Phylogenetic-trees.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
