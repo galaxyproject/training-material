@@ -69,7 +69,13 @@
             "tool_version": null,
             "type": "parameter_input",
             "uuid": "b2303a77-660d-45f9-943a-e909dbc09baa",
-            "workflow_outputs": []
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "9405f8d0-cec0-4839-b851-75dc9b9111a4"
+                }
+            ]
         },
         "2": {
             "annotation": "MLST Report Header tabular ",
@@ -133,7 +139,36 @@
                 "left": 276,
                 "top": 430.5
             },
-            "post_job_actions": {},
+            "post_job_actions": {
+                "RenameDatasetActionassembly_gfa": {
+                    "action_arguments": {
+                        "newname": "Flye Assembly GFA"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "assembly_gfa"
+                },
+                "RenameDatasetActionassembly_graph": {
+                    "action_arguments": {
+                        "newname": "Flye Assembly Graph"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "assembly_graph"
+                },
+                "RenameDatasetActionassembly_info": {
+                    "action_arguments": {
+                        "newname": "Flye Assembly Info Tabular"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "assembly_info"
+                },
+                "RenameDatasetActionconsensus": {
+                    "action_arguments": {
+                        "newname": "Flye Consensus Fasta"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "consensus"
+                }
+            },
             "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9.1+galaxy0",
             "tool_shed_repository": {
                 "changeset_revision": "cb8dfd28c16f",
@@ -147,24 +182,24 @@
             "uuid": "e6b3fcbb-8027-4e83-a6e0-79b8faff47a6",
             "workflow_outputs": [
                 {
-                    "label": null,
+                    "label": "Flye Consensus Fasta",
                     "output_name": "consensus",
-                    "uuid": "2aa028a4-c05d-4ad0-bf49-1465da608ebc"
+                    "uuid": "51bb5b80-e768-456c-b157-b366a0dd7431"
                 },
                 {
-                    "label": null,
+                    "label": "Flye Assembly Graph",
                     "output_name": "assembly_graph",
-                    "uuid": "f566a761-d330-4b7f-9881-e63149ceebbd"
+                    "uuid": "d5e52479-4ce6-4f20-831a-bebc390c622e"
                 },
                 {
-                    "label": null,
+                    "label": "Flye Assembly Info Tabular",
                     "output_name": "assembly_info",
-                    "uuid": "06853eb1-8567-4950-ab58-cdfe11de2762"
+                    "uuid": "dbf8c832-41a3-4c6f-84d0-5dc60ca14434"
                 },
                 {
-                    "label": null,
+                    "label": "Flye Assembly GFA",
                     "output_name": "assembly_gfa",
-                    "uuid": "b6ecdbce-8245-4e62-8b60-950fcf684f26"
+                    "uuid": "0cf6523e-6b95-44e3-b057-a28aca236a7f"
                 }
             ]
         },
@@ -208,7 +243,7 @@
                 {
                     "label": "SampleID Regex Expression2",
                     "output_name": "out1",
-                    "uuid": "a7dce194-cb24-44e9-b764-cd57c44b5260"
+                    "uuid": "70232ed7-5a91-4dcb-84a1-36f0353ef4c6"
                 }
             ]
         },
@@ -280,27 +315,27 @@
                 {
                     "label": "Medaka calls of draft Bam file",
                     "output_name": "out_calls",
-                    "uuid": "77da7685-52fb-4b42-aaec-4bd1e1171459"
+                    "uuid": "1380ee4e-9724-44e4-a0c7-3cc1bba985f0"
                 },
                 {
                     "label": "Medaka log file",
                     "output_name": "out_log",
-                    "uuid": "0b7a56c6-f4c0-42ad-8733-3921ab5b363d"
+                    "uuid": "049a0010-48e8-44fb-b0cf-a53122ef9c2d"
                 },
                 {
                     "label": "Medaka consensus with all contigs Fasta file",
                     "output_name": "out_consensus",
-                    "uuid": "d1da11d4-f93b-4986-9b7f-9ff6b54d7cb2"
+                    "uuid": "c1e4d02d-a051-4536-ba8f-4edc8ec3ed5a"
                 },
                 {
                     "label": "Medaka propability h5 file",
                     "output_name": "out_probs",
-                    "uuid": "bd2caa3e-d4c0-4be7-aa60-f60cc86f723f"
+                    "uuid": "63cf555f-28b4-48ed-81f9-7a5611077d83"
                 },
                 {
                     "label": "Medaka Gaps in draft bed file",
                     "output_name": "out_gaps",
-                    "uuid": "07b9cf56-b3da-42f8-a9d9-5d147940b159"
+                    "uuid": "73625aa6-ad5f-4a99-b113-01ed79a47a9b"
                 }
             ]
         },
@@ -344,7 +379,7 @@
                 {
                     "label": "Bandage Image on input dataset(s): Assembly Graph Image",
                     "output_name": "outfile",
-                    "uuid": "10943d96-eacb-4806-abac-d9889a4ae7dd"
+                    "uuid": "0cb9b935-ec55-43f9-8d2f-24af02af3291"
                 }
             ]
         },
@@ -396,7 +431,7 @@
                 {
                     "label": "ABRicate report using NCBI database to Indentify AMR",
                     "output_name": "report",
-                    "uuid": "dbecd07b-8d00-4e7d-b578-c0ddea6b66cd"
+                    "uuid": "614d5ad0-63ef-4271-b134-25bf75870af9"
                 }
             ]
         },
@@ -448,7 +483,7 @@
                 {
                     "label": "ABRicate with VFDB to Idetify genes with VFs ",
                     "output_name": "report",
-                    "uuid": "919e37ce-bf27-4fcc-9bfb-d89dce6798db"
+                    "uuid": "ba7b0d46-56f7-4cd9-ac66-8fa615981b54"
                 }
             ]
         },
@@ -463,7 +498,12 @@
                     "output_name": "out_consensus"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool FASTA-to-Tabular",
+                    "name": "input"
+                }
+            ],
             "label": null,
             "name": "FASTA-to-Tabular",
             "outputs": [
@@ -473,8 +513,8 @@
                 }
             ],
             "position": {
-                "left": 834,
-                "top": 605
+                "left": 839,
+                "top": 598
             },
             "post_job_actions": {
                 "RenameDatasetActionoutput": {
@@ -492,7 +532,7 @@
                 "owner": "devteam",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"descr_columns\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"keep_first\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"descr_columns\": \"1\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"keep_first\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.1.1",
             "type": "tool",
             "uuid": "cdd5f51f-dd91-479f-8ffc-58efbede08a3",
@@ -500,7 +540,7 @@
                 {
                     "label": "Preparing for a Sample Specific Contigs Tabular file",
                     "output_name": "output",
-                    "uuid": "b0090d18-110b-44f3-b128-87471f5f99dd"
+                    "uuid": "6ae4d6d3-6ec7-4ec8-abf6-55f2b84220a6"
                 }
             ]
         },
@@ -515,17 +555,18 @@
                     "output_name": "out_consensus"
                 }
             },
-            "inputs": [],
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MLST",
+                    "name": "input_files"
+                }
+            ],
             "label": null,
             "name": "MLST",
             "outputs": [
                 {
                     "name": "report",
                     "type": "tabular"
-                },
-                {
-                    "name": "novel_alleles",
-                    "type": "fasta"
                 }
             ],
             "position": {
@@ -540,20 +581,15 @@
                 "owner": "iuc",
                 "tool_shed": "toolshed.g2.bx.psu.edu"
             },
-            "tool_state": "{\"input_files\": {\"__class__\": \"ConnectedValue\"}, \"settings\": {\"advanced\": \"advanced\", \"__current_case__\": 1, \"minid\": \"95\", \"mincov\": \"10\", \"novel\": \"true\", \"scheme_condition\": {\"set_scheme\": \"auto\", \"__current_case__\": 0, \"minscore\": \"50\", \"exclude\": \"\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"input_files\": {\"__class__\": \"RuntimeValue\"}, \"settings\": {\"advanced\": \"advanced\", \"__current_case__\": 1, \"minid\": \"95\", \"mincov\": \"10\", \"novel\": \"false\", \"scheme_condition\": {\"set_scheme\": \"auto\", \"__current_case__\": 0, \"minscore\": \"50\", \"exclude\": \"\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "2.22.0",
             "type": "tool",
             "uuid": "39ba13ea-048d-49d7-ad4b-e39b39960198",
             "workflow_outputs": [
                 {
-                    "label": "MLST on input dataset(s): novel_alleles fasta",
-                    "output_name": "novel_alleles",
-                    "uuid": "bd3ac9b5-91e6-4a76-abb9-2aadb4e0fea2"
-                },
-                {
                     "label": "MLST on input dataset(s): report.tsv",
                     "output_name": "report",
-                    "uuid": "7ed6c8d4-f00f-4f4a-8c9e-fcd807a846ed"
+                    "uuid": "5d8e045b-ee48-47c4-b1e8-413f8ba0a795"
                 }
             ]
         },
@@ -599,7 +635,7 @@
                 {
                     "label": "AMR NCBI Accession",
                     "output_name": "out_file1",
-                    "uuid": "6998187e-3e64-47f7-ba72-73747c9b36df"
+                    "uuid": "f3110f97-9378-4e31-9387-0c1111b19aa1"
                 }
             ]
         },
@@ -614,12 +650,7 @@
                     "output_name": "report"
                 }
             },
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Cut",
-                    "name": "input"
-                }
-            ],
+            "inputs": [],
             "label": null,
             "name": "Cut",
             "outputs": [
@@ -642,7 +673,7 @@
                 }
             },
             "tool_id": "Cut1",
-            "tool_state": "{\"columnList\": \"c13\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_state": "{\"columnList\": \"c13\", \"delimiter\": \"T\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
             "tool_version": "1.0.2",
             "type": "tool",
             "uuid": "c741dc78-6ccb-43a3-b524-baa023159332",
@@ -650,7 +681,7 @@
                 {
                     "label": "VFs accessions",
                     "output_name": "out_file1",
-                    "uuid": "8edc03b1-adcc-4568-bd42-2bed849f62ee"
+                    "uuid": "50e8456f-ccae-41e0-a0e0-f7a3101e5225"
                 }
             ]
         },
@@ -710,7 +741,7 @@
                 {
                     "label": "VFs ",
                     "output_name": "outfile",
-                    "uuid": "da665c9e-e0d7-45f4-be34-29ac60570fea"
+                    "uuid": "6901781f-e167-4d3f-b150-b1c7d66d565e"
                 }
             ]
         },
@@ -766,7 +797,7 @@
                 {
                     "label": "Sample Specific Contigs Tabular file",
                     "output_name": "outfile",
-                    "uuid": "327fc35a-f23e-4bbe-939a-72089b8def3d"
+                    "uuid": "669c5821-fe2e-4289-9258-561c5c43c9b5"
                 }
             ]
         },
@@ -822,7 +853,7 @@
                 {
                     "label": "MLST Report Tabular with the sample name",
                     "output_name": "outfile",
-                    "uuid": "30d2d166-f1ba-4798-952c-3752a83fda17"
+                    "uuid": "a91658b0-417b-4a66-8ee4-40718b9fbfcc"
                 }
             ]
         },
@@ -878,7 +909,7 @@
                 {
                     "label": "AMR NCBI Accession Tabular with SampleID as a header",
                     "output_name": "outfile",
-                    "uuid": "ad511854-a966-4f7a-a778-1a037b44bc24"
+                    "uuid": "7072c05a-5a86-4d10-864e-afedf29498cd"
                 }
             ]
         },
@@ -934,7 +965,7 @@
                 {
                     "label": "VFs accessions with SampleID",
                     "output_name": "outfile",
-                    "uuid": "5e635d85-a82b-416f-96bc-6631f64086a0"
+                    "uuid": "975bc9f2-7d38-465c-aedb-bb93f5d1bf53"
                 }
             ]
         },
@@ -986,7 +1017,7 @@
                 {
                     "label": "Contigs",
                     "output_name": "output",
-                    "uuid": "b943825f-c17a-4780-b33c-302982d14cee"
+                    "uuid": "cbdb4c06-5df8-43c3-be81-c9e490729876"
                 }
             ]
         },
@@ -1036,7 +1067,7 @@
                 {
                     "label": "MLST Report with Header",
                     "output_name": "out_file1",
-                    "uuid": "985b2eb7-b4ff-44e3-b96e-4bec59ba1cf8"
+                    "uuid": "a6add3da-1324-45ed-92e9-e02e25fee672"
                 }
             ]
         }
@@ -1045,6 +1076,6 @@
         "microbiome",
         "nanopore"
     ],
-    "uuid": "260e4f35-1767-44cd-81ce-9752d4eb6a0c",
-    "version": 15
+    "uuid": "73f8c567-ad4e-4782-8436-f2d3c7826181",
+    "version": 18
 }
