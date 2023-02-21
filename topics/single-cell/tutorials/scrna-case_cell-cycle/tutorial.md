@@ -401,7 +401,11 @@ You will learn more about plotting your data in the [Filter, Plot and Explore]({
 >    - {% icon param-file %} *"Annotated data matrix"*: `CellCycle_Annotated_CC_Only` (output of **Manipulate AnnData** {% icon tool %})
 >    - *"Method used"*: `Computes PCA (principal component analysis) coordinates, loadings and variance decomposition, using 'tl.pca'`
 >        - *"Type of PCA?"*: `Full PCA`
->        
+>     
+>    > <comment-title>Plot all the genes </comment-title>
+>    >
+>    > Make sure that you de-select the option for the {% tool Cluster, infer trajectories and embed %} tool to use highly variable genes only - some of the cell cycle genes are also HVGs, but we want our plots to include the cell cycle genes that aren't HVGs too.  
+>    {: .comment}   
 >
 > 2. {% tool [Plot](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `anndata_out` (output of **Cluster, infer trajectories and embed** {% icon tool %})
@@ -410,11 +414,6 @@ You will learn more about plotting your data in the [Filter, Plot and Explore]({
 >        - In *"Plot attributes"*:
 >            - *"Colors to use for plotting categorical annotation groups"*: `rainbow (Miscellaneous)`
 >
->
->    > <comment-title>Plot all the genes </comment-title>
->    >
->    > Make sure that you de-select the option for the {% tool Cluster, infer trajectories and embed %} tool to use highly variable genes only - some of the cell cycle genes are also HVGs, but we want our plots to include the cell cycle genes that aren't HVGs too.  
->    {: .comment}
 >
 {: .hands_on}
 
