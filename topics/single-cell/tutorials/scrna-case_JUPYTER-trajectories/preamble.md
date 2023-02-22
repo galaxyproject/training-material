@@ -20,7 +20,18 @@ We will use the same sample from the previous three tutorials, which contains la
 
 We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the [project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find the final dataset in this [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferred-trajectory-analysis-using-python-jupyter-notebook-in-galaxy---input) or download from Zenodo below.
 
-> <hands-on-title>Data upload</hands-on-title>
+> <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
+>
+> 1. Import history from: [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferred-trajectory-analysis-using-python-jupyter-notebook-in-galaxy---input)
+>
+>
+>    {% snippet faqs/galaxy/histories_import.md %}
+>
+> 2. **Rename** {% icon galaxy-pencil %} the the history to your name of choice.
+>
+{: .hands_on}
+
+> <hands-on-title>Option 2: Data upload - Add to history</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
@@ -34,7 +45,7 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 >
 > 3. **Rename** {% icon galaxy-pencil %} the .h5ad object as `Final cell annotated object`
 >
->    {% snippet faqs/galaxy/datasets_rename.md name='Final cell annotated object' %}
+>    {% snippet faqs/galaxy/datasets_rename.md name="Final cell annotated object" %}
 >
 > 4. Check that the datatype is `h5ad`
 >
@@ -45,6 +56,15 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 > 6. Check that the datatype is `.ipynb`
 >
 {: .hands_on}
+
+# Important tips for easier analysis
+
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
+> <comment-title></comment-title>
+> - The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
+> - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [https://humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
+{: .comment}
 
 ## Filtering for T-cells
 
