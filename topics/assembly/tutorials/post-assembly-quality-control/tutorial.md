@@ -4,15 +4,11 @@ layout: tutorial_hands_on
 title: Post Assembly Quality Control
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- what combination of tools can control the quality of an initial assembly?
+- how to evaluate the quality and the completeness of the assemblies?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- apply the post-assembly-QC-workflow using the necessary tools
+- evaluate the quality of the post-assembly
 time_estimation: 3H
 key_points:
 - The take-home messages
@@ -27,6 +23,17 @@ contributors:
 # Introduction
 
 <!-- This is a comment. -->
+
+An important part in genome assembly is quality control. Since there are many different 
+ways how errors can occur there are also many different tools to identify and remove 
+potential problems. The difficulty is to choose between them and to know when it is time
+to move on. It is important because time and resources play a big role in genome assembly.
+
+In this tutorial you will learn how to use the tools for the post-assembly quality control
+workflow. It's a post assembly pipeline from ERGA to ensure high quality assemblies in
+appropriate time and resources.
+
+
 
 General introduction about the topic and then an introduction of the
 tutorial (the questions and the objectives). It is nice also to have a
@@ -80,7 +87,7 @@ depending on the specifics of your tutorial.
 
 have fun!
 
-## Get data
+# Get data
 
 > <hands-on-title> Data Upload </hands-on-title>
 >
@@ -111,7 +118,7 @@ have fun!
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# Assembly decontamination
 
 It comes first a description of the step: some background and some theory.
 Some image can be added there to support the theory explanation:
@@ -129,6 +136,45 @@ The idea is to keep the theory description before quite simple to focus more on 
 {: .details}
 
 A big step can have several subsections or sub steps:
+
+
+## Sub-step with **BlobToolKit**
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [BlobToolKit](toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/3.4.0+galaxy0) %} with the following parameters:
+>    - *"Select mode"*: `Create a BlobToolKit dataset`
+>        - {% icon param-file %} *"Genome assembly file"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Metadata file"*: `output` (Input dataset)
+>        - *"NCBI taxonomy ID"*: `{'id': 2, 'output_name': 'output'}`
+>        - {% icon param-file %} *"NCBI taxdump directory"*: `output` (Input dataset)
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
 
 
 ## Sub-step with **HISAT2**
@@ -178,43 +224,6 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **gfastats**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.2.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: `output` (Input dataset)
->    - *"Specify target sequences"*: `Disabled`
->    - *"Tool mode"*: `Summary statistics generation`
->        - *"Report mode"*: `Genome assembly statistics (--nstar-report)`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 ## Sub-step with **Busco**
 
 > <hands-on-title> Task description </hands-on-title>
@@ -225,81 +234,6 @@ A big step can have several subsections or sub steps:
 >        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
 >    - *"Auto-detect or select lineage?"*: `Auto-detect`
 >    - *"Which outputs should be generated"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **BlobToolKit**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [BlobToolKit](toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/3.4.0+galaxy0) %} with the following parameters:
->    - *"Select mode"*: `Create a BlobToolKit dataset`
->        - {% icon param-file %} *"Genome assembly file"*: `output` (Input dataset)
->        - {% icon param-file %} *"Metadata file"*: `output` (Input dataset)
->        - *"NCBI taxonomy ID"*: `{'id': 2, 'output_name': 'output'}`
->        - {% icon param-file %} *"NCBI taxdump directory"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Meryl**
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} with the following parameters:
->    - *"Operation type selector"*: `Count operations`
->        - {% icon param-file %} *"Input sequences"*: `output` (Input dataset)
->        - *"K-mer size selector"*: `Estimate the best k-mer size`
->            - *"Genome size"*: `{'id': 4, 'output_name': 'output'}`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -402,15 +336,15 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **Merqury**
+## Sub-step with **Meryl**
 
 > <hands-on-title> Task description </hands-on-title>
 >
-> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2) %} with the following parameters:
->    - *"Evaluation mode"*: `Default mode`
->        - {% icon param-file %} *"K-mer counts database"*: `read_db` (output of **Meryl** {% icon tool %})
->        - *"Number of assemblies"*: `One assembly (pseudo-haplotype or mixed-haplotype)`
->            - {% icon param-file %} *"Genome assembly"*: `output` (Input dataset)
+> 1. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} with the following parameters:
+>    - *"Operation type selector"*: `Count operations`
+>        - {% icon param-file %} *"Input sequences"*: `output` (Input dataset)
+>        - *"K-mer size selector"*: `Estimate the best k-mer size`
+>            - *"Genome size"*: `{'id': 4, 'output_name': 'output'}`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -508,6 +442,79 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
+## Sub-step with **Merqury**
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2) %} with the following parameters:
+>    - *"Evaluation mode"*: `Default mode`
+>        - {% icon param-file %} *"K-mer counts database"*: `read_db` (output of **Meryl** {% icon tool %})
+>        - *"Number of assemblies"*: `One assembly (pseudo-haplotype or mixed-haplotype)`
+>            - {% icon param-file %} *"Genome assembly"*: `output` (Input dataset)
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **gfastats**
+
+> <hands-on-title> Task description </hands-on-title>
+>
+> 1. {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.2.0+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Input file"*: `output` (Input dataset)
+>    - *"Specify target sequences"*: `Disabled`
+>    - *"Tool mode"*: `Summary statistics generation`
+>        - *"Report mode"*: `Genome assembly statistics (--nstar-report)`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> <question-title></question-title>
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
 
 ## Re-arrange
 
