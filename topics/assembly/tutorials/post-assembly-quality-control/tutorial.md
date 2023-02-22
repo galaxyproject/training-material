@@ -35,6 +35,7 @@ appropriate time and resources.
 
 
 
+
 General introduction about the topic and then an introduction of the
 tutorial (the questions and the objectives). It is nice also to have a
 scheme to sum up the pipeline used during the tutorial. The idea is to
@@ -120,6 +121,12 @@ have fun!
 
 # Assembly decontamination
 
+Extracted DNA from an organism contains always also DNA from other organisms.
+This is why most assemblies need to go through an decontamination process to remove 
+the non-target reads/contigs for a higher-quality end product.
+
+
+
 It comes first a description of the step: some background and some theory.
 Some image can be added there to support the theory explanation:
 
@@ -140,7 +147,10 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **BlobToolKit**
 
-> <hands-on-title> Task description </hands-on-title>
+Blobtoolkit is a decontamination tool. The first step is to create a new dataset.
+Therefor the tool takes some inputs and then creates the so called BlobDir datastructure as an output.
+
+> <hands-on-title> Creating the BlobDir dataset </hands-on-title>
 >
 > 1. {% tool [BlobToolKit](toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/3.4.0+galaxy0) %} with the following parameters:
 >    - *"Select mode"*: `Create a BlobToolKit dataset`
@@ -184,9 +194,8 @@ A big step can have several subsections or sub steps:
 > 1. {% tool [HISAT2](toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1) %} with the following parameters:
 >    - *"Source for the reference genome"*: `Use a genome from history`
 >        - {% icon param-file %} *"Select the reference genome"*: `output` (Input dataset)
->    - *"Is this a single or paired library"*: `Paired-end Dataset Collection`
->        - {% icon param-collection %} *"Paired Collection"*: `output` (Input dataset collection)
->        - *"Paired-end options"*: `Use default values`
+>    - *"Is this a single or paired library"*: `Single-end`
+>        - {% icon param-collection %} *"FASTA/Q file"*: `output` (Input dataset collection)
 >    - In *"Advanced Options"*:
 >        - *"Input options"*: `Use default values`
 >        - *"Alignment options"*: `Use default values`
@@ -515,6 +524,7 @@ A big step can have several subsections or sub steps:
 > {: .solution}
 >
 {: .question}
+
 
 ## Re-arrange
 
