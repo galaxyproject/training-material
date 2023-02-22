@@ -1,6 +1,5 @@
 ---
-redirect_from:
-- /faqs/galaxy/analysis_job_failure_value_error
+redirect_from: [/faqs/galaxy/analysis_job_failure_value_error]
 title: Understanding ValueError error messages
 area: troubleshooting
 box_type: tip

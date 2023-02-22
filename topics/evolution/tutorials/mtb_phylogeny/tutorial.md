@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 title: Tree thinking for tuberculosis evolution and epidemiology
 zenodo_link: 'https://zenodo.org/record/6010176'
-enable: false
+draft: true
 tags:
   - prokaryotes
   - phylogenetics

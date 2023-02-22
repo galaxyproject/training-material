@@ -65,9 +65,20 @@ In this tutorial we will perform trajectory analysis using [monocle3](https://co
 ## Get data
 We will continue to work on the case study data from a mouse model of fetal growth restriction {% cite Bacon2018 %} (see [the study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and [the project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)).
 Monocle3 works great with annotated data, so we will make use of our annotated AnnData object, generated in the previous [tutorial]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}). So you see - all the hard work of processing data was not in vain! We will also need a ‘clean’ expression matrix, extracted from the AnnData object just before we started the processing.
-You can find both datasets in this [input history](https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/monocle3-input-files) or download from Zenodo below.
+You have two options for uploading these datasets. Importing via history is often faster.
 
-><hands-on-title>Data upload</hands-on-title>
+> <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
+>
+> 1. Import history from: [input history](https://humancellatlas.usegalaxy.eu/u/j.jakiela/h/monocle3-input-files)
+>
+>
+>    {% snippet faqs/galaxy/histories_import.md %}
+>
+> 2. **Rename** {% icon galaxy-pencil %} the the history to your name of choice.
+>
+{: .hands_on}
+
+><hands-on-title>Option 2: Data upload - Add to history</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})

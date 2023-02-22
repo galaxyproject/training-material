@@ -1,6 +1,5 @@
 ---
-redirect_from:
-- /faqs/galaxy/reduce_quota_usage
+redirect_from: [/faqs/galaxy/reduce_quota_usage]
 title: How can I reduce quota usage while still retaining prior work (data, tools, methods)?
 area: account
 layout: faq

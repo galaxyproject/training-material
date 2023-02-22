@@ -1,6 +1,5 @@
 ---
-redirect_from:
-- /faqs/galaxy/analysis_job_failure_input_problem
+redirect_from: [/faqs/galaxy/analysis_job_failure_input_problem]
 title: Understanding input error messages
 area: troubleshooting
 box_type: tip

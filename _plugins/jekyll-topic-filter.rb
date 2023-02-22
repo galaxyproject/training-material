@@ -108,6 +108,10 @@ module TopicFilter
       out.delete("__OTHER__")
     end
 
+    out.each{|k, v|
+      v['materials'].sort_by!{|m| [m.fetch('priority', 1), m['title']] }
+    }
+
     out
   end
 
@@ -311,6 +315,7 @@ module TopicFilter
         x = {
           "workflow" => wf,
           "tests" => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length > 0,
+          "url" => "#{site.config['url']}#{site.config['baseurl']}/#{folder}/workflows/#{wf}",
         }
         x
       }
@@ -347,7 +352,7 @@ module TopicFilter
     # make it future proof.
     page_obj['type'] = 'tutorial'
 
-    if page_obj.has_key?("enable") and !page_obj['enable'] then
+    if page_obj.has_key?("draft") and page_obj['draft'] then
       if ! page_obj.has_key? 'tags'
         page_obj['tags'] = Array.new
       end

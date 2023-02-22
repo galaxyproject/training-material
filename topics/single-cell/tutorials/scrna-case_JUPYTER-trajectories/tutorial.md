@@ -51,11 +51,9 @@ notebook:
   
 ---
 
-
 # Run the tutorial!
 
 From now on, you can view this tutorial in the Jupyter notebook, which will allow you to read the material and simultaneously execute the code cells! You may have to change certain numbers in the code blocks, so do read carefully. The tutorial is adapted from the [Scanpy Trajectory inference tutorial](https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html).
-
 
 ## Install modules & activate them
 

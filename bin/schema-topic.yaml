@@ -174,11 +174,10 @@ mapping:
         examples:
             - Galaxy-Training-Network/galaxy-single-cell
             - galaxy-genome-annotation/Lobby
-    enable:
+    draft:
         type: bool
-        required: false
         description: |
-            `false` to hide your topic from the production GTN. This is useful if you need a topic for a workshop, but have not finished making it up to GTN standards.
+            `true` to hide your tutorial from the topic page (optional). This is useful if you need a tutorial for a workshop, but have not finished making it up to GTN standards.
     tag_based:
         type: bool
         required: false
@@ -186,3 +185,10 @@ mapping:
             If this is a synthetic tag based topic (no tutorials of it's own)
             then you must set this flag to indicate it as such, otherwise you
             will find yourself with an empty topic page.
+    og_image:
+        type: str
+        description: |
+            A custom image to show on the link preview in external applications (e.g. when the URL is pasted into Twitter)
+        pattern: /^\/.*/
+        examples:
+            - /assets/images/gat.png
