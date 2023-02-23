@@ -1099,7 +1099,7 @@ With these two types of visualizations we can have an overview of all samples an
 > <hands-on-title>All Samples Analysis</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Nanopore_Datasets_Reports_of_All_Samples_along_with_Full_genomes_and_VF_genes_Phylogenetic_trees.ga) or download it to your computer.
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Nanopore_Datasets_Pathogen_Tracking_among_all_samples.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
