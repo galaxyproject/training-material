@@ -27,6 +27,8 @@ key_points:
 contributions:
   authorship:
     - MarisaJL
+  editing:
+   - nomadscientist
   testing:
     - hrukkudyr
 
@@ -69,7 +71,7 @@ In addition to the scRNA-seq dataset, we will also need lists of the genes that 
 > <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
 > Sometimes data upload can take a while, so a faster route is to import a history.
 >
-> 1. Import history from: [example input history](https://usegalaxy.eu/u/wendi.bacon.training/h/removing-the-effects-of-the-cell-cycle---input)
+> 1. Import history from: [example input history](https://humancellatlas.usegalaxy.eu/u/marisa_jl/h/removing-the-effects-of-the-cell-cycle---input-history)
 >
 >
 >    {% snippet faqs/galaxy/histories_import.md %}
@@ -123,9 +125,14 @@ In addition to the scRNA-seq dataset, we will also need lists of the genes that 
 >
 {: .hands_on}
 
-The easiest way to find the tools you will need during this tutorial is to use tutorial mode or to run the analysis in the [HCA Galaxy](https://humancellatlas.usegalaxy.eu/).
+# Important tips for easier analysis
 
-{% snippet  faqs/galaxy/tutorial_mode.md %}
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
+> <comment-title></comment-title>
+> - The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
+> - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [https://humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
+{: .comment}
 
 # Cell Cycle Scoring
 
@@ -420,15 +427,12 @@ You will learn more about plotting your data in the [Filter, Plot and Explore]({
 > <question-title></question-title>
 >
 > 1. Does the plot look as you expected?
-> 2. What would happen if we plotted all of the genes from the main dataset?
 >
 > > <solution-title></solution-title>
 > >
 > > 1. The PCA plot shows that the three groups of cells are separated out according to what phase of the cell cycle they are in. This is what we would expect to see as we are only looking at the cell cycle genes, which by definition are expressed during particular phases.
 > >
 > > ![PCA plot showing three separate clusters of cells in the G1, S and G2M Phases](../../images/scrna-case_cell-cycle/CellCycle_PCA1.png "PCA Plot of Cell Cycle Genes before regression")
-> >
-> > 2. If we created a PCA plot using all of the genes (not just the cell cycle ones) and coloured the cells according to their phase, we wouldn't expect to see such clear distinctions between the groups. Although the cell cycle genes can have a significant effect on many datasets, these wouldn't be as obvious when other genes were also being taken into account. If you continue analysing your data in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial then you will be creating some more plots - you could try colouring these according to cell phase to see what happens.
 > >
 > {: .solution}
 {: .question}
@@ -457,7 +461,6 @@ We will now repeat the same steps to create a PCA plot of the filtered dataset a
 > <question-title></question-title>
 >
 > 1. Does the plot look as you expected?
-> 2. What impact do you think the cell cycle regression will have when you analyse the whole dataset?
 >
 > > <solution-title></solution-title>
 > >
@@ -465,15 +468,33 @@ We will now repeat the same steps to create a PCA plot of the filtered dataset a
 > >
 > > ![PCA plot showing one big cluster with the cells from G1, S and G2M Phases all mixed up together](../../images/scrna-case_cell-cycle/CellCycle_PCA2.png "PCA Plot of Cell Cycle Genes after regression")
 > >
-> > 2. The cell cycle genes aren't having a coordinated effect on the data now that the effects of the cell cycle have been regressed out - the cells don't separate according to phase in this PCA plot. When we analyse the whole `CellCycle_Regressed` dataset, this could allow other differences in gene expression to become more apparent. We can run the regressed dataset through the rest of the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial to find out how much of an impact this will have. We should see some differences in the plots, but the extent of these differences will depend on how strong the effects of the cell cycle are in this particular dataset.
-> >
 > {: .solution}
 {: .question}
 
 Comparing the before and after plots, we can clearly see that the effects of the cell cycle have been removed. Although you wouldn't usually need to filter out the cell cycle genes or create these plots when analysing your own data, hopefully you have found doing it now to be helpful for understanding the impact of cell cycle regression.
 
+<question-title></question-title>
+>
+> 1. What impact do you think the cell cycle regression will have when you analyse the whole dataset? What would happen if we plotted all of the genes from the main dataset?
+>
+> > <solution-title></solution-title>
+> > 
+> > 1. The regression reduces the impact of the cell cycle on the data - this is why the cells are less separated by phase afterwards. When we analyse the whole `CellCycle_Regressed` dataset, with all of the genes, this could allow other differences in gene expression to become more apparent.
+> > 
+> > We wouldn't expect to see such clear distinctions in PCA plots created using all of the genes (not just the cell cycle ones), even before the regression. Although the cell cycle genes can have a significant effect, these won't be as obvious when other genes are also being taken into account. However, we will still see a difference after we regress out the effects of the cell cycle - the cells in different phases will become more mixed up together. How much of a difference the regression makes will depend on how strong the effects of the cell cycle are in a particular dataset - you can see the effects on this dataset below. You can also replicate these plots after completing the rest of the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial by colouring your PCA plots by phase.
+> >
+> > ![PCA plot showing some separation between cells in the G1, S and G2M Phases before regression](../../images/scrna-case_cell-cycle/CellCycle_PCA3.png "PCA Plot using all genes before regression")
+> >
+> >
+> > ![PCA plot showing that cells in the G1, S and G2M Phases are more mixed up with each other after the regression](../../images/scrna-case_cell-cycle/CellCycle_PCA4.png "PCA Plot using all genes after regression")
+> >
+> {: .solution}
+{: .question}
+
 # Conclusion
 
 In this tutorial, you have annotated and scored the cell cycle genes and regressed out the effects of the cell cycle. You have also created PCA plots of the data before and after regression to visualise the effects.
+
+You might want to check your results against this [example history](https://humancellatlas.usegalaxy.eu/u/marisa_jl/h/removing-the-effects-of-the-cell-cycle---answer-key).
 
 You can now continue to analyse this data by returning to the Preparing coordinates step in the [Filter, Plot and Explore]({% link topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.md %}) tutorial. If you use the `CellCycle_Regressed` dataset (which you may now want to rename as `Use_me_Scaled` since that is the name used in the main tutorial), you should notice some differences in your results compared to those shown there because the effects of the cell cycle have been regressed out.
