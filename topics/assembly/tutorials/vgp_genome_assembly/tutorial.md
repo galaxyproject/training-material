@@ -824,7 +824,7 @@ The *Bionano Hybrid Scaffold* tool automates the scaffolding process, which incl
 
 > <hands-on-title>Bionano hybrid scaffolding</hands-on-title>
 >
-> 1. {% tool [Bionano Hybrid Scaffold](toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.6.1+galaxy2) %} (**VERSION 3.7+GALAXY0**) with the following parameters:
+> 1. {% tool [Bionano Hybrid Scaffold](toolshed.g2.bx.psu.edu/repos/bgruening/bionano_scaffold/bionano_scaffold/3.6.1+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"NGS FASTA"*: `Primary contigs purged`
 >    - {% icon param-file %} *"BioNano CMAP"*: `Bionano_dataset`
 >    - *"Configuration mode"*: `VGP mode`
