@@ -316,17 +316,28 @@ There are several possibilities to upload the data depending on how many dataset
 >
 >      </div>
 >
+>
 > 2. Create a collection to organize the data
 >
->    {% snippet faqs/galaxy/collections_build_list_paired.md %}
+>    <div class="Amplicon-Short Amplicon-Long" markdown="1">
+>
+>    {% snippet faqs/galaxy/collections_build_list_paired.md fw_filter="_R1.fastq" rv_filter="_R2.fastq" %}
+>
+>    </div>
+>
+>    <div class="Metatranscriptomic-Short Metatranscriptomic-Long" markdown="1">
+>
+>    {% snippet faqs/galaxy/collections_build_list_paired.md fw_filter="_1.fastq" rv_filter="_2.fastq" %}
 >
 >    > <comment-title></comment-title>
 >    >
->    > For the example datasets, since the datasets carry `_R1` and `_R2` or `_1` and `_2` in their names, Galaxy may already have detected a possible pairing scheme for the data, in which case the datasets will appear in green in the lower half (the paired section) of the dialog. You could accept this default pairing, but as shown in the middle column of the paired section, this would include the `.fastqsanger` or `fastq` suffix in the pair names (even with `Remove file extensions?` checked Galaxy would only remove the last suffix, `.gz`, from the dataset names.
+>    > Since these example datasets carry `_1` and `_2` in their names, Galaxy will likely autodetect a possible pairing scheme for the data, in which case the datasets will appear in green in the lower half (the paired section) of the dialog. You could accept this default pairing, but as shown in the middle column of the paired section, this would include the `fastq` suffix in the pair names (even with `Remove file extensions?` checked Galaxy would only remove the last suffix, `.gz`, from the dataset names).
 >    >
->    > To remove the extra suffix, you can click on all names in the middle column and remove the extra suffix
+>    > To remove the extra suffix, click on **Unpair all** at the top of the paired datasets section, then enter appropriate filter texts for your forward and reverse datasets, and repeat the auto-pairing.
 >    >
 >    {: .comment}
+>
+>    </div>
 >
 {: .hands_on}
 
@@ -584,7 +595,7 @@ To prepare the data, we first need to do:
 
 2. **Decontamination** to remove reads from the human genome
 
-   Sequences extracted from wastewater commonly contain human reads. These reads needs to be removed for legal and ethical reasons as well as to speed up downstream analysis. Here we use **ReadAndKeep** ({% cite hunt2022readitandkeep %}).
+   Sequences extracted from wastewater commonly contain human reads. These reads needs to be removed for legal and ethical reasons as well as to speed up downstream analysis. Here we use **ReadItAndKeep** ({% cite hunt2022readitandkeep %}).
 
    <div class="Amplicon-Long Metatranscriptomic-Long" markdown="1">
 
