@@ -17,6 +17,11 @@ time_estimation: 2H
 key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
+requirements :
+  - type: "internal"
+    topic_name: metabolomics
+    tutorials: 
+      - lcms-preprocessing
 contributors:
 - xtrojak
 - hechth
@@ -216,7 +221,7 @@ A big step can have several subsections or sub steps:
 
 # Peak detection using XCMS
 
-The first step in the workflow is to detect the peaks in the `.mzml` data using xcms. This part, however, is covered by a [separate tutorial]({{ site.baseurl }}/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html). Although the tutorial is dedicated to LC-MS data, it can be followed also for our GC data. Therefore, in this section, we do not explain this part of the workflow in detials, but rather refer the reader to the dedicated tutorial.
+The first step in the workflow is to detect the peaks in the `.mzml` data using xcms. This part, however, is covered by a [separate tutorial]({{ site.baseurl }}/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html). Although the tutorial is dedicated to LC-MS data, it can be followed also for our GC data. Therefore, in this section, we do not explain this part of the workflow in detials, but rather refer the reader to the dedicated tutorial. Please also pay attention to the parameter values for individual Galaxy tools, as these can differ from the refered tutorial and are adjusted to our dataset.
 
 ## Peak picking
 
