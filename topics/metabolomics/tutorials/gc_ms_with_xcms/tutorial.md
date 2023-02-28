@@ -1,11 +1,11 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Mass spectrometry: GC-MS analysis'
-zenodo_link: ''
+title: 'Mass spectrometry: GC-MS analysis with XCMS, RAMClustR, and matchms'
+zenodo_link: 'https://zenodo.org/record/6878356'
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- What are the main steps of GC-MS data processing for metabolomic analysis?
+- What similarity metrics can be used to compare a pair of mass spectra and what are the differences between them?
 objectives:
 - The learning objectives are the goals of the tutorial
 - They will be informed by your audience and will communicate to them and to yourself
@@ -13,13 +13,12 @@ objectives:
 - They are single sentences describing what a learner should be able to do once they
   have completed the tutorial
 - You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+time_estimation: 2H
 key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
 contributors:
-- contributor1
-- contributor2
+- xtrojak
 
 ---
 
@@ -111,7 +110,7 @@ have fun!
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# Data normalisation and prepocessing
 
 It comes first a description of the step: some background and some theory.
 Some image can be added there to support the theory explanation:
@@ -213,6 +212,10 @@ A big step can have several subsections or sub steps:
 > {: .solution}
 >
 {: .question}
+
+# Peak detection using XCMS
+
+The first step in the workflow is to detect the peaks in the `.mzml` data using xcms. For the used parameters please see the workflow display above and refer to the individual tool form to get familiar with the effects of the individual parameters of the tool. Drifts in retention time are also corrected in xcms, outputting an aligned feature table.
 
 ## Sub-step with **xcms findChromPeaks (xcmsSet)**
 
@@ -454,6 +457,10 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
+# Peak deconvolution
+
+The next step is deconvoluting the detected peaks in order to reconstruct the full spectra of the analysed compound. RAMClustR is used to group features based on correlations across samples in a hierarchy, focusing on consistency across samples.
+
 ## Sub-step with **RAMClustR**
 
 > <hands-on-title> Task description </hands-on-title>
@@ -498,6 +505,12 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
+# Retention index calculation
+
+We developed a new package RIAssigner to compute retention indices for files in the `.msp` format using an indexed reference list in `.csv` or `.msp` format.
+
+The output follows the same format as the input, but with added retention index values. These will be used at a later stage to improve compound identification with an additional filtering step. Multiple computation methods (piecewise-linear & cubic spline) are supported.
+
 ## Sub-step with **RIAssigner**
 
 > <hands-on-title> Task description </hands-on-title>
@@ -534,6 +547,10 @@ A big step can have several subsections or sub steps:
 > {: .solution}
 >
 {: .question}
+
+# Identification
+
+The deconvoluted spectra are annotated for identification by comparing them with a reference spectral library. This library contains spectra of standards measured on the same instrument for optimal comparability. The matchms package is used for spectral matching. The cosine score with a greedy peak pairing heuristic was used to compute the number of matching ions with a given tolerance and the cosine scores for the matched peaks.
 
 ## Sub-step with **matchMS similarity**
 
@@ -574,6 +591,8 @@ A big step can have several subsections or sub steps:
 {: .question}
 
 ## Sub-step with **matchms output formatter**
+
+The output table contains the scores and number of matched ions of the deconvoluted spectra with the spectra in the reference library. The raw output is filtered to only contain the top matches (3 by default) and is then further filtered to contain only pairs with a score and number of matched ions larger than provided thresholds (0.65 & 3 by default).
 
 > <hands-on-title> Task description </hands-on-title>
 >
