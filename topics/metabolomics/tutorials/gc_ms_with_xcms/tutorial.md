@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Mass spectrometry: GC-MS analysis with XCMS, RAMClustR, and matchms'
+title: 'Mass spectrometry: GC-MS analysis with XCMS, RAMClustR, and matchMS'
 zenodo_link: 'https://zenodo.org/record/6878356'
 questions:
 - What are the main steps of GC-MS data processing for metabolomic analysis?
@@ -215,13 +215,15 @@ A big step can have several subsections or sub steps:
 
 # Peak detection using XCMS
 
-The first step in the workflow is to detect the peaks in the `.mzml` data using xcms. For the used parameters please see the workflow display above and refer to the individual tool form to get familiar with the effects of the individual parameters of the tool. Drifts in retention time are also corrected in xcms, outputting an aligned feature table.
+The first step in the workflow is to detect the peaks in the `.mzml` data using xcms. This part, however, is covered by a [separate tutorial]({{ site.baseurl }}/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html). Although the tutorial is dedicated to LC-MS data, it can be followed also for our GC data. Therefore, in this section, we do not explain this part of the workflow in detials, but rather refer the reader to the dedicated tutorial.
 
-## Sub-step with **xcms findChromPeaks (xcmsSet)**
+## Peak picking
+
+The first step is to extract peaks from each of your data files independently. For this purpose, we use _centWave_ chromatographic peak detection algorithm implemented in {% tool [xcms findChromPeaks (xcmsSet)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0) %}.
 
 > <hands-on-title> Task description </hands-on-title>
 >
-> 1. {% tool [xcms findChromPeaks (xcmsSet)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0) %} with the following parameters:
+>  {% tool [xcms findChromPeaks (xcmsSet)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **MSnbase readMSData** {% icon tool %})
 >    - *"Extraction method for peaks detection"*: `CentWave - chromatographic peak detection using the centWave method`
 >        - *"Max tolerated ppm m/z deviation in consecutive scans in ppm"*: `3.0`
@@ -231,76 +233,32 @@ The first step in the workflow is to detect the peaks in the `.mzml` data using 
 >            - *"Noise filter"*: `1000`
 >    - In *"Resubmit your raw dataset or your zip file"*:
 >        - *"Resubmit your dataset or your zip file"*: `no need`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>  
+>    You can leave the other parameters with their default values.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Determining shared ions
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **xcms findChromPeaks Merger**
+At this step, you obtain a dataset collection containing one RData file per sample, with independent lists of ions. Next, we want to identify the ions shared between samples. To do so, first you need to group your individual RData files into a single one.
 
 > <hands-on-title> Task description </hands-on-title>
 >
-> 1. {% tool [xcms findChromPeaks Merger](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0) %} with the following parameters:
+>  {% tool [xcms findChromPeaks Merger](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **xcms findChromPeaks (xcmsSet)** {% icon tool %})
 >    - {% icon param-file %} *"Sample metadata file "*: `output` (Input dataset)
 >    - In *"Resubmit your raw dataset or your zip file"*:
 >        - *"Resubmit your dataset or your zip file"*: `no need`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    You can leave the other parameters with their default values.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **xcms groupChromPeaks (group)**
+Now we can proceed with the grouping and determining shared ions among samples. The aim of this step, called ‘grouping’, is to obtain a single matrix of ions’ intensities for all samples.
 
 > <hands-on-title> Task description </hands-on-title>
 >
-> 1. {% tool [xcms groupChromPeaks (group)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0) %} with the following parameters:
+>  {% tool [xcms groupChromPeaks (group)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **xcms findChromPeaks Merger** {% icon tool %})
 >    - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
 >        - *"Bandwidth"*: `3.0`
@@ -310,38 +268,17 @@ The first step in the workflow is to detect the peaks in the `.mzml` data using 
 >    - In *"Resubmit your raw dataset or your zip file"*:
 >        - *"Resubmit your dataset or your zip file"*: `no need`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    You can leave the other parameters with their default values.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Retention time correction
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **xcms adjustRtime (retcor)**
+A deviation in retention time occurs from a sample to another, especially when you inject large sequences of samples. This steps aims at correcting retention time drift for each peak among samples.
 
 > <hands-on-title> Task description </hands-on-title>
 >
-> 1. {% tool [xcms adjustRtime (retcor)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_retcor/abims_xcms_retcor/3.12.0+galaxy0) %} with the following parameters:
+>  {% tool [xcms adjustRtime (retcor)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_retcor/abims_xcms_retcor/3.12.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **xcms groupChromPeaks (group)** {% icon tool %})
 >    - *"Method to use for retention time correction"*: `PeakGroups - retention time correction based on aligment of features (peak groups) present in most/all samples.`
 >        - *"Minimum required fraction of samples in which peaks for the peak group were identified"*: `0.7`
@@ -349,38 +286,17 @@ The first step in the workflow is to detect the peaks in the `.mzml` data using 
 >    - In *"Resubmit your raw dataset or your zip file"*:
 >        - *"Resubmit your dataset or your zip file"*: `no need`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    You can leave the other parameters with their default values.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Second round of determining shared ions
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **xcms groupChromPeaks (group)**
+By applying retention time correction, the used retention time values were modified. Consequently, applying this step on your data requires to complete it with an additional ‘grouping’ step.
 
 > <hands-on-title> Task description </hands-on-title>
 >
-> 1. {% tool [xcms groupChromPeaks (group)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0) %} with the following parameters:
+>  {% tool [xcms groupChromPeaks (group)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **xcms adjustRtime (retcor)** {% icon tool %})
 >    - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
 >        - *"Bandwidth"*: `3.0`
@@ -392,70 +308,26 @@ The first step in the workflow is to detect the peaks in the `.mzml` data using 
 >    - In *"Resubmit your raw dataset or your zip file"*:
 >        - *"Resubmit your dataset or your zip file"*: `no need`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    You can leave the other parameters with their default values.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Integrating areas of missing peaks
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **xcms fillChromPeaks (fillPeaks)**
+At this point, the peak list may contain NA values when peaks were not considered peaks in only some of the samples in the first peak picking step. In this step, we will integrate signal in the mz-rt area of an ion (chromatographic peak group) for samples in which no chromatographic peak for this ion was identified.
 
 > <hands-on-title> Task description </hands-on-title>
 >
-> 1. {% tool [xcms fillChromPeaks (fillPeaks)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0) %} with the following parameters:
+>  {% tool [xcms fillChromPeaks (fillPeaks)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **xcms groupChromPeaks (group)** {% icon tool %})
 >    - In *"Peak List"*:
 >        - *"Convert retention time (seconds) into minutes"*: `Yes`
 >    - In *"Resubmit your raw dataset or your zip file"*:
 >        - *"Resubmit your dataset or your zip file"*: `no need`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    You can leave the other parameters with their default values.
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 # Peak deconvolution
 
