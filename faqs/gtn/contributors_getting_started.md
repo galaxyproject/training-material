@@ -8,7 +8,7 @@ contributors: [bebatut,shiltemann]
 
 If you would like to get involved in the project but are unsure where to start, there are some easy ways to contribute which will also help you familiarize yourself with the project.
 
-#### 1. Checking existing tutorials
+**Checking existing tutorials**
 
 A great way to help out the project is to test/edit existing tutorials. Pick a tutorial and check the contents. Does everything work as expected? Are there things that could be improved?
 
@@ -48,7 +48,7 @@ Below is a checklist of things to look out for to help you get started. If you f
   - Add a data-library.yaml file if none exists
 
 
-#### 2. Reviewing pull requests
+**Reviewing pull requests**
 
 Another great way to help out the project is by reviewing [open pull requests]({{ site.github_repository }}/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc). You can use the above checklist as a guide for your review. Some documentation about how to add your review in the GitHub interface can be found [here](https://help.github.com/articles/about-pull-request-reviews/)
 
