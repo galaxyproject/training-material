@@ -607,7 +607,7 @@ module GtnLinter
   end
 
   def self.check_bolded_heading(contents)
-    self.find_matching_texts(contents, /^#+ (?<title>\*\*.*\*\*)/)
+    self.find_matching_texts(contents, /^#+ (?<title>\*\*.*\*\*)$/)
     .map {|idx, text, selected|
       ReviewDogEmitter.error(
         path: @path,
