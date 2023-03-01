@@ -46,10 +46,6 @@ abbreviations:
     DVCS: Distributed Version Control System
 ---
 
-> <warning-title>22.05 not yet released</warning-title>
-> We updated the tutorials ahead of GCC, preparing for the GCC Galaxy Admin Training. However, 22.05 is not yet released and we still have some bugs in the roles to work our, so, until that time we recommend you follow the [GTN Training Archive](https://training.galaxyproject.org/archive/2022-05-01/topics/admin/tutorials/ansible-galaxy/tutorial.html) materials for this tutorial (and all others in this series.)
-{: .warning}
-
 This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:
 
 > An ansible is a category of fictional device or technology capable of instantaneous or faster-than-light communication. It can send and receive messages to and from a corresponding device over any distance or obstacle whatsoever with no delay, even between star systems (Source: [Wikipedia](https://en.wikipedia.org/wiki/Ansible))
@@ -86,7 +82,7 @@ The important variables for this tutorial are:
 
 These are largely self explanatory: a directory for all of Galaxy's code and configuration, which commit should be installed, and the Galaxy configuration. We will not explain Galaxy configuration variables in detail as they are covered sufficiently in the `galaxy.yml` sample file or the [online documentation](https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options).
 
-The official recommendation is that you should have a variables file such as a `group_vars/galaxyservers.yml` for storing all of the Galaxy configuration.
+The official recommendation is that you should have a variables file such as `group_vars/galaxyservers.yml` for storing all of the Galaxy configuration.
 
 ## Tasks
 
@@ -251,15 +247,11 @@ To proceed from here it is expected that:
 >
 > There are known issues with CentOS7 and python3, which is used in this tutorial. If you use this setup, you should have python2 and python3 coexisting, and use python2 for Ansible (i.e. do not set `interpreter_python` in your `ansible.cfg`) and python3 for Galaxy. This setup requires numerous changes that you will need to discover, which are not covered in this tutorial.
 >
-> Both `python-psycopg2` and `python3-psycopg2` need to be installed.
+> On older versions, both `python-psycopg2` and `python3-psycopg2` may need to be installed.
 >
 > CentOS8 (and RHEL in general) have significantly different package names for some modules, beware!
 {: .comment}
 
-
-> <warning-title>22.05 not yet released</warning-title>
-> We updated the tutorials ahead of GCC, preparing for the GCC Galaxy Admin Training. However, 22.05 is not yet released and we still have some bugs in the roles to work our, so, until that time we recommend you follow the [GTN Training Archive](https://training.galaxyproject.org/archive/2022-05-01/topics/admin/tutorials/ansible-galaxy/tutorial.html) materials for this tutorial (and all others in this series.)
-{: .warning}
 
 ## Requirements
 
@@ -277,19 +269,19 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +++ b/requirements.yml
 >    @@ -0,0 +1,14 @@
 >    +- src: galaxyproject.galaxy
->    +  version: 0.10.4
+>    +  version: 0.10.8
 >    +- src: galaxyproject.nginx
->    +  version: 0.7.0
+>    +  version: 0.7.1
 >    +- src: galaxyproject.postgresql
->    +  version: 1.0.3
+>    +  version: 1.1.2
 >    +- src: galaxyproject.postgresql_objects
->    +  version: 1.1.0
+>    +  version: 1.2.0
 >    +- src: geerlingguy.pip
->    +  version: 2.0.0
->    +- src: uchida.miniconda
->    +  version: 0.3.0
+>    +  version: 2.2.0
+>    +- src: galaxyproject.miniconda
+>    +  version: 0.3.1
 >    +- src: usegalaxy_eu.certbot
->    +  version: 0.1.5
+>    +  version: 0.1.7
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirements"}
@@ -306,13 +298,13 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    >  |`galaxyproject.postgresql` | Installs our database, PostgreSQL|
 >    >  |`galaxyproject.postgresql_objects` | Creates users and databases within PostgreSQL|
 >    >  |`geerlingguy.pip` | Ensures that pip is available|
->    >  |`uchida.miniconda` | Installs miniconda, which is used by Galaxy|
+>    >  |`galaxyproject.miniconda` | Installs miniconda, which is used by Galaxy|
 >    >  |`usegalaxy_eu.certbot` | Installs certbot and requests SSL certificates|
 >    {: .details}
 >
 >    > <details-title>Role version vs Galaxy version?</details-title>
 >    > Q: Is there a correspondence between galaxy role versions and galaxy versions?
->    > A: They  are correlated (because generally new Galaxy versions could introduce e.g. new configuration options that the galaxy role would then need to adopt), but the Galaxy role can install older versions of Galaxy.
+>    > A: They are correlated (because generally new Galaxy versions could introduce e.g. new configuration options that the galaxy role would then need to adopt), but the Galaxy role can install older versions of Galaxy.
 >    {: .details}
 >
 > 3. In the same directory, run:
@@ -354,13 +346,14 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    ```diff
 >    --- /dev/null
 >    +++ b/ansible.cfg
->    @@ -0,0 +1,6 @@
+>    @@ -0,0 +1,7 @@
 >    +[defaults]
 >    +interpreter_python = /usr/bin/python3
 >    +inventory = hosts
->    +retry_files_enabled = false
->    +stdout_callback = yaml # Use the YAML callback plugin.
->    +bin_ansible_callbacks = True # Use the stdout_callback when running ad-hoc commands.
+>    +# Use the YAML callback plugin.
+>    +stdout_callback = yaml
+>    +# Use the stdout_callback when running ad-hoc commands.
+>    +bin_ansible_callbacks = True
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add ansible.cfg"}
@@ -441,6 +434,10 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    ```
 >    {: data-commit="Add initial group variables file"}
 >
+>    > <comment-title>Regarding `expanduser`</comment-title>
+>    > The `expanduser` filter turns `~postgres` into the absolute path to the `postgres` user's home directory. However, you should be warned that the `expanduser` filter, like all Ansible filters, runs *locally*. This works in the training because Ansible is executed from the Galaxy server, but if you run Ansible over SSH, you would need to set the full path in `postgresql_backup_local_dir` directly.
+>    {: .comment}
+>
 >    > <tip-title>Using postgres via the network</tip-title>
 >    > To use postgres via another machine, or via the network, you can add lines like the following:
 >    >
@@ -462,7 +459,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >
 > 2. Create and open `galaxy.yml` which will be our playbook. Add the following:
 >
->    - Add a pre-task to install the necessary dependencies: `python3-psycopg2`, `acl`
+>    - Add a pre-task to install the necessary dependency at this stage: `acl`
 >    - A role for `galaxyproject.postgresql`. This will handle the installation of PostgreSQL.
 >    - A role for `galaxyproject.postgresql_objects`, run as the postgres user. (You will need `become`/`become_user`.) This role allows for managing users and databases within postgres.
 >
@@ -478,7 +475,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    +  pre_tasks:
 >    +    - name: Install Dependencies
 >    +      package:
->    +        name: ['acl', 'python3-psycopg2']
+>    +        name: 'acl'
 >    +  roles:
 >    +    - galaxyproject.postgresql
 >    +    - role: galaxyproject.postgresql_objects
@@ -525,7 +522,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > > >     ├── galaxyproject.postgresql
 >    > > >     ├── geerlingguy.pip
 >    > > >     ├── galaxyproject.postgresql_objects
->    > > >     ├── uchida.miniconda
+>    > > >     ├── galaxyproject.miniconda
 >    > > >     └── usegalaxy_eu.certbot
 >    > > >
 >    > > > 9 directories, 5 files
@@ -763,15 +760,9 @@ For a normal Galaxy instance there are a few configuration changes you make very
 - Configuring the admin user list
 - Changing the "brand"
 
-Additionally we'll go ahead and set up the production-ready Gunicorn which will handle processing Galaxy jobs. Gunicorn launches as many workers as you request, and then they take turns placing a lock, accepting a job, releasing that lock, and then going on to process that job.
+Additionally we'll go ahead and set up the production-ready [Gunicorn + Webless](https://docs.galaxyproject.org/en/master/admin/scaling.html#deployment-options) deployment, which separates Galaxy's web and job handling into separate processes.
 
 Finally, best admin practices are to not run Galaxy as a user with `sudo` access, like your login user probably has. Additionally, it is best to install the Galaxy code and configs as a separate user, for security purposes. So we will instruct the `galaxyproject.galaxy` role to create a new user account specifically to run Galaxy under.
-
-> <details-title>Mules are not the only option</details-title>
->
-> Galaxy can be run in a [couple of other configurations](https://docs.galaxyproject.org/en/master/admin/scaling.html#deployment-options) depending on your needs. Mules are generally a good solution for most production needs.
->
-{: .details}
 
 The configuration is quite simple thanks to the many sensible defaults that are provided in the Ansible roles.
 
@@ -779,8 +770,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > 1. Open `galaxy.yml` with your text editor and set the following:
 >
->    - Amend the [package installation](https://docs.ansible.com/ansible/2.9/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `bzip2`, `git`, `make`, `tar`, and `virtualenv`.
->    - Add the roles `geerlingguy.pip`, `galaxyproject.galaxy` and `uchida.miniconda` (in this order) at the end, with `uchida.miniconda` run as the `galaxy` user.
+>    - Amend the [package installation](https://docs.ansible.com/ansible/2.9/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `bzip2`, `git`, `make`, `tar`, `python3-venv`, and `python3-setuptools`.
+>    - Add the roles `geerlingguy.pip`, `galaxyproject.galaxy` and `galaxyproject.miniconda` (in this order) at the end, with `uchida.miniconda` run as the `galaxy` user.
 >
 >    {% raw %}
 >    ```diff
@@ -790,8 +781,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >       pre_tasks:
 >         - name: Install Dependencies
 >           package:
->    -        name: ['acl', 'python3-psycopg2']
->    +        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
+>    -        name: 'acl'
+>    +        name: ['acl', 'bzip2', 'git', 'make', 'tar', 'python3-venv', 'python3-setuptools']
 >       roles:
 >         - galaxyproject.postgresql
 >         - role: galaxyproject.postgresql_objects
@@ -799,18 +790,12 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >           become_user: postgres
 >    +    - geerlingguy.pip
 >    +    - galaxyproject.galaxy
->    +    - role: uchida.miniconda
+>    +    - role: galaxyproject.miniconda
 >    +      become: true
 >    +      become_user: "{{ galaxy_user.name }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pip, miniconda, galaxy to playbook"}
->
->    > <tip-title>Miniconda fails to work</tip-title>
->    > The Galaxy user is created to separate privileges. Then we add `uchida.miniconda`, which is run as the Galaxy user.
->    >
->    > The miniconda role attempts to install tar and bzip2, even when the user doesn't have permissions to do this. This issue has been addressed in the codebase, but, the role has not seen a release which would address this. You do *not* need to run this role, Galaxy will attempt to install conda when it is missing. We added it to prevent a possible race condition between the two mules if both attempt to install conda at the same time. So, remove the role from your playbook, and carry on, if you have issues.
->     {: .tip}
 >
 > 2. Edit your group variables file for your group (`group_vars/galaxyservers.yml`).
 >
@@ -824,11 +809,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_layout`                 | `root-dir`                                                       | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, tools, and mutable-data (like caches, location files, etc.) folders will live by default beneath `galaxy_root`. User data is stored under `file_path`, a variable we will set later.
 >    `galaxy_root`                   | `/srv/galaxy`                                                    | This is the root of the Galaxy deployment.
 >    `galaxy_user`                   | `{name: galaxy, shell: /bin/bash}`                               | The user that Galaxy will run as.
->    `galaxy_commit_id`              | `release_22.05`                                                  | The git reference to check out, which in this case is the branch for Galaxy Release 22.05
+>    `galaxy_commit_id`              | `release_23.0`                                                   | The git reference to check out, which in this case is the branch for Galaxy Release 23.0
 >    `galaxy_force_checkout`         | `true`                                                           | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
->    `miniconda_prefix`              | {% raw %}`"{{ galaxy_tool_dependency_dir }}/_conda"`{% endraw %} | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
->    `miniconda_version`             | `4.7.12`                                                         | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
->    `miniconda_manage_dependencies` | `false`                                                          | Specify whether to install the miniconda installer dependencies.
+>    `miniconda_prefix`              | {% raw %}`"{{ galaxy_tool_dependency_dir }}/_conda"`{% endraw %} | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can become deadlocked.
+>    `miniconda_version`             | `4.12.0`                                                         | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
+>    `miniconda_channels`          ` | `['conda-forge', 'defaults']`                                    | Use the community-maintained conda-forge channel in addition to the standard defaults channel of Conda.
 >
 >    > <tip-title>Different Galaxy Releases!</tip-title>
 >    > In the time between this tutorial was last updated ({{ page.last_modified_at | date: "%Y-%m-%d" }}), and when you are now reading it, one or more new releases of Galaxy may have occured.
@@ -854,11 +839,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +galaxy_layout: root-dir
 >    +galaxy_root: /srv/galaxy
 >    +galaxy_user: {name: galaxy, shell: /bin/bash}
->    +galaxy_commit_id: release_22.05
+>    +galaxy_commit_id: release_23.0
 >    +galaxy_force_checkout: true
 >    +miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->    +miniconda_version: 4.7.12
->    +miniconda_manage_dependencies: false
+>    +miniconda_version: 4.12.0
+>    +miniconda_channels: ['conda-forge', 'defaults']
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure miniconda and galaxy"}
@@ -881,19 +866,17 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    2. `brand` to something fun! (E.g. 🧬🔬🚀)
 >    3. `database_connection` to point to the database you setup earlier (`postgresql:///galaxy?host=/var/run/postgresql`).
 >    4. `file_path` to a place to store data, `/data` is fine for this lesson which sets up a single-node Galaxy. If you have separate compute machines, this will normally need to be storage shared between the Galaxy node and compute nodes.
->    5. `check_migrate_tools` must be set to `false` due to a new installation of Galaxy.
->    6. `tool_data_path` to {% raw %}`{{ galaxy_mutable_data_dir }}/tool-data`{% endraw %}, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
->    7. `object_store_store_by` to `uuid`, this is a better way of storing files that will ensure better filesystem balancing than the older system.
->    8. `id_secret` to {% raw %}`{{ vault_id_secret }}`{% endraw %}, we'll define this variable next but it will be used to encode the IDs used in Galaxy URLs and for securing session cookies.
+>    5. `tool_data_path` to {% raw %}`{{ galaxy_mutable_data_dir }}/tool-data`{% endraw %}, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
+>    6. `id_secret` to {% raw %}`{{ vault_id_secret }}`{% endraw %}, we'll define this variable next but it will be used to encode the IDs used in Galaxy URLs and for securing session cookies.
 >
 >    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -26,3 +26,14 @@ galaxy_force_checkout: true
+>    @@ -26,3 +26,15 @@ galaxy_force_checkout: true
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->     miniconda_version: 4.7.12
->     miniconda_manage_dependencies: false
+>     miniconda_version: 4.12.0
+>     miniconda_channels: ['conda-forge', 'defaults']
 >    +
 >    +galaxy_config:
 >    +  galaxy:
@@ -901,10 +884,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    admin_users: admin@example.org
 >    +    database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
 >    +    file_path: /data
->    +    check_migrate_tools: false
 >    +    tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
->    +    object_store_store_by: uuid
 >    +    id_secret: "{{ vault_id_secret }}"
+>    +    job_config:
+>    +      handling:
+>    +        assign: ['db-skip-locked']
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure galaxy config"}
@@ -920,7 +904,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >
 >    > ```
 >    > sqlite:///./database/universe.sqlite?isolation_level=IMMEDIATE
->    > postgres://<name>:<password>@localhost:5432/galaxy
+>    > postgresql://<name>:<password>@localhost:5432/galaxy
 >    > postgresql:///galaxy?host=/var/run/postgresql
 >    > ```
 >    >
@@ -954,13 +938,15 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -37,3 +37,23 @@ galaxy_config:
+>    @@ -37,3 +37,25 @@ galaxy_config:
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >    +  gravity:
+>    +    process_manager: systemd
 >    +    galaxy_root: "{{ galaxy_root }}/server"
->    +    app_server: gunicorn
+>    +    galaxy_user: "{{ galaxy_user.name }}"
+>    +    virtualenv: "{{ galaxy_venv_dir }}"
 >    +    gunicorn:
 >    +      # listening options
 >    +      bind: "unix:{{ galaxy_mutable_config_dir }}/gunicorn.sock"
@@ -974,7 +960,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +      loglevel: DEBUG
 >    +    handlers:
 >    +      handler:
->    +        processes: 3
+>    +        processes: 2
 >    +        pools:
 >    +          - job-handler
 >    +          - workflow-scheduler
@@ -984,8 +970,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >
 >    > <tip-title>Options explanations.</tip-title>
->    > 1`workers`: Controls the number of Galaxy application processes Gunicorn will spawn. Increased web performance can be attained by increasing this value. If Gunicorn is the only application on the server, a good starting value is the number of CPUs * 2 + 1. 4-12 workers should be able to handle hundreds if not thousands of requests per second.
->    > 2 `extra_args`: You can specify additional arguments to pass to gunicorn here.
+>    > 1. `workers`: Controls the number of Galaxy application processes Gunicorn will spawn. Increased web performance can be attained by increasing this value. If Gunicorn is the only application on the server, a good starting value is the number of CPUs * 2 + 1. 4-12 workers should be able to handle hundreds if not thousands of requests per second.
+>    > 2. `extra_args`: You can specify additional arguments to pass to gunicorn here.
+>    > 3. `handlers`: Two dedicated "webless" job handler processes will be started. These processes also handle workflow invocations.
 >    {: .tip}
 >
 > 5. Let's set up our vault to store the secrets for these tutorials.
@@ -1112,6 +1099,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    {: data-commit="Load the vault in the playbook"}
 >
 > 9. Run the playbook.
+>
+>    **FIXME** UPDATE OUTPUT
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
