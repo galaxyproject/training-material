@@ -583,6 +583,44 @@ module GtnLinter
     }
   end
 
+  def self.check_bad_heading_order(contents)
+    depth = 1
+    self.find_matching_texts(contents, /^(?<level>#+)/)
+    .map {|idx, text, selected|
+      new_depth = selected[:level].length
+      depth_change = new_depth - depth
+      depth = new_depth
+      [idx, text, selected, depth_change, new_depth]
+    }.select{ |idx, text, selected, depth_change, new_depth|
+      depth_change > 1
+    }.map {|idx, text, selected, depth_change, new_depth|
+      ReviewDogEmitter.error(
+        path: @path,
+        idx: idx,
+        match_start: selected.begin(1),
+        match_end: selected.end(1) + 1,
+        replacement: "#" * (new_depth - depth_change + 1),
+        message: "You have skipped a heading level, please correct this.",
+        code: "GTN:028",
+      )
+    }
+  end
+
+  def self.check_bolded_heading(contents)
+    self.find_matching_texts(contents, /^#+ (?<title>\*\*.*\*\*)/)
+    .map {|idx, text, selected|
+      ReviewDogEmitter.error(
+        path: @path,
+        idx: idx,
+        match_start: selected.begin(1),
+        match_end: selected.end(1) + 1,
+        replacement: selected[:title][2..-3],
+        message: "Please do not bold headings, it is unncessary and will potentially cause screen readers to shout them.",
+        code: "GTN:029",
+      )
+    }
+  end
+
   def self.fix_md(contents)
     [
       *fix_notoc(contents),
@@ -603,6 +641,8 @@ module GtnLinter
       *check_looks_like_heading(contents),
       *check_bad_tag(contents),
       *check_useless_box_prefix(contents),
+      *check_bad_heading_order(contents),
+      *check_bolded_heading(contents),
     ]
   end
 
