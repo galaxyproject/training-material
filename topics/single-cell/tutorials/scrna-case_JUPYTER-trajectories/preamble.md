@@ -116,16 +116,13 @@ Welcome!
 
 You have two options for how to proceed with this tutorial - either you download the tutorial notebook and run the lines in that notebook, or you can copy and paste the code for each step into a fresh notebook and run it yourself. The initial instructions for both options are below.
 
-> <hands-on-title>Option 1: Downloading the tutorial notebook</hands-on-title>
+> <hands-on-title>Option 1: Downloading the tutorial notebook & Upload</hands-on-title>
 >
 > 1. You will need to download the tutorial notebook locally to your own computer. Do this by clicking on {% icon notebook %}`Jupyter notebook` in the `Supporting Materials` section at the very beginning of the tutorial, in the Overview box.
-{: .hands_on}
-
-> <hands-on-title>Option 1: Uploading the tutorial notebook</hands-on-title>
 >
-> 1. In the folder window, {% icon galaxy-upload %} Upload the downloaded notebook from your computer. It should appear in the file window.
+> 2. In the folder window, {% icon galaxy-upload %} Upload the downloaded notebook from your computer. It should appear in the file window.
 >
-> 2. Open it by double clicking it in the file window.
+> 3. Open it by double clicking it in the file window.
 >
 {: .hands_on}
 
