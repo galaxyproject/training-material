@@ -194,7 +194,7 @@ module Jekyll
           wfid = "#{material['topic_name']}-#{material['tutorial_name']}"
           wfname = workflow['workflow'].gsub(/.ga/, '').downcase
 
-          page2 = PageWithoutAFile.new(site, "", "api/ga4gh/trs/v2/tools/#{wfid}/versions/", "#{wfname}?gtn=true")
+          page2 = PageWithoutAFile.new(site, "", "api/ga4gh/trs/v2/tools/#{wfid}/versions/", "#{wfname}.json")
           page2.content = JSON.pretty_generate({
             "id" => wfname,
             "url" => site.config['url'] + site.config['baseurl'] + material["url"],
@@ -205,7 +205,7 @@ module Jekyll
           page2.data["layout"] = nil
           site.pages << page2
 
-          page2 = PageWithoutAFile.new(site, "", "api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}/GALAXY", "descriptor")
+          page2 = PageWithoutAFile.new(site, "", "api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}/GALAXY", "descriptor.json")
           page2.content = JSON.pretty_generate({
             "content" => File.open(material['dir'] + '/workflows/' + workflow['workflow']).read,
             "checksum" => [],
