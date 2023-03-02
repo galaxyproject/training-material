@@ -64,81 +64,54 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# Data preparation and prepocessing
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+## Import the data into Galaxy
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
-
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
-
-## Get data
-
-> <hands-on-title> Data Upload </hands-on-title>
+> <hands-on-title> Upload data </hands-on-title>
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
->     -> `{{ page.title }}`):
+>
+>    {% snippet faqs/galaxy/histories_create_new.md %}
+>
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) into a collection:
 >
 >    ```
->    
+>    https://zenodo.org/record/6878356/files/8_qc_no_dil_milliq.raw
+>    https://zenodo.org/record/6878356/files/21_qc_no_dil_milliq.raw
+>    https://zenodo.org/record/6878356/files/29_qc_no_dil_milliq.raw
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
 >
->    ***TODO***: *Remove the useless files (if added)*
+>    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true format="mzml" collection_name="input" renaming=false %}
+>
+>    {% snippet faqs/galaxy/datasets_import_from_data_library.md astype="as a Collection" %}
+>
+> 3. Make sure your data is in a **collection**. You can always manually create the collection from separate files:
+>
+>    {% snippet faqs/galaxy/collections_build_list.md %}
+>
+> 4. Import the following extra files from Zenodo: 
+>
+>    ```
+>    TBA
+>    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >
 >    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
->
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>    > <comment-title> The extra files </comment-title>
+>    >
+>    > The two additional files contain reference alkanes, reference spectral library, and sample metadata. The list of alkanes with retention time and carbon number or retention index is used to compute the retention index of the deconvoluted peaks. The alkanes should be measured ideally in the same batch as the input sample collection. A reference spectral library (`.msp`) is used for identification of spectra. The spectral library contains the recorded and annotated mass spectra of compounds which can be detected in the sample and confirmed via comparison with this library. The specific library is the in-house library of metabolite standards. Sample metadata corresponds to a table containing information about our samples. In particular, it contains sample name, type (QC, blank, sample, etc.), batch number, and injection order.
+>    {: .comment}
 >
 {: .hands_on}
 
-# Data normalisation and prepocessing
+## Convert data to mzML
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+Our input data are in `.raw` format, which is not suitable for the downstream tools in this tutorial. We can use tool {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2) %} to convert them to the appropriate format (`.mzML` in this case).
 
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> <details-title> More details about the theory </details-title>
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **msconvert**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Convert data to mzML </hands-on-title>
 >
 > 1. {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2) %} with the following parameters:
 >    - {% icon param-collection %} *"Input unrefined MS data"*: `output` (Input dataset collection)
@@ -158,76 +131,34 @@ A big step can have several subsections or sub steps:
 >        - *"Sum adjacent scans"*: `Yes`
 >        - *"Output multiple runs per file"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <comment-title> Centroids </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > msconvert with selected parameters computes centroids in the m/z domain. **TBD** exmplain why !!!
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Create XCMS object
 
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+The first part of data processing is using XCMS tool. This step is only meant to read our `.mzML` files and generate an object usable by XCMS tool. {% tool [MSnbase readMSData](toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0) %} takes as input our files and prepares `RData` files for the first XCMS step.
 
-## Sub-step with **MSnbase readMSData**
-
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Create XCMS object </hands-on-title>
 >
 > 1. {% tool [MSnbase readMSData](toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"File(s) from your history containing your chromatograms"*: `output` (output of **msconvert** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+>    {% snippet faqs/galaxy/tools_select_collection.md %}
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 # Peak detection using XCMS
 
-The first step in the workflow is to detect the peaks in the `.mzml` data using xcms. This part, however, is covered by a [separate tutorial]({{ site.baseurl }}/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html). Although the tutorial is dedicated to LC-MS data, it can be followed also for our GC data. Therefore, in this section, we do not explain this part of the workflow in detials, but rather refer the reader to the dedicated tutorial. Please also pay attention to the parameter values for individual Galaxy tools, as these can differ from the refered tutorial and are adjusted to our dataset.
+The first step in the workflow is to detect the peaks in our data using XCMS. This part, however, is covered by a [separate tutorial]({{ site.baseurl }}/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html). Although the tutorial is dedicated to LC-MS data, it can be followed also for our GC data. Therefore, in this section, we do not explain this part of the workflow in detials, but rather refer the reader to the dedicated tutorial. Please also pay attention to the parameter values for individual Galaxy tools, as these can differ from the refered tutorial and are adjusted to our dataset.
 
 ## Peak picking
 
 The first step is to extract peaks from each of your data files independently. For this purpose, we use _centWave_ chromatographic peak detection algorithm implemented in {% tool [xcms findChromPeaks (xcmsSet)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0) %}.
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Peak picking </hands-on-title>
 >
 >  {% tool [xcms findChromPeaks (xcmsSet)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **MSnbase readMSData** {% icon tool %})
@@ -246,9 +177,9 @@ The first step is to extract peaks from each of your data files independently. F
 
 ## Determining shared ions
 
-At this step, you obtain a dataset collection containing one RData file per sample, with independent lists of ions. Next, we want to identify the ions shared between samples. To do so, first you need to group your individual RData files into a single one.
+At this step, you obtain a dataset collection containing one `RData` file per sample, with independent lists of ions. Next, we want to identify the ions shared between samples. To do so, first you need to group your individual `RData` files into a single one.
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Merging files </hands-on-title>
 >
 >  {% tool [xcms findChromPeaks Merger](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **xcms findChromPeaks (xcmsSet)** {% icon tool %})
@@ -260,9 +191,9 @@ At this step, you obtain a dataset collection containing one RData file per samp
 >
 {: .hands_on}
 
-Now we can proceed with the grouping and determining shared ions among samples. The aim of this step, called ‘grouping’, is to obtain a single matrix of ions’ intensities for all samples.
+Now we can proceed with the grouping and determining shared ions among samples. The aim of this step, called _grouping_, is to obtain a single matrix of ions’ intensities for all samples.
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Grouping peaks </hands-on-title>
 >
 >  {% tool [xcms groupChromPeaks (group)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **xcms findChromPeaks Merger** {% icon tool %})
@@ -282,7 +213,7 @@ Now we can proceed with the grouping and determining shared ions among samples. 
 
 A deviation in retention time occurs from a sample to another, especially when you inject large sequences of samples. This steps aims at correcting retention time drift for each peak among samples.
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Retention time correction </hands-on-title>
 >
 >  {% tool [xcms adjustRtime (retcor)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_retcor/abims_xcms_retcor/3.12.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **xcms groupChromPeaks (group)** {% icon tool %})
@@ -298,9 +229,9 @@ A deviation in retention time occurs from a sample to another, especially when y
 
 ## Second round of determining shared ions
 
-By applying retention time correction, the used retention time values were modified. Consequently, applying this step on your data requires to complete it with an additional ‘grouping’ step.
+By applying retention time correction, the used retention time values were modified. Consequently, applying this step on your data requires to complete it with an additional _grouping_ step.
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Grouping peaks </hands-on-title>
 >
 >  {% tool [xcms groupChromPeaks (group)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **xcms adjustRtime (retcor)** {% icon tool %})
@@ -320,9 +251,9 @@ By applying retention time correction, the used retention time values were modif
 
 ## Integrating areas of missing peaks
 
-At this point, the peak list may contain NA values when peaks were not considered peaks in only some of the samples in the first peak picking step. In this step, we will integrate signal in the mz-rt area of an ion (chromatographic peak group) for samples in which no chromatographic peak for this ion was identified.
+At this point, the peak list may contain `NA` values when peaks were not considered peaks in only some of the samples in the first peak picking step. In this step, we will integrate signal in the mz-rt area of an ion (chromatographic peak group) for samples in which no chromatographic peak for this ion was identified.
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Integrating areas of missing peaks </hands-on-title>
 >
 >  {% tool [xcms fillChromPeaks (fillPeaks)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **xcms groupChromPeaks (group)** {% icon tool %})
