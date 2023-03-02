@@ -312,12 +312,19 @@ module TopicFilter
     if workflows.length > 0
       workflow_names = workflows.map{ |a| a.split('/')[-1] }
       page_obj['workflows'] = workflow_names.map{|wf|
-        x = {
+        wfid = "#{page['topic_name']}-#{page['tutorial_name']}"
+        wfname = wf.gsub(/.ga/, '').downcase
+        trs = "api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}"
+
+        {
           "workflow" => wf,
           "tests" => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length > 0,
           "url" => "#{site.config['url']}#{site.config['baseurl']}/#{folder}/workflows/#{wf}",
+          "path" => "#{folder}/workflows/#{wf}",
+          "wfid" => wfid,
+          "wfname" => wfname,
+          "trs_endpoint" => "#{site.config['url']}#{site.config['baseurl']}/#{trs}",
         }
-        x
       }
     end
 
