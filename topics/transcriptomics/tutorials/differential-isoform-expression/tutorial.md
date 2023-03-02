@@ -106,6 +106,7 @@ Next we will retrieve the remaining datasets.
 >    - Once again, copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >      ```
+>      CPAT_header.tab  https://zenodo.org/record/7656544/files/CPAT_header.tab
 >      active_site.dat.gz	https://zenodo.org/record/7649293/files/active_site.dat.gz
 >      gencode.v42.lncRNA_transcripts.fa.gz	https://zenodo.org/record/7649293/files/gencode.v42.lncRNA_transcripts.fa.gz
 >      gencode.v42.pc_transcripts.fa.gz	https://zenodo.org/record/7649293/files/gencode.v42.pc_transcripts.fa.gz
@@ -146,6 +147,8 @@ Once we have got the datasets, we can start with the analysis. The first step is
 
 ## Inicial quality evaluation
 
+For the initial quality evaluation we will interlace the paired-read file, so instead of having the forward and the reverse reads in seperate files, each right read will be stored after the corresponding paired left read into a single file; this step is required because `FastQC` is not able to process separated paired-end reads. As probably you know, `FastQC` allows to generate a  QC report that allows to have easily an overview of basic quality control metrics. Then we will combine the individual report into a single one by making use of `MultiQC`.
+
 > <hands-on-title> Task description </hands-on-title>
 >
 > 1. {% tool [FASTQ interlacer](toolshed.g2.bx.psu.edu/repos/devteam/fastq_paired_end_interlacer/fastq_paired_end_interlacer/1.2.0.1+galaxy0) %} with the following parameters:
@@ -171,15 +174,19 @@ Once we have got the datasets, we can start with the analysis. The first step is
 >
 {: .hands_on}
 
-![figX:FASTQ sequence quality](../../images/differential_isoform/fastqc_per_base_sequence_quality.png "FASTQ sequence quality")
+Let's evaluate the per base sequence quality and the adapter content.
 
-![figX:FASTQ adapter content](../../images/differential_isoform/fastqc_adapter_content.png "FASTQ adapter content")
+![figX:MultiQC reports](../../images/differential_isoform/fastqc_per_base_sequence_quality.png "MultiQC aggregated reports. Mean quality scores (a). Adapter content (b).")
 
-## RNA-seq data pre-processsing
+As we can appreciate in the figure 2.a, the per base quality of all reads seems to be very good, with values over 30 in all cases. With respect to the adapter content, the adapter content is over 20% in most samples; it means that we need to pre-process the reads before pretending to start the isoform analysis, because otherwise the results could be affected as a result of adapter contaminations.
+
+## Read pre-processing with fastp
+
+In order to remove the adaptors we will make use of `fastp`, which is able to detect the adapter sequence by performing a per-read overlap analysis, so we won't even need to specify the adapter sequences. 
 
 > <hands-on-title> Task description </hands-on-title>
 >
-> 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %} with the following parameters:
+> {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired reads"*: `Paired Collection`
 >        - {% icon param-collection %} *"Select paired collection(s)"*: `output` (Input dataset collection)
 >        - In *"Global trimming options"*:
@@ -190,46 +197,12 @@ Once we have got the datasets, we can start with the analysis. The first step is
 >    - In *"Filter Options"*:
 >        - In *"Quality filtering options"*:
 >            - *"Qualified quality phred"*: `20`
->    - In *"Output Options"*:
->        - *"Output HTML report"*: `No`
->        - *"Output JSON report"*: `Yes`
-{: .hands_on}
-
-
-> <hands-on-title> Task description </hands-on-title>
-> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
->    - In *"Results"*:
->        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `fastp`
->                - {% icon param-file %} *"Output of fastp"*: `report_json` (output of **fastp** {% icon tool %})
->        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `fastp`
->                - {% icon param-file %} *"Output of fastp"*: `report_json` (output of **fastp** {% icon tool %})
 >
 {: .hands_on}
 
-![figX:Overexpressed sequences](../../images/differential_isoform/fastp_general_stats.png "General stats")
+# RNA-seq mapping and isoform quantification 
 
-![figX:Filtered reads](../../images/differential_isoform/fastp_filtered_reads.png "Filtered reads")
-
-![figX:GC content](../../images/differential_isoform/fastp_gc_content.png "GC content")
-
-![figX:Insert sizes](../../images/differential_isoform/fastp_insert_sizes.png "Insert sizes")
-
-![figX:N content](../../images/differential_isoform/fastp_n_content.png "N content")
-
-![figX:Sequence quality](../../images/differential_isoform/fastp_sequence_quality.png "Sequence quality")
-
-
-# RNA-seq mapping and quantification 
-
-<!-- Needs to be edited! -->
-
-RNA-seq analysis begins by mapping reads against a reference genome to identify their genomic positions. This mapping information allows us to collect subsets of the reads corresponding to each gene, and then to assemble and quantify transcripts represented by those reads.
-
-Using a mapping of reads to the reference genome, genome-guided transcript assemblers cluster the reads and build graph models representing all possible isoforms for each gene. One such model is a splice graph, in which nodes represent exons or parts of exons, and paths through the graph represent possible splice variants
-
-StringTie uses a genome-guided transcriptome assembly approach along with concepts from de novo genome assembly to improve transcript assembly. Specifically, the inputs to StringTie can include not only spliced read alignments, but also the alignments of contigs that StringTie pre-assembles from read pairs.
+Isoform quantification begins by mapping reads against the reference genome by using `RNA STAR`, which will provide us the required information to assemble and quantify transcripts represented by those reads. After mapping, we will use `Stringtie`, which uses a genome-guided transcriptome assembly approach along with concepts from de novo genome assembly to perform transcript assembly and quantification.
 
 ## RNA-seq mapping with **RNA STAR**
 
@@ -425,9 +398,11 @@ Provided a BAM/SAM file and reference gene model, this module will calculate how
 ![figX:RSeQC read distribution](../../images/differential_isoform/rseqc_read_distribution_plot.png "RSeQC read distribution")
 
 
-## Transcripts quantification with **StringTie**
+## Transcriptome assembly and quantification with **StringTie**
 
 <!-- Needs to be edited -->
+
+Using a mapping of reads to the reference genome, genome-guided transcript assemblers cluster the reads and build graph models representing all possible isoforms for each gene. One such model is a splice graph, in which nodes represent exons or parts of exons, and paths through the graph represent possible splice variants.
 
 StringTie is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts. It uses a novel network flow algorithm as well as an optional de novo assembly step to assemble and quantitate full-length transcripts representing multiple splice variants for each gene locus. Its input can include not only alignments of short reads that can also be used by other transcript assemblers, but also alignments of longer sequences that have been assembled from those reads {% cite Pertea2015 %}.
 
