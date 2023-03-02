@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Removing the effects of the cell cycle" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-02-14 18:00:44 +0000" />
+<meta name="DC.date" content="2023-02-21 16:23:07 +0000" />
 <meta name="DC.creator" content="Marisa Loach" />
 
         
@@ -64,7 +64,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-02-14 18:00:44 +0000",
+  "dateModified": "2023-02-21 16:23:07 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Removing the effects of the cell cycle",
   "interactivityType": "mixed",
@@ -497,8 +497,6 @@
                         
                     
                         
-                    
-                        
                             
                             <li> Generating a single cell matrix using Alevin:
                             
@@ -508,6 +506,8 @@
                                 
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -843,6 +843,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
             UseGalaxy.org.au
         </a>
@@ -864,7 +866,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 14, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 21, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -888,7 +890,7 @@
 
 <p>One common biological confounder is the cell cycle (<span class="citation"><a href="#Luecken2019">Luecken and Theis 2019</a></span>). Cells express different genes during different parts of the cell cycle, depending on whether they are in their growing phase (G1), duplicating their <span class="notranslate">DNA</span> (the S or Synthesis phase), or dividing in two (G2/M or Mitosis phase). If these cell cycle genes are having a big impact on your data, then you could end up with separate clusters that actually represent cells of the same type that are just at different stages of the cycle.</p>
 
-<p>In this tutorial, we will identify the genes whose <span class="notranslate">expression</span> is known to vary during the cell cycle so that we can use them to regress out (or remove) the effects of the cell cycle on the data.</p>
+<p>In this tutorial, we will identify the genes whose <span class="notranslate">expression</span> is known to vary during the cell cycle so that we can use them to regress out (or remove) the effects of the cell cycle on the clustering.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-other-scanpy-and-seurat-tutorials" aria-label="comment box: Other Scanpy and Seurat tutorials"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Other Scanpy and Seurat tutorials</div>
@@ -926,12 +928,38 @@
 
 <h2 id="get-data">Get Data</h2>
 
-<p>The data used in this tutorial is from a mouse dataset of fetal growth restriction (<span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span>). You can download the dataset below.</p>
+<p>The data used in this tutorial is from a mouse dataset of fetal growth restriction (<span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span>). Cell cycle regression should be performed after the data has been filtered, normalised, and scaled. You can download the dataset below or import the history with the starting data.</p>
 
-<p>If you’ve been working through the <span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span>-seq: Case Study then you can use your dataset from the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore <span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span>-seq Data</a> tutorial here. Cell cycle regression should be performed after the data has been filtered, normalised, and scaled, so you should use the dataset that was renamed as <code class="language-plaintext highlighter-rouge">Use_me_Scaled</code> in that tutorial. You should rename that dataset <code class="language-plaintext highlighter-rouge">Processed_Anndata</code> now to avoid confusion later. At the end of this tutorial, you can return to the main tutorial to plot and explore your data with reduced effects from the cell cycle.</p>
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
+  <ul>
+    <li>If you’ve been working through the <span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span>-seq: Case Study then you can use your dataset from the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore <span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span>-seq Data</a> tutorial here. Select the <code class="language-plaintext highlighter-rouge">Use_me_Scaled</code> dataset from your history. Rename that dataset as <code class="language-plaintext highlighter-rouge">Processed_Anndata</code>. You will still need to import the S and G2/M gene lists below through Zenodo.</li>
+    <li>At the end of this tutorial, you can return to the main tutorial to plot and explore your data with reduced effects from the cell cycle.</li>
+  </ul>
+</blockquote>
+
+<p>In addition to the sc<span class="notranslate">RNA</span>-seq dataset, we will also need lists of the genes that are known to be expressed at different points in the cell cycle. The lists used in this tutorial are part of the HBC tinyatlas and can be downloaded from Zenodo below <span class="citation"><a href="#kirchner_hbc_2018">Kirchner and HBC 2018</a></span>. Between them, they include 97 genes that are expressed during the S and G2/M phases. The <span class="notranslate">expression</span> level of these cycle genes are - mostly - determined by the phases of the cell cycle. Make sure that the file type is tabular (not just the name of the file) - you can choose this when you download the files or change it after the files are in your history.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-option-1-data-upload-import-history" aria-label="hands-on box: Option 1: Data upload - Import history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Option 1: Data upload - Import history</div>
+  <p>Sometimes data upload can take a while, so a faster route is to import a history.</p>
+
+  <ol>
+    <li>
+      <p>Import history from: <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/removing-the-effects-of-the-cell-cycle---input">example input history</a></p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open the link to the shared history</li>   <li>Click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>Import history</em> button on the top right</li>   <li>Enter a title for the new history</li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the the history to your name of choice.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-option-2-data-upload-add-to-history" aria-label="hands-on box: Option 2: Data upload - Add to history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Option 2: Data upload - Add to history</div>
 
   <ol>
     <li>
@@ -962,10 +990,8 @@
 
 </blockquote>
 
-<p>In addition to the sc<span class="notranslate">RNA</span>-seq dataset, we will also need lists of the genes that are known to be expressed at different points in the cell cycle. The lists used in this tutorial are part of the HBC tinyatlas and can be downloaded from Zenodo below <span class="citation"><a href="#kirchner_hbc_2018">Kirchner and HBC 2018</a></span>. Between them, they include 97 genes that are expressed during the S and G2/M phases. Make sure that the file type is tabular (not just the name of the file) - you can choose this when you download the files or change it after the files are in your history.</p>
-
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload-1" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
+  <div class="box-title hands-on-title" id="hands-on-option-2-continued-data-upload-add-to-history" aria-label="hands-on box: Option 2 continued: Data upload - Add to history "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Option 2 continued: Data upload - Add to history</div>
 
   <ol>
     <li>
@@ -1001,7 +1027,24 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
 
 <h1 id="cell-cycle-scoring">Cell Cycle Scoring</h1>
 
-<p>The first step towards reducing the effects of the cell cycle on our dataset is cell cycle scoring. The cell cycle scoring algorithm will look at each cell in turn and calculate an S score based on the difference in the mean <span class="notranslate">expression</span> of the S Phase genes and a random sample of the same number of non-cell cycle genes from the same cell. It will do the same for the G2M genes in order to calculate the G2M score. The cells will then be assigned to the most likely phase: S, G2M, or G1. Three columns will be added to the AnnData dataset: <code class="language-plaintext highlighter-rouge">S_score</code>, <code class="language-plaintext highlighter-rouge">G2M_score</code> and <code class="language-plaintext highlighter-rouge">phase</code>.</p>
+<p>The first step towards reducing the effects of the cell cycle on our dataset is cell cycle scoring. The cell cycle scoring algorithm will look at each cell in turn and calculate an S score based on the difference in the mean <span class="notranslate">expression</span> of the S Phase genes and a random sample of the same number of non-cell cycle genes from the same cell. It will do the same for the G2M genes in order to calculate the G2M score. The cells will then be assigned to the most likely phase: S, G2M, or G1, if neither G2M or S score highly. Three columns will be added to the AnnData dataset: <code class="language-plaintext highlighter-rouge">S_score</code>, <code class="language-plaintext highlighter-rouge">G2M_score</code> and <code class="language-plaintext highlighter-rouge">phase</code>.</p>
+
+<div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+<blockquote class="question">
+
+  <ol>
+    <li>Why don’t we need a list of genes expressed in the G1 Phase?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>Since we know which genes are expressed in the S and G2/M phases, we can classify cells that are expressing these genes into the S and G2/M phases respectively. Cells that aren’t expressing either the S or G2/M genes must be in the other phase of the cell cycle, so we can classify them as in G1 phase.</li>
+    </ol>
+
+  </blockquote>
+</blockquote>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-when-should-we-regress-out-the-effects-of-the-cell-cycle" aria-label="comment box: When should we regress out the effects of the cell cycle?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: When should we regress out the effects of the cell cycle?</div>
@@ -1034,27 +1077,11 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
     <li>Rename the output <code class="language-plaintext highlighter-rouge">CellCycle_Annotated</code></li>
   </ol>
 
-  <blockquote class="question">
-    <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
-
-    <ol>
-      <li>Why don’t we need a list of genes expressed in the G1 Phase?</li>
-    </ol>
-
-    <blockquote class="solution">
-      <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-
-      <ol>
-        <li>Since we know which genes are expressed in the S and G2/M phases, we can classify cells that are expressing these genes into the S and G2/M phases respectively. Cells that aren’t expressing either the S or G2/M genes must be in the other phase of the cell cycle, so we can classify them as in G1 phase.</li>
-      </ol>
-
-    </blockquote>
-  </blockquote>
 </blockquote>
 
 <h1 id="cell-cycle-regression">Cell Cycle Regression</h1>
 
-<p>The second step after scoring the cell cycle genes is to use these scores to regress out the effects of the cell cycle. Now that we know which phase each of our cells is in, we can work out how this is affecting gene <span class="notranslate">expression</span> in our cells. We can subtract these effects from our data so that they won’t influence our later analyses. You will need to type the <code class="language-plaintext highlighter-rouge">phase</code> variable in to the <span><strong>Scanpy RegressOut</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>  tool to enable it to regress out the cell cycle effects.</p>
+<p>The second step after scoring the cell cycle genes is to use these scores to regress out the effects of the cell cycle. Now that we know which phase each of our cells is in, we can work out how this is affecting gene <span class="notranslate">expression</span> in our cells. We can subtract these effects from our data so that they won’t influence our cell clustering. You will need to type the <code class="language-plaintext highlighter-rouge">phase</code> variable in to the <span><strong>Scanpy RegressOut</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>  tool to enable it to regress out the cell cycle effects.</p>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-how-does-cell-cycle-regression-work"><button class="gtn-boxify-button details" type="button" aria-controls="details-how-does-cell-cycle-regression-work-contents" aria-expanded="true" aria-label="Toggle details box: How does cell cycle regression work?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: How does cell cycle regression work?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1084,9 +1111,7 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
 
 <h1 id="plotting-the-effects-of-cell-cycle-regression">Plotting the Effects of Cell Cycle Regression</h1>
 
-<p>Your data is now ready for further analysis, so you can return to the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore <span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span>-seq Data</a> tutorial and move on to the Preparing coordinates step there. Make sure that you use the <code class="language-plaintext highlighter-rouge">CellCycle_Regressed</code> dataset (you may want to rename it as <code class="language-plaintext highlighter-rouge">Use_me_Scaled</code> as that is the name used in the main tutorial). However, if you want to understand how cell cycle regression has affected your data then you can work through the following steps first.</p>
-
-<p>The easiest way to see what is happening is to focus on the cell cycle genes as these will be the ones most affected by the regression. A large part of their <span class="notranslate">expression</span> depends on the cell cycle, which is why we have chosen them to help us work out the phase of each cell.</p>
+<p>Your data is now ready for further analysis, so you can return to the <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">Filter, Plot and Explore <span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span>-seq Data</a> tutorial and move on to the Preparing coordinates step there. Make sure that you use the <code class="language-plaintext highlighter-rouge">CellCycle_Regressed</code> dataset (you may want to rename it as <code class="language-plaintext highlighter-rouge">Use_me_Scaled</code> as that is the name used in the main tutorial). However, if you want to understand how cell cycle regression has affected your data then you can work through the following steps first, to visualise where the cell cycle genes are expressed - with or without regression.</p>
 
 <p>In order to look at the cell cycle genes, we first need to label them in our AnnData dataset so that we can select them for plotting. To add a new annotation to the genes or variables, we need a column with entries for each gene, in the same order as in the dataset, and with a header at the top that will become the key for identifying these entries in the AnnData dataset. We want to end up with a column that <span class="notranslate">reads</span> <code class="language-plaintext highlighter-rouge">TRUE</code> for the 97 cell cycle genes and <code class="language-plaintext highlighter-rouge">FALSE</code> for all the other genes.</p>
 
@@ -1146,19 +1171,12 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
             <li><em>“Type of table operation”</em>: <code class="language-plaintext highlighter-rouge">Drop, keep or duplicate rows and columns</code>
               <ul>
                 <li><em>“List of columns to select”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-                <li><em>“List of rows to select”</em>: <code class="language-plaintext highlighter-rouge">2:15396</code></li>
               </ul>
             </li>
           </ul>
         </li>
-        <li><em>“Output formatting options”</em>: ``</li>
+        <li><em>“Output formatting options”</em>: <code class="language-plaintext highlighter-rouge">Unselect all</code></li>
       </ul>
-
-      <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-selecting-the-right-rows" aria-label="comment box: Selecting the right rows"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Selecting the right rows</div>
-
-        <p>Since we don’t want to keep the header, we select the rows from <code class="language-plaintext highlighter-rouge">2</code> to the end of the dataset. If you were using a dataset of a different size, you would need to change this parameter to include all the genes.</p>
-      </blockquote>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0"><strong>Add column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0</span></span>  with the following parameters:
       <ul>
@@ -1186,9 +1204,9 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2"><strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: <code class="language-plaintext highlighter-rouge">CC_Genes</code> (output of <strong>Add column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: <code class="language-plaintext highlighter-rouge">Dataset_Genes</code> (output of <strong>Add column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd File”</em>: <code class="language-plaintext highlighter-rouge">Dataset_Genes</code> (output of <strong>Add column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd File”</em>: <code class="language-plaintext highlighter-rouge">CC_Genes</code> (output of <strong>Add column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Column to use from 2nd file”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
         <li><em>“Output lines appearing in”</em>: <code class="language-plaintext highlighter-rouge">All lines [-a 1 -a 2]</code></li>
         <li><em>“Value to put in unpaired (empty) fields”</em>: <code class="language-plaintext highlighter-rouge">FALSE</code></li>
@@ -1249,15 +1267,18 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
         <li><em>“Input Single or Multiple Tables”</em>: <code class="language-plaintext highlighter-rouge">Single Table</code>
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Table”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+          </ul>
+        </li>
+        <li><em>“Input data has:”</em>: <code class="language-plaintext highlighter-rouge">Unselect all</code>
+          <ul>
             <li><em>“Type of table operation”</em>: <code class="language-plaintext highlighter-rouge">Drop, keep or duplicate rows and columns</code>
               <ul>
                 <li><em>“List of columns to select”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
-                <li><em>“List of rows to select”</em>: <code class="language-plaintext highlighter-rouge">1:15395</code></li>
               </ul>
             </li>
           </ul>
         </li>
-        <li><em>“Output formatting options”</em>: ``</li>
+        <li><em>“Output formatting options”</em>: <code class="language-plaintext highlighter-rouge">Unselect all</code></li>
       </ul>
 
       <blockquote class="comment">
@@ -1269,7 +1290,7 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
     <li>
       <p>Create a new <strong>tabular</strong> file from the following</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> CC_genes
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CC_genes
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
@@ -1331,7 +1352,7 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
 
 <h2 id="filter-the-cell-cycle-genes">Filter the cell cycle genes</h2>
 
-<p>For both the newly annotated datasets, we can now filter out the cell cycle genes (the ones that have <code class="language-plaintext highlighter-rouge">TRUE</code> in their new <code class="language-plaintext highlighter-rouge">CC_genes</code> annotation). The filtered datasets will only include <span class="notranslate">expression</span> data for these 97 genes, so we’ll be able to use them to clearly visualise what happens when the cell cycle genes are regressed out.</p>
+<p>To demonstrate the power of cell cycle regression, we’re going to reduce our <span class="notranslate">expression</span> matrices to contain only the 97 cell cycle genes. This will force our dimension reduction and plotting to be based entirely on cell cycle genes. You wouldn’t do this during analysis, but for proof of principle, let’s go for it!</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-filter-the-anndata-datasets" aria-label="hands-on box: Filter the AnnData datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter the AnnData datasets</div>
@@ -1394,6 +1415,12 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
           </ul>
         </li>
       </ul>
+
+      <blockquote class="comment">
+        <div class="box-title comment-title" id="comment-plot-all-the-genes" aria-label="comment box: Plot all the genes "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Plot all the genes</div>
+
+        <p>Make sure that you de-select the option for the <span><strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>  tool to use highly variable genes only - some of the cell cycle genes are also HVGs, but we want our plots to include the cell cycle genes that aren’t HVGs too.</p>
+      </blockquote>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1"><strong>Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
       <ul>
@@ -1409,12 +1436,6 @@ https://zenodo.org/record/7311628//files/g2mPhase.tabular
           </ul>
         </li>
       </ul>
-
-      <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-plot-all-the-genes" aria-label="comment box: Plot all the genes "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Plot all the genes</div>
-
-        <p>Make sure that you de-select the option for the <span><strong>Cluster, infer trajectories and embed</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span>  tool to use highly variable genes only - some of the cell cycle genes are also HVGs, but we want our plots to include the cell cycle genes that aren’t HVGs too.</p>
-      </blockquote>
     </li>
   </ol>
 
