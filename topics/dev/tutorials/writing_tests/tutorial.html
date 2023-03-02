@@ -682,13 +682,13 @@
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
 <ol id="markdown-toc">
-  <li><a href="#testing-in-galaxy" id="markdown-toc-testing-in-galaxy">Testing in <span class="notranslate">Galaxy</span></a></li>
+  <li><a href="#testing-in-galaxy" id="markdown-toc-testing-in-galaxy">Testing in Galaxy</a></li>
   <li><a href="#local-development-environment-setup" id="markdown-toc-local-development-environment-setup">Local development environment setup</a></li>
   <li><a href="#api-tests" id="markdown-toc-api-tests">API tests</a>    <ol>
       <li><a href="#basic-api-test" id="markdown-toc-basic-api-test">Basic API test</a></li>
       <li><a href="#test-creating-a-simple-object" id="markdown-toc-test-creating-a-simple-object">Test creating a simple object</a></li>
       <li><a href="#a-better-test-for-creating-a-simple-object" id="markdown-toc-a-better-test-for-creating-a-simple-object">A better test for creating a simple object</a></li>
-      <li><a href="#use-galaxys-populators-for-setting-up-database-state" id="markdown-toc-use-galaxys-populators-for-setting-up-database-state">Use <span class="notranslate">Galaxy</span>’s populators for setting up database state</a></li>
+      <li><a href="#use-galaxys-populators-for-setting-up-database-state" id="markdown-toc-use-galaxys-populators-for-setting-up-database-state">Use Galaxy’s populators for setting up database state</a></li>
     </ol>
   </li>
   <li><a href="#unit-tests" id="markdown-toc-unit-tests">Unit tests</a>    <ol>
@@ -711,44 +711,44 @@
 
 </blockquote>
 
-<h1 id="testing-in-galaxy">Testing in <span class="notranslate">Galaxy</span></h1>
+<h1 id="testing-in-galaxy">Testing in Galaxy</h1>
 
-<p>The <span class="notranslate">Galaxy</span> code base contains thousands of tests that include tests of different types (unit vs. functional vs. end-to-end; client vs. backend, etc.) that are supported by a variety of testing frameworks and libraries. In this tutorial, we will offer a small, yet representative sample of the types of tests you might write, as well as the concepts and issues you may need to be familiar with when writing tests for <span class="notranslate">Galaxy</span> code, whether as part of a new feature you are implementing, or as a standalone contribution to <span class="notranslate">Galaxy</span>’s testing code.</p>
+<p>The Galaxy code base contains thousands of tests that include tests of different types (unit vs. functional vs. end-to-end; client vs. backend, etc.) that are supported by a variety of testing frameworks and libraries. In this tutorial, we will offer a small, yet representative sample of the types of tests you might write, as well as the concepts and issues you may need to be familiar with when writing tests for Galaxy code, whether as part of a new feature you are implementing, or as a standalone contribution to Galaxy’s testing code.</p>
 
-<p>A good way to start learning about <span class="notranslate">Galaxy</span>’s testing infrastructure and how to use it is to read the documentation article on the different types of tests that are present in the code base as well as how to determine which type is most appropriate for a given scenario (see <a href="https://docs.galaxyproject.org/en/master/dev/writing_tests.html">Writing Tests for <span class="notranslate">Galaxy</span></a>).</p>
+<p>A good way to start learning about Galaxy’s testing infrastructure and how to use it is to read the documentation article on the different types of tests that are present in the code base as well as how to determine which type is most appropriate for a given scenario (see <a href="https://docs.galaxyproject.org/en/master/dev/writing_tests.html">Writing Tests for Galaxy</a>).</p>
 
-<p>In addition to reading the documentation, it is essential to have a reasonable understanding of <span class="notranslate">Galaxy</span>’s code organization. The best documentation resource for that is the <a href="/training-material/topics/dev/tutorials/architecture/slides.html"><span class="notranslate">Galaxy</span> Code Architecture slides</a>. In addition, we recommend the <a href="/training-material/topics/dev/tutorials/core-contributing/tutorial.html">Contributing a New Feature to <span class="notranslate">Galaxy</span> Core</a> tutorial, which, among other things, combines some of the concepts from the architecture slides with the material covered in this tutorial.</p>
+<p>In addition to reading the documentation, it is essential to have a reasonable understanding of Galaxy’s code organization. The best documentation resource for that is the <a href="/training-material/topics/dev/tutorials/architecture/slides.html">Galaxy Code Architecture slides</a>. In addition, we recommend the <a href="/training-material/topics/dev/tutorials/core-contributing/tutorial.html">Contributing a New Feature to Galaxy Core</a> tutorial, which, among other things, combines some of the concepts from the architecture slides with the material covered in this tutorial.</p>
 
-<p>The most detailed and up-to-date documentation on running <span class="notranslate">Galaxy</span> tests is located at the top of the <code class="language-plaintext highlighter-rouge">run_tests.sh</code> script in <span class="notranslate">Galaxy</span>’s root directory.</p>
+<p>The most detailed and up-to-date documentation on running Galaxy tests is located at the top of the <code class="language-plaintext highlighter-rouge">run_tests.sh</code> script in Galaxy’s root directory.</p>
 
-<p>To run <span class="notranslate">Galaxy</span> tests, you may also use the <code class="language-plaintext highlighter-rouge">pytest</code> command directly (except for client tests, which provide their own infrastructure and scripts described in <code class="language-plaintext highlighter-rouge">client/README.md</code>. Using pytest directly is most convenient for running individual tests (although you might have to manually set the required environment variables for all but unit tests, as per documentation in <code class="language-plaintext highlighter-rouge">run_tests.sh</code>). However, keep in mind that the <code class="language-plaintext highlighter-rouge">run_scripts.sh</code> script optimizes the tests by reusing the same <span class="notranslate">Galaxy</span> instance and database for API tests, so running API tests in batch with pytest would be very inefficient.</p>
+<p>To run Galaxy tests, you may also use the <code class="language-plaintext highlighter-rouge">pytest</code> command directly (except for client tests, which provide their own infrastructure and scripts described in <code class="language-plaintext highlighter-rouge">client/README.md</code>. Using pytest directly is most convenient for running individual tests (although you might have to manually set the required environment variables for all but unit tests, as per documentation in <code class="language-plaintext highlighter-rouge">run_tests.sh</code>). However, keep in mind that the <code class="language-plaintext highlighter-rouge">run_scripts.sh</code> script optimizes the tests by reusing the same Galaxy instance and database for API tests, so running API tests in batch with pytest would be very inefficient.</p>
 
-<p>Another useful resource is the <a href="/training-material/topics/dev/tutorials/debugging/tutorial.html">Debugging <span class="notranslate">Galaxy</span></a> tutorial which contains a lot of useful information on how to debug test failures that occur both locally and remotely.</p>
+<p>Another useful resource is the <a href="/training-material/topics/dev/tutorials/debugging/tutorial.html">Debugging Galaxy</a> tutorial which contains a lot of useful information on how to debug test failures that occur both locally and remotely.</p>
 
-<p>Finally, nothing can substitute studying <span class="notranslate">Galaxy</span>’s test code - we encourage you to always look for examples of similar tests and testing scenarios before you write your own.</p>
+<p>Finally, nothing can substitute studying Galaxy’s test code - we encourage you to always look for examples of similar tests and testing scenarios before you write your own.</p>
 
 <h1 id="local-development-environment-setup">Local development environment setup</h1>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-how-to-contribute-to-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-contribute-to-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: How to Contribute to Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How to Contribute to <span class="notranslate">Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To contribute to <span class="notranslate">galaxy</span>, a GitHub account is required. Changes are proposed via a <a href="https://docs.github.com/en/github/collaborating-with-pull-requests">pull request</a>. This allows the project maintainers to review the changes and suggest improvements.</p>   <p>The general steps are as follows:</p>   <ol>   <li>Fork the <span class="notranslate">Galaxy</span> repository</li>   <li>Clone your fork</li>   <li>Make changes in a new branch</li>   <li>Commit your changes, push branch to your fork</li>   <li>Open a pull request for this branch in the <span class="notranslate">upstream</span> <span class="notranslate">Galaxy</span> repository</li> </ol>   <blockquote class="details">   <div class="box-title details-title" id="details-git-github-and-span-class-quot-notranslate-quot-galaxy-span-core"><button class="gtn-boxify-button details" type="button" aria-controls="details-git-github-and-span-class-quot-notranslate-quot-galaxy-span-core-contents" aria-expanded="true" aria-label="Toggle details box: Git, Github, and <span class=&quot;notranslate&quot;>Galaxy</span> Core"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Git, Github, and <span class=&quot;notranslate&quot;>Galaxy</span> Core<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>For a lot more information about Git branching and managing a repository on Github,  see the <a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Contributing with GitHub via command-line</a> tutorial.</p>   <p>The <a href="/training-material/topics/dev/tutorials/architecture/slides.html"><span class="notranslate">Galaxy</span> Core Architecture slides</a> have a lot of important <span class="notranslate">Galaxy</span> core-related information related to branches,  project management, and contributing to <span class="notranslate">Galaxy</span> - under the Project Management section of the slides.</p> </blockquote> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-how-to-contribute-to-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-contribute-to-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: How to Contribute to Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How to Contribute to Galaxy<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>To contribute to galaxy, a GitHub account is required. Changes are proposed via a <a href="https://docs.github.com/en/github/collaborating-with-pull-requests">pull request</a>. This allows the project maintainers to review the changes and suggest improvements.</p>   <p>The general steps are as follows:</p>   <ol>   <li>Fork the Galaxy repository</li>   <li>Clone your fork</li>   <li>Make changes in a new branch</li>   <li>Commit your changes, push branch to your fork</li>   <li>Open a pull request for this branch in the upstream Galaxy repository</li> </ol>   <blockquote class="details">   <div class="box-title details-title" id="details-git-github-and-galaxy-core"><button class="gtn-boxify-button details" type="button" aria-controls="details-git-github-and-galaxy-core-contents" aria-expanded="true" aria-label="Toggle details box: Git, Github, and Galaxy Core"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Git, Github, and Galaxy Core<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>For a lot more information about Git branching and managing a repository on Github,  see the <a href="/training-material/topics/contributing/tutorials/github-command-line-contribution/tutorial.html">Contributing with GitHub via command-line</a> tutorial.</p>   <p>The <a href="/training-material/topics/dev/tutorials/architecture/slides.html">Galaxy Core Architecture slides</a> have a lot of important Galaxy core-related information related to branches,  project management, and contributing to Galaxy - under the Project Management section of the slides.</p> </blockquote> </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-setup-your-local-galaxy-instance" aria-label="hands-on box: Setup your local Galaxy instance"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Setup your local <span class="notranslate">Galaxy</span> instance</div>
+  <div class="box-title hands-on-title" id="hands-on-setup-your-local-galaxy-instance" aria-label="hands-on box: Setup your local Galaxy instance"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Setup your local Galaxy instance</div>
 
   <ol>
-    <li>Use GitHub UI to fork <span class="notranslate">Galaxy</span>’s repository at <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project/<span class="notranslate">galaxy</span></code>.</li>
+    <li>Use GitHub UI to fork Galaxy’s repository at <code class="language-plaintext highlighter-rouge">galaxyproject/galaxy</code>.</li>
     <li>
-      <p>Clone your forked repository to a local path, further referred to as <code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_ROOT</code> and <code class="language-plaintext highlighter-rouge">cd</code> into <code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_ROOT</code>. Note that we specify the tutorial branch with the <code class="language-plaintext highlighter-rouge">-b</code> option:</p>
+      <p>Clone your forked repository to a local path, further referred to as <code class="language-plaintext highlighter-rouge">GALAXY_ROOT</code> and <code class="language-plaintext highlighter-rouge">cd</code> into <code class="language-plaintext highlighter-rouge">GALAXY_ROOT</code>. Note that we specify the tutorial branch with the <code class="language-plaintext highlighter-rouge">-b</code> option:</p>
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/&lt;your-use<span class="notranslate">rna</span>me&gt;/<span class="notranslate">galaxy</span> <span class="notranslate">GALAXY</span>_ROOT
-<span class="nb">cd </span><span class="notranslate">GALAXY</span>_ROOT
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/&lt;your-username&gt;/galaxy GALAXY_ROOT
+<span class="nb">cd </span>GALAXY_ROOT
 </code></pre></div>        </div>
       </blockquote>
     </li>
     <li>
-      <p>Before we can use <span class="notranslate">Galaxy</span>, we need to create a virtual environment and install the required dependencies. This is generally done with the <code class="language-plaintext highlighter-rouge">common_startup.sh</code> script:</p>
+      <p>Before we can use Galaxy, we need to create a virtual environment and install the required dependencies. This is generally done with the <code class="language-plaintext highlighter-rouge">common_startup.sh</code> script:</p>
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash-1" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
@@ -756,7 +756,7 @@
 </code></pre></div>        </div>
       </blockquote>
 
-      <p>Make sure your Python version is at least 3.7 (you can check your Python version with <code class="language-plaintext highlighter-rouge">python --version</code>). If your system uses an older version, you may specify an alte<span class="notranslate">rna</span>tive Python interpreter using the <code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_PYTHON</code> environment variable (<code class="language-plaintext highlighter-rouge"><span class="notranslate">GALAXY</span>_PYTHON=/path/to/alt/python bash scripts/common_startup.sh --dev-wheels</code>).</p>
+      <p>Make sure your Python version is at least 3.7 (you can check your Python version with <code class="language-plaintext highlighter-rouge">python --version</code>). If your system uses an older version, you may specify an alternative Python interpreter using the <code class="language-plaintext highlighter-rouge">GALAXY_PYTHON</code> environment variable (<code class="language-plaintext highlighter-rouge">GALAXY_PYTHON=/path/to/alt/python bash scripts/common_startup.sh --dev-wheels</code>).</p>
     </li>
     <li>
       <p>Activate your new virtual environment:</p>
@@ -802,14 +802,14 @@
 
 <h1 id="api-tests">API tests</h1>
 
-<p>We turn to API tests when we need to test some feature that requires a running <span class="notranslate">Galaxy</span> instance and, in many cases, the <span class="notranslate">Galaxy</span> database. These tests use the <span class="notranslate">Galaxy</span> API to drive the test.</p>
+<p>We turn to API tests when we need to test some feature that requires a running Galaxy instance and, in many cases, the Galaxy database. These tests use the Galaxy API to drive the test.</p>
 
-<p>In a way, these tests may be the simplest to write. While the required setup of an API test is, certainly, more involved than that of a basic unit test, <span class="notranslate">Galaxy</span>’s testing infrastructure takes care of all the heavy lifting, such as creating a test database, configuring and starting up a <span class="notranslate">Galaxy</span> instance, and tearing down the setup upon test completion. The testing infrastructure also provides a wealth of convenient abstractions that simplify pre-populating the database with the necessary state for each test, interacting with the API, as well as expressing expectations about the outcomes of a test. Thus, writing an API test boils down to calling the appropriate API endpoint and verifying the result.</p>
+<p>In a way, these tests may be the simplest to write. While the required setup of an API test is, certainly, more involved than that of a basic unit test, Galaxy’s testing infrastructure takes care of all the heavy lifting, such as creating a test database, configuring and starting up a Galaxy instance, and tearing down the setup upon test completion. The testing infrastructure also provides a wealth of convenient abstractions that simplify pre-populating the database with the necessary state for each test, interacting with the API, as well as expressing expectations about the outcomes of a test. Thus, writing an API test boils down to calling the appropriate API endpoint and verifying the result.</p>
 
-<p>We are not developing any new features in this tutorial (check out the <a href="/training-material/topics/dev/tutorials/core-contributing/tutorial.html">Contributing a New Feature to <span class="notranslate">Galaxy</span> Core</a> tutorial). However, we need to exercise the API, so we will be using existing <span class="notranslate">Galaxy</span> functionality as our testing context. Much of that functionality is already covered by tests. Existing tests may include advanced concepts or details on <span class="notranslate">Galaxy</span>’s inte<span class="notranslate">rna</span>ls that are beyond the scope of a tutorial on testing, so they are not optimal as examples for training. Therefore, the approach we will use is as follows:</p>
+<p>We are not developing any new features in this tutorial (check out the <a href="/training-material/topics/dev/tutorials/core-contributing/tutorial.html">Contributing a New Feature to Galaxy Core</a> tutorial). However, we need to exercise the API, so we will be using existing Galaxy functionality as our testing context. Much of that functionality is already covered by tests. Existing tests may include advanced concepts or details on Galaxy’s internals that are beyond the scope of a tutorial on testing, so they are not optimal as examples for training. Therefore, the approach we will use is as follows:</p>
 
 <ol>
-  <li>Pick a controller <code class="language-plaintext highlighter-rouge">foo</code> in the <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api</code> directory.</li>
+  <li>Pick a controller <code class="language-plaintext highlighter-rouge">foo</code> in the <code class="language-plaintext highlighter-rouge">lib/galaxy/webapps/galaxy/api</code> directory.</li>
   <li>Pick one of the existing endpoints from the selected controller. If the endpoint represents a <code class="language-plaintext highlighter-rouge">GET</code> request (e.g. <code class="language-plaintext highlighter-rouge">@router.get("/api/foos</code>), you may be able to view the results on a running instance at <code class="language-plaintext highlighter-rouge">[host]/api/foos</code></li>
   <li>Write a new test to verify the specified functionality.</li>
 </ol>
@@ -818,11 +818,11 @@
 
 <h2 id="basic-api-test">Basic API test</h2>
 
-<p>Let’s start by writing a basic test for a very simple API endpoint: <code class="language-plaintext highlighter-rouge">api/version</code>. The controller for this endpoint is located at <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/configuration.py</code>. You can check the format of the data at <code class="language-plaintext highlighter-rouge">https://use<span class="notranslate">galaxy</span>.org/api/version</code>.</p>
+<p>Let’s start by writing a basic test for a very simple API endpoint: <code class="language-plaintext highlighter-rouge">api/version</code>. The controller for this endpoint is located at <code class="language-plaintext highlighter-rouge">lib/galaxy/webapps/galaxy/api/configuration.py</code>. You can check the format of the data at <code class="language-plaintext highlighter-rouge">https://usegalaxy.org/api/version</code>.</p>
 
-<p>First, you need to create a new file at <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>_test/api/test_mytutorial.py</code>. For simplicity, we’ll place all new tests in this module. Next, add a class definition for <code class="language-plaintext highlighter-rouge">MyTutorialApiTestCase</code> that should be a subclass of <code class="language-plaintext highlighter-rouge">ApiTestCase</code>. Then add a test method, <code class="language-plaintext highlighter-rouge">test_version_is_current</code>, where you will (1) call the API via the <code class="language-plaintext highlighter-rouge">_get</code> method that returns a response object; and (2) verify that the response contains the “22.09” version number (assuming you have cloned the “dev” branch; otherwise your version may be different).</p>
+<p>First, you need to create a new file at <code class="language-plaintext highlighter-rouge">lib/galaxy_test/api/test_mytutorial.py</code>. For simplicity, we’ll place all new tests in this module. Next, add a class definition for <code class="language-plaintext highlighter-rouge">MyTutorialApiTestCase</code> that should be a subclass of <code class="language-plaintext highlighter-rouge">ApiTestCase</code>. Then add a test method, <code class="language-plaintext highlighter-rouge">test_version_is_current</code>, where you will (1) call the API via the <code class="language-plaintext highlighter-rouge">_get</code> method that returns a response object; and (2) verify that the response contains the “22.09” version number (assuming you have cloned the “dev” branch; otherwise your version may be different).</p>
 
-<p>If your test fails, one way to debug it is to insert a <code class="language-plaintext highlighter-rouge">breakpoint()</code> statement into the body of the test (right after the call to <code class="language-plaintext highlighter-rouge">_get</code> would be a logical spot), and then use <a href="https://docs.python.org/3/library/pdb.html">pdb</a>, Python’s interactive debugger, to explore the response at runtime with the test paused (see <a href="/training-material/topics/dev/tutorials/debugging/tutorial.html">Debugging <span class="notranslate">Galaxy</span></a> for more details on using pdb to debug <span class="notranslate">Galaxy</span>).</p>
+<p>If your test fails, one way to debug it is to insert a <code class="language-plaintext highlighter-rouge">breakpoint()</code> statement into the body of the test (right after the call to <code class="language-plaintext highlighter-rouge">_get</code> would be a logical spot), and then use <a href="https://docs.python.org/3/library/pdb.html">pdb</a>, Python’s interactive debugger, to explore the response at runtime with the test paused (see <a href="/training-material/topics/dev/tutorials/debugging/tutorial.html">Debugging Galaxy</a> for more details on using pdb to debug Galaxy).</p>
 
 <blockquote class="solution">
   <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -856,7 +856,7 @@
 
 <h2 id="test-creating-a-simple-object">Test creating a simple object</h2>
 
-<p>Now let’s write an API test for adding a simple object. By “simple”, we mean that this object does not depend on any other objects, so, for example, we don’t need to provide a reference to a History or User object to create it. We will be creating a role, using the <code class="language-plaintext highlighter-rouge">api/roles</code> <code class="language-plaintext highlighter-rouge">POST</code> endpoint located at <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/roles.py</code>.</p>
+<p>Now let’s write an API test for adding a simple object. By “simple”, we mean that this object does not depend on any other objects, so, for example, we don’t need to provide a reference to a History or User object to create it. We will be creating a role, using the <code class="language-plaintext highlighter-rouge">api/roles</code> <code class="language-plaintext highlighter-rouge">POST</code> endpoint located at <code class="language-plaintext highlighter-rouge">lib/galaxy/webapps/galaxy/api/roles.py</code>.</p>
 
 <p>To create a role, we need to call the <code class="language-plaintext highlighter-rouge">_post</code> method, passing it 4 arguments:</p>
 <ul>
@@ -940,21 +940,21 @@
 
 <p>Everything is straightforward: we verify that there is only n=1 role currently present (a built-in for the test user), we add the role, then retrieve all roles and verify that the new total is n + 1. Unfortunately, <strong><em>this is the wrong approach</em></strong>. Try running this together with the previous version of the test - you’ll get an assertion error: there’s an extra role in the database!</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FAILED lib/<span class="notranslate">galaxy</span>_test/api/test_mytutorial.py::MyTutorialApiTestCase::test_create_role_WRONG - AssertionError: assert 2 == 1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FAILED lib/galaxy_test/api/test_mytutorial.py::MyTutorialApiTestCase::test_create_role_WRONG - AssertionError: assert 2 == 1
 </code></pre></div></div>
 
 <p>The reason for that is that we are using the same database for both tests, so whatever artifacts are created in one test will affect the following test if we make any kind of assumptions about the state of the database.</p>
 
 <p>How do we rewrite this test without making assumptions about database state? We can’t retrieve the roles and use their initial quantity as our baseline: that’s a perfect recipe for a race condition (if some other test creates a role after we have counted the existing roles but before we have created our new role, our test will fail). Instead, we can use the role’s name (which is unique across all roles) to verify that our object has been added.</p>
 
-<p>We could generate our own unique name, but we can also simply use an existing method used across <span class="notranslate">Galaxy</span>’s tests: <code class="language-plaintext highlighter-rouge">get_random_name()</code> (we need to add an import and override the <code class="language-plaintext highlighter-rouge">setUp</code> method for that: see the solution code). Now we have a test we can safely run together with our old test (or with any number of other tests that create role objects).</p>
+<p>We could generate our own unique name, but we can also simply use an existing method used across Galaxy’s tests: <code class="language-plaintext highlighter-rouge">get_random_name()</code> (we need to add an import and override the <code class="language-plaintext highlighter-rouge">setUp</code> method for that: see the solution code). Now we have a test we can safely run together with our old test (or with any number of other tests that create role objects).</p>
 
 <blockquote class="solution">
   <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <p>Alte<span class="notranslate">rna</span>tive test for creating an object. Note the <code class="language-plaintext highlighter-rouge">setUp</code> method and the new import.</p>
+  <p>Alternative test for creating an object. Note the <code class="language-plaintext highlighter-rouge">setUp</code> method and the new import.</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn"><span class="notranslate">galaxy</span>_test.base.populators</span> <span class="kn">import</span> <span class="n">DatasetPopulator</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">galaxy_test.base.populators</span> <span class="kn">import</span> <span class="n">DatasetPopulator</span>
 <span class="kn">from</span> <span class="nn">._framework</span> <span class="kn">import</span> <span class="n">ApiTestCase</span>
 
 
@@ -962,7 +962,7 @@
 
     <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">().</span><span class="n">setUp</span><span class="p">()</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">dataset_populator</span> <span class="o">=</span> <span class="n">DatasetPopulator</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n"><span class="notranslate">galaxy</span>_interactor</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">dataset_populator</span> <span class="o">=</span> <span class="n">DatasetPopulator</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">galaxy_interactor</span><span class="p">)</span>
 
 <span class="c1"># [code omitted]
 </span>
@@ -996,11 +996,11 @@
 </code></pre></div>  </div>
 </blockquote>
 
-<p>Can’t we destroy and create or re-populate the database for each test? We can, and if you absolutely need to do that, there is infrastructure for that in <code class="language-plaintext highlighter-rouge">test/unit/data/model/testing_utils</code> - you can see examples of its usage in the <span class="notranslate">mapping</span> and migrations unit tests (check these subdirectories). However, setting up and initializing the database is an expensive operation, which will be noticeable for a single test; <span class="notranslate">Galaxy</span> has hundreds of tests that rely on the database, so providing a fresh copy of the database for each test function is infeasible.</p>
+<p>Can’t we destroy and create or re-populate the database for each test? We can, and if you absolutely need to do that, there is infrastructure for that in <code class="language-plaintext highlighter-rouge">test/unit/data/model/testing_utils</code> - you can see examples of its usage in the mapping and migrations unit tests (check these subdirectories). However, setting up and initializing the database is an expensive operation, which will be noticeable for a single test; Galaxy has hundreds of tests that rely on the database, so providing a fresh copy of the database for each test function is infeasible.</p>
 
-<h2 id="use-galaxys-populators-for-setting-up-database-state">Use <span class="notranslate">Galaxy</span>’s populators for setting up database state</h2>
+<h2 id="use-galaxys-populators-for-setting-up-database-state">Use Galaxy’s populators for setting up database state</h2>
 
-<p>As our last example, we’ll look at how to take advantage of some of the many abstractions provided by <span class="notranslate">Galaxy</span>’s testing infrastructure. Supposing you’d like to test the “datasets-filter-by-history” functionality exposed via the <code class="language-plaintext highlighter-rouge">api/datasets</code> endpoint (see <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/webapps/<span class="notranslate">galaxy</span>/api/datasets.py</code>). The test design is straightforward:</p>
+<p>As our last example, we’ll look at how to take advantage of some of the many abstractions provided by Galaxy’s testing infrastructure. Supposing you’d like to test the “datasets-filter-by-history” functionality exposed via the <code class="language-plaintext highlighter-rouge">api/datasets</code> endpoint (see <code class="language-plaintext highlighter-rouge">lib/galaxy/webapps/galaxy/api/datasets.py</code>). The test design is straightforward:</p>
 <ul>
   <li>Create 2 history objects h1 and h2.</li>
   <li>Create n and m datasets associated with h1 and h2 respectively.</li>
@@ -1035,7 +1035,7 @@
 </code></pre></div>  </div>
 </blockquote>
 
-<p>Populators are used extensively throughout API tests as well as integration and Selenium tests to both setup database state, as well as access information from the <span class="notranslate">Galaxy</span> server. For more details, see the populators module at <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>_test/base/populators.py</code>.</p>
+<p>Populators are used extensively throughout API tests as well as integration and Selenium tests to both setup database state, as well as access information from the Galaxy server. For more details, see the populators module at <code class="language-plaintext highlighter-rouge">lib/galaxy_test/base/populators.py</code>.</p>
 
 <p>And we are done! Here’s the final version of the code we added to this testing module.</p>
 
@@ -1044,7 +1044,7 @@
 
   <p>Final code.</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn"><span class="notranslate">galaxy</span>_test.base.populators</span> <span class="kn">import</span> <span class="n">DatasetPopulator</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">galaxy_test.base.populators</span> <span class="kn">import</span> <span class="n">DatasetPopulator</span>
 <span class="kn">from</span> <span class="nn">._framework</span> <span class="kn">import</span> <span class="n">ApiTestCase</span>
 
 
@@ -1052,7 +1052,7 @@
 
     <span class="k">def</span> <span class="nf">setUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">().</span><span class="n">setUp</span><span class="p">()</span>
-        <span class="bp">self</span><span class="p">.</span><span class="n">dataset_populator</span> <span class="o">=</span> <span class="n">DatasetPopulator</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n"><span class="notranslate">galaxy</span>_interactor</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">dataset_populator</span> <span class="o">=</span> <span class="n">DatasetPopulator</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">galaxy_interactor</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">test_version_is_current</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_get</span><span class="p">(</span><span class="s">"version"</span><span class="p">)</span>
@@ -1125,13 +1125,13 @@
 
 <h1 id="unit-tests">Unit tests</h1>
 
-<p>Unit tests are best suited for testing well-defined, isolated functionality and, with rare exceptions, should not require a running <span class="notranslate">Galaxy</span> instance, a database, or any other exte<span class="notranslate">rna</span>l infrastructure. Unit tests are located in the <code class="language-plaintext highlighter-rouge">test/unit</code> directory.</p>
+<p>Unit tests are best suited for testing well-defined, isolated functionality and, with rare exceptions, should not require a running Galaxy instance, a database, or any other external infrastructure. Unit tests are located in the <code class="language-plaintext highlighter-rouge">test/unit</code> directory.</p>
 
-<p>There are numerous unit tests in the <span class="notranslate">Galaxy</span> code base. However, existing unit tests do not cover the entire code base and do not verify all the relevant logic (so there is plenty of space for improvement, and new contributions are always welcome!) In this tutorial, we will be writing unit tests for such code.</p>
+<p>There are numerous unit tests in the Galaxy code base. However, existing unit tests do not cover the entire code base and do not verify all the relevant logic (so there is plenty of space for improvement, and new contributions are always welcome!) In this tutorial, we will be writing unit tests for such code.</p>
 
 <h2 id="testing-simple-functions">Testing simple functions</h2>
 
-<p>We’ll start by looking at the module <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/util/bytesize.py</code>. This module is not covered by unit tests. There are 2 obvious targets for unit tests: the <code class="language-plaintext highlighter-rouge">parse bytesize</code> function and the <code class="language-plaintext highlighter-rouge">to_unit</code> method of the <code class="language-plaintext highlighter-rouge">ByteSize</code> class. Our goal is to come up with a reasonable selection of unit tests that verify essential aspects of this functionality.</p>
+<p>We’ll start by looking at the module <code class="language-plaintext highlighter-rouge">lib/galaxy/util/bytesize.py</code>. This module is not covered by unit tests. There are 2 obvious targets for unit tests: the <code class="language-plaintext highlighter-rouge">parse bytesize</code> function and the <code class="language-plaintext highlighter-rouge">to_unit</code> method of the <code class="language-plaintext highlighter-rouge">ByteSize</code> class. Our goal is to come up with a reasonable selection of unit tests that verify essential aspects of this functionality.</p>
 
 <p>We’ll start with the <code class="language-plaintext highlighter-rouge">parse_bytesize</code> function. Look at the code of the function and identify the logic that, you think, needs testing. Essentially, you want to ensure that any combination of valid input produces the expected output. Next, add a few tests. (see <a href="https://docs.pytest.org/en/7.1.x/how-to/assert.html">https://docs.pytest.org/en/7.1.x/how-to/assert.html</a> for examples)</p>
 
@@ -1140,7 +1140,7 @@
 
   <p>Example of tests for the <code class="language-plaintext highlighter-rouge">parse_bytesize</code> function:</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn"><span class="notranslate">galaxy</span>.util.bytesize</span> <span class="kn">import</span> <span class="n">ByteSize</span><span class="p">,</span> <span class="n">parse_bytesize</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">galaxy.util.bytesize</span> <span class="kn">import</span> <span class="n">ByteSize</span><span class="p">,</span> <span class="n">parse_bytesize</span>
 
 
 <span class="k">def</span> <span class="nf">test_parse_bytesize_int_or_float</span><span class="p">():</span>
@@ -1235,7 +1235,7 @@
 
 <p>Our tests are looking good for the most part, although code duplication is starting to creep in. It’s time to refactor!</p>
 
-<p>Let’s start by factoring out the ByteSize object creation into a fixture (see <a href="https://docs.pytest.org/en/7.1.x/how-to/fixtures.html">https://docs.pytest.org/en/7.1.x/how-to/fixtures.html</a>). In this particular case moving this code into a fixture might be unnecessary, however, it provides an example of an approach that is very useful in more complex scenarios and is heavily used in <span class="notranslate">Galaxy</span>’s testing code.</p>
+<p>Let’s start by factoring out the ByteSize object creation into a fixture (see <a href="https://docs.pytest.org/en/7.1.x/how-to/fixtures.html">https://docs.pytest.org/en/7.1.x/how-to/fixtures.html</a>). In this particular case moving this code into a fixture might be unnecessary, however, it provides an example of an approach that is very useful in more complex scenarios and is heavily used in Galaxy’s testing code.</p>
 
 <blockquote class="solution">
   <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1281,7 +1281,7 @@ and then simply pass it as an argument to our tests.</p>
 
 <h2 id="parametrization-of-test-functions">Parametrization of test functions</h2>
 
-<p>Finally, our <code class="language-plaintext highlighter-rouge">test_bytesize_to_unit</code> test has a lot of assert statements of the same form. We can do better! Let’s use pytest’s test parametrization feature (see <a href="https://docs.pytest.org/en/7.1.x/how-to/parametrize.html">https://docs.pytest.org/en/7.1.x/how-to/parametrize.html</a>) to eliminate this redundancy. Again, as with the fixture example, this particular case would be fine without this feature. However, sometime you want to run the same test function on hundreds of different input combinations, in which case this feature is invaluable (e.g. <span class="notranslate">Galaxy</span>’s tool tests, or integration tests for configuration settings).</p>
+<p>Finally, our <code class="language-plaintext highlighter-rouge">test_bytesize_to_unit</code> test has a lot of assert statements of the same form. We can do better! Let’s use pytest’s test parametrization feature (see <a href="https://docs.pytest.org/en/7.1.x/how-to/parametrize.html">https://docs.pytest.org/en/7.1.x/how-to/parametrize.html</a>) to eliminate this redundancy. Again, as with the fixture example, this particular case would be fine without this feature. However, sometime you want to run the same test function on hundreds of different input combinations, in which case this feature is invaluable (e.g. Galaxy’s tool tests, or integration tests for configuration settings).</p>
 
 <blockquote class="solution">
   <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1317,24 +1317,24 @@ following. Note that the test function takes 2 additional arguments.</p>
 
 <h2 id="dealing-with-less-trivial-code">Dealing with less trivial code</h2>
 
-<p>So far we’ve been dealing with simple clean functions that had no exte<span class="notranslate">rna</span>l dependencies. However, quite often you will encounter lengthy blocks of code implementing nontrivial logic, that depend on objects that would be hard to instantiate in the context of a test. There are many excellent resources on this topic (the book <a href="https://www.oreilly.com/library/view/working-effectively-with/0131177052/">Working Effectively with Legacy Code</a> by Michael Feathers is but one example). In this tutorial, we’ll demonstrate a few basic approaches to handling such cases.</p>
+<p>So far we’ve been dealing with simple clean functions that had no external dependencies. However, quite often you will encounter lengthy blocks of code implementing nontrivial logic, that depend on objects that would be hard to instantiate in the context of a test. There are many excellent resources on this topic (the book <a href="https://www.oreilly.com/library/view/working-effectively-with/0131177052/">Working Effectively with Legacy Code</a> by Michael Feathers is but one example). In this tutorial, we’ll demonstrate a few basic approaches to handling such cases.</p>
 
-<p>Your target module for the following exercises is <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/security/validate_user_input.py</code>. The unit tests for this module are located at <code class="language-plaintext highlighter-rouge">test/unit/data/security/test_validate_user_input.py</code>. You will be adding your code to this testing module.</p>
+<p>Your target module for the following exercises is <code class="language-plaintext highlighter-rouge">lib/galaxy/security/validate_user_input.py</code>. The unit tests for this module are located at <code class="language-plaintext highlighter-rouge">test/unit/data/security/test_validate_user_input.py</code>. You will be adding your code to this testing module.</p>
 
 <p>If you look at the tests for this module, you’ll note that most of its functionality is directly or indirectly covered by tests. However, the <code class="language-plaintext highlighter-rouge">validate_email</code> function does not have tests - and that’s a shame for, despite being relatively small, it contains logic that is not immediately obvious (consider how the function behaves under different combinations of the allowlist and blocklist). That’s the function we’ll be testing.</p>
 
-<p>The <code class="language-plaintext highlighter-rouge">validate_email</code> function is not fun to test. It depends on a Transaction and User objects - one does not simply <del>walk into Mordor</del> instantiate those in the context of a unit test. It has multiple paths of execution, to determine which it accesses the <span class="notranslate">Galaxy</span>Application object (which is a reference to a running instance of <span class="notranslate">Galaxy</span>) to access configuration values, the User object to check the value of its email attribute, and in addition to all that, of course, it calls the database. None of these dependencies require testing, at least not in the context of a unit test. However, we do want to verify the function’s core logic: the cases when no validation is required, when the provided email already exists, and the different combinations of the allowlist and blocklist.</p>
+<p>The <code class="language-plaintext highlighter-rouge">validate_email</code> function is not fun to test. It depends on a Transaction and User objects - one does not simply <del>walk into Mordor</del> instantiate those in the context of a unit test. It has multiple paths of execution, to determine which it accesses the GalaxyApplication object (which is a reference to a running instance of Galaxy) to access configuration values, the User object to check the value of its email attribute, and in addition to all that, of course, it calls the database. None of these dependencies require testing, at least not in the context of a unit test. However, we do want to verify the function’s core logic: the cases when no validation is required, when the provided email already exists, and the different combinations of the allowlist and blocklist.</p>
 
 <h2 id="mocking-a-dependency">Mocking a dependency</h2>
 
-<p>First, let’s test the case when the function returns early - when the email argument is the empty string or when its value is the same as the value of the <code class="language-plaintext highlighter-rouge">email</code> attribute of the provided User object. The first case is trivial, but the next one requires a User object. However, if we think about it, we only care about that user having a given string as its <code class="language-plaintext highlighter-rouge">email</code> attribute. So let’s use a “test double” - a stand-in empty object, and give it an <code class="language-plaintext highlighter-rouge">email</code> attribute. We’ll call it <code class="language-plaintext highlighter-rouge">MockUser</code> (strictly speaking, it’s a stub, and <a href="https://martinfowler.com/articles/mocksArentStubs.html">“mocks aren’t stubs”</a>, but we’ll follow the naming convention often used in <span class="notranslate">Galaxy</span>). We can pass <code class="language-plaintext highlighter-rouge">None</code> as the transaction object in both cases.</p>
+<p>First, let’s test the case when the function returns early - when the email argument is the empty string or when its value is the same as the value of the <code class="language-plaintext highlighter-rouge">email</code> attribute of the provided User object. The first case is trivial, but the next one requires a User object. However, if we think about it, we only care about that user having a given string as its <code class="language-plaintext highlighter-rouge">email</code> attribute. So let’s use a “test double” - a stand-in empty object, and give it an <code class="language-plaintext highlighter-rouge">email</code> attribute. We’ll call it <code class="language-plaintext highlighter-rouge">MockUser</code> (strictly speaking, it’s a stub, and <a href="https://martinfowler.com/articles/mocksArentStubs.html">“mocks aren’t stubs”</a>, but we’ll follow the naming convention often used in Galaxy). We can pass <code class="language-plaintext highlighter-rouge">None</code> as the transaction object in both cases.</p>
 
 <blockquote class="solution">
   <div class="box-title solution-title" id="solution-10"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-10-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>Example of replacing an object with a test double:</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn"><span class="notranslate">galaxy</span>.security.validate_user_input</span> <span class="kn">import</span> <span class="p">(</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">galaxy.security.validate_user_input</span> <span class="kn">import</span> <span class="p">(</span>
     <span class="n">extract_domain</span><span class="p">,</span>
     <span class="n">validate_domain_resolves</span><span class="p">,</span>
     <span class="n">validate_email</span><span class="p">,</span>  <span class="c1"># we've added this import
@@ -1375,7 +1375,7 @@ following. Note that the test function takes 2 additional arguments.</p>
 
 <p>Next, we’d like to test the case when the provided email already exists, or doesn’t exist. To determine the existence of an email the function calls the database - we don’t want to do that. Instead, we can simulate both conditions, like we simulated the user email in the previous exercise.</p>
 
-<p>For this, we need to factor out the code that calls the database into its own function - then we can override that function for our test. So let’s modify <code class="language-plaintext highlighter-rouge">lib/<span class="notranslate">galaxy</span>/security/validate_user_input.py</code>.</p>
+<p>For this, we need to factor out the code that calls the database into its own function - then we can override that function for our test. So let’s modify <code class="language-plaintext highlighter-rouge">lib/galaxy/security/validate_user_input.py</code>.</p>
 
 <blockquote class="solution">
   <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1470,7 +1470,7 @@ following. Note that the test function takes 2 additional arguments.</p>
 
   <p>Monkeypatching the factored out function. Note the added import.</p>
 
-  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn"><span class="notranslate">galaxy</span>.security</span> <span class="kn">import</span> <span class="n">validate_user_input</span>
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">galaxy.security</span> <span class="kn">import</span> <span class="n">validate_user_input</span>
 
 <span class="c1"># [code omitted]
 </span>
@@ -1487,7 +1487,7 @@ following. Note that the test function takes 2 additional arguments.</p>
 
 <h2 id="more-refactoring">More refactoring</h2>
 
-<p>Run the tests to verify they pass after our latest modifications. But one test fails! The problem is that our validation function is not yet ready for testing: it still relies on the transaction object to access the running instance of <span class="notranslate">Galaxy</span> to retrieve 2 configuration settings: <code class="language-plaintext highlighter-rouge">email_domain_allowlist_content</code> and <code class="language-plaintext highlighter-rouge">email_domain_blocklist_content</code>.</p>
+<p>Run the tests to verify they pass after our latest modifications. But one test fails! The problem is that our validation function is not yet ready for testing: it still relies on the transaction object to access the running instance of Galaxy to retrieve 2 configuration settings: <code class="language-plaintext highlighter-rouge">email_domain_allowlist_content</code> and <code class="language-plaintext highlighter-rouge">email_domain_blocklist_content</code>.</p>
 
 <p>How would you fix this problem?</p>
 

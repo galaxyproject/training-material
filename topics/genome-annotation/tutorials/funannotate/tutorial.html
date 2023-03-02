@@ -773,8 +773,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -850,7 +848,7 @@
 
 <p>As explained on <a href="https://funannotate.readthedocs.io/">Funannotate’s website</a>, “it was originally written to annotate fungal genomes (small eukaryotes ~ 30 Mb genomes), but has evolved over time to accomodate larger genomes”. As other annotation tools like <a href="/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html">Maker</a> (<span class="citation"><a href="#Campbell2014">Campbell <i>et al.</i> 2014</a></span>) or Braker (<span class="citation"><a href="#braker">Brůna <i>et al.</i> 2021</a></span>), it works by aligning as many evidences as possible along the genome sequence, and then reconciliating all these signals to determine probable gene structures.</p>
 
-<p>The evidences can be transcript or protein sequences from the same (or closely related) organism. These sequences can come from public databases (like NR or GenBank) or from your own experimental data (transcriptome assembly from an <span class="notranslate">RNA</span>Seq experiment for example). Funannotate is also able to take into account repeated elements.</p>
+<p>The evidences can be transcript or protein sequences from the same (or closely related) organism. These sequences can come from public databases (like NR or GenBank) or from your own experimental data (transcriptome assembly from an RNASeq experiment for example). Funannotate is also able to take into account repeated elements.</p>
 
 <p>Funannotate uses ab-initio predictors (<a href="http://bioinf.uni-greifswald.de/augustus/">Augustus</a>, <a href="https://github.com/KorfLab/SNAP">SNAP</a>, <a href="https://bio.tools/glimmer-hmm">glimmerHMM</a>, <a href="https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-015-1344-4">CodingQuarry</a> and <a href="http://exon.gatech.edu/GeneMark/">GeneMark-ES/ET</a> (optional due to licensing)) to improve its predictions: these software tools are able to make gene structure predictions by analysing only the genome sequence with a statistical model.</p>
 
@@ -867,7 +865,7 @@
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
   <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
   <li><a href="#preparing-the-genome-sequence" id="markdown-toc-preparing-the-genome-sequence">Preparing the genome sequence</a></li>
-  <li><a href="#preparing-rnaseq-data" id="markdown-toc-preparing-rnaseq-data">Preparing <span class="notranslate">RNA</span>Seq data</a></li>
+  <li><a href="#preparing-rnaseq-data" id="markdown-toc-preparing-rnaseq-data">Preparing RNASeq data</a></li>
   <li><a href="#structural-annotation" id="markdown-toc-structural-annotation">Structural annotation</a></li>
   <li><a href="#functional-annotation" id="markdown-toc-functional-annotation">Functional annotation</a>    <ol>
       <li><a href="#eggnog-mapper" id="markdown-toc-eggnog-mapper"><strong>EggNOG Mapper</strong></a></li>
@@ -896,11 +894,11 @@
 
 <ul>
   <li>The <strong>genome sequence</strong> in fasta format. For best results, the sequence should be soft-masked beforehand. You can learn how to do it by following the <a href="/training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html">RepeatMasker tutorial</a>. For this tutorial, we will try to annotate the genome assembled in the <a href="/training-material/topics/assembly/tutorials/flye-assembly/tutorial.html">Flye assembly tutorial</a>.</li>
-  <li>Some <span class="notranslate">RNA</span>Seq data in fastq format. We will align them on the genome, and Funannotate will use it as evidence to annotate genes.</li>
+  <li>Some RNASeq data in fastq format. We will align them on the genome, and Funannotate will use it as evidence to annotate genes.</li>
   <li>A set of <strong>protein sequences</strong>, like UniProt/SwissProt. It is important to have good quality, curated sequences here, that’s why, by default, Funannotate will use the UniProt/SwissProt databank. In this tutorial, we have prepared a subset of this databank to speed up computing, but you should use UniProt/SwissProt for real life analysis.</li>
 </ul>
 
-<p>Funannotate will take into account the position of mapped <span class="notranslate">RNA</span>Seq <span class="notranslate">reads</span>, and the alignment of protein sequences on the genome sequence to determine gene positions.</p>
+<p>Funannotate will take into account the position of mapped RNASeq reads, and the alignment of protein sequences on the genome sequence to determine gene positions.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
@@ -910,7 +908,7 @@
       <p>Create a new history for this tutorial</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the files from <a href="https://zenodo.org/record/5726818">Zenodo</a> or from
@@ -918,17 +916,17 @@ the shared data library (<code class="language-plaintext highlighter-rouge">GTN 
  -&gt; <code class="language-plaintext highlighter-rouge">Genome annotation with Funannotate</code>):</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/genome_masked.fasta
-https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/<span class="notranslate">rna</span>seq_R1.fq.gz
-https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/<span class="notranslate">rna</span>seq_R2.fq.gz
+https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/rnaseq_R1.fq.gz
+https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/rnaseq_R2.fq.gz
 https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/SwissProt_subset.fasta
-https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alte<span class="notranslate">rna</span>te_annotation.gbk
-https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alte<span class="notranslate">rna</span>te_annotation.gff3
+https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alternate_annotation.gbk
+https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alternate_annotation.gff3
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -940,7 +938,7 @@ https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alte<span clas
 
 <p>Funannotate provides two little tools to help us. Let’s run the two tools, one after the other.</p>
 
-<p>The first one (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2"><strong>Funannotate assembly clean</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+<span class="notranslate">galaxy</span>2</span></span> ) compares all the sequences between them, and removes the shorter ones that are already included in longer ones. This is to reduce unexpected redundancy in the genome. This step is recommended only for haploid genomes (we know our organism is haploid). This first tool also removes any suspicious sequence (like sequences made only of 1 or 2 letters, instead of the 5 expected (ATGCN).</p>
+<p>The first one (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2"><strong>Funannotate assembly clean</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2</span></span> ) compares all the sequences between them, and removes the shorter ones that are already included in longer ones. This is to reduce unexpected redundancy in the genome. This step is recommended only for haploid genomes (we know our organism is haploid). This first tool also removes any suspicious sequence (like sequences made only of 1 or 2 letters, instead of the 5 expected (ATGCN).</p>
 
 <p>The second tool will ensure that our fasta file is sorted, based on the length of the contigs (the longest ones first). It will also rename contigs to make sure the name are standard (they will all begin with <code class="language-plaintext highlighter-rouge">scaffold_</code>, then a number).</p>
 
@@ -948,12 +946,12 @@ https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alte<span clas
   <div class="box-title hands-on-title" id="hands-on-polish-the-assembly" aria-label="hands-on box: Polish the assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Polish the assembly</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2"><strong>Funannotate assembly clean</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2"><strong>Funannotate assembly clean</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assembly to clean”</em>: <code class="language-plaintext highlighter-rouge">genome_masked.fasta</code> (Input dataset)</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_sort/funannotate_sort/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_sort/funannotate_sort/1.8.9+galaxy2"><strong>Sort assembly</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/funannotate_sort/funannotate_sort/1.8.9+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_sort/funannotate_sort/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_sort/funannotate_sort/1.8.9+galaxy2"><strong>Sort assembly</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/funannotate_sort/funannotate_sort/1.8.9+galaxy2</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assembly to sort”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Funannotate assembly clean</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -978,24 +976,24 @@ https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alte<span clas
 
 </blockquote>
 
-<h1 id="preparing-rnaseq-data">Preparing <span class="notranslate">RNA</span>Seq data</h1>
+<h1 id="preparing-rnaseq-data">Preparing RNASeq data</h1>
 
-<p>When you sequence a new genome, you usually sequence a few libraries of <span class="notranslate">RNA</span>Seq data, from different tissues and in different conditions, because this data will help you in annotating the genome. Here, we are using data from one <span class="notranslate">RNA</span>Seq dataset that is available on <a href="https://www.ncbi.nlm.nih.gov/sra">Sequence Read Archive (SRA)</a>: <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR8534859">SRR8534859</a>.</p>
+<p>When you sequence a new genome, you usually sequence a few libraries of RNASeq data, from different tissues and in different conditions, because this data will help you in annotating the genome. Here, we are using data from one RNASeq dataset that is available on <a href="https://www.ncbi.nlm.nih.gov/sra">Sequence Read Archive (SRA)</a>: <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SRR8534859">SRR8534859</a>.</p>
 
 <p>You would normally get the Fastq files directly from SRA and use them in the following step. To speed up the tutorial (without impairing too much the quality of the results), we have reduced the size of the dataset into a single pair of (smaller) fastq files, available from Zenodo (or the GTN Data Libraries).</p>
 
-<p>To make use of this <span class="notranslate">RNA</span>Seq data, we need to map it on the genome. We will use <strong><span class="notranslate">RNA</span> star</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and get a result in the form of a BAM file, that we will use in the rest of the tutorial.</p>
+<p>To make use of this RNASeq data, we need to map it on the genome. We will use <strong>RNA star</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and get a result in the form of a BAM file, that we will use in the rest of the tutorial.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy0"><strong><span class="notranslate">RNA</span> STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/rg<span class="notranslate">rna</span>star/<span class="notranslate">rna</span>_star/2.7.8a+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy0"><strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy0</span></span>  with the following parameters:
       <ul>
-        <li><em>“Single-end or paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired-end (as individual datasets)</code>
+        <li><em>“Single-end or paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Paired-end (as individual datasets)</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq FASTQ/FASTA file, forward <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">rna</span>seq_R1.fq.gz</code> (Input dataset)</li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq FASTQ/FASTA file, reverse <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">rna</span>seq_R2.fq.gz</code> (Input dataset)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RNA-Seq FASTQ/FASTA file, forward reads”</em>: <code class="language-plaintext highlighter-rouge">rnaseq_R1.fq.gz</code> (Input dataset)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RNA-Seq FASTQ/FASTA file, reverse reads”</em>: <code class="language-plaintext highlighter-rouge">rnaseq_R2.fq.gz</code> (Input dataset)</li>
           </ul>
         </li>
         <li><em>“Custom or built-in reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use reference genome from history and create temporary index</code>
@@ -1013,23 +1011,23 @@ https://zenodo.org/api/files/8c2cc766-2b68-45bd-a2d3-391acf9bdb1b/alte<span clas
 <p>We select <code class="language-plaintext highlighter-rouge">11</code> for the <em>“Length of the SA pre-indexing string”</em> parameter as it is the recommended value for a small genome of this size. If you select 14 (the default value), STAR will advise you to use <code class="language-plaintext highlighter-rouge">11</code> instead in its logs.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-what-if-i-want-to-use-multiple-rnaseq-libraries" aria-label="comment box: What if I want to use multiple RNASeq libraries"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: What if I want to use multiple <span class="notranslate">RNA</span>Seq libraries</div>
+  <div class="box-title comment-title" id="comment-what-if-i-want-to-use-multiple-rnaseq-libraries" aria-label="comment box: What if I want to use multiple RNASeq libraries"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: What if I want to use multiple RNASeq libraries</div>
 
-  <p>To get the best possible annotation, it is adviced to use multiple <span class="notranslate">RNA</span>Seq libraries, sequences from different tissues in different conditions. To use them, you can map each one individually using STAR, just as in this tutorial. You will get one BAM file per <span class="notranslate">RNA</span>Seq library, and you can then easily merge them into a single BAM file by using the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1"><strong>MergeSamFiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1</span></span>  tool. This single BAM file can then be used by Funannotate like we do in the next steps.</p>
+  <p>To get the best possible annotation, it is adviced to use multiple RNASeq libraries, sequences from different tissues in different conditions. To use them, you can map each one individually using STAR, just as in this tutorial. You will get one BAM file per RNASeq library, and you can then easily merge them into a single BAM file by using the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1"><strong>MergeSamFiles</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1</span></span>  tool. This single BAM file can then be used by Funannotate like we do in the next steps.</p>
 </blockquote>
 
-<p>Before we move on to the next step, we need to make sure that the <span class="notranslate">mapping</span> went well. Have a look at the <code class="language-plaintext highlighter-rouge">log</code> output of <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span> STAR</code>.</p>
+<p>Before we move on to the next step, we need to make sure that the mapping went well. Have a look at the <code class="language-plaintext highlighter-rouge">log</code> output of <code class="language-plaintext highlighter-rouge">RNA STAR</code>.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-  <p>What proportion of <span class="notranslate">reads</span> were correctly mapped to the genome? Do you think it is enough to continue with this tutorial?</p>
+  <p>What proportion of reads were correctly mapped to the genome? Do you think it is enough to continue with this tutorial?</p>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>Look for <code class="language-plaintext highlighter-rouge">Uniquely mapped <span class="notranslate">reads</span> %</code>: you should get ~96%. This is a very good score, because while reducing the size of the dataset for this tutorial, we have kept mostly <span class="notranslate">reads</span> properly <span class="notranslate">mapping</span>.
-Anyway, with real data, you expect to have a vast majority of <span class="notranslate">reads</span> <span class="notranslate">mapping</span> uniquely on the genome. If it’s not the case, check that you’re using the correct <span class="notranslate">RNA</span>Seq files, with the correct genome sequence.</p>
+    <p>Look for <code class="language-plaintext highlighter-rouge">Uniquely mapped reads %</code>: you should get ~96%. This is a very good score, because while reducing the size of the dataset for this tutorial, we have kept mostly reads properly mapping.
+Anyway, with real data, you expect to have a vast majority of reads mapping uniquely on the genome. If it’s not the case, check that you’re using the correct RNASeq files, with the correct genome sequence.</p>
 
   </blockquote>
 
@@ -1039,17 +1037,17 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 
 <p>We can now run <strong>Funannotate predict annotation</strong> to perform the structural annotation of the genome.</p>
 
-<p>We need to input the genome sequence, the mapped <span class="notranslate">RNA</span>Seq data, and the proteins to align on the genome. We also specify the name of the species and strain (they can be used later for submission to NCBI).</p>
+<p>We need to input the genome sequence, the mapped RNASeq data, and the proteins to align on the genome. We also specify the name of the species and strain (they can be used later for submission to NCBI).</p>
 
 <p>There are other parameters to finely tune how Funannotate will run ab-initio predictors to predict genes, and to filter the final results based on various criteria. As Funannotate uses <a href="http://busco.ezlab.org/">BUSCO</a> (Benchmarking Universal Single-Copy Orthologs) for initial training of ab-initio predictors, we select datasets close to the species we are annotating: <code class="language-plaintext highlighter-rouge">mucorales (orthodb 10)</code> and <code class="language-plaintext highlighter-rouge">rhizopus_oryzae</code>.</p>
 
-<p>Funannotate is also able to use GeneMark to predict new genes, but to due to licensing restrictions, this software is not available on every <span class="notranslate">Galaxy</span> instance. We will ignore this for this tutorial, it will not impact the results too much.</p>
+<p>Funannotate is also able to use GeneMark to predict new genes, but to due to licensing restrictions, this software is not available on every Galaxy instance. We will ignore this for this tutorial, it will not impact the results too much.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-1" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2"><strong>Funannotate predict annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2"><strong>Funannotate predict annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assembly to annotate”</em>: <code class="language-plaintext highlighter-rouge">genome</code> (output of <strong>Sort assembly</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Funannotate database”</em>: select the latest version available</li>
@@ -1062,7 +1060,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
         </li>
         <li>In <em>“Evidences”</em>:
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-seq mapped to genome to train Augustus/GeneMark-ET”</em>: <code class="language-plaintext highlighter-rouge">mapped.bam</code> (output of <strong><span class="notranslate">RNA</span> STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RNA-seq mapped to genome to train Augustus/GeneMark-ET”</em>: <code class="language-plaintext highlighter-rouge">mapped.bam</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
             <li><em>“Select protein evidences”</em>: <code class="language-plaintext highlighter-rouge">Custom protein sequences</code>
               <ul>
                 <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Proteins to map to genome”</em>: <code class="language-plaintext highlighter-rouge">SwissProt_subset.fasta</code> (Input dataset)</li>
@@ -1088,7 +1086,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 
   <ul>
     <li>For <em>“Select protein evidences”</em> we select <code class="language-plaintext highlighter-rouge">Custom protein sequences</code> to reduce the computing time, but for real data analysis, you should select the default value: <code class="language-plaintext highlighter-rouge">Use UniProtKb/SwissProt (from selected Funannotate database)</code>.</li>
-    <li>It is possible to enable the <em>“Is it a fungus species?”</em> option in Funannotate: it launches an additional ab initio predictor (CodingQuerry) dedicated to fungi genomes. However it has proved to be unstable on the genome studied in this tutorial, and it can create a lot of fragmented gene models depending on the <span class="notranslate">RNA</span>Seq data available. For this tutorial we leave this option to <code class="language-plaintext highlighter-rouge">No</code>. You can test it with real data, but be sure to compare the result with and without this option.</li>
+    <li>It is possible to enable the <em>“Is it a fungus species?”</em> option in Funannotate: it launches an additional ab initio predictor (CodingQuerry) dedicated to fungi genomes. However it has proved to be unstable on the genome studied in this tutorial, and it can create a lot of fragmented gene models depending on the RNASeq data available. For this tutorial we leave this option to <code class="language-plaintext highlighter-rouge">No</code>. You can test it with real data, but be sure to compare the result with and without this option.</li>
     <li>For real data analysis you can consider enabling the <em>“Augustus settings (advanced)”</em> &gt; <em>“Run ‘optimize_augustus.pl’ to refine training (long runtime)”</em>. If you have enough data, you might get better results as there will be an additional training step for augustus (at the cost of a longer runtime).</li>
   </ul>
 </blockquote>
@@ -1096,7 +1094,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-don-t-wait" aria-label="comment box: Don't wait"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Don't wait</div>
 
-  <p>This step will take a bit of time to run. While it runs, we can already schedule the following functional annotation steps. <span class="notranslate">Galaxy</span> will run them automatically as soon as the structural annotation is ready.</p>
+  <p>This step will take a bit of time to run. While it runs, we can already schedule the following functional annotation steps. Galaxy will run them automatically as soon as the structural annotation is ready.</p>
 </blockquote>
 
 <p>This tool produces several output dataset, in particular:</p>
@@ -1110,7 +1108,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 <p>Let’s have a closer look at the output of our annotation. First display the <code class="language-plaintext highlighter-rouge">stats</code> dataset: the first par of the file contains some information on how funannotate was launched. If you go to the bottom, you’ll find a few interesting numbers in the <code class="language-plaintext highlighter-rouge">annotation</code> section:</p>
 
 <ul>
-  <li>the total number of genes and m<span class="notranslate">RNA</span></li>
+  <li>the total number of genes and mRNA</li>
   <li>the average length of genes, exons, proteins</li>
   <li>the number of single/multiple exon transcripts</li>
 </ul>
@@ -1131,7 +1129,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
   <div class="box-title hands-on-title" id="hands-on-8" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy2.1.8" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy2.1.8"><strong>eggNOG Mapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/eggnog_mapper/eggnog_mapper/2.1.8+<span class="notranslate">galaxy</span>2.1.8</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy2.1.8" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy2.1.8"><strong>eggNOG Mapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/eggnog_mapper/eggnog_mapper/2.1.8+galaxy2.1.8</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Fasta sequences to annotate”</em>: <code class="language-plaintext highlighter-rouge">protein sequences</code> (output of <strong>Funannotate predict annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)”</li>
         <li><em>“Version of eggNOG Database”</em>: select the latest version available</li>
@@ -1162,7 +1160,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
   <div class="box-title hands-on-title" id="hands-on-9" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.55-88.0+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.55-88.0+galaxy3"><strong>InterProScan</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.55-88.0+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.55-88.0+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.55-88.0+galaxy3"><strong>InterProScan</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/interproscan/interproscan/5.55-88.0+galaxy3</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein FASTA File”</em>: <code class="language-plaintext highlighter-rouge">protein sequences</code> (output of <strong>Funannotate predict annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)”</li>
         <li><em>“InterProScan database”</em>: select the latest version available</li>
@@ -1216,7 +1214,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 
 <ul>
   <li>First, you should have created a BioProject and a BioSample <a href="https://submit.ncbi.nlm.nih.gov/subs/bioproject/">on the NCBI portal</a>, corresponding to your scientific project, and the sample(s) you have sequenced</li>
-  <li>The raw <span class="notranslate">reads</span> used for the assembly, and the <span class="notranslate">RNA</span>Seq ones should be deposited on SRA, and taggued with the BioProject and BioSample ids</li>
+  <li>The raw reads used for the assembly, and the RNASeq ones should be deposited on SRA, and taggued with the BioProject and BioSample ids</li>
   <li>Ideally you should start submitting the assembly <em>before</em> performing the annotation. The reason is simple: NCBI performs some validation on the genome sequence before accepting it into GenBank. It means that you may be forced to make modifications to the genome sequence (e.g. remove contigs, split contigs where you have adapter contamination, etc). You will save time and trouble doing the annotation on a fully validated and frozen genome sequence.</li>
   <li>You should get a <code class="language-plaintext highlighter-rouge">locus_tag</code> for your genome: it is the unique prefix that is used at the beginning of each gene name. By default, Funannotate uses <code class="language-plaintext highlighter-rouge">FUN_</code> (e.g. <code class="language-plaintext highlighter-rouge">FUN_000001</code>), but to submit to NCBI you need to have a prefix specific to your genome. NCBI should provide it to you when you create your BioProject.</li>
   <li>You then need to prepare a file containing a few metadata. This can be done online on <a href="https://submit.ncbi.nlm.nih.gov/genbank/template/submission/">https://submit.ncbi.nlm.nih.gov/genbank/template/submission/</a>. You need to fill the form with some basic information, like that for example (for real data, you should of course write real information!):</li>
@@ -1224,7 +1222,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 
 <figure id="figure-1"><img src="../../images/ncbi_template.png" alt="NCBI submission template. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Example of a filled form to generate an NCBI submission template.</figcaption></figure>
 
-<p>When filled, you can click on the <strong>Create template</strong> button: you will be able to download a <code class="language-plaintext highlighter-rouge">.sbt</code> file that you should then upload to your <span class="notranslate">Galaxy</span> history.</p>
+<p>When filled, you can click on the <strong>Create template</strong> button: you will be able to download a <code class="language-plaintext highlighter-rouge">.sbt</code> file that you should then upload to your Galaxy history.</p>
 
 <p>The next step will show you how Funannotate can use this <code class="language-plaintext highlighter-rouge">.sbt</code> file, and the <code class="language-plaintext highlighter-rouge">locus_tag</code>, to generate the needed file for the submission of the annotation to the NCBI. These files will need to be submitted on the <a href="https://submit.ncbi.nlm.nih.gov/subs/genome/">NCBI genome submission portal</a>.</p>
 
@@ -1236,7 +1234,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
   <div class="box-title hands-on-title" id="hands-on-2" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy2"><strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy2"><strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy2</span></span>  with the following parameters:
       <ul>
         <li><em>“Input format”</em>: <code class="language-plaintext highlighter-rouge">GenBank (from 'Funannotate predict annotation' tool)</code>
           <ul>
@@ -1276,7 +1274,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
   <div class="box-title hands-on-title" id="hands-on-3" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">protein sequences</code> (output of <strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">annotated gene sets (protein)</code></li>
@@ -1308,20 +1306,20 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 
     <p>That’s a quite good result as running BUSCO on the genome itself gives a very close number (2327 Complete BUSCOs) (see Flye assembly tutorial). It means the annotation process was able to detect most of the genes it was supposed to find.</p>
 
-    <p>To improve the result you can consider using more <span class="notranslate">RNA</span>Seq data, and using the <em>“Augustus settings (advanced)”</em> &gt; <em>“Run ‘optimize_augustus.pl’ to refine training (long runtime)”</em> option.</p>
+    <p>To improve the result you can consider using more RNASeq data, and using the <em>“Augustus settings (advanced)”</em> &gt; <em>“Run ‘optimize_augustus.pl’ to refine training (long runtime)”</em> option.</p>
   </blockquote>
 
 </blockquote>
 
 <h1 id="visualisation-with-a-genome-browser">Visualisation with a genome browser</h1>
 
-<p>With <span class="notranslate">Galaxy</span>, you can visualize the annotation you have generated using JBrowse genome browser. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene. We also add an <span class="notranslate">RNA</span>Seq track, using the BAM file created with <strong><span class="notranslate">RNA</span> STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+<p>With Galaxy, you can visualize the annotation you have generated using JBrowse genome browser. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene. We also add an RNASeq track, using the BAM file created with <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-4" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1</span></span>  with the following parameters:
       <ul>
         <li><em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
           <ul>
@@ -1337,9 +1335,9 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
                   <ul>
                     <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation Track”</em>
                       <ul>
-                        <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/<span class="notranslate">BED</span> Features</code>
+                        <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/BED Features</code>
                           <ul>
-                            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GFF/GFF3/<span class="notranslate">BED</span> Track Data”</em>: <code class="language-plaintext highlighter-rouge">gff3</code> (output of <strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GFF/GFF3/BED Track Data”</em>: <code class="language-plaintext highlighter-rouge">gff3</code> (output of <strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                           </ul>
                         </li>
                       </ul>
@@ -1350,14 +1348,14 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
             </li>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Track Group”</em>
               <ul>
-                <li><em>“Track Category”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>Seq</code></li>
+                <li><em>“Track Category”</em>: <code class="language-plaintext highlighter-rouge">RNASeq</code></li>
                 <li>In <em>“Annotation Track”</em>:
                   <ul>
                     <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation Track”</em>
                       <ul>
                         <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">BAM Pileups</code>
                           <ul>
-                            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM Track Data”</em>: <code class="language-plaintext highlighter-rouge">mapped.bam</code> (output of <strong><span class="notranslate">RNA</span> STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM Track Data”</em>: <code class="language-plaintext highlighter-rouge">mapped.bam</code> (output of <strong>RNA STAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                             <li><em>“Autogenerate SNP Track”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                           </ul>
                         </li>
@@ -1381,13 +1379,13 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 
 <p>If you click on a gene, a popup will appear with detailed information on the selected gene: position and sequence, but also the functional information retrieved from the <strong>EggNOG mapper</strong> and <strong>InterProScan</strong> results.</p>
 
-<p>If you zoom to a specific gene, and look at the <span class="notranslate">RNA</span>Seq tracks, you will see light grey regions corresponding to portions of the genomes where <span class="notranslate">RNA</span>Seq were mapped, and darker grey regions corresponding to introns (= regions were some <span class="notranslate">reads</span> were found to match both the end of an exon, and the start of the next one). You can enable the other <span class="notranslate">RNA</span>Seq track to display each individual read that was mapped on the genome.</p>
+<p>If you zoom to a specific gene, and look at the RNASeq tracks, you will see light grey regions corresponding to portions of the genomes where RNASeq were mapped, and darker grey regions corresponding to introns (= regions were some reads were found to match both the end of an exon, and the start of the next one). You can enable the other RNASeq track to display each individual read that was mapped on the genome.</p>
 
-<p>If you navigate along the genome, you will find genes with very low <span class="notranslate">RNA</span>Seq coverage: this demonstrates how Funannotate is able to predict genes not only with <span class="notranslate">RNA</span>Seq, but also by comparing to protein sequences (from SwissProt) and using ab initio predictors, trained using <span class="notranslate">RNA</span>Seq data.</p>
+<p>If you navigate along the genome, you will find genes with very low RNASeq coverage: this demonstrates how Funannotate is able to predict genes not only with RNASeq, but also by comparing to protein sequences (from SwissProt) and using ab initio predictors, trained using RNASeq data.</p>
 
 <h1 id="comparing-annotations">Comparing annotations</h1>
 
-<p>Earlier, we have seen how general statistics and BUSCO results can help to evaluate the quality of an annotation. But when annnotating a new genome, you might want to try different annotation methods and parameters. We will see now how to compare multiple annotations between them. As an example, we will compare the annotation we have generated, with an alte<span class="notranslate">rna</span>te one, that you have uploaded from Zenodo at the beginning of the tutorial. Comparison is only possible for annotations performed on the same genome sequence.</p>
+<p>Earlier, we have seen how general statistics and BUSCO results can help to evaluate the quality of an annotation. But when annnotating a new genome, you might want to try different annotation methods and parameters. We will see now how to compare multiple annotations between them. As an example, we will compare the annotation we have generated, with an alternate one, that you have uploaded from Zenodo at the beginning of the tutorial. Comparison is only possible for annotations performed on the same genome sequence.</p>
 
 <h2 id="comparing-with-aegean-parseval">Comparing with <strong>AEGeAn ParsEval</strong></h2>
 
@@ -1397,10 +1395,10 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
   <div class="box-title hands-on-title" id="hands-on-5" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0"><strong>AEGeAn ParsEval</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0"><strong>AEGeAn ParsEval</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference GFF3 file”</em>: <code class="language-plaintext highlighter-rouge">gff3</code> (output of <strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Prediction GFF3 file”</em>: <code class="language-plaintext highlighter-rouge">alte<span class="notranslate">rna</span>te_annotation.gff3</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Prediction GFF3 file”</em>: <code class="language-plaintext highlighter-rouge">alternate_annotation.gff3</code> (Input dataset)</li>
         <li><em>“Select the output type”</em>: <code class="language-plaintext highlighter-rouge">HTML</code></li>
       </ul>
     </li>
@@ -1408,7 +1406,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 
 </blockquote>
 
-<p><strong>AEGeAn ParsEval</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> compares gene loci spread all along the genome sequence, each locus containing gene(s) on the “reference” (=the annotation we have generated) and/or the “prediction” (=the alte<span class="notranslate">rna</span>te one) annotation.</p>
+<p><strong>AEGeAn ParsEval</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> compares gene loci spread all along the genome sequence, each locus containing gene(s) on the “reference” (=the annotation we have generated) and/or the “prediction” (=the alternate one) annotation.</p>
 
 <p>The output is a web page where you can see how many loci or genes are identical or different between the two annotations. By clicking on the <code class="language-plaintext highlighter-rouge">(+)</code> links, or on the scaffold names, you can see the results more in detail, even at the gene level.</p>
 
@@ -1435,9 +1433,9 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
 
     <figure id="figure-2"><img src="../../images/aegean_scaffold_11_637-7730.png" alt="Scaffold 11 - 637..7730. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Comparison of the two annotations on Scaffold 11 - 637..7730</figcaption></figure>
 
-    <p>As you can see, at this position, the alte<span class="notranslate">rna</span>te annotation as found only one big gene, while the annotation you have generated has found 4 different genes, not all on the same strand.</p>
+    <p>As you can see, at this position, the alternate annotation as found only one big gene, while the annotation you have generated has found 4 different genes, not all on the same strand.</p>
 
-    <p>This can be explained by the way the alte<span class="notranslate">rna</span>te annotation was performed: it was done by running Funannotate without any <span class="notranslate">RNA</span>Seq data, and choosing a wrong value (<code class="language-plaintext highlighter-rouge">insecta</code>) in the busco parameter. The annotation you have generated is probably the good one here.</p>
+    <p>This can be explained by the way the alternate annotation was performed: it was done by running Funannotate without any RNASeq data, and choosing a wrong value (<code class="language-plaintext highlighter-rouge">insecta</code>) in the busco parameter. The annotation you have generated is probably the good one here.</p>
   </blockquote>
 
 </blockquote>
@@ -1450,9 +1448,9 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
   <div class="box-title hands-on-title" id="hands-on-7" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.9+galaxy2"><strong>Funannotate compare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.9+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.9+galaxy2"><strong>Funannotate compare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.9+galaxy2</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Genome annotations in genbank format”</em>: <code class="language-plaintext highlighter-rouge">alte<span class="notranslate">rna</span>te_annotation.gbk</code> (Input dataset) and <code class="language-plaintext highlighter-rouge">gbk</code> (output of <strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Genome annotations in genbank format”</em>: <code class="language-plaintext highlighter-rouge">alternate_annotation.gbk</code> (Input dataset) and <code class="language-plaintext highlighter-rouge">gbk</code> (output of <strong>Funannotate functional</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Funannotate database”</em>: select the latest version available</li>
       </ul>
     </li>
@@ -1478,7 +1476,7 @@ Anyway, with real data, you expect to have a vast majority of <span class="notra
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>The alte<span class="notranslate">rna</span>te annotation contains less genes than the one you generated, and misses a lot of functional annotations. It confirms that this alte<span class="notranslate">rna</span>te annotation have a lower quality than the one you performed.</p>
+    <p>The alternate annotation contains less genes than the one you generated, and misses a lot of functional annotations. It confirms that this alternate annotation have a lower quality than the one you performed.</p>
   </blockquote>
 
 </blockquote>

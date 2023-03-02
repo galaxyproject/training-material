@@ -583,8 +583,8 @@
   <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#interacting-with-histories-in-galaxy-api" id="markdown-toc-interacting-with-histories-in-galaxy-api">Interacting with histories in <span class="notranslate">Galaxy</span> API</a>    <ol>
-      <li><a href="#exercise-galaxy-api" id="markdown-toc-exercise-galaxy-api">Exercise: <span class="notranslate">Galaxy</span> API</a></li>
+  <li><a href="#interacting-with-histories-in-galaxy-api" id="markdown-toc-interacting-with-histories-in-galaxy-api">Interacting with histories in Galaxy API</a>    <ol>
+      <li><a href="#exercise-galaxy-api" id="markdown-toc-exercise-galaxy-api">Exercise: Galaxy API</a></li>
     </ol>
   </li>
   <li><a href="#interacting-with-histories-in-bioblend" id="markdown-toc-interacting-with-histories-in-bioblend">Interacting with histories in BioBlend</a>    <ol>
@@ -600,13 +600,13 @@
 
 </blockquote>
 
-<h1 id="interacting-with-histories-in-galaxy-api">Interacting with histories in <span class="notranslate">Galaxy</span> API</h1>
+<h1 id="interacting-with-histories-in-galaxy-api">Interacting with histories in Galaxy API</h1>
 
-<p>We are going to use the <a href="https://requests.readthedocs.io/">requests</a> Python library to communicate via HTTP with the <span class="notranslate">Galaxy</span> server. To start, let’s define the connection parameters.</p>
+<p>We are going to use the <a href="https://requests.readthedocs.io/">requests</a> Python library to communicate via HTTP with the Galaxy server. To start, let’s define the connection parameters.</p>
 
-<p><strong>You need to insert the API key for your <span class="notranslate">Galaxy</span> server in the cell below</strong>:</p>
+<p><strong>You need to insert the API key for your Galaxy server in the cell below</strong>:</p>
 <ol>
-  <li>Open the <span class="notranslate">Galaxy</span> server in another browser tab</li>
+  <li>Open the Galaxy server in another browser tab</li>
   <li>Click on “User” on the top menu, then “Preferences”</li>
   <li>Click on “Manage API key”</li>
   <li>Generate an API key if needed, then copy the alphanumeric string and paste it as the value of the <code class="language-plaintext highlighter-rouge">api_key</code> variable below.</li>
@@ -618,7 +618,7 @@
 
 <span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">server</span> <span class="o">=</span> <span class="s">'https://use<span class="notranslate">galaxy</span>.eu/'</span>
+<span class="n">server</span> <span class="o">=</span> <span class="s">'https://usegalaxy.eu/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
 <span class="n">base_url</span> <span class="o">=</span> <span class="n">urljoin</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="s">'api'</span><span class="p">)</span>
 <span class="n">base_url</span>
@@ -633,7 +633,7 @@
 <span class="n">pprint</span><span class="p">(</span><span class="n">hists</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>As you can see, GET requests in <span class="notranslate">Galaxy</span> API return JSON strings, which need to be <strong>deserialized</strong> into Python data structures. In particular, GETting a resource collection returns a list of dictionaries.</p>
+<p>As you can see, GET requests in Galaxy API return JSON strings, which need to be <strong>deserialized</strong> into Python data structures. In particular, GETting a resource collection returns a list of dictionaries.</p>
 
 <p>Each dictionary returned when GETting a resource collection gives basic info about a resource, e.g. for a history you have:</p>
 <ul>
@@ -684,7 +684,7 @@
   <li><code class="language-plaintext highlighter-rouge">create_time</code></li>
   <li><code class="language-plaintext highlighter-rouge">creating job</code>: id of the job which created this dataset</li>
   <li><code class="language-plaintext highlighter-rouge">download_url</code>: URL to download the dataset</li>
-  <li><code class="language-plaintext highlighter-rouge">file_ext</code>: the <span class="notranslate">Galaxy</span> data type of this dataset</li>
+  <li><code class="language-plaintext highlighter-rouge">file_ext</code>: the Galaxy data type of this dataset</li>
   <li><code class="language-plaintext highlighter-rouge">file_size</code></li>
   <li><code class="language-plaintext highlighter-rouge">genome_build</code>: the genome build (dbkey) associated to this dataset.</li>
 </ul>
@@ -715,9 +715,9 @@
 <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">status_code</span><span class="p">)</span>
 </code></pre></div></div>
 
-<h2 id="exercise-galaxy-api">Exercise: <span class="notranslate">Galaxy</span> API</h2>
+<h2 id="exercise-galaxy-api">Exercise: Galaxy API</h2>
 
-<p><strong>Goal</strong>: Upload a file to a new history, import a <span class="notranslate">workflow</span> and run it on the uploaded dataset.</p>
+<p><strong>Goal</strong>: Upload a file to a new history, import a workflow and run it on the uploaded dataset.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-initialise" aria-label="question box: Initialise"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Initialise</div>
@@ -730,7 +730,7 @@
 
 <span class="kn">import</span> <span class="nn">requests</span>
 
-<span class="n">server</span> <span class="o">=</span> <span class="s">'https://use<span class="notranslate">galaxy</span>.eu/'</span>
+<span class="n">server</span> <span class="o">=</span> <span class="s">'https://usegalaxy.eu/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
 <span class="n">base_url</span> <span class="o">=</span> <span class="n">urljoin</span><span class="p">(</span><span class="n">server</span><span class="p">,</span> <span class="s">'api'</span><span class="p">)</span>
 </code></pre></div>    </div>
@@ -744,7 +744,7 @@
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-new-history" aria-label="question box: New History"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: New History</div>
-  <p>Next, create a new <span class="notranslate">Galaxy</span> history via POST to the correct API.</p>
+  <p>Next, create a new Galaxy history via POST to the correct API.</p>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s">"Content-Type"</span><span class="p">:</span> <span class="s">"application/json"</span><span class="p">,</span> <span class="s">"x-api-key"</span><span class="p">:</span> <span class="n">api_key</span><span class="p">}</span>
@@ -807,8 +807,8 @@
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-import-a-workflow" aria-label="question box: Import a workflow"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Import a <span class="notranslate">workflow</span></div>
-  <p><strong>Import a <span class="notranslate">workflow</span></strong> from the local file <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/workflows</code>. The only needed data is <code class="language-plaintext highlighter-rouge"><span class="notranslate">workflow</span></code>, which must be a deserialized JSON representation of the <span class="notranslate">workflow</span>.</p>
+  <div class="box-title question-title" id="question-import-a-workflow" aria-label="question box: Import a workflow"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Import a workflow</div>
+  <p><strong>Import a workflow</strong> from the local file <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/workflows</code>. The only needed data is <code class="language-plaintext highlighter-rouge">workflow</code>, which must be a deserialized JSON representation of the workflow.</p>
 
   <p>You can obtain the <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> file from the following URL, you’ll need to download it first.</p>
 
@@ -819,7 +819,7 @@
 
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">"convert_to_tab.ga"</span><span class="p">,</span> <span class="s">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">workflow_json</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'<span class="notranslate">workflow</span>'</span><span class="p">:</span> <span class="n">workflow_json</span><span class="p">}</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'workflow'</span><span class="p">:</span> <span class="n">workflow_json</span><span class="p">}</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">post</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/workflows"</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
 <span class="n">wf</span> <span class="o">=</span> <span class="n">r</span><span class="p">.</span><span class="n">json</span><span class="p">()</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
@@ -832,8 +832,8 @@
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-view-the-workflow-details" aria-label="question box: View the workflow details"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: View the <span class="notranslate">workflow</span> details</div>
-  <p>View the details of the imported <span class="notranslate">workflow</span> by making a GET request to <code class="language-plaintext highlighter-rouge">/api/workflows</code>.</p>
+  <div class="box-title question-title" id="question-view-the-workflow-details" aria-label="question box: View the workflow details"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: View the workflow details</div>
+  <p>View the details of the imported workflow by making a GET request to <code class="language-plaintext highlighter-rouge">/api/workflows</code>.</p>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">base_url</span> <span class="o">+</span> <span class="s">"/workflows/"</span> <span class="o">+</span> <span class="n">wf</span><span class="p">[</span><span class="s">"id"</span><span class="p">],</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
@@ -849,8 +849,8 @@
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-invoke-the-workflow" aria-label="question box: Invoke the workflow"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Invoke the <span class="notranslate">workflow</span></div>
-  <p><strong>Run</strong> the imported <span class="notranslate">workflow</span> on the uploaded dataset <strong>inside the same history</strong> by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/workflows/WORKFLOW_ID/invocations</code>. The only needed data are <code class="language-plaintext highlighter-rouge">history</code> and <code class="language-plaintext highlighter-rouge">inputs</code>.</p>
+  <div class="box-title question-title" id="question-invoke-the-workflow" aria-label="question box: Invoke the workflow"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Invoke the workflow</div>
+  <p><strong>Run</strong> the imported workflow on the uploaded dataset <strong>inside the same history</strong> by making a <code class="language-plaintext highlighter-rouge">POST</code> request to <code class="language-plaintext highlighter-rouge">/api/workflows/WORKFLOW_ID/invocations</code>. The only needed data are <code class="language-plaintext highlighter-rouge">history</code> and <code class="language-plaintext highlighter-rouge">inputs</code>.</p>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
@@ -870,31 +870,31 @@
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-view-the-results" aria-label="question box: View the results"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: View the results</div>
-  <p>View the results on the <span class="notranslate">Galaxy</span> server with your web browser. Were you successful? Did it run?</p>
+  <p>View the results on the Galaxy server with your web browser. Were you successful? Did it run?</p>
 </blockquote>
 
 <h1 id="interacting-with-histories-in-bioblend">Interacting with histories in BioBlend</h1>
 
-<p><strong>You need to insert the API key for your <span class="notranslate">Galaxy</span> server in the cell below</strong>:</p>
+<p><strong>You need to insert the API key for your Galaxy server in the cell below</strong>:</p>
 <ol>
-  <li>Open the <span class="notranslate">Galaxy</span> server in another browser tab</li>
+  <li>Open the Galaxy server in another browser tab</li>
   <li>Click on “User” on the top menu, then “Preferences”</li>
   <li>Click on “Manage API key”</li>
   <li>Generate an API key if needed, then copy the alphanumeric string and paste it as the value of the <code class="language-plaintext highlighter-rouge">api_key</code> variable below.</li>
 </ol>
 
-<p>The user interacts with a <span class="notranslate">Galaxy</span> server through a <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span>Instance</code> object:</p>
+<p>The user interacts with a Galaxy server through a <code class="language-plaintext highlighter-rouge">GalaxyInstance</code> object:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
-<span class="kn">import</span> <span class="nn">bioblend.<span class="notranslate">galaxy</span></span>
+<span class="kn">import</span> <span class="nn">bioblend.galaxy</span>
 
-<span class="n">server</span> <span class="o">=</span> <span class="s">'https://use<span class="notranslate">galaxy</span>.eu/'</span>
+<span class="n">server</span> <span class="o">=</span> <span class="s">'https://usegalaxy.eu/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
-<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n"><span class="notranslate">galaxy</span></span><span class="p">.</span><span class="n"><span class="notranslate">Galaxy</span>Instance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n">galaxy</span><span class="p">.</span><span class="n">GalaxyInstance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>The <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span>Instance</code> object gives you access to the various controllers, i.e. the resources you are dealing with, like <code class="language-plaintext highlighter-rouge">histories</code>, <code class="language-plaintext highlighter-rouge">tools</code> and <code class="language-plaintext highlighter-rouge">workflows</code>.
+<p>The <code class="language-plaintext highlighter-rouge">GalaxyInstance</code> object gives you access to the various controllers, i.e. the resources you are dealing with, like <code class="language-plaintext highlighter-rouge">histories</code>, <code class="language-plaintext highlighter-rouge">tools</code> and <code class="language-plaintext highlighter-rouge">workflows</code>.
 Therefore, method calls will have the format <code class="language-plaintext highlighter-rouge">gi.controller.method()</code>. For example, the call to retrieve all histories owned by the current user is:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pprint</span><span class="p">(</span><span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">get_histories</span><span class="p">())</span>
@@ -965,7 +965,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
   <li><code class="language-plaintext highlighter-rouge">create_time</code></li>
   <li><code class="language-plaintext highlighter-rouge">creating job</code>: id of the job which created this dataset</li>
   <li><code class="language-plaintext highlighter-rouge">download_url</code>: URL to download the dataset</li>
-  <li><code class="language-plaintext highlighter-rouge">file_ext</code>: the <span class="notranslate">Galaxy</span> data type of this dataset</li>
+  <li><code class="language-plaintext highlighter-rouge">file_ext</code>: the Galaxy data type of this dataset</li>
   <li><code class="language-plaintext highlighter-rouge">file_size</code></li>
   <li><code class="language-plaintext highlighter-rouge">genome_build</code>: the genome build (dbkey) associated to this dataset.</li>
 </ul>
@@ -984,20 +984,20 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 
 <h2 id="exercise-bioblend">Exercise: BioBlend</h2>
 
-<p><strong>Goal</strong>: Upload a file to a new history, import a <span class="notranslate">workflow</span> and run it on the uploaded dataset.</p>
+<p><strong>Goal</strong>: Upload a file to a new history, import a workflow and run it on the uploaded dataset.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-initialise-1" aria-label="question box: Initialise"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Initialise</div>
-  <p>Create a <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span>Instance</code> object.</p>
+  <p>Create a <code class="language-plaintext highlighter-rouge">GalaxyInstance</code> object.</p>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-7"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-7-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
-<span class="kn">import</span> <span class="nn">bioblend.<span class="notranslate">galaxy</span></span>
+<span class="kn">import</span> <span class="nn">bioblend.galaxy</span>
 
-<span class="n">server</span> <span class="o">=</span> <span class="s">'https://use<span class="notranslate">galaxy</span>.eu/'</span>
+<span class="n">server</span> <span class="o">=</span> <span class="s">'https://usegalaxy.eu/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
-<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n"><span class="notranslate">galaxy</span></span><span class="p">.</span><span class="n"><span class="notranslate">Galaxy</span>Instance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n">galaxy</span><span class="p">.</span><span class="n">GalaxyInstance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
 </code></pre></div>    </div>
 
   </blockquote>
@@ -1009,7 +1009,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-new-history-1" aria-label="question box: New History"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: New History</div>
-  <p>Create a new <span class="notranslate">Galaxy</span> history.</p>
+  <p>Create a new Galaxy history.</p>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">create_history</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'New history'</span><span class="p">)</span>
@@ -1058,8 +1058,8 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-import-a-workflow-1" aria-label="question box: Import a workflow"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Import a <span class="notranslate">workflow</span></div>
-  <p><strong>Import a <span class="notranslate">workflow</span></strong> from the local file <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> using <code class="language-plaintext highlighter-rouge">workflows.import_workflow_from_local_path()</code> .</p>
+  <div class="box-title question-title" id="question-import-a-workflow-1" aria-label="question box: Import a workflow"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Import a workflow</div>
+  <p><strong>Import a workflow</strong> from the local file <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> using <code class="language-plaintext highlighter-rouge">workflows.import_workflow_from_local_path()</code> .</p>
 
   <p>You can obtain the <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> file from the following URL, you’ll need to download it first.</p>
 
@@ -1078,11 +1078,11 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-view-the-workflow-details-1" aria-label="question box: View the workflow details"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: View the <span class="notranslate">workflow</span> details</div>
-  <p>View the details of the imported <span class="notranslate">workflow</span> using <code class="language-plaintext highlighter-rouge">workflows.show_<span class="notranslate">workflow</span>()</code></p>
+  <div class="box-title question-title" id="question-view-the-workflow-details-1" aria-label="question box: View the workflow details"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: View the workflow details</div>
+  <p>View the details of the imported workflow using <code class="language-plaintext highlighter-rouge">workflows.show_workflow()</code></p>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">show_<span class="notranslate">workflow</span></span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="s">'id'</span><span class="p">])</span>
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">show_workflow</span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="s">'id'</span><span class="p">])</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">wf</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
@@ -1093,12 +1093,12 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-invoke-the-workflow-1" aria-label="question box: Invoke the workflow"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Invoke the <span class="notranslate">workflow</span></div>
-  <p><strong>Run</strong> the imported <span class="notranslate">workflow</span> on the uploaded dataset <strong>inside the same history</strong> using <code class="language-plaintext highlighter-rouge">workflows.invoke_<span class="notranslate">workflow</span>()</code> .</p>
+  <div class="box-title question-title" id="question-invoke-the-workflow-1" aria-label="question box: Invoke the workflow"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Invoke the workflow</div>
+  <p><strong>Run</strong> the imported workflow on the uploaded dataset <strong>inside the same history</strong> using <code class="language-plaintext highlighter-rouge">workflows.invoke_workflow()</code> .</p>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-13"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-13-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="s">'id'</span><span class="p">:</span> <span class="n">hda</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span> <span class="s">'src'</span><span class="p">:</span> <span class="s">'hda'</span><span class="p">}}</span>
-<span class="n">ret</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">invoke_<span class="notranslate">workflow</span></span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span> <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">history_id</span><span class="o">=</span><span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">])</span>
+<span class="n">ret</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">workflows</span><span class="p">.</span><span class="n">invoke_workflow</span><span class="p">(</span><span class="n">wf</span><span class="p">[</span><span class="s">'id'</span><span class="p">],</span> <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">history_id</span><span class="o">=</span><span class="n">new_hist</span><span class="p">[</span><span class="s">'id'</span><span class="p">])</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span>
 </code></pre></div>    </div>
   </blockquote>
@@ -1110,31 +1110,31 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-view-the-results-1" aria-label="question box: View the results"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: View the results</div>
-  <p>View the results on the <span class="notranslate">Galaxy</span> server with your web browser. Were you successful? Did it run?</p>
+  <p>View the results on the Galaxy server with your web browser. Were you successful? Did it run?</p>
 </blockquote>
 
 <h1 id="interacting-with-histories-in-bioblendobjects">Interacting with histories in BioBlend.objects</h1>
 
-<p><strong>You need to insert the API key for your <span class="notranslate">Galaxy</span> server in the cell below</strong>:</p>
+<p><strong>You need to insert the API key for your Galaxy server in the cell below</strong>:</p>
 <ol>
-  <li>Open the <span class="notranslate">Galaxy</span> server in another browser tab</li>
+  <li>Open the Galaxy server in another browser tab</li>
   <li>Click on “User” on the top menu, then “Preferences”</li>
   <li>Click on “Manage API key”</li>
   <li>Generate an API key if needed, then copy the alphanumeric string and paste it as the value of the <code class="language-plaintext highlighter-rouge">api_key</code> variable below.</li>
 </ol>
 
-<p>The user interacts with a <span class="notranslate">Galaxy</span> server through a <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span>Instance</code> object:</p>
+<p>The user interacts with a Galaxy server through a <code class="language-plaintext highlighter-rouge">GalaxyInstance</code> object:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
-<span class="kn">import</span> <span class="nn">bioblend.<span class="notranslate">galaxy</span>.objects</span>
+<span class="kn">import</span> <span class="nn">bioblend.galaxy.objects</span>
 
-<span class="n">server</span> <span class="o">=</span> <span class="s">'https://use<span class="notranslate">galaxy</span>.eu/'</span>
+<span class="n">server</span> <span class="o">=</span> <span class="s">'https://usegalaxy.eu/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
-<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n"><span class="notranslate">galaxy</span></span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="n"><span class="notranslate">Galaxy</span>Instance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n">galaxy</span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="n">GalaxyInstance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>All <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span>Instance</code> method calls have the <code class="language-plaintext highlighter-rouge">client.method()</code> format, where <code class="language-plaintext highlighter-rouge">client</code> is the name of the resources you dealing with. There are 2 methods to get the list of resources:</p>
+<p>All <code class="language-plaintext highlighter-rouge">GalaxyInstance</code> method calls have the <code class="language-plaintext highlighter-rouge">client.method()</code> format, where <code class="language-plaintext highlighter-rouge">client</code> is the name of the resources you dealing with. There are 2 methods to get the list of resources:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">get_previews()</code>: lightweight (one GET request), retrieves basic resources’ info, returns a list of <strong>preview</strong> objects</li>
@@ -1205,20 +1205,20 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 
 <h2 id="exercise-bioblendobjects">Exercise: BioBlend.objects</h2>
 
-<p><strong>Goal</strong>: Upload a file to a new history, import a <span class="notranslate">workflow</span> and run it on the uploaded dataset.</p>
+<p><strong>Goal</strong>: Upload a file to a new history, import a workflow and run it on the uploaded dataset.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-initialise-2" aria-label="question box: Initialise"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Initialise</div>
-  <p>Create a <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span>Instance</code> object.</p>
+  <p>Create a <code class="language-plaintext highlighter-rouge">GalaxyInstance</code> object.</p>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-14"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-14-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 
-<span class="kn">import</span> <span class="nn">bioblend.<span class="notranslate">galaxy</span></span>
+<span class="kn">import</span> <span class="nn">bioblend.galaxy</span>
 
-<span class="n">server</span> <span class="o">=</span> <span class="s">'https://use<span class="notranslate">galaxy</span>.eu/'</span>
+<span class="n">server</span> <span class="o">=</span> <span class="s">'https://usegalaxy.eu/'</span>
 <span class="n">api_key</span> <span class="o">=</span> <span class="s">''</span>
-<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n"><span class="notranslate">galaxy</span></span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="n"><span class="notranslate">Galaxy</span>Instance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
+<span class="n">gi</span> <span class="o">=</span> <span class="n">bioblend</span><span class="p">.</span><span class="n">galaxy</span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="n">GalaxyInstance</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">server</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="n">api_key</span><span class="p">)</span>
 </code></pre></div>    </div>
 
   </blockquote>
@@ -1230,7 +1230,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-new-history-2" aria-label="question box: New History"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: New History</div>
-  <p>Create a new <span class="notranslate">Galaxy</span> history.</p>
+  <p>Create a new Galaxy history.</p>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-15"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-15-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">new_hist</span> <span class="o">=</span> <span class="n">gi</span><span class="p">.</span><span class="n">histories</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s">'New history'</span><span class="p">)</span>
@@ -1264,8 +1264,8 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-import-a-workflow-2" aria-label="question box: Import a workflow"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Import a <span class="notranslate">workflow</span></div>
-  <p><strong>Import a <span class="notranslate">workflow</span></strong> from the local file <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> using <code class="language-plaintext highlighter-rouge">workflows.import_new()</code></p>
+  <div class="box-title question-title" id="question-import-a-workflow-2" aria-label="question box: Import a workflow"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Import a workflow</div>
+  <p><strong>Import a workflow</strong> from the local file <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> using <code class="language-plaintext highlighter-rouge">workflows.import_new()</code></p>
 
   <p>You can obtain the <code class="language-plaintext highlighter-rouge">convert_to_tab.ga</code> file from the following URL, you’ll need to download it first.</p>
 
@@ -1286,7 +1286,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-view-the-workflow-inputs" aria-label="question box: View the workflow inputs"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: View the <span class="notranslate">workflow</span> inputs</div>
+  <div class="box-title question-title" id="question-view-the-workflow-inputs" aria-label="question box: View the workflow inputs"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: View the workflow inputs</div>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-18"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-18-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wf</span><span class="p">.</span><span class="n">inputs</span>
@@ -1299,8 +1299,8 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 </code></pre></div></div>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-invoke-the-workflow-2" aria-label="question box: Invoke the workflow"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Invoke the <span class="notranslate">workflow</span></div>
-  <p><strong>Run</strong> the imported <span class="notranslate">workflow</span> on the uploaded dataset <strong>inside the same history</strong> using the <code class="language-plaintext highlighter-rouge">invoke()</code> method of <code class="language-plaintext highlighter-rouge"><span class="notranslate">Workflow</span></code> objects.</p>
+  <div class="box-title question-title" id="question-invoke-the-workflow-2" aria-label="question box: Invoke the workflow"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Invoke the workflow</div>
+  <p><strong>Run</strong> the imported workflow on the uploaded dataset <strong>inside the same history</strong> using the <code class="language-plaintext highlighter-rouge">invoke()</code> method of <code class="language-plaintext highlighter-rouge">Workflow</code> objects.</p>
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-19"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-19-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="s">'0'</span><span class="p">:</span> <span class="n">hda</span><span class="p">}</span>
@@ -1315,7 +1315,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-view-the-results-2" aria-label="question box: View the results"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: View the results</div>
-  <p>View the results on the <span class="notranslate">Galaxy</span> server with your web browser. Were you successful? Did it run?</p>
+  <p>View the results on the Galaxy server with your web browser. Were you successful? Did it run?</p>
 </blockquote>
 
 <h1 id="optional-extra-exercises">Optional Extra Exercises</h1>
@@ -1323,7 +1323,7 @@ Therefore, method calls will have the format <code class="language-plaintext hig
 <p>If you have completed the exercise, you can try to perform these extra tasks with the help of the online documentation:</p>
 
 <ol>
-  <li>Download the <span class="notranslate">workflow</span> result to your computer</li>
+  <li>Download the workflow result to your computer</li>
   <li>Publish your history</li>
 </ol>
 

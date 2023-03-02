@@ -909,8 +909,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
             Metagenomics
         </a>
@@ -1008,9 +1006,9 @@
 
 <p>The Vertebrate Genome Project (VGP), a project of the G10K Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species (<span class="citation"><a href="#Rhie2021">Rhie <i>et al.</i> 2021</a></span>). The VGP has developed a fully automated <em>de-novo</em> genome assembly pipeline, which uses a combination of three different technologies: Pacbio HiFi, Bionano optical maps and Hi-C chromatin interaction data.</p>
 
-<p>As a result of a collaboration with the VGP team, a training including a step-by-step detailed description of parameter choices for each step of assembly was developed for the <span class="notranslate">Galaxy</span> Training Network (<span class="citation"><a href="#Lariviere2022">Lariviere <i>et al.</i> 2022</a></span>). This tutorial instead provides a quick walkthrough on how the workflows can be used to rapidly assemble a genome using the VGP pipeline with the <span class="notranslate">Galaxy</span> <span class="notranslate">Workflow</span> System (GWS).</p>
+<p>As a result of a collaboration with the VGP team, a training including a step-by-step detailed description of parameter choices for each step of assembly was developed for the Galaxy Training Network (<span class="citation"><a href="#Lariviere2022">Lariviere <i>et al.</i> 2022</a></span>). This tutorial instead provides a quick walkthrough on how the workflows can be used to rapidly assemble a genome using the VGP pipeline with the Galaxy Workflow System (GWS).</p>
 
-<p>GWS facilitates analysis repeatability, while minimizing the number of manual steps required to execute an analysis <span class="notranslate">workflow</span>, and automating the process of inputting parameters and software tool version tracking. The objective of this training is to explain how to run the VGP <span class="notranslate">workflow</span>, focusing on what are the required inputs and which outputs are generated and delegating how the steps are executed to the GWS.</p>
+<p>GWS facilitates analysis repeatability, while minimizing the number of manual steps required to execute an analysis workflow, and automating the process of inputting parameters and software tool version tracking. The objective of this training is to explain how to run the VGP workflow, focusing on what are the required inputs and which outputs are generated and delegating how the steps are executed to the GWS.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -1019,8 +1017,8 @@
 
 <ol id="markdown-toc">
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
-  <li><a href="#getting-started-on-galaxy" id="markdown-toc-getting-started-on-galaxy">Getting Started on <span class="notranslate">Galaxy</span></a></li>
-  <li><a href="#vgp-assembly-workflow-structure" id="markdown-toc-vgp-assembly-workflow-structure">VGP assembly <span class="notranslate">workflow</span> structure</a>    <ol>
+  <li><a href="#getting-started-on-galaxy" id="markdown-toc-getting-started-on-galaxy">Getting Started on Galaxy</a></li>
+  <li><a href="#vgp-assembly-workflow-structure" id="markdown-toc-vgp-assembly-workflow-structure">VGP assembly workflow structure</a>    <ol>
       <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
       <li><a href="#import-workflows-from-workflowhub" id="markdown-toc-import-workflows-from-workflowhub">Import workflows from WorkflowHub</a></li>
     </ol>
@@ -1035,28 +1033,28 @@
 
 </blockquote>
 
-<h1 id="getting-started-on-galaxy">Getting Started on <span class="notranslate">Galaxy</span></h1>
+<h1 id="getting-started-on-galaxy">Getting Started on Galaxy</h1>
 
-<p>This tutorial assumes you are comfortable getting data into <span class="notranslate">Galaxy</span>, running jobs, managing history, etc. If you are unfamiliar with <span class="notranslate">Galaxy</span>, we recommed you to visit the <a href="https://training.galaxyproject.org"><span class="notranslate">Galaxy</span> Training Network</a>. Consider starting with the following trainings:</p>
+<p>This tutorial assumes you are comfortable getting data into Galaxy, running jobs, managing history, etc. If you are unfamiliar with Galaxy, we recommed you to visit the <a href="https://training.galaxyproject.org">Galaxy Training Network</a>. Consider starting with the following trainings:</p>
 <ul>
-  <li><a href="/training-material/topics/introduction/tutorials/introduction/slides.html">Introduction to <span class="notranslate">Galaxy</span></a></li>
-  <li><a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html"><span class="notranslate">Galaxy</span> 101</a></li>
-  <li><a href="/training-material/topics/galaxy-interface/tutorials/get-data/slides.html">Getting Data into <span class="notranslate">Galaxy</span></a></li>
+  <li><a href="/training-material/topics/introduction/tutorials/introduction/slides.html">Introduction to Galaxy</a></li>
+  <li><a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html">Galaxy 101</a></li>
+  <li><a href="/training-material/topics/galaxy-interface/tutorials/get-data/slides.html">Getting Data into Galaxy</a></li>
   <li><a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">Using Dataset Collections</a></li>
-  <li><a href="https://training.galaxyproject.org/training-material/topics/introduction">Introduction to <span class="notranslate">Galaxy</span> Analyses</a></li>
-  <li><a href="/training-material/topics/galaxy-interface/tutorials/history/tutorial.html">Understanding the <span class="notranslate">Galaxy</span> History System</a></li>
-  <li><a href="/training-material/topics/galaxy-interface/tutorials/download-delete-data/tutorial.html">Downloading and Deleting Data in <span class="notranslate">Galaxy</span></a></li>
+  <li><a href="https://training.galaxyproject.org/training-material/topics/introduction">Introduction to Galaxy Analyses</a></li>
+  <li><a href="/training-material/topics/galaxy-interface/tutorials/history/tutorial.html">Understanding the Galaxy History System</a></li>
+  <li><a href="/training-material/topics/galaxy-interface/tutorials/download-delete-data/tutorial.html">Downloading and Deleting Data in Galaxy</a></li>
 </ul>
 
-<h1 id="vgp-assembly-workflow-structure">VGP assembly <span class="notranslate">workflow</span> structure</h1>
+<h1 id="vgp-assembly-workflow-structure">VGP assembly workflow structure</h1>
 
-<p>The VGP assembly pipeline has a modular organization, consisting in five main subworkflows (fig. 1), each one integrated by a series of data manipulation steps. Firstly, it allows the evaluation of intermediate steps, which facilitates the modification of parameters if necessary, without the need to start from the initial stage. Secondly, it allows to adapt the <span class="notranslate">workflow</span> to the available data.</p>
+<p>The VGP assembly pipeline has a modular organization, consisting in five main subworkflows (fig. 1), each one integrated by a series of data manipulation steps. Firstly, it allows the evaluation of intermediate steps, which facilitates the modification of parameters if necessary, without the need to start from the initial stage. Secondly, it allows to adapt the workflow to the available data.</p>
 
 <blockquote>
-  <figure id="figure-1"><img src="../../images/vgp_assembly/VGP_workflow_modules.png" alt="Figure 1: VGP pipeline modules. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> VGP assembly pipeline. The VGP <span class="notranslate">workflow</span> is implemented in a modular fashion: it consists of five independent subworkflows. In addition, it includes some additional workflows (not shown in the figure), required for exporting the results to GenomeArk.</figcaption></figure>
+  <figure id="figure-1"><img src="../../images/vgp_assembly/VGP_workflow_modules.png" alt="Figure 1: VGP pipeline modules. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> VGP assembly pipeline. The VGP workflow is implemented in a modular fashion: it consists of five independent subworkflows. In addition, it includes some additional workflows (not shown in the figure), required for exporting the results to GenomeArk.</figcaption></figure>
 </blockquote>
 
-<p>The VGP pipeline integrates two workflows to generate scaffolds from the contig level assemblies generated from the HiFi <span class="notranslate">reads</span>. When Hi-C data and Bionano data are available, the default pipeline is running the Bionano <span class="notranslate">workflow</span> first, followed by the Hi-C <span class="notranslate">workflow</span>. However, it is possible that Bionano data may not be available, in which case the HiC <span class="notranslate">workflow</span> can be used directly on the initial purged assembly.</p>
+<p>The VGP pipeline integrates two workflows to generate scaffolds from the contig level assemblies generated from the HiFi reads. When Hi-C data and Bionano data are available, the default pipeline is running the Bionano workflow first, followed by the Hi-C workflow. However, it is possible that Bionano data may not be available, in which case the HiC workflow can be used directly on the initial purged assembly.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-input-option-order" aria-label="comment box: Input option order"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Input option order</div>
@@ -1065,7 +1063,7 @@
 
 <h2 id="get-data">Get data</h2>
 
-<p>For this tutorial, the first step is to get the datasets from Zenodo. The VGP assembly pipeline uses data generated by a variety of technologies, including PacBio HiFi <span class="notranslate">reads</span>, Bionano optical maps, and Hi-C chromatin interaction maps.</p>
+<p>For this tutorial, the first step is to get the datasets from Zenodo. The VGP assembly pipeline uses data generated by a variety of technologies, including PacBio HiFi reads, Bionano optical maps, and Hi-C chromatin interaction maps.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
@@ -1076,7 +1074,7 @@
       <p>Import the files from <a href="https://zenodo.org/record/5887339">Zenodo</a></p>
 
       <ul>
-        <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> <strong>upload</strong> menu</li>
+        <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>upload</strong> menu</li>
         <li>Click on <strong>Rule-based</strong> tab</li>
         <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Datasets</code></li>
         <li>
@@ -1102,7 +1100,7 @@ Bionano_dataset    https://zenodo.org/record/5550653/files/bionano.cmap?download
       <p>Import the remaining datasets from <a href="https://zenodo.org/record/5887339">Zenodo</a></p>
 
       <ul>
-        <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> <strong>upload</strong> menu</li>
+        <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>upload</strong> menu</li>
         <li>Click on <strong>Rule-based</strong> tab</li>
         <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collections</code></li>
         <li>
@@ -1138,7 +1136,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
     <div class="box-title hands-on-title" id="hands-on-import-data-from-genomeark" aria-label="hands-on box: Import data from GenomeArk"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Import data from GenomeArk</div>
 
     <ol>
-      <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> <strong>upload</strong> menu</li>
+      <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>upload</strong> menu</li>
       <li>Click on <strong>Choose remote files</strong> tab</li>
       <li>Click on the <strong>Genome Ark</strong> button and then click on <strong>species</strong></li>
     </ol>
@@ -1153,30 +1151,30 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <h2 id="import-workflows-from-workflowhub">Import workflows from WorkflowHub</h2>
 
-<p>Once we have imported the datasets, the next step is to import the VGP workflows from the <a href="https://workflowhub.eu/">WorkflowHub server</a>. WorkflowHub is a <span class="notranslate">workflow</span> management system which allows workflows to be FAIR (Findable, Accessible, Interoperable, and Reusable), citable, have managed metadata profiles, and be openly available for review and analytics.</p>
+<p>Once we have imported the datasets, the next step is to import the VGP workflows from the <a href="https://workflowhub.eu/">WorkflowHub server</a>. WorkflowHub is a workflow management system which allows workflows to be FAIR (Findable, Accessible, Interoperable, and Reusable), citable, have managed metadata profiles, and be openly available for review and analytics.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-import-a-workflow" aria-label="hands-on box: Import a workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Import a <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-import-a-workflow" aria-label="hands-on box: Import a workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Import a workflow</div>
 
   <ol>
-    <li>Click on the <strong><span class="notranslate">Workflow</span></strong> menu, located in the top bar.
+    <li>Click on the <strong>Workflow</strong> menu, located in the top bar.
   <img src="../../images/vgp_assembly/top_bar.png" alt="Workflow menu. " loading="lazy" /></li>
     <li>Click on the <kbd>Import</kbd> button, located in the right corner.</li>
-    <li>In the section <strong>Import a <span class="notranslate">Workflow</span> from Configured GA4GH Tool Registry Servers (e.g. Dockstore)</strong>, click on <em>Search form</em>.</li>
+    <li>In the section <strong>Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)</strong>, click on <em>Search form</em>.</li>
     <li>In the <strong>TRS Server: <em>workflowhub.eu</em></strong> menu you should type <code class="language-plaintext highlighter-rouge">name:vgp</code>
 <img src="../../images/vgp_assembly/workflow_list.png" alt="Figure 3: Workflow menu. " loading="lazy" /></li>
-    <li>Click on the desired <span class="notranslate">workflow</span>, and finally select the latest available version.</li>
+    <li>Click on the desired workflow, and finally select the latest available version.</li>
   </ol>
 </blockquote>
 
-<p>After that, the imported workflows will appear in the main <span class="notranslate">workflow</span> menu. In order to initialize the <span class="notranslate">workflow</span>, we just need to click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> <strong>Run <span class="notranslate">workflow</span></strong> icon, marked with a red square in figure 2.</p>
+<p>After that, the imported workflows will appear in the main workflow menu. In order to initialize the workflow, we just need to click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> icon, marked with a red square in figure 2.</p>
 
-<figure id="figure-2"><img src="../../images/vgp_assembly/imported_workflows.png" alt="Figure 2: Workflow menu. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> <span class="notranslate">Workflow</span> main menu. The <span class="notranslate">workflow</span> menu lists all the workflows that have been imported. It provides useful information for organizing the workflows, such as last update and the tags. The worklows can be run by clicking in the play icon, marked in red in the image.</figcaption></figure>
+<figure id="figure-2"><img src="../../images/vgp_assembly/imported_workflows.png" alt="Figure 2: Workflow menu. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Workflow main menu. The workflow menu lists all the workflows that have been imported. It provides useful information for organizing the workflows, such as last update and the tags. The worklows can be run by clicking in the play icon, marked in red in the image.</figcaption></figure>
 
 <p>Once we have imported the datasets and the workflows, we can start with the genome assembly.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-workflow-centric-research-objects" aria-label="comment box: Workflow-centric Research Objects"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: <span class="notranslate">Workflow</span>-centric Research Objects</div>
+  <div class="box-title comment-title" id="comment-workflow-centric-research-objects" aria-label="comment box: Workflow-centric Research Objects"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Workflow-centric Research Objects</div>
 
   <p>In WorkflowHub, workflows are packaged, registered, downloaded and exchanged as Research Objects using the RO-Crate specification, with test and example data, managed metadata profiles, citations and more.</p>
 
@@ -1186,22 +1184,22 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#genome-profile-analysis"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to step by step version</a></p>
 
-<p>Now that our data and workflows are imported, we can run our first <span class="notranslate">workflow</span>. Before the assembly can be run, we need to collect metrics on the properties of the genome under consideration, such as the expected genome size according to our data. The present pipeline uses <strong>Meryl</strong> for generating the k-mer database and <strong>Genomescope2</strong> for determining genome characteristics based on a k-mer analysis.</p>
+<p>Now that our data and workflows are imported, we can run our first workflow. Before the assembly can be run, we need to collect metrics on the properties of the genome under consideration, such as the expected genome size according to our data. The present pipeline uses <strong>Meryl</strong> for generating the k-mer database and <strong>Genomescope2</strong> for determining genome characteristics based on a k-mer analysis.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-vgp-genome-profile-analysis-workflow" aria-label="hands-on box: VGP genome profile analysis workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: VGP genome profile analysis <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-vgp-genome-profile-analysis-workflow" aria-label="hands-on box: VGP genome profile analysis workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: VGP genome profile analysis workflow</div>
 
   <ol>
-    <li>Click in the <strong><span class="notranslate">Workflow</span></strong> menu, located in the top bar</li>
-    <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> <strong>Run <span class="notranslate">workflow</span></strong> buttom corresponding to <code class="language-plaintext highlighter-rouge">VGP genome profile analysis</code></li>
-    <li>In the <strong><span class="notranslate">Workflow</span>: VGP genome profile analysis</strong> menu:
+    <li>Click in the <strong>Workflow</strong> menu, located in the top bar</li>
+    <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> buttom corresponding to <code class="language-plaintext highlighter-rouge">VGP genome profile analysis</code></li>
+    <li>In the <strong>Workflow: VGP genome profile analysis</strong> menu:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> “<em>Collection of Pacbio Data</em>”: <code class="language-plaintext highlighter-rouge">7: HiFi_collection</code></li>
         <li>“<em>K-mer length</em>”: <code class="language-plaintext highlighter-rouge">31</code></li>
         <li>“<em>Ploidy</em>”: <code class="language-plaintext highlighter-rouge">2</code></li>
       </ul>
     </li>
-    <li>Click on the <kbd>Run <span class="notranslate">workflow</span></kbd> buttom</li>
+    <li>Click on the <kbd>Run workflow</kbd> buttom</li>
   </ol>
 
   <blockquote class="comment">
@@ -1211,33 +1209,33 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 </blockquote>
 
-<p>Once the <span class="notranslate">workflow</span> has finished, we can evaluate the linear plot generated by <strong>Genomescope</strong> (fig. 3), which includes valuable information such as the observed k-mer profile, fitted models and estimated parameters. This file corresponds to the dataset <code class="language-plaintext highlighter-rouge">26</code>.</p>
+<p>Once the workflow has finished, we can evaluate the linear plot generated by <strong>Genomescope</strong> (fig. 3), which includes valuable information such as the observed k-mer profile, fitted models and estimated parameters. This file corresponds to the dataset <code class="language-plaintext highlighter-rouge">26</code>.</p>
 
 <figure id="figure-3"><img src="../../images/vgp_assembly/genomescope_plot.png" alt="Figure 3: Genomescope plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> GenomeScope2 k-mer profile. The first peak located at about 25x corresponds to the heterozygous peak. The second peak at 50x, corresponds to the homozygous peak. The plot also includes information about the the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (ab), mean k-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and k-mer size (k).</figcaption></figure>
 
-<p>This distribution is the result of the Poisson process underlying the generation of sequencing <span class="notranslate">reads</span>. As we can see, the k-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit &gt; 93%). Low frequency <em>k</em>-mers are the result of sequencing errors, and are indicated by the red line. GenomeScope2 estimated a haploid genome size of around 11.7 Mbp, a value reasonably close to the <em>Saccharomyces</em> genome size.</p>
+<p>This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the k-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit &gt; 93%). Low frequency <em>k</em>-mers are the result of sequencing errors, and are indicated by the red line. GenomeScope2 estimated a haploid genome size of around 11.7 Mbp, a value reasonably close to the <em>Saccharomyces</em> genome size.</p>
 
 <h1 id="hifi-phased-assembly-with-hifiasm">HiFi phased assembly with hifiasm</h1>
 
 <p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#hifi-phased-assembly-with-hifiasm"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to step by step version</a></p>
 
-<p>After genome profiling, the next step is to run the <strong>VGP HiFi phased assembly with hifiasm and HiC data <span class="notranslate">workflow</span></strong>. This <span class="notranslate">workflow</span> uses <strong>hifiasm</strong> (HiC mode) to generate HiC-phased haplotypes (hap1 and hap2). This is in contrast to its default mode, which generates primary and alte<span class="notranslate">rna</span>te pseudohaplotype assemblies. This <span class="notranslate">workflow</span> includes three tools for evaluating assembly quality: <strong>QUAST</strong>, <strong>BUSCO</strong> and <strong>Merqury</strong>.</p>
+<p>After genome profiling, the next step is to run the <strong>VGP HiFi phased assembly with hifiasm and HiC data workflow</strong>. This workflow uses <strong>hifiasm</strong> (HiC mode) to generate HiC-phased haplotypes (hap1 and hap2). This is in contrast to its default mode, which generates primary and alternate pseudohaplotype assemblies. This workflow includes three tools for evaluating assembly quality: <strong>QUAST</strong>, <strong>BUSCO</strong> and <strong>Merqury</strong>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-vgp-hifi-phased-assembly-with-hifiasm-and-hic-data-workflow" aria-label="hands-on box: VGP HiFi phased assembly with hifiasm and HiC data workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: VGP HiFi phased assembly with hifiasm and HiC data <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-vgp-hifi-phased-assembly-with-hifiasm-and-hic-data-workflow" aria-label="hands-on box: VGP HiFi phased assembly with hifiasm and HiC data workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: VGP HiFi phased assembly with hifiasm and HiC data workflow</div>
   <ol>
-    <li>Click in the <strong><span class="notranslate">Workflow</span></strong> menu, located in the top bar</li>
-    <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> <strong>Run <span class="notranslate">workflow</span></strong> buttom corresponding to <code class="language-plaintext highlighter-rouge">VGP HiFi phased assembly with hifiasm and HiC data</code></li>
-    <li>In the <strong><span class="notranslate">Workflow</span>: VGP HiFi phased assembly with hifiasm and HiC data</strong> menu:
+    <li>Click in the <strong>Workflow</strong> menu, located in the top bar</li>
+    <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> buttom corresponding to <code class="language-plaintext highlighter-rouge">VGP HiFi phased assembly with hifiasm and HiC data</code></li>
+    <li>In the <strong>Workflow: VGP HiFi phased assembly with hifiasm and HiC data</strong> menu:
       <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> “<em>Pacbio <span class="notranslate">Reads</span> Collection</em>”: <code class="language-plaintext highlighter-rouge">7. HiFi_collection</code></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> “<em>Pacbio Reads Collection</em>”: <code class="language-plaintext highlighter-rouge">7. HiFi_collection</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Meryl database</em>”: <code class="language-plaintext highlighter-rouge">12: Meryl on data 11, data 10, data 9: read-db.meryldb</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>HiC forward <span class="notranslate">reads</span></em>”: <code class="language-plaintext highlighter-rouge">3: Hi-C_dataset_F</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>HiC reverse <span class="notranslate">reads</span></em>”: <code class="language-plaintext highlighter-rouge">2: Hi-C_dataset_R</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>HiC forward reads</em>”: <code class="language-plaintext highlighter-rouge">3: Hi-C_dataset_F</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>HiC reverse reads</em>”: <code class="language-plaintext highlighter-rouge">2: Hi-C_dataset_R</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Genomescope summary dataset</em>”: <code class="language-plaintext highlighter-rouge">19: Genomescope on data 13 Summary</code></li>
       </ul>
     </li>
-    <li>Click on the <kbd>Run <span class="notranslate">workflow</span></kbd> button</li>
+    <li>Click on the <kbd>Run workflow</kbd> button</li>
   </ol>
 
   <blockquote class="comment">
@@ -1249,31 +1247,31 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <p>Let’s have a look at the HTML report generated by <strong>QUAST</strong> (fig. 4), which corresponds with the dataset  <code class="language-plaintext highlighter-rouge">52</code>. It summarizes some main assembly statistics, such as contig number, N50, assembly length, etc.</p>
 
-<figure id="figure-4"><img src="../../images/vgp_assembly/QUAST_initial.png" alt="Figure 4: QUAST initial plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> QUAST report. Statistics of the primary and alte<span class="notranslate">rna</span>te assembly (a). Cumulative length plot (b).</figcaption></figure>
+<figure id="figure-4"><img src="../../images/vgp_assembly/QUAST_initial.png" alt="Figure 4: QUAST initial plot. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> QUAST report. Statistics of the primary and alternate assembly (a). Cumulative length plot (b).</figcaption></figure>
 
-<p>According to the report, both assemblies are quite similar; the primary assembly includes 18 contigs, whose cumulative length is around 12.2Mbp. The alte<span class="notranslate">rna</span>te assembly includes 17 contigs, whose total length is 11.3Mbp. As we can see in figure 4a, both assemblies come close to the estimated genome size, which is as expected since we used hifiasm-HiC mode to generate phased assemblies which lowers the chance of false duplications that can inflate assembly size.</p>
+<p>According to the report, both assemblies are quite similar; the primary assembly includes 18 contigs, whose cumulative length is around 12.2Mbp. The alternate assembly includes 17 contigs, whose total length is 11.3Mbp. As we can see in figure 4a, both assemblies come close to the estimated genome size, which is as expected since we used hifiasm-HiC mode to generate phased assemblies which lowers the chance of false duplications that can inflate assembly size.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-are-you-working-with-pri-alt-assemblies" aria-label="comment box: Are you working with pri/alt assemblies?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Are you working with pri/alt assemblies?</div>
-  <p>This tutorial uses the hifiasm-HiC <span class="notranslate">workflow</span>, which generates phased hap1 and hap2 assemblies. The phasing helps lower the chance of false duplications, since the phasing information helps the assembler know which genomic variation is heterozygosity at the same locus versus being two different loci entirely. If you are working with primary/alte<span class="notranslate">rna</span>te assemblies (especially if there is no inte<span class="notranslate">rna</span>l purging in the initial assembly), you can expect higher false duplication rates than we observe here with the yeast HiC hap1/hap2.</p>
+  <p>This tutorial uses the hifiasm-HiC workflow, which generates phased hap1 and hap2 assemblies. The phasing helps lower the chance of false duplications, since the phasing information helps the assembler know which genomic variation is heterozygosity at the same locus versus being two different loci entirely. If you are working with primary/alternate assemblies (especially if there is no internal purging in the initial assembly), you can expect higher false duplication rates than we observe here with the yeast HiC hap1/hap2.</p>
 </blockquote>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
-    <li>What is the longest contig in the primary assembly? And in the alte<span class="notranslate">rna</span>te one?</li>
+    <li>What is the longest contig in the primary assembly? And in the alternate one?</li>
     <li>What is the N50 of the primary assembly?</li>
-    <li>Which percentage of <span class="notranslate">reads</span> mapped to each assembly?</li>
+    <li>Which percentage of reads mapped to each assembly?</li>
   </ol>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>The longest contig in the primary assembly is 1.532.843 bp, and 1.532.843 bp in the alte<span class="notranslate">rna</span>te assembly.</li>
+      <li>The longest contig in the primary assembly is 1.532.843 bp, and 1.532.843 bp in the alternate assembly.</li>
       <li>The N50 of the primary assembly is 922.430 bp.</li>
-      <li>According to the report, 100% of <span class="notranslate">reads</span> mapped to both the primary assembly and the alte<span class="notranslate">rna</span>te assembly.</li>
+      <li>According to the report, 100% of reads mapped to both the primary assembly and the alternate assembly.</li>
     </ol>
 
   </blockquote>
@@ -1306,7 +1304,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 </blockquote>
 
-<p>Despite <strong>BUSCO</strong> being robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belongs to a taxonomic group that is not well represented in <a href="https://www.orthodb.org/">OrthoDB</a>. Merqury provides a complementary approach for assessing genome assembly quality metrics in a reference-free manner via <em>k</em>-mer copy number analysis. Specifically, it takes our hap1 as the first genome assembly, hap2 as the second genome assembly, and the merylDB generated previously for k-mer counts. Like the other QC metrics we have been looking at, the VGP Hifiasm-HiC <span class="notranslate">workflow</span> will automatically generate the Merqury analysis.</p>
+<p>Despite <strong>BUSCO</strong> being robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belongs to a taxonomic group that is not well represented in <a href="https://www.orthodb.org/">OrthoDB</a>. Merqury provides a complementary approach for assessing genome assembly quality metrics in a reference-free manner via <em>k</em>-mer copy number analysis. Specifically, it takes our hap1 as the first genome assembly, hap2 as the second genome assembly, and the merylDB generated previously for k-mer counts. Like the other QC metrics we have been looking at, the VGP Hifiasm-HiC workflow will automatically generate the Merqury analysis.</p>
 
 <p>By default, <strong>Merqury</strong> generates three collections as output: stats, plots and QV stats. The “stats” collection contains the completeness statistics, while the “QV stats” collection contains the quality value statistics. Let’s have a look at the copy number (CN) spectrum plot, known as the <em>spectra-cn</em> plot. The spectra-cn plot looks at both of your assemblies (here, your haplotypes) taken <em>together</em> (fig. 6a).  We can see a small amount of false duplications here: at the 50 mark on the x-axis, there is a small amount of k-mers present at 3-copy across the two assemblies (the green bump).</p>
 
@@ -1314,56 +1312,56 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <p>Thus, we know there is some false duplication (the 3-copy green bump) present as 2-copy in one of our assemblies, but we don’t know which one. We can look at the individual copy number spectrum for each haplotype in order to figure out which one contains the 2-copy k-mers (<em>i.e.</em>, the false duplications). In the Merqury spectra-CN plot for hap2 we can see the small bump of 2-copy k-mers at around the 50 mark on the x-axis (fig. 6b).</p>
 
-<p>Now that we know which haplotype contains the false duplications, we can run the purging <span class="notranslate">workflow</span> to try to get rid of these duplicates.</p>
+<p>Now that we know which haplotype contains the false duplications, we can run the purging workflow to try to get rid of these duplicates.</p>
 
 <h1 id="post-assembly-processing">Post-assembly processing</h1>
 
 <p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#post-assembly-processing"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to step by step version</a></p>
 
-<p>An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplotypes, as well as all hemizygous regions from both haplotypes (<span class="citation"><a href="#Guan2019">Guan <i>et al.</i> 2019</a></span>). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. In order to prevent potential issues in <span class="notranslate">downstream</span> analysis, we are going to run the <strong>VGP purge assembly with purge_dups <span class="notranslate">workflow</span></strong>, which will allow to identify and reassign heterozygous contigs. This step is only necessary if haplotypic duplications are observed, and the output should be carefully checked for overpurging.</p>
+<p>An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplotypes, as well as all hemizygous regions from both haplotypes (<span class="citation"><a href="#Guan2019">Guan <i>et al.</i> 2019</a></span>). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. In order to prevent potential issues in downstream analysis, we are going to run the <strong>VGP purge assembly with purge_dups workflow</strong>, which will allow to identify and reassign heterozygous contigs. This step is only necessary if haplotypic duplications are observed, and the output should be carefully checked for overpurging.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-vgp-purge-assembly-with-purge-dups-pipeline-workflow" aria-label="hands-on box: VGP purge assembly with purge_dups pipeline  workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: VGP purge assembly with purge_dups pipeline  <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-vgp-purge-assembly-with-purge-dups-pipeline-workflow" aria-label="hands-on box: VGP purge assembly with purge_dups pipeline  workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: VGP purge assembly with purge_dups pipeline  workflow</div>
 
   <ol>
-    <li>Click in the <strong><span class="notranslate">Workflow</span></strong> menu, located in the top bar</li>
-    <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> <strong>Run <span class="notranslate">workflow</span></strong> buttom corresponding to <code class="language-plaintext highlighter-rouge">VGP purge assembly with purge_dups pipeline</code></li>
-    <li>In the <strong><span class="notranslate">Workflow</span>: VGP purge assembly with purge_dups pipeline</strong> menu:
+    <li>Click in the <strong>Workflow</strong> menu, located in the top bar</li>
+    <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> buttom corresponding to <code class="language-plaintext highlighter-rouge">VGP purge assembly with purge_dups pipeline</code></li>
+    <li>In the <strong>Workflow: VGP purge assembly with purge_dups pipeline</strong> menu:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Hifiasm Primary assembly</em>”: <code class="language-plaintext highlighter-rouge">39: Hifiasm HiC hap1</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Hifiasm Alte<span class="notranslate">rna</span>te assembly</em>”: <code class="language-plaintext highlighter-rouge">40: Hifiasm HiC hap2</code></li>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> “<em>Pacbio <span class="notranslate">Reads</span> Collection - Trimmed</em>”: <code class="language-plaintext highlighter-rouge">22: Cutadapt</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Hifiasm Alternate assembly</em>”: <code class="language-plaintext highlighter-rouge">40: Hifiasm HiC hap2</code></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> “<em>Pacbio Reads Collection - Trimmed</em>”: <code class="language-plaintext highlighter-rouge">22: Cutadapt</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Genomescope model parameters</em>”: <code class="language-plaintext highlighter-rouge">20: Genomescope on data 13 Model parameters</code></li>
       </ul>
     </li>
-    <li>Click in the <kbd>Run <span class="notranslate">workflow</span></kbd> buttom</li>
+    <li>Click in the <kbd>Run workflow</kbd> buttom</li>
   </ol>
 
 </blockquote>
 
-<p>This <span class="notranslate">workflow</span> generates a large number of outputs, among which we should highlight the datasets <code class="language-plaintext highlighter-rouge">74</code> and <code class="language-plaintext highlighter-rouge">91</code>, which correspond to the purged primary and alte<span class="notranslate">rna</span>tive assemblies respectively.</p>
+<p>This workflow generates a large number of outputs, among which we should highlight the datasets <code class="language-plaintext highlighter-rouge">74</code> and <code class="language-plaintext highlighter-rouge">91</code>, which correspond to the purged primary and alternative assemblies respectively.</p>
 
 <h1 id="hybrid-scaffolding-with-bionano-optical-maps">Hybrid scaffolding with Bionano optical maps</h1>
 
 <p><a href="/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#hybrid-scaffolding-using-bionano-data"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to step by step version</a></p>
 
-<p>Once the assemblies generated by <strong>hifiasm</strong> have been purged, the next step is to run the <strong>VGP hybrid scaffolding with Bionano optical maps <span class="notranslate">workflow</span></strong>. It will integrate the information provided by optical maps with primary assembly sequences in order to detect and correct chimeric joins and misoriented contigs. In addition, this <span class="notranslate">workflow</span> includes some additonal steps for evaluating the outputs.</p>
+<p>Once the assemblies generated by <strong>hifiasm</strong> have been purged, the next step is to run the <strong>VGP hybrid scaffolding with Bionano optical maps workflow</strong>. It will integrate the information provided by optical maps with primary assembly sequences in order to detect and correct chimeric joins and misoriented contigs. In addition, this workflow includes some additonal steps for evaluating the outputs.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-vgp-hybrid-scaffolding-with-bionano-optical-maps-workflow" aria-label="hands-on box: VGP hybrid scaffolding with Bionano optical maps workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: VGP hybrid scaffolding with Bionano optical maps <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-vgp-hybrid-scaffolding-with-bionano-optical-maps-workflow" aria-label="hands-on box: VGP hybrid scaffolding with Bionano optical maps workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: VGP hybrid scaffolding with Bionano optical maps workflow</div>
 
   <ol>
-    <li>Click in the <strong><span class="notranslate">Workflow</span></strong> menu, located in the top bar</li>
-    <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> <strong>Run <span class="notranslate">workflow</span></strong> buttom corresponding to <code class="language-plaintext highlighter-rouge">VGP hybrid scaffolding with Bionano optical maps</code></li>
-    <li>In the <strong><span class="notranslate">Workflow</span>: VGP hybrid scaffolding with Bionano optical maps</strong> menu:
+    <li>Click in the <strong>Workflow</strong> menu, located in the top bar</li>
+    <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> buttom corresponding to <code class="language-plaintext highlighter-rouge">VGP hybrid scaffolding with Bionano optical maps</code></li>
+    <li>In the <strong>Workflow: VGP hybrid scaffolding with Bionano optical maps</strong> menu:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Bionano data</em>”: <code class="language-plaintext highlighter-rouge">1: Bionano_dataset</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Hifiasm Purged Assembly</em>”: <code class="language-plaintext highlighter-rouge">90: Purge overlaps on data 88 and data 33: get_seqs purged sequences</code> (note: the data numbers may differ in your <span class="notranslate">workflow</span>, but it should still be tagged <code class="language-plaintext highlighter-rouge">p1</code> from the purge_dups <span class="notranslate">workflow</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Hifiasm Purged Assembly</em>”: <code class="language-plaintext highlighter-rouge">90: Purge overlaps on data 88 and data 33: get_seqs purged sequences</code> (note: the data numbers may differ in your workflow, but it should still be tagged <code class="language-plaintext highlighter-rouge">p1</code> from the purge_dups workflow)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Estimated genome size - Parameter File</em>”: <code class="language-plaintext highlighter-rouge">60: Estimated Genome size</code></li>
         <li>“<em>Is genome large (&gt;100Mb)?</em>”: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
-    <li>Click on the <kbd>Run <span class="notranslate">workflow</span></kbd> buttom</li>
+    <li>Click on the <kbd>Run workflow</kbd> buttom</li>
   </ol>
 </blockquote>
 
@@ -1407,22 +1405,22 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
   <div class="box-title hands-on-title" id="hands-on-vgp-hybrid-scaffolding-with-hic-data" aria-label="hands-on box: VGP hybrid scaffolding with HiC data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: VGP hybrid scaffolding with HiC data</div>
 
   <ol>
-    <li>Click in the <strong><span class="notranslate">Workflow</span></strong> menu, located in the top bar</li>
-    <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> <strong>Run <span class="notranslate">workflow</span></strong> buttom corresponding to <code class="language-plaintext highlighter-rouge">VGP hybrid scaffolding with HiC data</code></li>
-    <li>In the <strong><span class="notranslate">Workflow</span>: VGP hybrid scaffolding with HiC data</strong> menu:
+    <li>Click in the <strong>Workflow</strong> menu, located in the top bar</li>
+    <li>Click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> buttom corresponding to <code class="language-plaintext highlighter-rouge">VGP hybrid scaffolding with HiC data</code></li>
+    <li>In the <strong>Workflow: VGP hybrid scaffolding with HiC data</strong> menu:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Scaffolded Assembly</em>”: <code class="language-plaintext highlighter-rouge">114: Concatenate datasets on data 110 and data 109</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>HiC Forward <span class="notranslate">reads</span></em>”: <code class="language-plaintext highlighter-rouge">3: Hi-C_dataset_F (as fastqsanger)</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>HiC Reverse <span class="notranslate">reads</span></em>”: <code class="language-plaintext highlighter-rouge">2: Hi-C_dataset_R (as fastqsanger)</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>HiC Forward reads</em>”: <code class="language-plaintext highlighter-rouge">3: Hi-C_dataset_F (as fastqsanger)</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>HiC Reverse reads</em>”: <code class="language-plaintext highlighter-rouge">2: Hi-C_dataset_R (as fastqsanger)</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Estimated genome size - Parameter File</em>”: <code class="language-plaintext highlighter-rouge">50: Estimated Genome size</code></li>
         <li>“<em>Is genome large (&gt;100Mb)?</em>”: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
-    <li>Click in the <kbd>Run <span class="notranslate">workflow</span></kbd> buttom</li>
+    <li>Click in the <kbd>Run workflow</kbd> buttom</li>
   </ol>
 </blockquote>
 
-<p>In order to evaluate the Hi-C hybrid scaffolding, we are going to compare the contact maps before and after running the HiC hybrid scaffolding <span class="notranslate">workflow</span> (fig. 8), corresponding to the datasets <code class="language-plaintext highlighter-rouge">130</code> and <code class="language-plaintext highlighter-rouge">141</code> respectively.</p>
+<p>In order to evaluate the Hi-C hybrid scaffolding, we are going to compare the contact maps before and after running the HiC hybrid scaffolding workflow (fig. 8), corresponding to the datasets <code class="language-plaintext highlighter-rouge">130</code> and <code class="language-plaintext highlighter-rouge">141</code> respectively.</p>
 
 <figure id="figure-8"><img src="../../images/vgp_assembly/hi-c_pretext_final.png" alt="Figure 8: Pretext final contact map. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Hi-C maps generated by Pretext using Hi-C data. The red circles indicate the  differences between the contact maps generated after (a) and before (b) Hi-C hybrid scaffolding.</figcaption></figure>
 
@@ -1434,7 +1432,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 <figure id="figure-9"><img src="../../images/vgp_assembly/stats_conclusion.png" alt="Figure 9: Final stats. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Comparison between the final assembly generated in this training and the reference genome. Contiguity plot using the reference genome size (a). Assemby statistics (b).</figcaption></figure>
 
-<p>With respect to the total sequence length, we can conclude that the size of our genome assembly is almost identical to the reference genome (fig.9a,b). It is noteworthy that the reference genome consists of 17 sequences, while our assembly includes only 16 chromosomes. This is due to the fact that the reference genome also includes the sequence of the mitochondrial <span class="notranslate">DNA</span>, which consists of 85,779 bp. The remaining statistics exhibit very similar values (fig. 9b).</p>
+<p>With respect to the total sequence length, we can conclude that the size of our genome assembly is almost identical to the reference genome (fig.9a,b). It is noteworthy that the reference genome consists of 17 sequences, while our assembly includes only 16 chromosomes. This is due to the fact that the reference genome also includes the sequence of the mitochondrial DNA, which consists of 85,779 bp. The remaining statistics exhibit very similar values (fig. 9b).</p>
 
 <figure id="figure-10"><img src="../../images/vgp_assembly/hi-c_pretext_conclusion.png" alt="Figure 10: Comparison reference genome. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Comparison between contact maps generated using the final assembly (a) and the reference genome (b).</figcaption></figure>
 

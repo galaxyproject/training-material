@@ -709,12 +709,12 @@
                 <h2 id="introduction">Introduction</h2>
 
 <p>In this tutorial we are going to demonstrate how to add a third party
-JavaScript-based visualization to <span class="notranslate">Galaxy</span>, and we’ll talk about what the benefits
+JavaScript-based visualization to Galaxy, and we’ll talk about what the benefits
 are. The plugin we’ve selected for this exercise is the <a href="https://biasmv.github.io/pv/"><em>PV-Javascript Protein
 Viewer</em></a>. It is an open source protein structure
 viewer for <code class="language-plaintext highlighter-rouge">PDB</code>-files. There are many other popular protein structure viewers
 available for the visualization of <code class="language-plaintext highlighter-rouge">PDB</code>-files such as e.g.
-<a href="https://arose.github.io/ngl/">NGL</a> (also available in <span class="notranslate">Galaxy</span>) and
+<a href="https://arose.github.io/ngl/">NGL</a> (also available in Galaxy) and
 <a href="https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm">JSMol</a>.</p>
 
 <blockquote class="details">
@@ -804,21 +804,21 @@ with the plugin.</p>
 
 <h3 id="directory-and-plugin-preparations">Directory and plugin preparations</h3>
 
-<p>In this section we will download the viewer and add it to a local <em><span class="notranslate">Galaxy</span></em>
-instance. All development takes place within the <em><span class="notranslate">Galaxy</span></em> codebase. The first
-thing we are going to do is to clone a <em><span class="notranslate">Galaxy</span></em> instance and prepare the
+<p>In this section we will download the viewer and add it to a local <em>Galaxy</em>
+instance. All development takes place within the <em>Galaxy</em> codebase. The first
+thing we are going to do is to clone a <em>Galaxy</em> instance and prepare the
 directory structure for the new visualization plugin.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-1" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
   <ol>
-    <li>Clone an instance of <em><span class="notranslate">Galaxy</span></em> in a path, further referred to as <code class="language-plaintext highlighter-rouge">$<span class="notranslate">GALAXY</span>_ROOT</code>:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/<span class="notranslate">galaxy</span>project/<span class="notranslate">galaxy</span>
+    <li>Clone an instance of <em>Galaxy</em> in a path, further referred to as <code class="language-plaintext highlighter-rouge">$GALAXY_ROOT</code>:
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/galaxyproject/galaxy
 </code></pre></div>      </div>
     </li>
     <li>Navigate to the visualization plugin directory:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$<span class="notranslate">GALAXY</span>_ROOT</span>/config/plugins/visualizations
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations
 </code></pre></div>      </div>
     </li>
     <li>Copy the existing example into a new directory:
@@ -837,7 +837,7 @@ files:</p>
 <ul>
   <li>Logo (<code class="language-plaintext highlighter-rouge">static/logo.png</code>) which will appear in <em>Chart</em>’s plugin selection interface.</li>
   <li>Configuration (<code class="language-plaintext highlighter-rouge">config/example.xml</code>) describing input parameters and options.</li>
-  <li>Wrapper (<code class="language-plaintext highlighter-rouge">src/script.js</code>) which serves as a bridge between <em><span class="notranslate">Galaxy</span></em> and our 3rd-party plugin.</li>
+  <li>Wrapper (<code class="language-plaintext highlighter-rouge">src/script.js</code>) which serves as a bridge between <em>Galaxy</em> and our 3rd-party plugin.</li>
 </ul>
 
 <p>In the following sections we are going to discuss these files in more detail and
@@ -846,7 +846,7 @@ our visualization.</p>
 
 <h3 id="your-visualization-needs-a-logo">Your visualization needs a logo</h3>
 
-<p>Each visualization is represented by a logo in the <span class="notranslate">Galaxy</span> interface. This makes
+<p>Each visualization is represented by a logo in the Galaxy interface. This makes
 it easier for users to find and configure their visualization. The logo should
 be in the <code class="language-plaintext highlighter-rouge">png</code>-file format. It will appear with a width of 120 pixels.</p>
 
@@ -885,14 +885,14 @@ this file but for now we keep it simple.</p>
     <li>
       <p>Edit the file named <code class="language-plaintext highlighter-rouge">config/myviz.xml</code> and change the name and description.</p>
     </li>
-    <li>Go to the <span class="notranslate">Galaxy</span> root directory to install dependencies, activate the virtual environment, and invoke the <span class="notranslate">Galaxy</span> client build.
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$<span class="notranslate">GALAXY</span>_ROOT</span>
+    <li>Go to the Galaxy root directory to install dependencies, activate the virtual environment, and invoke the Galaxy client build.
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>
 <span class="nv">$ </span>make setup-venv
 <span class="nv">$ </span><span class="nb">source</span> .venv/bin/activate
 <span class="nv">$ </span>make client
 </code></pre></div>      </div>
     </li>
-    <li>Run <span class="notranslate">Galaxy</span>
+    <li>Run Galaxy
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>./run.sh
 </code></pre></div>      </div>
     </li>
@@ -901,7 +901,7 @@ this file but for now we keep it simple.</p>
 </blockquote>
 
 <p>Your visualization should now be loaded.  You can verify that now by clicking
-on <code class="language-plaintext highlighter-rouge">Visualize &gt; Create Visualization</code> in the top menu bar of <span class="notranslate">Galaxy</span> and finding
+on <code class="language-plaintext highlighter-rouge">Visualize &gt; Create Visualization</code> in the top menu bar of Galaxy and finding
 your plugin with its new logo in the list there.</p>
 
 <h3 id="assign-a-new-datatype-to-your-visualization">Assign a new datatype to your visualization</h3>
@@ -931,7 +931,7 @@ history item of this file type the plugin will automatically be available.</p>
 <h3 id="modifying-the-wrapper">Modifying the wrapper</h3>
 
 <p>Now let’s take a look at the wrapper which connects our visualization with
-<span class="notranslate">Galaxy</span>. The wrapper consists of a module written in <em>JavaScript</em> and is
+Galaxy. The wrapper consists of a module written in <em>JavaScript</em> and is
 available at <code class="language-plaintext highlighter-rouge">src/script.js</code>:</p>
 
 <p>The wrapper receives an <code class="language-plaintext highlighter-rouge">options</code> dictionary with the following <b>four</b> components:</p>
@@ -971,7 +971,7 @@ Let’s take a look at the <a href="https://pv.readthedocs.io/">documentation</a
 
   <ol>
     <li>Access your visualization’s <code class="language-plaintext highlighter-rouge">myviz/src</code> directory.
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$<span class="notranslate">GALAXY</span>_ROOT</span>/config/plugins/visualizations/myviz
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations/myviz
 </code></pre></div>      </div>
     </li>
     <li>Install the package for the <em>PV-Viewer</em>:
@@ -1009,14 +1009,14 @@ Let’s take a look at the <a href="https://pv.readthedocs.io/">documentation</a
 <h3 id="build-the-package">Build the package</h3>
 
 <p>Now that we have completed the basic plugin definition, it is time to build the
-scripts and libraries into a single bundle that <span class="notranslate">Galaxy</span> can use.  <span class="notranslate">Galaxy</span>
+scripts and libraries into a single bundle that Galaxy can use.  Galaxy
 visualizations typically use <a href="https://parceljs.org"><em>Parcel</em></a> for this due to
 its simplicity, and this is how the example project is already configured.  If
 you’re interested in more details, take a look at the <code class="language-plaintext highlighter-rouge">package.json</code> file in
 your <code class="language-plaintext highlighter-rouge">myviz</code> plugin directory.</p>
 
 <p>After it has been built and staged the plugin will be accessible through
-<em><span class="notranslate">Galaxy</span></em>’s user interface. This process not require restarting your <em><span class="notranslate">Galaxy</span></em>
+<em>Galaxy</em>’s user interface. This process not require restarting your <em>Galaxy</em>
 instance, just make sure to properly refresh your browser.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1024,7 +1024,7 @@ instance, just make sure to properly refresh your browser.</p>
 
   <ol>
     <li>Navigate to your visualization’s root directory:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$<span class="notranslate">GALAXY</span>_ROOT</span>/config/plugins/visualizations/myviz
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations/myviz
 </code></pre></div>      </div>
     </li>
     <li>Install any necessary JavaScript dependencies:
@@ -1035,8 +1035,8 @@ instance, just make sure to properly refresh your browser.</p>
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yarn run build
 </code></pre></div>      </div>
     </li>
-    <li>Stage the scripts and run <span class="notranslate">Galaxy</span>:
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$<span class="notranslate">GALAXY</span>_ROOT</span>
+    <li>Stage the scripts and run Galaxy:
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>
 <span class="nv">$ </span>make client
 <span class="nv">$ </span>./run.sh
 </code></pre></div>      </div>
@@ -1065,9 +1065,9 @@ instance, just make sure to properly refresh your browser.</p>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Start your <span class="notranslate">Galaxy</span> instance</p>
+      <p>Start your Galaxy instance</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$<span class="notranslate">GALAXY</span>_ROOT</span>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>
 <span class="nv">$ </span>./run.sh
 </code></pre></div>      </div>
     </li>
@@ -1143,7 +1143,7 @@ latter is provided in <em>JavaScript</em> and not as XML.</p>
       <p>Rebuild the plugin</p>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yarn run build
-<span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$<span class="notranslate">GALAXY</span>_ROOT</span>
+<span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>
 <span class="nv">$ </span>make client
 </code></pre></div>      </div>
     </li>
@@ -1158,7 +1158,7 @@ latter is provided in <em>JavaScript</em> and not as XML.</p>
 <h2 id="conclusion">Conclusion</h2>
 
 <p>First of all, thank you for completing this tutorial. We have learned how to add
-JavaScript visualizations to <span class="notranslate">Galaxy</span> utilizing the Charts framework.</p>
+JavaScript visualizations to Galaxy utilizing the Charts framework.</p>
 
 
                 

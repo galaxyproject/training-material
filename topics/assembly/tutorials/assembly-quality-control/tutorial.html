@@ -907,8 +907,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
             Metagenomics
         </a>
@@ -1000,7 +998,7 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>In this tutorial, we will assess the assembly quality of 2 assemblies generated with Hifiasm and Flye using PacBio HiFi <span class="notranslate">reads</span> of a species of fungi, <em>Saccharomyces cerevisiae</em> INSC1019 and compare the results with the actual reference genome <a href="https://www.ncbi.nlm.nih.gov/genome/?term=Saccharomyces%20cerevisiae"><em>Saccharomyces cerevisiae</em> S288C</a>.</p>
+<p>In this tutorial, we will assess the assembly quality of 2 assemblies generated with Hifiasm and Flye using PacBio HiFi reads of a species of fungi, <em>Saccharomyces cerevisiae</em> INSC1019 and compare the results with the actual reference genome <a href="https://www.ncbi.nlm.nih.gov/genome/?term=Saccharomyces%20cerevisiae"><em>Saccharomyces cerevisiae</em> S288C</a>.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -1027,7 +1025,7 @@
 
 <h1 id="get-data">Get data</h1>
 
-<p>We will use long quality <span class="notranslate">reads</span> sequencing data from PacBio HiFi sequencing of <em>Saccharomyces cerevisiae</em> INSC1019 genome. This data is a subset of data from ENA repository <a href="https://www.ebi.ac.uk/ena/browser/view/SRR13577847?show=reads">SRR13577847</a>. We will also use the reference genome assembly downloaded from the <a href="https://www.ncbi.nlm.nih.gov/genome/?term=Saccharomyces%20cerevisiae">NCBI website</a> and we will use it as a comparison with our own assemblies.</p>
+<p>We will use long quality reads sequencing data from PacBio HiFi sequencing of <em>Saccharomyces cerevisiae</em> INSC1019 genome. This data is a subset of data from ENA repository <a href="https://www.ebi.ac.uk/ena/browser/view/SRR13577847?show=reads">SRR13577847</a>. We will also use the reference genome assembly downloaded from the <a href="https://www.ncbi.nlm.nih.gov/genome/?term=Saccharomyces%20cerevisiae">NCBI website</a> and we will use it as a comparison with our own assemblies.</p>
 
 <h2 id="get-data-from-zenodo">Get data from Zenodo</h2>
 
@@ -1042,17 +1040,17 @@
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6947782/files/GCA_000146045.2_genomic.fna
 https://zenodo.org/record/6947782/files/Scerevisiae-INSC1019.flye.30x.fa
 https://zenodo.org/record/6947782/files/Scerevisiae-INSC1019.hifiasm.30x.fa
-https://zenodo.org/record/6947782/files/SRR13577847_sub<span class="notranslate">reads</span>.30x.fastq.gz
+https://zenodo.org/record/6947782/files/SRR13577847_subreads.30x.fastq.gz
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
-      <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> for <code class="language-plaintext highlighter-rouge">SRR13577847_sub<span class="notranslate">reads</span>.30x.fastq.gz</code></p>
+      <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> for <code class="language-plaintext highlighter-rouge">SRR13577847_subreads.30x.fastq.gz</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1091,13 +1089,13 @@ LGA50: LG50 where aligned blocks are counted instead of contigs. i.e., if a cont
   <div class="box-title hands-on-title" id="hands-on-assembly-evaluation-with-quast" aria-label="hands-on box: assembly evaluation with Quast"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: assembly evaluation with Quast</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">No, use datasets names</code></li>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Contigs/scaffolds file”</em>: <code class="language-plaintext highlighter-rouge">Scerevisiae-INSC1019.flye.30x.fa</code> and <code class="language-plaintext highlighter-rouge">Scerevisiae-INSC1019.hifiasm.30x.fa</code></li>
-        <li><em>“<span class="notranslate">Reads</span> options”</em>: <code class="language-plaintext highlighter-rouge">Pacbio SMRT <span class="notranslate">reads</span></code>
+        <li><em>“Reads options”</em>: <code class="language-plaintext highlighter-rouge">Pacbio SMRT reads</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ file”</em>: <code class="language-plaintext highlighter-rouge">SRR13577847_sub<span class="notranslate">reads</span>.30x.fastq.gz</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ file”</em>: <code class="language-plaintext highlighter-rouge">SRR13577847_subreads.30x.fastq.gz</code></li>
           </ul>
         </li>
         <li><em>“Type of assembly”</em>: <code class="language-plaintext highlighter-rouge">Genome</code>
@@ -1125,7 +1123,7 @@ LGA50: LG50 where aligned blocks are counted instead of contigs. i.e., if a cont
     <li>Which assembly is closest to the reference genome?</li>
     <li>What is the longest contig of the Flye and Hifiasm assemblies?</li>
     <li>What is the N50 of the Flye assembly?</li>
-    <li>Which percentage of <span class="notranslate">reads</span> mapped to each assembly?</li>
+    <li>Which percentage of reads mapped to each assembly?</li>
   </ol>
 
   <blockquote class="solution">
@@ -1135,7 +1133,7 @@ LGA50: LG50 where aligned blocks are counted instead of contigs. i.e., if a cont
       <li>The Flye assembly, with a genome fraction of 99.57% while Hifiasm have a low genome fraction (75.15%) which can indicate a problematic assembly.</li>
       <li>The longest contig is 1,438,238 bp for Flye assembly while is 1,795,653 bp for Hifiasm</li>
       <li>The N50 of the Flye assembly is 929,061 bp.</li>
-      <li>A total of 99.96% of <span class="notranslate">reads</span> mapped were mapped to the Flye assembly while only 91.02% against the Hifiasm assembly.</li>
+      <li>A total of 99.96% of reads mapped were mapped to the Flye assembly while only 91.02% against the Hifiasm assembly.</li>
     </ol>
 
     <p>Without a reference genome, it would have been harder to determine that assembly with Hifiasm is problematic. Metrics on the assembly itself are not always sufficient and therefore it is necessary to use other methodologies to ensure the quality of an assembly.</p>
@@ -1153,10 +1151,10 @@ LGA50: LG50 where aligned blocks are counted instead of contigs. i.e., if a cont
   <div class="box-title hands-on-title" id="hands-on-assessing-assembly-completness-with-busco" aria-label="hands-on box: assessing assembly completness with BUSCO"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: assessing assembly completness with BUSCO</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+galaxy0"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+galaxy0"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Sequences to analyse”</em>:<code class="language-plaintext highlighter-rouge">Scerevisiae-INSC1019.flye.30x.fa</code>, <code class="language-plaintext highlighter-rouge">Scerevisiae-INSC1019.hifiasm.30x.fa</code> and <code class="language-plaintext highlighter-rouge">GCA_000146045.2_genomic.fna</code></li>
-        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Genome assemblies (<span class="notranslate">DNA</span>)</code>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Genome assemblies (DNA)</code>
           <ul>
             <li><em>“Use Augustus instead of Metaeuk”</em>: <code class="language-plaintext highlighter-rouge">Use Metaeuk</code></li>
           </ul>
@@ -1218,12 +1216,12 @@ LGA50: LG50 where aligned blocks are counted instead of contigs. i.e., if a cont
   <div class="box-title hands-on-title" id="hands-on-generate-k-mers-count-distribution" aria-label="hands-on box: Generate k-mers count distribution"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate k-mers count distribution</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6"><strong>Meryl</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+<span class="notranslate">galaxy</span>6</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6"><strong>Meryl</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6</span></span>  with the following parameters:
       <ul>
         <li><em>“Operation type selector”</em>: <code class="language-plaintext highlighter-rouge">Count operations</code>
           <ul>
             <li><em>“Count operations”</em>: <code class="language-plaintext highlighter-rouge">Count: count the ocurrences of canonical k-mers</code></li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input sequences”</em>: <code class="language-plaintext highlighter-rouge">SRR13577847_sub<span class="notranslate">reads</span>.30x.fastq.gz</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input sequences”</em>: <code class="language-plaintext highlighter-rouge">SRR13577847_subreads.30x.fastq.gz</code></li>
             <li><em>“K-mer size selector”</em>: <code class="language-plaintext highlighter-rouge">Estimate the best k-mer size</code>
               <ul>
                 <li>“<em>Genome size</em>”: <code class="language-plaintext highlighter-rouge">12000000</code></li>
@@ -1237,13 +1235,13 @@ LGA50: LG50 where aligned blocks are counted instead of contigs. i.e., if a cont
 
 </blockquote>
 
-<p>Merqury is used for reference-free assembly evaluation based on k-mer set operations. By comparing k-mers in a de novo assembly to those found in unassembled high-accuracy <span class="notranslate">reads</span>, Merqury estimates base-level accuracy and completeness. For trios, Merqury can also evaluate haplotype-specific accuracy, completeness, phase block continuity, and switch errors. Multiple visualizations and tables, such as k-mer spectrum plots, are generated for evaluation of the assembly quality.</p>
+<p>Merqury is used for reference-free assembly evaluation based on k-mer set operations. By comparing k-mers in a de novo assembly to those found in unassembled high-accuracy reads, Merqury estimates base-level accuracy and completeness. For trios, Merqury can also evaluate haplotype-specific accuracy, completeness, phase block continuity, and switch errors. Multiple visualizations and tables, such as k-mer spectrum plots, are generated for evaluation of the assembly quality.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-k-mer-based-evaluation-with-merqury" aria-label="hands-on box: K-mer based evaluation with Merqury"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: K-mer based evaluation with Merqury</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2"><strong>Merqury</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2"><strong>Merqury</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2</span></span>  with the following parameters:
       <ul>
         <li><em>“Evaluation mode”</em>: <code class="language-plaintext highlighter-rouge">Default mode</code>
           <ul>
@@ -1271,9 +1269,9 @@ LGA50: LG50 where aligned blocks are counted instead of contigs. i.e., if a cont
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>Merqury analysis confirms that Flye assembly is better than Hifiasm assembly. Hifiasm <code class="language-plaintext highlighter-rouge">assembly.spectra-cn.fl</code> shows that part of the data is specific to <span class="notranslate">reads</span> (black peak overlapping the red peak) indicating an absence of contigs in the assembly to represent these data.</p>
+    <p>Merqury analysis confirms that Flye assembly is better than Hifiasm assembly. Hifiasm <code class="language-plaintext highlighter-rouge">assembly.spectra-cn.fl</code> shows that part of the data is specific to reads (black peak overlapping the red peak) indicating an absence of contigs in the assembly to represent these data.</p>
 
-    <p>Flye it’s similar in completness to the reference genome with a single read peak. We note however that part of the reference genome assembly is specific and absent from the <span class="notranslate">reads</span> (red barplot on the left). This is because the sequencing data is from a different strain (INSC1019) than the reference genome (S288C).</p>
+    <p>Flye it’s similar in completness to the reference genome with a single read peak. We note however that part of the reference genome assembly is specific and absent from the reads (red barplot on the left). This is because the sequencing data is from a different strain (INSC1019) than the reference genome (S288C).</p>
 
   </blockquote>
 
@@ -1287,7 +1285,7 @@ LGA50: LG50 where aligned blocks are counted instead of contigs. i.e., if a cont
   <div class="box-title hands-on-title" id="hands-on-synteny-evaluation-with-chromeister" aria-label="hands-on box: Synteny evaluation with Chromeister"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Synteny evaluation with Chromeister</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a+galaxy1"><strong>Chromeister</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a+galaxy1"><strong>Chromeister</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a+galaxy1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Query sequence”</em>: <code class="language-plaintext highlighter-rouge">Scerevisiae-INSC1019.flye.30x.fa</code> and <code class="language-plaintext highlighter-rouge">Scerevisiae-INSC1019.hifiasm.30x.fa</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference sequence”</em>: <code class="language-plaintext highlighter-rouge">GCA_000146045.2_genomic.fna</code></li>

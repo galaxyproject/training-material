@@ -679,9 +679,9 @@ as every device is tied to a single user, and you can ask Tailscale what is the
 authenticated identity of the specific TCP connection, allowing automatically
 logging in your users.</p>
 
-<p>In the context of <span class="notranslate">Galaxy</span>, this can be useful for components like <a href="/training-material/topics/admin/tutorials/interactive-tools/tutorial.html">Interactive 
+<p>In the context of Galaxy, this can be useful for components like <a href="/training-material/topics/admin/tutorials/interactive-tools/tutorial.html">Interactive 
 Tools</a>, which 
-require a web proxy between <span class="notranslate">Galaxy</span> and the cluster node where the tool runs. If 
+require a web proxy between Galaxy and the cluster node where the tool runs. If 
 the cluster is not on the local network, Wireguard can be used to securely 
 bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p>
 <h1 id="setting-up-the-infrastructure">Setting up the infrastructure</h1>
@@ -757,11 +757,11 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
 </span><span class="gi">+++ b/hosts
 </span><span class="p">@@ -0,0 +1,5 @@</span>
 <span class="gi">+[head]
-+1-wg.<span class="notranslate">galaxy</span>.training
++1-wg.galaxy.training
 +[tail]
-+2-wg.<span class="notranslate">galaxy</span>.training
-+3-wg.<span class="notranslate">galaxy</span>.training
-+4-wg.<span class="notranslate">galaxy</span>.training
++2-wg.galaxy.training
++3-wg.galaxy.training
++4-wg.galaxy.training
 </span><span class="err">
 </span></code></pre></div>            </div>
           </div>
@@ -772,10 +772,10 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
 </span><span class="gi">+++ b/hosts
 </span><span class="p">@@ -0,0 +1,5 @@</span>
 <span class="gi">+[tail]
-+1-wg.<span class="notranslate">galaxy</span>.training
-+2-wg.<span class="notranslate">galaxy</span>.training
-+3-wg.<span class="notranslate">galaxy</span>.training
-+4-wg.<span class="notranslate">galaxy</span>.training
++1-wg.galaxy.training
++2-wg.galaxy.training
++3-wg.galaxy.training
++4-wg.galaxy.training
 </span></code></pre></div>            </div>
           </div>
         </blockquote>
@@ -804,7 +804,7 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
 
         <blockquote class="code-in">
           <div class="box-title code-in-title" id="code-in-bash-1" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-          <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles ckstevenson.headscale
+          <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles ckstevenson.headscale
 </code></pre></div>          </div>
         </blockquote>
       </li>
@@ -822,11 +822,11 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
 +    headscale_user: 'headscale'
 +    headscale_version: '0.15.0'
 +    headscale_namespaces:
-+    - <span class="notranslate">galaxy</span>
++    - galaxy
 +  roles:
 +    - ckstevenson.headscale
 +  post_tasks:
-+    - command: headscale --namespace <span class="notranslate">galaxy</span> preauthkeys create --reusable --expiration 1h
++    - command: headscale --namespace galaxy preauthkeys create --reusable --expiration 1h
 +      register: authkey
 +    - debug:
 +        msg: "{{ authkey.stdout.split('\n')[-1] }}"
@@ -860,7 +860,7 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash-3" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles artis3n.tailscale
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles artis3n.tailscale
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -934,7 +934,7 @@ bridge the gap, and Headscale or Tailscale can greatly simplify that process.</p
       </blockquote>
     </li>
     <li>
-      <p>Go check out your tailnet! Play around with the tailscale command and pinging other nodes with the suffix <code class="language-plaintext Headscale highlighter-rouge">.<span class="notranslate">galaxy</span>.example.com</code> <code class="language-plaintext Tailscale highlighter-rouge">&lt;use<span class="notranslate">rna</span>me&gt;.org.github.beta.tailscale.net</code></p>
+      <p>Go check out your tailnet! Play around with the tailscale command and pinging other nodes with the suffix <code class="language-plaintext Headscale highlighter-rouge">.galaxy.example.com</code> <code class="language-plaintext Tailscale highlighter-rouge">&lt;username&gt;.org.github.beta.tailscale.net</code></p>
 
       <blockquote class="Tailscale">
         <p>Note that you’ll need to enable <a href="https://login.tailscale.com/admin/dns">MagicDNS</a> in your acount settings.</p>

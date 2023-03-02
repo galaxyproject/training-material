@@ -803,8 +803,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -898,11 +896,11 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>The data provided here are part of a <span class="notranslate">Galaxy</span> tutorial that analyzes <span class="notranslate">RNA</span>-seq data from a study published by <em>Wu et al.</em> in 2014 <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4248312/">DOI:10.1101/gr.164830.113</a>. The goal of this study was to investigate “the dynamics of occupancy and the role in gene regulation of the transcription factor Tal1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation.” To this end, <span class="notranslate">RNA</span>-seq libraries were constructed from multiple mouse cell types including G1E - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes. This <span class="notranslate">RNA</span>-seq data was used to determine differential gene <span class="notranslate">expression</span> between G1E and megakaryocytes and later correlated with Tal1 occupancy. This dataset (GEO Accession: GSE51338) consists of biological replicate, paired-end, poly(A) selected <span class="notranslate">RNA</span>-seq libraries. Because of the long processing time for the large original files, we have downsampled the original raw data files to include only <span class="notranslate">reads</span> that align to chromosome 19 and a subset of interesting genomic loci identified by Wu <em>et al</em>.</p>
+<p>The data provided here are part of a Galaxy tutorial that analyzes RNA-seq data from a study published by <em>Wu et al.</em> in 2014 <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4248312/">DOI:10.1101/gr.164830.113</a>. The goal of this study was to investigate “the dynamics of occupancy and the role in gene regulation of the transcription factor Tal1, a critical regulator of hematopoiesis, at multiple stages of hematopoietic differentiation.” To this end, RNA-seq libraries were constructed from multiple mouse cell types including G1E - a GATA-null immortalized cell line derived from targeted disruption of GATA-1 in mouse embryonic stem cells - and megakaryocytes. This RNA-seq data was used to determine differential gene expression between G1E and megakaryocytes and later correlated with Tal1 occupancy. This dataset (GEO Accession: GSE51338) consists of biological replicate, paired-end, poly(A) selected RNA-seq libraries. Because of the long processing time for the large original files, we have downsampled the original raw data files to include only reads that align to chromosome 19 and a subset of interesting genomic loci identified by Wu <em>et al</em>.</p>
 
 <h1 id="analysis-strategy">Analysis strategy</h1>
 
-<p>The goal of this exercise is to identify what transcripts are present in the G1E and megakaryocyte cellular states and which transcripts are differentially expressed between the two states. We will use a <em>de novo</em> transcript reconstruction strategy to infer transcript structures from the mapped <span class="notranslate">reads</span> in the absence of the actual annotated transcript structures. This will allow us to identify novel transcripts and novel isoforms of known transcripts, as well as identify differentially expressed transcripts.</p>
+<p>The goal of this exercise is to identify what transcripts are present in the G1E and megakaryocyte cellular states and which transcripts are differentially expressed between the two states. We will use a <em>de novo</em> transcript reconstruction strategy to infer transcript structures from the mapped reads in the absence of the actual annotated transcript structures. This will allow us to identify novel transcripts and novel isoforms of known transcripts, as well as identify differentially expressed transcripts.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -916,12 +914,12 @@
       <li><a href="#quality-control" id="markdown-toc-quality-control">Quality control</a></li>
     </ol>
   </li>
-  <li><a href="#mapping" id="markdown-toc-mapping"><span class="notranslate">Mapping</span></a></li>
+  <li><a href="#mapping" id="markdown-toc-mapping">Mapping</a></li>
   <li><a href="#de-novo-transcript-reconstruction" id="markdown-toc-de-novo-transcript-reconstruction">De novo transcript reconstruction</a></li>
   <li><a href="#transcriptome-assembly" id="markdown-toc-transcriptome-assembly">Transcriptome assembly</a></li>
-  <li><a href="#analysis-of-the-differential-gene-expression" id="markdown-toc-analysis-of-the-differential-gene-expression">Analysis of the differential gene <span class="notranslate">expression</span></a>    <ol>
-      <li><a href="#count-the-number-of-reads-per-transcript" id="markdown-toc-count-the-number-of-reads-per-transcript">Count the number of <span class="notranslate">reads</span> per transcript</a></li>
-      <li><a href="#perform-differential-gene-expression-testing" id="markdown-toc-perform-differential-gene-expression-testing">Perform differential gene <span class="notranslate">expression</span> testing</a></li>
+  <li><a href="#analysis-of-the-differential-gene-expression" id="markdown-toc-analysis-of-the-differential-gene-expression">Analysis of the differential gene expression</a>    <ol>
+      <li><a href="#count-the-number-of-reads-per-transcript" id="markdown-toc-count-the-number-of-reads-per-transcript">Count the number of reads per transcript</a></li>
+      <li><a href="#perform-differential-gene-expression-testing" id="markdown-toc-perform-differential-gene-expression-testing">Perform differential gene expression testing</a></li>
     </ol>
   </li>
   <li><a href="#visualization" id="markdown-toc-visualization">Visualization</a></li>
@@ -932,30 +930,30 @@
 
 <h2 id="data-upload">Data upload</h2>
 
-<p>Due to the large size of this dataset, we have downsampled it to only include <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to chromosome 19 and certain loci with relevance to hematopoeisis. This data is available at <a href="https://zenodo.org/record/583140#.WSW3NhPyub8"><code class="language-plaintext highlighter-rouge">Zenodo</code></a>, where you can find the forward and reverse <span class="notranslate">reads</span> corresponding to replicate <span class="notranslate">RNA</span>-seq libraries from G1E and megakaryocyte cells and an annotation file of RefSeq transcripts we will use to generate our transcriptome database.</p>
+<p>Due to the large size of this dataset, we have downsampled it to only include reads mapping to chromosome 19 and certain loci with relevance to hematopoeisis. This data is available at <a href="https://zenodo.org/record/583140#.WSW3NhPyub8"><code class="language-plaintext highlighter-rouge">Zenodo</code></a>, where you can find the forward and reverse reads corresponding to replicate RNA-seq libraries from G1E and megakaryocyte cells and an annotation file of RefSeq transcripts we will use to generate our transcriptome database.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>
-      <p>Create a new history for this <span class="notranslate">RNA</span>-seq exercise</p>
+      <p>Create a new history for this RNA-seq exercise</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
     <li>Open the data upload manager (Get Data -&gt; Upload file)</li>
-    <li>Copy and paste the links for the <span class="notranslate">reads</span> and annotation file</li>
+    <li>Copy and paste the links for the reads and annotation file</li>
     <li>Select <strong>Paste/Fetch Data</strong></li>
     <li>Paste the link(s) into the text field</li>
     <li>Change the datatype of the read files to <strong>fastqsanger</strong></li>
     <li>Change the datatype of the annotation file to <strong>gtf</strong> and assign the Genome as <strong>mm10</strong></li>
     <li>Press <strong>Start</strong></li>
     <li>
-      <p>Rename the files in your history to retain just the necessary information (<em>e.g.</em> “G1E R1 forward <span class="notranslate">reads</span>”)</p>
+      <p>Rename the files in your history to retain just the necessary information (<em>e.g.</em> “G1E R1 forward reads”)</p>
     </li>
     <li>
       <p>Import the data from <a href="https://zenodo.org/record/583140">Zenodo</a> <a href="https://zenodo.org/record/583140"><img src="https://zenodo.org/badge/DOI/10.123/GTNdenovoRNAseq.svg" alt="DOI. " loading="lazy" /></a></p>
@@ -974,7 +972,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
       <p>You will need to fetch the link to the annotation file yourself ;)</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -989,14 +987,14 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 
   <ol>
     <li>
-      <p><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">FastQC</code> on the forward and reverse read files to assess the quality of the <span class="notranslate">reads</span>.</p>
+      <p><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">FastQC</code> on the forward and reverse read files to assess the quality of the reads.</p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <ol>
           <li>What is the read length?</li>
-          <li>Is there anything interesting about the quality of the base calls based on the position in the <span class="notranslate">reads</span>?</li>
+          <li>Is there anything interesting about the quality of the base calls based on the position in the reads?</li>
         </ol>
 
         <blockquote class="solution">
@@ -1009,10 +1007,10 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
       </blockquote>
     </li>
     <li>
-      <p><strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Trim off the low quality bases from the ends of the <span class="notranslate">reads</span> to increase <span class="notranslate">mapping</span> efficiency. Run <code class="language-plaintext highlighter-rouge">Trimmomatic</code> on each pair of forward and reverse <span class="notranslate">reads</span> with the following settings:</p>
+      <p><strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Trim off the low quality bases from the ends of the reads to increase mapping efficiency. Run <code class="language-plaintext highlighter-rouge">Trimmomatic</code> on each pair of forward and reverse reads with the following settings:</p>
 
       <ul>
-        <li><em>“Single-end or paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end (two separate input files)</code>
+        <li><em>“Single-end or paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end (two separate input files)</code>
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTQ file (R1/first of pair)”</em>: <code class="language-plaintext highlighter-rouge">G1E_rep1 forward read</code></li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTQ file (R2/second of pair)”</em>: <code class="language-plaintext highlighter-rouge">G1E_rep1 reverse read</code></li>
@@ -1022,21 +1020,21 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
       </ul>
     </li>
     <li>
-      <p><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Re-run <code class="language-plaintext highlighter-rouge">FastQC</code> on trimmed <span class="notranslate">reads</span> and inspect the differences.</p>
+      <p><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Re-run <code class="language-plaintext highlighter-rouge">FastQC</code> on trimmed reads and inspect the differences.</p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <ol>
           <li>What is the read length?</li>
-          <li>Is there anything interesting about the quality of the base calls based on the position in the <span class="notranslate">reads</span>?</li>
+          <li>Is there anything interesting about the quality of the base calls based on the position in the reads?</li>
         </ol>
 
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>The read lengths range from 1 to 99 bp after trimming</li>
-            <li>The average quality of base calls does not drop off as sharply at the 3’ ends of <span class="notranslate">reads</span>.</li>
+            <li>The average quality of base calls does not drop off as sharply at the 3’ ends of reads.</li>
           </ol>
         </blockquote>
       </blockquote>
@@ -1049,32 +1047,32 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 
 </blockquote>
 
-<p>Now that we have trimmed our <span class="notranslate">reads</span> and are fortunate that there is a reference genome assembly for mouse, we will align our trimmed <span class="notranslate">reads</span> to the genome.</p>
+<p>Now that we have trimmed our reads and are fortunate that there is a reference genome assembly for mouse, we will align our trimmed reads to the genome.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
-  <p>Instead of running a single tool multiple times on all your data, would you rather run a single tool on multiple datasets at once? Check out the <a href="https://galaxyproject.org/tutorials/collections/">dataset collections</a> feature of <span class="notranslate">Galaxy</span>!</p>
+  <p>Instead of running a single tool multiple times on all your data, would you rather run a single tool on multiple datasets at once? Check out the <a href="https://galaxyproject.org/tutorials/collections/">dataset collections</a> feature of Galaxy!</p>
 </blockquote>
 
-<h1 id="mapping"><span class="notranslate">Mapping</span></h1>
+<h1 id="mapping">Mapping</h1>
 
-<p>To make sense of the <span class="notranslate">reads</span>, their positions within mouse genome must be determined. This process is known as aligning or ‘<span class="notranslate">mapping</span>’ the <span class="notranslate">reads</span> to the reference genome.</p>
+<p>To make sense of the reads, their positions within mouse genome must be determined. This process is known as aligning or ‘mapping’ the reads to the reference genome.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
-  <p>Do you want to learn more about the principles behind <span class="notranslate">mapping</span>? Follow our <a href="/training-material/topics/sequence-analysis/">training</a></p>
+  <p>Do you want to learn more about the principles behind mapping? Follow our <a href="/training-material/topics/sequence-analysis/">training</a></p>
 </blockquote>
 
-<p>In the case of a eukaryotic transcriptome, most <span class="notranslate">reads</span> originate from processed m<span class="notranslate">RNA</span>s lacking introns. Therefore, they cannot be simply mapped back to the genome as we normally do for <span class="notranslate">reads</span> derived from <span class="notranslate">DNA</span> sequences. Instead, the <span class="notranslate">reads</span> must be separated into two categories:</p>
+<p>In the case of a eukaryotic transcriptome, most reads originate from processed mRNAs lacking introns. Therefore, they cannot be simply mapped back to the genome as we normally do for reads derived from DNA sequences. Instead, the reads must be separated into two categories:</p>
 
 <ul>
-  <li><span class="notranslate">Reads</span> contained within mature exons - these align perfectly to the reference genome</li>
-  <li><span class="notranslate">Reads</span> that span splice junctions in the mature m<span class="notranslate">RNA</span> - these align with gaps to the reference genome</li>
+  <li>Reads contained within mature exons - these align perfectly to the reference genome</li>
+  <li>Reads that span splice junctions in the mature mRNA - these align with gaps to the reference genome</li>
 </ul>
 
-<p>Spliced mappers have been developed to efficiently map transcript-derived <span class="notranslate">reads</span> against genomes. <a href="https://ccb.jhu.edu/software/hisat2/index.shtml"><code class="language-plaintext highlighter-rouge">HISAT</code></a> is an accurate and fast tool for <span class="notranslate">mapping</span> spliced <span class="notranslate">reads</span> to a genome. Another popular spliced aligner is <a href="https://ccb.jhu.edu/software/tophat/index.shtml"><code class="language-plaintext highlighter-rouge">TopHat</code></a>, but we will be using <code class="language-plaintext highlighter-rouge">HISAT</code> in this tutorial.</p>
+<p>Spliced mappers have been developed to efficiently map transcript-derived reads against genomes. <a href="https://ccb.jhu.edu/software/hisat2/index.shtml"><code class="language-plaintext highlighter-rouge">HISAT</code></a> is an accurate and fast tool for mapping spliced reads to a genome. Another popular spliced aligner is <a href="https://ccb.jhu.edu/software/tophat/index.shtml"><code class="language-plaintext highlighter-rouge">TopHat</code></a>, but we will be using <code class="language-plaintext highlighter-rouge">HISAT</code> in this tutorial.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-2" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
@@ -1138,7 +1136,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-spliced-mapping" aria-label="hands-on box: Spliced mapping"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Spliced <span class="notranslate">mapping</span></div>
+  <div class="box-title hands-on-title" id="hands-on-spliced-mapping" aria-label="hands-on box: Spliced mapping"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Spliced mapping</div>
 
   <ol>
     <li><strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">HISAT2</code> on one forward/reverse read pair and modify the following settings:
@@ -1148,7 +1146,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a reference genome”</em>: <code class="language-plaintext highlighter-rouge">Mouse (Mus Musculus): mm10</code></li>
           </ul>
         </li>
-        <li><em>“Single-end or paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code>
+        <li><em>“Single-end or paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code>
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #1”</em>: Trimmomatic on G1E_rep1 forward read (R1 paired)</li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #2”</em>: Trimmomatic on G1E_rep1 reverse read (R2 paired)</li>
@@ -1176,7 +1174,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 </blockquote>
 
 <h1 id="de-novo-transcript-reconstruction">De novo transcript reconstruction</h1>
-<p>Now that we have mapped our <span class="notranslate">reads</span> to the mouse genome with <code class="language-plaintext highlighter-rouge">HISAT</code>, we want to determine transcript structures that are represented by the aligned <span class="notranslate">reads</span>. This is called <em>de novo</em> transcriptome reconstruction. This unbiased approach permits the comprehensive identification of all transcripts present in a sample, including annotated genes, novel isoforms of annotated genes, and novel genes. While common gene/transcript databases are quite large, they are not comprehensive, and the <em>de novo</em> transcriptome reconstruction approach ensures complete transcriptome(s) identification from the experimental samples. The leading tool for transcript reconstruction is <code class="language-plaintext highlighter-rouge">Stringtie</code>. Here, we will use <code class="language-plaintext highlighter-rouge">Stringtie</code> to predict transcript structures based on the <span class="notranslate">reads</span> aligned by <code class="language-plaintext highlighter-rouge">HISAT</code>.</p>
+<p>Now that we have mapped our reads to the mouse genome with <code class="language-plaintext highlighter-rouge">HISAT</code>, we want to determine transcript structures that are represented by the aligned reads. This is called <em>de novo</em> transcriptome reconstruction. This unbiased approach permits the comprehensive identification of all transcripts present in a sample, including annotated genes, novel isoforms of annotated genes, and novel genes. While common gene/transcript databases are quite large, they are not comprehensive, and the <em>de novo</em> transcriptome reconstruction approach ensures complete transcriptome(s) identification from the experimental samples. The leading tool for transcript reconstruction is <code class="language-plaintext highlighter-rouge">Stringtie</code>. Here, we will use <code class="language-plaintext highlighter-rouge">Stringtie</code> to predict transcript structures based on the reads aligned by <code class="language-plaintext highlighter-rouge">HISAT</code>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-transcriptome-reconstruction" aria-label="hands-on box: Transcriptome reconstruction"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Transcriptome reconstruction</div>
@@ -1194,7 +1192,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 
 <h1 id="transcriptome-assembly">Transcriptome assembly</h1>
 
-<p>We just generated four transcriptomes with <code class="language-plaintext highlighter-rouge">Stringtie</code> representing each of the four <span class="notranslate">RNA</span>-seq libraries we are analyzing. Since these were generated in the absence of a reference transcriptome, and we ultimately would like to know what transcript structure corresponds to which annotated transcript (if any), we have to make a <strong>transcriptome database</strong>. We will use the tool <code class="language-plaintext highlighter-rouge">Stringtie - Merge</code> to combine redundant transcript structures across the four samples and the RefSeq reference. Once we have merged our transcript structures, we will use <code class="language-plaintext highlighter-rouge">GFFcompare</code> to annotate the transcripts of our newly created transcriptome so we know the relationship of each transcript to the RefSeq reference.</p>
+<p>We just generated four transcriptomes with <code class="language-plaintext highlighter-rouge">Stringtie</code> representing each of the four RNA-seq libraries we are analyzing. Since these were generated in the absence of a reference transcriptome, and we ultimately would like to know what transcript structure corresponds to which annotated transcript (if any), we have to make a <strong>transcriptome database</strong>. We will use the tool <code class="language-plaintext highlighter-rouge">Stringtie - Merge</code> to combine redundant transcript structures across the four samples and the RefSeq reference. Once we have merged our transcript structures, we will use <code class="language-plaintext highlighter-rouge">GFFcompare</code> to annotate the transcripts of our newly created transcriptome so we know the relationship of each transcript to the RefSeq reference.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-transcriptome-assembly" aria-label="hands-on box: Transcriptome assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Transcriptome assembly</div>
@@ -1274,7 +1272,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
       </tr>
       <tr>
         <td style="text-align: center">e</td>
-        <td style="text-align: left">Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible pre-m<span class="notranslate">RNA</span> fragment.</td>
+        <td style="text-align: left">Single exon transfrag overlapping a reference exon and at least 10 bp of a reference intron, indicating a possible pre-mRNA fragment.</td>
       </tr>
       <tr>
         <td style="text-align: center">i</td>
@@ -1292,24 +1290,24 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
   </table>
 </blockquote>
 
-<h1 id="analysis-of-the-differential-gene-expression">Analysis of the differential gene <span class="notranslate">expression</span></h1>
+<h1 id="analysis-of-the-differential-gene-expression">Analysis of the differential gene expression</h1>
 
 <p>We just generated a transriptome database that represents the transcripts present in the G1E and megakaryocytes samples. This database provides the location of our transcripts with non-redundant identifiers, as well as information regarding the origin of the transcript.</p>
 
-<p>We now want to identify which transcripts are differentially expressed between the G1E and megakaryocyte cellular states. To do this we will implement a counting approach using <code class="language-plaintext highlighter-rouge">FeatureCounts</code> to count <span class="notranslate">reads</span> per transcript. Then we will provide this information to <code class="language-plaintext highlighter-rouge">DESeq2</code> to generate normalized transcript counts (abundance estimates) and significance testing for differential <span class="notranslate">expression</span>.</p>
+<p>We now want to identify which transcripts are differentially expressed between the G1E and megakaryocyte cellular states. To do this we will implement a counting approach using <code class="language-plaintext highlighter-rouge">FeatureCounts</code> to count reads per transcript. Then we will provide this information to <code class="language-plaintext highlighter-rouge">DESeq2</code> to generate normalized transcript counts (abundance estimates) and significance testing for differential expression.</p>
 
-<h2 id="count-the-number-of-reads-per-transcript">Count the number of <span class="notranslate">reads</span> per transcript</h2>
+<h2 id="count-the-number-of-reads-per-transcript">Count the number of reads per transcript</h2>
 
-<p>To compare the abundance of transcripts between different cellular states, the first essential step is to quantify the number of <span class="notranslate">reads</span> per transcript. <a href="http://bioinf.wehi.edu.au/featureCounts/"><code class="language-plaintext highlighter-rouge">FeatureCounts</code></a> is one of the most popular tools for counting <span class="notranslate">reads</span> in genomic features. In our case, we’ll be using <code class="language-plaintext highlighter-rouge">FeatureCounts</code> to count <span class="notranslate">reads</span> aligning in exons of our <code class="language-plaintext highlighter-rouge">GFFCompare</code> generated transcriptome database.</p>
+<p>To compare the abundance of transcripts between different cellular states, the first essential step is to quantify the number of reads per transcript. <a href="http://bioinf.wehi.edu.au/featureCounts/"><code class="language-plaintext highlighter-rouge">FeatureCounts</code></a> is one of the most popular tools for counting reads in genomic features. In our case, we’ll be using <code class="language-plaintext highlighter-rouge">FeatureCounts</code> to count reads aligning in exons of our <code class="language-plaintext highlighter-rouge">GFFCompare</code> generated transcriptome database.</p>
 
-<p>The recommended mode is “union”, which counts overlaps even if a read only shares parts of its sequence with a genomic feature and disregards <span class="notranslate">reads</span> that overlap more than one feature.</p>
+<p>The recommended mode is “union”, which counts overlaps even if a read only shares parts of its sequence with a genomic feature and disregards reads that overlap more than one feature.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-counting-the-number-of-reads-per-transcript" aria-label="hands-on box: Counting the number of reads per transcript"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Counting the number of <span class="notranslate">reads</span> per transcript</div>
+  <div class="box-title hands-on-title" id="hands-on-counting-the-number-of-reads-per-transcript" aria-label="hands-on box: Counting the number of reads per transcript"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Counting the number of reads per transcript</div>
 
   <ol>
     <li>
-      <p><strong>FeatureCounts</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">FeatureCounts</code> on the aligned <span class="notranslate">reads</span> (<code class="language-plaintext highlighter-rouge">HISAT2</code> output) using the <code class="language-plaintext highlighter-rouge">GFFCompare</code> transcriptome database as the annotation file.</p>
+      <p><strong>FeatureCounts</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">FeatureCounts</code> on the aligned reads (<code class="language-plaintext highlighter-rouge">HISAT2</code> output) using the <code class="language-plaintext highlighter-rouge">GFFCompare</code> transcriptome database as the annotation file.</p>
 
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Alignment file”</em>: <code class="language-plaintext highlighter-rouge">four HISAT2 aligned read files</code></li>
@@ -1319,9 +1317,9 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
             <li><em>“Gene annotation file”</em>: <code class="language-plaintext highlighter-rouge">the annotated transcripts GTF file output by GFFCompare</code></li>
           </ul>
         </li>
-        <li><em>“Options for paired-end <span class="notranslate">reads</span>”</em>
+        <li><em>“Options for paired-end reads”</em>
           <ul>
-            <li><em>“Count fragments instead of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Enabled; fragments (or templates) wil be counted instead of <span class="notranslate">reads</span></code></li>
+            <li><em>“Count fragments instead of reads”</em>: <code class="language-plaintext highlighter-rouge">Enabled; fragments (or templates) wil be counted instead of reads</code></li>
           </ul>
         </li>
         <li><em>“Advanced options”</em>
@@ -1335,11 +1333,11 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 
 </blockquote>
 
-<h2 id="perform-differential-gene-expression-testing">Perform differential gene <span class="notranslate">expression</span> testing</h2>
+<h2 id="perform-differential-gene-expression-testing">Perform differential gene expression testing</h2>
 
-<p>Transcript <span class="notranslate">expression</span> is estimated from read counts, and attempts are made to correct for variability in measurements using replicates. This is absolutely essential to obtaining accurate results. We recommend having at least two biological replicates.</p>
+<p>Transcript expression is estimated from read counts, and attempts are made to correct for variability in measurements using replicates. This is absolutely essential to obtaining accurate results. We recommend having at least two biological replicates.</p>
 
-<p><a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html"><code class="language-plaintext highlighter-rouge">DESeq2</code></a> is a great tool for differential gene <span class="notranslate">expression</span> analysis. It accepts read counts produced by <code class="language-plaintext highlighter-rouge">FeatureCounts</code> and applies size factor normalization:</p>
+<p><a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html"><code class="language-plaintext highlighter-rouge">DESeq2</code></a> is a great tool for differential gene expression analysis. It accepts read counts produced by <code class="language-plaintext highlighter-rouge">FeatureCounts</code> and applies size factor normalization:</p>
 
 <ul>
   <li>Computation for each gene of the geometric mean of read counts across all samples</li>
@@ -1398,16 +1396,16 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 
   <ol>
     <li>
-      <p><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">Filter</code> to extract genes with a significant change in gene <span class="notranslate">expression</span> (adjusted <em>p</em>-value less than 0.05) between treated and untreated samples</p>
+      <p><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">Filter</code> to extract genes with a significant change in gene expression (adjusted <em>p</em>-value less than 0.05) between treated and untreated samples</p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-        <p>How many transcripts have a significant change in <span class="notranslate">expression</span> between these conditions?</p>
+        <p>How many transcripts have a significant change in expression between these conditions?</p>
 
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-          <p>To filter, use “c7&lt;0.05”. And we get 249 transcripts with a significant change in gene <span class="notranslate">expression</span> between the G1E and megakaryocyte cellular states.</p>
+          <p>To filter, use “c7&lt;0.05”. And we get 249 transcripts with a significant change in gene expression between the G1E and megakaryocyte cellular states.</p>
         </blockquote>
       </blockquote>
     </li>
@@ -1416,7 +1414,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-4" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
-        <p>Rename your datasets for the <span class="notranslate">downstream</span> analyses</p>
+        <p>Rename your datasets for the downstream analyses</p>
       </blockquote>
 
       <blockquote class="question">
@@ -1426,7 +1424,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-          <p>To obtain the up-regulated genes in the G1E state, we filter the previously generated file (with the significant change in transcript <span class="notranslate">expression</span>) with the <span class="notranslate">expression</span> “c3&gt;0” (the log2 fold changes must be greater than 0). We obtain 102  genes (40.9% of the genes with a significant change in gene <span class="notranslate">expression</span>). For the down-regulated genes in the G1E state, we did the inverse and we find 149 transcripts (59% of the genes with a significant change in transcript <span class="notranslate">expression</span>).</p>
+          <p>To obtain the up-regulated genes in the G1E state, we filter the previously generated file (with the significant change in transcript expression) with the expression “c3&gt;0” (the log2 fold changes must be greater than 0). We obtain 102  genes (40.9% of the genes with a significant change in gene expression). For the down-regulated genes in the G1E state, we did the inverse and we find 149 transcripts (59% of the genes with a significant change in transcript expression).</p>
         </blockquote>
       </blockquote>
     </li>
@@ -1442,7 +1440,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
     <p><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/Deseq2_histogram3.png" alt="DESeq2 histogram. " loading="lazy" /></p>
   </li>
   <li>
-    <p><a href="https://en.wikipedia.org/wiki/MA_plot">MA plot</a>: global view of the relationship between the <span class="notranslate">expression</span> change of conditions (log ratios, M), the average <span class="notranslate">expression</span> strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene <span class="notranslate">expression</span>. The genes that passed the significance threshold (adjusted p-value &lt; 0.1) are colored in red.</p>
+    <p><a href="https://en.wikipedia.org/wiki/MA_plot">MA plot</a>: global view of the relationship between the expression change of conditions (log ratios, M), the average expression strength of the genes (average mean, A), and the ability of the algorithm to detect differential gene expression. The genes that passed the significance threshold (adjusted p-value &lt; 0.1) are colored in red.</p>
 
     <p><img src="/training-material/topics/transcriptomics/images/transcriptomics_images/Deseq2_MAplot3.png" alt="MA plot. " loading="lazy" /></p>
   </li>
@@ -1470,9 +1468,9 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 <p>For more information about <code class="language-plaintext highlighter-rouge">DESeq2</code> and its outputs, you can have a look at <a href="https://www.bioconductor.org/packages/release/bioc/manuals/DESeq2/man/DESeq2.pdf"><code class="language-plaintext highlighter-rouge">DESeq2</code> documentation</a>.</p>
 
 <h1 id="visualization">Visualization</h1>
-<p>Now that we have a list of transcript <span class="notranslate">expression</span> levels and their differential <span class="notranslate">expression</span> levels, it is time to visually inspect our transcript structures and the <span class="notranslate">reads</span> they were predicted from. It is a good practice to visually inspect (and present) loci with transcripts of interest. Fortunately, there is a built-in genome browser in <span class="notranslate">Galaxy</span>, <strong>Trackster</strong>, that make this task simple (and even fun!).</p>
+<p>Now that we have a list of transcript expression levels and their differential expression levels, it is time to visually inspect our transcript structures and the reads they were predicted from. It is a good practice to visually inspect (and present) loci with transcripts of interest. Fortunately, there is a built-in genome browser in Galaxy, <strong>Trackster</strong>, that make this task simple (and even fun!).</p>
 
-<p>In this last section, we will convert our aligned read data from BAM format to bigWig format to simplify observing where our stranded <span class="notranslate">RNA</span>-seq data aligned to. We’ll then initiate a session on Trackster, load it with our data, and visually inspect our interesting loci.</p>
+<p>In this last section, we will convert our aligned read data from BAM format to bigWig format to simplify observing where our stranded RNA-seq data aligned to. We’ll then initiate a session on Trackster, load it with our data, and visually inspect our interesting loci.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-converting-aligned-read-files-to-bigwig-format" aria-label="hands-on box: Converting aligned read files to bigWig format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Converting aligned read files to bigWig format</div>
@@ -1484,20 +1482,20 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
         <li><em>“Effective genome size”</em>: ‘mm9 (2150570000)’’</li>
         <li><em>“Advanced options”</em>
           <ul>
-            <li><em>“Only include <span class="notranslate">reads</span> originating from fragments from the forward or reverse strand”</em>: ‘forward’</li>
+            <li><em>“Only include reads originating from fragments from the forward or reverse strand”</em>: ‘forward’</li>
           </ul>
         </li>
       </ul>
     </li>
     <li>
-      <p><strong>Rename</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Rename the outputs to reflect the origin of the <span class="notranslate">reads</span> and that they represent the <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to the PLUS strand.</p>
+      <p><strong>Rename</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the PLUS strand.</p>
     </li>
     <li><strong>bamCoverage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat Step 1 except changing the following parameter:
       <ul>
-        <li><em>“Only include <span class="notranslate">reads</span> originating from fragments from the forward or reverse strand”</em>: ‘reverse’</li>
+        <li><em>“Only include reads originating from fragments from the forward or reverse strand”</em>: ‘reverse’</li>
       </ul>
     </li>
-    <li><strong>Rename</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Rename the outputs to reflect the origin of the <span class="notranslate">reads</span> and that they represent the <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to the MINUS strand.</li>
+    <li><strong>Rename</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Rename the outputs to reflect the origin of the reads and that they represent the reads mapping to the MINUS strand.</li>
   </ol>
 </blockquote>
 
@@ -1505,7 +1503,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
   <div class="box-title hands-on-title" id="hands-on-trackster-based-visualization" aria-label="hands-on box: Trackster based visualization"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Trackster based visualization</div>
 
   <ol>
-    <li><strong>Viz</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: On the center console at the top of the <span class="notranslate">Galaxy</span> interface, choose “ Visualization” -&gt; “New track browser”
+    <li><strong>Viz</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: On the center console at the top of the Galaxy interface, choose “ Visualization” -&gt; “New track browser”
       <ul>
         <li>Name your visualization someting descriptive under “Browser name:”</li>
         <li>Choose “Mouse Dec. 2011 (GRCm38/mm10) (mm10)” as the “Reference genome build (dbkey)</li>
@@ -1571,7 +1569,7 @@ https://zenodo.org/record/583140/files/RefSeq_reference_GTF_%28DSv2%29
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>In this tutorial, we have analyzed <span class="notranslate">RNA</span> sequencing data to extract useful information, such as which genes are expressed in the G1E and megakaryocyte cellular states and which of these genes are differentially expressed between the two cellular states. In addition, we identified unannotated genes that are expressed in a cell-state dependent manner and at a locus with relevance to differentiation and development. To identify these transcripts, we analyzed <span class="notranslate">RNA</span> sequence datasets using a de novo transcriptome reconstruction <span class="notranslate">RNA</span>-seq data analysis approach. This approach can be summed up with the following scheme:</p>
+<p>In this tutorial, we have analyzed RNA sequencing data to extract useful information, such as which genes are expressed in the G1E and megakaryocyte cellular states and which of these genes are differentially expressed between the two cellular states. In addition, we identified unannotated genes that are expressed in a cell-state dependent manner and at a locus with relevance to differentiation and development. To identify these transcripts, we analyzed RNA sequence datasets using a de novo transcriptome reconstruction RNA-seq data analysis approach. This approach can be summed up with the following scheme:</p>
 
 <p><img src="../../images/transcriptomics_images/schematic_for_RNAseq_de_novo_tutorial.png" alt="RNAseq de novo tutorial workflow. " loading="lazy" /></p>
 

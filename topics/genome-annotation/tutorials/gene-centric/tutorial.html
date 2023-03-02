@@ -813,8 +813,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -941,7 +939,7 @@
   <li>
     <p>Extract amino acid sequences and genome coordinates for all possible open reading frames (ORFs) from all genomes in my set</p>
 
-    <p>The following steps 5, 6, and 7 are performed using a single <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> (grey area in the following figure).</p>
+    <p>The following steps 5, 6, and 7 are performed using a single Galaxy workflow (grey area in the following figure).</p>
   </li>
   <li>Align - Find matches between exons of the gene of interest and ORFs</li>
   <li>Intersect - Compute genome coordinates of matches</li>
@@ -998,15 +996,15 @@
 
 <h2 id="step-2-get-amino-acid-translations-for-all-exons-of-my-gene-of-interest">Step 2: Get amino acid translations for all exons of my gene of interest</h2>
 
-<p>This step is manual and is performed outside <span class="notranslate">Galaxy</span>.</p>
+<p>This step is manual and is performed outside Galaxy.</p>
 
-<p>The best annotated vertebrate is … human. To obtain amino acid translation of individual exons of <em>XBP-1</em> you can use <a href="https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&amp;lastVirtModeType=default&amp;lastVirtModeExtraState=&amp;virtModeType=default&amp;virtMode=0&amp;nonVirtPosition=&amp;position=chr22%3A28794555%2D28800597&amp;hgsid=1433476153_N1Iet0RvAaPQIpPuVl2qbi74BrC3">UCSC Genome browser</a>. The “UCSC annotations of RefSeq <span class="notranslate">RNA</span>s (NM_* and NR_*)” track shows two alte<span class="notranslate">rna</span>tive transcripts produced by <em>XBP-1</em> : spliced and unspliced (here ‘spliced’ and ‘unspliced’ do not refer to the “normal’ splicing process. To learn more about this fascinating gene read here).</p>
+<p>The best annotated vertebrate is … human. To obtain amino acid translation of individual exons of <em>XBP-1</em> you can use <a href="https://genome.ucsc.edu/cgi-bin/hgTracks?db=hg38&amp;lastVirtModeType=default&amp;lastVirtModeExtraState=&amp;virtModeType=default&amp;virtMode=0&amp;nonVirtPosition=&amp;position=chr22%3A28794555%2D28800597&amp;hgsid=1433476153_N1Iet0RvAaPQIpPuVl2qbi74BrC3">UCSC Genome browser</a>. The “UCSC annotations of RefSeq RNAs (NM_* and NR_*)” track shows two alternative transcripts produced by <em>XBP-1</em> : spliced and unspliced (here ‘spliced’ and ‘unspliced’ do not refer to the “normal’ splicing process. To learn more about this fascinating gene read here).</p>
 
 <p><img src="../../images/gene-centric/xbp-1.svg" alt="XBP-1. " loading="lazy" /></p>
 
 <p>Clicking on the names of the transcripts open a UCSC page specific to that transcript. From there you can obtain genomic sequences corresponding to all exons. You can then translate these sequences using any available online tool (e.g., <a href="https://www.ncbi.nlm.nih.gov/orffinder/">NCBI ORFinder</a>).</p>
 
-<p>In this particular case we did not create translation of all exons. Instead, we created translation of exon 1  and two terminal exons. The first exon is shared between the two transcripts. It will allow us to anchor the beginning of the gene. The two terminal exons are different between the two transcripts. Because of this we create two alte<span class="notranslate">rna</span>tive translation per exon: <code class="language-plaintext highlighter-rouge">s-p2</code> and <code class="language-plaintext highlighter-rouge">s-p12</code> for the spliced version and <code class="language-plaintext highlighter-rouge">u-p1</code> and <code class="language-plaintext highlighter-rouge">u-p2</code> for unspliced transcript. A FASTA file containing all translation is shown below:</p>
+<p>In this particular case we did not create translation of all exons. Instead, we created translation of exon 1  and two terminal exons. The first exon is shared between the two transcripts. It will allow us to anchor the beginning of the gene. The two terminal exons are different between the two transcripts. Because of this we create two alternative translation per exon: <code class="language-plaintext highlighter-rouge">s-p2</code> and <code class="language-plaintext highlighter-rouge">s-p12</code> for the spliced version and <code class="language-plaintext highlighter-rouge">u-p1</code> and <code class="language-plaintext highlighter-rouge">u-p2</code> for unspliced transcript. A FASTA file containing all translation is shown below:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;xbp-1u-p1
 GNEVRPVAGSAESAALRLRAPLQQVQAQLSPLQNISPWILAVLTLQIQ
@@ -1048,7 +1046,7 @@ https://zenodo.org/record/7034885/files/mCynVol1.fa
 https://zenodo.org/record/7034885/files/mHomSapT2T.fa
 </code></pre></div>      </div>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
   </ul>
 
@@ -1066,7 +1064,7 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
 
 <h3 id="uploading-vgp-data-from-genomeark">Uploading VGP data from GenomeArk</h3>
 
-<p><span class="notranslate">Galaxy</span> provides a direct connection to <a href="https://vgp.github.io/genomeark/">GenomeArk</a> from its “Upload Data” tool. To access GenomeArk data you need to:</p>
+<p>Galaxy provides a direct connection to <a href="https://vgp.github.io/genomeark/">GenomeArk</a> from its “Upload Data” tool. To access GenomeArk data you need to:</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-upload-vgp-data-from-genomeark" aria-label="hands-on box: Upload VGP data from GenomeArk"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Upload VGP data from GenomeArk</div>
@@ -1077,7 +1075,7 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
       <p>Import genome assembly FASTA files from GenomeArk:</p>
 
       <ul>
-        <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> <strong>Upload Data</strong> menu</li>
+        <li>Open the file <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong> menu</li>
         <li>Click on <strong>Choose remote files</strong> button at the bottom of the Upload interface</li>
         <li>Choose <strong>Genome Ark</strong></li>
         <li>Pick assembles you would like to include in your analysis (use Search box on top)</li>
@@ -1087,7 +1085,7 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
 
   <p>Generally for a given species you want the assembly with the highest version number. For example, Human (<em>Homo sapiens</em>) had three assemblies at the time of writing: <code class="language-plaintext highlighter-rouge">mHomSap1</code>, <code class="language-plaintext highlighter-rouge">mHomSap2</code>, and <code class="language-plaintext highlighter-rouge">mHomSap3</code>. Pick <code class="language-plaintext highlighter-rouge">mHomSap3</code> in this situation.</p>
 
-  <p>Inside each assembly folder you will see typically see different sub-folders. The one you should generally be interested in will be called <code class="language-plaintext highlighter-rouge">assembly_curated</code>. Inside that folder you will typically see separate assemblies for mate<span class="notranslate">rna</span>l (indicated with <code class="language-plaintext highlighter-rouge">mat</code>) and pate<span class="notranslate">rna</span>l (indicated with <code class="language-plaintext highlighter-rouge">pat</code>) haplotypes. In the analyses here we are choosing as assembly representing heterogametic haplotype (<code class="language-plaintext highlighter-rouge">pat</code> in the case of Human).</p>
+  <p>Inside each assembly folder you will see typically see different sub-folders. The one you should generally be interested in will be called <code class="language-plaintext highlighter-rouge">assembly_curated</code>. Inside that folder you will typically see separate assemblies for maternal (indicated with <code class="language-plaintext highlighter-rouge">mat</code>) and paternal (indicated with <code class="language-plaintext highlighter-rouge">pat</code>) haplotypes. In the analyses here we are choosing as assembly representing heterogametic haplotype (<code class="language-plaintext highlighter-rouge">pat</code> in the case of Human).</p>
 
   <ul>
     <li>Repeat this process for all assemblies you are interested in.</li>
@@ -1118,17 +1116,17 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-find-orfs-witrh-orfipy" aria-label="hands-on box: Find ORFs witrh ORFiPy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Find ORFs witrh ORFiPy</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/orfipy/orfipy/0.0.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/orfipy/orfipy/0.0.4+galaxy0"><strong>ORFiPy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/orfipy/orfipy/0.0.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:</p>
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/orfipy/orfipy/0.0.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/orfipy/orfipy/0.0.4+galaxy0"><strong>ORFiPy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/orfipy/orfipy/0.0.4+galaxy0</span></span>  with the following parameters:</p>
   <ul>
     <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Find ORFs in”</em>: The collection containing genome assemblies we just created (click “Dataset collection” <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> button on left-side of this input field)</li>
-    <li><em>“Select options”</em>: check the box next to <code class="language-plaintext highlighter-rouge"><span class="notranslate">BED</span></code> and <code class="language-plaintext highlighter-rouge">Peptides</code></li>
+    <li><em>“Select options”</em>: check the box next to <code class="language-plaintext highlighter-rouge">BED</code> and <code class="language-plaintext highlighter-rouge">Peptides</code></li>
     <li><em>“Minimum length of ORFs”</em>: type the number <code class="language-plaintext highlighter-rouge">99</code>. We do not want ORFs to be too short as their number will be too high</li>
     <li><em>“Output ORFs bound by Stop codons?”</em>: set this option to <code class="language-plaintext highlighter-rouge">Yes</code>.</li>
   </ul>
 
 </blockquote>
 
-<p>Because this operation is performed on a dataset collection. it will produce a dataset collection as an output. Actually, it will produce two because we selected <code class="language-plaintext highlighter-rouge"><span class="notranslate">BED</span></code> and <code class="language-plaintext highlighter-rouge">Peptides</code> options. One collection will contain amino acid sequences for all ORFs (it will typically be called <code class="language-plaintext highlighter-rouge">ORFs on collection ... (FASTA format)</code>) and another their coordinates (called <code class="language-plaintext highlighter-rouge">ORFs on collection ... (<span class="notranslate">BED</span> format)</code>)
+<p>Because this operation is performed on a dataset collection. it will produce a dataset collection as an output. Actually, it will produce two because we selected <code class="language-plaintext highlighter-rouge">BED</code> and <code class="language-plaintext highlighter-rouge">Peptides</code> options. One collection will contain amino acid sequences for all ORFs (it will typically be called <code class="language-plaintext highlighter-rouge">ORFs on collection ... (FASTA format)</code>) and another their coordinates (called <code class="language-plaintext highlighter-rouge">ORFs on collection ... (BED format)</code>)
 )</p>
 
 <p>This will produce two new dataset collections in your history: one containing coordinates of ORFs and the other containing their amino acid translations. Because genomes are large these will likely be tens of millions of ORFs identified this way.</p>
@@ -1140,7 +1138,7 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-create-diamond-database" aria-label="hands-on box: Create Diamond database"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create Diamond database</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond_makedb/2.0.15+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond_makedb/2.0.15+galaxy0"><strong>Diamond makedb</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond_makedb/2.0.15+<span class="notranslate">galaxy</span>0</span></span>  on the collection containing amino acid translations of ORFs generated using <strong>ORFiPy</strong>:</p>
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond_makedb/2.0.15+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond_makedb/2.0.15+galaxy0"><strong>Diamond makedb</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/diamond/bg_diamond_makedb/2.0.15+galaxy0</span></span>  on the collection containing amino acid translations of ORFs generated using <strong>ORFiPy</strong>:</p>
   <ul>
     <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> “Input reference file in FASTA format”*: Select collections containing amino acid (FASTA Protein) output of <strong>ORFiPy</strong></li>
   </ul>
@@ -1151,25 +1149,25 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
 
 <ol>
   <li>Diamond database of ORF translations from genome assemblies</li>
-  <li>Coordinates and frame information about ORFs in <span class="notranslate">BED</span> format</li>
+  <li>Coordinates and frame information about ORFs in BED format</li>
   <li>Amino acid translation of exons from the gene of interest</li>
 </ol>
 
 <h2 id="steps-5-6-and-7-finding-matches-and-building-trees">Steps 5, 6, and 7: Finding matches and building trees</h2>
 
-<p>To find location of genes, <a href="/training-material/topics/genome-annotation/tutorials/gene-centric/workflows/index.html">we will use the following <span class="notranslate">workflow</span></a> that is available as a part of this tutorial. To use this <span class="notranslate">workflow</span> you need to import it into your <span class="notranslate">Galaxy</span> instance.</p>
+<p>To find location of genes, <a href="/training-material/topics/genome-annotation/tutorials/gene-centric/workflows/index.html">we will use the following workflow</a> that is available as a part of this tutorial. To use this workflow you need to import it into your Galaxy instance.</p>
 
 <p><img src="../../images/gene-centric/wf.png" alt="WF. " loading="lazy" /></p>
 
-<p>The <span class="notranslate">workflow</span> takes three inputs:</p>
+<p>The workflow takes three inputs:</p>
 
 <blockquote class="code-in">
-  <div class="box-title code-in-title" id="code-in-workflow-inputs" aria-label="code-in box: Workflow inputs"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: <span class="notranslate">Workflow</span> inputs</div>
+  <div class="box-title code-in-title" id="code-in-workflow-inputs" aria-label="code-in box: Workflow inputs"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Workflow inputs</div>
 
   <ol>
     <li><kbd>EXONS</kbd> - Amino acid translation of exons from the gene of interest (<a href="#step-2-get-amino-acid-translations-for-all-exons-of-my-gene-of-interest">Step 2</a> of this tutorial)</li>
     <li><kbd>DiamondDB</kbd> - Diamond database of ORF translations from genome assemblies (<a href="#step-4-extract-amino-acid-sequences-and-genome-coordinates-for-all-orfs">Step 4</a> of this tutorial)</li>
-    <li><kbd>ORF <span class="notranslate">BED</span></kbd> - Coordinates and frame information about ORFs in <span class="notranslate">BED</span> format (<a href="#step-4-extract-amino-acid-sequences-and-genome-coordinates-for-all-orfs">Step 4</a>  of this tutorial)</li>
+    <li><kbd>ORF BED</kbd> - Coordinates and frame information about ORFs in BED format (<a href="#step-4-extract-amino-acid-sequences-and-genome-coordinates-for-all-orfs">Step 4</a>  of this tutorial)</li>
   </ol>
 
 </blockquote>
@@ -1186,19 +1184,19 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
 
 </blockquote>
 
-<p>The overall logic of the <span class="notranslate">workflow</span> is as follows:</p>
+<p>The overall logic of the workflow is as follows:</p>
 
 <ol>
   <li>Perform <a href="https://github.com/bbuchfink/diamond"><strong>Diamond</strong></a> search to identify matches between the gene of interest (<kbd>EXONS</kbd>) and ORF sets from each genomes (<kbd>DiamondDB</kbd>).</li>
-  <li>Intersect information about the matches with <span class="notranslate">BED</span> file containing ORF coordinates (<kbd>ORF <span class="notranslate">BED</span></kbd>). This allows us to know genomic position of the ORFs and their frames (1, 2, 3 or -1, -2, -3).</li>
+  <li>Intersect information about the matches with BED file containing ORF coordinates (<kbd>ORF BED</kbd>). This allows us to know genomic position of the ORFs and their frames (1, 2, 3 or -1, -2, -3).</li>
   <li>Extract matching parts of the sequences and generated multiple alignments using <a href="https://mafft.cbrc.jp/alignment/software/"><strong>MAFFT</strong></a>. This is done for each amino acid sequence in <kbd>EXONS</kbd>. Thus in the case of <em>XBP-1</em> there will be five sets of alignments.</li>
   <li>Build phylogenetic tree for each alignment produced in the previous step using the <a href="https://en.wikipedia.org/wiki/Neighbor_joining">Neighbor Joining method</a> - a simple and quick way to obtain a rough phylogeny.</li>
-  <li>Use information from step 1 to compute genome coordinates of matches. This is done by combining the information about genomic positions of ORFs from the <kbd>ORF <span class="notranslate">BED</span></kbd> file and local alignment information generated during step 1.</li>
+  <li>Use information from step 1 to compute genome coordinates of matches. This is done by combining the information about genomic positions of ORFs from the <kbd>ORF BED</kbd> file and local alignment information generated during step 1.</li>
 </ol>
 
 <h2 id="step-7-looking-at-the-trees">Step 7: Looking at the trees</h2>
 
-<p>After running the <span class="notranslate">workflow</span> phylogenetic trees will be saved into a collection named <code class="language-plaintext highlighter-rouge">Join neighbors on ...</code>. This collection will also be labelled with tag <kbd>Trees</kbd>. To visualize the trees:</p>
+<p>After running the workflow phylogenetic trees will be saved into a collection named <code class="language-plaintext highlighter-rouge">Join neighbors on ...</code>. This collection will also be labelled with tag <kbd>Trees</kbd>. To visualize the trees:</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-visualize-the-trees" aria-label="hands-on box: Visualize the trees"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualize the trees</div>
@@ -1206,7 +1204,7 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
   <ul>
     <li>Expand the collection by clicking on it</li>
     <li>Click on any dataset</li>
-    <li>Click the <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-barchart</span> icon:
+    <li>Click the <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> icon:
   <img src="../../images/gene-centric/display_tree.png" alt="Graph icon. " loading="lazy" /></li>
     <li>A selection of tree visualization tools will appear in the center pane of the interface</li>
     <li>Select <code class="language-plaintext highlighter-rouge">Phylogenetic Tre Visualization</code> and play with it:
@@ -1216,7 +1214,7 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
 
 <h2 id="step-8-generating-and-interpreting-the-comparative-genome-graph">Step 8: Generating and interpreting the comparative genome graph</h2>
 
-<p>Another <span class="notranslate">workflow</span> output will represent a single file summarizing genomic location of matches between each of the genomes in our dataset and amino acid translation of exons from the gene of interest. It will be called <code class="language-plaintext highlighter-rouge"><span class="notranslate">Mapping</span> report</code> and will have tag <kbd>PlottingData</kbd> associated with it. To plot the data contained in this file we will use exte<span class="notranslate">rna</span>l Jupyter notebook (note that Jupyter can be run directly from <span class="notranslate">Galaxy</span>, but to make this tutorial runnable on any <span class="notranslate">Galaxy</span> instance we will use an inte<span class="notranslate">rna</span>l notebook server).</p>
+<p>Another workflow output will represent a single file summarizing genomic location of matches between each of the genomes in our dataset and amino acid translation of exons from the gene of interest. It will be called <code class="language-plaintext highlighter-rouge">Mapping report</code> and will have tag <kbd>PlottingData</kbd> associated with it. To plot the data contained in this file we will use external Jupyter notebook (note that Jupyter can be run directly from Galaxy, but to make this tutorial runnable on any Galaxy instance we will use an internal notebook server).</p>
 
 <h3 id="starting-notebook">Starting notebook</h3>
 
@@ -1225,16 +1223,16 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
 	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
 	
 	<p>
-		If you are on a server with Interactive Tool support (e.g. <span class="notranslate">Galaxy</span> Europe, Australia, and many others), you can choose that option for a more integrated Jupyter Notebook experience.
+		If you are on a server with Interactive Tool support (e.g. Galaxy Europe, Australia, and many others), you can choose that option for a more integrated Jupyter Notebook experience.
 	</p>
 	
 	
 		<input id="cyoa-opt1" type="radio" name="cyoa" value="UseGalaxyorg" onclick="cyoaChoice('UseGalaxyorg')" />
-		<label for="cyoa-opt1" class="select btn btn-secondary">Use<span class="notranslate">Galaxy</span>.org</label>
+		<label for="cyoa-opt1" class="select btn btn-secondary">UseGalaxy.org</label>
 	
 	
 		<input id="cyoa-opt2" type="radio" name="cyoa" value="Galaxy-Europe-Australia-and-Others" onclick="cyoaChoice('Galaxy-Europe-Australia-and-Others')" />
-		<label for="cyoa-opt2" class="select btn btn-secondary"><span class="notranslate">Galaxy</span> Europe, Australia, and Others</label>
+		<label for="cyoa-opt2" class="select btn btn-secondary">Galaxy Europe, Australia, and Others</label>
 	
 	
 	
@@ -1249,7 +1247,7 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
 			}
 		}
 		ready(function() {
-			cyoaDefault("Use<span class="notranslate">Galaxy</span>org");
+			cyoaDefault("UseGalaxyorg");
 		})
 	</script>
 	
@@ -1263,7 +1261,7 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
 <div class="Galaxy-Europe-Australia-and-Others">
 
   <!--SNIPPET-->
-  <blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-launch-jupyterlab" aria-label="hands_on box: Launch JupyterLab"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch JupyterLab</div>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-jupyterlab-in-span-class-quot-notranslate-quot-galaxy-span"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-jupyterlab-in-span-class-quot-notranslate-quot-galaxy-span-contents" aria-expanded="true" aria-label="Toggle tip box: Launch JupyterLab in <span class=&quot;notranslate&quot;>Galaxy</span>"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch JupyterLab in <span class=&quot;notranslate&quot;>Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Currently JupyterLab in <span class="notranslate">Galaxy</span> is available on <a href="https://live.usegalaxy.eu">Live.use<span class="notranslate">Galaxy</span>.eu</a>, <a href="https://usegalaxy.org">use<span class="notranslate">galaxy</span>.org</a> and <a href="https://usegalaxy.eu">use<span class="notranslate">galaxy</span>.eu</a>.</p>   <blockquote class="notranslate hands_on">     <div class="box-title hands-on-title" id="hands-on-run-jupyterlab" aria-label="hands-on box: Run JupyterLab"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run JupyterLab</div>     <ol>       <li><span class="tool" data-tool="interactive_tool_jupyter_notebook" title="Tested with interactive_tool_jupyter_notebook"><strong>Interactive Jupyter Notebook</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_jupyter_notebook</span></span> :</li>       <li>Click Run Tool</li>       <li>The tool will start running and will stay running permanently</li>       <li>Click on the <strong>User</strong> menu at the top and go to <strong>Active Interactive Tools</strong> and locate the JupyterLab instance you started.</li>       <li>Click on your JupyterLab instance</li>     </ol>   </blockquote> </blockquote>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-try-jupyterlab-if-not-available-on-span-class-quot-notranslate-quot-galaxy-span"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-try-jupyterlab-if-not-available-on-span-class-quot-notranslate-quot-galaxy-span-contents" aria-expanded="true" aria-label="Toggle tip box: Launch Try JupyterLab if not available on <span class=&quot;notranslate&quot;>Galaxy</span>"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch Try JupyterLab if not available on <span class=&quot;notranslate&quot;>Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If JupyterLab is not available on the <span class="notranslate">Galaxy</span> instance:</p>   <ol>     <li>Start <a href="https://mybinder.org/v2/gh/jupyterlab/jupyterlab-demo/try.jupyter.org?urlpath=lab">Try JupyterLab</a></li>   </ol> </blockquote> </blockquote>
+  <blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-launch-jupyterlab" aria-label="hands_on box: Launch JupyterLab"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch JupyterLab</div>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-jupyterlab-in-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-jupyterlab-in-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: Launch JupyterLab in Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch JupyterLab in Galaxy<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Currently JupyterLab in Galaxy is available on <a href="https://live.usegalaxy.eu">Live.useGalaxy.eu</a>, <a href="https://usegalaxy.org">usegalaxy.org</a> and <a href="https://usegalaxy.eu">usegalaxy.eu</a>.</p>   <blockquote class="notranslate hands_on">     <div class="box-title hands-on-title" id="hands-on-run-jupyterlab" aria-label="hands-on box: Run JupyterLab"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run JupyterLab</div>     <ol>       <li><span class="tool" data-tool="interactive_tool_jupyter_notebook" title="Tested with interactive_tool_jupyter_notebook"><strong>Interactive Jupyter Notebook</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_jupyter_notebook</span></span> :</li>       <li>Click Run Tool</li>       <li>The tool will start running and will stay running permanently</li>       <li>Click on the <strong>User</strong> menu at the top and go to <strong>Active Interactive Tools</strong> and locate the JupyterLab instance you started.</li>       <li>Click on your JupyterLab instance</li>     </ol>   </blockquote> </blockquote>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-try-jupyterlab-if-not-available-on-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-try-jupyterlab-if-not-available-on-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: Launch Try JupyterLab if not available on Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch Try JupyterLab if not available on Galaxy<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If JupyterLab is not available on the Galaxy instance:</p>   <ol>     <li>Start <a href="https://mybinder.org/v2/gh/jupyterlab/jupyterlab-demo/try.jupyter.org?urlpath=lab">Try JupyterLab</a></li>   </ol> </blockquote> </blockquote>
 
   <ol>
     <li>
@@ -1272,7 +1270,7 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
     <li>
       <p>Run the following command:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://training.<span class="notranslate">galaxy</span>project.org/training-material/topics/genome-annotation/tutorials/gene-centric/gene_image.ipynb
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://training.galaxyproject.org/training-material/topics/genome-annotation/tutorials/gene-centric/gene_image.ipynb
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1287,10 +1285,10 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
 <p>The data is provided to the notebook by setting the <code class="language-plaintext highlighter-rouge">dataset_url</code> parameter in this cell:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Paste link to the dataset here
-</span><span class="n">dataset_url</span> <span class="o">=</span> <span class="s">'https://use<span class="notranslate">galaxy</span>.org/api/datasets/f9cad7b01a472135a8abd43f91f8d3cf/display?to_ext=tabular'</span>
+</span><span class="n">dataset_url</span> <span class="o">=</span> <span class="s">'https://usegalaxy.org/api/datasets/f9cad7b01a472135a8abd43f91f8d3cf/display?to_ext=tabular'</span>
 </code></pre></div></div>
 
-<p>This is a URL pointing to one of the <span class="notranslate">workflow</span> outputs: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Mapping</span> report</code> with the <kbd>PlottingData</kbd> tag. To copy the URL click on the <i class="fas fa-link" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-link</span> icon adjacent to the dataset:</p>
+<p>This is a URL pointing to one of the workflow outputs: <code class="language-plaintext highlighter-rouge">Mapping report</code> with the <kbd>PlottingData</kbd> tag. To copy the URL click on the <i class="fas fa-link" aria-hidden="true"></i><span class="visually-hidden">galaxy-link</span> icon adjacent to the dataset:</p>
 
 <p><img src="../../images/gene-centric/copy_link.png" alt="Copying the link. " loading="lazy" /></p>
 
@@ -5006,12 +5004,12 @@ https://zenodo.org/record/7034885/files/mHomSapT2T.fa
 
 <h1 id="about-the-gene">About the gene</h1>
 
-<p><em>XBP-1</em> is one of a few vertebrate gene containing overlapping reading frames encoding different proteins within a single gene (<span class="citation"><a href="#Chung2007-wv">Chung <i>et al.</i> 2007</a></span>). In this case the switch between two reading frames occurs when a highly specialized <span class="notranslate">RNA</span> endonuclease, IRE1, excises a 26 nucleotide spacer from <em>XBP-1</em> m<span class="notranslate">RNA</span> (<span class="citation"><a href="#Nekrutenko2006-bk">Nekrutenko and He 2006</a></span>). This converts the so-called “unspliced” form of the transcript (XBP-1U) to the “spliced” form XBP-1S (Note that the term “spliced” is misleading here. The XBP-1U is already processed by splicing machinery and contains no canonical introns. The “spliced” is simply used to indicate the removal of the 26 nucleotide spacer). Because the 26 is not divisible by three, the XBP-1S transcript is translated in a different frame from the point of cleavage. The activation of IRE1 and resulting removal of the spacer is triggered by presence of unfolded proteins in the endoplasmic reticulum and the IRE1-XBP1 pathway is one of the three major unfolded protein response systems in higher eukaryotes (<span class="citation"><a href="#Chen2021-ws">Chen and Cubillos-Ruiz 2021</a></span>) that is conserved all the way to yeast (with <em>XBP-1</em>’s homologue <em>HAC-1</em>; <span class="citation"><a href="#Calfon2002-dl">Calfon <i>et al.</i> 2002</a></span> ) .</p>
+<p><em>XBP-1</em> is one of a few vertebrate gene containing overlapping reading frames encoding different proteins within a single gene (<span class="citation"><a href="#Chung2007-wv">Chung <i>et al.</i> 2007</a></span>). In this case the switch between two reading frames occurs when a highly specialized RNA endonuclease, IRE1, excises a 26 nucleotide spacer from <em>XBP-1</em> mRNA (<span class="citation"><a href="#Nekrutenko2006-bk">Nekrutenko and He 2006</a></span>). This converts the so-called “unspliced” form of the transcript (XBP-1U) to the “spliced” form XBP-1S (Note that the term “spliced” is misleading here. The XBP-1U is already processed by splicing machinery and contains no canonical introns. The “spliced” is simply used to indicate the removal of the 26 nucleotide spacer). Because the 26 is not divisible by three, the XBP-1S transcript is translated in a different frame from the point of cleavage. The activation of IRE1 and resulting removal of the spacer is triggered by presence of unfolded proteins in the endoplasmic reticulum and the IRE1-XBP1 pathway is one of the three major unfolded protein response systems in higher eukaryotes (<span class="citation"><a href="#Chen2021-ws">Chen and Cubillos-Ruiz 2021</a></span>) that is conserved all the way to yeast (with <em>XBP-1</em>’s homologue <em>HAC-1</em>; <span class="citation"><a href="#Calfon2002-dl">Calfon <i>et al.</i> 2002</a></span> ) .</p>
 
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-getting-help"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-getting-help-contents" aria-expanded="true" aria-label="Toggle tip box: Getting help"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Getting help<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <p>For questions about using <span class="notranslate">Galaxy</span>, you can ask in the <a href="https://help.galaxyproject.org/"><span class="notranslate">Galaxy</span> help forum</a>.</p>
+  <p>For questions about using Galaxy, you can ask in the <a href="https://help.galaxyproject.org/">Galaxy help forum</a>.</p>
 
 </blockquote>
 

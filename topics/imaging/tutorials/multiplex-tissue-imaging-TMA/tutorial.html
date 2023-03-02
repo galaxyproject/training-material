@@ -717,8 +717,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
             UseGalaxy.no
         </a>
@@ -764,11 +762,11 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>Multiplex tissue images are large, multi-channel images that contain intensity data for numerous biomarkers. The methods for generating multiplex tissue images are diverse, and each method can require specialized knowledge for <span class="notranslate">downstream</span> processing and analysis. The MCMICRO (<span class="citation"><a href="#Schapiro2021">Schapiro <i>et al.</i> 2021</a></span>) pipeline was developed to process multiplex images into <span class="notranslate">single-cell</span> data, and to have the range of tools to accomodate for different imaging methods. The tools used in the MCMICRO pipeline, in addition to tools for <span class="notranslate">single-cell</span> analysis, spatial analysis, and interactive visualization are available in <span class="notranslate">Galaxy</span> to facilitate comprehensive and accessible analyses of multiplex tissue images. The MCMICRO tools available in <span class="notranslate">Galaxy</span> are capable of processing Whole Slide Images (WSI) and Tissue Microarrays (TMA). WSIs are images in which a tissue section from a single sample occupies the entire microscope slide; whereas, TMAs multiplex smaller cores from multiple samples onto a single slide. This tutorial will demonstrate how to use the <span class="notranslate">Galaxy</span> multiplex imaging tools to process and analyze publicly available TMA test data provided by MCMICRO (Figure 1.).</p>
+<p>Multiplex tissue images are large, multi-channel images that contain intensity data for numerous biomarkers. The methods for generating multiplex tissue images are diverse, and each method can require specialized knowledge for downstream processing and analysis. The MCMICRO (<span class="citation"><a href="#Schapiro2021">Schapiro <i>et al.</i> 2021</a></span>) pipeline was developed to process multiplex images into single-cell data, and to have the range of tools to accomodate for different imaging methods. The tools used in the MCMICRO pipeline, in addition to tools for single-cell analysis, spatial analysis, and interactive visualization are available in Galaxy to facilitate comprehensive and accessible analyses of multiplex tissue images. The MCMICRO tools available in Galaxy are capable of processing Whole Slide Images (WSI) and Tissue Microarrays (TMA). WSIs are images in which a tissue section from a single sample occupies the entire microscope slide; whereas, TMAs multiplex smaller cores from multiple samples onto a single slide. This tutorial will demonstrate how to use the Galaxy multiplex imaging tools to process and analyze publicly available TMA test data provided by MCMICRO (Figure 1.).</p>
 
 <p>Find a full <a href="https://cancer.usegalaxy.org/u/watsocam/h/gtnexemplar002tma">example history</a></p>
 
-<figure id="figure-1"><img src="../../images/multiplex-tissue-imaging-TMA/ex2_combined_avivator.png" alt="Aviator screenshot, described in figure caption. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Fully registered image of the MCMICRO Exemplar-002 Tissue microarray. Exemplar-002 consists of four cores, each with a distinct tissue organization and <span class="notranslate">expression</span> of biomarkers. In the image, there are six biomarkers shown: <span class="notranslate">DNA</span> (white), CD163 (yellow), CD3D (blue), CD31 (red), VDAC1 (green), and Keratin (orange). This image is being viewed using Avivator, an interactive tool that allows the user to selectively view channels and adjust channel intensities.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/multiplex-tissue-imaging-TMA/ex2_combined_avivator.png" alt="Aviator screenshot, described in figure caption. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Fully registered image of the MCMICRO Exemplar-002 Tissue microarray. Exemplar-002 consists of four cores, each with a distinct tissue organization and expression of biomarkers. In the image, there are six biomarkers shown: DNA (white), CD163 (yellow), CD3D (blue), CD31 (red), VDAC1 (green), and Keratin (orange). This image is being viewed using Avivator, an interactive tool that allows the user to selectively view channels and adjust channel intensities.</figcaption></figure>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -782,9 +780,9 @@
   <li><a href="#stitching-and-registration-with-ashlar" id="markdown-toc-stitching-and-registration-with-ashlar">Stitching and registration with <strong>ASHLAR</strong></a></li>
   <li><a href="#tma-dearray-with-unetcoreograph" id="markdown-toc-tma-dearray-with-unetcoreograph">TMA dearray with <strong>UNetCoreograph</strong></a></li>
   <li><a href="#nuclear-segmentation-with-mesmer" id="markdown-toc-nuclear-segmentation-with-mesmer">Nuclear segmentation with <strong>Mesmer</strong></a></li>
-  <li><a href="#calculate-single-cell-features-with-quantification" id="markdown-toc-calculate-single-cell-features-with-quantification">Calculate <span class="notranslate">single-cell</span> features with <strong>Quantification</strong></a></li>
+  <li><a href="#calculate-single-cell-features-with-quantification" id="markdown-toc-calculate-single-cell-features-with-quantification">Calculate single-cell features with <strong>Quantification</strong></a></li>
   <li><a href="#convert-mcmicro-output-to-anndata" id="markdown-toc-convert-mcmicro-output-to-anndata"><strong>Convert McMicro Output to Anndata</strong></a></li>
-  <li><a href="#scimap-single-cell-phenotyping" id="markdown-toc-scimap-single-cell-phenotyping">Scimap: <strong><span class="notranslate">Single Cell</span> Phenotyping</strong></a></li>
+  <li><a href="#scimap-single-cell-phenotyping" id="markdown-toc-scimap-single-cell-phenotyping">Scimap: <strong>Single Cell Phenotyping</strong></a></li>
   <li><a href="#interactive-visualization-of-multiplex-tissue-images" id="markdown-toc-interactive-visualization-of-multiplex-tissue-images">Interactive visualization of multiplex tissue images</a>    <ol>
       <li><a href="#converting-unetcoreograph-images-to-ome-tiff-using-the-convert-image-tool" id="markdown-toc-converting-unetcoreograph-images-to-ome-tiff-using-the-convert-image-tool">Converting UNetCoreograph images to OME-TIFF using the <strong>Convert image</strong> tool</a></li>
       <li><a href="#rename-ome-tiff-channels" id="markdown-toc-rename-ome-tiff-channels"><strong>Rename OME-TIFF Channels</strong></a></li>
@@ -800,7 +798,7 @@
 
 <h1 id="get-data">Get data</h1>
 
-<p>Multiplex tissue images come in a variety of forms and file-types depending on the modality or platform used. For this tutorial, the Exemplar-002 data was imaged using Cyclic Immunofluorescence (CycIF) with a RareCyte slide scanner. Many of the steps in this <span class="notranslate">workflow</span> have platform-specific parameters, and the hands-on sections will show the best parameters for CycIF RareCyte images; however, notes will be made where critical differences may occur depending on the modality or platform throughout the tutorial.</p>
+<p>Multiplex tissue images come in a variety of forms and file-types depending on the modality or platform used. For this tutorial, the Exemplar-002 data was imaged using Cyclic Immunofluorescence (CycIF) with a RareCyte slide scanner. Many of the steps in this workflow have platform-specific parameters, and the hands-on sections will show the best parameters for CycIF RareCyte images; however, notes will be made where critical differences may occur depending on the modality or platform throughout the tutorial.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-import-to-history" aria-label="hands-on box:  Data import to history "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Data import to history</div>
@@ -810,11 +808,11 @@
       <p>Create a new history for this tutorial</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>Import the files from <a href="https://doi.org/10.5281/zenodo.7622545">Zenodo</a> or from
 the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">imaging</code>
- -&gt; <code class="language-plaintext highlighter-rouge">End-to-End Tissue Microarray Image Analysis with <span class="notranslate">Galaxy</span>-ME</code>):
+ -&gt; <code class="language-plaintext highlighter-rouge">End-to-End Tissue Microarray Image Analysis with Galaxy-ME</code>):
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7622545/files/markers.csv
 https://zenodo.org/record/7622545/files/exemplar_002_phenotypes.csv
 https://zenodo.org/record/7622545/files/exemplar-002-cycle-01.ome.tiff
@@ -829,7 +827,7 @@ https://zenodo.org/record/7622545/files/exemplar-002-cycle-09.ome.tiff
 https://zenodo.org/record/7622545/files/exemplar-002-cycle-10.ome.tiff
 </code></pre></div>      </div>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>Group the datasets into <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">collections</a>. Make a collection of the OME-TIFF, ordering the files by cycle number.</li>
   </ol>
@@ -839,17 +837,17 @@ https://zenodo.org/record/7622545/files/exemplar-002-cycle-10.ome.tiff
 <blockquote class="warning">
   <div class="box-title warning-title" id="warning-imaging-platform-differences" aria-label="warning box: **Imaging platform differences**"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: **Imaging platform differences**</div>
 
-  <p>The Exemplar-002 raw images are in <em>ome.tiff</em> format; however, commonly seen raw file-types are <em>ome.tiff</em>, <em>tiff</em>, <em>czi</em>, and <em>svs</em>. If your input images are not <em>ome.tiff</em> or <em>tiff</em>, you may have to edit the dataset attributes in <span class="notranslate">Galaxy</span> to allow tools to recognize them as viable inputs.</p>
+  <p>The Exemplar-002 raw images are in <em>ome.tiff</em> format; however, commonly seen raw file-types are <em>ome.tiff</em>, <em>tiff</em>, <em>czi</em>, and <em>svs</em>. If your input images are not <em>ome.tiff</em> or <em>tiff</em>, you may have to edit the dataset attributes in Galaxy to allow tools to recognize them as viable inputs.</p>
 
 </blockquote>
 
-<p>The raw files for each round (10 in total) of the exemplar-002 data are available on <a href="https://cancer.usegalaxy.org">cancer.use<span class="notranslate">galaxy</span>.org</a> under <strong>Data Libraries</strong> (Figure 2.). Import the raw files into a new history as a <strong>list collection</strong>.</p>
+<p>The raw files for each round (10 in total) of the exemplar-002 data are available on <a href="https://cancer.usegalaxy.org">cancer.usegalaxy.org</a> under <strong>Data Libraries</strong> (Figure 2.). Import the raw files into a new history as a <strong>list collection</strong>.</p>
 
-<figure id="figure-2"><img src="../../images/multiplex-tissue-imaging-TMA/ex2_getData.png" alt="Screenshot of the Galaxy data libraries on cancer.usegalaxy.org, highlighting the path to the dataset, Libraries, Exemplar 002, raw. The UI shows all datasets in that folder selected before using the Export to History button to import them as a Collection." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Finding the Exemplar-002 data on cancer.use<span class="notranslate">galaxy</span>.org Data Libraries.</figcaption></figure>
+<figure id="figure-2"><img src="../../images/multiplex-tissue-imaging-TMA/ex2_getData.png" alt="Screenshot of the Galaxy data libraries on cancer.usegalaxy.org, highlighting the path to the dataset, Libraries, Exemplar 002, raw. The UI shows all datasets in that folder selected before using the Export to History button to import them as a Collection." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Finding the Exemplar-002 data on cancer.usegalaxy.org Data Libraries.</figcaption></figure>
 
 <h1 id="tile-illumination-correction-with-basic-illumination">Tile illumination correction with <strong>BaSiC Illumination</strong></h1>
 
-<p>Commonly, raw MTI data will consist of one image per round of imaging. These individual round images are frequently captured in tiles, and there can be slight variations in how each tile was illuminated across the course of imaging. Prior to tile stitching and image registration, the tiles have to undergo illumination correction with <strong>BaSiC Illumination</strong> (<span class="citation"><a href="#Peng2017">Peng <i>et al.</i> 2017</a></span>) to account for this. Unlike many of the other tools in this <span class="notranslate">workflow</span>, BaSiC has no extra parameters to think about: Just input the collection of raw images and press <em>go</em>!</p>
+<p>Commonly, raw MTI data will consist of one image per round of imaging. These individual round images are frequently captured in tiles, and there can be slight variations in how each tile was illuminated across the course of imaging. Prior to tile stitching and image registration, the tiles have to undergo illumination correction with <strong>BaSiC Illumination</strong> (<span class="citation"><a href="#Peng2017">Peng <i>et al.</i> 2017</a></span>) to account for this. Unlike many of the other tools in this workflow, BaSiC has no extra parameters to think about: Just input the collection of raw images and press <em>go</em>!</p>
 
 <p>Two new list collections will appear in the history upon completion:</p>
 
@@ -863,7 +861,7 @@ https://zenodo.org/record/7622545/files/exemplar-002-cycle-10.ome.tiff
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/perssond/basic_illumination/basic_illumination/1.0.3+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/perssond/basic_illumination/basic_illumination/1.0.3+galaxy1"><strong>BaSiC Illumination</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/perssond/basic_illumination/basic_illumination/1.0.3+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/perssond/basic_illumination/basic_illumination/1.0.3+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/perssond/basic_illumination/basic_illumination/1.0.3+galaxy1"><strong>BaSiC Illumination</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/perssond/basic_illumination/basic_illumination/1.0.3+galaxy1</span></span>  with the following parameters:</p>
 
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Raw Cycle Images: “</em>: List collection of raw images</li>
@@ -880,9 +878,9 @@ https://zenodo.org/record/7622545/files/exemplar-002-cycle-10.ome.tiff
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-important-detail-marker-file" aria-label="comment box: Important detail: Marker File"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Important detail: Marker File</div>
 
-  <p><strong>ASHLAR</strong> optionally <span class="notranslate">reads</span> a marker metadata file to name the channels in the output OME-TIFF image. This marker file will also be used in later steps. Make sure that the marker file is comma-separated and has the <code class="language-plaintext highlighter-rouge">marker_names</code> as the third column (Figure 3.).</p>
+  <p><strong>ASHLAR</strong> optionally reads a marker metadata file to name the channels in the output OME-TIFF image. This marker file will also be used in later steps. Make sure that the marker file is comma-separated and has the <code class="language-plaintext highlighter-rouge">marker_names</code> as the third column (Figure 3.).</p>
 
-  <figure id="figure-3"><img src="../../images/multiplex-tissue-imaging-TMA/ex2_markersFile.png" alt="screenshot of the markers table. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Markers file, used both in ASHLAR and <span class="notranslate">downstream</span> steps. Critically, the marker_names are in the third column.</figcaption></figure>
+  <figure id="figure-3"><img src="../../images/multiplex-tissue-imaging-TMA/ex2_markersFile.png" alt="screenshot of the markers table. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Markers file, used both in ASHLAR and downstream steps. Critically, the marker_names are in the third column.</figcaption></figure>
 
 </blockquote>
 
@@ -891,7 +889,7 @@ https://zenodo.org/record/7622545/files/exemplar-002-cycle-10.ome.tiff
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/perssond/ashlar/ashlar/1.14.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/perssond/ashlar/ashlar/1.14.0+galaxy1"><strong>ASHLAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/perssond/ashlar/ashlar/1.14.0+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/perssond/ashlar/ashlar/1.14.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/perssond/ashlar/ashlar/1.14.0+galaxy1"><strong>ASHLAR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/perssond/ashlar/ashlar/1.14.0+galaxy1</span></span>  with the following parameters:</p>
 
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Raw Images”</em>: List collection of raw images</li>
@@ -914,22 +912,22 @@ https://zenodo.org/record/7622545/files/exemplar-002-cycle-10.ome.tiff
 <blockquote class="warning">
   <div class="box-title warning-title" id="warning-imaging-platform-differences-1" aria-label="warning box: **Imaging platform differences**"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: **Imaging platform differences**</div>
 
-  <p>ASHLAR, among other tools in the MCMICRO and <span class="notranslate">Galaxy</span>-ME pre-processing tools have some parameters that are specific to the 
+  <p>ASHLAR, among other tools in the MCMICRO and Galaxy-ME pre-processing tools have some parameters that are specific to the 
 imaging patform used. By default, ASHLAR is oriented to work with images from RareCyte scanners. AxioScan scanners render images
 in a different orientation. Because of this, when using ASHLAR on AxioScan images, it is important to select the <strong>Flip Y-Axis</strong>
 parameter to <em>Yes</em></p>
 
   <p>ASHLAR will work for most imaging modalities; however, certain modalities require different tools to be registered. For example,
 multiplex immunohistochemistry (mIHC) images must use an aligner that registers each moving image to a reference Hematoxylin image. 
-For this, <span class="notranslate">Galaxy</span>-ME includes the alte<span class="notranslate">rna</span>tive registration tool <span><strong><strong>PALOM</strong></strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> .</p>
+For this, Galaxy-ME includes the alternative registration tool <span><strong><strong>PALOM</strong></strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> .</p>
 
 </blockquote>
 
 <h1 id="tma-dearray-with-unetcoreograph">TMA dearray with <strong>UNetCoreograph</strong></h1>
 
-<p>Many <span class="notranslate">downstream</span> processing and analysis steps require each individual core from the TMA to be in a separate image file. To accomplish this from our registered ome.tiff image, we can use <strong>UNetCoreograph</strong> to detect and crop each core into separate files.</p>
+<p>Many downstream processing and analysis steps require each individual core from the TMA to be in a separate image file. To accomplish this from our registered ome.tiff image, we can use <strong>UNetCoreograph</strong> to detect and crop each core into separate files.</p>
 
-<p>UNetCoreograph will output images (used for <span class="notranslate">downstream</span> steps), masks, and a preview image (Figure 4.).</p>
+<p>UNetCoreograph will output images (used for downstream steps), masks, and a preview image (Figure 4.).</p>
 
 <figure id="figure-4"><img src="../../images/multiplex-tissue-imaging-TMA/ex2_dearray.png" alt="Image of four cores (numbered 1-4) on a slide." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Preview image from UNetCoreograph, outlines show detection of each individual core in the TMA.</figcaption></figure>
 
@@ -938,7 +936,7 @@ For this, <span class="notranslate">Galaxy</span>-ME includes the alte<span clas
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/perssond/coreograph/unet_coreograph/2.2.8+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/perssond/coreograph/unet_coreograph/2.2.8+galaxy1"><strong>UNetCoreograph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/perssond/coreograph/unet_coreograph/2.2.8+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/perssond/coreograph/unet_coreograph/2.2.8+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/perssond/coreograph/unet_coreograph/2.2.8+galaxy1"><strong>UNetCoreograph</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/perssond/coreograph/unet_coreograph/2.2.8+galaxy1</span></span>  with the following parameters:</p>
 
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Registered TIFF”</em>: The output of <strong>ASHLAR</strong> (registered, pyramidal OME-TIFF file)</li>
@@ -956,9 +954,9 @@ For this, <span class="notranslate">Galaxy</span>-ME includes the alte<span clas
 
 <h1 id="nuclear-segmentation-with-mesmer">Nuclear segmentation with <strong>Mesmer</strong></h1>
 
-<p>Cell segmentation is the basis for all <span class="notranslate">downstream</span> <span class="notranslate">single-cell</span> analyses. Different segmentation tools work highly variably depending on the imaging modality or platform used. Because of this, <span class="notranslate">Galaxy</span>-ME has incorporated several cell segmentation tools so users may find the tool that works optimally for their data.</p>
+<p>Cell segmentation is the basis for all downstream single-cell analyses. Different segmentation tools work highly variably depending on the imaging modality or platform used. Because of this, Galaxy-ME has incorporated several cell segmentation tools so users may find the tool that works optimally for their data.</p>
 
-<p>Available segmentation tools in <span class="notranslate">Galaxy</span>-ME:</p>
+<p>Available segmentation tools in Galaxy-ME:</p>
 
 <ul>
   <li>Mesmer (<span class="citation"><a href="#Greenwald2021">Greenwald <i>et al.</i> 2021</a></span>)</li>
@@ -972,7 +970,7 @@ For this, <span class="notranslate">Galaxy</span>-ME includes the alte<span clas
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-important-detail-running-images-in-batches" aria-label="comment box: Important detail: Running images in batches"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Important detail: Running images in batches</div>
 
-  <p>Now that each image has been split into individual core images, <span class="notranslate">downstream</span> tools must be run on the images separately. Luckily, <span class="notranslate">Galaxy</span> makes this easy by including the option to run each tool in batch across a collection of inputs. Next to the input for the tool, select <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> (<strong>Dataset collection</strong>) as the input type, and pass the collection output by UNetCoreograph as input.</p>
+  <p>Now that each image has been split into individual core images, downstream tools must be run on the images separately. Luckily, Galaxy makes this easy by including the option to run each tool in batch across a collection of inputs. Next to the input for the tool, select <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> (<strong>Dataset collection</strong>) as the input type, and pass the collection output by UNetCoreograph as input.</p>
 
 </blockquote>
 
@@ -980,7 +978,7 @@ For this, <span class="notranslate">Galaxy</span>-ME includes the alte<span clas
   <div class="box-title hands-on-title" id="hands-on-nuclear-segmentation" aria-label="hands-on box:  Nuclear segmentation "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Nuclear segmentation</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/goeckslab/mesmer/mesmer/0.12.3+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/goeckslab/mesmer/mesmer/0.12.3+galaxy2"><strong>Mesmer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/goeckslab/mesmer/mesmer/0.12.3+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/goeckslab/mesmer/mesmer/0.12.3+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/goeckslab/mesmer/mesmer/0.12.3+galaxy2"><strong>Mesmer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/goeckslab/mesmer/mesmer/0.12.3+galaxy2</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Image containing the nuclear marker(s) “</em>: Collection output of UNetCoreograph (images)</li>
         <li><em>“Resolution of the image in microns-per-pixel”</em>: <code class="language-plaintext highlighter-rouge">0.65</code></li>
@@ -1004,7 +1002,7 @@ For this, <span class="notranslate">Galaxy</span>-ME includes the alte<span clas
 
 </blockquote>
 
-<h1 id="calculate-single-cell-features-with-quantification">Calculate <span class="notranslate">single-cell</span> features with <strong>Quantification</strong></h1>
+<h1 id="calculate-single-cell-features-with-quantification">Calculate single-cell features with <strong>Quantification</strong></h1>
 
 <p>After generating a segmentation mask, the mask and the original registered image can be used to extract mean intensities for each marker in the panel, spatial coordinates, and morphological features for every cell. This step is performed by MCMICRO’s <strong>Quantification</strong> module.</p>
 
@@ -1017,7 +1015,7 @@ For this, <span class="notranslate">Galaxy</span>-ME includes the alte<span clas
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/perssond/quantification/quantification/1.5.3+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/perssond/quantification/quantification/1.5.3+galaxy1"><strong>Quantification</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/perssond/quantification/quantification/1.5.3+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/perssond/quantification/quantification/1.5.3+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/perssond/quantification/quantification/1.5.3+galaxy1"><strong>Quantification</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/perssond/quantification/quantification/1.5.3+galaxy1</span></span>  with the following parameters:</p>
 
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Registered TIFF “</em>: Collection output of UNetCoreograph (images)</li>
@@ -1039,7 +1037,7 @@ For this, <span class="notranslate">Galaxy</span>-ME includes the alte<span clas
 
 <h1 id="convert-mcmicro-output-to-anndata"><strong>Convert McMicro Output to Anndata</strong></h1>
 
-<p>Anndata (<span class="citation"><a href="#Virshup2021">Virshup <i>et al.</i> 2021</a></span>) is a Python package and file format schema for working with annotated data matrices that has gained popularity in the <span class="notranslate">single-cell</span> analysis community. Many <span class="notranslate">downstream</span> analysis tools, including Scimap from MCMICRO, Scanpy (<span class="citation"><a href="#Wolf2018">Wolf <i>et al.</i> 2018</a></span>), and Squidpy (<span class="citation"><a href="#Palla2022">Palla <i>et al.</i> 2022</a></span>) are built around anndata format files (h5ad). This tool splits the marker intensity data into a separate dataframe (<code class="language-plaintext highlighter-rouge">X</code>), and places all observational data (spatial coordinates, morphological features, etc.) in the cell feature table into a separate dataframe (<code class="language-plaintext highlighter-rouge">obs</code>) that shares the same indices as <code class="language-plaintext highlighter-rouge">X</code>. In <span class="notranslate">downstream</span> analyses, new categorical variables, such as phenotype assignments for each cell, are stored in the <code class="language-plaintext highlighter-rouge">obs</code> dataframe.</p>
+<p>Anndata (<span class="citation"><a href="#Virshup2021">Virshup <i>et al.</i> 2021</a></span>) is a Python package and file format schema for working with annotated data matrices that has gained popularity in the single-cell analysis community. Many downstream analysis tools, including Scimap from MCMICRO, Scanpy (<span class="citation"><a href="#Wolf2018">Wolf <i>et al.</i> 2018</a></span>), and Squidpy (<span class="citation"><a href="#Palla2022">Palla <i>et al.</i> 2022</a></span>) are built around anndata format files (h5ad). This tool splits the marker intensity data into a separate dataframe (<code class="language-plaintext highlighter-rouge">X</code>), and places all observational data (spatial coordinates, morphological features, etc.) in the cell feature table into a separate dataframe (<code class="language-plaintext highlighter-rouge">obs</code>) that shares the same indices as <code class="language-plaintext highlighter-rouge">X</code>. In downstream analyses, new categorical variables, such as phenotype assignments for each cell, are stored in the <code class="language-plaintext highlighter-rouge">obs</code> dataframe.</p>
 
 <p>Learn more about this file format at the <a href="https://anndata.readthedocs.io/en/latest/index.html">anndata documentation</a>.</p>
 
@@ -1048,13 +1046,13 @@ For this, <span class="notranslate">Galaxy</span>-ME includes the alte<span clas
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_mcmicro_to_anndata/scimap_mcmicro_to_anndata/0.17.7+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_mcmicro_to_anndata/scimap_mcmicro_to_anndata/0.17.7+galaxy0"><strong>Convert McMicro Output to Anndata</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/goeckslab/scimap_mcmicro_to_anndata/scimap_mcmicro_to_anndata/0.17.7+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_mcmicro_to_anndata/scimap_mcmicro_to_anndata/0.17.7+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_mcmicro_to_anndata/scimap_mcmicro_to_anndata/0.17.7+galaxy0"><strong>Convert McMicro Output to Anndata</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_mcmicro_to_anndata/scimap_mcmicro_to_anndata/0.17.7+galaxy0</span></span>  with the following parameters:</p>
 
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select the input image or images”</em>: Collection output of Quantification (cellMaskQuant)</li>
         <li>In <em>“Advanced Options”</em>:
           <ul>
-            <li><em>“Whether to remove the <span class="notranslate">DNA</span> channels from the final output”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+            <li><em>“Whether to remove the DNA channels from the final output”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
             <li><em>“Whether to use unique name for cells/rows”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
           </ul>
         </li>
@@ -1063,30 +1061,30 @@ For this, <span class="notranslate">Galaxy</span>-ME includes the alte<span clas
       <blockquote class="comment">
         <div class="box-title warning-title" id="warning-important-parameter-unique-names-for-cells-rows" aria-label="warning box: Important parameter: Unique names for cells/rows"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Important parameter: Unique names for cells/rows</div>
 
-        <p>Setting <em>“Whether to use unique name for cells/rows”</em> to <code class="language-plaintext highlighter-rouge">No</code> to ensures that <span class="notranslate">downstream</span> interactive visualizations will be able to map observational features to the mask CellIDs.</p>
+        <p>Setting <em>“Whether to use unique name for cells/rows”</em> to <code class="language-plaintext highlighter-rouge">No</code> to ensures that downstream interactive visualizations will be able to map observational features to the mask CellIDs.</p>
       </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<h1 id="scimap-single-cell-phenotyping">Scimap: <strong><span class="notranslate">Single Cell</span> Phenotyping</strong></h1>
+<h1 id="scimap-single-cell-phenotyping">Scimap: <strong>Single Cell Phenotyping</strong></h1>
 
-<p>There are several ways to classify cells available in <span class="notranslate">Galaxy</span>-ME. Unsupervised approaches, such as Leiden clustering, can be performed on all cells and phenotypes can be manually annotated based on marker <span class="notranslate">expression</span> patterns observed by the user. This approach is time consuming, so here we will demonstrate automated phenotyping based on thresholds of specific lineage markers using MCMICRO’s Scimap. Scimap phenotyping can either be provided a table of manual gate values for each marker of interest (which can be determined using the <strong>GateFinder</strong> tool in <span class="notranslate">Galaxy</span>-ME), or by default, Scimap will fit a Gaussian Mixture Model (GMM) to the <code class="language-plaintext highlighter-rouge">log(intensity)</code> data for each marker to determine positive and negative populations for that marker. The marker intensity values are rescaled between (0,1) with 0.5 being the cut-off between negative and positive populations. Scimap uses a ‘Phenotype <span class="notranslate">workflow</span>’ to guide the classification of cells (Figure 5.). For more on how to construct a Scimap <span class="notranslate">workflow</span>, see the <a href="https://scimap-doc.readthedocs.io/en/latest/tutorials/scimap-tutorial-cell-phenotyping/">Scimap documentation</a>.</p>
+<p>There are several ways to classify cells available in Galaxy-ME. Unsupervised approaches, such as Leiden clustering, can be performed on all cells and phenotypes can be manually annotated based on marker expression patterns observed by the user. This approach is time consuming, so here we will demonstrate automated phenotyping based on thresholds of specific lineage markers using MCMICRO’s Scimap. Scimap phenotyping can either be provided a table of manual gate values for each marker of interest (which can be determined using the <strong>GateFinder</strong> tool in Galaxy-ME), or by default, Scimap will fit a Gaussian Mixture Model (GMM) to the <code class="language-plaintext highlighter-rouge">log(intensity)</code> data for each marker to determine positive and negative populations for that marker. The marker intensity values are rescaled between (0,1) with 0.5 being the cut-off between negative and positive populations. Scimap uses a ‘Phenotype workflow’ to guide the classification of cells (Figure 5.). For more on how to construct a Scimap workflow, see the <a href="https://scimap-doc.readthedocs.io/en/latest/tutorials/scimap-tutorial-cell-phenotyping/">Scimap documentation</a>.</p>
 
-<figure id="figure-5"><img src="../../images/multiplex-tissue-imaging-TMA/ex2_phenotypeWF.png" alt="Screenshot of the phenotypes table. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Example of a phenotype <span class="notranslate">workflow</span> compatible with Scimap. 'Pos' means that the marker must be positive to be classified as the respective phenotype. 'Anypos' means any, but not necessarily all, of the listed markers can be positive to call the respective phenotype.</figcaption></figure>
+<figure id="figure-5"><img src="../../images/multiplex-tissue-imaging-TMA/ex2_phenotypeWF.png" alt="Screenshot of the phenotypes table. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Example of a phenotype workflow compatible with Scimap. 'Pos' means that the marker must be positive to be classified as the respective phenotype. 'Anypos' means any, but not necessarily all, of the listed markers can be positive to call the respective phenotype.</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-single-cell-phenotyping-with-scimap" aria-label="hands-on box:  Single Cell Phenotyping with Scimap "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  <span class="notranslate">Single Cell</span> Phenotyping with Scimap</div>
+  <div class="box-title hands-on-title" id="hands-on-single-cell-phenotyping-with-scimap" aria-label="hands-on box:  Single Cell Phenotyping with Scimap "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Single Cell Phenotyping with Scimap</div>
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_phenotyping/scimap_phenotyping/0.17.7+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_phenotyping/scimap_phenotyping/0.17.7+galaxy0"><strong><span class="notranslate">Single Cell</span> Phenotyping</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/goeckslab/scimap_phenotyping/scimap_phenotyping/0.17.7+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_phenotyping/scimap_phenotyping/0.17.7+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_phenotyping/scimap_phenotyping/0.17.7+galaxy0"><strong>Single Cell Phenotyping</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/goeckslab/scimap_phenotyping/scimap_phenotyping/0.17.7+galaxy0</span></span>  with the following parameters:</p>
 
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select the input anndata”</em>: Output of <strong>Convert MCMICRO output to Anndata</strong></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the dataset containing manual gate information”</em>: (Optional) manually determined gates in CSV format. Gates will be determined automatically using a GMM for each marker if this file is not provided</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the dataset containing gating <span class="notranslate">workflow</span>”</em>: <code class="language-plaintext highlighter-rouge">exemplar_002_phenotypes.csv</code>, CSV phenotype <span class="notranslate">workflow</span> (Figure 5.)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the dataset containing gating workflow”</em>: <code class="language-plaintext highlighter-rouge">exemplar_002_phenotypes.csv</code>, CSV phenotype workflow (Figure 5.)</li>
         <li><em>“Save the GMM gates plots If True”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
 
@@ -1105,17 +1103,17 @@ For this, <span class="notranslate">Galaxy</span>-ME includes the alte<span clas
 
 <h1 id="interactive-visualization-of-multiplex-tissue-images">Interactive visualization of multiplex tissue images</h1>
 
-<p>Visual analysis is an important part of multiplex tissue imaging workflows. <span class="notranslate">Galaxy</span>-ME has several tools that make interactive visualization easy, and can be used at various stages of analysis.</p>
+<p>Visual analysis is an important part of multiplex tissue imaging workflows. Galaxy-ME has several tools that make interactive visualization easy, and can be used at various stages of analysis.</p>
 
 <h2 id="converting-unetcoreograph-images-to-ome-tiff-using-the-convert-image-tool">Converting UNetCoreograph images to OME-TIFF using the <strong>Convert image</strong> tool</h2>
 
-<p>UNetCoreograph outputs each individual core image in <code class="language-plaintext highlighter-rouge">tiff</code> format. Interactive visualization tools, such as <strong>Vitessce</strong> and <strong>Avivator</strong> require the images to be in <code class="language-plaintext highlighter-rouge">OME-TIFF</code> format to be viewed. <span class="notranslate">Galaxy</span>-ME includes a conversion tool that can accomodate this, along with many other useful conversion functions.</p>
+<p>UNetCoreograph outputs each individual core image in <code class="language-plaintext highlighter-rouge">tiff</code> format. Interactive visualization tools, such as <strong>Vitessce</strong> and <strong>Avivator</strong> require the images to be in <code class="language-plaintext highlighter-rouge">OME-TIFF</code> format to be viewed. Galaxy-ME includes a conversion tool that can accomodate this, along with many other useful conversion functions.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-convert-image" aria-label="hands-on box:  Convert image "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Convert image</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0"><strong>Convert image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0"><strong>Convert image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/imgteam/bfconvert/ip_convertimage/6.7.0+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input Image”</em>: <code class="language-plaintext highlighter-rouge">UNetCoreograph Images</code></li>
         <li><em>“Output data type”</em>: <code class="language-plaintext highlighter-rouge">OME TIFF</code></li>
@@ -1136,7 +1134,7 @@ For this, <span class="notranslate">Galaxy</span>-ME includes the alte<span clas
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/goeckslab/rename_tiff_channels/rename_tiff_channels/0.0.1+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/goeckslab/rename_tiff_channels/rename_tiff_channels/0.0.1+galaxy1"><strong>Rename OME-TIFF Channels</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/goeckslab/rename_tiff_channels/rename_tiff_channels/0.0.1+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/goeckslab/rename_tiff_channels/rename_tiff_channels/0.0.1+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/goeckslab/rename_tiff_channels/rename_tiff_channels/0.0.1+galaxy1"><strong>Rename OME-TIFF Channels</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/goeckslab/rename_tiff_channels/rename_tiff_channels/0.0.1+galaxy1</span></span>  with the following parameters:</p>
 
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input image in OME-tiff format”</em>: <code class="language-plaintext highlighter-rouge">Convert image</code></li>
@@ -1150,7 +1148,7 @@ For this, <span class="notranslate">Galaxy</span>-ME includes the alte<span clas
 
 <h2 id="initial-visualization-with-avivator">Initial visualization with <strong>Avivator</strong></h2>
 
-<p>For any <code class="language-plaintext highlighter-rouge">OME-TIFF</code> image in a <span class="notranslate">Galaxy</span>-ME history, there will be an option to view the image using <strong>Avivator</strong>. This is a great way to perform an initial inspection of an image for QC purposes before continuing with <span class="notranslate">downstream</span> steps. The <strong>Avivator</strong> window can be launched by expanding the dataset information in the history panel and clicking the link (Figure 7.).</p>
+<p>For any <code class="language-plaintext highlighter-rouge">OME-TIFF</code> image in a Galaxy-ME history, there will be an option to view the image using <strong>Avivator</strong>. This is a great way to perform an initial inspection of an image for QC purposes before continuing with downstream steps. The <strong>Avivator</strong> window can be launched by expanding the dataset information in the history panel and clicking the link (Figure 7.).</p>
 
 <figure id="figure-7"><img src="../../images/multiplex-tissue-imaging-TMA/ex2_avivatorHistory.png" alt="Screenshot shows a galaxy dataset expanded, and then the 'display at aviator' link expanded into a screenshot of Aviator showing a multicoloured histology slide." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> The highlighted link automatically appears for any OME-TIFF image (left) and, when clicked, launches an Avivator window to explore the image (right).</figcaption></figure>
 
@@ -1176,14 +1174,14 @@ For this, <span class="notranslate">Galaxy</span>-ME includes the alte<span clas
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/goeckslab/vitessce_spatial/vitessce_spatial/1.0.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/goeckslab/vitessce_spatial/vitessce_spatial/1.0.4+galaxy0"><strong>Vitessce Visualization</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/goeckslab/vitessce_spatial/vitessce_spatial/1.0.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/goeckslab/vitessce_spatial/vitessce_spatial/1.0.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/goeckslab/vitessce_spatial/vitessce_spatial/1.0.4+galaxy0"><strong>Vitessce Visualization</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/goeckslab/vitessce_spatial/vitessce_spatial/1.0.4+galaxy0</span></span>  with the following parameters:</p>
 
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select the OME Tiff image”</em>: OME-TIFF image to be viewed (or collection of files to run in batch)</li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select masks for the OME Tiff image (Optional)”</em>: Output of Mesmer (or other segmentation tool)</li>
         <li><em>“Whether to do phenotyping”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
           <ul>
-            <li><em>“Select the anndata contaning phenotyping info”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Single Cell</span> Phenotyping</code>, an anndata file that includes includes cell phenotype annotations.</li>
+            <li><em>“Select the anndata contaning phenotyping info”</em>: <code class="language-plaintext highlighter-rouge">Single Cell Phenotyping</code>, an anndata file that includes includes cell phenotype annotations.</li>
             <li><em>“Select an embedding algorithm for scatterplot”</em>: <code class="language-plaintext highlighter-rouge">UMAP</code></li>
             <li><em>“Input phenotyping keys”</em>: <code class="language-plaintext highlighter-rouge">Multiple choices</code>
               <ul>
@@ -1200,7 +1198,7 @@ For this, <span class="notranslate">Galaxy</span>-ME includes the alte<span clas
 
 <h1 id="next-steps-compositional-and-spatial-analyses">Next steps: Compositional and spatial analyses</h1>
 
-<p><span class="notranslate">Galaxy</span>-ME includes additional tools from <strong>Scimap</strong> and tools from the <strong>Squidpy</strong> package (<span class="citation"><a href="#Palla2022">Palla <i>et al.</i> 2022</a></span>) that can be used to perform a variety of <span class="notranslate">downstream</span> analyses. For example, once phenotypes have been assigned to individual cells, <strong>Squidpy</strong> has several methods for understanding the spatial organization of the tissue. Using <strong>Squidpy</strong>, a spatial neighborhood graph is first generated, from which the organization of specific phenotype groups and their interactions can be quantified.</p>
+<p>Galaxy-ME includes additional tools from <strong>Scimap</strong> and tools from the <strong>Squidpy</strong> package (<span class="citation"><a href="#Palla2022">Palla <i>et al.</i> 2022</a></span>) that can be used to perform a variety of downstream analyses. For example, once phenotypes have been assigned to individual cells, <strong>Squidpy</strong> has several methods for understanding the spatial organization of the tissue. Using <strong>Squidpy</strong>, a spatial neighborhood graph is first generated, from which the organization of specific phenotype groups and their interactions can be quantified.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-spatial-analysis-with-squidpy" aria-label="hands-on box:  Spatial analysis with Squidpy "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Spatial analysis with Squidpy</div>
@@ -1266,7 +1264,7 @@ For this, <span class="notranslate">Galaxy</span>-ME includes the alte<span clas
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>In this tutorial, we demonstrated a complete multiplex tissue imaging analysis <span class="notranslate">workflow</span> performed entirely in a web browser using <span class="notranslate">Galaxy</span>-ME. Using an example tissue microarray imaged with cylic immunofluoresence provided by MCMICRO, we…</p>
+<p>In this tutorial, we demonstrated a complete multiplex tissue imaging analysis workflow performed entirely in a web browser using Galaxy-ME. Using an example tissue microarray imaged with cylic immunofluoresence provided by MCMICRO, we…</p>
 
 <ul>
   <li>Corrected illumination between imaging tiles</li>
@@ -1274,12 +1272,12 @@ For this, <span class="notranslate">Galaxy</span>-ME includes the alte<span clas
   <li>Split the TMA into separate images for each core</li>
   <li>Processed each core in parallel, beginning with nuclear segmentation</li>
   <li>Quantified the mean marker intensities, morphological features, and spatial coordinates of each cell in each core</li>
-  <li>Converted the resulting tabular data to anndata format for convenient <span class="notranslate">downstream</span> anaylses and visualizations</li>
+  <li>Converted the resulting tabular data to anndata format for convenient downstream anaylses and visualizations</li>
   <li>Performed marker-based, automatically gated, phenotyping of cells</li>
   <li>Prepared the dearrayed images and viewed them interactively in a dashboard combined with observational data</li>
 </ul>
 
-<figure id="figure-12"><img src="../../images/multiplex-tissue-imaging-TMA/ex2_galaxyWF.png" alt="Image of a galaxy workflow with all of the tools from this tutorial." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> The entire <span class="notranslate">workflow</span> used in this tutorial.</figcaption></figure>
+<figure id="figure-12"><img src="../../images/multiplex-tissue-imaging-TMA/ex2_galaxyWF.png" alt="Image of a galaxy workflow with all of the tools from this tutorial." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> The entire workflow used in this tutorial.</figcaption></figure>
 
 
                 

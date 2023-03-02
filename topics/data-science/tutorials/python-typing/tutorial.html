@@ -586,7 +586,7 @@
 <span class="p">...</span>
 </code></pre></div></div>
 
-<p>or they can be relabeling of existing types, letting you create new types as needed to represent your inte<span class="notranslate">rna</span>l data structures</p>
+<p>or they can be relabeling of existing types, letting you create new types as needed to represent your internal data structures</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">NewType</span>
 
@@ -672,7 +672,7 @@ won’t know.</li>
 
 <p>And then defined on our function, e.g.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">GetUserAndCurrentHistory</span><span class="p">(</span><span class="n">use<span class="notranslate">rna</span>me</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">UserId</span><span class="p">,</span> <span class="n">HistoryId</span><span class="p">]:</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">GetUserAndCurrentHistory</span><span class="p">(</span><span class="n">username</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">UserId</span><span class="p">,</span> <span class="n">HistoryId</span><span class="p">]:</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">UserId</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># Pretend this is fetching from the database
 </span>    <span class="n">y</span> <span class="o">=</span> <span class="n">HistoryId</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># Likewise
 </span>    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -819,8 +819,8 @@ If you modified the line <code class="language-plaintext highlighter-rouge">y = 
 <p>You can use <code class="language-plaintext highlighter-rouge">mypy</code> to ensure that these type annotations are working in a project, this is a step you could add to your automated testing, if you have that. Using the <code class="language-plaintext highlighter-rouge">HistoryId</code>/<code class="language-plaintext highlighter-rouge">UserId</code> example from above, we can write that out into a script and test it out by running <code class="language-plaintext highlighter-rouge">mypy</code> on that file:</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>mypy tmp.py
-<span class="go">tmp.py:15: error: Incompatible types in assignment (<span class="notranslate">expression</span> has type "UserId", variable has type "HistoryId")
-tmp.py:15: error: Incompatible types in assignment (<span class="notranslate">expression</span> has type "HistoryId", variable has type "UserId")
+<span class="go">tmp.py:15: error: Incompatible types in assignment (expression has type "UserId", variable has type "HistoryId")
+tmp.py:15: error: Incompatible types in assignment (expression has type "HistoryId", variable has type "UserId")
 </span></code></pre></div></div>
 
 <p>Here it reports the errors in the console, and you can use this to prevent bad code from being committed.</p>

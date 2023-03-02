@@ -860,8 +860,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -941,9 +939,9 @@
 
 <p>In this tutorial we assemble and annotate the genome of <em>E. coli</em> strain <a href="http://cgsc2.biology.yale.edu/Strain.php?ID=8232">C-1</a>. This strain is routinely used in experimental evolution studies involving bacteriophages. For instance, now classic works by Holly Wichman and Jim Bull (<span class="citation"><a href="#Bull1997">Bull 1997</a></span>, <span class="citation"><a href="#Bull1998">Bull 1998</a></span>, <span class="citation"><a href="#Wichman1999">Wichman 1999</a></span>) have been performed using this strain and bacteriophage phiX174.</p>
 
-<p>To sequence the genome we have obtained the strain from the <a href="http://cgsc2.biology.yale.edu/">Yale E. coli Stock Center</a>. The stock center sent us a filter paper disk infused with cells. The disk was placed in the center of an LB-agar plate. A single colony was picked and resuspended in a liquid LB medium, grown overnight, and genomic <span class="notranslate">DNA</span> was isolated. The <span class="notranslate">DNA</span> was then sequenced using two methods. To obtain high coverage, high accuracy data we used Illumina miSEQ to generated 250-bp paired end <span class="notranslate">reads</span>. To generate high length <span class="notranslate">reads</span> we used the Oxford Nanopore MinION machine.</p>
+<p>To sequence the genome we have obtained the strain from the <a href="http://cgsc2.biology.yale.edu/">Yale E. coli Stock Center</a>. The stock center sent us a filter paper disk infused with cells. The disk was placed in the center of an LB-agar plate. A single colony was picked and resuspended in a liquid LB medium, grown overnight, and genomic DNA was isolated. The DNA was then sequenced using two methods. To obtain high coverage, high accuracy data we used Illumina miSEQ to generated 250-bp paired end reads. To generate high length reads we used the Oxford Nanopore MinION machine.</p>
 
-<p>Our goal is to reconstruct and annotate the full genome of <em>E. coli</em> C-1. As you will see in this tutorial a combination of many short, high accuracy <span class="notranslate">reads</span> with long, error-prone <span class="notranslate">reads</span> helps us produce an almost perfect assembly.</p>
+<p>Our goal is to reconstruct and annotate the full genome of <em>E. coli</em> C-1. As you will see in this tutorial a combination of many short, high accuracy reads with long, error-prone reads helps us produce an almost perfect assembly.</p>
 
 <blockquote class="agenda">
   <h3 id="outline-step-by-step">Outline step-by-step</h3>
@@ -973,19 +971,19 @@
 
 <h2 id="the-data">The data</h2>
 
-<p>In this tutorial we will assemble a genome using two types of input data: (1) Illumina 250 bp paired-end <span class="notranslate">reads</span> and (2) Oxford Nanopore <span class="notranslate">reads</span>.</p>
+<p>In this tutorial we will assemble a genome using two types of input data: (1) Illumina 250 bp paired-end reads and (2) Oxford Nanopore reads.</p>
 
 <h3 id="illumina-data">Illumina data</h3>
 
-<p>We generated 9,345,897 250 bp read pairs (library preparation performed on genomic <span class="notranslate">DNA</span> fragmented to mean size of 600 bp). However, to make sure that you can complete this tutorial in a finite amount of time we have downsampled (reduced in size) to 1,000,000 paired end <span class="notranslate">reads</span> - just enough to produce an accurate assembly.</p>
+<p>We generated 9,345,897 250 bp read pairs (library preparation performed on genomic DNA fragmented to mean size of 600 bp). However, to make sure that you can complete this tutorial in a finite amount of time we have downsampled (reduced in size) to 1,000,000 paired end reads - just enough to produce an accurate assembly.</p>
 
 <h3 id="oxford-nanopore-data">Oxford Nanopore Data</h3>
 
-<p>There are 12,738 <a href="http://www.nature.com/nmeth/journal/v12/n4/fig_tab/nmeth.3290_SF13.html">2d-<span class="notranslate">reads</span></a>. Maximum read length is 27,518 bp. The distribution of <span class="notranslate">reads</span> lengths looks like this:</p>
+<p>There are 12,738 <a href="http://www.nature.com/nmeth/journal/v12/n4/fig_tab/nmeth.3290_SF13.html">2d-reads</a>. Maximum read length is 27,518 bp. The distribution of reads lengths looks like this:</p>
 
 <figure id="figure-1"><img src="../../images/ont_length.png" alt="Nanopore read length distribution. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Distribution of nanopore read lengths.</figcaption></figure>
 
-<p>You can see that there many <span class="notranslate">reads</span> under the second peak with median of approximately 7.5 kb.</p>
+<p>You can see that there many reads under the second peak with median of approximately 7.5 kb.</p>
 
 <blockquote class="warning">
   <div class="box-title warning-title" id="warning-oxford-nanopore-data-format" aria-label="warning box: Oxford Nanopore Data Format"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Oxford Nanopore Data Format</div>
@@ -1009,7 +1007,7 @@
 
 <p>For assembly we will be using <a href="https://github.com/rrwick/Unicycler">Unicycler</a> (also see publication <span class="citation"><a href="#Wick2017">Wick <i>et al.</i> 2017</a></span>). Unicycler is designed specifically for <em>hybrid assembly</em> (that is, using both short- and long-read sequencing data) of small (e.g., bacterial, viral, organellar) genomes. In our hands it has produced complete high quality assemblies. Unicycler employs a multi-step process that utilizes a number of software tools:</p>
 
-<figure id="figure-2"><img src="../../images/unicycler.png" alt="Unicycler process. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Simplified view of the Unicycler assembly process (From <span class="citation"><a href="#Wick2017">Wick <i>et al.</i> 2017</a></span>) In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long <span class="notranslate">reads</span> to produce the longest possible set of contigs. These are then polished by aligning the original short <span class="notranslate">reads</span> against contigs and feeding these alignments to Pilon - an assembly improvement tool. <span class="citation"><a href="#Wick2017">Wick <i>et al.</i> 2017</a></span></figcaption></figure>
+<figure id="figure-2"><img src="../../images/unicycler.png" alt="Unicycler process. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Simplified view of the Unicycler assembly process (From <span class="citation"><a href="#Wick2017">Wick <i>et al.</i> 2017</a></span>) In short, Unicycler uses SPAdes (see below) to produce an assembly graph, which is then bridged (simplified) using long reads to produce the longest possible set of contigs. These are then polished by aligning the original short reads against contigs and feeding these alignments to Pilon - an assembly improvement tool. <span class="citation"><a href="#Wick2017">Wick <i>et al.</i> 2017</a></span></figcaption></figure>
 
 <p>As you can see Unicycler relies heavily on SPAdes (<span class="citation"><a href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a></span>) and <a href="https://github.com/broadinstitute/pilon/wiki">Pilon</a>. We will briefly describe these two tools.</p>
 
@@ -1019,34 +1017,34 @@
 
 <p>Assemblers usually construct graphs for <em>k</em>-mers of a fixed size. We have noted that when <em>k</em> is small it is difficult to resolve the repeats. If <em>k</em> is too large a corresponding graph may be fragmented (especially if read coverage is low). SPAdes uses several values for <em>k</em> (that are either manually set or inferred automatically) to create a <em>multisized</em> graph that minimized tangledness and fragmentation by combining various <em>k</em>-mers (<span class="citation"><a href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a></span>)):</p>
 
-<figure id="figure-3"><img src="../../images/multiGraph.jpg" alt="Multigraph approach implemented in SPAdes. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Multisized de Bruijn graph. A circular Genome CATCAGATAGGA is covered by a set of <span class="notranslate">Reads</span> consisting of nine 4-mers, {ACAT, CATC, ATCA, TCAG, CAGA, AGAT, GATA, TAGG, GGAC}. Three out of 12 possible 4-mers from Genome are missing from <span class="notranslate">Reads</span> (namely {ATAG,AGGA,GACA}), but all 3-mers from the Genome are present in the <span class="notranslate">Reads</span>. (A) The outside circle shows a separate black edge for each 3-mer from <span class="notranslate">Reads</span>. Dotted red lines indicate vertices that will be glued. The inner circle shows the result of applying some of the glues. (B) The graph DB(<span class="notranslate">Reads</span>, 3) resulting from all the glues is tangled. The three h-paths of length 2 in this graph (shown in blue) correspond to h-<span class="notranslate">reads</span> ATAG, AGGA, and GACA. Thus <span class="notranslate">Reads</span><sub>3,4</sub> contains all 4-mers from Genome. (C) The outside circle shows a separate edge for each of the nine 4-mer <span class="notranslate">reads</span>. The next inner circle shows the graph DB(<span class="notranslate">Reads</span>, 4), and the innermost circle represents the Genome. The graph DB(<span class="notranslate">Reads</span>, 4) is fragmented into 3 connected components. (D) The multisized de Bruijn graph DB (<span class="notranslate">Reads</span>, 3, 4). Figure and text from <span class="citation"><a href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a></span>.</figcaption></figure>
+<figure id="figure-3"><img src="../../images/multiGraph.jpg" alt="Multigraph approach implemented in SPAdes. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Multisized de Bruijn graph. A circular Genome CATCAGATAGGA is covered by a set of Reads consisting of nine 4-mers, {ACAT, CATC, ATCA, TCAG, CAGA, AGAT, GATA, TAGG, GGAC}. Three out of 12 possible 4-mers from Genome are missing from Reads (namely {ATAG,AGGA,GACA}), but all 3-mers from the Genome are present in the Reads. (A) The outside circle shows a separate black edge for each 3-mer from Reads. Dotted red lines indicate vertices that will be glued. The inner circle shows the result of applying some of the glues. (B) The graph DB(Reads, 3) resulting from all the glues is tangled. The three h-paths of length 2 in this graph (shown in blue) correspond to h-reads ATAG, AGGA, and GACA. Thus Reads<sub>3,4</sub> contains all 4-mers from Genome. (C) The outside circle shows a separate edge for each of the nine 4-mer reads. The next inner circle shows the graph DB(Reads, 4), and the innermost circle represents the Genome. The graph DB(Reads, 4) is fragmented into 3 connected components. (D) The multisized de Bruijn graph DB (Reads, 3, 4). Figure and text from <span class="citation"><a href="#Bankevich2012">Bankevich <i>et al.</i> 2012</a></span>.</figcaption></figure>
 
 <h5 id="read-pair-utilization">Read pair utilization</h5>
 
-<p>While the use of paired <span class="notranslate">reads</span> and mate pairs is key to genome assembly, and not new, SPAdes utilizes so called paired DeBruin graphs to take the advantage of the paired end data. One of the key issues with paired DeBruin graphs is that the resulting genome assemblies do not tolerate variability in insert sizes: The initial formulation of paired DeBruijn graphs assumed constant distance between pairs of <span class="notranslate">reads</span>. In practice this distance is always variable. SPAdes performs <em>k</em>-bimer (these are <em>k</em>-mers derived from <em>paired</em> <span class="notranslate">reads</span>) adjustment to identify exact or nearly-exact distances for each <em>k</em>-bimer pair.</p>
+<p>While the use of paired reads and mate pairs is key to genome assembly, and not new, SPAdes utilizes so called paired DeBruin graphs to take the advantage of the paired end data. One of the key issues with paired DeBruin graphs is that the resulting genome assemblies do not tolerate variability in insert sizes: The initial formulation of paired DeBruijn graphs assumed constant distance between pairs of reads. In practice this distance is always variable. SPAdes performs <em>k</em>-bimer (these are <em>k</em>-mers derived from <em>paired</em> reads) adjustment to identify exact or nearly-exact distances for each <em>k</em>-bimer pair.</p>
 
 <h5 id="error-correction">Error correction</h5>
 
-<p>Sequencing data contains a substantial number of sequencing errors that manifest themselves as deviations (bulges and non-connected components) within the assembly graph. One way to improve the graph before assembly it is to minimize the number of sequencing errors by performing error correction. SPAdes uses BayesHammer (<span class="citation"><a href="#Nikolenko2013">Nikolenko <i>et al.</i> 2013</a></span>) to correct the <span class="notranslate">reads</span>. Here is a brief summary of what it does:</p>
+<p>Sequencing data contains a substantial number of sequencing errors that manifest themselves as deviations (bulges and non-connected components) within the assembly graph. One way to improve the graph before assembly it is to minimize the number of sequencing errors by performing error correction. SPAdes uses BayesHammer (<span class="citation"><a href="#Nikolenko2013">Nikolenko <i>et al.</i> 2013</a></span>) to correct the reads. Here is a brief summary of what it does:</p>
 
 <ol>
-  <li>SPAdes (or rather BayesHammer) counts <em>k</em>-mers in <span class="notranslate">reads</span> and computes <em>k</em>-mer statistics that take into account base quality values.</li>
+  <li>SPAdes (or rather BayesHammer) counts <em>k</em>-mers in reads and computes <em>k</em>-mer statistics that take into account base quality values.</li>
   <li>A <a href="https://en.wikipedia.org/wiki/Hamming_graph">Hamming graph</a> is constructed in which <em>k</em>-mers are nodes. In this graph edges connect nodes (<em>k</em>-mers) if they differ from each other by a number of nucleotides up to a certain threshold (the <a href="https://en.wikipedia.org/wiki/Hamming_distance">Hamming distance</a>). The graph is central to the error correction algorithm.</li>
   <li>Then Bayesian subclustering is done on the graph from the previous step. For each <em>k</em>-mer we now know the center of its subcluster.</li>
   <li><strong>Solid</strong> <em>k</em>-mers are derived from cluster centers and are assumed to be <em>error free</em>.</li>
-  <li>Solid <em>k</em>-mers are mapped back to the <span class="notranslate">reads</span>.</li>
-  <li><span class="notranslate">Reads</span> are corrected using solid <em>k</em>-mers:</li>
+  <li>Solid <em>k</em>-mers are mapped back to the reads.</li>
+  <li>Reads are corrected using solid <em>k</em>-mers:</li>
 </ol>
 
 <figure id="figure-4"><img src="../../images/readCorrection.jpg" alt="Read correction with BayesHammer. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Read correction. Black <em>k</em>-mers are solid. Grey <em>k</em>-mers are non-solid. Red <em>k</em>-mers are the centers of the corresponding clusters (two grey <em>k</em>-mers striked through on the right are non-solid singletons). As a result, one nucleotide is changed based on majority rule. (From <span class="citation"><a href="#Nikolenko2013">Nikolenko <i>et al.</i> 2013</a></span>)</figcaption></figure>
 
-<p>In the case of the full dataset, SPAdes error correction changed 14,013,757 bases in 3,382,337 <span class="notranslate">reads</span> - a substantial fraction of the full ~18 million read dataset.</p>
+<p>In the case of the full dataset, SPAdes error correction changed 14,013,757 bases in 3,382,337 reads - a substantial fraction of the full ~18 million read dataset.</p>
 
 <h4 id="pilon">Pilon</h4>
 
-<p>Pilon improves draft assemblies by using the information from the original <span class="notranslate">reads</span> aligned to the draft assembly. The following image from a publication by <span class="citation"><a href="#Walker2014">Walker <i>et al.</i> 2014</a></span> highlights the steps of this process:</p>
+<p>Pilon improves draft assemblies by using the information from the original reads aligned to the draft assembly. The following image from a publication by <span class="citation"><a href="#Walker2014">Walker <i>et al.</i> 2014</a></span> highlights the steps of this process:</p>
 
-<figure id="figure-5"><img src="../../images/pilon.png" alt="Pilon workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> The left column depicts the conceptual steps of the Pilon process, and the center and right columns describe what Pilon does at each step while in assembly improvement and variant detection modes, respectively. During the first step (top row), Pilon scans the read alignments for evidence where the sequencing data disagree with the input genome and makes corrections to small errors and detects small variants. During the second step (second row), Pilon looks for coverage and alignment discrepancies to identify potential mis-assemblies and larger variants. Finally (bottom row), Pilon uses <span class="notranslate">reads</span> and mate pairs which are anchored to the flanks of discrepant regions and gaps in the input genome to reassemble the area, attempting to fill in the true sequence including large insertions. The resulting output is an improved assembly and/or a VCF file of variants. (From <span class="citation"><a href="#Walker2014">Walker <i>et al.</i> 2014</a></span>)</figcaption></figure>
+<figure id="figure-5"><img src="../../images/pilon.png" alt="Pilon workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> The left column depicts the conceptual steps of the Pilon process, and the center and right columns describe what Pilon does at each step while in assembly improvement and variant detection modes, respectively. During the first step (top row), Pilon scans the read alignments for evidence where the sequencing data disagree with the input genome and makes corrections to small errors and detects small variants. During the second step (second row), Pilon looks for coverage and alignment discrepancies to identify potential mis-assemblies and larger variants. Finally (bottom row), Pilon uses reads and mate pairs which are anchored to the flanks of discrepant regions and gaps in the input genome to reassemble the area, attempting to fill in the true sequence including large insertions. The resulting output is an improved assembly and/or a VCF file of variants. (From <span class="citation"><a href="#Walker2014">Walker <i>et al.</i> 2014</a></span>)</figcaption></figure>
 
 <h3 id="annotation">Annotation</h3>
 
@@ -1065,11 +1063,11 @@
       <td><a href="https://github.com/hyattpd/Prodigal">Prodigal</a></td>
     </tr>
     <tr>
-      <td>Ribosomal <span class="notranslate">RNA</span> genes</td>
-      <td><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1888812"><span class="notranslate">RNA</span>mmer</a></td>
+      <td>Ribosomal RNA genes</td>
+      <td><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1888812">RNAmmer</a></td>
     </tr>
     <tr>
-      <td>Transfer <span class="notranslate">RNA</span> genes</td>
+      <td>Transfer RNA genes</td>
       <td><a href="https://www.ncbi.nlm.nih.gov/pubmed/14704338">Aragorn</a></td>
     </tr>
     <tr>
@@ -1077,8 +1075,8 @@
       <td><a href="https://www.ncbi.nlm.nih.gov/pubmed/21959131">SignalP</a></td>
     </tr>
     <tr>
-      <td>Non-coding <span class="notranslate">RNA</span> genes</td>
-      <td><a href="http://eddylab.org/infernal/">Infe<span class="notranslate">rna</span>l</a></td>
+      <td>Non-coding RNA genes</td>
+      <td><a href="http://eddylab.org/infernal/">Infernal</a></td>
     </tr>
   </tbody>
 </table>
@@ -1089,7 +1087,7 @@
 
 <h2 id="load-data-and-assess-quality">Load data and assess quality</h2>
 
-<p>In this example we will use a downsampled version of <em>E. coli</em> C-1 Illumina and ONT sequencing data. These include 3 files: forward and reverse <span class="notranslate">reads</span> for Illumina, and Long read file produced by ONT. All data are in <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq</a> format.</p>
+<p>In this example we will use a downsampled version of <em>E. coli</em> C-1 Illumina and ONT sequencing data. These include 3 files: forward and reverse reads for Illumina, and Long read file produced by ONT. All data are in <a href="https://en.wikipedia.org/wiki/FASTQ_format">fastq</a> format.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-obtaining-our-data" aria-label="hands-on box: Obtaining our data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Obtaining our data</div>
@@ -1099,7 +1097,7 @@
       <p>Make sure you have an empty analysis history. Give it a name.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the following file from <a href="https://zenodo.org/record/940733">Zenodo</a></p>
@@ -1110,9 +1108,9 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1120,7 +1118,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 
 <p>If all goes well you will see datasets uploading and changing states from gray to green as shown below. The figure below also shows how datasets can be tagged.</p>
 
-<figure id="figure-6"><img src="../../images/starting_data.png" alt="Datasets in History. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Sequencing data loaded into <span class="notranslate">Galaxy</span> history. The full progression from gray (scheduling) to green (all OK) state is shown. To make it easier to identify datasets as we progress through the analysis we use so-called <em>Hashtags</em>. To tag a dataset: click on dataset to expand it (as shown in panel four); click the tag icon (<i class="fa fa-tags" aria-hidden="true"></i>) and a text field will appear. Add a tag (in this case <b>F</b>) pre-pended with hash (#). Hit enter. Do this for all three datasets and it will appear as in panel five.</figcaption></figure>
+<figure id="figure-6"><img src="../../images/starting_data.png" alt="Datasets in History. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Sequencing data loaded into Galaxy history. The full progression from gray (scheduling) to green (all OK) state is shown. To make it easier to identify datasets as we progress through the analysis we use so-called <em>Hashtags</em>. To tag a dataset: click on dataset to expand it (as shown in panel four); click the tag icon (<i class="fa fa-tags" aria-hidden="true"></i>) and a text field will appear. Add a tag (in this case <b>F</b>) pre-pended with hash (#). Hit enter. Do this for all three datasets and it will appear as in panel five.</figcaption></figure>
 
 <h3 id="assess-read-quality">Assess Read Quality</h3>
 
@@ -1151,11 +1149,11 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 
 <p>A quick look at quality score distribution will show a confusing picture:</p>
 
-<figure id="figure-7"><img src="../../images/multiqc1.png" alt="QC reported zoomed out. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Because Illumina <span class="notranslate">reads</span> (green) are <b>much</b> shorter that ONT <span class="notranslate">reads</span> (red) the plot looks strange. ONT <span class="notranslate">reads</span> generally have low quality scores and so they are not really meaningful in the context of this technology. However, in the case of Illumina data they mean a lot...</figcaption></figure>
+<figure id="figure-7"><img src="../../images/multiqc1.png" alt="QC reported zoomed out. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Because Illumina reads (green) are <b>much</b> shorter that ONT reads (red) the plot looks strange. ONT reads generally have low quality scores and so they are not really meaningful in the context of this technology. However, in the case of Illumina data they mean a lot...</figcaption></figure>
 
 <p>So let’s zoom in into Illumina data:</p>
 
-<figure id="figure-8"><img src="../../images/multiqc2.png" alt="QC reported zoomed in. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Zooming in shows quality distribution for Illumina <span class="notranslate">reads</span>. This is excellent data with mean base qualities above 30 across all <span class="notranslate">reads</span>.</figcaption></figure>
+<figure id="figure-8"><img src="../../images/multiqc2.png" alt="QC reported zoomed in. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Zooming in shows quality distribution for Illumina reads. This is excellent data with mean base qualities above 30 across all reads.</figcaption></figure>
 
 <h2 id="assembly-with-unicycler">Assembly with Unicycler</h2>
 
@@ -1168,9 +1166,9 @@ https://zenodo.org/record/940733/files/minion_2d.fq
     <li><strong>Unicycler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters :
       <ul>
         <li>“Paired or Single end data?” to <code class="language-plaintext highlighter-rouge">Paired</code></li>
-        <li>“First Set of <span class="notranslate">reads</span>” to the forward <span class="notranslate">reads</span> file <code class="language-plaintext highlighter-rouge">f</code></li>
-        <li>“Second Set of <span class="notranslate">reads</span>” to the reverse <span class="notranslate">reads</span> file <code class="language-plaintext highlighter-rouge">r</code></li>
-        <li>“Long <span class="notranslate">reads</span>” to the MinION file</li>
+        <li>“First Set of reads” to the forward reads file <code class="language-plaintext highlighter-rouge">f</code></li>
+        <li>“Second Set of reads” to the reverse reads file <code class="language-plaintext highlighter-rouge">r</code></li>
+        <li>“Long reads” to the MinION file</li>
         <li>Use default parameters</li>
       </ul>
     </li>
@@ -1229,7 +1227,7 @@ https://zenodo.org/record/940733/files/minion_2d.fq
 <p>Prokka outputs 10 datasets (including two log files). These are in various formats:</p>
 
 <ul>
-  <li><strong>txt</strong> : Provides Statistics on the annotation : number of CDS predicted, number of r<span class="notranslate">RNA</span> etc.</li>
+  <li><strong>txt</strong> : Provides Statistics on the annotation : number of CDS predicted, number of rRNA etc.</li>
   <li><strong>tbl</strong> : Provides a tabulated list of annotated features.</li>
   <li><strong>fsa</strong> : Nucleotide fasta file of the input contig sequence.</li>
   <li><strong>sqn</strong> : <a href="https://www.ncbi.nlm.nih.gov/Structure/asn1.html">ASN.1</a> format file for submission to GenBank.</li>

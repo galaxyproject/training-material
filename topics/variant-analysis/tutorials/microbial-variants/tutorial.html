@@ -889,8 +889,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -972,11 +970,11 @@
 
 <p>Imagine that you have been asked to find the differences between a sample that has been sequenced and a known genome. For example: You have a new sample from a patient and you want to see if it has any differences from a well known reference genome of the same species. Typically, you would have a couple of fastq read files sent back to you from the sequencing provider and either an annotated or non annotated reference genome.</p>
 
-<p>In this tutorial, we will use the tool “Snippy” (see <a href="https://github.com/tseemann/snippy">author development repository</a>) to find high confidence differences (indels or SNPs) between our known genome and our <span class="notranslate">reads</span>. Snippy uses one tool to align the <span class="notranslate">reads</span> to the reference genome, and another tool to decide (“call”) if any of the resulting discrepancies are real variants or technical artifacts that can be ignored. Finally, Snippy uses another tool to check what effect these differences have on the predicted genes - truncation, frame shift or if the changes are synonymous.</p>
+<p>In this tutorial, we will use the tool “Snippy” (see <a href="https://github.com/tseemann/snippy">author development repository</a>) to find high confidence differences (indels or SNPs) between our known genome and our reads. Snippy uses one tool to align the reads to the reference genome, and another tool to decide (“call”) if any of the resulting discrepancies are real variants or technical artifacts that can be ignored. Finally, Snippy uses another tool to check what effect these differences have on the predicted genes - truncation, frame shift or if the changes are synonymous.</p>
 
-<p>For the read alignment (read <span class="notranslate">mapping</span>) step, Snippy uses BWA MEM with a custom set of settings which are very suitable to aligning <span class="notranslate">reads</span> for microbial type data. For the variant calling step, Snippy uses Freebayes with a custom set of settings. snpeff is then used to describe what the predicted changes do in terms of the genes themselves.</p>
+<p>For the read alignment (read mapping) step, Snippy uses BWA MEM with a custom set of settings which are very suitable to aligning reads for microbial type data. For the variant calling step, Snippy uses Freebayes with a custom set of settings. snpeff is then used to describe what the predicted changes do in terms of the genes themselves.</p>
 
-<p>The <span class="notranslate">Galaxy</span> wrapper for Snippy has the ability to change some of the underlying tool settings in the advanced section but it is not recommended.</p>
+<p>The Galaxy wrapper for Snippy has the ability to change some of the underlying tool settings in the advanced section but it is not recommended.</p>
 
 <p>Read more about SNP calling <a href="https://en.wikipedia.org/wiki/SNV_calling_from_NGS_data">at Wikipedia</a>.</p>
 
@@ -1000,12 +998,12 @@
 
 <p>The data for today is a subset of a real dataset from a <em>Staphylococcus aureus</em> bacteria.
 We have a closed genome sequence and an annotation for our “wildtype” strain.
-We have used a whole genome shotgun approach to produce a set of short sequence <span class="notranslate">reads</span> on an Illumina <span class="notranslate">DNA</span> sequencing instrument for our mutant strain.</p>
+We have used a whole genome shotgun approach to produce a set of short sequence reads on an Illumina DNA sequencing instrument for our mutant strain.</p>
 
 <ul>
-  <li>The <span class="notranslate">reads</span> are paired-end</li>
+  <li>The reads are paired-end</li>
   <li>Each read is on average 150 bases</li>
-  <li>The <span class="notranslate">reads</span> would cover the original wildtype genome to a depth of 19x</li>
+  <li>The reads would cover the original wildtype genome to a depth of 19x</li>
 </ul>
 
 <p>The files we will be using are:</p>
@@ -1040,7 +1038,7 @@ https://zenodo.org/record/582600/files/wildtype.gff
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1048,9 +1046,9 @@ https://zenodo.org/record/582600/files/wildtype.gff
 
 <h1 id="find-variants-with-snippy">Find variants with Snippy</h1>
 
-<p>We will now run the Snippy tool on our <span class="notranslate">reads</span>, comparing it to the reference.</p>
+<p>We will now run the Snippy tool on our reads, comparing it to the reference.</p>
 
-<p>Snippy is a tool for rapid bacterial SNP calling and core genome alignments. Snippy finds SNPs between a haploid reference genome and your NGS sequence <span class="notranslate">reads</span>. It will find both substitutions (snps) and insertions/deletions (indels).</p>
+<p>Snippy is a tool for rapid bacterial SNP calling and core genome alignments. Snippy finds SNPs between a haploid reference genome and your NGS sequence reads. It will find both substitutions (snps) and insertions/deletions (indels).</p>
 
 <p>If we give Snippy an annotated reference, it will silently run a tool called SnpEff which will figure out the effect of any changes on the genes and other features. If we just give Snippy the reference sequence alone without the annotations, it will not run SnpEff.</p>
 
@@ -1063,9 +1061,9 @@ https://zenodo.org/record/582600/files/wildtype.gff
     <li><strong>Snippy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li>“Reference File” to the <code class="language-plaintext highlighter-rouge">wildtype.gbk</code> file (if the genbank file is not selectable, make sure to change its datatype to ‘genbank’)</li>
-        <li>“Single or Paired-end <span class="notranslate">reads</span>” to <code class="language-plaintext highlighter-rouge">Paired</code></li>
-        <li>“Select first set of <span class="notranslate">reads</span>” to <code class="language-plaintext highlighter-rouge">mutant_R1.fastq</code></li>
-        <li>“Select second set of <span class="notranslate">reads</span>” to <code class="language-plaintext highlighter-rouge">mutant_R2.fastq</code></li>
+        <li>“Single or Paired-end reads” to <code class="language-plaintext highlighter-rouge">Paired</code></li>
+        <li>“Select first set of reads” to <code class="language-plaintext highlighter-rouge">mutant_R1.fastq</code></li>
+        <li>“Select second set of reads” to <code class="language-plaintext highlighter-rouge">mutant_R2.fastq</code></li>
         <li>Select all outputs</li>
       </ul>
     </li>
@@ -1075,7 +1073,7 @@ https://zenodo.org/record/582600/files/wildtype.gff
 
 <h1 id="examine-snippy-output">Examine Snippy output</h1>
 
-<p>Snippy has taken the <span class="notranslate">reads</span>, mapped them against the reference using BWA MEM, looked through the resulting BAM file and found differences using some fancy Bayesian statistics (Freebayes), filtered the differences for sensibility and finally checked what effect these differences will have on the predicted genes and other features in the genome.</p>
+<p>Snippy has taken the reads, mapped them against the reference using BWA MEM, looked through the resulting BAM file and found differences using some fancy Bayesian statistics (Freebayes), filtered the differences for sensibility and finally checked what effect these differences will have on the predicted genes and other features in the genome.</p>
 
 <p>It produces quite a bit of output, there can be up to 10 output files.</p>
 
@@ -1116,12 +1114,12 @@ https://zenodo.org/record/582600/files/wildtype.gff
       <td>A version of the reference genome with all variants instantiated</td>
     </tr>
     <tr>
-      <td><span class="notranslate">mapping</span> depth</td>
-      <td>A table of the <span class="notranslate">mapping</span> depth</td>
+      <td>mapping depth</td>
+      <td>A table of the mapping depth</td>
     </tr>
     <tr>
-      <td>mapped <span class="notranslate">reads</span> bam</td>
-      <td>A BAM file containing all of the mapped <span class="notranslate">reads</span></td>
+      <td>mapped reads bam</td>
+      <td>A BAM file containing all of the mapped reads</td>
     </tr>
     <tr>
       <td>outdir</td>
@@ -1174,7 +1172,7 @@ Wildtype    190866  del GTT GT  GT:18 GTT:0 CDS -   28/1356 10/451  frameshift_v
 
 <h1 id="view-snippy-output-in-jbrowse">View Snippy output in JBrowse</h1>
 
-<p>We could go through all of the variants like this and read them out of a text table, but this is onerous and doesn’t really give the context of the changes very well. It would be much nicer to have a visualisation of the SNPs and the other relevant data. In <span class="notranslate">Galaxy</span> we can use a tool called JBrowse.</p>
+<p>We could go through all of the variants like this and read them out of a text table, but this is onerous and doesn’t really give the context of the changes very well. It would be much nicer to have a visualisation of the SNPs and the other relevant data. In Galaxy we can use a tool called JBrowse.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-run-jbrowse" aria-label="hands-on box: Run JBrowse"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run JBrowse</div>
@@ -1190,16 +1188,16 @@ Wildtype    190866  del GTT GT  GT:18 GTT:0 CDS -   28/1356 10/451  frameshift_v
         </li>
         <li>“Produce Standalone Instance” to <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li>“Genetic Code” to <code class="language-plaintext highlighter-rouge">11: The Bacterial, Archaeal and Plant Plastid Code</code></li>
-        <li>“JBrowse-in-<span class="notranslate">Galaxy</span> Action” to <code class="language-plaintext highlighter-rouge">New JBrowse Instance</code></li>
+        <li>“JBrowse-in-Galaxy Action” to <code class="language-plaintext highlighter-rouge">New JBrowse Instance</code></li>
         <li>
           <p>“Track Group”</p>
 
-          <p>We will now set up three different tracks - these are datasets displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format). We will choose to display the sequence <span class="notranslate">reads</span> (the .bam file), the variants found by snippy (the .gff file) and the annotated reference genome (the wildtype.gff)</p>
+          <p>We will now set up three different tracks - these are datasets displayed underneath the reference sequence (which is displayed as nucleotides in FASTA format). We will choose to display the sequence reads (the .bam file), the variants found by snippy (the .gff file) and the annotated reference genome (the wildtype.gff)</p>
 
           <ul>
-            <li><strong>Track 1 - sequence <span class="notranslate">reads</span></strong>: Click on <code class="language-plaintext highlighter-rouge">Insert Track Group</code> and fill it with
+            <li><strong>Track 1 - sequence reads</strong>: Click on <code class="language-plaintext highlighter-rouge">Insert Track Group</code> and fill it with
               <ul>
-                <li>“Track Category” to <code class="language-plaintext highlighter-rouge">sequence <span class="notranslate">reads</span></code></li>
+                <li>“Track Category” to <code class="language-plaintext highlighter-rouge">sequence reads</code></li>
                 <li>Click on <code class="language-plaintext highlighter-rouge">Insert Annotation Track</code> and fill it with
                   <ul>
                     <li>“Track Type” to <code class="language-plaintext highlighter-rouge">BAM Pileups</code></li>
@@ -1215,8 +1213,8 @@ Wildtype    190866  del GTT GT  GT:18 GTT:0 CDS -   28/1356 10/451  frameshift_v
                 <li>“Track Category” to <code class="language-plaintext highlighter-rouge">variants</code></li>
                 <li>Click on <code class="language-plaintext highlighter-rouge">Insert Annotation Track</code> and fill it with
                   <ul>
-                    <li>“Track Type” to <code class="language-plaintext highlighter-rouge">GFF/GFF3/<span class="notranslate">BED</span> Features</code></li>
-                    <li>“GFF/GFF3/<span class="notranslate">BED</span> Track Data” to <code class="language-plaintext highlighter-rouge">snippy snps gff file</code></li>
+                    <li>“Track Type” to <code class="language-plaintext highlighter-rouge">GFF/GFF3/BED Features</code></li>
+                    <li>“GFF/GFF3/BED Track Data” to <code class="language-plaintext highlighter-rouge">snippy snps gff file</code></li>
                     <li>“Track Visibility” to <code class="language-plaintext highlighter-rouge">On for new users</code></li>
                   </ul>
                 </li>
@@ -1227,8 +1225,8 @@ Wildtype    190866  del GTT GT  GT:18 GTT:0 CDS -   28/1356 10/451  frameshift_v
                 <li>“Track Category” to <code class="language-plaintext highlighter-rouge">annotated reference</code></li>
                 <li>Click on <code class="language-plaintext highlighter-rouge">Insert Annotation Track</code> and fill it with
                   <ul>
-                    <li>“Track Type” to <code class="language-plaintext highlighter-rouge">GFF/GFF3/<span class="notranslate">BED</span> Features</code></li>
-                    <li>“GFF/GFF3/<span class="notranslate">BED</span> Track Data” to <code class="language-plaintext highlighter-rouge">wildtype.gff</code></li>
+                    <li>“Track Type” to <code class="language-plaintext highlighter-rouge">GFF/GFF3/BED Features</code></li>
+                    <li>“GFF/GFF3/BED Track Data” to <code class="language-plaintext highlighter-rouge">wildtype.gff</code></li>
                     <li>“JBrowse Track Type [Advanced]” to <code class="language-plaintext highlighter-rouge">Canvas Features</code></li>
                     <li>Click on “JBrowse Styling Options [Advanced]”</li>
                     <li>“JBrowse style.label” to <code class="language-plaintext highlighter-rouge">product</code></li>
@@ -1245,7 +1243,7 @@ Wildtype    190866  del GTT GT  GT:18 GTT:0 CDS -   28/1356 10/451  frameshift_v
   </ol>
 </blockquote>
 
-<p>A new dataset will be created in your history, containing the JBrowse interactive visualisation. We will now view its contents and play with it by clicking the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon of the <code class="language-plaintext highlighter-rouge">JBrowse on data XX and data XX - Complete</code> dataset. The JBrowse window will appear in the centre <span class="notranslate">Galaxy</span> panel.</p>
+<p>A new dataset will be created in your history, containing the JBrowse interactive visualisation. We will now view its contents and play with it by clicking the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the <code class="language-plaintext highlighter-rouge">JBrowse on data XX and data XX - Complete</code> dataset. The JBrowse window will appear in the centre Galaxy panel.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-inspecting-the-snps-using-jbrowse" aria-label="hands-on box: Inspecting the SNPs using JBrowse"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Inspecting the SNPs using JBrowse</div>
@@ -1253,7 +1251,7 @@ Wildtype    190866  del GTT GT  GT:18 GTT:0 CDS -   28/1356 10/451  frameshift_v
     <li>Display all the tracks and practice maneuvering around
       <ol>
         <li>Click on the tick boxes on the left to display the tracks</li>
-        <li>Zoom out by clicking on the <code class="language-plaintext highlighter-rouge">minus</code> button to see sequence <span class="notranslate">reads</span> and their coverage (the grey graph)</li>
+        <li>Zoom out by clicking on the <code class="language-plaintext highlighter-rouge">minus</code> button to see sequence reads and their coverage (the grey graph)</li>
         <li>Zoom in by clicking on the <code class="language-plaintext highlighter-rouge">plus</code> button to see
           <ul>
             <li>probable real variants (a whole column of SNPs)</li>

@@ -961,14 +961,14 @@ The environment_variables would be needed to retrieve data from Galaxy History. 
 
 -->
 
-<p>This tutorial demonstrates how to build and deploy a <span class="notranslate">Galaxy</span> Interactive Tool (GxIT). GxITs are accessible through the <span class="notranslate">Galaxy</span> tool panel, like any installed <span class="notranslate">Galaxy</span> tool. Our example application is a simple R Shiny app that we call <code class="language-plaintext highlighter-rouge">Tabulator</code>.</p>
+<p>This tutorial demonstrates how to build and deploy a Galaxy Interactive Tool (GxIT). GxITs are accessible through the Galaxy tool panel, like any installed Galaxy tool. Our example application is a simple R Shiny app that we call <code class="language-plaintext highlighter-rouge">Tabulator</code>.</p>
 
-<p>There are three elements to a GxIT - an application script, a Docker container and a <span class="notranslate">Galaxy</span> tool XML file. This tutorial will take you through creating those components, and installing them as a new Interactive Tool into a local <span class="notranslate">Galaxy</span> instance and an existing <span class="notranslate">Galaxy</span> instance.</p>
+<p>There are three elements to a GxIT - an application script, a Docker container and a Galaxy tool XML file. This tutorial will take you through creating those components, and installing them as a new Interactive Tool into a local Galaxy instance and an existing Galaxy instance.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-if-you-plan-to-use-an-existing-galaxy-instance" aria-label="comment box: If you plan to use an existing Galaxy instance"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: If you plan to use an existing <span class="notranslate">Galaxy</span> instance</div>
-  <p>The <span class="notranslate">Galaxy</span> server requires specific configuration in order to run Interactive Tools! Please refer to <a href="/training-material/topics/admin/tutorials/interactive-tools/tutorial.html">this admin tutorial</a> for setting up a compatible <span class="notranslate">Galaxy</span> instance for development and testing of your GxIT.
-As well as updating the <span class="notranslate">Galaxy</span> server configuration, you will also have to configure the server’s DNS provider to allow wildcard DNS records. This allows <span class="notranslate">Galaxy</span> to create unique host names (subdomains) for GxITs to be served over, separating them from the main <span class="notranslate">Galaxy</span> application.</p>
+  <div class="box-title comment-title" id="comment-if-you-plan-to-use-an-existing-galaxy-instance" aria-label="comment box: If you plan to use an existing Galaxy instance"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: If you plan to use an existing Galaxy instance</div>
+  <p>The Galaxy server requires specific configuration in order to run Interactive Tools! Please refer to <a href="/training-material/topics/admin/tutorials/interactive-tools/tutorial.html">this admin tutorial</a> for setting up a compatible Galaxy instance for development and testing of your GxIT.
+As well as updating the Galaxy server configuration, you will also have to configure the server’s DNS provider to allow wildcard DNS records. This allows Galaxy to create unique host names (subdomains) for GxITs to be served over, separating them from the main Galaxy application.</p>
 </blockquote>
 
 <blockquote class="agenda">
@@ -990,18 +990,18 @@ As well as updating the <span class="notranslate">Galaxy</span> server configura
   </li>
   <li><a href="#testing-locally" id="markdown-toc-testing-locally">Testing locally</a>    <ol>
       <li><a href="#docker-installation" id="markdown-toc-docker-installation">Docker installation</a></li>
-      <li><a href="#galaxy-installation" id="markdown-toc-galaxy-installation"><span class="notranslate">Galaxy</span> installation</a></li>
-      <li><a href="#galaxy-configuration" id="markdown-toc-galaxy-configuration"><span class="notranslate">Galaxy</span> configuration</a></li>
-      <li><a href="#run-galaxy" id="markdown-toc-run-galaxy">Run <span class="notranslate">Galaxy</span></a></li>
+      <li><a href="#galaxy-installation" id="markdown-toc-galaxy-installation">Galaxy installation</a></li>
+      <li><a href="#galaxy-configuration" id="markdown-toc-galaxy-configuration">Galaxy configuration</a></li>
+      <li><a href="#run-galaxy" id="markdown-toc-run-galaxy">Run Galaxy</a></li>
     </ol>
   </li>
-  <li><a href="#installing-in-galaxy" id="markdown-toc-installing-in-galaxy">Installing in <span class="notranslate">Galaxy</span></a></li>
+  <li><a href="#installing-in-galaxy" id="markdown-toc-installing-in-galaxy">Installing in Galaxy</a></li>
   <li><a href="#debugging" id="markdown-toc-debugging">Debugging</a></li>
   <li><a href="#additional-components" id="markdown-toc-additional-components">Additional components</a>    <ol>
       <li><a href="#run-script" id="markdown-toc-run-script">Run script</a></li>
       <li><a href="#templated-config-files" id="markdown-toc-templated-config-files">Templated config files</a></li>
       <li><a href="#reserved-environment-variables" id="markdown-toc-reserved-environment-variables">Reserved environment variables</a></li>
-      <li><a href="#galaxy-history-interaction" id="markdown-toc-galaxy-history-interaction"><span class="notranslate">Galaxy</span> history interaction</a></li>
+      <li><a href="#galaxy-history-interaction" id="markdown-toc-galaxy-history-interaction">Galaxy history interaction</a></li>
       <li><a href="#self-destruct-script" id="markdown-toc-self-destruct-script">Self-destruct script</a></li>
     </ol>
   </li>
@@ -1012,25 +1012,25 @@ As well as updating the <span class="notranslate">Galaxy</span> server configura
 
 <h2 id="how-do-interactive-tools-work">How do Interactive Tools work?</h2>
 
-<p>Interactive tools are a special breed of <span class="notranslate">Galaxy</span> tool which is relatively
-new to the <span class="notranslate">Galaxy</span> ecosystem - they are a work in progress!
-GxITs enable the user to run an entire web application through <span class="notranslate">Galaxy</span>, which
+<p>Interactive tools are a special breed of Galaxy tool which is relatively
+new to the Galaxy ecosystem - they are a work in progress!
+GxITs enable the user to run an entire web application through Galaxy, which
 opens as a new tab in the browser. This can enable users to explore and manipulate
 data in a rich interface, such as Jupyter notebooks and RStudio. To see some
 examples of GxITs in action, take a look at
-<a href="https://live.usegalaxy.eu/"><span class="notranslate">Galaxy</span> EU “Live”</a>.</p>
+<a href="https://live.usegalaxy.eu/">Galaxy EU “Live”</a>.</p>
 
 <p>Interactive tool development builds on the canonical tool-wrapping process.
 Instead of running a command, the tool feeds user input to a Docker container
 running the application. Once it’s up and running, the GxIT application can
-then be accessed through a unique URL generated by the <span class="notranslate">Galaxy</span> server.
-The user can then open the application, interact with their <span class="notranslate">Galaxy</span> data and
+then be accessed through a unique URL generated by the Galaxy server.
+The user can then open the application, interact with their Galaxy data and
 then terminate the tool. On termination, the Docker container is stopped and
 removed, and the job is considered “complete”.</p>
 
 <h2 id="when-is-an-interactive-tool-appropriate">When is an Interactive Tool appropriate?</h2>
 
-<p>In a regular <span class="notranslate">Galaxy</span> tool the user passes data to the tool and waits for it to
+<p>In a regular Galaxy tool the user passes data to the tool and waits for it to
 run. They then get some output file(s) when the tool run is complete. In an
 Interactive Tool, however, the users are provided with a graphical web interface
 allowing them to interact with their data in real time. This is great for
@@ -1044,11 +1044,11 @@ Interactive Tool!</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-interactive-tool-infrastructure" aria-label="comment box: Interactive tool infrastructure"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Interactive tool infrastructure</div>
-  <p>Interactive tools require some rather complex infrastructure in order to work! However, most of the infrastructure requirements are taken care of by <span class="notranslate">Galaxy</span> core. As such, wrapping a new GxIT requires only three components:</p>
+  <p>Interactive tools require some rather complex infrastructure in order to work! However, most of the infrastructure requirements are taken care of by Galaxy core. As such, wrapping a new GxIT requires only three components:</p>
   <ul>
     <li>Application script(s)</li>
     <li>Docker container image</li>
-    <li><span class="notranslate">Galaxy</span> tool XML</li>
+    <li>Galaxy tool XML</li>
   </ul>
 
   <p>However, as we will see in the next section, testing and deploying a GxIT is not so simple.</p>
@@ -1061,19 +1061,19 @@ tool wrapping, the development process is unfortunately not so streamlined.
 Where Planemo is typically used for tool linting and testing, the complex
 architecture of GxITs requires a local instance or a development server to be built to manually
 test and run the tool.
-In addition, they are currently not supported by the <span class="notranslate">Galaxy</span> <span class="notranslate">ToolShed</span> and have to be installed
-manually. This means that distributed GxITs can be found in <a href="https://github.com/galaxyproject/galaxy/tree/dev/tools/interactive">the <span class="notranslate">Galaxy</span> core codebase</a>,
-and they can be manually enabled by the <span class="notranslate">Galaxy</span> server administrator.</p>
+In addition, they are currently not supported by the Galaxy ToolShed and have to be installed
+manually. This means that distributed GxITs can be found in <a href="https://github.com/galaxyproject/galaxy/tree/dev/tools/interactive">the Galaxy core codebase</a>,
+and they can be manually enabled by the Galaxy server administrator.</p>
 
 <p>However, the build process itself is not too complex!
 We can break it down into just a few steps:</p>
 
 <ol>
-  <li>Find or create the application you wish to install on <span class="notranslate">Galaxy</span></li>
+  <li>Find or create the application you wish to install on Galaxy</li>
   <li>Find or create a Docker image containing this application</li>
-  <li>Write a <span class="notranslate">Galaxy</span> tool XML to pass IT details to <span class="notranslate">Galaxy</span> and pass user input to the Docker container</li>
-  <li>Add the tool XML to your <span class="notranslate">Galaxy</span> server (local or distant)</li>
-  <li>Try out the tool in the <span class="notranslate">Galaxy</span> interface. Error messages might appear in the <span class="notranslate">Galaxy</span> history.</li>
+  <li>Write a Galaxy tool XML to pass IT details to Galaxy and pass user input to the Docker container</li>
+  <li>Add the tool XML to your Galaxy server (local or distant)</li>
+  <li>Try out the tool in the Galaxy interface. Error messages might appear in the Galaxy history.</li>
   <li>If errors occur, revise the container or tool XML, and try again until the application is working.</li>
 </ol>
 
@@ -1085,7 +1085,7 @@ cycle.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-a-note-on-architecture" aria-label="comment box: A note on architecture"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: A note on architecture</div>
-  <p>When building a GxIT, it is best to keep as much logic as possible in the tool XML, while keeping the Docker image as generic as possible. Why? Updating the tool XML is simple for <span class="notranslate">Galaxy</span> admins and developers in the future. They can view the tool XML directly on the server and understand how the tool works. The Docker image, meanwhile, is relatively opaque to other developers and administrators. To understand the container they must locate the original Dockerfile, which is not always available. Updating the container is more complex, as we will see later. Additionally, keeping the Docker container generic makes it testable outside of <span class="notranslate">Galaxy</span>.</p>
+  <p>When building a GxIT, it is best to keep as much logic as possible in the tool XML, while keeping the Docker image as generic as possible. Why? Updating the tool XML is simple for Galaxy admins and developers in the future. They can view the tool XML directly on the server and understand how the tool works. The Docker image, meanwhile, is relatively opaque to other developers and administrators. To understand the container they must locate the original Dockerfile, which is not always available. Updating the container is more complex, as we will see later. Additionally, keeping the Docker container generic makes it testable outside of Galaxy.</p>
 
   <p>In short: updating the Docker container is hard, but updating the tool XML is easy!</p>
 </blockquote>
@@ -1096,7 +1096,7 @@ cycle.</p>
 allows the user to upload <code class="language-plaintext highlighter-rouge">csv</code> and <code class="language-plaintext highlighter-rouge">tsv</code> files, manipulate them and download
 them. Our application is based on an R Shiny App hosted with Shiny server.</p>
 
-<p>Note that there is no link between this Interactive Tool and the <span class="notranslate">Galaxy</span> history.
+<p>Note that there is no link between this Interactive Tool and the Galaxy history.
 More complex applications might be able to read and write outputs to the user’s
 history to create a more integrated experience - see the
 <a href="#galaxy-history-interaction">Additional components section</a>
@@ -1122,7 +1122,7 @@ In the following sections, we will study how it was built.</p>
 ├── Makefile
 └── README.md
 </span></code></pre></div>  </div>
-  <p>You’ll find a <span class="notranslate">Galaxy</span> tool XML, a Dockerfile and two R scripts that will be injected into the container image.</p>
+  <p>You’ll find a Galaxy tool XML, a Dockerfile and two R scripts that will be injected into the container image.</p>
 
 </blockquote>
 
@@ -1188,7 +1188,7 @@ In the following sections, we will study how it was built.</p>
 that we’ll use to containerize our application.</p>
 
 <p>This container recipe can be used to build a Docker image which can be pushed to a
-container registry in the cloud, ready for consumption by our <span class="notranslate">Galaxy</span> instance:</p>
+container registry in the cloud, ready for consumption by our Galaxy instance:</p>
 
 <div class="language-dockerfile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Set image to build upon</span>
 <span class="k">FROM</span><span class="s"> rocker/shiny</span>
@@ -1231,7 +1231,7 @@ container registry in the cloud, ready for consumption by our <span class="notra
 
 <span class="c"># ------------------------------------------------------------------------------</span>
 
-<span class="k">RUN </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="si">$(</span><span class="nb">di<span class="notranslate">rna</span>me</span> <span class="s2">"</span><span class="k">${</span><span class="nv">LOG_PATH</span><span class="k">}</span><span class="s2">"</span><span class="si">)</span>
+<span class="k">RUN </span><span class="nb">mkdir</span> <span class="nt">-p</span> <span class="si">$(</span><span class="nb">dirname</span> <span class="s2">"</span><span class="k">${</span><span class="nv">LOG_PATH</span><span class="k">}</span><span class="s2">"</span><span class="si">)</span>
 <span class="k">EXPOSE</span><span class="s"> $PORT</span>
 <span class="k">COPY</span><span class="s"> ./gxit /gxit</span>
 
@@ -1279,7 +1279,7 @@ This allows the developer to simply run <code class="language-plaintext highligh
 
 <ol>
   <li>Expose the correct port. The application, Docker and tool XML ports must be aligned!</li>
-  <li>Log output to an exte<span class="notranslate">rna</span>l file - useful for debugging.</li>
+  <li>Log output to an external file - useful for debugging.</li>
   <li>Make the application callable from tool <code class="language-plaintext highlighter-rouge">&lt;command&gt;</code> - this sometimes requires a wrapper script to interface the application inside the container (we’ll take a look at this later).</li>
 </ol>
 
@@ -1303,7 +1303,7 @@ make it
 <h2 id="push-the-image">Push the image</h2>
 
 <p>If you are happy with the image, we are ready to push it to a container registry
-to make it accessible to our <span class="notranslate">Galaxy</span> server.</p>
+to make it accessible to our Galaxy server.</p>
 
 <p>During development, we suggest making an account on
 <a href="https://hub.docker.com/">Docker Hub</a>
@@ -1315,15 +1315,15 @@ and pushing images.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-3" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
-  <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Set remote tag for your container. This should include your use<span class="notranslate">rna</span>me and</span>
+  <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Set remote tag for your container. This should include your username and</span>
 <span class="c"># repository name for Docker Hub.</span>
-<span class="nv">REMOTE</span><span class="o">=</span>&lt;DOCKERHUB_USE<span class="notranslate">RNA</span>ME&gt;/my-first-gxit
+<span class="nv">REMOTE</span><span class="o">=</span>&lt;DOCKERHUB_USERNAME&gt;/my-first-gxit
 
 <span class="c"># Tag your image</span>
 docker tag <span class="nv">$IMAGE_TAG</span>:latest <span class="nv">$REMOTE</span>:latest
 
 <span class="c"># Authenticate your DockerHub account</span>
-docker login  <span class="c"># &gt;&gt;&gt; Enter use<span class="notranslate">rna</span>me and token for your account</span>
+docker login  <span class="c"># &gt;&gt;&gt; Enter username and token for your account</span>
 
 <span class="c"># Push the image</span>
 docker push <span class="nv">$REMOTE</span>:latest
@@ -1332,7 +1332,7 @@ docker push <span class="nv">$REMOTE</span>:latest
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-production-container-hosting"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-production-container-hosting-contents" aria-expanded="true" aria-label="Toggle tip box: Production container hosting"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Production container hosting<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <p>For production deployment, the
-<a href="https://docs.galaxyproject.org/en/latest/admin/special_topics/mulled_containers.html"><span class="notranslate">Galaxy</span> standard</a>
+<a href="https://docs.galaxyproject.org/en/latest/admin/special_topics/mulled_containers.html">Galaxy standard</a>
 for container image hosting is
 <a href="https://biocontainers.pro">Biocontainers</a>.
 This requires you to
@@ -1343,7 +1343,7 @@ repository on
 <a href="https://hub.docker.com">hub.docker.com</a> or
 <a href="https://quay.io">quay.io</a>
 but please ensure that it links to a public code repository
-(e.g. GitHub) to enable maintenance of the image by the <span class="notranslate">Galaxy</span> community!</p>
+(e.g. GitHub) to enable maintenance of the image by the Galaxy community!</p>
   </blockquote>
 </blockquote>
 
@@ -1351,15 +1351,15 @@ but please ensure that it links to a public code repository
 Check out your repo on Docker Hub and you should find the container image there.
 Awesome!</p>
 
-<p>Now we just need to write a tool XML that will enable <span class="notranslate">Galaxy</span> to pull and run
-our new Docker container as a <span class="notranslate">Galaxy</span> tool.</p>
+<p>Now we just need to write a tool XML that will enable Galaxy to pull and run
+our new Docker container as a Galaxy tool.</p>
 
 <h2 id="the-tool-xml">The tool XML</h2>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-4" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
-  <p>Create a <span class="notranslate">Galaxy</span> tool XML file named <code class="language-plaintext highlighter-rouge">interactivetool_tabulator.xml</code>. The file is similar to a regular tool XML, but calls on our remote Docker image as a dependency. The tags that we are most concerned with are:</p>
+  <p>Create a Galaxy tool XML file named <code class="language-plaintext highlighter-rouge">interactivetool_tabulator.xml</code>. The file is similar to a regular tool XML, but calls on our remote Docker image as a dependency. The tags that we are most concerned with are:</p>
   <ul>
     <li>A <code class="language-plaintext highlighter-rouge">&lt;container&gt;</code> (under the <code class="language-plaintext highlighter-rouge">&lt;requirements&gt;</code> tag)</li>
     <li>A <code class="language-plaintext highlighter-rouge">&lt;port&gt;</code> which matches our container</li>
@@ -1372,7 +1372,7 @@ our new Docker container as a <span class="notranslate">Galaxy</span> tool.</p>
 
     <p>This step can cause a lot of confusion. Here are a few pointer that you will find critical to understanding the process:</p>
     <ul>
-      <li>The <code class="language-plaintext highlighter-rouge">&lt;command&gt;</code> will be templated by <span class="notranslate">Galaxy</span></li>
+      <li>The <code class="language-plaintext highlighter-rouge">&lt;command&gt;</code> will be templated by Galaxy</li>
       <li>The templated command will run <em>inside</em> the Docker container</li>
     </ul>
 
@@ -1382,11 +1382,11 @@ our new Docker container as a <span class="notranslate">Galaxy</span> tool.</p>
     <div class="box-title tip-title" id="tip-writing-the-gxit-tool-xml"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-writing-the-gxit-tool-xml-contents" aria-expanded="true" aria-label="Toggle tip box: Writing the GxIT tool XML"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Writing the GxIT tool XML<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ul>
-      <li>Refer to the <a href="https://docs.galaxyproject.org/en/latest/dev/schema.html"><span class="notranslate">Galaxy</span> tool XML docs</a>.</li>
+      <li>Refer to the <a href="https://docs.galaxyproject.org/en/latest/dev/schema.html">Galaxy tool XML docs</a>.</li>
       <li>You can take inspiration from <a href="https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_askomics.xml">Askomics</a>, and other <a href="https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive">existing Interactive Tools</a>.</li>
       <li>Check XML syntax with <a href="https://www.xmlvalidation.com/">xmlvalidation.com</a> or <a href="https://www.w3schools.com/xml/xml_validator.asp">w3schools XML validator</a>, or use a linter in your code editor.</li>
       <li><a href="https://planemo.readthedocs.io/en/latest/commands/lint.html">planemo lint</a> can also be used for XML linting. But be aware that <code class="language-plaintext highlighter-rouge">planemo test</code> won’t work.</li>
-      <li>When it comes to testing and debugging your tool XML, it can be easier to update the XML file directly on your <span class="notranslate">Galaxy</span> server between tests.</li>
+      <li>When it comes to testing and debugging your tool XML, it can be easier to update the XML file directly on your Galaxy server between tests.</li>
     </ul>
   </blockquote>
 
@@ -1420,10 +1420,10 @@ our new Docker container as a <span class="notranslate">Galaxy</span> tool.</p>
 
     <span class="nt">&lt;command&gt;</span><span class="cp">&lt;![CDATA[
 
-        ## The command will be templated by Cheetah within <span class="notranslate">Galaxy</span>, and
+        ## The command will be templated by Cheetah within Galaxy, and
         ## then run inside the Docker container!
 
-        ## This only works because <span class="notranslate">Galaxy</span>'s user data directory is mapped
+        ## This only works because Galaxy's user data directory is mapped
         ## onto the Docker container at runtime - enabling access to
         ## '$infile' and '$outfile' from inside the container.
 
@@ -1438,7 +1438,7 @@ our new Docker container as a <span class="notranslate">Galaxy</span> tool.</p>
 
     <span class="nt">&lt;outputs&gt;</span>
         <span class="c">&lt;!--
-            Even if our IT doesn't export to <span class="notranslate">Galaxy</span> history,
+            Even if our IT doesn't export to Galaxy history,
             adding an output ensures to keep track of the IT
             execution in the history
         --&gt;</span>
@@ -1475,7 +1475,7 @@ our new Docker container as a <span class="notranslate">Galaxy</span> tool.</p>
 
 <h1 id="testing-locally">Testing locally</h1>
 
-<p>You would like to check your GxIT integration in <span class="notranslate">Galaxy</span> but don’t have a development server or don’t want to disturb your sysadmin at this point?
+<p>You would like to check your GxIT integration in Galaxy but don’t have a development server or don’t want to disturb your sysadmin at this point?
 Let’s check this integration on your machine. You can use a VM if you prefer not to modify your machine environment.</p>
 
 <blockquote class="comment">
@@ -1491,72 +1491,72 @@ If you have another OS on your machine (i.e. Windows or MacOS), you may need to 
   <p>Install Docker as described on the <a href="https://docs.docker.com/engine/install/">docker website</a>. Click on your distribution name to get specific information.</p>
 </blockquote>
 
-<h2 id="galaxy-installation"><span class="notranslate">Galaxy</span> installation</h2>
+<h2 id="galaxy-installation">Galaxy installation</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-install-galaxy" aria-label="hands-on box: Install Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Install <span class="notranslate">Galaxy</span></div>
+  <div class="box-title hands-on-title" id="hands-on-install-galaxy" aria-label="hands-on box: Install Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Install Galaxy</div>
 
   <p>For Ubuntu:</p>
-  <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install git to get <span class="notranslate">Galaxy</span> project</span>
+  <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Install git to get Galaxy project</span>
 <span class="nb">sudo </span>apt-get <span class="nb">install </span>git
 <span class="c"># Create a working directory and move to it</span>
 <span class="nb">mkdir</span> ~/GxIT <span class="o">&amp;&amp;</span> <span class="nb">cd</span> ~/GxIT
-<span class="c"># Get the <span class="notranslate">galaxy</span> project. A new directory named "<span class="notranslate">galaxy</span>" will be created.</span>
+<span class="c"># Get the galaxy project. A new directory named "galaxy" will be created.</span>
 <span class="c"># This directory contains the whole project</span>
-git clone https://github.com/<span class="notranslate">galaxy</span>project/<span class="notranslate">galaxy</span>
+git clone https://github.com/galaxyproject/galaxy
 <span class="c"># Checkout the last stable version (v21.09 as the time of writing)</span>
-<span class="nb">cd </span><span class="notranslate">galaxy</span> <span class="o">&amp;&amp;</span> git checkout v21.09
+<span class="nb">cd </span>galaxy <span class="o">&amp;&amp;</span> git checkout v21.09
 </code></pre></div>  </div>
 </blockquote>
 
-<h2 id="galaxy-configuration"><span class="notranslate">Galaxy</span> configuration</h2>
+<h2 id="galaxy-configuration">Galaxy configuration</h2>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-5" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
-  <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/GxIT/<span class="notranslate">galaxy</span>/config
+  <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> ~/GxIT/galaxy/config
 <span class="c"># Create custom config files</span>
-<span class="nb">cat </span><span class="notranslate">galaxy</span>.yml.interactivetools <span class="o">&gt;</span> <span class="notranslate">galaxy</span>.yml
+<span class="nb">cat </span>galaxy.yml.interactivetools <span class="o">&gt;</span> galaxy.yml
 <span class="nb">cat </span>job_conf.xml.interactivetools <span class="o">&gt;</span> job_conf.xml
 <span class="nb">cat </span>tool_conf.xml.sample <span class="o">&gt;</span> tool_conf.xml
 </code></pre></div>  </div>
-  <p>In <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>, add the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_infrastructure_url</code> parameter to the <span class="notranslate">galaxy</span> section:</p>
-  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
-  <span class="na"><span class="notranslate">galaxy</span>_infrastructure_url</span><span class="pi">:</span> <span class="s">http://localhost:8080</span>
+  <p>In <code class="language-plaintext highlighter-rouge">galaxy.yml</code>, add the <code class="language-plaintext highlighter-rouge">galaxy_infrastructure_url</code> parameter to the galaxy section:</p>
+  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy</span><span class="pi">:</span>
+  <span class="na">galaxy_infrastructure_url</span><span class="pi">:</span> <span class="s">http://localhost:8080</span>
 </code></pre></div>  </div>
-  <p>This will make <span class="notranslate">galaxy</span> to provide your GxIT using links like <a href="http://your_gxit_identifier.localhost:8080">http://your_gxit_identifier.localhost:8080</a>.</p>
+  <p>This will make galaxy to provide your GxIT using links like <a href="http://your_gxit_identifier.localhost:8080">http://your_gxit_identifier.localhost:8080</a>.</p>
 
-  <p>Configure the tool panel by adding a section in <code class="language-plaintext highlighter-rouge">~/GxIT/<span class="notranslate">galaxy</span>/config/tool_conf.xml</code>:</p>
+  <p>Configure the tool panel by adding a section in <code class="language-plaintext highlighter-rouge">~/GxIT/galaxy/config/tool_conf.xml</code>:</p>
   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"interactivetools"</span> <span class="na">name=</span><span class="s">"Interactive tools"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"interactive/interactivetool_tabulator.xml"</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;/section&gt;</span>
 </code></pre></div>  </div>
-  <p>With these lines, <span class="notranslate">Galaxy</span> will create a new section named “Interactive tools” in the tool panel
+  <p>With these lines, Galaxy will create a new section named “Interactive tools” in the tool panel
 with our interactive tabulator inside.
 Choose whatever name and id you want as long as the id is unique.
 And of course, you have no obligation to put your GxITs in this section.
 You can put them in any section.</p>
 
   <p>Finally, copy your GxIT wrapper to the Interactive Tool directory:</p>
-  <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> ~/my_filepath/interactivetool_tabulator.xml ~/GxIT/<span class="notranslate">galaxy</span>/tools/interactive/
+  <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> ~/my_filepath/interactivetool_tabulator.xml ~/GxIT/galaxy/tools/interactive/
 </code></pre></div>  </div>
 </blockquote>
 
-<h2 id="run-galaxy">Run <span class="notranslate">Galaxy</span></h2>
+<h2 id="run-galaxy">Run Galaxy</h2>
 
-<p>Go to the <span class="notranslate">Galaxy</span> directory and:</p>
+<p>Go to the Galaxy directory and:</p>
 <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./run.sh
 </code></pre></div></div>
 
-<p><span class="notranslate">Galaxy</span> is available at <a href="http://localhost:8080/">http://localhost:8080/</a> and you should be able to use your GxIT.
+<p>Galaxy is available at <a href="http://localhost:8080/">http://localhost:8080/</a> and you should be able to use your GxIT.
 Congrats!</p>
 
-<h1 id="installing-in-galaxy">Installing in <span class="notranslate">Galaxy</span></h1>
+<h1 id="installing-in-galaxy">Installing in Galaxy</h1>
 
 <p>We now have all the required components, we can install the tool in our
-configured <span class="notranslate">Galaxy</span> instance.
+configured Galaxy instance.
 This is as simple as dropping the tool XML in the right location inside
-the <span class="notranslate">Galaxy</span> core application directory, and adding the tool to our
+the Galaxy core application directory, and adding the tool to our
 <code class="language-plaintext highlighter-rouge">tool_conf_interactive.xml</code> file.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1566,10 +1566,10 @@ the <span class="notranslate">Galaxy</span> core application directory, and addi
     <li>
       <p>Add the tool XML</p>
 
-      <p>Access your <span class="notranslate">Galaxy</span> instance and take a look at the <span class="notranslate">Galaxy</span> application directory on to see the existing Interactive Tools:</p>
+      <p>Access your Galaxy instance and take a look at the Galaxy application directory on to see the existing Interactive Tools:</p>
 
-      <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Drop into the <span class="notranslate">Galaxy</span> application directory</span>
-<span class="nb">cd</span> /srv/<span class="notranslate">galaxy</span>/server/
+      <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Drop into the Galaxy application directory</span>
+<span class="nb">cd</span> /srv/galaxy/server/
 
 <span class="c"># Show the existing GxIT tool files</span>
 <span class="nb">ls</span> <span class="nt">-l</span> tools/interactive
@@ -1590,12 +1590,12 @@ the <span class="notranslate">Galaxy</span> core application directory, and addi
       <p>This step is the same as activating any other existing Interactive Tool. See <a href="/training-material/topics/admin/tutorials/interactive-tools/tutorial.html">the admin tutorial</a> for detailed instructions.</p>
 
       <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Open the Interactive Tools config file for editing:</span>
-<span class="nb">sudo </span>nano /srv/<span class="notranslate">galaxy</span>/config/tool_conf_interactive.xml
+<span class="nb">sudo </span>nano /srv/galaxy/config/tool_conf_interactive.xml
 </code></pre></div>      </div>
     </li>
     <li>
       <p>This configuration file should have been created when
-<a href="/training-material/topics/admin/tutorials/interactive-tools/tutorial.html">administering the <span class="notranslate">Galaxy</span> instance to serve Interactive Tools</a>
+<a href="/training-material/topics/admin/tutorials/interactive-tools/tutorial.html">administering the Galaxy instance to serve Interactive Tools</a>
 We just need to add a single line to this file to enable our tool. Can you figure it out?</p>
 
       <blockquote class="solution">
@@ -1609,32 +1609,32 @@ We just need to add a single line to this file to enable our tool. Can you figur
       </blockquote>
     </li>
     <li>
-      <p>Now we just need to restart the <span class="notranslate">Galaxy</span> server to refresh the tool registry</p>
+      <p>Now we just need to restart the Galaxy server to refresh the tool registry</p>
 
-      <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service <span class="notranslate">galaxy</span> restart
+      <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo </span>service galaxy restart
 </code></pre></div>      </div>
     </li>
   </ol>
 
 </blockquote>
 
-<p>Have a look in the web interface of your <span class="notranslate">Galaxy</span> instance. You should find the new tool under the “Interactive tools” section in the tool panel. If so, we are ready to start testing it out!</p>
+<p>Have a look in the web interface of your Galaxy instance. You should find the new tool under the “Interactive tools” section in the tool panel. If so, we are ready to start testing it out!</p>
 
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-distributing-a-new-gxit"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-distributing-a-new-gxit-contents" aria-expanded="true" aria-label="Toggle tip box: Distributing a new GxIT"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Distributing a new GxIT<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>To release a GxIT for production use, we must distribute two components:</p>
   <ul>
-    <li>the <span class="notranslate">Galaxy</span> tool XML</li>
+    <li>the Galaxy tool XML</li>
     <li>the Docker image</li>
   </ul>
 
   <p>We have already pushed the Docker image to the cloud (thought it should be hosted on an <a href="#push-the-image">approved registry</a> for production use).</p>
 
-  <p>All that’s left is to distribute the tool XML. This would conventionally be done through the <span class="notranslate">ToolShed</span>. But the <span class="notranslate">ToolShed</span> doesn’t support GxITs yet! This leaves us only two options for distributing the tool XML:</p>
+  <p>All that’s left is to distribute the tool XML. This would conventionally be done through the ToolShed. But the ToolShed doesn’t support GxITs yet! This leaves us only two options for distributing the tool XML:</p>
   <ul>
-    <li>Make a pull request against <a href="https://github.com/galaxyproject/galaxy"><span class="notranslate">Galaxy</span> core</a> to include the XML file under <code class="language-plaintext highlighter-rouge">tools/interactive/</code></li>
-    <li>Deploy the tool to specific <span class="notranslate">Galaxy</span> instance(s) in an Ansible Playbook</li>
+    <li>Make a pull request against <a href="https://github.com/galaxyproject/galaxy">Galaxy core</a> to include the XML file under <code class="language-plaintext highlighter-rouge">tools/interactive/</code></li>
+    <li>Deploy the tool to specific Galaxy instance(s) in an Ansible Playbook</li>
   </ul>
 
 </blockquote>
@@ -1642,20 +1642,20 @@ We just need to add a single line to this file to enable our tool. Can you figur
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-install-a-gxit-with-an-ansible-playbook"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-install-a-gxit-with-an-ansible-playbook-contents" aria-expanded="true" aria-label="Toggle tip box: Install a GxIT with an Ansible playbook"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Install a GxIT with an Ansible playbook<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <p>The steps that we took in this section can be easily incorporated into an Ansible playbook for deploying GxITs to a <span class="notranslate">Galaxy</span> server. This means that you can manage and deploy a GxIT as part of your <span class="notranslate">Galaxy</span> instance without merging into the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project/<span class="notranslate">galaxy</span></code> repository (or a fork of it).</p>
+  <p>The steps that we took in this section can be easily incorporated into an Ansible playbook for deploying GxITs to a Galaxy server. This means that you can manage and deploy a GxIT as part of your Galaxy instance without merging into the <code class="language-plaintext highlighter-rouge">galaxyproject/galaxy</code> repository (or a fork of it).</p>
 
   <p>The <a href="/training-material/topics/admin/tutorials/interactive-tools/tutorial.html">Interactive Tools admin tutorial</a>
 demonstrates how this can be acheived by adding our tool XML to the “local tools” section of the Ansible Playbook. However, for our GxIT to show up in the correct tool panel we’ll need to add an extra config file: <code class="language-plaintext highlighter-rouge">local_tool_conf.xml</code>.</p>
 
   <ol>
     <li>
-      <p>Copy the GxIT tool XML to <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/tools/interactivetool_tabulator.xml</code> in your Ansible directory</p>
+      <p>Copy the GxIT tool XML to <code class="language-plaintext highlighter-rouge">files/galaxy/tools/interactivetool_tabulator.xml</code> in your Ansible directory</p>
     </li>
     <li>
-      <p>Create the template <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/local_tool_conf.xml.j2</code></p>
+      <p>Create the template <code class="language-plaintext highlighter-rouge">templates/galaxy/local_tool_conf.xml.j2</code></p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version='1.0' encoding='utf-8'?&gt;</span>
-<span class="nt">&lt;toolbox</span> <span class="na">monitor=</span><span class="s">"true"</span> <span class="na">tool_path=</span><span class="s">"{{ <span class="notranslate">galaxy</span>_local_tools_dir }}"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;toolbox</span> <span class="na">monitor=</span><span class="s">"true"</span> <span class="na">tool_path=</span><span class="s">"{{ galaxy_local_tools_dir }}"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"interactivetools"</span> <span class="na">name=</span><span class="s">"Interactive tools"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"interactivetool_tabulator.xml"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;/section&gt;</span>
@@ -1663,19 +1663,19 @@ demonstrates how this can be acheived by adding our tool XML to the “local too
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Create variables in the following sections of <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code></p>
+      <p>Create variables in the following sections of <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code></p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ...</span>
-<span class="na"><span class="notranslate">galaxy</span>_local_tools_dir</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_server_dir</span><span class="nv"> </span><span class="s">}}/tools/local"</span>
-<span class="na"><span class="notranslate">galaxy</span>_tool_config_files</span><span class="pi">:</span>
+<span class="na">galaxy_local_tools_dir</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_server_dir</span><span class="nv"> </span><span class="s">}}/tools/local"</span>
+<span class="na">galaxy_tool_config_files</span><span class="pi">:</span>
   <span class="c1"># ...</span>
-  <span class="pi">-</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/local_tool_conf.xml"</span>
+  <span class="pi">-</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config_dir</span><span class="nv"> </span><span class="s">}}/local_tool_conf.xml"</span>
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Run the playbook and your Interactive Tool should be available at the bottom of the tool panel</p>
 
-      <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+      <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -1684,24 +1684,24 @@ demonstrates how this can be acheived by adding our tool XML to the “local too
 
 <h1 id="debugging">Debugging</h1>
 
-<p>The most obvious way to test a tool is simply to run it in the <span class="notranslate">Galaxy</span> UI, straight from the tool panel. If you are extremely lucky, you will find that the tool starts up and runs without error. But we all know that never happens! So this is where we start iteratively debugging our tool, until it functions as expected.</p>
+<p>The most obvious way to test a tool is simply to run it in the Galaxy UI, straight from the tool panel. If you are extremely lucky, you will find that the tool starts up and runs without error. But we all know that never happens! So this is where we start iteratively debugging our tool, until it functions as expected.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-a-successful-tool-run" aria-label="comment box: A successful tool run"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: A successful tool run</div>
-  <p>It is worth pointing out that the appearance of a GxIT in the <span class="notranslate">Galaxy</span> user history is not intuitive when you are used to running “regular” tool jobs. When the history item turns orange (“processing”), that’s when a GxIT is actually ready to use! At this point, the tool UI should refresh and display a link to the active GxIT. Remember, the history item doesn’t turn green until a job has terminated. With a GxIT, that only happens when the tool has been stopped by the user, or by wall time limits imposed by the <span class="notranslate">Galaxy</span> administrators.</p>
+  <p>It is worth pointing out that the appearance of a GxIT in the Galaxy user history is not intuitive when you are used to running “regular” tool jobs. When the history item turns orange (“processing”), that’s when a GxIT is actually ready to use! At this point, the tool UI should refresh and display a link to the active GxIT. Remember, the history item doesn’t turn green until a job has terminated. With a GxIT, that only happens when the tool has been stopped by the user, or by wall time limits imposed by the Galaxy administrators.</p>
 </blockquote>
 
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-gxit-testing-infrastructure"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-gxit-testing-infrastructure-contents" aria-expanded="true" aria-label="Toggle tip box: GxIT testing infrastructure"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: GxIT testing infrastructure<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-  <p>Testing and debugging is currently the trickiest part of GxIT development. Ideally, <span class="notranslate">Galaxy</span> core will be developed in the future to better support the process, but for the time being we have to make the most with what is available! In the future, we would like to see GxITs being tested with Planemo, and being installed and tested by Ephemeris from the <span class="notranslate">ToolShed</span>.</p>
+  <p>Testing and debugging is currently the trickiest part of GxIT development. Ideally, Galaxy core will be developed in the future to better support the process, but for the time being we have to make the most with what is available! In the future, we would like to see GxITs being tested with Planemo, and being installed and tested by Ephemeris from the ToolShed.</p>
 </blockquote>
 
 <h1 id="additional-components">Additional components</h1>
 
-<p>The GxIT that we wrapped in this tutorial was a simple example, and you should now understand what is required to create an Interactive Tool for <span class="notranslate">Galaxy</span>. However, there are a few additional components that can enhance the reliability and user experience of the tool. In addition, more complex applications may require some additional components or workarounds the create the desired experience for the user.</p>
+<p>The GxIT that we wrapped in this tutorial was a simple example, and you should now understand what is required to create an Interactive Tool for Galaxy. However, there are a few additional components that can enhance the reliability and user experience of the tool. In addition, more complex applications may require some additional components or workarounds the create the desired experience for the user.</p>
 
 <h2 id="run-script">Run script</h2>
-<p>In the case of our <code class="language-plaintext highlighter-rouge">Tabulator</code> application, the run script is simply the R script that renders our Shiny App. It is quite straightforward to call this from our <span class="notranslate">Galaxy</span> tool XML. However, some web apps might require more elaborate commands to be run. In this situation there are a number of solutions demonstrated in the <code class="language-plaintext highlighter-rouge">&lt;command&gt;</code> section of <a href="https://github.com/galaxyproject/galaxy/tree/dev/tools/interactive">existing GxITs</a>:</p>
+<p>In the case of our <code class="language-plaintext highlighter-rouge">Tabulator</code> application, the run script is simply the R script that renders our Shiny App. It is quite straightforward to call this from our Galaxy tool XML. However, some web apps might require more elaborate commands to be run. In this situation there are a number of solutions demonstrated in the <code class="language-plaintext highlighter-rouge">&lt;command&gt;</code> section of <a href="https://github.com/galaxyproject/galaxy/tree/dev/tools/interactive">existing GxITs</a>:</p>
 <ul>
   <li><a href="https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_guacamole_desktop.xml">Guacamole Desktop</a>: application startup with <code class="language-plaintext highlighter-rouge">startup.sh</code></li>
   <li><a href="https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_hicbrowser.xml">HiCBrowser</a>: application startup with <code class="language-plaintext highlighter-rouge">supervisord</code></li>
@@ -1727,40 +1727,40 @@ that are accessible in the command section of the tool XML - these can be handy 
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;environment_variables&gt;</span>
     <span class="nt">&lt;environment_variable</span> <span class="na">name=</span><span class="s">"HISTORY_ID"</span> <span class="na">strip=</span><span class="s">"True"</span><span class="nt">&gt;</span>${__app__.security.encode_id($jupyter_notebook.history_id)}<span class="nt">&lt;/environment_variable&gt;</span>
-    <span class="nt">&lt;environment_variable</span> <span class="na">name=</span><span class="s">"REMOTE_HOST"</span><span class="nt">&gt;</span>${__app__.config.<span class="notranslate">galaxy</span>_infrastructure_url}<span class="nt">&lt;/environment_variable&gt;</span>
-    <span class="nt">&lt;environment_variable</span> <span class="na">name=</span><span class="s">"<span class="notranslate">GALAXY</span>_WEB_PORT"</span><span class="nt">&gt;</span>8080<span class="nt">&lt;/environment_variable&gt;</span>
-    <span class="nt">&lt;environment_variable</span> <span class="na">name=</span><span class="s">"<span class="notranslate">GALAXY</span>_URL"</span><span class="nt">&gt;</span>$__<span class="notranslate">galaxy</span>_url__<span class="nt">&lt;/environment_variable&gt;</span>
+    <span class="nt">&lt;environment_variable</span> <span class="na">name=</span><span class="s">"REMOTE_HOST"</span><span class="nt">&gt;</span>${__app__.config.galaxy_infrastructure_url}<span class="nt">&lt;/environment_variable&gt;</span>
+    <span class="nt">&lt;environment_variable</span> <span class="na">name=</span><span class="s">"GALAXY_WEB_PORT"</span><span class="nt">&gt;</span>8080<span class="nt">&lt;/environment_variable&gt;</span>
+    <span class="nt">&lt;environment_variable</span> <span class="na">name=</span><span class="s">"GALAXY_URL"</span><span class="nt">&gt;</span>$__galaxy_url__<span class="nt">&lt;/environment_variable&gt;</span>
     <span class="nt">&lt;environment_variable</span> <span class="na">name=</span><span class="s">"DEBUG"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/environment_variable&gt;</span>
     <span class="nt">&lt;environment_variable</span> <span class="na">name=</span><span class="s">"DISABLE_AUTH"</span><span class="nt">&gt;</span>true<span class="nt">&lt;/environment_variable&gt;</span>
     <span class="nt">&lt;environment_variable</span> <span class="na">name=</span><span class="s">"API_KEY"</span> <span class="na">inject=</span><span class="s">"api_key"</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/environment_variables&gt;</span>
 </code></pre></div></div>
 
-<h2 id="galaxy-history-interaction"><span class="notranslate">Galaxy</span> history interaction</h2>
-<p>We have demonstrated how to pass an input file to the Docker container. But what if the application needs to interact with the user’s <span class="notranslate">Galaxy</span> history? For example, if the user creates a file within the application. That’s where the environment variables created in the tool XML become useful.</p>
+<h2 id="galaxy-history-interaction">Galaxy history interaction</h2>
+<p>We have demonstrated how to pass an input file to the Docker container. But what if the application needs to interact with the user’s Galaxy history? For example, if the user creates a file within the application. That’s where the environment variables created in the tool XML become useful.</p>
 
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-access-histories-in-r"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-access-histories-in-r-contents" aria-expanded="true" aria-label="Toggle tip box: Access histories in R"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Access histories in R<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-  <p>From the <a href="https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_rstudio.xml">R-Studio GxIT</a> we can see that there is <a href="https://github.com/hexylena/rGalaxyConnector">an R library</a> that allows us to interact with <span class="notranslate">Galaxy</span> histories.</p>
+  <p>From the <a href="https://github.com/galaxyproject/galaxy/blob/dev/tools/interactive/interactivetool_rstudio.xml">R-Studio GxIT</a> we can see that there is <a href="https://github.com/hexylena/rGalaxyConnector">an R library</a> that allows us to interact with Galaxy histories.</p>
 
-  <p>“The convenience functions <code class="language-plaintext highlighter-rouge">gx_put()</code> and <code class="language-plaintext highlighter-rouge">gx_get()</code> are available to you to interact with your current <span class="notranslate">Galaxy</span> history. You can save your workspace with <code class="language-plaintext highlighter-rouge">gx_save()</code>”</p>
+  <p>“The convenience functions <code class="language-plaintext highlighter-rouge">gx_put()</code> and <code class="language-plaintext highlighter-rouge">gx_get()</code> are available to you to interact with your current Galaxy history. You can save your workspace with <code class="language-plaintext highlighter-rouge">gx_save()</code>”</p>
 
-  <p>Under the hood, this library uses <a href="https://github.com/bgruening/galaxy_ie_helpers"><span class="notranslate">galaxy</span>_ie_helpers</a> - a Python interface to <span class="notranslate">Galaxy</span> histories written with <a href="https://github.com/galaxyproject/bioblend">BioBlend</a>. You could also use BioBlend directly (or even the <span class="notranslate">Galaxy</span> REST API) if your GxIT requires a more flexible interface than these wrappers provide.</p>
+  <p>Under the hood, this library uses <a href="https://github.com/bgruening/galaxy_ie_helpers">galaxy_ie_helpers</a> - a Python interface to Galaxy histories written with <a href="https://github.com/galaxyproject/bioblend">BioBlend</a>. You could also use BioBlend directly (or even the Galaxy REST API) if your GxIT requires a more flexible interface than these wrappers provide.</p>
 
 </blockquote>
 
 <h2 id="self-destruct-script">Self-destruct script</h2>
 
-<p>Unlike regular tools, web applications will run indefinitely until terminated. With <span class="notranslate">Galaxy</span>’s legacy “Interactive Environments”, this used to result in “zombie” containers hanging around and clogging up the <span class="notranslate">Galaxy</span> server. You may notice a <code class="language-plaintext highlighter-rouge">terminate.sh</code> script in some older GxITs as a workaround to this problem, but the new GxIT architecture handles container termination for you. This script is no longer required or reccommended.</p>
+<p>Unlike regular tools, web applications will run indefinitely until terminated. With Galaxy’s legacy “Interactive Environments”, this used to result in “zombie” containers hanging around and clogging up the Galaxy server. You may notice a <code class="language-plaintext highlighter-rouge">terminate.sh</code> script in some older GxITs as a workaround to this problem, but the new GxIT architecture handles container termination for you. This script is no longer required or reccommended.</p>
 
 <h1 id="troubleshooting">Troubleshooting</h1>
 
-<p>Having issues with your Interactive Tool? Here are a few ideas for how to troubleshoot your application. Remember that <span class="notranslate">Galaxy</span> Interactive Tools are a work in progress, so feel free to get creative with your solutions here!</p>
+<p>Having issues with your Interactive Tool? Here are a few ideas for how to troubleshoot your application. Remember that Galaxy Interactive Tools are a work in progress, so feel free to get creative with your solutions here!</p>
 
 <ul>
-  <li>Getting an error in the <span class="notranslate">Galaxy</span> History? Click on the “view” icon to see details of the tool run, including the tool command, <code class="language-plaintext highlighter-rouge">stdout</code> and <code class="language-plaintext highlighter-rouge">stderr</code>.</li>
-  <li>If the tool’s <code class="language-plaintext highlighter-rouge">stdout</code>/<code class="language-plaintext highlighter-rouge">stderr</code> is not enough, consider modifying the Docker image to make it more verbose. Add print/log statements and assertions. Write an application log to a file that can be collected as <span class="notranslate">Galaxy</span> output.</li>
-  <li>Try running the container with Docker directly on your development machine. If the application doesn’t work independantly it certainly won’t work inside <span class="notranslate">Galaxy</span>!</li>
+  <li>Getting an error in the Galaxy History? Click on the “view” icon to see details of the tool run, including the tool command, <code class="language-plaintext highlighter-rouge">stdout</code> and <code class="language-plaintext highlighter-rouge">stderr</code>.</li>
+  <li>If the tool’s <code class="language-plaintext highlighter-rouge">stdout</code>/<code class="language-plaintext highlighter-rouge">stderr</code> is not enough, consider modifying the Docker image to make it more verbose. Add print/log statements and assertions. Write an application log to a file that can be collected as Galaxy output.</li>
+  <li>Try running the container with Docker directly on your development machine. If the application doesn’t work independantly it certainly won’t work inside Galaxy!</li>
   <li>If you need to debug the Docker container itself, it can be useful to write output/logging to a <a href="https://docs.docker.com/storage/volumes/">mounted volume</a> that can be inspected after the tool has run.</li>
   <li>You can also open a <code class="language-plaintext highlighter-rouge">bash</code> terminal inside the container to check the container state while the application is running: <code class="language-plaintext highlighter-rouge">docker exec -it mycontainer /bin/bash</code></li>
 </ul>

@@ -844,8 +844,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -924,25 +922,25 @@ kinds of specific challenges.</p>
 <p>One of the three main technologies used to perform metabolomic analysis is <strong>Liquid-Chromatography Mass Spectrometry</strong> (LC-MS). Data analysis
 for this technology requires a large variety of steps, ranging from extracting information from the raw data, to statistical analysis
 and annotation. To be able to perform a complete LC-MS analysis in a single environment, the <a href="http://workflow4metabolomics.org/">Wokflow4Metabolomics</a>
-team provides <span class="notranslate">Galaxy</span> tools dedicated to metabolomics. This tutorial explains the main steps involved in untargeted LC-MS data processing
-for metabolomic analysis, and shows how to conduct metabolomic data analysis from preprocessing to annotation using <span class="notranslate">Galaxy</span>.</p>
+team provides Galaxy tools dedicated to metabolomics. This tutorial explains the main steps involved in untargeted LC-MS data processing
+for metabolomic analysis, and shows how to conduct metabolomic data analysis from preprocessing to annotation using Galaxy.</p>
 
 <p>To illustrate this approach, we will use data from <span class="citation"><a href="#Thvenot2015">Thévenot <i>et al.</i> 2015</a></span>. The objectives of this paper was to analyze
 the influence of age, body mass index, and gender on the urine metabolome. To do so, the authors collected samples
-from 183 employees from the French Alte<span class="notranslate">rna</span>tive Energies and Atomic Energy Commission (CEA) and performed LC-HRMS LTQ-Orbitrap
+from 183 employees from the French Alternative Energies and Atomic Energy Commission (CEA) and performed LC-HRMS LTQ-Orbitrap
 (negative ionization mode) analyses.</p>
 
 <p>Since the original dataset takes a few hours to be processed, we chose to take a limited subset of individuals for this tutorial.
-This will allow you to perform an example of metabolomic <span class="notranslate">workflow</span>, from pre-processing to annotation, in a limited time, even though
+This will allow you to perform an example of metabolomic workflow, from pre-processing to annotation, in a limited time, even though
 the results obtained may not be reliable from a scientific point of view due to the small sample size. Nevertheless,
-the chosen diversity of sample will allow you to explore the basics of a metabolomic <span class="notranslate">workflow</span>.</p>
+the chosen diversity of sample will allow you to explore the basics of a metabolomic workflow.</p>
 
 <p>We chose a subset of 9 samples, composed of 6 biological samples and 3 quality-control pooled samples (QC pools - mix of all
 biological samples).</p>
 
-<p>To analyze these data, we will then follow a light version of the <a href="http://workflow4metabolomics.org/the-lc-ms-workflow">LC-MS <span class="notranslate">workflow</span></a>,
+<p>To analyze these data, we will then follow a light version of the <a href="http://workflow4metabolomics.org/the-lc-ms-workflow">LC-MS workflow</a>,
 developed by the <a href="http://workflow4metabolomics.org/">Wokflow4metabolomics group</a> (<span class="citation"><a href="#Giacomoni2014">Giacomoni <i>et al.</i> 2014</a></span>, <span class="citation"><a href="#Guitton2017">Guitton <i>et al.</i> 2017</a></span>).
-The <span class="notranslate">workflow</span> is composed of 4 main parts:</p>
+The workflow is composed of 4 main parts:</p>
 <ol>
   <li><strong>Preprocessing</strong> extracts ions from raw data</li>
   <li><strong>Data processing</strong> checks the quality of data and transforms it to something relevant</li>
@@ -960,7 +958,7 @@ The <span class="notranslate">workflow</span> is composed of 4 main parts:</p>
 <ol id="markdown-toc">
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
   <li><a href="#preprocessing-with-xcms" id="markdown-toc-preprocessing-with-xcms">Preprocessing with XCMS</a>    <ol>
-      <li><a href="#importing-the-lcms-data-into-galaxy" id="markdown-toc-importing-the-lcms-data-into-galaxy">Importing the LC/MS data into <span class="notranslate">Galaxy</span></a></li>
+      <li><a href="#importing-the-lcms-data-into-galaxy" id="markdown-toc-importing-the-lcms-data-into-galaxy">Importing the LC/MS data into Galaxy</a></li>
       <li><a href="#data-preparation-for-xcms-msnbase-readmsdata" id="markdown-toc-data-preparation-for-xcms-msnbase-readmsdata">Data preparation for XCMS: <em>MSnbase readMSData</em></a></li>
       <li><a href="#importing-a-sample-metadata-file" id="markdown-toc-importing-a-sample-metadata-file">Importing a sample metadata file</a></li>
       <li><a href="#getting-an-overview-of-your-samples-chromatograms" id="markdown-toc-getting-an-overview-of-your-samples-chromatograms">Getting an overview of your samples’ chromatograms</a></li>
@@ -992,7 +990,7 @@ The <span class="notranslate">workflow</span> is composed of 4 main parts:</p>
 
 <h1 id="preprocessing-with-xcms">Preprocessing with XCMS</h1>
 
-<p>The first step in the <span class="notranslate">workflow</span> is the pre-processing of the raw data with <strong>XCMS</strong> (<span class="citation"><a href="#Smith2006">Smith <i>et al.</i> 2006</a></span>).</p>
+<p>The first step in the workflow is the pre-processing of the raw data with <strong>XCMS</strong> (<span class="citation"><a href="#Smith2006">Smith <i>et al.</i> 2006</a></span>).</p>
 
 <p><strong>XCMS</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is a free and open source software dedicated to pre-processing of any type of mass spectrometry acquisition files from low to
 high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). This software is
@@ -1002,16 +1000,16 @@ used worldwide by a huge community of specialists in metabolomics using mass spe
 
 <p><strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, prior to <strong>XCMS</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is able to read files with open format as <code class="language-plaintext highlighter-rouge">mzXML</code>, <code class="language-plaintext highlighter-rouge">mzMl</code>, <code class="language-plaintext highlighter-rouge">mzData</code> and <code class="language-plaintext highlighter-rouge">netCDF</code>, which are independent of the constructors’ formats. The <strong>XCMS</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> package itself is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes,
 adducts and fragments using the R package CAMERA (<span class="citation"><a href="#CAMERA">Carsten Kuhl 2017</a></span>). This set of functions gives modularity, and thus is particularly well
-adapted to define workflows, one of the key points of <span class="notranslate">Galaxy</span>.</p>
+adapted to define workflows, one of the key points of Galaxy.</p>
 
-<h2 id="importing-the-lcms-data-into-galaxy">Importing the LC/MS data into <span class="notranslate">Galaxy</span></h2>
+<h2 id="importing-the-lcms-data-into-galaxy">Importing the LC/MS data into Galaxy</h2>
 
 <p>In metabolomics studies, the number of samples can vary a lot (from a handful to several hundreds). Thus, extracting your
 data from the raw files can be very fast, or take quite a long time. To optimise the computation time as much as possible, the W4M core team chose to develop tools that can run single raw files for the first steps of
 pre-processing in parallel, since the initial actions in the extraction process treat files independently.</p>
 
-<p>Since the first steps can be run on each file independently, the use of <strong>Dataset collections</strong> in <span class="notranslate">Galaxy</span> is recommended, to avoid
-having to launch jobs manually for each sample. You can start using the dataset collection option from the very beginning of your analysis, when uploading your data into <span class="notranslate">Galaxy</span>.</p>
+<p>Since the first steps can be run on each file independently, the use of <strong>Dataset collections</strong> in Galaxy is recommended, to avoid
+having to launch jobs manually for each sample. You can start using the dataset collection option from the very beginning of your analysis, when uploading your data into Galaxy.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload-the-mzxml-with-b-get-data-b" aria-label="hands-on box: Data upload the mzXML with &lt;b&gt;Get data&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload the mzXML with <b>Get data</b></div>
@@ -1021,7 +1019,7 @@ having to launch jobs manually for each sample. You can start using the dataset 
       <p>Create a new history for this tutorial</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>Import the 9 <code class="language-plaintext highlighter-rouge">mzXML</code> files into a collection named <code class="language-plaintext highlighter-rouge">sacurine</code>
       <ul>
@@ -1041,10 +1039,10 @@ https://zenodo.org/record/3244991/files/QC1_014.mzML
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>     <p>Click on <strong>Collection</strong> on the top</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">mzml</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li>     <p>Click on <strong>Build</strong> when available</p>   </li>   <li>     <p>Enter a name for the collection</p>     <ul>       <li>sacurine</li>     </ul>   </li>   <li>Click on <strong>Create list</strong> (and wait a bit)</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>     <p>Click on <strong>Collection</strong> on the top</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">mzml</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li>     <p>Click on <strong>Build</strong> when available</p>   </li>   <li>     <p>Enter a name for the collection</p>     <ul>       <li>sacurine</li>     </ul>   </li>   <li>Click on <strong>Create list</strong> (and wait a bit)</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as a Collection</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as a Collection</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li>Make sure your data is in a <strong>collection</strong>. Make sure it is named <code class="language-plaintext highlighter-rouge">sacurine</code>
       <ul>
@@ -1059,7 +1057,7 @@ https://zenodo.org/record/3244991/files/QC1_014.mzML
 
 <p>You should have in your history a green Dataset collection (<code class="language-plaintext highlighter-rouge">sacurine</code>) with 9 datasets in mzml format.</p>
 
-<p>Their size can be checked by clicking on the information icon <i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-info</span> on the individual datasets</p>
+<p>Their size can be checked by clicking on the information icon <i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span> on the individual datasets</p>
 
 <h2 id="data-preparation-for-xcms-msnbase-readmsdata">Data preparation for XCMS: <em>MSnbase readMSData</em></h2>
 
@@ -1106,7 +1104,7 @@ time</em> (RT) ranges).</p>
 
 <p>To do so, you can use a tool that is called <strong>xcms plot chromatogram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> that will plot each sample’s chromatogram (see dedicated section
 further). However, to use this tool, you may need additional information about your samples for colouring purpose. Thus, you may need
-to upload into <span class="notranslate">Galaxy</span> a table containing metadata of your samples (a <em>sampleMetadata</em> file).</p>
+to upload into Galaxy a table containing metadata of your samples (a <em>sampleMetadata</em> file).</p>
 
 <h2 id="importing-a-sample-metadata-file">Importing a sample metadata file</h2>
 
@@ -1128,7 +1126,7 @@ Note that you can either:</p>
     <ol>
       <li>Generate a template with the <strong>xcms get a sampleMetadata file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool</li>
       <li>Fill it using your favorite table editor (Excel, LibreOffice etc.)</li>
-      <li>Upload it within <span class="notranslate">Galaxy</span></li>
+      <li>Upload it within Galaxy</li>
     </ol>
   </li>
 </ul>
@@ -1139,7 +1137,7 @@ Note that you can either:</p>
   <p>In the case of this tutorial, we already prepared a <em>sampleMetadata</em> file with all the necessary information. Below is an optional hands-on explaining how to get a template to fill, with the two following advantages:</p>
 
   <ol>
-    <li>You will have the exact list of the samples you used in <span class="notranslate">Galaxy</span>, with the exact identifiers (<em>i.e.</em> exact sample names)</li>
+    <li>You will have the exact list of the samples you used in Galaxy, with the exact identifiers (<em>i.e.</em> exact sample names)</li>
     <li>You will have a file with the right format (tabulation-separated text file) that only needs to be filled with the information you want.</li>
   </ol>
 
@@ -1159,7 +1157,7 @@ Note that you can either:</p>
   <p>An easy step for an easy sampleMetadata filling!</p>
 
   <p>From this tool, you will obtain a <code class="language-plaintext highlighter-rouge">tabular</code> file (meaning a tab-separated text file) with a first column of identifiers and a
-second column called <em>class</em> which is empty for the moment (only ‘.’ for each sample). You can now download this file by clicking on the <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> icon.</p>
+second column called <em>class</em> which is empty for the moment (only ‘.’ for each sample). You can now download this file by clicking on the <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> icon.</p>
 
 </blockquote>
 
@@ -1167,22 +1165,22 @@ second column called <em>class</em> which is empty for the moment (only ‘.’ 
 
 <p>The sampleMetadata file is a tab-separated table, in text format. This table has to be filled by the user. You can use any
 software you find appropriate to construct your table, as long as you save your file in a compatible format. For example, you can
-use a sp<span class="notranslate">reads</span>heet software such as Microsoft Excel or LibreOffice.</p>
+use a spreadsheet software such as Microsoft Excel or LibreOffice.</p>
 
 <blockquote class="warning">
   <div class="box-title warning-title" id="warning-important-save-your-table-in-the-correct-format" aria-label="warning box: Important: Save your table in the correct format"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Important: Save your table in the correct format</div>
 
   <p>The file has to be a <code class="language-plaintext highlighter-rouge">.txt</code>or a <code class="language-plaintext highlighter-rouge">.tsv</code> (tab-separated values). Neither <code class="language-plaintext highlighter-rouge">.xlsx</code> nor <code class="language-plaintext highlighter-rouge">.odt</code> are supported.
-If you use a sp<span class="notranslate">reads</span>heet software, be sure to change the default format to <strong>Text (Tab delimited)</strong> or equivalent.</p>
+If you use a spreadsheet software, be sure to change the default format to <strong>Text (Tab delimited)</strong> or equivalent.</p>
 </blockquote>
 
 <p>Once your sampleMetadata table is ready, you can proceed to the upload. In this tutorial we already prepared the table for you ;)</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-optional-filling-the-i-samplemetadata-i-using-the-template-obtained-from-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-optional-filling-the-i-samplemetadata-i-using-the-template-obtained-from-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: Optional: Filling the &lt;i&gt;sampleMetadata&lt;/i&gt; using the template obtained from Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Optional: Filling the <i>sampleMetadata</i> using the template obtained from <span class="notranslate">Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-optional-filling-the-i-samplemetadata-i-using-the-template-obtained-from-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-optional-filling-the-i-samplemetadata-i-using-the-template-obtained-from-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: Optional: Filling the &lt;i&gt;sampleMetadata&lt;/i&gt; using the template obtained from Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Optional: Filling the <i>sampleMetadata</i> using the template obtained from Galaxy<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <p>For this tutorial, we already provide the <em>sampleMetadata</em> file, so you only have to upload it to <span class="notranslate">Galaxy</span>. Below we
-explain how we filled this file from the template we generated in <span class="notranslate">Galaxy</span>.</p>
+  <p>For this tutorial, we already provide the <em>sampleMetadata</em> file, so you only have to upload it to Galaxy. Below we
+explain how we filled this file from the template we generated in Galaxy.</p>
 
   <p>First, we used <strong>xcms get a sampleMetadata file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> as mentioned in the previous tip box.</p>
 
@@ -1235,7 +1233,7 @@ explain how we filled this file from the template we generated in <span class="n
     </tbody>
   </table>
 
-  <p>We used a sp<span class="notranslate">reads</span>heet software to open the file. First, we completed the class column. You will see in further XCMS steps that this
+  <p>We used a spreadsheet software to open the file. First, we completed the class column. You will see in further XCMS steps that this
 second column matters.</p>
 
   <table>
@@ -1428,7 +1426,7 @@ Next, we added columns with interesting or needed information, as following:</p>
   <p>In particular, the <code class="language-plaintext highlighter-rouge">batch</code>, <code class="language-plaintext highlighter-rouge">sampleType</code> and <code class="language-plaintext highlighter-rouge">injectionOrder</code> columns are mandatory to correct the data from signal drift (see later in
 the tutorial).
 Once we completed the table filling, we saved the file, minding to stick with the original format. Then, our <em>sampleMetadata</em> was ready to
-be uploaded into <span class="notranslate">Galaxy</span>.</p>
+be uploaded into Galaxy.</p>
 
 </blockquote>
 
@@ -1443,10 +1441,10 @@ be uploaded into <span class="notranslate">Galaxy</span>.</p>
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li>Check the data type of your imported files.
       <ul>
@@ -1454,7 +1452,7 @@ be uploaded into <span class="notranslate">Galaxy</span>.</p>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
@@ -1470,7 +1468,7 @@ right away if you happen to get one of these obvious issues.</p>
       <p>Rename your sampleMetadata file with a shorter name ‘sampleMetadata_completed.tsv’</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1507,7 +1505,7 @@ your samples have distinct overall characteristics, <em>e.g.</em> unexpected chr
 <p>You can use the <em>sampleMedata</em> file we previously uploaded to add some group colours to your samples when visualising your chromatograms.
 The tool automatically takes the second column as colour groups when a file is provided.</p>
 
-<p>Note that you can also check the chromatograms at any moment during the <span class="notranslate">workflow</span>, in particular at the following steps:</p>
+<p>Note that you can also check the chromatograms at any moment during the workflow, in particular at the following steps:</p>
 <ul>
   <li>After <strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to help you to define retention time ranges that you may want to discard from the very beginning (<em>“Specta Filters”</em> in <strong>findChromPeaks</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
   <li>After <strong>adjustRtime</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to check the result of the correction (and potentially rerun <em>adjustRtime</em> with other settings)</li>
@@ -1529,7 +1527,7 @@ The tool automatically takes the second column as colour groups when a file is p
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
-        <p>If you use this tool at a later step of XCMS <span class="notranslate">workflow</span> while having provided, in the Merger step (see further in this tutorial), a sampleMetadata with a second column containing groups,
+        <p>If you use this tool at a later step of XCMS workflow while having provided, in the Merger step (see further in this tutorial), a sampleMetadata with a second column containing groups,
 you will get colouring according to these groups even without providing a sampleMetadata file as a ‘plot chromatogram’ parameter.</p>
       </blockquote>
     </li>
@@ -1620,7 +1618,7 @@ depending of your analytical sequence, you may want to treat part of your sample
 <p>This can be the case for example if you have in your analytical sequence some blank samples (your injection solvent) that you want to
 extract along with your biological samples to be able to use them as a reference for noise estimation and noise filtering. The fact that
 these blank samples have different characteristics compared to your biological samples can be of importance when setting parameters of
-your grouping step. You will see what this is all about in the ‘grouping’ section of this tutorial, but in the <span class="notranslate">workflow</span> order, it is
+your grouping step. You will see what this is all about in the ‘grouping’ section of this tutorial, but in the workflow order, it is
 at this step that you need to provide the needed information if you want distinction in your grouping step.</p>
 
 <p><strong>In the case of our tutorial data</strong>, we do not want to separate the samples according to groups, so we do not provide the sampleMetadata when executing
@@ -1861,7 +1859,7 @@ sample. What do you notice when looking at the intensity of the first ion regard
 
 </blockquote>
 
-<p>At this point of the XCMS extraction <span class="notranslate">workflow</span>, the peak list may contain NA when peaks where not considered peaks in only some
+<p>At this point of the XCMS extraction workflow, the peak list may contain NA when peaks where not considered peaks in only some
 of the samples in the first ‘findChromPeaks’ step. This does not necessary means that no peak exists for these samples. For example,
 sometimes peaks are of very low intensity for some samples and were not kept as peaks because of that in the first ‘findChromPeaks’
 step.</p>
@@ -1923,7 +1921,7 @@ your data:</p>
   <li>A <em>variableMetadata</em> file (with information about ions such as retention times, m/z)</li>
 </ul>
 
-<p>Nonetheless, before proceeding with the next step in the <span class="notranslate">workflow</span> (processing and filtering of your data), you can add an optional step with the
+<p>Nonetheless, before proceeding with the next step in the workflow (processing and filtering of your data), you can add an optional step with the
 <strong>CAMERA.annotate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> module. This tool uses the CAMERA R package to perform a first annotation of your data based on XCMS outputs.</p>
 
 <h2 id="annotation-with-camera-optional">Annotation with CAMERA [Optional]</h2>
@@ -1936,7 +1934,7 @@ for a first attempt to run this function. Nevertheless, a few parameters have to
 <ul>
   <li>The polarity has to be set since it affects annotation.</li>
   <li>For statistical analysis, you have to define if you have two or more conditions to compare. These conditions had to be defined in the
- sample metadata uploaded previously and taken into account in the XCMS <span class="notranslate">workflow</span>.</li>
+ sample metadata uploaded previously and taken into account in the XCMS workflow.</li>
   <li>You can define how many significant ions will be used for extracted ions chromatogram (EIC) plot. These plots will be included in a pdf file.</li>
 </ul>
 
@@ -1980,7 +1978,7 @@ In particular, the <strong>Mode</strong> parameter will influence a lot your res
 
 </blockquote>
 
-<p>The information given by this tool is not mandatory for the next step of the metabolomic <span class="notranslate">workflow</span>. Commonly, annotation is considered a later
+<p>The information given by this tool is not mandatory for the next step of the metabolomic workflow. Commonly, annotation is considered a later
 step in the pipeline, but since CAMERA uses the outputs of XCMS, if you want to use it you better do it at this step, allowing you to have the
 corresponding information in your variableMetadata file for later use.</p>
 
@@ -1993,7 +1991,7 @@ corresponding information in your variableMetadata file for later use.</p>
   <li>A <strong>variableMetadata</strong> file from either XCMS.fillChromPeaks or CAMERA.annotate</li>
 </ul>
 
-<p>Concerning the <strong>sampleMetadata</strong> file, for the next steps of the <span class="notranslate">workflow</span>, there are four columns that are mandatory to go through all the analysis:</p>
+<p>Concerning the <strong>sampleMetadata</strong> file, for the next steps of the workflow, there are four columns that are mandatory to go through all the analysis:</p>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">injectionOrder</code>: a numerical column of injection order</li>
   <li><code class="language-plaintext highlighter-rouge">sampleType</code>: specifies if a QC pool or a sample (coded <code class="language-plaintext highlighter-rouge">pool</code> or <code class="language-plaintext highlighter-rouge">sample</code>)</li>
@@ -2006,12 +2004,12 @@ corresponding information in your variableMetadata file for later use.</p>
 
   <p>The preprocessing part of this analysis can be quite time-consuming, and already corresponds to quite a few number of steps, depending of your analysis.
 It can also generate several versions of your 3 tables, with only one of interest for each at the end of the extraction process. We highly recommend,
-at this step of the metabolomic <span class="notranslate">workflow</span>, to split your analysis by beginning a new <span class="notranslate">Galaxy</span> history with only the 3 tables you need. This will help
+at this step of the metabolomic workflow, to split your analysis by beginning a new Galaxy history with only the 3 tables you need. This will help
 you in limiting selecting the wrong dataset in further analyses, and bring a little tidiness for future review of your analysis process.</p>
 
   <p>To begin a new history with the 3 tables from your current history, you can use the functionality ‘copy dataset’ and copy it into a new history.</p>
 
-  <p>We also recommend you to rename your 3 tables before proceeding with the next steps of the metabolomic <span class="notranslate">workflow</span>. Indeed, you may have notice that
+  <p>We also recommend you to rename your 3 tables before proceeding with the next steps of the metabolomic workflow. Indeed, you may have notice that
 the XCMS tools generate output names that contain the different XCMS steps you used, allowing easy traceability while browsing your history.
 However, knowing that the next steps of analysis are also going to extend the 3 tables’ names, if you keep the original names it will become very
 long and thus may reduce the names’ readability. Hence, we highly recommend you to rename them with something short, <em>e.g.</em> ‘sampleMetadata’,
@@ -2026,7 +2024,7 @@ long and thus may reduce the names’ readability. Hence, we highly recommend yo
       <p>Create a new history with the 3 tables</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-copy-a-dataset-between-histories"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-a-dataset-between-histories-contents" aria-expanded="true" aria-label="Toggle tip box: Copy a dataset between histories"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Copy a dataset between histories<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>There 3 ways to copy datasets between histories</p>   <ol>   <li>     <p>From the original history</p>     <ol>       <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>       <li>Click on <strong>Copy Dataset</strong></li>       <li>         <p>Select the desired files</p>       </li>       <li>         <p>“New history name:” <code class="language-plaintext highlighter-rouge">Sacurine Processing</code></p>       </li>       <li>Click on the new history name in the green box that have just appear to switch to this history</li>     </ol>   </li>   <li>     <p>From the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong></p>     <ol>       <li>Click on <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong> on the top right</li>       <li>Switch to the history in which the dataset should be copied</li>       <li>Drag the dataset to copy from its original history</li>       <li>Drop it in the target history</li>     </ol>   </li>   <li>     <p>From the target history</p>     <ol>       <li>Click on <strong>User</strong> in the top bar</li>       <li>Click on <strong>Datasets</strong></li>       <li>Search for the dataset to copy</li>       <li>Click on it</li>       <li>Click on <strong>Copy to History</strong></li>     </ol>   </li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-copy-a-dataset-between-histories"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-a-dataset-between-histories-contents" aria-expanded="true" aria-label="Toggle tip box: Copy a dataset between histories"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Copy a dataset between histories<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>There 3 ways to copy datasets between histories</p>   <ol>   <li>     <p>From the original history</p>     <ol>       <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>       <li>Click on <strong>Copy Dataset</strong></li>       <li>         <p>Select the desired files</p>       </li>       <li>         <p>“New history name:” <code class="language-plaintext highlighter-rouge">Sacurine Processing</code></p>       </li>       <li>Click on the new history name in the green box that have just appear to switch to this history</li>     </ol>   </li>   <li>     <p>From the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-columns</span> <strong>View all histories</strong></p>     <ol>       <li>Click on <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-columns</span> <strong>View all histories</strong> on the top right</li>       <li>Switch to the history in which the dataset should be copied</li>       <li>Drag the dataset to copy from its original history</li>       <li>Drop it in the target history</li>     </ol>   </li>   <li>     <p>From the target history</p>     <ol>       <li>Click on <strong>User</strong> in the top bar</li>       <li>Click on <strong>Datasets</strong></li>       <li>Search for the dataset to copy</li>       <li>Click on it</li>       <li>Click on <strong>Copy to History</strong></li>     </ol>   </li> </ol> </blockquote>
     </li>
     <li>
       <p>Rename the 3 tables with shorter names:</p>
@@ -2036,7 +2034,7 @@ long and thus may reduce the names’ readability. Hence, we highly recommend yo
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -2044,7 +2042,7 @@ long and thus may reduce the names’ readability. Hence, we highly recommend yo
 
 <h1 id="data-processing-quality-checks-normalisation-data-filtering">Data processing: quality checks, normalisation, data filtering</h1>
 
-<p>In the previous step of the LC-MS <span class="notranslate">workflow</span>, you saw how to extract features from your acquisition files. This data is
+<p>In the previous step of the LC-MS workflow, you saw how to extract features from your acquisition files. This data is
 shaped in a format allowing the use of various standard statistical methods. However, being able to perform a
 statistical analysis does not mean necessarily being able to highlight relevant information. Indeed, data are often affected
 by various sources of unwanted variability. It can limit the effectiveness of statistical methods, leading sometimes to
@@ -2458,7 +2456,7 @@ reference mass bank face to face. This will give you potential origins of your i
 
 <p>To be able to perform annotation, you will ‘only’ need to gather the mass list of your subset of ions, a reference bank, and a tool
 to proceed to the matching. The use of ‘only’ is tricky here, since even the subset of ions to use may not be turnkey at this step
-of the <span class="notranslate">workflow</span> (even if you consider the previous steps as cleared now, selected ions may not be the ones most appropriate to
+of the workflow (even if you consider the previous steps as cleared now, selected ions may not be the ones most appropriate to
 get a foothold in annotation).</p>
 
 <p>For example, what may be the reference bank that you need for the annotation step? This is a crucial question. It exists a variety
@@ -2503,17 +2501,17 @@ review to identify relevant proposed annotation.</p>
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-15" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
   <p>Once you reviewed carefully your annotation and settled for a subset of candidate identities, your are ready for further adventures.
-For now, <span class="notranslate">Galaxy</span>4Metabolomics stops here but we have various perspectives of additional tools for the future (a little bit of
+For now, Galaxy4Metabolomics stops here but we have various perspectives of additional tools for the future (a little bit of
 <a href="https://metexplore.toulouse.inra.fr/index.html/">MetExplore</a> for example?).</p>
 </blockquote>
 
 <h1 id="conclusion">Conclusion</h1>
 
 <p>This tutorial allowed you to get a glance at what data analysis in Metabolomics could look like when dealing with LC-MS data.
-The <span class="notranslate">workflow</span> used here as an example is only one of many that you can already construct using <span class="notranslate">Galaxy</span>. For each of the four main steps described
-here, you can find a variety of combinations and tools to use, to try to reach the highest potential of <span class="notranslate">Galaxy</span> when dealing with
+The workflow used here as an example is only one of many that you can already construct using Galaxy. For each of the four main steps described
+here, you can find a variety of combinations and tools to use, to try to reach the highest potential of Galaxy when dealing with
 LC-MS metabolomic data. Now that you know that tools exist and are available in this accessible, reproducible and transparent resource
-that <span class="notranslate">Galaxy</span> is, all that remains for you to make high level reproducible science is to develop and apply your expertise in Metabolomics,
+that Galaxy is, all that remains for you to make high level reproducible science is to develop and apply your expertise in Metabolomics,
 and create, run and share!</p>
 
 

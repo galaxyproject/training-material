@@ -822,8 +822,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://ml.usegalaxy.eu/" title="Machine Learning Workbench">
             Machine Learning Workbench
         </a>
@@ -951,20 +949,20 @@
 
 <!-- This is a comment. -->
 
-<p>Raw <span class="notranslate">reads</span> contain valuable information, such as coverage depth and quality scores, that is lost in a consensus sequence.
-Submission of raw <span class="notranslate">reads</span> to public repositories allows reuse of data and reproducibility of analysis and enables discovery of minor allelic variants and intrahost variation, for example during the recent COVID-19 pandemic (<span class="citation"><a href="#Maier2021">Maier <i>et al.</i> 2021</a></span>).</p>
+<p>Raw reads contain valuable information, such as coverage depth and quality scores, that is lost in a consensus sequence.
+Submission of raw reads to public repositories allows reuse of data and reproducibility of analysis and enables discovery of minor allelic variants and intrahost variation, for example during the recent COVID-19 pandemic (<span class="citation"><a href="#Maier2021">Maier <i>et al.</i> 2021</a></span>).</p>
 
-<p>The European Nucleotide Archive is an Open and FAIR repository of nucleotide data. As part of the Inte<span class="notranslate">rna</span>tional Nucleotide Sequence Database Collaboration (INSDC), ENA also indexes data from the NCBI and DDBJ <span class="citation"><a href="#Arita2020">Arita <i>et al.</i> 2020</a></span>. Data submitted to ENA must be accompanied by sufficient metadata. You can learn more from this <a href="/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/slides.html">introductory slide deck</a> or directly from <a href="https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html">ENA</a>.</p>
+<p>The European Nucleotide Archive is an Open and FAIR repository of nucleotide data. As part of the International Nucleotide Sequence Database Collaboration (INSDC), ENA also indexes data from the NCBI and DDBJ <span class="citation"><a href="#Arita2020">Arita <i>et al.</i> 2020</a></span>. Data submitted to ENA must be accompanied by sufficient metadata. You can learn more from this <a href="/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/slides.html">introductory slide deck</a> or directly from <a href="https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html">ENA</a>.</p>
 
-<p>In this tutorial we will show you how to use <span class="notranslate">Galaxy</span>’s ‘ENA Upload tool’ to submit raw sequencing <span class="notranslate">reads</span>, consensus sequences and their associated metadata to ENA <span class="citation"><a href="#Roncoroni2021">Roncoroni <i>et al.</i> 2021</a></span>. You will learn to add your ENA Webin credentials to <span class="notranslate">Galaxy</span>, input metadata interactively or via a metadata template and submit the <span class="notranslate">reads</span> to ENA (test) server using <span class="notranslate">Galaxy</span>’s ‘ENA upload tool’.
-Specifically, we will use one ONT sequencing file to demonstrate interactive metadata input and two sets of PE Illumina <span class="notranslate">reads</span> to demonstrate how to use the ENA metadata template. Finally, we will submit consensus sequences to ENA using ‘Submit consensus sequence to ENA’ tool.</p>
+<p>In this tutorial we will show you how to use Galaxy’s ‘ENA Upload tool’ to submit raw sequencing reads, consensus sequences and their associated metadata to ENA <span class="citation"><a href="#Roncoroni2021">Roncoroni <i>et al.</i> 2021</a></span>. You will learn to add your ENA Webin credentials to Galaxy, input metadata interactively or via a metadata template and submit the reads to ENA (test) server using Galaxy’s ‘ENA upload tool’.
+Specifically, we will use one ONT sequencing file to demonstrate interactive metadata input and two sets of PE Illumina reads to demonstrate how to use the ENA metadata template. Finally, we will submit consensus sequences to ENA using ‘Submit consensus sequence to ENA’ tool.</p>
 
 <p>Data will be submitted to ENA’s test server and will not be public.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-nature-of-the-input-data" aria-label="comment box: Nature of the input data"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Nature of the input data</div>
   <p>We will use data derived from sequencing data of bronchoalveolar lavage fluid (BALF) samples obtained from early COVID-19 patients in China as our input data.
-Human traces have been removed in <a href="/training-material/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html"><span class="notranslate">Galaxy</span></a>.</p>
+Human traces have been removed in <a href="/training-material/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html">Galaxy</a>.</p>
 
 </blockquote>
 
@@ -975,8 +973,8 @@ Human traces have been removed in <a href="/training-material/topics/sequence-an
 
 <ol id="markdown-toc">
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
-  <li><a href="#adding-ena-webin-credentials-to-your-galaxy-user-information" id="markdown-toc-adding-ena-webin-credentials-to-your-galaxy-user-information">Adding ENA Webin credentials to your <span class="notranslate">Galaxy</span> user information</a></li>
-  <li><a href="#submitting-raw-sequence-data-reads-to-the-ena" id="markdown-toc-submitting-raw-sequence-data-reads-to-the-ena">Submitting raw sequence data (<span class="notranslate">reads</span>) to the ENA</a>    <ol>
+  <li><a href="#adding-ena-webin-credentials-to-your-galaxy-user-information" id="markdown-toc-adding-ena-webin-credentials-to-your-galaxy-user-information">Adding ENA Webin credentials to your Galaxy user information</a></li>
+  <li><a href="#submitting-raw-sequence-data-reads-to-the-ena" id="markdown-toc-submitting-raw-sequence-data-reads-to-the-ena">Submitting raw sequence data (reads) to the ENA</a>    <ol>
       <li><a href="#option-1-submitting-to-ena-using-interactive-metadata-generator" id="markdown-toc-option-1-submitting-to-ena-using-interactive-metadata-generator">Option 1: submitting to ENA using interactive metadata generator</a></li>
       <li><a href="#option-2-submitting-to-ena-using-a-metadata-template" id="markdown-toc-option-2-submitting-to-ena-using-a-metadata-template">Option 2: submitting to ENA using a metadata template</a></li>
     </ol>
@@ -986,15 +984,15 @@ Human traces have been removed in <a href="/training-material/topics/sequence-an
 
 </blockquote>
 
-<h1 id="adding-ena-webin-credentials-to-your-galaxy-user-information">Adding ENA Webin credentials to your <span class="notranslate">Galaxy</span> user information</h1>
+<h1 id="adding-ena-webin-credentials-to-your-galaxy-user-information">Adding ENA Webin credentials to your Galaxy user information</h1>
 
-<p>In order to submit data to ENA, you need to have a valid Webin account. If you don’t have one already you can register for one <a href="https://www.ebi.ac.uk/ena/submit/sra/#registration">on ENA’s Registration Page</a>. Webin credentials need to be included in your <span class="notranslate">Galaxy</span> user information before you can use the ENA Upload tool.</p>
+<p>In order to submit data to ENA, you need to have a valid Webin account. If you don’t have one already you can register for one <a href="https://www.ebi.ac.uk/ena/submit/sra/#registration">on ENA’s Registration Page</a>. Webin credentials need to be included in your Galaxy user information before you can use the ENA Upload tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-webin-credentials-to-your-galaxy-user-information" aria-label="hands-on box: Add Webin credentials to your Galaxy user information"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add Webin credentials to your <span class="notranslate">Galaxy</span> user information</div>
+  <div class="box-title hands-on-title" id="hands-on-add-webin-credentials-to-your-galaxy-user-information" aria-label="hands-on box: Add Webin credentials to your Galaxy user information"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add Webin credentials to your Galaxy user information</div>
 
   <ol>
-    <li>If you have not already done so, log in to use<span class="notranslate">galaxy</span>.eu</li>
+    <li>If you have not already done so, log in to usegalaxy.eu</li>
     <li>Navigate to <em>“User”</em> &gt; <em>“Preferences”</em> on the top menu
       <ul>
         <li>Click on <i class="fa fa-user" aria-hidden="true"></i> <strong>Manage Information</strong></li>
@@ -1007,7 +1005,7 @@ Human traces have been removed in <a href="/training-material/topics/sequence-an
   <figure id="figure-1"><img src="../../images/upload-data-to-ena/ENA-credentials.png" alt="ENA Webin Account details in Galaxy. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> ENA Webin Account details</figcaption></figure>
 </blockquote>
 
-<h1 id="submitting-raw-sequence-data-reads-to-the-ena">Submitting raw sequence data (<span class="notranslate">reads</span>) to the ENA</h1>
+<h1 id="submitting-raw-sequence-data-reads-to-the-ena">Submitting raw sequence data (reads) to the ENA</h1>
 <h2 id="option-1-submitting-to-ena-using-interactive-metadata-generator">Option 1: submitting to ENA using interactive metadata generator</h2>
 
 <p>In this first example, you will submit one ONT sequence file using the interactive metadata forms from the ENA Upload tool. This method is only convenient for small submissions. For bulk submissions, we recommend you use the metadata template described below in Option 2.</p>
@@ -1020,7 +1018,7 @@ Human traces have been removed in <a href="/training-material/topics/sequence-an
       <p>Upload the ONT data from Zenodo via URLs</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <p>The URL for our example data is this:</p>
 
@@ -1040,7 +1038,7 @@ After you confirm that all the data and metadata looks ok, you can go ahead and 
   <div class="box-title hands-on-title" id="hands-on-add-metadata-interactively-and-submit-a-single-sequence-to-ena" aria-label="hands-on box: add metadata interactively and submit a single sequence to ENA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: add metadata interactively and submit a single sequence to ENA</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1"><strong>ENA Upload tool</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1</span></span> :
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1"><strong>ENA Upload tool</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1</span></span> :
       <ul>
         <li><em>“Action to execute”</em>: <code class="language-plaintext highlighter-rouge">Add new data</code></li>
         <li>Under “Testing options”:
@@ -1050,7 +1048,7 @@ After you confirm that all the data and metadata looks ok, you can go ahead and 
           </ul>
         </li>
         <li><em>“Would you like to submit pregenerated table files or interactively define the input structures?”</em>: <code class="language-plaintext highlighter-rouge">Interactive generation of the study structure</code></li>
-        <li><em>“Add .fastq.(gz.bz2) extension to the <span class="notranslate">Galaxy</span> dataset names to match the ones described in the input tables?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Add .fastq.(gz.bz2) extension to the Galaxy dataset names to match the ones described in the input tables?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><em>“Does your submission contains viral samples?”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
       </ul>
     </li>
@@ -1063,7 +1061,7 @@ After you confirm that all the data and metadata looks ok, you can go ahead and 
         <li><em>“Host common name”</em>: <code class="language-plaintext highlighter-rouge">human</code></li>
         <li><em>“Host subject id”</em>: avoid using ID that can be use to trace samples back to patients</li>
         <li><em>“Host scientific name”</em>: <code class="language-plaintext highlighter-rouge">Homo sapiens</code></li>
-        <li><em>“Library strategy”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>-Seq</code></li>
+        <li><em>“Library strategy”</em>: <code class="language-plaintext highlighter-rouge">RNA-Seq</code></li>
         <li><em>“Select library source”</em>: <code class="language-plaintext highlighter-rouge">METAGENOMIC</code></li>
         <li><em>“Library selection”</em>: <code class="language-plaintext highlighter-rouge">RANDOM</code></li>
         <li><em>“Library layout”</em>: <code class="language-plaintext highlighter-rouge">SINGLE</code></li>
@@ -1100,7 +1098,7 @@ After you confirm that all the data and metadata looks ok, you can go ahead and 
 
 <h2 id="option-2-submitting-to-ena-using-a-metadata-template">Option 2: submitting to ENA using a metadata template</h2>
 
-<p>For larger submissions, interactive metadata input can be tedious and not practical. In the second example, you will submit two sets of Illumina PE sequence files and input metadata using a template sp<span class="notranslate">reads</span>heet. This template contains all fields for ENA sample checklist <em>‘ERC000033 - ENA virus pathogen reporting standard checklist’</em>. Tabular (.tsv and .xlsx) metadata templates for all sample checklist can be found in <a href="https://github.com/ELIXIR-Belgium/ENA-metadata-templates">this repository</a>.
+<p>For larger submissions, interactive metadata input can be tedious and not practical. In the second example, you will submit two sets of Illumina PE sequence files and input metadata using a template spreadsheet. This template contains all fields for ENA sample checklist <em>‘ERC000033 - ENA virus pathogen reporting standard checklist’</em>. Tabular (.tsv and .xlsx) metadata templates for all sample checklist can be found in <a href="https://github.com/ELIXIR-Belgium/ENA-metadata-templates">this repository</a>.
 For this tutorial, we provide you with a pre-filled template and encourage you to explore it.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1121,11 +1119,11 @@ https://zenodo.org/record/6912963/files/metadata_template_ERC000033_mock_complet
       <p>Arrange the data into a paired dataset collection</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-paired-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-paired-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a paired collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a paired collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>For all selected..</strong> and choose <strong>Build List of Dataset Pairs</strong></p>   </li>   <li>Change the text of <em>unpaired forward</em> to a common selector for the forward <span class="notranslate">reads</span></li>   <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse <span class="notranslate">reads</span></li>   <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-paired-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-paired-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a paired collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a paired collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>For all selected..</strong> and choose <strong>Build List of Dataset Pairs</strong></p>   </li>   <li>Change the text of <em>unpaired forward</em> to a common selector for the forward reads</li>   <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse reads</li>   <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
 
       <p>For the example datasets this means:</p>
       <ul>
-        <li>You need to tell <span class="notranslate">Galaxy</span> about the suffix for your forward and reverse <span class="notranslate">reads</span>, respectively:
+        <li>You need to tell Galaxy about the suffix for your forward and reverse reads, respectively:
           <ul>
             <li>set the text of <em>unpaired forward</em> to: <code class="language-plaintext highlighter-rouge">_1.fastq.gz</code></li>
             <li>set the text of <em>unpaired reverse</em> to: <code class="language-plaintext highlighter-rouge">_2.fastq.gz</code></li>
@@ -1147,7 +1145,7 @@ https://zenodo.org/record/6912963/files/metadata_template_ERC000033_mock_complet
       </ul>
     </li>
     <li>
-      <p>Inspect the <code class="language-plaintext highlighter-rouge">GTN_tutorial_mock_metadata.xlsx</code> (filled-in template) file by clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon</p>
+      <p>Inspect the <code class="language-plaintext highlighter-rouge">GTN_tutorial_mock_metadata.xlsx</code> (filled-in template) file by clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon</p>
 
       <p>https://github.com/enasequence/webin-cli</p>
 
@@ -1163,7 +1161,7 @@ https://zenodo.org/record/6912963/files/metadata_template_ERC000033_mock_complet
           <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>There are four metadata sheets, one per metadata object (Study, Sample, Experiment, Run)</li>
-            <li>The Sample section is more extensive in the template sp<span class="notranslate">reads</span>heet, because it contains all the fields from ENA ERC000033 sample checklist, as well as all ‘Recommended’ and ‘Optional’ fields in the other sections.</li>
+            <li>The Sample section is more extensive in the template spreadsheet, because it contains all the fields from ENA ERC000033 sample checklist, as well as all ‘Recommended’ and ‘Optional’ fields in the other sections.</li>
           </ol>
         </blockquote>
       </blockquote>
@@ -1178,7 +1176,7 @@ https://zenodo.org/record/6912963/files/metadata_template_ERC000033_mock_complet
   <div class="box-title hands-on-title" id="hands-on-use-a-metadata-template-and-submit-multiple-sequences-to-ena" aria-label="hands-on box: use a metadata template and submit multiple sequences to ENA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: use a metadata template and submit multiple sequences to ENA</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1"><strong>ENA Upload tool</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1</span></span> :
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1"><strong>ENA Upload tool</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1</span></span> :
       <ul>
         <li><em>“Action to execute”</em>: <code class="language-plaintext highlighter-rouge">Add new data</code></li>
         <li>Under “Testing options”:
@@ -1221,18 +1219,18 @@ https://zenodo.org/record/6912963/files/metadata_template_ERC000033_mock_complet
 <p>We produced consensus sequences for the Illumina data from Option 2 above following <a href="https://workflowhub.eu/workflows/113?version=4">SARS-CoV-2-PE-Illumina-WGS-variant-calling</a>, <a href="https://workflowhub.eu/workflows/109?version=5">SARS-CoV-2-variation-reporting</a> and <a href="https://workflowhub.eu/workflows/138?version=4">COVID-19-consensus-construction</a> workflows.</p>
 
 <p>In this step we will submit one consensus sequence to ENA.
-We will link it to the <span class="notranslate">reads</span> submitted in the first step using the accession numbers given to those submissions. <span class="notranslate">Galaxy</span>’s ‘ENA Upload tool’ captures and stores metadata on a metadata ticket.</p>
+We will link it to the reads submitted in the first step using the accession numbers given to those submissions. Galaxy’s ‘ENA Upload tool’ captures and stores metadata on a metadata ticket.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-submit-consensus-sequences-to-ena" aria-label="hands-on box: submit consensus sequences to ENA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: submit consensus sequences to ENA</div>
 
   <ol>
-    <li>Upload the consensus sequence to <span class="notranslate">Galaxy</span> from Zenodo via URLs:
+    <li>Upload the consensus sequence to Galaxy from Zenodo via URLs:
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/6912963/files/SRR10903401.fasta
 </code></pre></div>      </div>
     </li>
-    <li><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> Open the ‘ENA submsission receipt’ and find the Study and Sample accession numbers from the raw data submission.</li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ieguinoa/ena_webin_cli/ena_webin_cli/7d751b5943b0" title="Tested with toolshed.g2.bx.psu.edu/repos/ieguinoa/ena_webin_cli/ena_webin_cli/7d751b5943b0"><strong>Submit consensus sequence to ENA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ieguinoa/ena_webin_cli/ena_webin_cli/7d751b5943b0</span></span> :
+    <li><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> Open the ‘ENA submsission receipt’ and find the Study and Sample accession numbers from the raw data submission.</li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ieguinoa/ena_webin_cli/ena_webin_cli/7d751b5943b0" title="Tested with toolshed.g2.bx.psu.edu/repos/ieguinoa/ena_webin_cli/ena_webin_cli/7d751b5943b0"><strong>Submit consensus sequence to ENA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ieguinoa/ena_webin_cli/ena_webin_cli/7d751b5943b0</span></span> :
       <ul>
         <li><em>“Submit to test ENA server?”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
         <li><em>“Validate files and metadata but do not submit”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
@@ -1241,7 +1239,7 @@ We will link it to the <span class="notranslate">reads</span> submitted in the f
             <ul>
               <li><em>“Assembly type”</em>: <code class="language-plaintext highlighter-rouge">Clone</code></li>
               <li><em>“Assembly program”</em>: <code class="language-plaintext highlighter-rouge">BWA-MEM</code></li>
-              <li><em>“Molecule type”</em>: <code class="language-plaintext highlighter-rouge">genomic <span class="notranslate">RNA</span></code></li>
+              <li><em>“Molecule type”</em>: <code class="language-plaintext highlighter-rouge">genomic RNA</code></li>
               <li><em>“Coverage”</em>: <code class="language-plaintext highlighter-rouge">1000</code></li>
               <li><em>“Select the method to load study and sample metadata”</em>: <code class="language-plaintext highlighter-rouge">Fill in required metadata</code></li>
               <li><em>“Assembly name”</em>: give a name to your assembly.</li>

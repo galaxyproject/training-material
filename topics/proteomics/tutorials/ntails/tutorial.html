@@ -712,8 +712,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -790,36 +788,36 @@ The N-Tails technique includes the use of heavy isotope dimethyl labelling.</p>
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-interpretation-of-n-tails-results" aria-label="comment box: Interpretation of N-Tails results"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Interpretation of N-Tails results</div>
 
-  <p>Be careful when interpreting the results of N-Tails experiments. While the technique <strong>is</strong> fit to identify direct protease substrates, it does not discriminate direct from indirect (“<span class="notranslate">downstream</span>”) effects. Thus, most of the identified N-termini will <strong>not</strong> be direct protease substrates, even if their change in protein abundance is statistically significant. To identify direct protease substrates, you have to further validate substrate candidates by comparing the prime and non-prime amino acids of each identified N-terminus with the protease cleavage motif. The information can be extracted from the peptide IDs, but this step is so far not included in the <span class="notranslate">workflow</span>.</p>
+  <p>Be careful when interpreting the results of N-Tails experiments. While the technique <strong>is</strong> fit to identify direct protease substrates, it does not discriminate direct from indirect (“downstream”) effects. Thus, most of the identified N-termini will <strong>not</strong> be direct protease substrates, even if their change in protein abundance is statistically significant. To identify direct protease substrates, you have to further validate substrate candidates by comparing the prime and non-prime amino acids of each identified N-terminus with the protease cleavage motif. The information can be extracted from the peptide IDs, but this step is so far not included in the workflow.</p>
 
   <p>Lacking discrimination between direct and indirect effects is a general restriction also in other N-terminal screening techniques (e.g. COFRADIC), and is not specific for the N-Tails technique.</p>
 </blockquote>
 
-<p>This <span class="notranslate">workflow</span> was originally built in the OpenMS framework “TOPPAS” and published in <a href="https://www.ncbi.nlm.nih.gov/pubmed/27087653">Lai, Weisser et al., MCP, 2016</a>. It was converted to OpenMS v2.1, rebuild for the <span class="notranslate">Galaxy</span> framework and tested on the original dataset by Melanie Föll. It was designed for data analysis of a three samples combined in one MS run, a technique based on dimethyl stable isotope labeling (SIL). For more information on SIL, consult <a href="/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html">this tutorial</a>. The original data were generated using pre-fractionation. Thus, peptides of one biological experiment are measured in multiple consecutive MS runs (one run per fraction).</p>
+<p>This workflow was originally built in the OpenMS framework “TOPPAS” and published in <a href="https://www.ncbi.nlm.nih.gov/pubmed/27087653">Lai, Weisser et al., MCP, 2016</a>. It was converted to OpenMS v2.1, rebuild for the Galaxy framework and tested on the original dataset by Melanie Föll. It was designed for data analysis of a three samples combined in one MS run, a technique based on dimethyl stable isotope labeling (SIL). For more information on SIL, consult <a href="/training-material/topics/proteomics/tutorials/protein-quant-sil/tutorial.html">this tutorial</a>. The original data were generated using pre-fractionation. Thus, peptides of one biological experiment are measured in multiple consecutive MS runs (one run per fraction).</p>
 
-<p>The figure below gives an overview of the used <span class="notranslate">Galaxy</span> nodes. For further description of the <span class="notranslate">workflow</span>, please consider the <a href="https://www.ncbi.nlm.nih.gov/pubmed/27087653">original publication</a>.</p>
+<p>The figure below gives an overview of the used Galaxy nodes. For further description of the workflow, please consider the <a href="https://www.ncbi.nlm.nih.gov/pubmed/27087653">original publication</a>.</p>
 
-<figure id="figure-2"><img src="../../images/wf_ntails_tripleDimethylLabel.png" alt="N-Tails Galaxy Workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> N-Tails <span class="notranslate">Galaxy</span> <span class="notranslate">Workflow</span></figcaption></figure>
+<figure id="figure-2"><img src="../../images/wf_ntails_tripleDimethylLabel.png" alt="N-Tails Galaxy Workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> N-Tails Galaxy Workflow</figcaption></figure>
 
 <p>Notice that the given digestion enzyme is “ArgC”, even if the proteins were digested using trypsin. Due to the used labelling method prior to digestion, lysine (“K”) residues are dimethylated. Therefore, trypsin will not cut c-terminal of lysine, but only c-terminal of arginine in a N-TAILS experiment. This resembles the ArgC specificity and generally results in longer peptides <a href="http://www.mcponline.org/content/12/12/3532.full">Rogers and Overall, MCP, 2013</a>.</p>
 
 <h2 id="input">Input</h2>
 
-<p>The <span class="notranslate">workflow</span> needs two input files:</p>
+<p>The workflow needs two input files:</p>
 
 <p>1) A collection of mzML files (multiple fractions of the same experiment).
   2) A FASTA protein database for the organism of interest. For more information on protein databases, consult <a href="/training-material/topics/proteomics/tutorials/database-handling/tutorial.html">this tutorial</a></p>
 
-<h2 id="customizing-the-workflow">Customizing the <span class="notranslate">Workflow</span></h2>
+<h2 id="customizing-the-workflow">Customizing the Workflow</h2>
 
 <ul>
-  <li><em>Running the <span class="notranslate">workflow</span> on a non-prefractionated sample:</em> Simply use only one file as an input.</li>
-  <li><em>Running the <span class="notranslate">workflow</span> on a double dimethyl labeling (only light and heavy labeling):</em> remove the third <strong>MSGFPlusAdapter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and the following <strong>PeptideIndexer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> . Make sure that the mass changes are correctly given in the <strong>MSGFPlusAdapter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> .</li>
+  <li><em>Running the workflow on a non-prefractionated sample:</em> Simply use only one file as an input.</li>
+  <li><em>Running the workflow on a double dimethyl labeling (only light and heavy labeling):</em> remove the third <strong>MSGFPlusAdapter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and the following <strong>PeptideIndexer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> . Make sure that the mass changes are correctly given in the <strong>MSGFPlusAdapter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> .</li>
 </ul>
 
 <h2 id="citation">Citation</h2>
 
-<p>If you use this <span class="notranslate">workflow</span> directly, or any derivative of it, in work leading to a scientific publication,
+<p>If you use this workflow directly, or any derivative of it, in work leading to a scientific publication,
 please cite:</p>
 
 <p>Lai, Z.W., Weisser, J., Nilse, L., Costa, F., Keller, E., Tholen, M., Kizhakkedathu, J.N., Biniossek, M., Bronsert, P., and Schilling, O. (2016). Formalin-Fixed, Paraffin-Embedded Tissues (FFPE) as a Robust Source for the Profiling of Native and Protease-Generated Protein Amino Termini. Mol. Cell. Proteomics 15, 2203–2213.</p>

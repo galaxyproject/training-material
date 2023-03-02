@@ -653,8 +653,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://ml.usegalaxy.eu/" title="Machine Learning Workbench">
             Machine Learning Workbench
         </a>
@@ -796,8 +794,8 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>Workflows are a powerful feature in <span class="notranslate">Galaxy</span> that allow you to link multiple steps of complex analysis.
-In this tutorial we will demonstrate how to use the <span class="notranslate">Workflow</span> Editor to construct multiple variants of a simple <span class="notranslate">workflow</span>. Note that these workflows are meant to illustrate different concepts. Not all workflows require using all of the features described below, but we hope this tutorial will inspire you to make your analysis tasks more efficient.</p>
+<p>Workflows are a powerful feature in Galaxy that allow you to link multiple steps of complex analysis.
+In this tutorial we will demonstrate how to use the Workflow Editor to construct multiple variants of a simple workflow. Note that these workflows are meant to illustrate different concepts. Not all workflows require using all of the features described below, but we hope this tutorial will inspire you to make your analysis tasks more efficient.</p>
 
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-create-workflows-from-existing-histories"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-create-workflows-from-existing-histories-contents" aria-expanded="true" aria-label="Toggle tip box: Create workflows from existing histories"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Create workflows from existing histories<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -812,10 +810,10 @@ In this tutorial we will demonstrate how to use the <span class="notranslate">Wo
 
 <ol id="markdown-toc">
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a>    <ol>
-      <li><a href="#workflow-steps" id="markdown-toc-workflow-steps"><span class="notranslate">Workflow</span> steps</a></li>
-      <li><a href="#creating-a-new-workflow" id="markdown-toc-creating-a-new-workflow">Creating a new <span class="notranslate">workflow</span></a></li>
-      <li><a href="#editing-our-simple-workflow" id="markdown-toc-editing-our-simple-workflow">Editing our simple <span class="notranslate">workflow</span></a></li>
-      <li><a href="#embedding-a-workflow-within-a-workflow" id="markdown-toc-embedding-a-workflow-within-a-workflow">Embedding a <span class="notranslate">workflow</span> within a <span class="notranslate">workflow</span></a></li>
+      <li><a href="#workflow-steps" id="markdown-toc-workflow-steps">Workflow steps</a></li>
+      <li><a href="#creating-a-new-workflow" id="markdown-toc-creating-a-new-workflow">Creating a new workflow</a></li>
+      <li><a href="#editing-our-simple-workflow" id="markdown-toc-editing-our-simple-workflow">Editing our simple workflow</a></li>
+      <li><a href="#embedding-a-workflow-within-a-workflow" id="markdown-toc-embedding-a-workflow-within-a-workflow">Embedding a workflow within a workflow</a></li>
     </ol>
   </li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
@@ -823,37 +821,37 @@ In this tutorial we will demonstrate how to use the <span class="notranslate">Wo
 
 </blockquote>
 
-<h2 id="workflow-steps"><span class="notranslate">Workflow</span> steps</h2>
+<h2 id="workflow-steps">Workflow steps</h2>
 
 <p>Workflows logically connect a collection of steps. Possible step types are
-currently <span class="notranslate">workflow</span> inputs, tools, and workflows.</p>
+currently workflow inputs, tools, and workflows.</p>
 
-<h2 id="creating-a-new-workflow">Creating a new <span class="notranslate">workflow</span></h2>
+<h2 id="creating-a-new-workflow">Creating a new workflow</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-a-new-workflow" aria-label="hands-on box: Create a new workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create a new <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-create-a-new-workflow" aria-label="hands-on box: Create a new workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create a new workflow</div>
 
   <ul>
-    <li>Click on <strong><span class="notranslate">Workflow</span></strong> in the top panel of the <span class="notranslate">Galaxy</span> page</li>
+    <li>Click on <strong>Workflow</strong> in the top panel of the Galaxy page</li>
     <li>On the top right you will see 2 buttons: <strong>Create</strong> and <strong>Import</strong></li>
-    <li>To create a new <span class="notranslate">workflow</span> click on <strong>Create</strong></li>
-    <li>Enter a Name and Annotation for your <span class="notranslate">workflow</span> and click <strong>Save</strong></li>
-    <li>The <span class="notranslate">Workflow</span> Editor will open with a new, empty <span class="notranslate">workflow</span> loaded</li>
+    <li>To create a new workflow click on <strong>Create</strong></li>
+    <li>Enter a Name and Annotation for your workflow and click <strong>Save</strong></li>
+    <li>The Workflow Editor will open with a new, empty workflow loaded</li>
   </ul>
-  <figure id="figure-1"><img src="../../images/workflow_editor_new_workflow.png" alt="A new empty workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> A new empty <span class="notranslate">workflow</span></figcaption></figure>
+  <figure id="figure-1"><img src="../../images/workflow_editor_new_workflow.png" alt="A new empty workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> A new empty workflow</figcaption></figure>
 </blockquote>
 
 <p>On the left hand side of the Editor you see the available tools in the tool
-panel. The center panel (or “canvas”) holds the <span class="notranslate">workflow</span> layout. Steps will
+panel. The center panel (or “canvas”) holds the workflow layout. Steps will
 appear in the center panel. On the right you see the attributes of the
-<span class="notranslate">workflow</span>, such as name, version, annotation and tags. Depending on the context
+workflow, such as name, version, annotation and tags. Depending on the context
 the contents of the right panel will change, but you can always return to these
 attributes by clicking on the <strong>Edit Attributes</strong> button (the Pencil icon on
 the upper right). If there is no Pencil icon you can find the <strong>Edit Attributes</strong>
-button under the the <span class="notranslate">Workflow</span> options button (a wheel icon) on the top right of
+button under the the Workflow options button (a wheel icon) on the top right of
 the editor.</p>
 
-<p>We will start by creating a very simple <span class="notranslate">workflow</span> with just 2 tools, and then
+<p>We will start by creating a very simple workflow with just 2 tools, and then
 add more advanced features.</p>
 
 <blockquote class="notranslate hands_on">
@@ -870,7 +868,7 @@ add more advanced features.</p>
 
   <blockquote class="comment">
     <div class="box-title comment-title" id="comment-optional-input-datasets-formats" aria-label="comment box: Optional Input Datasets &amp; Formats"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Optional Input Datasets &amp; Formats</div>
-    <p>Tools may have optional dataset inputs. If your <span class="notranslate">workflow</span> should use
+    <p>Tools may have optional dataset inputs. If your workflow should use
 optional datasets, you can set <strong>Optional</strong> to <code class="language-plaintext highlighter-rouge">Yes</code>. Doing this allows you
 to connect such an input only to Tool inputs that are optional. You can
 also restrict the format of an input dataset or input dataset collection.
@@ -881,18 +879,18 @@ This serves as documentation and prevents selection of incompatible datasets.</p
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-input-modules" aria-label="comment box: Input modules"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Input modules</div>
   <p>There are 3 input types, “Input dataset”, “Input dataset
-collection” and “Simple inputs used for <span class="notranslate">workflow</span> logic”. Insert an input
-dataset or dataset collection for each possible input to your <span class="notranslate">workflow</span>.
-“Simple inputs used for <span class="notranslate">workflow</span> logic” allow the definition of parameters that
-users can or should change when running your <span class="notranslate">workflow</span>. Please check out the
-<a href="/training-material/topics/galaxy-interface/tutorials/workflow-parameters/tutorial.html">Using <span class="notranslate">Workflow</span> Parameters tutorial</a>
+collection” and “Simple inputs used for workflow logic”. Insert an input
+dataset or dataset collection for each possible input to your workflow.
+“Simple inputs used for workflow logic” allow the definition of parameters that
+users can or should change when running your workflow. Please check out the
+<a href="/training-material/topics/galaxy-interface/tutorials/workflow-parameters/tutorial.html">Using Workflow Parameters tutorial</a>
 for a detailed description of how to use these.</p>
 </blockquote>
 
 <p>We’re now ready to add a first tool and connect it to our input dataset.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-b-tac-reverse-a-file-reverse-cat-b-to-your-workflow" aria-label="hands-on box: Add &lt;b&gt;tac reverse a file (reverse cat)&lt;/b&gt; to your workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add <b>tac reverse a file (reverse cat)</b> to your <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-add-b-tac-reverse-a-file-reverse-cat-b-to-your-workflow" aria-label="hands-on box: Add &lt;b&gt;tac reverse a file (reverse cat)&lt;/b&gt; to your workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add <b>tac reverse a file (reverse cat)</b> to your workflow</div>
 
   <ol>
     <li>Find <strong>tac reverse a file (reverse cat)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in the tool panel and click on it</li>
@@ -910,7 +908,7 @@ for a detailed description of how to use these.</p>
 </blockquote>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-tip-workflow-connections" aria-label="comment box: Tip: Workflow connections"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Tip: <span class="notranslate">Workflow</span> connections</div>
+  <div class="box-title comment-title" id="comment-tip-workflow-connections" aria-label="comment box: Tip: Workflow connections"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Tip: Workflow connections</div>
   <p>Connections can be made by clicking on an output terminal and dragging the
 cursor to an input terminal. Input terminals that are compatible with the
 current output are highlighted in green, while input terminals that can’t
@@ -929,20 +927,20 @@ input terminal and clicking.</p>
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-steps-can-be-labeled" aria-label="comment box: Steps can be labeled"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Steps can be labeled</div>
   <p>The default label is the tool name, but it is often useful to label a step with
-what it does, especially if a tool is used multiple times in a <span class="notranslate">workflow</span>. A
+what it does, especially if a tool is used multiple times in a workflow. A
 click on a step will open the step’s settings on the right side. Any label
 will immediately appear in the center panel as well.</p>
 </blockquote>
 
-<p>This is great, but while a single tool in a <span class="notranslate">workflow</span> might be handy (for
+<p>This is great, but while a single tool in a workflow might be handy (for
 instance if there are many parameters to be set), let’s add another tool that
 works on the output of <strong>tac reverse a file (reverse cat)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for
-an authentic <span class="notranslate">workflow</span> experience. From now on we’ll contract steps 1 to 4 and
+an authentic workflow experience. From now on we’ll contract steps 1 to 4 and
 just mention the tool and parameters to insert, since the procedure is always
 the same.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-b-select-first-lines-from-a-dataset-b-to-your-workflow" aria-label="hands-on box: Add &lt;b&gt;Select first lines from a dataset&lt;/b&gt; to your workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add <b>Select first lines from a dataset</b> to your <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-add-b-select-first-lines-from-a-dataset-b-to-your-workflow" aria-label="hands-on box: Add &lt;b&gt;Select first lines from a dataset&lt;/b&gt; to your workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add <b>Select first lines from a dataset</b> to your workflow</div>
 
   <ol>
     <li><strong>Select first lines from a dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
@@ -952,19 +950,19 @@ the same.</p>
       </ul>
     </li>
     <li>Connect the output of the <strong>Reverse dataset</strong> step to the input</li>
-    <li>Save <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> your <span class="notranslate">workflow</span> using the save button on the top right</li>
+    <li>Save <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> your workflow using the save button on the top right</li>
   </ol>
 </blockquote>
 
-<p>We now have a very simple <span class="notranslate">workflow</span> that will reverse the contents of a file and
+<p>We now have a very simple workflow that will reverse the contents of a file and
 then output the first line of the resulting dataset. Now we’re ready to upload
-a test dataset and run our <span class="notranslate">workflow</span>.</p>
+a test dataset and run our workflow.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-running-the-workflow" aria-label="hands-on box: Running the workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Running the <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-running-the-workflow" aria-label="hands-on box: Running the workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Running the workflow</div>
 
   <ol>
-    <li>Return to the analysis are by clicking the Home button <i class="fas fa-home" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-home</span> (or <em>Analyze Data</em> on older versions of <span class="notranslate">Galaxy</span>) on the top</li>
+    <li>Return to the analysis are by clicking the Home button <i class="fas fa-home" aria-hidden="true"></i><span class="visually-hidden">galaxy-home</span> (or <em>Analyze Data</em> on older versions of Galaxy) on the top</li>
     <li>
       <p>Upload a dataset using “Paste/Fetch data” with the contents</p>
 
@@ -977,16 +975,16 @@ F
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run your <span class="notranslate">workflow</span></p>
+      <p>Run your workflow</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>   <li>Configure the <span class="notranslate">workflow</span> as needed</li>   <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<p>The outputs of the <span class="notranslate">workflow</span> will now appear in your history.
+<p>The outputs of the workflow will now appear in your history.
 In addition to our input file we will see 2 new datasets: <code class="language-plaintext highlighter-rouge">2: tac on data 1</code>
 which contains the reversed dataset and <code class="language-plaintext highlighter-rouge">3: Select first on data 2</code> which just
 contains the line <code class="language-plaintext highlighter-rouge">F</code>.</p>
@@ -997,7 +995,7 @@ dataset collections as inputs, which will maintain element identifiers across
 all steps of an analysis. We can also add colorful tags that can help us identify
 groups of datasets and we can label and rename outputs.</p>
 
-<h2 id="editing-our-simple-workflow">Editing our simple <span class="notranslate">workflow</span></h2>
+<h2 id="editing-our-simple-workflow">Editing our simple workflow</h2>
 
 <p>We will now add tags to step outputs and label one of the 2 output datasets.</p>
 
@@ -1005,19 +1003,19 @@ groups of datasets and we can label and rename outputs.</p>
   <div class="box-title comment-title" id="comment-configuring-outputs" aria-label="comment box: Configuring Outputs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Configuring Outputs</div>
   <p>Open a step and scroll to the “Configure Output:” section on the right side of
 the editor. Here you can set a Label. Outputs with a label can be used as
-outputs in a sub<span class="notranslate">workflow</span>. You will also be able to set an output name for the
+outputs in a subworkflow. You will also be able to set an output name for the
 dataset and to add or remove tags. You can also force a datatype. Note that
 setting a datatype does not change the content, so use this only if the
 file content fits the datatype you are going to select. This can be used
-to change a text output to tabular or gff/<span class="notranslate">bed</span> for instance.</p>
+to change a text output to tabular or gff/bed for instance.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-editing-our-simple-workflow" aria-label="hands-on box: Editing our simple workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Editing our simple <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-editing-our-simple-workflow" aria-label="hands-on box: Editing our simple workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Editing our simple workflow</div>
 
   <ol>
-    <li>Open our simple <span class="notranslate">workflow</span> in the <span class="notranslate">Workflow</span> Editor</li>
-    <li>Remove the input dataset called <code class="language-plaintext highlighter-rouge">A simple text input dataset</code> using the white <i class="fas fa-times" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-cross</span> icon</li>
+    <li>Open our simple workflow in the Workflow Editor</li>
+    <li>Remove the input dataset called <code class="language-plaintext highlighter-rouge">A simple text input dataset</code> using the white <i class="fas fa-times" aria-hidden="true"></i><span class="visually-hidden">galaxy-cross</span> icon</li>
     <li>Add an input dataset collection and label it
       <ul>
         <li><em>Label</em>: <code class="language-plaintext highlighter-rouge">A text dataset collection</code></li>
@@ -1036,15 +1034,15 @@ to change a text output to tabular or gff/<span class="notranslate">bed</span> f
         <li><em>Rename dataset</em>: <code class="language-plaintext highlighter-rouge">Renamed datasets</code></li>
       </ul>
     </li>
-    <li>Save <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> your <span class="notranslate">workflow</span> using the save button on the top right</li>
+    <li>Save <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> your workflow using the save button on the top right</li>
   </ol>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-running-the-workflow-1" aria-label="hands-on box: Running the workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Running the <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-running-the-workflow-1" aria-label="hands-on box: Running the workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Running the workflow</div>
 
   <ol>
-    <li>Return to the analysis page by clicking the Home button <i class="fas fa-home" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-home</span> (or <em>Analyze Data</em> on older versions of <span class="notranslate">Galaxy</span>) on the top</li>
+    <li>Return to the analysis page by clicking the Home button <i class="fas fa-home" aria-hidden="true"></i><span class="visually-hidden">galaxy-home</span> (or <em>Analyze Data</em> on older versions of Galaxy) on the top</li>
     <li>
       <p>Create a dataset collection from the first 2 files in your history</p>
 
@@ -1052,57 +1050,57 @@ to change a text output to tabular or gff/<span class="notranslate">bed</span> f
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-dataset-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-dataset-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a dataset collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a dataset collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>     <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>   </li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
     </li>
     <li>
-      <p>Run your <span class="notranslate">workflow</span> using the newly created collection input</p>
+      <p>Run your workflow using the newly created collection input</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-1-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>   <li>Configure the <span class="notranslate">workflow</span> as needed</li>   <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-1-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
 <p>You will now see only 1 new dataset collection, <code class="language-plaintext highlighter-rouge">Renamed datasets</code>, in your
-history.  This is because we have labeled only the last step in the <span class="notranslate">workflow</span>.
+history.  This is because we have labeled only the last step in the workflow.
 This collection has 2 name tags, <code class="language-plaintext highlighter-rouge">reverse</code> and <code class="language-plaintext highlighter-rouge">first</code>. The other output collection
 is hidden in the history but can be seen by clicking on <code class="language-plaintext highlighter-rouge">hidden</code> in your history.</p>
 
-<p>We will now use this <span class="notranslate">workflow</span> and embed it in a new <span class="notranslate">workflow</span>.</p>
+<p>We will now use this workflow and embed it in a new workflow.</p>
 
-<h2 id="embedding-a-workflow-within-a-workflow">Embedding a <span class="notranslate">workflow</span> within a <span class="notranslate">workflow</span></h2>
+<h2 id="embedding-a-workflow-within-a-workflow">Embedding a workflow within a workflow</h2>
 
-<p>Another step type is the <code class="language-plaintext highlighter-rouge">sub<span class="notranslate">workflow</span></code>. We can use this to include a section of
-a <span class="notranslate">workflow</span> that is repeated within a <span class="notranslate">workflow</span> or a <span class="notranslate">workflow</span> that contains steps
-that are useful in more than one <span class="notranslate">workflow</span>, so that we don’t have to maintain
+<p>Another step type is the <code class="language-plaintext highlighter-rouge">subworkflow</code>. We can use this to include a section of
+a workflow that is repeated within a workflow or a workflow that contains steps
+that are useful in more than one workflow, so that we don’t have to maintain
 and update closely related workflows.</p>
 
-<p>Here we will include our <span class="notranslate">workflow</span> twice within a new <span class="notranslate">workflow</span> and then paste the contents
-of each <span class="notranslate">workflow</span> together.</p>
+<p>Here we will include our workflow twice within a new workflow and then paste the contents
+of each workflow together.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-embedding-a-workflow" aria-label="hands-on box: Embedding a workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Embedding a <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-embedding-a-workflow" aria-label="hands-on box: Embedding a workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Embedding a workflow</div>
 
   <ol>
-    <li>Create a new, empty <span class="notranslate">workflow</span></li>
+    <li>Create a new, empty workflow</li>
     <li>Insert a dataset collection input</li>
     <li>On the left side scroll down until you see the <code class="language-plaintext highlighter-rouge">Workflows</code> section</li>
-    <li>Insert the previously created <span class="notranslate">workflow</span> by clicking on the <span class="notranslate">workflow</span> name</li>
-    <li>Label the new <span class="notranslate">workflow</span> step:
+    <li>Insert the previously created workflow by clicking on the workflow name</li>
+    <li>Label the new workflow step:
       <ul>
-        <li><em>Label</em>: <code class="language-plaintext highlighter-rouge">First <span class="notranslate">workflow</span></code></li>
+        <li><em>Label</em>: <code class="language-plaintext highlighter-rouge">First workflow</code></li>
       </ul>
     </li>
     <li>Repeat steps 4 and 5, but change the Label
       <ul>
-        <li><em>Label</em>: <code class="language-plaintext highlighter-rouge">Second <span class="notranslate">workflow</span></code></li>
+        <li><em>Label</em>: <code class="language-plaintext highlighter-rouge">Second workflow</code></li>
       </ul>
     </li>
     <li>Insert <strong>Paste two files side by side</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-    <li>Connect the 2 <span class="notranslate">workflow</span> outputs to the <strong>Paste two files side by side</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> input</li>
+    <li>Connect the 2 workflow outputs to the <strong>Paste two files side by side</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> input</li>
     <li>
-      <p>Save <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> your <span class="notranslate">workflow</span> using the save button on the top right</p>
+      <p>Save <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> your workflow using the save button on the top right</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-2-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>   <li>Configure the <span class="notranslate">workflow</span> as needed</li>   <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-2-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1112,11 +1110,11 @@ of each <span class="notranslate">workflow</span> together.</p>
 re-useable steps in real world scenarios.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-workflow-versions" aria-label="comment box: Workflow versions"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: <span class="notranslate">Workflow</span> versions</div>
-  <p>Every time a <span class="notranslate">workflow</span> is saved a new version is created, so that you can go
-back and forth between new and old versions of a <span class="notranslate">workflow</span>. Click on the pencil
-symbol to bring up the <span class="notranslate">workflow</span> attributes. You can freely select different
-versions. You can change an old version of a <span class="notranslate">workflow</span>, and when you save it it
+  <div class="box-title comment-title" id="comment-workflow-versions" aria-label="comment box: Workflow versions"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Workflow versions</div>
+  <p>Every time a workflow is saved a new version is created, so that you can go
+back and forth between new and old versions of a workflow. Click on the pencil
+symbol to bring up the workflow attributes. You can freely select different
+versions. You can change an old version of a workflow, and when you save it it
 will become the newest version.</p>
 </blockquote>
 
@@ -1130,14 +1128,14 @@ from a local file on your computer.</p>
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-managing-tool-versions" aria-label="comment box: Managing tool versions"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Managing tool versions</div>
 
-  <p>Versions of a tool in a <span class="notranslate">workflow</span> can be changed by clicking on a tool step in
+  <p>Versions of a tool in a workflow can be changed by clicking on a tool step in
 the center panel and on the right side clicking on <code class="language-plaintext highlighter-rouge">Select another tool
 version</code>.</p>
 </blockquote>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>You now know the ins and outs of Workflows in <span class="notranslate">Galaxy</span> and should be able to
+<p>You now know the ins and outs of Workflows in Galaxy and should be able to
 make your analyses more efficient and less manual!</p>
 
 

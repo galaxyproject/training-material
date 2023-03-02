@@ -556,22 +556,22 @@ following two lines somewhere at the top.</p>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 </code></pre></div></div>
 
-<p>This means that our code requires two <em>exte<span class="notranslate">rna</span>l libraries</em> (also called third-party packages or dependencies) -
+<p>This means that our code requires two <em>external libraries</em> (also called third-party packages or dependencies) -
 <code class="language-plaintext highlighter-rouge">numpy</code> and <code class="language-plaintext highlighter-rouge">matplotlib</code>.
-Python applications often use exte<span class="notranslate">rna</span>l libraries that don’t come as part of the standard Python distribution. This means
+Python applications often use external libraries that don’t come as part of the standard Python distribution. This means
 that you will have to use a <em>package manager</em> tool to install them on your system.
 Applications will also sometimes need a
-specific version of an exte<span class="notranslate">rna</span>l library (e.g. because they require that a particular
+specific version of an external library (e.g. because they require that a particular
 bug has been fixed in a newer version of the library), or a specific version of Python interpreter.
 This means that each Python application you work with may require a different setup and a set of dependencies so it
 is important to be able to keep these configurations separate to avoid confusion between projects.
 The solution for this problem is to create a self-contained <em>virtual
 environment</em> per project, which contains a particular version of Python installation plus a number of
-additional exte<span class="notranslate">rna</span>l libraries.</p>
+additional external libraries.</p>
 
 <p>Virtual environments are not just a feature of Python - all modern programming languages use them to isolate code
 of a specific project and make it easier to develop, run, test and share code with others. In this tutorial, we learn how
-to set up a virtual environment to develop our code and manage our exte<span class="notranslate">rna</span>l dependencies.</p>
+to set up a virtual environment to develop our code and manage our external dependencies.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -590,13 +590,13 @@ to set up a virtual environment to develop our code and manage our exte<span cla
 <p>So what exactly are virtual environments, and why use them?</p>
 
 <p>A Python virtual environment is an <strong>isolated working copy</strong> of a specific version of
-Python interpreter together with specific versions of a number of exte<span class="notranslate">rna</span>l libraries installed into that
+Python interpreter together with specific versions of a number of external libraries installed into that
 virtual environment. A virtual environment is simply a <em>directory with a particular
 structure</em> which includes links to and enables multiple side-by-side installations of
-different Python interpreters or different versions of the same exte<span class="notranslate">rna</span>l library to coexist on your machine and only one to be selected for each of our projects. This allows you to work on a particular
+different Python interpreters or different versions of the same external library to coexist on your machine and only one to be selected for each of our projects. This allows you to work on a particular
 project without worrying about affecting other projects on your machine.</p>
 
-<p>As more exte<span class="notranslate">rna</span>l libraries are added to your Python project over time, you can add them to
+<p>As more external libraries are added to your Python project over time, you can add them to
 its specific virtual environment and avoid a great deal of confusion by having separate (smaller) virtual environments
 for each project rather than one huge global environment with potential package version clashes. Another big motivator
 for using virtual environments is that they make sharing your code with others much easier (as we will see shortly).
@@ -614,7 +614,7 @@ introduced by the new version of the dependency without affecting the working ve
 a separate virtual environment for your branch to ‘isolate’ your code while testing the new feature.</li>
 </ul>
 
-<p>You do not have to worry too much about specific versions of exte<span class="notranslate">rna</span>l libraries that your project depends on most of the time.
+<p>You do not have to worry too much about specific versions of external libraries that your project depends on most of the time.
 Virtual environments enable you to always use the latest available version without specifying it explicitly.
 They also enable you to use a specific older version of a package for your project, should you need to.</p>
 
@@ -641,13 +641,13 @@ In this course, we will use <code class="language-plaintext highlighter-rouge">v
 virtual environment (which is the preferred way for Python 3.3+).</p>
 
 <p>Until you encounter the needs of a project which goes beyond what is available
-in the Python ecosystem, e.g. when you depend on exte<span class="notranslate">rna</span>l packages like htslib
+in the Python ecosystem, e.g. when you depend on external packages like htslib
 or bioinformatics tools that are simply not distributed as part of PyPI, then
 <code class="language-plaintext highlighter-rouge">venv</code> is a good choice to get started with.</p>
 
 <h3 id="managing-python-packages">Managing Python Packages</h3>
 
-<p>Part of managing your (virtual) working environment involves installing, updating and removing exte<span class="notranslate">rna</span>l packages
+<p>Part of managing your (virtual) working environment involves installing, updating and removing external packages
 on your system. The Python package manager tool <code class="language-plaintext highlighter-rouge">pip</code> is most commonly used for this - it interacts
  and obtains the packages from the central repository called <a href="https://pypi.org/">Python Package Index (PyPI)</a>.
 <code class="language-plaintext highlighter-rouge">pip</code> can now be used with all Python distributions (including Anaconda).</p>
@@ -663,12 +663,12 @@ remote package repositories and install them on your system, and (2) it is also 
 
 <h3 id="many-tools-for-the-job">Many Tools for the Job</h3>
 
-<p>Installing and managing Python distributions, exte<span class="notranslate">rna</span>l libraries and virtual environments is, well,
+<p>Installing and managing Python distributions, external libraries and virtual environments is, well,
 complex. There is an abundance of tools for each task, each with its advantages and disadvantages, and there are different
 ways to achieve the same effect (and even different ways to install the same tool!).
 Note that each Python distribution comes with its own version of
 <code class="language-plaintext highlighter-rouge">pip</code> - and if you have several Python versions installed you have to be extra careful to use the correct <code class="language-plaintext highlighter-rouge">pip</code> to
-manage exte<span class="notranslate">rna</span>l packages for that Python version.</p>
+manage external packages for that Python version.</p>
 
 <p><code class="language-plaintext highlighter-rouge">venv</code> and <code class="language-plaintext highlighter-rouge">pip</code> are considered the <em>de facto</em> standards for virtual environment and package management for Python 3.
 However, the advantages of using Anaconda and <code class="language-plaintext highlighter-rouge">conda</code> are that you get (most of the) packages needed for
@@ -722,7 +722,7 @@ this way when you come across such a subdirectory within a software project,
 by convention you know it contains its virtual environment details.
 A slight downside is that all different virtual environments
 on your machine then use the same name and the current one is determined by the context of the path
-you are currently located in. A (non-conventional) alte<span class="notranslate">rna</span>tive is to
+you are currently located in. A (non-conventional) alternative is to
 use your project name for the name of the virtual environment, with the downside that there is nothing to indicate
 that such a directory contains a virtual environment. In our case, we have settled to use the name “venv” since it is 
 not a hidden directory and we want it to be displayed by the command line when listing directory contents (hence, 
@@ -767,9 +767,9 @@ version of Python configured in your virtual environment.</p>
   <p>On some machines with Python 2 installed, <code class="language-plaintext highlighter-rouge">python</code> command may refer to the copy of Python 2 installed outside of the virtual environment instead, which can cause confusion. You can always check which version of Python you are using in your virtual environment with the command <code class="language-plaintext highlighter-rouge">which python</code> to be absolutely sure. We continue using <code class="language-plaintext highlighter-rouge">python3</code> and <code class="language-plaintext highlighter-rouge">pip3</code> in this material to avoid confusion for those users, but commands <code class="language-plaintext highlighter-rouge">python</code> and <code class="language-plaintext highlighter-rouge">pip</code> may work for you as expected.</p>
 </blockquote>
 
-<h3 id="installing-external-libraries-in-an-environment-with-pip">Installing Exte<span class="notranslate">rna</span>l Libraries in an Environment with <code class="language-plaintext highlighter-rouge">pip</code></h3>
+<h3 id="installing-external-libraries-in-an-environment-with-pip">Installing External Libraries in an Environment with <code class="language-plaintext highlighter-rouge">pip</code></h3>
 
-<p>We noticed earlier that our code depends on two <em>exte<span class="notranslate">rna</span>l libraries</em> - <code class="language-plaintext highlighter-rouge">numpy</code> and <code class="language-plaintext highlighter-rouge">matplotlib</code>. In order
+<p>We noticed earlier that our code depends on two <em>external libraries</em> - <code class="language-plaintext highlighter-rouge">numpy</code> and <code class="language-plaintext highlighter-rouge">matplotlib</code>. In order
 for the code to run on your machine, you need to
 install these two dependencies into your virtual environment.</p>
 

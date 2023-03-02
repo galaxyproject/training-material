@@ -779,8 +779,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
             UseGalaxy.be
         </a>
@@ -839,7 +837,7 @@
 <p>A biomarker is a measurable biological component that can be routinely detected in clinical practice and reflects a disease state,
 response to therapeutic treatment, or other relevant biological state.</p>
 
-<p><a href="http://www.proteore.org">ProteoRE <span class="notranslate">Galaxy</span> instance</a> provides necessary tools to execute a complete biomarkers selection pipeline.
+<p><a href="http://www.proteore.org">ProteoRE Galaxy instance</a> provides necessary tools to execute a complete biomarkers selection pipeline.
 In this tutorial we introduce successively the tools of this pipeline, and guide you to execute them in order to complete the entire
 pipeline on a concrete example. This strategy is described by <span class="citation"><a href="#Nguyen2019">Nguyen <i>et al.</i> 2019</a></span>.</p>
 
@@ -877,7 +875,7 @@ Our use-case here is to identify candidate biomarkers for myocardial infarction 
 <figure id="figure-1"><img src="../../images/pipeline.png" alt="Overview of the pipeline described in this tutorial. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Pipeline of the tutorial, from Nguyen et al., as of in 2019.</figcaption></figure>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or because of stochastic processes in the algorithms.</p> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, external databases, or because of stochastic processes in the algorithms.</p> </blockquote>
 
 <h1 id="selection-of-tissue-specific-proteins">Selection of tissue-specific proteins</h1>
 
@@ -885,21 +883,21 @@ Our use-case here is to identify candidate biomarkers for myocardial infarction 
 <a href="https://www.proteinatlas.org/">The Human Protein Atlas</a> (HPA) (Publication: <span class="citation"><a href="#Uhln2005">Uhlén <i>et al.</i> 2005</a></span>)</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-build-tissue-specific-expression-dataset-based-on-immunohistochemistry" aria-label="hands-on box: Build tissue-specific expression dataset based on ImmunoHistoChemistry"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Build tissue-specific <span class="notranslate">expression</span> dataset based on ImmunoHistoChemistry</div>
+  <div class="box-title hands-on-title" id="hands-on-build-tissue-specific-expression-dataset-based-on-immunohistochemistry" aria-label="hands-on box: Build tissue-specific expression dataset based on ImmunoHistoChemistry"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Build tissue-specific expression dataset based on ImmunoHistoChemistry</div>
 
   <ol>
     <li>
       <p><strong>Create a new history</strong> and give it a name.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
-      <p><strong>Build tissue-specific <span class="notranslate">expression</span> dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+      <p><strong>Build tissue-specific expression dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
       <ul>
-        <li><em>“Experimental data source (antibody- or <span class="notranslate">RNA</span>seq-based)”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Expression</span> profiles based on immunohistochemistry</code></li>
+        <li><em>“Experimental data source (antibody- or RNAseq-based)”</em>: <code class="language-plaintext highlighter-rouge">Expression profiles based on immunohistochemistry</code></li>
         <li><em>“Select tissue”</em>: <code class="language-plaintext highlighter-rouge">Heart muscle</code></li>
-        <li><em>“<span class="notranslate">Expression</span> level”</em>: <code class="language-plaintext highlighter-rouge">High</code> and <code class="language-plaintext highlighter-rouge">Medium</code></li>
+        <li><em>“Expression level”</em>: <code class="language-plaintext highlighter-rouge">High</code> and <code class="language-plaintext highlighter-rouge">Medium</code></li>
         <li><em>“Reliability score”</em>: <code class="language-plaintext highlighter-rouge">Enhanced</code> and <code class="language-plaintext highlighter-rouge">Supported</code></li>
       </ul>
     </li>
@@ -908,21 +906,21 @@ Our use-case here is to identify candidate biomarkers for myocardial infarction 
   <blockquote class="comment">
     <h3 id="output">Output</h3>
     <ul>
-      <li><strong>Tissue-specific <span class="notranslate">expression</span> from IHC</strong> (1596 lines): List of the selected proteins.
+      <li><strong>Tissue-specific expression from IHC</strong> (1596 lines): List of the selected proteins.
 6 columns: ‘Gene’, ‘Gene name’ and the retrieved info from HPA.</li>
     </ul>
   </blockquote>
 </blockquote>
 
-<p>We will now rerun the same tool but to select transcripts according to their <span class="notranslate">expression</span> profile.</p>
+<p>We will now rerun the same tool but to select transcripts according to their expression profile.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-build-tissue-specific-expression-dataset-based-on-rnaseq" aria-label="hands-on box: Build tissue-specific expression dataset based on RNAseq"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Build tissue-specific <span class="notranslate">expression</span> dataset based on <span class="notranslate">RNA</span>seq</div>
+  <div class="box-title hands-on-title" id="hands-on-build-tissue-specific-expression-dataset-based-on-rnaseq" aria-label="hands-on box: Build tissue-specific expression dataset based on RNAseq"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Build tissue-specific expression dataset based on RNAseq</div>
 
   <ol>
-    <li><strong>Build tissue-specific <span class="notranslate">expression</span> dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Build tissue-specific expression dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Experimental data source (antibody- or <span class="notranslate">RNA</span>seq-based)”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span> levels based on <span class="notranslate">RNA</span>-seq experiments</code></li>
+        <li><em>“Experimental data source (antibody- or RNAseq-based)”</em>: <code class="language-plaintext highlighter-rouge">RNA levels based on RNA-seq experiments</code></li>
         <li><em>“Select tissue”</em>: <code class="language-plaintext highlighter-rouge">Heart muscle</code></li>
       </ul>
     </li>
@@ -931,23 +929,23 @@ Our use-case here is to identify candidate biomarkers for myocardial infarction 
   <blockquote class="comment">
     <h3 id="output-1">Output</h3>
     <ul>
-      <li><strong>Tissue-specific <span class="notranslate">expression</span> from <span class="notranslate">RNA</span>seq</strong> (19613 lines): List of the selected transcripts.
+      <li><strong>Tissue-specific expression from RNAseq</strong> (19613 lines): List of the selected transcripts.
 4 columns: ‘Gene’, ‘Gene name’ and the retrieved info from HPA.</li>
     </ul>
   </blockquote>
 </blockquote>
 
 <p>This second list must be reduced by removing transcripts that are not highly enriched in heart muscle.
-To do so, a filter is applied on the <span class="notranslate">expression</span> value provided by HPA and measured in TPM (last column of the output file).
+To do so, a filter is applied on the expression value provided by HPA and measured in TPM (last column of the output file).
 In ProteoRE we’ll use the “Filter by keywords and/or numerical value” tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-on-expression-value-criterion" aria-label="hands-on box: Filter on expression value criterion"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter on <span class="notranslate">expression</span> value criterion</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-on-expression-value-criterion" aria-label="hands-on box: Filter on expression value criterion"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter on expression value criterion</div>
 
   <ol>
     <li><strong>Filter by keywords and/or numerical value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Input File”</em>: <code class="language-plaintext highlighter-rouge">Tissue-specific <span class="notranslate">expression</span> from <span class="notranslate">RNA</span>Seq</code> from the previous step</li>
+        <li><em>“Input File”</em>: <code class="language-plaintext highlighter-rouge">Tissue-specific expression from RNASeq</code> from the previous step</li>
         <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Discard</code></li>
         <li>In <em>“Filter by numerical value”</em>:
           <ul>
@@ -983,9 +981,9 @@ with a TPM value &gt;10 ?</p>
 
 </blockquote>
 
-<p>We have now 2 datasets of heart-muscle proteins/transcripts, based on IHC (Immonohistochemistry) data or <a href="https://statquest.org/2015/07/09/rpkm-fpkm-and-tpm-clearly-explained/">TPM</a> (<span class="notranslate">Expression</span> level expressed in Transcripts Per Million) value.</p>
+<p>We have now 2 datasets of heart-muscle proteins/transcripts, based on IHC (Immonohistochemistry) data or <a href="https://statquest.org/2015/07/09/rpkm-fpkm-and-tpm-clearly-explained/">TPM</a> (Expression level expressed in Transcripts Per Million) value.</p>
 
-<p>We want now to select candidate biomarkers that are expressed in the heart muscle according to <strong>both</strong> IHC and <span class="notranslate">RNA</span>-seq data, using the Jvenn tool.</p>
+<p>We want now to select candidate biomarkers that are expressed in the heart muscle according to <strong>both</strong> IHC and RNA-seq data, using the Jvenn tool.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-venn-diagram" aria-label="hands-on box: Venn diagram"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Venn diagram</div>
@@ -999,7 +997,7 @@ with a TPM value &gt;10 ?</p>
               <ul>
                 <li><em>“Enter your list”</em>: <code class="language-plaintext highlighter-rouge">Input file containing your list</code>
                   <ul>
-                    <li><em>“Select your file”</em>: <code class="language-plaintext highlighter-rouge">Tissue-specific <span class="notranslate">expression</span> from IHC</code></li>
+                    <li><em>“Select your file”</em>: <code class="language-plaintext highlighter-rouge">Tissue-specific expression from IHC</code></li>
                     <li><em>“Enter the name of this list”</em>: <code class="language-plaintext highlighter-rouge">heart IHC</code></li>
                   </ul>
                 </li>
@@ -1009,8 +1007,8 @@ with a TPM value &gt;10 ?</p>
               <ul>
                 <li><em>“Enter your list”</em>: <code class="language-plaintext highlighter-rouge">Input file containing your list</code>
                   <ul>
-                    <li><em>“Select your file”</em>: <code class="language-plaintext highlighter-rouge">Filtered tissue-specific <span class="notranslate">expression</span> from <span class="notranslate">RNA</span>seq</code></li>
-                    <li><em>“Enter the name of this list”</em>: <code class="language-plaintext highlighter-rouge">heart <span class="notranslate">RNA</span>seq</code></li>
+                    <li><em>“Select your file”</em>: <code class="language-plaintext highlighter-rouge">Filtered tissue-specific expression from RNAseq</code></li>
+                    <li><em>“Enter the name of this list”</em>: <code class="language-plaintext highlighter-rouge">heart RNAseq</code></li>
                   </ul>
                 </li>
               </ul>
@@ -1020,23 +1018,23 @@ with a TPM value &gt;10 ?</p>
       </ul>
     </li>
     <li>
-      <p>Examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the Venn diagram output:</p>
+      <p>Examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the Venn diagram output:</p>
 
       <p><img src="../../images/biomarker-selection/jVenn_chart-tuto2.png" alt="Venn diagram output. " loading="lazy" /></p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
-        <p>How many IDs are common to both IHC and <span class="notranslate">RNA</span>-seq data?</p>
+        <p>How many IDs are common to both IHC and RNA-seq data?</p>
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-          <p>931 candidate biomarkers are detected by both IHC and <span class="notranslate">RNA</span>-seq data.</p>
+          <p>931 candidate biomarkers are detected by both IHC and RNA-seq data.</p>
         </blockquote>
       </blockquote>
     </li>
   </ol>
 </blockquote>
 
-<p>For greater clarity we’ll keep only the column with those 931 candidate biomarkers detected in both IHC and <span class="notranslate">RNA</span>-seq data in the
+<p>For greater clarity we’ll keep only the column with those 931 candidate biomarkers detected in both IHC and RNA-seq data in the
 rest of our pipeline.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1084,34 +1082,34 @@ rest of our pipeline.</p>
       <p>Let’s rename the 931 IDs dataset in “heart931” for simplification.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
 <p>The pipeline will then continue based on these 931 candidates, from which we have to select biomarkers that are
-highly specific to the heart using additional <span class="notranslate">expression</span> data (still from HPA).</p>
+highly specific to the heart using additional expression data (still from HPA).</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-add-expression-data" aria-label="hands-on box: Add expression data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add <span class="notranslate">expression</span> data</div>
+  <div class="box-title hands-on-title" id="hands-on-add-expression-data" aria-label="hands-on box: Add expression data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add expression data</div>
 
   <ol>
-    <li><strong>Add <span class="notranslate">expression</span> data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Add expression data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“Enter your IDs (Ensembl gene IDs only, e.g. ENSG00000064787)”</em>: <code class="language-plaintext highlighter-rouge">Input file containing your IDs</code>
           <ul>
             <li><em>“Select your file”</em>: <code class="language-plaintext highlighter-rouge">Heart931</code> output we created in the previous step</li>
           </ul>
         </li>
-        <li>In <em>“<span class="notranslate">RNA</span>seq/Ab-based <span class="notranslate">expression</span> data”</em>:
+        <li>In <em>“RNAseq/Ab-based expression data”</em>:
           <ul>
             <li><em>“Select information to add to your list”</em>:
               <ul>
                 <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">Gene name</code></li>
                 <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">Gene description</code></li>
-                <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span> tissue category</code></li>
-                <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span> tissue specificity abundance in Transcript Per Million</code></li>
+                <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">RNA tissue category</code></li>
+                <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">RNA tissue specificity abundance in Transcript Per Million</code></li>
               </ul>
             </li>
           </ul>
@@ -1124,15 +1122,15 @@ highly specific to the heart using additional <span class="notranslate">expressi
 
 <p>We wish to focus on transcripts that have been classed as (according to the HPA definition):</p>
 <ul>
-  <li><strong>Tissue enriched</strong> (<span class="notranslate">expression</span> in one tissue at least fivefold higher than all other tissues),</li>
+  <li><strong>Tissue enriched</strong> (expression in one tissue at least fivefold higher than all other tissues),</li>
   <li><strong>Group enriched</strong> (fivefold higher average TPM in a group of two to to seven tissues compared to all other tissues) and</li>
   <li><strong>Tissue enhanced</strong> (fivefold higher average TPM in one or more tissues/cell lines compared to the mean TPM for all tissues)</li>
 </ul>
 
-<p>This information is listed in the column 4 : <em>“<span class="notranslate">RNA</span> tissue category”</em> of the result dataset.</p>
+<p>This information is listed in the column 4 : <em>“RNA tissue category”</em> of the result dataset.</p>
 
 <p>Let’s use <strong>Filter by keywords and/or numerical value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to select the candidate biomarkers based on this
-<em>“<span class="notranslate">RNA</span> tissue category”</em> criterion.</p>
+<em>“RNA tissue category”</em> criterion.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-filter-by-keywords-and-or-numerical-value" aria-label="hands-on box: Filter by keywords and/or numerical value"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter by keywords and/or numerical value</div>
@@ -1140,7 +1138,7 @@ highly specific to the heart using additional <span class="notranslate">expressi
   <ol>
     <li><strong>Filter by keywords and/or numerical value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Input file”</em>: output from <strong>Add <span class="notranslate">expression</span> data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Input file”</em>: output from <strong>Add expression data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li>In <em>“Filter by keywords”</em>:
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Filter by keywords”</em>
@@ -1166,12 +1164,12 @@ highly specific to the heart using additional <span class="notranslate">expressi
         <h3 id="output-2">Output</h3>
         <ul>
           <li>
-            <p><strong>Filtered Add_<span class="notranslate">expression</span>_data</strong>: output list of the heart biomarkers with <span class="notranslate">RNA</span> tissue category
+            <p><strong>Filtered Add_expression_data</strong>: output list of the heart biomarkers with RNA tissue category
 containing “enriched” or “enhanced” (115 lines = what we are interested in)</p>
           </li>
           <li>
-            <p><strong>Filtered Add_<span class="notranslate">expression</span>_data - discarded lines</strong>: output list of the heart biomarkers with
-<span class="notranslate">RNA</span> tissue category NOT containing “enriched” or “enhanced” (not what we are interested in)</p>
+            <p><strong>Filtered Add_expression_data - discarded lines</strong>: output list of the heart biomarkers with
+RNA tissue category NOT containing “enriched” or “enhanced” (not what we are interested in)</p>
           </li>
         </ul>
       </blockquote>
@@ -1180,13 +1178,13 @@ containing “enriched” or “enhanced” (115 lines = what we are interested 
       <p>Let’s rename the filtered dataset <strong>heart115</strong></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<p>We now have identified 115 candidates considered to have significantly higher <span class="notranslate">expression</span> in heart muscle according to HPA criteria.</p>
+<p>We now have identified 115 candidates considered to have significantly higher expression in heart muscle according to HPA criteria.</p>
 
 <h1 id="annotation-with-biochemical-and-cellular-features">Annotation with biochemical and cellular features</h1>
 
@@ -1415,13 +1413,13 @@ output list of proteins with no peptides seen in the plasma</li>
 <em>NB: Please be aware that, due to databases update, number of biomarkers you end up with can be different from 21 that we obtain here.</em></p>
 
 <p>Briefly and from a biological point of view, 3 of these proteins exhibit a relative low detection level in the plasma
-compared to heart muscle tissue, and are reported with a very high heart-muscle-specific <span class="notranslate">RNA</span> abundance.
+compared to heart muscle tissue, and are reported with a very high heart-muscle-specific RNA abundance.
 These potential mechanistic biomarkers of myocardial infarction include (i) cardiac Troponin I type 3 (TNNI3 (P19429))
 that is routinely used as the most specific marker of myocardial injury and (ii) the heart-type fatty acid-binding protein
 (FABP3 (P05413)) that has been proposed as a diagnostic and prognostic marker for acute and chronic cardiac injury.</p>
 
-<p>Extraction of a <span class="notranslate">workflow</span> from your history is valuable for analyses reproducibility and traceability.
-Moreover, a <span class="notranslate">workflow</span> can also be made reusable with modifiable parameters, and as a result this strategy can
+<p>Extraction of a workflow from your history is valuable for analyses reproducibility and traceability.
+Moreover, a workflow can also be made reusable with modifiable parameters, and as a result this strategy can
 be applied to other types of tissue injury (e.g. brain, liver, kidney).</p>
 
 

@@ -736,8 +736,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -818,7 +816,7 @@ outset.</p>
 
 <p>In this tutorial we use real data about endogenous retroviruses (ERVs) in mouse.
 In particular, we compare recombination hotspots in the flanking regions of fixed ETn versus control regions.
-The dataset contains two region datasets “ETn fixed”, “Control” and one feature “Recombination hotspots content”. The region dataset “ETn fixed” contains 1296 genomic regions of 64 kb surrounding fixed ETns elements (32-kb flanking sequences <span class="notranslate">upstream</span> and 32-kb flanking sequences <span class="notranslate">downstream</span> of each element). The region dataset “Control” contains 1142 regions of 64 kb without elements, used as control in the test. The regions are aligned around their center (i.e. around the ETn integration sites).</p>
+The dataset contains two region datasets “ETn fixed”, “Control” and one feature “Recombination hotspots content”. The region dataset “ETn fixed” contains 1296 genomic regions of 64 kb surrounding fixed ETns elements (32-kb flanking sequences upstream and 32-kb flanking sequences downstream of each element). The region dataset “Control” contains 1142 regions of 64 kb without elements, used as control in the test. The regions are aligned around their center (i.e. around the ETn integration sites).</p>
 
 <p>Recombination hotspots measurements are associated to each “ETn fixed” and “Control” region. In particular, this feature is measured in 1-kb windows, so that each region is associated to a recombination hotspots curve made of 64 values. The measurement used is the feature content, i.e. the fraction of the 1-kb window that is covered by recombination hotspots</p>
 
@@ -849,17 +847,17 @@ The dataset contains two region datasets “ETn fixed”, “Control” and one 
       <p>Create a new history for this tutorial</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>Import datasets:
       <ul>
-        <li>Fixed ETn (<code class="language-plaintext highlighter-rouge">ETn_fixed.<span class="notranslate">bed</span></code>) regions</li>
-        <li>Control (<code class="language-plaintext highlighter-rouge">Control.<span class="notranslate">bed</span></code>) regions</li>
+        <li>Fixed ETn (<code class="language-plaintext highlighter-rouge">ETn_fixed.bed</code>) regions</li>
+        <li>Control (<code class="language-plaintext highlighter-rouge">Control.bed</code>) regions</li>
         <li>Recombination Hotspot (<code class="language-plaintext highlighter-rouge">Recombination_hotspots.txt</code>) content</li>
       </ul>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/5589610/files/ETn_fixed.<span class="notranslate">bed</span>
-https://zenodo.org/record/5589610/files/Control.<span class="notranslate">bed</span>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/5589610/files/ETn_fixed.bed
+https://zenodo.org/record/5589610/files/Control.bed
 https://zenodo.org/record/5589610/files/Recombination_hotspots.txt
 </code></pre></div>      </div>
     </li>
@@ -873,7 +871,7 @@ https://zenodo.org/record/5589610/files/Recombination_hotspots.txt
 https://zenodo.org/record/5589610/files/features_header.tabular
 </code></pre></div>      </div>
 
-      <p>Please note that the file names in the first column of the header files must exactly match the dataset names in the <span class="notranslate">Galaxy</span> history.</p>
+      <p>Please note that the file names in the first column of the header files must exactly match the dataset names in the Galaxy history.</p>
     </li>
   </ol>
 </blockquote>
@@ -882,7 +880,7 @@ https://zenodo.org/record/5589610/files/features_header.tabular
   <div class="box-title hands-on-title" id="hands-on-pre-process-data-and-create-pointwise-boxplot" aria-label="hands-on box: Pre-process data and create pointwise boxplot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Pre-process data and create pointwise boxplot</div>
   <p><strong>Load, Smooth and Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <strong>Load, Smooth and Plot</strong> with:</p>
   <ul>
-    <li>Select the two region datasets <code class="language-plaintext highlighter-rouge">ETn_fixed.<span class="notranslate">bed</span></code> and <code class="language-plaintext highlighter-rouge">Control.<span class="notranslate">bed</span></code>.</li>
+    <li>Select the two region datasets <code class="language-plaintext highlighter-rouge">ETn_fixed.bed</code> and <code class="language-plaintext highlighter-rouge">Control.bed</code>.</li>
     <li>Select the region header file <code class="language-plaintext highlighter-rouge">regions_header.tabular</code>.</li>
     <li>Select the feature file <code class="language-plaintext highlighter-rouge">Recombination_hotspot.txt</code>.</li>
     <li>Select the feature header file <code class="language-plaintext highlighter-rouge">features_header.tabular</code>.</li>

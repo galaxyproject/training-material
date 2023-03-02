@@ -599,12 +599,12 @@ of high dimensional data or even entire genomes. Many of these visualizations of
 require a lot of tweaking and changes in settings like zooming in and assigning colors, etc.
 Therefore, visualizations are ideally interactive, and changing settings is often
 an initial step in exploring data. For this reason it may be inconvenient to make use
-of static <span class="notranslate">galaxy</span> tools because it lacks these interactive features. For these situations <span class="notranslate">Galaxy</span>
+of static galaxy tools because it lacks these interactive features. For these situations Galaxy
 offers the option to create <em>visualizations plugins</em>, file format specific javascripts
 that integrate with the history menu, without making redundant copies of data.</p>
 
 <p>In this tutorial we shall go through how this system works and create a simple visualization
-plugin. The tool will create a visualization of the number of aligned <span class="notranslate">reads</span> per
+plugin. The tool will create a visualization of the number of aligned reads per
 chromosome of a BAM file, and we will discuss possible optimizations and advantages
 and disadvantages of the proposed implementation.</p>
 
@@ -612,7 +612,7 @@ and disadvantages of the proposed implementation.</p>
 understanding of HTML5 and JavaScript as these are the basic languages in which they are written.
 However, for this tutorial we will keep it basic.</p>
 
-<p>Additional documentation about <span class="notranslate">Galaxy</span> visualizations can be found here:</p>
+<p>Additional documentation about Galaxy visualizations can be found here:</p>
 
 <ul>
   <li><a href="https://galaxyproject.org/data-providers">DataProviders</a></li>
@@ -627,7 +627,7 @@ However, for this tutorial we will keep it basic.</p>
 <ol id="markdown-toc">
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
   <li><a href="#part-1" id="markdown-toc-part-1">Part 1</a>    <ol>
-      <li><a href="#linking-the-plugin-with-galaxy" id="markdown-toc-linking-the-plugin-with-galaxy">Linking the plugin with <span class="notranslate">Galaxy</span></a></li>
+      <li><a href="#linking-the-plugin-with-galaxy" id="markdown-toc-linking-the-plugin-with-galaxy">Linking the plugin with Galaxy</a></li>
       <li><a href="#creating-the-visualization" id="markdown-toc-creating-the-visualization">Creating the visualization</a></li>
     </ol>
   </li>
@@ -639,28 +639,28 @@ However, for this tutorial we will keep it basic.</p>
 <h1 id="part-1">Part 1</h1>
 
 <p>The visualization we are going to create in this tutorial, is a tool that shows the number of aligned
-<span class="notranslate">reads</span> per chromosome of a BAM file. The first thing we need to do is to come up with a name.
-Let’s call it <em>alignment_<span class="notranslate">rna</span>me_boxplot</em>. Note that the reference sequences (usually chromosomes)
-to which we align are named <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>ME</code> in the BAM/SAM specification.</p>
+reads per chromosome of a BAM file. The first thing we need to do is to come up with a name.
+Let’s call it <em>alignment_rname_boxplot</em>. Note that the reference sequences (usually chromosomes)
+to which we align are named <code class="language-plaintext highlighter-rouge">RNAME</code> in the BAM/SAM specification.</p>
 
-<p>The development of a <span class="notranslate">Galaxy</span> visualization takes place within the <span class="notranslate">Galaxy</span> codebase.</p>
+<p>The development of a Galaxy visualization takes place within the Galaxy codebase.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
-    <li>Clone an instance of <span class="notranslate">Galaxy</span> in a path, further referred to as <code class="language-plaintext highlighter-rouge">$<span class="notranslate">GALAXY</span>_ROOT</code></li>
+    <li>Clone an instance of Galaxy in a path, further referred to as <code class="language-plaintext highlighter-rouge">$GALAXY_ROOT</code></li>
     <li>
       <p>Explore the plugin directory as follows:</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$<span class="notranslate">GALAXY</span>_ROOT</span>/config/plugins/visualizations
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>/config/plugins/visualizations
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Create a new directory for our new plugin project</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>alignment_<span class="notranslate">rna</span>me_boxplot
-<span class="nv">$ </span><span class="nb">cd </span>alignment_<span class="notranslate">rna</span>me_boxplot
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>alignment_rname_boxplot
+<span class="nv">$ </span><span class="nb">cd </span>alignment_rname_boxplot
 </code></pre></div>      </div>
     </li>
     <li>
@@ -674,19 +674,19 @@ to which we align are named <code class="language-plaintext highlighter-rouge"><
   </ol>
 </blockquote>
 
-<h2 id="linking-the-plugin-with-galaxy">Linking the plugin with <span class="notranslate">Galaxy</span></h2>
+<h2 id="linking-the-plugin-with-galaxy">Linking the plugin with Galaxy</h2>
 
-<p>To create a bridge between our not-yet-written plugin and <span class="notranslate">Galaxy</span>, we need to write a
+<p>To create a bridge between our not-yet-written plugin and Galaxy, we need to write a
 configuration in XML format.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload-1" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
-  <p>Create the file  <code class="language-plaintext highlighter-rouge">config/alignment_<span class="notranslate">rna</span>me_boxplot.xml</code> with the following contents:</p>
+  <p>Create the file  <code class="language-plaintext highlighter-rouge">config/alignment_rname_boxplot.xml</code> with the following contents:</p>
 
   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="cp">&lt;!DOCTYPE visualization SYSTEM "../../visualization.dtd"&gt;</span>
-<span class="nt">&lt;visualization</span> <span class="na">name=</span><span class="s">"alignment_<span class="notranslate">rna</span>me_boxplot"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;visualization</span> <span class="na">name=</span><span class="s">"alignment_rname_boxplot"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;data_sources&gt;</span>
         <span class="nt">&lt;data_source&gt;</span>
             <span class="nt">&lt;model_class&gt;</span>HistoryDatasetAssociation<span class="nt">&lt;/model_class&gt;</span>
@@ -700,7 +700,7 @@ configuration in XML format.</p>
     <span class="nt">&lt;params&gt;</span>
         <span class="nt">&lt;param</span> <span class="na">type=</span><span class="s">"dataset"</span> <span class="na">var_name_in_template=</span><span class="s">"hda"</span> <span class="na">required=</span><span class="s">"true"</span><span class="nt">&gt;</span>dataset_id<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;/params&gt;</span>
-    <span class="nt">&lt;template&gt;</span>alignment_<span class="notranslate">rna</span>me_boxplot.mako<span class="nt">&lt;/template&gt;</span>
+    <span class="nt">&lt;template&gt;</span>alignment_rname_boxplot.mako<span class="nt">&lt;/template&gt;</span>
 <span class="nt">&lt;/visualization&gt;</span>
 </code></pre></div>  </div>
 
@@ -724,9 +724,9 @@ mako file will be compiled to render an HTML file.</p>
 <p>Beause we would like the visualization to load quickly, computationally intensive tasks should
 not be done prior to loading. A bit of server-side rendering in itself is not a problem, but the
 visualizations (written in HTML and/or JS) should do most of the actual calculations and
-conversions on the client side (in the browser). Therefore, unlike regular <span class="notranslate">Galaxy</span> tools, parsing
+conversions on the client side (in the browser). Therefore, unlike regular Galaxy tools, parsing
 files does not take place on the server, but instead data will be downloaded by the client via an
-exposed <span class="notranslate">Galaxy</span> URL prior to client-side rendering.</p>
+exposed Galaxy URL prior to client-side rendering.</p>
 
 <p>The most basic part of the mako file are the variables used for further web development, given
 below.</p>
@@ -738,7 +738,7 @@ below.</p>
     <span class="na">##</span> <span class="na">Generates</span> <span class="na">hash</span> <span class="err">(</span><span class="na">hdadict</span><span class="err">['</span><span class="na">id</span><span class="err">'])</span> <span class="na">of</span> <span class="na">history</span> <span class="na">item</span>
     <span class="na">hdadict = </span><span class="s">trans.security.encode_dict_ids(</span> <span class="na">hda.to_dict</span><span class="err">()</span> <span class="err">)</span>
 
-    <span class="na">##</span> <span class="na">Finds</span> <span class="na">the</span> <span class="na">parent</span> <span class="na">directory</span> <span class="na">of</span> <span class="na"><span class="notranslate">galaxy</span></span> <span class="err">(/,</span> <span class="err">/</span><span class="na"><span class="notranslate">galaxy</span></span><span class="err">,</span> <span class="na">etc.</span><span class="err">)</span>
+    <span class="na">##</span> <span class="na">Finds</span> <span class="na">the</span> <span class="na">parent</span> <span class="na">directory</span> <span class="na">of</span> <span class="na">galaxy</span> <span class="err">(/,</span> <span class="err">/</span><span class="na">galaxy</span><span class="err">,</span> <span class="na">etc.</span><span class="err">)</span>
     <span class="na">root     = </span><span class="s">h.url_for(</span> <span class="err">'/'</span> <span class="err">)</span>
 
     <span class="na">##</span> <span class="na">Determines</span> <span class="na">the</span> <span class="na">exposed</span> <span class="na">URL</span> <span class="na">of</span> <span class="na">the</span> <span class="err">./</span><span class="na">static</span> <span class="na">directory</span>
@@ -752,7 +752,7 @@ below.</p>
 <ul>
   <li><code class="language-plaintext highlighter-rouge">hdadict</code> is a variable that contains a file identifier that has been encoded to it’s
  exposed uid.</li>
-  <li><code class="language-plaintext highlighter-rouge">root</code> indicates location of <span class="notranslate">Galaxy</span> on the webserver (e.g. <code class="language-plaintext highlighter-rouge">/</code>, <code class="language-plaintext highlighter-rouge">/<span class="notranslate">galaxy</span>/</code>, <code class="language-plaintext highlighter-rouge">/<span class="notranslate">galaxy</span>-pub/</code>, etc).</li>
+  <li><code class="language-plaintext highlighter-rouge">root</code> indicates location of Galaxy on the webserver (e.g. <code class="language-plaintext highlighter-rouge">/</code>, <code class="language-plaintext highlighter-rouge">/galaxy/</code>, <code class="language-plaintext highlighter-rouge">/galaxy-pub/</code>, etc).</li>
   <li><code class="language-plaintext highlighter-rouge">app_root</code> contains the exposed url of the static files for this visualization.</li>
   <li><code class="language-plaintext highlighter-rouge">file_url</code> contains the exposed url of the dataset selected (by user) for visualization.</li>
 </ul>
@@ -760,7 +760,7 @@ below.</p>
 <p>We could obtain the BAM file client-side by downloading the BAM/SAM file in its entirety via
 <em>file_url</em>. However, BAM files can become quite large and it is usually not desired to transfer
 such datasets over the network. In our case it is also rather inconvenient to parse the BAM file
-with Javascript, just to count the number of <span class="notranslate">reads</span>.</p>
+with Javascript, just to count the number of reads.</p>
 
 <p>Fortunately, BAM files have indices. These indices are brief summaries describing the
 number of entries per chromosome, in order to be able to access the data contained in them more
@@ -769,11 +769,11 @@ quickly. In the mako template we can access a BAM index as <em>hda.metadata.bam_
 
 <p>Samtools has a command named <code class="language-plaintext highlighter-rouge">idxstats</code> which is able to leverage this BAM index you. However,
 since visualizations do not have dependency management, it is very tricky to let the mako template
-do a system call to samtools. Fortunately, the <span class="notranslate">Galaxy</span> ecosystem ships with a built-in <code class="language-plaintext highlighter-rouge">pysam</code>
+do a system call to samtools. Fortunately, the Galaxy ecosystem ships with a built-in <code class="language-plaintext highlighter-rouge">pysam</code>
 dependency, a library that can do any native samtools command within python.</p>
 
-<p>The <code class="language-plaintext highlighter-rouge">*.metadata.bam_index</code> is a special kind of file in the <span class="notranslate">Galaxy</span> ecosystem. It is actually an
-invisible file in <span class="notranslate">Galaxy</span>, linked to another history item, but does have a unique filename.
+<p>The <code class="language-plaintext highlighter-rouge">*.metadata.bam_index</code> is a special kind of file in the Galaxy ecosystem. It is actually an
+invisible file in Galaxy, linked to another history item, but does have a unique filename.
 So, for the BAM file <code class="language-plaintext highlighter-rouge">./database/files/000/dataset_001.dat</code>, our BAI file (index) is <strong>not</strong>
 <code class="language-plaintext highlighter-rouge">./database/files/000/dataset_001.dat.bai</code> but could be <code class="language-plaintext highlighter-rouge">./database/files/000/dataset_002.dat</code> or
 <code class="language-plaintext highlighter-rouge">./database/files/000/dataset_003.dat</code>. We can create a symlink to this index file to ensure the
@@ -820,7 +820,7 @@ the HTML page and also does HTML escaping by providing the ` | h`-flag (for secu
   <div class="box-title hands-on-title" id="hands-on-data-upload-2" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
-    <li>Create the mako file <code class="language-plaintext highlighter-rouge">templates/alignment_<span class="notranslate">rna</span>me_boxplot.mako</code></li>
+    <li>Create the mako file <code class="language-plaintext highlighter-rouge">templates/alignment_rname_boxplot.mako</code></li>
     <li>
       <p>Fill it with the following code:</p>
 
@@ -831,7 +831,7 @@ the HTML page and also does HTML escaping by providing the ` | h`-flag (for secu
     <span class="na">##</span> <span class="na">Generates</span> <span class="na">hash</span> <span class="err">(</span><span class="na">hdadict</span><span class="err">['</span><span class="na">id</span><span class="err">'])</span> <span class="na">of</span> <span class="na">history</span> <span class="na">item</span>
     <span class="na">hdadict = </span><span class="s">trans.security.encode_dict_ids(</span> <span class="na">hda.to_dict</span><span class="err">()</span> <span class="err">)</span>
 
-    <span class="na">##</span> <span class="na">Finds</span> <span class="na">the</span> <span class="na">parent</span> <span class="na">directory</span> <span class="na">of</span> <span class="na"><span class="notranslate">galaxy</span></span> <span class="err">(/,</span> <span class="err">/</span><span class="na"><span class="notranslate">galaxy</span></span><span class="err">,</span> <span class="na">etc.</span><span class="err">)</span>
+    <span class="na">##</span> <span class="na">Finds</span> <span class="na">the</span> <span class="na">parent</span> <span class="na">directory</span> <span class="na">of</span> <span class="na">galaxy</span> <span class="err">(/,</span> <span class="err">/</span><span class="na">galaxy</span><span class="err">,</span> <span class="na">etc.</span><span class="err">)</span>
     <span class="na">root     = </span><span class="s">h.url_for(</span> <span class="err">'/'</span> <span class="err">)</span>
 
     <span class="na">##</span> <span class="na">Determines</span> <span class="na">the</span> <span class="na">exposed</span> <span class="na">URL</span> <span class="na">of</span> <span class="na">the</span> <span class="err">./</span><span class="na">static</span> <span class="na">directory</span>
@@ -864,9 +864,9 @@ the HTML page and also does HTML escaping by providing the ` | h`-flag (for secu
     </li>
     <li>Download <a href="https://zenodo.org/record/248730/files/tutorial.bam">the example BAM file</a></li>
     <li>
-      <p>Go the <span class="notranslate">galaxy</span> root directory and start <span class="notranslate">Galaxy</span>:</p>
+      <p>Go the galaxy root directory and start Galaxy:</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$<span class="notranslate">GALAXY</span>_ROOT</span>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$GALAXY_ROOT</span>
 <span class="nv">$ </span>./run.sh
 </code></pre></div>      </div>
     </li>
@@ -891,8 +891,8 @@ the HTML page and also does HTML escaping by providing the ` | h`-flag (for secu
 </code></pre></div></div>
 
 <p>It contains eight entries, one for each of our (made-up) chromosomes and one to <code class="language-plaintext highlighter-rouge">*</code>, which represents
-the unmapped <span class="notranslate">reads</span>. Entries are tab delimited (<code class="language-plaintext highlighter-rouge">\t</code>) and for the <code class="language-plaintext highlighter-rouge">chrA</code> entry it indicates that the
-length of the <span class="notranslate">RNA</span>ME (chromosome) is 5386 bases and 2 <span class="notranslate">reads</span> are aligned to it.</p>
+the unmapped reads. Entries are tab delimited (<code class="language-plaintext highlighter-rouge">\t</code>) and for the <code class="language-plaintext highlighter-rouge">chrA</code> entry it indicates that the
+length of the RNAME (chromosome) is 5386 bases and 2 reads are aligned to it.</p>
 
 <p>To make the data a bit more usable for Javascript , we convert it into a simple dictionary
 of the following syntax:</p>
@@ -930,7 +930,7 @@ so getting the raw data into Javascript is rather easy:</p>
   <span class="nt">&lt;/script&gt;</span>
 </code></pre></div></div>
 
-<p>The great thing about the mako system is that it does not require to restart <span class="notranslate">galaxy</span> in order to make
+<p>The great thing about the mako system is that it does not require to restart galaxy in order to make
 functional changes to the mako files.</p>
 
 <blockquote class="notranslate hands_on">
@@ -947,7 +947,7 @@ functional changes to the mako files.</p>
     <span class="na">##</span> <span class="na">Generates</span> <span class="na">hash</span> <span class="err">(</span><span class="na">hdadict</span><span class="err">['</span><span class="na">id</span><span class="err">'])</span> <span class="na">of</span> <span class="na">history</span> <span class="na">item</span>
     <span class="na">hdadict = </span><span class="s">trans.security.encode_dict_ids(</span> <span class="na">hda.to_dict</span><span class="err">()</span> <span class="err">)</span>
 
-    <span class="na">##</span> <span class="na">Finds</span> <span class="na">the</span> <span class="na">parent</span> <span class="na">directory</span> <span class="na">of</span> <span class="na"><span class="notranslate">galaxy</span></span> <span class="err">(/,</span> <span class="err">/</span><span class="na"><span class="notranslate">galaxy</span></span><span class="err">,</span> <span class="na">etc.</span><span class="err">)</span>
+    <span class="na">##</span> <span class="na">Finds</span> <span class="na">the</span> <span class="na">parent</span> <span class="na">directory</span> <span class="na">of</span> <span class="na">galaxy</span> <span class="err">(/,</span> <span class="err">/</span><span class="na">galaxy</span><span class="err">,</span> <span class="na">etc.</span><span class="err">)</span>
     <span class="na">root     = </span><span class="s">h.url_for(</span> <span class="err">'/'</span> <span class="err">)</span>
 
     <span class="na">##</span> <span class="na">Determines</span> <span class="na">the</span> <span class="na">exposed</span> <span class="na">URL</span> <span class="na">of</span> <span class="na">the</span> <span class="err">./</span><span class="na">static</span> <span class="na">directory</span>
@@ -1004,14 +1004,14 @@ functional changes to the mako files.</p>
 a simple visualization from this dictionary. Think of tables, DIVs or even more complicated
 solutions :).</p>
 
-<p>Below is an example visualization, which creates a bar plot showing the number of <span class="notranslate">reads</span> per
+<p>Below is an example visualization, which creates a bar plot showing the number of reads per
 chromosome.</p>
 
 <p><img src="../../images/vis_plugins_example.png" alt="Example visualization. " loading="lazy" /></p>
 
-<p>The full contents of this plugin are provided in the <a href="https://github.com/galaxyproject/training-material/tree/main/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot">GitHub repository related to this material in <code class="language-plaintext highlighter-rouge">tree/master/topics/dev/files/hands_on-visualizations/alignment_<span class="notranslate">rna</span>me_boxplot</code></a>.
-To try out this example, simply copy this folder to the <code class="language-plaintext highlighter-rouge">$<span class="notranslate">GALAXY</span>_ROOT/config/plugins/visualizations/</code> folder
-on your (local) <span class="notranslate">Galaxy</span> and restart <span class="notranslate">Galaxy</span>.</p>
+<p>The full contents of this plugin are provided in the <a href="https://github.com/galaxyproject/training-material/tree/main/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot">GitHub repository related to this material in <code class="language-plaintext highlighter-rouge">tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot</code></a>.
+To try out this example, simply copy this folder to the <code class="language-plaintext highlighter-rouge">$GALAXY_ROOT/config/plugins/visualizations/</code> folder
+on your (local) Galaxy and restart Galaxy.</p>
 
 <p>The contents of the mako file for this example are given below.</p>
 
@@ -1022,7 +1022,7 @@ on your (local) <span class="notranslate">Galaxy</span> and restart <span class=
     <span class="na">##</span> <span class="na">Generates</span> <span class="na">hash</span> <span class="err">(</span><span class="na">hdadict</span><span class="err">['</span><span class="na">id</span><span class="err">'])</span> <span class="na">of</span> <span class="na">history</span> <span class="na">item</span>
     <span class="na">hdadict = </span><span class="s">trans.security.encode_dict_ids(</span> <span class="na">hda.to_dict</span><span class="err">()</span> <span class="err">)</span>
 
-    <span class="na">##</span> <span class="na">Finds</span> <span class="na">the</span> <span class="na">parent</span> <span class="na">directory</span> <span class="na">of</span> <span class="na"><span class="notranslate">galaxy</span></span> <span class="err">(/,</span> <span class="err">/</span><span class="na"><span class="notranslate">galaxy</span></span><span class="err">,</span> <span class="na">etc.</span><span class="err">)</span>
+    <span class="na">##</span> <span class="na">Finds</span> <span class="na">the</span> <span class="na">parent</span> <span class="na">directory</span> <span class="na">of</span> <span class="na">galaxy</span> <span class="err">(/,</span> <span class="err">/</span><span class="na">galaxy</span><span class="err">,</span> <span class="na">etc.</span><span class="err">)</span>
     <span class="na">root     = </span><span class="s">h.url_for(</span> <span class="err">'/'</span> <span class="err">)</span>
 
     <span class="na">##</span> <span class="na">Determines</span> <span class="na">the</span> <span class="na">exposed</span> <span class="na">URL</span> <span class="na">of</span> <span class="na">the</span> <span class="err">./</span><span class="na">static</span> <span class="na">directory</span>
@@ -1132,15 +1132,15 @@ on your (local) <span class="notranslate">Galaxy</span> and restart <span class=
 
 </code></pre></div></div>
 
-<p>In the given example, the <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>ME</code> queries containing an underscore were removed.
-This is because there are many alte<span class="notranslate">rna</span>tive chromosomes, making the list very large
+<p>In the given example, the <code class="language-plaintext highlighter-rouge">RNAME</code> queries containing an underscore were removed.
+This is because there are many alternative chromosomes, making the list very large
 for certain reference genomes. However, for certain studies it might be desired to
 just look at those.</p>
 
 <p>The current plot is a box plot, but one can imagine a pie-chart may be convenient too.
 All of those additional settings can be implemented for interactive behaviour,
 contributing to quicker understanding of the data which is generally not so convenient
-using static <span class="notranslate">Galaxy</span> tools.</p>
+using static Galaxy tools.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-static-files" aria-label="comment box: Static files"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Static files</div>
@@ -1161,7 +1161,7 @@ Javascript. This would be a more elaborate solution, but requires more developme
 need to develop a function able to parse the binary file.</p>
 
 <p>Another thing we could do is create a static <code class="language-plaintext highlighter-rouge">samtools idxstats</code> tool, that creates a file of
-datatype <code class="language-plaintext highlighter-rouge">tabular.Idxstats</code> and include that datatype into <span class="notranslate">Galaxy</span>. We then make the visualization
+datatype <code class="language-plaintext highlighter-rouge">tabular.Idxstats</code> and include that datatype into Galaxy. We then make the visualization
 specific for that datatype, just plotting the results of the <code class="language-plaintext highlighter-rouge">idxstats</code>.</p>
 
 <p>A fundamental and more complicated problem is that BAM files are simply too big to transfer for
@@ -1176,8 +1176,8 @@ care of at the server side. This is what has been done in Trackster.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>We have just created a visualization plugin in <span class="notranslate">Galaxy</span> to visualize the number of alignments
-per <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>ME</code> (chromosome) in a BAM file.</p>
+<p>We have just created a visualization plugin in Galaxy to visualize the number of alignments
+per <code class="language-plaintext highlighter-rouge">RNAME</code> (chromosome) in a BAM file.</p>
 
 
                 

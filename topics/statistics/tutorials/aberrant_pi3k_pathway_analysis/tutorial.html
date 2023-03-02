@@ -722,8 +722,6 @@
     
         
     
-        
-    
     </ul>
 
 
@@ -759,14 +757,14 @@
 
 <p>Cancer driver genes comprising both oncogenes (OG) and Tumor suppressor genes (TSG) share common phenotypical outcome. However, they often have divergent molecular mechanisms  that drive the outcome. We are interested in capturing mutational specific differential transcriptional outcome among OG and TSG. In Figure 1, genes in red are oncogenes (have activating or copy gain) and genes in blue are tumor suppressor genes (have inactivating or copy loss).</p>
 
-<p>In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA dataset using <span class="notranslate">RNA</span>-Seq information and mutational and copy number information of following frequently altered genes. We named this tutorial as PanCancer Aberrant Pathway Activity Analysis (PAPAA).</p>
+<p>In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA dataset using RNA-Seq information and mutational and copy number information of following frequently altered genes. We named this tutorial as PanCancer Aberrant Pathway Activity Analysis (PAPAA).</p>
 
 <figure id="figure-1"><img src="../../images/aberrant_pi3k_pathway_analysis/pi3k_pathway.png" alt="pi3k_pathway. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Genes used in this study from ERK/RAS/PI3K pathway. Red text indicates Oncogenes (OG), blue text indicates Tumor suppressors genes (TSG).</figcaption></figure>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
-  <p>Let’s learn how to install this tutorial using Docker with <span class="notranslate">galaxy</span>, and how to download the datasets from Zenodo :</p>
+  <p>Let’s learn how to install this tutorial using Docker with galaxy, and how to download the datasets from Zenodo :</p>
 
 <ol id="markdown-toc">
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
@@ -779,11 +777,11 @@
       <li><a href="#pancancer-apply-weights" id="markdown-toc-pancancer-apply-weights">PanCancer apply weights</a></li>
       <li><a href="#pancancer-visualize-decisions" id="markdown-toc-pancancer-visualize-decisions">PanCancer visualize decisions</a></li>
       <li><a href="#pancancer-map-mutation-class" id="markdown-toc-pancancer-map-mutation-class">PanCancer map mutation class</a></li>
-      <li><a href="#pancancer-alternative-genes-pathwaymapper" id="markdown-toc-pancancer-alternative-genes-pathwaymapper">PanCancer alte<span class="notranslate">rna</span>tive genes pathwaymapper</a></li>
+      <li><a href="#pancancer-alternative-genes-pathwaymapper" id="markdown-toc-pancancer-alternative-genes-pathwaymapper">PanCancer alternative genes pathwaymapper</a></li>
       <li><a href="#pancancer-pathway-count-heatmaps" id="markdown-toc-pancancer-pathway-count-heatmaps">PanCancer pathway count heatmaps</a></li>
       <li><a href="#pancancer-targene-summary-figures" id="markdown-toc-pancancer-targene-summary-figures">PanCancer targene summary figures</a></li>
       <li><a href="#pancancer-targene-cell-line-predictions" id="markdown-toc-pancancer-targene-cell-line-predictions">PanCancer targene cell line predictions</a></li>
-      <li><a href="#pancancer-external-sample-status-prediction" id="markdown-toc-pancancer-external-sample-status-prediction">PanCancer exte<span class="notranslate">rna</span>l sample status prediction</a></li>
+      <li><a href="#pancancer-external-sample-status-prediction" id="markdown-toc-pancancer-external-sample-status-prediction">PanCancer external sample status prediction</a></li>
       <li><a href="#pancancer-targene-pharmacology" id="markdown-toc-pancancer-targene-pharmacology">PanCancer targene pharmacology</a></li>
     </ol>
   </li>
@@ -794,19 +792,19 @@
 
 <h1 id="pre-installed-tutorial-tools-datasets-and-workflows-from-the-docker-image"><strong>Pre-installed tutorial tools, datasets and workflows from the docker image</strong></h1>
 <blockquote>
-  <p>An efficient way to install and run the tutorial using papaa tools is available on docker based <span class="notranslate">galaxy</span> instance that has pre-installed papaa tool-suite as <strong>papaa</strong> under tools section. Additionally this local <span class="notranslate">galaxy</span> instance comes with datasets and <span class="notranslate">workflow</span> for generating PI3K_OG classifier. Instructions to run the docker image is below.</p>
+  <p>An efficient way to install and run the tutorial using papaa tools is available on docker based galaxy instance that has pre-installed papaa tool-suite as <strong>papaa</strong> under tools section. Additionally this local galaxy instance comes with datasets and workflow for generating PI3K_OG classifier. Instructions to run the docker image is below.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-tutorial-for-galaxy-docker-container-installation-and-running-the-workflow" aria-label="hands-on box: Tutorial for galaxy docker container installation and running the workflow:"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Tutorial for <span class="notranslate">galaxy</span> docker container installation and running the <span class="notranslate">workflow</span>:</div>
+  <div class="box-title hands-on-title" id="hands-on-tutorial-for-galaxy-docker-container-installation-and-running-the-workflow" aria-label="hands-on box: Tutorial for galaxy docker container installation and running the workflow:"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Tutorial for galaxy docker container installation and running the workflow:</div>
   <ol>
     <li>Pulling the docker image from docker hub: Open a terminal and type the following command:
-   <code class="language-plaintext highlighter-rouge">docker pull nvk747/<span class="notranslate">galaxy</span>_papaa:0.1.9</code></li>
+   <code class="language-plaintext highlighter-rouge">docker pull nvk747/galaxy_papaa:0.1.9</code></li>
     <li>For running the docker container use the following command :
-   <code class="language-plaintext highlighter-rouge">docker run -p 8888:80 --detach nvk747/<span class="notranslate">galaxy</span>_papaa:0.1.9</code></li>
+   <code class="language-plaintext highlighter-rouge">docker run -p 8888:80 --detach nvk747/galaxy_papaa:0.1.9</code></li>
     <li>Open the following <a href="http://localhost:8888"><em>http://localhost:8888</em></a> in your web browser.</li>
-    <li>Use <em>‘admin’</em> as use<span class="notranslate">rna</span>me and <em>‘password’</em> as password to login as <strong>admin</strong> into the docker <span class="notranslate">galaxy</span> instance.</li>
-    <li>The <span class="notranslate">Workflow</span> <strong>‘papaa@0.1.9_PI3K_OG_model_tutorial’</strong> from <span class="notranslate">workflow</span> section to run PI3K_OG tutorial is pre-installed.</li>
+    <li>Use <em>‘admin’</em> as username and <em>‘password’</em> as password to login as <strong>admin</strong> into the docker galaxy instance.</li>
+    <li>The Workflow <strong>‘papaa@0.1.9_PI3K_OG_model_tutorial’</strong> from workflow section to run PI3K_OG tutorial is pre-installed.</li>
     <li>Instructions to get datasets from shared library is given in Hands-on: Data upload.</li>
   </ol>
 </blockquote>
@@ -819,11 +817,11 @@
   <ol>
     <li>Create a new history for this tutorial</li>
     <li>
-      <p>Import the files from <a href="https://zenodo.org/record/4306639#.X9FJF-lKgZE">PAPAA-Zenodo</a> or from the docker <span class="notranslate">galaxy</span> <code class="language-plaintext highlighter-rouge">Shared Data -&gt; Data Libraries -&gt; (GTN - Material -&gt; statistics -&gt; PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis )</code></p>
+      <p>Import the files from <a href="https://zenodo.org/record/4306639#.X9FJF-lKgZE">PAPAA-Zenodo</a> or from the docker galaxy <code class="language-plaintext highlighter-rouge">Shared Data -&gt; Data Libraries -&gt; (GTN - Material -&gt; statistics -&gt; PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis )</code></p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/CCLE_DepMap_18Q1_maf_20180207.txt.gz
 https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/CCLE_MUT_CNA_AMP_DEL_binary_Revealer.tsv.gz
-https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/ccle_<span class="notranslate">rna</span>seq_genes_rpkm_20180929_mod.tsv.gz
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/ccle_rnaseq_genes_rpkm_20180929_mod.tsv.gz
 https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/compounds_of_interest.txt
 https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/copy_number_gain_status.tsv.gz
 https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/copy_number_loss_status.tsv.gz
@@ -838,7 +836,7 @@ https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_rtk_ras_p
 https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/mc3.v0.2.8.PUBLIC.maf.gz
 https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/mutation_burden_freeze.tsv
 https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/pancan_mutation_freeze.tsv.gz
-https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/pancan_<span class="notranslate">rna</span>seq_freeze.tsv.gz
+https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/pancan_rnaseq_freeze.tsv.gz
 https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/sample_freeze.tsv
 https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/tcga_dictionary.tsv
 </code></pre></div>      </div>
@@ -847,12 +845,12 @@ https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/tcga_dictionar
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-some-additional-files-that-you-can-use-for-alternative-analysis" aria-label="hands-on box: Some additional files that you can use for alternative analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Some additional files that you can use for alte<span class="notranslate">rna</span>tive analysis</div>
+  <div class="box-title hands-on-title" id="hands-on-some-additional-files-that-you-can-use-for-alternative-analysis" aria-label="hands-on box: Some additional files that you can use for alternative analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Some additional files that you can use for alternative analysis</div>
   <ol>
     <li>These files are provided to optionally enable you to perform an additional analysis, using the same methodology
 described here, but are not required for the main tutorial.</li>
     <li>
-      <p>Import the files from <a href="https://zenodo.org/record/4306639#.X9FJF-lKgZE">PAPAA-Zenodo</a> or from the docker <span class="notranslate">galaxy</span> <code class="language-plaintext highlighter-rouge">Shared Data -&gt; Data Libraries -&gt; (GTN - Material -&gt; statistics -&gt; PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis )</code></p>
+      <p>Import the files from <a href="https://zenodo.org/record/4306639#.X9FJF-lKgZE">PAPAA-Zenodo</a> or from the docker galaxy <code class="language-plaintext highlighter-rouge">Shared Data -&gt; Data Libraries -&gt; (GTN - Material -&gt; statistics -&gt; PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis )</code></p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE94937_kras_sign.txt
 https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE94937_rpkm_kras.csv
@@ -874,42 +872,42 @@ https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_wnt_genes
   <div class="box-title details-title" id="details-datasets-descriptions"><button class="gtn-boxify-button details" type="button" aria-controls="details-datasets-descriptions-contents" aria-expanded="true" aria-label="Toggle details box: Datasets descriptions"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Datasets descriptions<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <ul>
-    <li><strong>pancan_<span class="notranslate">rna</span>seq_freeze.tsv:</strong> Publicly available gene <span class="notranslate">expression</span> data for the TCGA Pan-cancer dataset. This file has gene-<span class="notranslate">expression</span> data for ~20,000 genes (columns) in ~10,000 samples (rows).</li>
+    <li><strong>pancan_rnaseq_freeze.tsv:</strong> Publicly available gene expression data for the TCGA Pan-cancer dataset. This file has gene-expression data for ~20,000 genes (columns) in ~10,000 samples (rows).</li>
     <li><strong>pancan_mutation_freeze.tsv:</strong> Publicly available Mutational information for TCGA Pan-cancer dataset. This file has mutational data for all genes (columns) as binary valued (0/1) in all samples (rows).</li>
     <li><strong>mutation_burden_freeze.tsv:</strong> Publicly available Mutational information for TCGA Pan-cancer dataset. This file has mutational burden information for all samples(rows).</li>
-    <li><strong>sample_freeze.tsv:</strong> The file lists the frozen samples as determined by TCGA PanCancer Atlas consortium along with raw <span class="notranslate">RNA</span>-Seq and mutation data. These were previously determined and included for all <span class="notranslate">downstream</span> analysis All other datasets were processed and subset according to the frozen samples.</li>
+    <li><strong>sample_freeze.tsv:</strong> The file lists the frozen samples as determined by TCGA PanCancer Atlas consortium along with raw RNA-Seq and mutation data. These were previously determined and included for all downstream analysis All other datasets were processed and subset according to the frozen samples.</li>
     <li><strong>cosmic_cancer_classification.tsv:</strong> Compendium of OG and TSG used for the analysis. This file has list of cancer genes(rows) from <a href="https://cancer.sanger.ac.uk/cosmic">cosmic database</a> classified as Oncogene or tumor suppressor (columns).</li>
     <li><strong>CCLE_DepMap_18Q1_maf_20180207.txt:</strong> Publicly available Mutational data for CCLE cell lines from Broad Institute Cancer Cell Line Encyclopedia <a href="https://portals.broadinstitute.org/ccle">CCLE</a>/<a href="https://depmap.org/portal/">DepMap Portal</a>. Variant classification along with nucleotide and protein level changes are provided in the columns for genes(rows).</li>
-    <li><strong>ccle_<span class="notranslate">rna</span>seq_genes_rpkm_20180929_mod.tsv:</strong> Publicly available <span class="notranslate">Expression</span> data for 1,019 cell lines (RPKM) from Broad Institute Cancer Cell Line Encyclopedia (CCLE) / DepMap Portal. This file has gene-<span class="notranslate">expression</span> data for genes(rows) in various cell lines (columns).</li>
+    <li><strong>ccle_rnaseq_genes_rpkm_20180929_mod.tsv:</strong> Publicly available Expression data for 1,019 cell lines (RPKM) from Broad Institute Cancer Cell Line Encyclopedia (CCLE) / DepMap Portal. This file has gene-expression data for genes(rows) in various cell lines (columns).</li>
     <li><strong>CCLE_MUT_CNA_AMP_DEL_binary_Revealer.tsv:</strong> Publicly available merged Mutational and copy number alterations that include gene amplifications and deletions for the CCLE cell lines. This file has mutational/copy number variation data for all cancer genes (rows) as binary valued (0/1) in all CCLE cell lines (columns).</li>
-    <li><strong>GDSC_cell_lines_EXP_CCLE_names.tsv:</strong> Publicly available RMA normalized <span class="notranslate">expression</span> data for Genomics of Drug Sensitivity in Cancer <a href="https://www.cancerrxgene.org/">GDSC</a> cell-lines. This data was subset to 382 cell lines that are common among CCLE and GDSC. This file has gene-<span class="notranslate">expression</span> data for genes(rows) in various cell lines (columns).</li>
+    <li><strong>GDSC_cell_lines_EXP_CCLE_names.tsv:</strong> Publicly available RMA normalized expression data for Genomics of Drug Sensitivity in Cancer <a href="https://www.cancerrxgene.org/">GDSC</a> cell-lines. This data was subset to 382 cell lines that are common among CCLE and GDSC. This file has gene-expression data for genes(rows) in various cell lines (columns).</li>
     <li><strong>GDSC_CCLE_common_mut_cnv_binary.tsv:</strong> A subset of merged Mutational and copy number alterations that include gene amplifications and deletions for common cell lines between GDSC and CCLE.</li>
     <li><strong>gdsc1_ccle_pharm_fitted_dose_data.txt:</strong> Pharmacological data for GDSC-1 cell lines. This data was subset to 379 cell lines that are common among CCLE and GDSC. This file has pharmacological data like IC50, Z-scores, drug information, concentrations used, AUC(columns) of 304 tested compounds in various cell-lines(rows).</li>
     <li><strong>gdsc2_ccle_pharm_fitted_dose_data.txt:</strong> Pharmacological data for GDSC-2 cell lines. This data was subset to 347 cell lines that are common among CCLE and GDSC. This file has pharmacological data like IC50, Z-scores, drug information, concentrations used, AUC(columns) of 170 tested compounds in various cell-lines(rows).</li>
     <li><strong>compounds_of_interest.txt:</strong> This file contains the compounds of interest for generation of pharmacological correlations with classifier scores. List of inhibitor compounds against EGFR-signaling, ERK-MAPK-signaling, Other-kinases, PI3K/MTOR-signaling, and RTK-signaling pathways.</li>
     <li><strong>tcga_dictonary.tsv:</strong> List of cancer types used in the analysis.</li>
-    <li><strong>GSE69822_pi3k_sign.txt:</strong> File with values assigned for tumor [1] or normal [-1] for exte<span class="notranslate">rna</span>l data samples deposited in Gene <span class="notranslate">Expression</span> Omnibus database accession:<a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822">GSE69822</a>.</li>
-    <li><strong>GSE69822_pi3k_trans.csv:</strong> Variant stabilized transformed values for the <span class="notranslate">RNA</span> <span class="notranslate">expression</span> levels in the exte<span class="notranslate">rna</span>l samples from <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822">GSE69822</a>.</li>
+    <li><strong>GSE69822_pi3k_sign.txt:</strong> File with values assigned for tumor [1] or normal [-1] for external data samples deposited in Gene Expression Omnibus database accession:<a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822">GSE69822</a>.</li>
+    <li><strong>GSE69822_pi3k_trans.csv:</strong> Variant stabilized transformed values for the RNA expression levels in the external samples from <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822">GSE69822</a>.</li>
     <li><strong>path_rtk_ras_pi3k_genes.txt:</strong> List of genes belong to RTK,RAS,PI3K used in our study.</li>
     <li><strong>path_myc_genes.txt:</strong> List of genes belong to Myc signaling pathway <a href="https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3">Sanchez Vega et.al 2018</a>.</li>
     <li><strong>path_ras_genes.txt:</strong> List of genes belong to Ras signaling Pathway <a href="https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3">Sanchez Vega et.al 2018</a>.</li>
     <li><strong>path_cell_cycle_genes.txt:</strong> List of genes belong to cell cycle pathway <a href="https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3">Sanchez Vega et.al 2018</a>.</li>
     <li><strong>path_wnt_genes.txt:</strong> List of genes belong to wnt signaling pathway <a href="https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3">Sanchez Vega et.al 2018</a>.</li>
-    <li><strong>GSE94937_rpkm_kras.csv:</strong> <span class="notranslate">RNA</span> <span class="notranslate">expression</span> levels in the exte<span class="notranslate">rna</span>l samples from <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE94937">GSE94937</a>.</li>
-    <li><strong>GSE94937_kras_sign.txt:</strong> File with values assigned for tumor [1] or normal [-1] for exte<span class="notranslate">rna</span>l data samples deposited in Gene <span class="notranslate">Expression</span> Omnibus database accession: <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE94937">GSE94937</a>.</li>
+    <li><strong>GSE94937_rpkm_kras.csv:</strong> RNA expression levels in the external samples from <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE94937">GSE94937</a>.</li>
+    <li><strong>GSE94937_kras_sign.txt:</strong> File with values assigned for tumor [1] or normal [-1] for external data samples deposited in Gene Expression Omnibus database accession: <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE94937">GSE94937</a>.</li>
   </ul>
 </blockquote>
 
 <h1 id="pancancer-aberrant-pathway-activity-analysis-papaa">PanCancer aberrant pathway activity analysis (PAPAA)</h1>
 
-<p><a href="https://en.wikipedia.org/wiki/Machine_learning">Machine Learning</a> algorithms  learn from various features in datasets and generate predictive models. Extracting transcriptional patterns and learning insights of tumor physiology from gene <span class="notranslate">expression</span> data is a developing research area. Transcriptional profiling was used to identify differentially expressed genes and pathways associated with drug resistance in breast cancer (<span class="citation"><a href="#Men2017">Men <i>et al.</i> 2017</a></span>). Hyperactive oncogenic pathway  signatures can be useful in predicting sensitivity to therapeutic agents (<span class="citation"><a href="#Bild2005">Bild <i>et al.</i> 2005</a></span>). Machine learning-based modeling provides a systematic manner to leverage these multi-omic data to predict phenotype or stratify tumors based on gene <span class="notranslate">expression</span> and pathway variations. We extended a previously developed elastic net penalized logistic regression classification modeling approach to derive transcription signature or pathway alterations to measure aberrant PI3K activity in the PanCancer data (<span class="citation"><a href="#Way2018">Way <i>et al.</i> 2018</a></span>). This method integrates bulk <span class="notranslate">RNA</span> Sequencing (<span class="notranslate">RNA</span>-Seq), copy number and mutation data from <a href="https://gdc.cancer.gov/about-data/publications/pancanatlas">PanCanAtlas</a>.</p>
+<p><a href="https://en.wikipedia.org/wiki/Machine_learning">Machine Learning</a> algorithms  learn from various features in datasets and generate predictive models. Extracting transcriptional patterns and learning insights of tumor physiology from gene expression data is a developing research area. Transcriptional profiling was used to identify differentially expressed genes and pathways associated with drug resistance in breast cancer (<span class="citation"><a href="#Men2017">Men <i>et al.</i> 2017</a></span>). Hyperactive oncogenic pathway  signatures can be useful in predicting sensitivity to therapeutic agents (<span class="citation"><a href="#Bild2005">Bild <i>et al.</i> 2005</a></span>). Machine learning-based modeling provides a systematic manner to leverage these multi-omic data to predict phenotype or stratify tumors based on gene expression and pathway variations. We extended a previously developed elastic net penalized logistic regression classification modeling approach to derive transcription signature or pathway alterations to measure aberrant PI3K activity in the PanCancer data (<span class="citation"><a href="#Way2018">Way <i>et al.</i> 2018</a></span>). This method integrates bulk RNA Sequencing (RNA-Seq), copy number and mutation data from <a href="https://gdc.cancer.gov/about-data/publications/pancanatlas">PanCanAtlas</a>.</p>
 
-<p>TCGA Pancancer has uniformly processed multi-omic data including <span class="notranslate">RNA</span>-Seq, copy number and mutational data. It covers 33 different cancer types and having information from over 10000 samples. We used publicly available <span class="notranslate">RNA</span>-Seq, mutation and CNV data sets from TCGA. Description and processing details of these data sets are listed at this site: <a href="https://github.com/nvk747/papaa.git">PanCancer aberrant pathway activity analysis</a>.</p>
+<p>TCGA Pancancer has uniformly processed multi-omic data including RNA-Seq, copy number and mutational data. It covers 33 different cancer types and having information from over 10000 samples. We used publicly available RNA-Seq, mutation and CNV data sets from TCGA. Description and processing details of these data sets are listed at this site: <a href="https://github.com/nvk747/papaa.git">PanCancer aberrant pathway activity analysis</a>.</p>
 
 <p><strong><em>Machine learning methodology</em></strong>
-Logistic regression is a kind of machine learning approach where statistical analysis is used to predict the outcome of a dependent variable based on observed changes in other variables. e.g. Changes in gene <span class="notranslate">expression</span> are directly connected to alterations/mutations in genes. We used above approach to predict mutational status given the gene <span class="notranslate">expression</span>. Optimizing to the above prediction of mutational status with gene <span class="notranslate">expression</span> variable, we used elastic net penalty with gradient descent algorithm is used to find the optimal cost function by going over a number of iterations. The objective of the classifier is to determine the probability a given sample (<em>i</em>) has a aberrant gene event given the sample’s <span class="notranslate">RNA</span>-Seq measurements (<em>Xi</em>). In order to achieve the objective, the classifier learns a vector of coefficients or gene-specific weights (<em>w</em>) that optimize the following penalized logistic function.</p>
+Logistic regression is a kind of machine learning approach where statistical analysis is used to predict the outcome of a dependent variable based on observed changes in other variables. e.g. Changes in gene expression are directly connected to alterations/mutations in genes. We used above approach to predict mutational status given the gene expression. Optimizing to the above prediction of mutational status with gene expression variable, we used elastic net penalty with gradient descent algorithm is used to find the optimal cost function by going over a number of iterations. The objective of the classifier is to determine the probability a given sample (<em>i</em>) has a aberrant gene event given the sample’s RNA-Seq measurements (<em>Xi</em>). In order to achieve the objective, the classifier learns a vector of coefficients or gene-specific weights (<em>w</em>) that optimize the following penalized logistic function.</p>
 
-<figure id="figure-2"><img src="../../images/aberrant_pi3k_pathway_analysis/equation.png" alt="Equations for probability measurement . " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Equation for prediction of mutational status(Yi) from <span class="notranslate">expression</span> data X(i) for each sample. Mutational status can be estimated by Multiplying Xi with gene specific weights (W). The negative log likelihood (L) is used for calculating minimum weights for each sample</figcaption></figure>
+<figure id="figure-2"><img src="../../images/aberrant_pi3k_pathway_analysis/equation.png" alt="Equations for probability measurement . " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Equation for prediction of mutational status(Yi) from expression data X(i) for each sample. Mutational status can be estimated by Multiplying Xi with gene specific weights (W). The negative log likelihood (L) is used for calculating minimum weights for each sample</figcaption></figure>
 
 <p>Where <em>alpha</em> and <em>l</em> are regularization and elastic net mixing hyperparameters respectively. Their optimal values are found during 5 fold cross validation by using scikit-learn <a href="https://scikit-learn.org/0.17/modules/generated/sklearn.grid_search.GridSearchCV.html">girdsearchCV</a> approach.</p>
 
@@ -918,7 +916,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 <ul>
   <li><strong>x-matrix:</strong>
     <blockquote>
-      <p>Gene-<span class="notranslate">expression</span> data comprises of <span class="notranslate">expression</span> levels for ~20,000 genes/sample and ~10,000 samples. Top 8,000 highly variable genes per sample with in each disease were measured by median absolute deviation (MAD) and considered for analysis.</p>
+      <p>Gene-expression data comprises of expression levels for ~20,000 genes/sample and ~10,000 samples. Top 8,000 highly variable genes per sample with in each disease were measured by median absolute deviation (MAD) and considered for analysis.</p>
     </blockquote>
   </li>
   <li><strong>y-matrix:</strong>
@@ -934,12 +932,12 @@ Logistic regression is a kind of machine learning approach where statistical ana
 
 <p>As elastic net penalty with stochastic decent gradient approach induces sparsity in the number of features used in classification, and the best/top features (genes) are likely to represent transcriptional signature of given disease or aberrant activity of the mutated genes in a pathway.</p>
 
-<p>Each feature (gene) is given a rank and score (negative or positive) depending on its contribution to classification. The positive scored genes are likely to be up-regulated in activated pathway samples and negatively scored genes are likely to be <span class="notranslate">downstream</span> targets of altered pathways.</p>
+<p>Each feature (gene) is given a rank and score (negative or positive) depending on its contribution to classification. The positive scored genes are likely to be up-regulated in activated pathway samples and negatively scored genes are likely to be downstream targets of altered pathways.</p>
 
 <p>In this tutorial, we made series of steps to generate classification models and used those models for predicting pharmacological response or identifying potential biomarkers that may be helpful for treatment of various cancers. Here, we generate models using <a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=ERBB2">ERBB2</a>, <a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=KRAS">KRAS</a>, <a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=PIK3CA">PIK3CA</a>, and <a href="https://www.genecards.org/cgi-bin/carddisp.pl?gene=AKT1">AKT1</a> oncogenes from the ERK/RAS/PI3K signaling axis pathway.  <strong>Have fun!</strong></p>
 
 <h2 id="papaa-pancancer-classifier">PAPAA: PanCancer classifier</h2>
-<p>This first step is designed to generate model with ERK/RAS/PI3K signaling axis pathway genes (path_genes): ERBB2, KRAS, PIK3CA ,AKT11 genes and various the Cancer Genome Atlas (TCGA) cancer types/diseases: BLCA, BRCA, CESC, COAD, ESCA, LUAD, LUSC, OV, PRAD, READ, STAD, UCEC, and UCS (ref: tcga_dictionary.tsv). This step takes gene <span class="notranslate">expression</span> information (pancan_<span class="notranslate">rna</span>seq_freeze.tsv), mutational information (pancan_mutation_freeze.tsv), load of mutations in each samples (mutation_burden_freeze.tsv), threshold passed sample information (sample_freeze.tsv) and copy number information (copy_number_loss_status.tsv &amp; copy_number_gain_status.tsv) and generates PI3K_OG model. AUROC and AUPR metrics are calculated for training,test,CV and random shuffled sets. As an additional option, the generated model was used to evaluate alte<span class="notranslate">rna</span>tive genes (PTEN, PIK3R1, and STK11) and alte<span class="notranslate">rna</span>tive diseases (BRCA, COAD, ESCA, HNSC, LGG, LUAD, LUSC, PRAD, READ, GBM, UCEC, and UCS) performance.</p>
+<p>This first step is designed to generate model with ERK/RAS/PI3K signaling axis pathway genes (path_genes): ERBB2, KRAS, PIK3CA ,AKT11 genes and various the Cancer Genome Atlas (TCGA) cancer types/diseases: BLCA, BRCA, CESC, COAD, ESCA, LUAD, LUSC, OV, PRAD, READ, STAD, UCEC, and UCS (ref: tcga_dictionary.tsv). This step takes gene expression information (pancan_rnaseq_freeze.tsv), mutational information (pancan_mutation_freeze.tsv), load of mutations in each samples (mutation_burden_freeze.tsv), threshold passed sample information (sample_freeze.tsv) and copy number information (copy_number_loss_status.tsv &amp; copy_number_gain_status.tsv) and generates PI3K_OG model. AUROC and AUPR metrics are calculated for training,test,CV and random shuffled sets. As an additional option, the generated model was used to evaluate alternative genes (PTEN, PIK3R1, and STK11) and alternative diseases (BRCA, COAD, ESCA, HNSC, LGG, LUAD, LUSC, PRAD, READ, GBM, UCEC, and UCS) performance.</p>
 
 <figure id="figure-3"><img src="../../images/aberrant_pi3k_pathway_analysis/pi3k_OG_auroc_aupr.png" alt="Prediction metrics for PI3K_OG model. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Prediction metrics of the PI3K_OG classifier- AUROC and AUPR curve for training, test, CV, and random shuffled sets.</figcaption></figure>
 <figure id="figure-4"><img src="../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_classifier_coef.png" alt="PI3K_OG Classifier Coefficients. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> PI3K_OG classifier coefficients represent the genes that impact the classification</figcaption></figure>
@@ -948,9 +946,9 @@ Logistic regression is a kind of machine learning approach where statistical ana
   <div class="box-title hands-on-title" id="hands-on-generating-model-from-erbb2-pik3ca-kras-akt1-genes-with-specific-disease-types" aria-label="hands-on box: Generating model from ERBB2,PIK3CA,KRAS,AKT1 genes with specific disease types"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generating model from ERBB2,PIK3CA,KRAS,AKT1 genes with specific disease types</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9"><strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9"><strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of features to use in model”</em>: <code class="language-plaintext highlighter-rouge">pancan_<span class="notranslate">rna</span>seq_freeze.tsv</code> (Input dataset).</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of features to use in model”</em>: <code class="language-plaintext highlighter-rouge">pancan_rnaseq_freeze.tsv</code> (Input dataset).</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename mutations”</em>: <code class="language-plaintext highlighter-rouge">pancan_mutation_freeze.tsv</code> (Input dataset).</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of mutation burden”</em>: <code class="language-plaintext highlighter-rouge">mutation_burden_freeze.tsv</code> (Input dataset).</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of sample”</em>: <code class="language-plaintext highlighter-rouge">sample_freeze.tsv</code> (Input dataset) Input TCGA processed sample information data. See dataset descriptions for details.</li>
@@ -960,8 +958,8 @@ Logistic regression is a kind of machine learning approach where statistical ana
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with Copy number loss”</em>: <code class="language-plaintext highlighter-rouge">copy_number_loss_status.tsv</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with Copy number gain”</em>: <code class="language-plaintext highlighter-rouge">copy_number_gain_status.tsv</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with cancer gene classification table”</em>: <code class="language-plaintext highlighter-rouge">cosmic_cancer_classification.tsv</code> (Input dataset)</li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“alte<span class="notranslate">rna</span>tive genes to test performance”</em>: <code class="language-plaintext highlighter-rouge">PTEN,PIK3R1,STK11</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“The alte<span class="notranslate">rna</span>tive diseases to test performance”</em>: <code class="language-plaintext highlighter-rouge">BRCA,COAD,ESCA,HNSC,LGG,LUAD,LUSC,PRAD,READ,GBM,UCEC,UCS</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“alternative genes to test performance”</em>: <code class="language-plaintext highlighter-rouge">PTEN,PIK3R1,STK11</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“The alternative diseases to test performance”</em>: <code class="language-plaintext highlighter-rouge">BRCA,COAD,ESCA,HNSC,LGG,LUAD,LUSC,PRAD,READ,GBM,UCEC,UCS</code></li>
         <li><em>“Decision to drop input genes from X matrix”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Remove hypermutated samples”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Keep intermediate ROC values for plotting”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -985,14 +983,14 @@ Logistic regression is a kind of machine learning approach where statistical ana
     <li>--num_features: Integer number for genes to include in classifier</li>
     <li>--alphas: Comma separated string of alphas to test in pipeline</li>
     <li>--l1_ratios: Comma separated string of l1 parameters to test</li>
-    <li>--alt_genes: Comma separated string of alte<span class="notranslate">rna</span>tive genes to test</li>
-    <li>--alt_diseases: Comma separated string of alte<span class="notranslate">rna</span>tive diseases to test</li>
+    <li>--alt_genes: Comma separated string of alternative genes to test</li>
+    <li>--alt_diseases: Comma separated string of alternative diseases to test</li>
     <li>--alt_filter_count: Integer number for minimum count of mutations to include per alt_diseases</li>
     <li>--alt_filter_prop: Floating value for minimum proportion of mutated samples alt_disease</li>
     <li>--alt_folder: String for location to save the classifier figures</li>
     <li>--remove_hyper: Store_true: remove hypermutated samples</li>
     <li>--keep_intermediate: Store_true: keep intermediate roc curve items</li>
-    <li>--x_matrix: File name of features gene <span class="notranslate">expression</span> matrix to use</li>
+    <li>--x_matrix: File name of features gene expression matrix to use</li>
     <li>--classifier_folder: String of the location to store classifier data</li>
   </ul>
 </blockquote>
@@ -1008,7 +1006,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
     <li>Heatmap for all the AUROC values at different alphas and L1 rations: cv_heatmap.pdf</li>
     <li>Disease classifier figures: list of 2 files [disease_pr and disease_auroc]</li>
     <li>This tool computes predictions, accuracy measurements and measures AUROC and AUPR curves for the combined disease model (Pan-model): <em>all_disease_pr.pdf ; pancan_roc_results.tsv ; all_disease_roc.pdf ; disease_aupr.pdf ; disease_auroc.pdf</em></li>
-    <li>Additionally, the output also includes above performance and prediction metrics when the pan-model applied to alte<span class="notranslate">rna</span>tive genes and cancer types: <em>alt_gene_alt_disease_summary.tsv ; alt_summary_counts.csv ; alt_gene_alt_disease_aupr_bar.pdf ; alt_gene_alt_disease_auroc_bar.pdf</em> Examine these files to analyze our PI3K_OG model on other alte<span class="notranslate">rna</span>te diseases.</li>
+    <li>Additionally, the output also includes above performance and prediction metrics when the pan-model applied to alternative genes and cancer types: <em>alt_gene_alt_disease_summary.tsv ; alt_summary_counts.csv ; alt_gene_alt_disease_aupr_bar.pdf ; alt_gene_alt_disease_auroc_bar.pdf</em> Examine these files to analyze our PI3K_OG model on other alternate diseases.</li>
   </ul>
 </blockquote>
 
@@ -1019,9 +1017,9 @@ Logistic regression is a kind of machine learning approach where statistical ana
   <div class="box-title hands-on-title" id="hands-on-generating-models-for-individual-diseases-listed-for-erbb2-pik3ca-kras-akt1" aria-label="hands-on box: Generating models for individual diseases listed for ERBB2,PIK3CA,KRAS,AKT1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generating models for individual diseases listed for ERBB2,PIK3CA,KRAS,AKT1</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9"><strong>PAPAA: PanCancer within disease analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9"><strong>PAPAA: PanCancer within disease analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of features to use in model”</em>: <code class="language-plaintext highlighter-rouge">pancan_<span class="notranslate">rna</span>seq_freeze.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of features to use in model”</em>: <code class="language-plaintext highlighter-rouge">pancan_rnaseq_freeze.tsv</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename mutations”</em>: <code class="language-plaintext highlighter-rouge">pancan_mutation_freeze.tsv</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of mutation burden”</em>: <code class="language-plaintext highlighter-rouge">mutation_burden_freeze.tsv</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of sample”</em>: <code class="language-plaintext highlighter-rouge">sample_freeze.tsv</code> (Input dataset)</li>
@@ -1045,7 +1043,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
     <li>--l1_ratios: Comma separated string of l1 parameters to test</li>
     <li>--remove_hyper: Remove hypermutated samples</li>
     <li>--alt_folder: String of location to classification folder extending to individual diseases</li>
-    <li>--x_matrix: File name of features gene <span class="notranslate">expression</span> matrix to use in the model</li>
+    <li>--x_matrix: File name of features gene expression matrix to use in the model</li>
     <li>--filename_mut: Filename of sample/gene mutations to use in model</li>
     <li>--filename_mut_burden: Filename of sample mutation burden to use in model</li>
     <li>--filename_sample: Filename of patient/samples to use in model</li>
@@ -1077,7 +1075,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
   <div class="box-title hands-on-title" id="hands-on-compare-the-erbb2-pik3ca-kras-akt1-pan-model-with-individual-disease-models" aria-label="hands-on box: compare the ERBB2_PIK3CA_KRAS_AKT1 pan model with individual disease models"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: compare the ERBB2_PIK3CA_KRAS_AKT1 pan model with individual disease models</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9"><strong>PAPAA: PanCancer compare within models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9"><strong>PAPAA: PanCancer compare within models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier summary”</em>: <code class="language-plaintext highlighter-rouge">classifier_summary.txt</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier coefficients”</em>: <code class="language-plaintext highlighter-rouge">classifier_coefficients.tsv</code> (output of <strong>PAPAA: Pancancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1106,15 +1104,15 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <h2 id="pancancer-apply-weights">PanCancer apply weights</h2>
-<p>In this step we would like to predict ‘y’ status (mutational status) using ‘x’ matrix (gene <span class="notranslate">expression</span>). We subset the x matrix to top variable genes (determined by Median Absolute Deviation), scaling the <span class="notranslate">expression</span> and adding covariate information. A logit transformation will be applied to output probabilities and classifier decisions.</p>
+<p>In this step we would like to predict ‘y’ status (mutational status) using ‘x’ matrix (gene expression). We subset the x matrix to top variable genes (determined by Median Absolute Deviation), scaling the expression and adding covariate information. A logit transformation will be applied to output probabilities and classifier decisions.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-apply-weights-for-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: Apply weights for ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Apply weights for ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9"><strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9"><strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of features to use in model”</em>: <code class="language-plaintext highlighter-rouge">pancan_<span class="notranslate">rna</span>seq_freeze.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of features to use in model”</em>: <code class="language-plaintext highlighter-rouge">pancan_rnaseq_freeze.tsv</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename mutations”</em>: <code class="language-plaintext highlighter-rouge">pancan_mutation_freeze.tsv</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of mutation burden”</em>: <code class="language-plaintext highlighter-rouge">mutation_burden_freeze.tsv</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of sample”</em>: <code class="language-plaintext highlighter-rouge">sample_freeze.tsv</code> (Input dataset)</li>
@@ -1134,7 +1132,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
   <ul>
     <li>--classifier_summary: String of the location of classifier_summary.txt file</li>
     <li>--copy_number: Supplement Y matrix with copy number events</li>
-    <li>--x_matrix: Filename of gene <span class="notranslate">expression</span> features to use in model</li>
+    <li>--x_matrix: Filename of gene expression features to use in model</li>
     <li>--filename_mut: Filename of sample/gene mutations to use in model</li>
     <li>--filename_mut_burden: Filename of sample mutation burden to use in model</li>
     <li>--filename_sample: Filename of patient/samples to use in model</li>
@@ -1147,7 +1145,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-outputs-3" aria-label="comment box: Outputs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Outputs</div>
   <ul>
-    <li>Apply a logit transform on <span class="notranslate">expression</span> values (y = 1/(1+e^(-wX))) to output mutational probabilities. Generates “classifier_decisions.tsv” file which has scores/probabilities and other covariate information.  The scores/probabilities will be used for gene ranking and variant specific classification.</li>
+    <li>Apply a logit transform on expression values (y = 1/(1+e^(-wX))) to output mutational probabilities. Generates “classifier_decisions.tsv” file which has scores/probabilities and other covariate information.  The scores/probabilities will be used for gene ranking and variant specific classification.</li>
     <li>Log file for script run and additional information</li>
   </ul>
 </blockquote>
@@ -1160,7 +1158,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
   <div class="box-title hands-on-title" id="hands-on-visualize-decisions-for-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: Visualize decisions for ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualize decisions for ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9"><strong>PAPAA: PanCancer visualize decisions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9"><strong>PAPAA: PanCancer visualize decisions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer decisions”</em>: <code class="language-plaintext highlighter-rouge">classifier_decisions</code> (output of <strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1194,7 +1192,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
   <div class="box-title hands-on-title" id="hands-on-map-mutation-class-for-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: map mutation class for ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: map mutation class for ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9"><strong>PAPAA: PanCancer map mutation class</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9"><strong>PAPAA: PanCancer map mutation class</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer decisions”</em>: <code class="language-plaintext highlighter-rouge">classifier_decisions.tsv</code> (output of <strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“string of the genes to extract or gene list file”</em>: <code class="language-plaintext highlighter-rouge">path_rtk_ras_pi3k_genes.txt</code> (Input dataset)</li>
@@ -1226,14 +1224,14 @@ Logistic regression is a kind of machine learning approach where statistical ana
   </ul>
 </blockquote>
 
-<h2 id="pancancer-alternative-genes-pathwaymapper">PanCancer alte<span class="notranslate">rna</span>tive genes pathwaymapper</h2>
+<h2 id="pancancer-alternative-genes-pathwaymapper">PanCancer alternative genes pathwaymapper</h2>
 <p>In this step we combine classifier weights, copy number information, recalculate metrics for positive samples, visualize distribution for AUROC and AUPR for all genes and metrics for each gene.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-alternative-genes-pathway-mapper-for-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: alternative genes pathway mapper for ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: alte<span class="notranslate">rna</span>tive genes pathway mapper for ERBB2_PIK3CA_KRAS_AKT1 model</div>
+  <div class="box-title hands-on-title" id="hands-on-alternative-genes-pathway-mapper-for-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: alternative genes pathway mapper for ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: alternative genes pathway mapper for ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.9"><strong>PAPAA: PanCancer alte<span class="notranslate">rna</span>tive genes pathwaymapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_alte<span class="notranslate">rna</span>tive_genes_pathwaymapper/pancancer_alte<span class="notranslate">rna</span>tive_genes_pathwaymapper/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.9"><strong>PAPAA: PanCancer alternative genes pathwaymapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer decisions”</em>: <code class="language-plaintext highlighter-rouge">classifier_decisions.tsv</code> (output of <strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Comma separated string of HUGO gene symbols”</em>: <code class="language-plaintext highlighter-rouge">ERBB2,PIK3CA,KRAS,AKT1</code></li>
@@ -1249,7 +1247,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-targene-alternative-genes-pathwaymapper-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-targene-alternative-genes-pathwaymapper-py-inputs-contents" aria-expanded="true" aria-label="Toggle details box: PanCancer Aberrant Pathway Activity Analysis `targene_alternative_genes_pathwaymapper.py` inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: PanCancer Aberrant Pathway Activity Analysis `targene_alte<span class="notranslate">rna</span>tive_genes_pathwaymapper.py` inputs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-targene-alternative-genes-pathwaymapper-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-targene-alternative-genes-pathwaymapper-py-inputs-contents" aria-expanded="true" aria-label="Toggle details box: PanCancer Aberrant Pathway Activity Analysis `targene_alternative_genes_pathwaymapper.py` inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: PanCancer Aberrant Pathway Activity Analysis `targene_alternative_genes_pathwaymapper.py` inputs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>--genes: Comma separated string of HUGO symbols for target genes or targenes_list.csv file</li>
     <li>--path_genes: Comma separated string of HUGO symbols for all genes in the target pathway or path_genes.csv file</li>
@@ -1279,14 +1277,14 @@ Logistic regression is a kind of machine learning approach where statistical ana
   <div class="box-title hands-on-title" id="hands-on-heatmaps-for-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: Heatmaps for ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Heatmaps for ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9"><strong>PAPAA: PanCancer pathway count heatmaps</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9"><strong>PAPAA: PanCancer pathway count heatmaps</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer decisions”</em>: <code class="language-plaintext highlighter-rouge">classifier_decisions.tsv</code> (output of <strong>PAPAA: PanCancer apply weights</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer metrics pathwaymapper”</em>: <code class="language-plaintext highlighter-rouge">pathway_metrics_pathwaymapper.txt</code> (output of <strong>PAPAA: PanCancer alte<span class="notranslate">rna</span>tive genes pathwaymapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer gene metric ranks”</em>: <code class="language-plaintext highlighter-rouge">all_gene_metric_ranks.tsv</code> (output of <strong>PAPAA: PanCancer alte<span class="notranslate">rna</span>tive genes pathwaymapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer metrics pathwaymapper”</em>: <code class="language-plaintext highlighter-rouge">pathway_metrics_pathwaymapper.txt</code> (output of <strong>PAPAA: PanCancer alternative genes pathwaymapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer gene metric ranks”</em>: <code class="language-plaintext highlighter-rouge">all_gene_metric_ranks.tsv</code> (output of <strong>PAPAA: PanCancer alternative genes pathwaymapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Comma separated string of HUGO gene symbols”</em>: <code class="language-plaintext highlighter-rouge">ERBB2,PIK3CA,KRAS,AKT1</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“String of the pathway genes to extract”</em>: <code class="language-plaintext highlighter-rouge">path_rtk_ras_pi3k_genes.txt</code> (Input dataset)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of features to use in model”</em>: <code class="language-plaintext highlighter-rouge">pancan_<span class="notranslate">rna</span>seq_freeze.tsv.gz</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of features to use in model”</em>: <code class="language-plaintext highlighter-rouge">pancan_rnaseq_freeze.tsv.gz</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename mutations”</em>: <code class="language-plaintext highlighter-rouge">pancan_mutation_freeze.tsv</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of mutation burden”</em>: <code class="language-plaintext highlighter-rouge">mutation_burden_freeze.tsv</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename of sample”</em>: <code class="language-plaintext highlighter-rouge">sample_freeze.tsv</code> (Input dataset)</li>
@@ -1332,7 +1330,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
   <div class="box-title hands-on-title" id="hands-on-summary-figures-for-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: Summary figures for ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Summary figures for ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9"><strong>PAPAA: PanCancer targene summary figures</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9"><strong>PAPAA: PanCancer targene summary figures</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Classifier data”</em>: <code class="language-plaintext highlighter-rouge">classifier_summary.txt</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier coefficients”</em>: <code class="language-plaintext highlighter-rouge">classifier_coefficients.tsv</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1340,7 +1338,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“summary counts”</em>: <code class="language-plaintext highlighter-rouge">summary_counts.csv</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“mutation classification scores”</em>: <code class="language-plaintext highlighter-rouge">mutation_classification_scores.tsv</code> (output of <strong>PAPAA: PanCancer map mutation class</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“path events per sample”</em>: <code class="language-plaintext highlighter-rouge">path_events_per_sample.tsv</code> (output of <strong>PAPAA: PanCancer pathway count heatmaps</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer gene metric ranks”</em>: <code class="language-plaintext highlighter-rouge">all_gene_metric_ranks.tsv</code> (output of <strong>PAPAA: PanCancer alte<span class="notranslate">rna</span>tive genes pathwaymapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer gene metric ranks”</em>: <code class="language-plaintext highlighter-rouge">all_gene_metric_ranks.tsv</code> (output of <strong>PAPAA: PanCancer alternative genes pathwaymapper</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
   </ol>
@@ -1380,7 +1378,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
   <div class="box-title hands-on-title" id="hands-on-analysis-of-ccle-and-gdsc-cell-lines-using-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: Analysis of CCLE and GDSC cell-lines using ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Analysis of CCLE and GDSC cell-lines using ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9"><strong>PAPAA: PanCancer targene cell line predictions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9"><strong>PAPAA: PanCancer targene cell line predictions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Classifier data”</em>: <code class="language-plaintext highlighter-rouge">classifier_summary.txt</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier coefficients”</em>: <code class="language-plaintext highlighter-rouge">classifier_coefficients.tsv</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1388,10 +1386,10 @@ Logistic regression is a kind of machine learning approach where statistical ana
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“amino acid mutation scores”</em>: <code class="language-plaintext highlighter-rouge">amino_acid_mutation_scores.tsv</code> (output of <strong>PAPAA: PanCancer targene summary figures</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Comma separated string of HUGO targene symbols”</em>: <code class="language-plaintext highlighter-rouge">ERBB2_MUT,PIK3CA_MUT,KRAS_MUT,AKT1_MUT</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“string of the genes to extract or gene list file”</em>: <code class="language-plaintext highlighter-rouge">path_rtk_ras_pi3k_genes.txt</code> (Input dataset)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename ccle <span class="notranslate">rna</span>seq data”</em>: <code class="language-plaintext highlighter-rouge">ccle_<span class="notranslate">rna</span>seq_genes_rpkm_20180929_mod.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename ccle rnaseq data”</em>: <code class="language-plaintext highlighter-rouge">ccle_rnaseq_genes_rpkm_20180929_mod.tsv</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename ccle mutational data”</em>: <code class="language-plaintext highlighter-rouge">CCLE_MUT_CNA_AMP_DEL_binary_Revealer.gct</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename ccle variant data”</em>: <code class="language-plaintext highlighter-rouge">CCLE_DepMap_18Q1_maf_20180207.txt</code> (Input dataset)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename gdsc <span class="notranslate">rna</span>seq data”</em>: <code class="language-plaintext highlighter-rouge">GDSC_EXP_CCLE_converted_name.tsv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename gdsc rnaseq data”</em>: <code class="language-plaintext highlighter-rouge">GDSC_EXP_CCLE_converted_name.tsv</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename gdsc mutational data”</em>: <code class="language-plaintext highlighter-rouge">GDSC_CCLE_common_mut_cnv_binary.tsv</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename for gdsc1 pharmacological data file”</em>: <code class="language-plaintext highlighter-rouge">gdsc1_ccle_pharm_fitted_dose_data.txt</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filename for gdsc2 pharmacological data file”</em>: <code class="language-plaintext highlighter-rouge">gdsc2_ccle_pharm_fitted_dose_data.txt</code> (Input dataset)</li>
@@ -1406,10 +1404,10 @@ Logistic regression is a kind of machine learning approach where statistical ana
     <li>--targenes: Comma separated string of HUGO symbols for target genes or targenes_list.csv file</li>
     <li>--path_genes: Comma separated string of HUGO symbols for all genes in the target pathway or path_genes.csv file</li>
     <li>--classifier_summary: String of the location of classifier_summary file</li>
-    <li>--ccle_<span class="notranslate">rna</span>seq: Filename of CCLE gene <span class="notranslate">expression</span> data file</li>
+    <li>--ccle_rnaseq: Filename of CCLE gene expression data file</li>
     <li>--ccle_mut: Filename of CCLE cell lines/gene mutations data file</li>
     <li>--ccle_maf: Filename of CCLE mutational variant level data file</li>
-    <li>--gdsc_<span class="notranslate">rna</span>seq: Filename of GDSC gene <span class="notranslate">expression</span> data file</li>
+    <li>--gdsc_rnaseq: Filename of GDSC gene expression data file</li>
     <li>--gdsc_mut: Filename of GDSC cell lines/gene mutations data file</li>
     <li>--gdsc1_phar: Filename of GDSC1 pharmacological response data</li>
     <li>--gdsc2_phar: Filename of GDSC2 pharmacological response data</li>
@@ -1434,19 +1432,19 @@ Logistic regression is a kind of machine learning approach where statistical ana
   </ul>
 </blockquote>
 
-<h2 id="pancancer-external-sample-status-prediction">PanCancer exte<span class="notranslate">rna</span>l sample status prediction</h2>
-<p>In this step we use our classifier information and predict mutational status from exte<span class="notranslate">rna</span>l gene <span class="notranslate">expression</span> data. Gene <span class="notranslate">expression</span> data from <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822">GSE69822</a>, where MCF10a cell lines are either having PI3KCA/PTENKO mutation or WT/WT+A66 treated samples. Note WT+A66 is wild-type MCF10a cell line treated with A66 a potent PI3K inhibitor. A distribution plot is generated to see how many samples match to prediction. Samples with scores below 0.5 are considered WT and above 0.5 are considered mutant.</p>
+<h2 id="pancancer-external-sample-status-prediction">PanCancer external sample status prediction</h2>
+<p>In this step we use our classifier information and predict mutational status from external gene expression data. Gene expression data from <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822">GSE69822</a>, where MCF10a cell lines are either having PI3KCA/PTENKO mutation or WT/WT+A66 treated samples. Note WT+A66 is wild-type MCF10a cell line treated with A66 a potent PI3K inhibitor. A distribution plot is generated to see how many samples match to prediction. Samples with scores below 0.5 are considered WT and above 0.5 are considered mutant.</p>
 <figure id="figure-10"><img src="../../images/aberrant_pi3k_pathway_analysis/external.png" alt="GSE69822_samples_classification. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> PI3K_OG classifiers applied to MCF10a cell lines dataset (GEO: GSE69822). The samples were either WT/WT+A66 (blue circles) or having a PIK3CA-H1074R/PTENKO mutation (orange circles).</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-external-sample-evaluation-with-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: external sample evaluation with ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: exte<span class="notranslate">rna</span>l sample evaluation with ERBB2_PIK3CA_KRAS_AKT1 model</div>
+  <div class="box-title hands-on-title" id="hands-on-external-sample-evaluation-with-erbb2-pik3ca-kras-akt1-model" aria-label="hands-on box: external sample evaluation with ERBB2_PIK3CA_KRAS_AKT1 model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: external sample evaluation with ERBB2_PIK3CA_KRAS_AKT1 model</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9"><strong>PAPAA: PanCancer exte<span class="notranslate">rna</span>l sample status prediction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/vijay/pancancer_exte<span class="notranslate">rna</span>l_sample_status_prediction/pancancer_exte<span class="notranslate">rna</span>l_sample_status_prediction/0.1.9</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9" title="Tested with toolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9"><strong>PAPAA: PanCancer external sample status prediction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Classifier data”</em>: <code class="language-plaintext highlighter-rouge">classifier_summary.txt</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pancancer classifier coefficients”</em>: <code class="language-plaintext highlighter-rouge">classifier_coefficients.tsv</code> (output of <strong>PAPAA: PanCancer classifier</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“exte<span class="notranslate">rna</span>l sample gene <span class="notranslate">expression</span> data”</em>: <code class="language-plaintext highlighter-rouge">GSE69822_pi3k_trans.csv</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“external sample gene expression data”</em>: <code class="language-plaintext highlighter-rouge">GSE69822_pi3k_trans.csv</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“given mutational status”</em>: <code class="language-plaintext highlighter-rouge">GSE69822_pi3k_sign.txt</code> (Input dataset)</li>
       </ul>
     </li>
@@ -1454,10 +1452,10 @@ Logistic regression is a kind of machine learning approach where statistical ana
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-external-sample-pred-targene-classifier-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-external-sample-pred-targene-classifier-py-inputs-contents" aria-expanded="true" aria-label="Toggle details box: PanCancer Aberrant Pathway Activity Analysis `external_sample_pred_targene_classifier.py` inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: PanCancer Aberrant Pathway Activity Analysis `exte<span class="notranslate">rna</span>l_sample_pred_targene_classifier.py` inputs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-pancancer-aberrant-pathway-activity-analysis-external-sample-pred-targene-classifier-py-inputs"><button class="gtn-boxify-button details" type="button" aria-controls="details-pancancer-aberrant-pathway-activity-analysis-external-sample-pred-targene-classifier-py-inputs-contents" aria-expanded="true" aria-label="Toggle details box: PanCancer Aberrant Pathway Activity Analysis `external_sample_pred_targene_classifier.py` inputs"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: PanCancer Aberrant Pathway Activity Analysis `external_sample_pred_targene_classifier.py` inputs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <ul>
     <li>--classifier_summary: String of the location of classifier scores file</li>
-    <li>--<span class="notranslate">expression</span>_file: File path for exte<span class="notranslate">rna</span>l sample <span class="notranslate">expression</span> data file (fpkm/rpkm/rlog/vlog/nlog values)</li>
+    <li>--expression_file: File path for external sample expression data file (fpkm/rpkm/rlog/vlog/nlog values)</li>
     <li>--status_sign: Provide sign for tumor/mutant [1] or normal/WT [-1] along with sorted sample names</li>
   </ul>
 </blockquote>
@@ -1465,7 +1463,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-outputs-10" aria-label="comment box: Outputs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Outputs</div>
   <ul>
-    <li>Model based classification scores distribution Plots for exte<span class="notranslate">rna</span>l normal and tumor samples (“targene_exte<span class="notranslate">rna</span>l_sample_predictions.pdf and targene_exte<span class="notranslate">rna</span>l_sample_predictions_1.pdf”)</li>
+    <li>Model based classification scores distribution Plots for external normal and tumor samples (“targene_external_sample_predictions.pdf and targene_external_sample_predictions_1.pdf”)</li>
     <li>Log file for script run and additional information</li>
   </ul>
 </blockquote>
@@ -1531,14 +1529,14 @@ Logistic regression is a kind of machine learning approach where statistical ana
 <h1 id="conclusions">Conclusions</h1>
 
 <ul>
-  <li>In our tutorial, we used machine learning based PI3K oncogene classifier in <span class="notranslate">galaxy</span> to distinguish tumor samples using PI3K activity. The classifier shows high accuracy ~80-86% in detecting aberrant PI3K activity in TCGA samples.</li>
+  <li>In our tutorial, we used machine learning based PI3K oncogene classifier in galaxy to distinguish tumor samples using PI3K activity. The classifier shows high accuracy ~80-86% in detecting aberrant PI3K activity in TCGA samples.</li>
   <li>The model output include top weighted genes that represent transcriptional signature of the tumors with selected gene mutations.  The pan model (all disease gene model) when compared to individual disease models have equal or higher performance for most of individual diseases.</li>
   <li>We also learned how to work with multi-omic datasets, and perform 5 fold cross-validation to output probability scores for each samples belonging to each disease/cancer type.</li>
-  <li>Further, we can apply the trained models to make predictions on a exte<span class="notranslate">rna</span>l <span class="notranslate">expression</span> dataset provided and predict their mutational status.</li>
+  <li>Further, we can apply the trained models to make predictions on a external expression dataset provided and predict their mutational status.</li>
   <li>In addition we used our models to evaluated cell-lines pharmacological response against various compounds. This information will be helpful to improve personalized medicine approaches to various individuals.</li>
 </ul>
 
-<figure id="figure-12"><img src="../../images/aberrant_pi3k_pathway_analysis/project_summary.png" alt="tutorial_summary. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> <span class="notranslate">Galaxy</span> based Machine Learning approach for Pan-cancer Aberrant Pathway Activity Analysis(PAPAA) using TCGA multi-omic data. </figcaption></figure>
+<figure id="figure-12"><img src="../../images/aberrant_pi3k_pathway_analysis/project_summary.png" alt="tutorial_summary. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Galaxy based Machine Learning approach for Pan-cancer Aberrant Pathway Activity Analysis(PAPAA) using TCGA multi-omic data. </figcaption></figure>
 
 
                 

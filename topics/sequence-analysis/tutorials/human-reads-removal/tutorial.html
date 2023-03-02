@@ -908,8 +908,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
             Metagenomics
         </a>
@@ -1029,18 +1027,18 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>Patient samples for pathogen detection are usually “contaminated” with human host <span class="notranslate">DNA</span>.
+<p>Patient samples for pathogen detection are usually “contaminated” with human host DNA.
 Such contamination, if not removed from sequencing data, may pose an issue with certain types of
 data analyses.
-Another issue is that submitting the raw sequenced <span class="notranslate">reads</span> with the human sequence “contamination” included to a public database may simply violate national or institutional regulations for handling patient data.
-For this second reason in particular, researchers will regularly have to remove traces of human sequencing data even from samples that, by their nature, should be highly enriched for just pathogen <span class="notranslate">reads</span>, as is the case, for example, for ampliconic viral samples, in which viral sequences have been PCR-amplified with virus-specific primers before sequencing.</p>
+Another issue is that submitting the raw sequenced reads with the human sequence “contamination” included to a public database may simply violate national or institutional regulations for handling patient data.
+For this second reason in particular, researchers will regularly have to remove traces of human sequencing data even from samples that, by their nature, should be highly enriched for just pathogen reads, as is the case, for example, for ampliconic viral samples, in which viral sequences have been PCR-amplified with virus-specific primers before sequencing.</p>
 
-<p>This tutorial will guide you through a typical <span class="notranslate">workflow</span> for clearing human sequences from any kind (ampliconic or not) of viral sequenced sample, which retains non-human <span class="notranslate">reads</span> in a format ready to be submitted to public databases.</p>
+<p>This tutorial will guide you through a typical workflow for clearing human sequences from any kind (ampliconic or not) of viral sequenced sample, which retains non-human reads in a format ready to be submitted to public databases.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-nature-of-the-input-data" aria-label="comment box: Nature of the input data"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Nature of the input data</div>
   <p>We will use sequencing data of bronchoalveolar lavage fluid (BALF) samples obtained from early COVID-19 patients in China as our input data.
-Since such samples are expected to be contaminated signficantly with human sequenced <span class="notranslate">reads</span>, the effect of the cleaning steps will be much more apparent than for ampliconic sequencing data from diagnostic patient swabs.
+Since such samples are expected to be contaminated signficantly with human sequenced reads, the effect of the cleaning steps will be much more apparent than for ampliconic sequencing data from diagnostic patient swabs.
 Nevertheless the cleaning processs does not rely on any particular sample isolation or preprcocessing method and could be used unaltered on, for example, ARTIC amplified SARS-CoV-2 samples.</p>
 
 </blockquote>
@@ -1056,9 +1054,9 @@ Nevertheless the cleaning processs does not rely on any particular sample isolat
       <li><a href="#getting-the-sequencing-data" id="markdown-toc-getting-the-sequencing-data">Getting the sequencing data</a></li>
     </ol>
   </li>
-  <li><a href="#read-trimming-and-mapping" id="markdown-toc-read-trimming-and-mapping">Read trimming and <span class="notranslate">mapping</span></a></li>
+  <li><a href="#read-trimming-and-mapping" id="markdown-toc-read-trimming-and-mapping">Read trimming and mapping</a></li>
   <li><a href="#obtaining-the-identifiers-of-non-human-read-pairs" id="markdown-toc-obtaining-the-identifiers-of-non-human-read-pairs">Obtaining the identifiers of non-human read pairs</a></li>
-  <li><a href="#use-the-non-human-read-identifiers-to-extract-the-reads-of-interest-from-the-original-inputs" id="markdown-toc-use-the-non-human-read-identifiers-to-extract-the-reads-of-interest-from-the-original-inputs">Use the non-human read identifiers to extract the <span class="notranslate">reads</span> of interest from the original inputs</a></li>
+  <li><a href="#use-the-non-human-read-identifiers-to-extract-the-reads-of-interest-from-the-original-inputs" id="markdown-toc-use-the-non-human-read-identifiers-to-extract-the-reads-of-interest-from-the-original-inputs">Use the non-human read identifiers to extract the reads of interest from the original inputs</a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
@@ -1066,7 +1064,7 @@ Nevertheless the cleaning processs does not rely on any particular sample isolat
 
 <h1 id="get-data">Get data</h1>
 
-<p>As always, it is best to give each analysis you are performing with <span class="notranslate">Galaxy</span> its own history, so let’s start with preparing this:</p>
+<p>As always, it is best to give each analysis you are performing with Galaxy its own history, so let’s start with preparing this:</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-prepare-new-history" aria-label="hands-on box: Prepare new history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Prepare new history</div>
@@ -1076,9 +1074,9 @@ Nevertheless the cleaning processs does not rely on any particular sample isolat
       <p>Create a new history for this tutorial and give it a proper name</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
   </ol>
 
@@ -1086,8 +1084,8 @@ Nevertheless the cleaning processs does not rely on any particular sample isolat
 
 <h2 id="getting-the-sequencing-data">Getting the sequencing data</h2>
 
-<p>The sequenced <span class="notranslate">reads</span> datasets used in this tutorial (4 files representing 2 Illumina paired-end sequenced samples) have been deposited on <a href="https://zenodo.org/record/3732359/">Zenodo</a> and can be uploaded to <span class="notranslate">Galaxy</span> via their URLs.
-After that, we will arrange the uploaded data into a collection in our <span class="notranslate">Galaxy</span> history to facilitate its handling in the analysis.</p>
+<p>The sequenced reads datasets used in this tutorial (4 files representing 2 Illumina paired-end sequenced samples) have been deposited on <a href="https://zenodo.org/record/3732359/">Zenodo</a> and can be uploaded to Galaxy via their URLs.
+After that, we will arrange the uploaded data into a collection in our Galaxy history to facilitate its handling in the analysis.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload-and-rearrangement" aria-label="hands-on box: Data upload and rearrangement"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload and rearrangement</div>
@@ -1097,7 +1095,7 @@ After that, we will arrange the uploaded data into a collection in our <span cla
       <p>Upload the data from Zenodo via URLs</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <p>The URLs for our example data are these:</p>
 
@@ -1111,11 +1109,11 @@ https://zenodo.org/record/3732359/files/SRR10903402_r2.fq.gz
       <p>Arrange the data into a paired dataset collection</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-paired-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-paired-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a paired collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a paired collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>For all selected..</strong> and choose <strong>Build List of Dataset Pairs</strong></p>   </li>   <li>Change the text of <em>unpaired forward</em> to a common selector for the forward <span class="notranslate">reads</span></li>   <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse <span class="notranslate">reads</span></li>   <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-paired-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-paired-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a paired collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a paired collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>For all selected..</strong> and choose <strong>Build List of Dataset Pairs</strong></p>   </li>   <li>Change the text of <em>unpaired forward</em> to a common selector for the forward reads</li>   <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse reads</li>   <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
 
       <p>For the example datasets this means:</p>
       <ul>
-        <li>You need to tell <span class="notranslate">Galaxy</span> about the suffix for your forward and reverse <span class="notranslate">reads</span>, respectively:
+        <li>You need to tell Galaxy about the suffix for your forward and reverse reads, respectively:
           <ul>
             <li>set the text of <em>unpaired forward</em> to: <code class="language-plaintext highlighter-rouge">_r1.fq.gz</code></li>
             <li>set the text of <em>unpaired reverse</em> to: <code class="language-plaintext highlighter-rouge">_r2.fq.gz</code></li>
@@ -1132,45 +1130,45 @@ https://zenodo.org/record/3732359/files/SRR10903402_r2.fq.gz
 
 </blockquote>
 
-<h1 id="read-trimming-and-mapping">Read trimming and <span class="notranslate">mapping</span></h1>
+<h1 id="read-trimming-and-mapping">Read trimming and mapping</h1>
 
-<p>In order to learn which of the <span class="notranslate">reads</span> of each of the input samples are of likely human origin, we need to map the <span class="notranslate">reads</span> to the human reference genome. To improve the quality of this step we will also trim low-quality bases from the ends of all <span class="notranslate">reads</span> before passing them to the read <span class="notranslate">mapping</span> software.</p>
+<p>In order to learn which of the reads of each of the input samples are of likely human origin, we need to map the reads to the human reference genome. To improve the quality of this step we will also trim low-quality bases from the ends of all reads before passing them to the read mapping software.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
-  <p>Do you want to learn more about the principles behind quality control (including trimming) and <span class="notranslate">mapping</span>? Follow our dedicated tutorials:</p>
+  <p>Do you want to learn more about the principles behind quality control (including trimming) and mapping? Follow our dedicated tutorials:</p>
   <ul>
     <li><a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control</a>.</li>
-    <li><a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><span class="notranslate">Mapping</span></a>.</li>
+    <li><a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html">Mapping</a>.</li>
   </ul>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-trim-reads-and-map-them-to-the-human-reference-genome" aria-label="hands-on box: Trim reads and map them to the human reference genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Trim <span class="notranslate">reads</span> and map them to the human reference genome</div>
+  <div class="box-title hands-on-title" id="hands-on-trim-reads-and-map-them-to-the-human-reference-genome" aria-label="hands-on box: Trim reads and map them to the human reference genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Trim reads and map them to the human reference genome</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0" title="Tested with toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0"><strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0</span></span>  with default settings and:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0" title="Tested with toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0"><strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.38.0</span></span>  with default settings and:
       <ul>
-        <li><em>“Single-end or paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end (as collection)</code>
+        <li><em>“Single-end or paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end (as collection)</code>
           <ul>
-            <li><em>“Select FASTQ dataset collection with R1/R2 pair”</em>: the collection of sequenced <span class="notranslate">reads</span> input datasets</li>
+            <li><em>“Select FASTQ dataset collection with R1/R2 pair”</em>: the collection of sequenced reads input datasets</li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>  with the following parameters:
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome index</code>
           <ul>
             <li>
               <p><em>“Using reference genome”</em>: <code class="language-plaintext highlighter-rouge">Human Dec. 2013 (GRCh38/hg38)(hg38)</code></p>
 
-              <p>The exact name of this version of the human reference genome may vary between <span class="notranslate">Galaxy</span> servers. Start typing <code class="language-plaintext highlighter-rouge">hg38</code> in the select box to reveal available choices on your server.</p>
+              <p>The exact name of this version of the human reference genome may vary between Galaxy servers. Start typing <code class="language-plaintext highlighter-rouge">hg38</code> in the select box to reveal available choices on your server.</p>
             </li>
           </ul>
         </li>
-        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code>
+        <li><em>“Single or Paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code>
           <ul>
             <li><em>“Select a paired collection”</em>: the <code class="language-plaintext highlighter-rouge">paired</code> output of <strong>Trimmomatic</strong></li>
           </ul>
@@ -1183,18 +1181,18 @@ https://zenodo.org/record/3732359/files/SRR10903402_r2.fq.gz
 
 <h1 id="obtaining-the-identifiers-of-non-human-read-pairs">Obtaining the identifiers of non-human read pairs</h1>
 
-<p>The <span class="notranslate">mapping</span> step above has produced a collection of BAM datasets that store, for each sample, which of its <span class="notranslate">reads</span> map to the human genome (and if so to which position on the genome though we are not interested in this information), and which ones could not be mapped to it. It is these <em>unmapped</em> <span class="notranslate">reads</span> that we are interested in, but how do we get at them?</p>
+<p>The mapping step above has produced a collection of BAM datasets that store, for each sample, which of its reads map to the human genome (and if so to which position on the genome though we are not interested in this information), and which ones could not be mapped to it. It is these <em>unmapped</em> reads that we are interested in, but how do we get at them?</p>
 
 <p>The logic of the following steps is:</p>
 
 <ol>
   <li>
-    <p>Filter the BAM dataset for each sample for only those <span class="notranslate">reads</span> that could not be mapped to the human reference genome, and for which also the read mate in the pair could not be mapped to this genome.</p>
+    <p>Filter the BAM dataset for each sample for only those reads that could not be mapped to the human reference genome, and for which also the read mate in the pair could not be mapped to this genome.</p>
 
     <p>In other words, if only one read of a read pair can be mapped to the human genome we play it safe and discard the pair.</p>
   </li>
   <li>
-    <p>Emit the remaining <span class="notranslate">reads</span> in a format (we choose FASTA here) from which it is easy to extract the read identifiers</p>
+    <p>Emit the remaining reads in a format (we choose FASTA here) from which it is easy to extract the read identifiers</p>
   </li>
   <li>
     <p>Extract the read identifiers</p>
@@ -1202,23 +1200,23 @@ https://zenodo.org/record/3732359/files/SRR10903402_r2.fq.gz
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-for-read-pairs-not-mapping-to-the-human-genome-and-extract-their-identifiers" aria-label="hands-on box: Filter for read pairs not mapping to the human genome and extract their identifiers"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter for read pairs not <span class="notranslate">mapping</span> to the human genome and extract their identifiers</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-for-read-pairs-not-mapping-to-the-human-genome-and-extract-their-identifiers" aria-label="hands-on box: Filter for read pairs not mapping to the human genome and extract their identifiers"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter for read pairs not mapping to the human genome and extract their identifiers</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1"><strong>Samtools fastx</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+<span class="notranslate">galaxy</span>1</span></span>  with the following parameter settings:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1"><strong>Samtools fastx</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/samtools_fastx/samtools_fastx/1.9+galaxy1</span></span>  with the following parameter settings:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM or SAM file to convert”</em>: the output of <strong>Map with BWA-MEM</strong></li>
         <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">FASTA</code></li>
         <li>
           <p><em>“outputs”</em>: select <code class="language-plaintext highlighter-rouge">READ1</code></p>
 
-          <p>With this setting we are choosing to retrieve only the forward <span class="notranslate">reads</span> of each pair as a single result dataset.
-Since the forward and reverse <span class="notranslate">reads</span> of a pair share their read identifier, we do not need the reverse <span class="notranslate">reads</span>.</p>
+          <p>With this setting we are choosing to retrieve only the forward reads of each pair as a single result dataset.
+Since the forward and reverse reads of a pair share their read identifier, we do not need the reverse reads.</p>
         </li>
         <li>
           <p><em>“Omit or append read numbers”</em>: <code class="language-plaintext highlighter-rouge">Do not append /1 and /2 to read names</code></p>
 
-          <p>Adding this first or second read of the pair indicator to the read name would make the result dependent on which half of the <span class="notranslate">reads</span> we retrieve. We do not want this.</p>
+          <p>Adding this first or second read of the pair indicator to the read name would make the result dependent on which half of the reads we retrieve. We do not want this.</p>
         </li>
         <li><em>“Require that these flags are set”</em>:
           <ul>
@@ -1226,11 +1224,11 @@ Since the forward and reverse <span class="notranslate">reads</span> of a pair s
             <li><code class="language-plaintext highlighter-rouge">mate is unmapped</code></li>
           </ul>
 
-          <p>This setting makes sure we retain only read pairs for which none of the two <span class="notranslate">reads</span> could be mapped to the human genome.</p>
+          <p>This setting makes sure we retain only read pairs for which none of the two reads could be mapped to the human genome.</p>
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select lines from”</em>: the output of <strong>Samtools fastx</strong></li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
@@ -1239,7 +1237,7 @@ Since the forward and reverse <span class="notranslate">reads</span> of a pair s
 
       <p>This will select only those lines from the FASTA inputs that start with a <code class="language-plaintext highlighter-rouge">&gt;</code> character, <em>i.e.</em> will retain the identifier lines, but not the sequence lines.</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2"><strong>Replace Text in entire line</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2"><strong>Replace Text in entire line</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File to process”</em>: the output of <strong>Select</strong></li>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Replacement”</em>:
@@ -1256,17 +1254,17 @@ Since the forward and reverse <span class="notranslate">reads</span> of a pair s
 
 </blockquote>
 
-<h1 id="use-the-non-human-read-identifiers-to-extract-the-reads-of-interest-from-the-original-inputs">Use the non-human read identifiers to extract the <span class="notranslate">reads</span> of interest from the original inputs</h1>
+<h1 id="use-the-non-human-read-identifiers-to-extract-the-reads-of-interest-from-the-original-inputs">Use the non-human read identifiers to extract the reads of interest from the original inputs</h1>
 
-<p>We are almost there! We already know the identifiers of all <span class="notranslate">reads</span> we would like to retain, we only need a way to filter the original input datasets for these identifiers.</p>
+<p>We are almost there! We already know the identifiers of all reads we would like to retain, we only need a way to filter the original input datasets for these identifiers.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-why-not-use-the-unmapped-reads-directly" aria-label="comment box: Why not use the unmapped reads directly?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Why not use the unmapped <span class="notranslate">reads</span> directly?</div>
+  <div class="box-title comment-title" id="comment-why-not-use-the-unmapped-reads-directly" aria-label="comment box: Why not use the unmapped reads directly?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Why not use the unmapped reads directly?</div>
 
   <p>When you followed the previous steps you may have noticed that <strong>Samtools fastx</strong> offers <em>fastq</em> as an output format.
-Since we used this tool to report the unmapped <span class="notranslate">reads</span>, you may be wondering why we did not simply ask the tool to write the <span class="notranslate">reads</span> in the format we want and be done with it.</p>
+Since we used this tool to report the unmapped reads, you may be wondering why we did not simply ask the tool to write the reads in the format we want and be done with it.</p>
 
-  <p>The answer is: we could have done that (and some people follow this approach), but remember that we trimmed the <span class="notranslate">reads</span> before <span class="notranslate">mapping</span> them, which means the extracted unmapped <span class="notranslate">reads</span> would not be identical to the input <span class="notranslate">reads</span>.</p>
+  <p>The answer is: we could have done that (and some people follow this approach), but remember that we trimmed the reads before mapping them, which means the extracted unmapped reads would not be identical to the input reads.</p>
 
   <p>It is good practice to submit sequencing data to public databases in as raw a state as possible to leave it up to the people downloading that data to apply processing steps as they see fit.</p>
 
@@ -1274,21 +1272,21 @@ Since we used this tool to report the unmapped <span class="notranslate">reads</
 
 <p>The <strong>seqtk_subseq</strong> tool offfers the identifier-based filtering functionality we are looking for.
 As a slight complication, however, the tool is not prepared to handle paired read collections like the one we organized our input data into.
-For this reason, we need to first unzip our collection into two simple list collections - one with the forward <span class="notranslate">reads</span>, the other one with the reverse <span class="notranslate">reads</span> of all samples.
+For this reason, we need to first unzip our collection into two simple list collections - one with the forward reads, the other one with the reverse reads of all samples.
 Then, after processing both with <strong>seqtk_subseq</strong>, we zip the filtered collections back into one.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-identifier-based-extraction-of-non-human-reads-from-the-input-data" aria-label="hands-on box: Identifier-based extraction of non-human reads from the input data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Identifier-based extraction of non-human <span class="notranslate">reads</span> from the input data</div>
+  <div class="box-title hands-on-title" id="hands-on-identifier-based-extraction-of-non-human-reads-from-the-input-data" aria-label="hands-on box: Identifier-based extraction of non-human reads from the input data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Identifier-based extraction of non-human reads from the input data</div>
 
   <ol>
     <li><span class="tool" data-tool="__UNZIP_COLLECTION__" title="Tested with __UNZIP_COLLECTION__"><strong>Unzip Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>UNZIP_COLLECTION</strong></span></span>  with the following setting:
       <ul>
-        <li><em>“Input Paired Dataset”</em>: the collection of original sequenced <span class="notranslate">reads</span> input datasets</li>
+        <li><em>“Input Paired Dataset”</em>: the collection of original sequenced reads input datasets</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1"><strong>seqtk_subseq</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1"><strong>seqtk_subseq</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input FASTA/Q file”</em>: the first (forward <span class="notranslate">reads</span>) output of <strong>Unzip Collection</strong></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input FASTA/Q file”</em>: the first (forward reads) output of <strong>Unzip Collection</strong></li>
         <li><em>“Select source of sequence choices”</em>: <code class="language-plaintext highlighter-rouge">FASTA/Q ID list</code>
           <ul>
             <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> the collection of read identifiers; output of <strong>Replace Text</strong></li>
@@ -1296,9 +1294,9 @@ Then, after processing both with <strong>seqtk_subseq</strong>, we zip the filte
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1"><strong>seqtk_subseq</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1"><strong>seqtk_subseq</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input FASTA/Q file”</em>: the second (reverse <span class="notranslate">reads</span>) output of <strong>Unzip Collection</strong></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input FASTA/Q file”</em>: the second (reverse reads) output of <strong>Unzip Collection</strong></li>
         <li><em>“Select source of sequence choices”</em>: <code class="language-plaintext highlighter-rouge">FASTA/Q ID list</code>
           <ul>
             <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> the collection of read identifiers; output of <strong>Replace Text</strong></li>
@@ -1308,8 +1306,8 @@ Then, after processing both with <strong>seqtk_subseq</strong>, we zip the filte
     </li>
     <li><span class="tool" data-tool="__ZIP_COLLECTION__" title="Tested with __ZIP_COLLECTION__"><strong>Zip Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>ZIP_COLLECTION</strong></span></span>  with the following settings:
       <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input Dataset (Forward)”</em>: the collection of cleaned forward <span class="notranslate">reads</span>; output of the first run of <strong>seqtk_subseq</strong></li>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input Dataset (Reverse)”</em>: the collection of cleaned reverse <span class="notranslate">reads</span>; output of the second run of <strong>seqtk_subseq</strong></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input Dataset (Forward)”</em>: the collection of cleaned forward reads; output of the first run of <strong>seqtk_subseq</strong></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input Dataset (Reverse)”</em>: the collection of cleaned reverse reads; output of the second run of <strong>seqtk_subseq</strong></li>
       </ul>
     </li>
   </ol>
@@ -1318,8 +1316,8 @@ Then, after processing both with <strong>seqtk_subseq</strong>, we zip the filte
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>Data cleaning is a standard procedure for clinical sequencing datasets and is a rather straightforward process in <span class="notranslate">Galaxy</span>.
-You just learnt how to remove human <span class="notranslate">reads</span> from any number of paired-end sequenced samples in parallel using collections and just a handful of tools.
+<p>Data cleaning is a standard procedure for clinical sequencing datasets and is a rather straightforward process in Galaxy.
+You just learnt how to remove human reads from any number of paired-end sequenced samples in parallel using collections and just a handful of tools.
 Cleaning of single-end data would use the same tools (with adjusted settings), but would work on data arranged in a simple list collection instead of in a paired collection.</p>
 
 

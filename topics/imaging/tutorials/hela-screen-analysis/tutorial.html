@@ -756,8 +756,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -823,9 +821,9 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>This tutorial shows how to segment and extract features from cell nuclei <span class="notranslate">Galaxy</span> for image analysis. As example use case, this tutorial shows you how to compare the phenotypes of PLK1 threated cells in comparison to a control. The data used in this tutorial is available at <a href="https://zenodo.org/record/3362976">Zenodo</a>.</p>
+<p>This tutorial shows how to segment and extract features from cell nuclei Galaxy for image analysis. As example use case, this tutorial shows you how to compare the phenotypes of PLK1 threated cells in comparison to a control. The data used in this tutorial is available at <a href="https://zenodo.org/record/3362976">Zenodo</a>.</p>
 
-<p><span class="notranslate">RNA</span> interference (<span class="notranslate">RNA</span>i) is used in the example use case for silencing genes by way of m<span class="notranslate">RNA</span> degradation. Gene knockdown by this method is achieved by introducing small double-stranded interfering <span class="notranslate">RNA</span>s (si<span class="notranslate">RNA</span>) into the cytoplasm. Small interfering <span class="notranslate">RNA</span>s can originate from inside the cell or can be exogenously introduced into the cell. Once introduced into the cell, exogenous si<span class="notranslate">RNA</span>s are processed by the <span class="notranslate">RNA</span>-induced silencing complex (RISC).The si<span class="notranslate">RNA</span> is complementary to the target m<span class="notranslate">RNA</span> to be silenced, and the RISC uses the si<span class="notranslate">RNA</span> as a template for locating the target m<span class="notranslate">RNA</span>. After the RISC localizes to the target m<span class="notranslate">RNA</span>, the <span class="notranslate">RNA</span> is cleaved by a ribonuclease. <span class="notranslate">RNA</span>i is widely used as a laboratory technique for genetic functional analysis. <span class="notranslate">RNA</span>i in organisms such as C. elegans and Drosophila melanogaster provides a quick and inexpensive means of investigating gene function. Insights gained from experimental <span class="notranslate">RNA</span>i use may be useful in identifying potential therapeutic targets, drug development, or other applications. <span class="notranslate">RNA</span> interference is a very useful research tool, allowing investigators to carry out large genetic screens in an effort to identify targets for further research related to a particular pathway, drug, or phenotype.</p>
+<p>RNA interference (RNAi) is used in the example use case for silencing genes by way of mRNA degradation. Gene knockdown by this method is achieved by introducing small double-stranded interfering RNAs (siRNA) into the cytoplasm. Small interfering RNAs can originate from inside the cell or can be exogenously introduced into the cell. Once introduced into the cell, exogenous siRNAs are processed by the RNA-induced silencing complex (RISC).The siRNA is complementary to the target mRNA to be silenced, and the RISC uses the siRNA as a template for locating the target mRNA. After the RISC localizes to the target mRNA, the RNA is cleaved by a ribonuclease. RNAi is widely used as a laboratory technique for genetic functional analysis. RNAi in organisms such as C. elegans and Drosophila melanogaster provides a quick and inexpensive means of investigating gene function. Insights gained from experimental RNAi use may be useful in identifying potential therapeutic targets, drug development, or other applications. RNA interference is a very useful research tool, allowing investigators to carry out large genetic screens in an effort to identify targets for further research related to a particular pathway, drug, or phenotype.</p>
 
 <p>The example used in this tutorial deals with PLK1 knocked down cells. PLK1 is an early trigger for G2/M transition. PLK1 supports the functional maturation of the centrosome in late G2/early prophase and establishment of the bipolar spindle. PLK1 is being studied as a target for cancer drugs. Many colon and lung cancers are caused by K-RAS mutations. These cancers are dependent on PLK1.</p>
 
@@ -837,8 +835,8 @@
 <ol id="markdown-toc">
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
   <li><a href="#getting-data" id="markdown-toc-getting-data">Getting data</a></li>
-  <li><a href="#create-feature-extraction-workflow" id="markdown-toc-create-feature-extraction-workflow">Create feature extraction <span class="notranslate">workflow</span></a></li>
-  <li><a href="#apply-workflow-to-screen" id="markdown-toc-apply-workflow-to-screen">Apply <span class="notranslate">workflow</span> to screen</a></li>
+  <li><a href="#create-feature-extraction-workflow" id="markdown-toc-create-feature-extraction-workflow">Create feature extraction workflow</a></li>
+  <li><a href="#apply-workflow-to-screen" id="markdown-toc-apply-workflow-to-screen">Apply workflow to screen</a></li>
   <li><a href="#plot-feature-extraction-results" id="markdown-toc-plot-feature-extraction-results">Plot feature extraction results</a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
@@ -847,7 +845,7 @@
 
 <h1 id="getting-data">Getting data</h1>
 
-<p>The dataset required for this tutorial contains a screen of DAPI stained HeLa nuclei (<a href="https://zenodo.org/record/3360236">more information</a>). We will use a sample image from this dataset for training basic image processing skills in <span class="notranslate">Galaxy</span>.</p>
+<p>The dataset required for this tutorial contains a screen of DAPI stained HeLa nuclei (<a href="https://zenodo.org/record/3360236">more information</a>). We will use a sample image from this dataset for training basic image processing skills in Galaxy.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
@@ -857,9 +855,9 @@
       <p>If you are logged in, create a new history for this tutorial</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
-    <li>Import <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> the following dataset from <a href="https://zenodo.org/record/3362976">Zenodo</a> or from the data library (ask your instructor).
+    <li>Import <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> the following dataset from <a href="https://zenodo.org/record/3362976">Zenodo</a> or from the data library (ask your instructor).
       <ul>
         <li><strong>Important:</strong> Choose the type of data as <code class="language-plaintext highlighter-rouge">zip</code>.</li>
       </ul>
@@ -868,10 +866,10 @@
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li><strong>Unzip file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
@@ -881,10 +879,10 @@
       </ul>
     </li>
     <li>
-      <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">testinput.tif</code></p>
+      <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">testinput.tif</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li><strong>Unzip file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
@@ -893,12 +891,12 @@
       </ul>
     </li>
     <li>
-      <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the resulting collection to <code class="language-plaintext highlighter-rouge">control</code></p>
+      <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the resulting collection to <code class="language-plaintext highlighter-rouge">control</code></p>
 
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on the collection</li>   <li>Click on the name of the collection at the top</li>   <li>Change the name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
-    <li>Import <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> the following dataset from <a href="https://zenodo.org/record/3362976">Zenodo</a> or from the data library (ask your instructor).
+    <li>Import <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> the following dataset from <a href="https://zenodo.org/record/3362976">Zenodo</a> or from the data library (ask your instructor).
       <ul>
         <li><strong>Important:</strong> Choose the type of data as <code class="language-plaintext highlighter-rouge">zip</code>.
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3362976/files/B3.zip
@@ -907,10 +905,10 @@
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li><strong>Unzip</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract the zipped screen:
       <ul>
@@ -918,30 +916,30 @@
         <li><em>“Extract single file”</em>: <code class="language-plaintext highlighter-rouge">All files</code></li>
       </ul>
     </li>
-    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the collection to <code class="language-plaintext highlighter-rouge">PLK1</code></li>
-    <li>Upload <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> the following segmentation filter rules as a new pasted file (format: <code class="language-plaintext highlighter-rouge">tabular</code>):
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the collection to <code class="language-plaintext highlighter-rouge">PLK1</code></li>
+    <li>Upload <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> the following segmentation filter rules as a new pasted file (format: <code class="language-plaintext highlighter-rouge">tabular</code>):
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	area	eccentricity
 min	500	0.
 max	100000	0.5
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-file-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new file<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Open the <span class="notranslate">Galaxy</span> Upload Manager</li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the file contents into the text field</p>   </li>   <li>     <p>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">tabular</code></p>   </li>   <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-file-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new file<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Open the Galaxy Upload Manager</li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the file contents into the text field</p>   </li>   <li>     <p>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">tabular</code></p>   </li>   <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
-      <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> dataset to <code class="language-plaintext highlighter-rouge">rules</code></p>
+      <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> dataset to <code class="language-plaintext highlighter-rouge">rules</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 </blockquote>
 
-<h1 id="create-feature-extraction-workflow">Create feature extraction <span class="notranslate">workflow</span></h1>
-<p>First, we will create and test a <span class="notranslate">workflow</span> which extracts mean DAPI intensity, area, and major axis length of cell nuclei from an image.</p>
+<h1 id="create-feature-extraction-workflow">Create feature extraction workflow</h1>
+<p>First, we will create and test a workflow which extracts mean DAPI intensity, area, and major axis length of cell nuclei from an image.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-feature-extraction-workflow" aria-label="hands-on box: Create feature extraction workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create feature extraction <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-create-feature-extraction-workflow" aria-label="hands-on box: Create feature extraction workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create feature extraction workflow</div>
 
   <ol>
     <li><strong>Filter Image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to smooth the image:
@@ -1001,15 +999,15 @@ max	100000	0.5
         </li>
       </ul>
     </li>
-    <li>Now we can extract the <span class="notranslate">workflow</span> for batch processing
+    <li>Now we can extract the workflow for batch processing
       <ul>
         <li>Name it “feature_extraction”.</li>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-extracting-a-workflow-from-your-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-extracting-a-workflow-from-your-history-contents" aria-expanded="true" aria-label="Toggle tip box: Extracting a workflow from your history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Extracting a <span class="notranslate">workflow</span> from your history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>     <p><strong>Clean up</strong> your history: remove any failed (red) jobs from your history by clicking on the <i class="fas fa-trash" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-delete</span> button.</p>     <p>This will make the creation of the <span class="notranslate">workflow</span> easier.</p>   </li>   <li>     <p>Click on <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> (<strong>History options</strong>) at the top of your history panel and select <strong>Extract <span class="notranslate">workflow</span></strong>.</p>     <p><img src="/training-material/topics/introduction/images/history_menu_extract_workflow.png" alt="`Extract Workflow` entry in the history options menu" /></p>     <p>The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the <span class="notranslate">workflow</span>.</p>   </li>   <li>     <p>Replace the <strong><span class="notranslate">Workflow</span> name</strong> to something more descriptive.</p>   </li>   <li>     <p><strong>Rename</strong> each <span class="notranslate">workflow</span> input in the boxes at the top of the second column.</p>   </li>   <li>     <p>If there are any steps that shouldn’t be included in the <span class="notranslate">workflow</span>, you can <strong>uncheck</strong> them in the first column of boxes.</p>   </li>   <li>     <p>Click on the <strong>Create <span class="notranslate">Workflow</span></strong> button near the top.</p>     <p>You will get a message that the <span class="notranslate">workflow</span> was created.</p>   </li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-extracting-a-workflow-from-your-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-extracting-a-workflow-from-your-history-contents" aria-expanded="true" aria-label="Toggle tip box: Extracting a workflow from your history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Extracting a workflow from your history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>     <p><strong>Clean up</strong> your history: remove any failed (red) jobs from your history by clicking on the <i class="fas fa-trash" aria-hidden="true"></i><span class="visually-hidden">galaxy-delete</span> button.</p>     <p>This will make the creation of the workflow easier.</p>   </li>   <li>     <p>Click on <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> (<strong>History options</strong>) at the top of your history panel and select <strong>Extract workflow</strong>.</p>     <p><img src="/training-material/topics/introduction/images/history_menu_extract_workflow.png" alt="`Extract Workflow` entry in the history options menu" /></p>     <p>The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.</p>   </li>   <li>     <p>Replace the <strong>Workflow name</strong> to something more descriptive.</p>   </li>   <li>     <p><strong>Rename</strong> each workflow input in the boxes at the top of the second column.</p>   </li>   <li>     <p>If there are any steps that shouldn’t be included in the workflow, you can <strong>uncheck</strong> them in the first column of boxes.</p>   </li>   <li>     <p>Click on the <strong>Create Workflow</strong> button near the top.</p>     <p>You will get a message that the workflow was created.</p>   </li> </ol> </blockquote>
     </li>
-    <li>Edit the <span class="notranslate">workflow</span> you just created
+    <li>Edit the workflow you just created
       <ul>
         <li>Name the inputs <code class="language-plaintext highlighter-rouge">input image</code> and <code class="language-plaintext highlighter-rouge">filter rules</code>.</li>
         <li>Mark the results of steps 5 and 6 as outputs (by clicking on the asterisk next to the output name).</li>
@@ -1019,27 +1017,27 @@ max	100000	0.5
 
 </blockquote>
 
-<p>The resulting <span class="notranslate">workflow</span> should look something like this:</p>
+<p>The resulting workflow should look something like this:</p>
 
-<figure id="figure-1"><img src="../../images/hela-screen-analysis/feature_extraction_workflow.png" alt="feature extraction workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Feature extraction sub<span class="notranslate">workflow</span>.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/hela-screen-analysis/feature_extraction_workflow.png" alt="feature extraction workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Feature extraction subworkflow.</figcaption></figure>
 
-<h1 id="apply-workflow-to-screen">Apply <span class="notranslate">workflow</span> to screen</h1>
+<h1 id="apply-workflow-to-screen">Apply workflow to screen</h1>
 
-<p>Now we want to apply our extracted <span class="notranslate">workflow</span> to <code class="language-plaintext highlighter-rouge">original data</code> and merge the results. For this purpose, we create a <span class="notranslate">workflow</span> which uses the previously created <span class="notranslate">workflow</span> as sub<span class="notranslate">workflow</span>.</p>
+<p>Now we want to apply our extracted workflow to <code class="language-plaintext highlighter-rouge">original data</code> and merge the results. For this purpose, we create a workflow which uses the previously created workflow as subworkflow.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-screen-analysis-workflow" aria-label="hands-on box: Create screen analysis workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create screen analysis <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-create-screen-analysis-workflow" aria-label="hands-on box: Create screen analysis workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create screen analysis workflow</div>
 
   <ol>
     <li>
-      <p>Create a new <span class="notranslate">workflow</span> in the <span class="notranslate">workflow</span> editor.</p>
+      <p>Create a new workflow in the workflow editor.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click <strong><span class="notranslate">Workflow</span></strong> on the top bar</li>   <li>Click the new <span class="notranslate">workflow</span> <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-new</span> button</li>   <li>Give it a clear and memorable name</li>   <li>Clicking <strong>Save</strong> will take you directly into the <span class="notranslate">workflow</span> editor for that <span class="notranslate">workflow</span></li>   <li>Need more help? Please see the <em>How to make a <span class="notranslate">workflow</span> subsection</em> <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">here</a></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click <strong>Workflow</strong> on the top bar</li>   <li>Click the new workflow <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-new</span> button</li>   <li>Give it a clear and memorable name</li>   <li>Clicking <strong>Save</strong> will take you directly into the workflow editor for that workflow</li>   <li>Need more help? Please see the <em>How to make a workflow subsection</em> <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">here</a></li> </ol> </blockquote>
     </li>
     <li>Add a <strong>Input dataset collection</strong> node and name it <code class="language-plaintext highlighter-rouge">input images</code></li>
     <li>Add a <strong>Input dataset</strong> node and name it <code class="language-plaintext highlighter-rouge">rules</code></li>
-    <li>Add the <strong>feature_extraction</strong> <span class="notranslate">workflow</span> as node.
+    <li>Add the <strong>feature_extraction</strong> workflow as node.
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input image”</em>: <code class="language-plaintext highlighter-rouge">input images</code> output of <strong>Input dataset collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“filter rules”</em>: <code class="language-plaintext highlighter-rouge">rules</code> output of <strong>Input dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1047,32 +1045,32 @@ max	100000	0.5
     </li>
     <li>Add a <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> node.
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Collection of files to collapse into single dataset”</em>: output of <strong>feature_extraction</strong> <span class="notranslate">workflow</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Collection of files to collapse into single dataset”</em>: output of <strong>feature_extraction</strong> workflow</li>
         <li><em>“Keep one header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Append File name”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-        <li>Mark the tool output as <span class="notranslate">workflow</span> output</li>
+        <li>Mark the tool output as workflow output</li>
       </ul>
     </li>
-    <li>Save your <span class="notranslate">workflow</span> and name it <code class="language-plaintext highlighter-rouge">analyze_screen</code></li>
+    <li>Save your workflow and name it <code class="language-plaintext highlighter-rouge">analyze_screen</code></li>
   </ol>
 </blockquote>
 
-<p>The resulting <span class="notranslate">workflow</span> should look something like this:</p>
+<p>The resulting workflow should look something like this:</p>
 
-<figure id="figure-2"><img src="../../images/hela-screen-analysis/analyze_screen_workflow.png" alt="screen analysis workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Full screen analysis <span class="notranslate">workflow</span>.</figcaption></figure>
+<figure id="figure-2"><img src="../../images/hela-screen-analysis/analyze_screen_workflow.png" alt="screen analysis workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Full screen analysis workflow.</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-screen-analysis-workflow" aria-label="hands-on box: Run screen analysis workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run screen analysis <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-run-screen-analysis-workflow" aria-label="hands-on box: Run screen analysis workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run screen analysis workflow</div>
 
   <ol>
     <li>
-      <p>Run the screen analysis <span class="notranslate">workflow</span> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span></span> on the <code class="language-plaintext highlighter-rouge">control</code> screen and the <code class="language-plaintext highlighter-rouge">rules</code> file</p>
+      <p>Run the screen analysis workflow <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> on the <code class="language-plaintext highlighter-rouge">control</code> screen and the <code class="language-plaintext highlighter-rouge">rules</code> file</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>   <li>Configure the <span class="notranslate">workflow</span> as needed</li>   <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
     <li>
-      <p>Run the screen analysis <span class="notranslate">workflow</span> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span></span> on the <code class="language-plaintext highlighter-rouge">PLK1</code> screen and the <code class="language-plaintext highlighter-rouge">rules</code> file</p>
+      <p>Run the screen analysis workflow <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> on the <code class="language-plaintext highlighter-rouge">PLK1</code> screen and the <code class="language-plaintext highlighter-rouge">rules</code> file</p>
     </li>
   </ol>
 
@@ -1086,7 +1084,7 @@ max	100000	0.5
   <div class="box-title hands-on-title" id="hands-on-plot-feature-extraction-results" aria-label="hands-on box: Plot feature extraction results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot feature extraction results</div>
 
   <ol>
-    <li>Click on the <code class="language-plaintext highlighter-rouge">Visualize this data</code> <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-barchart</span> icon of the <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> results.</li>
+    <li>Click on the <code class="language-plaintext highlighter-rouge">Visualize this data</code> <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> icon of the <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> results.</li>
     <li>Run <code class="language-plaintext highlighter-rouge">Box plot</code> with the following parameters:
       <ul>
         <li><em>“Provide a title”</em>: <code class="language-plaintext highlighter-rouge">Screen features</code></li>
@@ -1132,7 +1130,7 @@ max	100000	0.5
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>In this exercise you imported images into <span class="notranslate">Galaxy</span>, segmented cell nuclei, filtered segmentations by morphological features, extracted features from segmentations, scaled your <span class="notranslate">workflow</span> to a whole screen, and plotted the feature extraction results using <span class="notranslate">Galaxy</span>.</p>
+<p>In this exercise you imported images into Galaxy, segmented cell nuclei, filtered segmentations by morphological features, extracted features from segmentations, scaled your workflow to a whole screen, and plotted the feature extraction results using Galaxy.</p>
 
 
                 

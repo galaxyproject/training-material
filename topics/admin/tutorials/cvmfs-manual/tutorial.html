@@ -551,7 +551,7 @@
 
                 <h1 id="overview">Overview</h1>
 
-<p>The CernVM-FS is a distributed filesystem perfectly designed for sharing readonly data across the globe. We use it in the <a href="https://galaxyproject.org"><span class="notranslate">Galaxy</span> Project</a> for sharing things that a lot of <span class="notranslate">Galaxy</span> servers need. Namely:</p>
+<p>The CernVM-FS is a distributed filesystem perfectly designed for sharing readonly data across the globe. We use it in the <a href="https://galaxyproject.org">Galaxy Project</a> for sharing things that a lot of Galaxy servers need. Namely:</p>
 <ul>
   <li><strong>Reference Data</strong>
     <ul>
@@ -576,9 +576,9 @@
   <p>– <a href="https://cernvm.cern.ch/portal/filesystem">https://cernvm.cern.ch/portal/filesystem</a></p>
 </blockquote>
 
-<p>A slideshow presentation on this subject can be found <a href="/training-material/topics/admin/tutorials/cvmfs/slides.html">here</a>. More details on the use<span class="notranslate">galaxy</span>.org (<span class="notranslate">Galaxy</span> Main’s) reference data setup and CVMFS system can be found <a href="https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data">here</a></p>
+<p>A slideshow presentation on this subject can be found <a href="/training-material/topics/admin/tutorials/cvmfs/slides.html">here</a>. More details on the usegalaxy.org (Galaxy Main’s) reference data setup and CVMFS system can be found <a href="https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data">here</a></p>
 
-<p>There are two sections to this exercise. The first shows you how to use Ansible to setup and configure CVMFS for <span class="notranslate">Galaxy</span>. The second shows you how to do everything manually. It is recommended that you use the Ansible method. The manual method is included here mainly for a more in depth understanding of what is happening.</p>
+<p>There are two sections to this exercise. The first shows you how to use Ansible to setup and configure CVMFS for Galaxy. The second shows you how to do everything manually. It is recommended that you use the Ansible method. The manual method is included here mainly for a more in depth understanding of what is happening.</p>
 
 <p>If you really want to perform all these tasks manually, go <a href="#cvmfs-and-galaxy-without-ansible">here</a>, otherwise just follow along.</p>
 
@@ -587,7 +587,7 @@
 
 <ol id="markdown-toc">
   <li><a href="#overview" id="markdown-toc-overview">Overview</a></li>
-  <li><a href="#cvmfs-and-galaxy-without-ansible" id="markdown-toc-cvmfs-and-galaxy-without-ansible">CVMFS and <span class="notranslate">Galaxy</span> without Ansible</a>    <ol>
+  <li><a href="#cvmfs-and-galaxy-without-ansible" id="markdown-toc-cvmfs-and-galaxy-without-ansible">CVMFS and Galaxy without Ansible</a>    <ol>
       <li><a href="#configuring-cvmfs" id="markdown-toc-configuring-cvmfs">Configuring CVMFS</a></li>
       <li><a href="#testing-it-out" id="markdown-toc-testing-it-out">Testing it out</a></li>
       <li><a href="#look-at-the-repository" id="markdown-toc-look-at-the-repository">Look at the repository</a></li>
@@ -597,14 +597,14 @@
 
 </blockquote>
 
-<h1 id="cvmfs-and-galaxy-without-ansible">CVMFS and <span class="notranslate">Galaxy</span> without Ansible</h1>
+<h1 id="cvmfs-and-galaxy-without-ansible">CVMFS and Galaxy without Ansible</h1>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-manual-version-of-ansible-commands" aria-label="comment box: Manual version of Ansible Commands"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Manual version of Ansible Commands</div>
   <p>If you wish to perform the same thing that we’ve just done, but by building the ansible script manually, follow these instructions. Otherwise, you have already done everything below and do not need to re-do it.</p>
 </blockquote>
 
-<p>We are going to setup a CVMFS mount to the <span class="notranslate">Galaxy</span> reference data repository on our machines. To do this we have to install and configure the CVMFS client and then mount the appropriate CVMFS repository using the publicly available keys.</p>
+<p>We are going to setup a CVMFS mount to the Galaxy reference data repository on our machines. To do this we have to install and configure the CVMFS client and then mount the appropriate CVMFS repository using the publicly available keys.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-installing-the-cvmfs-client" aria-label="hands-on box: Installing the CVMFS Client"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Installing the CVMFS Client</div>
@@ -643,25 +643,25 @@ wget https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest_all.deb
     <li>
       <p>Create a <code class="language-plaintext highlighter-rouge">/etc/cvmfs/default.local</code> file with the following contents:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CVMFS_REPOSITORIES="data.<span class="notranslate">galaxy</span>project.org"
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CVMFS_REPOSITORIES="data.galaxyproject.org"
 CVMFS_HTTP_PROXY="DIRECT"
 CVMFS_QUOTA_LIMIT="500"
 CVMFS_CACHE_BASE="/srv/cvmfs/cache"
 CVMFS_USE_GEOAPI=yes
 </code></pre></div>      </div>
 
-      <p>This tells CVMFS to mount the <span class="notranslate">Galaxy</span> reference data repository and use a specific location for the cache which is limited to 500MB in size and to use the instance’s geo-location to choose the best CVMFS repo server to connect to. You can use the <code class="language-plaintext highlighter-rouge">cvmfs_quota_limit</code> role variable to control this setting.</p>
+      <p>This tells CVMFS to mount the Galaxy reference data repository and use a specific location for the cache which is limited to 500MB in size and to use the instance’s geo-location to choose the best CVMFS repo server to connect to. You can use the <code class="language-plaintext highlighter-rouge">cvmfs_quota_limit</code> role variable to control this setting.</p>
     </li>
     <li>
-      <p>Create a <code class="language-plaintext highlighter-rouge">/etc/cvmfs/domain.d/<span class="notranslate">galaxy</span>project.org.conf</code> file with the following contents:</p>
+      <p>Create a <code class="language-plaintext highlighter-rouge">/etc/cvmfs/domain.d/galaxyproject.org.conf</code> file with the following contents:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CVMFS_SERVER_URL="http://cvmfs1-tacc0.<span class="notranslate">galaxy</span>project.org/cvmfs/@fqrn@;http://cvmfs1-iu0.<span class="notranslate">galaxy</span>project.org/cvmfs/@fqrn@;http://cvmfs1-psu0.<span class="notranslate">galaxy</span>project.org/cvmfs/@fqrn@;http://<span class="notranslate">galaxy</span>.jrc.ec.europa.eu:8008/cvmfs/@fqrn@;http://cvmfs1-mel0.gvl.org.au/cvmfs/@fqrn@;http://cvmfs1-ufr0.<span class="notranslate">galaxy</span>project.eu/cvmfs/@fqrn@"
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CVMFS_SERVER_URL="http://cvmfs1-tacc0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-iu0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-psu0.galaxyproject.org/cvmfs/@fqrn@;http://galaxy.jrc.ec.europa.eu:8008/cvmfs/@fqrn@;http://cvmfs1-mel0.gvl.org.au/cvmfs/@fqrn@;http://cvmfs1-ufr0.galaxyproject.eu/cvmfs/@fqrn@"
 </code></pre></div>      </div>
 
       <p>This is a list of the available stratum 1 servers that have this repo.</p>
     </li>
     <li>
-      <p>Create a <code class="language-plaintext highlighter-rouge">/etc/cvmfs/keys/data.<span class="notranslate">galaxy</span>project.org.pub</code> file with the following contents:</p>
+      <p>Create a <code class="language-plaintext highlighter-rouge">/etc/cvmfs/keys/data.galaxyproject.org.pub</code> file with the following contents:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5LHQuKWzcX5iBbCGsXGt
@@ -692,7 +692,7 @@ owIDAQAB
 
   <ol>
     <li>
-      <p>Run <code class="language-plaintext highlighter-rouge">sudo cvmfs_config probe data.<span class="notranslate">galaxy</span>project.org</code></p>
+      <p>Run <code class="language-plaintext highlighter-rouge">sudo cvmfs_config probe data.galaxyproject.org</code></p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -728,11 +728,11 @@ owIDAQAB
       </blockquote>
     </li>
     <li>
-      <p>Change directory into <code class="language-plaintext highlighter-rouge">/cvmfs/data.<span class="notranslate">galaxy</span>project.org/</code>.</p>
+      <p>Change directory into <code class="language-plaintext highlighter-rouge">/cvmfs/data.galaxyproject.org/</code>.</p>
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /cvmfs/data.<span class="notranslate">galaxy</span>project.org/
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /cvmfs/data.galaxyproject.org/
 ls
 ls byhand
 ls managed
@@ -752,7 +752,7 @@ AutoFS only mounts the files when they’re accessed, so it appears like there i
 
       </blockquote>
 
-      <p>And just like that we all have access to all the reference genomes and associated tool indices thanks to the <span class="notranslate">Galaxy</span> Project, IDC, and Nate’s hard work!</p>
+      <p>And just like that we all have access to all the reference genomes and associated tool indices thanks to the Galaxy Project, IDC, and Nate’s hard work!</p>
 
       <blockquote class="tip">
         <div class="box-title tip-title" id="tip-contributing-reference-genomes"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-contributing-reference-genomes-contents" aria-expanded="true" aria-label="Toggle tip box: Contributing Reference Genomes"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Contributing Reference Genomes<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -765,7 +765,7 @@ AutoFS only mounts the files when they’re accessed, so it appears like there i
 
 <h2 id="look-at-the-repository">Look at the repository</h2>
 
-<p>Now to configure <span class="notranslate">Galaxy</span> to use the CVMFS references we have just installed, see <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html#configuring-galaxy-to-use-the-cvmfs-references">the Ansible tutorial.</a></p>
+<p>Now to configure Galaxy to use the CVMFS references we have just installed, see <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html#configuring-galaxy-to-use-the-cvmfs-references">the Ansible tutorial.</a></p>
 
 
 

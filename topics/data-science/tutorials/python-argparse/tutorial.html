@@ -627,7 +627,7 @@ python run.py --help
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">parser</span><span class="p">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s">'--sum'</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s">'store_true'</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s">'Should we sum up the integers?'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>Finally we parse the arguments, which <span class="notranslate">reads</span> <code class="language-plaintext highlighter-rouge">sys.argv</code> and processes it according to the above rules. The output is stored in <code class="language-plaintext highlighter-rouge">args</code>.</p>
+<p>Finally we parse the arguments, which reads <code class="language-plaintext highlighter-rouge">sys.argv</code> and processes it according to the above rules. The output is stored in <code class="language-plaintext highlighter-rouge">args</code>.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="p">.</span><span class="n">parse_args</span><span class="p">()</span>
 </code></pre></div></div>
@@ -723,15 +723,15 @@ python run.py <span class="nt">--help</span>
 <ol>
   <li>Standardised interface to your tool that’s familiar to everyone who uses command line tools</li>
   <li>Automatic Help page</li>
-  <li>Automatic <span class="notranslate">Galaxy</span> Tools?</li>
+  <li>Automatic Galaxy Tools?</li>
 </ol>
 
-<h3 id="generating-automatic-galaxy-tools-optional">Generating Automatic <span class="notranslate">Galaxy</span> Tools (Optional)</h3>
+<h3 id="generating-automatic-galaxy-tools-optional">Generating Automatic Galaxy Tools (Optional)</h3>
 
-<p>With the <code class="language-plaintext highlighter-rouge">argparse2tool</code> project, and eventually <code class="language-plaintext highlighter-rouge">pyGalGen</code> which will be merged into <code class="language-plaintext highlighter-rouge">planemo</code>, you can generate <span class="notranslate">Galaxy</span> tools automatically from <code class="language-plaintext highlighter-rouge">argparse</code> based Python scripts.</p>
+<p>With the <code class="language-plaintext highlighter-rouge">argparse2tool</code> project, and eventually <code class="language-plaintext highlighter-rouge">pyGalGen</code> which will be merged into <code class="language-plaintext highlighter-rouge">planemo</code>, you can generate Galaxy tools automatically from <code class="language-plaintext highlighter-rouge">argparse</code> based Python scripts.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-generate-a-galaxy-tool-wrapper-from-your-script" aria-label="hands-on box: Generate a Galaxy tool wrapper from your script"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate a <span class="notranslate">Galaxy</span> tool wrapper from your script</div>
+  <div class="box-title hands-on-title" id="hands-on-generate-a-galaxy-tool-wrapper-from-your-script" aria-label="hands-on box: Generate a Galaxy tool wrapper from your script"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate a Galaxy tool wrapper from your script</div>
   <ol>
     <li>
       <p>Write out the python script to a file named <code class="language-plaintext highlighter-rouge">main.py</code></p>
@@ -764,12 +764,12 @@ python run.py <span class="nt">--help</span>
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-command" aria-label="code-in box: Command"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Command</div>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PYTHONPATH=$(argparse2tool) python main.py --generate_<span class="notranslate">galaxy</span>_xml
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PYTHONPATH=$(argparse2tool) python main.py --generate_galaxy_xml
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
-        <div class="box-title code-out-title" id="code-out-galaxy-xml" aria-label="code-out box: Galaxy XML"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: <span class="notranslate">Galaxy</span> XML</div>
+        <div class="box-title code-out-title" id="code-out-galaxy-xml" aria-label="code-out box: Galaxy XML"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Galaxy XML</div>
         <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tool</span> <span class="na">name=</span><span class="s">"main.py"</span> <span class="na">id=</span><span class="s">"main.py"</span> <span class="na">version=</span><span class="s">"1.0"</span><span class="nt">&gt;</span>
   <span class="nt">&lt;description&gt;</span>Sum some numbers<span class="nt">&lt;/description&gt;</span>
   <span class="nt">&lt;stdio&gt;</span>

@@ -773,8 +773,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -875,7 +873,7 @@
 <figure id="figure-1"><img src="./images/mtbc_1strainPerLineage.nwk.COMB.svg" alt="Phylogeny. " width="800" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Rooted [A] and unrooted [B] phylogeny of the MTBC. Some basic tree vocabulary is shown in red.</figcaption></figure>
 
 <h2 id="branch-lengths">Branch lengths</h2>
-<p>Besides relatedness and direction, a third important piece of information contained in a phylogeny is the branch length. When a phylogeny was estimated from <span class="notranslate">DNA</span> or protein sequences, branch lengths usually reflect the evolutionary distance between nodes in the tree. This information can be used to translate distance in terms of expected nucleotide changes into years, and thus to connect evolutionary change to historical events.</p>
+<p>Besides relatedness and direction, a third important piece of information contained in a phylogeny is the branch length. When a phylogeny was estimated from DNA or protein sequences, branch lengths usually reflect the evolutionary distance between nodes in the tree. This information can be used to translate distance in terms of expected nucleotide changes into years, and thus to connect evolutionary change to historical events.</p>
 
 <p>As branch lengths reflect evolutionary distances, they can also be used to identify transmission clusters and outbreaks. Below is a (rooted) tree of the Central Asian Clade (CAC), which is part of lineage 2 (<span class="citation"><a href="#Eldholm2016">Eldholm <i>et al.</i> 2016</a></span>). The orange color highlights the Afghan strain family within the CAC. At the bottom of the tree, note the clade with short branch lengths. This is how one would expect an outbreak to look in a phylogenetic tree: a set of strains clustering together and separated by extremely short branches, reflecting their almost identical genomes.</p>
 
@@ -888,13 +886,13 @@
 
   <ol>
     <li>
-      <p>There seems to be <strong>no horizontal gene transfer</strong> (HGT) in the MTBC. HGT complicates phylogenetic inference in many bacteria because a piece of <span class="notranslate">DNA</span> introduced by HGT has a different history and thus phylogeny than genes not affected by HGT.</p>
+      <p>There seems to be <strong>no horizontal gene transfer</strong> (HGT) in the MTBC. HGT complicates phylogenetic inference in many bacteria because a piece of DNA introduced by HGT has a different history and thus phylogeny than genes not affected by HGT.</p>
     </li>
     <li>
       <p>There is <strong>little genetic diversity</strong> in the MTBC: any two strains differ by only around 2,500 SNPs over the whole genome. To achieve a good resolution of recent evolution (e.g. during an outbreak), whole genome sequences are thus extremely useful.</p>
     </li>
     <li>
-      <p>A large proportion of <span class="notranslate">DNA</span> polymorphisms in the MTBC are <strong>singletons</strong>, that is, variants present only in a single strain. This adds to the problem of low diversity, since singletons are not informative about tree topology.</p>
+      <p>A large proportion of DNA polymorphisms in the MTBC are <strong>singletons</strong>, that is, variants present only in a single strain. This adds to the problem of low diversity, since singletons are not informative about tree topology.</p>
     </li>
     <li>
       <p>In this workshop, and indeed in many studies of the MTBC, SNPs are called not against the reference strain H37Rv, but against a reconstructed ancestral genome. This means that the number of SNPs identified does not reflect the evolutionary distance from some random strain like H37Rv, but from the most recent common ancestor of the MTBC. Take a look at Figure 3 in <span class="citation"><a href="#Goig2018">Goig <i>et al.</i> 2018</a></span> to see how this affects the number of SNPs identified in a genome. Below we will see that this has implications for the interpretation of a tree.</p>
@@ -904,16 +902,16 @@
 </blockquote>
 
 <h1 id="the-alignment">The alignment</h1>
-<p>Aligned <span class="notranslate">DNA</span> or protein sequences are the starting material for phylogenetic inference with molecular data. Here we will make use of the single nucleotide polymorphisms (SNPs) you obtained in the previous <a href="/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html">tutorial on transmission clusters</a>, reflecting the diversity of 19 MTBC strains and 1 strain of <em>M. canettii</em>. The latter is included as outgroup, allowing us to root the phylogeny.</p>
+<p>Aligned DNA or protein sequences are the starting material for phylogenetic inference with molecular data. Here we will make use of the single nucleotide polymorphisms (SNPs) you obtained in the previous <a href="/training-material/topics/evolution/tutorials/mtb_transmission/tutorial.html">tutorial on transmission clusters</a>, reflecting the diversity of 19 MTBC strains and 1 strain of <em>M. canettii</em>. The latter is included as outgroup, allowing us to root the phylogeny.</p>
 
-<p>Recall that the alignment here was generated using SNPs called from reference-aligned short <span class="notranslate">reads</span>. Below is a snapshot of a SNP alignment. Each row is a different strain, each column a position in the reference genome. Because this alignment is based on SNPs, it contains <em>only variable positions</em>. This is important to keep in mind. Genetic distances between strains will be hugely overestimated if we leave out all the positions which show no variation. In exercise 6 below, we will see a way to correct for this.</p>
+<p>Recall that the alignment here was generated using SNPs called from reference-aligned short reads. Below is a snapshot of a SNP alignment. Each row is a different strain, each column a position in the reference genome. Because this alignment is based on SNPs, it contains <em>only variable positions</em>. This is important to keep in mind. Genetic distances between strains will be hugely overestimated if we leave out all the positions which show no variation. In exercise 6 below, we will see a way to correct for this.</p>
 
 <p><img src="./images/MEGA_alignment.png" alt="Alignment. " width="500" loading="lazy" /></p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-the-alternative-approach-genome-assembly" aria-label="comment box: The alternative approach: genome assembly"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: The alte<span class="notranslate">rna</span>tive approach: genome assembly</div>
+  <div class="box-title comment-title" id="comment-the-alternative-approach-genome-assembly" aria-label="comment box: The alternative approach: genome assembly"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: The alternative approach: genome assembly</div>
 
-  <p>A frequently used alte<span class="notranslate">rna</span>tive approach to obtain a phylogeny from short read data is to a) assemble the genomes (see the numerous <a href="https://training.galaxyproject.org/training-material/topics/assembly"><span class="notranslate">Galaxy</span> tutorials</a> on this topic), b) annotate genes, c) extract genes present in all strains (the “core” genes), d) align the core genes. This approach underlies core genome multilocus sequence typing (cgMLST), which is often used to genotype bacterial pathogens (e.g. <span class="citation"><a href="#Zhou2021">Zhou <i>et al.</i> 2021</a></span>).</p>
+  <p>A frequently used alternative approach to obtain a phylogeny from short read data is to a) assemble the genomes (see the numerous <a href="https://training.galaxyproject.org/training-material/topics/assembly">Galaxy tutorials</a> on this topic), b) annotate genes, c) extract genes present in all strains (the “core” genes), d) align the core genes. This approach underlies core genome multilocus sequence typing (cgMLST), which is often used to genotype bacterial pathogens (e.g. <span class="citation"><a href="#Zhou2021">Zhou <i>et al.</i> 2021</a></span>).</p>
 
 </blockquote>
 
@@ -926,7 +924,7 @@
       <p>Make sure you have an empty analysis history. Give it a name.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the following files from <a href="https://zenodo.org/record/6010176">Zenodo</a> or from the shared data library</p>
@@ -935,7 +933,7 @@
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Take a look at the alignment</p>
@@ -958,14 +956,14 @@
   <div class="box-title hands-on-title" id="hands-on-estimate-a-phylogeny-for-20-mtbc-strains" aria-label="hands-on box: Estimate a phylogeny for 20 MTBC strains"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Estimate a phylogeny for 20 MTBC strains</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/raxml/raxml/8.2.4+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/raxml/raxml/8.2.4+galaxy2"><strong>Phyogenetic reconstruction with RAxML</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/raxml/raxml/8.2.4+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/raxml/raxml/8.2.4+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/raxml/raxml/8.2.4+galaxy2"><strong>Phyogenetic reconstruction with RAxML</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/raxml/raxml/8.2.4+galaxy2</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Source file with aligned sequences”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
         <li><em>“Model type”</em>: <code class="language-plaintext highlighter-rouge">Nucleotide</code></li>
         <li><em>“RAxML options to use”</em>: <code class="language-plaintext highlighter-rouge">Required options only</code></li>
       </ul>
     </li>
-    <li>The RAxML output we are interested in is the “Best-scoring ML tree”. Select it in you <span class="notranslate">Galaxy</span> history and take a look at it with the different visualization options offered by <span class="notranslate">Galaxy</span>.</li>
+    <li>The RAxML output we are interested in is the “Best-scoring ML tree”. Select it in you Galaxy history and take a look at it with the different visualization options offered by Galaxy.</li>
   </ol>
 
 </blockquote>
@@ -973,7 +971,7 @@
 <h1 id="visualize-and-manipulate-the-tree">Visualize and manipulate the tree</h1>
 <p>Phylogenetic trees are great tools because they are at the same time quantitative (we can do calculations on branch lengths, estimate uncertainty of a tree topology etc.) and visually appealing, allowing to actually “see” biologically interesting patterns. Often this requires some tweaking of the tree, for example by coloring parts of the tree according to some background information we have about the samples.</p>
 
-<p>We will use R to plot and manipulate the phylogeny obtained from RAxML. The code to produce the figures is shown in the boxes below. You can execute it by starting RStudio within <span class="notranslate">Galaxy</span>, as explained in the box below. This is <strong>not required to finish this tutorial</strong>, the different trees resulting from executing the code are shown below. But if you have used R before, it might be worthwhile to go through the code, modify it, and explore the numerous phylogenetics packages and functions in R.</p>
+<p>We will use R to plot and manipulate the phylogeny obtained from RAxML. The code to produce the figures is shown in the boxes below. You can execute it by starting RStudio within Galaxy, as explained in the box below. This is <strong>not required to finish this tutorial</strong>, the different trees resulting from executing the code are shown below. But if you have used R before, it might be worthwhile to go through the code, modify it, and explore the numerous phylogenetics packages and functions in R.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-starting-rstudio" aria-label="hands-on box: Starting RStudio"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Starting RStudio</div>
@@ -983,10 +981,10 @@
       <p>Note the history number of the “Best-scoring ML tree”</p>
     </li>
     <li>
-      <p><span class="tool" data-tool="interactive_tool_rstudio" title="Tested with interactive_tool_rstudio"><strong>RStudio</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_rstudio</span></span>  in <span class="notranslate">Galaxy</span> provides some special functions such as <code class="language-plaintext highlighter-rouge">gx_get</code> to import and export files from your history.</p>
+      <p><span class="tool" data-tool="interactive_tool_rstudio" title="Tested with interactive_tool_rstudio"><strong>RStudio</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_rstudio</span></span>  in Galaxy provides some special functions such as <code class="language-plaintext highlighter-rouge">gx_get</code> to import and export files from your history.</p>
 
       <!--SNIPPET-->
-      <blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-launch-rstudio" aria-label="hands_on box: Launch RStudio"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch RStudio</div>   <p>Depending on which server you are using, you may be able to run RStudio directly in <span class="notranslate">Galaxy</span>. If that is not available, RStudio Cloud can be an alte<span class="notranslate">rna</span>tive.</p>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-rstudio-in-span-class-quot-notranslate-quot-galaxy-span"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-rstudio-in-span-class-quot-notranslate-quot-galaxy-span-contents" aria-expanded="true" aria-label="Toggle tip box: Launch RStudio in <span class=&quot;notranslate&quot;>Galaxy</span>"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch RStudio in <span class=&quot;notranslate&quot;>Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Currently RStudio in <span class="notranslate">Galaxy</span> is only available on <a href="https://usegalaxy.eu">Use<span class="notranslate">Galaxy</span>.eu</a> and <a href="https://usegalaxy.org">Use<span class="notranslate">Galaxy</span>.org</a></p>   <ol>     <li>Open the Rstudio tool <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> by clicking <a href="https://usegalaxy.eu/?tool_id=interactive_tool_rstudio">here to launch RStudio</a></li>     <li>Click Run Tool</li>     <li>The tool will start running and will stay running permanently</li>     <li>Click on the “User” menu at the top and go to “Active InteractiveTools” and locate the RStudio instance you started.</li>   </ol> </blockquote>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-rstudio-cloud-if-not-available-on-span-class-quot-notranslate-quot-galaxy-span"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-rstudio-cloud-if-not-available-on-span-class-quot-notranslate-quot-galaxy-span-contents" aria-expanded="true" aria-label="Toggle tip box: Launch RStudio Cloud if not available on <span class=&quot;notranslate&quot;>Galaxy</span>"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch RStudio Cloud if not available on <span class=&quot;notranslate&quot;>Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If RStudio is not available on the <span class="notranslate">Galaxy</span> instance:</p>   <ol>     <li>Register for <a href="https://client.login.rstudio.cloud/oauth/login?show_auth=0&amp;show_login=1&amp;show_setup=1">RStudio Cloud</a>, or login if you already have an account</li>     <li>Create a new project</li>   </ol> </blockquote> </blockquote>
+      <blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-launch-rstudio" aria-label="hands_on box: Launch RStudio"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch RStudio</div>   <p>Depending on which server you are using, you may be able to run RStudio directly in Galaxy. If that is not available, RStudio Cloud can be an alternative.</p>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-rstudio-in-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-rstudio-in-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: Launch RStudio in Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch RStudio in Galaxy<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Currently RStudio in Galaxy is only available on <a href="https://usegalaxy.eu">UseGalaxy.eu</a> and <a href="https://usegalaxy.org">UseGalaxy.org</a></p>   <ol>     <li>Open the Rstudio tool <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> by clicking <a href="https://usegalaxy.eu/?tool_id=interactive_tool_rstudio">here to launch RStudio</a></li>     <li>Click Run Tool</li>     <li>The tool will start running and will stay running permanently</li>     <li>Click on the “User” menu at the top and go to “Active InteractiveTools” and locate the RStudio instance you started.</li>   </ol> </blockquote>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-rstudio-cloud-if-not-available-on-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-rstudio-cloud-if-not-available-on-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: Launch RStudio Cloud if not available on Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch RStudio Cloud if not available on Galaxy<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If RStudio is not available on the Galaxy instance:</p>   <ol>     <li>Register for <a href="https://client.login.rstudio.cloud/oauth/login?show_auth=0&amp;show_login=1&amp;show_setup=1">RStudio Cloud</a>, or login if you already have an account</li>     <li>Create a new project</li>   </ol> </blockquote> </blockquote>
     </li>
     <li>
       <p>Install the <a href="https://cran.r-project.org/web/packages/ape/index.html">ape R package</a></p>
@@ -1009,12 +1007,12 @@
 </blockquote>
 
 <h2 id="plot-the-raxml-output">Plot the RAxML output</h2>
-<p>The RAxML output includes the “Best-scoring ML tree” in your <span class="notranslate">Galaxy</span> history. The code below imports this tree into a <span class="notranslate">Galaxy</span> instance of RStudio and plots the tree.</p>
+<p>The RAxML output includes the “Best-scoring ML tree” in your Galaxy history. The code below imports this tree into a Galaxy instance of RStudio and plots the tree.</p>
 
 <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Load ape, an R package for phylogenetics</span><span class="w">
 </span><span class="n">library</span><span class="p">(</span><span class="n">ape</span><span class="p">)</span><span class="w">
 
-</span><span class="c1"># Load the tree from <span class="notranslate">Galaxy</span>: in the first line below, replace x with the number of the "Best-scoring ML tree" in your <span class="notranslate">Galaxy</span> history (see box above).</span><span class="w">
+</span><span class="c1"># Load the tree from Galaxy: in the first line below, replace x with the number of the "Best-scoring ML tree" in your Galaxy history (see box above).</span><span class="w">
 </span><span class="n">treefile</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">gx_get</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w">
 </span><span class="n">tree</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.tree</span><span class="p">(</span><span class="n">treefile</span><span class="p">)</span><span class="w">
 
@@ -1131,7 +1129,7 @@
 <blockquote class="question">
   <div class="box-title question-title" id="question-exercise-3" aria-label="question box: Exercise 3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Exercise 3</div>
 
-  <p>An important part of bioinformatics consists in trying to find out whether a surprizing observation has biological significance — or reflects a mistake somewhere in the numerous steps leading to the result. Have we just discovered two new lineages of MTB, or did we commit a stupid mistake? To find out, take a look a the TB-profiler and the VCF files for the two strange strains, which should be present in your <span class="notranslate">Galaxy</span> history from the previous tutorials. Compare them with “normal” strains. Do you notice something?</p>
+  <p>An important part of bioinformatics consists in trying to find out whether a surprizing observation has biological significance — or reflects a mistake somewhere in the numerous steps leading to the result. Have we just discovered two new lineages of MTB, or did we commit a stupid mistake? To find out, take a look a the TB-profiler and the VCF files for the two strange strains, which should be present in your Galaxy history from the previous tutorials. Compare them with “normal” strains. Do you notice something?</p>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: 3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution: 3<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1201,7 +1199,7 @@
 
 <h2 id="map-a-trait-onto-the-tree">Map a trait onto the tree</h2>
 
-<p>Phylogenies are particularly useful when combined with additional information. For our 19 MTB strains, for example, we might know such things as the country of origin, the sampling date, or various phenotypes determined in the lab, for example the virulence of the strains in an animal model. By <span class="notranslate">mapping</span> this additional information onto the phylogeny, we can gain insights into how, where and when these traits evolved.</p>
+<p>Phylogenies are particularly useful when combined with additional information. For our 19 MTB strains, for example, we might know such things as the country of origin, the sampling date, or various phenotypes determined in the lab, for example the virulence of the strains in an animal model. By mapping this additional information onto the phylogeny, we can gain insights into how, where and when these traits evolved.</p>
 
 <p>For our 20 samples, a trait you previously identified is the DR profile. Let us map this trait onto the tree and see if we can learn something from the observed patterns.</p>
 
@@ -1253,12 +1251,12 @@
 <blockquote class="question">
   <div class="box-title question-title" id="question-exercise-5" aria-label="question box: Exercise 5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Exercise 5</div>
 
-  <p>In the previous tutorial on clustering, you have come across the hypothesis that unclustered cases of DR represent <em>de novo</em> evolution of DR, while clustered cases of DR represent instances of DR transmission. Looking at lineage 2 in the phylogeny above, does this hypothesis hold? How many times would MDR have evolved independently in lineage 2? Is there an alte<span class="notranslate">rna</span>tive explanation for the prevalence of MDR in lineage 2?</p>
+  <p>In the previous tutorial on clustering, you have come across the hypothesis that unclustered cases of DR represent <em>de novo</em> evolution of DR, while clustered cases of DR represent instances of DR transmission. Looking at lineage 2 in the phylogeny above, does this hypothesis hold? How many times would MDR have evolved independently in lineage 2? Is there an alternative explanation for the prevalence of MDR in lineage 2?</p>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: 5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution: 5<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>MDR would have evolved three times according to the clustering perspective mentioned above: once in cluster 12, once in ERR6362078, and once in ERR6362653. The phylogeny suggest a simpler alte<span class="notranslate">rna</span>tive: MDR could have been already present in the common ancestor of the six L2 strains in our sample; it could have evolved only once, along the long branch leading from the split from lineage 3 to the most recent common ancestor of the six samples. This picture, however, might change with a more extensive sampling of lineage 2. Six samples are hardly sufficient to make claims about the prevalence and evolution of MDR in lineage 2. As for the interpretation of clustering, sampling design is crucial for the interpretation of phylogenies and should always be kept in mind in order to avoid overinterpretation.</p>
+    <p>MDR would have evolved three times according to the clustering perspective mentioned above: once in cluster 12, once in ERR6362078, and once in ERR6362653. The phylogeny suggest a simpler alternative: MDR could have been already present in the common ancestor of the six L2 strains in our sample; it could have evolved only once, along the long branch leading from the split from lineage 3 to the most recent common ancestor of the six samples. This picture, however, might change with a more extensive sampling of lineage 2. Six samples are hardly sufficient to make claims about the prevalence and evolution of MDR in lineage 2. As for the interpretation of clustering, sampling design is crucial for the interpretation of phylogenies and should always be kept in mind in order to avoid overinterpretation.</p>
 
   </blockquote>
 
@@ -1344,7 +1342,7 @@
 
     <ol>
       <li>
-        <p>About 5 % of the MTB reference genome consists of repetitive or otherwise complicated regions where <span class="notranslate">mapping</span> and SNP calling cannot be done reliably. Most SNP calling pipelines exclude such regions, also the one used in this course. Rather than to assume that these regions are invariant, we should ignore them in our calculations. By not doing this, genomes seem more similar than they are; we underestimate phylogenetic distances.</p>
+        <p>About 5 % of the MTB reference genome consists of repetitive or otherwise complicated regions where mapping and SNP calling cannot be done reliably. Most SNP calling pipelines exclude such regions, also the one used in this course. Rather than to assume that these regions are invariant, we should ignore them in our calculations. By not doing this, genomes seem more similar than they are; we underestimate phylogenetic distances.</p>
       </li>
       <li>
         <p>A rate 10 times higher implies that there will be 10 times more mutations observed in the same time span, or, the other way around, that it will take a time span 10 times shorter to observe the same number of mutations. The timescale of the phylogeny would thus shift one order of magnitude, to hundreds rather than thousands of years. As this example shows, there are considerable uncertainties associated with molecular dating. This is also true for more sophisticated methods (see <span class="citation"><a href="#Menardo2019">Menardo <i>et al.</i> 2019</a></span> for a recent discussion of molecular dating with MTB).</p>

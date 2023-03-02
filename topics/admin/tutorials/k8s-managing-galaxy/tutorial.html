@@ -831,11 +831,11 @@
             <div class="col-sm-10">
                  
 
-                <h1 id="managing-galaxy-on-kubernetes">Managing <span class="notranslate">Galaxy</span> on Kubernetes</h1>
+                <h1 id="managing-galaxy-on-kubernetes">Managing Galaxy on Kubernetes</h1>
 
 <h2 id="overview">Overview</h2>
 
-<p>A primary advantage of <span class="notranslate">Galaxy</span> on <a href="https://kubernetes.io/">Kubernetes</a> is the ease with which common
+<p>A primary advantage of Galaxy on <a href="https://kubernetes.io/">Kubernetes</a> is the ease with which common
 administrative tasks can be performed reliably and without disruption of
 service. In particular, because of containerization, Kubernetes provides a significant
 advantage over managing individual virtual machines, where updates to system
@@ -850,11 +850,11 @@ moving those containers to a different node, allowing maintenance tasks to be
 performed on the underlying node without disruption of service.</p>
 
 <p>In this section, we will look at how to perform common management tasks on
-a <span class="notranslate">Galaxy</span> deployment on Kubernetes, including:</p>
+a Galaxy deployment on Kubernetes, including:</p>
 <ul>
   <li>How to upgrade a deployment</li>
-  <li>Change the configuration of a running <span class="notranslate">Galaxy</span> instance</li>
-  <li>Map arbitrary files into <span class="notranslate">Galaxy</span>’s config folder</li>
+  <li>Change the configuration of a running Galaxy instance</li>
+  <li>Map arbitrary files into Galaxy’s config folder</li>
   <li>Rollback changes in the case of an error</li>
   <li>Scale the number of job and web handlers</li>
   <li>Delete a deployment</li>
@@ -864,19 +864,19 @@ a <span class="notranslate">Galaxy</span> deployment on Kubernetes, including:</
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
 <ol id="markdown-toc">
-  <li><a href="#managing-galaxy-on-kubernetes" id="markdown-toc-managing-galaxy-on-kubernetes">Managing <span class="notranslate">Galaxy</span> on Kubernetes</a>    <ol>
+  <li><a href="#managing-galaxy-on-kubernetes" id="markdown-toc-managing-galaxy-on-kubernetes">Managing Galaxy on Kubernetes</a>    <ol>
       <li><a href="#overview" id="markdown-toc-overview">Overview</a></li>
       <li><a href="#prerequisites" id="markdown-toc-prerequisites">Prerequisites</a></li>
     </ol>
   </li>
-  <li><a href="#changing-the-configuration-of-a-galaxy-instance" id="markdown-toc-changing-the-configuration-of-a-galaxy-instance">Changing the configuration of a <span class="notranslate">Galaxy</span> instance</a>    <ol>
+  <li><a href="#changing-the-configuration-of-a-galaxy-instance" id="markdown-toc-changing-the-configuration-of-a-galaxy-instance">Changing the configuration of a Galaxy instance</a>    <ol>
       <li><a href="#changing-tool-configuration" id="markdown-toc-changing-tool-configuration">Changing tool configuration</a></li>
       <li><a href="#setting-the-admin-user-and-changing-the-brand" id="markdown-toc-setting-the-admin-user-and-changing-the-brand">Setting the admin user and changing the brand</a></li>
     </ol>
   </li>
-  <li><a href="#scaling-galaxy" id="markdown-toc-scaling-galaxy">Scaling <span class="notranslate">Galaxy</span></a></li>
+  <li><a href="#scaling-galaxy" id="markdown-toc-scaling-galaxy">Scaling Galaxy</a></li>
   <li><a href="#testing-kubernetes-resilience" id="markdown-toc-testing-kubernetes-resilience">Testing Kubernetes resilience</a></li>
-  <li><a href="#deleting-galaxy" id="markdown-toc-deleting-galaxy">Deleting <span class="notranslate">Galaxy</span></a></li>
+  <li><a href="#deleting-galaxy" id="markdown-toc-deleting-galaxy">Deleting Galaxy</a></li>
   <li><a href="#next-steps" id="markdown-toc-next-steps">Next Steps</a></li>
 </ol>
 
@@ -889,17 +889,17 @@ and we recommend following it first to setup the required environment.
 You must have some familiarity with Helm commands, know how to change values
 in a Helm Chart and how to use the <code class="language-plaintext highlighter-rouge">kubectl</code> command.</p>
 
-<h1 id="changing-the-configuration-of-a-galaxy-instance">Changing the configuration of a <span class="notranslate">Galaxy</span> instance</h1>
-<p>We will start off by looking at how to change the configuration of a <span class="notranslate">Galaxy</span>
+<h1 id="changing-the-configuration-of-a-galaxy-instance">Changing the configuration of a Galaxy instance</h1>
+<p>We will start off by looking at how to change the configuration of a Galaxy
 instance. We will first reduce the number of tools that are loaded for faster
-startup, and then change some common settings in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>.</p>
+startup, and then change some common settings in <code class="language-plaintext highlighter-rouge">galaxy.yml</code>.</p>
 
 <h2 id="changing-tool-configuration">Changing tool configuration</h2>
-<p>We will change the <span class="notranslate">Galaxy</span> configuration to limit the initial list of tools
-that <span class="notranslate">Galaxy</span> will use by pointing to our custom <code class="language-plaintext highlighter-rouge">tool_conf.xml</code>. This will make
+<p>We will change the Galaxy configuration to limit the initial list of tools
+that Galaxy will use by pointing to our custom <code class="language-plaintext highlighter-rouge">tool_conf.xml</code>. This will make
 your chart start up much faster for the remainder of this tutorial, as the
 default configuration loads the full list of tools used by
-<a href="https://usegalaxy.org/">https://use<span class="notranslate">galaxy</span>.org/</a>.</p>
+<a href="https://usegalaxy.org/">https://usegalaxy.org/</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-creating-a-custom-tool-set" aria-label="hands-on box: Creating a custom tool set"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating a custom tool set</div>
@@ -910,89 +910,89 @@ default configuration loads the full list of tools used by
 config as a file called <code class="language-plaintext highlighter-rouge">custom_tool_conf.xml</code>.</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" ?&gt;</span>
-<span class="nt">&lt;toolbox</span> <span class="na">tool_path=</span><span class="s">"/cvmfs/main.<span class="notranslate">galaxy</span>project.org/shed_tools"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;toolbox</span> <span class="na">tool_path=</span><span class="s">"/cvmfs/main.galaxyproject.org/shed_tools"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"get_data"</span> <span class="na">name=</span><span class="s">"Get Data"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"data_source/upload.xml"</span> <span class="nt">/&gt;</span>
     <span class="nt">&lt;/section&gt;</span>
     <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"chip_seq"</span> <span class="na">name=</span><span class="s">"ChIP-seq"</span> <span class="na">version=</span><span class="s">""</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">rna</span>team/chipseeker/1b9a9409831d/chipseeker/chipseeker.xml"</span> <span class="na">guid=</span><span class="s">"<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">rna</span>team/chipseeker/chipseeker/1.18.0+<span class="notranslate">galaxy</span>1"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;tool_shed&gt;</span><span class="notranslate">toolshed</span>.g2.bx.psu.edu<span class="nt">&lt;/tool_shed&gt;</span>
+        <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/rnateam/chipseeker/1b9a9409831d/chipseeker/chipseeker.xml"</span> <span class="na">guid=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/rnateam/chipseeker/chipseeker/1.18.0+galaxy1"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tool_shed&gt;</span>toolshed.g2.bx.psu.edu<span class="nt">&lt;/tool_shed&gt;</span>
             <span class="nt">&lt;repository_name&gt;</span>chipseeker<span class="nt">&lt;/repository_name&gt;</span>
-            <span class="nt">&lt;repository_owner&gt;</span><span class="notranslate">rna</span>team<span class="nt">&lt;/repository_owner&gt;</span>
+            <span class="nt">&lt;repository_owner&gt;</span>rnateam<span class="nt">&lt;/repository_owner&gt;</span>
             <span class="nt">&lt;installed_changeset_revision&gt;</span>1b9a9409831d<span class="nt">&lt;/installed_changeset_revision&gt;</span>
-            <span class="nt">&lt;id&gt;</span><span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">rna</span>team/chipseeker/chipseeker/1.18.0+<span class="notranslate">galaxy</span>1<span class="nt">&lt;/id&gt;</span>
-            <span class="nt">&lt;version&gt;</span>1.18.0+<span class="notranslate">galaxy</span>1<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;id&gt;</span>toolshed.g2.bx.psu.edu/repos/rnateam/chipseeker/chipseeker/1.18.0+galaxy1<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;version&gt;</span>1.18.0+galaxy1<span class="nt">&lt;/version&gt;</span>
         <span class="nt">&lt;/tool&gt;</span>
     <span class="nt">&lt;/section&gt;</span>
     <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"fastq_quality_control"</span> <span class="na">name=</span><span class="s">"FASTQ Quality Control"</span> <span class="na">version=</span><span class="s">""</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/51b771646466/trimmomatic/trimmomatic.xml"</span> <span class="na">guid=</span><span class="s">"<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.6"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;tool_shed&gt;</span><span class="notranslate">toolshed</span>.g2.bx.psu.edu<span class="nt">&lt;/tool_shed&gt;</span>
+        <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/51b771646466/trimmomatic/trimmomatic.xml"</span> <span class="na">guid=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.6"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tool_shed&gt;</span>toolshed.g2.bx.psu.edu<span class="nt">&lt;/tool_shed&gt;</span>
             <span class="nt">&lt;repository_name&gt;</span>trimmomatic<span class="nt">&lt;/repository_name&gt;</span>
             <span class="nt">&lt;repository_owner&gt;</span>pjbriggs<span class="nt">&lt;/repository_owner&gt;</span>
             <span class="nt">&lt;installed_changeset_revision&gt;</span>51b771646466<span class="nt">&lt;/installed_changeset_revision&gt;</span>
-            <span class="nt">&lt;id&gt;</span><span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.6<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;id&gt;</span>toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.6<span class="nt">&lt;/id&gt;</span>
             <span class="nt">&lt;version&gt;</span>0.36.6<span class="nt">&lt;/version&gt;</span>
         <span class="nt">&lt;/tool&gt;</span>
     <span class="nt">&lt;/section&gt;</span>
     <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"fastq_quality_control"</span> <span class="na">name=</span><span class="s">"FASTQ Quality Control"</span> <span class="na">version=</span><span class="s">""</span><span class="nt">&gt;</span>
-        <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/e7b2202befea/fastqc/rgFastQC.xml"</span> <span class="na">guid=</span><span class="s">"<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1"</span><span class="nt">&gt;</span>
-            <span class="nt">&lt;tool_shed&gt;</span><span class="notranslate">toolshed</span>.g2.bx.psu.edu<span class="nt">&lt;/tool_shed&gt;</span>
+        <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/devteam/fastqc/e7b2202befea/fastqc/rgFastQC.xml"</span> <span class="na">guid=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;tool_shed&gt;</span>toolshed.g2.bx.psu.edu<span class="nt">&lt;/tool_shed&gt;</span>
             <span class="nt">&lt;repository_name&gt;</span>fastqc<span class="nt">&lt;/repository_name&gt;</span>
             <span class="nt">&lt;repository_owner&gt;</span>devteam<span class="nt">&lt;/repository_owner&gt;</span>
             <span class="nt">&lt;installed_changeset_revision&gt;</span>e7b2202befea<span class="nt">&lt;/installed_changeset_revision&gt;</span>
-            <span class="nt">&lt;id&gt;</span><span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1<span class="nt">&lt;/id&gt;</span>
-            <span class="nt">&lt;version&gt;</span>0.72+<span class="notranslate">galaxy</span>1<span class="nt">&lt;/version&gt;</span>
+            <span class="nt">&lt;id&gt;</span>toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;version&gt;</span>0.72+galaxy1<span class="nt">&lt;/version&gt;</span>
         <span class="nt">&lt;/tool&gt;</span>
     <span class="nt">&lt;/section&gt;</span>
 <span class="nt">&lt;/toolbox&gt;</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Next, let’s create a new <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> file that uses this <code class="language-plaintext highlighter-rouge">custom_tool_conf.xml</code>.</p>
+      <p>Next, let’s create a new <code class="language-plaintext highlighter-rouge">galaxy.yml</code> file that uses this <code class="language-plaintext highlighter-rouge">custom_tool_conf.xml</code>.</p>
 
       <p>Note that the content below is the same as the <code class="language-plaintext highlighter-rouge">configs</code> section of
-<code class="language-plaintext highlighter-rouge">values-cvmfs.yaml</code> file from the <span class="notranslate">Galaxy</span> Helm chart with one exception:
+<code class="language-plaintext highlighter-rouge">values-cvmfs.yaml</code> file from the Galaxy Helm chart with one exception:
 <code class="language-plaintext highlighter-rouge">tool_config_file</code> entry is pointing to our custom tool list instead of the
 full list from CVMFS.</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">uwsgi</span><span class="pi">:</span>
-  <span class="na">virtualenv</span><span class="pi">:</span> <span class="s">/<span class="notranslate">galaxy</span>/server/.venv</span>
+  <span class="na">virtualenv</span><span class="pi">:</span> <span class="s">/galaxy/server/.venv</span>
   <span class="na">processes</span><span class="pi">:</span> <span class="m">1</span>
   <span class="na">http</span><span class="pi">:</span> <span class="s">0.0.0.0:8080</span>
-  <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static/style=/<span class="notranslate">galaxy</span>/server/static/style/blue</span>
-  <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static=/<span class="notranslate">galaxy</span>/server/static</span>
-  <span class="na">static-map</span><span class="pi">:</span> <span class="s">/favicon.ico=/<span class="notranslate">galaxy</span>/server/static/favicon.ico</span>
-  <span class="na">pythonpath</span><span class="pi">:</span> <span class="s">/<span class="notranslate">galaxy</span>/server/lib</span>
+  <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static/style=/galaxy/server/static/style/blue</span>
+  <span class="na">static-map</span><span class="pi">:</span> <span class="s">/static=/galaxy/server/static</span>
+  <span class="na">static-map</span><span class="pi">:</span> <span class="s">/favicon.ico=/galaxy/server/static/favicon.ico</span>
+  <span class="na">pythonpath</span><span class="pi">:</span> <span class="s">/galaxy/server/lib</span>
   <span class="na">thunder-lock</span><span class="pi">:</span> <span class="no">true</span>
   <span class="na">manage-script-name</span><span class="pi">:</span> <span class="no">true</span>
-  <span class="na">mount</span><span class="pi">:</span> <span class="pi">{{</span><span class="nv">.Values.ingress.path</span><span class="pi">}}</span><span class="s">=<span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.buildapp:uwsgi_app()</span>
+  <span class="na">mount</span><span class="pi">:</span> <span class="pi">{{</span><span class="nv">.Values.ingress.path</span><span class="pi">}}</span><span class="s">=galaxy.webapps.galaxy.buildapp:uwsgi_app()</span>
   <span class="na">buffer-size</span><span class="pi">:</span> <span class="m">16384</span>
-  <span class="na">offload-th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="m">2</span>
-  <span class="na">th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="m">4</span>
+  <span class="na">offload-threads</span><span class="pi">:</span> <span class="m">2</span>
+  <span class="na">threads</span><span class="pi">:</span> <span class="m">4</span>
   <span class="na">die-on-term</span><span class="pi">:</span> <span class="no">true</span>
   <span class="na">master</span><span class="pi">:</span> <span class="no">true</span>
   <span class="na">hook-master-start</span><span class="pi">:</span> <span class="s">unix_signal:2 gracefully_kill_them_all</span>
-  <span class="na">enable-th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="no">true</span>
+  <span class="na">enable-threads</span><span class="pi">:</span> <span class="no">true</span>
   <span class="na">py-call-osafterfork</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
-  <span class="na">database_connection</span><span class="pi">:</span> <span class="s1">'</span><span class="s">postgresql://{{.Values.postgresql.<span class="notranslate">galaxy</span>DatabaseUser}}:{{.Values.postgresql.<span class="notranslate">galaxy</span>DatabasePassword}}@{{</span><span class="nv"> </span><span class="s">template</span><span class="nv"> </span><span class="s">"<span class="notranslate">galaxy</span>-postgresql.fullname"</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">}}/<span class="notranslate">galaxy</span>'</span>
-  <span class="na">integrated_tool_panel_config</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/<span class="notranslate">galaxy</span>/server/config/mutable/integrated_tool_panel.xml"</span>
-  <span class="na">sanitize_whitelist_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/<span class="notranslate">galaxy</span>/server/config/mutable/sanitize_whitelist.txt"</span>
-  <span class="na">tool_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{.Values.persistence.mountPath}}/config/editable_shed_tool_conf.xml,/<span class="notranslate">galaxy</span>/server/config/custom_tool_conf.xml"</span>
+<span class="na">galaxy</span><span class="pi">:</span>
+  <span class="na">database_connection</span><span class="pi">:</span> <span class="s1">'</span><span class="s">postgresql://{{.Values.postgresql.galaxyDatabaseUser}}:{{.Values.postgresql.galaxyDatabasePassword}}@{{</span><span class="nv"> </span><span class="s">template</span><span class="nv"> </span><span class="s">"galaxy-postgresql.fullname"</span><span class="nv"> </span><span class="s">.</span><span class="nv"> </span><span class="s">}}/galaxy'</span>
+  <span class="na">integrated_tool_panel_config</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/galaxy/server/config/mutable/integrated_tool_panel.xml"</span>
+  <span class="na">sanitize_whitelist_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/galaxy/server/config/mutable/sanitize_whitelist.txt"</span>
+  <span class="na">tool_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{.Values.persistence.mountPath}}/config/editable_shed_tool_conf.xml,/galaxy/server/config/custom_tool_conf.xml"</span>
   <span class="na">tool_data_table_config_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">.Values.cvmfs.main.mountPath</span><span class="nv"> </span><span class="s">}}/config/shed_tool_data_table_conf.xml,{{.Values.cvmfs.data.mountPath}}/managed/location/tool_data_table_conf.xml,{{.Values.cvmfs.data.mountPath}}/byhand/location/tool_data_table_conf.xml"</span>
   <span class="na">tool_dependency_dir</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{.Values.persistence.mountPath}}/deps"</span>
   <span class="na">builds_file_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{.Values.cvmfs.data.mountPath}}/managed/location/builds.txt"</span>
   <span class="na">datatypes_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">.Values.cvmfs.main.mountPath</span><span class="nv"> </span><span class="s">}}/config/datatypes_conf.xml"</span>
-  <span class="na">containers_resolvers_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/<span class="notranslate">galaxy</span>/server/config/container_resolvers_conf.xml"</span>
-  <span class="na">workflow_schedulers_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/<span class="notranslate">galaxy</span>/server/config/workflow_schedulers_conf.xml"</span>
-  <span class="na">build_sites_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/<span class="notranslate">galaxy</span>/server/config/build_sites.yml"</span>
+  <span class="na">containers_resolvers_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/galaxy/server/config/container_resolvers_conf.xml"</span>
+  <span class="na">workflow_schedulers_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/galaxy/server/config/workflow_schedulers_conf.xml"</span>
+  <span class="na">build_sites_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">/galaxy/server/config/build_sites.yml"</span>
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Now, let’s upgrade the chart to use <code class="language-plaintext highlighter-rouge">custom_tool_conf.xml</code> and
-<code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> by running the <code class="language-plaintext highlighter-rouge">helm upgrade</code> command.</p>
+<code class="language-plaintext highlighter-rouge">galaxy.yml</code> by running the <code class="language-plaintext highlighter-rouge">helm upgrade</code> command.</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm upgrade <span class="nt">--reuse-values</span> <span class="nt">--set-file</span> <span class="s2">"configs.custom_tool_conf</span><span class="se">\.</span><span class="s2">xml"</span><span class="o">=</span>custom_tool_conf.xml <span class="nt">--set-file</span> <span class="s2">"configs.<span class="notranslate">galaxy</span></span><span class="se">\.</span><span class="s2">yml"</span><span class="o">=</span>configs/<span class="notranslate">galaxy</span>.yml <span class="notranslate">galaxy</span> <span class="notranslate">galaxy</span>/<span class="notranslate">galaxy</span>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm upgrade <span class="nt">--reuse-values</span> <span class="nt">--set-file</span> <span class="s2">"configs.custom_tool_conf</span><span class="se">\.</span><span class="s2">xml"</span><span class="o">=</span>custom_tool_conf.xml <span class="nt">--set-file</span> <span class="s2">"configs.galaxy</span><span class="se">\.</span><span class="s2">yml"</span><span class="o">=</span>configs/galaxy.yml galaxy galaxy/galaxy
 </code></pre></div>      </div>
 
       <p>Note the <code class="language-plaintext highlighter-rouge">--reuse-values</code> flag, which instructs Helm to reuse any
@@ -1000,7 +1000,7 @@ previously set values, and apply the new ones on top.  The <code class="language
 option will set the value of the <code class="language-plaintext highlighter-rouge">configs.custom_tool_conf.xml</code>
 key in your values file to the contents of the specified file, as a text
 string. Each file under <code class="language-plaintext highlighter-rouge">configs</code> key in <code class="language-plaintext highlighter-rouge">values.yaml</code> is automatically
-mapped into <span class="notranslate">Galaxy</span>’s <code class="language-plaintext highlighter-rouge">config</code> directory within the running container.</p>
+mapped into Galaxy’s <code class="language-plaintext highlighter-rouge">config</code> directory within the running container.</p>
     </li>
     <li>
       <p>Notice that while the chart is upgrading, the existing version continues
@@ -1016,8 +1016,8 @@ our changes if they are incorrect. This will be covered in a later section.</p>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm list
 NAME  	REVISION	UPDATED                 	STATUS  	CHART                 	APP VERSION	NAMESPACE
-cvmfs 	1       	Wed Jun 26 14:47:46 2019	DEPLOYED	<span class="notranslate">galaxy</span>-cvmfs-csi-1.0.1	1.0        	cvmfs
-<span class="notranslate">galaxy</span>	2       	Wed Jun 26 14:51:17 2019	DEPLOYED	<span class="notranslate">galaxy</span>-3.0.0          	v19.05     	default
+cvmfs 	1       	Wed Jun 26 14:47:46 2019	DEPLOYED	galaxy-cvmfs-csi-1.0.1	1.0        	cvmfs
+galaxy	2       	Wed Jun 26 14:51:17 2019	DEPLOYED	galaxy-3.0.0          	v19.05     	default
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1026,27 +1026,27 @@ mapped in. First, let’s get a list of running pods.</p>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get pods
 NAME                          READY   STATUS    RESTARTS   AGE
-<span class="notranslate">galaxy</span>-<span class="notranslate">galaxy</span>-postgres-0      1/1     Running   0          2d6h
-<span class="notranslate">galaxy</span>-job-69864b6797-zs5mn   1/1     Running   0          2d6h
-<span class="notranslate">galaxy</span>-web-7568c58b94-jzkvm   1/1     Running   0          2d6h
+galaxy-galaxy-postgres-0      1/1     Running   0          2d6h
+galaxy-job-69864b6797-zs5mn   1/1     Running   0          2d6h
+galaxy-web-7568c58b94-jzkvm   1/1     Running   0          2d6h
 </code></pre></div>      </div>
 
       <p>Exec into the web pod by running:</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec</span> <span class="nt">-it</span> <span class="notranslate">galaxy</span>-web-7568c58b94-jzkvm /bin/bash
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec</span> <span class="nt">-it</span> galaxy-web-7568c58b94-jzkvm /bin/bash
 </code></pre></div>      </div>
 
-      <p>Now run <code class="language-plaintext highlighter-rouge">ls /<span class="notranslate">galaxy</span>/server/config/</code> and note that the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> contains
+      <p>Now run <code class="language-plaintext highlighter-rouge">ls /galaxy/server/config/</code> and note that the <code class="language-plaintext highlighter-rouge">galaxy.yml</code> contains
 the content that you’ve provided and that <code class="language-plaintext highlighter-rouge">custom_tool_conf.xml</code> has also been
-mapped into the config folder. In this same way, any of <span class="notranslate">Galaxy</span>’s config
-files can be overridden by simply <span class="notranslate">mapping</span> in the relevant file into the
+mapped into the config folder. In this same way, any of Galaxy’s config
+files can be overridden by simply mapping in the relevant file into the
 config folder.</p>
     </li>
   </ol>
 </blockquote>
 
 <h2 id="setting-the-admin-user-and-changing-the-brand">Setting the admin user and changing the brand</h2>
-<p>Next, we will set the admin user and change the brand in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>. We will
+<p>Next, we will set the admin user and change the brand in <code class="language-plaintext highlighter-rouge">galaxy.yml</code>. We will
 rollback our change to understand how Helm manages configuration.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1054,8 +1054,8 @@ rollback our change to understand how Helm manages configuration.</p>
 
   <ol>
     <li>
-      <p>Modify the following entries in your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>. Make sure to add these
-keys under the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>:</code> section of the file.</p>
+      <p>Modify the following entries in your <code class="language-plaintext highlighter-rouge">galaxy.yml</code>. Make sure to add these
+keys under the <code class="language-plaintext highlighter-rouge">galaxy:</code> section of the file.</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brand: "Hello World"
 admin_users: "admin@mydomain.com"
@@ -1064,13 +1064,13 @@ admin_users: "admin@mydomain.com"
     <li>
       <p>Now, let’s upgrade the chart to apply the new configuration.</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm upgrade <span class="nt">--reuse-values</span> <span class="nt">--set-file</span> <span class="s2">"configs.<span class="notranslate">galaxy</span></span><span class="se">\.</span><span class="s2">yml"</span><span class="o">=</span><span class="notranslate">galaxy</span>.yml <span class="notranslate">galaxy</span> <span class="notranslate">galaxy</span>/<span class="notranslate">galaxy</span>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm upgrade <span class="nt">--reuse-values</span> <span class="nt">--set-file</span> <span class="s2">"configs.galaxy</span><span class="se">\.</span><span class="s2">yml"</span><span class="o">=</span>galaxy.yml galaxy galaxy/galaxy
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Inspect the currently set Helm values by:</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm get values <span class="notranslate">galaxy</span>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm get values galaxy
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1078,14 +1078,14 @@ admin_users: "admin@mydomain.com"
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm list
 NAME  	REVISION	UPDATED                 	STATUS  	CHART                 	APP VERSION	NAMESPACE
-cvmfs 	1       	Wed Jun 26 14:47:46 2019	DEPLOYED	<span class="notranslate">galaxy</span>-cvmfs-csi-1.0.1	1.0        	cvmfs
-<span class="notranslate">galaxy</span>	3       	Wed Jun 26 14:51:17 2019	DEPLOYED	<span class="notranslate">galaxy</span>-3.0.0          	v19.05     	default
+cvmfs 	1       	Wed Jun 26 14:47:46 2019	DEPLOYED	galaxy-cvmfs-csi-1.0.1	1.0        	cvmfs
+galaxy	3       	Wed Jun 26 14:51:17 2019	DEPLOYED	galaxy-3.0.0          	v19.05     	default
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Let’s now roll back to the previous revision.</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm rollback <span class="notranslate">galaxy</span> 2
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm rollback galaxy 2
 </code></pre></div>      </div>
 
       <p>Use <code class="language-plaintext highlighter-rouge">helm get values</code> again to observe that the values have reverted to
@@ -1097,8 +1097,8 @@ see that the previous configuration has been restored.</p>
 
 </blockquote>
 
-<h1 id="scaling-galaxy">Scaling <span class="notranslate">Galaxy</span></h1>
-<p>In <span class="notranslate">Galaxy</span> deployment on Kubernetes, there are two containers by default, one
+<h1 id="scaling-galaxy">Scaling Galaxy</h1>
+<p>In Galaxy deployment on Kubernetes, there are two containers by default, one
 web handler and one job handler. We will now look at how these can be scaled.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1106,7 +1106,7 @@ web handler and one job handler. We will now look at how these can be scaled.</p
 
   <ol>
     <li>
-      <p>View the <code class="language-plaintext highlighter-rouge">values-cvmfs.yaml</code> file in the <span class="notranslate">Galaxy</span> Helm chart and note down the
+      <p>View the <code class="language-plaintext highlighter-rouge">values-cvmfs.yaml</code> file in the Galaxy Helm chart and note down the
 number of web and job handlers.</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">webHandlers</span><span class="pi">:</span>
@@ -1118,7 +1118,7 @@ number of web and job handlers.</p>
     <li>
       <p>Let’s increase the number of web handlers by simply setting new values for the number of replicas.</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm upgrade <span class="nt">--reuse-values</span> <span class="nt">--set</span> webHandlers.replicaCount<span class="o">=</span>2 <span class="notranslate">galaxy</span> <span class="notranslate">galaxy</span>/<span class="notranslate">galaxy</span>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm upgrade <span class="nt">--reuse-values</span> <span class="nt">--set</span> webHandlers.replicaCount<span class="o">=</span>2 galaxy galaxy/galaxy
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1126,17 +1126,17 @@ number of web and job handlers.</p>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get pods
 NAME                          READY   STATUS    RESTARTS   AGE
-<span class="notranslate">galaxy</span>-<span class="notranslate">galaxy</span>-postgres-0      1/1     Running   0          2d9h
-<span class="notranslate">galaxy</span>-job-5cc75c6588-8dsbg   1/1     Running   0          7m13s
-<span class="notranslate">galaxy</span>-web-7c9576cf89-49nlm   1/1     Running   0          7m13s
-<span class="notranslate">galaxy</span>-web-7c9576cf89-r6rcj   0/1     Running   0          9s
+galaxy-galaxy-postgres-0      1/1     Running   0          2d9h
+galaxy-job-5cc75c6588-8dsbg   1/1     Running   0          7m13s
+galaxy-web-7c9576cf89-49nlm   1/1     Running   0          7m13s
+galaxy-web-7c9576cf89-r6rcj   0/1     Running   0          9s
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Follow the pod logs and check whether the new handler is receiving web requests
 as expected.</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl logs <span class="nt">-f</span> <span class="notranslate">galaxy</span>-web-7c9576cf89-r6rcj
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl logs <span class="nt">-f</span> galaxy-web-7c9576cf89-r6rcj
 </code></pre></div>      </div>
 
       <p>You will notice that Kubernetes automatically load balances requests between the
@@ -1166,15 +1166,15 @@ provision a new replacement.</p>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl get pods
 NAME                          READY   STATUS    RESTARTS   AGE
-<span class="notranslate">galaxy</span>-<span class="notranslate">galaxy</span>-postgres-0      1/1     Running   0          2d9h
-<span class="notranslate">galaxy</span>-job-5cc75c6588-8dsbg   1/1     Running   0          14m
-<span class="notranslate">galaxy</span>-web-7c9576cf89-49nlm   1/1     Running   0          14m
-<span class="notranslate">galaxy</span>-web-7c9576cf89-r6rcj   0/1     Running   1          7m36s
+galaxy-galaxy-postgres-0      1/1     Running   0          2d9h
+galaxy-job-5cc75c6588-8dsbg   1/1     Running   0          14m
+galaxy-web-7c9576cf89-49nlm   1/1     Running   0          14m
+galaxy-web-7c9576cf89-r6rcj   0/1     Running   1          7m36s
 </code></pre></div>      </div>
 
       <p>Then exec into one:</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec</span> <span class="nt">-it</span> <span class="notranslate">galaxy</span>-web-7c9576cf89-r6rcj /bin/bash
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec</span> <span class="nt">-it</span> galaxy-web-7c9576cf89-r6rcj /bin/bash
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1186,7 +1186,7 @@ NAME                          READY   STATUS    RESTARTS   AGE
     <li>
       <p>If we run <code class="language-plaintext highlighter-rouge">kubectl get pods</code>, we can notice how Kubernetes immediately
 starts a new pod to replace the failed one, bringing the environment back to
-the desired state. Take a look at the liveness probe defined for the <span class="notranslate">galaxy</span>
+the desired state. Take a look at the liveness probe defined for the galaxy
 web container in the helm chart source code
 (<code class="language-plaintext highlighter-rouge">templates/deployment-web.yaml</code>).</p>
     </li>
@@ -1194,21 +1194,21 @@ web container in the helm chart source code
 
 </blockquote>
 
-<h1 id="deleting-galaxy">Deleting <span class="notranslate">Galaxy</span></h1>
-<p>Finally, let’s take a look at how we can uninstall <span class="notranslate">Galaxy</span> and remove all
+<h1 id="deleting-galaxy">Deleting Galaxy</h1>
+<p>Finally, let’s take a look at how we can uninstall Galaxy and remove all
 related containers.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-deleting-galaxy" aria-label="hands-on box: Deleting Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Deleting <span class="notranslate">Galaxy</span></div>
+  <div class="box-title hands-on-title" id="hands-on-deleting-galaxy" aria-label="hands-on box: Deleting Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Deleting Galaxy</div>
 
   <ol>
     <li>
-      <p>To permanently delete the <span class="notranslate">Galaxy</span> release, run:</p>
+      <p>To permanently delete the Galaxy release, run:</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm delete <span class="nt">--purge</span> <span class="notranslate">galaxy</span>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm delete <span class="nt">--purge</span> galaxy
 </code></pre></div>      </div>
 
-      <p>The purge flag instructs helm to permanently remove <span class="notranslate">galaxy</span> from its history.</p>
+      <p>The purge flag instructs helm to permanently remove galaxy from its history.</p>
     </li>
     <li>
       <p>Use <code class="language-plaintext highlighter-rouge">kubectl get pods</code> to verify that the pods have been deleted.</p>
@@ -1218,14 +1218,14 @@ related containers.</p>
 </blockquote>
 
 <h1 id="next-steps">Next Steps</h1>
-<p>This tutorial provided an overview of some common <span class="notranslate">Galaxy</span> administration tasks.
-Advanced customizations would include running custom shell scripts on <span class="notranslate">Galaxy</span>
+<p>This tutorial provided an overview of some common Galaxy administration tasks.
+Advanced customizations would include running custom shell scripts on Galaxy
 startup to perform additional tasks, running additional containers on
-startup, administering and managing storage, building custom <span class="notranslate">Galaxy</span> containers
+startup, administering and managing storage, building custom Galaxy containers
 with desired modifications etc. For more info on some of these
-topics, take a look at the <a href="https://github.com/galaxyproject/galaxy-helm"><span class="notranslate">Galaxy</span> Helm chart</a> repository as well as
+topics, take a look at the <a href="https://github.com/galaxyproject/galaxy-helm">Galaxy Helm chart</a> repository as well as
 <a href="../..">other tutorials</a> tagged with <em>kubernetes</em>. Also, feel free to reach out
-on Gitter: <a href="https://gitter.im/galaxyproject/FederatedGalaxy">https://gitter.im/<span class="notranslate">galaxy</span>project/Federated<span class="notranslate">Galaxy</span></a>.</p>
+on Gitter: <a href="https://gitter.im/galaxyproject/FederatedGalaxy">https://gitter.im/galaxyproject/FederatedGalaxy</a>.</p>
 
 
 

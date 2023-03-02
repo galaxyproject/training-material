@@ -790,8 +790,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -890,7 +888,7 @@ bidirectionally deregulated components, (iii) are confined to a pathway region. 
 properties, computational methods that reach beyond the scope of predefined pathways are needed.</p>
 
 <p>In this tutorial, we will perform a network analysis using Heinz (<a href="https://github.com/ls-cwi/heinz">GitHub</a>,
-<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2718639/">publication</a>) in <span class="notranslate">Galaxy</span>. The data comes from
+<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2718639/">publication</a>) in Galaxy. The data comes from
 the study <a href="https://academic.oup.com/bioinformatics/article/32/11/1678/2240171">May et al.</a>,
 and we will reproduce some of the computational steps from this study with simplified data and
 parameters to speed up the analysis for the purposes of this tutorial.</p>
@@ -904,13 +902,13 @@ parameters to speed up the analysis for the purposes of this tutorial.</p>
   <li><a href="#overview" id="markdown-toc-overview">Overview</a></li>
   <li><a href="#obtaining-and-preparing-data--" id="markdown-toc-obtaining-and-preparing-data--">Obtaining and preparing data  <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.1344105.svg" alt="DOI. " loading="lazy" /></a>    <ol>
       <li><a href="#understanding-our-input-data" id="markdown-toc-understanding-our-input-data">Understanding our input data</a></li>
-      <li><a href="#importing-the-data-into-galaxy" id="markdown-toc-importing-the-data-into-galaxy">Importing the data into <span class="notranslate">Galaxy</span></a></li>
+      <li><a href="#importing-the-data-into-galaxy" id="markdown-toc-importing-the-data-into-galaxy">Importing the data into Galaxy</a></li>
     </ol>
   </li>
-  <li><a href="#differential-expression-analysis-dea-by-deseq2" id="markdown-toc-differential-expression-analysis-dea-by-deseq2">Differential <span class="notranslate">Expression</span> Analysis (DEA) by DESeq2</a>    <ol>
-      <li><a href="#what-is-differential-expression-analysis" id="markdown-toc-what-is-differential-expression-analysis">What is differential <span class="notranslate">expression</span> analysis?</a></li>
+  <li><a href="#differential-expression-analysis-dea-by-deseq2" id="markdown-toc-differential-expression-analysis-dea-by-deseq2">Differential Expression Analysis (DEA) by DESeq2</a>    <ol>
+      <li><a href="#what-is-differential-expression-analysis" id="markdown-toc-what-is-differential-expression-analysis">What is differential expression analysis?</a></li>
       <li><a href="#which-tools-are-available-for-dea" id="markdown-toc-which-tools-are-available-for-dea">Which tools are available for DEA?</a></li>
-      <li><a href="#perform-differential-expression-analysis-dea" id="markdown-toc-perform-differential-expression-analysis-dea">Perform Differential <span class="notranslate">Expression</span> Analysis (DEA)</a></li>
+      <li><a href="#perform-differential-expression-analysis-dea" id="markdown-toc-perform-differential-expression-analysis-dea">Perform Differential Expression Analysis (DEA)</a></li>
     </ol>
   </li>
   <li><a href="#fit-a-bum-model-a-mixture-model" id="markdown-toc-fit-a-bum-model-a-mixture-model">Fit a BUM model (a mixture model)</a></li>
@@ -920,15 +918,15 @@ parameters to speed up the analysis for the purposes of this tutorial.</p>
       <li><a href="#visualize-the-output-visualize-the-optimal-subnetwork" id="markdown-toc-visualize-the-output-visualize-the-optimal-subnetwork">Visualize the output: visualize the optimal subnetwork</a></li>
     </ol>
   </li>
-  <li><a href="#save-the-history-into-a-workflow" id="markdown-toc-save-the-history-into-a-workflow">Save the history into a <span class="notranslate">workflow</span></a></li>
+  <li><a href="#save-the-history-into-a-workflow" id="markdown-toc-save-the-history-into-a-workflow">Save the history into a workflow</a></li>
 </ol>
 
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or because of stochastic processes in the algorithms.</p> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, external databases, or because of stochastic processes in the algorithms.</p> </blockquote>
 
-<p>In this tutorial, we will run the Heinz <span class="notranslate">workflow</span> step by step to understand how each step works. To get an overview of what this <span class="notranslate">workflow</span> does
+<p>In this tutorial, we will run the Heinz workflow step by step to understand how each step works. To get an overview of what this workflow does
 and what kind of calculation is involved, view the flowchart below.</p>
 
 <p><img src="../../images/transcriptomics_images/flowchart-heinz.png" alt="Heinz flowchart. " loading="lazy" /></p>
@@ -936,8 +934,8 @@ and what kind of calculation is involved, view the flowchart below.</p>
 <h1 id="obtaining-and-preparing-data--">Obtaining and preparing data  <a href="https://doi.org/10.5281/zenodo.1344105"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.1344105.svg" alt="DOI. " loading="lazy" /></a></h1>
 
 <p>The study <a href="https://academic.oup.com/bioinformatics/article/32/11/1678/2240171">May et al.</a> includes the computation
-steps starting from the raw <span class="notranslate">RNA</span>seq datasets. The operations that processed raw data into the interpreted data are
-beyond the scope of this tutorial. To learn that, please refer to the relevant topics in the <span class="notranslate">Galaxy</span> training
+steps starting from the raw RNAseq datasets. The operations that processed raw data into the interpreted data are
+beyond the scope of this tutorial. To learn that, please refer to the relevant topics in the Galaxy training
 material. In this tutorial, we start with the interpreted data, which are KO
 (<a href="https://www.genome.jp/kegg/ko.html">KEGG Orthology</a>) count data. All the data needed for this tutorial are
 available from Zenodo.</p>
@@ -948,7 +946,7 @@ available from Zenodo.</p>
   <p>KOs are organism-independent identifiers that group together proteins of similar biochemical functions.
 It is a term specific to <a href="https://www.genome.jp/kegg/">KEGG</a> database. It is a group concept, similar to the concept “pathway”, which
 includes a bunch of molecules and their interactions. Take a random line in our dataset, “K01369 7” as an example, the first column represents the KO ID,
-and the second column — the numeric value is the KO counts. If we understand it by the face value, it is 7 protein molecules that are counted from our dataset as this KO “K01369”; but we usually mingle proteins with genes because we often assume that each protein corresponds to a gene, so it can be understood as 7 genes. Now we are working on the microbial <span class="notranslate">RNA</span>seq data, and the assumption is also used subconsciously.</p>
+and the second column — the numeric value is the KO counts. If we understand it by the face value, it is 7 protein molecules that are counted from our dataset as this KO “K01369”; but we usually mingle proteins with genes because we often assume that each protein corresponds to a gene, so it can be understood as 7 genes. Now we are working on the microbial RNAseq data, and the assumption is also used subconsciously.</p>
 
 </blockquote>
 
@@ -966,21 +964,21 @@ into KO counts. We will use these count data as the starting point to perform th
 ‘CP’ (caries-positive) and ‘CN’ (caries-negative).</p>
 </blockquote>
 
-<h2 id="importing-the-data-into-galaxy">Importing the data into <span class="notranslate">Galaxy</span></h2>
+<h2 id="importing-the-data-into-galaxy">Importing the data into Galaxy</h2>
 
-<p>After knowing what our input data are like, let’s get them into <span class="notranslate">Galaxy</span> history:</p>
+<p>After knowing what our input data are like, let’s get them into Galaxy history:</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-obtaining-our-data" aria-label="hands-on box: Obtaining our data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Obtaining our data</div>
 
   <ol>
     <li>
-      <p>Make sure we have an empty <span class="notranslate">Galaxy</span> history. Give it a sensible name.</p>
+      <p>Make sure we have an empty Galaxy history. Give it a sensible name.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
     <li><strong>Upload Disease Dataset</strong>
       <ul>
@@ -1096,7 +1094,7 @@ you can follow these steps to create a collection:</p>
       </li>
       <li>
         <p>Hidden these selected files by clicking on <strong>for all selected..</strong> and selecting <strong>Hidden datasets</strong>.
-  <strong>Note:</strong> This step is optional, we do it here to keep <span class="notranslate">Galaxy</span> history clean.</p>
+  <strong>Note:</strong> This step is optional, we do it here to keep Galaxy history clean.</p>
       </li>
       <li>
         <p>Redo the Step 2, 3, 4 for CN, set the name of the data list as ‘CN’.</p>
@@ -1105,17 +1103,17 @@ you can follow these steps to create a collection:</p>
   </blockquote>
 </blockquote>
 
-<h1 id="differential-expression-analysis-dea-by-deseq2">Differential <span class="notranslate">Expression</span> Analysis (DEA) by DESeq2</h1>
+<h1 id="differential-expression-analysis-dea-by-deseq2">Differential Expression Analysis (DEA) by DESeq2</h1>
 
-<h2 id="what-is-differential-expression-analysis">What is differential <span class="notranslate">expression</span> analysis?</h2>
+<h2 id="what-is-differential-expression-analysis">What is differential expression analysis?</h2>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-a-definition" aria-label="comment box: A definition"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: A definition</div>
 
-  <p>The definition of differential <span class="notranslate">expression</span> analysis given by
+  <p>The definition of differential expression analysis given by
 <a href="https://www.ebi.ac.uk/training/online/course/functional-genomics-ii-common-technologies-and-data-analysis-methods/differential-gene">EBI</a>
 means taking the normalised read count data and performing statistical analysis to discover quantitative
-changes in <span class="notranslate">expression</span> levels between experimental groups. For example, we use statistical testing to decide
+changes in expression levels between experimental groups. For example, we use statistical testing to decide
 whether, for a given gene, an observed difference in read counts is significant, that is, whether it is greater
 than what would be expected just due to natural random variation.</p>
 
@@ -1132,9 +1130,9 @@ related pathways.</p>
 and <a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html">DESeq2</a>. If you are interested, you
 may look up the pros and cons of each tool. Here we use DESeq2.</p>
 
-<h2 id="perform-differential-expression-analysis-dea">Perform Differential <span class="notranslate">Expression</span> Analysis (DEA)</h2>
+<h2 id="perform-differential-expression-analysis-dea">Perform Differential Expression Analysis (DEA)</h2>
 
-<p>After learning about differential <span class="notranslate">expression</span> analysis, let’s get some hands-on experience.</p>
+<p>After learning about differential expression analysis, let’s get some hands-on experience.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-dea-via-deseq2" aria-label="hands-on box: DEA via DESeq2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: DEA via DESeq2</div>
@@ -1175,7 +1173,7 @@ K01792  112.923146882195    -1.26925892659617	0.285732234964578	-4.4421271781026
 <h1 id="fit-a-bum-model-a-mixture-model">Fit a BUM model (a mixture model)</h1>
 
 <p>From a statistical point of view, p-values are uniformly distributed under null hypothesis; in other words,
-under alte<span class="notranslate">rna</span>tive hypothesis, the noise component (which holds under null hypothesis) will be adequately
+under alternative hypothesis, the noise component (which holds under null hypothesis) will be adequately
 modeled by a uniform distribution. With this knowledge, we can fit these p-values to a mixture model
 (BUM model), as the figure below shows.</p>
 
@@ -1193,7 +1191,7 @@ which computers can understand easily.</p>
 
 </blockquote>
 
-<p>Before fitting to BUM model in <span class="notranslate">Galaxy</span>, we need to prepare the input data for the tool
+<p>Before fitting to BUM model in Galaxy, we need to prepare the input data for the tool
 <strong>Fit a BUM model</strong>, that’s a file that only contains p-values.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1246,7 +1244,7 @@ LGALS4	PRKX
 NPTX1	CIAO1
 </code></pre></div></div>
 
-<p>Upload this edge file (hereafter we call it edge file) into the <span class="notranslate">Galaxy</span> instance.</p>
+<p>Upload this edge file (hereafter we call it edge file) into the Galaxy instance.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-upload-edge-file" aria-label="hands-on box: Upload edge file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Upload edge file</div>
@@ -1363,7 +1361,7 @@ and any KO whose p-value is below this threshold is regarded as significant, whi
   <ul>
     <li>Graph problem is way more complicated than we thought.</li>
     <li>It might take a much longer time for some complicated datasets.</li>
-    <li>We can use multiple CPUs to accelerate the computation (for now, this function is not available in <span class="notranslate">Galaxy</span> yet),
+    <li>We can use multiple CPUs to accelerate the computation (for now, this function is not available in Galaxy yet),
 but, to use that, you can install Heinz directly via <a href="https://anaconda.org/bioconda/heinz">Bioconda</a> in a Linux environment.</li>
   </ul>
 </blockquote>
@@ -1402,28 +1400,28 @@ but, to use that, you can install Heinz directly via <a href="https://anaconda.o
   </blockquote>
 </blockquote>
 
-<p>In addition to the tool we will use in <span class="notranslate">Galaxy</span>, you may consider using eXamine plugin in Cytoscape for a richer visualization, if we use the original data from the study <a href="https://academic.oup.com/bioinformatics/article/32/11/1678/2240171">May et al.</a>, perform all of these steps and visualize the result by eXamine, we can get a visualization as follows:</p>
+<p>In addition to the tool we will use in Galaxy, you may consider using eXamine plugin in Cytoscape for a richer visualization, if we use the original data from the study <a href="https://academic.oup.com/bioinformatics/article/32/11/1678/2240171">May et al.</a>, perform all of these steps and visualize the result by eXamine, we can get a visualization as follows:</p>
 
 <p><img src="../../images/transcriptomics_images/metaModules.png" alt="metaModules Result. " width="60%" loading="lazy" /></p>
 
 <p>If you are interested, you may try to make sense of the result yourself. To answer the question “which pathways are potentially contributing to dental caries?”, we need to find the key pathways relevant to the subnetwork. To achieve that, we probably need to combine information from other bioinformatics services and literature.</p>
 
-<h1 id="save-the-history-into-a-workflow">Save the history into a <span class="notranslate">workflow</span></h1>
+<h1 id="save-the-history-into-a-workflow">Save the history into a workflow</h1>
 
-<p>Let’s assume that these are the operations we always need for different datasets, to make life easier, we can save all of these operations into a <span class="notranslate">workflow</span> in <span class="notranslate">Galaxy</span>, which you can reuse for different datasets next time.</p>
+<p>Let’s assume that these are the operations we always need for different datasets, to make life easier, we can save all of these operations into a workflow in Galaxy, which you can reuse for different datasets next time.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-the-heinz-workflow" aria-label="hands-on box: Extract the Heinz workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extract the Heinz <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-extract-the-heinz-workflow" aria-label="hands-on box: Extract the Heinz workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extract the Heinz workflow</div>
 
   <ol>
     <li>
-      <p>Extract the <span class="notranslate">workflow</span> from your history</p>
+      <p>Extract the workflow from your history</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-extracting-a-workflow-from-your-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-extracting-a-workflow-from-your-history-contents" aria-expanded="true" aria-label="Toggle tip box: Extracting a workflow from your history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Extracting a <span class="notranslate">workflow</span> from your history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>     <p><strong>Clean up</strong> your history: remove any failed (red) jobs from your history by clicking on the <i class="fas fa-trash" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-delete</span> button.</p>     <p>This will make the creation of the <span class="notranslate">workflow</span> easier.</p>   </li>   <li>     <p>Click on <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> (<strong>History options</strong>) at the top of your history panel and select <strong>Extract <span class="notranslate">workflow</span></strong>.</p>     <p><img src="/training-material/topics/introduction/images/history_menu_extract_workflow.png" alt="`Extract Workflow` entry in the history options menu" /></p>     <p>The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the <span class="notranslate">workflow</span>.</p>   </li>   <li>     <p>Replace the <strong><span class="notranslate">Workflow</span> name</strong> to something more descriptive.</p>   </li>   <li>     <p><strong>Rename</strong> each <span class="notranslate">workflow</span> input in the boxes at the top of the second column.</p>   </li>   <li>     <p>If there are any steps that shouldn’t be included in the <span class="notranslate">workflow</span>, you can <strong>uncheck</strong> them in the first column of boxes.</p>   </li>   <li>     <p>Click on the <strong>Create <span class="notranslate">Workflow</span></strong> button near the top.</p>     <p>You will get a message that the <span class="notranslate">workflow</span> was created.</p>   </li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-extracting-a-workflow-from-your-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-extracting-a-workflow-from-your-history-contents" aria-expanded="true" aria-label="Toggle tip box: Extracting a workflow from your history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Extracting a workflow from your history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>     <p><strong>Clean up</strong> your history: remove any failed (red) jobs from your history by clicking on the <i class="fas fa-trash" aria-hidden="true"></i><span class="visually-hidden">galaxy-delete</span> button.</p>     <p>This will make the creation of the workflow easier.</p>   </li>   <li>     <p>Click on <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> (<strong>History options</strong>) at the top of your history panel and select <strong>Extract workflow</strong>.</p>     <p><img src="/training-material/topics/introduction/images/history_menu_extract_workflow.png" alt="`Extract Workflow` entry in the history options menu" /></p>     <p>The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.</p>   </li>   <li>     <p>Replace the <strong>Workflow name</strong> to something more descriptive.</p>   </li>   <li>     <p><strong>Rename</strong> each workflow input in the boxes at the top of the second column.</p>   </li>   <li>     <p>If there are any steps that shouldn’t be included in the workflow, you can <strong>uncheck</strong> them in the first column of boxes.</p>   </li>   <li>     <p>Click on the <strong>Create Workflow</strong> button near the top.</p>     <p>You will get a message that the workflow was created.</p>   </li> </ol> </blockquote>
     </li>
     <li>
-      <p>Run the <span class="notranslate">workflow</span> on the dataset in this tutorial</p>
+      <p>Run the workflow on the dataset in this tutorial</p>
     </li>
   </ol>
 
@@ -1431,9 +1429,9 @@ but, to use that, you can install Heinz directly via <a href="https://anaconda.o
 
 <p><img src="../../images/transcriptomics_images/heinz-workflow.png" alt="Heinz workflow. " loading="lazy" /></p>
 
-<p>As a self practice, you ran the newly created <span class="notranslate">workflow</span> with the dataset in this tutorial. Do you feel the convenience of running a <span class="notranslate">workflow</span> directly?</p>
+<p>As a self practice, you ran the newly created workflow with the dataset in this tutorial. Do you feel the convenience of running a workflow directly?</p>
 
-<p>Congrats! You have finished all the tools in Heinz <span class="notranslate">workflow</span>! You have successfully run each tool and understood how it works. In real research, running these tools are only part of the effort, we still need to invest a huge amount of intelligence in making sense of the results and converting them to knowledge, which is fraught with uncertainties and confounders, where perhaps luck will come into play. So good luck!</p>
+<p>Congrats! You have finished all the tools in Heinz workflow! You have successfully run each tool and understood how it works. In real research, running these tools are only part of the effort, we still need to invest a huge amount of intelligence in making sense of the results and converting them to knowledge, which is fraught with uncertainties and confounders, where perhaps luck will come into play. So good luck!</p>
 
 
                 

@@ -786,8 +786,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -887,7 +885,7 @@ price prediction dataset.</p>
   <li><a href="#losscost-function" id="markdown-toc-losscost-function">Loss/Cost function</a></li>
   <li><a href="#backpropagation-learning-algorithm" id="markdown-toc-backpropagation-learning-algorithm">Backpropagation Learning algorithm</a></li>
   <li><a href="#get-data" id="markdown-toc-get-data">Get Data</a></li>
-  <li><a href="#solve-a-simple-regression-problem-using-car-purchase-price-prediction-dataset-via-fnn-in-galaxy" id="markdown-toc-solve-a-simple-regression-problem-using-car-purchase-price-prediction-dataset-via-fnn-in-galaxy">Solve a simple regression problem using car purchase price prediction dataset via FNN in <span class="notranslate">Galaxy</span></a></li>
+  <li><a href="#solve-a-simple-regression-problem-using-car-purchase-price-prediction-dataset-via-fnn-in-galaxy" id="markdown-toc-solve-a-simple-regression-problem-using-car-purchase-price-prediction-dataset-via-fnn-in-galaxy">Solve a simple regression problem using car purchase price prediction dataset via FNN in Galaxy</a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
@@ -1118,7 +1116,7 @@ errors is the reason this algorithm is called <em>backpropagation</em>.</p>
 <p>After the error values for all the layers are calculated for sample <em>j</em>, we use the third and fourth equations to calculate the gradient
 of loss function relative to biases and weights for sample <em>j</em>. We can repeat these steps for all the samples, average the gradients of
 the loss function relative to biases and weights and use the average value to update the biases and weights. This is called <em>batch
-gradient descent</em>. If we have too many samples, such calculations will take a long time. An alte<span class="notranslate">rna</span>tive is to update the biases/weights
+gradient descent</em>. If we have too many samples, such calculations will take a long time. An alternative is to update the biases/weights
 based on the gradient of each sample. This is called <em>stochastic gradient descent</em>. While this is much faster than batch gradient descent,
 the gradient calculated based on a single sample is not a good estimate of the gradient calculated in the batch version of the algorithm.
 A middle ground solution is to calculate the gradient of a <em>batch</em>, and update the biases and weights based on the average of the gradients
@@ -1143,7 +1141,7 @@ why ReLU is so popular in deep networks).</p>
       <p>Create a new history for this tutorial</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the files from <a href="https://zenodo.org/record/4660497">Zenodo</a> or from the shared data library</p>
@@ -1155,28 +1153,28 @@ https://zenodo.org/record/4660497/files/y_train.tsv
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename the datasets as <code class="language-plaintext highlighter-rouge">X_test</code>, <code class="language-plaintext highlighter-rouge">X_train</code>, <code class="language-plaintext highlighter-rouge">y_test</code>, and <code class="language-plaintext highlighter-rouge">y_train</code> respectively.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Check that the datatype of all the four datasets is <code class="language-plaintext highlighter-rouge">tabular</code>. If not, change the dataset’s datatype to tabular.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<h1 id="solve-a-simple-regression-problem-using-car-purchase-price-prediction-dataset-via-fnn-in-galaxy">Solve a simple regression problem using car purchase price prediction dataset via FNN in <span class="notranslate">Galaxy</span></h1>
+<h1 id="solve-a-simple-regression-problem-using-car-purchase-price-prediction-dataset-via-fnn-in-galaxy">Solve a simple regression problem using car purchase price prediction dataset via FNN in Galaxy</h1>
 
 <p>In this section, we define a FNN (<span class="citation"><a href="#Python">Python and tutorials 2018</a></span>) and train it using car purchase price prediction dataset (<span class="citation"><a href="#Grogan">Grogan 2020</a></span>). Given 5 attributes
 about an individual (age, gender, average miles driven per day, personal debt, and monthly income), and the money they spent on purchasing
@@ -1190,7 +1188,7 @@ dataset has 723 training examples, and our test dataset has 242 test examples. I
   <div class="box-title hands-on-title" id="hands-on-model-config" aria-label="hands-on box: Model config"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Model config</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0"><strong>Create a deep learning model architecture</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0"><strong>Create a deep learning model architecture</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0</span></span>
       <ul>
         <li><em>“Select keras model type”</em>: <code class="language-plaintext highlighter-rouge">sequential</code></li>
         <li><em>“input_shape”</em>: <code class="language-plaintext highlighter-rouge">(5,)</code></li>
@@ -1244,7 +1242,7 @@ layers use ReLU activation function. The model config can be downloaded as a JSO
   <div class="box-title hands-on-title" id="hands-on-model-builder-optimizer-loss-function-and-fit-parameters" aria-label="hands-on box: Model builder (Optimizer, loss function, and fit parameters)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Model builder (Optimizer, loss function, and fit parameters)</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0"><strong>Create deep learning model</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0"><strong>Create deep learning model</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0</span></span>
       <ul>
         <li><em>“Choose a building mode”</em>: <code class="language-plaintext highlighter-rouge">Build a training model</code></li>
         <li><em>“Select the dataset containing model configuration”</em>: Select the <em>Keras Model Config</em> from the previous step.</li>
@@ -1281,7 +1279,7 @@ batch_size decides the size of this subset (which we set to 50). The model build
   <div class="box-title hands-on-title" id="hands-on-training-the-model" aria-label="hands-on box: Training the model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Training the model</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3"><strong>Deep learning training and evaluation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3"><strong>Deep learning training and evaluation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.3</span></span>
       <ul>
         <li><em>“Select a scheme”</em>: <code class="language-plaintext highlighter-rouge">Train and Validate</code></li>
         <li><em>“Choose the dataset containing pipeline/estimator object”</em>: Select the <em>Keras Model Builder</em> from the previous step.</li>
@@ -1311,7 +1309,7 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
   <div class="box-title hands-on-title" id="hands-on-testing-the-model" aria-label="hands-on box: Testing the model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Testing the model</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3"><strong>Model Prediction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3"><strong>Model Prediction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.3</span></span>
       <ul>
         <li><em>“Choose the dataset containing pipeline/estimator object”</em> : Select the trained model from the previous step.</li>
         <li><em>“Choose the dataset containing weights for the estimator above”</em> : Select the trained model weights from the previous step.</li>
@@ -1335,7 +1333,7 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
   <div class="box-title hands-on-title" id="hands-on-check-and-visualize-the-predictions" aria-label="hands-on box: Check and visualize the predictions"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Check and visualize the predictions</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1"><strong>Plot actual vs predicted curves and residual plots</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1"><strong>Plot actual vs predicted curves and residual plots</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/plotly_regression_performance_plots/plotly_regression_performance_plots/0.1</span></span>
       <ul>
         <li><em>“Select input data file”</em>: <code class="language-plaintext highlighter-rouge">y_test</code></li>
         <li><em>“Select predicted data file”</em>”: Select <code class="language-plaintext highlighter-rouge">Model Prediction</code> from the previous step</li>
@@ -1364,7 +1362,7 @@ predicted values. The better our model’s predictions, the closer the points to
 
 <p>In this tutorial, we discussed the inspiration behind the neural networks, and explained Perceptron, one of the earliest neural
 networks still in use today. We then discussed different activation functions, what supervised learning is, what are loss/cost functions,
-and how backpropagation minimizes the cost function. Finally, we implemented a FNN in <span class="notranslate">Galaxy</span> to solve a regression problem on car purchase price prediction data.</p>
+and how backpropagation minimizes the cost function. Finally, we implemented a FNN in Galaxy to solve a regression problem on car purchase price prediction data.</p>
 
 
                 

@@ -556,20 +556,20 @@ following two lines somewhere at the top.</p>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
 </code></pre></div></div>
 
-<p>This means that our code requires two <em>exte<span class="notranslate">rna</span>l libraries</em> (also called third-party packages or dependencies) -
+<p>This means that our code requires two <em>external libraries</em> (also called third-party packages or dependencies) -
 <code class="language-plaintext highlighter-rouge">numpy</code> and <code class="language-plaintext highlighter-rouge">matplotlib</code>.</p>
 
-<p>Python applications often use exte<span class="notranslate">rna</span>l libraries that don’t come as part of the standard Python distribution. This means
+<p>Python applications often use external libraries that don’t come as part of the standard Python distribution. This means
 that you will have to use a <em>package manager</em> tool to install them on your system.</p>
 
 <p>Applications will also sometimes need a
-specific version of an exte<span class="notranslate">rna</span>l library (e.g. because they require that a particular
+specific version of an external library (e.g. because they require that a particular
 bug has been fixed in a newer version of the library), or a specific version of Python interpreter.
 This means that each Python application you work with may require a different setup and a set of dependencies so it
 is important to be able to keep these configurations separate to avoid confusion between projects.
 The solution for this problem is to create a self-contained 
 <em>environment</em> per project, which contains a particular version of Python installation plus a number of
-additional exte<span class="notranslate">rna</span>l libraries.</p>
+additional external libraries.</p>
 
 <p>If you see something like</p>
 
@@ -579,7 +579,7 @@ additional exte<span class="notranslate">rna</span>l libraries.</p>
 <p>You know you’ll need additional packages installed on your system, as it relies on <a href="https://github.com/samtools/htslib">htslib, a C library for working with HTS data</a>. This usually means installing additional packages and things that are not always available from within Python’s packaging ecosystem.</p>
 
 <p>Conda environments go beyond virtual environments, and make it easier to develop, run, test and share code with others. In this tutorial, we learn how
-to set up an environment to develop our code and manage our exte<span class="notranslate">rna</span>l dependencies.</p>
+to set up an environment to develop our code and manage our external dependencies.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -601,12 +601,12 @@ one of more packages and all of their dependencies.</p>
 
 <p>This is in fact simply a <em>directory with a particular structure</em> which includes
 links to and enables multiple side-by-side installations of different packages
-or different versions of the same exte<span class="notranslate">rna</span>l library to coexist on your machine
+or different versions of the same external library to coexist on your machine
 and only one to be selected for each of our projects. This allows you to work on
 a particular project without worrying about affecting other projects on your
 machine.</p>
 
-<p>As more exte<span class="notranslate">rna</span>l libraries are added to your project over time, you can add them to
+<p>As more external libraries are added to your project over time, you can add them to
 its specific environment and avoid a great deal of confusion by having separate (smaller) environments
 for each project rather than one huge global environment with potential package version clashes. Another big motivator
 for using environments is that they make sharing your code with others much easier (as we will see shortly).
@@ -628,7 +628,7 @@ introduced by the new version of the dependency without affecting the working ve
 a separate conda environments for your branch to ‘isolate’ your code while testing the new feature.</li>
 </ul>
 
-<p>You do not have to worry too much about specific versions of exte<span class="notranslate">rna</span>l libraries that your project depends on most of the time.
+<p>You do not have to worry too much about specific versions of external libraries that your project depends on most of the time.
 Conda environments enable you to always use the latest available version without specifying it explicitly.
 They also enable you to use a specific older version of a package for your project, should you need to.</p>
 
@@ -650,11 +650,11 @@ ever be installed once on your system (in <code class="language-plaintext highli
 </ul>
 
 <p>While there are pros and cons for using each of the above, all will do the job of managing
-environments for you and it may be a matter of personal preference which one you go for. The <span class="notranslate">Galaxy</span> project is heavily invested in the Conda ecosystem and recommends it as an entry point as it is the most generally useful, and convenient. <a href="http://bioconda.github.io/">The BioConda ecosystem</a> provides an unbelievably large number of packages for bioinformatics specific purposes, which makes it a good choice in general.</p>
+environments for you and it may be a matter of personal preference which one you go for. The Galaxy project is heavily invested in the Conda ecosystem and recommends it as an entry point as it is the most generally useful, and convenient. <a href="http://bioconda.github.io/">The BioConda ecosystem</a> provides an unbelievably large number of packages for bioinformatics specific purposes, which makes it a good choice in general.</p>
 
 <h3 id="managing-packages">Managing Packages</h3>
 
-<p>Part of managing your (virtual) working environment involves installing, updating and removing exte<span class="notranslate">rna</span>l packages
+<p>Part of managing your (virtual) working environment involves installing, updating and removing external packages
 on your system. The Conda command (<code class="language-plaintext highlighter-rouge">conda</code>) is most commonly used for this - it interacts
  and obtains the packages from one or more Conda repositories (e.g. Conda Forge, BioConda, etc.)</p>
 
@@ -736,7 +736,7 @@ bash Miniconda3-latest-Linux-x86_64.sh <span class="nt">-b</span>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda config <span class="nt">--set</span> experimental_solver libmamba
 </code></pre></div></div>
 
-<p>While we’re at it, let’s configure Conda to use the same default repositories as <span class="notranslate">Galaxy</span>:</p>
+<p>While we’re at it, let’s configure Conda to use the same default repositories as Galaxy:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda config <span class="nt">--add</span> channels bioconda
 conda config <span class="nt">--add</span> channels conda-forge
@@ -790,9 +790,9 @@ and modify the environment so that any packages you install will be available on
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conda activate hts
 </code></pre></div></div>
 
-<h3 id="installing-external-libraries-in-an-environment">Installing Exte<span class="notranslate">rna</span>l Libraries in an Environment</h3>
+<h3 id="installing-external-libraries-in-an-environment">Installing External Libraries in an Environment</h3>
 
-<p>We noticed earlier that our code depends on two <em>exte<span class="notranslate">rna</span>l libraries</em> - <code class="language-plaintext highlighter-rouge">numpy</code> and <code class="language-plaintext highlighter-rouge">matplotlib</code> as well as <code class="language-plaintext highlighter-rouge">pysam</code> which depends on <code class="language-plaintext highlighter-rouge">htslib</code>. In order for the code to run on your machine, you need to
+<p>We noticed earlier that our code depends on two <em>external libraries</em> - <code class="language-plaintext highlighter-rouge">numpy</code> and <code class="language-plaintext highlighter-rouge">matplotlib</code> as well as <code class="language-plaintext highlighter-rouge">pysam</code> which depends on <code class="language-plaintext highlighter-rouge">htslib</code>. In order for the code to run on your machine, you need to
 install these dependencies into your environment.</p>
 
 <p>To install the latest version of a package with <code class="language-plaintext highlighter-rouge">conda</code> you use conda’s <code class="language-plaintext highlighter-rouge">install</code> command and specify the package’s name, e.g.:</p>

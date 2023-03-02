@@ -887,9 +887,9 @@
             <div class="col-sm-10">
                  
 
-                <p>Here you will learn to write both Make and Snakemake workflows. We teach two <span class="notranslate">workflow</span> engines because Snakemake uses a lot of the concepts of Make, and these concepts are somewhat complex and a very different way of thinking than you might be used to with <span class="notranslate">workflow</span> design.</p>
+                <p>Here you will learn to write both Make and Snakemake workflows. We teach two workflow engines because Snakemake uses a lot of the concepts of Make, and these concepts are somewhat complex and a very different way of thinking than you might be used to with workflow design.</p>
 
-<p>This tutorial is aimed at students and <span class="notranslate">Galaxy</span> community members who might want to convert Snakemake workflows into <span class="notranslate">Galaxy</span> workflows, but need to understand how Snakemake workflows work.</p>
+<p>This tutorial is aimed at students and Galaxy community members who might want to convert Snakemake workflows into Galaxy workflows, but need to understand how Snakemake workflows work.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -917,7 +917,7 @@
 
 </blockquote>
 
-<p>We’re going to go through this tutorial as “the evolution of a pipeline” from a simple bash script that we might run as individual commands on the command line, all the way up to a Snakemake <span class="notranslate">workflow</span>. This should give you some perspective of why the systems exist, and what benefits each system brings.</p>
+<p>We’re going to go through this tutorial as “the evolution of a pipeline” from a simple bash script that we might run as individual commands on the command line, all the way up to a Snakemake workflow. This should give you some perspective of why the systems exist, and what benefits each system brings.</p>
 
 <h1 id="bash">Bash</h1>
 
@@ -933,7 +933,7 @@ wget https://zenodo.org/record/5562251/files/SRR2589044_2.fq.gz
 <span class="c"># Generate FastQC Report</span>
 fastqc <span class="k">*</span>.fq
 
-<span class="c"># Run Trimmomatic to trim the bad <span class="notranslate">reads</span> out.</span>
+<span class="c"># Run Trimmomatic to trim the bad reads out.</span>
 trimmomatic PE SRR2589044_1.fq.gz SRR2589044_2.fq.gz <span class="se">\</span>
                SRR2589044_1.trim.fq SRR2589044_1un.trim.fq <span class="se">\</span>
                SRR2589044_2.trim.fq SRR2589044_2un.trim.fq <span class="se">\</span>
@@ -950,7 +950,7 @@ fastqc <span class="k">*</span>.trim.fq
 <span class="c"># Generate the genome index</span>
 bwa index GCA_000017985.1_ASM1798v1_genomic.fna
 
-<span class="c"># Align <span class="notranslate">reads</span> to the genome</span>
+<span class="c"># Align reads to the genome</span>
 bwa mem GCA_000017985.1_ASM1798v1_genomic.fna SRR2589044_1.trim.fq SRR2589044_2.trim.fq | samtools <span class="nb">sort</span> <span class="nt">-O</span> bam <span class="nt">-o</span> SRR2589044.bam
 bwa mem GCA_000017985.1_ASM1798v1_genomic.fna SRR2584866_1.trim.fq SRR2584866_2.trim.fq | samtools <span class="nb">sort</span> <span class="nt">-O</span> bam <span class="nt">-o</span> SRR2584866.bam
 </code></pre></div></div>
@@ -960,7 +960,7 @@ the commands we executed interactively at the command line.</p>
 
 <h1 id="make">Make</h1>
 
-<p>Make is a build automation tool that has been around since 1976. It lets you describe build processes, writing down the individual processes which will occur, and then providing you a single entrypoint to run your <span class="notranslate">workflow</span>, a lot like how Scientific <span class="notranslate">Workflow</span> Management System (SciWMS) work! But importantly it is declarative, rather than imperative which is a big change if you’re familiar with programming languages like bash or python.</p>
+<p>Make is a build automation tool that has been around since 1976. It lets you describe build processes, writing down the individual processes which will occur, and then providing you a single entrypoint to run your workflow, a lot like how Scientific Workflow Management System (SciWMS) work! But importantly it is declarative, rather than imperative which is a big change if you’re familiar with programming languages like bash or python.</p>
 
 <p>Instead of defining step by step all of the steps that should be executed like the bash example above,
 you instead write more general rules on how to produce individual files. We’ll look at them one-by-one.</p>
@@ -1065,9 +1065,9 @@ wget https://.../SRR2584866_1.fq.gz</span>
 
 <dl>
   <dt>Speed</dt>
-  <dd>Every time you want to run your declarative pipeline, you either need to run it from start to finish every time (re-downloading sequence data, re-building genome indicies, re-<span class="notranslate">mapping</span> <span class="notranslate">reads</span>) or to write a lot of bash code to check if those files exist and only downloading/indexing/alinging as-needed.</dd>
+  <dd>Every time you want to run your declarative pipeline, you either need to run it from start to finish every time (re-downloading sequence data, re-building genome indicies, re-mapping reads) or to write a lot of bash code to check if those files exist and only downloading/indexing/alinging as-needed.</dd>
   <dt>Reusability</dt>
-  <dd>That pipeline can only download those specific files, unless you write additional code to template out the name of the <span class="notranslate">reads</span> and genome you want to align. By writing more generic rules, as soon as someone gives you new datasets, you can immediately start processing those with your re-usable pipeline.</dd>
+  <dd>That pipeline can only download those specific files, unless you write additional code to template out the name of the reads and genome you want to align. By writing more generic rules, as soon as someone gives you new datasets, you can immediately start processing those with your re-usable pipeline.</dd>
 </dl>
 
 <p>However with <code class="language-plaintext highlighter-rouge">make</code>, you’ve written generic rules which can be used to download any fastq files. And best of all, make can check if the files already exist, and if they do, it skips the step and goes on to the next step, rather than re-creating the file. Make does this by checking the</p>
@@ -1104,7 +1104,7 @@ wget https://.../SRR2584866_1.fq.gz</span>
     <tr>
       <td>Paralellisation?</td>
       <td>None by default, you must edit the script to add it.</td>
-      <td><code class="language-plaintext highlighter-rouge">make -j 8</code> runs each build step on one thread, with 8 th<span class="notranslate">reads</span> available, until all tasks are finished.</td>
+      <td><code class="language-plaintext highlighter-rouge">make -j 8</code> runs each build step on one thread, with 8 threads available, until all tasks are finished.</td>
     </tr>
     <tr>
       <td>Filename</td>
@@ -1150,7 +1150,7 @@ wget https://.../SRR2584866_1.fq.gz</span>
 %.fastqc.html: %.fq
 	fastqc $&lt;
 
-# This rule violates some Makefile inte<span class="notranslate">rna</span>l expectations by having multiple
+# This rule violates some Makefile internal expectations by having multiple
 # outputs which is not handled well by all implementations
 %_1.trim.fq %_2.trim.fq %_1un.trim.fq %_2un.trim.fq: %_1.fq.gz %_2.fq.gz
 	trimmomatic PE $^ \
@@ -1211,7 +1211,7 @@ wget https://.../SRR2584866_1.fq.gz</span>
   </blockquote>
 </blockquote>
 
-<p>Reading the above you should be able to imagine a tree of tasks that Make is creating inte<span class="notranslate">rna</span>lly:</p>
+<p>Reading the above you should be able to imagine a tree of tasks that Make is creating internally:</p>
 
 <p>TODO</p>
 
@@ -1222,7 +1222,7 @@ wget https://.../SRR2584866_1.fq.gz</span>
 <h1 id="snakemake">Snakemake</h1>
 
 <blockquote class="quote">
-  <p>The Snakemake <span class="notranslate">workflow</span> management system is a tool to create reproducible and scalable data analyses. Workflows are described via a human readable, Python based language. They can be seamlessly scaled to server, cluster, grid and cloud environments, without the need to modify the <span class="notranslate">workflow</span> definition. Finally, Snakemake workflows can entail a description of required software, which will be automatically deployed to any execution environment. <a href="https://snakemake.readthedocs.io/en/stable/index.html">source</a></p>
+  <p>The Snakemake workflow management system is a tool to create reproducible and scalable data analyses. Workflows are described via a human readable, Python based language. They can be seamlessly scaled to server, cluster, grid and cloud environments, without the need to modify the workflow definition. Finally, Snakemake workflows can entail a description of required software, which will be automatically deployed to any execution environment. <a href="https://snakemake.readthedocs.io/en/stable/index.html">source</a></p>
 </blockquote>
 
 <p>Snakemake addresses a lot of the issues with make for use in scientific contexts: clearer pipelines and dependencies. We did not talk about it in the previous section, but where did <code class="language-plaintext highlighter-rouge">bowtie2</code> and <code class="language-plaintext highlighter-rouge">bowtie2-build</code> come from? How did those get installed? What versions are they? None of that information is included in the Makefile</p>
@@ -1425,7 +1425,7 @@ rule trimmomatic:
         <div class="box-title code-out-title" id="code-out" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Building DAG of jobs...
 WorkflowError:
-Target rules may not contain wildcards. Please specify concrete files or a rule without wildcards at the command line, or have a rule without wildcards at the very top of your <span class="notranslate">workflow</span> (e.g. the typical "rule all" which just collects all results you want to generate in the end).
+Target rules may not contain wildcards. Please specify concrete files or a rule without wildcards at the command line, or have a rule without wildcards at the very top of your workflow (e.g. the typical "rule all" which just collects all results you want to generate in the end).
 </code></pre></div>        </div>
       </blockquote>
 
@@ -1445,10 +1445,10 @@ Target rules may not contain wildcards. Please specify concrete files or a rule 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Building DAG of jobs...
 Using shell: /usr/bin/bash
 Provided cores: 1 (use --cores to define parallelism)
-Rules claiming more th<span class="notranslate">reads</span> will be scaled down.
+Rules claiming more threads will be scaled down.
 Conda environments: ignored
 Job stats:
-job         count    min th<span class="notranslate">reads</span>    max th<span class="notranslate">reads</span>
+job         count    min threads    max threads
 --------  -------  -------------  -------------
 download        2              1              1
 total           2              1              1
@@ -1592,7 +1592,7 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T160632.213680.snak
 
 <h2 id="best-practices">Best Practices</h2>
 
-<p>But this was our very first attempt at a <span class="notranslate">workflow</span>, so what might a best practice <span class="notranslate">workflow</span> look like?</p>
+<p>But this was our very first attempt at a workflow, so what might a best practice workflow look like?</p>
 
 <h3 id="conda-for-reproducibility">Conda for reproducibility</h3>
 
@@ -1898,7 +1898,7 @@ The first line shows the original file, and the second line shows the new file. 
           <td>Conda environment files</td>
         </tr>
         <tr>
-          <td><span class="notranslate">reads</span></td>
+          <td>reads</td>
           <td>Your sequencing data</td>
         </tr>
         <tr>
@@ -1937,7 +1937,7 @@ index 59b983c..31ebdff 100644
  rule download:
  	output:
 <span class="gd">-		"{sample}.fq.gz"
-</span><span class="gi">+		"<span class="notranslate">reads</span>/{sample}.fq.gz"
+</span><span class="gi">+		"reads/{sample}.fq.gz"
 </span> 	log:
  		out="logs/download.{sample}.out",
  		err="logs/download.{sample}.err"
@@ -1955,7 +1955,7 @@ index 59b983c..31ebdff 100644
 </span> rule fastqc:
  	input:
 <span class="gd">-		"{sample}.fq"
-</span><span class="gi">+		"<span class="notranslate">reads</span>/{sample}.fq.gz"
+</span><span class="gi">+		"reads/{sample}.fq.gz"
 </span> 	output:
 <span class="gd">-		"{sample}_fastqc.html"
 </span><span class="gi">+		"fastqc/{sample}_fastqc.html"
@@ -1968,8 +1968,8 @@ index 59b983c..31ebdff 100644
  	input:
 <span class="gd">-		r1="{sample}_1.fq",
 -		r2="{sample}_2.fq"
-</span><span class="gi">+		r1="<span class="notranslate">reads</span>/{sample}_1.fq",
-+		r2="<span class="notranslate">reads</span>/{sample}_2.fq"
+</span><span class="gi">+		r1="reads/{sample}_1.fq",
++		r2="reads/{sample}_2.fq"
 </span> 	output:
 <span class="gd">-		o1="{sample}_1.trim.fq",
 -		o2="{sample}_2.trim.fq",
@@ -2043,7 +2043,7 @@ index 59b983c..31ebdff 100644
 +
 </span> rule download:
  	output:
- 		"<span class="notranslate">reads</span>/{sample}.fq.gz"
+ 		"reads/{sample}.fq.gz"
 </code></pre></div>    </div>
 
     <blockquote class="tip">
@@ -2056,7 +2056,7 @@ index 59b983c..31ebdff 100644
 
 <h2 id="final-pipeline">Final Pipeline</h2>
 
-<p>This is starting to look like a pretty good <span class="notranslate">workflow</span>! Let’s preview how it will run:</p>
+<p>This is starting to look like a pretty good workflow! Let’s preview how it will run:</p>
 
 <blockquote class="code-in">
   <div class="box-title code-in-title" id="code-in" aria-label="code-in box: "><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input</div>
@@ -2067,7 +2067,7 @@ index 59b983c..31ebdff 100644
   <div class="box-title code-out-title" id="code-out-2" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Building DAG of jobs...
 Job stats:
-job                count    min th<span class="notranslate">reads</span>    max th<span class="notranslate">reads</span>
+job                count    min threads    max threads
 ---------------  -------  -------------  -------------
 align                  1              1              1
 all                    1              1              1
@@ -2080,23 +2080,23 @@ total                  7              1              1
 
 [Fri Oct  8 16:59:39 2021]
 rule download:
-    output: <span class="notranslate">reads</span>/SRR2584863_2.fq.gz
+    output: reads/SRR2584863_2.fq.gz
     log: logs/download.SRR2584863_2.out, logs/download.SRR2584863_2.err
     jobid: 4
     wildcards: sample=SRR2584863_2
     resources: tmpdir=/tmp
 
-wget https://zenodo.org/record/5562251/SRR2584863_2.fq.gz -O <span class="notranslate">reads</span>/SRR2584863_2.fq.gz &gt;logs/download.SRR2584863_2.out 2&gt;logs/download.SRR2584863_2.err
+wget https://zenodo.org/record/5562251/SRR2584863_2.fq.gz -O reads/SRR2584863_2.fq.gz &gt;logs/download.SRR2584863_2.out 2&gt;logs/download.SRR2584863_2.err
 
 [Fri Oct  8 16:59:39 2021]
 rule download:
-    output: <span class="notranslate">reads</span>/SRR2584863_1.fq.gz
+    output: reads/SRR2584863_1.fq.gz
     log: logs/download.SRR2584863_1.out, logs/download.SRR2584863_1.err
     jobid: 3
     wildcards: sample=SRR2584863_1
     resources: tmpdir=/tmp
 
-wget https://zenodo.org/record/5562251/SRR2584863_1.fq.gz -O <span class="notranslate">reads</span>/SRR2584863_1.fq.gz &gt;logs/download.SRR2584863_1.out 2&gt;logs/download.SRR2584863_1.err
+wget https://zenodo.org/record/5562251/SRR2584863_1.fq.gz -O reads/SRR2584863_1.fq.gz &gt;logs/download.SRR2584863_1.out 2&gt;logs/download.SRR2584863_1.err
 
 [Fri Oct  8 16:59:39 2021]
 rule download_genome:
@@ -2109,14 +2109,14 @@ wget https://zenodo.org/record/5562251/GCA_000017985.1_ASM1798v1_genomic.fna.gz 
 
 [Fri Oct  8 16:59:39 2021]
 rule trimmomatic:
-    input: <span class="notranslate">reads</span>/SRR2584863_1.fq.gz, <span class="notranslate">reads</span>/SRR2584863_2.fq.gz
+    input: reads/SRR2584863_1.fq.gz, reads/SRR2584863_2.fq.gz
     output: trim/SRR2584863_1.trim.fq, trim/SRR2584863_2.trim.fq, trim/SRR2584863_1un.trim.fq, trim/SRR2584863_2un.trim.fq
     log: logs/trimmomatic.SRR2584863.out, logs/trimmomatic.SRR2584863.err
     jobid: 2
     wildcards: sample=SRR2584863
     resources: tmpdir=/tmp
 
-trimmomatic PE <span class="notranslate">reads</span>/SRR2584863_1.fq.gz <span class="notranslate">reads</span>/SRR2584863_2.fq.gz trim/SRR2584863_1.trim.fq trim/SRR2584863_1un.trim.fq trim/SRR2584863_2.trim.fq trim/SRR2584863_2un.trim.fq SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15 &gt;logs/trimmomatic.SRR2584863.out 2&gt;logs/trimmomatic.SRR2584863.err
+trimmomatic PE reads/SRR2584863_1.fq.gz reads/SRR2584863_2.fq.gz trim/SRR2584863_1.trim.fq trim/SRR2584863_1un.trim.fq trim/SRR2584863_2.trim.fq trim/SRR2584863_2un.trim.fq SLIDINGWINDOW:4:20 MINLEN:25 ILLUMINACLIP:NexteraPE-PE.fa:2:40:15 &gt;logs/trimmomatic.SRR2584863.out 2&gt;logs/trimmomatic.SRR2584863.err
 
 [Fri Oct  8 16:59:39 2021]
 rule indexgenome:
@@ -2146,7 +2146,7 @@ localrule all:
     resources: tmpdir=/tmp
 
 Job stats:
-job                count    min th<span class="notranslate">reads</span>    max th<span class="notranslate">reads</span>
+job                count    min threads    max threads
 ---------------  -------  -------------  -------------
 align                  1              1              1
 all                    1              1              1
@@ -2250,23 +2250,23 @@ This was a dry-run (flag -n). The order of jobs does not reflect the order of ex
 
 <h3 id="expand">expand</h3>
 
-<p>You can use this function in inputs and outputs to help you list all expected files, without having to write out or hardcode that list of files. Here we define a <code class="language-plaintext highlighter-rouge">sorted_<span class="notranslate">reads</span>/{sample}.bam</code> and then this is repeated for every value of samples</p>
+<p>You can use this function in inputs and outputs to help you list all expected files, without having to write out or hardcode that list of files. Here we define a <code class="language-plaintext highlighter-rouge">sorted_reads/{sample}.bam</code> and then this is repeated for every value of samples</p>
 
 <blockquote class="code-in">
   <div class="box-title code-in-title" id="code-in-snakemake-code" aria-label="code-in box: Snakemake Code"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Snakemake Code</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SAMPLES = ["a", "b", "c"]
-expand("sorted_<span class="notranslate">reads</span>/{sample}.bam", sample=SAMPLES)
+expand("sorted_reads/{sample}.bam", sample=SAMPLES)
 </code></pre></div>  </div>
 </blockquote>
 <blockquote class="code-out">
   <div class="box-title code-out-title" id="code-out-snakemake-output" aria-label="code-out box: Snakemake Output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Snakemake Output</div>
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>["sorted_<span class="notranslate">reads</span>/a.bam", "sorted_<span class="notranslate">reads</span>/b.bam", "sorted_<span class="notranslate">reads</span>/c.bam"]
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>["sorted_reads/a.bam", "sorted_reads/b.bam", "sorted_reads/c.bam"]
 </code></pre></div>  </div>
 </blockquote>
 
 <p>This can also be used with multiple variables:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>expand("sorted_<span class="notranslate">reads</span>/{sample}.{replicate}.bam", sample=SAMPLES, replicate=[0, 1])
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>expand("sorted_reads/{sample}.{replicate}.bam", sample=SAMPLES, replicate=[0, 1])
 </code></pre></div></div>
 
 <p>We should use something exactly like this for our samples. We can have a <code class="language-plaintext highlighter-rouge">SAMPLES</code> variable representing our final output bam files we wish to generate, and then instead of <code class="language-plaintext highlighter-rouge">replicates</code> we’ll have <code class="language-plaintext highlighter-rouge">_1</code> and <code class="language-plaintext highlighter-rouge">_2</code> or so. First let’s make the change to use the <code class="language-plaintext highlighter-rouge">SAMPLES</code> and expand just for our final output.</p>
@@ -2342,15 +2342,15 @@ expand("sorted_<span class="notranslate">reads</span>/{sample}.bam", sample=SAMP
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rule fastqc:
 	input:
-		"<span class="notranslate">reads</span>/{sample}.fq.gz"
+		"reads/{sample}.fq.gz"
 </code></pre></div></div>
 
-<p>This rule only knows how to input files from the <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span></code> directory. We have some options:</p>
+<p>This rule only knows how to input files from the <code class="language-plaintext highlighter-rouge">reads</code> directory. We have some options:</p>
 
 <ol>
-  <li>We can probably most easily solve this by simply replacing our <code class="language-plaintext highlighter-rouge">trimmed</code> folder with the <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span></code> folder and making them the same. This way all fastq files will be in the same place, but perhaps it will be less clear later which files we can delete if we need to clean up. Right now we know we can remove the <code class="language-plaintext highlighter-rouge">trimmed</code> folder if we need some space, and our pipeline can re-create the data. If we mixed them, it would be slightly more complicated.</li>
+  <li>We can probably most easily solve this by simply replacing our <code class="language-plaintext highlighter-rouge">trimmed</code> folder with the <code class="language-plaintext highlighter-rouge">reads</code> folder and making them the same. This way all fastq files will be in the same place, but perhaps it will be less clear later which files we can delete if we need to clean up. Right now we know we can remove the <code class="language-plaintext highlighter-rouge">trimmed</code> folder if we need some space, and our pipeline can re-create the data. If we mixed them, it would be slightly more complicated.</li>
   <li>
-    <p>We could probably use <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span></code> as a wildcard (like our <code class="language-plaintext highlighter-rouge">{genome}</code> or <code class="language-plaintext highlighter-rouge">{sample}</code>), but here we’d have to have some additional complexity as a result, like the folder name would en up part of the <code class="language-plaintext highlighter-rouge">output</code> name, as is required by <code class="language-plaintext highlighter-rouge">Snakemake</code> to prevent accidental conflicts.</p>
+    <p>We could probably use <code class="language-plaintext highlighter-rouge">reads</code> as a wildcard (like our <code class="language-plaintext highlighter-rouge">{genome}</code> or <code class="language-plaintext highlighter-rouge">{sample}</code>), but here we’d have to have some additional complexity as a result, like the folder name would en up part of the <code class="language-plaintext highlighter-rouge">output</code> name, as is required by <code class="language-plaintext highlighter-rouge">Snakemake</code> to prevent accidental conflicts.</p>
 
     <blockquote class="tip">
       <div class="box-title tip-title" id="tip-how-would-this-look"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-would-this-look-contents" aria-expanded="true" aria-label="Toggle tip box: How would this look?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How would this look?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -2360,7 +2360,7 @@ expand("sorted_<span class="notranslate">reads</span>/{sample}.bam", sample=SAMP
 
  rule fastqc:
         input:
--               "<span class="notranslate">reads</span>/{sample}.fq.gz"
+-               "reads/{sample}.fq.gz"
 +               "{folder}/{sample}.fq.gz"
         output:
 -               "fastqc/{sample}_fastqc.html"
@@ -2407,7 +2407,7 @@ expand("sorted_<span class="notranslate">reads</span>/{sample}.bam", sample=SAMP
 <span class="err">
 </span><span class="gi">+rule fastqc_trim:
 +	input:
-+		"<span class="notranslate">reads</span>/{sample}.fq.gz"
++		"reads/{sample}.fq.gz"
 +	output:
 +		"fastqc/{sample}_fastqc.html"
 +	conda:
@@ -2420,7 +2420,7 @@ expand("sorted_<span class="notranslate">reads</span>/{sample}.bam", sample=SAMP
 +
 </span> rule trimmomatic:
  	input:
- 		r1="<span class="notranslate">reads</span>/{sample}_1.fq.gz",
+ 		r1="reads/{sample}_1.fq.gz",
 </code></pre></div>    </div>
 
   </blockquote>
@@ -2449,8 +2449,8 @@ Wildcards:
 	fastqc_trim: sample=SRR2584863_1
 	fastqc: sample=SRR2584863_1
 Expected input files:
-	fastqc_trim: <span class="notranslate">reads</span>/SRR2584863_1.fq.gz
-	fastqc: <span class="notranslate">reads</span>/SRR2584863_1.fq.gz
+	fastqc_trim: reads/SRR2584863_1.fq.gz
+	fastqc: reads/SRR2584863_1.fq.gz
 Expected output files:
 	fastqc_trim: fastqc/SRR2584863_1_fastqc.html
 	fastqc: fastqc/SRR2584863_1_fastqc.html
@@ -2464,7 +2464,7 @@ Expected output files:
 </span><span class="gi">+++ b/Snakefile
 </span><span class="p">@@ -28,7 +28,7 @@</span> rule fastqc:
  	input:
- 		"<span class="notranslate">reads</span>/{sample}.fq.gz"
+ 		"reads/{sample}.fq.gz"
  	output:
 <span class="gd">-		"fastqc/{sample}_fastqc.html"
 </span><span class="gi">+		"fastqc-trim/{sample}_fastqc.html"
@@ -2486,7 +2486,7 @@ Expected output files:
         <div class="box-title code-in-title" id="code-in-cli-4" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
 Job stats:
-job         count    min th<span class="notranslate">reads</span>    max th<span class="notranslate">reads</span>
+job         count    min threads    max threads
 --------  -------  -------------  -------------
 all             1              1              1
 download        4              1              1
@@ -2519,27 +2519,27 @@ This was a dry-run (flag -n). The order of jobs does not reflect the order of ex
         <div class="box-title code-in-title" id="code-in-cli-6" aria-label="code-in box: CLI"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: CLI</div>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error in rule download:
 Removing output files of failed job download since they might be corrupted:
-<span class="notranslate">reads</span>/SRR2584863_2un.fq.gz
+reads/SRR2584863_2un.fq.gz
     jobid: 24
-    output: <span class="notranslate">reads</span>/SRR2589044_1un.fq.gz
+    output: reads/SRR2589044_1un.fq.gz
     log: logs/download.SRR2589044_1un.out, logs/download.SRR2589044_1un.err (check log file(s) for error message)
     shell:
-        wget https://zenodo.org/record/5562251/SRR2589044_1un.fq.gz -O <span class="notranslate">reads</span>/SRR2589044_1un.fq.gz &gt;logs/download.SRR2589044_1un.out 2&gt;logs/download.SRR2589044_1un.err
+        wget https://zenodo.org/record/5562251/SRR2589044_1un.fq.gz -O reads/SRR2589044_1un.fq.gz &gt;logs/download.SRR2589044_1un.out 2&gt;logs/download.SRR2589044_1un.err
         (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
 
 Removing output files of failed job download since they might be corrupted:
-<span class="notranslate">reads</span>/SRR2589044_1un.fq.gz
+reads/SRR2589044_1un.fq.gz
 [Fri Oct  8 17:15:46 2021]
 Error in rule download:
     jobid: 26
-    output: <span class="notranslate">reads</span>/SRR2589044_2un.fq.gz
+    output: reads/SRR2589044_2un.fq.gz
     log: logs/download.SRR2589044_2un.out, logs/download.SRR2589044_2un.err (check log file(s) for error message)
     shell:
-        wget https://zenodo.org/record/5562251/SRR2589044_2un.fq.gz -O <span class="notranslate">reads</span>/SRR2589044_2un.fq.gz &gt;logs/download.SRR2589044_2un.out 2&gt;logs/download.SRR2589044_2un.err
+        wget https://zenodo.org/record/5562251/SRR2589044_2un.fq.gz -O reads/SRR2589044_2un.fq.gz &gt;logs/download.SRR2589044_2un.out 2&gt;logs/download.SRR2589044_2un.err
         (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
 
 Removing output files of failed job download since they might be corrupted:
-<span class="notranslate">reads</span>/SRR2589044_2un.fq.gz
+reads/SRR2589044_2un.fq.gz
 Waiting at most 5 seconds for missing files.
 MissingOutputException in line 55 of /tmp/snake.q5mqtdhfg6/Snakefile:
 Job Missing files after 5 seconds:
@@ -2558,7 +2558,7 @@ Job id: 21 completed successfully, but some output files are missing. 21
 <span class="err">
 </span> rule fastqc:
  	input:
-<span class="gd">-		"<span class="notranslate">reads</span>/{sample}.fq.gz"
+<span class="gd">-		"reads/{sample}.fq.gz"
 </span><span class="gi">+		"trim/{sample}.fq.gz"
 </span> 	output:
  		"fastqc-trim/{sample}_fastqc.html"
@@ -2729,7 +2729,7 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T172535.438752.snak
  	log:
 <span class="p">@@ -41,7 +40,7 @@</span> rule fastqc_trim:
  	input:
- 		"<span class="notranslate">reads</span>/{sample}.fq.gz"
+ 		"reads/{sample}.fq.gz"
  	output:
 <span class="gd">-		"fastqc/{sample}_fastqc.html"
 </span><span class="gi">+		"fastqc/{sample}_fastqc.zip"
@@ -2757,7 +2757,7 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T172535.438752.snak
 +
 </span> rule trimmomatic:
  	input:
- 		r1="<span class="notranslate">reads</span>/{sample}_1.fq.gz",
+ 		r1="reads/{sample}_1.fq.gz",
 </code></pre></div>    </div>
 
     <p>And your new <code class="language-plaintext highlighter-rouge">envs/multiqc.yaml</code> should look like this:</p>
@@ -2796,9 +2796,9 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T172535.438752.snak
 
 <p>With this you’ve made a real pipeline in Snakemake and hopefully learned a bit about how to manage jobs on the command line. If you’re going to work at the command line to do your bioinformatics or other analyses, this (or another <abbr title="Scientific Workflow Management System">SciWMS</abbr>) is the way to do it! They all have pros and cons which you should evaluate.</p>
 
-<p>But for those of you who have done <span class="notranslate">Galaxy</span> work before, you’ll notice there is a <strong>lot</strong> of overhead, things you need to take care of yourself. Is the program installed, are the dependencies correct, how many cores would you like this job to use, what is precisely the command line you would like to run. How would you like to batch your data, by sample? By another method? And this is one of the major benefits of using a system like <span class="notranslate">Galaxy</span>, it abstracts away all of the command line, all of the resource management for you. Our administrators check things like how much memory each step should have, or how many cores, the tool developers work to make sure the interface has all of the options that are available on the command line. You get less control over your data and the processes, but in exchange you don’t need to worry about these intricate details of low level bioinformatics.</p>
+<p>But for those of you who have done Galaxy work before, you’ll notice there is a <strong>lot</strong> of overhead, things you need to take care of yourself. Is the program installed, are the dependencies correct, how many cores would you like this job to use, what is precisely the command line you would like to run. How would you like to batch your data, by sample? By another method? And this is one of the major benefits of using a system like Galaxy, it abstracts away all of the command line, all of the resource management for you. Our administrators check things like how much memory each step should have, or how many cores, the tool developers work to make sure the interface has all of the options that are available on the command line. You get less control over your data and the processes, but in exchange you don’t need to worry about these intricate details of low level bioinformatics.</p>
 
-<p>Let’s do a final comparison table for the systems, and since this is the <span class="notranslate">Galaxy</span> Training Network we’ll include <span class="notranslate">Galaxy</span> in the comparison. Here we categorise features as ‘manual’ if you can accomplish those features with manual work, ‘automatic’ if they’re built in parts of the system, <code class="language-plaintext highlighter-rouge">none</code> if the concept doesn’t really apply</p>
+<p>Let’s do a final comparison table for the systems, and since this is the Galaxy Training Network we’ll include Galaxy in the comparison. Here we categorise features as ‘manual’ if you can accomplish those features with manual work, ‘automatic’ if they’re built in parts of the system, <code class="language-plaintext highlighter-rouge">none</code> if the concept doesn’t really apply</p>
 
 <table>
   <thead>
@@ -2807,7 +2807,7 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T172535.438752.snak
       <th>Bash</th>
       <th>Make</th>
       <th>Snakemake</th>
-      <th><span class="notranslate">Galaxy</span></th>
+      <th>Galaxy</th>
     </tr>
   </thead>
   <tbody>
@@ -2816,7 +2816,7 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T172535.438752.snak
       <td>Line-by-line</td>
       <td>Custom Generic Rules</td>
       <td>Custom Generic Rules</td>
-      <td>Pre-built rules via <span class="notranslate">Galaxy</span> Tools</td>
+      <td>Pre-built rules via Galaxy Tools</td>
     </tr>
     <tr>
       <td>Partial re-run</td>
@@ -2879,7 +2879,7 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T172535.438752.snak
       <td>None</td>
       <td>None</td>
       <td>Yes, but manual</td>
-      <td>Automatic, handled by <span class="notranslate">Galaxy</span> Admins</td>
+      <td>Automatic, handled by Galaxy Admins</td>
     </tr>
     <tr>
       <td>Installation/Maintenance</td>
@@ -2891,7 +2891,7 @@ Complete log: /tmp/snake.q5mqtdhfg6/.snakemake/log/2021-10-08T172535.438752.snak
   </tbody>
 </table>
 
-<p>The author’s biases are probably quite clear in the above table, and you can find an alte<span class="notranslate">rna</span>tive viewpoint from Snakemake’s documentation, but it comes down to different audiences. If you care how many CPU cores a job receives and need precise control over the command line, or can’t/don’t want to deploy <span class="notranslate">Galaxy</span> and just want a quick command line tool.</p>
+<p>The author’s biases are probably quite clear in the above table, and you can find an alternative viewpoint from Snakemake’s documentation, but it comes down to different audiences. If you care how many CPU cores a job receives and need precise control over the command line, or can’t/don’t want to deploy Galaxy and just want a quick command line tool.</p>
 
 
                 

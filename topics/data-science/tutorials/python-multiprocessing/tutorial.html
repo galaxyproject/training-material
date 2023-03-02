@@ -557,22 +557,22 @@
   <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#threads-vs-processes" id="markdown-toc-threads-vs-processes">Th<span class="notranslate">reads</span> vs Processes</a></li>
+  <li><a href="#threads-vs-processes" id="markdown-toc-threads-vs-processes">Threads vs Processes</a></li>
   <li><a href="#pools--paralellism" id="markdown-toc-pools--paralellism">Pools &amp; Paralellism</a></li>
   <li><a href="#when-to-parallelise" id="markdown-toc-when-to-parallelise">When to parallelise</a></li>
   <li><a href="#sizing-your-pool" id="markdown-toc-sizing-your-pool">Sizing your Pool</a></li>
-  <li><a href="#threads" id="markdown-toc-threads">Th<span class="notranslate">reads</span></a></li>
+  <li><a href="#threads" id="markdown-toc-threads">Threads</a></li>
 </ol>
 
 </blockquote>
 
-<h2 id="threads-vs-processes">Th<span class="notranslate">reads</span> vs Processes</h2>
+<h2 id="threads-vs-processes">Threads vs Processes</h2>
 
-<p>For many languages, th<span class="notranslate">reads</span> can be extremely efficient, as they are rather light weight and don’t require many resources to create new th<span class="notranslate">reads</span>. “Th<span class="notranslate">reads</span> are cheap”. However Python has a major limitation with the Global Interpreter Lock (GIL). Only one thread can be executing at once, whether it’s the main thread, or one of the others you’ve spawned. So we look to alte<span class="notranslate">rna</span>tive concurrency mechanisms like processes for sharing the load across multiple CPU cores.</p>
+<p>For many languages, threads can be extremely efficient, as they are rather light weight and don’t require many resources to create new threads. “Threads are cheap”. However Python has a major limitation with the Global Interpreter Lock (GIL). Only one thread can be executing at once, whether it’s the main thread, or one of the others you’ve spawned. So we look to alternative concurrency mechanisms like processes for sharing the load across multiple CPU cores.</p>
 
-<p>For <strong>th<span class="notranslate">reads</span></strong>, if you are doing “lightweight” work like fetching data from the web where a lot of time is spent waiting for the server to respond, but very little computational work within Python is required, then th<span class="notranslate">reads</span> are a great fit!</p>
+<p>For <strong>threads</strong>, if you are doing “lightweight” work like fetching data from the web where a lot of time is spent waiting for the server to respond, but very little computational work within Python is required, then threads are a great fit!</p>
 
-<p>However if you are doing computationally intensive work (imagine calculating prime numbers or similar complex tasks) then each thread will be contending for CPU time. Python is a single processes and can only have one thread running at a time due to the <abbr title="Global Interpreter Lock">GIL</abbr>. So it will switch between multiple th<span class="notranslate">reads</span> and try and make progress on each, but it cannot execute them truly simultaneously. Here we need to switch to processes.</p>
+<p>However if you are doing computationally intensive work (imagine calculating prime numbers or similar complex tasks) then each thread will be contending for CPU time. Python is a single processes and can only have one thread running at a time due to the <abbr title="Global Interpreter Lock">GIL</abbr>. So it will switch between multiple threads and try and make progress on each, but it cannot execute them truly simultaneously. Here we need to switch to processes.</p>
 
 <p><strong>Processes</strong> are relatively heavier weight as they essentially start a new python process, before executing the individual function. This is part of the reason for a “Pool”, to amortise the expensive cost of setting up processes, before allowing them to do a lot of work quickly. Here each process can be using it’s own CPU core fully, and thus make more sense for computationally expensive tasks.</p>
 
@@ -598,7 +598,7 @@ function to send inputs multiply to the specified function <code class="language
 
 <h2 id="pools--paralellism">Pools &amp; Paralellism</h2>
 
-<p>Let’s do another example, the classic “print time”, to see how the th<span class="notranslate">reads</span> are actually executing across 4 processes.</p>
+<p>Let’s do another example, the classic “print time”, to see how the threads are actually executing across 4 processes.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">time</span>
 
@@ -636,19 +636,19 @@ This is precisely the situation of e.g. 4 queues at the grocery; as soon as one 
   <li>That take a significant amount of time, relative to the time it takes to rewrite your code to support parallelising.</li>
 </ul>
 
-<p>Some common examples of this are slow tasks like requesting data from multiple websites, e.g. using the <code class="language-plaintext highlighter-rouge">requests</code> library. Or doing some computationally expensive calculation. The last point however is especially important, as it is not always trivial to rearchitect your code to handle being spread across multiple th<span class="notranslate">reads</span> or processes.</p>
+<p>Some common examples of this are slow tasks like requesting data from multiple websites, e.g. using the <code class="language-plaintext highlighter-rouge">requests</code> library. Or doing some computationally expensive calculation. The last point however is especially important, as it is not always trivial to rearchitect your code to handle being spread across multiple threads or processes.</p>
 
-<p>Let’s parallelize this program which fetches some metadata from multiple <span class="notranslate">Galaxy</span> servers:</p>
+<p>Let’s parallelize this program which fetches some metadata from multiple Galaxy servers:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">time</span>
 
 <span class="n">servers</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s">"https://use<span class="notranslate">galaxy</span>.org"</span><span class="p">,</span>
-    <span class="s">"https://use<span class="notranslate">galaxy</span>.org.au"</span><span class="p">,</span>
-    <span class="s">"https://use<span class="notranslate">galaxy</span>.eu"</span><span class="p">,</span>
-    <span class="s">"https://use<span class="notranslate">galaxy</span>.fr"</span><span class="p">,</span>
-    <span class="s">"https://use<span class="notranslate">galaxy</span>.be"</span><span class="p">,</span>
+    <span class="s">"https://usegalaxy.org"</span><span class="p">,</span>
+    <span class="s">"https://usegalaxy.org.au"</span><span class="p">,</span>
+    <span class="s">"https://usegalaxy.eu"</span><span class="p">,</span>
+    <span class="s">"https://usegalaxy.fr"</span><span class="p">,</span>
+    <span class="s">"https://usegalaxy.be"</span><span class="p">,</span>
 <span class="p">]</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
@@ -740,9 +740,9 @@ This is precisely the situation of e.g. 4 queues at the grocery; as soon as one 
 
 <p><img src="../../images/pool-vs-runtime.png" alt="graph of the above, showing a decrease in runtime from 2.6 seconds to approximately 1.1 seconds as the pool size increases from 1 to 5. As the pool size increases from 1-2 there is a large improvement, but as it increases from 4-5 the improvement is very small, on the order of milliseconds." loading="lazy" /></p>
 
-<h2 id="threads">Th<span class="notranslate">reads</span></h2>
+<h2 id="threads">Threads</h2>
 
-<p>Let’s convert our previous example from processes to th<span class="notranslate">reads</span>, as processes aren’t strictly necessary for such a light weight use case as fetching data from the internet where you’re blocking on network rather than CPU resources.</p>
+<p>Let’s convert our previous example from processes to threads, as processes aren’t strictly necessary for such a light weight use case as fetching data from the internet where you’re blocking on network rather than CPU resources.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">concurrent.futures</span>
 <span class="kn">import</span> <span class="nn">requests</span>

@@ -811,7 +811,7 @@ You can often configure them to “test code when it is pushed to a branch on Gi
 If you need to automatically run a command whenever some event happens, and then to report this back in some standardised way (GitHub PR statuses, automatically deploying, notifications in chat), then a CI system can do this for you.</p>
 
 <p>There are many options for, some of these have different features which may be desirable in one or another scenario.
-This tutorial will specifically cover automation with Jenkins as that is one of the tools <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>.*</code> use for a subset of their automation.</p>
+This tutorial will specifically cover automation with Jenkins as that is one of the tools <code class="language-plaintext highlighter-rouge">usegalaxy.*</code> use for a subset of their automation.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -852,7 +852,7 @@ This tutorial will specifically cover automation with Jenkins as that is one of 
 
 <p>In general, self-hosted options have the overhead of managing and securing and updating the service, but offer significantly more freedom if you need it. They generally provide poor per-job isolation and assume you trust all of the jobs and people with access to build scripts used in the build pipeline. The free services (Travis, Circle CI) often have much better user-experiences and are easier to get started with and provide better out-of-the-box isolation.</p>
 
-<p>We will look at setting up and managing a Jenkins server today, how to setup tasks, and some of the things that <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>.*</code> automate with their Jenkins servers.</p>
+<p>We will look at setting up and managing a Jenkins server today, how to setup tasks, and some of the things that <code class="language-plaintext highlighter-rouge">usegalaxy.*</code> automate with their Jenkins servers.</p>
 
 <h1 id="infrastructure">Infrastructure</h1>
 
@@ -876,7 +876,7 @@ This tutorial will specifically cover automation with Jenkins as that is one of 
     <li>
       <p>Install the requirements</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy install -p roles -r requirements.yml
 </code></pre></div>      </div>
     </li>
     <li>
@@ -898,7 +898,7 @@ This tutorial will specifically cover automation with Jenkins as that is one of 
     <span class="pi">-</span> <span class="s">geerlingguy.jenkins</span>
 </code></pre></div>      </div>
 
-      <p>During this tutorial we will install everything on the same host, but often one keeps the build infrastructure on a separate host. We permit the Jenkins user to run everything as root, because later we will run Ansible with Jenkins, and we have <code class="language-plaintext highlighter-rouge">become: true</code> in our <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook, so the <code class="language-plaintext highlighter-rouge">jenkins</code> user will need to be able to become root.</p>
+      <p>During this tutorial we will install everything on the same host, but often one keeps the build infrastructure on a separate host. We permit the Jenkins user to run everything as root, because later we will run Ansible with Jenkins, and we have <code class="language-plaintext highlighter-rouge">become: true</code> in our <code class="language-plaintext highlighter-rouge">galaxy.yml</code> playbook, so the <code class="language-plaintext highlighter-rouge">jenkins</code> user will need to be able to become root.</p>
     </li>
     <li>
       <p>Edit the inventory file (<code class="language-plaintext highlighter-rouge">hosts</code>) an add a group for monitoring like:</p>
@@ -911,7 +911,7 @@ This tutorial will specifically cover automation with Jenkins as that is one of 
       <p>Create and edit the group variables for the <code class="language-plaintext highlighter-rouge">build</code> group, <code class="language-plaintext highlighter-rouge">group_vars/build.yml</code>, and include the following:</p>
 
       <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">jenkins_http_port</span><span class="pi">:</span> <span class="m">4000</span>
-<span class="na">jenkins_admin_use<span class="notranslate">rna</span>me</span><span class="pi">:</span> <span class="s">admin</span>
+<span class="na">jenkins_admin_username</span><span class="pi">:</span> <span class="s">admin</span>
 <span class="c1"># Please change at least the password to something more suitable</span>
 <span class="na">jenkins_admin_password</span><span class="pi">:</span> <span class="s">admin</span>
 <span class="na">jenkins_url_prefix</span><span class="pi">:</span> <span class="s">/jenkins</span>
@@ -926,7 +926,7 @@ This tutorial will specifically cover automation with Jenkins as that is one of 
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Update the nginx configuration in <code class="language-plaintext highlighter-rouge">templates/nginx/<span class="notranslate">galaxy</span>.j2</code> to proxy jenkins with the following. Add it <em>before the last curly brace</em> at the end of the file.</p>
+      <p>Update the nginx configuration in <code class="language-plaintext highlighter-rouge">templates/nginx/galaxy.j2</code> to proxy jenkins with the following. Add it <em>before the last curly brace</em> at the end of the file.</p>
 
       <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">location</span> <span class="n">/jenkins</span> <span class="p">{</span>
         <span class="kn">proxy_set_header</span>        <span class="s">Host</span> <span class="nv">$host</span><span class="p">:</span><span class="nv">$server_port</span><span class="p">;</span>
@@ -941,9 +941,9 @@ This tutorial will specifically cover automation with Jenkins as that is one of 
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run the <span class="notranslate">galaxy</span> playbook which contains Nginx:</p>
+      <p>Run the galaxy playbook which contains Nginx:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook -i hosts <span class="notranslate">galaxy</span>.yml
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook -i hosts galaxy.yml
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -997,7 +997,7 @@ This tutorial will specifically cover automation with Jenkins as that is one of 
         <div class="box-title details-title" id="details-cron-syntax"><button class="gtn-boxify-button details" type="button" aria-controls="details-cron-syntax-contents" aria-expanded="true" aria-label="Toggle details box: Cron syntax"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Cron syntax<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>Jenkins uses the <a href="https://en.wikipedia.org/wiki/Cron#Overview">cron syntax</a>, with the addition that <code class="language-plaintext highlighter-rouge">H</code> can be used to randomly choose a value for that place, rather than running at precisely that minute or hour. This allows you to spread the load of multiple jobs over a period of time, rather than having maybe 10 jobs all attempting to run simultaneously if they do not need to.
 For the above example it will choose one value for the <code class="language-plaintext highlighter-rouge">H</code>, a random minute in the hour, and then run every hour, every day, at that minute.
-You can enter different <span class="notranslate">expression</span>s to see when Jenkins would run it next.</p>
+You can enter different expressions to see when Jenkins would run it next.</p>
       </blockquote>
     </li>
     <li>
@@ -1025,7 +1025,7 @@ env | sort
 
       <blockquote class="warning">
         <div class="box-title warning-title" id="warning-danger" aria-label="warning box: Danger!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Danger!</div>
-        <p>This field allows you to execute arbitrary bash scripts. This is a reason Jenkins <strong>must</strong> be secured with HTTPS and a good use<span class="notranslate">rna</span>me/password.</p>
+        <p>This field allows you to execute arbitrary bash scripts. This is a reason Jenkins <strong>must</strong> be secured with HTTPS and a good username/password.</p>
       </blockquote>
     </li>
     <li>
@@ -1055,7 +1055,7 @@ env | sort
 
 <h2 id="ansible-in-jenkins">Ansible in Jenkins</h2>
 
-<p>We will now setup Jenkins to run Ansible on cron. In the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><span class="notranslate">Galaxy</span> Installation with Ansible</a> tutorial we emphasised that it is useful to often run the entire playbook to ensure that all changes are applied. Use<span class="notranslate">Galaxy</span>.eu likes to accomplish this by having Jenkins run the playbooks every day. We know that even if our coworkers made some changes to the servers, that by tomorrow it will be reverted to a known-good configuration.</p>
+<p>We will now setup Jenkins to run Ansible on cron. In the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">Galaxy Installation with Ansible</a> tutorial we emphasised that it is useful to often run the entire playbook to ensure that all changes are applied. UseGalaxy.eu likes to accomplish this by having Jenkins run the playbooks every day. We know that even if our coworkers made some changes to the servers, that by tomorrow it will be reverted to a known-good configuration.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-jenkins-running-ansible" aria-label="hands-on box: Jenkins running Ansible"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Jenkins running Ansible</div>
@@ -1068,7 +1068,7 @@ env | sort
       <p>Click <strong>New Item</strong> in the left hand menu.</p>
     </li>
     <li>
-      <p>Give your job a name like “ansible-<span class="notranslate">galaxy</span>”, and select that it is a “freestyle project”, and click “OK”</p>
+      <p>Give your job a name like “ansible-galaxy”, and select that it is a “freestyle project”, and click “OK”</p>
     </li>
     <li>
       <p>Configure your job</p>
@@ -1093,8 +1093,8 @@ env | sort
             <li>In the new step
               <ul>
                 <li><em>“Command”</em>:
-                  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /home/ubuntu/<span class="notranslate">galaxy</span>/ # Change this to wherever your <span class="notranslate">galaxy</span>.yml is, you can check with the command pwd
-ansible-playbook -i hosts <span class="notranslate">galaxy</span>.yml --diff
+                  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /home/ubuntu/galaxy/ # Change this to wherever your galaxy.yml is, you can check with the command pwd
+ansible-playbook -i hosts galaxy.yml --diff
 </code></pre></div>                  </div>
                 </li>
               </ul>
@@ -1111,19 +1111,19 @@ ansible-playbook -i hosts <span class="notranslate">galaxy</span>.yml --diff
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Started by user admin
 Running as SYSTEM
-Building in workspace /var/lib/jenkins/workspace/ansible-<span class="notranslate">galaxy</span>
-[ansible-<span class="notranslate">galaxy</span>] $ /bin/sh -xe /tmp/jenkins6010384499214486550.sh
-+ cd /home/ubuntu/<span class="notranslate">galaxy</span>/
-+ ansible-playbook -i hosts <span class="notranslate">galaxy</span>.yml --diff
+Building in workspace /var/lib/jenkins/workspace/ansible-galaxy
+[ansible-galaxy] $ /bin/sh -xe /tmp/jenkins6010384499214486550.sh
++ cd /home/ubuntu/galaxy/
++ ansible-playbook -i hosts galaxy.yml --diff
 
-PLAY [<span class="notranslate">galaxy</span>servers] ***********************************************************
+PLAY [galaxyservers] ***********************************************************
 
 TASK [Gathering Facts] *********************************************************
-ok: [gcc-3.training.<span class="notranslate">galaxy</span>project.eu]
+ok: [gcc-3.training.galaxyproject.eu]
 
 TASK [Install Dependencies] ****************************************************
  [WARNING]: Could not find aptitude. Using apt-get instead
-ok: [gcc-3.training.<span class="notranslate">galaxy</span>project.eu]
+ok: [gcc-3.training.galaxyproject.eu]
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -1133,16 +1133,16 @@ ok: [gcc-3.training.<span class="notranslate">galaxy</span>project.eu]
 <p>With this we have Jenkins running our playbook for us! You can imaging several steps you could take to follow up from this:</p>
 
 <ol>
-  <li>Storing your playbooks in <code class="language-plaintext highlighter-rouge">git</code> like Use<span class="notranslate">Galaxy</span>.*
+  <li>Storing your playbooks in <code class="language-plaintext highlighter-rouge">git</code> like UseGalaxy.*
     <ul>
-      <li><a href="https://github.com/usegalaxy-eu/infrastructure-playbook">Use<span class="notranslate">Galaxy</span>.eu’s playbooks</a> are public, anyone can contribute and if the PR is merged, it is automatically applied to our infrastructure within the next day. We store our job configuration in here as well which specifies how much memory and how many CPUs tools receive. Our teammates often can contribute fixes themselves when they notice a tool needs more memory.</li>
-      <li><a href="https://github.com/galaxyproject/infrastructure-playbook">Use<span class="notranslate">Galaxy</span>.org’s playbooks</a> are also public, but run manually.</li>
+      <li><a href="https://github.com/usegalaxy-eu/infrastructure-playbook">UseGalaxy.eu’s playbooks</a> are public, anyone can contribute and if the PR is merged, it is automatically applied to our infrastructure within the next day. We store our job configuration in here as well which specifies how much memory and how many CPUs tools receive. Our teammates often can contribute fixes themselves when they notice a tool needs more memory.</li>
+      <li><a href="https://github.com/galaxyproject/infrastructure-playbook">UseGalaxy.org’s playbooks</a> are also public, but run manually.</li>
     </ul>
   </li>
   <li>Running this job regularly
     <ul>
       <li>This can prevent mistakes, if a coworker edits some configuration on the server and forgets to commit it, this ensures everything is reverted back to the expected state.</li>
-      <li>The amount of time the <span class="notranslate">Galaxy</span> playbook takes can be quite annoying when done manually but no one is upset if it takes 30 minutes when it is run on cron.</li>
+      <li>The amount of time the Galaxy playbook takes can be quite annoying when done manually but no one is upset if it takes 30 minutes when it is run on cron.</li>
     </ul>
   </li>
   <li>Alerting you if something went wrong
@@ -1156,7 +1156,7 @@ ok: [gcc-3.training.<span class="notranslate">galaxy</span>project.eu]
 
 <h1 id="securing-jenkins">Securing Jenkins</h1>
 
-<p>You have already secured Jenkins in that it is protected with a good password and HTTPS. This is one important thing. The other portion is the visibility of jobs and their outputs. In the above Ansible <span class="notranslate">Galaxy</span> deployment job we set the parameter <code class="language-plaintext highlighter-rouge">--diff</code>, so we could see what changed. This is an extremely helpful thing to do to be able to audit changes from a particular run. But! If you change the <code class="language-plaintext highlighter-rouge">id_secret</code> or other secret variables, then this diff will be visible in the job’s console logs. This is useful to see for admins but needs to be restricted so that the whole world cannot see this.</p>
+<p>You have already secured Jenkins in that it is protected with a good password and HTTPS. This is one important thing. The other portion is the visibility of jobs and their outputs. In the above Ansible Galaxy deployment job we set the parameter <code class="language-plaintext highlighter-rouge">--diff</code>, so we could see what changed. This is an extremely helpful thing to do to be able to audit changes from a particular run. But! If you change the <code class="language-plaintext highlighter-rouge">id_secret</code> or other secret variables, then this diff will be visible in the job’s console logs. This is useful to see for admins but needs to be restricted so that the whole world cannot see this.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-securing-jenkins" aria-label="hands-on box: Securing Jenkins"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Securing Jenkins</div>
@@ -1188,7 +1188,7 @@ The checkboxes give you the ability to grant or deny permissions to certain clas
 
           <p>In the above example we have configured that:</p>
           <ul>
-            <li><em>Anonymous users</em> (not logged in) may <code class="language-plaintext highlighter-rouge">Read</code>, so they can access the Jenkins page, but by default will not see any jobs. The <code class="language-plaintext highlighter-rouge">Discover</code> permission is also granted so that if a user has bookmarked the ansible-<span class="notranslate">galaxy</span> job page, they will automatically be redirected through the login page, if they are not already logged in.</li>
+            <li><em>Anonymous users</em> (not logged in) may <code class="language-plaintext highlighter-rouge">Read</code>, so they can access the Jenkins page, but by default will not see any jobs. The <code class="language-plaintext highlighter-rouge">Discover</code> permission is also granted so that if a user has bookmarked the ansible-galaxy job page, they will automatically be redirected through the login page, if they are not already logged in.</li>
             <li>Once they login and are <em>Authenticated Users</em>, they can see that <code class="language-plaintext highlighter-rouge">Manage</code> and <code class="language-plaintext highlighter-rouge">Run</code> Jobs and Views</li>
             <li>Only the <em>admin</em> user, however, can configure <code class="language-plaintext highlighter-rouge">Agents</code> to run those jobs.</li>
           </ul>
@@ -1229,11 +1229,11 @@ The checkboxes give you the ability to grant or deny permissions to certain clas
   <li>OR include some sort of yum or apt auto-updater on whichever system that Jenkins is running on</li>
 </ol>
 
-<p>The downside of automatic updating is that Jenkins will restart and kill any jobs that had been running. Choose which works best for your environment. Use<span class="notranslate">Galaxy</span>.eu chose a completely automated setup because their jobs can be killed and few things are affected. Use<span class="notranslate">Galaxy</span>.org chose a more manual setup because their jobs are more critical, there if jobs fail, <span class="notranslate">Galaxy</span> pull request tests will fail unexpectedly and unhelpfully.</p>
+<p>The downside of automatic updating is that Jenkins will restart and kill any jobs that had been running. Choose which works best for your environment. UseGalaxy.eu chose a completely automated setup because their jobs can be killed and few things are affected. UseGalaxy.org chose a more manual setup because their jobs are more critical, there if jobs fail, Galaxy pull request tests will fail unexpectedly and unhelpfully.</p>
 
 <h2 id="updating-plugins">Updating Plugins</h2>
 
-<p>Plugins also regularly receive updates due to security issues. You should either check in with your Jenkins server regularly and apply updates when they are available, or automate this as well. Use<span class="notranslate">Galaxy</span>.eu uses a script like:</p>
+<p>Plugins also regularly receive updates due to security issues. You should either check in with your Jenkins server regularly and apply updates when they are available, or automate this as well. UseGalaxy.eu uses a script like:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 <span class="nv">ARGS</span><span class="o">=</span><span class="s2">"-jar /opt/jenkins-cli.jar -s http://localhost:4000/ -auth user:password"</span>
@@ -1274,11 +1274,11 @@ The checkboxes give you the ability to grant or deny permissions to certain clas
     </tr>
     <tr>
       <td>Embeddable Build Status Plugin</td>
-      <td>Produces nice build statuses like Travis does, e.g. <a href="https://github.com/usegalaxy-eu/infrastructure-playbook#build-statuses">Use<span class="notranslate">Galaxy</span>.eu’s playbook statuses</a></td>
+      <td>Produces nice build statuses like Travis does, e.g. <a href="https://github.com/usegalaxy-eu/infrastructure-playbook#build-statuses">UseGalaxy.eu’s playbook statuses</a></td>
     </tr>
     <tr>
       <td>GitHub Authentication plugin</td>
-      <td>The Use<span class="notranslate">Galaxy</span>.eu build server requires login with GitHub and ensures membership in the correct organisation to be able to access group secrets and build logs.</td>
+      <td>The UseGalaxy.eu build server requires login with GitHub and ensures membership in the correct organisation to be able to access group secrets and build logs.</td>
     </tr>
     <tr>
       <td>Job Configuration History plugin</td>
@@ -1303,7 +1303,7 @@ The checkboxes give you the ability to grant or deny permissions to certain clas
 
 <p>You may need to specify credentials for cloning from private repositories, in this case you should beware that when you configure the SSH credentials you should specify the <code class="language-plaintext highlighter-rouge">user</code> as <code class="language-plaintext highlighter-rouge">git</code>. You will also need to ensure that the server’s SSH public key is known to your Jenkins system which generally requires <code class="language-plaintext highlighter-rouge">su</code>ing as the Jenkins user and running <code class="language-plaintext highlighter-rouge">ssh git@...</code> once, and accepting the “Unknown host” key prompt. We recommend that you use repository URLs of the format <code class="language-plaintext highlighter-rouge">git@github.com:org/repo.git</code>, if you are using one of the GitHub PR builder plugins, then this URL has to match a value in the incoming webhook and it is not always obvious that this needs to be set like this.</p>
 
-<p>The “Branches to build” section allows you to specify which branches. Whenever you click “Build now”, Jenkins usually just picks the main branch to build, and doesn’t run a build job per-branch. If you are automatically triggering Jenkins builds based on GitHub (or other) webhooks, then you can ensure that branches that should not be built are filtered out here. Real life example: Use<span class="notranslate">Galaxy</span>.eu has one Jenkins job which should only build the main branch of a repository, and another job that only builds the PRs for that repository. We know the first job will only ever build the main branch so we can hardcode that there. With the Git plugin, many “Additional Behaviours” are available. If you have submodules in your repository, you will need to enable one of these to ensure that the repository is cloned recursively. If you want to ensure a fresh start each time because you write out temporary files to the current working directory, then there is a behaviour to wipe out the repository before each build.</p>
+<p>The “Branches to build” section allows you to specify which branches. Whenever you click “Build now”, Jenkins usually just picks the main branch to build, and doesn’t run a build job per-branch. If you are automatically triggering Jenkins builds based on GitHub (or other) webhooks, then you can ensure that branches that should not be built are filtered out here. Real life example: UseGalaxy.eu has one Jenkins job which should only build the main branch of a repository, and another job that only builds the PRs for that repository. We know the first job will only ever build the main branch so we can hardcode that there. With the Git plugin, many “Additional Behaviours” are available. If you have submodules in your repository, you will need to enable one of these to ensure that the repository is cloned recursively. If you want to ensure a fresh start each time because you write out temporary files to the current working directory, then there is a behaviour to wipe out the repository before each build.</p>
 
 <h3 id="build-triggers">Build Triggers</h3>
 
@@ -1321,7 +1321,7 @@ The checkboxes give you the ability to grant or deny permissions to certain clas
 
 <h2 id="real-life-examples">Real Life Examples</h2>
 
-<p>Here are some examples of how Jenkins is used in the wild, maybe it can provide some reference for potential uses within your organisation or solutions to various problems. The examples are mostly pulled from Use<span class="notranslate">Galaxy</span>.eu’s experiences, as the author is most familiar with those.</p>
+<p>Here are some examples of how Jenkins is used in the wild, maybe it can provide some reference for potential uses within your organisation or solutions to various problems. The examples are mostly pulled from UseGalaxy.eu’s experiences, as the author is most familiar with those.</p>
 
 <h3 id="compute-nodes">Compute Nodes</h3>
 
@@ -1335,12 +1335,12 @@ The checkboxes give you the ability to grant or deny permissions to certain clas
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">#</span><span class="w"> </span>some <span class="nb">env </span>vars that are needed, it<span class="s1">'s kind of gross but it works :(
 </span><span class="go">export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.212.b04-0.el7_6.x86_64/
-</span><span class="gp">export PERL5LIB=/home/centos/workspace/use<span class="notranslate">galaxy</span>-eu/apollo-builder/extlib/lib/perl5:$</span>PERL5LIB
+</span><span class="gp">export PERL5LIB=/home/centos/workspace/usegalaxy-eu/apollo-builder/extlib/lib/perl5:$</span>PERL5LIB
 <span class="gp">#</span><span class="w"> </span>setting a variable from some build data
 <span class="gp">APOLLO_VERSION=$</span><span class="o">(</span><span class="nb">cat </span>application.properties | <span class="nb">grep </span>app.version | <span class="nb">sed</span> <span class="s1">'s/.*=//g'</span><span class="o">)</span>
 <span class="go">
 </span><span class="gp">#</span><span class="w"> </span>Check <span class="k">if </span>this version needs to be built
-<span class="go">curl --silent https://use<span class="notranslate">galaxy</span>.eu/static/vgcn/ | \
+<span class="go">curl --silent https://usegalaxy.eu/static/vgcn/ | \
 </span><span class="gp">	grep -F "apollo-$</span><span class="o">{</span>APOLLO_VERSION<span class="o">}</span><span class="s2">" &amp;&amp; echo "</span>Already built!<span class="s2">" &amp;&amp; exit 0;
 </span><span class="go">
 </span><span class="gp">#</span><span class="w"> </span>Build the thing
@@ -1361,7 +1361,7 @@ The checkboxes give you the ability to grant or deny permissions to certain clas
 
 <p>Similar to the Apollo builder but it uploads outputs as GitHub releases which is useful for public projects with complex build pipelines. The CSB takes on average 5-6 hours to run so we cannot easily run this on free infrastructure.</p>
 
-<p>Here we store both the <a href="https://github.com/hexylena/chado-schema-builder/blob/master/.ci/run.sh">build</a> and <a href="https://github.com/hexylena/chado-schema-builder/blob/master/.ci/upload.sh">deploy</a> scripts in the GitHub repository. If you do this, you have to be careful about building PRs, as anyone can edit the build scripts and access your inte<span class="notranslate">rna</span>l infrastructure!</p>
+<p>Here we store both the <a href="https://github.com/hexylena/chado-schema-builder/blob/master/.ci/run.sh">build</a> and <a href="https://github.com/hexylena/chado-schema-builder/blob/master/.ci/upload.sh">deploy</a> scripts in the GitHub repository. If you do this, you have to be careful about building PRs, as anyone can edit the build scripts and access your internal infrastructure!</p>
 
 <h3 id="job-website">Job: Website</h3>
 
@@ -1392,11 +1392,11 @@ The checkboxes give you the ability to grant or deny permissions to certain clas
 
 <p>By splitting these up, we can run the “actually apply” portion without having to fetch updates to the tools first. Additionally we can have the second portion run only if the first portion succeeds, so we have some check that everything looks OK before trying to apply it.</p>
 
-<p>We include a <span class="notranslate">Galaxy</span> API key as a credential and then use a <code class="language-plaintext highlighter-rouge">Makefile</code> contained in the project to do the steps. We don’t automatically test PRs so we don’t care if people change the Makefile because we visually validate it before merging their PR.</p>
+<p>We include a Galaxy API key as a credential and then use a <code class="language-plaintext highlighter-rouge">Makefile</code> contained in the project to do the steps. We don’t automatically test PRs so we don’t care if people change the Makefile because we visually validate it before merging their PR.</p>
 
 <h3 id="configuration-themes">Configuration: Themes</h3>
 
-<p>Many people find the “blue/red ball” icons a bit hard to understand. Using the “Simple Theme Plugin” you can easily add custom CSS files or directly enter custom CSS. Use<span class="notranslate">Galaxy</span>.* use the <a href="http://afonsof.com/jenkins-material-theme/">jenkins-material-theme</a> as it provides a slightly cleaner view of Jenkins with better iconography.</p>
+<p>Many people find the “blue/red ball” icons a bit hard to understand. Using the “Simple Theme Plugin” you can easily add custom CSS files or directly enter custom CSS. UseGalaxy.* use the <a href="http://afonsof.com/jenkins-material-theme/">jenkins-material-theme</a> as it provides a slightly cleaner view of Jenkins with better iconography.</p>
 
 <h3 id="configuration-folder-permissions">Configuration: Folder Permissions</h3>
 

@@ -719,8 +719,8 @@
 <p>Reassortment events are a key trait of <em>Influenza A</em> made possible by its wide range of natural hosts combined with two molecular characteristics of the species:</p>
 
 <ol>
-  <li>the linear negative-sense single-stranded <span class="notranslate">RNA</span> genomes of influenza viruses (and of all viruses of the <em>Orthomyxoviridae</em> family) are segmented, i.e. consist of several (eight in the case of <em>Influenza A</em> and <em>B</em>) distinct pieces of <span class="notranslate">RNA</span>, which typically encode just one, sometimes two viral proteins.</li>
-  <li>the mutation rate in the genome is high in influenza viruses, and particularly high in <em>Influenza A</em>, since their <span class="notranslate">RNA</span> polymerase lacks exonuclease activity necessary for proof-reading.</li>
+  <li>the linear negative-sense single-stranded RNA genomes of influenza viruses (and of all viruses of the <em>Orthomyxoviridae</em> family) are segmented, i.e. consist of several (eight in the case of <em>Influenza A</em> and <em>B</em>) distinct pieces of RNA, which typically encode just one, sometimes two viral proteins.</li>
+  <li>the mutation rate in the genome is high in influenza viruses, and particularly high in <em>Influenza A</em>, since their RNA polymerase lacks exonuclease activity necessary for proof-reading.</li>
 </ol>
 
 <p>Together these characteristics enable <em>Influenza A</em> to evolve relatively rapidly in non-human hosts, then re-adapt to humans through exchange of segments (reassortment) in a host co-infected with a human and, <em>e.g.</em>, an avian strain. If such a reassortment introduces new variants of the two most antigenic proteins of influenza, HA (hemagglutinin) and NA (neuraminidase), this antigenic shift provides the reassorted strain with immune escape potential, which, if it happens in a genetic background compatible with efficient transmission in humans, can trigger an unusually strong wave of influenza or even a new pandemic.</p>
@@ -731,7 +731,7 @@
 
 <p>The viral surface proteins HA and (to a lesser extent) NA are the main targets of the host antibody response and are, thus, under constant selection pressure to mutate into forms capable of evading an existing host immune response. As a consequence, these segments have evolved into a much richer panel of sequence variants than the other segments, to the point that sequences of the HA segment can, at present, be classified into 18 distinct subfamilies, H1-H18, while there are 11 recognized subfamilies of NA, and <em>Influenza A</em> strains are subtyped (as, for example, H5N1, H3N2, etc.) according to the combination of HA- and NA-encoding segments they are carrying.</p>
 
-<p>Importantly, the sequence diversity of HA and (again to a lesser extent) of NA segments is big enough to prevent a naive approach of <span class="notranslate">mapping</span> sequenced <span class="notranslate">reads</span> to one specific agreed-upon <em>Influenza A</em> reference sequence. While this would work for the other six segments, <span class="notranslate">mapping</span> software would regularly fail to find enough plausible <span class="notranslate">mapping</span>s for sequenced <span class="notranslate">reads</span> of HA and NA origin to continue analysis with. This is why, in this tutorial we are going to explore an alte<span class="notranslate">rna</span>tive approach, which is also <span class="notranslate">mapping</span>-based but chooses a suitable reference for each segment dynamically based on the input sequencing data.</p>
+<p>Importantly, the sequence diversity of HA and (again to a lesser extent) of NA segments is big enough to prevent a naive approach of mapping sequenced reads to one specific agreed-upon <em>Influenza A</em> reference sequence. While this would work for the other six segments, mapping software would regularly fail to find enough plausible mappings for sequenced reads of HA and NA origin to continue analysis with. This is why, in this tutorial we are going to explore an alternative approach, which is also mapping-based but chooses a suitable reference for each segment dynamically based on the input sequencing data.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -747,7 +747,7 @@
   </li>
   <li><a href="#quality-control" id="markdown-toc-quality-control">Quality control</a></li>
   <li><a href="#per-segment-subtyping-and-hybrid-reference-construction" id="markdown-toc-per-segment-subtyping-and-hybrid-reference-construction">Per-segment subtyping and hybrid reference construction</a></li>
-  <li><a href="#mapping-to-a-hybrid-reference" id="markdown-toc-mapping-to-a-hybrid-reference"><span class="notranslate">Mapping</span> to a hybrid reference</a></li>
+  <li><a href="#mapping-to-a-hybrid-reference" id="markdown-toc-mapping-to-a-hybrid-reference">Mapping to a hybrid reference</a></li>
   <li><a href="#consensus-sequence-construction" id="markdown-toc-consensus-sequence-construction">Consensus sequence construction</a></li>
   <li><a href="#placing-segments-on-a-phylogenetic-tree" id="markdown-toc-placing-segments-on-a-phylogenetic-tree">Placing segments on a phylogenetic tree</a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
@@ -757,23 +757,23 @@
 
 <h1 id="prepare-analysis-history-and-data">Prepare analysis history and data</h1>
 
-<p>Any analysis should get its own <span class="notranslate">Galaxy</span> history. So let’s start by creating a new one:</p>
+<p>Any analysis should get its own Galaxy history. So let’s start by creating a new one:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history" aria-label="hands-on box: Prepare the Galaxy history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Prepare the <span class="notranslate">Galaxy</span> history</div>
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history" aria-label="hands-on box: Prepare the Galaxy history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Prepare the Galaxy history</div>
 
   <ol>
     <li>
       <p>Create a new history for this analysis</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Rename the history</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
   </ol>
 
@@ -781,18 +781,18 @@
 
 <h2 id="get-reference-and-sequenced-samples-data">Get reference and sequenced samples data</h2>
 
-<p>In this tutorial you are going to work on a single avian influenza sample sequenced in paired-end mode on the Illumina platform, <em>i.e.</em> we are going to download two datasets of sequenced <span class="notranslate">reads</span> for that sample.</p>
+<p>In this tutorial you are going to work on a single avian influenza sample sequenced in paired-end mode on the Illumina platform, <em>i.e.</em> we are going to download two datasets of sequenced reads for that sample.</p>
 
 <p>In addition, we are going to base the analysis on a small collection of multiple reference sequences for each influenza gene segment. We prepared this collection for you from public INSAFlu data.</p>
 
 <p>If you have your own curated collection of reference sequences, you should be able to use it for following this tutorial without any problem. Note, however, that the analysis results referred to in many of the questions will be different if you are exchanging the reference collection.
-If you want to learn how you can create a <span class="notranslate">Galaxy</span> collection from your own references that is structured like the default we are suggesting here, you may want to follow the dedicated tutorial on <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">Using dataset collections</a>.</p>
+If you want to learn how you can create a Galaxy collection from your own references that is structured like the default we are suggesting here, you may want to follow the dedicated tutorial on <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">Using dataset collections</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-get-the-data" aria-label="hands-on box: Get the data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get the data</div>
 
   <ol>
-    <li><span class="tool" data-tool="upload1" title="Tested with upload1"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>  the forward and reverse <span class="notranslate">reads</span> of your sequenced sample to your history and turn them into a <em>Paired Collection</em>.
+    <li><span class="tool" data-tool="upload1" title="Tested with upload1"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>  the forward and reverse reads of your sequenced sample to your history and turn them into a <em>Paired Collection</em>.
       <ol>
         <li>In the <em>“Download from web or upload from disk”</em> dialogue, switch to the <code class="language-plaintext highlighter-rouge">Collection</code> tab,
 then configure the drop-down select boxes on that tab like this:
@@ -804,8 +804,8 @@ then configure the drop-down select boxes on that tab like this:
         <li>
           <p>Click on <code class="language-plaintext highlighter-rouge">Paste/Fetch data</code> and copy the following links over to the empty text box</p>
 
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://use<span class="notranslate">galaxy</span>.eu/api/datasets/4838ba20a6d86765171e4f201205515c/display?to_ext=fastqsanger.gz
-https://use<span class="notranslate">galaxy</span>.eu/api/datasets/4838ba20a6d867657d09280baae4e1ec/display?to_ext=fastqsanger.gz
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://usegalaxy.eu/api/datasets/4838ba20a6d86765171e4f201205515c/display?to_ext=fastqsanger.gz
+https://usegalaxy.eu/api/datasets/4838ba20a6d867657d09280baae4e1ec/display?to_ext=fastqsanger.gz
 </code></pre></div>          </div>
 
           <p>and press <code class="language-plaintext highlighter-rouge">Start</code>.</p>
@@ -819,7 +819,7 @@ https://use<span class="notranslate">galaxy</span>.eu/api/datasets/4838ba20a6d86
         <li>Click on <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>“Import”</em> in the upper right corner of the page</li>
         <li>Choose a name for the new history (or go with the default), confirm by clicking Import and wait for the page to reload</li>
         <li>In the history panel (which should now show the newly imported history),
-click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon in the bar just above the history’s datasets,
+click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon in the bar just above the history’s datasets,
 select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, and wait for the center panel to refresh</li>
         <li>In the center panel,
           <ul>
@@ -845,7 +845,7 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
     <li>Step inside the uploaded reference collection by clicking on it.</li>
     <li>Expand individual elements of the collection by clicking on them to reveal more details about them.</li>
     <li>
-      <p>View the content of any element by clicking its <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span>.</p>
+      <p>View the content of any element by clicking its <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span>.</p>
 
       <p>You can then scroll through the data and use your browser’s search function to look for particular sequences.</p>
 
@@ -864,7 +864,7 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
 
           <ol>
             <li>The collection consists of eight elements and each element provides reference sequences for one genome segment.</li>
-            <li>Each element has data for 56 sequences (<span class="notranslate">Galaxy</span> knows how to interpret the fasta format of the sequencing data and counts sequences for you; you can see the count for any of the elements by expanding it).</li>
+            <li>Each element has data for 56 sequences (Galaxy knows how to interpret the fasta format of the sequencing data and counts sequences for you; you can see the count for any of the elements by expanding it).</li>
             <li>The collection has reference sequence data for H1-H18 (with the exception of H11) and for N1-N11. For many of those subtypes, however, there is only one reference, i.e., within-subtype variation is not captured well by the collection.</li>
             <li>There are 6 <em>Influenza B</em> references in the collection. Since <em>Influenza B</em> is not normally seen in birds and we are going to analyze an avian influenza sample here, these can be considered controls: if we get an <em>Influenza B</em> assignment for the sample at any step in our analysis, we know something is very suspicious. This also means that we only have 50 <em>informative</em> references in the collection.</li>
           </ol>
@@ -876,24 +876,24 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
 
 </blockquote>
 
-<p><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-info</span> There are lots of text processing and filtering tools for <span class="notranslate">Galaxy</span>, of which this tutorial is going to introduce just a small subset. You could use them to extract statistics about which subtypes are found how many times in the collection of references instead of relying on scrolling and searching. If you are interested and have the time, you may want to try the <a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">Data Manipulation Olympics</a> to learn more about available such tools and how to combine them.</p>
+<p><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span> There are lots of text processing and filtering tools for Galaxy, of which this tutorial is going to introduce just a small subset. You could use them to extract statistics about which subtypes are found how many times in the collection of references instead of relying on scrolling and searching. If you are interested and have the time, you may want to try the <a href="/training-material/topics/introduction/tutorials/data-manipulation-olympics/tutorial.html">Data Manipulation Olympics</a> to learn more about available such tools and how to combine them.</p>
 
 <h1 id="quality-control">Quality control</h1>
 
-<p>As a very first step, we would like to make sure that we base our analysis only on the high-quality parts of the sequenced <span class="notranslate">reads</span>.</p>
+<p>As a very first step, we would like to make sure that we base our analysis only on the high-quality parts of the sequenced reads.</p>
 
-<p>NGS <span class="notranslate">reads</span> often have lower base calling quality near their ends, so here we are going to trim low-quality stretches of bases from both ends. In addition, we are going to discard <span class="notranslate">reads</span> shorter than 30 bases after trimming. This is reasonable since our next step will involve extracting all possible 21-mers from the <span class="notranslate">reads</span> and there are very few possibilities for a read shorter than 30 bases.</p>
+<p>NGS reads often have lower base calling quality near their ends, so here we are going to trim low-quality stretches of bases from both ends. In addition, we are going to discard reads shorter than 30 bases after trimming. This is reasonable since our next step will involve extracting all possible 21-mers from the reads and there are very few possibilities for a read shorter than 30 bases.</p>
 
-<p>The tool <strong>fastp</strong> lets us perform these tasks and obtain a nice quality report for our <span class="notranslate">reads</span> before and after processing in one go, but many other options exist to perform sequenced <span class="notranslate">reads</span> quality control and trimming/filtering in <span class="notranslate">Galaxy</span> and the dedicated tutorial on <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">quality control</a> introduces more of them.</p>
+<p>The tool <strong>fastp</strong> lets us perform these tasks and obtain a nice quality report for our reads before and after processing in one go, but many other options exist to perform sequenced reads quality control and trimming/filtering in Galaxy and the dedicated tutorial on <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">quality control</a> introduces more of them.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-qc-and-read-trimming-filtering-with-fastp" aria-label="hands-on box: QC and read trimming/filtering with fastp"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: QC and read trimming/filtering with fastp</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0"><strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+<span class="notranslate">galaxy</span>0</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0"><strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.23.2+galaxy0</span></span>
       <ul>
-        <li><em>“Single-end or paired <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code></li>
-        <li><em>“Select paired collection(s)”</em>: the uploaded paired collection of sequenced <span class="notranslate">reads</span></li>
+        <li><em>“Single-end or paired reads”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code></li>
+        <li><em>“Select paired collection(s)”</em>: the uploaded paired collection of sequenced reads</li>
         <li>In <em>“Filter Options”</em> under <em>“Length filtering options”</em>:
           <ul>
             <li><em>“Length required”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
@@ -908,27 +908,27 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
         </li>
       </ul>
 
-      <p>Running the tool will result in two outputs. One is a new paired collection with the processed <span class="notranslate">reads</span>, the other one is a report of initial quality, the processing actions performed and their effect on key quality metrics.</p>
+      <p>Running the tool will result in two outputs. One is a new paired collection with the processed reads, the other one is a report of initial quality, the processing actions performed and their effect on key quality metrics.</p>
     </li>
     <li>
-      <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> <strong>Inspect</strong> the report and try to answer the following questions:</p>
+      <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> <strong>Inspect</strong> the report and try to answer the following questions:</p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-questions-1" aria-label="question box: Questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Questions</div>
 
         <ol>
-          <li>Which set of <span class="notranslate">reads</span> (forward or reverse <span class="notranslate">reads</span>) did profit most quality-wise from our low-quality base trimming?</li>
-          <li>What percentage of <span class="notranslate">reads</span> got discarded completely with our settings, and what percentage of bases?</li>
-          <li>Why, according to the Filtering result, have some <span class="notranslate">reads</span> been discarded because of too many Ns?</li>
+          <li>Which set of reads (forward or reverse reads) did profit most quality-wise from our low-quality base trimming?</li>
+          <li>What percentage of reads got discarded completely with our settings, and what percentage of bases?</li>
+          <li>Why, according to the Filtering result, have some reads been discarded because of too many Ns?</li>
         </ol>
 
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-answers-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers-1-contents" aria-expanded="true" aria-label="Toggle solution box: Answers"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution: Answers<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
-            <li>The forward <span class="notranslate">reads</span> were of worse quality in particular near their 3’-ends than the reverse <span class="notranslate">reads</span> and, consequently, were affected more strongly by trimming (see the different “quality” plots in the report).</li>
-            <li>Less than 2% of <span class="notranslate">reads</span> got discarded completely (the “Filtering result” section of the report says 98.03% of all <span class="notranslate">reads</span> were retained). In contrast, around 10% of all bases got discarded (compare total bases before and after filtering) so most <span class="notranslate">reads</span> got trimmed but not discarded.</li>
-            <li><strong>fastp</strong> is a tool with many hidden default actions in its various sections. Inside the <em>Filter Options</em> check <em>Quality filtering options</em> and the various defaults mentioned in the parameters help therein. One of these defaults is to discard <span class="notranslate">reads</span> with more than 5 Ns. These defaults are often reasonable, but it’s good to be aware of them.</li>
+            <li>The forward reads were of worse quality in particular near their 3’-ends than the reverse reads and, consequently, were affected more strongly by trimming (see the different “quality” plots in the report).</li>
+            <li>Less than 2% of reads got discarded completely (the “Filtering result” section of the report says 98.03% of all reads were retained). In contrast, around 10% of all bases got discarded (compare total bases before and after filtering) so most reads got trimmed but not discarded.</li>
+            <li><strong>fastp</strong> is a tool with many hidden default actions in its various sections. Inside the <em>Filter Options</em> check <em>Quality filtering options</em> and the various defaults mentioned in the parameters help therein. One of these defaults is to discard reads with more than 5 Ns. These defaults are often reasonable, but it’s good to be aware of them.</li>
           </ol>
 
         </blockquote>
@@ -946,7 +946,7 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
   <li>suggest the best reference to map the sequencing data to for each segment.</li>
 </ul>
 
-<p>We are then going to combine the best reference of each segment into a hybrid reference genome to use for <span class="notranslate">mapping</span> our sequenced <span class="notranslate">reads</span> against.</p>
+<p>We are then going to combine the best reference of each segment into a hybrid reference genome to use for mapping our sequenced reads against.</p>
 
 <p>To identify the best matching reference segments, we are going to run the tool <strong>VAPOR</strong> asking it to report the stats for any hits it identifies.</p>
 
@@ -954,11 +954,11 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
   <div class="box-title hands-on-title" id="hands-on-exploring-best-matching-reference-segment-scores" aria-label="hands-on box: Exploring best-matching reference segment scores"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Exploring best-matching reference segment scores</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/vapor/vapor/1.0.2+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/vapor/vapor/1.0.2+galaxy3"><strong>VAPOR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/vapor/vapor/1.0.2+<span class="notranslate">galaxy</span>3</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/vapor/vapor/1.0.2+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/vapor/vapor/1.0.2+galaxy3"><strong>VAPOR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/vapor/vapor/1.0.2+galaxy3</span></span>
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Reference sequences”</em>: <code class="language-plaintext highlighter-rouge">References per segment (INSAFlu)</code></li>
         <li><em>“Type of sequencing data”</em>: <code class="language-plaintext highlighter-rouge">Paired-end as collection</code></li>
-        <li><em>“Paired collection of sequenced <span class="notranslate">reads</span>”</em>: quality-trimmed <span class="notranslate">reads</span>; output of <strong>fastp</strong></li>
+        <li><em>“Paired collection of sequenced reads”</em>: quality-trimmed reads; output of <strong>fastp</strong></li>
         <li><em>“Desired output”</em>: <code class="language-plaintext highlighter-rouge">Return scores of best matches</code></li>
         <li><em>“Limit number of reported matches to”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
         <li>In <em>“Optional arguments”</em>:
@@ -970,7 +970,7 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
       </ul>
     </li>
     <li>
-      <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> Explore the output collection produced by the tool</p>
+      <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> Explore the output collection produced by the tool</p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-questions-2" aria-label="question box: Questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Questions</div>
@@ -984,7 +984,7 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
           <div class="box-title solution-title" id="solution-answers-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answers-2-contents" aria-expanded="true" aria-label="Toggle solution box: Answers"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution: Answers<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <ol>
-            <li>The values for <code class="language-plaintext highlighter-rouge">% of query bases in <span class="notranslate">reads</span></code> and for <code class="language-plaintext highlighter-rouge">Total score</code> are drastically lower for the HA and somewhat lower for the NA segment than for any of the other segments. This could be due to the structure of the collection of references we have used, but also fits very well with the higher selection pressure on NA and, in particular on HA, as the main antigenic proteins of the virus, which leads to higher variability in these segments than in the others.</li>
+            <li>The values for <code class="language-plaintext highlighter-rouge">% of query bases in reads</code> and for <code class="language-plaintext highlighter-rouge">Total score</code> are drastically lower for the HA and somewhat lower for the NA segment than for any of the other segments. This could be due to the structure of the collection of references we have used, but also fits very well with the higher selection pressure on NA and, in particular on HA, as the main antigenic proteins of the virus, which leads to higher variability in these segments than in the others.</li>
             <li>
               <p>The best match (assigned an almost 2x higher score than the second-best match) found for the HA segment is from an H4N6 strain. The top two matches with regard to the NA segment (again assigned ~ 2x higher scores than the next best matches) are from strains with the N6 subtype of NA.</p>
 
@@ -999,20 +999,20 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
 
 </blockquote>
 
-<p>Now that we have established that things <em>may</em> make sense, we can use the output of <strong>VAPOR</strong> to extract the actual sequence of the top hit for each reference segment. We then concatenate these best matches into a hybrid reference genome for <span class="notranslate">mapping</span>.</p>
+<p>Now that we have established that things <em>may</em> make sense, we can use the output of <strong>VAPOR</strong> to extract the actual sequence of the top hit for each reference segment. We then concatenate these best matches into a hybrid reference genome for mapping.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-obtaining-sequences-of-top-hits-identified-by-vapor" aria-label="hands-on box: Obtaining sequences of top hits identified by VAPOR"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Obtaining sequences of top hits identified by VAPOR</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4"><strong>Replace parts of text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span>  to extract just the name of the sequence from each line of VAPOR’s output
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4"><strong>Replace parts of text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span>  to extract just the name of the sequence from each line of VAPOR’s output
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File to process”</em>: collection of score outputs of <strong>VAPOR</strong></li>
         <li>In <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“1. Find and Replace”</em>:
           <ul>
             <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">^.+\t&gt;(.+)$</code></li>
             <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">$1</code></li>
-            <li><em>“Find-Pattern is a regular <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Find-Pattern is a regular expression”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
@@ -1023,14 +1023,14 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“from”</em>: output of <strong>Replace</strong></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1"><strong>seqtk_subseq</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1</span></span>  to extract the reference sequences based on their names reported by VAPOR
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1"><strong>seqtk_subseq</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/seqtk/seqtk_subseq/1.3.1</span></span>  to extract the reference sequences based on their names reported by VAPOR
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input FASTA/Q file”</em>: <code class="language-plaintext highlighter-rouge">References per segment (INSAFlu)</code></li>
         <li><em>“Select source of sequence choices”</em>: <code class="language-plaintext highlighter-rouge">FASTA/Q ID list</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input ID list”</em>: the collection output of <strong>Select first</strong></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0</span></span>  to combine the best-matching sequence of each segment into one dataset
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0</span></span>  to combine the best-matching sequence of each segment into one dataset
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse into single dataset”</em>: the selected sequences collection produced by <strong>seqtk_subseq</strong></li>
       </ul>
@@ -1039,24 +1039,24 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
 
 </blockquote>
 
-<p>At this point, you may want to <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> inspect the output of the last step to see if it is an eight-segments reference genome as expected, and if the segments correspond to the top hits found by VAPOR.</p>
+<p>At this point, you may want to <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> inspect the output of the last step to see if it is an eight-segments reference genome as expected, and if the segments correspond to the top hits found by VAPOR.</p>
 
-<h1 id="mapping-to-a-hybrid-reference"><span class="notranslate">Mapping</span> to a hybrid reference</h1>
+<h1 id="mapping-to-a-hybrid-reference">Mapping to a hybrid reference</h1>
 
-<p>If things went well, the hybrid reference we just obtained should be close enough across all segments to our sample to allow successful <span class="notranslate">mapping</span> of <span class="notranslate">reads</span>. Before we start the <span class="notranslate">mapping</span> we may want to truncate the segment names in our hybrid reference genome though because currently these names still reflect the full origin of the segment sequences, but from now on we are fine with just the segment ID. We can use the <strong>Replace</strong> tool from before again to truncate the names.</p>
+<p>If things went well, the hybrid reference we just obtained should be close enough across all segments to our sample to allow successful mapping of reads. Before we start the mapping we may want to truncate the segment names in our hybrid reference genome though because currently these names still reflect the full origin of the segment sequences, but from now on we are fine with just the segment ID. We can use the <strong>Replace</strong> tool from before again to truncate the names.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-shortening-sequence-titles" aria-label="hands-on box: Shortening sequence titles"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Shortening sequence titles</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4"><strong>Replace parts of text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4"><strong>Replace parts of text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: the hybrid reference genome; output of <strong>Collapse Collection</strong></li>
         <li>In <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“1. Find and Replace”</em>:
           <ul>
             <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">^&gt;([^|]+).+$</code></li>
             <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">&gt;$1</code></li>
-            <li><em>“Find-Pattern is a regular <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Find-Pattern is a regular expression”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
@@ -1065,24 +1065,24 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
 
 </blockquote>
 
-<p>Having polished the titles of the segments in our hybrid reference genome we are finally ready for <span class="notranslate">mapping</span>, which we will carry out with <strong>BWA-MEM</strong>, clean up a bit with <strong>Samtools view</strong> and produce a quality report for with <strong>QualiMap BamQC</strong>.</p>
+<p>Having polished the titles of the segments in our hybrid reference genome we are finally ready for mapping, which we will carry out with <strong>BWA-MEM</strong>, clean up a bit with <strong>Samtools view</strong> and produce a quality report for with <strong>QualiMap BamQC</strong>.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-read-mapping-and-quality-control" aria-label="hands-on box: Read mapping and quality control"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Read <span class="notranslate">mapping</span> and quality control</div>
+  <div class="box-title hands-on-title" id="hands-on-read-mapping-and-quality-control" aria-label="hands-on box: Read mapping and quality control"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Read mapping and quality control</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.2</span></span>
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: hybrid reference genome with shortened names; output of <strong>Replace</strong></li>
-        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code></li>
-        <li><em>“Select a paired collection”</em>: quality-trimmed <span class="notranslate">reads</span>; output of <strong>fastp</strong> in QC and Trimming</li>
+        <li><em>“Single or Paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code></li>
+        <li><em>“Select a paired collection”</em>: quality-trimmed reads; output of <strong>fastp</strong> in QC and Trimming</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0"><strong>Samtools view</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+<span class="notranslate">galaxy</span>0</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0"><strong>Samtools view</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.15.1+galaxy0</span></span>
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SAM/BAM/CRAM data set”</em>: mapped <span class="notranslate">reads</span> BAM dataset; output of <strong>BWA-MEM</strong></li>
-        <li><em>“What would you like to look at?”</em>: <code class="language-plaintext highlighter-rouge">A filtered/subsampled selection of <span class="notranslate">reads</span></code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SAM/BAM/CRAM data set”</em>: mapped reads BAM dataset; output of <strong>BWA-MEM</strong></li>
+        <li><em>“What would you like to look at?”</em>: <code class="language-plaintext highlighter-rouge">A filtered/subsampled selection of reads</code></li>
         <li>In <em>“Configure filters”</em>:
           <ul>
             <li><em>“Filter by quality”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
@@ -1091,10 +1091,10 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bamqc/2.2.2d+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bamqc/2.2.2d+galaxy3"><strong>QualiMap BamQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bamqc/2.2.2d+<span class="notranslate">galaxy</span>3</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bamqc/2.2.2d+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bamqc/2.2.2d+galaxy3"><strong>QualiMap BamQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/qualimap_bamqc/qualimap_bamqc/2.2.2d+galaxy3</span></span>
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Mapped <span class="notranslate">reads</span> input dataset”</em>: filtered mapped <span class="notranslate">reads</span> BAM dataset; output of <strong>Samtools view</strong></li>
-        <li><em>“Skip duplicate <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Unselect all</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Mapped reads input dataset”</em>: filtered mapped reads BAM dataset; output of <strong>Samtools view</strong></li>
+        <li><em>“Skip duplicate reads”</em>: <code class="language-plaintext highlighter-rouge">Unselect all</code></li>
         <li>In <em>“Settings affecting specific plots”</em>:
           <ul>
             <li><em>“Number of bins to use in across-reference plots”</em>: <code class="language-plaintext highlighter-rouge">40</code></li>
@@ -1103,14 +1103,14 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
       </ul>
     </li>
     <li>
-      <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> Study the report generated with QualiMap</p>
+      <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> Study the report generated with QualiMap</p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-questions-3" aria-label="question box: Questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Questions</div>
 
         <ol>
-          <li>What is the coverage of each segment by the sequenced <span class="notranslate">reads</span>, and is it uniform?</li>
-          <li>Look for a plot showing read <span class="notranslate">mapping</span> quality across the reference. What can you conclude?</li>
+          <li>What is the coverage of each segment by the sequenced reads, and is it uniform?</li>
+          <li>Look for a plot showing read mapping quality across the reference. What can you conclude?</li>
         </ol>
 
         <blockquote class="solution">
@@ -1118,10 +1118,10 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
 
           <ol>
             <li>Coverage is rather different for the different segments. Looking at “Mean coverage” and its “Standard deviation” in the “Chromosome stats” table and at the “Coverage across reference” plot, coverage of the HA segment seems to be most critical since it approaches zero in some regions.</li>
-            <li><span class="notranslate">Mapping</span> quality is almost constant at or very near 60 (which happens to be the maximum <span class="notranslate">mapping</span> quality value emitted by BWA-MEM) across all segments with the exception of HA.</li>
+            <li>Mapping quality is almost constant at or very near 60 (which happens to be the maximum mapping quality value emitted by BWA-MEM) across all segments with the exception of HA.</li>
           </ol>
 
-          <p>These two observations combined with the VAPOR statistics for HA show again that even the best matching reference for this segment is not exactly close to the sequence of our sample. The read mapper had difficulties placing the sequenced <span class="notranslate">reads</span> on that sub-optimal reference and it looks as if we might have very little sequence information for some HA regions.</p>
+          <p>These two observations combined with the VAPOR statistics for HA show again that even the best matching reference for this segment is not exactly close to the sequence of our sample. The read mapper had difficulties placing the sequenced reads on that sub-optimal reference and it looks as if we might have very little sequence information for some HA regions.</p>
 
         </blockquote>
       </blockquote>
@@ -1132,17 +1132,17 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
 
 <h1 id="consensus-sequence-construction">Consensus sequence construction</h1>
 
-<p>From the polished <span class="notranslate">mapping</span> of <span class="notranslate">reads</span> to our custom reference we can now construct the consensus sequence of our sample.</p>
+<p>From the polished mapping of reads to our custom reference we can now construct the consensus sequence of our sample.</p>
 
-<p>Unfortunately, the tool we are going to use for this, <strong>ivar consensus</strong>, is not capable of working with more than one reference name at a time, but because this is influenza data we have <span class="notranslate">mapping</span>s to 8 different segments described in our data. So we need to take a little detour and split the mapped <span class="notranslate">reads</span> data into a collection of datasets each containing the <span class="notranslate">mapping</span>s for just one segment first again, then perform the consensus construction for all of them in parallel.</p>
+<p>Unfortunately, the tool we are going to use for this, <strong>ivar consensus</strong>, is not capable of working with more than one reference name at a time, but because this is influenza data we have mappings to 8 different segments described in our data. So we need to take a little detour and split the mapped reads data into a collection of datasets each containing the mappings for just one segment first again, then perform the consensus construction for all of them in parallel.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-splitting-mapped-reads-by-genome-segment" aria-label="hands-on box: Splitting mapped reads by genome segment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Splitting mapped <span class="notranslate">reads</span> by genome segment</div>
+  <div class="box-title hands-on-title" id="hands-on-splitting-mapped-reads-by-genome-segment" aria-label="hands-on box: Splitting mapped reads by genome segment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Splitting mapped reads by genome segment</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.1+galaxy0"><strong>Split BAM by Reference</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.1+<span class="notranslate">galaxy</span>0</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.1+galaxy0"><strong>Split BAM by Reference</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bamtools_split_ref/bamtools_split_ref/2.5.1+galaxy0</span></span>
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM dataset to split by reference”</em>: filtered mapped <span class="notranslate">reads</span>; output of <strong>Samtools view</strong></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM dataset to split by reference”</em>: filtered mapped reads; output of <strong>Samtools view</strong></li>
         <li><em>“Select references (chromosomes and contigs) you would like to restrict bam to”</em>: <code class="language-plaintext highlighter-rouge">Unselect all</code></li>
       </ul>
     </li>
@@ -1150,37 +1150,37 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
 
 </blockquote>
 
-<p>The output from this step has the desired collection structure, but the names of the collection elements are not the nicest. Ideally, we would just reuse the segment names, which are already provided in our <span class="notranslate">mapping</span> reference genome. So lets extract these names again and use them as new element labels</p>
+<p>The output from this step has the desired collection structure, but the names of the collection elements are not the nicest. Ideally, we would just reuse the segment names, which are already provided in our mapping reference genome. So lets extract these names again and use them as new element labels</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-relabeling-collection-elements" aria-label="hands-on box: Relabeling collection elements"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Relabeling collection elements</div>
 
   <ol>
-    <li><span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>
+    <li><span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: the <span class="notranslate">mapping</span> reference; output of <strong>Replace</strong> in <span class="notranslate">Mapping</span> to a hybrid reference</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: the mapping reference; output of <strong>Replace</strong> in Mapping to a hybrid reference</li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
         <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">^&gt;.+</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4"><strong>Replace parts of text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4"><strong>Replace parts of text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Select</strong></li>
         <li>In <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“1. Find and Replace”</em>:
           <ul>
             <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">^&gt;(.+)$</code></li>
             <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">$1</code></li>
-            <li><em>“Find-Pattern is a regular <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Find-Pattern is a regular expression”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
     </li>
     <li><span class="tool" data-tool="__RELABEL_FROM_FILE__" title="Tested with __RELABEL_FROM_FILE__"><strong>Relabel identifiers</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>RELABEL_FROM_FILE</strong></span></span>
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input collection”</em>: the split <span class="notranslate">mapping</span>s; output of <strong>Split BAM by Reference</strong></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input collection”</em>: the split mappings; output of <strong>Split BAM by Reference</strong></li>
         <li><em>“How should the new labels be specified?”</em>: <code class="language-plaintext highlighter-rouge">Using lines in a simple text file.</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“New Identifiers”</em>: output of <strong>Replace</strong></li>
-        <li><em>“Ensure strict <span class="notranslate">mapping</span>”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Ensure strict mapping”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
@@ -1189,26 +1189,26 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
 
 <p>And with that we are ready for consensus sequence generation!</p>
 
-<p>To accept any base suggested by the mapped sequenced <span class="notranslate">reads</span> as the consensus base for the corresponding genome position, we ask for the following requirements to be fulfilled:</p>
+<p>To accept any base suggested by the mapped sequenced reads as the consensus base for the corresponding genome position, we ask for the following requirements to be fulfilled:</p>
 
 <ul>
-  <li>at least ten sequenced <span class="notranslate">reads</span> have to provide information about the base in question</li>
-  <li>at a minimum, 70% of these <span class="notranslate">reads</span> have to agree on the base at this position.</li>
+  <li>at least ten sequenced reads have to provide information about the base in question</li>
+  <li>at a minimum, 70% of these reads have to agree on the base at this position.</li>
 </ul>
 
-<p>To avoid getting misled too much by sequencing errors, we are also going to ignore bases with a base calling quality less than 20 in the above counts (i.e., we are going to base our decisions only on bases in sequenced <span class="notranslate">reads</span> that the basecaller of the sequencer was reasonably sure about.</p>
+<p>To avoid getting misled too much by sequencing errors, we are also going to ignore bases with a base calling quality less than 20 in the above counts (i.e., we are going to base our decisions only on bases in sequenced reads that the basecaller of the sequencer was reasonably sure about.</p>
 
 <p>Now what if we cannot obtain a consensus base for a position with the above criteria? In such cases of uncertainty we want to insert an N (i.e. an unknown base) to express that we either did not have enough information about the position or that this information was ambiguous.</p>
 
-<p><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-info</span> All of the above limits for consensus base calling are arbitrary to some degree, and depend somewhat on the quality of the sequencing data. With very high overall coverage, for example, it is possible to increase the coverage threshold, but if you increase that threshold too much, you may end up with a consensus sequence consisting mostly of Ns.</p>
+<p><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span> All of the above limits for consensus base calling are arbitrary to some degree, and depend somewhat on the quality of the sequencing data. With very high overall coverage, for example, it is possible to increase the coverage threshold, but if you increase that threshold too much, you may end up with a consensus sequence consisting mostly of Ns.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-per-segment-consensus-construction" aria-label="hands-on box: Per-segment consensus construction"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Per-segment consensus construction</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.3.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.3.1+galaxy0"><strong>ivar consensus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.3.1+<span class="notranslate">galaxy</span>0</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.3.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.3.1+galaxy0"><strong>ivar consensus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/ivar_consensus/ivar_consensus/1.3.1+galaxy0</span></span>
       <ul>
-        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Bam file”</em>: the relabeled collection of mapped <span class="notranslate">reads</span>; output of <strong>Relabel identifiers</strong></li>
+        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Bam file”</em>: the relabeled collection of mapped reads; output of <strong>Relabel identifiers</strong></li>
         <li><em>“Minimum quality score threshold to count base”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
         <li><em>“Minimum frequency threshold”</em>: <code class="language-plaintext highlighter-rouge">0.7</code></li>
         <li><em>“Minimum depth to call consensus”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
@@ -1219,20 +1219,20 @@ select <code class="language-plaintext highlighter-rouge">Copy Datasets</code>, 
       <p>The output is a consensus sequence in FASTA format, one per segment, with
 the names just providing a bit too much detail for our purpose.</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4"><strong>Replace parts of text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4"><strong>Replace parts of text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4</span></span>
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File to process”</em>: consensus sequences; output of <strong>ivar consensus</strong></li>
         <li>In <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“1. Find and Replace”</em>:
           <ul>
             <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">^&gt;Consensus_(.*)_threshold_.*</code></li>
             <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">&gt;$1</code></li>
-            <li><em>“Find-Pattern is a regular <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Find-Pattern is a regular expression”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
     </li>
     <li>
-      <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> Inspect each consensus sequence generated for the different segments</p>
+      <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> Inspect each consensus sequence generated for the different segments</p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -1242,7 +1242,7 @@ the names just providing a bit too much detail for our purpose.</p>
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-answer"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-answer-contents" aria-expanded="true" aria-label="Toggle solution box: Answer"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution: Answer<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-          <p>As expected from the findings so far, the consensus sequence for the HA segment has stretches of Ns in it, which likely reflect the <span class="notranslate">mapping</span> issues and associated loss of coverage caused by our insufficiently sized collection of references.</p>
+          <p>As expected from the findings so far, the consensus sequence for the HA segment has stretches of Ns in it, which likely reflect the mapping issues and associated loss of coverage caused by our insufficiently sized collection of references.</p>
 
         </blockquote>
       </blockquote>
@@ -1260,7 +1260,7 @@ To do so, we are going to build multiple sequence alignments (MSAs) per segment 
   <div class="box-title hands-on-title" id="hands-on-exploring-phylogeny" aria-label="hands-on box: Exploring phylogeny"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Exploring phylogeny</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy0"><strong>MAFFT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">rna</span>team/mafft/rbc_mafft/7.508+<span class="notranslate">galaxy</span>0</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy0"><strong>MAFFT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft/7.508+galaxy0</span></span>
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Sequences to align”</em>: <code class="language-plaintext highlighter-rouge">References per segment (INSAFlu)</code></li>
         <li><em>“Data type”</em>: <code class="language-plaintext highlighter-rouge">Nucleic Acids</code></li>
@@ -1269,7 +1269,7 @@ To do so, we are going to build multiple sequence alignments (MSAs) per segment 
 
       <p>The result is a collection of MSAs, each representing all reference sequences of one genome segment.</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft_add/7.508+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft_add/7.508+galaxy0"><strong>MAFFT add</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">rna</span>team/mafft/rbc_mafft_add/7.508+<span class="notranslate">galaxy</span>0</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft_add/7.508+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft_add/7.508+galaxy0"><strong>MAFFT add</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/rnateam/mafft/rbc_mafft_add/7.508+galaxy0</span></span>
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Sequences to add to the alignment”</em>: consensus sequences with simplified names; output of <strong>Replace</strong></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Alignment”</em>: collection of MSAs; output of MAFFT</li>
@@ -1279,14 +1279,14 @@ To do so, we are going to build multiple sequence alignments (MSAs) per segment 
 
       <p>The result is a new collection with each of our sample consensus sequences added to the respective segment MSA.</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2"><strong>IQTree</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+<span class="notranslate">galaxy</span>2</span></span>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2"><strong>IQTree</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/iqtree/iqtree/2.1.2+galaxy2</span></span>
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Specify input alignment file in PHYLIP, FASTA, NEXUS, CLUSTAL or MSF format.”</em>: output of <strong>MAFFT add</strong></li>
-        <li><em>“Specify sequence type …“</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span></code></li>
+        <li><em>“Specify sequence type …“</em>: <code class="language-plaintext highlighter-rouge">DNA</code></li>
       </ul>
     </li>
     <li>
-      <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> Explore each of the final trees produced by IQTree for the different segments</p>
+      <p><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> Explore each of the final trees produced by IQTree for the different segments</p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -1314,7 +1314,7 @@ To do so, we are going to build multiple sequence alignments (MSAs) per segment 
 
 <p>Analysis workflows for influenza whole-genome sequencing data need to take into account the specific characteristics of the viral genome. Due to their higher natural variability this is especially true for avian influenza samples and for the HA- and NA-encoding segments of the genome.</p>
 
-<p>Nevertheless, it looks possible, with carefully chosen reference segment sequences and bioinformatic tools, to avoid a computationally expensive de-novo assembly approach and to use <span class="notranslate">mapping</span> against a dynamically compiled reference genome instead.</p>
+<p>Nevertheless, it looks possible, with carefully chosen reference segment sequences and bioinformatic tools, to avoid a computationally expensive de-novo assembly approach and to use mapping against a dynamically compiled reference genome instead.</p>
 
 <p>The rather small reference segment collection suggested for this tutorial consists of 56 different samples, of which only a single one has the H4N6 subtype of the sample analyzed here. Still it allowed us to perform subtyping of the sample, to construct complete consensus sequences for 7 segments including NA, and to draw valuable conclusions about the origin of the sample. It is conceivable that a larger collection of references chosen to capture several strains from each HA subtype could solve the remaining issue of the incomplete HA consensus sequence.</p>
 

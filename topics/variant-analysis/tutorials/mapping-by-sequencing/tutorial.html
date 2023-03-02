@@ -803,8 +803,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -880,21 +878,21 @@
 
 <p>In order to map and identify phenotype-causing mutations efficiently from a
 single experiment, modern genetic research aims to combine classical genetic
-<span class="notranslate">mapping</span> concepts with the power of next-generation-sequencing.</p>
+mapping concepts with the power of next-generation-sequencing.</p>
 
 <p>For example, after having obtained a mutant strain of an organism with a particular phenotype from a forward genetic screen, the classical approach towards
 identification of the underlying causative mutation would be to:</p>
 
 <ol>
-  <li>perform <span class="notranslate">mapping</span> crosses to probe for linkage between the unknown mutation
+  <li>perform mapping crosses to probe for linkage between the unknown mutation
 and selected markers with known location on the genome, in order to determine
 the approximate genomic region that the mutation resides in, then</li>
-  <li>sequence candidate <span class="notranslate">DNA</span> stretches in this region to identify the precise
+  <li>sequence candidate DNA stretches in this region to identify the precise
 nature of the mutation.</li>
 </ol>
 
 <p>Modern approaches, in contrast, use just one set of genome-wide sequencing data
-obtained from <span class="notranslate">mapping</span>-cross progeny and suitable parent strains to
+obtained from mapping-cross progeny and suitable parent strains to
 simultaneously:</p>
 
 <ul>
@@ -903,33 +901,33 @@ simultaneously:</p>
   <li>identify candidate mutations.</li>
 </ul>
 
-<p>Since it uses sequencing data already at the <span class="notranslate">mapping</span> step, this process is
-called <strong><span class="notranslate">mapping</span>-by-sequencing</strong>.</p>
+<p>Since it uses sequencing data already at the mapping step, this process is
+called <strong>mapping-by-sequencing</strong>.</p>
 
 <p>Since genome-wide sequencing will often reveal a few hundreds to many thousands
 of marker variants that should be considered together in the linkage analysis,
-<span class="notranslate">mapping</span>-by-sequencing data is typically analyzed with dedicated computational
-tools. For <span class="notranslate">Galaxy</span>, the <strong>MiModD</strong> suite of tools offers efficient and flexible
-analysis workflows compatible with a variety of <span class="notranslate">mapping</span>-by-sequencing
+mapping-by-sequencing data is typically analyzed with dedicated computational
+tools. For Galaxy, the <strong>MiModD</strong> suite of tools offers efficient and flexible
+analysis workflows compatible with a variety of mapping-by-sequencing
 approaches.</p>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-further-reading"><button class="gtn-boxify-button details" type="button" aria-controls="details-further-reading-contents" aria-expanded="true" aria-label="Toggle details box: Further reading"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Further reading<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>The MiModD documentation has its own chapter on supported
-<a href="http://mimodd.readthedocs.io/en/latest/nacreousmap.html"><span class="notranslate">mapping</span>-by-sequencing schemes</a>
+<a href="http://mimodd.readthedocs.io/en/latest/nacreousmap.html">mapping-by-sequencing schemes</a>
 not covered here.</p>
 </blockquote>
 
 <p>In this tutorial we are going to use several of these tools to map and identify
 a point mutation in an <em>Arabidopsis thaliana</em> strain from whole-genome
 sequencing data. This will demonstrate one particular kind of linkage analysis
-supported by <strong>MiModD</strong> called <em>Variant Allele Frequency <span class="notranslate">Mapping</span></em>.</p>
+supported by <strong>MiModD</strong> called <em>Variant Allele Frequency Mapping</em>.</p>
 
-<h3 id="variant-allele-frequency-mapping">Variant Allele Frequency <span class="notranslate">Mapping</span></h3>
+<h3 id="variant-allele-frequency-mapping">Variant Allele Frequency Mapping</h3>
 
-<figure id="figure-1"><img src="../../images/mbs_scheme.png" alt="Principal of variant allele frequency mapping. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Principle of variant allele frequency <span class="notranslate">mapping</span></figcaption></figure>
+<figure id="figure-1"><img src="../../images/mbs_scheme.png" alt="Principal of variant allele frequency mapping. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Principle of variant allele frequency mapping</figcaption></figure>
 
-<p>As illustrated in Figure 1, variant allele frequency <span class="notranslate">mapping</span> analyzes marker
+<p>As illustrated in Figure 1, variant allele frequency mapping analyzes marker
 variant inheritance patterns in pooled F2 recombinants selected for the
 mutation to be mapped.</p>
 
@@ -945,16 +943,16 @@ variant responsible for the mutant phenotype (yellow)</li>
 present in the premutagenesis strain (green open diamonds)</li>
 </ul>
 
-<p>For <span class="notranslate">mapping</span> the causative mutation, additional variants (blue open diamonds)
-are introduced through a cross to a <span class="notranslate">mapping</span> strain and F2 progeny is selected
+<p>For mapping the causative mutation, additional variants (blue open diamonds)
+are introduced through a cross to a mapping strain and F2 progeny is selected
 for the mutant phenotype. While each individual in the F2 generation carries
 its uniquely recombined variant pattern (3 possible outcomes for the diploid
 genome are shown in the figure), this phenotypic selection will work against
-<span class="notranslate">mapping</span> strain variants in the vicinity (yellow boxes) of the causative
-variant. Hence, when the recombined <span class="notranslate">DNA</span> from phenotypic F2 progeny gets pooled
+mapping strain variants in the vicinity (yellow boxes) of the causative
+variant. Hence, when the recombined DNA from phenotypic F2 progeny gets pooled
 and sequenced, the causative variant can be found by looking for a region for
-which all sequenced <span class="notranslate">reads</span> support variant alleles found in the original mutant
-line, rather than <span class="notranslate">mapping</span> strain variant alleles.</p>
+which all sequenced reads support variant alleles found in the original mutant
+line, rather than mapping strain variant alleles.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -986,10 +984,10 @@ The data used in this tutorial represent a subsample of the
 </blockquote>
 
 <p>The mutant line was obtained from a mutagenesis screen on the <strong>Col</strong>umbia
-reference background of <em>A. thaliana</em>. For <span class="notranslate">mapping</span>-by-sequencing, the line was
+reference background of <em>A. thaliana</em>. For mapping-by-sequencing, the line was
 outcrossed to the highly polymorphic <strong>L</strong>andsberg <em><strong>er</strong>ecta</em> background as a
 source of marker variants. From this outcross, 119 F2 siblings showing the
-original late-flowering phenotype were recovered and their genomic <span class="notranslate">DNA</span> was
+original late-flowering phenotype were recovered and their genomic DNA was
 pooled and subjected to whole-genome sequencing.
 Together with whole-genome sequencing data of a pure L<em>er</em> background strain,
 this outcrossed pool data forms the starting point of our analysis.
@@ -998,15 +996,15 @@ outcrossed F2 pool <em>could</em> have inherited and exclusion of L<em>er</em> m
 a particular genomic region from the F2 pool provides evidence that the
 phenotype causing variant lies close to this region. With respect to
 <a href="#figure-1">Figure 1</a>, this means that we will only use “blue diamond” marker
-variants introduced through the <span class="notranslate">mapping</span> cross for the linkage analysis and
+variants introduced through the mapping cross for the linkage analysis and
 ignore potentially informative (green and orange) variants found in the
 original mutant line.</p>
 
-<p>For your convenience, the sequenced <span class="notranslate">reads</span> from both datasets have already been
+<p>For your convenience, the sequenced reads from both datasets have already been
 mapped (using <strong>Bowtie2</strong>) to the <em>A. thaliana</em> Col reference genome (version
-TAIR10) so the two datasets take the form of BAM files with the <span class="notranslate">mapping</span> results
+TAIR10) so the two datasets take the form of BAM files with the mapping results
 (see the tutorial on
-<a href="../../../sequence-analysis/tutorials/mapping/tutorial.html">NGS data <span class="notranslate">mapping</span></a>
+<a href="../../../sequence-analysis/tutorials/mapping/tutorial.html">NGS data mapping</a>
 if you do not know what this means).</p>
 
 <blockquote class="notranslate hands_on">
@@ -1017,7 +1015,7 @@ if you do not know what this means).</p>
     <p>This section assumes that you already know</p>
 
     <ul>
-      <li>how to upload data to <span class="notranslate">Galaxy</span> via links</li>
+      <li>how to upload data to Galaxy via links</li>
       <li>edit dataset attributes</li>
       <li>do some basic text manipulation on datasets</li>
     </ul>
@@ -1033,11 +1031,11 @@ and
   <ol>
     <li>Import the two BAM datasets representing the:
       <ul>
-        <li><a href="https://zenodo.org/record/1098034/files/Ler_mapping_strain.bam">L<em>er</em> <span class="notranslate">mapping</span> strain</a></li>
+        <li><a href="https://zenodo.org/record/1098034/files/Ler_mapping_strain.bam">L<em>er</em> mapping strain</a></li>
         <li><a href="https://zenodo.org/record/1098034/files/outcrossed_F2.bam">outcrossed F2 pool</a></li>
       </ul>
     </li>
-    <li>Specify the genome that was used at the <span class="notranslate">reads</span> <span class="notranslate">mapping</span> step
+    <li>Specify the genome that was used at the reads mapping step
       <ol>
         <li>Click on <strong>Edit attributes</strong> (the pencil icon displayed with the dataset)</li>
         <li>As the <strong>Database/Build</strong> select <code class="language-plaintext highlighter-rouge">Arabidopsis thaliana TAIR10</code></li>
@@ -1050,7 +1048,7 @@ and
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-tair10-version" aria-label="comment box: TAIR10 Version"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: TAIR10 Version</div>
         <p>This step is only necessary if the TAIR10 version of the <em>A. thaliana</em>
-genome is not available as a built-in genome on your <span class="notranslate">Galaxy</span> server.</p>
+genome is not available as a built-in genome on your Galaxy server.</p>
       </blockquote>
 
       <ol>
@@ -1074,7 +1072,7 @@ underscore.</p>
 following the <code class="language-plaintext highlighter-rouge">&gt;</code>.</p>
             </li>
             <li>
-              <p><strong>Find-Pattern is a regular <span class="notranslate">expression</span></strong> to <code class="language-plaintext highlighter-rouge">Yes</code></p>
+              <p><strong>Find-Pattern is a regular expression</strong> to <code class="language-plaintext highlighter-rouge">Yes</code></p>
             </li>
           </ul>
         </li>
@@ -1088,7 +1086,7 @@ give the dataset a nice name (<em>e.g.</em>, TAIR10 reference).</li>
 
 <h1 id="joint-variant-calling-and-extraction">Joint Variant Calling and Extraction</h1>
 
-<p>A hallmark of all <span class="notranslate">mapping</span>-by-sequencing analyses is that one would like to
+<p>A hallmark of all mapping-by-sequencing analyses is that one would like to
 follow the fate of variants through genetic crosses. In this tutorial, for
 example, we would like to determine, for every marker variant provided by the
 L<em>er</em> background, at what frequency it got inherited by the outcrossed F2 pool.
@@ -1117,12 +1115,12 @@ variant call statistics:
         <li>
           <p>Select the <strong>reference genome</strong> to call variants against.</p>
 
-          <p>If your <span class="notranslate">Galaxy</span> server offers version TAIR10 of the <em>A. thaliana</em>
+          <p>If your Galaxy server offers version TAIR10 of the <em>A. thaliana</em>
 reference as a <strong>built-in genome</strong>, you can go ahead and use it.
 Otherwise, download and preprocess the reference as described under
 Data Preparation and use it as a <strong>genome from my history</strong>.</p>
         </li>
-        <li>As the <strong>Aligned <span class="notranslate">reads</span> input datasets</strong> for the analysis select the two
+        <li>As the <strong>Aligned reads input datasets</strong> for the analysis select the two
 BAM datasets representing the two samples (use the <code class="language-plaintext highlighter-rouge">Control</code> key on the
 keyboard to select multiple datasets from the list.</li>
         <li><strong>Execute</strong> the job</li>
@@ -1154,13 +1152,13 @@ of header lines), this roughly
 equals the number of variants in the dataset.</li>
         <li>
           <p>The huge number of variants reflects the fact that the L<em>er</em>
-<span class="notranslate">mapping</span> strain is really quite diverged from the Col reference
+mapping strain is really quite diverged from the Col reference
 background that the mutant was generated in and, thus, offers many
-marker variants for <span class="notranslate">mapping</span>.</p>
+marker variants for mapping.</p>
 
           <p>In total, the L<em>er</em> genome harbors &gt;400,000 single nucleotide
 variants compared to the Col reference, but to keep the tutorial
-datasets small we only provided <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to 2 out of 5
+datasets small we only provided reads mapping to 2 out of 5
 chromosomes. In addition, we provided really low-coverage data
 even for those two chromosomes so our analysis will miss many true
 variants and contain many questionable variant calls that may represent
@@ -1178,7 +1176,7 @@ of variants is robust enough to provide useful results.</p>
 <p>The extracted variants dataset obtained in the previous step contains
 information about thousands of sites that can be used as markers to map the
 causative mutation in the F2 pool. We will now analyze the data with the
-<strong>MiModD NacreousMap</strong> tool in <strong>Variant Allele Frequency</strong> <span class="notranslate">mapping</span> mode to
+<strong>MiModD NacreousMap</strong> tool in <strong>Variant Allele Frequency</strong> mapping mode to
 identify these markers and look for linkage between them and the causative
 mutation.</p>
 
@@ -1187,28 +1185,28 @@ mutation.</p>
 
   <p>In the <strong>MiModD NacreousMap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> interface, set</p>
   <ul>
-    <li><strong>type of <span class="notranslate">mapping</span> analysis to perform</strong> to <code class="language-plaintext highlighter-rouge">Variant Allele Frequency
-<span class="notranslate">Mapping</span></code> and</li>
+    <li><strong>type of mapping analysis to perform</strong> to <code class="language-plaintext highlighter-rouge">Variant Allele Frequency
+Mapping</code> and</li>
     <li><strong>data source to use</strong> to <code class="language-plaintext highlighter-rouge">VCF file of variants</code>.</li>
     <li>As the <strong>input file with variants to analyze</strong> select your extracted
 variants VCF dataset obtained in the previous step.</li>
-    <li>As the <strong><span class="notranslate">mapping</span> sample name</strong> use <code class="language-plaintext highlighter-rouge">outcrossed F2</code>.</li>
+    <li>As the <strong>mapping sample name</strong> use <code class="language-plaintext highlighter-rouge">outcrossed F2</code>.</li>
     <li>Leave the <strong>name of the related parent sample</strong> input field empty because
 in this two-sample there is no such sample.</li>
     <li>As the <strong>name of the unrelated parent sample</strong> specify <code class="language-plaintext highlighter-rouge">Ler</code>.
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-sample-roles" aria-label="comment box: Sample roles"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Sample roles</div>
-        <p>In <code class="language-plaintext highlighter-rouge">Variant Allele Frequency <span class="notranslate">Mapping</span></code> mode the tool requires:</p>
+        <p>In <code class="language-plaintext highlighter-rouge">Variant Allele Frequency Mapping</code> mode the tool requires:</p>
         <ul>
-          <li>a <strong><span class="notranslate">mapping</span> sample</strong>, which corresponds to the recombinant pool, from
+          <li>a <strong>mapping sample</strong>, which corresponds to the recombinant pool, from
 which allele frequencies should be calculated</li>
           <li>either a <strong>related</strong> or an <strong>unrelated parent sample</strong> (or both),
 from which the marker variant sites to use in the linkage analysis
 will be determined. A related parent sample is related (or identical)
 to the original mutant line by descent and provides information about
 (some of) the variants present in that line, while an unrelated parent
-sample provides information about the <span class="notranslate">mapping</span> strain variants
-introduced in the <span class="notranslate">mapping</span> cross. If both a related and an unrelated
+sample provides information about the mapping strain variants
+introduced in the mapping cross. If both a related and an unrelated
 parent sample are available, the tool can also use the marker sets
 from both sides for the linkage analysis.</li>
         </ul>
@@ -1253,13 +1251,13 @@ corresponds to a peak in the histograms and the two kinds of plots are,
 thus, in very good agreement for this analysis.</p>
 
           <p>In general, the histogram plots are easier to digest and often
-provide more precise <span class="notranslate">mapping</span> intervals, and are often all you need for
-<span class="notranslate">mapping</span> a causative variant. The per-marker scatter plots, on the other
+provide more precise mapping intervals, and are often all you need for
+mapping a causative variant. The per-marker scatter plots, on the other
 hand, are closer to the raw data and can sometimes reveal additional
-irregularities in the data that may indicate problems with the <span class="notranslate">mapping</span>
+irregularities in the data that may indicate problems with the mapping
 cross or unexpected factors influencing the inheritance pattern.</p>
         </li>
-        <li>Since we included only <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to chromosome 1 or 2 in
+        <li>Since we included only reads mapping to chromosome 1 or 2 in
 the original BAM files, the tool will not be able to detect any markers
 for the other chromosomes.</li>
       </ol>
@@ -1270,7 +1268,7 @@ for the other chromosomes.</li>
 
 <h1 id="identifying-candidate-mutations">Identifying Candidate Mutations</h1>
 
-<p>With the <span class="notranslate">mapping</span> results obtained above we can now try to get a list of
+<p>With the mapping results obtained above we can now try to get a list of
 candidates for the causative mutation. Here is what we know about this mutation
 so far:</p>
 
@@ -1315,7 +1313,7 @@ pool has a <code class="language-plaintext highlighter-rouge">1/1</code>, <em>i.
         <li><strong>genotype pattern(s) for the inclusion of variants</strong> to <code class="language-plaintext highlighter-rouge">0/0</code></li>
       </ul>
 
-      <p>This filter will retain only variants for which the <span class="notranslate">mapping</span> strain sample
+      <p>This filter will retain only variants for which the mapping strain sample
 has a homozygous wt genotype.</p>
     </li>
     <li>add a <strong>Region Filter</strong> and set its
@@ -1325,7 +1323,7 @@ has a homozygous wt genotype.</p>
         <li><strong>Region End</strong> to 19000000</li>
       </ul>
 
-      <p>to retain only variants falling into the previously determined <span class="notranslate">mapping</span>
+      <p>to retain only variants falling into the previously determined mapping
 interval.</p>
 
       <blockquote class="comment">
@@ -1338,7 +1336,7 @@ names are used where in your own analyses.</p>
         <p>Because this is a valid concern, the MiModD tool suite features the
 <strong>MiModD File Information</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool that can report the
 sample and sequence names stored in almost any dataset that you may
-encounter in a <span class="notranslate">mapping</span>-by-sequencing analysis (specifically, the
+encounter in a mapping-by-sequencing analysis (specifically, the
 tool can handle datasets in vcf, bcf, sam, bam and fasta format).</p>
 
       </blockquote>
@@ -1354,18 +1352,18 @@ filters.</p>
     <ol>
       <li>How many variants passed the filters?</li>
       <li>How many variants would you have to consider as candidates if you did
-not have any <span class="notranslate">mapping</span> information?</li>
+not have any mapping information?</li>
     </ol>
 
     <blockquote class="solution">
       <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
       <ol>
-        <li>If you used the suggested <span class="notranslate">mapping</span> interval of 1Mb on chr2, you
+        <li>If you used the suggested mapping interval of 1Mb on chr2, you
 should have retained 5 variants. Filtering is a really powerful way to
 reduce the number of variants to consider!</li>
         <li>Re-running the job with the region filter removed shows that across
 the two chromosomes, for which the input datasets provided sequencing
-<span class="notranslate">reads</span>, there are 50 variants for which the pool appears homozygous
+reads, there are 50 variants for which the pool appears homozygous
 mutant and for which the L<em>er</em> strain is homozygous wt.</li>
       </ol>
     </blockquote>
@@ -1373,7 +1371,7 @@ mutant and for which the L<em>er</em> strain is homozygous wt.</li>
 </blockquote>
 
 <p>Not all of the retained variants are equally likely candidates for being the
-causative mutation. Since the input datasets consist of <span class="notranslate">reads</span> from whole-genome
+causative mutation. Since the input datasets consist of reads from whole-genome
 sequencing, as opposed to exome sequencing, some of the variants may fall in
 intergenic regions or introns where they are unlikely to cause a phenotype.
 Other variants may fall in coding regions, but may be silent on the protein
@@ -1405,7 +1403,7 @@ step.</p>
 
         <p>Please also note that before SnpEff version 4.3 the TAIR10 version of
 the <em>A. thaliana</em> genome database was named <code class="language-plaintext highlighter-rouge">athalianaTair10</code>.
-If your <span class="notranslate">Galaxy</span> server offers only older versions of the SnpEff tools,
+If your Galaxy server offers only older versions of the SnpEff tools,
 you will have to use that name instead of <code class="language-plaintext highlighter-rouge">Arabidopsis_thaliana</code>.</p>
       </blockquote>
     </li>
@@ -1489,7 +1487,7 @@ chr2:18,808,927 C→T.</li>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p><span class="notranslate">Mapping</span>-by-sequencing can greatly speed up and facilitate the molecular
+<p>Mapping-by-sequencing can greatly speed up and facilitate the molecular
 identification of mutations recovered from mutagenesis screens. The method
 makes extensive use of cross-sample comparison of variants and benefits strongly
 from joint variant calling to generate reliable and manageable variant

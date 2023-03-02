@@ -960,8 +960,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -1028,7 +1026,7 @@
                 
 <h1 id="overview">Overview</h1>
 
-<p>In this tutorial we will perform a metatranscriptomics analysis based on the ASAIM <span class="notranslate">workflow</span> (<span class="citation"><a href="#batut2018asaim">Batut <i>et al.</i> 2018</a></span>), using data from <span class="citation"><a href="#kunath2018proteins">Kunath <i>et al.</i> 2018</a></span>.</p>
+<p>In this tutorial we will perform a metatranscriptomics analysis based on the ASAIM workflow (<span class="citation"><a href="#batut2018asaim">Batut <i>et al.</i> 2018</a></span>), using data from <span class="citation"><a href="#kunath2018proteins">Kunath <i>et al.</i> 2018</a></span>.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-note-two-versions-of-this-tutorial" aria-label="comment box: Note: Two versions of this tutorial"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Note: Two versions of this tutorial</div>
@@ -1044,7 +1042,7 @@ more in-depth discussion of each step, please see the <a href="/training-materia
 
 <h1 id="introduction">Introduction</h1>
 
-<p>Microbiomes play a critical role in host health, disease, and the environment. The study of microbiota and microbial communities has been facilitated by the evolution of technologies, specifically the sequencing techniques. We can now study the microbiome dynamics by investigating the <span class="notranslate">DNA</span> content (metagenomics), <span class="notranslate">RNA</span> <span class="notranslate">expression</span> (metatranscriptomics), protein <span class="notranslate">expression</span> (metaproteomics) or small molecules (metabolomics):</p>
+<p>Microbiomes play a critical role in host health, disease, and the environment. The study of microbiota and microbial communities has been facilitated by the evolution of technologies, specifically the sequencing techniques. We can now study the microbiome dynamics by investigating the DNA content (metagenomics), RNA expression (metatranscriptomics), protein expression (metaproteomics) or small molecules (metabolomics):</p>
 
 <p><img src="../../images/metatranscriptomics/Why_MT.png" alt="Multiomics" /></p>
 
@@ -1056,13 +1054,13 @@ more in-depth discussion of each step, please see the <a href="/training-materia
 
 <p>Metatranscriptomics analysis enables understanding of how the microbiome responds to the environment by studying the functional analysis of genes expressed by the microbiome. It can also estimate the taxonomic composition of the microbial population. It provides scientists with the confirmation of predicted open‐reading frames (ORFs) and potential identification of novel sites of transcription and/or translation from microbial genomes. Metatranscriptomics can enable more complete generation of protein sequences databases for metaproteomics.</p>
 
-<p>To illustrate how to analyze metatranscriptomics data, we will use data from time-series analysis of a microbial community inside a bioreactor (<span class="citation"><a href="#kunath2018proteins">Kunath <i>et al.</i> 2018</a></span>). They generated metatranscriptomics data for 3 replicates over 7 time points. Before amplification the amount of r<span class="notranslate">RNA</span> was reduced by r<span class="notranslate">RNA</span> depletion. The sequencing libray was prepared with the TruSeq stranded <span class="notranslate">RNA</span> sample preparation, which included the production of a c<span class="notranslate">DNA</span> library.</p>
+<p>To illustrate how to analyze metatranscriptomics data, we will use data from time-series analysis of a microbial community inside a bioreactor (<span class="citation"><a href="#kunath2018proteins">Kunath <i>et al.</i> 2018</a></span>). They generated metatranscriptomics data for 3 replicates over 7 time points. Before amplification the amount of rRNA was reduced by rRNA depletion. The sequencing libray was prepared with the TruSeq stranded RNA sample preparation, which included the production of a cDNA library.</p>
 
 <p>In this tutorial, we focus on biological replicate A of the 1st time point. In a follow-up tutorial we will illustrate how to compare the results over the different time points and replicates. The input files used here are trimmed version of the original file for the purpose of saving time and resources.</p>
 
-<p>To analyze the data, we will follow the ASaiM <span class="notranslate">workflow</span> and explain it step by step. ASaiM (<span class="citation"><a href="#batut2018asaim">Batut <i>et al.</i> 2018</a></span>) is an open-source <span class="notranslate">Galaxy</span>-based <span class="notranslate">workflow</span> that enables microbiome analyses. Its <span class="notranslate">workflow</span> offers a streamlined <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> for users to explore metagenomic/metatranscriptomic data in a reproducible and transparent environment. The ASaiM <span class="notranslate">workflow</span> has been updated by the <strong><span class="notranslate">Galaxy</span>P</strong> team (University of Minnesota) to perform metatranscriptomics analysis of large microbial datasets.</p>
+<p>To analyze the data, we will follow the ASaiM workflow and explain it step by step. ASaiM (<span class="citation"><a href="#batut2018asaim">Batut <i>et al.</i> 2018</a></span>) is an open-source Galaxy-based workflow that enables microbiome analyses. Its workflow offers a streamlined Galaxy workflow for users to explore metagenomic/metatranscriptomic data in a reproducible and transparent environment. The ASaiM workflow has been updated by the <strong>GalaxyP</strong> team (University of Minnesota) to perform metatranscriptomics analysis of large microbial datasets.</p>
 
-<p>The <span class="notranslate">workflow</span> described in this tutorial takes in paired-end datasets of raw shotgun sequences (in FastQ format) as an input and proceeds to:</p>
+<p>The workflow described in this tutorial takes in paired-end datasets of raw shotgun sequences (in FastQ format) as an input and proceeds to:</p>
 
 <ol>
   <li>Preprocess</li>
@@ -1071,13 +1069,13 @@ more in-depth discussion of each step, please see the <a href="/training-materia
   <li>Combine taxonomic and functional information to offer insights into the taxonomic contribution to a function or functions expressed by a particular taxonomy.</li>
 </ol>
 
-<p>A graphical representation of the ASaiM <span class="notranslate">workflow</span> which we will be using today is given below:</p>
+<p>A graphical representation of the ASaiM workflow which we will be using today is given below:</p>
 
 <p><img src="../../images/asaim-wf.png" alt="ASaiM diagram" width="75%" /></p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-span-class-quot-notranslate-quot-workflow-span-also-applicable-to-metagenomics-data" aria-label="comment box: <span class=&quot;notranslate&quot;>Workflow</span> also applicable to metagenomics data"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: <span class=&quot;notranslate&quot;>Workflow</span> also applicable to metagenomics data</div>
-  <p>The approach with the tools described here can also apply to metagenomics data. What will change are the quality control profiles and proportion of r<span class="notranslate">RNA</span> sequences.</p>
+  <div class="box-title comment-title" id="comment-workflow-also-applicable-to-metagenomics-data" aria-label="comment box: Workflow also applicable to metagenomics data"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Workflow also applicable to metagenomics data</div>
+  <p>The approach with the tools described here can also apply to metagenomics data. What will change are the quality control profiles and proportion of rRNA sequences.</p>
 </blockquote>
 
 <blockquote class="agenda">
@@ -1091,8 +1089,8 @@ more in-depth discussion of each step, please see the <a href="/training-materia
   <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
   <li><a href="#preprocessing" id="markdown-toc-preprocessing">Preprocessing</a>    <ol>
       <li><a href="#quality-control" id="markdown-toc-quality-control">Quality control</a></li>
-      <li><a href="#ribosomal-rna-fragments-filtering" id="markdown-toc-ribosomal-rna-fragments-filtering">Ribosomal <span class="notranslate">RNA</span> fragments filtering</a></li>
-      <li><a href="#interlace-forward-and-reverse-reads" id="markdown-toc-interlace-forward-and-reverse-reads">Interlace forward and reverse <span class="notranslate">reads</span></a></li>
+      <li><a href="#ribosomal-rna-fragments-filtering" id="markdown-toc-ribosomal-rna-fragments-filtering">Ribosomal RNA fragments filtering</a></li>
+      <li><a href="#interlace-forward-and-reverse-reads" id="markdown-toc-interlace-forward-and-reverse-reads">Interlace forward and reverse reads</a></li>
     </ol>
   </li>
   <li><a href="#extraction-of-the-community-profile" id="markdown-toc-extraction-of-the-community-profile">Extraction of the community profile</a>    <ol>
@@ -1121,9 +1119,9 @@ more in-depth discussion of each step, please see the <a href="/training-materia
       <p>Create a new history for this tutorial and give it a proper name</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
     <li>
       <p><span class="tool" data-tool="upload1" title="Tested with upload1"><strong>Import</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>  <code class="language-plaintext highlighter-rouge">T1A_forward</code> and <code class="language-plaintext highlighter-rouge">T1A_reverse</code> from <a href="https://zenodo.org/record/4776250">Zenodo</a> or from the data library (ask your instructor)</p>
@@ -1133,23 +1131,23 @@ https://zenodo.org/record/4776250/files/T1A_reverse.fastqsanger
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
 
-      <p>As default, <span class="notranslate">Galaxy</span> takes the link as name, so rename them.</p>
+      <p>As default, Galaxy takes the link as name, so rename them.</p>
     </li>
     <li>
-      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the files to <code class="language-plaintext highlighter-rouge">T1A_forward</code> and <code class="language-plaintext highlighter-rouge">T1A_reverse</code></p>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the files to <code class="language-plaintext highlighter-rouge">T1A_forward</code> and <code class="language-plaintext highlighter-rouge">T1A_reverse</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">fastqsanger</code> (e.g. <strong>not</strong> <code class="language-plaintext highlighter-rouge">fastq</code>). If it is not, please change the datatype to <code class="language-plaintext highlighter-rouge">fastqsanger</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">fastqsanger</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">fastqsanger</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1158,32 +1156,32 @@ https://zenodo.org/record/4776250/files/T1A_reverse.fastqsanger
 <h1 id="preprocessing">Preprocessing</h1>
 <p><a href="../metatranscriptomics/tutorial.html#preprocessing"><i class="fas fa-exchange-alt" aria-hidden="true"></i><span class="visually-hidden">exchange</span> Switch to extended tutorial</a></p>
 
-<p>Before starting any analysis, it is always a good idea to assess the quality of your input data and improve it where possible by trimming and filtering <span class="notranslate">reads</span>.</p>
+<p>Before starting any analysis, it is always a good idea to assess the quality of your input data and improve it where possible by trimming and filtering reads.</p>
 
-<p>In this section we will run a <span class="notranslate">workflow</span> that performs the following tasks:</p>
+<p>In this section we will run a workflow that performs the following tasks:</p>
 <ol>
   <li>Assess read quality using <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and  <strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-  <li>Filter <span class="notranslate">reads</span> by length and quality using <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-  <li>Remove ribosomal <span class="notranslate">RNA</span> (r<span class="notranslate">RNA</span>) using <strong>SortMe<span class="notranslate">RNA</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-  <li>Combine the high-quality <span class="notranslate">reads</span> into a single <em>interlaced</em> FastQ file for <span class="notranslate">downstream</span> analysis using <strong>FastQ interlacer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+  <li>Filter reads by length and quality using <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+  <li>Remove ribosomal RNA (rRNA) using <strong>SortMeRNA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+  <li>Combine the high-quality reads into a single <em>interlaced</em> FastQ file for downstream analysis using <strong>FastQ interlacer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
 </ol>
 
-<p>We will run all these steps using a single <span class="notranslate">workflow</span>, then discuss each step and the results in more detail.</p>
+<p>We will run all these steps using a single workflow, then discuss each step and the results in more detail.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-pretreatments" aria-label="hands-on box: Pretreatments"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Pretreatments</div>
 
   <ol>
-    <li><strong>Import the <span class="notranslate">workflow</span></strong> into <span class="notranslate">Galaxy</span>
+    <li><strong>Import the workflow</strong> into Galaxy
       <ul>
-        <li>Copy the URL (e.g. via right-click) of <a href="/training-material/topics/metagenomics/tutorials/metatranscriptomics-short/workflows/workflow1_preprocessing.ga">this <span class="notranslate">workflow</span></a> or download it to your computer.</li>
-        <li>Import the <span class="notranslate">workflow</span> into <span class="notranslate">Galaxy</span></li>
+        <li>Copy the URL (e.g. via right-click) of <a href="/training-material/topics/metagenomics/tutorials/metatranscriptomics-short/workflows/workflow1_preprocessing.ga">this workflow</a> or download it to your computer.</li>
+        <li>Import the workflow into Galaxy</li>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> at the top-right of the screen</li>   <li>Provide your <span class="notranslate">workflow</span>     <ul>       <li>Option 1: Paste the URL of the <span class="notranslate">workflow</span> into the box labelled <em>“Archived <span class="notranslate">Workflow</span> URL”</em></li>       <li>Option 2: Upload the <span class="notranslate">workflow</span> file in the box labelled <em>“Archived <span class="notranslate">Workflow</span> File”</em></li>     </ul>   </li>   <li>Click the <strong>Import <span class="notranslate">workflow</span></strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
     </li>
-    <li>Run <strong><span class="notranslate">Workflow</span> 1: Preprocessing</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span></span> using the following parameters:
+    <li>Run <strong>Workflow 1: Preprocessing</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
       <ul>
         <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Forward FastQ file”</em>: <code class="language-plaintext highlighter-rouge">T1A_forward</code></li>
@@ -1191,15 +1189,15 @@ https://zenodo.org/record/4776250/files/T1A_reverse.fastqsanger
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>   <li>Configure the <span class="notranslate">workflow</span> as needed</li>   <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<p>The <span class="notranslate">workflow</span> will take a little while to complete. Once tools have completed, the results will be available in your history for viewing. Note that only the most important outputs will he visible; intermediate files are hidden by default.</p>
+<p>The workflow will take a little while to complete. Once tools have completed, the results will be available in your history for viewing. Note that only the most important outputs will he visible; intermediate files are hidden by default.</p>
 
-<p>While you wait for the <span class="notranslate">workflow</span> to complete, please continue reading, in the next section(s) we will go into a bit more detail about what happens in each step of this <span class="notranslate">workflow</span> and examine the results.</p>
+<p>While you wait for the workflow to complete, please continue reading, in the next section(s) we will go into a bit more detail about what happens in each step of this workflow and examine the results.</p>
 
 <h2 id="quality-control">Quality control</h2>
 
@@ -1222,7 +1220,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
 
   <ol>
     <li>How many sequences does each file has?</li>
-    <li>How is the quality score over the <span class="notranslate">reads</span>? And the mean score?</li>
+    <li>How is the quality score over the reads? And the mean score?</li>
     <li>Is there any bias in base content?</li>
     <li>How is the GC content?</li>
     <li>Are there any unindentified bases?</li>
@@ -1238,18 +1236,18 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
     <ol>
       <li>Both files have 260,554 sequences</li>
       <li>
-        <p>The “Per base sequence quality” is globally good: the quality stays around 40 over the <span class="notranslate">reads</span>, with just a slight decrease at the end (but still higher than 35)</p>
+        <p>The “Per base sequence quality” is globally good: the quality stays around 40 over the reads, with just a slight decrease at the end (but still higher than 35)</p>
 
         <p><img src="../../images/metatranscriptomics/fastqc_per_base_sequence_quality_plot.png" alt="Sequence Quality" /></p>
 
-        <p>The reverse <span class="notranslate">reads</span> have a slight worst quality than the forward, a usual case in Illumina sequencing.</p>
+        <p>The reverse reads have a slight worst quality than the forward, a usual case in Illumina sequencing.</p>
 
-        <p>The distribution of the mean quality score is almost at the maximum for the forward and reverse <span class="notranslate">reads</span>:</p>
+        <p>The distribution of the mean quality score is almost at the maximum for the forward and reverse reads:</p>
 
         <p><img src="../../images/metatranscriptomics/fastqc_per_sequence_quality_scores_plot.png" alt="Per Sequence Quality Scores" /></p>
       </li>
       <li>
-        <p>For both forward and reverse <span class="notranslate">reads</span>, the percentage of A, T, C, G over sequence length is biased. As for any <span class="notranslate">RNA</span>-seq data or more generally libraries produced by priming using random hexamers, the first 10-12 bases have an intrinsic bias.</p>
+        <p>For both forward and reverse reads, the percentage of A, T, C, G over sequence length is biased. As for any RNA-seq data or more generally libraries produced by priming using random hexamers, the first 10-12 bases have an intrinsic bias.</p>
 
         <p><img src="../../images/metatranscriptomics/fastqc_per_base_sequence_content_forward.png" alt="Per Base Sequence Content (forward)" /></p>
 
@@ -1258,43 +1256,43 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
         <p>We could also see that after these first bases the distinction between C-G and A-T groups is not clear as expected. It explains the error raised by FastQC.</p>
       </li>
       <li>
-        <p>With sequences from random position of a genome, we expect a normal distribution of the %GC of <span class="notranslate">reads</span> around the mean %GC of the genome. Here, we have <span class="notranslate">RNA</span> <span class="notranslate">reads</span> from various genomes. We do not expect a normal distribution of the %GC. Indeed, for the forward <span class="notranslate">reads</span>, the distribution shows with several peaks: maybe corresponding to mean %GC of different organisms.</p>
+        <p>With sequences from random position of a genome, we expect a normal distribution of the %GC of reads around the mean %GC of the genome. Here, we have RNA reads from various genomes. We do not expect a normal distribution of the %GC. Indeed, for the forward reads, the distribution shows with several peaks: maybe corresponding to mean %GC of different organisms.</p>
 
         <p><img src="../../images/metatranscriptomics/fastqc_per_sequence_gc_content_plot.png" alt="Per Sequence GC Content" /></p>
       </li>
       <li>
-        <p>Almost no N were found in the <span class="notranslate">reads</span>: so almost no unindentified bases</p>
+        <p>Almost no N were found in the reads: so almost no unindentified bases</p>
 
         <p><img src="../../images/metatranscriptomics/fastqc_per_base_n_content_plot.png" alt="Per base N content" /></p>
       </li>
       <li>
-        <p>The forward <span class="notranslate">reads</span> seem to have more duplicated <span class="notranslate">reads</span> than the reverse <span class="notranslate">reads</span> with a rate of duplication up to 60% and some <span class="notranslate">reads</span> identified over 10 times.</p>
+        <p>The forward reads seem to have more duplicated reads than the reverse reads with a rate of duplication up to 60% and some reads identified over 10 times.</p>
 
         <p><img src="../../images/metatranscriptomics/fastqc_sequence_counts_plot.png" alt="Sequence Counts" />
 <img src="../../images/metatranscriptomics/fastqc_sequence_duplication_levels_plot.png" alt="Sequence Duplication Levels" /></p>
 
-        <p>In data from <span class="notranslate">RNA</span> (metatranscriptomics data), duplicated <span class="notranslate">reads</span> are expected. The low rate of duplication in reverse <span class="notranslate">reads</span> could be due to bad quality: some nucleotides may have been wrongly identified, altering the <span class="notranslate">reads</span> and reducing the duplication.</p>
+        <p>In data from RNA (metatranscriptomics data), duplicated reads are expected. The low rate of duplication in reverse reads could be due to bad quality: some nucleotides may have been wrongly identified, altering the reads and reducing the duplication.</p>
       </li>
       <li>
-        <p>The high rate of overrepresented sequences in the forward <span class="notranslate">reads</span> is linked to the high rate of duplication.</p>
+        <p>The high rate of overrepresented sequences in the forward reads is linked to the high rate of duplication.</p>
 
         <p><img src="../../images/metatranscriptomics/fastqc_overrepresented_sequencesi_plot.png" alt=" Overrepresented sequences" /></p>
       </li>
       <li>
-        <p>Illumina universal adapters are still present in the <span class="notranslate">reads</span>, especially at the 3’ end.</p>
+        <p>Illumina universal adapters are still present in the reads, especially at the 3’ end.</p>
 
         <p><img src="../../images/metatranscriptomics/fastqc_adapter_content_plot.png" alt=" Adapter Content" /></p>
       </li>
-      <li>After checking what is wrong, we should think about the errors reported by FastQC: they may come from the type of sequencing or what we sequenced (check the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control” training</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> for more details): some like the duplication rate or the base content biases are due to the <span class="notranslate">RNA</span> sequencing. However, despite these challenges, we can still get slightly better sequences for the <span class="notranslate">downstream</span> analyses.</li>
+      <li>After checking what is wrong, we should think about the errors reported by FastQC: they may come from the type of sequencing or what we sequenced (check the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">“Quality control” training</a>: <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> for more details): some like the duplication rate or the base content biases are due to the RNA sequencing. However, despite these challenges, we can still get slightly better sequences for the downstream analyses.</li>
     </ol>
   </blockquote>
 </blockquote>
 
 <p>Even though our data is already of pretty high quality, we can improve it even more by:</p>
 <ol>
-  <li>Trimming <span class="notranslate">reads</span> to remove bases that were sequenced with low certainty (= low-quality bases) at the ends of the <span class="notranslate">reads</span></li>
-  <li>Removing <span class="notranslate">reads</span> of overall bad quality</li>
-  <li>Removing <span class="notranslate">reads</span> that are too short to be informative in <span class="notranslate">downstream</span> analysis</li>
+  <li>Trimming reads to remove bases that were sequenced with low certainty (= low-quality bases) at the ends of the reads</li>
+  <li>Removing reads of overall bad quality</li>
+  <li>Removing reads that are too short to be informative in downstream analysis</li>
 </ol>
 
 <blockquote class="question">
@@ -1312,7 +1310,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
 
 <p>There are several tools out there that can perform these steps, but in this analysis we use <strong>Cutadapt</strong> (<span class="citation"><a href="#martin2011cutadapt">Martin 2011</a></span>).</p>
 
-<p><strong>Cutadapt</strong> also helps find and remove adapter sequences, primers, poly-A tails and/or other unwanted sequences from the input FASTQ files. It trims the input <span class="notranslate">reads</span> by finding the adapter or primer sequences in an error-tolerant way. Additional features include modifying and filtering <span class="notranslate">reads</span>.</p>
+<p><strong>Cutadapt</strong> also helps find and remove adapter sequences, primers, poly-A tails and/or other unwanted sequences from the input FASTQ files. It trims the input reads by finding the adapter or primer sequences in an error-tolerant way. Additional features include modifying and filtering reads.</p>
 
 <p><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> outputs a report file containing some information about the trimming and filtering it performed.</p>
 
@@ -1322,67 +1320,67 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
   <p>Inspect the output report from <strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
   <ol>
-    <li>How many basepairs have been removed from the forwards <span class="notranslate">reads</span> because of bad quality? And from the reverse <span class="notranslate">reads</span>?</li>
+    <li>How many basepairs have been removed from the forwards reads because of bad quality? And from the reverse reads?</li>
     <li>How many sequence pairs have been removed because at least one read was shorter than the length cutoff?</li>
   </ol>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
-      <li>203,654 bp has been trimmed for the forward read (read 1) and 569,653 bp bp on the reverse (read 2). It is not a surprise: we saw that at the end of the sequences the quality was dropping more for the reverse <span class="notranslate">reads</span> than for the forward <span class="notranslate">reads</span>.</li>
-      <li>27,677 (10.6%) <span class="notranslate">reads</span> were too short after trimming and then filtered.</li>
+      <li>203,654 bp has been trimmed for the forward read (read 1) and 569,653 bp bp on the reverse (read 2). It is not a surprise: we saw that at the end of the sequences the quality was dropping more for the reverse reads than for the forward reads.</li>
+      <li>27,677 (10.6%) reads were too short after trimming and then filtered.</li>
     </ol>
   </blockquote>
 </blockquote>
 
-<h2 id="ribosomal-rna-fragments-filtering">Ribosomal <span class="notranslate">RNA</span> fragments filtering</h2>
+<h2 id="ribosomal-rna-fragments-filtering">Ribosomal RNA fragments filtering</h2>
 
-<p>Metatranscriptomics sequencing targets any <span class="notranslate">RNA</span> in a pool of micro-organisms. The highest proportion of the <span class="notranslate">RNA</span> sequences in any organism will be ribosomal <span class="notranslate">RNA</span>s.</p>
+<p>Metatranscriptomics sequencing targets any RNA in a pool of micro-organisms. The highest proportion of the RNA sequences in any organism will be ribosomal RNAs.</p>
 
-<p>These r<span class="notranslate">RNA</span>s are useful for the taxonomic assignment (i.e. which organisms are found) but they do not provide any functional information, (i.e. which genes are expressed). To make the <span class="notranslate">downstream</span> functional annotation faster, we will sort the r<span class="notranslate">RNA</span> sequences using <strong>SortMe<span class="notranslate">RNA</span></strong> (<span class="citation"><a href="#kopylova2012sortmerna">Kopylova <i>et al.</i> 2012</a></span>). It can handle large <span class="notranslate">RNA</span> databases and sort out all fragments matching to the database with high accuracy and specificity:</p>
+<p>These rRNAs are useful for the taxonomic assignment (i.e. which organisms are found) but they do not provide any functional information, (i.e. which genes are expressed). To make the downstream functional annotation faster, we will sort the rRNA sequences using <strong>SortMeRNA</strong> (<span class="citation"><a href="#kopylova2012sortmerna">Kopylova <i>et al.</i> 2012</a></span>). It can handle large RNA databases and sort out all fragments matching to the database with high accuracy and specificity:</p>
 
 <p><img src="../../images/metatranscriptomics/sortmerna.png" alt="SortMeRNA" /></p>
 
-<p><strong>SortMe<span class="notranslate">RNA</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> removes any <span class="notranslate">reads</span> identified as r<span class="notranslate">RNA</span> from our dataset, and outputs a log file with more information about this filtering.</p>
+<p><strong>SortMeRNA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> removes any reads identified as rRNA from our dataset, and outputs a log file with more information about this filtering.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-  <p>Inspect the log output from <strong>SortMe<span class="notranslate">RNA</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, and scroll down to the <code class="language-plaintext highlighter-rouge">Results</code> section.</p>
+  <p>Inspect the log output from <strong>SortMeRNA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, and scroll down to the <code class="language-plaintext highlighter-rouge">Results</code> section.</p>
 
   <ol>
-    <li>How many <span class="notranslate">reads</span> have been processed?</li>
-    <li>How many <span class="notranslate">reads</span> have been identified as r<span class="notranslate">RNA</span> given the log file?</li>
-    <li>Which type of r<span class="notranslate">RNA</span> are identified? Which organisms are we then expected to identify?</li>
+    <li>How many reads have been processed?</li>
+    <li>How many reads have been identified as rRNA given the log file?</li>
+    <li>Which type of rRNA are identified? Which organisms are we then expected to identify?</li>
   </ol>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>
-        <p>465,754 <span class="notranslate">reads</span> are processed: 232,877 for forward and 232,877 for reverse (given the <strong>Cutadapt</strong> report)</p>
+        <p>465,754 reads are processed: 232,877 for forward and 232,877 for reverse (given the <strong>Cutadapt</strong> report)</p>
       </li>
       <li>
-        <p>Out of the 465,754 <span class="notranslate">reads</span>, 119,646 (26%) have passed the e-value threshold and are identified as r<span class="notranslate">RNA</span>.</p>
+        <p>Out of the 465,754 reads, 119,646 (26%) have passed the e-value threshold and are identified as rRNA.</p>
 
-        <p>The proportion of r<span class="notranslate">RNA</span> sequences is then quite high (around 40%), compared to metagenomics data where usually they represent &lt; 1% of the sequences. Indeed there are only few copies of r<span class="notranslate">RNA</span> genes in genomes, but they are expressed a lot for the cells.</p>
+        <p>The proportion of rRNA sequences is then quite high (around 40%), compared to metagenomics data where usually they represent &lt; 1% of the sequences. Indeed there are only few copies of rRNA genes in genomes, but they are expressed a lot for the cells.</p>
 
-        <p>Some of the aligned <span class="notranslate">reads</span> are forward (resp. reverse) <span class="notranslate">reads</span> but the corresponding reverse (resp. forward) <span class="notranslate">reads</span> are not aligned. As we choose <em>“If one of the paired-end <span class="notranslate">reads</span> aligns and the other one does not”</em>: <code class="language-plaintext highlighter-rouge">Output both <span class="notranslate">reads</span> to rejected file (--paired_out)</code>, if one read in a pair does not align, both go to unaligned.</p>
+        <p>Some of the aligned reads are forward (resp. reverse) reads but the corresponding reverse (resp. forward) reads are not aligned. As we choose <em>“If one of the paired-end reads aligns and the other one does not”</em>: <code class="language-plaintext highlighter-rouge">Output both reads to rejected file (--paired_out)</code>, if one read in a pair does not align, both go to unaligned.</p>
       </li>
       <li>
-        <p>The 20.56% r<span class="notranslate">RNA</span> <span class="notranslate">reads</span> are 23S bacterial r<span class="notranslate">RNA</span>, 2.34% 16S bacterial r<span class="notranslate">RNA</span> and 1.74% 18S eukaryotic r<span class="notranslate">RNA</span>. We then expect to identify mostly bacteria but also probably some archae (18S eukaryotic r<span class="notranslate">RNA</span>).</p>
+        <p>The 20.56% rRNA reads are 23S bacterial rRNA, 2.34% 16S bacterial rRNA and 1.74% 18S eukaryotic rRNA. We then expect to identify mostly bacteria but also probably some archae (18S eukaryotic rRNA).</p>
       </li>
     </ol>
   </blockquote>
 </blockquote>
 
-<h2 id="interlace-forward-and-reverse-reads">Interlace forward and reverse <span class="notranslate">reads</span></h2>
+<h2 id="interlace-forward-and-reverse-reads">Interlace forward and reverse reads</h2>
 
 <p>The tool for functional annotations needs a single file as input, even with paired-end data.</p>
 
-<p>We need to join the two separate files (forward and reverse) to create a single interleaced file, using <strong>FASTQ interlacer</strong>, in which the forward <span class="notranslate">reads</span> have <code class="language-plaintext highlighter-rouge">/1</code> in their id and reverse <span class="notranslate">reads</span> <code class="language-plaintext highlighter-rouge">/2</code>. The join is performed using sequence identifiers (headers), allowing the two files to contain differing ordering. If a sequence identifier does not appear in both files, it is output in a separate file named <code class="language-plaintext highlighter-rouge">singles</code>.</p>
+<p>We need to join the two separate files (forward and reverse) to create a single interleaced file, using <strong>FASTQ interlacer</strong>, in which the forward reads have <code class="language-plaintext highlighter-rouge">/1</code> in their id and reverse reads <code class="language-plaintext highlighter-rouge">/2</code>. The join is performed using sequence identifiers (headers), allowing the two files to contain differing ordering. If a sequence identifier does not appear in both files, it is output in a separate file named <code class="language-plaintext highlighter-rouge">singles</code>.</p>
 
-<p>We use <strong>FASTQ interlacer</strong> on the unaligned (non-r<span class="notranslate">RNA</span>) <span class="notranslate">reads</span> from <strong>SortMe<span class="notranslate">RNA</span></strong> to prepare for the functional analysis.</p>
+<p>We use <strong>FASTQ interlacer</strong> on the unaligned (non-rRNA) reads from <strong>SortMeRNA</strong> to prepare for the functional analysis.</p>
 
 <h1 id="extraction-of-the-community-profile">Extraction of the community profile</h1>
 
@@ -1396,41 +1394,41 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
   <li>
     <p>Identification and classification of Operational Taxonomic Units OTUs, as used in amplicon data</p>
 
-    <p>Such an approach first requires sequence sorting to extract only the 16S and 18S sequences (e.g. using the aligned <span class="notranslate">reads</span> from <strong>SortMe<span class="notranslate">RNA</span></strong>), then again using the same tools as for amplicon data (as explained in tutorials like <a href="/training-material/topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.html">16S Microbial Analysis with mothur</a> or <a href="/training-material/topics/metagenomics/tutorials/nanopore-16S-metagenomics/tutorial.html">16S Microbial analysis with Nanopore data</a>).</p>
+    <p>Such an approach first requires sequence sorting to extract only the 16S and 18S sequences (e.g. using the aligned reads from <strong>SortMeRNA</strong>), then again using the same tools as for amplicon data (as explained in tutorials like <a href="/training-material/topics/metagenomics/tutorials/mothur-miseq-sop/tutorial.html">16S Microbial Analysis with mothur</a> or <a href="/training-material/topics/metagenomics/tutorials/nanopore-16S-metagenomics/tutorial.html">16S Microbial analysis with Nanopore data</a>).</p>
 
-    <p>However, because r<span class="notranslate">RNA</span> sequences represent less than 50% of the raw sequences, this approach is not the most statistically supported.</p>
+    <p>However, because rRNA sequences represent less than 50% of the raw sequences, this approach is not the most statistically supported.</p>
   </li>
   <li>
     <p>Assignment of taxonomy on the whole sequences using databases with marker genes</p>
   </li>
 </ul>
 
-<p>In this tutorial, we follow second approach using <strong>MetaPhlAn</strong> (<span class="citation"><a href="#truong2015metaphlan2">Truong <i>et al.</i> 2015</a></span>). This tool uses a database of ~1M unique clade-specific marker genes (not only the r<span class="notranslate">RNA</span> genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes.</p>
+<p>In this tutorial, we follow second approach using <strong>MetaPhlAn</strong> (<span class="citation"><a href="#truong2015metaphlan2">Truong <i>et al.</i> 2015</a></span>). This tool uses a database of ~1M unique clade-specific marker genes (not only the rRNA genes) identified from ~17,000 reference (bacterial, archeal, viral and eukaryotic) genomes.</p>
 
-<p>As r<span class="notranslate">RNA</span>s <span class="notranslate">reads</span> are good marker genes, we will use directly the quality controlled files (output of <strong>Cutadapt</strong>) with all <span class="notranslate">reads</span> (not only the non r<span class="notranslate">RNA</span>s).</p>
+<p>As rRNAs reads are good marker genes, we will use directly the quality controlled files (output of <strong>Cutadapt</strong>) with all reads (not only the non rRNAs).</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-community-profile" aria-label="hands-on box: Community Profile"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Community Profile</div>
 
   <ol>
-    <li><strong>Import the <span class="notranslate">workflow</span></strong> into <span class="notranslate">Galaxy</span>
+    <li><strong>Import the workflow</strong> into Galaxy
       <ul>
-        <li>Copy the URL (e.g. via right-click) of <a href="/training-material/topics/metagenomics/tutorials/metatranscriptomics-short/workflows/workflow2_community_profile.ga">this <span class="notranslate">workflow</span></a> or download it to your computer.</li>
-        <li>Import the <span class="notranslate">workflow</span> into <span class="notranslate">Galaxy</span></li>
+        <li>Copy the URL (e.g. via right-click) of <a href="/training-material/topics/metagenomics/tutorials/metatranscriptomics-short/workflows/workflow2_community_profile.ga">this workflow</a> or download it to your computer.</li>
+        <li>Import the workflow into Galaxy</li>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> at the top-right of the screen</li>   <li>Provide your <span class="notranslate">workflow</span>     <ul>       <li>Option 1: Paste the URL of the <span class="notranslate">workflow</span> into the box labelled <em>“Archived <span class="notranslate">Workflow</span> URL”</em></li>       <li>Option 2: Upload the <span class="notranslate">workflow</span> file in the box labelled <em>“Archived <span class="notranslate">Workflow</span> File”</em></li>     </ul>   </li>   <li>Click the <strong>Import <span class="notranslate">workflow</span></strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
     </li>
-    <li>Run <strong><span class="notranslate">Workflow</span> 2: Community Profile</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span></span> using the following parameters:
+    <li>Run <strong>Workflow 2: Community Profile</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
       <ul>
         <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: QC controlled forward <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">QC controlled forward <span class="notranslate">reads</span></code> output from the first <span class="notranslate">workflow</span></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2: QC controlled reverse <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">QC controlled reverse <span class="notranslate">reads</span></code> output from the first <span class="notranslate">workflow</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: QC controlled forward reads”</em>: <code class="language-plaintext highlighter-rouge">QC controlled forward reads</code> output from the first workflow</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2: QC controlled reverse reads”</em>: <code class="language-plaintext highlighter-rouge">QC controlled reverse reads</code> output from the first workflow</li>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-1-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>   <li>Configure the <span class="notranslate">workflow</span> as needed</li>   <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-1-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1489,7 +1487,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
               <li>3 species: Coprothermobacter proteolyticus, Methanothermobacter thermautotrophicus, Hungateiclostridium thermocellum</li>
             </ul>
           </li>
-          <li>As expected from the r<span class="notranslate">RNA</span> sorting, we have some archaea, Methanobacteria, in our sample.</li>
+          <li>As expected from the rRNA sorting, we have some archaea, Methanobacteria, in our sample.</li>
         </ol>
       </blockquote>
     </blockquote>
@@ -1501,14 +1499,14 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
 
     <p>BIOM format is quite common in microbiomics. This is standard, for example, as the input for tools like mothur or QIIME.</p>
   </li>
-  <li>A <strong>SAM file</strong> with the results of the sequence <span class="notranslate">mapping</span> on the reference database.</li>
+  <li>A <strong>SAM file</strong> with the results of the sequence mapping on the reference database.</li>
   <li>A <strong>tabular file</strong> called <code class="language-plaintext highlighter-rouge">Bowtie2 output</code> with similar information as the one in the <strong>SAM file</strong></li>
 </ul>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-note-analyzing-an-isolated-metatranscriptome" aria-label="comment box: Note: Analyzing an isolated metatranscriptome"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Note: Analyzing an isolated metatranscriptome</div>
 
-  <p>We are analyzing our <span class="notranslate">RNA</span> <span class="notranslate">reads</span> as we would do for <span class="notranslate">DNA</span> <span class="notranslate">reads</span>. This approach has one main caveat. In <strong>MetaPhlAn</strong>, the species are quantified based on the recruitment of <span class="notranslate">reads</span> to species-specific marker genes. In metagenomic data, each genome copy is assumed to donate ~1 copy of each marker. But the same assumption cannot be made for <span class="notranslate">RNA</span> data: markers may be transcribed more or less within a given species in this sample compared to the average transcription rate. A species will still be detected in the metatranscriptomic data as long as a non-trivial fraction of the species’ markers is expressed.</p>
+  <p>We are analyzing our RNA reads as we would do for DNA reads. This approach has one main caveat. In <strong>MetaPhlAn</strong>, the species are quantified based on the recruitment of reads to species-specific marker genes. In metagenomic data, each genome copy is assumed to donate ~1 copy of each marker. But the same assumption cannot be made for RNA data: markers may be transcribed more or less within a given species in this sample compared to the average transcription rate. A species will still be detected in the metatranscriptomic data as long as a non-trivial fraction of the species’ markers is expressed.</p>
 
   <p>We should then carefully interpret the species relative abundance. These values reflect species’ relative contributions to the pool of species-specific transcripts and not the overall transcript pool.</p>
 </blockquote>
@@ -1567,43 +1565,43 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
 
 <p>In the metatranscriptomics data, we have access to the genes that are expressed by the community. We can use that to identify genes, their functions, and build pathways, etc., to investigate their contribution to the community using <strong>HUMAnN</strong> (<span class="citation"><a href="#franzosa2018species">Franzosa <i>et al.</i> 2018</a></span>). <strong>HUMAnN</strong> is a pipeline developed for efficiently and accurately profiling the presence/absence and abundance of microbial pathways in a community from metagenomic or metatranscriptomic sequencing data.</p>
 
-<p>To identify the functions made by the community, we do not need the r<span class="notranslate">RNA</span> sequences, specially because they had noise and will slow the run. We will then use the output of <strong>SortMe<span class="notranslate">RNA</span></strong>, but also the identified community profile from <strong>MetaPhlAn</strong>. This will help <strong>HUMAnN</strong> to focus on the known sequences for the identified organisms.</p>
+<p>To identify the functions made by the community, we do not need the rRNA sequences, specially because they had noise and will slow the run. We will then use the output of <strong>SortMeRNA</strong>, but also the identified community profile from <strong>MetaPhlAn</strong>. This will help <strong>HUMAnN</strong> to focus on the known sequences for the identified organisms.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-functional-information" aria-label="hands-on box: Functional Information"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Functional Information</div>
 
   <ol>
-    <li><strong>Import the <span class="notranslate">workflow</span></strong> into <span class="notranslate">Galaxy</span>
+    <li><strong>Import the workflow</strong> into Galaxy
       <ul>
-        <li>Copy the URL (e.g. via right-click) of <a href="/training-material/topics/metagenomics/tutorials/metatranscriptomics-short/workflows/workflow3_functional_information.ga">this <span class="notranslate">workflow</span></a> or download it to your computer.</li>
-        <li>Import the <span class="notranslate">workflow</span> into <span class="notranslate">Galaxy</span></li>
+        <li>Copy the URL (e.g. via right-click) of <a href="/training-material/topics/metagenomics/tutorials/metatranscriptomics-short/workflows/workflow3_functional_information.ga">this workflow</a> or download it to your computer.</li>
+        <li>Import the workflow into Galaxy</li>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-2-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> at the top-right of the screen</li>   <li>Provide your <span class="notranslate">workflow</span>     <ul>       <li>Option 1: Paste the URL of the <span class="notranslate">workflow</span> into the box labelled <em>“Archived <span class="notranslate">Workflow</span> URL”</em></li>       <li>Option 2: Upload the <span class="notranslate">workflow</span> file in the box labelled <em>“Archived <span class="notranslate">Workflow</span> File”</em></li>     </ul>   </li>   <li>Click the <strong>Import <span class="notranslate">workflow</span></strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-2-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
     </li>
-    <li>Run <strong><span class="notranslate">Workflow</span> 3: Functional Information</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span></span> using the following parameters:
+    <li>Run <strong>Workflow 3: Functional Information</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
       <ul>
         <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Interlaced non-r<span class="notranslate">RNA</span> <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Interlaced non-r<span class="notranslate">RNA</span> <span class="notranslate">reads</span></code> output from the first <span class="notranslate">workflow</span></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2: Community Profile”</em>: <code class="language-plaintext highlighter-rouge">Predicted taxon relative abundances</code> output from the second <span class="notranslate">workflow</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Interlaced non-rRNA reads”</em>: <code class="language-plaintext highlighter-rouge">Interlaced non-rRNA reads</code> output from the first workflow</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2: Community Profile”</em>: <code class="language-plaintext highlighter-rouge">Predicted taxon relative abundances</code> output from the second workflow</li>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-2-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>   <li>Configure the <span class="notranslate">workflow</span> as needed</li>   <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-2-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
   </ol>
 
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-running-low-on-time-use-this-faster-approach"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-low-on-time-use-this-faster-approach-contents" aria-expanded="true" aria-label="Toggle tip box: Running low on time? Use this faster approach"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running low on time? Use this faster approach<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>The first step of this <span class="notranslate">workflow</span> (<strong>HUMAnN</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) may take quite a bit of time to complete (&gt; 45 min). If you would like to run through this tutorial a bit faster, you can download the output of this step first, and then run the rest of the <span class="notranslate">workflow</span>. Instructions are given below:</p>
+    <p>The first step of this workflow (<strong>HUMAnN</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) may take quite a bit of time to complete (&gt; 45 min). If you would like to run through this tutorial a bit faster, you can download the output of this step first, and then run the rest of the workflow. Instructions are given below:</p>
 
     <ol>
-      <li><strong>Import the <span class="notranslate">workflow</span></strong> into <span class="notranslate">Galaxy</span>
+      <li><strong>Import the workflow</strong> into Galaxy
         <ul>
-          <li>Copy the URL (e.g. via right-click) of <a href="/training-material/topics/metagenomics/tutorials/metatranscriptomics-short/workflows/workflow3_functional_information_quick.ga">this <span class="notranslate">workflow</span></a> or download it to your computer.</li>
-          <li>Import the <span class="notranslate">workflow</span> into <span class="notranslate">Galaxy</span></li>
+          <li>Copy the URL (e.g. via right-click) of <a href="/training-material/topics/metagenomics/tutorials/metatranscriptomics-short/workflows/workflow3_functional_information_quick.ga">this workflow</a> or download it to your computer.</li>
+          <li>Import the workflow into Galaxy</li>
         </ul>
       </li>
       <li>
@@ -1613,7 +1611,7 @@ In this tutorial we use similar tools as described in the tutorial <a href="/tra
 https://zenodo.org/record/4776250/files/T1A_HUMAnN_Pathways_and_their_abundance.tabular
 </code></pre></div>        </div>
       </li>
-      <li>Run <strong><span class="notranslate">Workflow</span> 3: Functional Information (quick)</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span></span> using the following parameters:
+      <li>Run <strong>Workflow 3: Functional Information (quick)</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> using the following parameters:
         <ul>
           <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Gene Family abundance”</em>: <code class="language-plaintext highlighter-rouge">T1A_HUMAnN_Gene_families_and_their_abundance.tabular</code> you uploaded</li>
@@ -1644,9 +1642,9 @@ https://zenodo.org/record/4776250/files/T1A_HUMAnN_Pathways_and_their_abundance.
 
     <p>Gene family abundance at the community level is stratified to show the contributions from known and unknown species. Individual species’ abundance contributions sum to the community total abundance.</p>
 
-    <p>Gene family abundance is reported in RPK (<span class="notranslate">reads</span> per kilobase) units to normalize for gene length. It reflects the relative gene (or transcript) copy number in the community.</p>
+    <p>Gene family abundance is reported in RPK (reads per kilobase) units to normalize for gene length. It reflects the relative gene (or transcript) copy number in the community.</p>
 
-    <p>The “UNMAPPED” value is the total number of <span class="notranslate">reads</span> which remain unmapped after both alignment steps (nucleotide and translated search). Since other gene features in the table are quantified in RPK units, “UNMAPPED” can be interpreted as a single unknown gene of length 1 kilobase recruiting all <span class="notranslate">reads</span> that failed to map to known sequences.</p>
+    <p>The “UNMAPPED” value is the total number of reads which remain unmapped after both alignment steps (nucleotide and translated search). Since other gene features in the table are quantified in RPK units, “UNMAPPED” can be interpreted as a single unknown gene of length 1 kilobase recruiting all reads that failed to map to known sequences.</p>
 
     <blockquote class="question">
       <div class="box-title question-title" id="question-6" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -1662,12 +1660,12 @@ https://zenodo.org/record/4776250/files/T1A_HUMAnN_Pathways_and_their_abundance.
       <blockquote class="solution">
         <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
         <ol>
-          <li>The most abundant family is the first one in the family: UniRef90_A3DCI4. We can use the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+galaxy1"><strong>Rename features of a HUMAnN generated table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+<span class="notranslate">galaxy</span>1</span></span>  to add extra information about the gene family.</li>
+          <li>The most abundant family is the first one in the family: UniRef90_A3DCI4. We can use the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+galaxy1"><strong>Rename features of a HUMAnN generated table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/humann_rename_table/humann_rename_table/3.0.0+galaxy1</span></span>  to add extra information about the gene family.</li>
           <li>Beta-lactamase TEM seems mostly produced here by <em>Hungateiclostridium thermocellum</em>.</li>
           <li>
             <p>There is 6,374 lines in gene family file. But some of the gene families have multiple lines when the involved species are known.</p>
 
-            <p>To know the number of gene families, we need to remove all lines with the species information, i.e. lines with <code class="language-plaintext highlighter-rouge">|</code> in them using the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1"><strong>Split a HUMAnN table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+<span class="notranslate">galaxy</span>1</span></span></p>
+            <p>To know the number of gene families, we need to remove all lines with the species information, i.e. lines with <code class="language-plaintext highlighter-rouge">|</code> in them using the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1"><strong>Split a HUMAnN table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1</span></span></p>
 
             <p>The tool generates 2 output file:</p>
             <ul>
@@ -1719,7 +1717,7 @@ https://zenodo.org/record/4776250/files/T1A_HUMAnN_Pathways_and_their_abundance.
           <li>The most abundant pathway is PWY-6609. It produces the adenine and adenosine salvage III.</li>
           <li>Like the gene family, this pathway is mostly achieved by <em>Hungateiclostridium thermocellum</em>.</li>
           <li>
-            <p>There are 118 lines in the pathway file, including the lines with species information. To compute the number of gene families, we need to apply a similar approach as for the gene families by removing the lines with <code class="language-plaintext highlighter-rouge">|</code> in them using the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1"><strong>Split a HUMAnN table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+<span class="notranslate">galaxy</span>1</span></span> .
+            <p>There are 118 lines in the pathway file, including the lines with species information. To compute the number of gene families, we need to apply a similar approach as for the gene families by removing the lines with <code class="language-plaintext highlighter-rouge">|</code> in them using the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1"><strong>Split a HUMAnN table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1</span></span> .
   The unstratified output file has 64 lines, including the header, UNMAPPED and UNINTEGRATED. Therefore, 61 MetaCyc pathways have been identified for our sample.</p>
           </li>
           <li>The “UNINTEGRATED” abundance corresponds to the total abundance of genes in the different levels that do not contribute to any pathways.</li>
@@ -1730,7 +1728,7 @@ https://zenodo.org/record/4776250/files/T1A_HUMAnN_Pathways_and_their_abundance.
   <li>
     <p>A file with the <strong>pathways and their coverage</strong>:</p>
 
-    <p>Pathway coverage provides an alte<span class="notranslate">rna</span>tive description of the presence (1) and absence (0) of pathways in a community, independent of their quantitative abundance.</p>
+    <p>Pathway coverage provides an alternative description of the presence (1) and absence (0) of pathways in a community, independent of their quantitative abundance.</p>
   </li>
   <li>
     <p>A log file</p>
@@ -1740,11 +1738,11 @@ https://zenodo.org/record/4776250/files/T1A_HUMAnN_Pathways_and_their_abundance.
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-note-analyzing-an-isolated-metatranscriptome-1" aria-label="comment box: Note: Analyzing an isolated metatranscriptome"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Note: Analyzing an isolated metatranscriptome</div>
 
-  <p>As we already mentioned above, we are analyzing our <span class="notranslate">RNA</span> <span class="notranslate">reads</span> as we would do for <span class="notranslate">DNA</span> <span class="notranslate">reads</span> and therefore we should be careful when interpreting the results. We already mentioned the analysis of the species’ relative abundance from <strong>MetaPhlAn</strong>, but there is another aspect we should be careful about.</p>
+  <p>As we already mentioned above, we are analyzing our RNA reads as we would do for DNA reads and therefore we should be careful when interpreting the results. We already mentioned the analysis of the species’ relative abundance from <strong>MetaPhlAn</strong>, but there is another aspect we should be careful about.</p>
 
   <p>From a lone metatranscriptomic dataset, the transcript abundance can be confounded with the underlying gene copy number. For example, transcript X may be more abundant in sample A relative to sample B because the underlying X gene (same number in both samples) is more highly expressed in sample A relative to sample B; or there are more copies of gene X in sample A relative to sample B (all of which are equally expressed). This is a general challenge in analyzing isolated metatranscriptomes.</p>
 
-  <p>The best approach would be to combine the metatranscriptomic analysis with a metagenomic analysis. In this case, rather than running <strong>MetaPhlAn</strong> on the metatranscriptomic data, we run it on the metagenomic data and use the taxonomic profile as input to <strong>HUMAnN</strong>. <span class="notranslate">RNA</span> <span class="notranslate">reads</span> are then mapped to any species’ pangenomes detected in the metagenome. Then we run <strong>HUMAnN</strong> on both metagenomics and metatranscriptomic data. We can use both outputs to normalize the <span class="notranslate">RNA</span>-level outputs (e.g. transcript family abundance) by corresponding <span class="notranslate">DNA</span>-level outputs to the quantification of microbial <span class="notranslate">expression</span> independent of gene copy number.</p>
+  <p>The best approach would be to combine the metatranscriptomic analysis with a metagenomic analysis. In this case, rather than running <strong>MetaPhlAn</strong> on the metatranscriptomic data, we run it on the metagenomic data and use the taxonomic profile as input to <strong>HUMAnN</strong>. RNA reads are then mapped to any species’ pangenomes detected in the metagenome. Then we run <strong>HUMAnN</strong> on both metagenomics and metatranscriptomic data. We can use both outputs to normalize the RNA-level outputs (e.g. transcript family abundance) by corresponding DNA-level outputs to the quantification of microbial expression independent of gene copy number.</p>
 
   <p>Here we do not have a metagenomic dataset to combine with and need to be careful in our interpretation.</p>
 
@@ -1752,12 +1750,12 @@ https://zenodo.org/record/4776250/files/T1A_HUMAnN_Pathways_and_their_abundance.
 
 <h2 id="normalize-the-abundances">Normalize the abundances</h2>
 
-<p>Gene family and pathway abundances are in RPKs (<span class="notranslate">reads</span> per kilobase), accounting for gene length but not sample sequencing depth. While there are some applications, e.g. strain profiling, where RPK units are superior to depth-normalized units, most of the time we need to renormalize our samples prior to <span class="notranslate">downstream</span> analysis.</p>
+<p>Gene family and pathway abundances are in RPKs (reads per kilobase), accounting for gene length but not sample sequencing depth. While there are some applications, e.g. strain profiling, where RPK units are superior to depth-normalized units, most of the time we need to renormalize our samples prior to downstream analysis.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-8" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-  <p><strong>Inspect</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the <code class="language-plaintext highlighter-rouge">Normalized gene families</code> file</p>
+  <p><strong>Inspect</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the <code class="language-plaintext highlighter-rouge">Normalized gene families</code> file</p>
 
   <ol>
     <li>What percentage of sequences has not been assigned to a gene family?</li>
@@ -1768,7 +1766,7 @@ https://zenodo.org/record/4776250/files/T1A_HUMAnN_Pathways_and_their_abundance.
     <div class="box-title solution-title" id="solution-8"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-8-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>14% (<code class="language-plaintext highlighter-rouge">0.14438 x 100</code>) of the sequences have not be assigned to a gene family.</li>
-      <li>The UniRef90_A3DCI4 family represents 6% of the <span class="notranslate">reads</span>.</li>
+      <li>The UniRef90_A3DCI4 family represents 6% of the reads.</li>
     </ol>
   </blockquote>
 </blockquote>
@@ -1776,19 +1774,19 @@ https://zenodo.org/record/4776250/files/T1A_HUMAnN_Pathways_and_their_abundance.
 <blockquote class="question">
   <div class="box-title question-title" id="question-9" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-  <p><strong>Inspect</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the <code class="language-plaintext highlighter-rouge">Normalized pathways</code> file.</p>
+  <p><strong>Inspect</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the <code class="language-plaintext highlighter-rouge">Normalized pathways</code> file.</p>
   <ol>
     <li>What is the UNMAPPED percentage?</li>
-    <li>What percentage of <span class="notranslate">reads</span> assigned to a gene family has not be assigned to a pathway?</li>
+    <li>What percentage of reads assigned to a gene family has not be assigned to a pathway?</li>
     <li>What is the relative abundance of the most abundant gene family?</li>
   </ol>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-9"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-9-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
-      <li>UNMAPPED, here 14% of the <span class="notranslate">reads</span>, corresponds to the percentage of <span class="notranslate">reads</span> not assigned to gene families. It is the same value as in the normalized gene family file.</li>
-      <li>83% (UNINTEGRATED) of <span class="notranslate">reads</span> assigned to a gene family have not be assigned to a pathway</li>
-      <li>The PWY-6609 pathway represents 0.2% of the <span class="notranslate">reads</span>.</li>
+      <li>UNMAPPED, here 14% of the reads, corresponds to the percentage of reads not assigned to gene families. It is the same value as in the normalized gene family file.</li>
+      <li>83% (UNINTEGRATED) of reads assigned to a gene family have not be assigned to a pathway</li>
+      <li>The PWY-6609 pathway represents 0.2% of the reads.</li>
     </ol>
   </blockquote>
 </blockquote>
@@ -1815,7 +1813,7 @@ BRANCHED-CHAIN-AA-SYN-PWY|g__Hungateiclostridium.s__Hungateiclostridium_thermoce
 <blockquote class="question">
   <div class="box-title question-title" id="question-10" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-  <p><strong>Inspect</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the output from <strong>Unpack pathway abundances to show genes included</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
+  <p><strong>Inspect</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the output from <strong>Unpack pathway abundances to show genes included</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
 
   <p>Which gene families are involved in the PWY-6609 pathway (the most abundant one)? And which species?</p>
 
@@ -1838,7 +1836,7 @@ PWY-6609|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum|UniRef90_A3D
 
 <p>The gene families can be a long list of ids and going through the gene families one by one to identify the interesting ones can be cumbersome. To help construct a big picture, we could identify and use categories of genes using the gene families.</p>
 
-<p><a href="http://www.geneontology.org/">Gene Ontology (GO)</a> analysis is widely used to reduce complexity and highlight biological processes in genome-wide <span class="notranslate">expression</span> studies. There is a dedicated tool which groups and converts UniRef50 gene family abundances generated with <strong>HUMAnN</strong> into GO terms.</p>
+<p><a href="http://www.geneontology.org/">Gene Ontology (GO)</a> analysis is widely used to reduce complexity and highlight biological processes in genome-wide expression studies. There is a dedicated tool which groups and converts UniRef50 gene family abundances generated with <strong>HUMAnN</strong> into GO terms.</p>
 
 <p>The output is a table with the GO terms, their abundance and the involved species:</p>
 
@@ -1860,14 +1858,14 @@ GO:0000015|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	239.568
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-11"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-11-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-    <p>Using the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1"><strong>Split a HUMAnN table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+<span class="notranslate">galaxy</span>1</span></span> , we see that the unstratified table has 1,171 lines (including the UNMAPPED, UNGROUPED and the header). So 1,168 GO terms have been identified.</p>
+    <p>Using the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1"><strong>Split a HUMAnN table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1</span></span> , we see that the unstratified table has 1,171 lines (including the UNMAPPED, UNGROUPED and the header). So 1,168 GO terms have been identified.</p>
   </blockquote>
 </blockquote>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-12" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-  <p><strong>Inspect</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the 3 outputs of these steps</p>
+  <p><strong>Inspect</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the 3 outputs of these steps</p>
 
   <ol>
     <li>How many GO terms have been identified?</li>
@@ -1878,7 +1876,7 @@ GO:0000015|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	239.568
     <div class="box-title solution-title" id="solution-12"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-12-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>After running <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1"><strong>Split a HUMAnN table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+<span class="notranslate">galaxy</span>1</span></span>  on the 3 outputs, we found:
+      <li>After running <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1"><strong>Split a HUMAnN table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/humann_split_stratified_table/humann_split_stratified_table/3.0.0+galaxy1</span></span>  on the 3 outputs, we found:
         <ul>
           <li>414 BP GO terms</li>
           <li>689 MF GO terms</li>
@@ -1894,10 +1892,10 @@ GO:0000036: [MF] acyl carrier activity	726.249
 GO:0000036: [MF] acyl carrier activity|g__Coprothermobacter.s__Coprothermobacter_proteolyticus	10.101
 GO:0000036: [MF] acyl carrier activity|g__Hungateiclostridium.s__Hungateiclostridium_thermocellum	572.281
 GO:0000036: [MF] acyl carrier activity|unclassified	143.868
-GO:0000049: [MF] t<span class="notranslate">RNA</span> binding	4818.299
+GO:0000049: [MF] tRNA binding	4818.299
 </code></pre></div>        </div>
 
-        <p>So to identify the most abundant GO terms, we first need to sort the file using the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1"><strong>Sort data in ascending or descending order</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</span></span>  tool (on column 2, in descending order):</p>
+        <p>So to identify the most abundant GO terms, we first need to sort the file using the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1"><strong>Sort data in ascending or descending order</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</span></span>  tool (on column 2, in descending order):</p>
 
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GO:0015035: [MF] protein disulfide oxidoreductase activity	42908.123
 GO:0003735: [MF] structural constituent of ribosome	42815.337
@@ -1922,7 +1920,7 @@ GO:0046872: [MF] metal ion binding	31068.144
   <div class="box-title hands-on-title" id="hands-on-combine-taxonomic-and-functional-information" aria-label="hands-on box: Combine taxonomic and functional information"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Combine taxonomic and functional information</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.1.0"><strong>Combine MetaPhlAn2 and HUMAnN2 outputs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.1.0</span></span>   with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.1.0"><strong>Combine MetaPhlAn2 and HUMAnN2 outputs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bebatut/combine_metaphlan2_humann2/combine_metaphlan2_humann2/0.1.0</span></span>   with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file corresponding to MetaPhlAN output”</em>: <code class="language-plaintext highlighter-rouge">Cut predicted taxon relative abundances table</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file corresponding HUMAnN output”</em>: <code class="language-plaintext highlighter-rouge">Normalized gene families</code></li>
@@ -2053,7 +2051,7 @@ Hungateiclostridium	94.67418	Hungateiclostridium_thermocellum	94.67418	UniRef90_
   <li>combined taxonomic and functional information to offer insights into taxonomic contribution to a function or functions expressed by a particular taxonomy</li>
 </ol>
 
-<p>The <span class="notranslate">workflow</span> can be represented this way:</p>
+<p>The workflow can be represented this way:</p>
 
 <p><img src="../../images/asaim-wf.png" alt="ASaiM diagram" /></p>
 

@@ -797,8 +797,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -882,34 +880,34 @@
 
 <!-- This is a comment. -->
 
-<p>With the advances in the next-generation sequencing technologies, genome-wide <span class="notranslate">RNA</span>-<span class="notranslate">RNA</span> interaction predictions are now
-possible. The most recent line of development has been to ligate the micro<span class="notranslate">RNA</span> to the site-specific interaction region of
- the target, selecting these interactions via cross-linking to one of the Argonaute proteins required for micro<span class="notranslate">RNA</span>-based
-  regulation, and to sequence the resulting chimeric <span class="notranslate">RNA</span> molecule, for example, the CLASH and CLEAR-CLIP protocols.
-Going beyond micro<span class="notranslate">RNA</span>s, these protocols can be applied to <span class="notranslate">RNA</span> interactions that involve a regulatory protein
+<p>With the advances in the next-generation sequencing technologies, genome-wide RNA-RNA interaction predictions are now
+possible. The most recent line of development has been to ligate the microRNA to the site-specific interaction region of
+ the target, selecting these interactions via cross-linking to one of the Argonaute proteins required for microRNA-based
+  regulation, and to sequence the resulting chimeric RNA molecule, for example, the CLASH and CLEAR-CLIP protocols.
+Going beyond microRNAs, these protocols can be applied to RNA interactions that involve a regulatory protein
 other than Argonaute. To generalize even further, researchers have applied the same idea to the detection of all
-transcriptome-wide <span class="notranslate">RNA</span>-<span class="notranslate">RNA</span> interactions, which include both inter- and intramolecular base pairing without the necessity
+transcriptome-wide RNA-RNA interactions, which include both inter- and intramolecular base pairing without the necessity
  of choosing a specific regulatory protein for cross-linking. These protocols include LIGR-Seq that maps the human
- <span class="notranslate">RNA</span>-<span class="notranslate">RNA</span> interactome and PARIS that focused on long-range structures in human and mouse.</p>
+ RNA-RNA interactome and PARIS that focused on long-range structures in human and mouse.</p>
 
-<p>The <span class="notranslate">reads</span> from these experiments are chimeric with each arm generated from one of the interaction
+<p>The reads from these experiments are chimeric with each arm generated from one of the interaction
 partners. Due to short lengths, often these sequenced arms ambiguously map to multiple locations and  inferring the
 origin of these can be quite complicated. Theoretically, alignment tools like <code class="language-plaintext highlighter-rouge">HISAT2</code> and <code class="language-plaintext highlighter-rouge">STAR</code> can be used to align
-chimeric <span class="notranslate">reads</span>, but they are not efficient at this task. The other alignment tools like <code class="language-plaintext highlighter-rouge">BWA-MEM</code> or <code class="language-plaintext highlighter-rouge">Bowtie2</code> can be
-used in local alignment settings to map these chimeric <span class="notranslate">reads</span>. In this case user needs to adjust the alignment parameters
+chimeric reads, but they are not efficient at this task. The other alignment tools like <code class="language-plaintext highlighter-rouge">BWA-MEM</code> or <code class="language-plaintext highlighter-rouge">Bowtie2</code> can be
+used in local alignment settings to map these chimeric reads. In this case user needs to adjust the alignment parameters
 to match the read lengths and there needs to be a lot of post-processing to be done to choose the best hits. Recently,
-there is also an alignment tool called <code class="language-plaintext highlighter-rouge">CLAN</code> published to specifically map the chimeric <span class="notranslate">reads</span> from CLASH experiments.</p>
+there is also an alignment tool called <code class="language-plaintext highlighter-rouge">CLAN</code> published to specifically map the chimeric reads from CLASH experiments.</p>
 
 <p>In this tutorial, we will learn the analysis of a CLEAR-CLIP data set using a tool suite called <code class="language-plaintext highlighter-rouge">ChiRA</code>. The data used
 is from mouse cortex sample
 (<a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1881541">GSM1881541</a>) prepared using CLEAR-CLIP protocol. It is
-a complete analysis framework that can be used starting from raw sequencing <span class="notranslate">reads</span> to analysis and visualization of
-results. <code class="language-plaintext highlighter-rouge">ChiRA</code> uses <code class="language-plaintext highlighter-rouge">BWA-MEM</code> or <code class="language-plaintext highlighter-rouge">CLAN</code> to map the <span class="notranslate">reads</span>. Subsequently, it also merges the overlappig alignments and
- chooses the best alignments per read by quantifying the all the loci that <span class="notranslate">reads</span> map to. In the end, it scores each
+a complete analysis framework that can be used starting from raw sequencing reads to analysis and visualization of
+results. <code class="language-plaintext highlighter-rouge">ChiRA</code> uses <code class="language-plaintext highlighter-rouge">BWA-MEM</code> or <code class="language-plaintext highlighter-rouge">CLAN</code> to map the reads. Subsequently, it also merges the overlappig alignments and
+ chooses the best alignments per read by quantifying the all the loci that reads map to. In the end, it scores each
   alignment and outputs only the best alignments per read. The final part of this tutorial gives an insight into how to
   filter, export and visualize your results using the visualization framework <code class="language-plaintext highlighter-rouge">ChiRAViz</code>.</p>
 
-<figure id="figure-1"><img src="../../images/rna-interactome/chira.png" alt="ChiRA workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> ChiRA <span class="notranslate">workflow</span>. First the <span class="notranslate">reads</span> deduplicated and mapped to transcriptome. Then the mapped loci are merged based on overlapping. The merged loci are quantified and the interactions are scored and reported.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/rna-interactome/chira.png" alt="ChiRA workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> ChiRA workflow. First the reads deduplicated and mapped to transcriptome. Then the mapped loci are merged based on overlapping. The merged loci are quantified and the interactions are scored and reported.</figcaption></figure>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -926,7 +924,7 @@ results. <code class="language-plaintext highlighter-rouge">ChiRA</code> uses <c
   </li>
   <li><a href="#analysis-of-interactome-data-using-chira-tool-suite" id="markdown-toc-analysis-of-interactome-data-using-chira-tool-suite">Analysis of interactome data using <code class="language-plaintext highlighter-rouge">ChiRA</code> tool suite</a>    <ol>
       <li><a href="#remove-duplicate-sequences" id="markdown-toc-remove-duplicate-sequences">Remove duplicate sequences</a></li>
-      <li><a href="#map-reads-to-the-reference-transcriptome" id="markdown-toc-map-reads-to-the-reference-transcriptome">Map <span class="notranslate">reads</span> to the reference transcriptome</a></li>
+      <li><a href="#map-reads-to-the-reference-transcriptome" id="markdown-toc-map-reads-to-the-reference-transcriptome">Map reads to the reference transcriptome</a></li>
       <li><a href="#merge-overlapping-alignment-information" id="markdown-toc-merge-overlapping-alignment-information">Merge overlapping alignment information</a></li>
       <li><a href="#quantify-aligned-loci-to-score-the-alignments" id="markdown-toc-quantify-aligned-loci-to-score-the-alignments">Quantify aligned loci to score the alignments</a></li>
       <li><a href="#extract-the-best-scoring-chimeras" id="markdown-toc-extract-the-best-scoring-chimeras">Extract the best scoring chimeras</a></li>
@@ -948,30 +946,30 @@ results. <code class="language-plaintext highlighter-rouge">ChiRA</code> uses <c
     <li>
       <p>Import the files from <a href="https://zenodo.org/record/3709188">Zenodo</a> or from the shared data library</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3709188/files/mi<span class="notranslate">RNA</span>_mature.fa.gz
-https://zenodo.org/record/3709188/files/Mus_musculus.GRCm38.<span class="notranslate">dna</span>.fa.gz
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3709188/files/miRNA_mature.fa.gz
+https://zenodo.org/record/3709188/files/Mus_musculus.GRCm38.dna.fa.gz
 https://zenodo.org/record/3709188/files/SRR2413302.fastq.gz
 https://zenodo.org/record/3709188/files/transcriptome.fa.gz
 https://zenodo.org/record/3709188/files/whole_transcriptome.gff.gz
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li>Rename the datasets</li>
     <li>
       <p>Check that the datatype</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Add to each database a tag corresponding to …</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -979,7 +977,7 @@ https://zenodo.org/record/3709188/files/whole_transcriptome.gff.gz
 
 <h1 id="preprocessing">Preprocessing</h1>
 
-<p>Before starting with the analysis of data it is always good to check the sequenced <span class="notranslate">reads</span> for low quality bases and
+<p>Before starting with the analysis of data it is always good to check the sequenced reads for low quality bases and
 adapters.</p>
 
 <h2 id="quality-control">Quality control</h2>
@@ -1018,8 +1016,8 @@ library preparation are not present in the <code class="language-plaintext highl
 </blockquote>
 
 <h2 id="adapter-trimming">Adapter trimming</h2>
-<p>Due to the inefficiency of the current <span class="notranslate">RNA</span> interactome protocols, not all <span class="notranslate">reads</span> are not made up of <span class="notranslate">RNA</span> hybrids. In some
-cases, <span class="notranslate">reads</span> contain single <span class="notranslate">RNA</span> fragments with adapters or nothing but only adapters. Hence adapter removal is a very important step
+<p>Due to the inefficiency of the current RNA interactome protocols, not all reads are not made up of RNA hybrids. In some
+cases, reads contain single RNA fragments with adapters or nothing but only adapters. Hence adapter removal is a very important step
 in this analysis. In this step, we use <code class="language-plaintext highlighter-rouge">cutadapt</code> to trim the adapters. As the adapters used in this library are not
 standard Illumina adapters, we need to provide them manually.</p>
 
@@ -1094,14 +1092,14 @@ very few sequences.
 
 <h1 id="analysis-of-interactome-data-using-chira-tool-suite">Analysis of interactome data using <code class="language-plaintext highlighter-rouge">ChiRA</code> tool suite</h1>
 
-<p>The analysis includes several steps that deal with deduplication <span class="notranslate">mapping</span>, quantification and extraction of interacting
+<p>The analysis includes several steps that deal with deduplication mapping, quantification and extraction of interacting
 partners.</p>
 
 <h2 id="remove-duplicate-sequences">Remove duplicate sequences</h2>
 
 <p>First, we eliminate the duplicate sequences from the library to reduce the computational effort. This will also have an
 impact on the quantification of the loci because often these identical sequences might be PCR duplicates. There is also
-a 5’ degenerate linker of length 5 nucleotides present in the <span class="notranslate">reads</span>. Hence we have to strip that too.</p>
+a 5’ degenerate linker of length 5 nucleotides present in the reads. Hence we have to strip that too.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
@@ -1110,14 +1108,14 @@ a 5’ degenerate linker of length 5 nucleotides present in the <span class="not
     <li><strong>ChiRA collapse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTQ file”</em>: <code class="language-plaintext highlighter-rouge">Read 1 Output</code> (output of <strong>cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Length of the UMI if present at the 5’ end of your <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+        <li><em>“Length of the UMI if present at the 5’ end of your reads”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
       </ul>
 
       <blockquote class="tip">
         <div class="box-title tip-title" id="tip-dealing-with-umis"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-dealing-with-umis-contents" aria-expanded="true" aria-label="Toggle tip box: Dealing with UMIs"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Dealing with UMIs<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ul>
-          <li>If you have UMIs (at the 5’ end) in the sequenced <span class="notranslate">reads</span>, please set <em>“Length of the UMI if present at the 5’ end of your <span class="notranslate">reads</span>”</em>.</li>
+          <li>If you have UMIs (at the 5’ end) in the sequenced reads, please set <em>“Length of the UMI if present at the 5’ end of your reads”</em>.</li>
           <li>The UMI will be trimmed and put in the unique sequence id.</li>
         </ul>
       </blockquote>
@@ -1126,14 +1124,14 @@ a 5’ degenerate linker of length 5 nucleotides present in the <span class="not
 
 </blockquote>
 
-<h2 id="map-reads-to-the-reference-transcriptome">Map <span class="notranslate">reads</span> to the reference transcriptome</h2>
+<h2 id="map-reads-to-the-reference-transcriptome">Map reads to the reference transcriptome</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-map-chimeric-reads-from-fasta-file" aria-label="hands-on box: Map chimeric reads from fasta file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Map chimeric <span class="notranslate">reads</span> from fasta file</div>
+  <div class="box-title hands-on-title" id="hands-on-map-chimeric-reads-from-fasta-file" aria-label="hands-on box: Map chimeric reads from fasta file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Map chimeric reads from fasta file</div>
   <p>Here we use <code class="language-plaintext highlighter-rouge">BWA-MEM</code> aligner in local alignment mode to locate the chimeric arms on the
 transcriptome. Your reference can be single or split in two. Two references are
 ideal for example if you have CLASH experimental data where you have separate
-mi<span class="notranslate">RNA</span> and target references.</p>
+miRNA and target references.</p>
 
   <ol>
     <li><strong>ChiRA map</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1141,7 +1139,7 @@ mi<span class="notranslate">RNA</span> and target references.</p>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTA file”</em>: <code class="language-plaintext highlighter-rouge">fasta file</code> (output of <strong>ChiRA collapse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Single or split reference?”</em>: <code class="language-plaintext highlighter-rouge">Split reference</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">mi<span class="notranslate">RNA</span>_mature.fa.gz</code> (Input dataset)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">miRNA_mature.fa.gz</code> (Input dataset)</li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">transcriptome.fa.gz</code> (Input dataset)</li>
           </ul>
         </li>
@@ -1156,7 +1154,7 @@ mi<span class="notranslate">RNA</span> and target references.</p>
 
 <p>In this step, we merge the overlapping aligned positions to define the read concentrated loci. If an annotation GTF file
 produced, the transcriptomic alignment positions are first converted to their corresponding genomic positions. The
-merging is also done on <span class="notranslate">reads</span> defining which parts of the <span class="notranslate">reads</span> are <span class="notranslate">mapping</span> that indicates potential interacting segments
+merging is also done on reads defining which parts of the reads are mapping that indicates potential interacting segments
 of read.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1165,7 +1163,7 @@ of read.</p>
   <ol>
     <li><strong>ChiRA merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input <span class="notranslate">BED</span> file of alignments”</em>: <code class="language-plaintext highlighter-rouge">ChiRA aligned <span class="notranslate">BED</span></code> (output of <strong>ChiRA map</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input BED file of alignments”</em>: <code class="language-plaintext highlighter-rouge">ChiRA aligned BED</code> (output of <strong>ChiRA map</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Do you have an annotation in GTF format?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotations in GTF format”</em>: <code class="language-plaintext highlighter-rouge">whole_transcriptome.gff.gz</code> (Input dataset)</li>
@@ -1173,7 +1171,7 @@ of read.</p>
         </li>
         <li><em>“Did you use single or split reference for alignment?”</em>: <code class="language-plaintext highlighter-rouge">Split reference</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">mi<span class="notranslate">RNA</span>_mature.fa.gz</code> (Input dataset)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">miRNA_mature.fa.gz</code> (Input dataset)</li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">transcriptome.fa.gz</code> (Input dataset)</li>
           </ul>
         </li>
@@ -1190,7 +1188,7 @@ default <code class="language-plaintext highlighter-rouge">Overlap based</code> 
               <li>From <em>“Select the mode of merging”</em>: <code class="language-plaintext highlighter-rouge">Gaussian based (blockbuster)</code></li>
             </ul>
           </li>
-          <li>Working with only the chimeric <span class="notranslate">reads</span> further reduces the computation time fr subsequent steps.
+          <li>Working with only the chimeric reads further reduces the computation time fr subsequent steps.
             <ul>
               <li><em>“chimeric_only”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             </ul>
@@ -1205,9 +1203,9 @@ default <code class="language-plaintext highlighter-rouge">Overlap based</code> 
 <h2 id="quantify-aligned-loci-to-score-the-alignments">Quantify aligned loci to score the alignments</h2>
 
 <p>Now we have the loci where the potential interacting read segments are mapped to. Due to the small length of these arms, there is a
-very high chance of multi <span class="notranslate">mapping</span>. Another reason for this is the lenient <span class="notranslate">mapping</span> parameters that are used to increase
-the <span class="notranslate">mapping</span> sensitivity. Quantification needs 2 files containing read segements and loci where they are <span class="notranslate">mapping</span> to. From
-this information, <code class="language-plaintext highlighter-rouge">ChiRA quanitify</code> tries to infer the correct origin of <span class="notranslate">reads</span> and calculates the <span class="notranslate">expression</span> of the loci
+very high chance of multi mapping. Another reason for this is the lenient mapping parameters that are used to increase
+the mapping sensitivity. Quantification needs 2 files containing read segements and loci where they are mapping to. From
+this information, <code class="language-plaintext highlighter-rouge">ChiRA quanitify</code> tries to infer the correct origin of reads and calculates the expression of the loci
 using a simple expectation-maximization algorithm.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1216,7 +1214,7 @@ using a simple expectation-maximization algorithm.</p>
   <ol>
     <li><strong>ChiRA qauntify</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">BED</span> file of aligned segments”</em>: <code class="language-plaintext highlighter-rouge">ChiRA aligned read segments</code> (output of <strong>ChiRA merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BED file of aligned segments”</em>: <code class="language-plaintext highlighter-rouge">ChiRA aligned read segments</code> (output of <strong>ChiRA merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular file of merged alignments”</em>: <code class="language-plaintext highlighter-rouge">ChiRA merged alignments</code> (output of <strong>ChiRA merge</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
@@ -1226,10 +1224,10 @@ using a simple expectation-maximization algorithm.</p>
 
 <h2 id="extract-the-best-scoring-chimeras">Extract the best scoring chimeras</h2>
 
-<p>After having the information about the loci <span class="notranslate">expression</span>, the final step extracts only the best scoring interacting
+<p>After having the information about the loci expression, the final step extracts only the best scoring interacting
 partners for each read. All the combinations of the transcripts that are overlapping with the interacting loci are
 reported. If there is more than one locus with the equal best score then all the best hits are reported. If you have the
-genomic fasta file the tool can hybridize the interacting loci sequences using <code class="language-plaintext highlighter-rouge">Inta<span class="notranslate">RNA</span></code>.</p>
+genomic fasta file the tool can hybridize the interacting loci sequences using <code class="language-plaintext highlighter-rouge">IntaRNA</code>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-task-description-1" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
@@ -1243,14 +1241,14 @@ genomic fasta file the tool can hybridize the interacting loci sequences using <
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotations in GTF format”</em>: <code class="language-plaintext highlighter-rouge">whole_transcriptome.gff.gz</code> (Input dataset)</li>
             <li><em>“Choose the source for the FASTA file”</em>: <code class="language-plaintext highlighter-rouge">History</code>
               <ul>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA file”</em>: <code class="language-plaintext highlighter-rouge">Mus_musculus.GRCm38.<span class="notranslate">dna</span>.fa.gz</code> (Input dataset)</li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA file”</em>: <code class="language-plaintext highlighter-rouge">Mus_musculus.GRCm38.dna.fa.gz</code> (Input dataset)</li>
               </ul>
             </li>
           </ul>
         </li>
         <li><em>“Did you use single or split reference for alignment?”</em>: <code class="language-plaintext highlighter-rouge">Split reference</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">mi<span class="notranslate">RNA</span>_mature.fa.gz</code> (Input dataset)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">miRNA_mature.fa.gz</code> (Input dataset)</li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">transcriptome.fa.gz</code> (Input dataset)</li>
           </ul>
         </li>
@@ -1266,9 +1264,9 @@ genomic fasta file the tool can hybridize the interacting loci sequences using <
 
 <p>The output tabular file generated in the above step can be huge with up to some millions of rows depending on the
 library size and more than 30 columns. Extracting useful data from this can be very tedious. For example, extracting and
-visualizing the distribution of target biotypes of your favorite mi<span class="notranslate">RNA</span> can be very tricky and might need more than a
-hand full of <span class="notranslate">galaxy</span> tools to achieve. For this reason, there exists a visualization and filtering tool for this data along
-with <code class="language-plaintext highlighter-rouge">ChiRA</code> known as <code class="language-plaintext highlighter-rouge">ChiRAViz</code>. It is a <span class="notranslate">galaxy</span> visualization framework to work with the output of <code class="language-plaintext highlighter-rouge">ChiRA</code>. But it does
+visualizing the distribution of target biotypes of your favorite miRNA can be very tricky and might need more than a
+hand full of galaxy tools to achieve. For this reason, there exists a visualization and filtering tool for this data along
+with <code class="language-plaintext highlighter-rouge">ChiRA</code> known as <code class="language-plaintext highlighter-rouge">ChiRAViz</code>. It is a galaxy visualization framework to work with the output of <code class="language-plaintext highlighter-rouge">ChiRA</code>. But it does
 not directly work with the tabular output we have. Rather it needs a “sqlite” database. For this reason, we first build a
 sqlite database from the <code class="language-plaintext highlighter-rouge">ChiRA</code> output.</p>
 
@@ -1282,7 +1280,7 @@ sqlite database from the <code class="language-plaintext highlighter-rouge">ChiR
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Database Table”</em>
               <ul>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">ChiRA chimeric <span class="notranslate">reads</span></code> (output of <strong>ChiRA extract</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">ChiRA chimeric reads</code> (output of <strong>ChiRA extract</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
               </ul>
             </li>
           </ul>
@@ -1299,7 +1297,7 @@ sqlite database from the <code class="language-plaintext highlighter-rouge">ChiR
       <p>Change the datatype to <code class="language-plaintext highlighter-rouge">chira.sqlite</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">chira.sqlite</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">chira.sqlite</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1309,11 +1307,11 @@ sqlite database from the <code class="language-plaintext highlighter-rouge">ChiR
   <div class="box-title hands-on-title" id="hands-on-visualize-interactions" aria-label="hands-on box: Visualize interactions"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualize interactions</div>
 
   <ol>
-    <li>Please click on <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-barchart</span> <em>“Visualize this data”</em>. Then click on the <code class="language-plaintext highlighter-rouge">ChiRAViz</code> visualization.
+    <li>Please click on <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> <em>“Visualize this data”</em>. Then click on the <code class="language-plaintext highlighter-rouge">ChiRAViz</code> visualization.
 This loads the data into the visualization framework and shows some basic plots from the data.
       <ul>
         <li>The visualization split into two to show the left and the right arms information.</li>
-        <li>On home page pie charts of left and right chimeric arms, types of interactions and top 50 expressed <span class="notranslate">RNA</span>s are shown.
+        <li>On home page pie charts of left and right chimeric arms, types of interactions and top 50 expressed RNAs are shown.
 <img src="../../images/rna-interactome/chiraviz_view1.png" alt="ChiRAViz home page. " loading="lazy" /></li>
       </ul>
     </li>
@@ -1332,13 +1330,13 @@ on the top and then click on <strong>“Get interactions”</strong>.</p>
   <div class="box-title hands-on-title" id="hands-on-filter-and-summarize-interactions-and-export-the-results" aria-label="hands-on box:  Filter and summarize interactions and export the results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Filter and summarize interactions and export the results</div>
   <p><code class="language-plaintext highlighter-rouge">ChiRAViz</code> provides filters to search for keywords like gene symbols, sort interactions by score, filter by score or
 hybridization energy. Then the filtered interactions can be summarized or exported to a file. In this step, we filter
-the interactions that <code class="language-plaintext highlighter-rouge">mmu-miR-190a</code> involved in and consider those which have an <code class="language-plaintext highlighter-rouge">Inta<span class="notranslate">RNA</span></code> predicted hybrid.</p>
+the interactions that <code class="language-plaintext highlighter-rouge">mmu-miR-190a</code> involved in and consider those which have an <code class="language-plaintext highlighter-rouge">IntaRNA</code> predicted hybrid.</p>
   <ul>
     <li>To search, type <code class="language-plaintext highlighter-rouge">mir-190a</code> in the search field and click on search icon
 or hit enter. Search is case insensitive and can search for sub-phrases
 too. This results in 27 records.</li>
-    <li>We now further filter the records that contain <code class="language-plaintext highlighter-rouge">Inta<span class="notranslate">RNA</span></code> hybrid. If
-there is no hybrid predicted by <code class="language-plaintext highlighter-rouge">Inta<span class="notranslate">RNA</span></code>,
+    <li>We now further filter the records that contain <code class="language-plaintext highlighter-rouge">IntaRNA</code> hybrid. If
+there is no hybrid predicted by <code class="language-plaintext highlighter-rouge">IntaRNA</code>,
 then the hybrid filed contains an <code class="language-plaintext highlighter-rouge">NA</code> value.
       <ul>
         <li>From <strong>”–filter–“</strong> dropdown choose <code class="language-plaintext highlighter-rouge">Hybrid</code></li>
@@ -1377,8 +1375,8 @@ This filters out 10 more records and results in 17 records.</li>
 corresponds to 4 different transcripts of the target gene <code class="language-plaintext highlighter-rouge">Myo5a</code>.</li>
     <li>Click on one of the records to view following information.
       <ul>
-        <li><strong>“Chimera”</strong> panel in the middle depicts the <span class="notranslate">mapping</span> positions on the read with read length.</li>
-        <li><strong>“Interacting partners”</strong> panel shows the information on which transcripts the left and right arm are <span class="notranslate">mapping</span> to with their alignment positions on the transcripts.</li>
+        <li><strong>“Chimera”</strong> panel in the middle depicts the mapping positions on the read with read length.</li>
+        <li><strong>“Interacting partners”</strong> panel shows the information on which transcripts the left and right arm are mapping to with their alignment positions on the transcripts.</li>
         <li><strong>“Alignment Information”</strong> panel shows the alignment if present with a possibility to download the alignment.
 <img src="../../images/rna-interactome/chiraviz_view3.png" alt="ChiRAViz single interaction. " loading="lazy" /></li>
       </ul>
@@ -1388,7 +1386,7 @@ corresponds to 4 different transcripts of the target gene <code class="language-
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>Though chimeric <span class="notranslate">reads</span> look normal when inspected in a FASTQ file, the origin of each read is from two different <span class="notranslate">RNA</span> fragments. Limitations of the current sequencing protocols limit the length of each sequenced interacting <span class="notranslate">RNA</span> fragment. These smaller <span class="notranslate">RNA</span> fragments are often harder to map considering that the boundaries of each <span class="notranslate">RNA</span> fragment in the read are unknown. In this tutorial, we have seen how to map these <span class="notranslate">reads</span> and infer the true origins of them by quantifying the mapped loci. The visualization framework gives flexibility in filtering and searching output files, visualize the summaries of filtered data as well as exporting them.</p>
+<p>Though chimeric reads look normal when inspected in a FASTQ file, the origin of each read is from two different RNA fragments. Limitations of the current sequencing protocols limit the length of each sequenced interacting RNA fragment. These smaller RNA fragments are often harder to map considering that the boundaries of each RNA fragment in the read are unknown. In this tutorial, we have seen how to map these reads and infer the true origins of them by quantifying the mapped loci. The visualization framework gives flexibility in filtering and searching output files, visualize the summaries of filtered data as well as exporting them.</p>
 
 
                 

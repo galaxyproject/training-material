@@ -783,8 +783,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -870,26 +868,26 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p><span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span>-seq (sc<span class="notranslate">RNA</span>-seq) is emerging as a promising technology for analysing variability in cell populations. However, the combination of technical noise and intrinsic biological variability makes detecting technical artefacts particularly challenging. Removal of low-quality cells and detection of technical artefacts is critical for accurate <span class="notranslate">downstream</span> analysis.</p>
+<p>Single-cell RNA-seq (scRNA-seq) is emerging as a promising technology for analysing variability in cell populations. However, the combination of technical noise and intrinsic biological variability makes detecting technical artefacts particularly challenging. Removal of low-quality cells and detection of technical artefacts is critical for accurate downstream analysis.</p>
 
-<p>A number of factors should be examined before <span class="notranslate">downstream</span> analyses, many of which we’ll address here:</p>
+<p>A number of factors should be examined before downstream analyses, many of which we’ll address here:</p>
 
 <ul>
   <li>
-    <p><strong>Low library size</strong>: When cells are very degraded or absent from the library preparation, the number of <span class="notranslate">reads</span> sequenced from that library will be very low. It’s important to remove these cells from <span class="notranslate">downstream</span> analyses.</p>
+    <p><strong>Low library size</strong>: When cells are very degraded or absent from the library preparation, the number of reads sequenced from that library will be very low. It’s important to remove these cells from downstream analyses.</p>
   </li>
   <li>
-    <p><strong>Low number of expressed genes</strong>: A low number of expressed genes may be a result of poor-quality cells (e.g. dying, degraded, damaged, etc.), followed by high PCR amplification of the remaining <span class="notranslate">RNA</span>. Again, these cells should be removed from <span class="notranslate">downstream</span> analyses.</p>
+    <p><strong>Low number of expressed genes</strong>: A low number of expressed genes may be a result of poor-quality cells (e.g. dying, degraded, damaged, etc.), followed by high PCR amplification of the remaining RNA. Again, these cells should be removed from downstream analyses.</p>
   </li>
   <li>
-    <p><strong>High mitochondrial gene content</strong>: High concentrations of mitochondrial genes is often a result of damaged cells where the endogenous <span class="notranslate">RNA</span> escapes or degrades. As mitochondria has its own cell membranes, it is often the last <span class="notranslate">DNA</span>/<span class="notranslate">RNA</span> in damaged cells to degrade and hence occurs in high quantities during sequencing.</p>
+    <p><strong>High mitochondrial gene content</strong>: High concentrations of mitochondrial genes is often a result of damaged cells where the endogenous RNA escapes or degrades. As mitochondria has its own cell membranes, it is often the last DNA/RNA in damaged cells to degrade and hence occurs in high quantities during sequencing.</p>
   </li>
   <li>
-    <p><strong>Batch effect</strong>: Large sc<span class="notranslate">RNA</span>-seq projects usually need to generate data across multiple batches due to logistical constraints. However, the processing of different batches is often subject to variation, e.g., changes in operator, differences in reagent quality and concentration, the sequencing machine used, etc. This results in systematic differences in the observed <span class="notranslate">expression</span> in cells from different batches, which we refer to as “batch effects”. Batch effects are problematic as they can be major drivers of variation in the data, masking the relevant biological differences and complicating interpretation of the results.</p>
+    <p><strong>Batch effect</strong>: Large scRNA-seq projects usually need to generate data across multiple batches due to logistical constraints. However, the processing of different batches is often subject to variation, e.g., changes in operator, differences in reagent quality and concentration, the sequencing machine used, etc. This results in systematic differences in the observed expression in cells from different batches, which we refer to as “batch effects”. Batch effects are problematic as they can be major drivers of variation in the data, masking the relevant biological differences and complicating interpretation of the results.</p>
   </li>
 </ul>
 
-<p>We will use <em>scater</em> (<span class="citation"><a href="#10.1093/bioinformatics/btw777">McCarthy <i>et al.</i> 2017</a></span>) to visualise sc<span class="notranslate">RNA</span>-seq data, obtaining information about the factors mentioned above, filter out low-quality cells and confirm that filtering has worked. We’ll then look at confounding factors such as batch effect to see if the data is biased to any technical artifacts.</p>
+<p>We will use <em>scater</em> (<span class="citation"><a href="#10.1093/bioinformatics/btw777">McCarthy <i>et al.</i> 2017</a></span>) to visualise scRNA-seq data, obtaining information about the factors mentioned above, filter out low-quality cells and confirm that filtering has worked. We’ll then look at confounding factors such as batch effect to see if the data is biased to any technical artifacts.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -912,9 +910,9 @@
 </blockquote>
 
 <h1 id="overview">Overview</h1>
-<p>We will use a pre-calculated <span class="notranslate">expression</span> matrix, along with some additional metadata such as lists of mitochondrial genes and annotation of technical information for each sequencing library. We will plot the data and carry out quality control filtering based on the visualise-filter-visualise paradigm of this approach (see <span class="notranslate">workflow</span> below).</p>
+<p>We will use a pre-calculated expression matrix, along with some additional metadata such as lists of mitochondrial genes and annotation of technical information for each sequencing library. We will plot the data and carry out quality control filtering based on the visualise-filter-visualise paradigm of this approach (see workflow below).</p>
 
-<figure id="figure-1"><img src="../../images/scrna-scater-qc/Figure1.jpg" alt="Workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> <span class="notranslate">Workflow</span> demonstrating the visualise-filter-visualise paradigm of the software</figcaption></figure>
+<figure id="figure-1"><img src="../../images/scrna-scater-qc/Figure1.jpg" alt="Workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Workflow demonstrating the visualise-filter-visualise paradigm of the software</figcaption></figure>
 
 <h1 id="data-upload">Data upload</h1>
 
@@ -932,9 +930,9 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -942,21 +940,21 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
 
 <h1 id="visualise-the-data">Visualise the data</h1>
 
-<p>Take a look at the uploaded data by clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> symbol for each dataset.</p>
+<p>Take a look at the uploaded data by clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> symbol for each dataset.</p>
 
 <ul>
-  <li>The <code class="language-plaintext highlighter-rouge">counts.txt</code> file is a 40-sample <span class="notranslate">expression</span> matrix. Each sample (Cell_001 - Cell_040) is listed as the column headers and the start of each row is a gene name. The rest of the data refers to the number of <span class="notranslate">reads</span> mapped to each gene/sample.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">counts.txt</code> file is a 40-sample expression matrix. Each sample (Cell_001 - Cell_040) is listed as the column headers and the start of each row is a gene name. The rest of the data refers to the number of reads mapped to each gene/sample.</li>
   <li><code class="language-plaintext highlighter-rouge">annotation.txt</code> is a file listing experimental information about each cell. Parameters here include <code class="language-plaintext highlighter-rouge">Mutation_Status</code>, <code class="language-plaintext highlighter-rouge">Cell_Cycle</code>, and <code class="language-plaintext highlighter-rouge">Treatment</code>. These will be useful for looking at  batch effects later.</li>
-  <li>The <code class="language-plaintext highlighter-rouge">mt_controls.txt</code> file is a list of mitochondrial genes. This list will be used later to calculate the % of mitochondrial <span class="notranslate">reads</span> in each sequencing library.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">mt_controls.txt</code> file is a list of mitochondrial genes. This list will be used later to calculate the % of mitochondrial reads in each sequencing library.</li>
 </ul>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-calculate-qc-metrics" aria-label="hands-on box: Calculate QC metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Calculate QC metrics</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2"><strong>Scater: Calculate QC metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2</span></span>   with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2"><strong>Scater: Calculate QC metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scater_create_qcmetric_ready_sce/scater_create_qcmetric_ready_sce/1.12.2</span></span>   with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">Expression</span> matrix in tabular format”</em>: <code class="language-plaintext highlighter-rouge">counts.txt</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Expression matrix in tabular format”</em>: <code class="language-plaintext highlighter-rouge">counts.txt</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Format dataset describing the features in tabular format”</em>: <code class="language-plaintext highlighter-rouge">annotation.txt</code> (Input dataset)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset containing the list of the mitochondrial control genes”</em>: <code class="language-plaintext highlighter-rouge">mt_controls.txt</code> (Input dataset)</li>
       </ul>
@@ -977,30 +975,30 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
   <div class="box-title hands-on-title" id="hands-on-plot-library-qc" aria-label="hands-on box: Plot library QC"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot library QC</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2"><strong>Scater: plot library QC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2</span></span>   with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2"><strong>Scater: plot library QC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2</span></span>   with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="language-plaintext highlighter-rouge">output_loom</code> (output of <strong>Scater: Calculate QC metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Plot on log scale”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
-    <li>If we have a large number of cells (500+), set the ‘Plot on log scale’ option to ‘Yes’. This will make it easier to pick cut-offs when dealing with large numbers. When the tool has finished running, click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> to view the plots. If it doesn’t appear in the browser, you may have to download it and view it exte<span class="notranslate">rna</span>lly. You should be presented with plots similar to those below.
+    <li>If we have a large number of cells (500+), set the ‘Plot on log scale’ option to ‘Yes’. This will make it easier to pick cut-offs when dealing with large numbers. When the tool has finished running, click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> to view the plots. If it doesn’t appear in the browser, you may have to download it and view it externally. You should be presented with plots similar to those below.
       <figure id="figure-2"><img src="../../images/scrna-scater-qc/raw_data.png" alt="Raw data QC plots. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Raw data QC plots</figcaption></figure>
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
         <p>There are four plots, two distribution bar plots and two scatter plots.
-The first distribution plot is the number of <span class="notranslate">reads</span> in each library (from a <span class="notranslate">single cell</span>).
+The first distribution plot is the number of reads in each library (from a single cell).
 The second plot is the distribution of <em>feature counts</em> per cell. Feature counts in this case refers to the number of genes expressed in each cell.
-The third plot <strong>Scatterplot of <span class="notranslate">reads</span> vs genes</strong> is a combination of the two barplots, in that it plots both the read count and the expressed gene count for each cell.
+The third plot <strong>Scatterplot of reads vs genes</strong> is a combination of the two barplots, in that it plots both the read count and the expressed gene count for each cell.
 The final scatterplot is the <strong>% MT genes</strong>, which plots the number of genes expressed verses the percentage of those genes that are mitochondrial genes.</p>
       </blockquote>
 
       <p>Let’s look at each plot in turn and see what it tells us.</p>
       <ul>
-        <li><strong>Read counts</strong>. You can see that there are a few cells that have less than ~200,000 <span class="notranslate">reads</span>, with other cells having up to one million <span class="notranslate">reads</span>. Although 200,000 <span class="notranslate">reads</span> is still quite a lot and we wouldn’t want to get rid of so much data, we might want to think about removing cells that only contain a smaller number of <span class="notranslate">reads</span> (say, 100,000).</li>
+        <li><strong>Read counts</strong>. You can see that there are a few cells that have less than ~200,000 reads, with other cells having up to one million reads. Although 200,000 reads is still quite a lot and we wouldn’t want to get rid of so much data, we might want to think about removing cells that only contain a smaller number of reads (say, 100,000).</li>
         <li><strong>Feature counts</strong>. Similar to the read counts plot, we see a few cells that have a very low number of expressed genes (&lt;600), then followed by a more even distribution.</li>
-        <li><strong>Scatterplot of <span class="notranslate">reads</span> vs genes</strong>. This takes the information provided in the two distribution plots above and creates a scatterplot from them. The really poor-quality cells are represented by the points near the intersection of the x and y axis, being data with low read count and low gene count. These are the cells we want to remove during filtering.</li>
+        <li><strong>Scatterplot of reads vs genes</strong>. This takes the information provided in the two distribution plots above and creates a scatterplot from them. The really poor-quality cells are represented by the points near the intersection of the x and y axis, being data with low read count and low gene count. These are the cells we want to remove during filtering.</li>
         <li><strong>% MT genes</strong>. You can see from the plot that there are a few cells outside the main “cloud” of datapoints. Some of these could be removed by filtering out cells with low feature counts, but others might need to be removed by mitochondrial content, such as the cell around 37.5%</li>
       </ul>
     </li>
@@ -1012,20 +1010,20 @@ The final scatterplot is the <strong>% MT genes</strong>, which plots the number
 
 <h2 id="manual-filtering">Manual filtering</h2>
 
-<p>In the <strong>Scater: filter SCE</strong> <span class="notranslate">Galaxy</span> tool there are two filtering methods available. First, there’s an “automatic” filtering method that uses PCA to identify outliers cells and remove them from the data. This is particularly useful for very large datasets (hundreds of samples). Second, there’s a manual filtering method where users can put a range of filtering parameters, informed by the previous plotting tool.
+<p>In the <strong>Scater: filter SCE</strong> Galaxy tool there are two filtering methods available. First, there’s an “automatic” filtering method that uses PCA to identify outliers cells and remove them from the data. This is particularly useful for very large datasets (hundreds of samples). Second, there’s a manual filtering method where users can put a range of filtering parameters, informed by the previous plotting tool.
 Here, we’ll use the manual filtering method.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-filtering-with-scater" aria-label="hands-on box: Filtering with scater"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filtering with scater</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2"><strong>Scater: filter SCE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2</span></span>   with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2"><strong>Scater: filter SCE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2</span></span>   with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="language-plaintext highlighter-rouge">output_loom</code> (output of <strong>Scater: Calculate QC metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Type of filter”</em>: <code class="language-plaintext highlighter-rouge">manual</code>
           <ul>
-            <li><em>“Number of <span class="notranslate">reads</span> mapped to a gene for it to be counted as expressed”</em>: <code class="language-plaintext highlighter-rouge">4.0</code></li>
-            <li><em>“Minimum library size (mapped <span class="notranslate">reads</span>) to filter cells on”</em>: <code class="language-plaintext highlighter-rouge">100000</code></li>
+            <li><em>“Number of reads mapped to a gene for it to be counted as expressed”</em>: <code class="language-plaintext highlighter-rouge">4.0</code></li>
+            <li><em>“Minimum library size (mapped reads) to filter cells on”</em>: <code class="language-plaintext highlighter-rouge">100000</code></li>
             <li><em>“Minimum number of expressed genes to filter cells on”</em>: <code class="language-plaintext highlighter-rouge">500</code></li>
             <li><em>“Maximum % of mitochondrial genes expressed per cell”</em>: <code class="language-plaintext highlighter-rouge">35.0</code></li>
           </ul>
@@ -1037,8 +1035,8 @@ Here, we’ll use the manual filtering method.</p>
 
         <p>Let’s have a look at the parameters and their values:</p>
         <ol>
-          <li><em>“Number of <span class="notranslate">reads</span> mapped to a gene for it to be counted as expressed”</em>: by default, only one read needs to be mapped to a gene for it to be counted as “expressed”. We can be a little bit more stringent here and increase the number of <span class="notranslate">reads</span> that need to be mapped to a gene for it to be categorised as “expressed”.</li>
-          <li><em>“Minimum library size (mapped <span class="notranslate">reads</span>) to filter cells on”</em>: This value asks how many mapped <span class="notranslate">reads</span> from each cell do you require to be mapped to your genome to be included in <span class="notranslate">downstream</span> analysis. We can see from our plots that we have a few cells that have less than 200,000 <span class="notranslate">reads</span>. 200,000 can still be quite a lot of <span class="notranslate">reads</span> (depending on the experiment), but we can use a smaller number to see what the initial effect of filtering is. Initially, use 100,000 as the value here.</li>
+          <li><em>“Number of reads mapped to a gene for it to be counted as expressed”</em>: by default, only one read needs to be mapped to a gene for it to be counted as “expressed”. We can be a little bit more stringent here and increase the number of reads that need to be mapped to a gene for it to be categorised as “expressed”.</li>
+          <li><em>“Minimum library size (mapped reads) to filter cells on”</em>: This value asks how many mapped reads from each cell do you require to be mapped to your genome to be included in downstream analysis. We can see from our plots that we have a few cells that have less than 200,000 reads. 200,000 can still be quite a lot of reads (depending on the experiment), but we can use a smaller number to see what the initial effect of filtering is. Initially, use 100,000 as the value here.</li>
           <li><em>“Minimum number of expressed genes”</em>: You can see that some cells only express a few hundred genes, so we’ll remove these cells also.</li>
           <li><em>“Maximum % of mitochondrial genes expressed per cell”</em>. You can see that as well as having one obvious outlier (~37%).</li>
         </ol>
@@ -1052,7 +1050,7 @@ Here, we’ll use the manual filtering method.</p>
   <div class="box-title hands-on-title" id="hands-on-plot-library-qc-after-filtering" aria-label="hands-on box: Plot library QC after filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot library QC after filtering</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2"><strong>Scater: plot library QC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2</span></span>   with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2"><strong>Scater: plot library QC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_dist_scatter/scater_plot_dist_scatter/1.12.2</span></span>   with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="language-plaintext highlighter-rouge">output_loom</code> (output of <strong>Scater: filter SCE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1081,7 +1079,7 @@ Here, we’ll use the manual filtering method.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-task-description" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2"><strong>Scater: filter SCE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2</span></span>   with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2"><strong>Scater: filter SCE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scater_filter/scater_filter/1.12.2</span></span>   with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="language-plaintext highlighter-rouge">output_loom</code> (output of <strong>Scater: Calculate QC metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Type of filter”</em>: <code class="language-plaintext highlighter-rouge">automatic</code></li>
@@ -1107,12 +1105,12 @@ Here, we’ll use the manual filtering method.</p>
 
 </blockquote>
 
-<p>As discussed previously, technical artefacts can bias sc<span class="notranslate">RNA</span>-seq analyses. Strong batch effects can mask real biological differences in the data, so must be identified and removed from the data. Logging meta-data details such as date of library construction, sequencing batch, sample name, technical replicate, plate number, etc., is essential to identify batch effects in the data. We can use this information to visualise the data to examine it for clustering according to batch, rather than any real biological feature.</p>
+<p>As discussed previously, technical artefacts can bias scRNA-seq analyses. Strong batch effects can mask real biological differences in the data, so must be identified and removed from the data. Logging meta-data details such as date of library construction, sequencing batch, sample name, technical replicate, plate number, etc., is essential to identify batch effects in the data. We can use this information to visualise the data to examine it for clustering according to batch, rather than any real biological feature.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-pca-plot" aria-label="hands-on box: PCA plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: PCA plot</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2"><strong>Scater: PCA plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2</span></span>   with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2"><strong>Scater: PCA plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/scater_plot_pca/scater_plot_pca/1.12.2</span></span>   with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="language-plaintext highlighter-rouge">output_loom</code> (output of <strong>Scater: filter SCE</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Feature (from annotation file) to colour PCA plot points by”</em>: <code class="language-plaintext highlighter-rouge">Mutation_Status</code></li>
@@ -1146,10 +1144,10 @@ Here, we’ll use the manual filtering method.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>We have gone through the process of filtering low-quality data from an sc<span class="notranslate">RNA</span>-seq <span class="notranslate">expression</span> matrix, using the visualise-filter-visualise paradigm, which proves to be a very effective way of quality-controlling sc<span class="notranslate">RNA</span>-seq data. Cells that have low read-coverage, low <span class="notranslate">expression</span> values, or high mitochondrial gene <span class="notranslate">expression</span> have been filtered out. We have then examined ways of looking at confounding factors to examine batch effects in our data.
-The <span class="notranslate">workflow</span> available from the “Supporting Materials” of this tutorial can be directly imported and used or adapted to a specific analysis.</p>
+<p>We have gone through the process of filtering low-quality data from an scRNA-seq expression matrix, using the visualise-filter-visualise paradigm, which proves to be a very effective way of quality-controlling scRNA-seq data. Cells that have low read-coverage, low expression values, or high mitochondrial gene expression have been filtered out. We have then examined ways of looking at confounding factors to examine batch effects in our data.
+The workflow available from the “Supporting Materials” of this tutorial can be directly imported and used or adapted to a specific analysis.</p>
 
-<p>This tutorial is part of the https://singlecell.use<span class="notranslate">galaxy</span>.eu portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span> and <span class="citation"><a href="#etherington2019galaxy">Etherington <i>et al.</i> 2019</a></span>)</p>
+<p>This tutorial is part of the https://singlecell.usegalaxy.eu portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span> and <span class="citation"><a href="#etherington2019galaxy">Etherington <i>et al.</i> 2019</a></span>)</p>
 
 
                 

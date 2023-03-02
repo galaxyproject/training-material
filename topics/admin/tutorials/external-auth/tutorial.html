@@ -889,7 +889,7 @@
 
                 <h1 id="overview">Overview</h1>
 
-<p>For this exercise we will use a basic password file method for authenticating - this is probably not a very useful method in production, but it demonstrates how the proxy server can be configured to provide the correct header to <span class="notranslate">Galaxy</span>, and how <span class="notranslate">Galaxy</span> integrates with <span class="notranslate">upstream</span> authentication providers. This same method can be used with NGINX and Apache modules for CAS or SAML authentication.</p>
+<p>For this exercise we will use a basic password file method for authenticating - this is probably not a very useful method in production, but it demonstrates how the proxy server can be configured to provide the correct header to Galaxy, and how Galaxy integrates with upstream authentication providers. This same method can be used with NGINX and Apache modules for CAS or SAML authentication.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -910,9 +910,9 @@
   <div class="box-title hands-on-title" id="hands-on-configuring-everything" aria-label="hands-on box: Configuring everything"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Configuring everything</div>
 
   <ol>
-    <li>Edit the <span class="notranslate">galaxy</span>.j2 template file in the templates/nginx directory and update the main location block defined for serving <span class="notranslate">galaxy</span>. Add the parameters:
+    <li>Edit the galaxy.j2 template file in the templates/nginx directory and update the main location block defined for serving galaxy. Add the parameters:
       <ul>
-        <li><code class="language-plaintext highlighter-rouge">auth_basic <span class="notranslate">galaxy</span>;</code></li>
+        <li><code class="language-plaintext highlighter-rouge">auth_basic galaxy;</code></li>
         <li><code class="language-plaintext highlighter-rouge">auth_basic_user_file /etc/nginx/passwd;</code></li>
         <li><code class="language-plaintext highlighter-rouge">proxy_set_header HTTP_REMOTE_USER $remote_user;</code></li>
         <li><code class="language-plaintext highlighter-rouge">proxy_set_header HTTP_GX_SECRET SOME_SECRET_STRING;</code></li>
@@ -921,7 +921,7 @@
       <p>It should look like:</p>
 
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -14,6 +14,10 @@</span>
-<span class="gi">+        auth_basic           <span class="notranslate">galaxy</span>;
+<span class="gi">+        auth_basic           galaxy;
 +        auth_basic_user_file /etc/nginx/passwd;
 +        proxy_set_header          HTTP_REMOTE_USER $remote_user;
 +        proxy_set_header          HTTP_GX_SECRET SOME_SECRET_STRING;
@@ -938,16 +938,16 @@
         <p>Add the <code class="language-plaintext highlighter-rouge">auth_basic</code> and <code class="language-plaintext highlighter-rouge">auth_basic_user_file</code> lines to your <code class="language-plaintext highlighter-rouge">location /reports/</code></p>
       </blockquote>
 
-      <p><code class="language-plaintext highlighter-rouge">auth_basic</code> enables validation of use<span class="notranslate">rna</span>me and password using the “HTTP Basic Authentication” protocol. Its value <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code> is used as a realm name to be displayed to the user when prompting for credentials.
-<code class="language-plaintext highlighter-rouge">auth_basic_user_file</code> specifies the file that keeps use<span class="notranslate">rna</span>mes and passwords.
-<code class="language-plaintext highlighter-rouge">proxy_set_header</code> adds <code class="language-plaintext highlighter-rouge">HTTP_REMOTE_USER</code> to the special variables passed by nginx to <span class="notranslate">Galaxy</span>, with value <code class="language-plaintext highlighter-rouge">$remote_user</code>, which is a nginx embedded variable containing the use<span class="notranslate">rna</span>me supplied with the Basic authentication.</p>
+      <p><code class="language-plaintext highlighter-rouge">auth_basic</code> enables validation of username and password using the “HTTP Basic Authentication” protocol. Its value <code class="language-plaintext highlighter-rouge">galaxy</code> is used as a realm name to be displayed to the user when prompting for credentials.
+<code class="language-plaintext highlighter-rouge">auth_basic_user_file</code> specifies the file that keeps usernames and passwords.
+<code class="language-plaintext highlighter-rouge">proxy_set_header</code> adds <code class="language-plaintext highlighter-rouge">HTTP_REMOTE_USER</code> to the special variables passed by nginx to Galaxy, with value <code class="language-plaintext highlighter-rouge">$remote_user</code>, which is a nginx embedded variable containing the username supplied with the Basic authentication.</p>
 
-      <p><code class="language-plaintext highlighter-rouge">GX_SECRET</code> is added as a header for security purposes, to prevent any other users on the system impersonating nginx and sending requests to <span class="notranslate">Galaxy</span>. NGINX and other webservers like Apache will strip any user-sent <code class="language-plaintext highlighter-rouge">REMOTE_USER</code> headers, as that header defines the authenticated user. If you can talk directly to <span class="notranslate">Galaxy</span> (e.g. via curl) and provide the <code class="language-plaintext highlighter-rouge">REMOTE_USER</code> header, you can impersonate any other use. While having <span class="notranslate">Galaxy</span> listen on <code class="language-plaintext highlighter-rouge">127.0.0.1</code> prevents any requests from outside of the system reaching <span class="notranslate">Galaxy</span>, anyone on the system can still send requests to that port. Here you can choose to switch to a unix socket with permissions only permitting <span class="notranslate">Galaxy</span> and Nginx to connect. <code class="language-plaintext highlighter-rouge">GX_SECRET</code> adds additional security as it needs to match <code class="language-plaintext highlighter-rouge">remote_user_secret</code> in your <span class="notranslate">galaxy</span> configutation.</p>
+      <p><code class="language-plaintext highlighter-rouge">GX_SECRET</code> is added as a header for security purposes, to prevent any other users on the system impersonating nginx and sending requests to Galaxy. NGINX and other webservers like Apache will strip any user-sent <code class="language-plaintext highlighter-rouge">REMOTE_USER</code> headers, as that header defines the authenticated user. If you can talk directly to Galaxy (e.g. via curl) and provide the <code class="language-plaintext highlighter-rouge">REMOTE_USER</code> header, you can impersonate any other use. While having Galaxy listen on <code class="language-plaintext highlighter-rouge">127.0.0.1</code> prevents any requests from outside of the system reaching Galaxy, anyone on the system can still send requests to that port. Here you can choose to switch to a unix socket with permissions only permitting Galaxy and Nginx to connect. <code class="language-plaintext highlighter-rouge">GX_SECRET</code> adds additional security as it needs to match <code class="language-plaintext highlighter-rouge">remote_user_secret</code> in your galaxy configutation.</p>
 
       <blockquote class="tip">
         <div class="box-title tip-title" id="tip-proxy-bypass"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-proxy-bypass-contents" aria-expanded="true" aria-label="Toggle tip box: Proxy bypass"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Proxy bypass<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-        <p>Users can bypass the authentication only if they can talk directly to the gunicorn processes (if you have socket/http: 0.0.0.0, or if it is directly responsible for serving <span class="notranslate">galaxy</span>, and there is no proxy.)
-This can happen mostly when some users have command line access to the <span class="notranslate">Galaxy</span> server, which is considered a bad practice.</p>
+        <p>Users can bypass the authentication only if they can talk directly to the gunicorn processes (if you have socket/http: 0.0.0.0, or if it is directly responsible for serving galaxy, and there is no proxy.)
+This can happen mostly when some users have command line access to the Galaxy server, which is considered a bad practice.</p>
       </blockquote>
     </li>
     <li>
@@ -963,14 +963,14 @@ This can happen mostly when some users have command line access to the <span cla
           <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
           <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -7,6 +7,15 @@</span>
-         name: <span class="notranslate">galaxy</span>
+         name: galaxy
          state: restarted
    pre_tasks:
 <span class="gi">+    - pip:
 +        name: passlib
 +    - htpasswd:
 +        path: /etc/nginx/passwd
-+        name: user1        # Pick a use<span class="notranslate">rna</span>me
++        name: user1        # Pick a username
 +        password: changeme # and a password
 +        owner: www-data    # nginx on centos
 +        group: root
@@ -984,11 +984,11 @@ This can happen mostly when some users have command line access to the <span cla
       </blockquote>
     </li>
     <li>
-      <p><span class="notranslate">Galaxy</span> needs to be instructed to expect authentication to come from the <span class="notranslate">upstream</span> proxy. In order to do this, set the following two options in your <span class="notranslate">Galaxy</span> group variables:</p>
+      <p>Galaxy needs to be instructed to expect authentication to come from the upstream proxy. In order to do this, set the following two options in your Galaxy group variables:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">...</span>
-<span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
-  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
+<span class="na">galaxy_config</span><span class="pi">:</span>
+  <span class="na">galaxy</span><span class="pi">:</span>
     <span class="s">...</span>
     <span class="s">use_remote_user</span><span class="err">:</span> <span class="no">true</span>
     <span class="s">remote_user_maildomain</span><span class="err">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}"</span>
@@ -997,7 +997,7 @@ This can happen mostly when some users have command line access to the <span cla
 
       <blockquote class="tip">
         <div class="box-title tip-title" id="tip-running-this-tutorial-i-just-i-for-reports-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-this-tutorial-i-just-i-for-reports-1-contents" aria-expanded="true" aria-label="Toggle tip box: Running this tutorial &lt;i&gt;just&lt;/i&gt; for Reports?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running this tutorial <i>just</i> for Reports?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-        <p>You don’t need to make the above changes for <span class="notranslate">Galaxy</span> then.</p>
+        <p>You don’t need to make the above changes for Galaxy then.</p>
       </blockquote>
 
       <p>Set the <code class="language-plaintext highlighter-rouge">remote_user_maildomain</code> option to the appropriate domain name for your site.</p>
@@ -1018,22 +1018,22 @@ This can happen mostly when some users have command line access to the <span cla
 
 <h1 id="testing">Testing</h1>
 
-<p>You should now be presented with a password dialog when attempting to load the <span class="notranslate">Galaxy</span> UI.</p>
+<p>You should now be presented with a password dialog when attempting to load the Galaxy UI.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-testing" aria-label="hands-on box: Testing"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Testing</div>
 
   <ol>
     <li>
-      <p>Log in using the use<span class="notranslate">rna</span>me and password you provided when creating the <code class="language-plaintext highlighter-rouge">passwd</code> file. If your use<span class="notranslate">rna</span>me and the value of <code class="language-plaintext highlighter-rouge">remote_user_maildomain</code> match an existing user, you will be logged in to that account. If not, a new account will be created for that user.</p>
+      <p>Log in using the username and password you provided when creating the <code class="language-plaintext highlighter-rouge">passwd</code> file. If your username and the value of <code class="language-plaintext highlighter-rouge">remote_user_maildomain</code> match an existing user, you will be logged in to that account. If not, a new account will be created for that user.</p>
     </li>
     <li>
-      <p>Click on the “User” menu at the top, to see how the use<span class="notranslate">rna</span>me appears.</p>
+      <p>Click on the “User” menu at the top, to see how the username appears.</p>
     </li>
     <li>
       <p>Note that some user features are not available when remote user support is enabled.</p>
 
-      <p>Try logging out by selecting <strong>User</strong> -&gt; <strong>Logout</strong>. You will discover that when returning to the user interface, you are still logged in. This is because <span class="notranslate">Galaxy</span> has no way of logging you out of the proxy’s authentication system. Instead, you should set <code class="language-plaintext highlighter-rouge">remote_user_logout_href</code> in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> to point to the URL of your authentication system’s logout page.</p>
+      <p>Try logging out by selecting <strong>User</strong> -&gt; <strong>Logout</strong>. You will discover that when returning to the user interface, you are still logged in. This is because Galaxy has no way of logging you out of the proxy’s authentication system. Instead, you should set <code class="language-plaintext highlighter-rouge">remote_user_logout_href</code> in <code class="language-plaintext highlighter-rouge">galaxy.yml</code> to point to the URL of your authentication system’s logout page.</p>
     </li>
   </ol>
 
@@ -1041,7 +1041,7 @@ This can happen mostly when some users have command line access to the <span cla
 
 <h1 id="api-access">API access</h1>
 
-<p>If you wish your <span class="notranslate">Galaxy</span> to be accessible to command line clients (e.g. bioblend, blend4j, parsec), you will need to add an exception for authentication on the API. <span class="notranslate">Galaxy</span> will still be secure and protected, but non-browser access will be permitted with an API key.</p>
+<p>If you wish your Galaxy to be accessible to command line clients (e.g. bioblend, blend4j, parsec), you will need to add an exception for authentication on the API. Galaxy will still be secure and protected, but non-browser access will be permitted with an API key.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>location /api/ {
     satisfy any;
@@ -1051,12 +1051,12 @@ This can happen mostly when some users have command line access to the <span cla
 
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-notification-of-registration"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-notification-of-registration-contents" aria-expanded="true" aria-label="Toggle tip box: Notification of Registration"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Notification of Registration<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-  <p>There is no built-in way to be notified if users are registered, with exte<span class="notranslate">rna</span>l authentication or built-in. However, you could automate this easily. There is a <a href="https://github.com/usegalaxy-eu/gxadmin">gxadmin</a> command we use called <code class="language-plaintext highlighter-rouge">gxadmin query latest-users</code> which Björn uses often. Other sites have other methods, e.g. Nicola’s <a href="https://gist.github.com/nsoranzo/f023e26aa60024ef6a7e3a3fe5fb2e4f">cron script</a> which runs daily on his server, to add new users to a group according to their email domain name.</p>
+  <p>There is no built-in way to be notified if users are registered, with external authentication or built-in. However, you could automate this easily. There is a <a href="https://github.com/usegalaxy-eu/gxadmin">gxadmin</a> command we use called <code class="language-plaintext highlighter-rouge">gxadmin query latest-users</code> which Björn uses often. Other sites have other methods, e.g. Nicola’s <a href="https://gist.github.com/nsoranzo/f023e26aa60024ef6a7e3a3fe5fb2e4f">cron script</a> which runs daily on his server, to add new users to a group according to their email domain name.</p>
 </blockquote>
 
 <h1 id="reverting">Reverting</h1>
 
-<p>We don’t want to leave <span class="notranslate">Galaxy</span> this way for the rest of our workshop.</p>
+<p>We don’t want to leave Galaxy this way for the rest of our workshop.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-reverting-the-changes" aria-label="hands-on box: Reverting the changes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Reverting the changes</div>

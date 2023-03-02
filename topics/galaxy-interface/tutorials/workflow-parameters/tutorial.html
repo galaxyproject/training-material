@@ -712,8 +712,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://ml.usegalaxy.eu/" title="Machine Learning Workbench">
             Machine Learning Workbench
         </a>
@@ -855,8 +853,8 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>Workflows are a powerful feature in <span class="notranslate">Galaxy</span> that allow you to chain multiple steps of an analysis together.
-To make a <span class="notranslate">workflow</span> reusable with slightly different settings you can define and use <span class="notranslate">workflow</span> parameters.</p>
+<p>Workflows are a powerful feature in Galaxy that allow you to chain multiple steps of an analysis together.
+To make a workflow reusable with slightly different settings you can define and use workflow parameters.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -865,8 +863,8 @@ To make a <span class="notranslate">workflow</span> reusable with slightly diffe
 
 <ol id="markdown-toc">
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
-  <li><a href="#add-workflow-parameters-to-a-workflow" id="markdown-toc-add-workflow-parameters-to-a-workflow">Add <span class="notranslate">workflow</span> parameters to a <span class="notranslate">workflow</span></a></li>
-  <li><a href="#add-an-integer-workflow-parameter" id="markdown-toc-add-an-integer-workflow-parameter">Add an integer <span class="notranslate">workflow</span> parameter</a></li>
+  <li><a href="#add-workflow-parameters-to-a-workflow" id="markdown-toc-add-workflow-parameters-to-a-workflow">Add workflow parameters to a workflow</a></li>
+  <li><a href="#add-an-integer-workflow-parameter" id="markdown-toc-add-an-integer-workflow-parameter">Add an integer workflow parameter</a></li>
   <li><a href="#create-a-text-parameter-from-multiple-parameters" id="markdown-toc-create-a-text-parameter-from-multiple-parameters">Create a text parameter from multiple parameters</a></li>
   <li><a href="#read-a-parameter-from-a-dataset" id="markdown-toc-read-a-parameter-from-a-dataset">Read a parameter from a dataset</a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
@@ -874,40 +872,40 @@ To make a <span class="notranslate">workflow</span> reusable with slightly diffe
 
 </blockquote>
 
-<h1 id="add-workflow-parameters-to-a-workflow">Add <span class="notranslate">workflow</span> parameters to a <span class="notranslate">workflow</span></h1>
+<h1 id="add-workflow-parameters-to-a-workflow">Add workflow parameters to a workflow</h1>
 
-<p>We will import a simple <span class="notranslate">workflow</span> and then demonstrate how <span class="notranslate">workflow</span> parameters
+<p>We will import a simple workflow and then demonstrate how workflow parameters
 can be added.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-import-integer-workflow" aria-label="hands-on box: Import integer workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Import integer <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-import-integer-workflow" aria-label="hands-on box: Import integer workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Import integer workflow</div>
 
   <ol>
-    <li>Click on <span class="notranslate">Workflow</span> in the top menu</li>
-    <li>Click on the <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> import <span class="notranslate">workflow</span> button on the right</li>
+    <li>Click on Workflow in the top menu</li>
+    <li>Click on the <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> import workflow button on the right</li>
     <li>
-      <p>Enter the following URL into the “Archived <span class="notranslate">Workflow</span>” URL box</p>
+      <p>Enter the following URL into the “Archived Workflow” URL box</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/<span class="notranslate">galaxy</span>project/training-material/master/topics/<span class="notranslate">galaxy</span>-interface/tutorials/<span class="notranslate">workflow</span>-parameters/workflows/cut_n_lines.ga
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/galaxyproject/training-material/master/topics/galaxy-interface/tutorials/workflow-parameters/workflows/cut_n_lines.ga
 </code></pre></div>      </div>
     </li>
-    <li>Click on import <span class="notranslate">workflow</span></li>
+    <li>Click on import workflow</li>
   </ol>
 </blockquote>
 
-<h1 id="add-an-integer-workflow-parameter">Add an integer <span class="notranslate">workflow</span> parameter</h1>
+<h1 id="add-an-integer-workflow-parameter">Add an integer workflow parameter</h1>
 
-<p>This <span class="notranslate">workflow</span> takes an input dataset and outputs the first 10 lines of that input dataset.
+<p>This workflow takes an input dataset and outputs the first 10 lines of that input dataset.
 The number of lines that should be output can be set using the <code class="language-plaintext highlighter-rouge">Number of lines</code> parameter
 of the select first tool.</p>
 
-<p>Instead of selecting a specific number of lines we can choose to insert a <span class="notranslate">workflow</span> parameter
-that allows the user to set this parameter when running the <span class="notranslate">workflow</span>.</p>
+<p>Instead of selecting a specific number of lines we can choose to insert a workflow parameter
+that allows the user to set this parameter when running the workflow.</p>
 
-<figure id="figure-1"><img src="../../images/connection-module.png" alt="Button for selecting connections. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> The new button for creating a <span class="notranslate">workflow</span> parameter connection. When you click this, it will add a new 'input' to the tool that can be connected, just like other tools in workflows.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/connection-module.png" alt="Button for selecting connections. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> The new button for creating a workflow parameter connection. When you click this, it will add a new 'input' to the tool that can be connected, just like other tools in workflows.</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-updating-the-workflow" aria-label="hands-on box: Updating the Workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Updating the <span class="notranslate">Workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-updating-the-workflow" aria-label="hands-on box: Updating the Workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Updating the Workflow</div>
 
   <ol>
     <li>
@@ -932,19 +930,19 @@ E. coli UTI89 O18:K1:H7. UPEC)
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Open the <strong><span class="notranslate">workflow</span> editor</strong></p>
+      <p>Open the <strong>workflow editor</strong></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-opening-the-workflow-editor"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-opening-the-workflow-editor-contents" aria-expanded="true" aria-label="Toggle tip box: Opening the workflow editor"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Opening the <span class="notranslate">workflow</span> editor<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>In the top menu bar, click on <strong>Workflows</strong></li>   <li>Click on the name of the <span class="notranslate">workflow</span> you want to edit <img src="/training-material/topics/galaxy-interface/images/edit_workflow.png" alt="Workflow drop down menu showing Edit option" title="When you click on the name of a workflow it will open a drop down menu whose first option is Edit. Select the Edit option to edit the workflow." /></li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-edit</span> <strong>Edit</strong> from the dropdown menu to open the <span class="notranslate">workflow</span> in the <span class="notranslate">workflow</span> editor</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-opening-the-workflow-editor"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-opening-the-workflow-editor-contents" aria-expanded="true" aria-label="Toggle tip box: Opening the workflow editor"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Opening the workflow editor<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>In the top menu bar, click on <strong>Workflows</strong></li>   <li>Click on the name of the workflow you want to edit <img src="/training-material/topics/galaxy-interface/images/edit_workflow.png" alt="Workflow drop down menu showing Edit option" title="When you click on the name of a workflow it will open a drop down menu whose first option is Edit. Select the Edit option to edit the workflow." /></li>   <li>Select <i class="fa fa-edit" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-edit</span> <strong>Edit</strong> from the dropdown menu to open the workflow in the workflow editor</li> </ol> </blockquote>
     </li>
-    <li>Click the <strong>Select first</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool in your <span class="notranslate">workflow</span></li>
+    <li>Click the <strong>Select first</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool in your workflow</li>
     <li>Find the <strong>Number of lines</strong> parameter in the right hand panel.</li>
     <li>
-      <p>Click on the <span class="notranslate">workflow</span> connection button <i class="fas fa-arrows-alt-h" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-connection</span> to convert the Number of lines parameter into a <span class="notranslate">workflow</span> parameter connection</p>
+      <p>Click on the workflow connection button <i class="fas fa-arrows-alt-h" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-connection</span> to convert the Number of lines parameter into a workflow parameter connection</p>
 
       <p>You will see that a new input with the text <code class="language-plaintext highlighter-rouge">Number of lines</code> has appeared on the <strong>Select first</strong> tool in the editor.</p>
     </li>
-    <li>Add a <strong>Simple inputs used for <span class="notranslate">workflow</span> logic</strong>, found under the Inputs section of your toolbox</li>
+    <li>Add a <strong>Simple inputs used for workflow logic</strong>, found under the Inputs section of your toolbox</li>
     <li>
       <p>If you click on the Input parameter box in the editor you will see in the <code class="language-plaintext highlighter-rouge">Details panel</code> that the <strong>Parameter type</strong> is set to <code class="language-plaintext highlighter-rouge">Text</code>. If you try to connect this parameter to the “Number of lines” parameter you will see that the noodle turns orange and that you cannot create a connection.</p>
     </li>
@@ -955,20 +953,20 @@ E. coli UTI89 O18:K1:H7. UPEC)
       <p>Connect <em>“output”</em> from Input parameter <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the <em>“Number of lines”</em> input of the Select first <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
     </li>
     <li>
-      <p>Save <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> your <span class="notranslate">workflow</span></p>
+      <p>Save <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> your workflow</p>
     </li>
     <li>
-      <p>Run your <span class="notranslate">workflow</span></p>
+      <p>Run your workflow</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>   <li>Configure the <span class="notranslate">workflow</span> as needed</li>   <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
   </ol>
 
-  <p>Notice the new input that can be changed before the <span class="notranslate">workflow</span> is run</p>
+  <p>Notice the new input that can be changed before the workflow is run</p>
 </blockquote>
 
-<figure id="figure-2"><img src="../../images/workflow_integer_param.gif" alt="Animation of simple integer workflow parameter. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Integer <span class="notranslate">workflow</span> parameter</figcaption></figure>
+<figure id="figure-2"><img src="../../images/workflow_integer_param.gif" alt="Animation of simple integer workflow parameter. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Integer workflow parameter</figcaption></figure>
 
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-parameter-reuse"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-parameter-reuse-contents" aria-expanded="true" aria-label="Toggle tip box: Parameter Reuse"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Parameter Reuse<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -979,30 +977,30 @@ E. coli UTI89 O18:K1:H7. UPEC)
 <h1 id="create-a-text-parameter-from-multiple-parameters">Create a text parameter from multiple parameters</h1>
 
 <p>It is often necessary to create a text parameter that is flanked by additional text.
-Take for instance a regular <span class="notranslate">expression</span> that finds <code class="language-plaintext highlighter-rouge">foo</code> in a string and replaces it
+Take for instance a regular expression that finds <code class="language-plaintext highlighter-rouge">foo</code> in a string and replaces it
 with <code class="language-plaintext highlighter-rouge">foobar</code> as in <code class="language-plaintext highlighter-rouge">s/(foo)/\1bar/</code>.
-The <span class="notranslate">Galaxy</span> tool <code class="language-plaintext highlighter-rouge">Regex Find And Replace</code> can be used to tune such a regular <span class="notranslate">expression</span>. The find part of the regex (<code class="language-plaintext highlighter-rouge">s/(foo)/</code>) can be defined in the <code class="language-plaintext highlighter-rouge">Find regex</code> parameter and the replacement part can be entered in the <code class="language-plaintext highlighter-rouge">Replacement</code> parameter.
-If we want to make the <code class="language-plaintext highlighter-rouge">foo</code> part of the regular <span class="notranslate">expression</span> configurable we can
+The Galaxy tool <code class="language-plaintext highlighter-rouge">Regex Find And Replace</code> can be used to tune such a regular expression. The find part of the regex (<code class="language-plaintext highlighter-rouge">s/(foo)/</code>) can be defined in the <code class="language-plaintext highlighter-rouge">Find regex</code> parameter and the replacement part can be entered in the <code class="language-plaintext highlighter-rouge">Replacement</code> parameter.
+If we want to make the <code class="language-plaintext highlighter-rouge">foo</code> part of the regular expression configurable we can
 compose this text parameter using the <code class="language-plaintext highlighter-rouge">Compose text parameter value</code> tool.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-compose-a-text-parameter" aria-label="hands-on box: Compose a text parameter"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Compose a text parameter</div>
   <ol>
     <li>
-      <p>Create a new <span class="notranslate">workflow</span></p>
+      <p>Create a new workflow</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click <strong><span class="notranslate">Workflow</span></strong> on the top bar</li>   <li>Click the new <span class="notranslate">workflow</span> <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-new</span> button</li>   <li>Give it a clear and memorable name</li>   <li>Clicking <strong>Save</strong> will take you directly into the <span class="notranslate">workflow</span> editor for that <span class="notranslate">workflow</span></li>   <li>Need more help? Please see the <em>How to make a <span class="notranslate">workflow</span> subsection</em> <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">here</a></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click <strong>Workflow</strong> on the top bar</li>   <li>Click the new workflow <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-new</span> button</li>   <li>Give it a clear and memorable name</li>   <li>Clicking <strong>Save</strong> will take you directly into the workflow editor for that workflow</li>   <li>Need more help? Please see the <em>How to make a workflow subsection</em> <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html">here</a></li> </ol> </blockquote>
     </li>
-    <li>Add an Inputs → <strong>Input Dataset</strong> to the <span class="notranslate">workflow</span></li>
-    <li>Add an Inputs → <strong>Simple inputs used for <span class="notranslate">workflow</span> logic</strong> to the <span class="notranslate">workflow</span>
+    <li>Add an Inputs → <strong>Input Dataset</strong> to the workflow</li>
+    <li>Add an Inputs → <strong>Simple inputs used for workflow logic</strong> to the workflow
       <ul>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Parameter type”</em>: <code class="language-plaintext highlighter-rouge">Text</code></li>
       </ul>
     </li>
-    <li>Add <strong>Compose text parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the <span class="notranslate">workflow</span>
+    <li>Add <strong>Compose text parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the workflow
       <ul>
-        <li>Add two more “Components” using the “Insert components” button in the <span class="notranslate">workflow</span> editor tool form on the right of the screen. You will need three “Component” blocks in total.</li>
+        <li>Add two more “Components” using the “Insert components” button in the workflow editor tool form on the right of the screen. You will need three “Component” blocks in total.</li>
         <li>In the first component:
           <ul>
             <li><em>“Enter text that should be part of the computed value”</em>: <code class="language-plaintext highlighter-rouge">(</code></li>
@@ -1010,7 +1008,7 @@ compose this text parameter using the <code class="language-plaintext highlighte
         </li>
         <li>In the second component:
           <ul>
-            <li><em>“Enter text that should be part of the computed value”</em>: Leave empty and click “Add connection to module” <i class="fas fa-arrows-alt-h" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-connection</span></li>
+            <li><em>“Enter text that should be part of the computed value”</em>: Leave empty and click “Add connection to module” <i class="fas fa-arrows-alt-h" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-connection</span></li>
             <li>Connect the output of the <strong>Input parameter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to this new input</li>
           </ul>
         </li>
@@ -1021,30 +1019,30 @@ compose this text parameter using the <code class="language-plaintext highlighte
         </li>
       </ul>
     </li>
-    <li>Add the <strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the <span class="notranslate">workflow</span>
+    <li>Add the <strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the workflow
       <ul>
         <li>Click on <code class="language-plaintext highlighter-rouge">Insert Check</code></li>
-        <li><em>“Find Regex”</em>: Click “Add connection to module” <i class="fas fa-arrows-alt-h" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-connection</span></li>
+        <li><em>“Find Regex”</em>: Click “Add connection to module” <i class="fas fa-arrows-alt-h" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-connection</span></li>
         <li><em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1bar</code></li>
         <li>Connect the output of the <strong>Compose text parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the <em>“Find Regex”</em> parameter of <strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
         <li>Connect the output of the <strong>Input dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the <em>“Select lines from”</em> input of the <strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
       </ul>
     </li>
-    <li><strong>Save</strong> <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> your <span class="notranslate">workflow</span></li>
+    <li><strong>Save</strong> <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> your workflow</li>
   </ol>
 </blockquote>
 
-<p>You’ve now built a <span class="notranslate">workflow</span> with a parameterised input! It’s time to test it out.</p>
+<p>You’ve now built a workflow with a parameterised input! It’s time to test it out.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-running-the-workflow" aria-label="hands-on box: Running the workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Running the <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-running-the-workflow" aria-label="hands-on box: Running the workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Running the workflow</div>
 
   <ol>
     <li>
       <p>Upload a dataset using “Paste/Fetch data” with the contents <code class="language-plaintext highlighter-rouge">wunder</code></p>
     </li>
     <li>
-      <p>Run your <span class="notranslate">workflow</span> with the following parameters</p>
+      <p>Run your workflow with the following parameters</p>
 
       <ul>
         <li>
@@ -1055,7 +1053,7 @@ compose this text parameter using the <code class="language-plaintext highlighte
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-1-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>   <li>Configure the <span class="notranslate">workflow</span> as needed</li>   <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-1-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
     <li>
       <p>Examine the outputs</p>
@@ -1063,20 +1061,20 @@ compose this text parameter using the <code class="language-plaintext highlighte
   </ol>
 </blockquote>
 
-<p>You should see two new datasets in your history. The first dataset has the data type <code class="language-plaintext highlighter-rouge"><span class="notranslate">expression</span>.json</code> and contains the composed parameter value <code class="language-plaintext highlighter-rouge">(wunder)</code>, the second dataset will contain the output of the <strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step. A click on the information <i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> button will show the parameters for the tool. You will see that the <em>“Find Regex”</em> parameter will contain the values that you entered in the <span class="notranslate">workflow</span> run form. If you look at the dataset content you will see it is <code class="language-plaintext highlighter-rouge">wunderbar</code>.</p>
+<p>You should see two new datasets in your history. The first dataset has the data type <code class="language-plaintext highlighter-rouge">expression.json</code> and contains the composed parameter value <code class="language-plaintext highlighter-rouge">(wunder)</code>, the second dataset will contain the output of the <strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step. A click on the information <i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> button will show the parameters for the tool. You will see that the <em>“Find Regex”</em> parameter will contain the values that you entered in the workflow run form. If you look at the dataset content you will see it is <code class="language-plaintext highlighter-rouge">wunderbar</code>.</p>
 
 <h1 id="read-a-parameter-from-a-dataset">Read a parameter from a dataset</h1>
 
-<p>Often times it is necessary to calculate a parameter in one step of a <span class="notranslate">workflow</span> and then to use it in another step of the same <span class="notranslate">workflow</span>. This can be accomplished by reading the parameter from a dataset (As long as it is a text, integer, float, boolean or color parameter).
-In this example we will construct a <span class="notranslate">workflow</span> where we calculate the sum of all values in a dataset and then divide the values in this dataset by the sum calculated in the previous step.</p>
+<p>Often times it is necessary to calculate a parameter in one step of a workflow and then to use it in another step of the same workflow. This can be accomplished by reading the parameter from a dataset (As long as it is a text, integer, float, boolean or color parameter).
+In this example we will construct a workflow where we calculate the sum of all values in a dataset and then divide the values in this dataset by the sum calculated in the previous step.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-construct-workflow-with-parameters-read-from-a-dataset" aria-label="hands-on box: Construct Workflow with Parameters read from a dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Construct <span class="notranslate">Workflow</span> with Parameters read from a dataset</div>
+  <div class="box-title hands-on-title" id="hands-on-construct-workflow-with-parameters-read-from-a-dataset" aria-label="hands-on box: Construct Workflow with Parameters read from a dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Construct Workflow with Parameters read from a dataset</div>
 
   <ol>
-    <li>Create a new <span class="notranslate">workflow</span></li>
+    <li>Create a new workflow</li>
     <li>Add an <strong>Input dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-    <li>Add <strong>Datamash</strong> (operations on tabular data) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the <span class="notranslate">workflow</span>
+    <li>Add <strong>Datamash</strong> (operations on tabular data) <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the workflow
       <ul>
         <li><i class="fas fa-chevron-circle-right" aria-hidden="true"></i><span class="visually-hidden">wf-input</span> <em>“Input tabular dataset”</em>: Connect the noodle from the output of the <strong>Input dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to this input</li>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Operation to perform in each group</strong>
@@ -1087,13 +1085,13 @@ In this example we will construct a <span class="notranslate">workflow</span> wh
         </li>
       </ul>
     </li>
-    <li>Add <strong>Parse parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the <span class="notranslate">workflow</span>
+    <li>Add <strong>Parse parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the workflow
       <ul>
         <li><em>“Select type of parameter to parse”</em>: integer</li>
         <li><i class="fas fa-chevron-circle-right" aria-hidden="true"></i><span class="visually-hidden">wf-input</span> <em>“Input file containing parameter to parse out of”</em>: Connect the <strong>Datamash</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> output to this input</li>
       </ul>
     </li>
-    <li>Add <strong>Compose text parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the <span class="notranslate">workflow</span>
+    <li>Add <strong>Compose text parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the workflow
       <ul>
         <li>In the first repeat:
           <ul>
@@ -1105,25 +1103,25 @@ In this example we will construct a <span class="notranslate">workflow</span> wh
         <li>In the second repeat:
           <ul>
             <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose the type of parameter for this field”</em>: Integer Parameter</li>
-            <li><em>“Enter integer that should be part of the computed value”</em>: Click on <code class="language-plaintext highlighter-rouge">Add connection to module</code> <i class="fas fa-arrows-alt-h" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-wf-connection</span></li>
+            <li><em>“Enter integer that should be part of the computed value”</em>: Click on <code class="language-plaintext highlighter-rouge">Add connection to module</code> <i class="fas fa-arrows-alt-h" aria-hidden="true"></i><span class="visually-hidden">galaxy-wf-connection</span></li>
             <li><i class="fas fa-chevron-circle-right" aria-hidden="true"></i><span class="visually-hidden">wf-input</span> <em>“Input”</em>: Connect the output of the <strong>Parse parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>Add <strong>Compute an <span class="notranslate">expression</span> on every row</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the <span class="notranslate">workflow</span>
+    <li>Add <strong>Compute an expression on every row</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the workflow
       <ul>
-        <li><em>“Add <span class="notranslate">expression</span> as a new column to”</em>: click on <code class="language-plaintext highlighter-rouge">Add connection to module</code>, then connect the output of <strong>Compose text parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Add expression as a new column to”</em>: click on <code class="language-plaintext highlighter-rouge">Add connection to module</code>, then connect the output of <strong>Compose text parameter value</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“as a new column to”</em>: Select the output of the <strong>Input dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
   </ol>
 </blockquote>
 
-<p>With this you’re ready to run the <span class="notranslate">workflow</span>!</p>
+<p>With this you’re ready to run the workflow!</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-running-the-workflow-1" aria-label="hands-on box: Running the workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Running the <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-running-the-workflow-1" aria-label="hands-on box: Running the workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Running the workflow</div>
 
   <ol>
     <li>
@@ -1142,14 +1140,14 @@ In this example we will construct a <span class="notranslate">workflow</span> wh
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run your <span class="notranslate">workflow</span> with the following parameters</p>
+      <p>Run your workflow with the following parameters</p>
 
       <ul>
         <li><em>“Input dataset”</em>: the table you have just uploaded</li>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-2-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>   <li>Configure the <span class="notranslate">workflow</span> as needed</li>   <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-2-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
     </li>
     <li>
       <p>Examine the outputs</p>
@@ -1157,7 +1155,7 @@ In this example we will construct a <span class="notranslate">workflow</span> wh
   </ol>
 </blockquote>
 
-<p>This <span class="notranslate">workflow</span> will produce a new dataset, where the last column will be the
+<p>This workflow will produce a new dataset, where the last column will be the
 result of dividing the value in the first column by the sum of all values in
 the first column.</p>
 
@@ -1167,15 +1165,15 @@ the first column.</p>
   <ul>
     <li>Often times you need to try a couple of different parameter values and pick the best one.
 You can create or compute a dataset for each parameter you would like to try and run the
-<code class="language-plaintext highlighter-rouge">Parse parameter value</code> tool on it, running all <span class="notranslate">downstream</span> tools once for each parameter.</li>
+<code class="language-plaintext highlighter-rouge">Parse parameter value</code> tool on it, running all downstream tools once for each parameter.</li>
   </ul>
 </blockquote>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p><span class="notranslate">Galaxy</span> Workflows chain together different steps of an analysis. To make your workflows
-more useful to your colleagues you can add <span class="notranslate">workflow</span> parameters. Sometimes a parameter is not
-known in advance, but can be calculated as part of the <span class="notranslate">workflow</span>. Now you know how to read these
+<p>Galaxy Workflows chain together different steps of an analysis. To make your workflows
+more useful to your colleagues you can add workflow parameters. Sometimes a parameter is not
+known in advance, but can be calculated as part of the workflow. Now you know how to read these
 parameters from datasets!</p>
 
 

@@ -729,8 +729,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -836,7 +834,7 @@ The climate data is mainly represented in these three categories : <a href="http
 
 <h1 id="introduction">Introduction</h1>
 
-<p>The data used in this tutorial is <a href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=overview">ECMWF Reanalysis 5 hourly data on single levels</a>. We are interested in the following variables: air temperature at 2 metres, latitude, longitude and time. Our main objective is to plot the global air temperature at 2 metres with respect to time. For this we will be using the netCDF xarray tool available in the <span class="notranslate">Galaxy</span> Europe (or your favourite <span class="notranslate">Galaxy</span> Instance) server.</p>
+<p>The data used in this tutorial is <a href="https://cds.climate.copernicus.eu/cdsapp#!/dataset/reanalysis-era5-single-levels?tab=overview">ECMWF Reanalysis 5 hourly data on single levels</a>. We are interested in the following variables: air temperature at 2 metres, latitude, longitude and time. Our main objective is to plot the global air temperature at 2 metres with respect to time. For this we will be using the netCDF xarray tool available in the Galaxy Europe (or your favourite Galaxy Instance) server.</p>
 
 <p>It will be a fun learning experience for anyone who loves visualization !</p>
 
@@ -850,7 +848,7 @@ The climate data is mainly represented in these three categories : <a href="http
       <p>Create a new history for this tutorial. Name it as per your choice. My suggestions : <em>ECMWF_Reanalysis</em>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li><strong>Import remote files</strong>
       <ul>
@@ -858,7 +856,7 @@ The climate data is mainly represented in these three categories : <a href="http
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-remote-files"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-remote-files-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from remote files"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from remote files<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>Choose remote files</em>:</p>   <ol>   <li>Click on <strong>Upload Data</strong> on the top of the left panel</li>   <li>     <p>Click on <strong>Choose remote files</strong> and scroll down to find your data folder or type the folder name in the <code class="language-plaintext highlighter-rouge">search box</code> on the top.</p>     <ul>       <li>Look for your data under:<code class="language-plaintext highlighter-rouge">ECMWF ERA4 Reanalysis -&gt; 2022 -&gt; 05 -&gt; data -&gt; air_temperature_at_2_metres.nc</code></li>     </ul>   </li>   <li>click on <strong>OK</strong></li>   <li>Click on <strong>Start</strong></li>   <li>Click on <strong>Close</strong></li>   <li>You can find the dataset has begun loading in you history.</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-remote-files"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-remote-files-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from remote files"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from remote files<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>Choose remote files</em>:</p>   <ol>   <li>Click on <strong>Upload Data</strong> on the top of the left panel</li>   <li>     <p>Click on <strong>Choose remote files</strong> and scroll down to find your data folder or type the folder name in the <code class="language-plaintext highlighter-rouge">search box</code> on the top.</p>     <ul>       <li>Look for your data under:<code class="language-plaintext highlighter-rouge">ECMWF ERA4 Reanalysis -&gt; 2022 -&gt; 05 -&gt; data -&gt; air_temperature_at_2_metres.nc</code></li>     </ul>   </li>   <li>click on <strong>OK</strong></li>   <li>Click on <strong>Start</strong></li>   <li>Click on <strong>Close</strong></li>   <li>You can find the dataset has begun loading in you history.</li> </ol> </blockquote>
 
       <p><strong>or</strong>, if this is not available, you can import from <a href="https://doi.org/10.5281/zenodo.6621460">Zenodo</a>:</p>
 
@@ -866,24 +864,24 @@ The climate data is mainly represented in these three categories : <a href="http
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li><strong>Check the datatype</strong> of uploaded data, it should be <code class="language-plaintext highlighter-rouge">netCDF</code>.
       <ul>
-        <li>If it is not <code class="language-plaintext highlighter-rouge">netCDF</code>, make sure to convert it using the <span class="notranslate">Galaxy</span> built-in format converters.</li>
+        <li>If it is not <code class="language-plaintext highlighter-rouge">netCDF</code>, make sure to convert it using the Galaxy built-in format converters.</li>
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-converting-the-file-format"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-converting-the-file-format-contents" aria-expanded="true" aria-label="Toggle tip box: Converting the file format"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Converting the file format<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> <strong>Convert</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">Convert h5 to netCDF</code></li>   <li>Click the <strong>Create dataset</strong> button to start the conversion.</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-converting-the-file-format"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-converting-the-file-format-contents" aria-expanded="true" aria-label="Toggle tip box: Converting the file format"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Converting the file format<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>Convert</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">Convert h5 to netCDF</code></li>   <li>Click the <strong>Create dataset</strong> button to start the conversion.</li> </ul> </blockquote>
     </li>
     <li>
-      <p><strong>Rename Datasets</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> if you find the name to be too long or you have something more meaningful in your mind.</p>
+      <p><strong>Rename Datasets</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> if you find the name to be too long or you have something more meaningful in your mind.</p>
     </li>
     <li>
-      <p><strong>Tag Datasets</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> with the tag <code class="language-plaintext highlighter-rouge">#ecmwf</code></p>
+      <p><strong>Tag Datasets</strong> <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> with the tag <code class="language-plaintext highlighter-rouge">#ecmwf</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -908,16 +906,16 @@ For a multidimensional data consisting of latitudes and longitudes along with th
 <h2 id="netcdf-xarray-metadata-info"><strong>NetCDF xarray Metadata Info</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-netcdf-dataset-with-xarray-metadata-galaxy-tool" aria-label="hands-on box: netCDF dataset with xarray metadata Galaxy Tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: netCDF dataset with xarray metadata <span class="notranslate">Galaxy</span> Tool</div>
+  <div class="box-title hands-on-title" id="hands-on-netcdf-dataset-with-xarray-metadata-galaxy-tool" aria-label="hands-on box: netCDF dataset with xarray metadata Galaxy Tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: netCDF dataset with xarray metadata Galaxy Tool</div>
 
   <ol>
-    <li>In the tools search for <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1"><strong>NetCDF xarray Metadata Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1</span></span>  with the following parameter:
+    <li>In the tools search for <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1"><strong>NetCDF xarray Metadata Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1</span></span>  with the following parameter:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">air_temperature_at_2_metres.nc</code>
  and click on <code class="language-plaintext highlighter-rouge">Execute</code>.</li>
       </ul>
     </li>
-    <li>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the two generated outputs:
+    <li>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the two generated outputs:
       <ul>
         <li><code class="language-plaintext highlighter-rouge">Metadata infos</code> is a <code class="language-plaintext highlighter-rouge">tabular</code> providing the list of variables, their dimension names and number of elements per dimension. This file is used by other xarray Tools.</li>
         <li>The second file <code class="language-plaintext highlighter-rouge">info file</code> provides a summary of the <strong>xarray Dataset</strong> contained in your netCDF file.</li>
@@ -936,7 +934,7 @@ For a multidimensional data consisting of latitudes and longitudes along with th
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
-      <li>Information about variable names and units can be found in <strong>info file</strong> that was generated by xarray metadata <span class="notranslate">Galaxy</span> Tool.
+      <li>Information about variable names and units can be found in <strong>info file</strong> that was generated by xarray metadata Galaxy Tool.
         <ul>
           <li>Variable name: <code class="language-plaintext highlighter-rouge">air_temperature_at_2_metres</code></li>
           <li>Units: <code class="language-plaintext highlighter-rouge">K</code></li>
@@ -994,17 +992,17 @@ variables:
   <div class="box-title hands-on-title" id="hands-on-get-coordinate-information-with-xarray-coordinate" aria-label="hands-on box:  Get Coordinate information with xarray Coordinate"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Get Coordinate information with xarray Coordinate</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.20.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.20.2+galaxy0"><strong>NetCDF xarray Coordinate Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.20.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.20.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.20.2+galaxy0"><strong>NetCDF xarray Coordinate Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/xarray_coords_info/xarray_coords_info/0.20.2+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">air_temperature_at_2_metres.nc</code>.</li>
       </ul>
     </li>
-    <li>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the 4 generated outputs:
+    <li>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the 4 generated outputs:
       <ul>
         <li><code class="language-plaintext highlighter-rouge">lat</code>: a tabular file containing all the latitude values of our Xarray dataset;</li>
         <li><code class="language-plaintext highlighter-rouge">lon</code>: a tabular file containing all the longitudes values;</li>
         <li><code class="language-plaintext highlighter-rouge">time0</code>: this tabular file contains all the times extracted from the netCDF file. In our case, these are relative to 01/05/2022, 00:00:00 UTC;</li>
-        <li><code class="language-plaintext highlighter-rouge">version</code>: this is a text file returning the xarray package version. It is useful when publishing your <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span>.</li>
+        <li><code class="language-plaintext highlighter-rouge">version</code>: this is a text file returning the xarray package version. It is useful when publishing your Galaxy workflow.</li>
       </ul>
     </li>
   </ol>
@@ -1058,7 +1056,7 @@ variables:
   <div class="box-title hands-on-title" id="hands-on-defining-a-particular-time-range-using-seltimestep" aria-label="hands-on box: Defining a particular time range using seltimestep "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Defining a particular time range using seltimestep</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0"><strong>CDO Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0"><strong>CDO Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0</span></span>  with the following parameters:
       <ul>
         <li>In <em>“CDO Operators”</em>:
           <ul>
@@ -1083,7 +1081,7 @@ variables:
     <p>Although we are not using <code class="language-plaintext highlighter-rouge">splithour</code> here, you can find below the syntax for future uses.</p>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0"><strong>CDO Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0"><strong>CDO Operations</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/climate/cdo_operations/cdo_operations/2.0.0+galaxy0</span></span>  with the following parameters:
         <ul>
           <li>In <em>“CDO Operators”</em>:</li>
           <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert CDO Operators”</em></li>
@@ -1103,15 +1101,15 @@ Suppose your selected range was <code class="language-plaintext highlighter-roug
 <h2 id="finding-the--netcdf-xarray-metadata-info">Finding the  <strong>NetCDF xarray Metadata Info</strong></h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-netcdf-dataset-with-xarray-metadata-galaxy-tool-for-the-hourly-plots" aria-label="hands-on box: netCDF dataset with xarray metadata Galaxy Tool for the hourly plots"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: netCDF dataset with xarray metadata <span class="notranslate">Galaxy</span> Tool for the hourly plots</div>
+  <div class="box-title hands-on-title" id="hands-on-netcdf-dataset-with-xarray-metadata-galaxy-tool-for-the-hourly-plots" aria-label="hands-on box: netCDF dataset with xarray metadata Galaxy Tool for the hourly plots"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: netCDF dataset with xarray metadata Galaxy Tool for the hourly plots</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1"><strong>NetCDF xarray Metadata Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1"><strong>NetCDF xarray Metadata Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">outfile.netcdf</code>. .</li>
       </ul>
     </li>
-    <li>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the two generated outputs:
+    <li>View <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the two generated outputs:
       <ul>
         <li><code class="language-plaintext highlighter-rouge">Metadata infos</code> is a <code class="language-plaintext highlighter-rouge">tabular</code> providing the list of variables, their dimension names and number of elements per dimension. This file is used by other xarray Tools.</li>
         <li>The second file <code class="language-plaintext highlighter-rouge">info file</code> provide a summary of the <strong>xarray Dataset</strong> contained in your netCDF file.</li>
@@ -1127,7 +1125,7 @@ Suppose your selected range was <code class="language-plaintext highlighter-roug
   <p>The air temperatures corresponding to the 744th time step from the original netCDF file, namely <code class="language-plaintext highlighter-rouge">23:00:00</code> for 31st May 2022 is plotted here :</p>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0"><strong>NetCDF xarray map plotting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0"><strong>NetCDF xarray map plotting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">outfile.netcdf</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular of variables”</em>: <code class="language-plaintext highlighter-rouge">Metadata infos from outfile.netcdf</code> (output of <strong>NetCDF xarray Metadata Info</strong> &gt;<i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1154,7 +1152,7 @@ Suppose your selected range was <code class="language-plaintext highlighter-roug
   <div class="box-title details-title" id="details-syntax-for-projections"><button class="gtn-boxify-button details" type="button" aria-controls="details-syntax-for-projections-contents" aria-expanded="true" aria-label="Toggle details box: Syntax for Projections"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Syntax for Projections<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <p><strong>Xarray Map Plotting</strong> comes with a variety of projections. There are basically four types of projections available namely <strong>Azimuthal, Conic, Cylindrical and Pseudo-cylindrical.</strong></p>
 
-  <p>The <strong>Azimuthal projection</strong> depicts the surface of the earth with the help of a flat plane. It is also known as ‘<strong>Plane Projection</strong>.’ This simple projection type forms a family of projections by considering the poles in “normal aspect.” Another form of this projection is <strong>Azimuthal Equidistant Projection</strong>. It preserves both directions and distance from the central point of the earth. The <strong>stereographic projection</strong> which is a type of azimuthal projection was created before 150AD and deployed while <span class="notranslate">mapping</span> areas over the poles.
+  <p>The <strong>Azimuthal projection</strong> depicts the surface of the earth with the help of a flat plane. It is also known as ‘<strong>Plane Projection</strong>.’ This simple projection type forms a family of projections by considering the poles in “normal aspect.” Another form of this projection is <strong>Azimuthal Equidistant Projection</strong>. It preserves both directions and distance from the central point of the earth. The <strong>stereographic projection</strong> which is a type of azimuthal projection was created before 150AD and deployed while mapping areas over the poles.
 The <strong>conic type</strong> is based on the concept of projecting the surface of the Earth on a conical surface which is unrolled into a plane  surfaced map. Some of the examples of conic type of projections are : <strong>Albers Equal Area Conic, Equidistant Conic, Lambert Conformal Conic, and Polyconic</strong>. This type of projection basically has a big implementation in aviation navigation.</p>
 
   <p>The <strong>cylindrical type</strong> is based on the concept of plotting the geographical features on the surface of the cylinder and then it is unrolled to present as a <strong>flat projection</strong>. Some examples of cylindrical projections are : <strong>Cylindrical Equal Area, Behrmann Cylindrical Equal-Area , Stereographic Cylindrical, Peters, Mercator, and Transverse Mercator</strong>. <strong>Mercator</strong> is one of the most famous and preferred type of projection. The straight lines (Rhumb Lines) are best for the navigation process.</p>
@@ -1310,7 +1308,7 @@ The <strong>conic type</strong> is based on the concept of projecting the surfac
       <div class="box-title hands-on-title" id="hands-on-plotting-the-major-projections-using-the-xarray-tool" aria-label="hands-on box: Plotting the major projections using the xarray tool."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plotting the major projections using the xarray tool.</div>
 
       <ol>
-        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0"><strong>NetCDF xarray map plotting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0"><strong>NetCDF xarray map plotting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0</span></span>  with the following parameters:
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">outfile.netcdf</code></li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular of variables”</em>: <code class="language-plaintext highlighter-rouge">Metadata infos from outfile.netcdf</code> (output of <strong>NetCDF xarray Metadata Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1668,7 +1666,7 @@ Below is the complete list for reference.</p>
       <div class="box-title hands-on-title" id="hands-on-plotting-the-major-colormaps-using-the-xarray-tool" aria-label="hands-on box: Plotting the major colormaps using the xarray tool."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plotting the major colormaps using the xarray tool.</div>
 
       <ol>
-        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0"><strong>NetCDF xarray map plotting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0"><strong>NetCDF xarray map plotting</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/xarray_mapplot/xarray_mapplot/0.20.2+galaxy0</span></span>  with the following parameters:
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">outfile.netcdf</code></li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular of variables”</em>: <code class="language-plaintext highlighter-rouge">Metadata infos from outfile.netcdf</code> (output of <strong>NetCDF xarray Metadata Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1726,7 +1724,7 @@ Some other important color variants of the same map can be found below :</p>
       <li>The tutorial has summed up a proper way of plotting data from a netcdf file. It has discussed everything from loading of data to its final display. Some other key points to keep in mind are :
         <blockquote>
           <ol>
-            <li>It may take some time while plotting the maps. It depends on traffic / load on the <span class="notranslate">Galaxy</span> server. It is suggested to have a 64-bit processor with 8GB RAM storage. Be patient.</li>
+            <li>It may take some time while plotting the maps. It depends on traffic / load on the Galaxy server. It is suggested to have a 64-bit processor with 8GB RAM storage. Be patient.</li>
             <li>You can view as well as download the generated plots to use further.</li>
             <li>Plotting over global maps is very convinient as you saw above. But many a times,  you want to plot a specific region, it becomes very easy using CDO tool. Refer to <a href="/training-material/topics/climate/tutorials/pangeo/tutorial.html">this tutorial</a> for more info.</li>
           </ol>
@@ -1735,7 +1733,7 @@ Some other important color variants of the same map can be found below :</p>
       <li>If you wish to present all the plotted maps at one place for comparision or analysis. It is a short and simple step and can be doe using the tool name <code class="language-plaintext highlighter-rouge">Image Montage</code>.</li>
     </ol>
 
-    <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1"><strong>Image Montage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:</p>
+    <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1"><strong>Image Montage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/graphicsmagick_image_montage/graphicsmagick_image_montage/1.3.31+galaxy1</span></span>  with the following parameters:</p>
     <ul>
       <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Images”</em>: <code class="language-plaintext highlighter-rouge">Map plots</code></li>
       <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>”# of images wide”</em>: <code class="language-plaintext highlighter-rouge">4</code>

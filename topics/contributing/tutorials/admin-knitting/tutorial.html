@@ -604,13 +604,13 @@ admin training, in support of students and testing.</p>
 <p>But mostly you don’t need to care about the <code class="language-plaintext highlighter-rouge">knit.py</code> or <code class="language-plaintext highlighter-rouge">knit-frog.py</code>, we have <code class="language-plaintext highlighter-rouge">knit-automated.sh</code> which takes care of calling those properly. You can call it with <code class="language-plaintext highlighter-rouge">export</code> to write the patches into <code class="language-plaintext highlighter-rouge">/tmp/git-gat/</code></p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./bin/knit-automated.sh export
-/tmp/git-gat/0-ansible-<span class="notranslate">galaxy</span>-commit-0000-add-requirements.patch
-/tmp/git-gat/0-ansible-<span class="notranslate">galaxy</span>-commit-0001-add-ansible-cfg.patch
-/tmp/git-gat/0-ansible-<span class="notranslate">galaxy</span>-commit-0002-add-hosts.patch
-/tmp/git-gat/0-ansible-<span class="notranslate">galaxy</span>-commit-0003-add-initial-group-variables-file.patch
-/tmp/git-gat/0-ansible-<span class="notranslate">galaxy</span>-commit-0004-add-initial-<span class="notranslate">galaxy</span>-playbook.patch
-/tmp/git-gat/0-ansible-<span class="notranslate">galaxy</span>-commit-0005-add-pip--miniconda--<span class="notranslate">galaxy</span>-to-playbook.patch
-/tmp/git-gat/0-ansible-<span class="notranslate">galaxy</span>-commit-0006-configure-miniconda-and-<span class="notranslate">galaxy</span>.patch
+/tmp/git-gat/0-ansible-galaxy-commit-0000-add-requirements.patch
+/tmp/git-gat/0-ansible-galaxy-commit-0001-add-ansible-cfg.patch
+/tmp/git-gat/0-ansible-galaxy-commit-0002-add-hosts.patch
+/tmp/git-gat/0-ansible-galaxy-commit-0003-add-initial-group-variables-file.patch
+/tmp/git-gat/0-ansible-galaxy-commit-0004-add-initial-galaxy-playbook.patch
+/tmp/git-gat/0-ansible-galaxy-commit-0005-add-pip--miniconda--galaxy-to-playbook.patch
+/tmp/git-gat/0-ansible-galaxy-commit-0006-configure-miniconda-and-galaxy.patch
 [...]
 /tmp/git-gat/6-pulsar-commit-0000-add-requirements.patch
 /tmp/git-gat/6-pulsar-commit-0001-configure-rabbitmq.patch
@@ -627,13 +627,13 @@ admin training, in support of students and testing.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[hxr@mk:/tmp/git-gat]$ git init
 [hxr@mk:/tmp/git-gat]$ git am -3 *
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0000: Add requirements
+Applying: admin/ansible-galaxy/0000: Add requirements
 applying to an empty history
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0001: Add ansible.cfg
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0002: Add hosts
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0003: Add initial group variables file
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0004: Add initial <span class="notranslate">galaxy</span> playbook
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0005: Add pip, miniconda, <span class="notranslate">galaxy</span> to playbook
+Applying: admin/ansible-galaxy/0001: Add ansible.cfg
+Applying: admin/ansible-galaxy/0002: Add hosts
+Applying: admin/ansible-galaxy/0003: Add initial group variables file
+Applying: admin/ansible-galaxy/0004: Add initial galaxy playbook
+Applying: admin/ansible-galaxy/0005: Add pip, miniconda, galaxy to playbook
 [...]
 Applying: admin/pulsar/0004: Add pulsar host
 Applying: admin/pulsar/0005: Add pulsar playbook
@@ -649,7 +649,7 @@ Applying: admin/pulsar/0008: Send bwa and bwa-mem to pulsar
 <span class="c">.
 </span><span class="go">├── ansible.cfg
 ├── files
-│   └── <span class="notranslate">galaxy</span>
+│   └── galaxy
 │       ├── config
 │       │   ├── dependency_resolvers_conf.xml
 │       │   └── tool_destinations.yml
@@ -658,22 +658,22 @@ Applying: admin/pulsar/0008: Send bwa and bwa-mem to pulsar
 │       │   └── my_rules.py
 │       └── tools
 │           └── testing.xml
-├── <span class="notranslate">galaxy</span>.yml
+├── galaxy.yml
 ├── group_vars
 │   ├── all.yml
-│   ├── <span class="notranslate">galaxy</span>servers.yml
+│   ├── galaxyservers.yml
 │   └── pulsarservers.yml
 ├── hosts
 ├── pulsar.yml
 ├── requirements.yml
 └── templates
-    ├── <span class="notranslate">galaxy</span>
+    ├── galaxy
     │   └── config
     │       ├── container_resolvers_conf.xml.j2
     │       ├── job_conf.xml.j2
     │       └── job_resource_params_conf.xml.j2
     └── nginx
-        ├── <span class="notranslate">galaxy</span>.j2
+        ├── galaxy.j2
         └── redirect-ssl.j2
 
 10 directories, 18 files
@@ -697,7 +697,7 @@ Applying: admin/pulsar/0008: Send bwa and bwa-mem to pulsar
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-example-problem" aria-label="question box: Example problem"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Example problem</div>
-  <p>I want to edit the commit titled “Add production facing vars” to add an addtional variable in admin/ansible-<span class="notranslate">galaxy</span>.</p>
+  <p>I want to edit the commit titled “Add production facing vars” to add an addtional variable in admin/ansible-galaxy.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
@@ -714,15 +714,15 @@ Applying: admin/pulsar/0008: Send bwa and bwa-mem to pulsar
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[hxr@mk:/tmp/git-gat]$ git init
 [hxr@mk:/tmp/git-gat]$ git am -3 *.patch
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0000: Add requirements
+Applying: admin/ansible-galaxy/0000: Add requirements
 applying to an empty history
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0001: Add ansible.cfg
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0002: Add hosts
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0003: Add initial group variables file
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0004: Add initial <span class="notranslate">galaxy</span> playbook
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0005: Add pip, miniconda, <span class="notranslate">galaxy</span> to playbook
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0006: Configure miniconda and <span class="notranslate">galaxy</span>
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0007: Configure <span class="notranslate">galaxy</span> config
+Applying: admin/ansible-galaxy/0001: Add ansible.cfg
+Applying: admin/ansible-galaxy/0002: Add hosts
+Applying: admin/ansible-galaxy/0003: Add initial group variables file
+Applying: admin/ansible-galaxy/0004: Add initial galaxy playbook
+Applying: admin/ansible-galaxy/0005: Add pip, miniconda, galaxy to playbook
+Applying: admin/ansible-galaxy/0006: Configure miniconda and galaxy
+Applying: admin/ansible-galaxy/0007: Configure galaxy config
 [...]
 [hxr@mk:/tmp/git-gat]$ rm *.patch
 </code></pre></div>      </div>
@@ -731,26 +731,26 @@ Applying: admin/ansible-<span class="notranslate">galaxy</span>/0007: Configure 
       <p>Find the commit:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git log --oneline | grep "Add production facing vars"
-2f5b416 admin/ansible-<span class="notranslate">galaxy</span>/0022: Add production facing vars
+2f5b416 admin/ansible-galaxy/0022: Add production facing vars
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Edit rebase one <span class="notranslate">upstream</span> of that commit</p>
+      <p>Edit rebase one upstream of that commit</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git rebase -i 2f5b416~
 </code></pre></div>      </div>
 
       <p>Mark it for editing</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>edit 2f5b416 admin/ansible-<span class="notranslate">galaxy</span>/0022: Add production facing vars
-pick a352bec admin/ansible-<span class="notranslate">galaxy</span>/0023: Add nginx x-accel-redir and g-i-g webhook config to nginx
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>edit 2f5b416 admin/ansible-galaxy/0022: Add production facing vars
+pick a352bec admin/ansible-galaxy/0023: Add nginx x-accel-redir and g-i-g webhook config to nginx
 pick 59f9ff0 admin/singularity/0000: Add golang and singulary ansible roles
 pick f38ddbf admin/singularity/0001: Configure golang and singularity
 </code></pre></div>      </div>
 
       <p>It should stop there</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Stopped at 2f5b416...  admin/ansible-<span class="notranslate">galaxy</span>/0022: Add production facing vars
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Stopped at 2f5b416...  admin/ansible-galaxy/0022: Add production facing vars
 You can amend the commit now, with
 
   git commit --amend
@@ -764,11 +764,11 @@ Once you are satisfied with your changes, run
       <p>Open your file, make your change. Here I’m showing the change I made with <code class="language-plaintext highlighter-rouge">git diff</code></p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git diff | cat
-diff --git a/group_vars/<span class="notranslate">galaxy</span>servers.yml b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+diff --git a/group_vars/galaxyservers.yml b/group_vars/galaxyservers.yml
 index 15fbf1e..8fe4343 100644
---- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
-+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-@@ -53,6 +53,8 @@ <span class="notranslate">galaxy</span>_config:
+--- a/group_vars/galaxyservers.yml
++++ b/group_vars/galaxyservers.yml
+@@ -53,6 +53,8 @@ galaxy_config:
      expose_user_name: true
      expose_dataset_path: true
      expose_potentially_sensitive_job_metrics: true
@@ -785,9 +785,9 @@ index 15fbf1e..8fe4343 100644
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git status
 interactive rebase in progress; onto 7284036
 Last command done (1 command done):
-   edit 2f5b416 admin/ansible-<span class="notranslate">galaxy</span>/0022: Add production facing vars
+   edit 2f5b416 admin/ansible-galaxy/0022: Add production facing vars
 Next commands to do (46 remaining commands):
-   pick 3c6a72e admin/ansible-<span class="notranslate">galaxy</span>/0023: Add nginx x-accel-redir and g-i-g webhook config to nginx
+   pick 3c6a72e admin/ansible-galaxy/0023: Add nginx x-accel-redir and g-i-g webhook config to nginx
    pick a893955 admin/singularity/0000: Add golang and singulary ansible roles
   (use "git rebase --edit-todo" to view and edit)
 You are currently editing a commit while rebasing branch 'main' on '7284036'.
@@ -796,15 +796,15 @@ You are currently editing a commit while rebasing branch 'main' on '7284036'.
 
 Changes to be committed:
   (use "git restore --staged &lt;file&gt;..." to unstage)
-        modified:   group_vars/<span class="notranslate">galaxy</span>servers.yml
+        modified:   group_vars/galaxyservers.yml
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Ammend the commit, and continue the rebase</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git commit --amend
-[detached HEAD ed290de] admin/ansible-<span class="notranslate">galaxy</span>/0022: Add production facing vars
- Author: The <span class="notranslate">Galaxy</span> Training Network &lt;<span class="notranslate">galaxy</span>trainingnetwork@gmail.com&gt;
+[detached HEAD ed290de] admin/ansible-galaxy/0022: Add production facing vars
+ Author: The Galaxy Training Network &lt;galaxytrainingnetwork@gmail.com&gt;
  Date: Mon Feb 15 14:06:56 2021 +0100
  1 file changed, 22 insertions(+)
 $ git rebase --continue
@@ -845,15 +845,15 @@ Successfully rebased and updated refs/heads/main.
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[hxr@mk:/tmp/git-gat]$ git init
 [hxr@mk:/tmp/git-gat]$ git am -3 0* 1* 2*
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0000: Add requirements
+Applying: admin/ansible-galaxy/0000: Add requirements
 applying to an empty history
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0001: Add ansible.cfg
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0002: Add hosts
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0003: Add initial group variables file
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0004: Add initial <span class="notranslate">galaxy</span> playbook
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0005: Add pip, miniconda, <span class="notranslate">galaxy</span> to playbook
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0006: Configure miniconda and <span class="notranslate">galaxy</span>
-Applying: admin/ansible-<span class="notranslate">galaxy</span>/0007: Configure <span class="notranslate">galaxy</span> config
+Applying: admin/ansible-galaxy/0001: Add ansible.cfg
+Applying: admin/ansible-galaxy/0002: Add hosts
+Applying: admin/ansible-galaxy/0003: Add initial group variables file
+Applying: admin/ansible-galaxy/0004: Add initial galaxy playbook
+Applying: admin/ansible-galaxy/0005: Add pip, miniconda, galaxy to playbook
+Applying: admin/ansible-galaxy/0006: Configure miniconda and galaxy
+Applying: admin/ansible-galaxy/0007: Configure galaxy config
 [...]
 </code></pre></div>      </div>
     </li>
@@ -914,11 +914,11 @@ $ ./bin/knit-automated.sh import
 +++ b/requirements.yml
 @@ -22,3 +22,7 @@
    version: 0.0.2
- - src: <span class="notranslate">galaxy</span>project.slurm
+ - src: galaxyproject.slurm
    version: 0.1.3
-+- name: use<span class="notranslate">galaxy</span>_eu.rabbitmq
++- name: usegalaxy_eu.rabbitmq
 +  version: 0.1.0
-+- src: <span class="notranslate">galaxy</span>project.pulsar
++- src: galaxyproject.pulsar
 +  version: 1.0.7
 { endraw }
 ```
@@ -943,14 +943,14 @@ $ git am -3 *.patch # Resolve any conflicts
       <p>This will fail. Here’s how to fix it:</p>
 
       <ol>
-        <li>Run <code class="language-plaintext highlighter-rouge">git am --show-current-patch</code> to see the above diff you’ve inserted (or the otherwise incorrect diff that’s a <span class="notranslate">downstream</span> result of your new change).</li>
+        <li>Run <code class="language-plaintext highlighter-rouge">git am --show-current-patch</code> to see the above diff you’ve inserted (or the otherwise incorrect diff that’s a downstream result of your new change).</li>
         <li>Make the correct change to the file on disk.</li>
         <li><code class="language-plaintext highlighter-rouge">git add &lt;path&gt;</code></li>
         <li><code class="language-plaintext highlighter-rouge">git am --continue</code></li>
       </ol>
     </li>
     <li>
-      <p>You’ll probably have to do this quite a few more times, diffs have a habit of affecting <span class="notranslate">downstream</span> diffs (e.g. changing a version number or being included in the diff context.)</p>
+      <p>You’ll probably have to do this quite a few more times, diffs have a habit of affecting downstream diffs (e.g. changing a version number or being included in the diff context.)</p>
     </li>
     <li>
       <p>Once you’ve finished all of them, you’ll just <code class="language-plaintext highlighter-rouge">./bin/knit-automated.sh import</code> and commit the resulting changes!</p>
@@ -958,7 +958,7 @@ $ git am -3 *.patch # Resolve any conflicts
   </ol>
 </blockquote>
 
-<p>The alte<span class="notranslate">rna</span>tive to the above approach is</p>
+<p>The alternative to the above approach is</p>
 
 <ol>
   <li>Export</li>
@@ -990,7 +990,7 @@ To restore the original branch and stop patching, run "git am --abort".
 <p>Here you grumble at how picky it is.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ git am --show-current-patch
-From: The <span class="notranslate">Galaxy</span> Training Network &lt;<span class="notranslate">galaxy</span>trainingnetwork@gmail.com&gt;
+From: The Galaxy Training Network &lt;galaxytrainingnetwork@gmail.com&gt;
 Date: Mon, 15 Feb 2021 14:06:56 +0100
 Subject: admin/gxadmin/0000: Add requirement
 
@@ -999,9 +999,9 @@ Subject: admin/gxadmin/0000: Add requirement
 +++ b/requirements.yml
 @@ -26,3 +26,5 @@
    version: 0.1.0
- - src: <span class="notranslate">galaxy</span>project.pulsar
+ - src: galaxyproject.pulsar
    version: 1.0.6
-+- src: <span class="notranslate">galaxy</span>project.gxadmin
++- src: galaxyproject.gxadmin
 +  version: 0.0.8
 --
 2.25.1

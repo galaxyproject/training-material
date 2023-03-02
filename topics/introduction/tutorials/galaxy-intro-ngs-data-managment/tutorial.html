@@ -785,8 +785,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -862,13 +860,13 @@
             <div class="col-sm-10">
                  
 
-                <p>In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with the FASTQ format produced by most sequencing machines and will finish with the SAM/BAM format representing mapped <span class="notranslate">reads</span>. The cover image above shows a screen dump of a SAM dataset.</p>
+                <p>In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with the FASTQ format produced by most sequencing machines and will finish with the SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset.</p>
 
 <h1 id="introduction-to-sequencing-data">Introduction to sequencing data</h1>
 
 <h2 id="fastq-manipulation-and-quality-control">FASTQ manipulation and quality control</h2>
 
-<p><a href="https://en.wikipedia.org/wiki/FASTQ_format">FASTQ</a> is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret FASTQ as they saw fit, resulting in a multitude of FASTQ flavors. This variation stemmed primarily from different ways of encoding quality values as described <a href="https://en.wikipedia.org/wiki/FASTQ_format">on the Wikipedia article for FASTQ</a> (below you will find an explanation of quality scores and their meaning). Today, the <a href="https://www.ncbi.nlm.nih.gov/pubmed/20015970">FASTQ Sanger</a> version of the format is considered to be the standard form of FASTQ. <span class="notranslate">Galaxy</span> is using FASTQ Sanger as the only legitimate input for <span class="notranslate">downstream</span> processing tools and provides <a href="https://www.ncbi.nlm.nih.gov/pubmed/20562416">a number of utilities for converting FASTQ files</a> into this form (see <strong>FASTQ Quality Control</strong> section of <span class="notranslate">Galaxy</span> tools).</p>
+<p><a href="https://en.wikipedia.org/wiki/FASTQ_format">FASTQ</a> is not a very well defined format. In the beginning various manufacturers of sequencing instruments were free to interpret FASTQ as they saw fit, resulting in a multitude of FASTQ flavors. This variation stemmed primarily from different ways of encoding quality values as described <a href="https://en.wikipedia.org/wiki/FASTQ_format">on the Wikipedia article for FASTQ</a> (below you will find an explanation of quality scores and their meaning). Today, the <a href="https://www.ncbi.nlm.nih.gov/pubmed/20015970">FASTQ Sanger</a> version of the format is considered to be the standard form of FASTQ. Galaxy is using FASTQ Sanger as the only legitimate input for downstream processing tools and provides <a href="https://www.ncbi.nlm.nih.gov/pubmed/20562416">a number of utilities for converting FASTQ files</a> into this form (see <strong>FASTQ Quality Control</strong> section of Galaxy tools).</p>
 
 <p>The FASTQ format looks like this:</p>
 
@@ -912,12 +910,12 @@ AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
       <td><img src="../../images/pe_mp.png" alt="Paired-end and mate-pair reads. " loading="lazy" /></td>
     </tr>
     <tr>
-      <td><small><strong>Paired-end and mate-pair <span class="notranslate">reads</span></strong>. In paired end sequencing (left) the actual ends of rather short <span class="notranslate">DNA</span> molecules (less than 1kb) are determined, while for mate pair sequencing (right) the ends of long molecules are joined and prepared in special sequencing libraries. In these mate pair protocols, the ends of long, size-selected molecules are connected with an inte<span class="notranslate">rna</span>l adapter sequence (i.e. linker, yellow) in a circularization reaction. The circular molecule is then processed using restriction enzymes or fragmentation. Fragments are enriched for the linker and outer library adapters are added around the two combined molecule ends. The inte<span class="notranslate">rna</span>l adapter can then be used as a second priming site for an additional sequencing reaction in the same orientation or sequencing can be performed from the second adapter, from the reverse strand. (From “Understanding and improving high-throughput sequencing data production and analysis”, Ph.D. dissertation by <a href="https://ul.qucosa.de/api/qucosa%3A11231/attachment/ATT-0/">Martin Kircher</a>)</small></td>
+      <td><small><strong>Paired-end and mate-pair reads</strong>. In paired end sequencing (left) the actual ends of rather short DNA molecules (less than 1kb) are determined, while for mate pair sequencing (right) the ends of long molecules are joined and prepared in special sequencing libraries. In these mate pair protocols, the ends of long, size-selected molecules are connected with an internal adapter sequence (i.e. linker, yellow) in a circularization reaction. The circular molecule is then processed using restriction enzymes or fragmentation. Fragments are enriched for the linker and outer library adapters are added around the two combined molecule ends. The internal adapter can then be used as a second priming site for an additional sequencing reaction in the same orientation or sequencing can be performed from the second adapter, from the reverse strand. (From “Understanding and improving high-throughput sequencing data production and analysis”, Ph.D. dissertation by <a href="https://ul.qucosa.de/api/qucosa%3A11231/attachment/ATT-0/">Martin Kircher</a>)</small></td>
     </tr>
   </tbody>
 </table>
 
-<p>Thus in both cases (paired-end and mate-pair) a single physical piece of <span class="notranslate">DNA</span> (or <span class="notranslate">RNA</span> in the case of <span class="notranslate">RNA</span>-seq) is sequenced from two ends and so generates two <span class="notranslate">reads</span>. These can be represented as separate files (two FASTQ files with first and second <span class="notranslate">reads</span>) or a single file were <span class="notranslate">reads</span> for each end are interleaved. Here are examples:</p>
+<p>Thus in both cases (paired-end and mate-pair) a single physical piece of DNA (or RNA in the case of RNA-seq) is sequenced from two ends and so generates two reads. These can be represented as separate files (two FASTQ files with first and second reads) or a single file were reads for each end are interleaved. Here are examples:</p>
 
 <h4 id="two-single-files">Two single files</h4>
 
@@ -970,7 +968,7 @@ CCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAAC
 HHHHHHHHHHHHHGHHHHHHGHHHHHHHHHHHFHHHFHHHHHHHHHHH
 </code></pre></div></div>
 
-<p>Here the first and the second <span class="notranslate">reads</span> are identified with <code class="language-plaintext highlighter-rouge">/1</code> and <code class="language-plaintext highlighter-rouge">/2</code> tags.</p>
+<p>Here the first and the second reads are identified with <code class="language-plaintext highlighter-rouge">/1</code> and <code class="language-plaintext highlighter-rouge">/2</code> tags.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-fastq-format-is-a-loose-standard" aria-label="comment box: FASTQ format is a loose standard"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: FASTQ format is a loose standard</div>
@@ -989,14 +987,14 @@ HHHHHHHHHHHHHGHHHHHHGHHHHHHHHHHHFHHHFHHHHHHHHHHH
 <p>The base qualities allow us to judge how trustworthy each base in a sequencing read is. The following excerpt from an excellent <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, Paul Zumbo explains what base qualities are:</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-from-quot-introduction-to-differential-gene-expression-analysis-using-rna-seq-quot" aria-label="comment box: From &quot;Introduction to differential gene expression analysis using RNA-seq&quot;"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: From &quot;Introduction to differential gene <span class="notranslate">expression</span> analysis using <span class="notranslate">RNA</span>-seq&quot;</div>
+  <div class="box-title comment-title" id="comment-from-quot-introduction-to-differential-gene-expression-analysis-using-rna-seq-quot" aria-label="comment box: From &quot;Introduction to differential gene expression analysis using RNA-seq&quot;"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: From &quot;Introduction to differential gene expression analysis using RNA-seq&quot;</div>
   <p>Illumina sequencing is based on identifying the individual nucleotides by the fluorescence signal emitted upon their incorporation into the growing sequencing read. Once the fluorescence intensities are extracted and translated into the four letter code. The deduction of nucleotide sequences from the images acquired during sequencing is commonly referred to as base calling.
 <br />
-Due to the imperfect nature of the sequencing process and limitations of the optical instruments, base calling will always have inherent uncertainty. This is the reason why FASTQ files store the <span class="notranslate">DNA</span> sequence of each read together with a position-specific quality score that represents the error probability, i.e., how likely it is that an individual base call may be incorrect. The score is called <a href="http://www.phrap.com/phred/">Phred score</a>, \(Q\), which is proportional to the probability \(p\) that a base call is incorrect, where \(Q = −10lg(p)\). For example, a Phred score of 10 corresponds to one error in every ten base calls (\(Q = −10lg(0.1)\)), or 90% accuracy; a Phred score of 20 corresponds to one error in every 100 base calls, or 99% accuracy. A higher Phred score thus reflects higher confidence in the reported base.
+Due to the imperfect nature of the sequencing process and limitations of the optical instruments, base calling will always have inherent uncertainty. This is the reason why FASTQ files store the DNA sequence of each read together with a position-specific quality score that represents the error probability, i.e., how likely it is that an individual base call may be incorrect. The score is called <a href="http://www.phrap.com/phred/">Phred score</a>, \(Q\), which is proportional to the probability \(p\) that a base call is incorrect, where \(Q = −10lg(p)\). For example, a Phred score of 10 corresponds to one error in every ten base calls (\(Q = −10lg(0.1)\)), or 90% accuracy; a Phred score of 20 corresponds to one error in every 100 base calls, or 99% accuracy. A higher Phred score thus reflects higher confidence in the reported base.
 <br />
 To assign each base a unique score identifier (instead of numbers of varying character length), Phred scores are typically represented as ASCII characters. At http://ascii-code.com/ you can see which characters are assigned to what number.
 <br />
-For raw <span class="notranslate">reads</span>, the range of scores will depend on the sequencing technology and the base caller used (Illumina, for example, used a tool called Bustard, or, more recently, RTA). Unfortunately, Illumina has been anything but consistent in how they calculated and ASCII-encoded the Phred score (see below)! In addition, Illumina now allows Phred scores for base calls with as high as 45, while 41 used to be the maximum score until the HiSeq X. This may cause issues with <span class="notranslate">downstream</span> sapplications that expect an upper limit of 41.</p>
+For raw reads, the range of scores will depend on the sequencing technology and the base caller used (Illumina, for example, used a tool called Bustard, or, more recently, RTA). Unfortunately, Illumina has been anything but consistent in how they calculated and ASCII-encoded the Phred score (see below)! In addition, Illumina now allows Phred scores for base calls with as high as 45, while 41 used to be the maximum score until the HiSeq X. This may cause issues with downstream sapplications that expect an upper limit of 41.</p>
 </blockquote>
 
 <p><img src="../../images/illumina_qs.png" alt="Illumina quality score. " loading="lazy" /></p>
@@ -1016,7 +1014,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
       <td><img src="../../images/fastq_qs.png" alt="FASTQ quality score. " loading="lazy" /></td>
     </tr>
     <tr>
-      <td><small>The ASCII interpretation and ranges of the different Phred score notations used by Illumina and the original Sanger interpretation. Although the Sanger format allows a theoretical score of 93, raw sequencing <span class="notranslate">reads</span> typically do not exceed a Phred score of 60. In fact, most Illumina-based sequencing will result in maximum scores of 41 to 45 (image from <a href="https://en.wikipedia.org/wiki/FASTQ_format">Wikipedia</a>)</small></td>
+      <td><small>The ASCII interpretation and ranges of the different Phred score notations used by Illumina and the original Sanger interpretation. Although the Sanger format allows a theoretical score of 93, raw sequencing reads typically do not exceed a Phred score of 60. In fact, most Illumina-based sequencing will result in maximum scores of 41 to 45 (image from <a href="https://en.wikipedia.org/wiki/FASTQ_format">Wikipedia</a>)</small></td>
     </tr>
   </tbody>
 </table>
@@ -1044,15 +1042,15 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   </tbody>
 </table>
 
-<p>Here you can see FastQC base quality reports (the tools gives you many other types of data) for two datasets: <strong>A</strong> and <strong>B</strong>. The <strong>A</strong> dataset has long <span class="notranslate">reads</span> (250 bp) and very good quality profile with no qualities dropping below <a href="http://www.phrap.com/phred/">phred score</a> of 30. The <strong>B</strong> dataset is significantly worse with ends of the <span class="notranslate">reads</span> dipping below phred score of 20. The <strong>B</strong> <span class="notranslate">reads</span> may need to be trimmed for further processing.</p>
+<p>Here you can see FastQC base quality reports (the tools gives you many other types of data) for two datasets: <strong>A</strong> and <strong>B</strong>. The <strong>A</strong> dataset has long reads (250 bp) and very good quality profile with no qualities dropping below <a href="http://www.phrap.com/phred/">phred score</a> of 30. The <strong>B</strong> dataset is significantly worse with ends of the reads dipping below phred score of 20. The <strong>B</strong> reads may need to be trimmed for further processing.</p>
 
 <!--
 <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/123453134?portrait=0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 -->
 
-<h2 id="mapping-your-data"><span class="notranslate">Mapping</span> your data</h2>
+<h2 id="mapping-your-data">Mapping your data</h2>
 
-<p><span class="notranslate">Mapping</span> of NGS <span class="notranslate">reads</span> against reference sequences is one of the key steps of the analysis. Now it is time to see how this is done in practice. Below is a list of key publications highlighting mainstream <span class="notranslate">mapping</span> tools:</p>
+<p>Mapping of NGS reads against reference sequences is one of the key steps of the analysis. Now it is time to see how this is done in practice. Below is a list of key publications highlighting mainstream mapping tools:</p>
 
 <ul>
   <li>2009 Bowtie 1 - <a href="http://genomebiology.com/content/10/3/R25">Langmead et al.</a></li>
@@ -1062,9 +1060,9 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   <li>2013 BWA-MEM - <a href="https://arxiv.org/abs/1303.3997">Li</a></li>
 </ul>
 
-<h3 id="mapping-against-a-pre-computed-genome-index"><span class="notranslate">Mapping</span> against a pre-computed genome index</h3>
+<h3 id="mapping-against-a-pre-computed-genome-index">Mapping against a pre-computed genome index</h3>
 
-<p>Mappers usually compare <span class="notranslate">reads</span> against a reference sequence that has been transformed into a highly accessible data structure called genome index. Such indexes should be generated before <span class="notranslate">mapping</span> begins. <span class="notranslate">Galaxy</span> instances typically store indexes for a number of publicly available genome builds.</p>
+<p>Mappers usually compare reads against a reference sequence that has been transformed into a highly accessible data structure called genome index. Such indexes should be generated before mapping begins. Galaxy instances typically store indexes for a number of publicly available genome builds.</p>
 
 <table>
   <thead>
@@ -1077,7 +1075,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
       <td><img src="../../images/cached_genome.png" alt="Cached genome. " loading="lazy" /></td>
     </tr>
     <tr>
-      <td><small><span class="notranslate">Mapping</span> against a pre-computed index in <span class="notranslate">Galaxy</span>.</small></td>
+      <td><small>Mapping against a pre-computed index in Galaxy.</small></td>
     </tr>
   </tbody>
 </table>
@@ -1087,7 +1085,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 <h3 id="what-if-pre-computed-index-does-not-exist">What if pre-computed index does not exist?</h3>
 
-<p>If <span class="notranslate">Galaxy</span> does not have a genome you need to map against, you can upload your genome sequence as a FASTA file and use it in the mapper directly as shown below (<strong>Load reference genome</strong> is set to <code class="language-plaintext highlighter-rouge">History</code>).</p>
+<p>If Galaxy does not have a genome you need to map against, you can upload your genome sequence as a FASTA file and use it in the mapper directly as shown below (<strong>Load reference genome</strong> is set to <code class="language-plaintext highlighter-rouge">History</code>).</p>
 
 <table>
   <thead>
@@ -1100,18 +1098,18 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
       <td><img src="../../images/uploaded_genome.png" alt="Uploaded genome. " loading="lazy" /></td>
     </tr>
     <tr>
-      <td><small><span class="notranslate">Mapping</span> against a pre-computed index in <span class="notranslate">Galaxy</span> </small></td>
+      <td><small>Mapping against a pre-computed index in Galaxy </small></td>
     </tr>
   </tbody>
 </table>
 
-<p>In this case <span class="notranslate">Galaxy</span> will first create an index from this dataset and then run <span class="notranslate">mapping</span> analysis against it.</p>
+<p>In this case Galaxy will first create an index from this dataset and then run mapping analysis against it.</p>
 
 <h2 id="sambam-datasets">SAM/BAM datasets</h2>
 
-<p>The <a href="https://samtools.github.io/hts-specs/SAMv1.pdf">SAM/BAM</a> format is an accepted standard for storing aligned <span class="notranslate">reads</span> (it can also store unaligned <span class="notranslate">reads</span> and some mappers such as BWA are accepting unaligned BAM as input). The binary form of the format (BAM) is compact and can be rapidly searched (if indexed). In <span class="notranslate">Galaxy</span> BAM datasets are always indexed (accompanies by a .bai file) and sorted in coordinate order. In the following duscussion I once again rely on <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo.</p>
+<p>The <a href="https://samtools.github.io/hts-specs/SAMv1.pdf">SAM/BAM</a> format is an accepted standard for storing aligned reads (it can also store unaligned reads and some mappers such as BWA are accepting unaligned BAM as input). The binary form of the format (BAM) is compact and can be rapidly searched (if indexed). In Galaxy BAM datasets are always indexed (accompanies by a .bai file) and sorted in coordinate order. In the following duscussion I once again rely on <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo.</p>
 
-<p>The Sequence Alignment/Map (SAM) format is, in fact, a generic nucleotide alignment format that describes the alignment of sequencing <span class="notranslate">reads</span> (or query sequences) to a reference. The human readable, TABdelimited SAM files can be compressed into the Binary Alignment/Map format. These BAM files are bigger than simply gzipped SAM files, because they have been optimized for fast random access rather than size reduction. Position-sorted BAM files can be indexed so that all <span class="notranslate">reads</span> aligning to a locus can be efficiently retrieved without loading the entire file into memory.</p>
+<p>The Sequence Alignment/Map (SAM) format is, in fact, a generic nucleotide alignment format that describes the alignment of sequencing reads (or query sequences) to a reference. The human readable, TABdelimited SAM files can be compressed into the Binary Alignment/Map format. These BAM files are bigger than simply gzipped SAM files, because they have been optimized for fast random access rather than size reduction. Position-sorted BAM files can be indexed so that all reads aligning to a locus can be efficiently retrieved without loading the entire file into memory.</p>
 
 <p>As shown below, SAM files typically contain a short header section and a very long alignment section where each row represents a single read alignment. The following sections will explain the SAM format in a bit more detail. For the most comprehensive and updated information go to https://github.com/samtools/hts-specs.</p>
 
@@ -1133,7 +1131,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 <h3 id="sam-header">SAM Header</h3>
 
-<p>The header section includes information about how the alignment was generated and stored. All lines in the header section are tab-delimited and begin with the “@” character, followed by tag:value pairs, where tag is a two-letter string that defines the content and the format of value. For example, the “@SQ” line in the header section contains the information about the names and lengths of the *reference sequences to which the <span class="notranslate">reads</span> were aligned. For a hypothetical organism with three chromosomes of length 1,000 bp, the SAM header should contain the following three lines:</p>
+<p>The header section includes information about how the alignment was generated and stored. All lines in the header section are tab-delimited and begin with the “@” character, followed by tag:value pairs, where tag is a two-letter string that defines the content and the format of value. For example, the “@SQ” line in the header section contains the information about the names and lengths of the *reference sequences to which the reads were aligned. For a hypothetical organism with three chromosomes of length 1,000 bp, the SAM header should contain the following three lines:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@SQ SN:chr1 LN:1000
 @SQ SN:chr2 LN:1000
@@ -1144,7 +1142,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 <p>The optional header section is followed by the alignment section where each line corresponds to one sequenced read. For each read, there are 11 mandatory fields that always appear in the same order:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;QNAME&gt; &lt;FLAG&gt; &lt;<span class="notranslate">RNA</span>ME&gt; &lt;POS&gt; &lt;MAPQ&gt; &lt;CIGAR&gt; &lt;MRNM&gt; &lt;MPOS&gt; &lt;ISIZE&gt; &lt;SEQ&gt; &lt;QUAL&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;QNAME&gt; &lt;FLAG&gt; &lt;RNAME&gt; &lt;POS&gt; &lt;MAPQ&gt; &lt;CIGAR&gt; &lt;MRNM&gt; &lt;MPOS&gt; &lt;ISIZE&gt; &lt;SEQ&gt; &lt;QUAL&gt;
 </code></pre></div></div>
 
 <p>If the corresponding information is unavailable or irrelevant, field values can be ‘0’ or ‘*’ (depending on the field, see below), but they cannot be missing! After the 11 mandatory fields, a variable number of optional fields can be present. Here’s an example of one single line of a real-life SAM file (you may need to scroll sideways):</p>
@@ -1152,13 +1150,13 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERR458493 .552967 16 chrI 140 255 12 M61232N37M2S * 0 0 CCACTCGTTCACCAGGGCCGGCGGGCTGATCACTTTATCGTGCATCTTGGC BB?HHJJIGHHJIGIIJJIJGIJIJJIIIGHBJJJJJJHHHHFFDDDA1+B NH:i:1 HI:i:1 AS:i:41 nM:i:2
 </code></pre></div></div>
 
-<p>The following table explains the format and content of each field. The <code class="language-plaintext highlighter-rouge">FLAG</code>, <code class="language-plaintext highlighter-rouge">CIGAR</code>, and the optional fields (marked in blue) are explained in more detail below. The number of optional fields can vary widely between different SAM files and even between <span class="notranslate">reads</span> within in the same file. The field types marked in blue are explained in more detail in the main text below.</p>
+<p>The following table explains the format and content of each field. The <code class="language-plaintext highlighter-rouge">FLAG</code>, <code class="language-plaintext highlighter-rouge">CIGAR</code>, and the optional fields (marked in blue) are explained in more detail below. The number of optional fields can vary widely between different SAM files and even between reads within in the same file. The field types marked in blue are explained in more detail in the main text below.</p>
 
 <p><img src="../../images/sam_fields.png" alt="SAM fields. " loading="lazy" /></p>
 
 <h3 id="flag-field"><code class="language-plaintext highlighter-rouge">FLAG</code> field</h3>
 
-<p>The FLAG field encodes various pieces of information about the individual read, which is particularly important for PE <span class="notranslate">reads</span>. It contains an integer that is generated from a sequence of bits (0, 1). This way, answers to multiple binary (Yes/No) questions can be compactly stored as a series of bits, where each of the single bits can be addressed and assigned separately.</p>
+<p>The FLAG field encodes various pieces of information about the individual read, which is particularly important for PE reads. It contains an integer that is generated from a sequence of bits (0, 1). This way, answers to multiple binary (Yes/No) questions can be compactly stored as a series of bits, where each of the single bits can be addressed and assigned separately.</p>
 
 <p>The following table gives an overview of the different properties that can be encoded in the FLAG field. The developers of the SAM format and samtools tend to use the hexadecimal encoding as a means to refer to the different bits in their documentation. The value of the FLAG field in a given SAM file, however, will always be the decimal representation of the sum of the underlying binary values (as shown in Table below, row 2).</p>
 
@@ -1173,12 +1171,12 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
       <td><img src="../../images/sam_flag.png" alt="SAM flag. " loading="lazy" /></td>
     </tr>
     <tr>
-      <td><small>The <code class="language-plaintext highlighter-rouge">FLAG</code> field of SAM files stores information about the respective read alignment in one single decimal number. The decimal number is the sum of all the answers to the Yes/No questions associated with each binary bit. The hexadecimal representation is used to refer to the individual bits (questions). A bit is set if the corresponding state is true. For example, if a read is paired, <code class="language-plaintext highlighter-rouge">0x1</code> will be set, returning the decimal value of 1. Therefore, all <code class="language-plaintext highlighter-rouge">FLAG</code> values associated with paired <span class="notranslate">reads</span> must be uneven decimal numbers. Conversely, if the <code class="language-plaintext highlighter-rouge">0x1</code> bit is unset (= read is not paired), no assumptions can be made about <code class="language-plaintext highlighter-rouge">0x2</code>, <code class="language-plaintext highlighter-rouge">0x8</code>, <code class="language-plaintext highlighter-rouge">0x20</code>, <code class="language-plaintext highlighter-rouge">0x40</code> and <code class="language-plaintext highlighter-rouge">0x80</code> because they refer to paired <span class="notranslate">reads</span>. From <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo</small></td>
+      <td><small>The <code class="language-plaintext highlighter-rouge">FLAG</code> field of SAM files stores information about the respective read alignment in one single decimal number. The decimal number is the sum of all the answers to the Yes/No questions associated with each binary bit. The hexadecimal representation is used to refer to the individual bits (questions). A bit is set if the corresponding state is true. For example, if a read is paired, <code class="language-plaintext highlighter-rouge">0x1</code> will be set, returning the decimal value of 1. Therefore, all <code class="language-plaintext highlighter-rouge">FLAG</code> values associated with paired reads must be uneven decimal numbers. Conversely, if the <code class="language-plaintext highlighter-rouge">0x1</code> bit is unset (= read is not paired), no assumptions can be made about <code class="language-plaintext highlighter-rouge">0x2</code>, <code class="language-plaintext highlighter-rouge">0x8</code>, <code class="language-plaintext highlighter-rouge">0x20</code>, <code class="language-plaintext highlighter-rouge">0x40</code> and <code class="language-plaintext highlighter-rouge">0x80</code> because they refer to paired reads. From <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo</small></td>
     </tr>
   </tbody>
 </table>
 
-<p>In a run with single <span class="notranslate">reads</span>, the flags you most commonly see are:</p>
+<p>In a run with single reads, the flags you most commonly see are:</p>
 
 <ul>
   <li>0: This read has been mapped to the forward strand. (None of the bit-wise flags have been set.)</li>
@@ -1186,7 +1184,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   <li>16: The read is mapped to the reverse strand (<code class="language-plaintext highlighter-rouge">0x10</code> is set)</li>
 </ul>
 
-<p>(<code class="language-plaintext highlighter-rouge">0x100</code>, <code class="language-plaintext highlighter-rouge">0x200</code> and <code class="language-plaintext highlighter-rouge">0x400</code> are not used by most aligners/mappers, but could, in principle be set for single <span class="notranslate">reads</span>.) Some common <code class="language-plaintext highlighter-rouge">FLAG</code> values that you may see in a PE experiment include:</p>
+<p>(<code class="language-plaintext highlighter-rouge">0x100</code>, <code class="language-plaintext highlighter-rouge">0x200</code> and <code class="language-plaintext highlighter-rouge">0x400</code> are not used by most aligners/mappers, but could, in principle be set for single reads.) Some common <code class="language-plaintext highlighter-rouge">FLAG</code> values that you may see in a PE experiment include:</p>
 
 <table>
   <thead>
@@ -1248,7 +1246,7 @@ contains a so-called CIGAR string indicating which operations were necessary to 
   <li><strong>M</strong> - Alignment (can be a sequence match or mismatch!)</li>
   <li><strong>I</strong> - Insertion in the read compared to the reference</li>
   <li><strong>D</strong> - Deletion in the read compared to the reference</li>
-  <li><strong>N</strong> - Skipped region from the reference. For m<span class="notranslate">RNA</span>-to-genome alignments, an N operation represents an intron. For other types of alignments, the interpretation of N is not defined.</li>
+  <li><strong>N</strong> - Skipped region from the reference. For mRNA-to-genome alignments, an N operation represents an intron. For other types of alignments, the interpretation of N is not defined.</li>
   <li><strong>S</strong> - Soft clipping (clipped sequences are present in read); S may only have H operations between them and the ends of the string</li>
   <li><strong>H</strong> - Hard clipping (clipped sequences are NOT present in the alignment record); can only be present as the first and/or last operation</li>
   <li><strong>P</strong> - Padding (silent deletion from padded reference)</li>
@@ -1287,7 +1285,7 @@ pairs in the format of <code class="language-plaintext highlighter-rouge">&lt;TA
   <li><code class="language-plaintext highlighter-rouge">H</code> - Hex string</li>
 </ul>
 
-<p>The information stored in these optional fields will vary widely depending on the mapper and new tags can be added freely. In addition, <span class="notranslate">reads</span> within the same SAM file may have different numbers of optional fields, depending on the program that generated the SAM file. Commonly used optional tags include:</p>
+<p>The information stored in these optional fields will vary widely depending on the mapper and new tags can be added freely. In addition, reads within the same SAM file may have different numbers of optional fields, depending on the program that generated the SAM file. Commonly used optional tags include:</p>
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge">AS:i</code> - Alignment score</li>
@@ -1299,11 +1297,11 @@ pairs in the format of <code class="language-plaintext highlighter-rouge">&lt;TA
   <li><code class="language-plaintext highlighter-rouge">RG:Z</code> - Read group (should match the entry after ID if @RG is present in the header.</li>
 </ul>
 
-<p>Thus, for example, we can use the NM:i:0 tag to select only those <span class="notranslate">reads</span> which map perfectly to the reference(i.e., have no mismatches). While the optional fields listed above are fairly standardized, tags that begin with <code class="language-plaintext highlighter-rouge">X</code>, <code class="language-plaintext highlighter-rouge">Y</code>, and <code class="language-plaintext highlighter-rouge">Z</code> are reserved for particularly free usage and will never be part of the official SAM file format specifications. <code class="language-plaintext highlighter-rouge">XS</code>, for example, is used by TopHat (an <span class="notranslate">RNA</span>-seq analysis tool we will discuss later) to encode the strand information (e.g., <code class="language-plaintext highlighter-rouge">XS:A:+</code>) while Bowtie2 and BWA use <code class="language-plaintext highlighter-rouge">XS:i:</code> for <span class="notranslate">reads</span> with multiple alignments to store the alignment score for the next-best-scoring alignment (e.g., <code class="language-plaintext highlighter-rouge">XS:i:30</code>).</p>
+<p>Thus, for example, we can use the NM:i:0 tag to select only those reads which map perfectly to the reference(i.e., have no mismatches). While the optional fields listed above are fairly standardized, tags that begin with <code class="language-plaintext highlighter-rouge">X</code>, <code class="language-plaintext highlighter-rouge">Y</code>, and <code class="language-plaintext highlighter-rouge">Z</code> are reserved for particularly free usage and will never be part of the official SAM file format specifications. <code class="language-plaintext highlighter-rouge">XS</code>, for example, is used by TopHat (an RNA-seq analysis tool we will discuss later) to encode the strand information (e.g., <code class="language-plaintext highlighter-rouge">XS:A:+</code>) while Bowtie2 and BWA use <code class="language-plaintext highlighter-rouge">XS:i:</code> for reads with multiple alignments to store the alignment score for the next-best-scoring alignment (e.g., <code class="language-plaintext highlighter-rouge">XS:i:30</code>).</p>
 
 <h3 id="read-groups">Read Groups</h3>
 
-<p>One of the key features of SAM/BAM format is the ability to label individual <span class="notranslate">reads</span> with readgroup tags. This allows pooling results of multiple experiments into a single BAM dataset. This significantly simplifies <span class="notranslate">downstream</span> logistics: instead of dealing with multiple datasets one can handle just one. Many <span class="notranslate">downstream</span> analysis tools such as variant callers are designed to recognize readgroup data and output results on per-readgroup basis.</p>
+<p>One of the key features of SAM/BAM format is the ability to label individual reads with readgroup tags. This allows pooling results of multiple experiments into a single BAM dataset. This significantly simplifies downstream logistics: instead of dealing with multiple datasets one can handle just one. Many downstream analysis tools such as variant callers are designed to recognize readgroup data and output results on per-readgroup basis.</p>
 
 <p>One of the best descriptions of BAM readgroups is on <a href="https://gatkforums.broadinstitute.org/discussion/1317/collected-faqs-about-bam-files">GATK support site</a>. We have gratefully stolen two tables describing the most important readgroup tags - <code class="language-plaintext highlighter-rouge">ID</code>, <code class="language-plaintext highlighter-rouge">SM</code>, <code class="language-plaintext highlighter-rouge">LB</code>, and <code class="language-plaintext highlighter-rouge">PL</code> - from GATK forum and provide them here:</p>
 
@@ -1318,9 +1316,9 @@ pairs in the format of <code class="language-plaintext highlighter-rouge">&lt;TA
 <p>We support four major toolsets for processing of SAM/BAM datasets:</p>
 
 <ul>
-  <li><a href="https://deeptools.readthedocs.io">DeepTools</a> - a suite of user-friendly tools for the visualization, quality control and normalization of data from deep-sequencing <span class="notranslate">DNA</span> sequencing experiments.</li>
+  <li><a href="https://deeptools.readthedocs.io">DeepTools</a> - a suite of user-friendly tools for the visualization, quality control and normalization of data from deep-sequencing DNA sequencing experiments.</li>
   <li><a href="http://www.htslib.org/">SAMtools</a> - various utilities for manipulating alignments in the SAM/BAM format, including sorting, merging, indexing and generating alignments in a per-position format.</li>
-  <li><a href="https://bedtools.readthedocs.io/en/latest/"><span class="notranslate">BED</span>tools</a> - a toolkit originally written for <span class="notranslate">BED</span> format was expanded for analysis of BAM and VCF datasets.</li>
+  <li><a href="https://bedtools.readthedocs.io/en/latest/">BEDtools</a> - a toolkit originally written for BED format was expanded for analysis of BAM and VCF datasets.</li>
   <li><a href="https://broadinstitute.github.io/picard/">Picard</a> - a set of Java tools for manipulating high-throughput sequencing data (HTS) data and formats.</li>
 </ul>
 
@@ -1341,22 +1339,22 @@ pairs in the format of <code class="language-plaintext highlighter-rouge">&lt;TA
       <td><img src="../../images/pcr-duplicates.png" alt="PCR duplicates. " loading="lazy" /></td>
     </tr>
     <tr>
-      <td><small>Analyzing molecules aligning with the same outer coordinates, a <span class="notranslate">mapping</span> quality of at least 30 and a length of at least 30nt, resulted in an average coverage of 12.9 per PCR duplicate and an empirical coverage distribution similar to an exponential/power law distribution (left upper panel). This indicates that many molecules are only observed for deeper sequencing while other molecules are available at higher frequencies. Analyzing length (left middle panel) and GC content (left lower panel) patterns as well as the combination (right panel) shows higher PCR duplicate counts for a GC content between 30% to 70% as well as for shorter molecules compared to longer molecules. This effect may be due to an amplification bias from the polymerase or the cluster generation process necessary for Illumina sequencing. From Ph.D. dissertation of <a href="https://ul.qucosa.de/api/qucosa%3A11231/attachment/ATT-0/">Martin Kircher</a>).</small></td>
+      <td><small>Analyzing molecules aligning with the same outer coordinates, a mapping quality of at least 30 and a length of at least 30nt, resulted in an average coverage of 12.9 per PCR duplicate and an empirical coverage distribution similar to an exponential/power law distribution (left upper panel). This indicates that many molecules are only observed for deeper sequencing while other molecules are available at higher frequencies. Analyzing length (left middle panel) and GC content (left lower panel) patterns as well as the combination (right panel) shows higher PCR duplicate counts for a GC content between 30% to 70% as well as for shorter molecules compared to longer molecules. This effect may be due to an amplification bias from the polymerase or the cluster generation process necessary for Illumina sequencing. From Ph.D. dissertation of <a href="https://ul.qucosa.de/api/qucosa%3A11231/attachment/ATT-0/">Martin Kircher</a>).</small></td>
     </tr>
   </tbody>
 </table>
 
-<p>Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate <span class="notranslate">reads</span> is the <code class="language-plaintext highlighter-rouge">MarkDuplicates</code> utility from <a href="https://broadinstitute.github.io/picard/command-line-overview.html">Picard</a> package. It is designed to identify both PCR and optical duplicates:</p>
+<p>Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate reads is the <code class="language-plaintext highlighter-rouge">MarkDuplicates</code> utility from <a href="https://broadinstitute.github.io/picard/command-line-overview.html">Picard</a> package. It is designed to identify both PCR and optical duplicates:</p>
 
 <div class="well well-lg">
 
-Duplicates are identified as read pairs having identical 5' positions (coordinate and strand) for both <span class="notranslate">reads</span> in a mate pair (and optionally, matching unique molecular identifier <span class="notranslate">reads</span>; see BARCODE_TAG option). Optical, or more broadly Sequencing, duplicates are duplicates that appear clustered together spatially during sequencing and can arise from optical/imagine-processing artifacts or from bio-chemical processes during clonal amplification and sequencing; they are identified using the READ_NAME_REGEX and the OPTICAL_DUPLICATE_PIXEL_DISTANCE options. The tool's main output is a new SAM or BAM file in which duplicates have been identified in the SAM flags field, or optionally removed (see REMOVE_DUPLICATE and REMOVE_SEQUENCING_DUPLICATES), and optionally marked with a duplicate type in the 'DT' optional attribute. In addition, it also outputs a metrics file containing the numbers of READ_PAIRS_EXAMINED, UNMAPPED_<span class="notranslate">READS</span>, UNPAIRED_<span class="notranslate">READS</span>, UNPAIRED_READ DUPLICATES, READ_PAIR_DUPLICATES, and READ_PAIR_OPTICAL_DUPLICATES. Usage example: java -jar picard.jar MarkDuplicates I=input.bam \ O=marked_duplicates.bam M=marked_dup_metrics.txt.`
+Duplicates are identified as read pairs having identical 5' positions (coordinate and strand) for both reads in a mate pair (and optionally, matching unique molecular identifier reads; see BARCODE_TAG option). Optical, or more broadly Sequencing, duplicates are duplicates that appear clustered together spatially during sequencing and can arise from optical/imagine-processing artifacts or from bio-chemical processes during clonal amplification and sequencing; they are identified using the READ_NAME_REGEX and the OPTICAL_DUPLICATE_PIXEL_DISTANCE options. The tool's main output is a new SAM or BAM file in which duplicates have been identified in the SAM flags field, or optionally removed (see REMOVE_DUPLICATE and REMOVE_SEQUENCING_DUPLICATES), and optionally marked with a duplicate type in the 'DT' optional attribute. In addition, it also outputs a metrics file containing the numbers of READ_PAIRS_EXAMINED, UNMAPPED_READS, UNPAIRED_READS, UNPAIRED_READ DUPLICATES, READ_PAIR_DUPLICATES, and READ_PAIR_OPTICAL_DUPLICATES. Usage example: java -jar picard.jar MarkDuplicates I=input.bam \ O=marked_duplicates.bam M=marked_dup_metrics.txt.`
 
 </div>
 
 <h3 id="sampling-coincidence-duplicates">Sampling coincidence duplicates</h3>
 
-<p>However, one has to be careful when removing duplicates in cases when the sequencing targets are small (e.g., sequencing of bacterial, viral, or organellar genomes as well as amplicons). This is because when sequencing target is small <span class="notranslate">reads</span> will have the same coordinates by chance and not because of PCR amplification issues. The figure below illustrates the fine balance between estimates allele frequency, coverage, and variation in insert size:</p>
+<p>However, one has to be careful when removing duplicates in cases when the sequencing targets are small (e.g., sequencing of bacterial, viral, or organellar genomes as well as amplicons). This is because when sequencing target is small reads will have the same coordinates by chance and not because of PCR amplification issues. The figure below illustrates the fine balance between estimates allele frequency, coverage, and variation in insert size:</p>
 
 <table>
   <thead>
@@ -1369,14 +1367,14 @@ Duplicates are identified as read pairs having identical 5' positions (coordinat
       <td><img src="../../images/sampling-bias.png" alt="Sampling bias. " loading="lazy" /></td>
     </tr>
     <tr>
-      <td><small>The Variant Allele Frequency (VAF) bias determined by coverage and insert size variance. <span class="notranslate">Reads</span> are paired-end and read length is 76. The insert size distribution is modeled as a Gaussian distribution with mean at 200 and standard deviation shown on the x-axis. The true VAF is 0.05. The darkness at each position indicates the magnitude of the bias in the VAF. (From Zhou et al. <a href="https://bioinformatics.oxfordjournals.org/content/30/8/1073">2013</a>).</small></td>
+      <td><small>The Variant Allele Frequency (VAF) bias determined by coverage and insert size variance. Reads are paired-end and read length is 76. The insert size distribution is modeled as a Gaussian distribution with mean at 200 and standard deviation shown on the x-axis. The true VAF is 0.05. The darkness at each position indicates the magnitude of the bias in the VAF. (From Zhou et al. <a href="https://bioinformatics.oxfordjournals.org/content/30/8/1073">2013</a>).</small></td>
     </tr>
   </tbody>
 </table>
 
-<h1 id="getting-ngs-data-to-galaxy">Getting NGS data to <span class="notranslate">Galaxy</span></h1>
+<h1 id="getting-ngs-data-to-galaxy">Getting NGS data to Galaxy</h1>
 
-<p>You can upload data in <span class="notranslate">Galaxy</span> using one of these ways:</p>
+<p>You can upload data in Galaxy using one of these ways:</p>
 
 <h2 id="from-your-computer">From your computer</h2>
 
@@ -1403,15 +1401,15 @@ Duplicates are identified as read pairs having identical 5' positions (coordinat
 
 </blockquote>
 
-<h1 id="lets-do-it-from-reads-to-variants">Let’s do it: From <span class="notranslate">reads</span> to variants</h1>
+<h1 id="lets-do-it-from-reads-to-variants">Let’s do it: From reads to variants</h1>
 
-<p>In primary analysis we start with raw sequencing data (e.g., fastq <span class="notranslate">reads</span>) and convert them into a dataset for secondary analysis. Such dataset can be a list of sequence variants, a collection of ChIP-seq peaks, a list of differentially expressed genes and so on.</p>
+<p>In primary analysis we start with raw sequencing data (e.g., fastq reads) and convert them into a dataset for secondary analysis. Such dataset can be a list of sequence variants, a collection of ChIP-seq peaks, a list of differentially expressed genes and so on.</p>
 
-<p>SARS-CoV-2 is undoubtedly the most talked about biological system of the day. We will use SARS-CoV-2 sequencing data to demonstrate how <span class="notranslate">Galaxy</span> handles NGS data. In this case we will go from FASTQ data to a list of variants.</p>
+<p>SARS-CoV-2 is undoubtedly the most talked about biological system of the day. We will use SARS-CoV-2 sequencing data to demonstrate how Galaxy handles NGS data. In this case we will go from FASTQ data to a list of variants.</p>
 
 <h2 id="find-necessary-data-in-sra">Find necessary data in SRA</h2>
 
-<p>First we need to find a good dataset to play with. The <a href="https://www.ncbi.nlm.nih.gov/sra">Sequence Read Archive (SRA)</a> is the primary archive of <em>unassembled <span class="notranslate">reads</span></em>  operated by the <a href="https://www.ncbi.nlm.nih.gov/">US National Institutes of Health (NIH)</a>.  SRA is a great place to get the sequencing data that underlie publications and studies. Let’s do that:</p>
+<p>First we need to find a good dataset to play with. The <a href="https://www.ncbi.nlm.nih.gov/sra">Sequence Read Archive (SRA)</a> is the primary archive of <em>unassembled reads</em>  operated by the <a href="https://www.ncbi.nlm.nih.gov/">US National Institutes of Health (NIH)</a>.  SRA is a great place to get the sequencing data that underlie publications and studies. Let’s do that:</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-get-metadata-from-ncbi-sra" aria-label="hands-on box: Get Metadata from NCBI SRA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get Metadata from NCBI SRA</div>
@@ -1419,7 +1417,7 @@ Duplicates are identified as read pairs having identical 5' positions (coordinat
   <ol>
     <li>Go to NCBI’s SRA page by pointing your browser to https://www.ncbi.nlm.nih.gov/sra</li>
     <li>In the search box enter <code class="language-plaintext highlighter-rouge">SARS-CoV-2 Patient Sequencing From Partners / MGH</code>:
-<img src="../../images/find_mgh_data.png" alt="Find data. " loading="lazy" /> (Alte<span class="notranslate">rna</span>tively, you simply click on this <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH">link directly to the data</a>)</li>
+<img src="../../images/find_mgh_data.png" alt="Find data. " loading="lazy" /> (Alternatively, you simply click on this <a href="https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH">link directly to the data</a>)</li>
     <li>The web page will show a large number of SRA datasets (at the time of writing there were 2,223). This is data from a <a href="https://science.sciencemag.org/content/early/2020/12/09/science.abe3261">study</a> describing analysis of SARS-CoV-2 in Boston area.</li>
     <li>Download metadata describing these datasets by:
       <ul>
@@ -1435,22 +1433,22 @@ Here is how it should look like:
   </ol>
 </blockquote>
 
-<p>Now that we have downloaded this file we can go to a <span class="notranslate">Galaxy</span> instance and start processing it.</p>
+<p>Now that we have downloaded this file we can go to a Galaxy instance and start processing it.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
-  <p>Note that the file we just downloaded is <strong>not</strong> sequencing data itself. Rather, it is <em>metadata</em> describing properties of sequencing <span class="notranslate">reads</span>. We will filter this list down to just a few accessions that will be used in the remainder of this tutorial.</p>
+  <p>Note that the file we just downloaded is <strong>not</strong> sequencing data itself. Rather, it is <em>metadata</em> describing properties of sequencing reads. We will filter this list down to just a few accessions that will be used in the remainder of this tutorial.</p>
 
 </blockquote>
 
-<h2 id="process-and-filter-sraruninfocsv-file-in-galaxy">Process and filter <code class="language-plaintext highlighter-rouge">SraRunInfo.csv</code> file in <span class="notranslate">Galaxy</span></h2>
+<h2 id="process-and-filter-sraruninfocsv-file-in-galaxy">Process and filter <code class="language-plaintext highlighter-rouge">SraRunInfo.csv</code> file in Galaxy</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-upload-sraruninfo-csv-file-into-galaxy" aria-label="hands-on box: Upload `SraRunInfo.csv` file into Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Upload `SraRunInfo.csv` file into <span class="notranslate">Galaxy</span></div>
+  <div class="box-title hands-on-title" id="hands-on-upload-sraruninfo-csv-file-into-galaxy" aria-label="hands-on box: Upload `SraRunInfo.csv` file into Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Upload `SraRunInfo.csv` file into Galaxy</div>
 
   <ol>
-    <li>Go to your <span class="notranslate">Galaxy</span> instance of choice such as one of the <a href="https://usegalaxy.org/">use<span class="notranslate">galaxy</span>.org</a>, <a href="https://usegalaxy.eu">use<span class="notranslate">galaxy</span>.eu</a>, <a href="https://usegalaxy.org.au">use<span class="notranslate">galaxy</span>.org.au</a> or any other. (This tutorial uses use<span class="notranslate">galaxy</span>.org).</li>
+    <li>Go to your Galaxy instance of choice such as one of the <a href="https://usegalaxy.org/">usegalaxy.org</a>, <a href="https://usegalaxy.eu">usegalaxy.eu</a>, <a href="https://usegalaxy.org.au">usegalaxy.org.au</a> or any other. (This tutorial uses usegalaxy.org).</li>
     <li>Click <em>Upload Data</em> button:
 <img src="../../images/upload_button.png" alt="Data upload button. " loading="lazy" /></li>
     <li>In the dialog box that would appear click “<em>Choose local files</em>” button:
@@ -1458,30 +1456,30 @@ Here is how it should look like:
     <li>Find and select <code class="language-plaintext highlighter-rouge">SraRunInfo.csv</code> file from your computer</li>
     <li>Click <em>Start</em> button</li>
     <li>Close dialog by pressing <strong>Close</strong> button</li>
-    <li>You can now look at the content of this file by clicking <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon. You will see that this file contains a lot of information about individual SRA accessions. In this study every accession corresponds to an individual patient whose samples were sequenced.</li>
+    <li>You can now look at the content of this file by clicking <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon. You will see that this file contains a lot of information about individual SRA accessions. In this study every accession corresponds to an individual patient whose samples were sequenced.</li>
   </ol>
 </blockquote>
 
-<p><span class="notranslate">Galaxy</span> can process all 2,000+ datasets, but to make this tutorial bearable we need to selected a smaller subset. In particular our previous experience with this data shows two interesting datasets <code class="language-plaintext highlighter-rouge">SRR11954102</code> and <code class="language-plaintext highlighter-rouge">SRR12733957</code>. So, let’s pull them out.</p>
+<p>Galaxy can process all 2,000+ datasets, but to make this tutorial bearable we need to selected a smaller subset. In particular our previous experience with this data shows two interesting datasets <code class="language-plaintext highlighter-rouge">SRR11954102</code> and <code class="language-plaintext highlighter-rouge">SRR12733957</code>. So, let’s pull them out.</p>
 
 <!--SNIPPET-->
-<blockquote class="warning">   <div class="box-title warning-title" id="warning-beware-of-cuts" aria-label="warning box: Beware of Cuts"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Beware of Cuts</div>   <p>The section below uses <strong>Cut</strong> tool. There are two <strong>cut</strong> tools in <span class="notranslate">Galaxy</span> due to historical reasons. This example uses tool with the full name <strong>Cut columns from a table (cut)</strong>. However, the same logic applies to the other tool. It simply has a slightly different interface.</p> </blockquote>
+<blockquote class="warning">   <div class="box-title warning-title" id="warning-beware-of-cuts" aria-label="warning box: Beware of Cuts"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Beware of Cuts</div>   <p>The section below uses <strong>Cut</strong> tool. There are two <strong>cut</strong> tools in Galaxy due to historical reasons. This example uses tool with the full name <strong>Cut columns from a table (cut)</strong>. However, the same logic applies to the other tool. It simply has a slightly different interface.</p> </blockquote>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-creating-a-subset-of-data" aria-label="hands-on box: Creating a subset of data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating a subset of data</div>
 
   <ol>
-    <li>Find <span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  tool in <strong>Filter and Sort</strong> section of the tool panel.
+    <li>Find <span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  tool in <strong>Filter and Sort</strong> section of the tool panel.
       <blockquote class="tip">
         <div class="box-title tip-title" id="tip-finding-tools"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-finding-tools-contents" aria-expanded="true" aria-label="Toggle tip box: Finding tools"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Finding tools<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-        <p><span class="notranslate">Galaxy</span> may have an overwhelming amount of tools installed. To find a specific tool type the tool name in the tool panel search box to find the tool.</p>
+        <p>Galaxy may have an overwhelming amount of tools installed. To find a specific tool type the tool name in the tool panel search box to find the tool.</p>
       </blockquote>
     </li>
     <li>Make sure the <code class="language-plaintext highlighter-rouge">SraRunInfo.csv</code> dataset we just uploaded is listed in the <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> “<em>Select lines from</em>” field of the tool form.</li>
-    <li>In “<em>the pattern</em>” field enter the following <span class="notranslate">expression</span> → <code class="language-plaintext highlighter-rouge">SRR12733957|SRR11954102</code>. These are two accession we want to find separated by the pipe symbol <code class="language-plaintext highlighter-rouge">|</code>. The <code class="language-plaintext highlighter-rouge">|</code> means <code class="language-plaintext highlighter-rouge">or</code>: find lines containing <code class="language-plaintext highlighter-rouge">SRR12733957</code> <strong>or</strong> <code class="language-plaintext highlighter-rouge">SRR11954102</code>.</li>
+    <li>In “<em>the pattern</em>” field enter the following expression → <code class="language-plaintext highlighter-rouge">SRR12733957|SRR11954102</code>. These are two accession we want to find separated by the pipe symbol <code class="language-plaintext highlighter-rouge">|</code>. The <code class="language-plaintext highlighter-rouge">|</code> means <code class="language-plaintext highlighter-rouge">or</code>: find lines containing <code class="language-plaintext highlighter-rouge">SRR12733957</code> <strong>or</strong> <code class="language-plaintext highlighter-rouge">SRR11954102</code>.</li>
     <li>Click the <code class="language-plaintext highlighter-rouge">Run Tool</code> button.</li>
     <li>This will generate a file containing two lines (well … one line is also used as the header, so it will appear the the file has three lines. It is OK.)</li>
-    <li>Cut the first column from the file using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0"><strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0</span></span>  tool, which you will find in <strong>Text Manipulation</strong> section of the tool pane.</li>
+    <li>Cut the first column from the file using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0"><strong>Advanced Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0</span></span>  tool, which you will find in <strong>Text Manipulation</strong> section of the tool pane.</li>
     <li>Make sure the dataset produced by the previous step is selected in the “<em>File to cut</em>” field of the tool form.</li>
     <li>Change “<em>Delimited by</em>” to <code class="language-plaintext highlighter-rouge">Comma</code></li>
     <li>In “<em>List of fields</em>” select <code class="language-plaintext highlighter-rouge">Column: 1</code>.</li>
@@ -1502,7 +1500,7 @@ SRR11954102
   <div class="box-title hands-on-title" id="hands-on-get-data-from-sra" aria-label="hands-on box: Get data from SRA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get data from SRA</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.9+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.9+galaxy0"><strong>Faster Download and Extract <span class="notranslate">Reads</span> in FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.9+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.9+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.9+galaxy0"><strong>Faster Download and Extract Reads in FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.9+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“select input type”</em>: <code class="language-plaintext highlighter-rouge">List of SRA accession, one per line</code>
           <ul>
@@ -1523,7 +1521,7 @@ SRR11954102
   </ol>
 </blockquote>
 
-<p>The first three items are actually <em>collections</em> of datasets. <em>Collections</em> in <span class="notranslate">Galaxy</span> are logical groupings of datasets that reflect the semantic relationships between them in the experiment / analysis. In this case the tool creates separate collections for paired-end <span class="notranslate">reads</span>, single <span class="notranslate">reads</span>, and <em>other</em>. See the <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">Collections tutorial</a> and watch <a href="https://youtube.com/playlist?list=PLNFLKDpdM3B9UaxWEXgziHXO3k-003FzE">videos</a> (with names beginning with “Dataset Collections”) for more information.</p>
+<p>The first three items are actually <em>collections</em> of datasets. <em>Collections</em> in Galaxy are logical groupings of datasets that reflect the semantic relationships between them in the experiment / analysis. In this case the tool creates separate collections for paired-end reads, single reads, and <em>other</em>. See the <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">Collections tutorial</a> and watch <a href="https://youtube.com/playlist?list=PLNFLKDpdM3B9UaxWEXgziHXO3k-003FzE">videos</a> (with names beginning with “Dataset Collections”) for more information.</p>
 
 <p>Explore the collections by first <strong>clicking</strong> on the collection name in the history panel. This takes you inside the collection and shows you the datasets in it.  You can then navigate back to the outer level of your history.</p>
 
@@ -1531,20 +1529,20 @@ SRR11954102
 
 <h2 id="now-what">Now what?</h2>
 
-<p>You can now analyze the retrieved data using any sequence analysis tools and workflows in <span class="notranslate">Galaxy</span>.  SRA holds backing data for every imaginable type of *-seq experiment.</p>
+<p>You can now analyze the retrieved data using any sequence analysis tools and workflows in Galaxy.  SRA holds backing data for every imaginable type of *-seq experiment.</p>
 
-<p>If you ran this tutorial, but retrieved datasets that you were interested in, then see the rest of the GTN library for ideas on how to analyze in <span class="notranslate">Galaxy</span>.</p>
+<p>If you ran this tutorial, but retrieved datasets that you were interested in, then see the rest of the GTN library for ideas on how to analyze in Galaxy.</p>
 
 <p>However, if you retrieved the datasets used in this tutorial’s examples above, then you are ready to run the SARS-CoV-2 variant analysis below.</p>
 
 <p>In this part of the tutorial we will perform variant calling and basic analysis of the datasets downloaded above. We will start by downloading the Wuhan-Hu-1 SARS-CoV-2 reference sequence, then run adapter trimming, alignment and variant calling.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-the-usegalaxy-covid-19-analysis-project" aria-label="comment box: The usegalaxy.* COVID-19 analysis project"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: The use<span class="notranslate">galaxy</span>.* COVID-19 analysis project</div>
+  <div class="box-title comment-title" id="comment-the-usegalaxy-covid-19-analysis-project" aria-label="comment box: The usegalaxy.* COVID-19 analysis project"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: The usegalaxy.* COVID-19 analysis project</div>
   <p>This tutorial uses a subset of the data and runs through the
 <a href="https://covid19.galaxyproject.org/genomics/4-variation/">Variation Analysis</a>
-section of <a href="https://covid19.galaxyproject.org/">covid19.<span class="notranslate">galaxy</span>project.org</a>.
-The data for <a href="https://covid19.galaxyproject.org/">covid19.<span class="notranslate">galaxy</span>project.org</a> is
+section of <a href="https://covid19.galaxyproject.org/">covid19.galaxyproject.org</a>.
+The data for <a href="https://covid19.galaxyproject.org/">covid19.galaxyproject.org</a> is
 being updated continuously as new datasets are made public.</p>
 </blockquote>
 
@@ -1565,7 +1563,7 @@ being updated continuously as new datasets are made public.</p>
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1578,11 +1576,11 @@ being updated continuously as new datasets are made public.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-running-fastp" aria-label="hands-on box: Running `fastp`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Running `fastp`</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0"><strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:</p>
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0"><strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0</span></span>  with the following parameters:</p>
   <ul>
-    <li><em>“Single-end or paired <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code>
+    <li><em>“Single-end or paired reads”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code>
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select paired collection(s)”</em>: <code class="language-plaintext highlighter-rouge">list_paired</code> (output of <strong>Faster Download and Extract <span class="notranslate">Reads</span> in FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select paired collection(s)”</em>: <code class="language-plaintext highlighter-rouge">list_paired</code> (output of <strong>Faster Download and Extract Reads in FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
     <li>In <em>“Output Options”</em>:
@@ -1598,16 +1596,16 @@ being updated continuously as new datasets are made public.</p>
 <p><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-map-sequencing-reads-to-reference-genome" aria-label="hands-on box: Map sequencing reads to reference genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Map sequencing <span class="notranslate">reads</span> to reference genome</div>
+  <div class="box-title hands-on-title" id="hands-on-map-sequencing-reads-to-reference-genome" aria-label="hands-on box: Map sequencing reads to reference genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Map sequencing reads to reference genome</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1</span></span>  with the following parameters:</p>
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1</span></span>  with the following parameters:</p>
   <ul>
     <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
       </ul>
     </li>
-    <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code>
+    <li><em>“Single or Paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select a paired collection”</em>: <code class="language-plaintext highlighter-rouge">output_paired_coll</code> (output of <strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1625,7 +1623,7 @@ being updated continuously as new datasets are made public.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-remove-duplicates" aria-label="hands-on box: Remove duplicates"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Remove duplicates</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2"><strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2</span></span>  with the following parameters:</p>
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2"><strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2</span></span>  with the following parameters:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select SAM/BAM dataset or dataset collection”</em>: <code class="language-plaintext highlighter-rouge">bam_output</code> (output of <strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“If true do not write duplicates to the output file instead of writing them with appropriate flags set”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1652,16 +1650,16 @@ After the duplicate marking step above we can generate statistic about the align
 
 -->
 
-<h2 id="realign-reads-with-lofreq-viterbi"><strong>Realign <span class="notranslate">reads</span></strong> with lofreq viterbi</h2>
+<h2 id="realign-reads-with-lofreq-viterbi"><strong>Realign reads</strong> with lofreq viterbi</h2>
 
-<p><strong>Realign <span class="notranslate">reads</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> corrects misalignments around insertions and deletions. This is required in order to accurately detect variants.</p>
+<p><strong>Realign reads</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> corrects misalignments around insertions and deletions. This is required in order to accurately detect variants.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-realign-reads-around-indels" aria-label="hands-on box: Realign reads around indels"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Realign <span class="notranslate">reads</span> around indels</div>
+  <div class="box-title hands-on-title" id="hands-on-realign-reads-around-indels" aria-label="hands-on box: Realign reads around indels"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Realign reads around indels</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/lofreq_viterbi/lofreq_viterbi/2.1.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/lofreq_viterbi/lofreq_viterbi/2.1.5+galaxy0"><strong>Realign <span class="notranslate">reads</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/lofreq_viterbi/lofreq_viterbi/2.1.5+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:</p>
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/lofreq_viterbi/lofreq_viterbi/2.1.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/lofreq_viterbi/lofreq_viterbi/2.1.5+galaxy0"><strong>Realign reads</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/lofreq_viterbi/lofreq_viterbi/2.1.5+galaxy0</span></span>  with the following parameters:</p>
   <ul>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">Reads</span> to realign”</em>: <code class="language-plaintext highlighter-rouge">outFile</code> (output of <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reads to realign”</em>: <code class="language-plaintext highlighter-rouge">outFile</code> (output of <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">History</code>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
@@ -1682,9 +1680,9 @@ After the duplicate marking step above we can generate statistic about the align
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-add-indel-qualities" aria-label="hands-on box: Add indel qualities"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Add indel qualities</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/lofreq_indelqual/lofreq_indelqual/2.1.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/lofreq_indelqual/lofreq_indelqual/2.1.5+galaxy0"><strong>Insert indel qualities</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/lofreq_indelqual/lofreq_indelqual/2.1.5+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:</p>
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/lofreq_indelqual/lofreq_indelqual/2.1.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/lofreq_indelqual/lofreq_indelqual/2.1.5+galaxy0"><strong>Insert indel qualities</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/lofreq_indelqual/lofreq_indelqual/2.1.5+galaxy0</span></span>  with the following parameters:</p>
   <ul>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">Reads</span>”</em>: <code class="language-plaintext highlighter-rouge">realigned</code> (output of <strong>Realign <span class="notranslate">reads</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reads”</em>: <code class="language-plaintext highlighter-rouge">realigned</code> (output of <strong>Realign reads</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“Indel calculation approach”</em>: <code class="language-plaintext highlighter-rouge">Dindel</code>
       <ul>
         <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">History</code>
@@ -1705,9 +1703,9 @@ After the duplicate marking step above we can generate statistic about the align
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-call-variants" aria-label="hands-on box: Call variants"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Call variants</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1"><strong>Call variants</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:</p>
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1"><strong>Call variants</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1</span></span>  with the following parameters:</p>
   <ul>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input <span class="notranslate">reads</span> in BAM format”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Insert indel qualities</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input reads in BAM format”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Insert indel qualities</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">History</code>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset)</li>
@@ -1725,12 +1723,12 @@ After the duplicate marking step above we can generate statistic about the align
         <li>In <em>“Base-calling quality”</em>:
           <ul>
             <li><em>“Minimum baseQ”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
-            <li><em>“Minimum baseQ for alte<span class="notranslate">rna</span>te bases”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
+            <li><em>“Minimum baseQ for alternate bases”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
           </ul>
         </li>
-        <li>In <em>“<span class="notranslate">Mapping</span> quality”</em>:
+        <li>In <em>“Mapping quality”</em>:
           <ul>
-            <li><em>“Minimum <span class="notranslate">mapping</span> quality”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
+            <li><em>“Minimum mapping quality”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
           </ul>
         </li>
       </ul>
@@ -1748,11 +1746,11 @@ After the duplicate marking step above we can generate statistic about the align
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-annotate-variant-effects" aria-label="hands-on box: Annotate variant effects"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Annotate variant effects</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19"><strong>SnpEff eff: annotate variants for SARS-CoV-2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19</span></span>  with the following parameters:</p>
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19"><strong>SnpEff eff: annotate variants for SARS-CoV-2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19</span></span>  with the following parameters:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequence changes (SNPs, MNPs, InDels)”</em>: <code class="language-plaintext highlighter-rouge">variants</code> (output of <strong>Call variants</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">VCF (only if input is VCF)</code></li>
-    <li><em>“Create CSV report, useful for <span class="notranslate">downstream</span> analysis (-csvStats)”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+    <li><em>“Create CSV report, useful for downstream analysis (-csvStats)”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
     <li><em>“Annotation options”</em>: ``</li>
     <li><em>“Filter output”</em>: ``</li>
     <li><em>“Filter out specific Effects”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1769,7 +1767,7 @@ After the duplicate marking step above we can generate statistic about the align
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-create-table-of-variants" aria-label="hands-on box: Create table of variants"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create table of variants</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0"><strong>SnpSift Extract Fields</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:</p>
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0"><strong>SnpSift Extract Fields</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0</span></span>  with the following parameters:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Variant input file in VCF format”</em>: <code class="language-plaintext highlighter-rouge">snpeff_output</code> (output of <strong>SnpEff eff: annotate variants for SARS-CoV-2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“Fields to extract”</em>: <code class="language-plaintext highlighter-rouge">CHROM POS REF ALT QUAL DP AF SB DP4 EFF[*].IMPACT EFF[*].FUNCLASS EFF[*].EFFECT EFF[*].GENE EFF[*].CODON</code></li>
@@ -1790,7 +1788,7 @@ After the duplicate marking step above we can generate statistic about the align
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-summarize-data" aria-label="hands-on box: Summarize data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Summarize data</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:</p>
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1</span></span>  with the following parameters:</p>
   <ul>
     <li>In <em>“Results”</em>:
       <ul>
@@ -1837,7 +1835,7 @@ After the duplicate marking step above we can generate statistic about the align
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-collapse-a-collection" aria-label="hands-on box: Collapse a collection"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Collapse a collection</div>
 
-  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0</span></span>  with the following parameters:</p>
+  <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0</span></span>  with the following parameters:</p>
   <ul>
     <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse into single dataset”</em>: <code class="language-plaintext highlighter-rouge">snpsift extract fields</code> (output of <strong>SnpSift Extract Fields</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li>“<em>Keep one header line</em>”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1881,7 +1879,7 @@ SRR12733957 NC_045512.2 823 PASS  C T 1199.0  50  0.76      3 5,6,13,26 LOW     
 
 <h2 id="anything-interesting">Anything interesting?</h2>
 
-<p>These data are now ready for <span class="notranslate">downstream</span> analysis. One of the interesting things about these data is that it contains some of the mutations identified in the <a href="https://cov-lineages.org/global_report_B.1.1.7.html">B.1.1.7</a> lineage. For example, dataset <code class="language-plaintext highlighter-rouge">SRR12733957</code> contains a nonsense mutation (change for legitimate codon specifying an amino acid to a stop codon) in ORF8a:</p>
+<p>These data are now ready for downstream analysis. One of the interesting things about these data is that it contains some of the mutations identified in the <a href="https://cov-lineages.org/global_report_B.1.1.7.html">B.1.1.7</a> lineage. For example, dataset <code class="language-plaintext highlighter-rouge">SRR12733957</code> contains a nonsense mutation (change for legitimate codon specifying an amino acid to a stop codon) in ORF8a:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SRR12733957 NC_045512.2 27972 PASS  C T 56.0  39  0.076923  0 7,29,0,3  HIGH  NONSENSE  STOP_GAINED ORF8  Caa/Taa
 </code></pre></div></div>
@@ -1898,7 +1896,7 @@ After a dataset is converted into an intermediary result (such as variant table 
 > Jupyter notebook functionality in Galaxy is currently in Beta. It means that we are still working on it and its implementation is constantly changing. Be aware of this fact.
 {: .warning}
 
-> <div class="box-title hands-on-title" id="hands-on-analyze-data-in-jupyter-from-galaxy" aria-label="hands-on box: Analyze data in Jupyter from Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Analyze data in Jupyter from <span class="notranslate">Galaxy</span></div>
+> <div class="box-title hands-on-title" id="hands-on-analyze-data-in-jupyter-from-galaxy" aria-label="hands-on box: Analyze data in Jupyter from Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Analyze data in Jupyter from Galaxy</div>
 >
 > 1. Open <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> **Interactive Jupyter Notebook** from section **Interactive Tools**
 > 1. *"Do you already have a notebook?"*: `Start with a fresh notebook`
@@ -1952,7 +1950,7 @@ We can also import data directly into Google Colab:
 > <div class="box-title hands-on-title" id="hands-on-analyze-data-in-google-colab" aria-label="hands-on box: Analyze data in Google Colab"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Analyze data in Google Colab</div>
 >
 > 1. Expand history dataset containing the output of the collection collapse step
-> 1. Right click on <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> (disk) icon and copy link to clipboard
+> 1. Right click on <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> (disk) icon and copy link to clipboard
 > 1. Go to https://colab.research.google.com/ and create a new notebook
 > 1. Type `!wget <link>` where you must replace `<link>` with the URL you copied into clipboard at the previous step
 > 1. This will copy this dataset into your Colaboratory environment

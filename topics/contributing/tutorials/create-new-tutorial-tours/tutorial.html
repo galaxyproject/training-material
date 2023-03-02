@@ -621,18 +621,18 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p><span class="notranslate">Galaxy</span> is a great solution to train the bioinformatics concepts:</p>
+<p>Galaxy is a great solution to train the bioinformatics concepts:</p>
 
 <ul>
-  <li>numerous bioinformatics tools are available (almost 5,000 in the <span class="notranslate">ToolShed</span>)</li>
+  <li>numerous bioinformatics tools are available (almost 5,000 in the ToolShed)</li>
   <li>it can be used by people without any computer science skills</li>
   <li>it trains to use technology, outlining available resources and efforts that have made them accessible to researchers</li>
   <li>it is scalable</li>
 </ul>
 
-<p>In 2016, the <span class="notranslate">Galaxy</span> Training Network decide to set up a new infrastructure for delivering easily <span class="notranslate">Galaxy</span> related training material. The idea was to develop something open and online based on a community effort, as most of the time in <span class="notranslate">Galaxy</span>.</p>
+<p>In 2016, the Galaxy Training Network decide to set up a new infrastructure for delivering easily Galaxy related training material. The idea was to develop something open and online based on a community effort, as most of the time in Galaxy.</p>
 
-<p>We take inspiration from <a href="https://software-carpentry.org">Software Carpentry</a>. We collected everything on a GitHub repository: <a href="https://github.com/galaxyproject/training-material">https://github.com/<span class="notranslate">galaxy</span>project/training-material </a>. We decided a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a technical support to be able to run.</p>
+<p>We take inspiration from <a href="https://software-carpentry.org">Software Carpentry</a>. We collected everything on a GitHub repository: <a href="https://github.com/galaxyproject/training-material">https://github.com/galaxyproject/training-material </a>. We decided a structure based on tutorials with hands-on, fitting both for online self-training but also for workshops, grouped in topics. Each tutorial follows the same structure and comes with a technical support to be able to run.</p>
 
 <p>In this tutorial, you will understand how to design and develop a new tutorial fitting in this training material repository. As doing helps to understand, we will develop a small tutorial to explain BLAST with the full infrastructure to be able to run this tutorial anywhere.</p>
 
@@ -643,36 +643,36 @@
 
 <ol id="markdown-toc">
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
-  <li><a href="#a-galaxy-interactive-tour" id="markdown-toc-a-galaxy-interactive-tour">A <span class="notranslate">Galaxy</span> Interactive Tour</a></li>
-  <li><a href="#creating-a-galaxy-interactive-tour" id="markdown-toc-creating-a-galaxy-interactive-tour">Creating a <span class="notranslate">Galaxy</span> Interactive Tour</a></li>
+  <li><a href="#a-galaxy-interactive-tour" id="markdown-toc-a-galaxy-interactive-tour">A Galaxy Interactive Tour</a></li>
+  <li><a href="#creating-a-galaxy-interactive-tour" id="markdown-toc-creating-a-galaxy-interactive-tour">Creating a Galaxy Interactive Tour</a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
 </blockquote>
 
-<h1 id="a-galaxy-interactive-tour">A <span class="notranslate">Galaxy</span> Interactive Tour</h1>
+<h1 id="a-galaxy-interactive-tour">A Galaxy Interactive Tour</h1>
 
-<p>A <span class="notranslate">Galaxy</span> Interactive Tour is a way to go through an entire analysis, step by step inside <span class="notranslate">Galaxy</span> in an interactive and explorative way. It is a great pedagogic way to run the tutorial directly inside <span class="notranslate">Galaxy</span>.</p>
+<p>A Galaxy Interactive Tour is a way to go through an entire analysis, step by step inside Galaxy in an interactive and explorative way. It is a great pedagogic way to run the tutorial directly inside Galaxy.</p>
 
 <figure id="figure-1"><img src="../../../dev/images/galaxy_tour_demo.gif" alt="Demonstration of an Interactive Tour. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Demonstration of an Interactive Tour</figcaption></figure>
 
 <p>A tour is a YAML file like:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id: <span class="notranslate">galaxy</span>_ui
-name: <span class="notranslate">Galaxy</span> UI
-description: A gentle introduction to the <span class="notranslate">Galaxy</span> User Interface
-title_default: "Welcome to <span class="notranslate">Galaxy</span>"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id: galaxy_ui
+name: Galaxy UI
+description: A gentle introduction to the Galaxy User Interface
+title_default: "Welcome to Galaxy"
 
 steps:
-    - title: "Welcome to <span class="notranslate">Galaxy</span>"
-      content: "This short tour will guide you through <span class="notranslate">Galaxy</span>'s user interface.&lt;br&gt;
+    - title: "Welcome to Galaxy"
+      content: "This short tour will guide you through Galaxy's user interface.&lt;br&gt;
                 You can navigate with your arrow keys and leave the tour at any time point
                 with 'Escape' or the 'End tour' button."
       backdrop: true
 
     - title: "Upload your data"
       element: ".upload-button"
-      intro: "<span class="notranslate">Galaxy</span> supports many ways to get in your data.&lt;br&gt;
+      intro: "Galaxy supports many ways to get in your data.&lt;br&gt;
               Use this button to upload your data."
       position: "right"
       postclick:
@@ -736,13 +736,13 @@ steps:
   </li>
 </ul>
 
-<p>The YAML file of a tour can be integrated in a <span class="notranslate">Galaxy</span> instance by placing the YAML file in the <code class="language-plaintext highlighter-rouge">config/plugins/tours</code> directory of the <span class="notranslate">Galaxy</span> code and restarting the <span class="notranslate">Galaxy</span> instance</p>
+<p>The YAML file of a tour can be integrated in a Galaxy instance by placing the YAML file in the <code class="language-plaintext highlighter-rouge">config/plugins/tours</code> directory of the Galaxy code and restarting the Galaxy instance</p>
 
-<h1 id="creating-a-galaxy-interactive-tour">Creating a <span class="notranslate">Galaxy</span> Interactive Tour</h1>
+<h1 id="creating-a-galaxy-interactive-tour">Creating a Galaxy Interactive Tour</h1>
 
 <p><a href="https://github.com/TailorDev/galaxy-tourbuilder">A Web browser plugin</a> is available to help the creation and the test (on the fly) of an interactive tour.</p>
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="a/0YVvz"><a href="https://imgur.com/a/0YVvz"><span class="notranslate">Galaxy</span> Tour Builder by TailorDev</a></blockquote>
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/0YVvz"><a href="https://imgur.com/a/0YVvz">Galaxy Tour Builder by TailorDev</a></blockquote>
 <script async="" src="https://s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 <blockquote class="notranslate hands_on">
@@ -756,22 +756,22 @@ steps:
         <li><a href="https://addons.opera.com/en/extensions/details/galaxy-tour-builder/">Opera add-ons</a></li>
       </ul>
     </li>
-    <li>Load the webpage of any <span class="notranslate">Galaxy</span> instance</li>
-    <li>Start the plugin by clicking on the icon with <span class="notranslate">Galaxy</span> icon close to the address bar</li>
+    <li>Load the webpage of any Galaxy instance</li>
+    <li>Start the plugin by clicking on the icon with Galaxy icon close to the address bar</li>
   </ol>
 </blockquote>
 
-<p>We can now create easily a <span class="notranslate">Galaxy</span> Interactive Tour and test it on the fly.</p>
+<p>We can now create easily a Galaxy Interactive Tour and test it on the fly.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-create-a-galaxy-interactive-tour" aria-label="hands-on box: Create a Galaxy Interactive Tour"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create a <span class="notranslate">Galaxy</span> Interactive Tour</div>
+  <div class="box-title hands-on-title" id="hands-on-create-a-galaxy-interactive-tour" aria-label="hands-on box: Create a Galaxy Interactive Tour"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create a Galaxy Interactive Tour</div>
 
   <ol>
-    <li>Create a <span class="notranslate">Galaxy</span> Interactive Tour for “BLAST” tutorial</li>
+    <li>Create a Galaxy Interactive Tour for “BLAST” tutorial</li>
     <li>Test it with the plugin</li>
     <li>Copy the YAML content and add it to a file</li>
     <li>Add the file to the <code class="language-plaintext highlighter-rouge">tours</code> directory of the tutorial</li>
-    <li>Test it on a local <span class="notranslate">Galaxy</span> instance</li>
+    <li>Test it on a local Galaxy instance</li>
   </ol>
 </blockquote>
 

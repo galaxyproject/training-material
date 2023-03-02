@@ -953,8 +953,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
             Metagenomics
         </a>
@@ -1074,10 +1072,10 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>This tutorial aims to familiarize you with the <span class="notranslate">Galaxy</span> user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.</p>
+<p>This tutorial aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.</p>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or because of stochastic processes in the algorithms.</p> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, external databases, or because of stochastic processes in the algorithms.</p> </blockquote>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -1099,10 +1097,10 @@
       <li><a href="#displaying-data-in-ucsc-genome-browser" id="markdown-toc-displaying-data-in-ucsc-genome-browser">Displaying data in UCSC genome browser</a></li>
     </ol>
   </li>
-  <li><a href="#galaxy-management" id="markdown-toc-galaxy-management"><span class="notranslate">Galaxy</span> management</a>    <ol>
-      <li><a href="#convert-your-analysis-history-into-a-workflow" id="markdown-toc-convert-your-analysis-history-into-a-workflow">Convert your analysis history into a <span class="notranslate">workflow</span></a></li>
-      <li><a href="#the-workflow-editor" id="markdown-toc-the-workflow-editor">The <span class="notranslate">workflow</span> editor</a></li>
-      <li><a href="#run-workflow-on-different-data" id="markdown-toc-run-workflow-on-different-data">Run <span class="notranslate">workflow</span> on different data</a></li>
+  <li><a href="#galaxy-management" id="markdown-toc-galaxy-management">Galaxy management</a>    <ol>
+      <li><a href="#convert-your-analysis-history-into-a-workflow" id="markdown-toc-convert-your-analysis-history-into-a-workflow">Convert your analysis history into a workflow</a></li>
+      <li><a href="#the-workflow-editor" id="markdown-toc-the-workflow-editor">The workflow editor</a></li>
+      <li><a href="#run-workflow-on-different-data" id="markdown-toc-run-workflow-on-different-data">Run workflow on different data</a></li>
       <li><a href="#share-your-work" id="markdown-toc-share-your-work">Share your work</a></li>
     </ol>
   </li>
@@ -1120,14 +1118,14 @@
   <p>Not everyone has the same background and that’s ok! You may have studied different organisms with different gene models, or you may not be familiar with the biological aspect at all. The biological background is not necessary for following this tutorial, we just like to provide research context for any tutorial. Here are brief explanations of some of the concepts mentioned in this tutorial:</p>
 
   <ul>
-    <li><strong>Nucleotides</strong> are the A, C, T, and Gs that make up <span class="notranslate">DNA</span>.</li>
-    <li><strong>Chromosomes</strong> can be thought of as a very long piece of <span class="notranslate">DNA</span> (string of A, C, T, Gs) Some organisms have chromosomes, in this tutorial we will use Human chromosome number 22.</li>
+    <li><strong>Nucleotides</strong> are the A, C, T, and Gs that make up DNA.</li>
+    <li><strong>Chromosomes</strong> can be thought of as a very long piece of DNA (string of A, C, T, Gs) Some organisms have chromosomes, in this tutorial we will use Human chromosome number 22.</li>
     <li><strong>Features</strong> are regions of the chromosome that are interesting for one reason or another. Some examples of features include genes, terminators, transcription start sites, and repeat regions.</li>
-    <li><strong>Genes</strong> are one kind of interesting feature, a region that will be <a href="https://en.wikipedia.org/wiki/Transcription_(biology)">transcribed</a> into <span class="notranslate">RNA</span> before being <a href="https://en.wikipedia.org/wiki/Translation_(biology)">translated</a> into proteins.</li>
+    <li><strong>Genes</strong> are one kind of interesting feature, a region that will be <a href="https://en.wikipedia.org/wiki/Transcription_(biology)">transcribed</a> into RNA before being <a href="https://en.wikipedia.org/wiki/Translation_(biology)">translated</a> into proteins.</li>
     <li>
-      <p><strong>Exons</strong> are fundamental components of <a href="https://en.wikipedia.org/wiki/Eukaryote">eukaryotic</a> <a href="https://en.wikipedia.org/wiki/Gene#Structure_and_function">genes</a>. A typical eukaryotic gene contains numerous <em>exons</em> separated by <em>introns</em>. An entire gene containing both exons and introns is <em>transcribed</em> into a pre-messenger <span class="notranslate">RNA</span> or pre-m<span class="notranslate">RNA</span>. During maturation introns are excised from the pre-m<span class="notranslate">RNA</span> in a process called <em><a href="https://www.nature.com/scitable/topicpage/rna-splicing-introns-exons-and-spliceosome-12375/">splicing</a></em>.  A mature messenger <span class="notranslate">RNA</span>, or simply m<span class="notranslate">RNA</span>, is then <em>translated</em> into protein during the process of <em>translation</em>.</p>
+      <p><strong>Exons</strong> are fundamental components of <a href="https://en.wikipedia.org/wiki/Eukaryote">eukaryotic</a> <a href="https://en.wikipedia.org/wiki/Gene#Structure_and_function">genes</a>. A typical eukaryotic gene contains numerous <em>exons</em> separated by <em>introns</em>. An entire gene containing both exons and introns is <em>transcribed</em> into a pre-messenger RNA or pre-mRNA. During maturation introns are excised from the pre-mRNA in a process called <em><a href="https://www.nature.com/scitable/topicpage/rna-splicing-introns-exons-and-spliceosome-12375/">splicing</a></em>.  A mature messenger RNA, or simply mRNA, is then <em>translated</em> into protein during the process of <em>translation</em>.</p>
 
-      <figure id="figure-1"><img src="../../images/DNA_exons_introns.png" alt="Eukaryotic gene model. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> An original piece of <span class="notranslate">DNA</span> containing introns and exons has the introns cut out before the exons are joined together to form the m<span class="notranslate">RNA</span>. (Image from <a href="https://commons.wikimedia.org/wiki/File:DNA_exons_introns.gif">WikiMedia</a>, under the Public Domain)</figcaption></figure>
+      <figure id="figure-1"><img src="../../images/DNA_exons_introns.png" alt="Eukaryotic gene model. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> An original piece of DNA containing introns and exons has the introns cut out before the exons are joined together to form the mRNA. (Image from <a href="https://commons.wikimedia.org/wiki/File:DNA_exons_introns.gif">WikiMedia</a>, under the Public Domain)</figcaption></figure>
     </li>
   </ul>
 
@@ -1135,14 +1133,14 @@
 </blockquote>
 
 <p>You may be familiar with the <a href="https://genome.ucsc.edu/">UCSC Genome Browser</a> or another resource like it, and know that you can find the data there.
-But even with your data in hand, you still have the question: “how do I actually compute this?” There is really a straightforward answer: <strong><span class="notranslate">Galaxy</span></strong>. So let’s try it…</p>
+But even with your data in hand, you still have the question: “how do I actually compute this?” There is really a straightforward answer: <strong>Galaxy</strong>. So let’s try it…</p>
 
-<p>Browse to your favorite <a href="https://galaxyproject.org/use/"><span class="notranslate">Galaxy</span> instance</a> and log in or register.</p>
+<p>Browse to your favorite <a href="https://galaxyproject.org/use/">Galaxy instance</a> and log in or register.</p>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-how-do-i-create-an-account-on-a-public-galaxy-instance"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-do-i-create-an-account-on-a-public-galaxy-instance-contents" aria-expanded="true" aria-label="Toggle tip box: How do I create an account on a public Galaxy instance?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How do I create an account on a public <span class="notranslate">Galaxy</span> instance?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>     <p>To create an account at any public <span class="notranslate">Galaxy</span> instance, choose your server from the available <a href="https://galaxyproject.org/use/">list of <span class="notranslate">Galaxy</span> Platforms</a>.</p>     <p>There are 3 main public <span class="notranslate">Galaxy</span> servers: <a href="https://usegalaxy.org/">Use<span class="notranslate">Galaxy</span>.org</a>, <a href="https://usegalaxy.eu/">Use<span class="notranslate">Galaxy</span>.eu</a>, and <a href="https://usegalaxy.org.au/">Use<span class="notranslate">Galaxy</span>.org.au</a>.</p>   </li>   <li>     <p>Click on <strong>“Login or Register”</strong> in the masthead on the server.</p>     <p><img src="/training-material/faqs/galaxy/images/login_register.png" alt="Login or Register on the top panel" /></p>   </li>   <li>On the login page, find the <strong>Register here</strong> link and click on it.</li>   <li>     <p>Fill in the the registration form, then click on <strong>Create</strong>.</p>     <p>Your account should now get created, but will remain inactive until you verify the email address you provided in the registration form.</p>     <p><img src="/training-material/faqs/galaxy/images/unverified_account.png" alt="Banner warning about account with unverified email address" /></p>   </li>   <li>Check for a <strong>Confirmation Email</strong> in the email you used for account creation.</li>   <li>     <p>Click on the <strong>Email confirmation link</strong> to fully activate your account.</p>     <p><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-info</span> Delivery of the confimation email is blocked by your email provider or you mistyped the email address in the registration form?</p>     <p>Please do <strong>not</strong> register again, but follow the <a href="/training-material/faqs/galaxy/user_preferences_manage_information.html">instructions to change the email address</a> registered with your account! The confirmation email will be resent to your new address once you have changed it.</p>   </li> </ol> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-how-do-i-create-an-account-on-a-public-galaxy-instance"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-do-i-create-an-account-on-a-public-galaxy-instance-contents" aria-expanded="true" aria-label="Toggle tip box: How do I create an account on a public Galaxy instance?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How do I create an account on a public Galaxy instance?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>     <p>To create an account at any public Galaxy instance, choose your server from the available <a href="https://galaxyproject.org/use/">list of Galaxy Platforms</a>.</p>     <p>There are 3 main public Galaxy servers: <a href="https://usegalaxy.org/">UseGalaxy.org</a>, <a href="https://usegalaxy.eu/">UseGalaxy.eu</a>, and <a href="https://usegalaxy.org.au/">UseGalaxy.org.au</a>.</p>   </li>   <li>     <p>Click on <strong>“Login or Register”</strong> in the masthead on the server.</p>     <p><img src="/training-material/faqs/galaxy/images/login_register.png" alt="Login or Register on the top panel" /></p>   </li>   <li>On the login page, find the <strong>Register here</strong> link and click on it.</li>   <li>     <p>Fill in the the registration form, then click on <strong>Create</strong>.</p>     <p>Your account should now get created, but will remain inactive until you verify the email address you provided in the registration form.</p>     <p><img src="/training-material/faqs/galaxy/images/unverified_account.png" alt="Banner warning about account with unverified email address" /></p>   </li>   <li>Check for a <strong>Confirmation Email</strong> in the email you used for account creation.</li>   <li>     <p>Click on the <strong>Email confirmation link</strong> to fully activate your account.</p>     <p><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span> Delivery of the confimation email is blocked by your email provider or you mistyped the email address in the registration form?</p>     <p>Please do <strong>not</strong> register again, but follow the <a href="/training-material/faqs/galaxy/user_preferences_manage_information.html">instructions to change the email address</a> registered with your account! The confirmation email will be resent to your new address once you have changed it.</p>   </li> </ol> </blockquote>
 
-<p>The <span class="notranslate">Galaxy</span> interface consists of three main parts:</p>
+<p>The Galaxy interface consists of three main parts:</p>
 
 <ol>
   <li>The available <strong>Tools</strong> are listed on the left</li>
@@ -1151,10 +1149,10 @@ But even with your data in hand, you still have the question: “how do I actual
 </ol>
 
 <blockquote class="comment">
-  <figure id="figure-2"><img src="../../images/galaxy_interface.svg" alt="Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Galactic triptych: the three panels of <span class="notranslate">Galaxy</span> interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em></figcaption></figure>
+  <figure id="figure-2"><img src="../../images/galaxy_interface.svg" alt="Galaxy interface screenshot showing History panel on the right, tools panel on the left, and main panel in the center. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Galactic triptych: the three panels of Galaxy interface: <em>Tools</em>, <em>Center Panel</em>, and <em>History</em></figcaption></figure>
 </blockquote>
 
-<p>When you start <span class="notranslate">Galaxy</span> for very first time, your history will be empty. Let’s add some data to it.</p>
+<p>When you start Galaxy for very first time, your history will be empty. Let’s add some data to it.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-create-history" aria-label="hands-on box: Create history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create history</div>
@@ -1164,10 +1162,10 @@ But even with your data in hand, you still have the question: “how do I actual
       <p>Make sure you start from an empty analysis history.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
-      <p><strong>Rename your history</strong> to be meaningful and easy to find. You can do this by clicking on the title of the history (which by default is <em>Unnamed history</em>) and typing <strong><span class="notranslate">Galaxy</span> 101</strong> as the name. Do  not forget to hit the <kbd>Enter</kbd> key on your keyboard to save it.</p>
+      <p><strong>Rename your history</strong> to be meaningful and easy to find. You can do this by clicking on the title of the history (which by default is <em>Unnamed history</em>) and typing <strong>Galaxy 101</strong> as the name. Do  not forget to hit the <kbd>Enter</kbd> key on your keyboard to save it.</p>
 
       <p><img src="../../../../shared/images/rename_history.png" alt="Rename the history. " loading="lazy" /></p>
     </li>
@@ -1177,13 +1175,13 @@ But even with your data in hand, you still have the question: “how do I actual
 
 <h2 id="locating-exons">Locating Exons</h2>
 
-<p>First we need to get some data into our history. You can upload files from your computer, or <span class="notranslate">Galaxy</span> can also fetch data directly from exte<span class="notranslate">rna</span>l sources. We know UCSC has exon locations for humans and we can use <span class="notranslate">Galaxy</span> to import the data for chromosome 22, directly from the UCSC table browser.</p>
+<p>First we need to get some data into our history. You can upload files from your computer, or Galaxy can also fetch data directly from external sources. We know UCSC has exon locations for humans and we can use Galaxy to import the data for chromosome 22, directly from the UCSC table browser.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-upload-snps-and-exons" aria-label="hands-on box: Upload SNPs and Exons"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Upload SNPs and Exons</div>
   <ol>
     <li>
-      <p>At the top of the <strong>Tools</strong> panel (on the left), click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> <strong>Upload Data</strong></p>
+      <p>At the top of the <strong>Tools</strong> panel (on the left), click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> <strong>Upload Data</strong></p>
 
       <p><img src="../../images/upload-data.png" alt="upload data button. " loading="lazy" /></p>
 
@@ -1194,24 +1192,24 @@ But even with your data in hand, you still have the question: “how do I actual
     <li>
       <p>Click <strong>Paste/Fetch data</strong> and paste in the following URLs in the box that appears.</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-Coding-Exons.<span class="notranslate">bed</span>
-https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-dbSNP153-Whole-Gene-SNPs.<span class="notranslate">bed</span>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-Coding-Exons.bed
+https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-dbSNP153-Whole-Gene-SNPs.bed
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Click <strong>Start</strong>, and then <strong>Close</strong></p>
     </li>
     <li>
-      <p>When they are ready, <strong>rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the datasets to <code class="language-plaintext highlighter-rouge">Exons</code> and <code class="language-plaintext highlighter-rouge">SNPs</code>, respectively.</p>
+      <p>When they are ready, <strong>rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the datasets to <code class="language-plaintext highlighter-rouge">Exons</code> and <code class="language-plaintext highlighter-rouge">SNPs</code>, respectively.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<p>For this tutorial, we made the input datasets available on Zenodo for you. However, these datasets can also obtained directly from UCSC, without leaving <span class="notranslate">Galaxy</span>.
+<p>For this tutorial, we made the input datasets available on Zenodo for you. However, these datasets can also obtained directly from UCSC, without leaving Galaxy.
 Below we describe how you can do this, but it is not necessary for this tutorial. Note that since the data in UCSC is updated frequently, you might get slightly different results in the rest of this tutorial if you use these files.</p>
 
 <blockquote class="comment">
@@ -1222,7 +1220,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-optional-obtaining-the-data-directly-from-ucsc"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-optional-obtaining-the-data-directly-from-ucsc-contents" aria-expanded="true" aria-label="Toggle tip box: Optional: Obtaining the Data directly from UCSC"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Optional: Obtaining the Data directly from UCSC<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <p>This tool works a bit differently than most <span class="notranslate">Galaxy</span> tools, but if you wish to obtain the newest data from UCSC, you can do that as follows:</p>
+  <p>This tool works a bit differently than most Galaxy tools, but if you wish to obtain the newest data from UCSC, you can do that as follows:</p>
 
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-obtaining-exons-from-ucsc" aria-label="hands-on box: Obtaining Exons from UCSC"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Obtaining Exons from UCSC</div>
@@ -1248,8 +1246,8 @@ Below we describe how you can do this, but it is not necessary for this tutorial
           <li><em>“track”</em>: <code class="language-plaintext highlighter-rouge">GENCODE v36</code> (or a more recent version)</li>
           <li><em>“table”</em>: <code class="language-plaintext highlighter-rouge">knownGene</code></li>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“region”</em> should be changed to <code class="language-plaintext highlighter-rouge">position</code> with value <code class="language-plaintext highlighter-rouge">chr22</code></li>
-          <li><em>“output format”</em> should be changed to <code class="language-plaintext highlighter-rouge"><span class="notranslate">BED</span> - browser extensible data</code></li>
-          <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Send output to”</em> should have the option <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span></code> checked</li>
+          <li><em>“output format”</em> should be changed to <code class="language-plaintext highlighter-rouge">BED - browser extensible data</code></li>
+          <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Send output to”</em> should have the option <code class="language-plaintext highlighter-rouge">Galaxy</code> checked</li>
         </ul>
 
         <blockquote class="comment">
@@ -1262,20 +1260,20 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 
         <p><img src="../../images/101_03.png" alt="`UCSC table browser` tool, second screen for exons. " loading="lazy" /></p>
 
-        <p>Change <strong>Create one <span class="notranslate">BED</span> record per</strong> to <code class="language-plaintext highlighter-rouge">Coding Exons</code> and then click on the <strong>Send query to <span class="notranslate">Galaxy</span></strong> button.</p>
+        <p>Change <strong>Create one BED record per</strong> to <code class="language-plaintext highlighter-rouge">Coding Exons</code> and then click on the <strong>Send query to Galaxy</strong> button.</p>
 
         <blockquote class="comment">
           <div class="box-title comment-title" id="comment-2" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
-          <p>After this you will see your first history item in <span class="notranslate">Galaxy</span>’s right panel. It will go through
+          <p>After this you will see your first history item in Galaxy’s right panel. It will go through
 the gray (preparing/queued) and yellow (running) states to become green (success):</p>
 
           <p><img src="../../images/101_04.png" alt="`UCSC Main on Human: knownGene` dataset is green. " loading="lazy" /></p>
 
-          <p>You might need to login to <span class="notranslate">Galaxy</span> again.</p>
+          <p>You might need to login to Galaxy again.</p>
         </blockquote>
       </li>
       <li>
-        <p>When the dataset is green, click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon to <strong>view the contents</strong> of the file. It should look something like this:</p>
+        <p>When the dataset is green, click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon to <strong>view the contents</strong> of the file. It should look something like this:</p>
 
         <p><img src="../../images/101_exons.png" alt="Contents of the `UCSC Main on Human: knownGene` dataset. " loading="lazy" /></p>
 
@@ -1284,7 +1282,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
       <li>
         <p>Let’s rename our dataset to something more recognizable.</p>
         <ul>
-          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, change the <strong>Name</strong> field to <code class="language-plaintext highlighter-rouge">Exons</code></li>
           <li>Click the <strong>Save</strong> button</li>
         </ul>
@@ -1307,7 +1305,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
         <ul>
           <li><em>“group”</em> should be changed to <code class="language-plaintext highlighter-rouge">Variation</code></li>
           <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“region”</em> should be changed again to <code class="language-plaintext highlighter-rouge">position</code> with value <code class="language-plaintext highlighter-rouge">chr22</code></li>
-          <li><em>“output format”</em> should be changed again to <code class="language-plaintext highlighter-rouge"><span class="notranslate">BED</span> - browser extensible data</code></li>
+          <li><em>“output format”</em> should be changed again to <code class="language-plaintext highlighter-rouge">BED - browser extensible data</code></li>
         </ul>
 
         <p><img src="../../images/101_06.png" alt="`UCSC table browser` tool, first screen for SNPs. " loading="lazy" /></p>
@@ -1319,9 +1317,9 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 
         <p><img src="../../images/101_07.png" alt="`UCSC table browser` tool, second screen for SNPs. " loading="lazy" /></p>
 
-        <p>Make sure that <em>“Create one <span class="notranslate">BED</span> record per”</em> is set to <code class="language-plaintext highlighter-rouge">Whole Gene</code> (Whole Gene here really means Whole Feature), and click on <strong>Send query to <span class="notranslate">Galaxy</span></strong>. A second item will appear in your analysis history.</p>
+        <p>Make sure that <em>“Create one BED record per”</em> is set to <code class="language-plaintext highlighter-rouge">Whole Gene</code> (Whole Gene here really means Whole Feature), and click on <strong>Send query to Galaxy</strong>. A second item will appear in your analysis history.</p>
       </li>
-      <li>Now <strong>rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> your new dataset to <code class="language-plaintext highlighter-rouge">SNPs</code> so we can easily remember what the file contains.</li>
+      <li>Now <strong>rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> your new dataset to <code class="language-plaintext highlighter-rouge">SNPs</code> so we can easily remember what the file contains.</li>
     </ol>
 
   </blockquote>
@@ -1337,7 +1335,7 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-search-bar" aria-label="comment box: Search bar"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Search bar</div>
 
-  <p>Different <span class="notranslate">Galaxy</span> servers may have tools available under different sections, therefore it is often useful to use the <strong>search bar</strong> at the top of the tool panel to find your tool.</p>
+  <p>Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the <strong>search bar</strong> at the top of the tool panel to find your tool.</p>
 
   <p>Additionally different servers may have multiple, similarly named tools which accomplish similar functions. For these tutorials, you should select precisely the one that is described. However, in your real analyses, you’ll need to search among the various options to find the one that works for you.</p>
 
@@ -1346,14 +1344,14 @@ the gray (preparing/queued) and yellow (running) states to become green (success
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-finding-exons" aria-label="hands-on box: Finding Exons"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Finding Exons</div>
 
-  <p>To find intersection we will be using <code class="language-plaintext highlighter-rouge">intersect intervals</code> tool from <a href="https://bedtools.readthedocs.io/en/latest/content/overview.html"><span class="notranslate">BED</span>Tools</a> package.</p>
+  <p>To find intersection we will be using <code class="language-plaintext highlighter-rouge">intersect intervals</code> tool from <a href="https://bedtools.readthedocs.io/en/latest/content/overview.html">BEDTools</a> package.</p>
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0"><strong><span class="notranslate">bed</span>tools intersect intervals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/<span class="notranslate">bed</span>tools/<span class="notranslate">bed</span>tools_intersectbed/2.30.0</span></span>  the intervals of two datasets side-by-side:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0"><strong>bedtools intersect intervals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0</span></span>  the intervals of two datasets side-by-side:</p>
 
       <p>Enter the word <code class="language-plaintext highlighter-rouge">intersect</code> in the search bar of the tool panel, and select the
-tool named <code class="language-plaintext highlighter-rouge"><span class="notranslate">bed</span>tools Intersect intervals</code></p>
+tool named <code class="language-plaintext highlighter-rouge">bedtools Intersect intervals</code></p>
 
       <ul>
         <li><em>“File A to intersect with B”</em>: Select <code class="language-plaintext highlighter-rouge">Exons</code></li>
@@ -1370,14 +1368,14 @@ tool named <code class="language-plaintext highlighter-rouge"><span class="notra
 
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-how-do-i-use-this-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-do-i-use-this-tool-contents" aria-expanded="true" aria-label="Toggle tip box: How do I use this tool?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How do I use this tool?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-    <p>All <span class="notranslate">Galaxy</span> tools include documentation. If you scroll down on this page, you will find the help of the tool.</p>
+    <p>All Galaxy tools include documentation. If you scroll down on this page, you will find the help of the tool.</p>
   </blockquote>
 
   <ol>
     <li>Click <strong>Run Tool</strong></li>
     <li>Wait for the job to finish</li>
     <li>
-      <p>View the resulting file (with the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon). If everything went okay, you should see a file that looks similar to this:</p>
+      <p>View the resulting file (with the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon). If everything went okay, you should see a file that looks similar to this:</p>
 
       <p><img src="../../images/101_joined.png" alt="Contents of the `Join` output dataset. " loading="lazy" /></p>
 
@@ -1392,7 +1390,7 @@ tool named <code class="language-plaintext highlighter-rouge"><span class="notra
 
     <ul>
       <li>For both SNP and EXON: <em>“region”</em> is actually changed to <code class="language-plaintext highlighter-rouge">position</code> with value <code class="language-plaintext highlighter-rouge">chr22</code></li>
-      <li>For EXON: <em>“Create one <span class="notranslate">BED</span> record per”</em> <code class="language-plaintext highlighter-rouge">Coding Exons</code> is selected (<em>not</em> <code class="language-plaintext highlighter-rouge">Whole Gene</code> as for the SNP data)</li>
+      <li>For EXON: <em>“Create one BED record per”</em> <code class="language-plaintext highlighter-rouge">Coding Exons</code> is selected (<em>not</em> <code class="language-plaintext highlighter-rouge">Whole Gene</code> as for the SNP data)</li>
       <li>Carefully inspect the remaining Table Browser settings if these two most common reasons for problems were correct in your tool executions</li>
     </ul>
   </blockquote>
@@ -1443,10 +1441,10 @@ tool named <code class="language-plaintext highlighter-rouge"><span class="notra
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0"><strong>Datamash</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0</span></span>  (operations on tabular data):</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0"><strong>Datamash</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0</span></span>  (operations on tabular data):</p>
 
       <ul>
-        <li><em>“Input tabular dataset”</em>: select the output dataset from <strong><span class="notranslate">bed</span>tools intersect intervals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Input tabular dataset”</em>: select the output dataset from <strong>bedtools intersect intervals</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Group by fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 4</code> (the column with the exon IDs)</li>
       </ul>
 
@@ -1536,7 +1534,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0"><strong>Select first</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0</span></span>  lines from a dataset (head):</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0"><strong>Select first</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0</span></span>  lines from a dataset (head):</p>
 
       <ul>
         <li><em>“File to select”</em>: The output from <strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1556,7 +1554,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
 <h2 id="recovering-exon-info">Recovering exon info</h2>
 
-<p>Congratulations! You have now determined which exons on chromosome 22 have the highest number of SNPs, but what else can we learn about them? One way to learn more about a genetic location is to view it in a genome browser. However, in the process of getting our answer, we have lost information about the location of these exons on the chromosome. But fear not, <span class="notranslate">Galaxy</span> saves all of your data, so we can recover this information quite easily.</p>
+<p>Congratulations! You have now determined which exons on chromosome 22 have the highest number of SNPs, but what else can we learn about them? One way to learn more about a genetic location is to view it in a genome browser. However, in the process of getting our answer, we have lost information about the location of these exons on the chromosome. But fear not, Galaxy saves all of your data, so we can recover this information quite easily.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-compare-two-datasets" aria-label="hands-on box: Compare two Datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Compare two Datasets</div>
@@ -1584,26 +1582,26 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
 <h2 id="displaying-data-in-ucsc-genome-browser">Displaying data in UCSC genome browser</h2>
 
-<p>A good way to learn about these exons is to look at their genomic surrounding. This can be done by using genome browsers. <span class="notranslate">Galaxy</span> can launch a genome browser such as IGV on your local machine, and it can connect to online genome browsers as well. An example of such an online genome browser is the UCSC genome browser.</p>
+<p>A good way to learn about these exons is to look at their genomic surrounding. This can be done by using genome browsers. Galaxy can launch a genome browser such as IGV on your local machine, and it can connect to online genome browsers as well. An example of such an online genome browser is the UCSC genome browser.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-ucsc-genome-browser" aria-label="hands-on box: UCSC genome browser"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: UCSC genome browser</div>
 
   <ol>
     <li>
-      <p>First, check that the <strong>database</strong> of your latest history dataset is <code class="language-plaintext highlighter-rouge">hg38</code>. If not, click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> pencil icon and modify the <strong>Database/Build:</strong> field to <code class="language-plaintext highlighter-rouge">Human Dec. 2013 (GRCh38/hg38) (hg38)</code>.</p>
+      <p>First, check that the <strong>database</strong> of your latest history dataset is <code class="language-plaintext highlighter-rouge">hg38</code>. If not, click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> pencil icon and modify the <strong>Database/Build:</strong> field to <code class="language-plaintext highlighter-rouge">Human Dec. 2013 (GRCh38/hg38) (hg38)</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-database-build-dbkey"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-database-build-dbkey-contents" aria-expanded="true" aria-label="Toggle tip box: Changing database/build (dbkey)"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing database/build (dbkey)<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Database/Build</strong> field</li>   <li>Select your desired database key from the dropdown list: <code class="language-plaintext highlighter-rouge">hg38</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-database-build-dbkey"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-database-build-dbkey-contents" aria-expanded="true" aria-label="Toggle tip box: Changing database/build (dbkey)"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing database/build (dbkey)<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Database/Build</strong> field</li>   <li>Select your desired database key from the dropdown list: <code class="language-plaintext highlighter-rouge">hg38</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
-      <p>Second, check that the <strong>format</strong> of your latest history dataset is <code class="language-plaintext highlighter-rouge"><span class="notranslate">bed</span></code>. If not, click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> pencil icon and modify the <strong>Datatype</strong> field to <code class="language-plaintext highlighter-rouge"><span class="notranslate">bed</span></code>.</p>
+      <p>Second, check that the <strong>format</strong> of your latest history dataset is <code class="language-plaintext highlighter-rouge">bed</code>. If not, click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> pencil icon and modify the <strong>Datatype</strong> field to <code class="language-plaintext highlighter-rouge">bed</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge"><span class="notranslate">bed</span></code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">bed</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
-      <p>Click on the <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-barchart</span> (<strong>Visualize</strong>) icon</p>
+      <p>Click on the <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> (<strong>Visualize</strong>) icon</p>
     </li>
     <li>
       <p>To <strong>visualize the data in UCSC genome browser</strong>, click on <code class="language-plaintext highlighter-rouge">display at UCSC main</code> now visible in the Visualize menu.</p>
@@ -1619,13 +1617,13 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
 <p>UCSC provides a large number of tracks that can help you get a sense of your genomic area, it contains common SNPs, repeats, genes, and much more (scroll down to find all possible tracks).</p>
 
-<h1 id="galaxy-management"><span class="notranslate">Galaxy</span> management</h1>
+<h1 id="galaxy-management">Galaxy management</h1>
 
-<p>In <span class="notranslate">Galaxy</span> your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> <strong>History Options</strong> menu on the top of the history panel:</p>
+<p>In Galaxy your analyses live in histories such as your current one. Histories can be very large, and you can have as many histories as you want. You can control your histories (switching, copying, sharing, creating a fresh history, etc.) in the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> <strong>History Options</strong> menu on the top of the history panel:</p>
 
 <p><img src="../../images/history_options_menu.png" alt="History options menu. " loading="lazy" /></p>
 
-<p>If you create a new history, your current history does not disappear. If you would like to list all of your histories just use the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> Multi-history view:</p>
+<p>If you create a new history, your current history does not disappear. If you would like to list all of your histories just use the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-columns</span> Multi-history view:</p>
 
 <p><img src="../../images/101_history-overview.png" alt="Overview of histories with their datasets. " loading="lazy" /></p>
 
@@ -1638,75 +1636,75 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
   <li>copy datasets between histories (by dragging and dropping)</li>
 </ul>
 
-<p>You can always return to your analysis view by clicking on Home icon <i class="fas fa-home" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-home</span> (<strong>Analyze Data</strong> on older versions of <span class="notranslate">Galaxy</span>) in the top menu bar.</p>
+<p>You can always return to your analysis view by clicking on Home icon <i class="fas fa-home" aria-hidden="true"></i><span class="visually-hidden">galaxy-home</span> (<strong>Analyze Data</strong> on older versions of Galaxy) in the top menu bar.</p>
 
-<h2 id="convert-your-analysis-history-into-a-workflow">Convert your analysis history into a <span class="notranslate">workflow</span></h2>
+<h2 id="convert-your-analysis-history-into-a-workflow">Convert your analysis history into a workflow</h2>
 
-<p>When you look carefully at your history, you can see that it contains all the steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with <span class="notranslate">Galaxy</span> preserving all parameter settings applied at every step. But when you receive new data, or a new report is requested, it would be tedious to do each step over again. Wouldn’t it be nice to just convert this history into a <span class="notranslate">workflow</span> that we will be able to execute again and again?</p>
+<p>When you look carefully at your history, you can see that it contains all the steps of our analysis, from the beginning to the end. By building this history we have actually built a complete record of our analysis with Galaxy preserving all parameter settings applied at every step. But when you receive new data, or a new report is requested, it would be tedious to do each step over again. Wouldn’t it be nice to just convert this history into a workflow that we will be able to execute again and again?</p>
 
-<p><span class="notranslate">Galaxy</span> makes this very easy with the <code class="language-plaintext highlighter-rouge">Extract <span class="notranslate">workflow</span></code> option. This means any time you want to build a <span class="notranslate">workflow</span>, you can just perform the steps once manually, and then convert it to a <span class="notranslate">workflow</span>, so that next time it will be a lot less work to do the same analysis.</p>
+<p>Galaxy makes this very easy with the <code class="language-plaintext highlighter-rouge">Extract workflow</code> option. This means any time you want to build a workflow, you can just perform the steps once manually, and then convert it to a workflow, so that next time it will be a lot less work to do the same analysis.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-workflow" aria-label="hands-on box: Extract workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extract <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-extract-workflow" aria-label="hands-on box: Extract workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extract workflow</div>
 
   <ol>
     <li>
-      <p><strong>Clean up</strong> your history: remove any failed (red) jobs from your history by clicking on the <i class="fas fa-trash" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-delete</span> button.</p>
+      <p><strong>Clean up</strong> your history: remove any failed (red) jobs from your history by clicking on the <i class="fas fa-trash" aria-hidden="true"></i><span class="visually-hidden">galaxy-delete</span> button.</p>
 
-      <p>This will make the creation of the <span class="notranslate">workflow</span> easier.</p>
+      <p>This will make the creation of the workflow easier.</p>
     </li>
     <li>
-      <p>Click on <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> (<strong>History options</strong>) at the top of your history panel and select <strong>Extract <span class="notranslate">workflow</span></strong>.</p>
+      <p>Click on <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> (<strong>History options</strong>) at the top of your history panel and select <strong>Extract workflow</strong>.</p>
 
       <p><img src="../../images/history_menu_extract_workflow.png" alt="`Extract Workflow` entry in the history options menu. " loading="lazy" /></p>
 
-      <p>The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the <span class="notranslate">workflow</span>.</p>
+      <p>The central panel will show the content of the history in reverse order (oldest on top), and you will be able to choose which steps to include in the workflow.</p>
 
       <p><img src="../../images/101_25.png" alt="Selection of steps for `Extract Workflow` from history. " loading="lazy" /></p>
     </li>
     <li>
-      <p>Replace the <strong><span class="notranslate">Workflow</span> name</strong> to something more descriptive, for example <code class="language-plaintext highlighter-rouge">Find exons with the highest number of features</code>.</p>
+      <p>Replace the <strong>Workflow name</strong> to something more descriptive, for example <code class="language-plaintext highlighter-rouge">Find exons with the highest number of features</code>.</p>
 
-      <p>While we created this <span class="notranslate">workflow</span> initially to analyse SNPs, if we had similarly formatted datasets we could use this <span class="notranslate">workflow</span> to find different features.</p>
+      <p>While we created this workflow initially to analyse SNPs, if we had similarly formatted datasets we could use this workflow to find different features.</p>
     </li>
     <li>
-      <p>If there are any steps that shouldn’t be included in the <span class="notranslate">workflow</span>, you can <strong>uncheck</strong> them in the first column of boxes.</p>
+      <p>If there are any steps that shouldn’t be included in the workflow, you can <strong>uncheck</strong> them in the first column of boxes.</p>
     </li>
     <li>
-      <p>Click on the <strong>Create <span class="notranslate">Workflow</span></strong> button near the top.</p>
+      <p>Click on the <strong>Create Workflow</strong> button near the top.</p>
 
-      <p>You will get a message that the <span class="notranslate">workflow</span> was created. But where did it go?</p>
+      <p>You will get a message that the workflow was created. But where did it go?</p>
     </li>
     <li>
-      <p>Click on <strong><span class="notranslate">Workflow</span></strong> in the top menu of <span class="notranslate">Galaxy</span>. Here you have a list of all your workflows. Your newly created <span class="notranslate">workflow</span> should be listed at the top:</p>
+      <p>Click on <strong>Workflow</strong> in the top menu of Galaxy. Here you have a list of all your workflows. Your newly created workflow should be listed at the top:</p>
 
       <p><img src="../../images/101_26.png" alt="`Your workflows` list. " loading="lazy" /></p>
     </li>
   </ol>
 </blockquote>
 
-<h2 id="the-workflow-editor">The <span class="notranslate">workflow</span> editor</h2>
+<h2 id="the-workflow-editor">The workflow editor</h2>
 
-<p>We can examine the <span class="notranslate">workflow</span> in <span class="notranslate">Galaxy</span>’s <span class="notranslate">workflow</span> editor. Here you can view/change the parameter settings of each step, add and remove tools, and connect an output from one tool to the input of another, all in an easy and graphical manner. You can also use this editor to build workflows from scratch.</p>
+<p>We can examine the workflow in Galaxy’s workflow editor. Here you can view/change the parameter settings of each step, add and remove tools, and connect an output from one tool to the input of another, all in an easy and graphical manner. You can also use this editor to build workflows from scratch.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-workflow-1" aria-label="hands-on box: Extract workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extract <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-extract-workflow-1" aria-label="hands-on box: Extract workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extract workflow</div>
 
   <ol>
     <li>
-      <p>Click on the triangle to the right of your <span class="notranslate">workflow</span> name.</p>
+      <p>Click on the triangle to the right of your workflow name.</p>
 
       <p><img src="../../images/101_27.png" alt="`Edit` option in the menu for the latest workflow. " loading="lazy" /></p>
     </li>
     <li>
-      <p>Select <strong>Edit</strong> to launch the <span class="notranslate">workflow</span> editor. You should see something like this:</p>
+      <p>Select <strong>Edit</strong> to launch the workflow editor. You should see something like this:</p>
 
       <p><img src="../../images/101_28.png" alt="Workflow editor. " loading="lazy" /></p>
 
-      <p>When you click on a <span class="notranslate">workflow</span> step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.</p>
+      <p>When you click on a workflow step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-hiding-intermediate-steps"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-hiding-intermediate-steps-contents" aria-expanded="true" aria-label="Toggle tip box: Hiding intermediate steps"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Hiding intermediate steps<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>When a <span class="notranslate">workflow</span> is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a <span class="notranslate">workflow</span> will be shown, but we can explicitly tell <span class="notranslate">Galaxy</span> which outputs to show and which to hide for a given <span class="notranslate">workflow</span>. This behaviour is controlled by the little checkbox in front of every output dataset:</p>   <p><img src="/training-material/shared/images/workflow_editor_mark_output.png" alt="Asterisk for `out_file1` in the `Select First` tool" /></p> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-hiding-intermediate-steps"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-hiding-intermediate-steps-contents" aria-expanded="true" aria-label="Toggle tip box: Hiding intermediate steps"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Hiding intermediate steps<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which outputs to show and which to hide for a given workflow. This behaviour is controlled by the little checkbox in front of every output dataset:</p>   <p><img src="/training-material/shared/images/workflow_editor_mark_output.png" alt="Asterisk for `out_file1` in the `Select First` tool" /></p> </blockquote>
     </li>
     <li>
       <p>Re-arrange the boxes so you can clearly see the data flow. The default automatic layout hides some of the connections due to overlapping and box placement.</p>
@@ -1714,10 +1712,10 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
     <li>
       <p>Make sure the  <strong>check boxes</strong> for <code class="language-plaintext highlighter-rouge">out_file1</code> in the <code class="language-plaintext highlighter-rouge">Select First</code> and <code class="language-plaintext highlighter-rouge">Compare two Datasets</code> tools are selected. Make sure that everything else is not selected.</p>
 
-      <p>Now, when we run the <span class="notranslate">workflow</span>, we will only see the final two outputs, i.e. the table with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser.</p>
+      <p>Now, when we run the workflow, we will only see the final two outputs, i.e. the table with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser.</p>
     </li>
     <li>
-      <p>The box named <code class="language-plaintext highlighter-rouge">Exons</code> is named ok, but we want to change <code class="language-plaintext highlighter-rouge">SNPs</code> since this <span class="notranslate">workflow</span> is not specific to SNPs</p>
+      <p>The box named <code class="language-plaintext highlighter-rouge">Exons</code> is named ok, but we want to change <code class="language-plaintext highlighter-rouge">SNPs</code> since this workflow is not specific to SNPs</p>
 
       <ul>
         <li><strong>Click</strong> on the box corresponding to the <code class="language-plaintext highlighter-rouge">SNPs</code> input dataset</li>
@@ -1728,7 +1726,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
       <p>Let’s also <strong>rename the outputs</strong>:</p>
 
       <ul>
-        <li>Click on the <code class="language-plaintext highlighter-rouge">Select first</code> tool in the <span class="notranslate">workflow</span> editor</li>
+        <li>Click on the <code class="language-plaintext highlighter-rouge">Select first</code> tool in the workflow editor</li>
         <li>In the menu on the right click on <code class="language-plaintext highlighter-rouge">Configure Output: 'out_file1'</code>
           <ul>
             <li>Under <code class="language-plaintext highlighter-rouge">Rename dataset</code>, and enter a descriptive name for the output dataset like <code class="language-plaintext highlighter-rouge">Top 5 exon IDs</code></li>
@@ -1742,10 +1740,10 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
       <p><strong>Repeat</strong> this for the output of the <code class="language-plaintext highlighter-rouge">Compare two Datasets</code> tool, naming it <code class="language-plaintext highlighter-rouge">Top 5 exons</code></p>
     </li>
     <li>
-      <p><strong>Save your <span class="notranslate">workflow</span></strong> (important!) by clicking on the <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> icon at the top right of the screen.</p>
+      <p><strong>Save your workflow</strong> (important!) by clicking on the <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> icon at the top right of the screen.</p>
     </li>
     <li>
-      <p><strong>Return</strong> to the analysis view by clicking on the Home icon <i class="fas fa-home" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-home</span> (or <strong>Analyze Data</strong> on older versions of <span class="notranslate">Galaxy</span>) at the top menu bar.</p>
+      <p><strong>Return</strong> to the analysis view by clicking on the Home icon <i class="fas fa-home" aria-hidden="true"></i><span class="visually-hidden">galaxy-home</span> (or <strong>Analyze Data</strong> on older versions of Galaxy) at the top menu bar.</p>
     </li>
   </ol>
 
@@ -1753,39 +1751,39 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-3" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
-  <p>We could <strong>validate</strong> our newly built <span class="notranslate">workflow</span> by running it on the same input datasets that we used at the start of this tutorial, in order to make sure we do obtain the same results.</p>
+  <p>We could <strong>validate</strong> our newly built workflow by running it on the same input datasets that we used at the start of this tutorial, in order to make sure we do obtain the same results.</p>
 </blockquote>
 
-<h2 id="run-workflow-on-different-data">Run <span class="notranslate">workflow</span> on different data</h2>
+<h2 id="run-workflow-on-different-data">Run workflow on different data</h2>
 
-<p>Now that we have built our <span class="notranslate">workflow</span>, let’s use it on some different data. For example, let’s find out which exons have the highest number of repeat elements.</p>
+<p>Now that we have built our workflow, let’s use it on some different data. For example, let’s find out which exons have the highest number of repeat elements.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-run-workflow" aria-label="hands-on box: Run workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-run-workflow" aria-label="hands-on box: Run workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run workflow</div>
 
   <ol>
     <li>
       <p>Create a <strong>new history</strong> and give it a name.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-1-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-1-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
-      <p>We will need the list of exons again. We don’t have to get this from UCSC again, we can just <strong>copy</strong> it from our previous history. The easiest way to do this is to go to the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> history overview. Here you can just drag and drop datasets from one history to another.</p>
+      <p>We will need the list of exons again. We don’t have to get this from UCSC again, we can just <strong>copy</strong> it from our previous history. The easiest way to do this is to go to the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-columns</span> history overview. Here you can just drag and drop datasets from one history to another.</p>
 
       <p><img src="../../images/copying_data.gif" alt="Drag and drop of `Exons` dataset in the history overview. " loading="lazy" /></p>
     </li>
     <li>
-      <p>Click the Home icon <i class="fas fa-home" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-home</span> (or <strong>Analyze Data</strong> on older <span class="notranslate">Galaxy</span> versions) at the top to return to the main analysis window</p>
+      <p>Click the Home icon <i class="fas fa-home" aria-hidden="true"></i><span class="visually-hidden">galaxy-home</span> (or <strong>Analyze Data</strong> on older Galaxy versions) at the top to return to the main analysis window</p>
     </li>
     <li>
       <p><span class="tool" data-tool="upload1" title="Tested with upload1"><strong>Upload Data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>  the Repeats file from <a href="https://doi.org/10.5281/zenodo.4104428">Zenodo</a></p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-Repeats.<span class="notranslate">bed</span>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-Repeats.bed
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <blockquote class="tip">
         <div class="box-title tip-title" id="tip-obtaining-the-data-from-ucsc"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-obtaining-the-data-from-ucsc-contents" aria-expanded="true" aria-label="Toggle tip box: Obtaining the Data from UCSC"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Obtaining the Data from UCSC<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1808,32 +1806,32 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
                 <li><em>“assembly”</em>: <code class="language-plaintext highlighter-rouge">Dec. 2013 (GRCh38/hg38)</code></li>
                 <li><em>“group”</em>: <code class="language-plaintext highlighter-rouge">Repeats</code></li>
                 <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“region”</em> should be changed to <code class="language-plaintext highlighter-rouge">position</code> with value <code class="language-plaintext highlighter-rouge">chr22</code></li>
-                <li><em>“output format”</em> should be changed to <code class="language-plaintext highlighter-rouge"><span class="notranslate">BED</span> - browser extensible data</code></li>
-                <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Send output to”</em> should have the option <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span></code> checked</li>
+                <li><em>“output format”</em> should be changed to <code class="language-plaintext highlighter-rouge">BED - browser extensible data</code></li>
+                <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Send output to”</em> should have the option <code class="language-plaintext highlighter-rouge">Galaxy</code> checked</li>
               </ul>
             </li>
           </ol>
 
-          <p>Click on <strong>get output</strong> and then <strong>Send query to <span class="notranslate">Galaxy</span></strong> on the next screen.</p>
+          <p>Click on <strong>get output</strong> and then <strong>Send query to Galaxy</strong> on the next screen.</p>
         </blockquote>
       </blockquote>
     </li>
     <li>
-      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">Repeats</code></p>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">Repeats</code></p>
     </li>
     <li>
-      <p>Open the <strong><span class="notranslate">workflow</span> menu</strong> (top menu bar). Find the <span class="notranslate">workflow</span> you made in the previous section, and select the option <code class="language-plaintext highlighter-rouge">Run</code>.</p>
+      <p>Open the <strong>workflow menu</strong> (top menu bar). Find the workflow you made in the previous section, and select the option <code class="language-plaintext highlighter-rouge">Run</code>.</p>
 
       <p><img src="../../images/101_37.png" alt="`Run` option in the workflow menu. " loading="lazy" /></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>   <li>Configure the <span class="notranslate">workflow</span> as needed</li>   <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-running-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Running a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>   <li>Configure the workflow as needed</li>   <li>Click the <strong>Run Workflow</strong> button at the top-right of the screen</li>   <li>You may have to refresh your history to see the queued jobs</li> </ul> </blockquote>
 
-      <p>The central panel will change to allow you to configure and launch the <span class="notranslate">workflow</span>.</p>
+      <p>The central panel will change to allow you to configure and launch the workflow.</p>
     </li>
-    <li>Select appropriate datasets for the inputs as shown below, then scroll down and click <code class="language-plaintext highlighter-rouge">Run <span class="notranslate">workflow</span></code>.
+    <li>Select appropriate datasets for the inputs as shown below, then scroll down and click <code class="language-plaintext highlighter-rouge">Run workflow</code>.
       <ul>
-        <li>Select <code class="language-plaintext highlighter-rouge">Expand to full <span class="notranslate">workflow</span> form</code></li>
+        <li>Select <code class="language-plaintext highlighter-rouge">Expand to full workflow form</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Exons”</em>: the <code class="language-plaintext highlighter-rouge">Exons</code> file you copied from our previous history</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Features”</em>: the <code class="language-plaintext highlighter-rouge">Repeats</code> file we downloaded from UCSC</li>
       </ul>
@@ -1841,16 +1839,16 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
       <p><img src="../../images/101_38.png" alt="Settings for running the workflow. " loading="lazy" /></p>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-potential-workflow-issues" aria-label="comment box: Potential workflow issues"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Potential <span class="notranslate">workflow</span> issues</div>
+        <div class="box-title comment-title" id="comment-potential-workflow-issues" aria-label="comment box: Potential workflow issues"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Potential workflow issues</div>
 
         <ul>
-          <li><span class="notranslate">Galaxy</span> validates the <span class="notranslate">workflow</span> inputs to ensure they’re correct. It may show a validation error at the start, until you select <code class="language-plaintext highlighter-rouge">Exons</code> for the Exons input, and your repeats for the Features input.</li>
+          <li>Galaxy validates the workflow inputs to ensure they’re correct. It may show a validation error at the start, until you select <code class="language-plaintext highlighter-rouge">Exons</code> for the Exons input, and your repeats for the Features input.</li>
           <li>If you see an “Invalid column choice” error, you need to specify which column you want to use. If you have to type the column number, you need to type just the number e.g. <code class="language-plaintext highlighter-rouge">4</code> (not <code class="language-plaintext highlighter-rouge">Column 4</code> or anything else).</li>
         </ul>
       </blockquote>
     </li>
     <li>
-      <p>Once the <span class="notranslate">workflow</span> has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:</p>
+      <p>Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:</p>
 
       <p><img src="../../images/101_39.png" alt="Datasets appearing in the history. " loading="lazy" /></p>
     </li>
@@ -1859,7 +1857,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-unhiding-hidden-datasets" aria-label="comment box: Unhiding hidden datasets"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Unhiding hidden datasets</div>
-  <p>Because most intermediate steps of the <span class="notranslate">workflow</span> were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, you can click the “## hidden” just below the history’s name.</p>
+  <p>Because most intermediate steps of the workflow were hidden, once it is finished you will only see the final two datasets. If we want to view the intermediate files after all, you can click the “## hidden” just below the history’s name.</p>
 </blockquote>
 
 <blockquote class="question">
@@ -1869,14 +1867,14 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
 <h2 id="share-your-work">Share your work</h2>
 
-<p>One of the most important features of <span class="notranslate">Galaxy</span> comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. <span class="notranslate">Galaxy</span> enables users to easily share their workflows and histories with others.</p>
+<p>One of the most important features of Galaxy comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. Galaxy enables users to easily share their workflows and histories with others.</p>
 
-<p>To share a history, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon in the history panel and select <code class="language-plaintext highlighter-rouge">Share or Publish</code>. On this page you can do 3 things:</p>
+<p>To share a history, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon in the history panel and select <code class="language-plaintext highlighter-rouge">Share or Publish</code>. On this page you can do 3 things:</p>
 
 <ol>
   <li><strong>Make History Accessible via Link</strong>. This generates a link that you can give out to others. Anybody with this link will be able to view your history.</li>
   <li><strong>Make History Accessible and Publish</strong>. This will not only create a link, but will also publish your history. This means your history will be listed under <code class="language-plaintext highlighter-rouge">Shared Data → Histories</code> in the top menu.</li>
-  <li><strong>Share with a user</strong>. This will share the history only with specific users on the <span class="notranslate">Galaxy</span> instance.</li>
+  <li><strong>Share with a user</strong>. This will share the history only with specific users on the Galaxy instance.</li>
 </ol>
 
 <blockquote class="comment">
@@ -1887,18 +1885,18 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-share-history-and-workflow" aria-label="hands-on box: Share history and workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Share history and <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-share-history-and-workflow" aria-label="hands-on box: Share history and workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Share history and workflow</div>
 
   <ol>
     <li>Share one of your histories with your neighbour.</li>
-    <li>See if you can do the same with your <span class="notranslate">workflow</span>!</li>
-    <li>Find the history and/or <span class="notranslate">workflow</span> shared by your neighbour. Histories shared with specific users can be accessed by those users in their <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> history menu under <code class="language-plaintext highlighter-rouge">Histories shared with me</code>.</li>
+    <li>See if you can do the same with your workflow!</li>
+    <li>Find the history and/or workflow shared by your neighbour. Histories shared with specific users can be accessed by those users in their <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> history menu under <code class="language-plaintext highlighter-rouge">Histories shared with me</code>.</li>
   </ol>
 </blockquote>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p><i class="fas fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> Well done! You have just performed your first analysis in <span class="notranslate">Galaxy</span>. You also created a <span class="notranslate">workflow</span> from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.</p>
+<p><i class="fas fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> Well done! You have just performed your first analysis in Galaxy. You also created a workflow from your analysis so you can easily repeat the exact same analysis on other datasets. Additionally you shared your results and methods with others.</p>
 
 
                 

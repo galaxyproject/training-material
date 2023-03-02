@@ -642,7 +642,7 @@
             <div class="col-sm-10">
                  
 
-                <p>Many linux sysadmins with years and years of experience bemoan systemd (“it’s infecting everything! Now it wants to mess with time? And DNS???”) and jou<span class="notranslate">rna</span>lctl (“unix was supposed to be about files!”) and while those are fair complaints and make systemd and friends wildly more opaque than traditional SysV and logging to files, there are some benefits that can be obtained, and may be interesting even to the wise old admins. There is a lot of convenience in systemd that can make the tradeoffs worth it.</p>
+                <p>Many linux sysadmins with years and years of experience bemoan systemd (“it’s infecting everything! Now it wants to mess with time? And DNS???”) and journalctl (“unix was supposed to be about files!”) and while those are fair complaints and make systemd and friends wildly more opaque than traditional SysV and logging to files, there are some benefits that can be obtained, and may be interesting even to the wise old admins. There is a lot of convenience in systemd that can make the tradeoffs worth it.</p>
 
 <p>This tutorial assumes a working knowledge of unix systems (files, directories, services, logging, <code class="language-plaintext highlighter-rouge">/var/log</code>, etc.).</p>
 
@@ -672,7 +672,7 @@
       <li><a href="#further-reading-1" id="markdown-toc-further-reading-1">Further Reading</a></li>
     </ol>
   </li>
-  <li><a href="#journald" id="markdown-toc-journald">jou<span class="notranslate">rna</span>ld</a>    <ol>
+  <li><a href="#journald" id="markdown-toc-journald">journald</a>    <ol>
       <li><a href="#per-unit-logs" id="markdown-toc-per-unit-logs">Per Unit Logs</a></li>
       <li><a href="#logs-for-a-group-of-units" id="markdown-toc-logs-for-a-group-of-units">Logs for a Group of Units</a></li>
       <li><a href="#dropping-logs" id="markdown-toc-dropping-logs">Dropping Logs</a></li>
@@ -704,21 +704,21 @@
 <h2 id="unit-files">Unit Files</h2>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Unit]
-Description=<span class="notranslate">Galaxy</span>
+Description=Galaxy
 After=network.target
 After=time-sync.target
 
 [Service]
 UMask=022
 Type=simple
-User=<span class="notranslate">galaxy</span>
-Group=<span class="notranslate">galaxy</span>
-WorkingDirectory=/srv/<span class="notranslate">galaxy</span>/server
+User=galaxy
+Group=galaxy
+WorkingDirectory=/srv/galaxy/server
 TimeoutStartSec=60
-ExecStart=/srv/<span class="notranslate">galaxy</span>/venv/bin/<span class="notranslate">galaxy</span>ctl start --foreground --quiet
+ExecStart=/srv/galaxy/venv/bin/galaxyctl start --foreground --quiet
 
-Environment=HOME=/srv/<span class="notranslate">galaxy</span>
-Environment=VIRTUAL_ENV=/srv/<span class="notranslate">galaxy</span>/venv
+Environment=HOME=/srv/galaxy
+Environment=VIRTUAL_ENV=/srv/galaxy/venv
 
 MemoryAccounting=yes
 MemoryLimit=16G
@@ -746,27 +746,27 @@ WantedBy=multi-user.target
 
 <p>Status is generally your first step looking at any unit file.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>systemctl <span class="notranslate">galaxy</span>
-● <span class="notranslate">galaxy</span>.service - <span class="notranslate">Galaxy</span>
-     Loaded: loaded <span class="o">(</span>/etc/systemd/system/<span class="notranslate">galaxy</span>.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>systemctl galaxy
+● galaxy.service - Galaxy
+     Loaded: loaded <span class="o">(</span>/etc/systemd/system/galaxy.service<span class="p">;</span> enabled<span class="p">;</span> vendor preset: enabled<span class="o">)</span>
      Active: active <span class="o">(</span>running<span class="o">)</span> since Tue 2022-06-28 15:17:04 CEST<span class="p">;</span> 5 days ago
    Main PID: 217446
       Tasks: 73 <span class="o">(</span>limit: 9521<span class="o">)</span>
      Memory: 1.7G <span class="o">(</span>limit: 16.0G<span class="o">)</span>
         CPU: 18h 16min 20.685s
-     CGroup: /system.slice/<span class="notranslate">galaxy</span>.service
-             ├─217446 /srv/<span class="notranslate">galaxy</span>/venv/bin/python /srv/<span class="notranslate">galaxy</span>/venv/bin/<span class="notranslate">galaxy</span>ctl start <span class="nt">--foreground</span> <span class="nt">--quiet</span>
-             ├─217467 /srv/<span class="notranslate">galaxy</span>/venv/bin/python /srv/<span class="notranslate">galaxy</span>/venv/bin/supervisord <span class="nt">-c</span> /srv/<span class="notranslate">galaxy</span>/var/gravity/supervisor/supervisord.conf <span class="nt">--nodaemon</span>
-             ├─217484 /bin/tail <span class="nt">-f</span> /srv/<span class="notranslate">galaxy</span>/var/gravity/supervisor/supervisord.log
-             ├─217487 /srv/<span class="notranslate">galaxy</span>/venv/bin/python /srv/<span class="notranslate">galaxy</span>/venv/bin/gunicorn <span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.fast_factory:factory<span class="o">()</span> <span class="nt">--timeout</span> 300 <span class="nt">--pythonpath</span> lib <span class="nt">-k</span> <span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.workers.Worker <span class="nt">-b</span> unix:/srv/<span class="notranslate">galaxy</span>/var/config/gunicorn.sock <span class="nt">--workers</span><span class="o">=</span>2 <span class="nt">--config</span> python:<span class="notranslate">galaxy</span>.web_stack.gunicorn_config <span class="nt">--preload</span> <span class="nt">--forwarded-allow-ips</span><span class="o">=</span><span class="k">*</span>
-             ├─245320 /srv/<span class="notranslate">galaxy</span>/venv/bin/python /srv/<span class="notranslate">galaxy</span>/venv/bin/gunicorn <span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.fast_factory:factory<span class="o">()</span> <span class="nt">--timeout</span> 300 <span class="nt">--pythonpath</span> lib <span class="nt">-k</span> <span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.workers.Worker <span class="nt">-b</span> unix:/srv/<span class="notranslate">galaxy</span>/var/config/gunicorn.sock <span class="nt">--workers</span><span class="o">=</span>2 <span class="nt">--config</span> python:<span class="notranslate">galaxy</span>.web_stack.gunicorn_config <span class="nt">--preload</span> <span class="nt">--forwarded-allow-ips</span><span class="o">=</span><span class="k">*</span>
-             ├─245322 /srv/<span class="notranslate">galaxy</span>/venv/bin/python /srv/<span class="notranslate">galaxy</span>/venv/bin/gunicorn <span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.fast_factory:factory<span class="o">()</span> <span class="nt">--timeout</span> 300 <span class="nt">--pythonpath</span> lib <span class="nt">-k</span> <span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.workers.Worker <span class="nt">-b</span> unix:/srv/<span class="notranslate">galaxy</span>/var/config/gunicorn.sock <span class="nt">--workers</span><span class="o">=</span>2 <span class="nt">--config</span> python:<span class="notranslate">galaxy</span>.web_stack.gunicorn_config <span class="nt">--preload</span> <span class="nt">--forwarded-allow-ips</span><span class="o">=</span><span class="k">*</span>
-             ├─245334 /srv/<span class="notranslate">galaxy</span>/venv/bin/python /srv/<span class="notranslate">galaxy</span>/venv/bin/celery <span class="nt">--app</span> <span class="notranslate">galaxy</span>.celery worker <span class="nt">--concurrency</span> 2 <span class="nt">--loglevel</span> DEBUG <span class="nt">--pool</span> th<span class="notranslate">reads</span> <span class="nt">--queues</span> celery,<span class="notranslate">galaxy</span>.inte<span class="notranslate">rna</span>l,<span class="notranslate">galaxy</span>.exte<span class="notranslate">rna</span>l
-             ├─245401 /srv/<span class="notranslate">galaxy</span>/venv/bin/python <span class="nt">-c</span> from multiprocessing.resource_tracker import main<span class="p">;</span>main<span class="o">(</span>7<span class="o">)</span>
-             ├─245582 /srv/<span class="notranslate">galaxy</span>/venv/bin/python /srv/<span class="notranslate">galaxy</span>/venv/bin/celery <span class="nt">--app</span> <span class="notranslate">galaxy</span>.celery beat <span class="nt">--loglevel</span> DEBUG <span class="nt">--schedule</span> /srv/<span class="notranslate">galaxy</span>/var/gravity/celery-beat-schedule
-             ├─245806 python ./lib/<span class="notranslate">galaxy</span>/main.py <span class="nt">-c</span> /srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml <span class="nt">--server-name</span><span class="o">=</span>handler_0 <span class="nt">--attach-to-pool</span><span class="o">=</span>job-handler <span class="nt">--attach-to-pool</span><span class="o">=</span><span class="notranslate">workflow</span>-scheduler <span class="nt">--pid-file</span><span class="o">=</span>/srv/<span class="notranslate">galaxy</span>/var/gravity/supervisor/handler_0.pid
-             ├─246274 python ./lib/<span class="notranslate">galaxy</span>/main.py <span class="nt">-c</span> /srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml <span class="nt">--server-name</span><span class="o">=</span>handler_1 <span class="nt">--attach-to-pool</span><span class="o">=</span>job-handler <span class="nt">--attach-to-pool</span><span class="o">=</span><span class="notranslate">workflow</span>-scheduler <span class="nt">--pid-file</span><span class="o">=</span>/srv/<span class="notranslate">galaxy</span>/var/gravity/supervisor/handler_1.pid
-             └─246737 python ./lib/<span class="notranslate">galaxy</span>/main.py <span class="nt">-c</span> /srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml <span class="nt">--server-name</span><span class="o">=</span>handler_2 <span class="nt">--attach-to-pool</span><span class="o">=</span>job-handler <span class="nt">--attach-to-pool</span><span class="o">=</span><span class="notranslate">workflow</span>-scheduler <span class="nt">--pid-file</span><span class="o">=</span>/srv/<span class="notranslate">galaxy</span>/var/gravity/supervisor/handler_2.pid
+     CGroup: /system.slice/galaxy.service
+             ├─217446 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/galaxyctl start <span class="nt">--foreground</span> <span class="nt">--quiet</span>
+             ├─217467 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/supervisord <span class="nt">-c</span> /srv/galaxy/var/gravity/supervisor/supervisord.conf <span class="nt">--nodaemon</span>
+             ├─217484 /bin/tail <span class="nt">-f</span> /srv/galaxy/var/gravity/supervisor/supervisord.log
+             ├─217487 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/gunicorn galaxy.webapps.galaxy.fast_factory:factory<span class="o">()</span> <span class="nt">--timeout</span> 300 <span class="nt">--pythonpath</span> lib <span class="nt">-k</span> galaxy.webapps.galaxy.workers.Worker <span class="nt">-b</span> unix:/srv/galaxy/var/config/gunicorn.sock <span class="nt">--workers</span><span class="o">=</span>2 <span class="nt">--config</span> python:galaxy.web_stack.gunicorn_config <span class="nt">--preload</span> <span class="nt">--forwarded-allow-ips</span><span class="o">=</span><span class="k">*</span>
+             ├─245320 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/gunicorn galaxy.webapps.galaxy.fast_factory:factory<span class="o">()</span> <span class="nt">--timeout</span> 300 <span class="nt">--pythonpath</span> lib <span class="nt">-k</span> galaxy.webapps.galaxy.workers.Worker <span class="nt">-b</span> unix:/srv/galaxy/var/config/gunicorn.sock <span class="nt">--workers</span><span class="o">=</span>2 <span class="nt">--config</span> python:galaxy.web_stack.gunicorn_config <span class="nt">--preload</span> <span class="nt">--forwarded-allow-ips</span><span class="o">=</span><span class="k">*</span>
+             ├─245322 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/gunicorn galaxy.webapps.galaxy.fast_factory:factory<span class="o">()</span> <span class="nt">--timeout</span> 300 <span class="nt">--pythonpath</span> lib <span class="nt">-k</span> galaxy.webapps.galaxy.workers.Worker <span class="nt">-b</span> unix:/srv/galaxy/var/config/gunicorn.sock <span class="nt">--workers</span><span class="o">=</span>2 <span class="nt">--config</span> python:galaxy.web_stack.gunicorn_config <span class="nt">--preload</span> <span class="nt">--forwarded-allow-ips</span><span class="o">=</span><span class="k">*</span>
+             ├─245334 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/celery <span class="nt">--app</span> galaxy.celery worker <span class="nt">--concurrency</span> 2 <span class="nt">--loglevel</span> DEBUG <span class="nt">--pool</span> threads <span class="nt">--queues</span> celery,galaxy.internal,galaxy.external
+             ├─245401 /srv/galaxy/venv/bin/python <span class="nt">-c</span> from multiprocessing.resource_tracker import main<span class="p">;</span>main<span class="o">(</span>7<span class="o">)</span>
+             ├─245582 /srv/galaxy/venv/bin/python /srv/galaxy/venv/bin/celery <span class="nt">--app</span> galaxy.celery beat <span class="nt">--loglevel</span> DEBUG <span class="nt">--schedule</span> /srv/galaxy/var/gravity/celery-beat-schedule
+             ├─245806 python ./lib/galaxy/main.py <span class="nt">-c</span> /srv/galaxy/config/galaxy.yml <span class="nt">--server-name</span><span class="o">=</span>handler_0 <span class="nt">--attach-to-pool</span><span class="o">=</span>job-handler <span class="nt">--attach-to-pool</span><span class="o">=</span>workflow-scheduler <span class="nt">--pid-file</span><span class="o">=</span>/srv/galaxy/var/gravity/supervisor/handler_0.pid
+             ├─246274 python ./lib/galaxy/main.py <span class="nt">-c</span> /srv/galaxy/config/galaxy.yml <span class="nt">--server-name</span><span class="o">=</span>handler_1 <span class="nt">--attach-to-pool</span><span class="o">=</span>job-handler <span class="nt">--attach-to-pool</span><span class="o">=</span>workflow-scheduler <span class="nt">--pid-file</span><span class="o">=</span>/srv/galaxy/var/gravity/supervisor/handler_1.pid
+             └─246737 python ./lib/galaxy/main.py <span class="nt">-c</span> /srv/galaxy/config/galaxy.yml <span class="nt">--server-name</span><span class="o">=</span>handler_2 <span class="nt">--attach-to-pool</span><span class="o">=</span>job-handler <span class="nt">--attach-to-pool</span><span class="o">=</span>workflow-scheduler <span class="nt">--pid-file</span><span class="o">=</span>/srv/galaxy/var/gravity/supervisor/handler_2.pid
 </code></pre></div></div>
 
 <p>Helpful things to note:</p>
@@ -782,9 +782,9 @@ WantedBy=multi-user.target
 
 <h2 id="restarting">Restarting</h2>
 
-<p>Here’s one of the nice new things you can do, once you’ve moved away from SysV, and to the joyous world of systemd, restart multiple processes at once! If you have multiple <span class="notranslate">Galaxy</span> processes, use a wildcard to restart them all.</p>
+<p>Here’s one of the nice new things you can do, once you’ve moved away from SysV, and to the joyous world of systemd, restart multiple processes at once! If you have multiple Galaxy processes, use a wildcard to restart them all.</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl restart nginx <span class="notranslate">galaxy</span>-<span class="k">*</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl restart nginx galaxy-<span class="k">*</span>
 </code></pre></div></div>
 
 <h2 id="failed-units">Failed Units</h2>
@@ -804,18 +804,18 @@ WantedBy=multi-user.target
 
 <h2 id="masking-units">Masking Units</h2>
 
-<p>I never needed this until one day I did. Masking a unit makes it impossible to start, but if someone’s gone and installed a GUI on your server, inclusive of power management systems that trigger hibe<span class="notranslate">rna</span>tion when not in use, then this might be a useful trick. You can mask anything, service, or even targets like I had to in that case.</p>
+<p>I never needed this until one day I did. Masking a unit makes it impossible to start, but if someone’s gone and installed a GUI on your server, inclusive of power management systems that trigger hibernation when not in use, then this might be a useful trick. You can mask anything, service, or even targets like I had to in that case.</p>
 
 <p>This command will prevent the device from reaching or activating any of those targets. Useful for servers when you’re in a bind and don’t know how to remove power management:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">systemctl mask sleep.target suspend.target hibe<span class="notranslate">rna</span>te.target hybrid-sleep.target
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 </span></code></pre></div></div>
 
 <h2 id="unit-security-optimisation">Unit Security Optimisation</h2>
 
-<p>Because systemd uses cgroups, it can also give us a nice overview of any security issues that might be worth looking into. Here we see the <span class="notranslate">Galaxy</span> unit has a lot of</p>
+<p>Because systemd uses cgroups, it can also give us a nice overview of any security issues that might be worth looking into. Here we see the Galaxy unit has a lot of</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@gat-1:~$</span><span class="w"> </span>systemd-analyze security <span class="notranslate">galaxy</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">ubuntu@gat-1:~$</span><span class="w"> </span>systemd-analyze security galaxy
 <span class="go">  NAME                                       DESCRIPTION                                         EXPOSURE
 ✗ PrivateNetwork=                            Service has access to the host's network            0.5
 ✓ User=/DynamicUser=                         Service runs under a static non-root user identity  
@@ -829,10 +829,10 @@ WantedBy=multi-user.target
 ✗ CapabilityBoundingSet=~CAP_WAKE_ALARM      Service may program timers that wake up the system  0.1
 ✗ RestrictAddressFamilies=~AF_UNIX           Service may allocate local sockets                  0.1
 
-→ Overall exposure level for <span class="notranslate">galaxy</span>.service: 9.2 UNSAFE 😨
+→ Overall exposure level for galaxy.service: 9.2 UNSAFE 😨
 </span></code></pre></div></div>
 
-<p>Here we see a lot of low hanging fruit for restricting the abilities of <span class="notranslate">Galaxy</span>’s processes. This can also be applied to e.g. the job runner, or your webserver for additional security.</p>
+<p>Here we see a lot of low hanging fruit for restricting the abilities of Galaxy’s processes. This can also be applied to e.g. the job runner, or your webserver for additional security.</p>
 
 <h2 id="testing-with-systemd-run">Testing with systemd-run</h2>
 
@@ -857,7 +857,7 @@ graphical.target reached after 11.547s in userspace
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemd-analyze plot <span class="o">&gt;</span> plot.svg
 </code></pre></div></div>
 
-<figure id="figure-1"><img src="images/plot.svg" alt="waterfall graphic of systemd boot time, cloud-init has the most, largest red bars. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Notice how many units wait for network to finish being ready, and are stuck until that is ready. This image was generated from a training VM. Can you spot <span class="notranslate">Galaxy</span>? It doesn't show the red bars, because it does not currently notify systemd when it's done starting up.</figcaption></figure>
+<figure id="figure-1"><img src="images/plot.svg" alt="waterfall graphic of systemd boot time, cloud-init has the most, largest red bars. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Notice how many units wait for network to finish being ready, and are stuck until that is ready. This image was generated from a training VM. Can you spot Galaxy? It doesn't show the red bars, because it does not currently notify systemd when it's done starting up.</figcaption></figure>
 
 <h2 id="procons-of-systemd">Pro/Cons of systemd</h2>
 
@@ -969,9 +969,9 @@ WantedBy=timers.target
 
 <p>It has a description, an <code class="language-plaintext highlighter-rouge">OnCalendar</code> time since it’s a clock based timer, potentially a random delay as well (despite being <code class="language-plaintext highlighter-rouge">Sec</code>, can be expressed in any unit). The associated <code class="language-plaintext highlighter-rouge">motd-news.service</code> does not need to be mentioned, it will be started by default based on the name of the timer.</p>
 
-<p>What about logs? They’re in jou<span class="notranslate">rna</span>lctl now! Let’s take advantage of some of the things we learned earlier, like, wildcards!</p>
+<p>What about logs? They’re in journalctl now! Let’s take advantage of some of the things we learned earlier, like, wildcards!</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">jou<span class="notranslate">rna</span>lctl -u motd-news.* --since '5 days ago'
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">journalctl -u motd-news.* --since '5 days ago'
 </span></code></pre></div></div>
 
 <p>You’ll see the timer unit start mostly around reboots, usually it doesn’t have much useful in it. The service unit has what we’re more interested in, any logged output.</p>
@@ -1019,7 +1019,7 @@ OnFailure=failure-notification@%n
   <li><a href="https://man.archlinux.org/man/systemd.time.7">man 7 systemd.time</a></li>
 </ul>
 
-<h1 id="journald">jou<span class="notranslate">rna</span>ld</h1>
+<h1 id="journald">journald</h1>
 
 <blockquote class="quote">
   <p>Where did my files go?</p>
@@ -1027,19 +1027,19 @@ OnFailure=failure-notification@%n
 
 <p>In a number of systems they’re still there, to be honest, you’ve still got all of your old log files.</p>
 
-<p>But now instead of search N different log files, or memorising which files have what contents, there’s one firehose for you to watch instead: jou<span class="notranslate">rna</span>lctl. So we need to make this manageable with filters!</p>
+<p>But now instead of search N different log files, or memorising which files have what contents, there’s one firehose for you to watch instead: journalctl. So we need to make this manageable with filters!</p>
 
 <h2 id="per-unit-logs">Per Unit Logs</h2>
 
 <blockquote class="code-out">
-  <div class="box-title code-out-title" id="code-out-the-journalctl-way" aria-label="code-out box: The journalctl Way"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: The jou<span class="notranslate">rna</span>lctl Way</div>
-  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">-u</span> <span class="notranslate">galaxy</span>
+  <div class="box-title code-out-title" id="code-out-the-journalctl-way" aria-label="code-out box: The journalctl Way"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: The journalctl Way</div>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl <span class="nt">-u</span> galaxy
 </code></pre></div>  </div>
 </blockquote>
 
-<p>returns all of the logs for <span class="notranslate">Galaxy</span>.  The first line even tells us how far back our logs go:</p>
+<p>returns all of the logs for Galaxy.  The first line even tells us how far back our logs go:</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>jou<span class="notranslate">rna</span>lctl <span class="nt">-u</span> <span class="notranslate">galaxy</span> | <span class="nb">head</span> <span class="nt">-n1</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>journalctl <span class="nt">-u</span> galaxy | <span class="nb">head</span> <span class="nt">-n1</span>
 <span class="go">-- Logs begin at Tue 2022-06-28 08:31:06 UTC, end at Mon 2022-07-04 09:30:01 UTC. --
 </span></code></pre></div></div>
 
@@ -1049,7 +1049,7 @@ OnFailure=failure-notification@%n
     <p>You did not need to know or remember:</p>
 
     <ul>
-      <li>Where the log files were (<code class="language-plaintext highlighter-rouge">/var/log</code>? <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/log</code>? somewhere else?)</li>
+      <li>Where the log files were (<code class="language-plaintext highlighter-rouge">/var/log</code>? <code class="language-plaintext highlighter-rouge">/srv/galaxy/log</code>? somewhere else?)</li>
       <li>If any of the old logs were compressed (or use <code class="language-plaintext highlighter-rouge">zless</code>/<code class="language-plaintext highlighter-rouge">zcat</code>/<code class="language-plaintext highlighter-rouge">zgrep</code>)</li>
     </ul>
   </blockquote>
@@ -1064,9 +1064,9 @@ OnFailure=failure-notification@%n
 
 <h2 id="logs-for-a-group-of-units">Logs for a Group of Units</h2>
 
-<p>Sometimes you want to tail the logs of multiple proceses as once. Have you ever been debugging an issue, and wanted to see the logs of <code class="language-plaintext highlighter-rouge">nginx</code>, <strong>all</strong> <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code> processes, and <code class="language-plaintext highlighter-rouge">postgres</code>? Well you can’t because <code class="language-plaintext highlighter-rouge">nginx</code> needs special configuration to write to jou<span class="notranslate">rna</span>lctl (see, your files are still there, and it makes things extra confusing.)</p>
+<p>Sometimes you want to tail the logs of multiple proceses as once. Have you ever been debugging an issue, and wanted to see the logs of <code class="language-plaintext highlighter-rouge">nginx</code>, <strong>all</strong> <code class="language-plaintext highlighter-rouge">galaxy</code> processes, and <code class="language-plaintext highlighter-rouge">postgres</code>? Well you can’t because <code class="language-plaintext highlighter-rouge">nginx</code> needs special configuration to write to journalctl (see, your files are still there, and it makes things extra confusing.)</p>
 
-<p>Adding these two lines to your <code class="language-plaintext highlighter-rouge">nginx</code> configuration will place logs in jou<span class="notranslate">rna</span>ld</p>
+<p>Adding these two lines to your <code class="language-plaintext highlighter-rouge">nginx</code> configuration will place logs in journald</p>
 
 <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">error_log</span> <span class="s">syslog:server=unix:/dev/log</span><span class="p">;</span>
 <span class="k">access_log</span> <span class="s">syslog:server=unix:/dev/log</span><span class="p">;</span>
@@ -1075,12 +1075,12 @@ OnFailure=failure-notification@%n
 <p>And then you can simply</p>
 
 <blockquote class="code-out">
-  <div class="box-title code-out-title" id="code-out-the-journalctl-way-1" aria-label="code-out box: The journalctl Way"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: The jou<span class="notranslate">rna</span>lctl Way</div>
-  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">-f</span> <span class="nt">-u</span> <span class="notranslate">galaxy</span><span class="k">*</span> <span class="nt">-u</span> nginx <span class="nt">-u</span> postgresql
+  <div class="box-title code-out-title" id="code-out-the-journalctl-way-1" aria-label="code-out box: The journalctl Way"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: The journalctl Way</div>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl <span class="nt">-f</span> <span class="nt">-u</span> galaxy<span class="k">*</span> <span class="nt">-u</span> nginx <span class="nt">-u</span> postgresql
 </code></pre></div>  </div>
 </blockquote>
 
-<p>If you have multiple similarly named units, the wildcard feature is incredibly helpful. Use<span class="notranslate">Galaxy</span>.eu had multiple named processes for: web handlers, <span class="notranslate">workflow</span> schedulers, job handlers. We could see logs simultaneously across all of these units.</p>
+<p>If you have multiple similarly named units, the wildcard feature is incredibly helpful. UseGalaxy.eu had multiple named processes for: web handlers, workflow schedulers, job handlers. We could see logs simultaneously across all of these units.</p>
 
 <blockquote class="code-2col">
   <blockquote class="code-out">
@@ -1100,16 +1100,16 @@ OnFailure=failure-notification@%n
 
 <h2 id="dropping-logs">Dropping Logs</h2>
 
-<p>jou<span class="notranslate">rna</span>ld has the habit of throwing away logs if it gets too many messages simultaneously, to prevent {DOS} and denial-of-storage attacks. To disable that behaviour, you can tune</p>
+<p>journald has the habit of throwing away logs if it gets too many messages simultaneously, to prevent {DOS} and denial-of-storage attacks. To disable that behaviour, you can tune</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RateLimitBurst=0
 </code></pre></div></div>
 
-<p>(see <code class="language-plaintext highlighter-rouge">man 5 jou<span class="notranslate">rna</span>ld.conf</code>)</p>
+<p>(see <code class="language-plaintext highlighter-rouge">man 5 journald.conf</code>)</p>
 
 <h2 id="logs-during-a-specific-time-period">Logs during a specific time period</h2>
 
-<p>This is my absolute favourite feature of jou<span class="notranslate">rna</span>lctl, and I’ve regularly used it to narrow down logs from dozens of processes, especially when I don’t know the root cause of an issue and need to watch all of the logs.</p>
+<p>This is my absolute favourite feature of journalctl, and I’ve regularly used it to narrow down logs from dozens of processes, especially when I don’t know the root cause of an issue and need to watch all of the logs.</p>
 
 <blockquote class="code-2col">
   <blockquote class="code-in">
@@ -1120,15 +1120,15 @@ OnFailure=failure-notification@%n
   </blockquote>
 
   <blockquote class="code-out">
-    <div class="box-title code-out-title" id="code-out-the-journalctl-way-2" aria-label="code-out box: The journalctl Way"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: The jou<span class="notranslate">rna</span>lctl Way</div>
-    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">--since</span> <span class="s2">"2022-07-01 11:40 CEST"</span> <span class="nt">--until</span> <span class="s2">"2022-07-01 11:50 CEST"</span>
+    <div class="box-title code-out-title" id="code-out-the-journalctl-way-2" aria-label="code-out box: The journalctl Way"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: The journalctl Way</div>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl <span class="nt">--since</span> <span class="s2">"2022-07-01 11:40 CEST"</span> <span class="nt">--until</span> <span class="s2">"2022-07-01 11:50 CEST"</span>
 </code></pre></div>    </div>
   </blockquote>
 </blockquote>
 
-<p>This is very useful if you know when an error is, easily pull out entire system logs from around a specific timepoint. Everything is forced through jou<span class="notranslate">rna</span>ld’s logging format, so you can be sure the timestamps are all correct, and <code class="language-plaintext highlighter-rouge">--since</code> and <code class="language-plaintext highlighter-rouge">--when</code> can be made timezone aware if you have reason to use that (e.g. a user reporting an issue in their current local time.) You can mix and match explicit time zone locales for even more fun:</p>
+<p>This is very useful if you know when an error is, easily pull out entire system logs from around a specific timepoint. Everything is forced through journald’s logging format, so you can be sure the timestamps are all correct, and <code class="language-plaintext highlighter-rouge">--since</code> and <code class="language-plaintext highlighter-rouge">--when</code> can be made timezone aware if you have reason to use that (e.g. a user reporting an issue in their current local time.) You can mix and match explicit time zone locales for even more fun:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">--since</span> <span class="s2">"2022-06-21 14:24 Pacific/Auckland"</span> <span class="nt">--until</span> <span class="s2">"2022-06-21 14:30 Europe/Amsterdam"</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl <span class="nt">--since</span> <span class="s2">"2022-06-21 14:24 Pacific/Auckland"</span> <span class="nt">--until</span> <span class="s2">"2022-06-21 14:30 Europe/Amsterdam"</span>
 </code></pre></div></div>
 
 <p>The logs will be displayed in the last mentioned TZ.</p>
@@ -1137,7 +1137,7 @@ OnFailure=failure-notification@%n
 
 <p>This is another flag that I use literally every day:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">--since</span> <span class="s1">'1 hour ago'</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl <span class="nt">--since</span> <span class="s1">'1 hour ago'</span>
 </code></pre></div></div>
 
 <p>If you know relatively when an issue started happening, it’s a great way to filter on the logs that are interesting, without having to do clock math.</p>
@@ -1146,7 +1146,7 @@ OnFailure=failure-notification@%n
 
 <p>Want to see what happened during a previous run of the system, during a previous boot? Use <code class="language-plaintext highlighter-rouge">--list-boots</code> to list all of the previous system restarts</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>jou<span class="notranslate">rna</span>lctl <span class="nt">--list-boots</span>
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>journalctl <span class="nt">--list-boots</span>
 <span class="go">-14 143fdb7ac7a54370b41196c02affc3e8 Wed 2022-04-06 20:03:38 CEST—Mon 2022-04-11 08:26:00 CEST
 -13 45801d31b0654fe3a4a7d5541e6ff71a Mon 2022-04-11 09:06:07 CEST—Wed 2022-04-20 13:37:31 CEST
 -12 661e959635954aa0bbd6b800433e5097 Wed 2022-04-20 13:37:53 CEST—Thu 2022-04-28 17:26:32 CEST
@@ -1166,7 +1166,7 @@ OnFailure=failure-notification@%n
 
 <p>You can then see logs for those specific timeperiods with</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ jou<span class="notranslate">rna</span>lctl -b -3 | head
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ journalctl -b -3 | head
 -- Logs begin at Wed 2022-04-06 20:03:38 CEST, end at Mon 2022-07-04 11:59:13 CEST. --
 jun 21 14:29:20 cosima kernel: microcode: microcode updated early to revision 0x88, date = 2021-03-31
 jun 21 14:29:20 cosima kernel: Linux version 5.13.0-44-generic (buildd@lcy02-amd64-107) (gcc (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0, GNU ld (GNU Binutils for Ubuntu) 2.34) #49~20.04.1-Ubuntu SMP Wed May 18 18:44:28 UTC 2022 (Ubuntu 5.13.0-44.49~20.04.1-generic 5.13.19)
@@ -1176,9 +1176,9 @@ jun 21 14:29:20 cosima kernel: Linux version 5.13.0-44-generic (buildd@lcy02-amd
 
 <h2 id="advanced-log-filtering">Advanced Log Filtering</h2>
 
-<p>There’s a lot of additional information jou<span class="notranslate">rna</span>ld tracks with your logs, you can read them in the <code class="language-plaintext highlighter-rouge">verbose</code> format to see</p>
+<p>There’s a lot of additional information journald tracks with your logs, you can read them in the <code class="language-plaintext highlighter-rouge">verbose</code> format to see</p>
 
-<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>jou<span class="notranslate">rna</span>lctl <span class="nt">-o</span> verbose
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>journalctl <span class="nt">-o</span> verbose
 <span class="gp">Wed 2022-04-06 20:03:38.281794 CEST [s=1b57c151fb2e49ad98a84ac45ed2e245;</span><span class="nv">i</span><span class="o">=</span>a310796<span class="p">;</span><span class="nv">b</span><span class="o">=</span>143fdb7ac7a54370b41196c02affc3e8<span class="p">;</span><span class="nv">m</span><span class="o">=</span>51917bf226<span class="p">;</span><span class="nv">t</span><span class="o">=</span>5dc002e4a3f42<span class="p">;</span><span class="nv">x</span><span class="o">=</span>4ae28fb4218f3691]
 <span class="go">    _TRANSPORT=stdout
     _STREAM_ID=45b0adde513f46348564e6f9ce85e4b2
@@ -1203,59 +1203,59 @@ jun 21 14:29:20 cosima kernel: Linux version 5.13.0-44-generic (buildd@lcy02-amd
     _HOSTNAME=cosima
 </span></code></pre></div></div>
 
-<p>All of these attributes can be used to filter your logs, just add them to your <code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl</code> command like so:</p>
+<p>All of these attributes can be used to filter your logs, just add them to your <code class="language-plaintext highlighter-rouge">journalctl</code> command like so:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nv">_GID</span><span class="o">=</span>1001
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl <span class="nv">_GID</span><span class="o">=</span>1001
 </code></pre></div></div>
 
-<p>Or, for example, to get every log, by any process that logged, running under a specific user, like the <span class="notranslate">Galaxy</span> user:</p>
+<p>Or, for example, to get every log, by any process that logged, running under a specific user, like the Galaxy user:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nv">_UID</span><span class="o">=</span><span class="si">$(</span>getent passwd | <span class="nb">grep </span><span class="notranslate">galaxy</span> | <span class="nb">cut</span> <span class="nt">-f</span> 3 <span class="nt">-d</span> : <span class="si">)</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl <span class="nv">_UID</span><span class="o">=</span><span class="si">$(</span>getent passwd | <span class="nb">grep </span>galaxy | <span class="nb">cut</span> <span class="nt">-f</span> 3 <span class="nt">-d</span> : <span class="si">)</span>
 </code></pre></div></div>
 
 <p>Or to see every log from a python program?</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nv">_COMM</span><span class="o">=</span>python3
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl <span class="nv">_COMM</span><span class="o">=</span>python3
 </code></pre></div></div>
 
 <h2 id="cleaning-logs">Cleaning Logs</h2>
 
-<p>Jou<span class="notranslate">rna</span>ld comes with a nice tool for cleaning up logs, <code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl --vacuum-...</code>. There are a couple different ways to invoke this. It’s very useful if you left <span class="notranslate">Galaxy</span> poorly configured, reading bad XML files and crashing every minute, logging endlessly until you checked it again. That sort of behaviour generates an incredible number of logs.</p>
+<p>Journald comes with a nice tool for cleaning up logs, <code class="language-plaintext highlighter-rouge">journalctl --vacuum-...</code>. There are a couple different ways to invoke this. It’s very useful if you left Galaxy poorly configured, reading bad XML files and crashing every minute, logging endlessly until you checked it again. That sort of behaviour generates an incredible number of logs.</p>
 
 <p>First we can check how much disk space our logs are using:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ jou<span class="notranslate">rna</span>lctl --disk-usage
-Archived and active jou<span class="notranslate">rna</span>ls take up 120.0M in the file system.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ journalctl --disk-usage
+Archived and active journals take up 120.0M in the file system.
 </code></pre></div></div>
 
 <p>And then we can clean it!</p>
 
 <p>Based on <strong>size</strong>:</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">--vacuum-size</span><span class="o">=</span>4GB
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl <span class="nt">--vacuum-size</span><span class="o">=</span>4GB
 </code></pre></div></div>
 
 <p>Based on <strong>age</strong></p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">--vacuum-time</span><span class="o">=</span><span class="s2">"2 days"</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl <span class="nt">--vacuum-time</span><span class="o">=</span><span class="s2">"2 days"</span>
 </code></pre></div></div>
 
 <p>Or based on number of <strong>files</strong></p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl <span class="nt">--vacuum-files</span><span class="o">=</span>3 <span class="c"># I've never used this one.</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl <span class="nt">--vacuum-files</span><span class="o">=</span>3 <span class="c"># I've never used this one.</span>
 </code></pre></div></div>
 
-<p>Note that this only applies to “archived” logs, not “active” ones, but you can use <code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl --rotate</code> to force them to archived, before cleaning..</p>
+<p>Note that this only applies to “archived” logs, not “active” ones, but you can use <code class="language-plaintext highlighter-rouge">journalctl --rotate</code> to force them to archived, before cleaning..</p>
 
 <h2 id="log-verification">Log Verification</h2>
 
 <p>Want to check if they’ve been tampered with (and someone forgot to recalculate checksums?). The <code class="language-plaintext highlighter-rouge">--verify</code> flag can be used to do that.</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ jou<span class="notranslate">rna</span>lctl --verify
-PASS: /var/log/jou<span class="notranslate">rna</span>l/08854338f5f046d5a0d73f81ca5c2d79/user-1001@0005df9b9d17faa5-c4276c13359e16e1.jou<span class="notranslate">rna</span>l~
-File corruption detected at /var/log/jou<span class="notranslate">rna</span>l/08854338f5f046d5a0d73f81ca5c2d79/system@0005df9b9c8ebfda-d41419e76ede7f2c.jou<span class="notranslate">rna</span>l~:3f070f8 (of 67108864 bytes, 98%).
-FAIL: /var/log/jou<span class="notranslate">rna</span>l/08854338f5f046d5a0d73f81ca5c2d79/system@0005df9b9c8ebfda-d41419e76ede7f2c.jou<span class="notranslate">rna</span>l~ (Bad message)
-PASS: /var/log/jou<span class="notranslate">rna</span>l/08854338f5f046d5a0d73f81ca5c2d79/system@ede9cabbb3874bd98bcb0b16ada49d8f-000000000a6ce684-0005de680b29a077.jou<span class="notranslate">rna</span>l
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ journalctl --verify
+PASS: /var/log/journal/08854338f5f046d5a0d73f81ca5c2d79/user-1001@0005df9b9d17faa5-c4276c13359e16e1.journal~
+File corruption detected at /var/log/journal/08854338f5f046d5a0d73f81ca5c2d79/system@0005df9b9c8ebfda-d41419e76ede7f2c.journal~:3f070f8 (of 67108864 bytes, 98%).
+FAIL: /var/log/journal/08854338f5f046d5a0d73f81ca5c2d79/system@0005df9b9c8ebfda-d41419e76ede7f2c.journal~ (Bad message)
+PASS: /var/log/journal/08854338f5f046d5a0d73f81ca5c2d79/system@ede9cabbb3874bd98bcb0b16ada49d8f-000000000a6ce684-0005de680b29a077.journal
 7e5abf8: Unused data (entry_offset==0)
 ..  94%
 </code></pre></div></div>
@@ -1263,9 +1263,9 @@ PASS: /var/log/jou<span class="notranslate">rna</span>l/08854338f5f046d5a0d73f81
 <h2 id="further-reading-2">Further Reading</h2>
 
 <ul>
-  <li><a href="https://manpages.ubuntu.com/manpages/bionic/man5/journald.conf.5.html">man 5 jou<span class="notranslate">rna</span>ld.conf</a></li>
-  <li><a href="https://manpages.ubuntu.com/manpages/bionic/man1/journalctl.1.html">man 1 jou<span class="notranslate">rna</span>lctl</a></li>
-  <li><a href="https://manpages.ubuntu.com/manpages/bionic/man7/systemd.journal-fields.7.html">man 7 systemd.jou<span class="notranslate">rna</span>l-fields</a></li>
+  <li><a href="https://manpages.ubuntu.com/manpages/bionic/man5/journald.conf.5.html">man 5 journald.conf</a></li>
+  <li><a href="https://manpages.ubuntu.com/manpages/bionic/man1/journalctl.1.html">man 1 journalctl</a></li>
+  <li><a href="https://manpages.ubuntu.com/manpages/bionic/man7/systemd.journal-fields.7.html">man 7 systemd.journal-fields</a></li>
 </ul>
 
 

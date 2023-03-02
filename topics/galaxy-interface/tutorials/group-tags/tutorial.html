@@ -457,7 +457,7 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>Advanced uses of <span class="notranslate">Galaxy</span> often require the use of dataset collections,
+<p>Advanced uses of Galaxy often require the use of dataset collections,
 which can contain between one and tens of thousands of datasets.
 Grouping datasets in this way has numerous advantages:</p>
 <ul>
@@ -467,7 +467,7 @@ Grouping datasets in this way has numerous advantages:</p>
 </ul>
 
 <p>While collections can be split in any way, doing so for multi-factor analysis
-quickly becomes cumbersome and messy. An alte<span class="notranslate">rna</span>tive is to label collection
+quickly becomes cumbersome and messy. An alternative is to label collection
 elements with special group tags, i.e. tags prefixed by the string <code class="language-plaintext highlighter-rouge">group:</code>.
 Note that group tags currently do not propagate, i.e. they are not inherited
 to datasets resulting from analyses. These tags can be displayed in the Tool
@@ -475,8 +475,8 @@ form, allowing users to select subsets
 of collections.</p>
 
 <p>This tutorial outlines how to set and use group tags with the DESeq2 tool.
-For a more detailed description and background for differential <span class="notranslate">expression</span>
-testing see the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">Reference-based <span class="notranslate">RNA</span>-Seq data analysis</a>.</p>
+For a more detailed description and background for differential expression
+testing see the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">Reference-based RNA-Seq data analysis</a>.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -521,9 +521,9 @@ to the Rule Based Uploader.</p>
       <p>Create a new history for this tutorial</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
-    <li>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</li>
+    <li>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</li>
     <li>
       <p>Click on <strong>Rule-based</strong> on the top</p>
 
@@ -547,9 +547,9 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
     <li>Click <strong>Build</strong></li>
     <li>We will add a regex that creates 3 new columns with accession, treatment and library type:
       <ul>
-        <li>Click on the <strong>Column</strong> button and then <strong>Using a Regular <span class="notranslate">Expression</span></strong></li>
-        <li>Select <strong>Create columns matching <span class="notranslate">expression</span> groups</strong></li>
-        <li>Paste <code class="language-plaintext highlighter-rouge">.*(GSM.*)_(.*)_(.*).counts</code> in <em>“Regular <span class="notranslate">Expression</span>”</em></li>
+        <li>Click on the <strong>Column</strong> button and then <strong>Using a Regular Expression</strong></li>
+        <li>Select <strong>Create columns matching expression groups</strong></li>
+        <li>Paste <code class="language-plaintext highlighter-rouge">.*(GSM.*)_(.*)_(.*).counts</code> in <em>“Regular Expression”</em></li>
         <li>Set <em>“Number of Groups”</em> to 3</li>
         <li>
           <p>Click on <strong>Apply</strong></p>
@@ -599,9 +599,9 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
-    <li>Click on the <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-selector</span> icon (<strong>Operations on multiple datasets</strong>)</li>
+    <li>Click on the <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> icon (<strong>Operations on multiple datasets</strong>)</li>
     <li>Check all new datasets</li>
     <li>Click on <strong>For all selected…</strong> and then <strong>Build Dataset List</strong></li>
     <li>Enter a name for the new collection and click <strong>Create list</strong></li>
@@ -609,7 +609,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
 </blockquote>
 
 <p>We have now a collection with our files. We can now either upload a tabular file containing the element identifiers
-and the tags we want to apply, or we can extract the element identifiers and extract the tags using a Regular <span class="notranslate">Expression</span>.
+and the tags we want to apply, or we can extract the element identifiers and extract the tags using a Regular Expression.
 We will do the latter.</p>
 
 <blockquote class="notranslate hands_on">
@@ -641,7 +641,7 @@ We will do the latter.</p>
       <p>Change the datatype to <code class="language-plaintext highlighter-rouge">tabular</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">tabular</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li><strong>Tag elements from file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
       <ul>

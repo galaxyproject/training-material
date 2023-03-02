@@ -1234,9 +1234,9 @@
 
 </blockquote>
 
-<p>With <span class="notranslate">RNA</span>-Seq data analysis, we generated tables containing list of DE genes, their <span class="notranslate">expression</span>, some statistics, etc. We can manipulate these tables using <span class="notranslate">Galaxy</span>, as we saw in some tutorials, e.g. <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">“Reference-based <span class="notranslate">RNA</span>-Seq data analysis”</a>, and create some visualisations.</p>
+<p>With RNA-Seq data analysis, we generated tables containing list of DE genes, their expression, some statistics, etc. We can manipulate these tables using Galaxy, as we saw in some tutorials, e.g. <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">“Reference-based RNA-Seq data analysis”</a>, and create some visualisations.</p>
 
-<p>Sometimes we want to have some customizations on visualization, some complex table manipulations or some statistical analysis. If we can not find a <span class="notranslate">Galaxy</span> tools for that or the right parameters, we may need to use programming languages as R or Python.</p>
+<p>Sometimes we want to have some customizations on visualization, some complex table manipulations or some statistical analysis. If we can not find a Galaxy tools for that or the right parameters, we may need to use programming languages as R or Python.</p>
 
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-prerequisites"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-prerequisites-contents" aria-expanded="true" aria-label="Toggle tip box: Prerequisites"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Prerequisites<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1245,18 +1245,18 @@
   <p>If you are starting with this tutorial, you will need to import a dataset:</p>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-using-datasets-from-galaxy" aria-label="hands-on box: Using datasets from Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Using datasets from <span class="notranslate">Galaxy</span></div>
+    <div class="box-title hands-on-title" id="hands-on-using-datasets-from-galaxy" aria-label="hands-on box: Using datasets from Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Using datasets from Galaxy</div>
 
     <ol>
-      <li>Upload the following URL to <span class="notranslate">Galaxy</span>:
+      <li>Upload the following URL to Galaxy:
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular
 </code></pre></div>        </div>
       </li>
       <li>
-        <p>Note the history ID of the dataset in your <span class="notranslate">Galaxy</span> history</p>
+        <p>Note the history ID of the dataset in your Galaxy history</p>
       </li>
       <li>
-        <p><span class="tool" data-tool="interactive_tool_rstudio" title="Tested with interactive_tool_rstudio"><strong>RStudio</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_rstudio</span></span>  in <span class="notranslate">Galaxy</span> provides some special functions to import and export from your history:</p>
+        <p><span class="tool" data-tool="interactive_tool_rstudio" title="Tested with interactive_tool_rstudio"><strong>RStudio</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_rstudio</span></span>  in Galaxy provides some special functions to import and export from your history:</p>
 
         <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">annotatedDEgenes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="n">gx_get</span><span class="p">(</span><span class="m">2</span><span class="p">),</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s2">"\t"</span><span class="p">)</span><span class="w"> </span><span class="c1"># will import dataset number 2 from your history, use the correct ID for your dataset.</span><span class="w">
 </span></code></pre></div>        </div>
@@ -1266,7 +1266,7 @@
   </blockquote>
 
   <blockquote class="notranslate hands_on">
-    <div class="box-title hands-on-title" id="hands-on-using-datasets-without-galaxy" aria-label="hands-on box: Using datasets without Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Using datasets without <span class="notranslate">Galaxy</span></div>
+    <div class="box-title hands-on-title" id="hands-on-using-datasets-without-galaxy" aria-label="hands-on box: Using datasets without Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Using datasets without Galaxy</div>
     <ol>
       <li>
         <p>Read the tabular file into an object called <code class="language-plaintext highlighter-rouge">annotatedDEgenes</code>:</p>
@@ -1280,7 +1280,7 @@
   </blockquote>
 </blockquote>
 
-<p>In this tutorial, we will take the list of DE genes extracted from DESEq2’s output that we generated in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">“Reference-based <span class="notranslate">RNA</span>-Seq data analysis” tutorial</a>, manipulate it and create some visualizations.</p>
+<p>In this tutorial, we will take the list of DE genes extracted from DESEq2’s output that we generated in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">“Reference-based RNA-Seq data analysis” tutorial</a>, manipulate it and create some visualizations.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -1301,17 +1301,17 @@
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-launch-rstudio" aria-label="hands_on box: Launch RStudio"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch RStudio</div>   <p>Depending on which server you are using, you may be able to run RStudio directly in <span class="notranslate">Galaxy</span>. If that is not available, RStudio Cloud can be an alte<span class="notranslate">rna</span>tive.</p>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-rstudio-in-span-class-quot-notranslate-quot-galaxy-span"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-rstudio-in-span-class-quot-notranslate-quot-galaxy-span-contents" aria-expanded="true" aria-label="Toggle tip box: Launch RStudio in <span class=&quot;notranslate&quot;>Galaxy</span>"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch RStudio in <span class=&quot;notranslate&quot;>Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Currently RStudio in <span class="notranslate">Galaxy</span> is only available on <a href="https://usegalaxy.eu">Use<span class="notranslate">Galaxy</span>.eu</a> and <a href="https://usegalaxy.org">Use<span class="notranslate">Galaxy</span>.org</a></p>   <ol>     <li>Open the Rstudio tool <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> by clicking <a href="https://usegalaxy.eu/?tool_id=interactive_tool_rstudio">here to launch RStudio</a></li>     <li>Click Run Tool</li>     <li>The tool will start running and will stay running permanently</li>     <li>Click on the “User” menu at the top and go to “Active InteractiveTools” and locate the RStudio instance you started.</li>   </ol> </blockquote>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-rstudio-cloud-if-not-available-on-span-class-quot-notranslate-quot-galaxy-span"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-rstudio-cloud-if-not-available-on-span-class-quot-notranslate-quot-galaxy-span-contents" aria-expanded="true" aria-label="Toggle tip box: Launch RStudio Cloud if not available on <span class=&quot;notranslate&quot;>Galaxy</span>"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch RStudio Cloud if not available on <span class=&quot;notranslate&quot;>Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If RStudio is not available on the <span class="notranslate">Galaxy</span> instance:</p>   <ol>     <li>Register for <a href="https://client.login.rstudio.cloud/oauth/login?show_auth=0&amp;show_login=1&amp;show_setup=1">RStudio Cloud</a>, or login if you already have an account</li>     <li>Create a new project</li>   </ol> </blockquote> </blockquote>
+<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-launch-rstudio" aria-label="hands_on box: Launch RStudio"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch RStudio</div>   <p>Depending on which server you are using, you may be able to run RStudio directly in Galaxy. If that is not available, RStudio Cloud can be an alternative.</p>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-rstudio-in-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-rstudio-in-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: Launch RStudio in Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch RStudio in Galaxy<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Currently RStudio in Galaxy is only available on <a href="https://usegalaxy.eu">UseGalaxy.eu</a> and <a href="https://usegalaxy.org">UseGalaxy.org</a></p>   <ol>     <li>Open the Rstudio tool <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> by clicking <a href="https://usegalaxy.eu/?tool_id=interactive_tool_rstudio">here to launch RStudio</a></li>     <li>Click Run Tool</li>     <li>The tool will start running and will stay running permanently</li>     <li>Click on the “User” menu at the top and go to “Active InteractiveTools” and locate the RStudio instance you started.</li>   </ol> </blockquote>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-rstudio-cloud-if-not-available-on-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-rstudio-cloud-if-not-available-on-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: Launch RStudio Cloud if not available on Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch RStudio Cloud if not available on Galaxy<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If RStudio is not available on the Galaxy instance:</p>   <ol>     <li>Register for <a href="https://client.login.rstudio.cloud/oauth/login?show_auth=0&amp;show_login=1&amp;show_setup=1">RStudio Cloud</a>, or login if you already have an account</li>     <li>Create a new project</li>   </ol> </blockquote> </blockquote>
 
 <h1 id="visualization">Visualization</h1>
 
-<p>In <span class="notranslate">RNA</span>-seq data analysis and other omics experiments, visualization are an important step to check the data, their quality and represent the results found for publication.</p>
+<p>In RNA-seq data analysis and other omics experiments, visualization are an important step to check the data, their quality and represent the results found for publication.</p>
 
 <p><code class="language-plaintext highlighter-rouge">ggplot2</code> is a plotting package that makes it simple to create complex plots from data in a data frame. It provides a more programmatic interface for specifying what variables to plot, how they are displayed, and general visual properties. Therefore, we only need minimal changes if the underlying data change or if we decide to change from a bar plot to a scatter plot. This helps in creating publication quality plots with minimal amounts of adjustments and tweaking.</p>
 
 <p><code class="language-plaintext highlighter-rouge">ggplot2</code> graphics are built step by step by adding new elements, i.e. layers:</p>
 
-<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">DATA</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n"><span class="notranslate">mapping</span></span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="o">&lt;</span><span class="n"><span class="notranslate">MAPPING</span>S</span><span class="o">&gt;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
+<div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">DATA</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n">mapping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="o">&lt;</span><span class="n">MAPPINGS</span><span class="o">&gt;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="o">&lt;</span><span class="n">GEOM_FUNCTION</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="o">&lt;</span><span class="n">GEOM_FUNCTION</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="o">&lt;</span><span class="n">GEOM_FUNCTION</span><span class="o">&gt;</span><span class="p">()</span><span class="w">
@@ -1348,7 +1348,7 @@
       <p>A new window will open in the bottom-right panel</p>
     </li>
     <li>
-      <p>Define a <span class="notranslate">mapping</span> (using the <code class="language-plaintext highlighter-rouge">aes</code> aesthetic function), by selecting the variables to be plotted and specifying how to present them in the graph, e.g. as x/y positions or characteristics such as size, shape, color, etc.</p>
+      <p>Define a mapping (using the <code class="language-plaintext highlighter-rouge">aes</code> aesthetic function), by selecting the variables to be plotted and specifying how to present them in the graph, e.g. as x/y positions or characteristics such as size, shape, color, etc.</p>
 
       <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">annotatedDEgenes</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log2.FC.</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">P.value</span><span class="p">))</span><span class="w">
 </span></code></pre></div>      </div>
@@ -1413,7 +1413,7 @@
 <p><img src="../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v0.png" alt="Volcano Plot version 0. " loading="lazy" /></p>
 
 <blockquote class="question">
-  <div class="box-title question-title" id="question-categorising-expression-levels" aria-label="question box: Categorising expression levels"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Categorising <span class="notranslate">expression</span> levels</div>
+  <div class="box-title question-title" id="question-categorising-expression-levels" aria-label="question box: Categorising expression levels"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Categorising expression levels</div>
 
   <ol>
     <li>Why are there no points with log2 FC between -1 and 1?</li>
@@ -1455,9 +1455,9 @@
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-some-extra-comments" aria-label="comment box: Some extra comments"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Some extra comments</div>
 
-  <p>Anything you put in the <code class="language-plaintext highlighter-rouge">ggplot()</code> function can be seen by any <code class="language-plaintext highlighter-rouge">geom</code> layers that you add (i.e., these are universal plot settings). This includes the <code class="language-plaintext highlighter-rouge">x-</code> and <code class="language-plaintext highlighter-rouge">y-axis</code> <span class="notranslate">mapping</span> you set up in <code class="language-plaintext highlighter-rouge">aes()</code>.</p>
+  <p>Anything you put in the <code class="language-plaintext highlighter-rouge">ggplot()</code> function can be seen by any <code class="language-plaintext highlighter-rouge">geom</code> layers that you add (i.e., these are universal plot settings). This includes the <code class="language-plaintext highlighter-rouge">x-</code> and <code class="language-plaintext highlighter-rouge">y-axis</code> mapping you set up in <code class="language-plaintext highlighter-rouge">aes()</code>.</p>
 
-  <p>You can also specify <span class="notranslate">mapping</span>s for a given <code class="language-plaintext highlighter-rouge">geom</code> independently of the <span class="notranslate">mapping</span>s defined globally in the <code class="language-plaintext highlighter-rouge">ggplot()</code> function.</p>
+  <p>You can also specify mappings for a given <code class="language-plaintext highlighter-rouge">geom</code> independently of the mappings defined globally in the <code class="language-plaintext highlighter-rouge">ggplot()</code> function.</p>
 </blockquote>
 
 <p>Building plots with <code class="language-plaintext highlighter-rouge">ggplot2</code> is typically an iterative process. We start by defining the dataset we’ll use, lay out the axes, and choose a <code class="language-plaintext highlighter-rouge">geom</code>. We can now modify this plot to extract more information from it.</p>
@@ -1679,12 +1679,12 @@
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>Data manipulation and visualization are important parts of any <span class="notranslate">RNA</span>-Seq analysis. <span class="notranslate">Galaxy</span> provides several tools for that as explained in several tutorials:</p>
+<p>Data manipulation and visualization are important parts of any RNA-Seq analysis. Galaxy provides several tools for that as explained in several tutorials:</p>
 
 <ul>
-  <li><a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">Reference-based <span class="notranslate">RNA</span>-Seq</a></li>
-  <li><a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html">Visualization of <span class="notranslate">RNA</span>-seq results with heatmap2</a></li>
-  <li><a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html">Visualization of <span class="notranslate">RNA</span>-seq results with Volcano Plot</a></li>
+  <li><a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">Reference-based RNA-Seq</a></li>
+  <li><a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html">Visualization of RNA-seq results with heatmap2</a></li>
+  <li><a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html">Visualization of RNA-seq results with Volcano Plot</a></li>
 </ul>
 
 <p>But sometimes we need more customization and then need to use programming languages as R or Python.</p>

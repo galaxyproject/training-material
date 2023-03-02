@@ -976,23 +976,23 @@
 
 <p>Machine Learning (ML) is a subset of Artificial Intelligence (AI) in the field of computer science that often uses statistical techniques to give computers the ability to “learn” (i.e., progressively improve performance on a specific task) with data, without being explicitly programmed.</p>
 
-<p>Machine Learning is often closely related, if not used as an alte<span class="notranslate">rna</span>te term, to fields like Data Mining (the process of discovering patterns in large data sets involving methods at the intersection of machine learning, statistics, and database systems), Pattern Recognition, Statistical Inference or Statistical Learning. All these areas often employ the same methods and perhaps the name changes based on the practitioner’s expertise or the application domain.</p>
+<p>Machine Learning is often closely related, if not used as an alternate term, to fields like Data Mining (the process of discovering patterns in large data sets involving methods at the intersection of machine learning, statistics, and database systems), Pattern Recognition, Statistical Inference or Statistical Learning. All these areas often employ the same methods and perhaps the name changes based on the practitioner’s expertise or the application domain.</p>
 
 <h2 id="taxonomy-of-ml-and-examples-of-algorithms">Taxonomy of ML and examples of algorithms</h2>
 
 <p>The main ML tasks are typically classified into two broad categories, depending on whether there is “feedback” or a “teacher” available to the learning system or not.</p>
 
 <ul>
-  <li><strong>Supervised Learning</strong>: The system is presented with example inputs and their desired outputs provided by the “teacher” and the goal of the machine learning algorithm is to create a <span class="notranslate">mapping</span> from the inputs to the outputs. The <span class="notranslate">mapping</span> can be thought of as a function that if it is given as an input one of the training samples it should output the desired value.</li>
+  <li><strong>Supervised Learning</strong>: The system is presented with example inputs and their desired outputs provided by the “teacher” and the goal of the machine learning algorithm is to create a mapping from the inputs to the outputs. The mapping can be thought of as a function that if it is given as an input one of the training samples it should output the desired value.</li>
   <li><strong>Unsupervised Learning</strong>: In the unsupervised learning case, the machine learning algorithm is not given any examples of desired output, and is left on its own to find structure in its input.</li>
 </ul>
 
 <p>The main machine learning tasks are separated based on what the system tries to accomplish in the end:</p>
 <ul>
-  <li><strong>Dimensionality Reduction</strong>: simplifies inputs by <span class="notranslate">mapping</span> them into a lower-dimensional space. Topic modeling is a related problem, where a program is given a list of human language documents and is tasked with finding out which documents cover similar topics.</li>
+  <li><strong>Dimensionality Reduction</strong>: simplifies inputs by mapping them into a lower-dimensional space. Topic modeling is a related problem, where a program is given a list of human language documents and is tasked with finding out which documents cover similar topics.</li>
   <li><strong>Clustering</strong>: a set of inputs is to be divided into groups. Unlike in classification, the groups
 are not known beforehand, making this typically an unsupervised task.</li>
-  <li><strong>Classification</strong>: inputs are divided into two or more classes, and the learner must produce a model that assigns unseen inputs to one or more (multi-label classification) of these classes. This is typically tackled in a supervised manner. Identification of patient vs cases is an example of classification, where the inputs are gene <span class="notranslate">expression</span> and/or clinical profiles and the classes are “patient” and “healthy”.</li>
+  <li><strong>Classification</strong>: inputs are divided into two or more classes, and the learner must produce a model that assigns unseen inputs to one or more (multi-label classification) of these classes. This is typically tackled in a supervised manner. Identification of patient vs cases is an example of classification, where the inputs are gene expression and/or clinical profiles and the classes are “patient” and “healthy”.</li>
   <li><strong>Regression</strong>: also a supervised problem, the outputs are continuous rather than discrete.</li>
   <li><strong>Association Rules learning</strong> (or dependency modelling): Searches for relationships between inputs. For example, a supermarket might gather data on customer purchasing habits. Using association rule learning, the supermarket can determine which products are frequently bought together and use this information for marketing purposes. This is sometimes referred to as market basket analysis.</li>
 </ul>
@@ -1068,7 +1068,7 @@ are not known beforehand, making this typically an unsupervised task.</li>
 <p>Before diving in the tutorial, we need to open <span class="tool" data-tool="interactive_tool_rstudio" title="Tested with interactive_tool_rstudio"><strong>RStudio</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_rstudio</span></span> . If you do not know how or never interacted with RStudio, please follow the <a href="/training-material/topics/galaxy-interface/tutorials/rstudio/tutorial.html">dedicated tutorial</a>.</p>
 
 <!--SNIPPET-->
-<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-launch-rstudio" aria-label="hands_on box: Launch RStudio"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch RStudio</div>   <p>Depending on which server you are using, you may be able to run RStudio directly in <span class="notranslate">Galaxy</span>. If that is not available, RStudio Cloud can be an alte<span class="notranslate">rna</span>tive.</p>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-rstudio-in-span-class-quot-notranslate-quot-galaxy-span"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-rstudio-in-span-class-quot-notranslate-quot-galaxy-span-contents" aria-expanded="true" aria-label="Toggle tip box: Launch RStudio in <span class=&quot;notranslate&quot;>Galaxy</span>"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch RStudio in <span class=&quot;notranslate&quot;>Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Currently RStudio in <span class="notranslate">Galaxy</span> is only available on <a href="https://usegalaxy.eu">Use<span class="notranslate">Galaxy</span>.eu</a> and <a href="https://usegalaxy.org">Use<span class="notranslate">Galaxy</span>.org</a></p>   <ol>     <li>Open the Rstudio tool <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> by clicking <a href="https://usegalaxy.eu/?tool_id=interactive_tool_rstudio">here to launch RStudio</a></li>     <li>Click Run Tool</li>     <li>The tool will start running and will stay running permanently</li>     <li>Click on the “User” menu at the top and go to “Active InteractiveTools” and locate the RStudio instance you started.</li>   </ol> </blockquote>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-rstudio-cloud-if-not-available-on-span-class-quot-notranslate-quot-galaxy-span"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-rstudio-cloud-if-not-available-on-span-class-quot-notranslate-quot-galaxy-span-contents" aria-expanded="true" aria-label="Toggle tip box: Launch RStudio Cloud if not available on <span class=&quot;notranslate&quot;>Galaxy</span>"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch RStudio Cloud if not available on <span class=&quot;notranslate&quot;>Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If RStudio is not available on the <span class="notranslate">Galaxy</span> instance:</p>   <ol>     <li>Register for <a href="https://client.login.rstudio.cloud/oauth/login?show_auth=0&amp;show_login=1&amp;show_setup=1">RStudio Cloud</a>, or login if you already have an account</li>     <li>Create a new project</li>   </ol> </blockquote> </blockquote>
+<blockquote class="notranslate hands_on">   <div class="box-title hands_on-title" id="hands-on-launch-rstudio" aria-label="hands_on box: Launch RStudio"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch RStudio</div>   <p>Depending on which server you are using, you may be able to run RStudio directly in Galaxy. If that is not available, RStudio Cloud can be an alternative.</p>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-rstudio-in-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-rstudio-in-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: Launch RStudio in Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch RStudio in Galaxy<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Currently RStudio in Galaxy is only available on <a href="https://usegalaxy.eu">UseGalaxy.eu</a> and <a href="https://usegalaxy.org">UseGalaxy.org</a></p>   <ol>     <li>Open the Rstudio tool <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> by clicking <a href="https://usegalaxy.eu/?tool_id=interactive_tool_rstudio">here to launch RStudio</a></li>     <li>Click Run Tool</li>     <li>The tool will start running and will stay running permanently</li>     <li>Click on the “User” menu at the top and go to “Active InteractiveTools” and locate the RStudio instance you started.</li>   </ol> </blockquote>   <blockquote class="tip">   <div class="box-title tip-title" id="tip-launch-rstudio-cloud-if-not-available-on-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-launch-rstudio-cloud-if-not-available-on-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: Launch RStudio Cloud if not available on Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Launch RStudio Cloud if not available on Galaxy<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If RStudio is not available on the Galaxy instance:</p>   <ol>     <li>Register for <a href="https://client.login.rstudio.cloud/oauth/login?show_auth=0&amp;show_login=1&amp;show_setup=1">RStudio Cloud</a>, or login if you already have an account</li>     <li>Create a new project</li>   </ol> </blockquote> </blockquote>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-installing-required-packages" aria-label="hands-on box: Installing Required Packages"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Installing Required Packages</div>
@@ -1109,7 +1109,7 @@ are not known beforehand, making this typically an unsupervised task.</li>
 
 <ul>
   <li>The <a href="http://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+%28diagnostic%29">Breast Cancer Wisconsin (Diagnostic) Data Set</a> from the <a href="http://archive.ics.uci.edu/ml/">UCI Machine Learning repository</a>.</li>
-  <li><span class="notranslate">RNA</span>-Seq data from the study of tooth growth in mouse embryos from the <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE76316">Gene <span class="notranslate">Expression</span> Omnibus ID:GSE76316</a></li>
+  <li>RNA-Seq data from the study of tooth growth in mouse embryos from the <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE76316">Gene Expression Omnibus ID:GSE76316</a></li>
 </ul>
 
 <p>We will first load up the UCI dataset. The dataset itself does not contain column names, we’ve created a second file with only the column names, which we will use.
@@ -1331,7 +1331,7 @@ M:212     1st Qu.:-0.6888   1st Qu.:-0.7253   1st Qu.:-0.6913   1st Qu.:-0.6666
 
 <p><strong>Machine learning</strong> is the science and art of giving computers the ability to learn to make decisions from data without being explicitly programmed.</p>
 
-<p><strong>Unsupervised learning</strong>, in essence, is the machine learning task of uncovering hidden patterns and structures from <strong>unlabeled data</strong>. For example, a researcher might want to group their samples into distinct groups, based on their gene <span class="notranslate">expression</span> data without in advance what these categories maybe. This is known as <strong>clustering</strong>, one branch of unsupervised learning.</p>
+<p><strong>Unsupervised learning</strong>, in essence, is the machine learning task of uncovering hidden patterns and structures from <strong>unlabeled data</strong>. For example, a researcher might want to group their samples into distinct groups, based on their gene expression data without in advance what these categories maybe. This is known as <strong>clustering</strong>, one branch of unsupervised learning.</p>
 
 <p><strong>Supervised learning</strong> (which will be addressed later in depth), is the branch of machine learning that involves <strong>predicting labels</strong>, such as whether a tumor will be benign or malignant.</p>
 
@@ -1381,7 +1381,7 @@ Cumulative Proportion  0.99992 0.99997 1.00000 1.00000
   </ol>
 </blockquote>
 
-<p>Principal Components are the underlying structure in the data. They are the directions where there is the most variance, the directions where the data is most spread out. This means that we try to find the straight line that best sp<span class="notranslate">reads</span> the data out when it is projected along it. This is the first principal component, the straight line that shows the most substantial variance in the data.</p>
+<p>Principal Components are the underlying structure in the data. They are the directions where there is the most variance, the directions where the data is most spread out. This means that we try to find the straight line that best spreads the data out when it is projected along it. This is the first principal component, the straight line that shows the most substantial variance in the data.</p>
 
 <p>PCA is a type of linear transformation on a given data set that has values for a certain number of variables (coordinates) for a certain amount of spaces. In this way, you transform a set of <code class="language-plaintext highlighter-rouge">x</code> correlated variables over <code class="language-plaintext highlighter-rouge">y</code> samples to a set of <code class="language-plaintext highlighter-rouge">p</code> uncorrelated principal components over the same samples.</p>
 
@@ -1464,7 +1464,7 @@ Cumulative Proportion  0.99992 0.99997 1.00000 1.00000
 
 <h3 id="clustering">Clustering</h3>
 
-<p>One popular technique in unsupervised learning is clustering. As the name itself suggests, Clustering algorithms group a set of data points into subsets or clusters. The algorithms’ goal is to create clusters that are coherent inte<span class="notranslate">rna</span>lly, but clearly different from each other exte<span class="notranslate">rna</span>lly. In other words, entities within a cluster should be as similar as possible and entities in one cluster should be as dissimilar as possible from entities in another.</p>
+<p>One popular technique in unsupervised learning is clustering. As the name itself suggests, Clustering algorithms group a set of data points into subsets or clusters. The algorithms’ goal is to create clusters that are coherent internally, but clearly different from each other externally. In other words, entities within a cluster should be as similar as possible and entities in one cluster should be as dissimilar as possible from entities in another.</p>
 
 <p>Broadly speaking there are two ways of clustering data points based on the algorithmic structure and operation, namely agglomerative and divisive.</p>
 
@@ -1538,7 +1538,7 @@ Also, note that k-means requires the number of clusters to be defined beforehand
 
       <figure id="figure-5"><img src="../../images/intro-to-ml-with-r/kmeans-pc12-Visualization.png" alt="Visualization of the k-means results against the first two PCs on the UCI Breast Cancer dataset. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Visualization of the k-means results against the first two PCs on the UCI Breast Cancer dataset</figcaption></figure>
 
-      <p>This is a rather complex plotting command that is based on the <code class="language-plaintext highlighter-rouge">ggplot</code> library. For an overview of how <code class="language-plaintext highlighter-rouge">ggplot</code> works, have a look at the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-viz-in-r/tutorial.html"><span class="notranslate">RNA</span> Seq Counts to Viz in R</a> tutorial.</p>
+      <p>This is a rather complex plotting command that is based on the <code class="language-plaintext highlighter-rouge">ggplot</code> library. For an overview of how <code class="language-plaintext highlighter-rouge">ggplot</code> works, have a look at the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-viz-in-r/tutorial.html">RNA Seq Counts to Viz in R</a> tutorial.</p>
     </li>
     <li>
       <p>Now that we have a cluster for each tumor (clusters 1 and 2), we can check how well they coincide with the labels that we know. To do this we will use a cool method called <strong>cross-tabulation</strong>: a cross-tab is a table that allows you to read off how many data points in clusters 1 and 2 were actually benign or malignant respectively.</p>
@@ -1591,7 +1591,7 @@ breastCancerData$Diagnosis |         1 |         2 | Row Total |
 
 <h4 id="optimal-k">Optimal k</h4>
 
-<p>One technique to choose the best <code class="language-plaintext highlighter-rouge">k</code> is called the <strong>elbow method</strong>. This method uses within-group homogeneity or within-group heterogeneity to evaluate the variability. In other words, you are interested in the percentage of the variance explained by each cluster. You can expect the variability to increase with the number of clusters, alte<span class="notranslate">rna</span>tively, heterogeneity decreases. Our challenge is to find the <code class="language-plaintext highlighter-rouge">k</code> that is beyond the diminishing returns. Adding a new cluster does not improve the variability in the data because very few information is left to explain.</p>
+<p>One technique to choose the best <code class="language-plaintext highlighter-rouge">k</code> is called the <strong>elbow method</strong>. This method uses within-group homogeneity or within-group heterogeneity to evaluate the variability. In other words, you are interested in the percentage of the variance explained by each cluster. You can expect the variability to increase with the number of clusters, alternatively, heterogeneity decreases. Our challenge is to find the <code class="language-plaintext highlighter-rouge">k</code> that is beyond the diminishing returns. Adding a new cluster does not improve the variability in the data because very few information is left to explain.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-finding-the-optimal-k" aria-label="hands-on box: Finding the optimal k"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Finding the optimal k</div>
@@ -1665,7 +1665,7 @@ breastCancerData$Diagnosis |         1 |         2 | Row Total |
 
   <ol>
     <li>Try re-running the clustering step with the new k. Is there a significant difference?</li>
-    <li>Try to think of alte<span class="notranslate">rna</span>tive metrics that could be used as a “distance” measure, instead of the default “Euclidean”. Do you think there might be an optimal for our case?</li>
+    <li>Try to think of alternative metrics that could be used as a “distance” measure, instead of the default “Euclidean”. Do you think there might be an optimal for our case?</li>
   </ol>
 
   <blockquote class="solution">
@@ -1678,7 +1678,7 @@ breastCancerData$Diagnosis |         1 |         2 | Row Total |
 
 <h3 id="hierarchical-clustering">Hierarchical clustering</h3>
 
-<p>k-means clustering requires us to specify the number of clusters, and determining the optimal number of clusters is often not trivial. Hierarchical clustering is an alte<span class="notranslate">rna</span>tive approach which builds a hierarchy from the bottom-up, and doesn’t require us to specify the number of clusters beforehand but requires extra steps to extract final clusters.
+<p>k-means clustering requires us to specify the number of clusters, and determining the optimal number of clusters is often not trivial. Hierarchical clustering is an alternative approach which builds a hierarchy from the bottom-up, and doesn’t require us to specify the number of clusters beforehand but requires extra steps to extract final clusters.
 The algorithm works as follows:</p>
 
 <ul>
@@ -2022,7 +2022,7 @@ M   5 131
       <div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">print</span><span class="p">(</span><span class="n">rf</span><span class="p">)</span><span class="w">
 </span></code></pre></div>      </div>
 
-      <p>The output shows the individual components and inte<span class="notranslate">rna</span>l parameters of the Random Forest model.</p>
+      <p>The output shows the individual components and internal parameters of the Random Forest model.</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Call:
  randomForest(formula = Diagnosis ~ ., data = breastCancerData.train,      ntree = 100, proximity = T)

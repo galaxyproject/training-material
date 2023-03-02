@@ -728,7 +728,7 @@
 <p>You will mostly use <code class="language-plaintext highlighter-rouge">r</code> and <code class="language-plaintext highlighter-rouge">w</code>, <code class="language-plaintext highlighter-rouge">a</code> is especially useful for writing to program logs where you don’t really care what was written before, you just want to add your new logs to the end of the file.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'hamlet.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
-    <span class="c1"># readlines <span class="notranslate">reads</span> every line of a file into a giant list!
+    <span class="c1"># readlines reads every line of a file into a giant list!
 </span>    <span class="n">lines</span> <span class="o">=</span> <span class="n">handle</span><span class="p">.</span><span class="n">readlines</span><span class="p">()</span>
 </code></pre></div></div>
 
@@ -767,7 +767,7 @@ handle.close() # Important!
 <p>Every line that’s read in ends in a newline currently. This is done because if we wanted to write it back out, we would need to preserve those newlines, or all of the content would be on one giant line. Let’s try writing out a file, it’s <em>just</em> like reading in a file!</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'hamlet-copy.txt'</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
-    <span class="c1"># readlines <span class="notranslate">reads</span> every line of a file into a giant list!
+    <span class="c1"># readlines reads every line of a file into a giant list!
 </span>    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">:</span>
         <span class="n">handle</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
 </code></pre></div></div>
@@ -788,7 +788,7 @@ HAMLET. O, but she’ll keep her word.
 <p>So let’s count up how many times each character speaks! (Roughly)</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'hamlet.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
-    <span class="c1"># readlines <span class="notranslate">reads</span> every line of a file into a giant list!
+    <span class="c1"># readlines reads every line of a file into a giant list!
 </span>    <span class="n">lines</span> <span class="o">=</span> <span class="n">handle</span><span class="p">.</span><span class="n">readlines</span><span class="p">()</span>
 
 <span class="n">speakers</span> <span class="o">=</span> <span class="p">{}</span>

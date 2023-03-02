@@ -632,7 +632,7 @@ after you have executed a tool. As a more useful example we are going to ask <a 
 display to entertain our users.</p>
 
 <p>At first let’s create a config file that defines the name and the type of your webhook. The <code class="language-plaintext highlighter-rouge">name</code> is <code class="language-plaintext highlighter-rouge">phdcomics</code> and with the type we define the entry-points
-at which we modify the <span class="notranslate">Galaxy</span> user-interface. In our case we want to display an image at the <code class="language-plaintext highlighter-rouge">tool</code> and <code class="language-plaintext highlighter-rouge"><span class="notranslate">workflow</span></code> entry-point.
+at which we modify the Galaxy user-interface. In our case we want to display an image at the <code class="language-plaintext highlighter-rouge">tool</code> and <code class="language-plaintext highlighter-rouge">workflow</code> entry-point.
 The key <code class="language-plaintext highlighter-rouge">activate</code> gives you control per-webhook to activate or deactivate it.</p>
 
 <blockquote class="notranslate hands_on">
@@ -645,18 +645,18 @@ The key <code class="language-plaintext highlighter-rouge">activate</code> gives
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="na">name</span><span class="pi">:</span> <span class="s">phdcomics</span>
    <span class="na">type</span><span class="pi">:</span>
      <span class="pi">-</span> <span class="s">tool</span>
-     <span class="pi">-</span> <span class="s"><span class="notranslate">workflow</span></span>
+     <span class="pi">-</span> <span class="s">workflow</span>
    <span class="na">activate</span><span class="pi">:</span> <span class="no">true</span>
 </code></pre></div>      </div>
     </li>
   </ol>
 </blockquote>
 
-<p>The next step is to define HTML/JS part which will control the part of the <span class="notranslate">Galaxy</span> UI. We create a new PHDComicsAppView view extended from Backbone.
+<p>The next step is to define HTML/JS part which will control the part of the Galaxy UI. We create a new PHDComicsAppView view extended from Backbone.
 Inside this view we define a simple <code class="language-plaintext highlighter-rouge">div</code>-container with a button and a placeholder for our image called <code class="language-plaintext highlighter-rouge">phdcomics-img</code>. You can add additional
 functionality to your view, for example getting a new image on button click. The essential functionality however is stored getRandomComic.
 The big problem with phdcomics is that there is no nice API to retrive the comics, so we need to fallback to parse the HTML pages. We decided to do this
-in Python to demonstrate webhooks abilitity to call self-defined python functions. Please note the <code class="language-plaintext highlighter-rouge">url = <span class="notranslate">galaxy</span>Root + 'api/webhooks/phdcomics/get_data';</code>, which
+in Python to demonstrate webhooks abilitity to call self-defined python functions. Please note the <code class="language-plaintext highlighter-rouge">url = galaxyRoot + 'api/webhooks/phdcomics/get_data';</code>, which
 calls an REST endpoint defined by use in the next step. The return value of this endpoint is retrived in JS and can be displayed or modified.</p>
 
 <blockquote class="notranslate hands_on">
@@ -668,7 +668,7 @@ calls an REST endpoint defined by use in the next step. The return value of this
 
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 
-        <span class="kd">var</span> <span class="nx"><span class="notranslate">galaxy</span>Root</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx"><span class="notranslate">Galaxy</span></span> <span class="o">!=</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span> <span class="p">?</span> <span class="nx"><span class="notranslate">Galaxy</span></span><span class="p">.</span><span class="nx">root</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">galaxyRoot</span> <span class="o">=</span> <span class="k">typeof</span> <span class="nx">Galaxy</span> <span class="o">!=</span> <span class="dl">'</span><span class="s1">undefined</span><span class="dl">'</span> <span class="p">?</span> <span class="nx">Galaxy</span><span class="p">.</span><span class="nx">root</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">;</span>
 
         <span class="kd">var</span> <span class="nx">PHDComicsAppView</span> <span class="o">=</span> <span class="nx">Backbone</span><span class="p">.</span><span class="nx">View</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
             <span class="na">el</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#phdcomics</span><span class="dl">'</span><span class="p">,</span>
@@ -700,7 +700,7 @@ calls an REST endpoint defined by use in the next step. The return value of this
 
             <span class="na">getRandomComic</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
                 <span class="kd">var</span> <span class="nx">me</span> <span class="o">=</span> <span class="k">this</span><span class="p">,</span>
-                    <span class="nx">url</span> <span class="o">=</span> <span class="nx"><span class="notranslate">galaxy</span>Root</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">api/webhooks/phdcomics/get_data</span><span class="dl">'</span><span class="p">;</span>
+                    <span class="nx">url</span> <span class="o">=</span> <span class="nx">galaxyRoot</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">api/webhooks/phdcomics/get_data</span><span class="dl">'</span><span class="p">;</span>
 
                 <span class="k">this</span><span class="p">.</span><span class="nx">$comicImg</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="dl">'</span><span class="s1">&lt;div/&gt;</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
                     <span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">phdcomics-loader</span><span class="dl">'</span>
@@ -728,8 +728,8 @@ calls an REST endpoint defined by use in the next step. The return value of this
 </blockquote>
 
 <p>The following hands-on will define an API endpoint that is called from the JS code of your webhook.
-Make sure you name the python function <code class="language-plaintext highlighter-rouge">main</code> and that all third-party requirements are installed in your <span class="notranslate">Galaxy</span> virtual environment.
-Please note that the <code class="language-plaintext highlighter-rouge">main()</code> can consume <code class="language-plaintext highlighter-rouge">params</code> from your client but also the <span class="notranslate">Galaxy</span> <code class="language-plaintext highlighter-rouge">trans</code> object, which will give you access to the
+Make sure you name the python function <code class="language-plaintext highlighter-rouge">main</code> and that all third-party requirements are installed in your Galaxy virtual environment.
+Please note that the <code class="language-plaintext highlighter-rouge">main()</code> can consume <code class="language-plaintext highlighter-rouge">params</code> from your client but also the Galaxy <code class="language-plaintext highlighter-rouge">trans</code> object, which will give you access to the
 entire user-object, including histories and datasets.</p>
 
 <blockquote class="notranslate hands_on">
@@ -872,7 +872,7 @@ entire user-object, including histories and datasets.</p>
   </ol>
 </blockquote>
 
-<p>Please make sure you have activated webhooks in your <code class="language-plaintext highlighter-rouge">config/<span class="notranslate">galaxy</span>.yml</code> file by setting the <code class="language-plaintext highlighter-rouge">webhooks_dir</code> to the path in which your <code class="language-plaintext highlighter-rouge">phdcomics</code> folder is located.</p>
+<p>Please make sure you have activated webhooks in your <code class="language-plaintext highlighter-rouge">config/galaxy.yml</code> file by setting the <code class="language-plaintext highlighter-rouge">webhooks_dir</code> to the path in which your <code class="language-plaintext highlighter-rouge">phdcomics</code> folder is located.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-4" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
@@ -889,7 +889,7 @@ entire user-object, including histories and datasets.</p>
 
 <h2 id="conclusion">Conclusion</h2>
 
-<p>First of all, thank you for completing this tutorial. We have learned how to add webhooks to your <span class="notranslate">Galaxy</span>.</p>
+<p>First of all, thank you for completing this tutorial. We have learned how to add webhooks to your Galaxy.</p>
 
 
                 

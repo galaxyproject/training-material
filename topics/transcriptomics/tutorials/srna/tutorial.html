@@ -798,8 +798,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -893,15 +891,15 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>Small, noncoding <span class="notranslate">RNA</span> (s<span class="notranslate">RNA</span>) molecules, typically 18-40nt in length, are key features of post-transcriptional regulatory mechanisms governing gene <span class="notranslate">expression</span>. Through interactions with protein cofactors, these tiny s<span class="notranslate">RNA</span>s typically function by perfectly or imperfectly basepairing with substrate <span class="notranslate">RNA</span> molecules, and then eliciting <span class="notranslate">downstream</span> effects such as translation inhibition or <span class="notranslate">RNA</span> degradation. Different subclasses of s<span class="notranslate">RNA</span>s - <em>e.g.</em> micro<span class="notranslate">RNA</span>s (mi<span class="notranslate">RNA</span>s), Piwi-interaction <span class="notranslate">RNA</span>s (pi<span class="notranslate">RNA</span>s), and endogenous short interferring <span class="notranslate">RNA</span>s (si<span class="notranslate">RNA</span>s) - exhibit unique characteristics, and their relative abundances in biological contexts can indicate whether they are active or not. In this tutorial, we will examine <span class="notranslate">expression</span> of the pi<span class="notranslate">RNA</span> subclass of s<span class="notranslate">RNA</span>s and their targets in <em>Drosophila melanogaster</em>.</p>
+<p>Small, noncoding RNA (sRNA) molecules, typically 18-40nt in length, are key features of post-transcriptional regulatory mechanisms governing gene expression. Through interactions with protein cofactors, these tiny sRNAs typically function by perfectly or imperfectly basepairing with substrate RNA molecules, and then eliciting downstream effects such as translation inhibition or RNA degradation. Different subclasses of sRNAs - <em>e.g.</em> microRNAs (miRNAs), Piwi-interaction RNAs (piRNAs), and endogenous short interferring RNAs (siRNAs) - exhibit unique characteristics, and their relative abundances in biological contexts can indicate whether they are active or not. In this tutorial, we will examine expression of the piRNA subclass of sRNAs and their targets in <em>Drosophila melanogaster</em>.</p>
 
-<p>The data used in this tutorial are from polyphosphatase-treated s<span class="notranslate">RNA</span> sequencing (s<span class="notranslate">RNA</span>-seq) experiments in <em>Drosophila</em>. The goal of this study was to determine how si<span class="notranslate">RNA</span> <span class="notranslate">expression</span> changes in flies treated with <span class="notranslate">RNA</span> interference (<span class="notranslate">RNA</span>i) to knock down Symplekin, which is a component of the core cleaveage completx. To that end, in addition to s<span class="notranslate">RNA</span>-seq, m<span class="notranslate">RNA</span>-seq experiments were performed to determine whether targets of differentially expressed si<span class="notranslate">RNA</span>s were also differentially expressed. The original published study can be found <a href="https://www.ncbi.nlm.nih.gov/pubmed/28415970">here</a>. Because of the long processing time for the large original files - which contained 7-22 million <span class="notranslate">reads</span> each - we have downsampled the original input data to include only a subset of usable <span class="notranslate">reads</span>.</p>
+<p>The data used in this tutorial are from polyphosphatase-treated sRNA sequencing (sRNA-seq) experiments in <em>Drosophila</em>. The goal of this study was to determine how siRNA expression changes in flies treated with RNA interference (RNAi) to knock down Symplekin, which is a component of the core cleaveage completx. To that end, in addition to sRNA-seq, mRNA-seq experiments were performed to determine whether targets of differentially expressed siRNAs were also differentially expressed. The original published study can be found <a href="https://www.ncbi.nlm.nih.gov/pubmed/28415970">here</a>. Because of the long processing time for the large original files - which contained 7-22 million reads each - we have downsampled the original input data to include only a subset of usable reads.</p>
 
 <h1 id="analysis-strategy">Analysis strategy</h1>
 
-<p>In this exercise we will identify what small <span class="notranslate">RNA</span>s are present in <em>Drosophila</em> Dmel-2 tissue culture cells treated with either <span class="notranslate">RNA</span>i against  core cleavage complex component Symplekin or blank (control) <span class="notranslate">RNA</span>i (published data available in GEO at <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE82128">GSE82128</a>). In this study, biological triplicate s<span class="notranslate">RNA</span>- and m<span class="notranslate">RNA</span>-seq libraries were sequenced for both <span class="notranslate">RNA</span>i conditions. After removing contaminant ribosomal <span class="notranslate">RNA</span> (r<span class="notranslate">RNA</span>) and mi<span class="notranslate">RNA</span> <span class="notranslate">reads</span>, we will identify and quantify endogenous si<span class="notranslate">RNA</span>s from sequenced <span class="notranslate">reads</span> and test for differential abundance. We will follow a popular small <span class="notranslate">RNA</span> analysis pipeline developed for pi<span class="notranslate">RNA</span>s by the Phillip Zamore Lab and the ZLab (Zhiping Weng) at UMass Med School called <a href="https://github.com/bowhan/piPipes">PiPipes</a>. Although PiPipes was developed for analysis of pi<span class="notranslate">RNA</span>s, many of the basical principles can be applied to other classes of small <span class="notranslate">RNA</span>s.</p>
+<p>In this exercise we will identify what small RNAs are present in <em>Drosophila</em> Dmel-2 tissue culture cells treated with either RNAi against  core cleavage complex component Symplekin or blank (control) RNAi (published data available in GEO at <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE82128">GSE82128</a>). In this study, biological triplicate sRNA- and mRNA-seq libraries were sequenced for both RNAi conditions. After removing contaminant ribosomal RNA (rRNA) and miRNA reads, we will identify and quantify endogenous siRNAs from sequenced reads and test for differential abundance. We will follow a popular small RNA analysis pipeline developed for piRNAs by the Phillip Zamore Lab and the ZLab (Zhiping Weng) at UMass Med School called <a href="https://github.com/bowhan/piPipes">PiPipes</a>. Although PiPipes was developed for analysis of piRNAs, many of the basical principles can be applied to other classes of small RNAs.</p>
 
-<p>It is of note that this tutorial uses datasets that have been de-multiplexed so that the input data files are a single FASTQ formatted file for each sample. Because s<span class="notranslate">RNA</span>s are typically much smaller than fragments generated for <span class="notranslate">RNA</span>-seq or other types of deep sequencing experiments, single-end sequencing strategies are almost always used to sequence s<span class="notranslate">RNA</span>s. This tutorial uses the <em>Collections</em> feature of <span class="notranslate">Galaxy</span> to orgainze each set of replicates into a single group, making tool form submission easier and ensuring reproducibility.</p>
+<p>It is of note that this tutorial uses datasets that have been de-multiplexed so that the input data files are a single FASTQ formatted file for each sample. Because sRNAs are typically much smaller than fragments generated for RNA-seq or other types of deep sequencing experiments, single-end sequencing strategies are almost always used to sequence sRNAs. This tutorial uses the <em>Collections</em> feature of Galaxy to orgainze each set of replicates into a single group, making tool form submission easier and ensuring reproducibility.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -914,15 +912,15 @@
       <li><a href="#data-upload-and-organization" id="markdown-toc-data-upload-and-organization">Data upload and organization</a></li>
       <li><a href="#read-quality-checking" id="markdown-toc-read-quality-checking">Read quality checking</a></li>
       <li><a href="#adaptor-trimming" id="markdown-toc-adaptor-trimming">Adaptor trimming</a></li>
-      <li><a href="#hierarchical-read-alignment-to-remove-rrnamirna-reads" id="markdown-toc-hierarchical-read-alignment-to-remove-rrnamirna-reads">Hierarchical read alignment to remove r<span class="notranslate">RNA</span>/mi<span class="notranslate">RNA</span> <span class="notranslate">reads</span></a></li>
-      <li><a href="#small-rna-subclass-distinction" id="markdown-toc-small-rna-subclass-distinction">Small <span class="notranslate">RNA</span> subclass distinction</a></li>
-      <li><a href="#sirna-abundance-estimation" id="markdown-toc-sirna-abundance-estimation">si<span class="notranslate">RNA</span> abundance estimation</a></li>
-      <li><a href="#sirna-differential-abundance-testing" id="markdown-toc-sirna-differential-abundance-testing">si<span class="notranslate">RNA</span> differential abundance testing</a></li>
+      <li><a href="#hierarchical-read-alignment-to-remove-rrnamirna-reads" id="markdown-toc-hierarchical-read-alignment-to-remove-rrnamirna-reads">Hierarchical read alignment to remove rRNA/miRNA reads</a></li>
+      <li><a href="#small-rna-subclass-distinction" id="markdown-toc-small-rna-subclass-distinction">Small RNA subclass distinction</a></li>
+      <li><a href="#sirna-abundance-estimation" id="markdown-toc-sirna-abundance-estimation">siRNA abundance estimation</a></li>
+      <li><a href="#sirna-differential-abundance-testing" id="markdown-toc-sirna-differential-abundance-testing">siRNA differential abundance testing</a></li>
       <li><a href="#visualization" id="markdown-toc-visualization">Visualization</a></li>
     </ol>
   </li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a>    <ol>
-      <li><a href="#small-rna-analysis-general-pipeline" id="markdown-toc-small-rna-analysis-general-pipeline">Small <span class="notranslate">RNA</span> analysis (general) pipeline</a></li>
+      <li><a href="#small-rna-analysis-general-pipeline" id="markdown-toc-small-rna-analysis-general-pipeline">Small RNA analysis (general) pipeline</a></li>
     </ol>
   </li>
 </ol>
@@ -931,38 +929,38 @@
 
 <h2 id="data-upload-and-organization">Data upload and organization</h2>
 
-<p>Due to the large size of the original s<span class="notranslate">RNA</span>-seq datasets, we have downsampled them to only inlcude a subset of <span class="notranslate">reads</span>. These datasets are available at <a href="https://doi.org/10.5281/zenodo.826906"><code class="language-plaintext highlighter-rouge">Zenodo</code></a> where you can find the FASTQ files corresponding to replicate s<span class="notranslate">RNA</span>-seq experiments and additional annotation files for the <em>Drosophila melanogaster</em> genome version dm3.</p>
+<p>Due to the large size of the original sRNA-seq datasets, we have downsampled them to only inlcude a subset of reads. These datasets are available at <a href="https://doi.org/10.5281/zenodo.826906"><code class="language-plaintext highlighter-rouge">Zenodo</code></a> where you can find the FASTQ files corresponding to replicate sRNA-seq experiments and additional annotation files for the <em>Drosophila melanogaster</em> genome version dm3.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload-and-organization" aria-label="hands-on box: Data upload and organization"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload and organization</div>
 
   <ol>
     <li>
-      <p>Create a new history and name it something meaningful (<em>e.g.</em> s<span class="notranslate">RNA</span>-seq tutorial)</p>
+      <p>Create a new history and name it something meaningful (<em>e.g.</em> sRNA-seq tutorial)</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
     <li>
-      <p>Import the 3 <code class="language-plaintext highlighter-rouge">Blank_<span class="notranslate">RNA</span>i_s<span class="notranslate">RNA</span>-seq</code> and 3 <code class="language-plaintext highlighter-rouge">Symp_<span class="notranslate">RNA</span>i_s<span class="notranslate">RNA</span>-seq</code> FASTQ files from <a href="https://zenodo.org/record/1324070">Zenodo</a> or from the data library (ask your instructor)</p>
+      <p>Import the 3 <code class="language-plaintext highlighter-rouge">Blank_RNAi_sRNA-seq</code> and 3 <code class="language-plaintext highlighter-rouge">Symp_RNAi_sRNA-seq</code> FASTQ files from <a href="https://zenodo.org/record/1324070">Zenodo</a> or from the data library (ask your instructor)</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/826906/files/Blank_<span class="notranslate">RNA</span>i_s<span class="notranslate">RNA</span>-seq_rep1_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Blank_<span class="notranslate">RNA</span>i_s<span class="notranslate">RNA</span>-seq_rep2_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Blank_<span class="notranslate">RNA</span>i_s<span class="notranslate">RNA</span>-seq_rep3_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Symp_<span class="notranslate">RNA</span>i_s<span class="notranslate">RNA</span>-seq_rep1_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Symp_<span class="notranslate">RNA</span>i_s<span class="notranslate">RNA</span>-seq_rep2_downsampled.fastqsanger.gz
-https://zenodo.org/record/826906/files/Symp_<span class="notranslate">RNA</span>i_s<span class="notranslate">RNA</span>-seq_rep3_downsampled.fastqsanger.gz
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep1_downsampled.fastqsanger.gz
+https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep2_downsampled.fastqsanger.gz
+https://zenodo.org/record/826906/files/Blank_RNAi_sRNA-seq_rep3_downsampled.fastqsanger.gz
+https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep1_downsampled.fastqsanger.gz
+https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep2_downsampled.fastqsanger.gz
+https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep3_downsampled.fastqsanger.gz
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
 
       <p>Set the datatype of the read (.fastqsanger) files to <strong>fastq</strong>
-As default, <span class="notranslate">Galaxy</span> takes the link as name, so rename them.</p>
+As default, Galaxy takes the link as name, so rename them.</p>
     </li>
     <li>
       <p>Build a dataset list for both sets (<code class="language-plaintext highlighter-rouge">Blank</code> and <code class="language-plaintext highlighter-rouge">Symp</code>) of replicate FASTQ files</p>
@@ -977,8 +975,8 @@ As default, <span class="notranslate">Galaxy</span> takes the link as name, so r
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/826906/files/dm3_transcriptome_Tx2Gene_downsampled.tab.gz
 https://zenodo.org/record/826906/files/dm3_transcriptome_sequences_downsampled.fa.gz
-https://zenodo.org/record/826906/files/dm3_mi<span class="notranslate">RNA</span>_hairpin_sequences.fa.gz
-https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>_sequences.fa.gz
+https://zenodo.org/record/826906/files/dm3_miRNA_hairpin_sequences.fa.gz
+https://zenodo.org/record/826906/files/dm3_rRNA_sequences.fa.gz
 </code></pre></div>      </div>
 
       <ul>
@@ -992,7 +990,7 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
 
 <h2 id="read-quality-checking">Read quality checking</h2>
 
-<p>Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one of a few different encoding schemes. Most <span class="notranslate">Galaxy</span> tools assume that input FASTQ files are using the Sanger/Illumina 1.9 encoding scheme. If the input FASTQ files are using an alte<span class="notranslate">rna</span>te encoding scheme, then some tools will not interpret the quality score encodings correctly. It is good practice to confirm the quality encoding scheme of your data and then convert to Sanger/Illumina 1.9, if necessary. We can check the quality encoding scheme using the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> tool (further described in the <a href="/training-material/topics/sequence-analysis">NGS-QC tutorial</a>).</p>
+<p>Read quality scores (phred scores) in FASTQ-formatted data can be encoded by one of a few different encoding schemes. Most Galaxy tools assume that input FASTQ files are using the Sanger/Illumina 1.9 encoding scheme. If the input FASTQ files are using an alternate encoding scheme, then some tools will not interpret the quality score encodings correctly. It is good practice to confirm the quality encoding scheme of your data and then convert to Sanger/Illumina 1.9, if necessary. We can check the quality encoding scheme using the <a href="https://www.bioinformatics.babraham.ac.uk/projects/fastqc/">FastQC</a> tool (further described in the <a href="/training-material/topics/sequence-analysis">NGS-QC tutorial</a>).</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-quality-checking" aria-label="hands-on box: Quality checking"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Quality checking</div>
@@ -1006,7 +1004,7 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-selecting-a-dataset-collection-as-input"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-selecting-a-dataset-collection-as-input-contents" aria-expanded="true" aria-label="Toggle tip box: Selecting a dataset collection as input"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Selecting a dataset collection as input<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <strong>Dataset collection</strong> in  front of the input parameter you want to supply the collection to.</li>   <li>Select the collection you want to use from the list</li> </ol> </blockquote>
     </li>
-    <li>Run <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <em>Symplekin</em> <span class="notranslate">RNA</span>i dataset collection</li>
+    <li>Run <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <em>Symplekin</em> RNAi dataset collection</li>
     <li>
       <p>Inspect the <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> reports</p>
 
@@ -1022,7 +1020,7 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
             <p><img src="../../images/sRNA/Fig5a_fastqc_result_stats_boxplot.png" alt="The output of FastQC as a boxplot. " loading="lazy" /></p>
           </li>
           <li>
-            <p>Are there any adaptors present in these <span class="notranslate">reads</span>? Which one(s)?</p>
+            <p>Are there any adaptors present in these reads? Which one(s)?</p>
 
             <p><img src="../../images/sRNA/Fig5b_fastqc_result_stats_adapter.png" alt="The output of FastQC stats adapted. " loading="lazy" /></p>
           </li>
@@ -1033,7 +1031,7 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
           <ol>
             <li>All samples use the Illumina 1.9 quality encoding scheme, so we do <strong>not</strong> need to convert.</li>
             <li>All samples have a read length of 50 nt.</li>
-            <li>The base quality across the entire length of the <span class="notranslate">reads</span> is good (phred score &gt; 28 for the most part).</li>
+            <li>The base quality across the entire length of the reads is good (phred score &gt; 28 for the most part).</li>
             <li>Yes, the “Illumina Universal Adapter” is present.</li>
           </ol>
         </blockquote>
@@ -1062,46 +1060,46 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
       <p>Change the datatype to <code class="language-plaintext highlighter-rouge">fastqsanger</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">fastqsanger</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">fastqsanger</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<p>Go back to the <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and scroll down to the “Adapter Content” section. You can see that Illumina Universal Adapters are present in <strong>&gt;80%</strong> of the <span class="notranslate">reads</span>. The next step is to remove these artificial adaptors because they are not part of the biological s<span class="notranslate">RNA</span>s. If a different adapter is present, you can update the <strong>Adapter sequence to be trimmed off</strong> in the <strong>Trim Galore!</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step described below.</p>
+<p>Go back to the <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and scroll down to the “Adapter Content” section. You can see that Illumina Universal Adapters are present in <strong>&gt;80%</strong> of the reads. The next step is to remove these artificial adaptors because they are not part of the biological sRNAs. If a different adapter is present, you can update the <strong>Adapter sequence to be trimmed off</strong> in the <strong>Trim Galore!</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step described below.</p>
 
 <h2 id="adaptor-trimming">Adaptor trimming</h2>
 
-<p>s<span class="notranslate">RNA</span>-seq library preparation involves adding an artificial adaptor sequence to both the 5’ and 3’ ends of the small <span class="notranslate">RNA</span>s. While the 5’ adaptor anchors <span class="notranslate">reads</span> to the sequencing surface and thus are not sequenced, the 3’ adaptor is typically sequenced immediately following the s<span class="notranslate">RNA</span> sequence. In the example datasets here, the 3’ adaptor sequence is identified as the Illumina Universal Adapter, and needs to be removed from each read before aligning to a reference. We will be using the <span class="notranslate">Galaxy</span> tool <strong>Trim Galore!</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> which implements the <a href="https://cutadapt.readthedocs.io/en/stable/"><code class="language-plaintext highlighter-rouge">cutadapt</code></a> tool for adapter trimming.</p>
+<p>sRNA-seq library preparation involves adding an artificial adaptor sequence to both the 5’ and 3’ ends of the small RNAs. While the 5’ adaptor anchors reads to the sequencing surface and thus are not sequenced, the 3’ adaptor is typically sequenced immediately following the sRNA sequence. In the example datasets here, the 3’ adaptor sequence is identified as the Illumina Universal Adapter, and needs to be removed from each read before aligning to a reference. We will be using the Galaxy tool <strong>Trim Galore!</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> which implements the <a href="https://cutadapt.readthedocs.io/en/stable/"><code class="language-plaintext highlighter-rouge">cutadapt</code></a> tool for adapter trimming.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-adaptor-trimming" aria-label="hands-on box: Adaptor trimming"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adaptor trimming</div>
 
   <ol>
-    <li><strong>Trim Galore!</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on each collection of FASTQ read files to remove Illumina adapters from the 3’ ends of <span class="notranslate">reads</span> with the following parameters:
+    <li><strong>Trim Galore!</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on each collection of FASTQ read files to remove Illumina adapters from the 3’ ends of reads with the following parameters:
       <ul>
         <li><em>“Is this library paired- or single-end”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
-            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“<span class="notranslate">Reads</span> in FASTQ format?”</em>: <code class="language-plaintext highlighter-rouge">Blank</code> collection</li>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Reads in FASTQ format?”</em>: <code class="language-plaintext highlighter-rouge">Blank</code> collection</li>
             <li><em>“Adapter sequence to be trimmed”</em>: <code class="language-plaintext highlighter-rouge">Illumina universal</code></li>
           </ul>
         </li>
         <li><em>“Trim Galore! advanced settings”</em>: <code class="language-plaintext highlighter-rouge">Full parameter list</code>
           <ul>
-            <li><em>“Trim low-quality ends from <span class="notranslate">reads</span> in addition to adapter removal”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+            <li><em>“Trim low-quality ends from reads in addition to adapter removal”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
             <li><em>“Overlap with adapter sequence required to trim a sequence”</em>: <code class="language-plaintext highlighter-rouge">6</code></li>
-            <li><em>“Discard <span class="notranslate">reads</span> that became shorter than length N”</em>: <code class="language-plaintext highlighter-rouge">12</code></li>
+            <li><em>“Discard reads that became shorter than length N”</em>: <code class="language-plaintext highlighter-rouge">12</code></li>
             <li><em>“Generate a report file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><strong>Trim Galore!</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat for the <em>Symplekin</em> <span class="notranslate">RNA</span>i dataset collection</li>
+    <li><strong>Trim Galore!</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat for the <em>Symplekin</em> RNAi dataset collection</li>
   </ol>
 
 </blockquote>
 
-<p>We don’t want to trim for quality because the adapter-trimmed sequences represent a full small <span class="notranslate">RNA</span> molecule, and we want to maintain the integrity of the entire molecule. We increase the minimum read length required to keep a read because small <span class="notranslate">RNA</span>s can potentially be shorter than 20 nt (the default value). We can check out the generated report file for any sample and see the command for the tool, a summary of the total <span class="notranslate">reads</span> processed and number of <span class="notranslate">reads</span> with an adapter identified, and histogram data of the length of adaptor trimmed. We also see that a very small percentage of low-quality bases have been trimmed</p>
+<p>We don’t want to trim for quality because the adapter-trimmed sequences represent a full small RNA molecule, and we want to maintain the integrity of the entire molecule. We increase the minimum read length required to keep a read because small RNAs can potentially be shorter than 20 nt (the default value). We can check out the generated report file for any sample and see the command for the tool, a summary of the total reads processed and number of reads with an adapter identified, and histogram data of the length of adaptor trimmed. We also see that a very small percentage of low-quality bases have been trimmed</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-adaptor-trimming-check" aria-label="hands-on box: Adaptor trimming check"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adaptor trimming check</div>
@@ -1121,7 +1119,7 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
         <p><img src="../../images/sRNA/Fig8a_fastqc_post_trimming_result.png" alt="FastQC output after trimming. " loading="lazy" /></p>
 
         <ol>
-          <li>Are there any adaptors present in these <span class="notranslate">reads</span>? Which one(s)?</li>
+          <li>Are there any adaptors present in these reads? Which one(s)?</li>
         </ol>
 
         <p><img src="../../images/sRNA/Fig8b_fastqc_post_trimming_lengths.png" alt="FastQC output after trimming. " loading="lazy" /></p>
@@ -1137,23 +1135,23 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
   </ol>
 </blockquote>
 
-<p>An interesting thing to note from our <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> results is the <em>Sequence Length Distribution</em> results. While many <span class="notranslate">RNA</span>-seq experiments have normal distribution of read lengths, an unusual spike at 22nt is observed in our data. This spike represents the large set of endogenous si<span class="notranslate">RNA</span>s that occur in the cell line used in this study, and is actually confirmation that our dataset captures the biological molecule we are interested in.</p>
+<p>An interesting thing to note from our <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> results is the <em>Sequence Length Distribution</em> results. While many RNA-seq experiments have normal distribution of read lengths, an unusual spike at 22nt is observed in our data. This spike represents the large set of endogenous siRNAs that occur in the cell line used in this study, and is actually confirmation that our dataset captures the biological molecule we are interested in.</p>
 
-<p>Now that we have converted to <em>fastqsanger</em> format and trimmed our <span class="notranslate">reads</span> of the Illumina Universal Adaptors, we will align our trimmed <span class="notranslate">reads</span> to reference <em>Drosophila</em> r<span class="notranslate">RNA</span> and mi<span class="notranslate">RNA</span> sequences (dm3) to remove these artifacts. Interestingly, <em>Drosophila</em> have a short 2S r<span class="notranslate">RNA</span> sequence that is 30nt long and typically co-migrates with s<span class="notranslate">RNA</span> populations during gel electrophoresis. r<span class="notranslate">RNA</span>s make up a very large proportion of all non-coding <span class="notranslate">RNA</span>s, and thus need to be removed. Oftentimes, experimental approaches can be utilized to deplete or avoid capture of r<span class="notranslate">RNA</span>s, but these methods are not always 100% efficient. We also want to remove any mi<span class="notranslate">RNA</span> sequences, as these are not relevant to our analysis. After removing r<span class="notranslate">RNA</span> and mi<span class="notranslate">RNA</span> <span class="notranslate">reads</span>, we will analyze the remaining <span class="notranslate">reads</span>, which may be si<span class="notranslate">RNA</span> or pi<span class="notranslate">RNA</span> sequences.</p>
+<p>Now that we have converted to <em>fastqsanger</em> format and trimmed our reads of the Illumina Universal Adaptors, we will align our trimmed reads to reference <em>Drosophila</em> rRNA and miRNA sequences (dm3) to remove these artifacts. Interestingly, <em>Drosophila</em> have a short 2S rRNA sequence that is 30nt long and typically co-migrates with sRNA populations during gel electrophoresis. rRNAs make up a very large proportion of all non-coding RNAs, and thus need to be removed. Oftentimes, experimental approaches can be utilized to deplete or avoid capture of rRNAs, but these methods are not always 100% efficient. We also want to remove any miRNA sequences, as these are not relevant to our analysis. After removing rRNA and miRNA reads, we will analyze the remaining reads, which may be siRNA or piRNA sequences.</p>
 
-<h2 id="hierarchical-read-alignment-to-remove-rrnamirna-reads">Hierarchical read alignment to remove r<span class="notranslate">RNA</span>/mi<span class="notranslate">RNA</span> <span class="notranslate">reads</span></h2>
+<h2 id="hierarchical-read-alignment-to-remove-rrnamirna-reads">Hierarchical read alignment to remove rRNA/miRNA reads</h2>
 
-<p>To first identify r<span class="notranslate">RNA</span>-originating <span class="notranslate">reads</span> (which we are not interested in in this case), we will align the <span class="notranslate">reads</span> to a reference set of r<span class="notranslate">RNA</span> sequences using <a href="https://ccb.jhu.edu/software/hisat2/index.shtml"><strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></a>, an accurate and fast tool for aligning <span class="notranslate">reads</span> to a reference.</p>
+<p>To first identify rRNA-originating reads (which we are not interested in in this case), we will align the reads to a reference set of rRNA sequences using <a href="https://ccb.jhu.edu/software/hisat2/index.shtml"><strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></a>, an accurate and fast tool for aligning reads to a reference.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-hierarchical-alignment-to-rrna-and-mirna-reference-sequences" aria-label="hands-on box: Hierarchical alignment to rRNA and miRNA reference sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hierarchical alignment to r<span class="notranslate">RNA</span> and mi<span class="notranslate">RNA</span> reference sequences</div>
+  <div class="box-title hands-on-title" id="hands-on-hierarchical-alignment-to-rrna-and-mirna-reference-sequences" aria-label="hands-on box: Hierarchical alignment to rRNA and miRNA reference sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hierarchical alignment to rRNA and miRNA reference sequences</div>
 
   <ol>
-    <li><strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on each collection of trimmed <span class="notranslate">reads</span> to align to reference r<span class="notranslate">RNA</span> sequences with the following parameters
+    <li><strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on each collection of trimmed reads to align to reference rRNA sequences with the following parameters
       <ul>
         <li><em>“Source for the reference genome to align against”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Dmel_r<span class="notranslate">RNA</span>_sequences.fa</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Dmel_rRNA_sequences.fa</code></li>
           </ul>
         </li>
         <li><em>“Is this a single or paired library?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
@@ -1164,14 +1162,14 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
         </li>
       </ul>
     </li>
-    <li><strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat for the <em>Symplekin</em> <span class="notranslate">RNA</span>i dataset collection</li>
+    <li><strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat for the <em>Symplekin</em> RNAi dataset collection</li>
   </ol>
 </blockquote>
 
-<p>We now need to extract the <em>unaligned</em> <span class="notranslate">reads</span> from the output BAM file for aligning to reference mi<span class="notranslate">RNA</span> sequences. We can do this by using the <code class="language-plaintext highlighter-rouge">Filter SAM or BAM, output SAM or BAM</code> tool to obtain <span class="notranslate">reads</span> with a bit flag = 4 (meaning the read is unaligned) and then converting the filtered BAM file to FASTQ format with the <code class="language-plaintext highlighter-rouge">Convert from BAM to FastQ</code> tool.</p>
+<p>We now need to extract the <em>unaligned</em> reads from the output BAM file for aligning to reference miRNA sequences. We can do this by using the <code class="language-plaintext highlighter-rouge">Filter SAM or BAM, output SAM or BAM</code> tool to obtain reads with a bit flag = 4 (meaning the read is unaligned) and then converting the filtered BAM file to FASTQ format with the <code class="language-plaintext highlighter-rouge">Convert from BAM to FastQ</code> tool.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-hierarchical-alignment-to-rrna-and-mirna-reference-sequences-2" aria-label="hands-on box: Hierarchical alignment to rRNA and miRNA reference sequences (2)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hierarchical alignment to r<span class="notranslate">RNA</span> and mi<span class="notranslate">RNA</span> reference sequences (2)</div>
+  <div class="box-title hands-on-title" id="hands-on-hierarchical-alignment-to-rrna-and-mirna-reference-sequences-2" aria-label="hands-on box: Hierarchical alignment to rRNA and miRNA reference sequences (2)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hierarchical alignment to rRNA and miRNA reference sequences (2)</div>
   <ol>
     <li><strong>Filter SAM or BAM, output SAM or BAM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on collection of HISAT2 output BAM files with the following parameters
       <ul>
@@ -1183,26 +1181,26 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
         </li>
       </ul>
     </li>
-    <li><strong>Filter SAM or BAM, output SAM or BAM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat for the <em>Symplekin</em> <span class="notranslate">RNA</span>i dataset collection</li>
+    <li><strong>Filter SAM or BAM, output SAM or BAM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat for the <em>Symplekin</em> RNAi dataset collection</li>
     <li><strong>Convert from BAM to FastQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on each collection of filtered HISAT2 output BAM files with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Convert the following BAM file to FASTQ”</em>: output of <strong>Filter SAM or BAM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for <code class="language-plaintext highlighter-rouge">Blank</code> collection</li>
       </ul>
     </li>
-    <li><strong>Convert from BAM to FastQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat for the <em>Symplekin</em> <span class="notranslate">RNA</span>i dataset collection</li>
+    <li><strong>Convert from BAM to FastQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat for the <em>Symplekin</em> RNAi dataset collection</li>
   </ol>
 </blockquote>
 
-<p>Next we will align the non-r<span class="notranslate">RNA</span> <span class="notranslate">reads</span> to a known set of mi<span class="notranslate">RNA</span> hairpin sequences to identify mi<span class="notranslate">RNA</span> <span class="notranslate">reads</span>.</p>
+<p>Next we will align the non-rRNA reads to a known set of miRNA hairpin sequences to identify miRNA reads.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-hierarchical-alignment-to-rrna-and-mirna-reference-sequences-3" aria-label="hands-on box: Hierarchical alignment to rRNA and miRNA reference sequences (3)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hierarchical alignment to r<span class="notranslate">RNA</span> and mi<span class="notranslate">RNA</span> reference sequences (3)</div>
+  <div class="box-title hands-on-title" id="hands-on-hierarchical-alignment-to-rrna-and-mirna-reference-sequences-3" aria-label="hands-on box: Hierarchical alignment to rRNA and miRNA reference sequences (3)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hierarchical alignment to rRNA and miRNA reference sequences (3)</div>
   <ol>
-    <li><strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on each collection of filtered HISAT2 output FASTQ files to align non-r<span class="notranslate">RNA</span> <span class="notranslate">reads</span> to reference mi<span class="notranslate">RNA</span> hairpin sequences using the following parameters:
+    <li><strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on each collection of filtered HISAT2 output FASTQ files to align non-rRNA reads to reference miRNA hairpin sequences using the following parameters:
       <ul>
         <li><em>“Source for the reference genome to align against”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Dmel_mi<span class="notranslate">RNA</span>_sequences.fa</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Dmel_miRNA_sequences.fa</code></li>
           </ul>
         </li>
         <li><em>“Is this a single or paired library?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
@@ -1213,30 +1211,30 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
         </li>
       </ul>
     </li>
-    <li><strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat for the <em>Symplekin</em> <span class="notranslate">RNA</span>i dataset collection</li>
+    <li><strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat for the <em>Symplekin</em> RNAi dataset collection</li>
   </ol>
 </blockquote>
 
-<p>For this tutorial we are not interested in mi<span class="notranslate">RNA</span> <span class="notranslate">reads</span>, so we need to extract <em>unaligned</em> <span class="notranslate">reads</span> from the output BAM files. To do this, repeat the <strong>Filter SAM or BAM, output SAM or BAM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> steps for each dataset collection. Finally, rename the converted FASTQ files something meaningful (<em>e.g.</em> “non-r/mi<span class="notranslate">RNA</span> control <span class="notranslate">RNA</span>i s<span class="notranslate">RNA</span>-seq”).</p>
+<p>For this tutorial we are not interested in miRNA reads, so we need to extract <em>unaligned</em> reads from the output BAM files. To do this, repeat the <strong>Filter SAM or BAM, output SAM or BAM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> steps for each dataset collection. Finally, rename the converted FASTQ files something meaningful (<em>e.g.</em> “non-r/miRNA control RNAi sRNA-seq”).</p>
 
-<p>In some instances, mi<span class="notranslate">RNA</span>-aligned <span class="notranslate">reads</span> are the desired output for <span class="notranslate">downstream</span> analyses, for example, if we are investigating how loss of key mi<span class="notranslate">RNA</span> pathway components affect levels of pre-mi<span class="notranslate">RNA</span> and mature mi<span class="notranslate">RNA</span>s. In this case, the BAM output of HISAT2 can directly be used in subsequent tools as it contains the subset of <span class="notranslate">reads</span> aligned to mi<span class="notranslate">RNA</span> sequences.</p>
+<p>In some instances, miRNA-aligned reads are the desired output for downstream analyses, for example, if we are investigating how loss of key miRNA pathway components affect levels of pre-miRNA and mature miRNAs. In this case, the BAM output of HISAT2 can directly be used in subsequent tools as it contains the subset of reads aligned to miRNA sequences.</p>
 
-<h2 id="small-rna-subclass-distinction">Small <span class="notranslate">RNA</span> subclass distinction</h2>
+<h2 id="small-rna-subclass-distinction">Small RNA subclass distinction</h2>
 
-<p>In <em>Drosophila</em>, non-mi<span class="notranslate">RNA</span> small <span class="notranslate">RNA</span>s are typically divided into two major groups: endogenous si<span class="notranslate">RNA</span>s which are 20-22nt long and pi<span class="notranslate">RNA</span>s which are 23-29nt long. We want to analyze these s<span class="notranslate">RNA</span> subclasses independently, so next we are going to filter the non-r/mi<span class="notranslate">RNA</span> <span class="notranslate">reads</span> based on length using the <strong>Manipulate FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
+<p>In <em>Drosophila</em>, non-miRNA small RNAs are typically divided into two major groups: endogenous siRNAs which are 20-22nt long and piRNAs which are 23-29nt long. We want to analyze these sRNA subclasses independently, so next we are going to filter the non-r/miRNA reads based on length using the <strong>Manipulate FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-extract-subclasses" aria-label="hands-on box: Extract subclasses"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extract subclasses</div>
 
   <ol>
-    <li><strong>Manipulate FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on each collection of non-r/mi<span class="notranslate">RNA</span> <span class="notranslate">reads</span> to identify si<span class="notranslate">RNA</span>s (20-22nt) using the following parameters.
+    <li><strong>Manipulate FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on each collection of non-r/miRNA reads to identify siRNAs (20-22nt) using the following parameters.
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ File”</em>: output of last <strong>HISAT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for <code class="language-plaintext highlighter-rouge">Blank</code> collection</li>
-        <li>Click on <em>“Insert Match <span class="notranslate">Reads</span>”</em>
+        <li>Click on <em>“Insert Match Reads”</em>
           <ul>
-            <li>In “1: Match <span class="notranslate">Reads</span>”
+            <li>In “1: Match Reads”
               <ul>
-                <li><em>“Match <span class="notranslate">Reads</span> by”</em>: <code class="language-plaintext highlighter-rouge">Sequence Content</code>
+                <li><em>“Match Reads by”</em>: <code class="language-plaintext highlighter-rouge">Sequence Content</code>
                   <ul>
                     <li><em>“Match by”</em>: <code class="language-plaintext highlighter-rouge">^.{12,19}$|^.{23,50}$</code></li>
                   </ul>
@@ -1245,11 +1243,11 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
             </li>
           </ul>
         </li>
-        <li>Click on <em>“Manipulate <span class="notranslate">Reads</span>”</em>
+        <li>Click on <em>“Manipulate Reads”</em>
           <ul>
-            <li>In “1: Manipulate <span class="notranslate">Reads</span>”
+            <li>In “1: Manipulate Reads”
               <ul>
-                <li><em>“Manipulate <span class="notranslate">Reads</span> on”</em>: <code class="language-plaintext highlighter-rouge">Miscellaneous actions</code>
+                <li><em>“Manipulate Reads on”</em>: <code class="language-plaintext highlighter-rouge">Miscellaneous actions</code>
                   <ul>
                     <li><em>“Miscellaneous Manipulation Type”</em>: <code class="language-plaintext highlighter-rouge">Remove Read</code></li>
                   </ul>
@@ -1260,24 +1258,24 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
         </li>
       </ul>
     </li>
-    <li><strong>Manipulate FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat for the <em>Symplekin</em> <span class="notranslate">RNA</span>i dataset collection</li>
-    <li>Rename each resulting dataset collection something meaningful (<em>i.e.</em> “blank <span class="notranslate">RNA</span>i - si<span class="notranslate">RNA</span> <span class="notranslate">reads</span> (20-22nt)”)</li>
+    <li><strong>Manipulate FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat for the <em>Symplekin</em> RNAi dataset collection</li>
+    <li>Rename each resulting dataset collection something meaningful (<em>i.e.</em> “blank RNAi - siRNA reads (20-22nt)”)</li>
   </ol>
 </blockquote>
 
-<p>The regular <span class="notranslate">expression</span> in the <strong>Match by</strong> parameter tells the tool to identify sequences that are length 12-19 or 23-50 (inclusive), and the <strong>Miscellaneous Manipulation Type</strong> parameter tells the tool to remove these sequences. What remains are sequences of length 20-22nt. We will now repeat these steps to identify sequences in the size-range of pi<span class="notranslate">RNA</span>s (23-29nt).</p>
+<p>The regular expression in the <strong>Match by</strong> parameter tells the tool to identify sequences that are length 12-19 or 23-50 (inclusive), and the <strong>Miscellaneous Manipulation Type</strong> parameter tells the tool to remove these sequences. What remains are sequences of length 20-22nt. We will now repeat these steps to identify sequences in the size-range of piRNAs (23-29nt).</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-extract-subclasses-1" aria-label="hands-on box: Extract subclasses"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extract subclasses</div>
   <ol>
-    <li><strong>Manipulate FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">Manipulate FASTQ</code> on each collection of non-r/mi<span class="notranslate">RNA</span> <span class="notranslate">reads</span> to identify sequences in the size-range of pi<span class="notranslate">RNA</span>s (23-29nt)
+    <li><strong>Manipulate FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">Manipulate FASTQ</code> on each collection of non-r/miRNA reads to identify sequences in the size-range of piRNAs (23-29nt)
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ File”</em>: output of last <strong>HISAT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for <code class="language-plaintext highlighter-rouge">Blank</code> collection</li>
-        <li>Click on <em>“Insert Match <span class="notranslate">Reads</span>”</em>
+        <li>Click on <em>“Insert Match Reads”</em>
           <ul>
-            <li>In “1: Match <span class="notranslate">Reads</span>”
+            <li>In “1: Match Reads”
               <ul>
-                <li><em>“Match <span class="notranslate">Reads</span> by”</em>: <code class="language-plaintext highlighter-rouge">Sequence Content</code>
+                <li><em>“Match Reads by”</em>: <code class="language-plaintext highlighter-rouge">Sequence Content</code>
                   <ul>
                     <li><em>“Match by”</em>: <code class="language-plaintext highlighter-rouge">^.{12,22}$|^.{30,50}$</code></li>
                   </ul>
@@ -1286,11 +1284,11 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
             </li>
           </ul>
         </li>
-        <li>Click on <em>“Manipulate <span class="notranslate">Reads</span>”</em>
+        <li>Click on <em>“Manipulate Reads”</em>
           <ul>
-            <li>In “1: Manipulate <span class="notranslate">Reads</span>”
+            <li>In “1: Manipulate Reads”
               <ul>
-                <li><em>“Manipulate <span class="notranslate">Reads</span> on”</em>: <code class="language-plaintext highlighter-rouge">Miscellaneous actions</code>
+                <li><em>“Manipulate Reads on”</em>: <code class="language-plaintext highlighter-rouge">Miscellaneous actions</code>
                   <ul>
                     <li><em>“Miscellaneous Manipulation Type”</em>: <code class="language-plaintext highlighter-rouge">Remove Read</code></li>
                   </ul>
@@ -1301,44 +1299,44 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
         </li>
       </ul>
     </li>
-    <li><strong>Manipulate FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat for the <em>Symplekin</em> <span class="notranslate">RNA</span>i dataset collection</li>
-    <li>Rename each resulting dataset collection something meaningful (<em>i.e.</em> “blank <span class="notranslate">RNA</span>i - pi<span class="notranslate">RNA</span> <span class="notranslate">reads</span> (23-29nt)”)</li>
+    <li><strong>Manipulate FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat for the <em>Symplekin</em> RNAi dataset collection</li>
+    <li>Rename each resulting dataset collection something meaningful (<em>i.e.</em> “blank RNAi - piRNA reads (23-29nt)”)</li>
   </ol>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-check-the-read-length" aria-label="hands-on box: Check the read length"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Check the read length</div>
   <ol>
-    <li><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">FastQC</code> on each collection of si<span class="notranslate">RNA</span> and pi<span class="notranslate">RNA</span> read files to confirm the correct read lengths.</li>
+    <li><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <code class="language-plaintext highlighter-rouge">FastQC</code> on each collection of siRNA and piRNA read files to confirm the correct read lengths.</li>
   </ol>
 </blockquote>
 
 <p><img src="../../images/sRNA/Fig13_FastQC_piRNA_siRNA_result_Blank_rep1.png" alt="FastQC result on both collections. " loading="lazy" /></p>
 
-<p>We see in the above image (for Blank <span class="notranslate">RNA</span>i, replicate 3) that we have ~32k <span class="notranslate">reads</span> that are 20-22nt long in our <span class="notranslate">Reads</span>_20-22_nt_length_si<span class="notranslate">RNA</span>s file and ~16k <span class="notranslate">reads</span> that are 23-29nt long in our <span class="notranslate">Reads</span>_23-29_nt_length_pi<span class="notranslate">RNA</span>s file, as expected. Given that we had ~268k trimmed <span class="notranslate">reads</span> in the Blank <span class="notranslate">RNA</span>i replicate 3 file, si<span class="notranslate">RNA</span>s represent ~12.1% of the <span class="notranslate">reads</span> and pi<span class="notranslate">RNA</span>s represent ~6.2% of the <span class="notranslate">reads</span> in this experiment. There is no distinct peak in the pi<span class="notranslate">RNA</span> range (you can find the example of the real pi<span class="notranslate">RNA</span> profile in Figure 1 from <a href="http://dx.doi.org/10.1016/j.cell.2009.03.040">Colin D. Malone et al, 2009</a>.</p>
+<p>We see in the above image (for Blank RNAi, replicate 3) that we have ~32k reads that are 20-22nt long in our Reads_20-22_nt_length_siRNAs file and ~16k reads that are 23-29nt long in our Reads_23-29_nt_length_piRNAs file, as expected. Given that we had ~268k trimmed reads in the Blank RNAi replicate 3 file, siRNAs represent ~12.1% of the reads and piRNAs represent ~6.2% of the reads in this experiment. There is no distinct peak in the piRNA range (you can find the example of the real piRNA profile in Figure 1 from <a href="http://dx.doi.org/10.1016/j.cell.2009.03.040">Colin D. Malone et al, 2009</a>.</p>
 
-<p>The next step in our analysis pipeline is to identify which <span class="notranslate">RNA</span> features - e.g. protein-coding m<span class="notranslate">RNA</span>s, transposable elements - the si<span class="notranslate">RNA</span>s and pi<span class="notranslate">RNA</span>s align to. Most fly pi<span class="notranslate">RNA</span>s originate from and thus align to transposable elements (TEs) but some also originate from genome pi<span class="notranslate">RNA</span> clusters or protein-coding genes. si<span class="notranslate">RNA</span>s are thought to inhibit TE mobility and potentially target m<span class="notranslate">RNA</span>s for degradation via an <span class="notranslate">RNA</span>-interference (<span class="notranslate">RNA</span>i) mechanism. Ultimately, we want to know whether an <span class="notranslate">RNA</span> feature (TE, pi<span class="notranslate">RNA</span> cluster, m<span class="notranslate">RNA</span>, etc.) has significantly different numbers of si<span class="notranslate">RNA</span>s or pi<span class="notranslate">RNA</span>s targeting it. To determine this, we will use <strong>Salmon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to simultaneously align and quantify si<span class="notranslate">RNA</span> <span class="notranslate">reads</span> against known target sequences to estimate si<span class="notranslate">RNA</span> abundance per target. For the remainder of the tutorial we will be focusing on si<span class="notranslate">RNA</span>s, but similar approaches can be done for pi<span class="notranslate">RNA</span>s, mi<span class="notranslate">RNA</span>s, or any other subclass of small, non-coding <span class="notranslate">RNA</span>s.</p>
+<p>The next step in our analysis pipeline is to identify which RNA features - e.g. protein-coding mRNAs, transposable elements - the siRNAs and piRNAs align to. Most fly piRNAs originate from and thus align to transposable elements (TEs) but some also originate from genome piRNA clusters or protein-coding genes. siRNAs are thought to inhibit TE mobility and potentially target mRNAs for degradation via an RNA-interference (RNAi) mechanism. Ultimately, we want to know whether an RNA feature (TE, piRNA cluster, mRNA, etc.) has significantly different numbers of siRNAs or piRNAs targeting it. To determine this, we will use <strong>Salmon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to simultaneously align and quantify siRNA reads against known target sequences to estimate siRNA abundance per target. For the remainder of the tutorial we will be focusing on siRNAs, but similar approaches can be done for piRNAs, miRNAs, or any other subclass of small, non-coding RNAs.</p>
 
-<h2 id="sirna-abundance-estimation">si<span class="notranslate">RNA</span> abundance estimation</h2>
+<h2 id="sirna-abundance-estimation">siRNA abundance estimation</h2>
 
-<p>We want to identify which si<span class="notranslate">RNA</span>s are differentially abundance between the blank and <em>Symplekin</em> <span class="notranslate">RNA</span>i conditions. To do this we will implement a counting approach using <strong>Salmon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to quantify si<span class="notranslate">RNA</span>s per <span class="notranslate">RNA</span> feature. Specifically, we will analyzing m<span class="notranslate">RNA</span> and TE elements by counting si<span class="notranslate">RNA</span>s against a FASTA file of transcript sequences, not the reference genome. This approach is especially useful in this case because we are interested in TEs, which occur at many copies (100s - 1000s) in the genome, and thus will result in multiple alignments if we align to the genome with a tool like <strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Further, we will be counting abundance of si<span class="notranslate">RNA</span>s that align <em>sense</em> or <em>antisense</em> to an <span class="notranslate">RNA</span> feature independently, as opposite sense alignments are correlated with unique <span class="notranslate">downstream</span> silencing effects. Then, we will provide this information to <strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to generate normalized counts and significance testing for differential abundance of si<span class="notranslate">RNA</span>s per feature.</p>
+<p>We want to identify which siRNAs are differentially abundance between the blank and <em>Symplekin</em> RNAi conditions. To do this we will implement a counting approach using <strong>Salmon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to quantify siRNAs per RNA feature. Specifically, we will analyzing mRNA and TE elements by counting siRNAs against a FASTA file of transcript sequences, not the reference genome. This approach is especially useful in this case because we are interested in TEs, which occur at many copies (100s - 1000s) in the genome, and thus will result in multiple alignments if we align to the genome with a tool like <strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Further, we will be counting abundance of siRNAs that align <em>sense</em> or <em>antisense</em> to an RNA feature independently, as opposite sense alignments are correlated with unique downstream silencing effects. Then, we will provide this information to <strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to generate normalized counts and significance testing for differential abundance of siRNAs per feature.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-sirna-abundance-estimation" aria-label="hands-on box: siRNA abundance estimation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: si<span class="notranslate">RNA</span> abundance estimation</div>
+  <div class="box-title hands-on-title" id="hands-on-sirna-abundance-estimation" aria-label="hands-on box: siRNA abundance estimation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: siRNA abundance estimation</div>
 
   <ol>
-    <li><strong>Salmon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on each collection of si<span class="notranslate">RNA</span> <span class="notranslate">reads</span> (20-22nt) to quantify the abundance of <em>antisense</em> si<span class="notranslate">RNA</span>s at relevant targets
+    <li><strong>Salmon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on each collection of siRNA reads (20-22nt) to quantify the abundance of <em>antisense</em> siRNAs at relevant targets
       <ul>
         <li><em>“Select a reference transcriptome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use one from the history</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference transcriptome”</em>: <code class="language-plaintext highlighter-rouge">the reference m<span class="notranslate">RNA</span> and TE fasta file</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference transcriptome”</em>: <code class="language-plaintext highlighter-rouge">the reference mRNA and TE fasta file</code></li>
             <li><em>“The size should be odd number”</em>: <code class="language-plaintext highlighter-rouge">19</code></li>
           </ul>
         </li>
         <li><em>“Is this library mate-paired?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
-            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/FASTA file”</em>: collection with the Blank <span class="notranslate">RNA</span>i si<span class="notranslate">RNA</span> (20-22nt) <span class="notranslate">reads</span></li>
-            <li><em>“Specify the strandedness of the <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">read 1 (or single-end read) comes from the reverse strand (SR)</code></li>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/FASTA file”</em>: collection with the Blank RNAi siRNA (20-22nt) reads</li>
+            <li><em>“Specify the strandedness of the reads”</em>: <code class="language-plaintext highlighter-rouge">read 1 (or single-end read) comes from the reverse strand (SR)</code></li>
           </ul>
         </li>
         <li>In <em>“Additional Options”</em>
@@ -1348,44 +1346,44 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
         </li>
       </ul>
     </li>
-    <li><strong>Salmon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat for the <em>Symplekin</em> <span class="notranslate">RNA</span>i si<span class="notranslate">RNA</span>s (20-22nt) <span class="notranslate">reads</span> dataset collection</li>
-    <li><strong>Salmon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat on each collection of si<span class="notranslate">RNA</span> <span class="notranslate">reads</span> (20-22nt) to quantify the abundance of <em>sense</em> si<span class="notranslate">RNA</span>s at relevant targets by changing the following parameters:
+    <li><strong>Salmon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat for the <em>Symplekin</em> RNAi siRNAs (20-22nt) reads dataset collection</li>
+    <li><strong>Salmon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Repeat on each collection of siRNA reads (20-22nt) to quantify the abundance of <em>sense</em> siRNAs at relevant targets by changing the following parameters:
       <ul>
-        <li><em>“Specify the strandedness of the <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">read 1 (or single-end read) comes from the forward strand (SF)</code></li>
+        <li><em>“Specify the strandedness of the reads”</em>: <code class="language-plaintext highlighter-rouge">read 1 (or single-end read) comes from the forward strand (SF)</code></li>
       </ul>
     </li>
   </ol>
 </blockquote>
 
-<p>The output of <strong>Salmon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> includes a table of <span class="notranslate">RNA</span> features, estimated counts, transcripts per million, and feature length. We will be using the TPM quantification column as input to <strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in the next section.</p>
+<p>The output of <strong>Salmon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> includes a table of RNA features, estimated counts, transcripts per million, and feature length. We will be using the TPM quantification column as input to <strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in the next section.</p>
 
-<h2 id="sirna-differential-abundance-testing">si<span class="notranslate">RNA</span> differential abundance testing</h2>
+<h2 id="sirna-differential-abundance-testing">siRNA differential abundance testing</h2>
 
-<p><a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html"><strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></a> is a great tool for differential <span class="notranslate">expression</span> analysis, but we also employ it here for estimation of abundance of <span class="notranslate">reads</span> targeting each of our <span class="notranslate">RNA</span> features. As input, <strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> can take <em>t</em>ranscripts <em>p</em>er <em>m</em>illion (TPM) counts produced by <strong>Salmon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for each feature. TPMs are estimates of the relative abundance of a given transcript in units, and analogously can be used here to quantify si<span class="notranslate">RNA</span>s that align either sense or antisense to transcripts.</p>
+<p><a href="https://bioconductor.org/packages/release/bioc/html/DESeq2.html"><strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></a> is a great tool for differential expression analysis, but we also employ it here for estimation of abundance of reads targeting each of our RNA features. As input, <strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> can take <em>t</em>ranscripts <em>p</em>er <em>m</em>illion (TPM) counts produced by <strong>Salmon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for each feature. TPMs are estimates of the relative abundance of a given transcript in units, and analogously can be used here to quantify siRNAs that align either sense or antisense to transcripts.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-sirna-differential-abundance-testing" aria-label="hands-on box: siRNA differential abundance testing"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: si<span class="notranslate">RNA</span> differential abundance testing</div>
+  <div class="box-title hands-on-title" id="hands-on-sirna-differential-abundance-testing" aria-label="hands-on box: siRNA differential abundance testing"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: siRNA differential abundance testing</div>
 
   <ol>
-    <li><strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to test for differential abundance of <em>antisense</em> si<span class="notranslate">RNA</span>s at m<span class="notranslate">RNA</span> and TE features using the following parameters:
+    <li><strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to test for differential abundance of <em>antisense</em> siRNAs at mRNA and TE features using the following parameters:
       <ul>
         <li>In <em>“Factor”</em>:
           <ul>
             <li>In “1: Factor”
               <ul>
-                <li><em>“Specify a factor name”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>i</code></li>
+                <li><em>“Specify a factor name”</em>: <code class="language-plaintext highlighter-rouge">RNAi</code></li>
                 <li>In <em>“Factor level”</em>:
                   <ul>
                     <li>In <em>“1: Factor level”</em>:
                       <ul>
                         <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">Symplekin</code></li>
-                        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Counts file(s)”</em>: the Symplekin <span class="notranslate">RNA</span>i si<span class="notranslate">RNA</span> counts from reverse strand (SR) collection</li>
+                        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Counts file(s)”</em>: the Symplekin RNAi siRNA counts from reverse strand (SR) collection</li>
                       </ul>
                     </li>
                     <li>In <em>“2: Factor level”</em>:
                       <ul>
-                        <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>i</code></li>
-                        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Counts file(s)”</em>: the Symplekin <span class="notranslate">RNA</span>i si<span class="notranslate">RNA</span> counts from reverse strand (SR)</li>
+                        <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">RNAi</code></li>
+                        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Counts file(s)”</em>: the Symplekin RNAi siRNA counts from reverse strand (SR)</li>
                       </ul>
                     </li>
                   </ul>
@@ -1397,9 +1395,9 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
         <li><em>“Choice of Input data”</em>: <code class="language-plaintext highlighter-rouge">TPM values (e.g. from sailfish and salmon)</code>
           <ul>
             <li><em>“Program used to generate TPMs”</em>: <code class="language-plaintext highlighter-rouge">Salmon</code></li>
-            <li><em>“Gene <span class="notranslate">mapping</span> format”</em>: <code class="language-plaintext highlighter-rouge">Transcript-ID and Gene-ID <span class="notranslate">mapping</span> file</code>
+            <li><em>“Gene mapping format”</em>: <code class="language-plaintext highlighter-rouge">Transcript-ID and Gene-ID mapping file</code>
               <ul>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular file with Transcript - Gene <span class="notranslate">mapping</span>”</em>: <code class="language-plaintext highlighter-rouge">reference tx2g (transcript to gene) file</code> (available through zenodo link)</li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular file with Transcript - Gene mapping”</em>: <code class="language-plaintext highlighter-rouge">reference tx2g (transcript to gene) file</code> (available through zenodo link)</li>
               </ul>
             </li>
           </ul>
@@ -1407,25 +1405,25 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
         <li><em>“Output normalized counts table”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li><strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <em>sense</em> si<span class="notranslate">RNA</span>s at m<span class="notranslate">RNA</span> and TE features:
+    <li><strong>DESeq2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <em>sense</em> siRNAs at mRNA and TE features:
       <ul>
         <li>In <em>“Factor”</em>:
           <ul>
             <li>In “1: Factor”
               <ul>
-                <li><em>“Specify a factor name”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>i</code></li>
+                <li><em>“Specify a factor name”</em>: <code class="language-plaintext highlighter-rouge">RNAi</code></li>
                 <li>In <em>“Factor level”</em>:
                   <ul>
                     <li>In <em>“1: Factor level”</em>:
                       <ul>
                         <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">Symplekin</code></li>
-                        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Counts file(s)”</em>: the Symplekin <span class="notranslate">RNA</span>i si<span class="notranslate">RNA</span> counts from forward strand (SF)</li>
+                        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Counts file(s)”</em>: the Symplekin RNAi siRNA counts from forward strand (SF)</li>
                       </ul>
                     </li>
                     <li>In <em>“2: Factor level”</em>:
                       <ul>
-                        <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>i</code></li>
-                        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Counts file(s)”</em>: the Symplekin <span class="notranslate">RNA</span>i si<span class="notranslate">RNA</span> counts from forward strand (SF)</li>
+                        <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">RNAi</code></li>
+                        <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Counts file(s)”</em>: the Symplekin RNAi siRNA counts from forward strand (SF)</li>
                       </ul>
                     </li>
                   </ul>
@@ -1437,9 +1435,9 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
         <li><em>“Choice of Input data”</em>: <code class="language-plaintext highlighter-rouge">TPM values (e.g. from sailfish and salmon)</code>
           <ul>
             <li><em>“Program used to generate TPMs”</em>: <code class="language-plaintext highlighter-rouge">Salmon</code></li>
-            <li><em>“Gene <span class="notranslate">mapping</span> format”</em>: <code class="language-plaintext highlighter-rouge">Transcript-ID and Gene-ID <span class="notranslate">mapping</span> file</code>
+            <li><em>“Gene mapping format”</em>: <code class="language-plaintext highlighter-rouge">Transcript-ID and Gene-ID mapping file</code>
               <ul>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular file with Transcript - Gene <span class="notranslate">mapping</span>”</em>: <code class="language-plaintext highlighter-rouge">reference tx2g (transcript to gene) file</code> (available through zenodo link)</li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular file with Transcript - Gene mapping”</em>: <code class="language-plaintext highlighter-rouge">reference tx2g (transcript to gene) file</code> (available through zenodo link)</li>
               </ul>
             </li>
           </ul>
@@ -1447,15 +1445,15 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
         <li><em>“Output normalized counts table”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract features with a significantly different <em>antisense</em> si<span class="notranslate">RNA</span> abundance (adjusted <em>p</em>-value less than 0.05).
+    <li><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract features with a significantly different <em>antisense</em> siRNA abundance (adjusted <em>p</em>-value less than 0.05).
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: Select the <code class="language-plaintext highlighter-rouge">DESeq2</code> result file from testing <em>antisense</em> (SR) si<span class="notranslate">RNA</span> abundances</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: Select the <code class="language-plaintext highlighter-rouge">DESeq2</code> result file from testing <em>antisense</em> (SR) siRNA abundances</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c7&lt;0.05</code></li>
       </ul>
     </li>
-    <li><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <em>sense</em> si<span class="notranslate">RNA</span>s at m<span class="notranslate">RNA</span> and TE features:
+    <li><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <em>sense</em> siRNAs at mRNA and TE features:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: Select the <code class="language-plaintext highlighter-rouge">DESeq2</code> result file from testing <em>sense</em> (SF) si<span class="notranslate">RNA</span> abundances</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: Select the <code class="language-plaintext highlighter-rouge">DESeq2</code> result file from testing <em>sense</em> (SF) siRNA abundances</li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c7&lt;0.05</code></li>
       </ul>
     </li>
@@ -1465,11 +1463,11 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
 <blockquote class="question">
   <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-  <p>How many features have a significant difference in <em>antisense</em> and <em>sense</em> si<span class="notranslate">RNA</span> abundance in the <em>Symplekin</em> <span class="notranslate">RNA</span>i condition?</p>
+  <p>How many features have a significant difference in <em>antisense</em> and <em>sense</em> siRNA abundance in the <em>Symplekin</em> RNAi condition?</p>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-    <p>There are 87 <em>antisense</em> and 15 <em>sense</em> features that have significanlty different si<span class="notranslate">RNA</span> abundances.</p>
+    <p>There are 87 <em>antisense</em> and 15 <em>sense</em> features that have significanlty different siRNA abundances.</p>
   </blockquote>
 </blockquote>
 
@@ -1481,9 +1479,9 @@ https://zenodo.org/record/826906/files/dm3_r<span class="notranslate">RNA</span>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>Analysis of small <span class="notranslate">RNA</span>s is a complicated and intricate process due to the diversity in characteristics, functionality, and nuances of small <span class="notranslate">RNA</span> subclasses. The goal of this tutorial is to introduce you to a common small <span class="notranslate">RNA</span> <span class="notranslate">workflow</span> that specifically identifies changes in endogenous si<span class="notranslate">RNA</span> abundances that target protein-coding m<span class="notranslate">RNA</span>s and transposable elements. The steps presented here can be rearranged and modified based on small <span class="notranslate">RNA</span> features of specific systems and the needs of the user.</p>
+<p>Analysis of small RNAs is a complicated and intricate process due to the diversity in characteristics, functionality, and nuances of small RNA subclasses. The goal of this tutorial is to introduce you to a common small RNA workflow that specifically identifies changes in endogenous siRNA abundances that target protein-coding mRNAs and transposable elements. The steps presented here can be rearranged and modified based on small RNA features of specific systems and the needs of the user.</p>
 
-<h2 id="small-rna-analysis-general-pipeline">Small <span class="notranslate">RNA</span> analysis (general) pipeline</h2>
+<h2 id="small-rna-analysis-general-pipeline">Small RNA analysis (general) pipeline</h2>
 
 <p><img src="../../images/sRNA/schematic_for_sRNAseq_tutorial.png" alt="sRNA tutorial workflow. " loading="lazy" /></p>
 

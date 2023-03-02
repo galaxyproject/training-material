@@ -753,7 +753,7 @@
 
 <p><img src="../../images/gat.png" alt="GAT logo is the GTN logo over a space background and text reading galaxy admin traiing." loading="lazy" /></p>
 
-<p>Setting up and running a <span class="notranslate">Galaxy</span> Admin Training is not a very complicated process thanks to a significant amount of work that has been put into making it easy and quick.</p>
+<p>Setting up and running a Galaxy Admin Training is not a very complicated process thanks to a significant amount of work that has been put into making it easy and quick.</p>
 
 <p>This tutorial has multiple audiences who are all adressed within this one tutorial. We encourage everyone involved in hosting a GAT event to read this, so you are aware of all of the moving parts which are required for such an event.</p>
 
@@ -806,7 +806,7 @@
   <li>expose ports 20, 80, 443 (optional), 8080 (optional but nice)</li>
 </ul>
 
-<p>Then consider <a href="mailto:galaxy@informatik.uni-freiburg.de?subject=Hosting%20a%20GAT">contacting Use<span class="notranslate">Galaxy</span>.eu</a> and let us know you’d like to host a GAT event. Tell us the number of students and dates of the event.</p>
+<p>Then consider <a href="mailto:galaxy@informatik.uni-freiburg.de?subject=Hosting%20a%20GAT">contacting UseGalaxy.eu</a> and let us know you’d like to host a GAT event. Tell us the number of students and dates of the event.</p>
 
 <h1 id="provisioning-the-infrastructure">Provisioning the Infrastructure</h1>
 
@@ -828,12 +828,12 @@
       <p>Once deployed, clone/pull the repository locally and run <code class="language-plaintext highlighter-rouge">./bin/process-training-output.sh</code></p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ./bin/process-training-output.sh
-ubuntu  gat-0.training.<span class="notranslate">galaxy</span>project.eu ...
-ubuntu  gat-1.training.<span class="notranslate">galaxy</span>project.eu ...
+ubuntu  gat-0.training.galaxyproject.eu ...
+ubuntu  gat-1.training.galaxyproject.eu ...
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Place this in the <a href="http://gxy.io/gatmachines">GAT Machines</a> sp<span class="notranslate">reads</span>heet in the correct tab.</p>
+      <p>Place this in the <a href="http://gxy.io/gatmachines">GAT Machines</a> spreadsheet in the correct tab.</p>
     </li>
   </ol>
 
@@ -854,10 +854,10 @@ ubuntu  gat-1.training.<span class="notranslate">galaxy</span>project.eu ...
         <li>2 VCPUs</li>
       </ul>
 
-      <p>If you’re using terraform, you can take inspiration from <a href="https://github.com/usegalaxy-eu/infrastructure/blob/master/gat.tf">Use<span class="notranslate">Galaxy</span>.eu’s terraform configuration</a></p>
+      <p>If you’re using terraform, you can take inspiration from <a href="https://github.com/usegalaxy-eu/infrastructure/blob/master/gat.tf">UseGalaxy.eu’s terraform configuration</a></p>
     </li>
     <li>
-      <p>Place the list of use<span class="notranslate">rna</span>mes and IPs and passwords in the <a href="http://gxy.io/gatmachines">GAT Machines</a> sp<span class="notranslate">reads</span>heet in the correct tab.</p>
+      <p>Place the list of usernames and IPs and passwords in the <a href="http://gxy.io/gatmachines">GAT Machines</a> spreadsheet in the correct tab.</p>
     </li>
   </ol>
 
@@ -892,7 +892,7 @@ set_password = true      # Generate a random password
 
   <ol>
     <li>
-      <p><code class="language-plaintext highlighter-rouge">git clone https://github.com/<span class="notranslate">galaxy</span>project/admin-training/</code> and change into that repo</p>
+      <p><code class="language-plaintext highlighter-rouge">git clone https://github.com/galaxyproject/admin-training/</code> and change into that repo</p>
     </li>
     <li>
       <p><code class="language-plaintext highlighter-rouge">cd bootstrap-instances</code></p>
@@ -900,12 +900,12 @@ set_password = true      # Generate a random password
     <li>
       <p>In the <code class="language-plaintext highlighter-rouge">hosts</code> file, edit the <code class="language-plaintext highlighter-rouge">[workshop_eu]</code> section to list all of your IPs or DNS entries.</p>
 
-      <p>You can specify <code class="language-plaintext highlighter-rouge">ansible_user=something</code> if it uses a different use<span class="notranslate">rna</span>me, and <code class="language-plaintext highlighter-rouge">ansible_password=password</code> for each machine. E.g.</p>
+      <p>You can specify <code class="language-plaintext highlighter-rouge">ansible_user=something</code> if it uses a different username, and <code class="language-plaintext highlighter-rouge">ansible_password=password</code> for each machine. E.g.</p>
 
       <p>A range of DNS entries (<code class="language-plaintext highlighter-rouge">gat-0</code> to <code class="language-plaintext highlighter-rouge">gat-39</code>)</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[workshop_]
-gat-[0:39].training.<span class="notranslate">galaxy</span>project.eu
+gat-[0:39].training.galaxyproject.eu
 </code></pre></div>      </div>
 
       <p>Some IPs</p>
@@ -951,7 +951,7 @@ ansible_user = myuser
   <li>(Generates if needed) and copies an SSH key to all of the machines to make login easier (this is stored in <code class="language-plaintext highlighter-rouge">id_rsa</code> and <code class="language-plaintext highlighter-rouge">id_rsa.pub</code> in the same directory as the makefile.)</li>
   <li>This key is set as the ubuntu user’s key, and added to their authorized_keys, to permit them to run ansible easily on that machine (if they don’t configure the local connection correctly.)
     <ul>
-      <li>(When pulsar is in use) the pulsar machines are provisioned identically to the ones where <span class="notranslate">Galaxy</span> is setup, so the students can login passwordlessly to their pulsar machine.</li>
+      <li>(When pulsar is in use) the pulsar machines are provisioned identically to the ones where Galaxy is setup, so the students can login passwordlessly to their pulsar machine.</li>
     </ul>
   </li>
   <li>Updates packages (slow)</li>
@@ -968,7 +968,7 @@ ansible_user = myuser
 
 <h1 id="testing">Testing</h1>
 
-<p>Once your VMs are ready, you should test ALL of the lessons you intend to teach. Most of the training should be fine, but sometimes changes in e.g. <span class="notranslate">Galaxy</span> versions or the availability of newer versions of some ansible modules will indicate you should test the training as you plan to teach it, and update the training materials where relevant.</p>
+<p>Once your VMs are ready, you should test ALL of the lessons you intend to teach. Most of the training should be fine, but sometimes changes in e.g. Galaxy versions or the availability of newer versions of some ansible modules will indicate you should test the training as you plan to teach it, and update the training materials where relevant.</p>
 
 <h1 id="starting-your-training">Starting Your Training</h1>
 
@@ -983,7 +983,7 @@ ansible_user = myuser
     </ul>
   </li>
   <li><strong>Chat</strong> pointing to <code class="language-plaintext highlighter-rouge">https://gxy.io/gatchat</code> (or your preferred channel)</li>
-  <li><strong>VM List</strong> pointing to <code class="language-plaintext highlighter-rouge">https://gxy.io/gatmachines</code> (or your own sp<span class="notranslate">reads</span>heet)</li>
+  <li><strong>VM List</strong> pointing to <code class="language-plaintext highlighter-rouge">https://gxy.io/gatmachines</code> (or your own spreadsheet)</li>
   <li>The slides and tutorials for your training.</li>
 </ul>
 
@@ -992,34 +992,34 @@ ansible_user = myuser
 <p>During planning for BCC2020 we found that monitoring student progress would be extremely difficult, it was not a situation we had encountered before as this was the first remote GAT during the pandemic. So we developed a small utility, the <code class="language-plaintext highlighter-rouge">gat-cli</code>, which assists in monitoring students’ progress.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ gat
-<span class="notranslate">Galaxy</span> Admin Training (gat) tool:
+Galaxy Admin Training (gat) tool:
 
   gat status-ansible     [Admin] Check status of ansible training
-  gat status-<span class="notranslate">galaxy</span>      [Admin] Check status of ansible-<span class="notranslate">galaxy</span> training
+  gat status-galaxy      [Admin] Check status of ansible-galaxy training
   gat status-cvmfs       [Admin] Check status of cvmfs training
   gat status-pulsar      [Admin] Check status of pulsar training
 </code></pre></div></div>
 
-<p>Each of these commands run a couple checks on their local machine. For example the <code class="language-plaintext highlighter-rouge">status-<span class="notranslate">galaxy</span></code> command checks:</p>
+<p>Each of these commands run a couple checks on their local machine. For example the <code class="language-plaintext highlighter-rouge">status-galaxy</code> command checks:</p>
 
 <ul>
   <li>Check that the <code class="language-plaintext highlighter-rouge">postgresql</code> service is running</li>
-  <li>Does a db named <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code> exist</li>
+  <li>Does a db named <code class="language-plaintext highlighter-rouge">galaxy</code> exist</li>
   <li>Does http://localhost:8080/api/version respond with <em>some</em> content</li>
-  <li>Check that the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code> service is running</li>
+  <li>Check that the <code class="language-plaintext highlighter-rouge">galaxy</code> service is running</li>
   <li>Check that the <code class="language-plaintext highlighter-rouge">nginx</code> service is running</li>
   <li>Does https://localhost:443/api/version respond with <em>some</em> content</li>
 </ul>
 
 <p>However, the <code class="language-plaintext highlighter-rouge">gat</code> command is only available on the VMs, so we’ve written an ansible task (wrapped in the Makefile) which SSHs into every machine, and runs the gat command for you:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ make check-<span class="notranslate">galaxy</span>-eu
-gat-19    postgres ✘ ✘ <span class="notranslate">galaxy</span>(http) ✘ SysD-gxy ✘ SysD-nginx ✘ <span class="notranslate">galaxy</span>(ssl) ✘
-gat-22    postgres ✔ ✘ <span class="notranslate">galaxy</span>(http) ✘ SysD-gxy ✘ SysD-nginx ✘ <span class="notranslate">galaxy</span>(ssl) ✘
-gat-2     postgres ✔ ✔ <span class="notranslate">galaxy</span>(http) ✔ SysD-gxy ✘ SysD-nginx ✘ <span class="notranslate">galaxy</span>(ssl) ✘
-gat-15    postgres ✔ ✘ <span class="notranslate">galaxy</span>(http) ✘ SysD-gxy ✘ SysD-nginx ✘ <span class="notranslate">galaxy</span>(ssl) ✘
-gat-24    postgres ✔ ✘ <span class="notranslate">galaxy</span>(http) ✘ SysD-gxy ✘ SysD-nginx ✘ <span class="notranslate">galaxy</span>(ssl) ✘
-gat-6     postgres ✘ ✘ <span class="notranslate">galaxy</span>(http) ✘ SysD-gxy ✘ SysD-nginx ✘ <span class="notranslate">galaxy</span>(ssl) ✘
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ make check-galaxy-eu
+gat-19    postgres ✘ ✘ galaxy(http) ✘ SysD-gxy ✘ SysD-nginx ✘ galaxy(ssl) ✘
+gat-22    postgres ✔ ✘ galaxy(http) ✘ SysD-gxy ✘ SysD-nginx ✘ galaxy(ssl) ✘
+gat-2     postgres ✔ ✔ galaxy(http) ✔ SysD-gxy ✘ SysD-nginx ✘ galaxy(ssl) ✘
+gat-15    postgres ✔ ✘ galaxy(http) ✘ SysD-gxy ✘ SysD-nginx ✘ galaxy(ssl) ✘
+gat-24    postgres ✔ ✘ galaxy(http) ✘ SysD-gxy ✘ SysD-nginx ✘ galaxy(ssl) ✘
+gat-6     postgres ✘ ✘ galaxy(http) ✘ SysD-gxy ✘ SysD-nginx ✘ galaxy(ssl) ✘
 </code></pre></div></div>
 
 <p>You can see a checkmark reported for every step completed by students, giving you a nice overview of how many students have completed each step, and if you’re ready to move on. Additionally you know precisely which students you should reach out to check in with, if they aren’t progressing. The <code class="language-plaintext highlighter-rouge">-eu</code> again refers to the specific pool of machines, and if you’re using a different hosts file, with different group names, you may need to edit the Makefile accordingly.</p>

@@ -905,12 +905,12 @@
             <div class="col-sm-10">
                  
 
-                <p>The tools that are added to <span class="notranslate">Galaxy</span> can have a wide variance in the compute resources that they require and work efficiently on.
-To account for this, <span class="notranslate">Galaxy</span>’s job configuration needs to be tuned to run these tools properly. In addition, site-specific variables must
+                <p>The tools that are added to Galaxy can have a wide variance in the compute resources that they require and work efficiently on.
+To account for this, Galaxy’s job configuration needs to be tuned to run these tools properly. In addition, site-specific variables must
 be taken into consideration when choosing where to run jobs and what parameters to run them with.</p>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or because of stochastic processes in the algorithms.</p> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, external databases, or because of stochastic processes in the algorithms.</p> </blockquote>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -919,12 +919,12 @@ be taken into consideration when choosing where to run jobs and what parameters 
   <li><a href="#installing-slurm" id="markdown-toc-installing-slurm">Installing Slurm</a></li>
   <li><a href="#using-slurm" id="markdown-toc-using-slurm">Using Slurm</a></li>
   <li><a href="#slurm-drmaa" id="markdown-toc-slurm-drmaa">Slurm-DRMAA</a></li>
-  <li><a href="#galaxy-and-slurm" id="markdown-toc-galaxy-and-slurm"><span class="notranslate">Galaxy</span> and Slurm</a>    <ol>
+  <li><a href="#galaxy-and-slurm" id="markdown-toc-galaxy-and-slurm">Galaxy and Slurm</a>    <ol>
       <li><a href="#running-a-job" id="markdown-toc-running-a-job">Running a Job</a></li>
     </ol>
   </li>
   <li><a href="#recording-job-metrics" id="markdown-toc-recording-job-metrics">Recording Job Metrics</a>    <ol>
-      <li><a href="#setting-up-galaxy" id="markdown-toc-setting-up-galaxy">Setting up <span class="notranslate">Galaxy</span></a></li>
+      <li><a href="#setting-up-galaxy" id="markdown-toc-setting-up-galaxy">Setting up Galaxy</a></li>
       <li><a href="#generating-metrics" id="markdown-toc-generating-metrics">Generating Metrics</a></li>
       <li><a href="#what-should-i-collect" id="markdown-toc-what-should-i-collect">What should I collect?</a></li>
       <li><a href="#accessing-the-data" id="markdown-toc-accessing-the-data">Accessing the data</a></li>
@@ -936,18 +936,18 @@ be taken into consideration when choosing where to run jobs and what parameters 
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-galaxy-admin-training-path" aria-label="comment box: Galaxy Admin Training Path"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: <span class="notranslate">Galaxy</span> Admin Training Path</div>   <p>The yearly <span class="notranslate">Galaxy</span> Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in <span class="notranslate">Galaxy</span> Admin Training.</p>   <ol id="git-gat-timeline">     <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">     <li class="disabled">         <span>Step 1</span>         <span>ansible-<span class="notranslate">galaxy</span></span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tus/tutorial.html">     <li class="disabled">         <span>Step 2</span>         <span>tus</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">     <li class="disabled">         <span>Step 3</span>         <span>cvmfs</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/singularity/tutorial.html">     <li class="disabled">         <span>Step 4</span>         <span>singularity</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">     <li class="disabled">         <span>Step 5</span>         <span>tool-management</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">     <li class="disabled">         <span>Step 6</span>         <span>data-library</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">     <li class="active">         <span>Step 7</span>         <span>connect-to-compute-cluster</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html">     <li class="">         <span>Step 8</span>         <span>job-destinations</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">     <li class="">         <span>Step 9</span>         <span>pulsar</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html">     <li class="">         <span>Step 10</span>         <span>gxadmin</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/monitoring/tutorial.html">     <li class="">         <span>Step 11</span>         <span>monitoring</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">     <li class="">         <span>Step 12</span>         <span>tiaas</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">     <li class="">         <span>Step 13</span>         <span>reports</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/ftp/tutorial.html">     <li class="">         <span>Step 14</span>         <span>ftp</span>     </li>          </a>      </ol>   <style type="text/css"> #git-gat-timeline {     display: flex;     flex-direction: row;     flex-wrap: wrap; } #git-gat-timeline li  {     display: flex;     flex-direction: column;     border: 1px solid black;     border-radius: 5px;     padding: 0.5em;     margin: 0.5em; } #git-gat-timeline li.active {     background: #86d486;     color: black; } #git-gat-timeline li.disabled {     background: #eee; } #git-gat-timeline span {     align-self: center; } </style> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-galaxy-admin-training-path" aria-label="comment box: Galaxy Admin Training Path"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Galaxy Admin Training Path</div>   <p>The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in Galaxy Admin Training.</p>   <ol id="git-gat-timeline">     <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">     <li class="disabled">         <span>Step 1</span>         <span>ansible-galaxy</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tus/tutorial.html">     <li class="disabled">         <span>Step 2</span>         <span>tus</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">     <li class="disabled">         <span>Step 3</span>         <span>cvmfs</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/singularity/tutorial.html">     <li class="disabled">         <span>Step 4</span>         <span>singularity</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">     <li class="disabled">         <span>Step 5</span>         <span>tool-management</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">     <li class="disabled">         <span>Step 6</span>         <span>data-library</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">     <li class="active">         <span>Step 7</span>         <span>connect-to-compute-cluster</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html">     <li class="">         <span>Step 8</span>         <span>job-destinations</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">     <li class="">         <span>Step 9</span>         <span>pulsar</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html">     <li class="">         <span>Step 10</span>         <span>gxadmin</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/monitoring/tutorial.html">     <li class="">         <span>Step 11</span>         <span>monitoring</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">     <li class="">         <span>Step 12</span>         <span>tiaas</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">     <li class="">         <span>Step 13</span>         <span>reports</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/ftp/tutorial.html">     <li class="">         <span>Step 14</span>         <span>ftp</span>     </li>          </a>      </ol>   <style type="text/css"> #git-gat-timeline {     display: flex;     flex-direction: row;     flex-wrap: wrap; } #git-gat-timeline li  {     display: flex;     flex-direction: column;     border: 1px solid black;     border-radius: 5px;     padding: 0.5em;     margin: 0.5em; } #git-gat-timeline li.active {     background: #86d486;     color: black; } #git-gat-timeline li.disabled {     background: #eee; } #git-gat-timeline span {     align-self: center; } </style> </blockquote>
 
 <h2 id="installing-slurm">Installing Slurm</h2>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-ansible-best-practices" aria-label="comment box: Ansible Best Practices"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Ansible Best Practices</div>
-  <p>If you’ve set up your <span class="notranslate">Galaxy</span> server using the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><span class="notranslate">Galaxy</span> Installation with Ansible</a> tutorial, you will have created a <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group in your inventory file, <code class="language-plaintext highlighter-rouge">hosts</code>, and placed your variables in <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>. Although for the purposes of this tutorial, the <span class="notranslate">Galaxy</span> server and Slurm controller/node are one and the same, in a real world deployment they are very likely to be different hosts. We will continue to use the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group for simplicity, but in your own deployment you should consider creating some additional groups for Slurm controller(s), Slurm nodes, and Slurm clients.</p>
+  <p>If you’ve set up your Galaxy server using the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">Galaxy Installation with Ansible</a> tutorial, you will have created a <code class="language-plaintext highlighter-rouge">galaxyservers</code> group in your inventory file, <code class="language-plaintext highlighter-rouge">hosts</code>, and placed your variables in <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code>. Although for the purposes of this tutorial, the Galaxy server and Slurm controller/node are one and the same, in a real world deployment they are very likely to be different hosts. We will continue to use the <code class="language-plaintext highlighter-rouge">galaxyservers</code> group for simplicity, but in your own deployment you should consider creating some additional groups for Slurm controller(s), Slurm nodes, and Slurm clients.</p>
 </blockquote>
 
 <blockquote class="tip">
   <div class="box-title tip-title" id="tip-do-you-need-a-drm"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-do-you-need-a-drm-contents" aria-expanded="true" aria-label="Toggle tip box: Do you need a DRM?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Do you need a DRM?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-  <p>If you have a smaller server, do you still need a DRM? Yes! You should definitely run Slurm or a similar option. If you don’t, as soon as you restart <span class="notranslate">Galaxy</span> with local runners, any running jobs will be killed. Even with a handful of users, it is a good idea to keep 1-2 CPU cores/4GB RAM reserved for <span class="notranslate">Galaxy</span>.</p>
+  <p>If you have a smaller server, do you still need a DRM? Yes! You should definitely run Slurm or a similar option. If you don’t, as soon as you restart Galaxy with local runners, any running jobs will be killed. Even with a handful of users, it is a good idea to keep 1-2 CPU cores/4GB RAM reserved for Galaxy.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
@@ -963,9 +963,9 @@ be taken into consideration when choosing where to run jobs and what parameters 
    version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
  - src: gantsign.golang
    version: 2.6.3
-<span class="gi">+- src: <span class="notranslate">galaxy</span>project.repos
+<span class="gi">+- src: galaxyproject.repos
 +  version: 0.0.2
-+- src: <span class="notranslate">galaxy</span>project.slurm
++- src: galaxyproject.slurm
 +  version: 0.1.3
 </span>   
 </code></pre></div>      </div>
@@ -973,39 +973,39 @@ be taken into consideration when choosing where to run jobs and what parameters 
       <!--SNIPPET-->
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-how-to-read-a-diff"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-read-a-diff-contents" aria-expanded="true" aria-label="Toggle tip box: How to read a Diff"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How to read a Diff<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you haven’t worked with diffs before, this can be something quite new or different.</p>   <p>If we have two files, let’s say a grocery list, in two files. We’ll call them ‘a’ and ‘b’.</p>   <blockquote class="code-2col">   <blockquote class="code-in">     <div class="box-title code-in-title" id="code-in-old" aria-label="code-in box: Old"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Old</div>     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat old<br />🍎<br />🍐<br />🍊<br />🍋<br />🍒<br />🥑<br /></code></pre></div>    </div>   </blockquote>   <blockquote class="code-out">     <div class="box-title code-out-title" id="code-out-new" aria-label="code-out box: New"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: New</div>     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat new<br />🍎<br />🍐<br />🍊<br />🍋<br />🍍<br />🥑<br /></code></pre></div>    </div>   </blockquote> </blockquote>   <p>We can see that they have some different entries. We’ve removed 🍒 because they’re awful, and replaced them with an 🍍</p>   <p>Diff lets us compare these files</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff old new<br />5c5<br />&lt; 🍒<br /><span class="nt">---</span><br /><span class="o">&gt;</span> 🍍<br /></code></pre></div></div>   <p>Here we see that 🍒 is only in a, and 🍍 is only in b. But otherwise the files are identical.</p>   <p>There are a couple different formats to diffs, one is the ‘unified diff’</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> old new<br /><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:06:36.340962616 +0100<br />@@ <span class="nt">-3</span>,4 +3,4 @@<br /> 🍊<br /> 🍋<br />-🍒<br />+🍍<br /> 🥑<br /></code></pre></div></div>   <p>This is basically what you see in the training materials which gives you a lot of context about the changes:</p>   <ul>   <li><code class="language-plaintext highlighter-rouge">--- old</code> is the ‘old’ file in our view</li>   <li><code class="language-plaintext highlighter-rouge">+++ new</code> is the ‘new’ file</li>   <li>@@ these lines tell us where the change occurs and how many lines are added or removed.</li>   <li>Lines starting with a - are removed from our ‘new’ file</li>   <li>Lines with a + have been added.</li> </ul>   <p>So when you go to apply these diffs to your files in the training:</p>   <ol>   <li>Ignore the header</li>   <li>Remove lines starting with - from your file</li>   <li>Add lines starting with + to your file</li> </ol>   <p>The other lines (🍊/🍋 and 🥑) above just provide “context”, they help you know where a change belongs in a file, but <strong>should not be edited</strong> when you’re making the above change. Given the above diff, you would find a line with a 🍒, and replace it with a 🍍</p>   <h4 id="added--removed-lines">Added &amp; Removed Lines</h4>   <p>Removals are very easy to spot, we just have removed lines</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:10:14.370722802 +0100<br />@@ <span class="nt">-4</span>,3 +4,2 @@<br /> 🍋<br /> 🍒<br />-🥑<br /></code></pre></div></div>   <p>And additions likewise are very easy, just add a new line, between the other lines in your file.</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:11:11.422135393 +0100<br />@@ <span class="nt">-1</span>,3 +1,4 @@<br /> 🍎<br />+🍍<br /> 🍐<br /> 🍊<br /></code></pre></div></div>   <h4 id="completely-new-files">Completely new files</h4>   <p>Completely new files look a bit different, there the “old” file is <code class="language-plaintext highlighter-rouge">/dev/null</code>, the empty file in a Linux machine.</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> /dev/null old<br /><span class="nt">---</span> /dev/null	2022-02-15 11:47:16.100000270 +0100<br />+++ old	2022-02-16 14:06:19.697132568 +0100<br />@@ <span class="nt">-0</span>,0 +1,6 @@<br />+🍎<br />+🍐<br />+🍊<br />+🍋<br />+🍒<br />+🥑<br /></code></pre></div></div>   <p>And removed files are similar, except with the new file being /dev/null</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ /dev/null	2022-02-15 11:47:16.100000270 +0100<br />@@ <span class="nt">-1</span>,6 +0,0 @@<br />-🍎<br />-🍐<br />-🍊<br />-🍋<br />-🍒<br />-🥑<br /></code></pre></div></div> </blockquote>
 
-      <p>The <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.repos</code> role adds the <a href="https://depot.galaxyproject.org/yum/"><span class="notranslate">Galaxy</span> Packages for Enterprise Linux (GPEL)</a> repository for RedHat/CentOS, which provides both Slurm and Slurm-DRMAA (neither are available in standard repositories or EPEL). For Ubuntu versions 18.04 or newer, it adds the <a href="https://launchpad.net/~natefoo/+archive/ubuntu/slurm-drmaa">Slurm-DRMAA PPA</a> (Slurm-DRMAA was removed from Debian/Ubuntu in buster/bionic).</p>
+      <p>The <code class="language-plaintext highlighter-rouge">galaxyproject.repos</code> role adds the <a href="https://depot.galaxyproject.org/yum/">Galaxy Packages for Enterprise Linux (GPEL)</a> repository for RedHat/CentOS, which provides both Slurm and Slurm-DRMAA (neither are available in standard repositories or EPEL). For Ubuntu versions 18.04 or newer, it adds the <a href="https://launchpad.net/~natefoo/+archive/ubuntu/slurm-drmaa">Slurm-DRMAA PPA</a> (Slurm-DRMAA was removed from Debian/Ubuntu in buster/bionic).</p>
     </li>
     <li>
       <p>In the same directory, run:</p>
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
     <li>
-      <p>Add <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.repos</code>, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.slurm</code> to the <em>beginning</em> of your roles section in your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook:</p>
+      <p>Add <code class="language-plaintext highlighter-rouge">galaxyproject.repos</code>, <code class="language-plaintext highlighter-rouge">galaxyproject.slurm</code> to the <em>beginning</em> of your roles section in your <code class="language-plaintext highlighter-rouge">galaxy.yml</code> playbook:</p>
 
-      <div data-commit="Add the repos and slurm roles" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
-</span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
+      <div data-commit="Add the repos and slurm roles" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/galaxy.yml
+</span><span class="gi">+++ b/galaxy.yml
 </span><span class="p">@@ -12,6 +12,8 @@</span>
-         repo: 'https://github.com/use<span class="notranslate">galaxy</span>-eu/libraries-training-repo'
+         repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
          dest: /libraries/
    roles:
-<span class="gi">+    - <span class="notranslate">galaxy</span>project.repos
-+    - <span class="notranslate">galaxy</span>project.slurm
-</span>     - <span class="notranslate">galaxy</span>project.postgresql
-     - role: <span class="notranslate">galaxy</span>project.postgresql_objects
+<span class="gi">+    - galaxyproject.repos
++    - galaxyproject.slurm
+</span>     - galaxyproject.postgresql
+     - role: galaxyproject.postgresql_objects
        become: true
    
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Add the slurm variables to your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
+      <p>Add the slurm variables to your <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code>:</p>
 
-      <div data-commit="Add slurm configuration" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+      <div data-commit="Add slurm configuration" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
+</span><span class="gi">+++ b/group_vars/galaxyservers.yml
 </span><span class="p">@@ -157,6 +157,16 @@</span> golang_gopath: '/opt/workspace-go'
  singularity_version: "3.7.4"
  singularity_go_path: "{{ golang_install_dir }}"
@@ -1021,7 +1021,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 +  SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 +
 </span> # TUS
- <span class="notranslate">galaxy</span>_tusd_port: 1080
+ galaxy_tusd_port: 1080
  tusd_instances:
    
 </code></pre></div>      </div>
@@ -1031,7 +1031,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash-1" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1112,7 +1112,7 @@ localhost      1    debug*        idle    1    2:1:1      1        0      1   (n
   <li><code class="language-plaintext highlighter-rouge">sbatch</code>: Run a batch job, with stdin closed and stdout/stderr redirected to a file.</li>
 </ul>
 
-<p><span class="notranslate">Galaxy</span> runs <code class="language-plaintext highlighter-rouge">sbatch</code> jobs but we can use both <code class="language-plaintext highlighter-rouge">srun</code> and <code class="language-plaintext highlighter-rouge">sbatch</code> to test:</p>
+<p>Galaxy runs <code class="language-plaintext highlighter-rouge">sbatch</code> jobs but we can use both <code class="language-plaintext highlighter-rouge">srun</code> and <code class="language-plaintext highlighter-rouge">sbatch</code> to test:</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-running-commands-with-srun" aria-label="hands-on box: Running commands with `srun`"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Running commands with `srun`</div>
@@ -1131,7 +1131,7 @@ localhost      1    debug*        idle    1    2:1:1      1        0      1   (n
         <div class="box-title code-out-title" id="code-out" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
         <p>Your output may look slightly different:</p>
         <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>srun <span class="nb">uname</span> <span class="nt">-a</span>
-<span class="gp">Linux gat-1.oz.training.<span class="notranslate">galaxy</span>project.eu 5.4.0-48-generic #</span>52-Ubuntu SMP Thu Sep 10 10:58:49 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
+<span class="gp">Linux gat-1.oz.training.galaxyproject.eu 5.4.0-48-generic #</span>52-Ubuntu SMP Thu Sep 10 10:58:49 UTC 2020 x86_64 x86_64 x86_64 GNU/Linux
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1221,28 +1221,28 @@ sleep </span>30
     <li>
       <p>Add a <code class="language-plaintext highlighter-rouge">post_task</code> to your playbook to install <code class="language-plaintext highlighter-rouge">slurm-drmaa1</code> (Debian/Ubuntu) or <code class="language-plaintext highlighter-rouge">slurm-drmaa</code> (RedHat/CentOS).</p>
 
-      <div data-commit="Add post task to install slurm-drmaa" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
-</span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
+      <div data-commit="Add post task to install slurm-drmaa" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/galaxy.yml
+</span><span class="gi">+++ b/galaxy.yml
 </span><span class="p">@@ -11,6 +11,10 @@</span>
      - git:
-         repo: 'https://github.com/use<span class="notranslate">galaxy</span>-eu/libraries-training-repo'
+         repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
          dest: /libraries/
 <span class="gi">+  post_tasks:
 +    - name: Install slurm-drmaa
 +      package:
 +        name: slurm-drmaa1
 </span>   roles:
-     - <span class="notranslate">galaxy</span>project.repos
-     - <span class="notranslate">galaxy</span>project.slurm
+     - galaxyproject.repos
+     - galaxyproject.slurm
    
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run the playbook (<code class="language-plaintext highlighter-rouge">ansible-playbook <span class="notranslate">galaxy</span>.yml</code>)</p>
+      <p>Run the playbook (<code class="language-plaintext highlighter-rouge">ansible-playbook galaxy.yml</code>)</p>
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash-5" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1250,26 +1250,26 @@ sleep </span>30
 
 </blockquote>
 
-<p>Moving one level further up the stack, we find DRMAA Python. This is a <span class="notranslate">Galaxy</span> framework <em>conditional dependency</em>. Conditional dependencies are only installed if, during startup, a configuration option is set that requires that dependency. The <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> Ansible role will install these conditional dependencies, automatically.</p>
+<p>Moving one level further up the stack, we find DRMAA Python. This is a Galaxy framework <em>conditional dependency</em>. Conditional dependencies are only installed if, during startup, a configuration option is set that requires that dependency. The <code class="language-plaintext highlighter-rouge">galaxyproject.galaxy</code> Ansible role will install these conditional dependencies, automatically.</p>
 
-<h1 id="galaxy-and-slurm"><span class="notranslate">Galaxy</span> and Slurm</h1>
+<h1 id="galaxy-and-slurm">Galaxy and Slurm</h1>
 
-<p>At the top of the stack sits <span class="notranslate">Galaxy</span>. <span class="notranslate">Galaxy</span> must now be configured to use the cluster we’ve just set up. The DRMAA Python documentation (and <span class="notranslate">Galaxy</span>’s own documentation) instruct that you should set the <code class="language-plaintext highlighter-rouge">$DRMAA_LIBRARY_PATH</code> environment variable so that DRMAA Python can find <code class="language-plaintext highlighter-rouge">libdrmaa.so</code> (aka slurm-drmaa). Because <span class="notranslate">Galaxy</span> runs under systemd, the environment that <span class="notranslate">Galaxy</span> starts under is controlled by the <code class="language-plaintext highlighter-rouge">environment</code> option in systemd service unit that the ansible role manages. The <span class="notranslate">galaxy</span> task should thus be updated to refer to the path to slurm-drmaa, which is <code class="language-plaintext highlighter-rouge">/usr/lib/slurm-drmaa/lib/libdrmaa.so.1</code>:</p>
+<p>At the top of the stack sits Galaxy. Galaxy must now be configured to use the cluster we’ve just set up. The DRMAA Python documentation (and Galaxy’s own documentation) instruct that you should set the <code class="language-plaintext highlighter-rouge">$DRMAA_LIBRARY_PATH</code> environment variable so that DRMAA Python can find <code class="language-plaintext highlighter-rouge">libdrmaa.so</code> (aka slurm-drmaa). Because Galaxy runs under systemd, the environment that Galaxy starts under is controlled by the <code class="language-plaintext highlighter-rouge">environment</code> option in systemd service unit that the ansible role manages. The galaxy task should thus be updated to refer to the path to slurm-drmaa, which is <code class="language-plaintext highlighter-rouge">/usr/lib/slurm-drmaa/lib/libdrmaa.so.1</code>:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-making-galaxy-aware-of-drmaa" aria-label="hands-on box: Making Galaxy aware of DRMAA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Making <span class="notranslate">Galaxy</span> aware of DRMAA</div>
+  <div class="box-title hands-on-title" id="hands-on-making-galaxy-aware-of-drmaa" aria-label="hands-on box: Making Galaxy aware of DRMAA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Making Galaxy aware of DRMAA</div>
 
   <ol>
     <li>
       <p>Open your group variables and add the environment variable:</p>
 
-      <div data-commit="Configure DRMAA_LIBRARY_PATH" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -98,6 +98,7 @@</span> <span class="notranslate">galaxy</span>_config_templates:
+      <div data-commit="Configure DRMAA_LIBRARY_PATH" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
+</span><span class="gi">+++ b/group_vars/galaxyservers.yml
+</span><span class="p">@@ -98,6 +98,7 @@</span> galaxy_config_templates:
     
  # systemd
- <span class="notranslate">galaxy</span>_manage_systemd: true
-<span class="gi">+<span class="notranslate">galaxy</span>_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
+ galaxy_manage_systemd: true
+<span class="gi">+galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
 </span>    
  # Certbot
  certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
@@ -1279,16 +1279,16 @@ sleep </span>30
       <p>This environment variable will then be supplied to any web process (zerglings or mules).</p>
     </li>
     <li>
-      <p>Next, we need to configure the Slurm job runner. First, we instruct <span class="notranslate">Galaxy</span>’s job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the <code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">type</code>, and <code class="language-plaintext highlighter-rouge">load</code> attributes. Since we already have a good default destination that uses singularity, we will simply modify that to use the slurm runner. <span class="notranslate">Galaxy</span> will do the equivalent of submitting a job as <code class="language-plaintext highlighter-rouge">sbatch /path/to/job_script.sh</code>. <!-- Note that we also need to set a default destination now that more than one destination is defined. --> In a <code class="language-plaintext highlighter-rouge">&lt;destination&gt;</code> tag, the <code class="language-plaintext highlighter-rouge">id</code> attribute is a unique identifier for that destination and the <code class="language-plaintext highlighter-rouge">runner</code> attribute must match the <code class="language-plaintext highlighter-rouge">id</code> of a defined plugin:</p>
+      <p>Next, we need to configure the Slurm job runner. First, we instruct Galaxy’s job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the <code class="language-plaintext highlighter-rouge">id</code>, <code class="language-plaintext highlighter-rouge">type</code>, and <code class="language-plaintext highlighter-rouge">load</code> attributes. Since we already have a good default destination that uses singularity, we will simply modify that to use the slurm runner. Galaxy will do the equivalent of submitting a job as <code class="language-plaintext highlighter-rouge">sbatch /path/to/job_script.sh</code>. <!-- Note that we also need to set a default destination now that more than one destination is defined. --> In a <code class="language-plaintext highlighter-rouge">&lt;destination&gt;</code> tag, the <code class="language-plaintext highlighter-rouge">id</code> attribute is a unique identifier for that destination and the <code class="language-plaintext highlighter-rouge">runner</code> attribute must match the <code class="language-plaintext highlighter-rouge">id</code> of a defined plugin:</p>
 
-      <div data-commit="Configure slurm destination" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
-</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
+      <div data-commit="Configure slurm destination" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/galaxy/config/job_conf.yml.j2
+</span><span class="gi">+++ b/templates/galaxy/config/job_conf.yml.j2
 </span><span class="p">@@ -2,12 +2,24 @@</span> runners:
    local_runner:
-     load: <span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner
+     load: galaxy.jobs.runners.local:LocalJobRunner
      workers: 4
 <span class="gi">+  slurm:
-+    load: <span class="notranslate">galaxy</span>.jobs.runners.slurm:SlurmJobRunner
++    load: galaxy.jobs.runners.slurm:SlurmJobRunner
 </span>    
  execution:
 <span class="gd">-  default: singularity
@@ -1313,11 +1313,11 @@ sleep </span>30
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run your <span class="notranslate">Galaxy</span> playbook</p>
+      <p>Run your Galaxy playbook</p>
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash-6" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1326,15 +1326,15 @@ sleep </span>30
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash-7" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl -f -u <span class="notranslate">galaxy</span>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl -f -u galaxy
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out">
         <div class="box-title code-out-title" id="code-out-2" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
         <p>Your output may look slightly different:</p>
-        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project.eu gunicorn[1821134]: <span class="notranslate">galaxy</span>.jobs.runners DEBUG 2021-01-12 15:46:01,109 [p:1821134,w:0,m:1] [MainThread] Starting 4 SlurmRunner workers
-Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project.eu gunicorn[1821134]: <span class="notranslate">galaxy</span>.jobs DEBUG 2021-01-12 15:46:01,110 [p:1821134,w:0,m:1] [MainThread] Loaded job runner '<span class="notranslate">galaxy</span>.jobs.runners.slurm:SlurmJobRunner' as 'slurm'
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu gunicorn[1821134]: galaxy.jobs.runners DEBUG 2021-01-12 15:46:01,109 [p:1821134,w:0,m:1] [MainThread] Starting 4 SlurmRunner workers
+Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu gunicorn[1821134]: galaxy.jobs DEBUG 2021-01-12 15:46:01,110 [p:1821134,w:0,m:1] [MainThread] Loaded job runner 'galaxy.jobs.runners.slurm:SlurmJobRunner' as 'slurm'
 </span></code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1344,22 +1344,22 @@ Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project
 
 <h2 id="running-a-job">Running a Job</h2>
 
-<p>You should now be able to run a <span class="notranslate">Galaxy</span> job through Slurm. The simplest way to test is using the upload tool to upload some text.</p>
+<p>You should now be able to run a Galaxy job through Slurm. The simplest way to test is using the upload tool to upload some text.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-testing-a-slurm-job" aria-label="hands-on box: Testing a Slurm Job"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Testing a Slurm Job</div>
 
   <ol>
     <li>
-      <p>If you’re not still following the log files with <code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl</code>, do so now.</p>
+      <p>If you’re not still following the log files with <code class="language-plaintext highlighter-rouge">journalctl</code>, do so now.</p>
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash-8" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl -f -u <span class="notranslate">galaxy</span>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>journalctl -f -u galaxy
 </code></pre></div>        </div>
       </blockquote>
     </li>
-    <li>Click the upload button at the top of the tool panel (on the left side of the <span class="notranslate">Galaxy</span> UI).</li>
+    <li>Click the upload button at the top of the tool panel (on the left side of the Galaxy UI).</li>
     <li>In the resulting modal dialog, click the “Paste/Fetch data” button.</li>
     <li>Type some random characters into the text field that has just appeared.</li>
     <li>
@@ -1367,39 +1367,39 @@ Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project
 
       <blockquote class="code-out">
         <div class="box-title code-out-title" id="code-out-3" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
-        <p>Your output may look slightly different. In your <code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl</code> terminal window you should see the following messages:</p>
+        <p>Your output may look slightly different. In your <code class="language-plaintext highlighter-rouge">journalctl</code> terminal window you should see the following messages:</p>
 
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="notranslate">galaxy</span>.jobs.mapper DEBUG 2020-02-10 09:37:17,946 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] (1) Mapped job to destination id: slurm
-<span class="notranslate">galaxy</span>.jobs.handler DEBUG 2020-02-10 09:37:17,976 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] (1) Dispatching to slurm runner
-<span class="notranslate">galaxy</span>.jobs DEBUG 2020-02-10 09:37:18,016 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] (1) Persisting job destination (destination id: slurm)
-<span class="notranslate">galaxy</span>.jobs DEBUG 2020-02-10 09:37:18,021 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] (1) Working directory for job is: /srv/<span class="notranslate">galaxy</span>/jobs/000/1
-<span class="notranslate">galaxy</span>.jobs.runners DEBUG 2020-02-10 09:37:18,358 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] Job [1] queued (380.809 ms)
-<span class="notranslate">galaxy</span>.jobs.handler INFO 2020-02-10 09:37:18,372 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] (1) Job dispatched
-<span class="notranslate">galaxy</span>.jobs.command_factory INFO 2020-02-10 09:37:18,564 [p:9859,w:0,m:2] [SlurmRunner.work_thread-0] Built script [/srv/<span class="notranslate">galaxy</span>/jobs/000/1/tool_script.sh] for tool command [python '/srv/<span class="notranslate">galaxy</span>/server/tools/data_source/upload.py' /srv/<span class="notranslate">galaxy</span>/server /srv/<span class="notranslate">galaxy</span>/jobs/000/1/registry.xml /srv/<span class="notranslate">galaxy</span>/jobs/000/1/upload_params.json 1:/srv/<span class="notranslate">galaxy</span>/jobs/000/1/working/dataset_1_files:/data/000/dataset_1.dat]
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>galaxy.jobs.mapper DEBUG 2020-02-10 09:37:17,946 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] (1) Mapped job to destination id: slurm
+galaxy.jobs.handler DEBUG 2020-02-10 09:37:17,976 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] (1) Dispatching to slurm runner
+galaxy.jobs DEBUG 2020-02-10 09:37:18,016 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] (1) Persisting job destination (destination id: slurm)
+galaxy.jobs DEBUG 2020-02-10 09:37:18,021 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] (1) Working directory for job is: /srv/galaxy/jobs/000/1
+galaxy.jobs.runners DEBUG 2020-02-10 09:37:18,358 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] Job [1] queued (380.809 ms)
+galaxy.jobs.handler INFO 2020-02-10 09:37:18,372 [p:9859,w:0,m:2] [JobHandlerQueue.monitor_thread] (1) Job dispatched
+galaxy.jobs.command_factory INFO 2020-02-10 09:37:18,564 [p:9859,w:0,m:2] [SlurmRunner.work_thread-0] Built script [/srv/galaxy/jobs/000/1/tool_script.sh] for tool command [python '/srv/galaxy/server/tools/data_source/upload.py' /srv/galaxy/server /srv/galaxy/jobs/000/1/registry.xml /srv/galaxy/jobs/000/1/upload_params.json 1:/srv/galaxy/jobs/000/1/working/dataset_1_files:/data/000/dataset_1.dat]
 ...
-<span class="notranslate">galaxy</span>.jobs.runners.drmaa DEBUG 2020-02-10 09:37:18,645 [p:9859,w:0,m:2] [SlurmRunner.work_thread-0] (1) submitting file /srv/<span class="notranslate">galaxy</span>/jobs/000/1/<span class="notranslate">galaxy</span>_1.sh
-<span class="notranslate">galaxy</span>.jobs.runners.drmaa INFO 2020-02-10 09:37:18,654 [p:9859,w:0,m:2] [SlurmRunner.work_thread-0] (1) queued as 4
-<span class="notranslate">galaxy</span>.jobs DEBUG 2020-02-10 09:37:18,654 [p:9859,w:0,m:2] [SlurmRunner.work_thread-0] (1) Persisting job destination (destination id: slurm)
+galaxy.jobs.runners.drmaa DEBUG 2020-02-10 09:37:18,645 [p:9859,w:0,m:2] [SlurmRunner.work_thread-0] (1) submitting file /srv/galaxy/jobs/000/1/galaxy_1.sh
+galaxy.jobs.runners.drmaa INFO 2020-02-10 09:37:18,654 [p:9859,w:0,m:2] [SlurmRunner.work_thread-0] (1) queued as 4
+galaxy.jobs DEBUG 2020-02-10 09:37:18,654 [p:9859,w:0,m:2] [SlurmRunner.work_thread-0] (1) Persisting job destination (destination id: slurm)
 </code></pre></div>        </div>
 
-        <p>At this point the job has been accepted by Slurm and is awaiting scheduling on a node. Once it’s been sent to a node and starts running, <span class="notranslate">Galaxy</span> logs this event:</p>
+        <p>At this point the job has been accepted by Slurm and is awaiting scheduling on a node. Once it’s been sent to a node and starts running, Galaxy logs this event:</p>
 
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="notranslate">galaxy</span>.jobs.runners.drmaa DEBUG 2020-02-10 09:37:19,537 [p:9859,w:0,m:2] [SlurmRunner.monitor_thread] (1/4) state change: job is running
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>galaxy.jobs.runners.drmaa DEBUG 2020-02-10 09:37:19,537 [p:9859,w:0,m:2] [SlurmRunner.monitor_thread] (1/4) state change: job is running
 </code></pre></div>        </div>
 
-        <p>Finally, when the job is complete, <span class="notranslate">Galaxy</span> performs its job finalization process:</p>
+        <p>Finally, when the job is complete, Galaxy performs its job finalization process:</p>
 
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="notranslate">galaxy</span>.jobs.runners.drmaa DEBUG 2020-02-10 09:37:24,700 [p:9859,w:0,m:2] [SlurmRunner.monitor_thread] (1/4) state change: job finished normally
-<span class="notranslate">galaxy</span>.model.metadata DEBUG 2020-02-10 09:37:24,788 [p:9859,w:0,m:2] [SlurmRunner.work_thread-1] loading metadata from file for: HistoryDatasetAssociation 1
-<span class="notranslate">galaxy</span>.jobs INFO 2020-02-10 09:37:24,883 [p:9859,w:0,m:2] [SlurmRunner.work_thread-1] Collecting metrics for Job 1 in /srv/<span class="notranslate">galaxy</span>/jobs/000/1
-<span class="notranslate">galaxy</span>.jobs DEBUG 2020-02-10 09:37:24,917 [p:9859,w:0,m:2] [SlurmRunner.work_thread-1] job_wrapper.finish for job 1 executed (154.514 ms)
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>galaxy.jobs.runners.drmaa DEBUG 2020-02-10 09:37:24,700 [p:9859,w:0,m:2] [SlurmRunner.monitor_thread] (1/4) state change: job finished normally
+galaxy.model.metadata DEBUG 2020-02-10 09:37:24,788 [p:9859,w:0,m:2] [SlurmRunner.work_thread-1] loading metadata from file for: HistoryDatasetAssociation 1
+galaxy.jobs INFO 2020-02-10 09:37:24,883 [p:9859,w:0,m:2] [SlurmRunner.work_thread-1] Collecting metrics for Job 1 in /srv/galaxy/jobs/000/1
+galaxy.jobs DEBUG 2020-02-10 09:37:24,917 [p:9859,w:0,m:2] [SlurmRunner.work_thread-1] job_wrapper.finish for job 1 executed (154.514 ms)
 </code></pre></div>        </div>
 
         <p>Note a few useful bits in the output:</p>
         <ul>
-          <li><code class="language-plaintext highlighter-rouge">Persisting job destination (destination id: slurm)</code>: <span class="notranslate">Galaxy</span> has selected the <code class="language-plaintext highlighter-rouge">slurm</code> destination we defined</li>
-          <li><code class="language-plaintext highlighter-rouge">submitting file /srv/<span class="notranslate">galaxy</span>/server/database/jobs/000/2/<span class="notranslate">galaxy</span>_2.sh</code>: This is the path to the script that is submitted to Slurm as it would be with <code class="language-plaintext highlighter-rouge">sbatch</code></li>
-          <li><code class="language-plaintext highlighter-rouge">(1) queued as 4</code>: <span class="notranslate">Galaxy</span> job id “1” is Slurm job id “4”, this can also be seen with the <code class="language-plaintext highlighter-rouge">(1/4)</code> in other output lines.</li>
+          <li><code class="language-plaintext highlighter-rouge">Persisting job destination (destination id: slurm)</code>: Galaxy has selected the <code class="language-plaintext highlighter-rouge">slurm</code> destination we defined</li>
+          <li><code class="language-plaintext highlighter-rouge">submitting file /srv/galaxy/server/database/jobs/000/2/galaxy_2.sh</code>: This is the path to the script that is submitted to Slurm as it would be with <code class="language-plaintext highlighter-rouge">sbatch</code></li>
+          <li><code class="language-plaintext highlighter-rouge">(1) queued as 4</code>: Galaxy job id “1” is Slurm job id “4”, this can also be seen with the <code class="language-plaintext highlighter-rouge">(1/4)</code> in other output lines.</li>
           <li>If <code class="language-plaintext highlighter-rouge">job &lt;id&gt; ended</code> is reached, the job should show as done in the UI</li>
         </ul>
       </blockquote>
@@ -1426,7 +1426,7 @@ Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project
   <div class="box-title code-out-title" id="code-out-4" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
   <p>Your output may also look slightly different:</p>
   <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">JobId=4 JobName=g1_upload1_admin_example_org
-   UserId=<span class="notranslate">galaxy</span>(999) GroupId=<span class="notranslate">galaxy</span>(999) MCS_label=N/A
+   UserId=galaxy(999) GroupId=galaxy(999) MCS_label=N/A
    Priority=4294901757 Nice=0 Account=(null) QOS=(null)
    JobState=COMPLETED Reason=None Dependency=(null)
    Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
@@ -1447,10 +1447,10 @@ Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project
    Gres=(null) Reservation=(null)
    OverSubscribe=OK Contiguous=0 Licenses=(null) Network=(null)
    Command=(null)
-   WorkDir=/srv/<span class="notranslate">galaxy</span>/jobs/000/1
-   StdErr=/srv/<span class="notranslate">galaxy</span>/jobs/000/1/<span class="notranslate">galaxy</span>_1.e
+   WorkDir=/srv/galaxy/jobs/000/1
+   StdErr=/srv/galaxy/jobs/000/1/galaxy_1.e
    StdIn=StdIn=/dev/null
-   StdOut=/srv/<span class="notranslate">galaxy</span>/jobs/000/1/<span class="notranslate">galaxy</span>_1.o
+   StdOut=/srv/galaxy/jobs/000/1/galaxy_1.o
    Power=
 </span></code></pre></div>  </div>
 </blockquote>
@@ -1461,36 +1461,36 @@ Jan 12 15:46:01 gat-1.oz.training.<span class="notranslate">galaxy</span>project
   <div class="box-title tip-title" id="tip-which-directories-need-to-be-shared-on-a-cluster"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-which-directories-need-to-be-shared-on-a-cluster-contents" aria-expanded="true" aria-label="Toggle tip box: Which directories need to be shared on a cluster?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Which directories need to be shared on a cluster?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>The following directories need to be accesible via the same path on both the head node and compute nodes:</p>
   <ul>
-    <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_shed_tools_dir</code></li>
-    <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_tool_dependency_dir</code></li>
-    <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_file_path</code></li>
-    <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_job_working_directory</code></li>
-    <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_server_dir</code></li>
-    <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_venv_dir</code></li>
+    <li><code class="language-plaintext highlighter-rouge">galaxy_shed_tools_dir</code></li>
+    <li><code class="language-plaintext highlighter-rouge">galaxy_tool_dependency_dir</code></li>
+    <li><code class="language-plaintext highlighter-rouge">galaxy_file_path</code></li>
+    <li><code class="language-plaintext highlighter-rouge">galaxy_job_working_directory</code></li>
+    <li><code class="language-plaintext highlighter-rouge">galaxy_server_dir</code></li>
+    <li><code class="language-plaintext highlighter-rouge">galaxy_venv_dir</code></li>
   </ul>
 </blockquote>
 
 <h1 id="recording-job-metrics">Recording Job Metrics</h1>
 
-<p>Job metrics record properties of the jobs that are executed, information that can help you plan for trainings or plan capacity for further expansions of your <span class="notranslate">Galaxy</span> server. These properties include details such as the number of slots (cores) assigned to a job, the amount of memory available, details about the node on which the job executed, environment variables that were set at execution time, and more.</p>
+<p>Job metrics record properties of the jobs that are executed, information that can help you plan for trainings or plan capacity for further expansions of your Galaxy server. These properties include details such as the number of slots (cores) assigned to a job, the amount of memory available, details about the node on which the job executed, environment variables that were set at execution time, and more.</p>
 
-<p><span class="notranslate">Galaxy</span> collects and records very few job metrics by default, enabling more metrics plugins is recommended for any cluster-enabled <span class="notranslate">Galaxy</span> deployment. The metrics are stored in the <span class="notranslate">Galaxy</span> database, which can be queried exte<span class="notranslate">rna</span>lly to generate reports and debug job problems.</p>
+<p>Galaxy collects and records very few job metrics by default, enabling more metrics plugins is recommended for any cluster-enabled Galaxy deployment. The metrics are stored in the Galaxy database, which can be queried externally to generate reports and debug job problems.</p>
 
 <p>Some work has been done to try to analyse job runtime metrics to optimise cluster allocation based on job inputs, and enhance job submission (<span class="citation"><a href="#Tyryshkina_2019">Tyryshkina <i>et al.</i> 2019</a></span>). More work will be done in this area.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-note" aria-label="comment box: Note"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Note</div>
 
-  <p>Job metrics are only visible to <span class="notranslate">Galaxy</span> <em>admin users</em>, unless you set <code class="language-plaintext highlighter-rouge">expose_potentially_sensitive_job_metrics: true</code>, like Use<span class="notranslate">Galaxy</span>.eu does. EU’s intention with this is to empower users and make everything as transparent as possible.</p>
+  <p>Job metrics are only visible to Galaxy <em>admin users</em>, unless you set <code class="language-plaintext highlighter-rouge">expose_potentially_sensitive_job_metrics: true</code>, like UseGalaxy.eu does. EU’s intention with this is to empower users and make everything as transparent as possible.</p>
 
   <p>This is the only option controlling which metrics general users see. Admins see all metrics collected, and by default general users see none.
 However most of the metrics exposed by this setting are quite safe (e.g. cgroups information on resource consumption, walltime, etc.)</p>
 
 </blockquote>
 
-<h2 id="setting-up-galaxy">Setting up <span class="notranslate">Galaxy</span></h2>
+<h2 id="setting-up-galaxy">Setting up Galaxy</h2>
 
-<p>By default, <span class="notranslate">Galaxy</span> enables the <code class="language-plaintext highlighter-rouge">core</code> metrics:</p>
+<p>By default, Galaxy enables the <code class="language-plaintext highlighter-rouge">core</code> metrics:</p>
 
 <p><img src="../../images/job-metrics-basic.png" alt="screenshot of galaxy metrics. " loading="lazy" /></p>
 
@@ -1504,21 +1504,21 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
       <p>Edit the <strong>global</strong> (for all hosts) group variables file, <code class="language-plaintext highlighter-rouge">group_vars/all.yml</code>:</p>
 
       <blockquote class="details">
-        <div class="box-title details-title" id="details-why-are-we-editing-quot-all-quot-instead-of-quot-galaxyservers-quot-vars"><button class="gtn-boxify-button details" type="button" aria-controls="details-why-are-we-editing-quot-all-quot-instead-of-quot-galaxyservers-quot-vars-contents" aria-expanded="true" aria-label="Toggle details box: Why are we editing &quot;all&quot; instead of &quot;galaxyservers&quot; vars?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Why are we editing &quot;all&quot; instead of &quot;<span class="notranslate">galaxy</span>servers&quot; vars?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-        <p>Both <span class="notranslate">Galaxy</span> and Pulsar use job metrics plugins, and when we configure Pulsar later, we will want it to have the same metrics plugin configuration as <span class="notranslate">Galaxy</span>. Putting this variable in <code class="language-plaintext highlighter-rouge">all.yml</code> will allow us to refer to it later when setting the corresponding variable for Pulsar.</p>
+        <div class="box-title details-title" id="details-why-are-we-editing-quot-all-quot-instead-of-quot-galaxyservers-quot-vars"><button class="gtn-boxify-button details" type="button" aria-controls="details-why-are-we-editing-quot-all-quot-instead-of-quot-galaxyservers-quot-vars-contents" aria-expanded="true" aria-label="Toggle details box: Why are we editing &quot;all&quot; instead of &quot;galaxyservers&quot; vars?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Why are we editing &quot;all&quot; instead of &quot;galaxyservers&quot; vars?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <p>Both Galaxy and Pulsar use job metrics plugins, and when we configure Pulsar later, we will want it to have the same metrics plugin configuration as Galaxy. Putting this variable in <code class="language-plaintext highlighter-rouge">all.yml</code> will allow us to refer to it later when setting the corresponding variable for Pulsar.</p>
       </blockquote>
 
-      <p>The variable we’ll set is named <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_job_metrics_plugins</code>:</p>
+      <p>The variable we’ll set is named <code class="language-plaintext highlighter-rouge">galaxy_job_metrics_plugins</code>:</p>
 
       <div data-commit="Configure job metrics plugins" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/all.yml
 </span><span class="gi">+++ b/group_vars/all.yml
 </span><span class="p">@@ -2,3 +2,13 @@</span>
  cvmfs_role: client
- <span class="notranslate">galaxy</span>_cvmfs_repos_enabled: config-repo
+ galaxy_cvmfs_repos_enabled: config-repo
  cvmfs_quota_limit: 500
 <span class="gi">+
-+# <span class="notranslate">Galaxy</span> vars that will be reused by Pulsar
-+<span class="notranslate">galaxy</span>_job_metrics_plugins:
++# Galaxy vars that will be reused by Pulsar
++galaxy_job_metrics_plugins:
 +  - type: core
 +  - type: cpuinfo
 +  - type: meminfo
@@ -1530,11 +1530,11 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run your <span class="notranslate">Galaxy</span> playbook</p>
+      <p>Run your Galaxy playbook</p>
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash-10" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1542,11 +1542,11 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
 
 </blockquote>
 
-<p>Currently, the job metrics plugin configuration is stored in a separate configuration file from <span class="notranslate">Galaxy</span>’s main configuration file (<code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>). By setting <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_job_metrics_plugins</code>, we instructed the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role to create this file, and update the option (<code class="language-plaintext highlighter-rouge">job_metrics_config_file</code>) in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> that sets the path to this file. You can inspect the contents of the new config file on your <span class="notranslate">Galaxy</span> server:</p>
+<p>Currently, the job metrics plugin configuration is stored in a separate configuration file from Galaxy’s main configuration file (<code class="language-plaintext highlighter-rouge">galaxy.yml</code>). By setting <code class="language-plaintext highlighter-rouge">galaxy_job_metrics_plugins</code>, we instructed the <code class="language-plaintext highlighter-rouge">galaxyproject.galaxy</code> role to create this file, and update the option (<code class="language-plaintext highlighter-rouge">job_metrics_config_file</code>) in <code class="language-plaintext highlighter-rouge">galaxy.yml</code> that sets the path to this file. You can inspect the contents of the new config file on your Galaxy server:</p>
 
 <blockquote class="code-in">
   <div class="box-title code-in-title" id="code-in-bash-11" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /srv/<span class="notranslate">galaxy</span>/config/job_metrics_conf.yml
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /srv/galaxy/config/job_metrics_conf.yml
 </code></pre></div>  </div>
 </blockquote>
 
@@ -1578,7 +1578,7 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
       <p>Run a job (any tool is fine, even upload)</p>
     </li>
     <li>
-      <p>View the information of the output dataset (<i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-info</span>)</p>
+      <p>View the information of the output dataset (<i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">galaxy-info</span>)</p>
     </li>
   </ol>
 
@@ -1600,7 +1600,7 @@ However most of the metrics exposed by this setting are quite safe (e.g. cgroups
 <h2 id="further-reading">Further Reading</h2>
 
 <ul>
-  <li><a href="https://docs.galaxyproject.org/en/latest/admin/cluster.html"><span class="notranslate">Galaxy</span>’s cluster documentation</a> describes in detail alte<span class="notranslate">rna</span>tive cluster configurations.</li>
+  <li><a href="https://docs.galaxyproject.org/en/latest/admin/cluster.html">Galaxy’s cluster documentation</a> describes in detail alternative cluster configurations.</li>
   <li><a href="https://docs.galaxyproject.org/en/latest/admin/jobs.html">The job_conf.xml documentation</a> fully describes the syntax of the job configuration file.</li>
   <li>The <a href="https://www.drmaa.org/">Distributed Resource Management Application API (DRMAA)</a> page contains the DRMAA specification as well as documentation for various implementations. It also includes a list of DRMs supporting DRMAA.</li>
   <li>The <a href="http://slurm.schedmd.com/">Slurm documentation</a> is extensive and covers all the features and myriad of ways in which you can configure slurm.</li>

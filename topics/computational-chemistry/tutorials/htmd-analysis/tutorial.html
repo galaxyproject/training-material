@@ -848,8 +848,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -967,7 +965,7 @@
 <h1 id="background">Background</h1>
 
 <h2 id="what-is-high-throughput-molecular-dynamics">What is high-throughput molecular dynamics?</h2>
-<p>Molecular dynamics (MD) is a method to simulate molecular motion by iterative application of Newton’s laws of motion. It is often applied to large biomolecules such as proteins or nucleic acids. A common application is to assess the interaction between these macromolecules and a number of small molecules (e.g. potential drug candidates). This tutorial provides a guide to setting up and running a high-throughput <span class="notranslate">workflow</span> for screening multiple small molecules, using the open-source GROMACS tools provided through the <span class="notranslate">Galaxy</span> platform. Following simulation, the trajectory data is analyzed using a range of tools to investigate structural properties and correlations over time.</p>
+<p>Molecular dynamics (MD) is a method to simulate molecular motion by iterative application of Newton’s laws of motion. It is often applied to large biomolecules such as proteins or nucleic acids. A common application is to assess the interaction between these macromolecules and a number of small molecules (e.g. potential drug candidates). This tutorial provides a guide to setting up and running a high-throughput workflow for screening multiple small molecules, using the open-source GROMACS tools provided through the Galaxy platform. Following simulation, the trajectory data is analyzed using a range of tools to investigate structural properties and correlations over time.</p>
 
 <h2 id="why-is-hsp90-interesting-to-study">Why is Hsp90 interesting to study?</h2>
 <p>The 90 kDa heat shock protein (Hsp90) is a chaperone protein responsible for catalyzing the conversion of a wide variety of proteins to a functional form; examples of the Hsp90 clientele, which totals several hundred proteins, include nuclear steroid hormone receptors and protein kinases (<span class="citation"><a href="#Pearl2006">Pearl and Prodromou 2006</a></span>). The mechanism by which Hsp90 acts varies between clients, as does the client binding site; the process is dependent on post-translational modifications of Hsp90 and the identity of co-chaperones which bind and regulate the conformational cycle (<span class="citation"><a href="#Schopf2017">Schopf <i>et al.</i> 2017</a></span>).</p>
@@ -980,20 +978,20 @@
 
 <h2 id="get-data">Get data</h2>
 
-<p>As a first step, we create a new <span class="notranslate">Galaxy</span> history and then we download a crystal structure for the Hsp90 protein from the Protein Data Bank (PDB). The structure is provided under accession code <code class="language-plaintext highlighter-rouge">6HHR</code> (<span class="citation"><a href="#Schuetz2018">Schuetz <i>et al.</i> 2018</a></span>) and shows Hsp90 in complex with a ligand belonging to the resorcinol class.</p>
+<p>As a first step, we create a new Galaxy history and then we download a crystal structure for the Hsp90 protein from the Protein Data Bank (PDB). The structure is provided under accession code <code class="language-plaintext highlighter-rouge">6HHR</code> (<span class="citation"><a href="#Schuetz2018">Schuetz <i>et al.</i> 2018</a></span>) and shows Hsp90 in complex with a ligand belonging to the resorcinol class.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
 
   <ol>
     <li>Create a new history for this tutorial</li>
-    <li>Search <span class="notranslate">Galaxy</span> for the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0"><strong>Get PDB</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0</span></span>  tool. Request the accession code <code class="language-plaintext highlighter-rouge">6hhr</code>.</li>
+    <li>Search Galaxy for the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0"><strong>Get PDB</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/get_pdb/get_pdb/0.1.0</span></span>  tool. Request the accession code <code class="language-plaintext highlighter-rouge">6hhr</code>.</li>
     <li>Rename the dataset to ‘Hsp90 structure’</li>
     <li>
       <p>Check that the datatype is correct (PDB file).</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1011,7 +1009,7 @@
 
 <h3 id="extract-protein-and-ligand-coordinates">Extract protein and ligand coordinates</h3>
 
-<p>Parameterization needs to be done separately for the ligand and protein. Therefore, the first step is to separate the PDB file into two sets of coordinates - one for the ligand and one for the protein. Here, we can make use of the simple text manipulation tools integrated into <span class="notranslate">Galaxy</span>.</p>
+<p>Parameterization needs to be done separately for the ligand and protein. Therefore, the first step is to separate the PDB file into two sets of coordinates - one for the ligand and one for the protein. Here, we can make use of the simple text manipulation tools integrated into Galaxy.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -1035,19 +1033,19 @@
   <div class="box-title hands-on-title" id="hands-on-separate-protein-and-ligand-coordinates" aria-label="hands-on box: Separate protein and ligand coordinates"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Separate protein and ligand coordinates</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1"><strong>Search in textfiles (grep)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1"><strong>Search in textfiles (grep)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1</span></span>  with the following parameters:
       <ul>
         <li><em>“Select lines from”</em>: ‘Hsp90 structure’</li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Don't Match</code></li>
-        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">HETATM</code></li>
+        <li><em>“Regular Expression”</em>: <code class="language-plaintext highlighter-rouge">HETATM</code></li>
       </ul>
     </li>
     <li>Rename output to ‘Protein (PDB)’</li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1"><strong>Search in textfiles (grep)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1"><strong>Search in textfiles (grep)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1</span></span>  with the following parameters:
       <ul>
         <li><em>“Select lines from”</em>: ‘Hsp90 structure’</li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Match</code></li>
-        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">AG5E</code></li>
+        <li><em>“Regular Expression”</em>: <code class="language-plaintext highlighter-rouge">AG5E</code></li>
       </ul>
     </li>
     <li>Rename output to ‘Ligand (PDB)’</li>
@@ -1067,7 +1065,7 @@
   <div class="box-title hands-on-title" id="hands-on-generate-protein-topology" aria-label="hands-on box: Generate protein topology"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate protein topology</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_setup/gmx_setup/2020.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_setup/gmx_setup/2020.4+galaxy0"><strong>GROMACS initial setup</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/gmx_setup/gmx_setup/2020.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_setup/gmx_setup/2020.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_setup/gmx_setup/2020.4+galaxy0"><strong>GROMACS initial setup</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/chemteam/gmx_setup/gmx_setup/2020.4+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“PDB input file”</em>: ‘Protein (PDB)’ file</li>
         <li><em>“Force field”</em>: <code class="language-plaintext highlighter-rouge">AMBER99SB</code></li>
@@ -1100,7 +1098,7 @@
   <div class="box-title hands-on-title" id="hands-on-generate-ligand-topology" aria-label="hands-on box: Generate ligand topology"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate ligand topology</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0"><strong>Compound conversion</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0"><strong>Compound conversion</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“Molecular input file”</em>: ‘Ligand (PDB)’</li>
         <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">Protein Data Bank format (pdb)</code></li>
@@ -1108,7 +1106,7 @@
       </ul>
     </li>
     <li>Rename the output file to <code class="language-plaintext highlighter-rouge">Hydrated ligand (PDB)</code>.</li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/ambertools_acpype/ambertools_acpype/21.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/ambertools_acpype/ambertools_acpype/21.3+galaxy0"><strong>Generate MD topologies for small molecules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/ambertools_acpype/ambertools_acpype/21.3+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/ambertools_acpype/ambertools_acpype/21.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/ambertools_acpype/ambertools_acpype/21.3+galaxy0"><strong>Generate MD topologies for small molecules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/chemteam/ambertools_acpype/ambertools_acpype/21.3+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“Input file”</em>: ‘Hydrated ligand (PDB)’</li>
         <li><em>“Charge of the molecule”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
@@ -1134,13 +1132,13 @@ minimization step.</p>
 
 <h2 id="combine-topology-and-gro-files">Combine topology and GRO files</h2>
 
-<p>While we have separate topology and structure files for both protein and ligand, we need to combine them into a single set of files to continue with the simulation setup. A dedicated <span class="notranslate">Galaxy</span> tool is provided for this, using the Python library ParmEd (<span class="citation"><a href="#Swails2016">Swails <i>et al.</i> 2016</a></span>).</p>
+<p>While we have separate topology and structure files for both protein and ligand, we need to combine them into a single set of files to continue with the simulation setup. A dedicated Galaxy tool is provided for this, using the Python library ParmEd (<span class="citation"><a href="#Swails2016">Swails <i>et al.</i> 2016</a></span>).</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-combine-gro-and-topology-files" aria-label="hands-on box: Combine GRO and topology files"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Combine GRO and topology files</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_merge_topology_files/gmx_merge_topology_files/3.2.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_merge_topology_files/gmx_merge_topology_files/3.2.0+galaxy0"><strong>Merge GROMACS topologies</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/gmx_merge_topology_files/gmx_merge_topology_files/3.2.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_merge_topology_files/gmx_merge_topology_files/3.2.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_merge_topology_files/gmx_merge_topology_files/3.2.0+galaxy0"><strong>Merge GROMACS topologies</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/chemteam/gmx_merge_topology_files/gmx_merge_topology_files/3.2.0+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein topology (TOP) file”</em>: <code class="language-plaintext highlighter-rouge">TOP</code> file created by the <strong>GROMACS initial setup</strong> tool</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Ligand topology (TOP or ITP file)”</em>: <code class="language-plaintext highlighter-rouge">Topology</code> created by the <strong>acpype</strong> tool</li>
@@ -1160,7 +1158,7 @@ minimization step.</p>
   <div class="box-title hands-on-title" id="hands-on-create-simulation-box" aria-label="hands-on box: Create simulation box"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Create simulation box</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2020.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2020.4+galaxy0"><strong>GROMACS structure configuration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2020.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2020.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2020.4+galaxy0"><strong>GROMACS structure configuration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2020.4+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input structure”</em>: <code class="language-plaintext highlighter-rouge">System GRO file</code> (Input dataset)</li>
         <li><em>“Configure box?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
@@ -1190,7 +1188,7 @@ minimization step.</p>
   <div class="box-title hands-on-title" id="hands-on-solvation" aria-label="hands-on box: Solvation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Solvation</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_solvate/gmx_solvate/2020.4+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_solvate/gmx_solvate/2020.4+galaxy1"><strong>GROMACS solvation and adding ions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/gmx_solvate/gmx_solvate/2020.4+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_solvate/gmx_solvate/2020.4+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_solvate/gmx_solvate/2020.4+galaxy1"><strong>GROMACS solvation and adding ions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/chemteam/gmx_solvate/gmx_solvate/2020.4+galaxy1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: output of <strong>GROMACS structure configuration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: <code class="language-plaintext highlighter-rouge">TOP</code> output of <strong>Merge GROMACS topologies</strong></li>
@@ -1231,7 +1229,7 @@ minimization step.</p>
   <div class="box-title hands-on-title" id="hands-on-energy-minimization" aria-label="hands-on box: Energy minimization"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Energy minimization</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_em/gmx_em/2020.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_em/gmx_em/2020.4+galaxy0"><strong>GROMACS energy minimization</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/gmx_em/gmx_em/2020.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_em/gmx_em/2020.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_em/gmx_em/2020.4+galaxy0"><strong>GROMACS energy minimization</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/chemteam/gmx_em/gmx_em/2020.4+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file.”</em>: GRO output of <strong>GROMACS solvation and adding ions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file.”</em>: TOP output of <strong>GROMACS solvation and adding ions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1257,11 +1255,11 @@ minimization step.</p>
   <div class="box-title hands-on-title" id="hands-on-checking-em-convergence" aria-label="hands-on box: Checking EM convergence"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Checking EM convergence</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_energy/gmx_energy/2020.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_energy/gmx_energy/2020.4+galaxy0"><strong>Extract energy components with GROMACS</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/gmx_energy/gmx_energy/2020.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_energy/gmx_energy/2020.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_energy/gmx_energy/2020.4+galaxy0"><strong>Extract energy components with GROMACS</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/chemteam/gmx_energy/gmx_energy/2020.4+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“EDR file.”</em>: EDR output of <strong>GROMACS energy minimization</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Terms to calculate”</em>: <code class="language-plaintext highlighter-rouge">Potential</code></li>
-        <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span> tabular</code></li>
+        <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">Galaxy tabular</code></li>
       </ul>
     </li>
     <li>On the output tabular file, click on the ‘Visualize this data’ icon. This provides a range of visualization options. Select ‘Line chart (jqPlot)’.</li>
@@ -1278,7 +1276,7 @@ minimization step.</p>
 
 <p>The resulting plot should resemble the figure below. The system first drops rapidly in energy, before slowly converging on the minimized state.</p>
 
-<figure id="figure-2"><img src="/training-material/topics/computational-chemistry/images/empot.png" alt="Snapshot of Energy potential during the EM simulation. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Energy potential during the EM simulation. <a href="https://usegalaxy.eu/u/sbray/v/em-pot">Click to view</a> as a <span class="notranslate">Galaxy</span> visualization</figcaption></figure>
+<figure id="figure-2"><img src="/training-material/topics/computational-chemistry/images/empot.png" alt="Snapshot of Energy potential during the EM simulation. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Energy potential during the EM simulation. <a href="https://usegalaxy.eu/u/sbray/v/em-pot">Click to view</a> as a Galaxy visualization</figcaption></figure>
 
 <h2 id="equilibration">Equilibration</h2>
 
@@ -1299,7 +1297,7 @@ minimization step.</p>
   <div class="box-title hands-on-title" id="hands-on-nvt-equilibration" aria-label="hands-on box: NVT equilibration"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: NVT equilibration</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1"><strong>GROMACS simulation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1"><strong>GROMACS simulation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: <code class="language-plaintext highlighter-rouge">Minimized GRO file</code> (from energy minimization step)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: <code class="language-plaintext highlighter-rouge">Solvated TOP</code></li>
@@ -1351,7 +1349,7 @@ NVT simulation.</p>
   <div class="box-title hands-on-title" id="hands-on-npt-equilibration" aria-label="hands-on box: NPT equilibration"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: NPT equilibration</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1"><strong>GROMACS simulation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1"><strong>GROMACS simulation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO output of <strong>GROMACS simulation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (NVT equilibration)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: <code class="language-plaintext highlighter-rouge">Solvated TOP</code></li>
@@ -1400,7 +1398,7 @@ NVT simulation.</p>
   <div class="box-title hands-on-title" id="hands-on" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1"><strong>GROMACS simulation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1"><strong>GROMACS simulation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/chemteam/gmx_sim/gmx_sim/2020.4+galaxy1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: Output of <strong>GROMACS simulation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (NPT equilibration)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: <code class="language-plaintext highlighter-rouge">Solvated TOP</code></li>
@@ -1438,7 +1436,7 @@ NVT simulation.</p>
 
 <h1 id="analysis">Analysis</h1>
 
-<p>After the completion of the simulation, the following questions arise: 1) is the simulation converged enough, and 2) what interesting molecular properties are observed. To answer these questions, an analysis of the GROMACS simulation outputs (structure and trajectory file) will be carried out using <span class="notranslate">Galaxy</span> tools developed for computational chemistry (<span class="citation"><a href="#senapathi_biomolecular_2019">Senapathi <i>et al.</i> 2019</a></span>) based on popular analysis software, such as MDAnalysis (<span class="citation"><a href="#michaudagrawal_mdanalysis_2011">Michaud‐Agrawal <i>et al.</i> 2011</a></span>), MDTraj (<span class="citation"><a href="#mcgibbon_mdtraj_2015">McGibbon <i>et al.</i> 2015</a></span>), and  Bio3D (<span class="citation"><a href="#skjaerven_integrating_2014">Skjærven <i>et al.</i> 2014</a></span>). These tools output both tabular files as well as a variety of attractive plots.</p>
+<p>After the completion of the simulation, the following questions arise: 1) is the simulation converged enough, and 2) what interesting molecular properties are observed. To answer these questions, an analysis of the GROMACS simulation outputs (structure and trajectory file) will be carried out using Galaxy tools developed for computational chemistry (<span class="citation"><a href="#senapathi_biomolecular_2019">Senapathi <i>et al.</i> 2019</a></span>) based on popular analysis software, such as MDAnalysis (<span class="citation"><a href="#michaudagrawal_mdanalysis_2011">Michaud‐Agrawal <i>et al.</i> 2011</a></span>), MDTraj (<span class="citation"><a href="#mcgibbon_mdtraj_2015">McGibbon <i>et al.</i> 2015</a></span>), and  Bio3D (<span class="citation"><a href="#skjaerven_integrating_2014">Skjærven <i>et al.</i> 2014</a></span>). These tools output both tabular files as well as a variety of attractive plots.</p>
 
 <h2 id="create-pdb-file-needed-by-most-analysis-tools">Create PDB file needed by most analysis tools</h2>
 
@@ -1448,7 +1446,7 @@ NVT simulation.</p>
   <div class="box-title hands-on-title" id="hands-on-convert-coordinate-format" aria-label="hands-on box: Convert coordinate format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Convert coordinate format</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2020.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2020.4+galaxy0"><strong>GROMACS structure configuration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2020.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2020.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2020.4+galaxy0"><strong>GROMACS structure configuration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2020.4+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">PDB file</code></li>
         <li><em>“Configure box?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1472,7 +1470,7 @@ NVT simulation.</p>
   <div class="box-title hands-on-title" id="hands-on-convert-trajectory-format" aria-label="hands-on box: Convert trajectory format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Convert trajectory format</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/md_converter/md_converter/1.9.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/md_converter/md_converter/1.9.6+galaxy0"><strong>MDTraj file converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/md_converter/md_converter/1.9.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/md_converter/md_converter/1.9.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/md_converter/md_converter/1.9.6+galaxy0"><strong>MDTraj file converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/chemteam/md_converter/md_converter/1.9.6+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">DCD file</code></li>
       </ul>
@@ -1499,7 +1497,7 @@ is a measure of how much the protein conformation has changed between different 
   <div class="box-title hands-on-title" id="hands-on-rmsd-analysis" aria-label="hands-on box: RMSD Analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: RMSD Analysis</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsd/bio3d_rmsd/2.3.4" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsd/bio3d_rmsd/2.3.4"><strong>RMSD Analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/bio3d_rmsd/bio3d_rmsd/2.3.4</span></span>  <em>“DCD trajectory input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsd/bio3d_rmsd/2.3.4" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsd/bio3d_rmsd/2.3.4"><strong>RMSD Analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsd/bio3d_rmsd/2.3.4</span></span>  <em>“DCD trajectory input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Select domains”</em>: <code class="language-plaintext highlighter-rouge">Residue ID</code>
@@ -1527,7 +1525,7 @@ is a measure of how much the protein conformation has changed between different 
   <div class="box-title hands-on-title" id="hands-on-rmsf-analysis" aria-label="hands-on box: RMSF analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: RMSF analysis</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsf/bio3d_rmsf/2.3.4" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsf/bio3d_rmsf/2.3.4"><strong>RMSF Analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/bio3d_rmsf/bio3d_rmsf/2.3.4</span></span>  <em>“DCD trajectory input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsf/bio3d_rmsf/2.3.4" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsf/bio3d_rmsf/2.3.4"><strong>RMSF Analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsf/bio3d_rmsf/2.3.4</span></span>  <em>“DCD trajectory input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Select domains”</em>: <code class="language-plaintext highlighter-rouge">C-alpha</code></li>
@@ -1555,7 +1553,7 @@ Having discovered the principal components usually these are visualized. The PCA
   <div class="box-title hands-on-title" id="hands-on-pca" aria-label="hands-on box: PCA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: PCA</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4"><strong>PCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4"><strong>PCA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“DCD trajectory input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1574,7 +1572,7 @@ Having discovered the principal components usually these are visualized. The PCA
   <div class="box-title hands-on-title" id="hands-on-pca-cosine-content-calculation" aria-label="hands-on box: PCA cosine content calculation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: PCA cosine content calculation</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_cosine_analysis/mdanalysis_cosine_analysis/1.0.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_cosine_analysis/mdanalysis_cosine_analysis/1.0.0+galaxy0"><strong>Cosine Content</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/mdanalysis_cosine_analysis/mdanalysis_cosine_analysis/1.0.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_cosine_analysis/mdanalysis_cosine_analysis/1.0.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_cosine_analysis/mdanalysis_cosine_analysis/1.0.0+galaxy0"><strong>Cosine Content</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_cosine_analysis/mdanalysis_cosine_analysis/1.0.0+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“DCD/XTC trajectory input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB/GRO input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1590,7 +1588,7 @@ Having discovered the principal components usually these are visualized. The PCA
   <div class="box-title hands-on-title" id="hands-on-pca-visualisation" aria-label="hands-on box: PCA visualisation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: PCA visualisation</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4"><strong>PCA visualization</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4"><strong>PCA visualization</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“DCD trajectory input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1605,13 +1603,13 @@ Having discovered the principal components usually these are visualized. The PCA
 
 <h2 id="hydrogen-bond-analysis">Hydrogen bond analysis</h2>
 
-<p>Hydrogen bonding interactions contribute to binding and are worth investigating, in particular persistent hydrogen bonds. All possible hydrogen bonding interactions between the two selected regions, here the protein and the ligand, are investigated over time using the VMD hydrogen bond analysis tool included in <span class="notranslate">Galaxy</span>. Hydrogen bonds are identified and in the output the total number of hydrogen bonds and  occupancy over time is returned.</p>
+<p>Hydrogen bonding interactions contribute to binding and are worth investigating, in particular persistent hydrogen bonds. All possible hydrogen bonding interactions between the two selected regions, here the protein and the ligand, are investigated over time using the VMD hydrogen bond analysis tool included in Galaxy. Hydrogen bonds are identified and in the output the total number of hydrogen bonds and  occupancy over time is returned.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-hydrogen-bond-analysis" aria-label="hands-on box: Hydrogen bond analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hydrogen bond analysis</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/vmd_hbonds/vmd_hbonds/1.9.3" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/vmd_hbonds/vmd_hbonds/1.9.3"><strong>Hydrogen Bond Analysis using VMD</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/chemteam/vmd_hbonds/vmd_hbonds/1.9.3</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/chemteam/vmd_hbonds/vmd_hbonds/1.9.3" title="Tested with toolshed.g2.bx.psu.edu/repos/chemteam/vmd_hbonds/vmd_hbonds/1.9.3"><strong>Hydrogen Bond Analysis using VMD</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/chemteam/vmd_hbonds/vmd_hbonds/1.9.3</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“DCD/XTC trajectory input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB/GRO input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1626,48 +1624,48 @@ Having discovered the principal components usually these are visualized. The PCA
 <p>The active site of this protein is quite hydrophobic, yet multiple hydrogen bonds were identified. The hydrogen bond between aspartate-93 and the ligand (as identified in the crystal structure) was found to be persistent, meeting the hydrogen bond criteria for 89.22% of the simulation. A hydrogen bond between the ligand and the carbonyl group of glycine-97 was found to have a 15.27% occupancy. Hydrogen bonding interactions with threonine-184, asparagine-51 and lysine-58 were also observed but these are not persistent and only present for a minority of the simulation. These values can be accessed from the ‘Percentage occupancy of the H-bond’ output of the hydrogen bond analysis tool.</p>
 
 <h1 id="optional-automating-high-throughput-calculations">Optional: Automating high throughput calculations</h1>
-<p>Up until this step, <span class="notranslate">Galaxy</span> tools have been applied sequentially to datasets. This is useful to gain an understanding of the steps involved, but becomes tedious if the <span class="notranslate">workflow</span> needs to be run on multiple protein-ligand systems. Fortunately, <span class="notranslate">Galaxy</span> allows entire workflows to be executed with a single mouse-click, enabling straightforward high-throughput analyses.</p>
+<p>Up until this step, Galaxy tools have been applied sequentially to datasets. This is useful to gain an understanding of the steps involved, but becomes tedious if the workflow needs to be run on multiple protein-ligand systems. Fortunately, Galaxy allows entire workflows to be executed with a single mouse-click, enabling straightforward high-throughput analyses.</p>
 
-<p>We will demonstrate the high-throughput capabilities of <span class="notranslate">Galaxy</span> by running the <span class="notranslate">workflow</span> detailed so far on a further three ligands.</p>
+<p>We will demonstrate the high-throughput capabilities of Galaxy by running the workflow detailed so far on a further three ligands.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-high-throughput-md" aria-label="hands-on box: High-throughput MD"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: High-throughput MD</div>
 
   <ol>
-    <li>Create a new history for running the high-throughput <span class="notranslate">workflow</span> and name it <code class="language-plaintext highlighter-rouge">Hsp90 HTMD simulation</code></li>
+    <li>Create a new history for running the high-throughput workflow and name it <code class="language-plaintext highlighter-rouge">Hsp90 HTMD simulation</code></li>
     <li>Upload the SD-file containing the new ligand structures from Zenodo  and rename it <code class="language-plaintext highlighter-rouge">Ligands (SDF)</code></li>
-    <li>Import the simulation <span class="notranslate">workflow</span> from the European (<span class="citation"><a href="#eu_htmd_simulation_workflow">“<b><span class="notranslate">Galaxy</span> | Europe | Accessible History | Protein-ligand HTMD simulation</b>”</a></span>) or the South African <span class="notranslate">Galaxy</span> server (<span class="citation"><a href="#za_htmd_simulation_workflow">“<b><span class="notranslate">Galaxy</span> | South Africa | Accessible History | Protein-ligand HTMD analysis</b>”</a></span>).</li>
-    <li>Run the imported <span class="notranslate">workflow</span> with the following parameters:
+    <li>Import the simulation workflow from the European (<span class="citation"><a href="#eu_htmd_simulation_workflow">“<b>Galaxy | Europe | Accessible History | Protein-ligand HTMD simulation</b>”</a></span>) or the South African Galaxy server (<span class="citation"><a href="#za_htmd_simulation_workflow">“<b>Galaxy | South Africa | Accessible History | Protein-ligand HTMD analysis</b>”</a></span>).</li>
+    <li>Run the imported workflow with the following parameters:
       <ul>
         <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“History name results to a new history”</em>: <code class="language-plaintext highlighter-rouge">Hsp90 HTMD analysis</code></li>
-        <li><em>“GRO input”</em>: ‘Collection of GRO files produced by simulation <span class="notranslate">workflow</span>’</li>
-        <li><em>“XTC input”</em>: ‘Collection of XTC files produced by simulation <span class="notranslate">workflow</span>’</li>
+        <li><em>“GRO input”</em>: ‘Collection of GRO files produced by simulation workflow’</li>
+        <li><em>“XTC input”</em>: ‘Collection of XTC files produced by simulation workflow’</li>
       </ul>
     </li>
   </ol>
 
 </blockquote>
 
-<p>This process runs the entire simulation and analysis procedure described so far on the new set of ligands. It uses <span class="notranslate">Galaxy</span>’s <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">collection feature</a> to organize the data; each item in the history is a collection (essentially a directory containing multiple individual datasets) containing one file corresponding to each of the input ligands.</p>
+<p>This process runs the entire simulation and analysis procedure described so far on the new set of ligands. It uses Galaxy’s <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">collection feature</a> to organize the data; each item in the history is a collection (essentially a directory containing multiple individual datasets) containing one file corresponding to each of the input ligands.</p>
 
-<p>Note that the SD-file needs to contain ligands with the correct 3D coordinates for MD simulation. The easiest way to obtain these is using a molecular docking tool such as Autodock Vina (<span class="citation"><a href="#Trott2009">Trott and Olson 2009</a></span>) or rDock (<span class="citation"><a href="#Ruiz2014">Ruiz-Carmona <i>et al.</i> 2014</a></span>); tutorials and workflows are available for both of these from the <span class="notranslate">Galaxy</span> Training Network. As an example, the history in which the SD-file used in the HTMD <span class="notranslate">workflow</span> is generated (using AutoDock Vina) is provided (<span class="citation"><a href="#eu_6hhr">“<b><span class="notranslate">Galaxy</span> | Europe | Accessible History | Protein-ligand docking (6hhr)</b>”</a></span>).</p>
+<p>Note that the SD-file needs to contain ligands with the correct 3D coordinates for MD simulation. The easiest way to obtain these is using a molecular docking tool such as Autodock Vina (<span class="citation"><a href="#Trott2009">Trott and Olson 2009</a></span>) or rDock (<span class="citation"><a href="#Ruiz2014">Ruiz-Carmona <i>et al.</i> 2014</a></span>); tutorials and workflows are available for both of these from the Galaxy Training Network. As an example, the history in which the SD-file used in the HTMD workflow is generated (using AutoDock Vina) is provided (<span class="citation"><a href="#eu_6hhr">“<b>Galaxy | Europe | Accessible History | Protein-ligand docking (6hhr)</b>”</a></span>).</p>
 
-<p>Apart from manual setups or collections, there are several other alte<span class="notranslate">rna</span>tives which are helpful in scaling up workflows. <span class="notranslate">Galaxy</span> supports and provides training material for converting <a href="/training-material/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html">histories to workflows</a>, using <a href="/training-material/topics/galaxy-interface/tutorials/history/tutorial.html">multiple histories</a>, and the <a href="/training-material/topics/dev/tutorials/bioblend-api/slides.html"><span class="notranslate">Galaxy</span> Application Programming Interface (API)</a>. For beginners and users who prefer a visual interface, automation can be done using multiple histories and collections with the standard <span class="notranslate">Galaxy</span> user interface.</p>
+<p>Apart from manual setups or collections, there are several other alternatives which are helpful in scaling up workflows. Galaxy supports and provides training material for converting <a href="/training-material/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html">histories to workflows</a>, using <a href="/training-material/topics/galaxy-interface/tutorials/history/tutorial.html">multiple histories</a>, and the <a href="/training-material/topics/dev/tutorials/bioblend-api/slides.html">Galaxy Application Programming Interface (API)</a>. For beginners and users who prefer a visual interface, automation can be done using multiple histories and collections with the standard Galaxy user interface.</p>
 
-<p>If you are able to write small scripts, you can automate everything you have learned here with the <span class="notranslate">Galaxy</span> API. This allows you to interact with the server to automate repetitive tasks and create more complex workflows (which may have repetition or branching). The simplest way to access the API is through the Python library BioBlend (<span class="citation"><a href="#sloggett_bioblend">Sloggett <i>et al.</i> 2013</a></span>). An example Python script, which uses BioBlend to run the GROMACS simulation <span class="notranslate">workflow</span> for each of a list of ligands, is given in the hands-on box below.</p>
+<p>If you are able to write small scripts, you can automate everything you have learned here with the Galaxy API. This allows you to interact with the server to automate repetitive tasks and create more complex workflows (which may have repetition or branching). The simplest way to access the API is through the Python library BioBlend (<span class="citation"><a href="#sloggett_bioblend">Sloggett <i>et al.</i> 2013</a></span>). An example Python script, which uses BioBlend to run the GROMACS simulation workflow for each of a list of ligands, is given in the hands-on box below.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-bioblend-script" aria-label="hands-on box: Bioblend script"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Bioblend script</div>
 
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from bioblend import <span class="notranslate">galaxy</span>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from bioblend import galaxy
 
 # Server and account details
-API_KEY = 'YOUR USE<span class="notranslate">GALAXY</span>.EU API KEY'
-gi = <span class="notranslate">galaxy</span>.<span class="notranslate">Galaxy</span>Instance(key=API_KEY,
-   url='https://use<span class="notranslate">galaxy</span>.eu/')
+API_KEY = 'YOUR USEGALAXY.EU API KEY'
+gi = galaxy.GalaxyInstance(key=API_KEY,
+   url='https://usegalaxy.eu/')
 
-# ID for GROMACS <span class="notranslate">workflow</span>
+# ID for GROMACS workflow
 workflow_id = 'adc6d049e9283789'
 
 # Dataset IDs for ligands to dock
@@ -1677,9 +1675,9 @@ ligands = {
 # ...
 }
 
-# Loop over ligands, invoking <span class="notranslate">workflow</span>
+# Loop over ligands, invoking workflow
 for name, _id in ligands.items():
-   inv = gi.workflows.invoke_<span class="notranslate">workflow</span>(
+   inv = gi.workflows.invoke_workflow(
        workflow_id,
        inputs={
            '1': {'src': 'hda', 'id': _id}
@@ -1690,31 +1688,31 @@ for name, _id in ligands.items():
 
 </blockquote>
 
-<p>Another option is to use the Planemo command-line tool. Planemo has a very wide range of functions, including the ability to run <span class="notranslate">Galaxy</span> workflows from the command line. For a full overview, see the <a href="https://planemo.readthedocs.io/en/latest/running.html">tutorial</a>.</p>
+<p>Another option is to use the Planemo command-line tool. Planemo has a very wide range of functions, including the ability to run Galaxy workflows from the command line. For a full overview, see the <a href="https://planemo.readthedocs.io/en/latest/running.html">tutorial</a>.</p>
 
 <p>Assuming you have Planemo installed, you can create a file with the name <code class="language-plaintext highlighter-rouge">htmd-job.yml</code> with the following contents:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SDF file with (docked) ligands:
   class: File
-  <span class="notranslate">galaxy</span>_id: '11ac94870d0bb33a79c5fa18b0fd3b4c'
+  galaxy_id: '11ac94870d0bb33a79c5fa18b0fd3b4c'
   # path: ligands.sdf
 
 </code></pre></div></div>
 
-<p>You can specify the dataset either using its <span class="notranslate">Galaxy</span> ID, or with the path of a local file. The <span class="notranslate">Galaxy</span> ID is associated with the specific server you are using - in
-this case <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>.eu</code>. You can get this ID by clicking on the <code class="language-plaintext highlighter-rouge">View details</code> icon of a dataset in your <span class="notranslate">Galaxy</span> history - it is provided in the <code class="language-plaintext highlighter-rouge">Dataset Information</code>
+<p>You can specify the dataset either using its Galaxy ID, or with the path of a local file. The Galaxy ID is associated with the specific server you are using - in
+this case <code class="language-plaintext highlighter-rouge">usegalaxy.eu</code>. You can get this ID by clicking on the <code class="language-plaintext highlighter-rouge">View details</code> icon of a dataset in your Galaxy history - it is provided in the <code class="language-plaintext highlighter-rouge">Dataset Information</code>
 table as <code class="language-plaintext highlighter-rouge">History Content API ID</code>. Then run:</p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo run adc6d049e9283789 htmd-job.yml --<span class="notranslate">galaxy</span>_url https://use<span class="notranslate">galaxy</span>.eu --<span class="notranslate">galaxy</span>_user_key YOUR_USE<span class="notranslate">GALAXY</span>_EU_API_KEY --history_name "HTMD with planemo"
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>planemo run adc6d049e9283789 htmd-job.yml --galaxy_url https://usegalaxy.eu --galaxy_user_key YOUR_USEGALAXY_EU_API_KEY --history_name "HTMD with planemo"
 </code></pre></div></div>
 
-<p>Here <code class="language-plaintext highlighter-rouge">adc6d049e9283789</code> is the <span class="notranslate">Galaxy</span> ID associated with the <span class="notranslate">workflow</span> on <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>.eu</code>, but the <code class="language-plaintext highlighter-rouge">planemo run</code> command can also use a local <span class="notranslate">workflow</span> file.</p>
+<p>Here <code class="language-plaintext highlighter-rouge">adc6d049e9283789</code> is the Galaxy ID associated with the workflow on <code class="language-plaintext highlighter-rouge">usegalaxy.eu</code>, but the <code class="language-plaintext highlighter-rouge">planemo run</code> command can also use a local workflow file.</p>
 
 <p>If you now return to the web-browser, you should see a new history should have been created named <code class="language-plaintext highlighter-rouge">HTMD with planemo</code> and it should begin to fill with datasets.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>This tutorial provides a guide on how to study protein-ligand interaction using molecular dynamics in <span class="notranslate">Galaxy</span>. Performing such analyses in <span class="notranslate">Galaxy</span> makes it straightforward to set up, schedule and run workflows, removing much of the difficulty from MD simulation. Thus, the technical barrier to performing high-throughput studies is greatly reduced. Results are structured in the form of <span class="notranslate">Galaxy</span> histories or collections, and include ready-plotted diagrams, which ensure data can be easily understood and reproduced if necessary. Apart from streamlining the process for existing MD users, this tutorial should also prove useful as a pedagogical guide for educating students or newcomers to the field.</p>
+<p>This tutorial provides a guide on how to study protein-ligand interaction using molecular dynamics in Galaxy. Performing such analyses in Galaxy makes it straightforward to set up, schedule and run workflows, removing much of the difficulty from MD simulation. Thus, the technical barrier to performing high-throughput studies is greatly reduced. Results are structured in the form of Galaxy histories or collections, and include ready-plotted diagrams, which ensure data can be easily understood and reproduced if necessary. Apart from streamlining the process for existing MD users, this tutorial should also prove useful as a pedagogical guide for educating students or newcomers to the field.</p>
 
 <p>After completing the tutorial, the user will be familiar at a basic level with a range of MD analysis techniques, and understand the steps required for a typical MD simulation. Thus, they will be equipped to apply these tools to their own problems.</p>
 

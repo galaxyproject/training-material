@@ -526,7 +526,7 @@
 │   │   ├── data-library.yaml
 │   │   ├── workflows
 │   │   │   ├── index.md
-│   │   │   ├── <span class="notranslate">workflow</span>.ga
+│   │   │   ├── workflow.ga
 │   │   ├── tours
 │   │   │   ├── tour.yaml
 </code></pre></div></div>
@@ -543,7 +543,7 @@
 
 <p>This directory collects the materials related to the topic, one material per subdirectory, though it may consist of slides, tutorials, or both.</p>
 
-<p>The tutorials are hands-on built for workshop and self-training, with description of the whole infrastructure needed to run the tutorial on any <span class="notranslate">Galaxy</span> instance (tools, data library, etc).</p>
+<p>The tutorials are hands-on built for workshop and self-training, with description of the whole infrastructure needed to run the tutorial on any Galaxy instance (tools, data library, etc).</p>
 
 <p>The templates for the tutorials are different from the other pages to help users to focus on the content of the tutorial. To improve the output of the tutorial, several metadata are mandatory for every tutorials, such as the requirements or the objectives of the tutorials. Boxes are also used to highlight some key points as the hands-on or the tips.</p>
 
@@ -559,10 +559,10 @@
 <h3 id="docker-directory"><code class="language-plaintext highlighter-rouge">docker</code> directory</h3>
 
 <p>For each topic, a flavored Docker image must integrate the tools needed for
-the tutorials. The corresponding image must be based on official <span class="notranslate">Galaxy</span> Docker
+the tutorials. The corresponding image must be based on official Galaxy Docker
 images.</p>
 
-<p>The <code class="language-plaintext highlighter-rouge">docker</code> image will also integrate the <span class="notranslate">Galaxy</span> tours available for each topics and the workflows.</p>
+<p>The <code class="language-plaintext highlighter-rouge">docker</code> image will also integrate the Galaxy tours available for each topics and the workflows.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -595,13 +595,13 @@ images.</p>
 
 <h2 id="defining-the-topic">Defining the topic</h2>
 
-<p>When we structured the repository, we decided to use as topics the categories that are used in the <a href="https://toolshed.g2.bx.psu.edu/"><span class="notranslate">ToolShed</span></a>. The <span class="notranslate">ToolShed</span> assigns a category to each tool. Therefore, to decide where to put your tutorial, have a look at which <span class="notranslate">ToolShed</span>’s category the main tools in your tutorial belong. For example, this tutorial will rely on the NCBI Blast+ tool.</p>
+<p>When we structured the repository, we decided to use as topics the categories that are used in the <a href="https://toolshed.g2.bx.psu.edu/">ToolShed</a>. The ToolShed assigns a category to each tool. Therefore, to decide where to put your tutorial, have a look at which ToolShed’s category the main tools in your tutorial belong. For example, this tutorial will rely on the NCBI Blast+ tool.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-defining-the-topic-for-the-tutorial" aria-label="hands-on box: Defining the topic for the tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Defining the topic for the tutorial</div>
 
   <ol>
-    <li>Search for NCBI Blast+ on the <a href="https://toolshed.g2.bx.psu.edu/"><span class="notranslate">ToolShed</span></a></li>
+    <li>Search for NCBI Blast+ on the <a href="https://toolshed.g2.bx.psu.edu/">ToolShed</a></li>
     <li>
       <p>Check in which category it has been placed</p>
 
@@ -613,7 +613,7 @@ images.</p>
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-          <p>If we search for <a href="https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41">NCBI Blast+ in the <span class="notranslate">ToolShed</span></a>, it is placed in 2 categories (bottom): “Next Gen Mappers”, and “Sequence Analysis”.
+          <p>If we search for <a href="https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41">NCBI Blast+ in the ToolShed</a>, it is placed in 2 categories (bottom): “Next Gen Mappers”, and “Sequence Analysis”.
 We decided to put it in “Sequence analysis” because this is the most general one for this tutorial.</p>
         </blockquote>
       </blockquote>
@@ -717,7 +717,7 @@ We decided to put it in “Sequence analysis” because this is the most general
 <b>Free Text</b>
 
 <p>
-<p>The inte<span class="notranslate">rna</span>l identifier for a topic, it should be the same as the folder name.</p>
+<p>The internal identifier for a topic, it should be the same as the folder name.</p>
 
 </p>
 
@@ -752,7 +752,7 @@ We decided to put it in “Sequence analysis” because this is the most general
 
 
 <p>
-<b>Required Pattern:</b> Must match the following regular <span class="notranslate">expression</span>
+<b>Required Pattern:</b> Must match the following regular expression
 
 <div>
         <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">/^[a-z0-9_-]+$/</span>
@@ -793,13 +793,13 @@ We decided to put it in “Sequence analysis” because this is the most general
   <dt><code class="language-plaintext highlighter-rouge">admin-dev</code></dt>
   <dd>should be used for admin and developer topics that are not scientifically focused.</dd>
   <dt><code class="language-plaintext highlighter-rouge">basics</code></dt>
-  <dd>Only used for <span class="notranslate">galaxy</span>-interface type topics</dd>
+  <dd>Only used for galaxy-interface type topics</dd>
   <dt><code class="language-plaintext highlighter-rouge">data-science</code></dt>
-  <dd>Topics which are not necessarily <span class="notranslate">Galaxy</span> focused but expand into broader communities</dd>
+  <dd>Topics which are not necessarily Galaxy focused but expand into broader communities</dd>
   <dt><code class="language-plaintext highlighter-rouge">use</code></dt>
-  <dd>These topics use <span class="notranslate">galaxy</span> for some analysis</dd>
+  <dd>These topics use galaxy for some analysis</dd>
   <dt><code class="language-plaintext highlighter-rouge">instructors</code></dt>
-  <dd>Specific to topics related to instruction of <span class="notranslate">Galaxy</span></dd>
+  <dd>Specific to topics related to instruction of Galaxy</dd>
 </dl>
 
 </p>
@@ -956,7 +956,7 @@ We decided to put it in “Sequence analysis” because this is the most general
 <p>
 	<b>Example(s)</b>
 <div>
-        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">summary</span><span class="pi">:</span> <span class="s">Statistical Analyses for omics data and machine learning using <span class="notranslate">Galaxy</span> tools</span>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">summary</span><span class="pi">:</span> <span class="s">Statistical Analyses for omics data and machine learning using Galaxy tools</span>
 </code></pre></div>        </div>
       </div>
 	
@@ -1076,7 +1076,7 @@ We decided to put it in “Sequence analysis” because this is the most general
 <p>
 	<b>Example(s)</b>
 <div>
-        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">docker_image</span><span class="pi">:</span> <span class="s">quay.io/<span class="notranslate">galaxy</span>/sequence-analysis-training</span>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">docker_image</span><span class="pi">:</span> <span class="s">quay.io/galaxy/sequence-analysis-training</span>
 </code></pre></div>        </div>
       </div>
 	
@@ -1186,7 +1186,7 @@ We decided to put it in “Sequence analysis” because this is the most general
 
 
 <p>
-<b>Required Pattern:</b> Must match the following regular <span class="notranslate">expression</span>
+<b>Required Pattern:</b> Must match the following regular expression
 
 <div>
         <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">/^topic_[0-9]+$/</span>
@@ -1225,7 +1225,7 @@ We decided to put it in “Sequence analysis” because this is the most general
 <b>Free Text</b>
 
 <p>
-<p>Link to a gitter channel that is more relevant for this topic than the default. E.g. a <span class="notranslate">single cell</span> topic, you could use <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span>-Training-Network/<span class="notranslate">galaxy</span>-<span class="notranslate">single-cell</span></code> to link to their specific chat room in all of the child tutorials by default.</p>
+<p>Link to a gitter channel that is more relevant for this topic than the default. E.g. a single cell topic, you could use <code class="language-plaintext highlighter-rouge">Galaxy-Training-Network/galaxy-single-cell</code> to link to their specific chat room in all of the child tutorials by default.</p>
 
 </p>
 
@@ -1239,12 +1239,12 @@ We decided to put it in “Sequence analysis” because this is the most general
 <p>
 	<b>Example(s)</b>
 <div>
-        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">gitter</span><span class="pi">:</span> <span class="s"><span class="notranslate">Galaxy</span>-Training-Network/<span class="notranslate">galaxy</span>-<span class="notranslate">single-cell</span></span>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">gitter</span><span class="pi">:</span> <span class="s">Galaxy-Training-Network/galaxy-single-cell</span>
 </code></pre></div>        </div>
       </div>
 	
 <div>
-        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">gitter</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>-genome-annotation/Lobby</span>
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">gitter</span><span class="pi">:</span> <span class="s">galaxy-genome-annotation/Lobby</span>
 </code></pre></div>        </div>
       </div>
 	
@@ -1288,7 +1288,7 @@ We decided to put it in “Sequence analysis” because this is the most general
 <b>Free Text</b>
 
 <p>
-<p>A custom image to show on the link preview in exte<span class="notranslate">rna</span>l applications (e.g. when the URL is pasted into Twitter)</p>
+<p>A custom image to show on the link preview in external applications (e.g. when the URL is pasted into Twitter)</p>
 
 </p>
 
@@ -1313,7 +1313,7 @@ We decided to put it in “Sequence analysis” because this is the most general
 
 
 <p>
-<b>Required Pattern:</b> Must match the following regular <span class="notranslate">expression</span>
+<b>Required Pattern:</b> Must match the following regular expression
 
 <div>
         <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">/^\/.*/</span>
@@ -1645,7 +1645,7 @@ We decided to put it in “Sequence analysis” because this is the most general
 <p>
 	<b>Example(s)</b><div>
         <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">requirements</span><span class="pi">:</span>
-<span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">inte<span class="notranslate">rna</span>l</span>
+<span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">internal</span>
   <span class="na">topic_name</span><span class="pi">:</span> <span class="s">statistics</span>
   <span class="na">tutorials</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="s">age-prediction-with-ml</span>
@@ -1728,7 +1728,7 @@ We decided to put it in “Sequence analysis” because this is the most general
 <b>Possible Values:</b>
 <ul>
 
-	<li><code>inte<span class="notranslate">rna</span>l</code></li>
+	<li><code>internal</code></li>
 
 </ul>
 </p>
@@ -1741,7 +1741,7 @@ We decided to put it in “Sequence analysis” because this is the most general
 	<b>Example(s)</b>
 	
 <div>
-            <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">inte<span class="notranslate">rna</span>l"</span>
+            <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">type</span><span class="pi">:</span> <span class="s2">"</span><span class="s">internal"</span>
 </code></pre></div>            </div>
           </div>
 	</p>
@@ -1985,7 +1985,7 @@ We decided to put it in “Sequence analysis” because this is the most general
 <p>
 	<b>Example(s)</b>
 <div>
-            <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">id</span><span class="pi">:</span> <span class="s"><span class="notranslate">single-cell</span></span>
+            <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">id</span><span class="pi">:</span> <span class="s">single-cell</span>
 </code></pre></div>            </div>
           </div>
 	
@@ -1996,7 +1996,7 @@ We decided to put it in “Sequence analysis” because this is the most general
 
 
 <p>
-<b>Required Pattern:</b> Must match the following regular <span class="notranslate">expression</span>
+<b>Required Pattern:</b> Must match the following regular expression
 
 <div>
             <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">/^[A-Za-z0-9_-]+$/</span>
@@ -2045,12 +2045,12 @@ We decided to put it in “Sequence analysis” because this is the most general
 <p>
 	<b>Example(s)</b>
 <div>
-            <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">title</span><span class="pi">:</span> <span class="s">Maintaining a Production <span class="notranslate">Galaxy</span></span>
+            <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">title</span><span class="pi">:</span> <span class="s">Maintaining a Production Galaxy</span>
 </code></pre></div>            </div>
           </div>
 	
 <div>
-            <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">title</span><span class="pi">:</span> <span class="s"><span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span>-seq</span>
+            <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">title</span><span class="pi">:</span> <span class="s">Single-cell RNA-seq</span>
 </code></pre></div>            </div>
           </div>
 	
@@ -2100,10 +2100,10 @@ We decided to put it in “Sequence analysis” because this is the most general
 <p>
 	<b>Example(s)</b>
 <div>
-            <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">description</span><span class="pi">:</span> <span class="s">- "Start here if you are new to <span class="notranslate">RNA</span>-Seq analysis in <span class="notranslate">Galaxy</span>"</span>
-<span class="pi">-</span> <span class="s2">"</span><span class="s">These</span><span class="nv"> </span><span class="s">tutorials</span><span class="nv"> </span><span class="s">take</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">raw</span><span class="nv"> </span><span class="s">sequencing</span><span class="nv"> </span><span class="s"><span class="notranslate">reads</span></span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">pathway</span><span class="nv"> </span><span class="s">analysis"</span>
-<span class="pi">-</span> <span class="s2">"</span><span class="s">Tutorials</span><span class="nv"> </span><span class="s">about</span><span class="nv"> </span><span class="s">analysis</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s"><span class="notranslate">single-cell</span></span><span class="nv"> </span><span class="s"><span class="notranslate">RNA</span>-seq</span><span class="nv"> </span><span class="s">data"</span>
-<span class="pi">-</span> <span class="s2">"</span><span class="s">Tutorials</span><span class="nv"> </span><span class="s">using</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">published</span><span class="nv"> </span><span class="s"><span class="notranslate">single-cell</span></span><span class="nv"> </span><span class="s"><span class="notranslate">RNA</span>-seq</span><span class="nv"> </span><span class="s">dataset</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">variety</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">analyses"</span>
+            <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">description</span><span class="pi">:</span> <span class="s">- "Start here if you are new to RNA-Seq analysis in Galaxy"</span>
+<span class="pi">-</span> <span class="s2">"</span><span class="s">These</span><span class="nv"> </span><span class="s">tutorials</span><span class="nv"> </span><span class="s">take</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">raw</span><span class="nv"> </span><span class="s">sequencing</span><span class="nv"> </span><span class="s">reads</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">pathway</span><span class="nv"> </span><span class="s">analysis"</span>
+<span class="pi">-</span> <span class="s2">"</span><span class="s">Tutorials</span><span class="nv"> </span><span class="s">about</span><span class="nv"> </span><span class="s">analysis</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">single-cell</span><span class="nv"> </span><span class="s">RNA-seq</span><span class="nv"> </span><span class="s">data"</span>
+<span class="pi">-</span> <span class="s2">"</span><span class="s">Tutorials</span><span class="nv"> </span><span class="s">using</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">single</span><span class="nv"> </span><span class="s">published</span><span class="nv"> </span><span class="s">single-cell</span><span class="nv"> </span><span class="s">RNA-seq</span><span class="nv"> </span><span class="s">dataset</span><span class="nv"> </span><span class="s">for</span><span class="nv"> </span><span class="s">a</span><span class="nv"> </span><span class="s">variety</span><span class="nv"> </span><span class="s">of</span><span class="nv"> </span><span class="s">analyses"</span>
 
 </code></pre></div>            </div>
           </div>
@@ -2270,17 +2270,17 @@ will find yourself with an empty topic page.</p>
 <span class="na">type</span><span class="pi">:</span> <span class="s">use</span>
 <span class="na">title</span><span class="pi">:</span> <span class="s">Transcriptomics</span>
 <span class="na">summary</span><span class="pi">:</span> <span class="s">Training material for all kinds of transcriptomics analysis.</span>
-<span class="na">docker_image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">quay.io/<span class="notranslate">galaxy</span>/transcriptomics-training"</span>
+<span class="na">docker_image</span><span class="pi">:</span> <span class="s2">"</span><span class="s">quay.io/galaxy/transcriptomics-training"</span>
 
 <span class="pi">[</span><span class="nv">...</span><span class="pi">]</span>
 
 <span class="na">subtopics</span><span class="pi">:</span>
 <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">introduction</span>
   <span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Introduction"</span>
-  <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Start</span><span class="nv"> </span><span class="s">here</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">new</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s"><span class="notranslate">RNA</span>-Seq</span><span class="nv"> </span><span class="s">analysis</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s"><span class="notranslate">Galaxy</span>"</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Start</span><span class="nv"> </span><span class="s">here</span><span class="nv"> </span><span class="s">if</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">are</span><span class="nv"> </span><span class="s">new</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">RNA-Seq</span><span class="nv"> </span><span class="s">analysis</span><span class="nv"> </span><span class="s">in</span><span class="nv"> </span><span class="s">Galaxy"</span>
 <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">end-to-end</span>
   <span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">End-to-End</span><span class="nv"> </span><span class="s">Analysis"</span>
-  <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">These</span><span class="nv"> </span><span class="s">tutorials</span><span class="nv"> </span><span class="s">take</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">raw</span><span class="nv"> </span><span class="s">sequencing</span><span class="nv"> </span><span class="s"><span class="notranslate">reads</span></span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">pathway</span><span class="nv"> </span><span class="s">analysis"</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">These</span><span class="nv"> </span><span class="s">tutorials</span><span class="nv"> </span><span class="s">take</span><span class="nv"> </span><span class="s">you</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">raw</span><span class="nv"> </span><span class="s">sequencing</span><span class="nv"> </span><span class="s">reads</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">pathway</span><span class="nv"> </span><span class="s">analysis"</span>
 <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">visualisation</span>
   <span class="na">title</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Visualisation"</span>
   <span class="na">description</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Tutorials</span><span class="nv"> </span><span class="s">covering</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">visualisation"</span>
@@ -2313,7 +2313,7 @@ tag_based: true
 maintainers:
   - wm75
 
-gitter: <span class="notranslate">galaxy</span>project/sars-cov-2
+gitter: galaxyproject/sars-cov-2
 </code></pre></div></div>
 
 <p>As you can see it is very short, and there are only a handful of important points:</p>

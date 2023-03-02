@@ -601,7 +601,7 @@
 
                 <h1 id="overview">Overview</h1>
 
-<p>In this tutorial we will briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Or maybe to contribute to the <a href="https://github.com/galaxyproject?q=ansible"><span class="notranslate">Galaxy</span>project Ansible roles</a>.</p>
+<p>In this tutorial we will briefly cover what Ansible is and how to understand what it does. This guide is not meant to make you an expert on Ansible, but perhaps give you enough that you can debug broken roles and modify them to suit your needs. Or maybe to contribute to the <a href="https://github.com/galaxyproject?q=ansible">Galaxyproject Ansible roles</a>.</p>
 
 <p>This will be a very practical training with emphasis on looking at examples from modules and becoming self sufficient.</p>
 
@@ -625,7 +625,7 @@
       <li><a href="#templates" id="markdown-toc-templates">Templates</a></li>
     </ol>
   </li>
-  <li><a href="#ansible-galaxy" id="markdown-toc-ansible-galaxy">Ansible <span class="notranslate">Galaxy</span></a>    <ol>
+  <li><a href="#ansible-galaxy" id="markdown-toc-ansible-galaxy">Ansible Galaxy</a>    <ol>
       <li><a href="#choosing-a-role" id="markdown-toc-choosing-a-role">Choosing a Role</a></li>
     </ol>
   </li>
@@ -641,7 +641,7 @@
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-operating-system-compatibility"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-operating-system-compatibility-contents" aria-expanded="true" aria-label="Toggle tip box: Operating system compatibility"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Operating system compatibility<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>These Ansible roles and training materials were last tested on Centos 7 and Ubuntu 18.04, but will probably work on other RHEL and Debian variants.</p>   <p>The roles that are used in these training are currently used by <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>.*</code>, and other, servers in maintaining their infrastructure. (<a href="https://github.com/galaxyproject/infrastructure-playbook/">US</a>, <a href="https://github.com/usegalaxy-eu/infrastructure-playbook">EU</a>, both are running CentOS 7)</p>   <p>If you have an issue running these trainings on your OS flavour, please report <a href="https://github.com/galaxyproject/training-material/issues/new">the issue</a> in the training material and we can see if it is possible to solve.</p> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-operating-system-compatibility"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-operating-system-compatibility-contents" aria-expanded="true" aria-label="Toggle tip box: Operating system compatibility"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Operating system compatibility<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>These Ansible roles and training materials were last tested on Centos 7 and Ubuntu 18.04, but will probably work on other RHEL and Debian variants.</p>   <p>The roles that are used in these training are currently used by <code class="language-plaintext highlighter-rouge">usegalaxy.*</code>, and other, servers in maintaining their infrastructure. (<a href="https://github.com/galaxyproject/infrastructure-playbook/">US</a>, <a href="https://github.com/usegalaxy-eu/infrastructure-playbook">EU</a>, both are running CentOS 7)</p>   <p>If you have an issue running these trainings on your OS flavour, please report <a href="https://github.com/galaxyproject/training-material/issues/new">the issue</a> in the training material and we can see if it is possible to solve.</p> </blockquote>
 
 <h1 id="what-is-ansible">What is Ansible?</h1>
 
@@ -657,7 +657,7 @@
   <dt>Task</dt>
   <dd>A call to an Ansible module that should be executed and the configuration for this module.</dd>
   <dt>Role</dt>
-  <dd>A folder containing some tasks, templates, files, and default values for variables, with a predefined directory structure. People share roles on <a href="https://galaxy.ansible.com/">“Ansible <span class="notranslate">Galaxy</span>”</a>.</dd>
+  <dd>A folder containing some tasks, templates, files, and default values for variables, with a predefined directory structure. People share roles on <a href="https://galaxy.ansible.com/">“Ansible Galaxy”</a>.</dd>
   <dt>Playbook</dt>
   <dd>A YAML file listing a set of tasks and/or roles that should be applied to a group of hosts.</dd>
   <dt>Vault</dt>
@@ -677,7 +677,7 @@
 </code></pre></div></div>
 
 <p>Here we’ve defined two groups of computers, <code class="language-plaintext highlighter-rouge">webservers</code> and <code class="language-plaintext highlighter-rouge">databases</code>. <code class="language-plaintext highlighter-rouge">ansible_user</code> is used to
-specify which user to connect with (you need to specify that if you SSH in with a use<span class="notranslate">rna</span>me different
+specify which user to connect with (you need to specify that if you SSH in with a username different
 than your current local user account’s name).</p>
 
 <p>As you can see, in this inventory we connect to multiple remote machines. This is common practice;
@@ -748,7 +748,7 @@ required to rebuild everything with Ansible.</p>
     </tr>
     <tr>
       <td>meta</td>
-      <td>Only needed to publish your role to Ansible <span class="notranslate">Galaxy</span>.</td>
+      <td>Only needed to publish your role to Ansible Galaxy.</td>
     </tr>
     <tr>
       <td>tasks</td>
@@ -825,7 +825,7 @@ required to rebuild everything with Ansible.</p>
   <span class="na">vars</span><span class="pi">:</span>
     <span class="na">cvmfs_numfiles</span><span class="pi">:</span> <span class="m">4096</span>
   <span class="na">roles</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.cvmfs</span>
+    <span class="pi">-</span> <span class="s">galaxyproject.cvmfs</span>
 </code></pre></div></div>
 
 <p>This is a quite minimal playbook. It selects a <code class="language-plaintext highlighter-rouge">hosts</code> group named <code class="language-plaintext highlighter-rouge">webservers</code>, overrides the variable <code class="language-plaintext highlighter-rouge">cvmfs_numfiles</code>, and then says the following set of roles will be executed for this group of hosts. Ansible makes it easy to collect tasks that should apply to a group of hosts and run a playbook for all of those hosts. Some good uses of this are things like ensuring a certain set of users are installed on all of your managed machines, or using one of the package autoupdating roles to make sure your machines are up-to-date.</p>
@@ -870,11 +870,11 @@ required to rebuild everything with Ansible.</p>
   <li><code class="language-plaintext highlighter-rouge">host_vars/&lt;host_name&gt;.yml</code>: if you run a playbook and it affects host (e.g.) <code class="language-plaintext highlighter-rouge">api01</code>, and <code class="language-plaintext highlighter-rouge">host_vars/api01.yml</code> exists, it will be loaded automatically.</li>
 </ul>
 
-<p>For a real-life example, Use<span class="notranslate">Galaxy</span>.eu <a href="https://github.com/usegalaxy-eu/infrastructure-playbook">generally attempts</a> to put variables in an appropriately named <code class="language-plaintext highlighter-rouge">group_vars/</code> file.</p>
+<p>For a real-life example, UseGalaxy.eu <a href="https://github.com/usegalaxy-eu/infrastructure-playbook">generally attempts</a> to put variables in an appropriately named <code class="language-plaintext highlighter-rouge">group_vars/</code> file.</p>
 
 <h2 id="vaults">Vaults</h2>
 
-<p><a href="https://docs.ansible.com/ansible/2.9/user_guide/vault.html"><code class="language-plaintext highlighter-rouge">ansible-vault</code></a> is a super useful tool that lets you encrypt secrets for your group using a pre-shared key. This allows you to commit ALL of your Ansible playbooks and variables to source control, without the concern of leaking secrets. E.g. <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/secret_group_vars/all.yml">Use<span class="notranslate">Galaxy</span>.eu</a>’s vault file. The encrypted version is not very interesting to look at, but it is mostly to show that we confidently place an encrypted copy of our secrets online, under configuration management. This has made our life a lot easier.</p>
+<p><a href="https://docs.ansible.com/ansible/2.9/user_guide/vault.html"><code class="language-plaintext highlighter-rouge">ansible-vault</code></a> is a super useful tool that lets you encrypt secrets for your group using a pre-shared key. This allows you to commit ALL of your Ansible playbooks and variables to source control, without the concern of leaking secrets. E.g. <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/secret_group_vars/all.yml">UseGalaxy.eu</a>’s vault file. The encrypted version is not very interesting to look at, but it is mostly to show that we confidently place an encrypted copy of our secrets online, under configuration management. This has made our life a lot easier.</p>
 
 <h1 id="your-first-playbook-and-first-role">Your First Playbook and First Role</h1>
 
@@ -890,7 +890,7 @@ Ansible provides some flags which can help you identify changes before they’re
     <dt><strong><code class="language-plaintext highlighter-rouge">--diff</code></strong></dt>
     <dd>This will show the difference whenever a file is changed.</dd>
     <dt><strong><code class="language-plaintext highlighter-rouge">--check</code></strong></dt>
-    <dd>Will do a dry-run of the playbook, attempting to show you which tasks will execute, which files will be updated. Not all actions can be predicted because commands are not run, if a <span class="notranslate">downstream</span> task depends on the result of a command execution task, Ansible has no way of knowing whether or not it will execute.</dd>
+    <dd>Will do a dry-run of the playbook, attempting to show you which tasks will execute, which files will be updated. Not all actions can be predicted because commands are not run, if a downstream task depends on the result of a command execution task, Ansible has no way of knowing whether or not it will execute.</dd>
   </dl>
 
   <p>In this tutorial we will write to files in <code class="language-plaintext highlighter-rouge">/tmp</code> as that is a <em>relatively</em> safe thing to do. The training material community does not have the resources to test this tutorial across all of the platforms you might want to run it on. Additionally we do not want to be responsible if you accidentally cause permanent damage by following this tutorial.</p>
@@ -902,7 +902,7 @@ Ansible provides some flags which can help you identify changes before they’re
 
   <ol>
     <li>
-      <p>You have <a href="https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html">Ansible installed</a> on the machine where you will install <span class="notranslate">Galaxy</span></p>
+      <p>You have <a href="https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html">Ansible installed</a> on the machine where you will install Galaxy</p>
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-running-ansible-on-remote-machine" aria-label="comment box: Running Ansible on remote machine"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Running Ansible on remote machine</div>
@@ -930,7 +930,7 @@ Ansible provides some flags which can help you identify changes before they’re
     <li>
       <p><strong>Create a directory named <code class="language-plaintext highlighter-rouge">intro</code> and <code class="language-plaintext highlighter-rouge">cd</code> into it.</strong></p>
 
-      <p>It’s good practice to keep your deployments separated, and later on we’ll be deploying <span class="notranslate">Galaxy</span> with ansible in a separate directory.</p>
+      <p>It’s good practice to keep your deployments separated, and later on we’ll be deploying Galaxy with ansible in a separate directory.</p>
     </li>
     <li>
       <p>Create your inventory file (named <code class="language-plaintext highlighter-rouge">hosts</code>) in this folder</p>
@@ -940,7 +940,7 @@ Ansible provides some flags which can help you identify changes before they’re
           <p>We will call our group <code class="language-plaintext highlighter-rouge">my_hosts</code></p>
         </li>
         <li>
-          <p>Create <a href="https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html">an inventory file</a> with the group <code class="language-plaintext highlighter-rouge">my_hosts</code> and <code class="language-plaintext highlighter-rouge">localhost ansible_connection=local</code>, which tells Ansible to not use SSH, and just use the local connection. Additionally, you should explicitly set the <code class="language-plaintext highlighter-rouge">ansible_user</code> variable to the use<span class="notranslate">rna</span>me to use when connecting to the server. Ansible has changed its behaviour over time regarding whether or not <code class="language-plaintext highlighter-rouge">ansible_user</code> is defined, and it is most effective to define it explicitly even when it can sometimes be inferred.</p>
+          <p>Create <a href="https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html">an inventory file</a> with the group <code class="language-plaintext highlighter-rouge">my_hosts</code> and <code class="language-plaintext highlighter-rouge">localhost ansible_connection=local</code>, which tells Ansible to not use SSH, and just use the local connection. Additionally, you should explicitly set the <code class="language-plaintext highlighter-rouge">ansible_user</code> variable to the username to use when connecting to the server. Ansible has changed its behaviour over time regarding whether or not <code class="language-plaintext highlighter-rouge">ansible_user</code> is defined, and it is most effective to define it explicitly even when it can sometimes be inferred.</p>
 
           <blockquote class="solution">
             <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -983,7 +983,7 @@ Ansible provides some flags which can help you identify changes before they’re
       </blockquote>
     </li>
     <li>
-      <p>Create a <code class="language-plaintext highlighter-rouge">roles/my-role/files</code> folder, and within it a file named <code class="language-plaintext highlighter-rouge">test.txt</code>, containing the content “Hello, <span class="notranslate">Galaxy</span> 🚀”</p>
+      <p>Create a <code class="language-plaintext highlighter-rouge">roles/my-role/files</code> folder, and within it a file named <code class="language-plaintext highlighter-rouge">test.txt</code>, containing the content “Hello, Galaxy 🚀”</p>
     </li>
     <li>
       <p>This is a complete role by itself and will copy the file <code class="language-plaintext highlighter-rouge">test.txt</code> from the <code class="language-plaintext highlighter-rouge">roles/my-role/files/</code> folder over to the target host and place it in <code class="language-plaintext highlighter-rouge">/tmp</code>.</p>
@@ -1081,7 +1081,7 @@ localhost                  : ok=2    changed=1    unreachable=0    failed=0    s
 
 <h2 id="facts">Facts</h2>
 
-<p>In the last step of the last hands-on, you ran your playbook. The first <code class="language-plaintext highlighter-rouge">TASK</code> that was executed was not one that you had written, it <span class="notranslate">reads</span>:</p>
+<p>In the last step of the last hands-on, you ran your playbook. The first <code class="language-plaintext highlighter-rouge">TASK</code> that was executed was not one that you had written, it reads:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TASK [Gathering Facts] *********************************************************
 ok: [localhost]
@@ -1294,23 +1294,23 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0    s
 
 </blockquote>
 
-<h1 id="ansible-galaxy">Ansible <span class="notranslate">Galaxy</span></h1>
+<h1 id="ansible-galaxy">Ansible Galaxy</h1>
 
-<p>Now that you’ve built a small role, you can imagine that building real roles that manage the full installation of a piece of software are not simple things. Ansible <span class="notranslate">Galaxy</span> is the answer here. Many roles for common administration tasks, and software installation and setup are readily available on Ansible <span class="notranslate">Galaxy</span>.</p>
+<p>Now that you’ve built a small role, you can imagine that building real roles that manage the full installation of a piece of software are not simple things. Ansible Galaxy is the answer here. Many roles for common administration tasks, and software installation and setup are readily available on Ansible Galaxy.</p>
 
 <p><strong>Warning</strong>: This will install Memcached on the target machine.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-installing-a-module-using-ansible-galaxy" aria-label="hands-on box: Installing a module using ansible-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Installing a module using ansible-<span class="notranslate">galaxy</span></div>
+  <div class="box-title hands-on-title" id="hands-on-installing-a-module-using-ansible-galaxy" aria-label="hands-on box: Installing a module using ansible-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Installing a module using ansible-galaxy</div>
 
   <ol>
     <li>
-      <p>Install the geerlingguy.memcached role with ansible-<span class="notranslate">galaxy</span> into your roles folder:</p>
+      <p>Install the geerlingguy.memcached role with ansible-galaxy into your roles folder:</p>
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
           <div class="box-title code-in-title" id="code-in-bash-3" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="se">\</span>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="se">\</span>
     <span class="nt">-p</span> roles/ geerlingguy.memcached
 </code></pre></div>          </div>
         </blockquote>
@@ -1374,11 +1374,11 @@ The solution to this is to set <code class="language-plaintext highlighter-rouge
 
 <h2 id="choosing-a-role">Choosing a Role</h2>
 
-<p>Picking the best role for a task from Ansible <span class="notranslate">Galaxy</span> is not always a trivial task. Sometimes there will only be a single role doing what you need. Other times you’ll have to choose between 20 different roles that all look more or less the same. Here are some tips to guide you in identifying appropriate and well-written roles:</p>
+<p>Picking the best role for a task from Ansible Galaxy is not always a trivial task. Sometimes there will only be a single role doing what you need. Other times you’ll have to choose between 20 different roles that all look more or less the same. Here are some tips to guide you in identifying appropriate and well-written roles:</p>
 
 <ul>
-  <li>The name should match the software you are using (I.e. ignore a role named <code class="language-plaintext highlighter-rouge">stackstorm</code> when you are trying to set up <code class="language-plaintext highlighter-rouge">rabbitmq</code>. Ansible <span class="notranslate">Galaxy</span> does not have perfect search.)</li>
-  <li><code class="language-plaintext highlighter-rouge">geerlingguy</code> wrote a huge number of roles for many pieces of standard software. If there is a role from this person, this is usually a safe choice. In the same way we recommend <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project</code> and <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>_eu</code> roles.</li>
+  <li>The name should match the software you are using (I.e. ignore a role named <code class="language-plaintext highlighter-rouge">stackstorm</code> when you are trying to set up <code class="language-plaintext highlighter-rouge">rabbitmq</code>. Ansible Galaxy does not have perfect search.)</li>
+  <li><code class="language-plaintext highlighter-rouge">geerlingguy</code> wrote a huge number of roles for many pieces of standard software. If there is a role from this person, this is usually a safe choice. In the same way we recommend <code class="language-plaintext highlighter-rouge">galaxyproject</code> and <code class="language-plaintext highlighter-rouge">usegalaxy_eu</code> roles.</li>
   <li>Check the GitHub readme of each role you consider using. Look for:
     <ul>
       <li>Extensive documentation of all of the variables, their default values, and how they behave.</li>
@@ -1390,10 +1390,10 @@ The solution to this is to set <code class="language-plaintext highlighter-rouge
 
 <p>These are usually good proxies for quality, but do not treat them as strict rules. For an example of a role meeting many of these qualities, <a href="https://github.com/galaxyproject/ansible-cvmfs"><code class="language-plaintext highlighter-rouge">ansible-cvmfs</code></a> is good; the variables are well documented and there are example playbooks that you can (more or less) copy-and-paste and run.</p>
 
-<p>Sometimes a role will accomplish 95% of what you need to do, but not everything. Once you have installed the role with <code class="language-plaintext highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install</code>, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. <a href="https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles"><span class="notranslate">galaxy</span>project</a> and <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles">use<span class="notranslate">galaxy</span>.eu</a></p>
+<p>Sometimes a role will accomplish 95% of what you need to do, but not everything. Once you have installed the role with <code class="language-plaintext highlighter-rouge">ansible-galaxy install</code>, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. <a href="https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles">galaxyproject</a> and <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles">usegalaxy.eu</a></p>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-how-do-i-know-what-i-can-do-with-a-role-what-variables-are-available"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-do-i-know-what-i-can-do-with-a-role-what-variables-are-available-contents" aria-expanded="true" aria-label="Toggle tip box: How do I know what I can do with a role? What variables are available?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How do I know what I can do with a role? What variables are available?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>You don’t. There is no standard way for reporting this, but well written roles by trusted authors (e.g. geerlingguy, <span class="notranslate">galaxy</span>project) do it properly and write all of the variables in the README file of the repository. We try to pick sensible roles for you in this course, but, in real life it may not be that simple.</p>   <p>So, definitely check there first, but if they aren’t there, then you’ll need to read through <code class="language-plaintext highlighter-rouge">defaults/</code> and <code class="language-plaintext highlighter-rouge">tasks/</code> and <code class="language-plaintext highlighter-rouge">templates/</code> to figure out what the role does and how you can control and modify it to accomplish your goals.</p> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-how-do-i-know-what-i-can-do-with-a-role-what-variables-are-available"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-do-i-know-what-i-can-do-with-a-role-what-variables-are-available-contents" aria-expanded="true" aria-label="Toggle tip box: How do I know what I can do with a role? What variables are available?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How do I know what I can do with a role? What variables are available?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>You don’t. There is no standard way for reporting this, but well written roles by trusted authors (e.g. geerlingguy, galaxyproject) do it properly and write all of the variables in the README file of the repository. We try to pick sensible roles for you in this course, but, in real life it may not be that simple.</p>   <p>So, definitely check there first, but if they aren’t there, then you’ll need to read through <code class="language-plaintext highlighter-rouge">defaults/</code> and <code class="language-plaintext highlighter-rouge">tasks/</code> and <code class="language-plaintext highlighter-rouge">templates/</code> to figure out what the role does and how you can control and modify it to accomplish your goals.</p> </blockquote>
 
 <h1 id="ansible-vault">Ansible Vault</h1>
 

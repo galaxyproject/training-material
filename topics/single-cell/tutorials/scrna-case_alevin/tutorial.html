@@ -828,8 +828,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
             UseGalaxy.org (Main)
         </a>
@@ -875,7 +873,7 @@
 
 <!-- This is a comment. -->
 
-<p>This tutorial will take you from raw FASTQ files to a cell x gene data matrix in AnnData format. What’s a data matrix, and what’s AnnData format? Well you’ll find out! Importantly, this is the first step in processing <span class="notranslate">single cell</span> data in order to start analysing it. Currently you have a bunch of strings of <code class="language-plaintext highlighter-rouge">ATGGGCTT</code> etc. in your sequencing files, and what you need to know is how many cells you have and what genes appear in those cells. These steps are the most computationally heavy in the <span class="notranslate">single cell</span> world, as you’re starting with 100s of millions of <span class="notranslate">reads</span>, each with 4 lines of text. Later on in analysis, this data becomes simple gene counts such as ‘Cell A has 4 GAPDHs’, which is a lot easier to store! Because of this data overload, we have downsampled the FASTQ files to speed up the analysis a bit. Saying that, you’re still having to map loads of <span class="notranslate">reads</span> to the massive murine genome, so get yourself a cup of coffee and prepare to analyse!</p>
+<p>This tutorial will take you from raw FASTQ files to a cell x gene data matrix in AnnData format. What’s a data matrix, and what’s AnnData format? Well you’ll find out! Importantly, this is the first step in processing single cell data in order to start analysing it. Currently you have a bunch of strings of <code class="language-plaintext highlighter-rouge">ATGGGCTT</code> etc. in your sequencing files, and what you need to know is how many cells you have and what genes appear in those cells. These steps are the most computationally heavy in the single cell world, as you’re starting with 100s of millions of reads, each with 4 lines of text. Later on in analysis, this data becomes simple gene counts such as ‘Cell A has 4 GAPDHs’, which is a lot easier to store! Because of this data overload, we have downsampled the FASTQ files to speed up the analysis a bit. Saying that, you’re still having to map loads of reads to the massive murine genome, so get yourself a cup of coffee and prepare to analyse!</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -908,9 +906,9 @@
 
 <h1 id="generating-a-matrix">Generating a matrix</h1>
 
-<p>In this section, we will show you the principles of the initial phase of <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span>-seq analysis: generating <span class="notranslate">expression</span> measures in a matrix. We’ll concentrate on droplet-based (rather than plate-based) methodology, since this is the process with most differences with respect to conventional approaches developed for bulk <span class="notranslate">RNA</span>-seq.</p>
+<p>In this section, we will show you the principles of the initial phase of single-cell RNA-seq analysis: generating expression measures in a matrix. We’ll concentrate on droplet-based (rather than plate-based) methodology, since this is the process with most differences with respect to conventional approaches developed for bulk RNA-seq.</p>
 
-<p>Droplet-based data consists of three components: cell barcodes, unique molecular identifiers (UMIs) and c<span class="notranslate">DNA</span> <span class="notranslate">reads</span>. To generate cell-wise quantifications we need to:</p>
+<p>Droplet-based data consists of three components: cell barcodes, unique molecular identifiers (UMIs) and cDNA reads. To generate cell-wise quantifications we need to:</p>
 
 <ul>
   <li>Process cell barcodes, working out which ones correspond to ‘real’ cells, which to sequencing artefacts, and possibly correct any barcodes likely to be the product of sequencing errors by comparison to more frequent sequences.</li>
@@ -921,7 +919,7 @@
 <p>This used to be a complex process involving multiple algorithms, or was performed with technology-specific methods (such as 10X’s ‘Cellranger’ tool)  but is now much simpler thanks to the advent of a few new methods. When selecting methodology for your own work you should consider:</p>
 
 <ul>
-  <li><a href="https://github.com/alexdobin/STAR">STARsolo</a> - a droplet-based sc<span class="notranslate">RNA</span>-seq-specific variant of the popular genome alignment method STAR. Produces results very close to those of Cellranger (which itself uses STAR under the hood).</li>
+  <li><a href="https://github.com/alexdobin/STAR">STARsolo</a> - a droplet-based scRNA-seq-specific variant of the popular genome alignment method STAR. Produces results very close to those of Cellranger (which itself uses STAR under the hood).</li>
   <li><a href="https://www.kallistobus.tools/">Kallisto/ bustools</a> - developed by the originators of the transcriptome quantification method, Kallisto.</li>
   <li><a href="https://salmon.readthedocs.io/en/latest/alevin.html">Alevin</a> - another transcriptome analysis method developed by the authors of the Salmon tool.</li>
 </ul>
@@ -930,11 +928,11 @@
 
 <h2 id="get-data">Get Data</h2>
 
-<p>We’ve provided you with some example data to play with, a small subset of the <span class="notranslate">reads</span> in a mouse dataset of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span> (see the <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">study in <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas</a> and the <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">project submission</a>). This is a study using the Drop-seq chemistry, however this tutorial is almost identical to a 10x chemistry. We will point out the one tool parameter change you will need to run 10x samples. This data is not carefully curated, standard tutorial data - it’s real, it’s messy, it desperately needs filtering, it has background <span class="notranslate">RNA</span> running around, and most of all it will give you a chance to practice your analysis as if this data were yours.</p>
+<p>We’ve provided you with some example data to play with, a small subset of the reads in a mouse dataset of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span> (see the <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">study in Single Cell Expression Atlas</a> and the <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">project submission</a>). This is a study using the Drop-seq chemistry, however this tutorial is almost identical to a 10x chemistry. We will point out the one tool parameter change you will need to run 10x samples. This data is not carefully curated, standard tutorial data - it’s real, it’s messy, it desperately needs filtering, it has background RNA running around, and most of all it will give you a chance to practice your analysis as if this data were yours.</p>
 
-<p>Down-sampled <span class="notranslate">reads</span> and some associated annotation can be imported below. How did I downsample these FASTQ files? Check out <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---how-to-downsample">this history</a> to find out!</p>
+<p>Down-sampled reads and some associated annotation can be imported below. How did I downsample these FASTQ files? Check out <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---how-to-downsample">this history</a> to find out!</p>
 
-<p>Additionally, to map your <span class="notranslate">reads</span>, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. You can download these for your species of interest <a href="https://www.ensembl.org/info/data/ftp/index.html">from Ensembl</a>. These files are included in the data import step below. Keep in mind, these are big files, so the fastest way to get these into your <span class="notranslate">Galaxy</span> account is through importing them by history.</p>
+<p>Additionally, to map your reads, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. You can download these for your species of interest <a href="https://www.ensembl.org/info/data/ftp/index.html">from Ensembl</a>. These files are included in the data import step below. Keep in mind, these are big files, so the fastest way to get these into your Galaxy account is through importing them by history.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-option-1-data-upload-import-history" aria-label="hands-on box: Option 1: Data upload - Import history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Option 1: Data upload - Import history</div>
@@ -947,7 +945,7 @@
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open the link to the shared history</li>   <li>Click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>Import history</em> button on the top right</li>   <li>Enter a title for the new history</li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
     </li>
     <li>
-      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the the history to your name of choice.</p>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the the history to your name of choice.</p>
     </li>
   </ol>
 
@@ -959,19 +957,19 @@
   <ol>
     <li>Create a new history for this tutorial</li>
     <li>
-      <p>Import the Experimental Design table, sequencing <span class="notranslate">reads</span> 1 &amp; 2, the GTF and fasta files from <a href="https://zenodo.org/record/4574153">Zenodo</a></p>
+      <p>Import the Experimental Design table, sequencing reads 1 &amp; 2, the GTF and fasta files from <a href="https://zenodo.org/record/4574153">Zenodo</a></p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4574153/files/Experimental_Design.tabular
 https://zenodo.org/record/4574153/files/Mus_musculus.GRCm38.100.gtf.gff
-https://zenodo.org/record/4574153/files/Mus_musculus.GRCm38.c<span class="notranslate">dna</span>.all.fa.fasta
+https://zenodo.org/record/4574153/files/Mus_musculus.GRCm38.cdna.all.fa.fasta
 https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k.fastq
 https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.fastq
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
-    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the datasets</li>
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the datasets</li>
   </ol>
 
 </blockquote>
@@ -982,7 +980,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <p>Have a look at the files you now have in your history.</p>
   <ol>
     <li>Which of the FASTQ files do you think contains the barcode sequences?</li>
-    <li>Given the chemistry this study should have, are the barcode/UMI <span class="notranslate">reads</span> the correct length?</li>
+    <li>Given the chemistry this study should have, are the barcode/UMI reads the correct length?</li>
     <li>What is the ‘N701’ referring to?</li>
   </ol>
 
@@ -1000,23 +998,23 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <h1 id="important-tips-for-easier-analysis">Important tips for easier analysis</h1>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-not-all-browsers-work" aria-label="warning box: Not all browsers work!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Not all browsers work!</div>   <ul>     <li>We’ve had some issues with Tutorial mode on Safari for Mac users.</li>     <li>Try a <strong>different browser</strong> if you aren’t seeing the button.</li>   </ul> </blockquote> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your Galaxy may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your Galaxy server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside Galaxy.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the Galaxy analytical interface</li> </ul>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-not-all-browsers-work" aria-label="warning box: Not all browsers work!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Not all browsers work!</div>   <ul>     <li>We’ve had some issues with Tutorial mode on Safari for Mac users.</li>     <li>Try a <strong>different browser</strong> if you aren’t seeing the button.</li>   </ul> </blockquote> </blockquote>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
   <ul>
-    <li>The <span class="notranslate">Galaxy</span> tool search panel sometimes doesn’t find the tools we need from the thousands available.</li>
-    <li>You’ll have a much easier time selecting tools from the panel (if you aren’t using tutorial mode!) if you are on the <a href="https://humancellatlas.usegalaxy.eu">https://humancellatlas.use<span class="notranslate">galaxy</span>.eu</a></li>
+    <li>The Galaxy tool search panel sometimes doesn’t find the tools we need from the thousands available.</li>
+    <li>You’ll have a much easier time selecting tools from the panel (if you aren’t using tutorial mode!) if you are on the <a href="https://humancellatlas.usegalaxy.eu">https://humancellatlas.usegalaxy.eu</a></li>
   </ul>
 </blockquote>
 
 <h2 id="generate-a-transcript-to-gene-map">Generate a transcript to gene map</h2>
 
-<p>Gene-level, rather than transcript-level, quantification is standard in sc<span class="notranslate">RNA</span>-seq, which means that the <span class="notranslate">expression</span> level of alte<span class="notranslate">rna</span>tively spliced <span class="notranslate">RNA</span> molecules are combined to create gene-level values. Droplet-based sc<span class="notranslate">RNA</span>-seq techniques only sample one end each transcript, so lack the full-molecule coverage that would be required to accurately quantify different transcript isoforms.</p>
+<p>Gene-level, rather than transcript-level, quantification is standard in scRNA-seq, which means that the expression level of alternatively spliced RNA molecules are combined to create gene-level values. Droplet-based scRNA-seq techniques only sample one end each transcript, so lack the full-molecule coverage that would be required to accurately quantify different transcript isoforms.</p>
 
-<p>To generate gene-level quantifications based on transcriptome quantification, Alevin and similar tools require a conversion between transcript and gene identifiers. We can derive a transcript-gene conversion from the gene annotations available in genome resources such as Ensembl. The transcripts in such a list need to match the ones we will use later to build a binary transcriptome index. If you were using spike-ins, you’d need to add these to the transcriptome and the transcript-gene <span class="notranslate">mapping</span>.</p>
+<p>To generate gene-level quantifications based on transcriptome quantification, Alevin and similar tools require a conversion between transcript and gene identifiers. We can derive a transcript-gene conversion from the gene annotations available in genome resources such as Ensembl. The transcripts in such a list need to match the ones we will use later to build a binary transcriptome index. If you were using spike-ins, you’d need to add these to the transcriptome and the transcript-gene mapping.</p>
 
-<p>In your example data you will see the murine reference annotation as retrieved from Ensembl in GTF format. This annotation contains gene, exon, transcript and all sorts of other information on the sequences. We will use these to generate the transcript/ gene <span class="notranslate">mapping</span> by passing that information to a tool that extracts just the transcript identifiers we need.</p>
+<p>In your example data you will see the murine reference annotation as retrieved from Ensembl in GTF format. This annotation contains gene, exon, transcript and all sorts of other information on the sequences. We will use these to generate the transcript/ gene mapping by passing that information to a tool that extracts just the transcript identifiers we need.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -1041,31 +1039,31 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <div class="box-title hands-on-title" id="hands-on-generate-a-filtered-fasta-and-transcript-gene-map" aria-label="hands-on box: Generate a filtered FASTA and transcript-gene map"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate a filtered FASTA and transcript-gene map</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0"><strong>GTF2GeneList</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0"><strong>GTF2GeneList</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Ensembl GTF file”</em>: <code class="language-plaintext highlighter-rouge">GTF file in the history</code> <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-history</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Ensembl GTF file”</em>: <code class="language-plaintext highlighter-rouge">GTF file in the history</code> <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-history</span></li>
         <li><em>“Feature type for which to derive annotation”</em>: <code class="language-plaintext highlighter-rouge">transcript</code> (Your sequences are transcript sequencing, so this is your starting point)</li>
         <li><em>“Field to place first in output table”</em>: <code class="language-plaintext highlighter-rouge">transcript_id</code> (This is accessing the column you identified above!)</li>
         <li><em>“Suppress header line in output?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (The next tool (Alevin) does not expect a header)</li>
         <li><em>“Comma-separated list of field names to extract from the GTF (default: use all fields)”</em>: <code class="language-plaintext highlighter-rouge">transcript_id,gene_id</code> (This calls the first column to be the transcript_id, and the second the gene_id. Thus, your key can turn transcripts into genes)</li>
         <li><em>“Append version to transcript identifiers?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (The Ensembl FASTA files usually have these, and since we need the FASTA transcriptome and the GTF gene information to work together, we need to append these!)</li>
         <li><em>“Flag mitochondrial features?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-        <li><em>“Provide a c<span class="notranslate">DNA</span> file for extracting annotations and/ or possible filtering?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA-format c<span class="notranslate">DNA</span>/transcript file”</em>: <code class="language-plaintext highlighter-rouge">FASTA file in your history</code> <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-history</span></li>
+        <li><em>“Provide a cDNA file for extracting annotations and/ or possible filtering?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA-format cDNA/transcript file”</em>: <code class="language-plaintext highlighter-rouge">FASTA file in your history</code> <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-history</span></li>
         <li><em>“Annotation field to match with sequences”</em>: <code class="language-plaintext highlighter-rouge">transcript_id</code></li>
-        <li><em>“Filter the c<span class="notranslate">DNA</span> file to match the annotations?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Filter the cDNA file to match the annotations?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
     <li>
-      <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the annotation table to <code class="language-plaintext highlighter-rouge">Map</code></p>
+      <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the annotation table to <code class="language-plaintext highlighter-rouge">Map</code></p>
     </li>
-    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the uncompressed filtered FASTA file to <code class="language-plaintext highlighter-rouge">Filtered FASTA</code></li>
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the uncompressed filtered FASTA file to <code class="language-plaintext highlighter-rouge">Filtered FASTA</code></li>
   </ol>
 </blockquote>
 
 <h2 id="generate-a-transcriptome-index--quantify">Generate a transcriptome index &amp; quantify!</h2>
 
-<p>Alevin collapses the steps involved in dealing with dsc<span class="notranslate">RNA</span>-seq into a single process. Such tools need to compare the sequences in your sample to a reference containing all the likely transcript sequences (a ‘transcriptome’). This will contain the biological transcript sequences known for a given species, and perhaps also technical sequences such as ‘spike ins’ if you have those.</p>
+<p>Alevin collapses the steps involved in dealing with dscRNA-seq into a single process. Such tools need to compare the sequences in your sample to a reference containing all the likely transcript sequences (a ‘transcriptome’). This will contain the biological transcript sequences known for a given species, and perhaps also technical sequences such as ‘spike ins’ if you have those.</p>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-how-does-alevin-work"><button class="gtn-boxify-button details" type="button" aria-controls="details-how-does-alevin-work-contents" aria-expanded="true" aria-label="Toggle details box: How does Alevin work?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: How does Alevin work?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1077,20 +1075,20 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <p>We now have:</p>
 
 <ul>
-  <li>Barcode/ UMI <span class="notranslate">reads</span></li>
-  <li>c<span class="notranslate">DNA</span> <span class="notranslate">reads</span></li>
-  <li>transcript/ gene <span class="notranslate">mapping</span></li>
+  <li>Barcode/ UMI reads</li>
+  <li>cDNA reads</li>
+  <li>transcript/ gene mapping</li>
   <li>filtered FASTA</li>
 </ul>
 
-<p>We can now run Alevin. In some public instances, Alevin won’t show up if you search for it. Instead, you may have to click the <span class="notranslate">Single Cell</span> tab at the left and scroll down to the Alevin tool. Alte<span class="notranslate">rna</span>tively, use Tutorial Mode as described above and you’ll easily navigate to all the tools, and their versions will all be the tried and tested ones of this tutorial. It’s often a good idea to check your tool versions. In this case the tutorial was built with Alevin <span class="notranslate">Galaxy</span> Version 1.5.1+<span class="notranslate">galaxy</span>0. To identify which version of a tool you are using. Select <i class="fas fa-cubes" aria-hidden="true"></i><span class="visually-hidden">tool-versions</span> ‘Versions’ and choose the appropriate version.</p>
+<p>We can now run Alevin. In some public instances, Alevin won’t show up if you search for it. Instead, you may have to click the Single Cell tab at the left and scroll down to the Alevin tool. Alternatively, use Tutorial Mode as described above and you’ll easily navigate to all the tools, and their versions will all be the tried and tested ones of this tutorial. It’s often a good idea to check your tool versions. In this case the tutorial was built with Alevin Galaxy Version 1.5.1+galaxy0. To identify which version of a tool you are using. Select <i class="fas fa-cubes" aria-hidden="true"></i><span class="visually-hidden">tool-versions</span> ‘Versions’ and choose the appropriate version.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-running-alevin" aria-label="hands-on box: Running Alevin"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Running Alevin</div>
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0"><strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+<span class="notranslate">galaxy</span>0</span></span></p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0"><strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0</span></span></p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -1100,7 +1098,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
         <blockquote class="tip">
           <div class="box-title tip-title" id="tip-strandedness"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-strandedness-contents" aria-expanded="true" aria-label="Toggle tip box: Strandedness?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Strandedness?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-          <p>The Salmon documentation on ‘Fragment Library Types’ and running the Alevin command is here: <a href="https://salmon.readthedocs.io/en/latest/library_type.html">salmon.readthedocs.io/en/latest/library_type.html</a> and <a href="https://salmon.readthedocs.io/en/latest/alevin.html">salmon.readthedocs.io/en/latest/alevin.html</a>. These links will help here, although keep in mind the image there is drawn with the <span class="notranslate">RNA</span> 5’ on top, whereas in this sc<span class="notranslate">RNA</span>-seq protocol, the polyA is captured by its 3’ tail and thus effectively the bottom or reverse strand…)</p>
+          <p>The Salmon documentation on ‘Fragment Library Types’ and running the Alevin command is here: <a href="https://salmon.readthedocs.io/en/latest/library_type.html">salmon.readthedocs.io/en/latest/library_type.html</a> and <a href="https://salmon.readthedocs.io/en/latest/alevin.html">salmon.readthedocs.io/en/latest/alevin.html</a>. These links will help here, although keep in mind the image there is drawn with the RNA 5’ on top, whereas in this scRNA-seq protocol, the polyA is captured by its 3’ tail and thus effectively the bottom or reverse strand…)</p>
         </blockquote>
 
         <blockquote class="solution">
@@ -1112,11 +1110,11 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
               </ul>
             </li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Transcripts FASTA file”</em>: <code class="language-plaintext highlighter-rouge">Filtered FASTA</code></li>
-            <li><em>“Single or paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code></li>
+            <li><em>“Single or paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code></li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“file1”</em>: <code class="language-plaintext highlighter-rouge">N701-Read1</code></li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“file2”</em>: <code class="language-plaintext highlighter-rouge">N701-Read2</code></li>
-            <li><em>“Specify the strandedness of the <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Infer automatically (A)</code></li>
-            <li><em>“Protocol”</em>: <code class="language-plaintext highlighter-rouge">DropSeq <span class="notranslate">Single Cell</span> protocol</code></li>
+            <li><em>“Specify the strandedness of the reads”</em>: <code class="language-plaintext highlighter-rouge">Infer automatically (A)</code></li>
+            <li><em>“Protocol”</em>: <code class="language-plaintext highlighter-rouge">DropSeq Single Cell protocol</code></li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Transcript to gene map file”</em>: <code class="language-plaintext highlighter-rouge">Map</code></li>
             <li><em>“Retrieve all output files”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li>In <em>“Optional commands”</em>:
@@ -1151,9 +1149,9 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 <blockquote class="question">
   <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-  <p>After you’ve run Alevin, <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> look through all the different files. Can you find:</p>
+  <p>After you’ve run Alevin, <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> look through all the different files. Can you find:</p>
   <ol>
-    <li>The <span class="notranslate">Mapping</span> Rate?</li>
+    <li>The Mapping Rate?</li>
     <li>How many cells are present in the matrix output?</li>
   </ol>
 
@@ -1161,8 +1159,8 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
     <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>Inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the file <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> meta_info.json. You can see the <span class="notranslate">mapping</span> rate is a paltry <code class="language-plaintext highlighter-rouge">25.45%</code>. This is a terrible <span class="notranslate">mapping</span> rate. Why might this be? Remember this was downsampled, and specifically by taking only the last 400,000 <span class="notranslate">reads</span> of the FASTQ file. The overall <span class="notranslate">mapping</span> rate of the file is more like 50%, which is still quite poor, but for early Drop-Seq samples and <span class="notranslate">single-cell</span> data in general, you might expect a slightly poorer <span class="notranslate">mapping</span> rate. 10x samples are much better these days! This is real data, not test data, after all!</li>
-      <li>Inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the file <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> ‘quants_mat_rows.txt’, and you can see it has <code class="language-plaintext highlighter-rouge">2163</code> lines. The rows refer to the cells in the cell x gene matrix. According to this (rough) estimate, your sample has 2163 cells in it!</li>
+      <li>Inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the file <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> meta_info.json. You can see the mapping rate is a paltry <code class="language-plaintext highlighter-rouge">25.45%</code>. This is a terrible mapping rate. Why might this be? Remember this was downsampled, and specifically by taking only the last 400,000 reads of the FASTQ file. The overall mapping rate of the file is more like 50%, which is still quite poor, but for early Drop-Seq samples and single-cell data in general, you might expect a slightly poorer mapping rate. 10x samples are much better these days! This is real data, not test data, after all!</li>
+      <li>Inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the file <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> ‘quants_mat_rows.txt’, and you can see it has <code class="language-plaintext highlighter-rouge">2163</code> lines. The rows refer to the cells in the cell x gene matrix. According to this (rough) estimate, your sample has 2163 cells in it!</li>
     </ol>
 
   </blockquote>
@@ -1174,34 +1172,34 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <p>Make certain to use <strong>quants_mat.mtx.gz</strong>  and NOT <strong>quants_tier.mtx.gz</strong> going forward.</p>
 </blockquote>
 
-<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations - you’ve made an <span class="notranslate">expression</span> matrix! We could almost stop here. But it’s sensible to do some basic QC, and one of the things we can do is look at a barcode rank plot.</p>
+<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations - you’ve made an expression matrix! We could almost stop here. But it’s sensible to do some basic QC, and one of the things we can do is look at a barcode rank plot.</p>
 
 <h1 id="basic-qc">Basic QC</h1>
 
-<p>The question we’re looking to answer here, is: “do we mostly have a <span class="notranslate">single cell</span> per droplet”? That’s what experimenters are normally aiming for, but it’s not entirely straightforward to get exactly one cell per droplet. Sometimes almost no cells make it into droplets, other times we have too many cells in each droplet. At a minimum, we should easily be able to distinguish droplets with cells from those without.</p>
+<p>The question we’re looking to answer here, is: “do we mostly have a single cell per droplet”? That’s what experimenters are normally aiming for, but it’s not entirely straightforward to get exactly one cell per droplet. Sometimes almost no cells make it into droplets, other times we have too many cells in each droplet. At a minimum, we should easily be able to distinguish droplets with cells from those without.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-generate-a-raw-barcode-qc-plot" aria-label="hands-on box: Generate a raw barcode QC plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate a raw barcode QC plot</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2"><strong>Droplet barcode rank plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2"><strong>Droplet barcode rank plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2</span></span>  with the following parameters:
       <ul>
         <li><em>“Input MTX-format matrix?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“A two-column tab-delimited file, with barcodes in the first column and frequencies in the second”</em>: <code class="language-plaintext highlighter-rouge">raw_cb_frequencies.txt</code></li>
         <li><em>“Label to place in plot title”</em>: <code class="language-plaintext highlighter-rouge">Barcode rank plot (raw barcode frequencies)</code></li>
       </ul>
     </li>
-    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the image output <code class="language-plaintext highlighter-rouge">Barcode Plot - raw barcode frequencies</code></li>
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the image output <code class="language-plaintext highlighter-rouge">Barcode Plot - raw barcode frequencies</code></li>
   </ol>
 </blockquote>
 
 <figure id="figure-1"><img src="../../images/scrna-casestudy/wab-raw_barcodes-400k.png" alt="raw droplet barcode plots-400k. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> 400k subsample raw</figcaption></figure>
 
-<p>Now, the image generated here (400k) isn’t the most informative - but you are dealing with a fraction of the <span class="notranslate">reads</span>! If you run the total sample (so identical steps above, but with significantly more time!) you’d get the image below.</p>
+<p>Now, the image generated here (400k) isn’t the most informative - but you are dealing with a fraction of the reads! If you run the total sample (so identical steps above, but with significantly more time!) you’d get the image below.</p>
 
-<figure id="figure-2"><img src="../../images/scrna-casestudy/wab-raw_barcodes-total.png" alt="raw droplet barcode plots-total. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Total sample - 32,579,453 <span class="notranslate">reads</span> - raw</figcaption></figure>
+<figure id="figure-2"><img src="../../images/scrna-casestudy/wab-raw_barcodes-total.png" alt="raw droplet barcode plots-total. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Total sample - 32,579,453 reads - raw</figcaption></figure>
 
-<p>This is our own formulation of the barcode plot based on a <a href="https://github.com/COMBINE-lab/salmon/issues/362#issuecomment-490160480">discussion</a> we had with community members. The left hand plots with the smooth lines are the main plots, showing the UMI counts for individual cell barcodes ranked from high to low. We expect a sharp drop-off between cell-containing droplets and ones that are empty or contain only cell debris. Now, this data is not an ideal dataset, so for perspective, in an ideal world with a very clean 10x run, data will look a bit more like the following taken from the lung atlas (see the <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6653/results/tsne">study in <span class="notranslate">Single Cell</span> <span class="notranslate">Expression</span> Atlas</a> and the <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6653/">project submission</a>).</p>
+<p>This is our own formulation of the barcode plot based on a <a href="https://github.com/COMBINE-lab/salmon/issues/362#issuecomment-490160480">discussion</a> we had with community members. The left hand plots with the smooth lines are the main plots, showing the UMI counts for individual cell barcodes ranked from high to low. We expect a sharp drop-off between cell-containing droplets and ones that are empty or contain only cell debris. Now, this data is not an ideal dataset, so for perspective, in an ideal world with a very clean 10x run, data will look a bit more like the following taken from the lung atlas (see the <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6653/results/tsne">study in Single Cell Expression Atlas</a> and the <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6653/">project submission</a>).</p>
 
 <figure id="figure-3"><img src="../../images/scrna-casestudy/wab-lung-atlas-barcodes-raw.png" alt="raw droplet barcode plots - lung atlas. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Pretty data - raw</figcaption></figure>
 
@@ -1213,7 +1211,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <div class="box-title hands-on-title" id="hands-on-generate-alevin-s-barcode-qc-plot" aria-label="hands-on box: Generate Alevin's barcode QC plot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate Alevin's barcode QC plot</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2"><strong>Droplet barcode rank plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2"><strong>Droplet barcode rank plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2</span></span>  with the following parameters:
       <ul>
         <li><em>“Input MTX-format matrix?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Matrix-market format matrix file, with cells by column (overrides –barcode-frequencies if supplied)”</em>: <code class="language-plaintext highlighter-rouge">quants_mat.mtx</code></li>
@@ -1221,7 +1219,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
         <li><em>“Label to place in plot title”</em>: <code class="language-plaintext highlighter-rouge">Barcode rank plot (Alevin-processed)</code></li>
       </ul>
     </li>
-    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the image output <code class="language-plaintext highlighter-rouge">Barcode Plot - Alevin processed barcodes</code></li>
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the image output <code class="language-plaintext highlighter-rouge">Barcode Plot - Alevin processed barcodes</code></li>
   </ol>
 </blockquote>
 
@@ -1229,7 +1227,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 
 <p>And the full sample looks like:</p>
 
-<figure id="figure-5"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-total.png" alt="raw droplet barcode plots - total. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Total sample - 32,579,453 <span class="notranslate">reads</span> - Alevin processed</figcaption></figure>
+<figure id="figure-5"><img src="../../images/scrna-casestudy/wab-alevin-barcodes-total.png" alt="raw droplet barcode plots - total. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Total sample - 32,579,453 reads - Alevin processed</figcaption></figure>
 
 <p>And to round this off, here’s the lung atlas plot.</p>
 
@@ -1239,14 +1237,14 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 
 <p>In experiments with relatively simple characteristics, this ‘knee detection’ method works relatively well. But some populations (such as our sample!) present difficulties. For instance, sub-populations of small cells may not be distinguished from empty droplets based purely on counts by barcode. Some libraries produce multiple ‘knees’ for multiple sub-populations. The <a href="https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1662-y">emptyDrops</a> method has become a popular way of dealing with this. emptyDrops still retains barcodes with very high counts, but also adds in barcodes that can be statistically distinguished from the ambient profiles, even if total counts are similar. In order to ultimately run emptyDrops (or indeed, whatever tool you like that accomplishes biologically relevant thresholding), we first need to re-run Alevin, but prevent it from applying its own less than ideal thresholds.</p>
 
-<p>To use emptyDrops effectively, we need to go back and re-run Alevin, stopping it from applying it’s own thresholds. Click the re-run icon <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> on any Alevin output in your history, because almost every parameter is the same as before, except you need to change the following:</p>
+<p>To use emptyDrops effectively, we need to go back and re-run Alevin, stopping it from applying it’s own thresholds. Click the re-run icon <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> on any Alevin output in your history, because almost every parameter is the same as before, except you need to change the following:</p>
 
 <h2 id="generate-an-unprocessed-matrix-in-a-usable-format">Generate an unprocessed matrix in a usable format</h2>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-stopping-alevin-from-thresholding" aria-label="hands-on box: Stopping Alevin from thresholding"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Stopping Alevin from thresholding</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0"><strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+<span class="notranslate">galaxy</span>0</span></span>  (Click re-run on the last Alevin output)
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0"><strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.5.1+galaxy0</span></span>  (Click re-run on the last Alevin output)
       <ul>
         <li><em>“Optional commands”</em></li>
         <li><em>“keepCBFraction”</em>: ‘1’ - i.e. keep them all!</li>
@@ -1256,7 +1254,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   </ol>
 
   <!--SNIPPET-->
-  <blockquote class="tip">   <div class="box-title tip-title" id="tip-re-running-a-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-re-running-a-tool-contents" aria-expanded="true" aria-label="Toggle tip box: Re-running a tool"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Re-running a tool<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li><strong>Expand</strong> one of the output datasets of the tool (by clicking on it)</li>   <li><strong>Click</strong> re-run <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> the tool</li> </ol>   <p>This is useful if you want to run the tool again but with slightly different paramters, or if you just want to check which parameter setting you used.</p> </blockquote>
+  <blockquote class="tip">   <div class="box-title tip-title" id="tip-re-running-a-tool"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-re-running-a-tool-contents" aria-expanded="true" aria-label="Toggle tip box: Re-running a tool"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Re-running a tool<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li><strong>Expand</strong> one of the output datasets of the tool (by clicking on it)</li>   <li><strong>Click</strong> re-run <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> the tool</li> </ol>   <p>This is useful if you want to run the tool again but with slightly different paramters, or if you just want to check which parameter setting you used.</p> </blockquote>
 </blockquote>
 
 <blockquote class="question">
@@ -1286,16 +1284,16 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <div class="box-title hands-on-title" id="hands-on-transform-matrix" aria-label="hands-on box: Transform matrix"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Transform matrix</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy6" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy6"><strong>salmonKallistoMtxTo10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+<span class="notranslate">galaxy</span>6</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy6" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy6"><strong>salmonKallistoMtxTo10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy6</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“.mtx-format matrix”</em>: <code class="language-plaintext highlighter-rouge">quants_mat.mtx.gz</code> (output of <strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tab-delimited genes file”</em>: <code class="language-plaintext highlighter-rouge">quants_mat_cols.txt</code> (output of <strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tab-delimited barcodes file”</em>: <code class="language-plaintext highlighter-rouge">quants_mat_rows.txt</code> (output of <strong>Alevin</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
-    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> ‘salmonKallistoMtxTo10x….:genes’ to <code class="language-plaintext highlighter-rouge">Gene table</code></li>
-    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> ‘salmonKallistoMtxTo10x….:barcodes’ to <code class="language-plaintext highlighter-rouge">Barcode table</code></li>
-    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> ‘salmonKallistoMtxTo10x….:matrix’ to <code class="language-plaintext highlighter-rouge">Matrix table</code></li>
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> ‘salmonKallistoMtxTo10x….:genes’ to <code class="language-plaintext highlighter-rouge">Gene table</code></li>
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> ‘salmonKallistoMtxTo10x….:barcodes’ to <code class="language-plaintext highlighter-rouge">Barcode table</code></li>
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> ‘salmonKallistoMtxTo10x….:matrix’ to <code class="language-plaintext highlighter-rouge">Matrix table</code></li>
   </ol>
 </blockquote>
 
@@ -1331,13 +1329,13 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 
 </blockquote>
 
-<p>We’re now going to re-run <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> the tool that extracts information from our GTF file.</p>
+<p>We’re now going to re-run <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> the tool that extracts information from our GTF file.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-generate-gene-information" aria-label="hands-on box: Generate gene information"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate gene information</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0"><strong>GTF2GeneList</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0"><strong>GTF2GeneList</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.52.0+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“Feature type for which to derive annotation”</em>: <code class="language-plaintext highlighter-rouge">gene</code></li>
         <li><em>“Field to place first in output table”</em>: <code class="language-plaintext highlighter-rouge">gene_id</code></li>
@@ -1345,15 +1343,15 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
         <li><em>“Comma-separated list of field names to extract from the GTF (default: use all fields)”</em>: <code class="language-plaintext highlighter-rouge">gene_id,gene_name,mito</code></li>
         <li><em>“Append version to transcript identifiers?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Flag mitochondrial features?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> - note, this will auto-fill a bunch of acronyms for searching in the GTF for mitochondrial associated genes. This is good!</li>
-        <li><em>“Filter a FASTA-format c<span class="notranslate">DNA</span> file to match annotations?”</em>: <code class="language-plaintext highlighter-rouge">No</code> - we don’t need to, we’re done with the FASTA!</li>
+        <li><em>“Filter a FASTA-format cDNA file to match annotations?”</em>: <code class="language-plaintext highlighter-rouge">No</code> - we don’t need to, we’re done with the FASTA!</li>
       </ul>
     </li>
-    <li>Check that the output file type is <code class="language-plaintext highlighter-rouge">tabular</code>. If not, change the file type by clicking the ‘Edit attributes’<i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> on the dataset in the history (as if you were renaming the file.) Then click <code class="language-plaintext highlighter-rouge">Datatypes</code> and type in <code class="language-plaintext highlighter-rouge">tabular</code>. Click <code class="language-plaintext highlighter-rouge">Change datatype</code>.)</li>
-    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the annotation table to <code class="language-plaintext highlighter-rouge">Gene Information</code></li>
+    <li>Check that the output file type is <code class="language-plaintext highlighter-rouge">tabular</code>. If not, change the file type by clicking the ‘Edit attributes’<i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> on the dataset in the history (as if you were renaming the file.) Then click <code class="language-plaintext highlighter-rouge">Datatypes</code> and type in <code class="language-plaintext highlighter-rouge">tabular</code>. Click <code class="language-plaintext highlighter-rouge">Change datatype</code>.)</li>
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the annotation table to <code class="language-plaintext highlighter-rouge">Gene Information</code></li>
   </ol>
 </blockquote>
 
-<p>Inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the <strong>Gene Information</strong> object in the history. Now you have made a new key for gene_id, with gene name and a column of mitochondrial information (false = not mitochondrial, true = mitochondrial). We need to add this information into the salmonKallistoMtxTo10x output ‘Gene table’. But we need to keep ‘Gene table’ in the same order, since it is referenced in the ‘Matrix table’ by row.</p>
+<p>Inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the <strong>Gene Information</strong> object in the history. Now you have made a new key for gene_id, with gene name and a column of mitochondrial information (false = not mitochondrial, true = mitochondrial). We need to add this information into the salmonKallistoMtxTo10x output ‘Gene table’. But we need to keep ‘Gene table’ in the same order, since it is referenced in the ‘Matrix table’ by row.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-combine-mtx-gene-table-with-gene-information" aria-label="hands-on box: Combine MTX Gene Table with Gene Information"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Combine MTX Gene Table with Gene Information</div>
@@ -1371,7 +1369,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
         <li><em>“Keep the header lines”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
 
-      <p>If you inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the object, you’ll see we have joined these tables and now have quite a few gene_id repeats. Let’s take those out, while keeping the order of the original ‘Gene Table’.</p>
+      <p>If you inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the object, you’ll see we have joined these tables and now have quite a few gene_id repeats. Let’s take those out, while keeping the order of the original ‘Gene Table’.</p>
     </li>
     <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
       <ul>
@@ -1384,7 +1382,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   </ol>
 </blockquote>
 
-<p>Inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> your <code class="language-plaintext highlighter-rouge">Annotated Gene Table</code>. That’s more like it! You now have <code class="language-plaintext highlighter-rouge">gene_id</code>, <code class="language-plaintext highlighter-rouge">gene_name</code>, and <code class="language-plaintext highlighter-rouge">mito</code>. Now let’s get back to your journey to emptyDrops and sophisticated thresholding of empty droplets!</p>
+<p>Inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> your <code class="language-plaintext highlighter-rouge">Annotated Gene Table</code>. That’s more like it! You now have <code class="language-plaintext highlighter-rouge">gene_id</code>, <code class="language-plaintext highlighter-rouge">gene_name</code>, and <code class="language-plaintext highlighter-rouge">mito</code>. Now let’s get back to your journey to emptyDrops and sophisticated thresholding of empty droplets!</p>
 
 <h1 id="emptydrops">emptyDrops</h1>
 
@@ -1394,15 +1392,15 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <div class="box-title hands-on-title" id="hands-on-converting-to-singlecellexperiment-format" aria-label="hands-on box: Converting to SingleCellExperiment format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Converting to SingleCellExperiment format</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0"><strong>DropletUtils Read10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0"><strong>DropletUtils Read10x</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.4+galaxy0</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">Expression</span> matrix in sparse matrix format (.mtx)”</em>: <code class="language-plaintext highlighter-rouge">Matrix table</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Expression matrix in sparse matrix format (.mtx)”</em>: <code class="language-plaintext highlighter-rouge">Matrix table</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Gene Table”</em>: <code class="language-plaintext highlighter-rouge">Annotated Gene Table</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Barcode/cell table”</em>: <code class="language-plaintext highlighter-rouge">Barcode table</code></li>
         <li><em>“Should metadata file be added?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
-    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> output: <code class="language-plaintext highlighter-rouge">SCE Object</code></li>
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output: <code class="language-plaintext highlighter-rouge">SCE Object</code></li>
   </ol>
 </blockquote>
 
@@ -1412,16 +1410,16 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
   <div class="box-title hands-on-title" id="hands-on-emptydrops" aria-label="hands-on box: Emptydrops"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Emptydrops</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.4+galaxy0"><strong>DropletUtils emptyDrops</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.4+galaxy0"><strong>DropletUtils emptyDrops</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.4+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SingleCellExperiment rdata object”</em>: <code class="language-plaintext highlighter-rouge">SCE Object</code></li>
         <li><em>“Should barcodes estimated to have no cells be removed from the output object?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
     <li>
-      <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <code class="language-plaintext highlighter-rouge">serialised SingleCellExperiment</code> output as <code class="language-plaintext highlighter-rouge">Emptied-Object</code></p>
+      <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <code class="language-plaintext highlighter-rouge">serialised SingleCellExperiment</code> output as <code class="language-plaintext highlighter-rouge">Emptied-Object</code></p>
     </li>
-    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <code class="language-plaintext highlighter-rouge">tabular output</code> as <code class="language-plaintext highlighter-rouge">Emptied-Tabular Output</code></li>
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <code class="language-plaintext highlighter-rouge">tabular output</code> as <code class="language-plaintext highlighter-rouge">Emptied-Tabular Output</code></li>
   </ol>
 </blockquote>
 
@@ -1432,7 +1430,7 @@ https://zenodo.org/record/4574153/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.f
 
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-hint-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-hint-1-contents" aria-expanded="true" aria-label="Toggle tip box: Hint"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Hint<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-    <p>If you click on the <code class="language-plaintext highlighter-rouge">Emptied-Object</code> in the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-history</span> history, the text in that window says <code class="language-plaintext highlighter-rouge">37 barcodes</code> or something similar to that - there is an element of random in the algorithm, so yours might differ slightly. Why is this so low?? And why might the number be different?
+    <p>If you click on the <code class="language-plaintext highlighter-rouge">Emptied-Object</code> in the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-history</span> history, the text in that window says <code class="language-plaintext highlighter-rouge">37 barcodes</code> or something similar to that - there is an element of random in the algorithm, so yours might differ slightly. Why is this so low?? And why might the number be different?
 Consider…is this a complete set of data?</p>
   </blockquote>
 
@@ -1445,20 +1443,20 @@ Consider…is this a complete set of data?</p>
 
 </blockquote>
 
-<p>We will nevertheless proceed with your majestic annotated <span class="notranslate">expression</span> matrix of 37 cells, ready to go for further processing and analysis! However, the next tutorials we will link to use a tool suite called Scanpy <span class="citation"><a href="#Wolf2018">Wolf <i>et al.</i> 2018</a></span>. You need to convert this SingleCellExperiment object into a format called <code class="language-plaintext highlighter-rouge">annData</code>, which is a variant of a file format called <code class="language-plaintext highlighter-rouge">hdf5</code>.</p>
+<p>We will nevertheless proceed with your majestic annotated expression matrix of 37 cells, ready to go for further processing and analysis! However, the next tutorials we will link to use a tool suite called Scanpy <span class="citation"><a href="#Wolf2018">Wolf <i>et al.</i> 2018</a></span>. You need to convert this SingleCellExperiment object into a format called <code class="language-plaintext highlighter-rouge">annData</code>, which is a variant of a file format called <code class="language-plaintext highlighter-rouge">hdf5</code>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-converting-to-anndata-format" aria-label="hands-on box: Converting to AnnData format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Converting to AnnData format</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1"><strong>SCEasy convert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1"><strong>SCEasy convert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1</span></span>  with the following parameters:
       <ul>
         <li><em>“Direction of conversion”</em>: <code class="language-plaintext highlighter-rouge">SingleCellExperiment to AnnData</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input object in SingleCellExperiment RDS format”</em>: <code class="language-plaintext highlighter-rouge">Emptied-Object</code></li>
         <li><em>“Name of the assay to be transferred as main layer”</em>: <code class="language-plaintext highlighter-rouge">counts</code></li>
       </ul>
     </li>
-    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> output <code class="language-plaintext highlighter-rouge">N701-400k-AnnData</code></li>
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output <code class="language-plaintext highlighter-rouge">N701-400k-AnnData</code></li>
   </ol>
 
 </blockquote>
@@ -1469,7 +1467,7 @@ Consider…is this a complete set of data?</p>
 
 <h1 id="analysing-multiple-fastq-files">Analysing multiple FASTQ files</h1>
 
-<p>This sample was originally one of seven. So to run the other <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k">12 downsampled FASTQ files</a>, you can use a <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/cs1generating-a-single-cell-matrix-using-alevin"><span class="notranslate">workflow</span></a> and run them all at once! All these samples are going to take a while, so go and have several cups of tea… Or, better yet, I have <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1generating-a-single-cell-matrix-using-alevin---all-downsample-fastq-processed-to-anndata">run them myself</a>. To combine the resultant files into a single matrix, you can look at the next tutorial in this case study: <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html">Combining datasets after pre-processing</a></p>
+<p>This sample was originally one of seven. So to run the other <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k">12 downsampled FASTQ files</a>, you can use a <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/cs1generating-a-single-cell-matrix-using-alevin">workflow</a> and run them all at once! All these samples are going to take a while, so go and have several cups of tea… Or, better yet, I have <a href="https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1generating-a-single-cell-matrix-using-alevin---all-downsample-fastq-processed-to-anndata">run them myself</a>. To combine the resultant files into a single matrix, you can look at the next tutorial in this case study: <a href="/training-material/topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.html">Combining datasets after pre-processing</a></p>
 
 <h1 id="mitochondrial-flagging">Mitochondrial flagging</h1>
 
@@ -1477,7 +1475,7 @@ Consider…is this a complete set of data?</p>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<figure id="figure-7"><img src="../../images/scrna-casestudy/wab-alevin-part1workflow.png" alt="Workflow Part 1. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> <span class="notranslate">Workflow</span>  - Steps 1-3</figcaption></figure>
+<figure id="figure-7"><img src="../../images/scrna-casestudy/wab-alevin-part1workflow.png" alt="Workflow Part 1. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Workflow  - Steps 1-3</figcaption></figure>
 
 <p>We have:</p>
 
@@ -1485,10 +1483,10 @@ Consider…is this a complete set of data?</p>
   <li>Examined raw read data, annotations and necessary input files for quantification.</li>
   <li>Run Alevin in two different parameterisations, both allowing Alevin to make its own calls on what constitutes empty droplets, and applying emptyDrops instead.</li>
   <li>Deployed barcode rank plots as a way of quickly assessing the signal present in droplet datasets.</li>
-  <li>Applied the necessary conversion to pass these data to <span class="notranslate">downstream</span> processes.</li>
+  <li>Applied the necessary conversion to pass these data to downstream processes.</li>
 </ul>
 
-<p>To discuss with like-minded scientists, join our Gitter channel for all things <span class="notranslate">Galaxy</span>-<span class="notranslate">single cell</span>!
+<p>To discuss with like-minded scientists, join our Gitter channel for all things Galaxy-single cell!
  <a href="https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg" alt="Gitter. " loading="lazy" /></a></p>
 
 

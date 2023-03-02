@@ -684,13 +684,13 @@
             <div class="col-sm-10">
                  
 
-                <h1 id="building-a-galaxy-instance-specifically-for-your-training">Building a <span class="notranslate">Galaxy</span> instance specifically for your training</h1>
+                <h1 id="building-a-galaxy-instance-specifically-for-your-training">Building a Galaxy instance specifically for your training</h1>
 
-<p>To be able to run the tutorial, we need a <span class="notranslate">Galaxy</span> instance where all of the needed tools and data are available. Thus we need to describe the needed technical infrastructure.</p>
+<p>To be able to run the tutorial, we need a Galaxy instance where all of the needed tools and data are available. Thus we need to describe the needed technical infrastructure.</p>
 
-<p>The files we define in this tutorial will be used to automatically build a Docker <span class="notranslate">Galaxy</span> flavour, and also to test if a public <span class="notranslate">Galaxy</span> instance is able to run the tool.</p>
+<p>The files we define in this tutorial will be used to automatically build a Docker Galaxy flavour, and also to test if a public Galaxy instance is able to run the tool.</p>
 
-<p>In this tutorial, you will learn how to create a virtualized <span class="notranslate">Galaxy</span> instance, based on Docker, to run your training - either on normal computers or cloud environments.</p>
+<p>In this tutorial, you will learn how to create a virtualized Galaxy instance, based on Docker, to run your training - either on normal computers or cloud environments.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -698,14 +698,14 @@
   <p>In this tutorial, we will deal with:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#building-a-galaxy-instance-specifically-for-your-training" id="markdown-toc-building-a-galaxy-instance-specifically-for-your-training">Building a <span class="notranslate">Galaxy</span> instance specifically for your training</a></li>
+  <li><a href="#building-a-galaxy-instance-specifically-for-your-training" id="markdown-toc-building-a-galaxy-instance-specifically-for-your-training">Building a Galaxy instance specifically for your training</a></li>
   <li><a href="#extracting-workflows" id="markdown-toc-extracting-workflows">Extracting workflows</a>    <ol>
-      <li><a href="#testing-the-workflow-recommended" id="markdown-toc-testing-the-workflow-recommended">Testing the <span class="notranslate">workflow</span> (recommended)</a></li>
+      <li><a href="#testing-the-workflow-recommended" id="markdown-toc-testing-the-workflow-recommended">Testing the workflow (recommended)</a></li>
     </ol>
   </li>
   <li><a href="#creating-the-data-libraryyaml-recommended" id="markdown-toc-creating-the-data-libraryyaml-recommended">Creating the <code class="language-plaintext highlighter-rouge">data-library.yaml</code> (recommended)</a></li>
   <li><a href="#creating-the-data-manageryaml-optional" id="markdown-toc-creating-the-data-manageryaml-optional">Creating the <code class="language-plaintext highlighter-rouge">data-manager.yaml</code> (optional)</a></li>
-  <li><a href="#creating-the-galaxy-interactive-tour-optional" id="markdown-toc-creating-the-galaxy-interactive-tour-optional">Creating the <span class="notranslate">Galaxy</span> Interactive Tour (optional)</a></li>
+  <li><a href="#creating-the-galaxy-interactive-tour-optional" id="markdown-toc-creating-the-galaxy-interactive-tour-optional">Creating the Galaxy Interactive Tour (optional)</a></li>
   <li><a href="#testing-the-technical-infrastructure" id="markdown-toc-testing-the-technical-infrastructure">Testing the technical infrastructure</a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
@@ -714,44 +714,44 @@
 
 <h1 id="extracting-workflows">Extracting workflows</h1>
 
-<p>Once the tutorial is ready, we need to develop a <span class="notranslate">workflow</span> that represents the steps taken in the tutorial, and then extract these <span class="notranslate">workflow</span>(s) and add them to the <code class="language-plaintext highlighter-rouge">workflows</code> directory in the tutorial. Additionally we will need to add some explanation about the <span class="notranslate">workflow</span>(s) in a <code class="language-plaintext highlighter-rouge">README.md</code> file</p>
+<p>Once the tutorial is ready, we need to develop a workflow that represents the steps taken in the tutorial, and then extract these workflow(s) and add them to the <code class="language-plaintext highlighter-rouge">workflows</code> directory in the tutorial. Additionally we will need to add some explanation about the workflow(s) in a <code class="language-plaintext highlighter-rouge">README.md</code> file</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extract-the-workflow" aria-label="hands-on box: Extract the workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extract the <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-extract-the-workflow" aria-label="hands-on box: Extract the workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extract the workflow</div>
 
   <ol>
-    <li>Add the topic name as a Tag and the tutorial title as Annotation/Notes to the <span class="notranslate">workflow</span> using the <span class="notranslate">workflow</span> editor.</li>
-    <li>Download the <span class="notranslate">workflow</span> for the tutorial</li>
-    <li>Save it in the <code class="language-plaintext highlighter-rouge"><span class="notranslate">workflow</span></code> directory of the tutorial</li>
+    <li>Add the topic name as a Tag and the tutorial title as Annotation/Notes to the workflow using the workflow editor.</li>
+    <li>Download the workflow for the tutorial</li>
+    <li>Save it in the <code class="language-plaintext highlighter-rouge">workflow</code> directory of the tutorial</li>
     <li>
-      <p>Check that your <code class="language-plaintext highlighter-rouge"><span class="notranslate">workflow</span></code> directory has an <code class="language-plaintext highlighter-rouge">index.md</code> with the contents:</p>
+      <p>Check that your <code class="language-plaintext highlighter-rouge">workflow</code> directory has an <code class="language-plaintext highlighter-rouge">index.md</code> with the contents:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
-<span class="na">layout</span><span class="pi">:</span> <span class="s"><span class="notranslate">workflow</span>-list</span>
+<span class="na">layout</span><span class="pi">:</span> <span class="s">workflow-list</span>
 <span class="nn">---</span>
 </code></pre></div>      </div>
     </li>
   </ol>
 </blockquote>
 
-<h2 id="testing-the-workflow-recommended">Testing the <span class="notranslate">workflow</span> (recommended)</h2>
+<h2 id="testing-the-workflow-recommended">Testing the workflow (recommended)</h2>
 
-<p><span class="notranslate">Workflow</span> testing is a great way to get feedback that your tutorial can be run successfully on a given server. When you’re giving a training this can provide peace of mind, not only are the tools installed (as is indicated by the badges we provide) but they also work.</p>
+<p>Workflow testing is a great way to get feedback that your tutorial can be run successfully on a given server. When you’re giving a training this can provide peace of mind, not only are the tools installed (as is indicated by the badges we provide) but they also work.</p>
 
-<p>Given the <span class="notranslate">workflow</span> you created above and have included in the tutorial folder, you’ll need to create a corresponding <code class="language-plaintext highlighter-rouge">-test.yml</code> file.</p>
+<p>Given the workflow you created above and have included in the tutorial folder, you’ll need to create a corresponding <code class="language-plaintext highlighter-rouge">-test.yml</code> file.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-creating-the-test-yml-file-for-your-workflow" aria-label="hands-on box: Creating the `-test.yml` file for your workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating the `-test.yml` file for your <span class="notranslate">workflow</span></div>
+  <div class="box-title hands-on-title" id="hands-on-creating-the-test-yml-file-for-your-workflow" aria-label="hands-on box: Creating the `-test.yml` file for your workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating the `-test.yml` file for your workflow</div>
 
   <ol>
     <li>
-      <p>Find the correct name for the file; if your <span class="notranslate">workflow</span> was <code class="language-plaintext highlighter-rouge">unicycler.ga</code>, then your test file should be <code class="language-plaintext highlighter-rouge">unicycler-test.yml</code>, they need to share the same prefix.</p>
+      <p>Find the correct name for the file; if your workflow was <code class="language-plaintext highlighter-rouge">unicycler.ga</code>, then your test file should be <code class="language-plaintext highlighter-rouge">unicycler-test.yml</code>, they need to share the same prefix.</p>
     </li>
     <li>
       <p>Create the following structure:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
-<span class="pi">-</span> <span class="na">doc</span><span class="pi">:</span> <span class="s">Test sample data for the <span class="notranslate">workflow</span></span>
+<span class="pi">-</span> <span class="na">doc</span><span class="pi">:</span> <span class="s">Test sample data for the workflow</span>
   <span class="na">job</span><span class="pi">:</span>
     <span class="na">an_input_file</span><span class="pi">:</span>
       <span class="na">class</span><span class="pi">:</span> <span class="s">File</span>
@@ -770,11 +770,11 @@
 
 </blockquote>
 
-<p>You’ll need to edit the <code class="language-plaintext highlighter-rouge">job</code> and <code class="language-plaintext highlighter-rouge">outputs</code> sections according to your <span class="notranslate">workflow</span>’s inputs and outputs. Additionally you will need to edit the steps of your <span class="notranslate">workflow</span> <code class="language-plaintext highlighter-rouge">.ga</code> file appropriately.</p>
+<p>You’ll need to edit the <code class="language-plaintext highlighter-rouge">job</code> and <code class="language-plaintext highlighter-rouge">outputs</code> sections according to your workflow’s inputs and outputs. Additionally you will need to edit the steps of your workflow <code class="language-plaintext highlighter-rouge">.ga</code> file appropriately.</p>
 
 <h3 id="inputs">Inputs</h3>
 
-<p>Your <span class="notranslate">workflow</span> <strong>must</strong> use “Data Inputs” for each input dataset. For each of these input steps in the <code class="language-plaintext highlighter-rouge">.ga</code> file, you’ll need to do the following:</p>
+<p>Your workflow <strong>must</strong> use “Data Inputs” for each input dataset. For each of these input steps in the <code class="language-plaintext highlighter-rouge">.ga</code> file, you’ll need to do the following:</p>
 
 <ol>
   <li>Edit the <code class="language-plaintext highlighter-rouge">label</code></li>
@@ -783,7 +783,7 @@
   <li>Edit the <code class="language-plaintext highlighter-rouge">tool_state</code></li>
 </ol>
 
-<p>In a normal <span class="notranslate">workflow</span> you have exported from <span class="notranslate">Galaxy</span>, you’ll see something like</p>
+<p>In a normal workflow you have exported from Galaxy, you’ll see something like</p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
@@ -841,7 +841,7 @@
       filetype: ...
 </code></pre></div></div>
 
-<p>The filetype should be the <span class="notranslate">Galaxy</span> datatype of your file, for example <code class="language-plaintext highlighter-rouge">fastqsanger</code>, <code class="language-plaintext highlighter-rouge">tabular</code>, <code class="language-plaintext highlighter-rouge">bam</code>.</p>
+<p>The filetype should be the Galaxy datatype of your file, for example <code class="language-plaintext highlighter-rouge">fastqsanger</code>, <code class="language-plaintext highlighter-rouge">tabular</code>, <code class="language-plaintext highlighter-rouge">bam</code>.</p>
 
 <h3 id="outputs">Outputs</h3>
 
@@ -852,7 +852,7 @@
   <li>
     <p>Convert the relevant <code class="language-plaintext highlighter-rouge">outputs</code> to <code class="language-plaintext highlighter-rouge">workflow_outputs</code></p>
 
-    <p>In a normal <span class="notranslate">workflow</span> you see</p>
+    <p>In a normal workflow you see</p>
 
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -907,18 +907,18 @@
 <p>You can test the file you’ve written with the following command and a recent version (&gt;=0.56.0) of planemo:</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">planemo test \
-</span><span class="gp">	--<span class="notranslate">galaxy</span>_url "$</span><span class="notranslate">GALAXY</span>_URL<span class="s2">" </span><span class="se">\</span><span class="s2">
-</span><span class="gp">	--<span class="notranslate">galaxy</span>_user_key "$</span><span class="s2"><span class="notranslate">GALAXY</span>_USER_KEY"</span> <span class="se">\</span>
+</span><span class="gp">	--galaxy_url "$</span>GALAXY_URL<span class="s2">" </span><span class="se">\</span><span class="s2">
+</span><span class="gp">	--galaxy_user_key "$</span><span class="s2">GALAXY_USER_KEY"</span> <span class="se">\</span>
 <span class="go">	--no_shed_install \
-	--engine exte<span class="notranslate">rna</span>l_<span class="notranslate">galaxy</span> \
-	<span class="notranslate">workflow</span>.ga
+	--engine external_galaxy \
+	workflow.ga
 </span></code></pre></div></div>
 
-<p>Planemo will autodetect that the <code class="language-plaintext highlighter-rouge"><span class="notranslate">workflow</span>-test.yml</code> file and load that for the testing.</p>
+<p>Planemo will autodetect that the <code class="language-plaintext highlighter-rouge">workflow-test.yml</code> file and load that for the testing.</p>
 
 <h1 id="creating-the-data-libraryyaml-recommended">Creating the <code class="language-plaintext highlighter-rouge">data-library.yaml</code> (recommended)</h1>
 
-<p>The datasets needed for a tutorial can also be integrated in the <span class="notranslate">Galaxy</span> instance inside of data libraries. These allow the datasets to be easily shared with all users of a <span class="notranslate">Galaxy</span> instance. Additionally it lets trainees avoid each re-downloading the input data.</p>
+<p>The datasets needed for a tutorial can also be integrated in the Galaxy instance inside of data libraries. These allow the datasets to be easily shared with all users of a Galaxy instance. Additionally it lets trainees avoid each re-downloading the input data.</p>
 
 <p>These datasets are described in the <code class="language-plaintext highlighter-rouge">data-library.yaml</code> files:</p>
 
@@ -926,8 +926,8 @@
 <span class="na">destination</span><span class="pi">:</span>
   <span class="na">type</span><span class="pi">:</span> <span class="s">library</span>
   <span class="na">name</span><span class="pi">:</span> <span class="s">GTN - Material</span>
-  <span class="na">description</span><span class="pi">:</span> <span class="s"><span class="notranslate">Galaxy</span> Training Network Material</span>
-  <span class="na">synopsis</span><span class="pi">:</span> <span class="s"><span class="notranslate">Galaxy</span> Training Network Material. See https://training.<span class="notranslate">galaxy</span>project.org</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s">Galaxy Training Network Material</span>
+  <span class="na">synopsis</span><span class="pi">:</span> <span class="s">Galaxy Training Network Material. See https://training.galaxyproject.org</span>
 <span class="na">items</span><span class="pi">:</span>
 <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Title of the topic</span>
   <span class="na">description</span><span class="pi">:</span> <span class="s">Summary of the topic</span>
@@ -939,7 +939,7 @@
       <span class="na">items</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="na">info</span><span class="pi">:</span> <span class="s">https://doi.org/10.5281/zenodo....</span>
         <span class="na">url</span><span class="pi">:</span> <span class="s">https://zenodo.org/api/files/URL/to/the/input/file</span>
-        <span class="na">ext</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>-datatype</span>
+        <span class="na">ext</span><span class="pi">:</span> <span class="s">galaxy-datatype</span>
         <span class="na">src</span><span class="pi">:</span> <span class="s">url</span>
 </code></pre></div></div>
 
@@ -964,12 +964,12 @@
 
 <h1 id="creating-the-data-manageryaml-optional">Creating the <code class="language-plaintext highlighter-rouge">data-manager.yaml</code> (optional)</h1>
 
-<p>Some of the tools may require specific databases, specifically prepared for the tool. In this case, some <span class="notranslate">Galaxy</span> tools come with “data managers” to simplify this process.</p>
+<p>Some of the tools may require specific databases, specifically prepared for the tool. In this case, some Galaxy tools come with “data managers” to simplify this process.</p>
 
 <p>If you need such data managers for your training, then you should describe how to run them in the <code class="language-plaintext highlighter-rouge">data-manager.yaml</code> file:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">data_managers</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">url to data manager on <span class="notranslate">ToolShed</span></span>
+    <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">url to data manager on ToolShed</span>
       <span class="na">params</span><span class="pi">:</span>
         <span class="pi">-</span> <span class="s1">'</span><span class="s">param1'</span><span class="err">:</span> <span class="s1">'</span><span class="s">'</span>
         <span class="pi">-</span> <span class="s1">'</span><span class="s">param2'</span><span class="err">:</span> <span class="s1">'</span><span class="s">value'</span>
@@ -984,14 +984,14 @@
         <span class="pi">-</span> <span class="s">__dbkeys__</span>
 </code></pre></div></div>
 
-<h1 id="creating-the-galaxy-interactive-tour-optional">Creating the <span class="notranslate">Galaxy</span> Interactive Tour (optional)</h1>
+<h1 id="creating-the-galaxy-interactive-tour-optional">Creating the Galaxy Interactive Tour (optional)</h1>
 
-<p>A <span class="notranslate">Galaxy</span> Interactive Tour is a way to go through an entire analysis, step by step inside <span class="notranslate">Galaxy</span> in an interactive and explorative way.
-It is a great way to help users run the tutorial directly inside <span class="notranslate">Galaxy</span>. To learn more about creating a <span class="notranslate">Galaxy</span> tour please have a look at our <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html">dedicated tour training</a>.</p>
+<p>A Galaxy Interactive Tour is a way to go through an entire analysis, step by step inside Galaxy in an interactive and explorative way.
+It is a great way to help users run the tutorial directly inside Galaxy. To learn more about creating a Galaxy tour please have a look at our <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-tours/tutorial.html">dedicated tour training</a>.</p>
 
 <h1 id="testing-the-technical-infrastructure">Testing the technical infrastructure</h1>
 
-<p>Once we have defined all the requirements for running the tutorial, we can test these requirements, either in a locally running <span class="notranslate">Galaxy</span> or in a Docker container. Please see our tutorial about <a href="/training-material/topics/teaching/tutorials/setup-galaxy-for-training/tutorial.html">Setting up <span class="notranslate">Galaxy</span> for Training</a> about how to test your tutorial requirements.</p>
+<p>Once we have defined all the requirements for running the tutorial, we can test these requirements, either in a locally running Galaxy or in a Docker container. Please see our tutorial about <a href="/training-material/topics/teaching/tutorials/setup-galaxy-for-training/tutorial.html">Setting up Galaxy for Training</a> about how to test your tutorial requirements.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 

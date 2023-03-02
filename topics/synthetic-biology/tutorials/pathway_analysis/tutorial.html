@@ -935,8 +935,6 @@
     
         
     
-        
-    
     </ul>
 
 
@@ -965,13 +963,13 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>Progress in synthetic biology is enabled by powerful bioinformatics tools such as those aimed to design metabolic pathways for the production of chemicals. These tools are available in SynBioCAD portal which is the first <span class="notranslate">Galaxy</span> set of tools for synthetic biology and metabolic engineering (<span class="citation"><a href="#Hrisson2022">Hérisson <i>et al.</i> 2022</a></span>).</p>
+<p>Progress in synthetic biology is enabled by powerful bioinformatics tools such as those aimed to design metabolic pathways for the production of chemicals. These tools are available in SynBioCAD portal which is the first Galaxy set of tools for synthetic biology and metabolic engineering (<span class="citation"><a href="#Hrisson2022">Hérisson <i>et al.</i> 2022</a></span>).</p>
 
-<p>In this tutorial, we will use a set of tools from the <strong>Pathway Analysis <span class="notranslate">workflow</span></strong> which will enable you to evaluate a set of heterelogous pathways previously produced by the RetroSynthesis <span class="notranslate">workflow</span> in a chassis organism (<em>E. coli</em> iML1515). These workflows are available in the <a href="https://galaxy-synbiocad.org"><span class="notranslate">Galaxy</span> SynbioCAD platform</a>. The goal is to inform the user of the theoretically best performing pathways by ranking them based on the four following criteria: target product flux, thermodynamic feasibility, pathway length and enzyme availability.</p>
+<p>In this tutorial, we will use a set of tools from the <strong>Pathway Analysis workflow</strong> which will enable you to evaluate a set of heterelogous pathways previously produced by the RetroSynthesis workflow in a chassis organism (<em>E. coli</em> iML1515). These workflows are available in the <a href="https://galaxy-synbiocad.org">Galaxy SynbioCAD platform</a>. The goal is to inform the user of the theoretically best performing pathways by ranking them based on the four following criteria: target product flux, thermodynamic feasibility, pathway length and enzyme availability.</p>
 
 <p>We recommend that you follow the Retrosynthesis tutorial before starting the current tutorial which will enable you to find pathways to synthesize heterologous compounds producing Lycopene in the <em>E. coli</em> chassis organism.</p>
 
-<p>Four main steps will be run using the following <span class="notranslate">workflow</span>:</p>
+<p>Four main steps will be run using the following workflow:</p>
 
 <p>To rank the computed heterologous pathways, we need to calculate some metrics. This is why an in-house Flux Balance Analysis (FBA) was developed to calculate the production flux of a given target (e.g. lycopene). The method forces a fraction of its maximal flux through the biomass reaction while optimizing for the target molecule. This is achieved by the <em>Flux Balance Analysis</em> tool.</p>
 
@@ -983,7 +981,7 @@
 
 <p><img src="../../images/pathway_analysis_workflow.jpg" alt="This image shows the pathway analysis workflow viewed from the Galaxy editor interface. The pathway analysis workflow will evaluate and rank pathways based on multiple metrics. First, Flux Balance Analysis (FBA) node will take as inputs a collection of SBMLs representing the heterologous pathways to be evaluated, another SBML representing the chassis, and 2 additional inputs are expected for indicating the biomass reaction ID and the cell compartment ID that will be used during the FBA analysis. The FBA method will optimize the production of the target under the constraint that the model should still produce some level biomass. Then, the Thermo tool is used to estimate thermodynamics values for each pathway to know whether it is favorable towards target production in physiological conditions. After that the Score Pathway tool will calculate a global score combining target flux, pathway thermodynamics, pathway length and enzyme availability. Finally, the pathways are ranked based on the global score using the Rank Pathways tool. All exchange files are SBMLs. The output is a CSV file which contains the pathway IDs and their corresponding global score." loading="lazy" /></p>
 
-<p>Note that we will run the steps of this <span class="notranslate">workflow</span> individually so as not to neglect the understanding of the intermediate steps. Then, we will run the <span class="notranslate">workflow</span> automatically so that it itself retrieves the outputs from the previous step and gives them as input to the next tool.</p>
+<p>Note that we will run the steps of this workflow individually so as not to neglect the understanding of the intermediate steps. Then, we will run the workflow automatically so that it itself retrieves the outputs from the previous step and gives them as input to the next tool.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -1002,7 +1000,7 @@
       <li><a href="#rank-annotated-pathways" id="markdown-toc-rank-annotated-pathways">Rank annotated pathways</a></li>
     </ol>
   </li>
-  <li><a href="#run-the-pathway-analysis-workflow" id="markdown-toc-run-the-pathway-analysis-workflow">Run the <strong>Pathway Analysis <span class="notranslate">Workflow</span></strong></a></li>
+  <li><a href="#run-the-pathway-analysis-workflow" id="markdown-toc-run-the-pathway-analysis-workflow">Run the <strong>Pathway Analysis Workflow</strong></a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
@@ -1014,7 +1012,7 @@
 
 <ul>
   <li>
-    <p>A set of pathways provided in the SBML format (Systems Biology Markup Language) to be ranked, modeling heterologous pathways such as those outputted by the <strong>RetroSynthesis <span class="notranslate">workflow</span></strong> (available in <a href="https://galaxy-synbiocad.org"><span class="notranslate">Galaxy</span> SynbioCAD platform</a>).</p>
+    <p>A set of pathways provided in the SBML format (Systems Biology Markup Language) to be ranked, modeling heterologous pathways such as those outputted by the <strong>RetroSynthesis workflow</strong> (available in <a href="https://galaxy-synbiocad.org">Galaxy SynbioCAD platform</a>).</p>
   </li>
   <li>
     <p>The GEM (Genome-scale Metabolic Models) which is a formalized representation of the metabolism of the host organism (the model is <em>E. coli</em> iML1515), provided in the SBML format.</p>
@@ -1044,7 +1042,7 @@ https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/SBML_Model_iML
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Create a list or collection named <code class="language-plaintext highlighter-rouge">Heterologous pathways</code> and composed of the 9 rpSBML pathways.</p>
@@ -1060,11 +1058,11 @@ https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/SBML_Model_iML
 
 <p>Notice that the starting compounds (in other words, <em>the precursors</em>) of the predicted pathways (also referred as the <em>heterologous pathways</em>) are compounds that have been initially extracted from the genome-scale metabolic model (GEM) of the organism we are interested in (also referred as <em>chassis</em>). While this step is out of the scope of the present Pathway Analysis tutorial, this means that the precursors of predicted pathways are also present in the chassis model. Hence, predicted pathways and the chassis organism model can be merged to construct “augmented” whole-cell models, enabling flux analysis of these metabolic systems. This is what we’ll do here to predict the production flux of a compound of interest.</p>
 
-<p>Within the frame of this tutorial, we’ll use the <em>E. coli</em> iML1515 GEM (downloaded from the <a href="http://bigg.ucsd.edu/">BiGG database</a>) to model the chassis metabolism of <em>E. coli</em> and the target compound is the lycopene. The provided <em>E. coli</em> model is in the SBML. The extraction of precursor compounds and the pathway prediction have already been performed during the RetroSynthesis <span class="notranslate">workflow</span> (available in <a href="https://galaxy-synbiocad.org"><span class="notranslate">Galaxy</span> SynbioCAD platform</a>).</p>
+<p>Within the frame of this tutorial, we’ll use the <em>E. coli</em> iML1515 GEM (downloaded from the <a href="http://bigg.ucsd.edu/">BiGG database</a>) to model the chassis metabolism of <em>E. coli</em> and the target compound is the lycopene. The provided <em>E. coli</em> model is in the SBML. The extraction of precursor compounds and the pathway prediction have already been performed during the RetroSynthesis workflow (available in <a href="https://galaxy-synbiocad.org">Galaxy SynbioCAD platform</a>).</p>
 
 <p>The FBA (Flux Balance Analysis) method used to calculate the flux is a mathematical approach (as decribed in section Methods in <span class="citation"><a href="#Hrisson2022">Hérisson <i>et al.</i> 2022</a></span>) which uses the COBRApy package (<span class="citation"><a href="#Ebrahim2013">Ebrahim <i>et al.</i> 2013</a></span>) and proposes 3 different analysis methods (standard FBA, parsimonious FBA, fraction of reaction). The first two methods are specific to the COBRApy package and the last one <code class="language-plaintext highlighter-rouge">Fraction of Reaction</code> is an in-house analysis method (as decribed in section Methods in <span class="citation"><a href="#Hrisson2022">Hérisson <i>et al.</i> 2022</a></span>) to consider the cell needs for its own maintenance while producing the target compound.</p>
 
-<p>Within the <span class="notranslate">workflow</span>, the purpose of the <em>Flux Balance Analysis</em> tool is to predict the production flux of the targeted compound, while considering the cellular needs. Under such simulation conditions, the analysis that returns a low production flux may be due to some precursor compounds having a limiting production flux, nor cofactor fluxes involved not being sufficiently balanced by the chassis native metabolism. Pathways with high flux would be caused by both the precursor compounds and the cofactors being in abundance. In either case, bottlenecks that limit the flux of the pathway may be investigated (this is outside of the scope of the <span class="notranslate">workflow</span>) and pathways that do not theoretically generate high yields can be filtered out.</p>
+<p>Within the workflow, the purpose of the <em>Flux Balance Analysis</em> tool is to predict the production flux of the targeted compound, while considering the cellular needs. Under such simulation conditions, the analysis that returns a low production flux may be due to some precursor compounds having a limiting production flux, nor cofactor fluxes involved not being sufficiently balanced by the chassis native metabolism. Pathways with high flux would be caused by both the precursor compounds and the cofactors being in abundance. In either case, bottlenecks that limit the flux of the pathway may be investigated (this is outside of the scope of the workflow) and pathways that do not theoretically generate high yields can be filtered out.</p>
 
 <p>We first perform an FBA (with COBRApy) optimizing the biomass reaction and record its maximal theoretical flux. The upper and lower bounds of the biomass reaction are then set to a same amount, equals to a fraction of its previously recorded optimum (default is 75% of its optimum). The method then performs a second FBA where biomass flux is enforced to this fraction of its optimum while optimizing the target production flux. Simulated fluxes are recorded directly into the SBML file and all changed flux bounds are reset to their original values before saving the output file.</p>
 
@@ -1081,7 +1079,7 @@ https://zenodo.org/api/files/5db78fa1-b8cb-4046-b57c-8a9d00806f42/SBML_Model_iML
   <div class="box-title hands-on-title" id="hands-on-calculating-the-flux-of-a-target-using-flux-balance-analysis-fba" aria-label="hands-on box: Calculating the flux of a target using Flux Balance Analysis (FBA)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Calculating the flux of a target using Flux Balance Analysis (FBA)</div>
 
   <ol>
-    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rpfba/rpfba/5.12.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/rpfba/rpfba/5.12.1"><strong>Flux balance analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/rpfba/rpfba/5.12.1</span></span>  with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rpfba/rpfba/5.12.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/rpfba/rpfba/5.12.1"><strong>Flux balance analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/rpfba/rpfba/5.12.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Pathway (rpSBML)”</em>: Select <code class="language-plaintext highlighter-rouge">Heterologous pathways</code> (Input dataset collection) from your current history.</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Model (SBML)”</em>: Select <code class="language-plaintext highlighter-rouge">SBML_Model_iML1515.xml</code> (Input dataset) from your current history.</li>
@@ -1133,7 +1131,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
 
 <h2 id="compute-thermodynamics-values">Compute thermodynamics values</h2>
 
-<p>The goal of the thermodynamic analysis is to estimate the feasibility of the predicted pathways toward target production, in physiological conditions. The eQuilibrator libraries (<span class="citation"><a href="#Flamholz_2011">Flamholz <i>et al.</i> 2011</a></span>) are used to calculate the formation energy of compounds by either using public database IDs (when referenced within the tools inte<span class="notranslate">rna</span>l database) or by decomposing the chemical structure and calculating its energy of formation using the component contribution method.</p>
+<p>The goal of the thermodynamic analysis is to estimate the feasibility of the predicted pathways toward target production, in physiological conditions. The eQuilibrator libraries (<span class="citation"><a href="#Flamholz_2011">Flamholz <i>et al.</i> 2011</a></span>) are used to calculate the formation energy of compounds by either using public database IDs (when referenced within the tools internal database) or by decomposing the chemical structure and calculating its energy of formation using the component contribution method.</p>
 
 <p>The reaction Gibbs energy is estimated by combining the energy of formation of the compounds involved in the reaction (with consideration for the stoichiometric coefficients).</p>
 
@@ -1147,7 +1145,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
   <div class="box-title hands-on-title" id="hands-on-compute-thermodynamics-values-for-each-pathway-using-rpthermo-tool" aria-label="hands-on box: Compute thermodynamics values for each pathway using rpThermo tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Compute thermodynamics values for each pathway using rpThermo tool</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpthermo/rpthermo/5.12.1" title="Tested with toolshed.g2.bx.psu.edu/repos/tduigou/rpthermo/rpthermo/5.12.1"><strong>Thermo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/tduigou/rpthermo/rpthermo/5.12.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpthermo/rpthermo/5.12.1" title="Tested with toolshed.g2.bx.psu.edu/repos/tduigou/rpthermo/rpthermo/5.12.1"><strong>Thermo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/rpthermo/rpthermo/5.12.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input File”</em>: <code class="language-plaintext highlighter-rouge">pathway_with_fba</code> (output of <strong>Flux balance analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1188,7 +1186,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
   <div class="box-title hands-on-title" id="hands-on-compute-the-global-score-using-the-pathway-score-tool" aria-label="hands-on box: Compute the global score using the _Pathway Score_ tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Compute the global score using the _Pathway Score_ tool</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpscore/rpscore/5.12.1" title="Tested with toolshed.g2.bx.psu.edu/repos/tduigou/rpscore/rpscore/5.12.1"><strong>Score Pathway</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/tduigou/rpscore/rpscore/5.12.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpscore/rpscore/5.12.1" title="Tested with toolshed.g2.bx.psu.edu/repos/tduigou/rpscore/rpscore/5.12.1"><strong>Score Pathway</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/rpscore/rpscore/5.12.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Pathway (rpSBML)”</em>: <code class="language-plaintext highlighter-rouge">pathway_with_thermo</code> (output of <strong>Thermo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1229,7 +1227,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
   <div class="box-title hands-on-title" id="hands-on-rank-annotated-pathways-using-rpranker-tool" aria-label="hands-on box: Rank annotated pathways using rpRanker tool"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Rank annotated pathways using rpRanker tool</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpranker/rpranker/5.12.1" title="Tested with toolshed.g2.bx.psu.edu/repos/tduigou/rpranker/rpranker/5.12.1"><strong>Rank Pathways</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/tduigou/rpranker/rpranker/5.12.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/tduigou/rpranker/rpranker/5.12.1" title="Tested with toolshed.g2.bx.psu.edu/repos/tduigou/rpranker/rpranker/5.12.1"><strong>Rank Pathways</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/tduigou/rpranker/rpranker/5.12.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Pathways”</em>: <code class="language-plaintext highlighter-rouge">scored_pathway</code> (output of <strong>Score Pathway</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1262,23 +1260,23 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
 
 </blockquote>
 
-<h1 id="run-the-pathway-analysis-workflow">Run the <strong>Pathway Analysis <span class="notranslate">Workflow</span></strong></h1>
+<h1 id="run-the-pathway-analysis-workflow">Run the <strong>Pathway Analysis Workflow</strong></h1>
 
-<p>In this section, you can run the Pathway Analysis <span class="notranslate">Workflow</span> more easily and fastly following these instructions:</p>
+<p>In this section, you can run the Pathway Analysis Workflow more easily and fastly following these instructions:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-execute-the-entire-workflow-in-one-go" aria-label="hands-on box: Execute the entire workflow in one go."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Execute the entire <span class="notranslate">workflow</span> in one go.</div>
+  <div class="box-title hands-on-title" id="hands-on-execute-the-entire-workflow-in-one-go" aria-label="hands-on box: Execute the entire workflow in one go."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Execute the entire workflow in one go.</div>
 
   <ol>
     <li>
-      <p>Import your <strong>Pathway Analysis <span class="notranslate">Workflow</span></strong> by uploading the <a href="https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/pathway_analysis/workflows/main_workflow.ga"><strong><span class="notranslate">workflow</span> file</strong></a>.</p>
+      <p>Import your <strong>Pathway Analysis Workflow</strong> by uploading the <a href="https://training.galaxyproject.org/training-material/topics/synthetic-biology/tutorials/pathway_analysis/workflows/main_workflow.ga"><strong>workflow file</strong></a>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a <span class="notranslate">workflow</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> at the top-right of the screen</li>   <li>Provide your <span class="notranslate">workflow</span>     <ul>       <li>Option 1: Paste the URL of the <span class="notranslate">workflow</span> into the box labelled <em>“Archived <span class="notranslate">Workflow</span> URL”</em></li>       <li>Option 2: Upload the <span class="notranslate">workflow</span> file in the box labelled <em>“Archived <span class="notranslate">Workflow</span> File”</em></li>     </ul>   </li>   <li>Click the <strong>Import <span class="notranslate">workflow</span></strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-workflow"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-workflow-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a workflow<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see a list of all your workflows.</li>   <li>Click on the upload icon <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> at the top-right of the screen</li>   <li>Provide your workflow     <ul>       <li>Option 1: Paste the URL of the workflow into the box labelled <em>“Archived Workflow URL”</em></li>       <li>Option 2: Upload the workflow file in the box labelled <em>“Archived Workflow File”</em></li>     </ul>   </li>   <li>Click the <strong>Import workflow</strong> button</li> </ul> </blockquote>
     </li>
-    <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see <strong>Pathway Analysis <span class="notranslate">Workflow</span></strong></li>
-    <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>
-    <li>Provide the <span class="notranslate">workflow</span> with the following parameters:
+    <li>Click on <em>Workflow</em> on the top menu bar of Galaxy. You will see <strong>Pathway Analysis Workflow</strong></li>
+    <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> (<em>Run workflow</em>) button next to your workflow</li>
+    <li>Provide the workflow with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Heterologous pathways”:</em> Select <code class="language-plaintext highlighter-rouge">Heterologous pathways</code> (Input dataset collection) from your current history.</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Chassis where to produce target from”</em>: Select <code class="language-plaintext highlighter-rouge">SBML_Model_iML1515.xml</code> (Input dataset) from your current history.</li>
@@ -1297,7 +1295,7 @@ The default is <code class="language-plaintext highlighter-rouge">c</code>, the 
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>To select the best pathways for producing the lycopene in <em>E. coli</em>, some metrics have to be estimated, namely production flux of the target and pathway thermodynamics. A global score is then computed by combining these criteria with others (pathway length, enzyme availability score, reaction SMARTS) using a machine learning model. These steps achieved using the tools of the presented Pathway Analysis <span class="notranslate">workflow</span>.</p>
+<p>To select the best pathways for producing the lycopene in <em>E. coli</em>, some metrics have to be estimated, namely production flux of the target and pathway thermodynamics. A global score is then computed by combining these criteria with others (pathway length, enzyme availability score, reaction SMARTS) using a machine learning model. These steps achieved using the tools of the presented Pathway Analysis workflow.</p>
 
 <p><img src="../../images/pathway_analysis_scheme.png" alt="This scheme represents the pathway analysis workflow enabling the identification of the best pathways for producing a molecule of interest. To do that the workflow takes as input the collection of pathways to be scored and the metabolic model of the chassis (all files are SBMLs). Iteratively, each pathway is merged with the chassis model, and several metrics are evaluated such as the target production flux (using the rpFBA tool) and the thermodynamics of the pathway (using the rpThermo tool). A global score of each pathway combining these metrics with others is computed using a machine learning method (with the rpScore tool). Finally, the pathways are ranked from best to worst according to their global score (using the rpRanker tool). During the workflow, all metrics are stored as SBML annotations. The final output is a CSV file which contains the pathway IDs and their corresponding global score." loading="lazy" /></p>
 

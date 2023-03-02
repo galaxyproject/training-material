@@ -792,8 +792,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
             UseGalaxy.be
         </a>
@@ -858,7 +856,7 @@
 
 <p>The resulting dataset is ready to be used for phylogenetic reconstruction.</p>
 
-<p><strong>If you are starting from sequence <span class="notranslate">reads</span>, please follow
+<p><strong>If you are starting from sequence reads, please follow
 <a href="/training-material/topics/assembly/tutorials/general-introduction/tutorial.html">An Introduction to Genome Assembly</a>, and the appropriate genome assembly training for your sequencing technology from GTN’s <a href="/training-material/topics/assembly/index.html">Assembly</a> section</strong></p>
 
 <blockquote class="agenda">
@@ -886,7 +884,7 @@
 </blockquote>
 
 <h1 id="get-data">Get data</h1>
-<p>For this training we will use a subset of the genome (chromosome 5) from four strains of <em>S. cerevisiae</em>. The GenBank annotated sequenced were produced using ‘funannotate predict annotation’ (<span class="notranslate">Galaxy</span> Version 1.8.9+<span class="notranslate">galaxy</span>2) on the nucleotide sequences sequences.</p>
+<p>For this training we will use a subset of the genome (chromosome 5) from four strains of <em>S. cerevisiae</em>. The GenBank annotated sequenced were produced using ‘funannotate predict annotation’ (Galaxy Version 1.8.9+galaxy2) on the nucleotide sequences sequences.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
@@ -909,7 +907,7 @@ https://zenodo.org/record/6610704/files/CM005299.1.genome.fasta
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>Optional: Rename each dataset to its accession number followed by ‘.genome.fasta’ or ‘.genbank’.</li>
     <li>
@@ -929,16 +927,16 @@ https://zenodo.org/record/6610704/files/CM005299.1.genome.fasta
 <p>Before we can annotate the genome, we will prepare the data by masking repetitive sequences in the genome.
 Repeat-rich regions can interfere with genome annotation tools. In this step we find and soft-mask repetitive regions in the genome. The annotation tool can then take this information into account (<a href="/training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html">see RepeatMasker tutorial for more details</a>).
 We use <strong>RepeatMasker</strong>
-<span class="citation"><a href="#RepeatMasker">Smit <i>et al.</i> 2013</a></span>, a program that screens <span class="notranslate">DNA</span> sequences for interspersed repeats and low complexity <span class="notranslate">DNA</span> sequences.
-This program has historically made use of <a href="https://www.girinst.org/repbase/update/index.html">RepBase</a> (<span class="citation"><a href="#Kohany2006-ks">Kohany <i>et al.</i> 2006</a></span>), a service of the Genetic Information Research Institute, but this database in no longer open access. Instead, we will use <a href="https://www.dfam.org/home">Dfam</a> (<span class="citation"><a href="#Storer2021">Storer <i>et al.</i> 2021</a></span>) an open collection of Transposable Element <span class="notranslate">DNA</span> sequence alignments,  HMMs derived from Repbase sequences and consensus sequences. For this reason, the annotation of repetitive sequences might be incomplete.</p>
+<span class="citation"><a href="#RepeatMasker">Smit <i>et al.</i> 2013</a></span>, a program that screens DNA sequences for interspersed repeats and low complexity DNA sequences.
+This program has historically made use of <a href="https://www.girinst.org/repbase/update/index.html">RepBase</a> (<span class="citation"><a href="#Kohany2006-ks">Kohany <i>et al.</i> 2006</a></span>), a service of the Genetic Information Research Institute, but this database in no longer open access. Instead, we will use <a href="https://www.dfam.org/home">Dfam</a> (<span class="citation"><a href="#Storer2021">Storer <i>et al.</i> 2021</a></span>) an open collection of Transposable Element DNA sequence alignments,  HMMs derived from Repbase sequences and consensus sequences. For this reason, the annotation of repetitive sequences might be incomplete.</p>
 
-<p>RepeatMasker will only accept compact fasta headers. Before we can mask repetitive regions with RepeatMasker we must trim the NCBI long header (<code class="language-plaintext highlighter-rouge">BK006939.2 TPA_inf: Saccharomyces cerevisiae S288C chromosome V, complete sequence</code>) to leave only the accession number (<code class="language-plaintext highlighter-rouge">&gt;BK006939.2</code>) by using a regular <span class="notranslate">expression</span>.</p>
+<p>RepeatMasker will only accept compact fasta headers. Before we can mask repetitive regions with RepeatMasker we must trim the NCBI long header (<code class="language-plaintext highlighter-rouge">BK006939.2 TPA_inf: Saccharomyces cerevisiae S288C chromosome V, complete sequence</code>) to leave only the accession number (<code class="language-plaintext highlighter-rouge">&gt;BK006939.2</code>) by using a regular expression.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-mask-repetitive-sequences" aria-label="hands-on box:  Mask repetitive sequences "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Mask repetitive sequences</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2"><strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Input dataset collection)</li>
         <li>In <em>“Replacement”</em>:
@@ -961,9 +959,9 @@ This program has historically made use of <a href="https://www.girinst.org/repba
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy0"><strong>RepeatMasker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy0"><strong>RepeatMasker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy0</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genomic <span class="notranslate">DNA</span>”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genomic DNA”</em>: <code class="language-plaintext highlighter-rouge">outfile</code> (output of <strong>Replace Text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Repeat library source”</em>: <code class="language-plaintext highlighter-rouge">DFam (curated only, bundled with RepeatMasker)</code>
           <ul>
             <li><em>“Select species name from a list?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
@@ -987,7 +985,7 @@ This program has historically made use of <a href="https://www.girinst.org/repba
 
 <h2 id="annotate-with-funannotate">Annotate with Funannotate</h2>
 
-<p>We will predict protein-coding genes from genomic sequences using <a href="https://funannotate.readthedocs.io/">Funannotate</a> (<span class="citation"><a href="#Young2019">Young and Gillung 2019</a></span>), which collects evidence from different ab-initio gene predictors as well as from <span class="notranslate">RNA</span>-seq or ESTs data. Funannotate has been developed for Fungi but it works with any Eukaryotic genome. The output of Funannotate is a list of ORFs and their translation in GenBank format.</p>
+<p>We will predict protein-coding genes from genomic sequences using <a href="https://funannotate.readthedocs.io/">Funannotate</a> (<span class="citation"><a href="#Young2019">Young and Gillung 2019</a></span>), which collects evidence from different ab-initio gene predictors as well as from RNA-seq or ESTs data. Funannotate has been developed for Fungi but it works with any Eukaryotic genome. The output of Funannotate is a list of ORFs and their translation in GenBank format.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-2" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
@@ -1004,7 +1002,7 @@ This program has historically made use of <a href="https://www.girinst.org/repba
   <div class="box-title hands-on-title" id="hands-on-annotate-genome" aria-label="hands-on box:  Annotate genome "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Annotate genome</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2"><strong>Funannotate predict annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2"><strong>Funannotate predict annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Assembly to annotate”</em>: <code class="language-plaintext highlighter-rouge">output_masked_genome</code> (output of <strong>RepeatMasker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Organism”</em>:
@@ -1024,7 +1022,7 @@ This program has historically made use of <a href="https://www.girinst.org/repba
       <blockquote class="tip">
         <div class="box-title tip-title" id="tip"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-contents" aria-expanded="true" aria-label="Toggle tip box: "><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-        <p>If available, include m<span class="notranslate">RNA</span> and/or ESTs in this evidence section to increase sensitivity of predictions.</p>
+        <p>If available, include mRNA and/or ESTs in this evidence section to increase sensitivity of predictions.</p>
       </blockquote>
 
       <ul>
@@ -1061,12 +1059,12 @@ This program has historically made use of <a href="https://www.girinst.org/repba
   <div class="box-title hands-on-title" id="hands-on-extract-orfs" aria-label="hands-on box:  Extract ORFs "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Extract ORFs</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/glimmer_gbk_to_orf/glimmer_gbk_to_orf/3.02" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/glimmer_gbk_to_orf/glimmer_gbk_to_orf/3.02"><strong>Extract ORF</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/glimmer_gbk_to_orf/glimmer_gbk_to_orf/3.02</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/glimmer_gbk_to_orf/glimmer_gbk_to_orf/3.02" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/glimmer_gbk_to_orf/glimmer_gbk_to_orf/3.02"><strong>Extract ORF</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/glimmer_gbk_to_orf/glimmer_gbk_to_orf/3.02</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“gene bank file”</em>: <code class="language-plaintext highlighter-rouge">annot_gbk</code> (output of <strong>Funannotate predict annotation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> - or the genbank files downloaded from Zenodo)</li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1"><strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/regex_find_replace/regex1/1.0.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1"><strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">aa_output</code> (output of <strong>Extract ORF</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Check”</em>:
@@ -1081,7 +1079,7 @@ This program has historically made use of <a href="https://www.girinst.org/repba
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Collection of files to collapse into single dataset”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Prepend File name”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1120,7 +1118,7 @@ The result file ‘orthology-groups’ contains one row per orthogroup and one c
   <div class="box-title hands-on-title" id="hands-on-find-and-filter-orthologs" aria-label="hands-on box:  Find and filter orthologs "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Find and filter orthologs</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/proteinortho/proteinortho/6.0.14+galaxy2.9.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/proteinortho/proteinortho/6.0.14+galaxy2.9.1"><strong>Proteinortho</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/proteinortho/proteinortho/6.0.14+<span class="notranslate">galaxy</span>2.9.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/proteinortho/proteinortho/6.0.14+galaxy2.9.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/proteinortho/proteinortho/6.0.14+galaxy2.9.1"><strong>Proteinortho</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/proteinortho/proteinortho/6.0.14+galaxy2.9.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input fasta files (&gt;2)”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Activate synteny feature (POFF)”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
@@ -1187,7 +1185,7 @@ It outputs a proxy of completeness, duplication and fragmentation of the annotat
   <div class="box-title hands-on-title" id="hands-on-qc-with-busco" aria-label="hands-on box:  QC with Busco "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  QC with Busco</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Proteome</code></li>
@@ -1237,7 +1235,7 @@ It outputs a proxy of completeness, duplication and fragmentation of the annotat
   <div class="box-title hands-on-title" id="hands-on-extract-protein-sequences" aria-label="hands-on box:  Extract protein sequences "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Extract protein sequences</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/proteinortho_grab_proteins/proteinortho_grab_proteins/6.0.14+galaxy2.9.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/proteinortho_grab_proteins/proteinortho_grab_proteins/6.0.14+galaxy2.9.1"><strong>Proteinortho grab proteins</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/proteinortho_grab_proteins/proteinortho_grab_proteins/6.0.14+<span class="notranslate">galaxy</span>2.9.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/proteinortho_grab_proteins/proteinortho_grab_proteins/6.0.14+galaxy2.9.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/proteinortho_grab_proteins/proteinortho_grab_proteins/6.0.14+galaxy2.9.1"><strong>Proteinortho grab proteins</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/proteinortho_grab_proteins/proteinortho_grab_proteins/6.0.14+galaxy2.9.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input fasta files”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Query type”</em>: <code class="language-plaintext highlighter-rouge">orthology-groups output file</code>
@@ -1263,7 +1261,7 @@ It outputs a proxy of completeness, duplication and fragmentation of the annotat
   <div class="box-title hands-on-title" id="hands-on-align-orthologs-with-clustalw" aria-label="hands-on box:  Align orthologs with ClustalW "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Align orthologs with ClustalW</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1"><strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/regex_find_replace/regex1/1.0.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1"><strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">listproteinorthograbproteins</code> (output of <strong>Proteinortho grab proteins</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Check”</em>:
@@ -1278,7 +1276,7 @@ It outputs a proxy of completeness, duplication and fragmentation of the annotat
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1"><strong>ClustalW</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1"><strong>ClustalW</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA file”</em>: <code class="language-plaintext highlighter-rouge">out_file1</code> (output of <strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Data type”</em>: <code class="language-plaintext highlighter-rouge">Protein sequences</code></li>

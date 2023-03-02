@@ -578,17 +578,17 @@
 
 <p>When the sequence is mapped against a reference genome, we can then see which gene locus it aligns to and qualitatively assert that, together with the two pieces of information above, the sequence depicts a transcript from a specific gene that originated from a specific cell.</p>
 
-<p>Barcodes come in a variety of formats, and in this tutorial we will be looking at the CEL-Seq2 protocol <span class="citation"><a href="#Hashimshony2016">Hashimshony <i>et al.</i> 2016</a></span> used in droplet-based <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span>-seq.</p>
+<p>Barcodes come in a variety of formats, and in this tutorial we will be looking at the CEL-Seq2 protocol <span class="citation"><a href="#Hashimshony2016">Hashimshony <i>et al.</i> 2016</a></span> used in droplet-based single-cell RNA-seq.</p>
 
 <h3 id="the-cel-seq2-protocol">The CEL-Seq2 Protocol</h3>
 
 <p><small><a href="javascript:window.history.back()">Back to previous</a></small></p>
 
-<p>CEL-Seq2 is a paired-end protocol, meaning that two primers bind to opposite ends of a c<span class="notranslate">DNA</span> strand in order to sequence. Each primer has a specific role.</p>
+<p>CEL-Seq2 is a paired-end protocol, meaning that two primers bind to opposite ends of a cDNA strand in order to sequence. Each primer has a specific role.</p>
 
-<p>In this case; <em>Read1</em> contains the barcoding information followed by the polyT tail of the messenger <span class="notranslate">RNA</span>, and <em>Read2</em> contains the actual sequence. Here, Read1 is regarded as the ‘forward’ strand and Read2 as the ‘reverse’ strand, though this is more a convention when dealing with paired-end data rather than an indication of the actual strand orientation.</p>
+<p>In this case; <em>Read1</em> contains the barcoding information followed by the polyT tail of the messenger RNA, and <em>Read2</em> contains the actual sequence. Here, Read1 is regarded as the ‘forward’ strand and Read2 as the ‘reverse’ strand, though this is more a convention when dealing with paired-end data rather than an indication of the actual strand orientation.</p>
 
-<figure id="figure-1"><img src="../../images/scrna-umis/celseq2_schema.svg" alt="CEL-Seq2 Scheme. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Read1 encapsulates the barcodes, and Read2 the m<span class="notranslate">RNA</span> sequence</figcaption></figure>
+<figure id="figure-1"><img src="../../images/scrna-umis/celseq2_schema.svg" alt="CEL-Seq2 Scheme. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Read1 encapsulates the barcodes, and Read2 the mRNA sequence</figcaption></figure>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -604,7 +604,7 @@
     </ol>
   </li>
   <li><a href="#barcoding-format" id="markdown-toc-barcoding-format">Barcoding Format</a>    <ol>
-      <li><a href="#our-four-reads-of-interest" id="markdown-toc-our-four-reads-of-interest">Our Four <span class="notranslate">Reads</span> of Interest</a></li>
+      <li><a href="#our-four-reads-of-interest" id="markdown-toc-our-four-reads-of-interest">Our Four Reads of Interest</a></li>
       <li><a href="#verifying-the-barcode-format" id="markdown-toc-verifying-the-barcode-format">Verifying the Barcode Format</a></li>
     </ol>
   </li>
@@ -625,7 +625,7 @@
 
 <p>Transcript barcodes, meanwhile, are random sets of nucleotides added to each transcript.</p>
 
-<figure id="figure-3"><img src="/training-material/topics/single-cell/images/scrna-umis/scrna_umi_add.svg" alt="Transcript Barcodes. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Random oligonucleotides barcodes added to (cell barcoded) <span class="notranslate">reads</span></figcaption></figure>
+<figure id="figure-3"><img src="/training-material/topics/single-cell/images/scrna-umis/scrna_umi_add.svg" alt="Transcript Barcodes. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Random oligonucleotides barcodes added to (cell barcoded) reads</figcaption></figure>
 
 <p>There are two things to take note of:</p>
 
@@ -634,28 +634,28 @@
   <li>The number of duplicate read transcripts (right)</li>
 </ol>
 
-<p>Transcript barcodes are often <em>not</em> unique. This becomes evident when you consider that there are approximately 200,000 m<span class="notranslate">RNA</span>’s in a given mammalian cell (<span class="citation"><a href="#Shapiro2013">Shapiro <i>et al.</i> 2013</a></span>) which would require barcode lengths of greater than 9 nucleotides to capture, assuming no sequencing errors.</p>
+<p>Transcript barcodes are often <em>not</em> unique. This becomes evident when you consider that there are approximately 200,000 mRNA’s in a given mammalian cell (<span class="citation"><a href="#Shapiro2013">Shapiro <i>et al.</i> 2013</a></span>) which would require barcode lengths of greater than 9 nucleotides to capture, assuming no sequencing errors.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>Why is it important to know which cell a read came from?</li>
-    <li>Why do we need to barcode a read transcript too? Isn’t <span class="notranslate">mapping</span> it against the reference genome enough?</li>
+    <li>Why do we need to barcode a read transcript too? Isn’t mapping it against the reference genome enough?</li>
   </ol>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>If all our <span class="notranslate">reads</span> encode for a <em>Red Gene</em> (as above), we may want to know which cells express <em>Red Gene</em> more than others.
+      <li>If all our reads encode for a <em>Red Gene</em> (as above), we may want to know which cells express <em>Red Gene</em> more than others.
         <ul>
-          <li>e.g. If our <em>Grey</em> cell has 10 times more <em>Red Gene</em> <span class="notranslate">reads</span> than our <em>Green</em> cell, then we know that the <em>Grey</em> cell and <em>Green</em> cell differ in their <span class="notranslate">expression</span> of <em>Red Gene</em> - which might be biologically significant.</li>
+          <li>e.g. If our <em>Grey</em> cell has 10 times more <em>Red Gene</em> reads than our <em>Green</em> cell, then we know that the <em>Grey</em> cell and <em>Green</em> cell differ in their expression of <em>Red Gene</em> - which might be biologically significant.</li>
         </ul>
       </li>
       <li><em>Yes</em> and <em>no</em>!
         <ul>
-          <li><strong>Yes</strong>: We can indeed align our sequence against a reference genome and obtain the name of the gene it aligns against. This sequence will then contribute to the ‘count’ of sequences that gene has, and increase the <span class="notranslate">expression</span> of that gene.</li>
+          <li><strong>Yes</strong>: We can indeed align our sequence against a reference genome and obtain the name of the gene it aligns against. This sequence will then contribute to the ‘count’ of sequences that gene has, and increase the expression of that gene.</li>
           <li><strong>No</strong>: We do not know whether these ‘counts’ are <em>unique</em>. Many of these counts could be duplicates as a result of the amplification process. To explain further, we must look at UMIs and their role in the analysis.</li>
         </ul>
       </li>
@@ -664,9 +664,9 @@
 
 </blockquote>
 
-<p>The purpose of transcript barcodes is to reduce the impact of duplicated <span class="notranslate">reads</span> that occur non-linearly during the amplification process.</p>
+<p>The purpose of transcript barcodes is to reduce the impact of duplicated reads that occur non-linearly during the amplification process.</p>
 
-<p>For this reason, transcript barcodes do not need to be unique. As long as we know that a given read maps to a specific transcript (i.e. after <span class="notranslate">mapping</span> it to a transcriptome), then we can assess how unique that read is based on:</p>
+<p>For this reason, transcript barcodes do not need to be unique. As long as we know that a given read maps to a specific transcript (i.e. after mapping it to a transcriptome), then we can assess how unique that read is based on:</p>
 
 <ol>
   <li>Cell barcode</li>
@@ -674,28 +674,28 @@
   <li>Mapped location</li>
 </ol>
 
-<p>To fully explore the uniqueness of counts, we must discuss the inclusion of <em>UMIs</em> in a <span class="notranslate">single-cell</span> analysis.</p>
+<p>To fully explore the uniqueness of counts, we must discuss the inclusion of <em>UMIs</em> in a single-cell analysis.</p>
 
 <h1 id="mitigating-duplicate-transcript-counts-with-umis">Mitigating duplicate transcript counts with UMIs</h1>
 
-<p>One of the major issues with sequencing is that the read fragments require amplification before they can be sequenced. A gene with a single m<span class="notranslate">RNA</span> transcript will not be detected by most sequencers, so it needs to be duplicated 100-1000x times for the sequencer to ‘see’ it.</p>
+<p>One of the major issues with sequencing is that the read fragments require amplification before they can be sequenced. A gene with a single mRNA transcript will not be detected by most sequencers, so it needs to be duplicated 100-1000x times for the sequencer to ‘see’ it.</p>
 
-<p>Amplification is an imprecise process however, since some <span class="notranslate">reads</span> are amplified more than others, and subsequent amplification can lead to these over-amplified <span class="notranslate">reads</span> being over-amplified even more, leading to an exponential bias of some <span class="notranslate">reads</span> over others.</p>
+<p>Amplification is an imprecise process however, since some reads are amplified more than others, and subsequent amplification can lead to these over-amplified reads being over-amplified even more, leading to an exponential bias of some reads over others.</p>
 
 <p><small><strong><em>Note:</em></strong> Cell barcodes are not shown in any of the below examples, we assume they were added to our transcripts previously. </small><br /><br /></p>
 
 <h2 id="naive-amplification">Naive Amplification</h2>
 
-<figure id="figure-4"><img src="/training-material/topics/single-cell/images/scrna-intro/scrna_amplif_errors.svg" alt="Amplification Bias. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> A cell with two <span class="notranslate">reads</span> from different transcripts being amplified unevenly</figcaption></figure>
+<figure id="figure-4"><img src="/training-material/topics/single-cell/images/scrna-intro/scrna_amplif_errors.svg" alt="Amplification Bias. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> A cell with two reads from different transcripts being amplified unevenly</figcaption></figure>
 
-<p>Consider the above example where two <span class="notranslate">reads</span> from different transcripts are amplified unevenly. The resulting frequency table would yield:</p>
+<p>Consider the above example where two reads from different transcripts are amplified unevenly. The resulting frequency table would yield:</p>
 
 <blockquote class="matrix">
   <table>
     <thead>
       <tr>
         <th> </th>
-        <th><span class="notranslate">Reads</span> in Cell 1</th>
+        <th>Reads in Cell 1</th>
       </tr>
     </thead>
     <tbody>
@@ -716,18 +716,18 @@ How do we correct for this bias?</p>
 
 <h2 id="amplification-with-umis">Amplification with UMIs</h2>
 
-<p><strong>Unique Molecular Identifiers</strong> (or <em>UMIs</em>) constitute the second portion of a barcode, where their role is to <em>uniquely</em> count <span class="notranslate">reads</span> such that amplicons of the same read are only counted once, e.g:</p>
+<p><strong>Unique Molecular Identifiers</strong> (or <em>UMIs</em>) constitute the second portion of a barcode, where their role is to <em>uniquely</em> count reads such that amplicons of the same read are only counted once, e.g:</p>
 
 <figure id="figure-5"><img src="/training-material/topics/single-cell/images/scrna-intro/scrna_amplif_errors_umis.svg" alt="Amplification Bias with UMIs. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> A cell with four unique transcripts, two from Gene Red and two from Gene Blue</figcaption></figure>
 
-<p>Here, we see two unique transcripts from Gene Red and two unique transcripts from Gene Blue, each given a (coloured) UMI. After amplification, Gene Red has more <span class="notranslate">reads</span> than Gene Blue. If we were to construct a frequency table as before to count the <span class="notranslate">reads</span>, we would have:</p>
+<p>Here, we see two unique transcripts from Gene Red and two unique transcripts from Gene Blue, each given a (coloured) UMI. After amplification, Gene Red has more reads than Gene Blue. If we were to construct a frequency table as before to count the reads, we would have:</p>
 
 <blockquote class="matrix">
   <table>
     <thead>
       <tr>
         <th> </th>
-        <th><span class="notranslate">Reads</span> in Cell 1</th>
+        <th>Reads in Cell 1</th>
       </tr>
     </thead>
     <tbody>
@@ -743,7 +743,7 @@ How do we correct for this bias?</p>
   </table>
 </blockquote>
 
-<p>This information is false, because it shows that Red has twice the <span class="notranslate">expression</span> that Blue does. However, we can reconstitute the true count by considering the UMI information:</p>
+<p>This information is false, because it shows that Red has twice the expression that Blue does. However, we can reconstitute the true count by considering the UMI information:</p>
 
 <blockquote class="matrix">
   <table>
@@ -751,7 +751,7 @@ How do we correct for this bias?</p>
       <tr>
         <th> </th>
         <th>UMI colour</th>
-        <th><span class="notranslate">Reads</span> in Cell 1</th>
+        <th>Reads in Cell 1</th>
       </tr>
     </thead>
     <tbody>
@@ -833,7 +833,7 @@ How do we correct for this bias?</p>
 
   <ol>
     <li>Are UMIs not specific to certain genes? Can the same UMI map to different genes?</li>
-    <li>Can the same UMI map to different m<span class="notranslate">RNA</span> molecules of the same gene?</li>
+    <li>Can the same UMI map to different mRNA molecules of the same gene?</li>
   </ol>
 
   <blockquote class="solution">
@@ -887,7 +887,7 @@ How do we correct for this bias?</p>
       </tbody>
     </table>
 
-    <p>If UMIs were unique to a gene, then the <code class="language-plaintext highlighter-rouge">TCA</code> UMI barcode would not have <span class="notranslate">reads</span> that map to both <em>Slx1</em> and <em>Gh13</em> in the same cell (<code class="language-plaintext highlighter-rouge">AAAT</code>).</p>
+    <p>If UMIs were unique to a gene, then the <code class="language-plaintext highlighter-rouge">TCA</code> UMI barcode would not have reads that map to both <em>Slx1</em> and <em>Gh13</em> in the same cell (<code class="language-plaintext highlighter-rouge">AAAT</code>).</p>
 
   </blockquote>
 
@@ -901,20 +901,20 @@ How do we correct for this bias?</p>
   <div class="box-title hands-on-title" id="hands-on-preparing-the-data" aria-label="hands-on box: Preparing the Data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Preparing the Data</div>
 
   <ol>
-    <li>Create a new history and rename it (<em>e.g.</em> ‘Inspecting FastQ Files in sc<span class="notranslate">RNA</span> batch data’)</li>
+    <li>Create a new history and rename it (<em>e.g.</em> ‘Inspecting FastQ Files in scRNA batch data’)</li>
     <li>Import the following files from <a href="https://zenodo.org/record/2573177"><code class="language-plaintext highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2573177/files/test_barcodes_celseq2_R1.fastq.gz
 https://zenodo.org/record/2573177/files/test_barcodes_celseq2_R2.fastq.gz
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <p><br /></p>
     </li>
     <li>Build a <em>Dataset pair</em> for the two FASTQ files <!-- cannot force this to count from 3 -->
       <ul>
         <li>Click the <em>Operations on multiple datasets</em> check box at the top of the history panel</li>
-        <li>Check the two boxes next to the R1 and R2 sc<span class="notranslate">RNA</span> FASTQ samples</li>
+        <li>Check the two boxes next to the R1 and R2 scRNA FASTQ samples</li>
         <li>Click <em>For all selected…</em> and choose <em>Build dataset pair</em></li>
         <li>Ensure that the forward read is the <code class="language-plaintext highlighter-rouge">R1</code> sample, and the reverse read is the <code class="language-plaintext highlighter-rouge">R2</code> sample.
           <ul>
@@ -924,7 +924,7 @@ https://zenodo.org/record/2573177/files/test_barcodes_celseq2_R2.fastq.gz
         <li>Set the name of the pair</li>
       </ul>
     </li>
-    <li>Generate a list of <span class="notranslate">reads</span> to filter by creating a plain tabular file containing the following read names:
+    <li>Generate a list of reads to filter by creating a plain tabular file containing the following read names:
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>J00182:75:HTKJNBBXX:2:1114:12469:11073
 J00182:75:HTKJNBBXX:2:2222:13301:35690
 J00182:75:HTKJNBBXX:2:1203:25022:13763
@@ -936,15 +936,15 @@ J00182:75:HTKJNBBXX:2:1115:8501:46961
 
 </blockquote>
 
-<p>At this point we now have a history with two items: our paired FASTQ test data, and a tabular file of read names. We will now apply the tabular file to the FASTQ file and extract only those <span class="notranslate">reads</span>.</p>
+<p>At this point we now have a history with two items: our paired FASTQ test data, and a tabular file of read names. We will now apply the tabular file to the FASTQ file and extract only those reads.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-extracting-the-reads" aria-label="hands-on box: Extracting the Reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extracting the <span class="notranslate">Reads</span></div>
+  <div class="box-title hands-on-title" id="hands-on-extracting-the-reads" aria-label="hands-on box: Extracting the Reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Extracting the Reads</div>
 
   <ol>
-    <li>Extracting our 4 <span class="notranslate">reads</span>
+    <li>Extracting our 4 reads
       <ul>
-        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7" title="Tested with toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7"><strong>Filter sequences by ID</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7</span></span>  with the following parameters:
+        <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7" title="Tested with toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7"><strong>Filter sequences by ID</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/peterjc/seq_filter_by_id/seq_filter_by_id/0.2.7</span></span>  with the following parameters:
           <ul>
             <li><strong>Sequence file to be filtered</strong>
               <ul>
@@ -971,16 +971,16 @@ J00182:75:HTKJNBBXX:2:1115:8501:46961
       <p>Change the datatypes of the output pair to <code class="language-plaintext highlighter-rouge">fastqsanger</code> if not already set.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select  your desired datatype     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
-    <li>Viewing our 4 <span class="notranslate">reads</span> side-by-side
+    <li>Viewing our 4 reads side-by-side
       <ul>
         <li>Activate the <strong>Scratchbook</strong> by clicking on the <strong>Enable/Disable Scratchbook</strong> icon on the main top toolbar</li>
-        <li>Click on the newly generated FastQ pair ending in <em>“with matched ID”</em> to expand the individual <span class="notranslate">reads</span>
+        <li>Click on the newly generated FastQ pair ending in <em>“with matched ID”</em> to expand the individual reads
           <ul>
-            <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> symbol of the forward read</li>
+            <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> symbol of the forward read</li>
             <li>Click somewhere outside the white box to close the <strong>Scratchbook</strong></li>
-            <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> symbol of the reverse read</li>
+            <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> symbol of the reverse read</li>
           </ul>
         </li>
         <li>Position/Resize the boxes as desired</li>
@@ -1001,12 +1001,12 @@ These are reads that all map to ENSDARG00000019692. In [Cell, UMI] format:
 4: 11073 -- GGTAAC, CGGCGT -> diff UMI, same cell
 -->
 
-<h2 id="our-four-reads-of-interest">Our Four <span class="notranslate">Reads</span> of Interest</h2>
+<h2 id="our-four-reads-of-interest">Our Four Reads of Interest</h2>
 
-<p>Let us examine these four <span class="notranslate">reads</span> of interest which we have just sub-selected using their headers:</p>
+<p>Let us examine these four reads of interest which we have just sub-selected using their headers:</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-forward-reads"><button class="gtn-boxify-button details" type="button" aria-controls="details-forward-reads-contents" aria-expanded="true" aria-label="Toggle details box: Forward Reads:"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Forward <span class="notranslate">Reads</span>:<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-forward-reads"><button class="gtn-boxify-button details" type="button" aria-controls="details-forward-reads-contents" aria-expanded="true" aria-label="Toggle details box: Forward Reads:"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Forward Reads:<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@J00182:75:HTKJNBBXX:2:1115:8501:46961 1:N:0:ATCACG
 GGAAGAACCAGATTTTTTTTTTTTTTTTTT
@@ -1032,7 +1032,7 @@ AAFFFJJJJJJJFAFFJJJJJJJJF---&lt;F
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-reverse-reads"><button class="gtn-boxify-button details" type="button" aria-controls="details-reverse-reads-contents" aria-expanded="true" aria-label="Toggle details box: Reverse Reads:"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Reverse <span class="notranslate">Reads</span>:<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-reverse-reads"><button class="gtn-boxify-button details" type="button" aria-controls="details-reverse-reads-contents" aria-expanded="true" aria-label="Toggle details box: Reverse Reads:"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Reverse Reads:<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@J00182:75:HTKJNBBXX:2:1115:8501:46961 2:N:0:ATCACG
 GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
@@ -1065,12 +1065,12 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
   <li>Quality string of the nucleotide bases in ASCII</li>
 </ol>
 
-<p>The main source of interest for us is in the (2) sequences of these <span class="notranslate">reads</span>, which somewhere within encode for three crucial pieces of information that we will need to perform quantification:</p>
+<p>The main source of interest for us is in the (2) sequences of these reads, which somewhere within encode for three crucial pieces of information that we will need to perform quantification:</p>
 
 <ol>
   <li>Cell Barcode</li>
   <li>UMI Barcode</li>
-  <li>Reverse-transcribed m<span class="notranslate">RNA</span> sequence</li>
+  <li>Reverse-transcribed mRNA sequence</li>
 </ol>
 
 <p>These can be encoded into the sequences of our paired-end data by any means. In order to know where our barcodes are, we must be familiar with the sequencing primers used in the analysis:</p>
@@ -1090,7 +1090,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
   </li>
   <li>Reverse Read:
     <ul>
-      <li>01-70bp: m<span class="notranslate">RNA</span> sequence</li>
+      <li>01-70bp: mRNA sequence</li>
     </ul>
   </li>
 </ul>
@@ -1101,7 +1101,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
   <div class="box-title hands-on-title" id="hands-on-confirming-the-barcoding" aria-label="hands-on box: Confirming the Barcoding"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Confirming the Barcoding</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: <code class="language-plaintext highlighter-rouge">Paired FastQ</code> (the original paired set) You will need to choose ‘Dataset collection’ to allow this as an input.</li>
       </ul>
@@ -1113,7 +1113,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
       </blockquote>
     </li>
     <li>Click on <em>FastQC on collection :Webpage</em></li>
-    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> of the Forward read</li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> of the Forward read</li>
     <li>Click on the <em>Per base sequence content</em> header on the side-bar</li>
   </ol>
 </blockquote>
@@ -1145,7 +1145,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 
 <h1 id="uniting-barcodes-with-sequence">Uniting Barcodes with Sequence</h1>
 
-<p>In a sense, we have a disparity in our data: the reverse <span class="notranslate">reads</span> contain the sequences we wish to map, but not the barcodes; the forward <span class="notranslate">reads</span> contain the barcode, but not the sequence. For the forward and reverse <span class="notranslate">reads</span> given above, the information that we really want from both can be summarized in this table:</p>
+<p>In a sense, we have a disparity in our data: the reverse reads contain the sequences we wish to map, but not the barcodes; the forward reads contain the barcode, but not the sequence. For the forward and reverse reads given above, the information that we really want from both can be summarized in this table:</p>
 
 <table>
   <thead>
@@ -1187,18 +1187,18 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 <blockquote class="question">
   <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-  <p>Provided that these <span class="notranslate">reads</span> all map to the same gene:</p>
+  <p>Provided that these reads all map to the same gene:</p>
 
   <ol>
-    <li>Which of these <span class="notranslate">reads</span> come from the same cell?</li>
-    <li>Which of these <span class="notranslate">reads</span> are PCR duplicates?</li>
+    <li>Which of these reads come from the same cell?</li>
+    <li>Which of these reads are PCR duplicates?</li>
   </ol>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li><span class="notranslate">Reads</span>:
+      <li>Reads:
         <ul>
           <li><code class="language-plaintext highlighter-rouge">@J00182:75:HTKJNBBXX:2:1203:25022:13763</code></li>
           <li><code class="language-plaintext highlighter-rouge">@J00182:75:HTKJNBBXX:2:2222:13301:35690</code></li>
@@ -1206,7 +1206,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
  all have the cell barcode <code class="language-plaintext highlighter-rouge">GGTAAC</code>.</li>
         </ul>
       </li>
-      <li><span class="notranslate">Reads</span>:
+      <li>Reads:
         <ul>
           <li><code class="language-plaintext highlighter-rouge">@J00182:75:HTKJNBBXX:2:1203:25022:13763</code></li>
           <li><code class="language-plaintext highlighter-rouge">@J00182:75:HTKJNBBXX:2:2222:13301:35690</code>
@@ -1221,7 +1221,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 35690:                        CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
 </code></pre></div>    </div>
 
-    <p>They describe the same transcript but have sequences from different <span class="notranslate">reads</span>, and therefore both <span class="notranslate">reads</span> <em>should</em> be counted as separate <span class="notranslate">reads</span>. Whether or not both these <span class="notranslate">reads</span> are counted as a single read due to their identical barcodes, or counted separately due to their differing sequences depends entirely on the deduplication utility they are fed into it.</p>
+    <p>They describe the same transcript but have sequences from different reads, and therefore both reads <em>should</em> be counted as separate reads. Whether or not both these reads are counted as a single read due to their identical barcodes, or counted separately due to their differing sequences depends entirely on the deduplication utility they are fed into it.</p>
 
   </blockquote>
 </blockquote>
@@ -1230,18 +1230,18 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 
 <p>How should we unite these two source of information into a single location without impacting the data content?</p>
 
-<p>For this we need to take the barcode information from the Forward <span class="notranslate">reads</span>, and stick it into the <em>header</em> of the Reverse <span class="notranslate">reads</span>. That way we can align our sequence to the reference and still keep the barcode information associated with the <span class="notranslate">reads</span>.</p>
+<p>For this we need to take the barcode information from the Forward reads, and stick it into the <em>header</em> of the Reverse reads. That way we can align our sequence to the reference and still keep the barcode information associated with the reads.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-barcode-extraction-and-annotation-of-our-4-reads" aria-label="hands-on box: Barcode Extraction and Annotation of our 4 reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Barcode Extraction and Annotation of our 4 <span class="notranslate">reads</span></div>
+  <div class="box-title hands-on-title" id="hands-on-barcode-extraction-and-annotation-of-our-4-reads" aria-label="hands-on box: Barcode Extraction and Annotation of our 4 reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Barcode Extraction and Annotation of our 4 reads</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/0.5.5.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/0.5.5.1"><strong>UMI-tools extract</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/0.5.5.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/0.5.5.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/0.5.5.1"><strong>UMI-tools extract</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/umi_tools_extract/umi_tools_extract/0.5.5.1</span></span>  with the following parameters:
       <ul>
         <li><em>“Library type”</em>: <code class="language-plaintext highlighter-rouge">Paired-end Dataset Collection</code>
           <ul>
-            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“<span class="notranslate">Reads</span> in FASTQ format”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Our paired set of 4 sequences)</li>
-            <li><em>“Barcode on both <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Barcode on first read only</code></li>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Reads in FASTQ format”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Our paired set of 4 sequences)</li>
+            <li><em>“Barcode on both reads?”</em>: <code class="language-plaintext highlighter-rouge">Barcode on first read only</code></li>
           </ul>
         </li>
         <li><em>“Use Known Barcodes?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1261,17 +1261,17 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 
       </blockquote>
     </li>
-    <li>Click the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> symbol on the <em><span class="notranslate">Reads</span>1: UMI-tools extract</em> file</li>
+    <li>Click the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> symbol on the <em>Reads1: UMI-tools extract</em> file</li>
     <li>Click somewhere outside the white box to close the <strong>Scratchbook</strong></li>
-    <li>Click the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> symbol on the <em><span class="notranslate">Reads</span>2: UMI-tools extract</em> file</li>
+    <li>Click the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> symbol on the <em>Reads2: UMI-tools extract</em> file</li>
   </ol>
 
 </blockquote>
 
-<p>We should now be able to see the following <span class="notranslate">reads</span>:</p>
+<p>We should now be able to see the following reads:</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-forward-reads-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-forward-reads-1-contents" aria-expanded="true" aria-label="Toggle details box: Forward Reads:"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Forward <span class="notranslate">Reads</span>:<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-forward-reads-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-forward-reads-1-contents" aria-expanded="true" aria-label="Toggle details box: Forward Reads:"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Forward Reads:<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@J00182:75:HTKJNBBXX:2:1115:8501:46961_ACCAGA_GGAAGA 1:N:0:ATCACG
 TTTTTTTTTTTTTTTTTT
@@ -1297,7 +1297,7 @@ FAFFJJJJJJJJF---&lt;F&gt;
 </blockquote>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-reverse-reads-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-reverse-reads-1-contents" aria-expanded="true" aria-label="Toggle details box: Reverse Reads:"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Reverse <span class="notranslate">Reads</span>:<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-reverse-reads-1"><button class="gtn-boxify-button details" type="button" aria-controls="details-reverse-reads-1-contents" aria-expanded="true" aria-label="Toggle details box: Reverse Reads:"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Reverse Reads:<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@J00182:75:HTKJNBBXX:2:1115:8501:46961_ACCAGA_GGAAGA 2:N:0:ATCACG
 GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
@@ -1322,14 +1322,14 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 
 </blockquote>
 
-<p>Notice the remaining sequence in each of the <span class="notranslate">reads</span>, and that the reverse <span class="notranslate">reads</span> appear to fully encapsulate all the information that we wanted to capture in our table at the beginning of this section.</p>
+<p>Notice the remaining sequence in each of the reads, and that the reverse reads appear to fully encapsulate all the information that we wanted to capture in our table at the beginning of this section.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
-    <li>Compare the Forward/Read1 and Reverse/Read2 <span class="notranslate">reads</span> to those prior the extraction. What has happened to the header and sequence of each read?</li>
-    <li>Are the Forward <span class="notranslate">reads</span> useful at all?</li>
+    <li>Compare the Forward/Read1 and Reverse/Read2 reads to those prior the extraction. What has happened to the header and sequence of each read?</li>
+    <li>Are the Forward reads useful at all?</li>
   </ol>
 
   <blockquote class="solution">
@@ -1347,25 +1347,25 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
           <li>Reverse:
             <ul>
               <li>Sequence: Has not changed.</li>
-              <li>Header: The <code class="language-plaintext highlighter-rouge">cell</code> and <code class="language-plaintext highlighter-rouge">umi</code> sections of the sequence from the Forward (note: <strong>NOT</strong> Reverse) <span class="notranslate">reads</span> have been added to the header.</li>
+              <li>Header: The <code class="language-plaintext highlighter-rouge">cell</code> and <code class="language-plaintext highlighter-rouge">umi</code> sections of the sequence from the Forward (note: <strong>NOT</strong> Reverse) reads have been added to the header.</li>
             </ul>
           </li>
         </ul>
       </li>
-      <li>With the inclusion of the cell and UMI barcodes into the header of our sequence data, we now have all our useful data in the Reverse <span class="notranslate">reads</span>. We can now effectively throw away our Forward <span class="notranslate">reads</span>, as they have no more useful information within them.</li>
+      <li>With the inclusion of the cell and UMI barcodes into the header of our sequence data, we now have all our useful data in the Reverse reads. We can now effectively throw away our Forward reads, as they have no more useful information within them.</li>
     </ol>
   </blockquote>
 </blockquote>
 
-<p>We have now successfully multiplexed data from several different (cell) sources into a single file that will greatly simplify the <span class="notranslate">mapping</span>/alignment process <span class="notranslate">downstream</span>.</p>
+<p>We have now successfully multiplexed data from several different (cell) sources into a single file that will greatly simplify the mapping/alignment process downstream.</p>
 
-<p>We have also now successfully <em>de</em>-multiplexed our data, by decoding each pair of <span class="notranslate">reads</span> into barcoding and sequence parts and making use of the FASTQ format by storing this information within the FASTQ headers and data, respectively.</p>
+<p>We have also now successfully <em>de</em>-multiplexed our data, by decoding each pair of reads into barcoding and sequence parts and making use of the FASTQ format by storing this information within the FASTQ headers and data, respectively.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>With this tutorial we have understood the importance of handling FASTQ data from different sources, and extracting the information we need (barcodes (cell and UMI) and sequence) using <strong>UMI-tools</strong> so that we can perform <span class="notranslate">mapping</span> without losing any context of where the <span class="notranslate">reads</span> are derived from.</p>
+<p>With this tutorial we have understood the importance of handling FASTQ data from different sources, and extracting the information we need (barcodes (cell and UMI) and sequence) using <strong>UMI-tools</strong> so that we can perform mapping without losing any context of where the reads are derived from.</p>
 
-<p>This tutorial is part of the https://singlecell.use<span class="notranslate">galaxy</span>.eu portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span>).</p>
+<p>This tutorial is part of the https://singlecell.usegalaxy.eu portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span>).</p>
 
 
                 

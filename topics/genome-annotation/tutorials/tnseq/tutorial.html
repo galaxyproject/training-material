@@ -712,8 +712,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
             Metagenomics
         </a>
@@ -821,9 +819,9 @@
 
 <h2 id="transposon-insertion-sequencing">Transposon insertion Sequencing</h2>
 
-<p>Transposon insertion sequencing is a technique used to functionally annotate bacterial genomes. In this technique, the genome is saturated by insertions of transposons. Transposons are highly regulated, discrete <span class="notranslate">DNA</span> segments that can relocate within the genome. They have a large influence on gene <span class="notranslate">expression</span> and can be used to determine the function of genes.</p>
+<p>Transposon insertion sequencing is a technique used to functionally annotate bacterial genomes. In this technique, the genome is saturated by insertions of transposons. Transposons are highly regulated, discrete DNA segments that can relocate within the genome. They have a large influence on gene expression and can be used to determine the function of genes.</p>
 
-<p>When a transposon inserts itself in a gene, the gene’s function will be disrupted, affecting the fitness (growth) of the bacteria. We can then manipulate transposons for use in insertional mutagenesis, <em>i.e.</em> creation of mutations of <span class="notranslate">DNA</span> by the addition of transposons. The genomes can be then sequenced to locate the transposon insertion site and the function affected by a transposon insertion can be linked to the disrupted gene.</p>
+<p>When a transposon inserts itself in a gene, the gene’s function will be disrupted, affecting the fitness (growth) of the bacteria. We can then manipulate transposons for use in insertional mutagenesis, <em>i.e.</em> creation of mutations of DNA by the addition of transposons. The genomes can be then sequenced to locate the transposon insertion site and the function affected by a transposon insertion can be linked to the disrupted gene.</p>
 
 <figure id="figure-1"><img src="../../images/tnseq/principle_tnseq.png" alt="Illustration of tnseq Method. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Transposon insertion sequencing method (from <a href="#Chao2016"> Chao <i>et al.</i> 2016</a>)</figcaption></figure>
 
@@ -836,14 +834,14 @@
   <li>
     <p><strong>Analysis</strong> (<strong>b</strong> in the previous image)</p>
 
-    <p>The sequences are aligned to the reference genome to identify the location of the regions flanking the insertions. The resulting data will show a discrete repartition of <span class="notranslate">reads</span> on each site. If a gene present several insertions, like the two leftmost genes in <em>Condition A</em>, it means that its disruption has little or no impact to the bacterial growth. On the other hand, when a gene shows no insertions at all, like the rightmost gene in <em>Condition A</em>, is means that any disruption in this gene killed the bacteria, meaning it is a gene essential to bacteria survival. If the library is sufficiently saturated, there is a clear threshold between essential and non-essential genes when you analyze the insertion rate per gene.</p>
+    <p>The sequences are aligned to the reference genome to identify the location of the regions flanking the insertions. The resulting data will show a discrete repartition of reads on each site. If a gene present several insertions, like the two leftmost genes in <em>Condition A</em>, it means that its disruption has little or no impact to the bacterial growth. On the other hand, when a gene shows no insertions at all, like the rightmost gene in <em>Condition A</em>, is means that any disruption in this gene killed the bacteria, meaning it is a gene essential to bacteria survival. If the library is sufficiently saturated, there is a clear threshold between essential and non-essential genes when you analyze the insertion rate per gene.</p>
   </li>
 </ol>
 
 <p>Two type of transposon insertion methods exist:</p>
 <ul>
   <li>Gene disruption, where we analyze only the disruptions. This will covered by of this tutorial</li>
-  <li>Regulatory element insertion, where different promoters are inserted by the transposon, and we analyze the change in gene <span class="notranslate">expression</span> in addition to the disruption. This method will be the subject of another tutorial.</li>
+  <li>Regulatory element insertion, where different promoters are inserted by the transposon, and we analyze the change in gene expression in addition to the disruption. This method will be the subject of another tutorial.</li>
 </ul>
 
 <h2 id="building-a-tnseq-library">Building a TnSeq library</h2>
@@ -874,32 +872,32 @@
 
 <p>Independently of the transposon choice we need to be careful about the library complexity. With a large complex library, multiple insertion can be found in every potential locus. The higher density of insertion, the greater precision in identifying limits of regions of interest. If the density of the library is too low, some genes might by chance not be disrupted and mistaken for essential. The advantage of a target specific transposon, like the mariner, in opposition of a Tn5-based transposon inserting randomly, it that the limited number of insertion sites makes it easier to build high complexity libraries.</p>
 
-<p>After selection of the type of transposon, we need to modify it to allow insertion site amplification and sequencing to get a library fitting the transposon insertion. Biases could be introduced during the process due to uneven fragment sizes. To avoid that, we can introduce a Type I restriction site to cleave <span class="notranslate">DNA</span> <span class="notranslate">downstream</span> of transposon, and get uniform fragment sizes and therefore avoid a bias in the representation of the insertions.</p>
+<p>After selection of the type of transposon, we need to modify it to allow insertion site amplification and sequencing to get a library fitting the transposon insertion. Biases could be introduced during the process due to uneven fragment sizes. To avoid that, we can introduce a Type I restriction site to cleave DNA downstream of transposon, and get uniform fragment sizes and therefore avoid a bias in the representation of the insertions.</p>
 
-<p>As we just want to identify the TA site affected by an insertion, we only need the location of the start of the <span class="notranslate">reads</span> and not a good coverage of the entire genome. Long <span class="notranslate">reads</span> are then not so important. On the other hand, a minimum transposon length of 16 bp is necessary for precise <span class="notranslate">mapping</span> on the genome <span class="citation"><a href="#Kwon2015">Kwon <i>et al.</i> 2015</a></span>. We can therefore not use the BsmFI restriction site (11 to 12 bp) but MmeI.</p>
+<p>As we just want to identify the TA site affected by an insertion, we only need the location of the start of the reads and not a good coverage of the entire genome. Long reads are then not so important. On the other hand, a minimum transposon length of 16 bp is necessary for precise mapping on the genome <span class="citation"><a href="#Kwon2015">Kwon <i>et al.</i> 2015</a></span>. We can therefore not use the BsmFI restriction site (11 to 12 bp) but MmeI.</p>
 
-<p><strong>In this tutorial, we are using mariner transposon targeting TA sequences, in ordered to target the whole genome uniformly,</strong> with two specific regions used to specifically sequence the region <span class="notranslate">upstream</span> of the insertion <span class="citation"><a href="#Santiago2015">Santiago <i>et al.</i> 2015</a></span></p>
+<p><strong>In this tutorial, we are using mariner transposon targeting TA sequences, in ordered to target the whole genome uniformly,</strong> with two specific regions used to specifically sequence the region upstream of the insertion <span class="citation"><a href="#Santiago2015">Santiago <i>et al.</i> 2015</a></span></p>
 
 <figure id="figure-2"><img src="../../images/tnseq/tranposon_structure.png" alt="Structure of the transposon containing several parcodes and adapters. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Structure of the transposon containing several parcodes and adapters (from <a href="#Santiago2015"> Santiago <i>et al.</i> 2015</a>)</figcaption></figure>
 
-<p>The transposon inserts itself at TA site at the ITR junctions. These ITR junctions have been modified to include a Mme1 restriction site and a NotI restriction site which cut 21 bp <span class="notranslate">upstream</span> the restriction site. These two site are the 5’ and 3’ limits to the genomic <span class="notranslate">DNA</span> we want to sequence.</p>
+<p>The transposon inserts itself at TA site at the ITR junctions. These ITR junctions have been modified to include a Mme1 restriction site and a NotI restriction site which cut 21 bp upstream the restriction site. These two site are the 5’ and 3’ limits to the genomic DNA we want to sequence.</p>
 
 <ol>
   <li>
-    <p>After digestion by NotI restriction enzyme, the fragments are attached to biotinylated adaptors that link to NotI restriction site. The attached fragment are then digested by MMeI at a site <span class="notranslate">upstream</span>, where an Illumina primer is then linked. The sequencing is then done, adding Illumina adaptors and an additional barcode to the read for multiplexed sequencing.</p>
+    <p>After digestion by NotI restriction enzyme, the fragments are attached to biotinylated adaptors that link to NotI restriction site. The attached fragment are then digested by MMeI at a site upstream, where an Illumina primer is then linked. The sequencing is then done, adding Illumina adaptors and an additional barcode to the read for multiplexed sequencing.</p>
   </li>
   <li>
-    <p>An insertion can sometimes be composed of one or more copies of the transposon (multimer). There is therefore a risk to select plasmid backbone sequence. To solve this problem, an additional NotI has been added in the backbone to create different length construct, that can later be filtrated. Different promoters are added with an additional 3 bp barcode to analyze differential <span class="notranslate">expression</span> impact. This type of complex analysis will be covered in a follow-up tutorial.</p>
+    <p>An insertion can sometimes be composed of one or more copies of the transposon (multimer). There is therefore a risk to select plasmid backbone sequence. To solve this problem, an additional NotI has been added in the backbone to create different length construct, that can later be filtrated. Different promoters are added with an additional 3 bp barcode to analyze differential expression impact. This type of complex analysis will be covered in a follow-up tutorial.</p>
   </li>
 </ol>
 
-<p>Because of this complex transposon structure, the <span class="notranslate">reads</span> obtained after sequencing contain a lot of adapters and foreign sequences used to insert and target the transposon. Several steps of preprocessing are then need to extract only the transposon sequence before finding its location on the genome.</p>
+<p>Because of this complex transposon structure, the reads obtained after sequencing contain a lot of adapters and foreign sequences used to insert and target the transposon. Several steps of preprocessing are then need to extract only the transposon sequence before finding its location on the genome.</p>
 
 <h2 id="tnseq-analysis">Tnseq analysis</h2>
 
-<p>Once the genomic sequences are extracted from the initial <span class="notranslate">reads</span> (<em>i.e.</em> remove non genomic sequences from the <span class="notranslate">reads</span>), they need to be located each on the genome to link them to a TA site and genes. To do that we map them to a reference genome, link them to a specific insertion site, and then count the number of insertion for each TA site and identify essential genes of regions.</p>
+<p>Once the genomic sequences are extracted from the initial reads (<em>i.e.</em> remove non genomic sequences from the reads), they need to be located each on the genome to link them to a TA site and genes. To do that we map them to a reference genome, link them to a specific insertion site, and then count the number of insertion for each TA site and identify essential genes of regions.</p>
 
-<p>We will apply this approach in this tutorial using a subset of TnSeq <span class="notranslate">reads</span> from <span class="citation"><a href="#Santiago2015">Santiago <i>et al.</i> 2015</a></span>.</p>
+<p>We will apply this approach in this tutorial using a subset of TnSeq reads from <span class="citation"><a href="#Santiago2015">Santiago <i>et al.</i> 2015</a></span>.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -914,15 +912,15 @@
     </ol>
   </li>
   <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
-  <li><a href="#remove-all-non-genomic-sequences-from-the-sequenced-reads" id="markdown-toc-remove-all-non-genomic-sequences-from-the-sequenced-reads">Remove all non genomic sequences from the sequenced <span class="notranslate">reads</span></a>    <ol>
-      <li><a href="#separate-reads-by-experimental-conditions" id="markdown-toc-separate-reads-by-experimental-conditions">Separate <span class="notranslate">reads</span> by experimental conditions</a></li>
+  <li><a href="#remove-all-non-genomic-sequences-from-the-sequenced-reads" id="markdown-toc-remove-all-non-genomic-sequences-from-the-sequenced-reads">Remove all non genomic sequences from the sequenced reads</a>    <ol>
+      <li><a href="#separate-reads-by-experimental-conditions" id="markdown-toc-separate-reads-by-experimental-conditions">Separate reads by experimental conditions</a></li>
       <li><a href="#remove-adapter-sequence" id="markdown-toc-remove-adapter-sequence">Remove Adapter sequence</a></li>
-      <li><a href="#separate-reads-from-different-transposon-constructs" id="markdown-toc-separate-reads-from-different-transposon-constructs">Separate <span class="notranslate">reads</span> from different transposon constructs</a></li>
+      <li><a href="#separate-reads-from-different-transposon-constructs" id="markdown-toc-separate-reads-from-different-transposon-constructs">Separate reads from different transposon constructs</a></li>
       <li><a href="#remove-the-remaining-transposon-sequence" id="markdown-toc-remove-the-remaining-transposon-sequence">Remove the remaining transposon sequence</a></li>
     </ol>
   </li>
   <li><a href="#count-the-number-of-insertion-per-ta-sites" id="markdown-toc-count-the-number-of-insertion-per-ta-sites">Count the number of insertion per TA sites</a>    <ol>
-      <li><a href="#align-the-reads-to-a-reference-genome" id="markdown-toc-align-the-reads-to-a-reference-genome">Align the <span class="notranslate">reads</span> to a reference genome</a></li>
+      <li><a href="#align-the-reads-to-a-reference-genome" id="markdown-toc-align-the-reads-to-a-reference-genome">Align the reads to a reference genome</a></li>
       <li><a href="#compute-coverage-of-the-genome" id="markdown-toc-compute-coverage-of-the-genome">Compute coverage of the genome</a></li>
       <li><a href="#identify-ta-sites-positions" id="markdown-toc-identify-ta-sites-positions">Identify TA sites positions</a></li>
       <li><a href="#merge-overall-coverage-and-positions-of-ta-sites-to-get-the-coverage-of-each-ta-sites" id="markdown-toc-merge-overall-coverage-and-positions-of-ta-sites-to-get-the-coverage-of-each-ta-sites">Merge overall coverage and positions of TA sites to get the coverage of each TA sites</a></li>
@@ -951,21 +949,21 @@
       <p>Create a new history for this tutorial and give it a proper name</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
     <li>Import from <a href="https://zenodo.org/record/2579335">Zenodo</a> or a data library (ask your instructor):
       <ul>
-        <li>FASTQ file with the Tnseq <span class="notranslate">reads</span>: <code class="language-plaintext highlighter-rouge">Tnseq-Tutorial-<span class="notranslate">reads</span>.fastqsanger.gz</code></li>
-        <li>Set of barcodes to separate <span class="notranslate">reads</span> from different experimental conditions: <code class="language-plaintext highlighter-rouge">condition_barcodes.fasta</code></li>
-        <li>Set of barcodes to separate <span class="notranslate">reads</span> from different transposon constructs: <code class="language-plaintext highlighter-rouge">construct_barcodes.fasta</code></li>
+        <li>FASTQ file with the Tnseq reads: <code class="language-plaintext highlighter-rouge">Tnseq-Tutorial-reads.fastqsanger.gz</code></li>
+        <li>Set of barcodes to separate reads from different experimental conditions: <code class="language-plaintext highlighter-rouge">condition_barcodes.fasta</code></li>
+        <li>Set of barcodes to separate reads from different transposon constructs: <code class="language-plaintext highlighter-rouge">construct_barcodes.fasta</code></li>
         <li>Genome file for <em>Staphylococcus aureus</em>: <code class="language-plaintext highlighter-rouge">staph_aur.fasta</code></li>
         <li>Annotation file for <em>Staphylococcus aureus</em>: <code class="language-plaintext highlighter-rouge">staph_aur.gff3</code></li>
       </ul>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2579335/files/Tnseq-Tutorial-<span class="notranslate">reads</span>.fastqsanger.gz
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2579335/files/Tnseq-Tutorial-reads.fastqsanger.gz
 https://zenodo.org/record/2579335/files/condition_barcodes.fasta
 https://zenodo.org/record/2579335/files/construct_barcodes.fasta
 https://zenodo.org/record/2579335/files/staph_aur.fasta
@@ -973,36 +971,36 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename the files</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<h1 id="remove-all-non-genomic-sequences-from-the-sequenced-reads">Remove all non genomic sequences from the sequenced <span class="notranslate">reads</span></h1>
+<h1 id="remove-all-non-genomic-sequences-from-the-sequenced-reads">Remove all non genomic sequences from the sequenced reads</h1>
 
-<p>Because of the experimental design for transposon insertion sequencing, the raw <span class="notranslate">reads</span> contain a lot of adapters and foreign sequences used to insert and target the transposon. To obtain the core <span class="notranslate">reads</span> that contain only genomic sequence, the <span class="notranslate">reads</span> have to go through several steps (using the <strong>Cutadapt</strong> tool) to remove them and divide the <span class="notranslate">reads</span> per experimental condition and type of transposon:</p>
+<p>Because of the experimental design for transposon insertion sequencing, the raw reads contain a lot of adapters and foreign sequences used to insert and target the transposon. To obtain the core reads that contain only genomic sequence, the reads have to go through several steps (using the <strong>Cutadapt</strong> tool) to remove them and divide the reads per experimental condition and type of transposon:</p>
 
 <figure id="figure-3"><img src="../../images/tnseq/preprocessing.png" alt="Workflow of data pre-processing. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Data pre-processing</figcaption></figure>
 
 <ol>
-  <li>We separate the <span class="notranslate">reads</span> of each experimental condition based on a 8 bp barcode at the beginning of each read. These barcodes were added to be able to pool different conditions together before the transposon insertion and sequencing.</li>
-  <li>The tail of each set of read is then removed. It immediately follows the 3 bp barcode specific to transposon constructs, and contains illumina adapter sequence and <span class="notranslate">downstream</span></li>
-  <li>To be sure all our <span class="notranslate">reads</span> have been trimmed correctly we filter out the <span class="notranslate">reads</span> too large.</li>
-  <li>We then separate the <span class="notranslate">reads</span> per transposon construct</li>
+  <li>We separate the reads of each experimental condition based on a 8 bp barcode at the beginning of each read. These barcodes were added to be able to pool different conditions together before the transposon insertion and sequencing.</li>
+  <li>The tail of each set of read is then removed. It immediately follows the 3 bp barcode specific to transposon constructs, and contains illumina adapter sequence and downstream</li>
+  <li>To be sure all our reads have been trimmed correctly we filter out the reads too large.</li>
+  <li>We then separate the reads per transposon construct</li>
   <li>We remove the remaining transposon sequence containing MmeI.</li>
 </ol>
 
-<h2 id="separate-reads-by-experimental-conditions">Separate <span class="notranslate">reads</span> by experimental conditions</h2>
+<h2 id="separate-reads-by-experimental-conditions">Separate reads by experimental conditions</h2>
 
 <p>First we divide the initial data set by experimental conditions using the 8 bp barcode added during the Illumina multiplexing protocol.</p>
 
@@ -1031,17 +1029,17 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <p>The <code class="language-plaintext highlighter-rouge">^</code> at the beginning of the sequence means we want to anchor the barcode at the beginning of the read. To know more about the symbols used by <strong>Cutadapt</strong>, you check the <a href="https://cutadapt.readthedocs.io/en/stable/guide.html#adapter-types"><strong>Cutadapt</strong> manual</a>.</p>
 </blockquote>
 
-<p>We would like now to split our Tnseq <span class="notranslate">reads</span> in <code class="language-plaintext highlighter-rouge">Tnseq-Tutorial-<span class="notranslate">reads</span></code> given the barcodes.</p>
+<p>We would like now to split our Tnseq reads in <code class="language-plaintext highlighter-rouge">Tnseq-Tutorial-reads</code> given the barcodes.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-split-reads-by-condition-barcodes-using-cutadapt" aria-label="hands-on box: Split reads by condition barcodes using Cutadapt"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Split <span class="notranslate">reads</span> by condition barcodes using Cutadapt</div>
+  <div class="box-title hands-on-title" id="hands-on-split-reads-by-condition-barcodes-using-cutadapt" aria-label="hands-on box: Split reads by condition barcodes using Cutadapt"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Split reads by condition barcodes using Cutadapt</div>
 
   <ol>
     <li><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
+        <li><em>“Single-end or Paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file”</em>: <code class="language-plaintext highlighter-rouge">Tnseq-Tutorial-<span class="notranslate">reads</span></code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file”</em>: <code class="language-plaintext highlighter-rouge">Tnseq-Tutorial-reads</code></li>
             <li>In <em>“Read 1 Options”</em>
               <ul>
                 <li>In <em>“5’ (Front) Adapters”</em>
@@ -1070,8 +1068,8 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         <li>In <em>“Output Selector”</em>, select
           <ul>
             <li><em>“Report”</em></li>
-            <li><em>“Multiple output”</em> (to separate the <span class="notranslate">reads</span> into one file per condition)</li>
-            <li><em>“Untrimmed <span class="notranslate">reads</span>”</em> (to write <span class="notranslate">reads</span> that do not contain the adapter to a separate file)</li>
+            <li><em>“Multiple output”</em> (to separate the reads into one file per condition)</li>
+            <li><em>“Untrimmed reads”</em> (to write reads that do not contain the adapter to a separate file)</li>
           </ul>
         </li>
       </ul>
@@ -1086,16 +1084,16 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
-    <li>What percentage of <span class="notranslate">reads</span> has been trimmed for the adapter?</li>
-    <li>How many <span class="notranslate">reads</span> have been trimmed for each condition?</li>
-    <li>What should we change if our barcodes were at the end of the <span class="notranslate">reads</span> ?</li>
+    <li>What percentage of reads has been trimmed for the adapter?</li>
+    <li>How many reads have been trimmed for each condition?</li>
+    <li>What should we change if our barcodes were at the end of the reads ?</li>
   </ol>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
     <ol>
-      <li>100% of the <span class="notranslate">reads</span> were trimmed (line <code class="language-plaintext highlighter-rouge"><span class="notranslate">Reads</span> with adapters</code>)</li>
+      <li>100% of the reads were trimmed (line <code class="language-plaintext highlighter-rouge">Reads with adapters</code>)</li>
       <li>2,847,018 for control (<code class="language-plaintext highlighter-rouge">CTCAGAAG</code> barcode) and 2,862,108 for condition (<code class="language-plaintext highlighter-rouge">GACGTCAT</code> barcode)</li>
       <li>We should use the option <em>“Insert 3’ (End) Adapters”</em> and anchored them at the end of the read with the symbol <code class="language-plaintext highlighter-rouge">$</code> in our fasta file containing the barcodes.</li>
     </ol>
@@ -1105,7 +1103,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
 <h2 id="remove-adapter-sequence">Remove Adapter sequence</h2>
 
-<p>Our <span class="notranslate">reads</span> are now divided by condition. We need to trim their tail containing the Illumina adapters, used for initiating the sequencing (<code class="language-plaintext highlighter-rouge">CGTTATGGCACGC</code>, here). To do so, we remove the adapter and everything <span class="notranslate">downstream</span>, using the end adapter option of <strong>Cutadapt</strong> and not anchor the sequence anywhere. To eliminate <span class="notranslate">reads</span> that might not have been trimmed because of too many mismatches or other reasons, we filter the <span class="notranslate">reads</span> by size, given the known approximate size of the remaining sequences (<strong>how is it computed??</strong>).</p>
+<p>Our reads are now divided by condition. We need to trim their tail containing the Illumina adapters, used for initiating the sequencing (<code class="language-plaintext highlighter-rouge">CGTTATGGCACGC</code>, here). To do so, we remove the adapter and everything downstream, using the end adapter option of <strong>Cutadapt</strong> and not anchor the sequence anywhere. To eliminate reads that might not have been trimmed because of too many mismatches or other reasons, we filter the reads by size, given the known approximate size of the remaining sequences (<strong>how is it computed??</strong>).</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-remove-adapter-with-cutadapt" aria-label="hands-on box: Remove Adapter with Cutadapt"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Remove Adapter with Cutadapt</div>
@@ -1113,7 +1111,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <ol>
     <li><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to remove adapters with:
       <ul>
-        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
+        <li><em>“Single-end or Paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
             <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/A file”</em>: collection output of the previous <strong>Cutadapt</strong></li>
             <li>In <em>“Read 1 Options”</em>
@@ -1152,7 +1150,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         <p>What are the outputs at this step?</p>
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-          <p>The outputs are two collections: one containing the <span class="notranslate">reads</span> in both conditions, and one containing the <strong>Cutadapt</strong> reports for each condition.</p>
+          <p>The outputs are two collections: one containing the reads in both conditions, and one containing the <strong>Cutadapt</strong> reports for each condition.</p>
         </blockquote>
       </blockquote>
     </li>
@@ -1161,16 +1159,16 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
-        <p>What percentage of the <span class="notranslate">reads</span> contained the adapter?</p>
+        <p>What percentage of the reads contained the adapter?</p>
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-          <p>More than 99% of the <span class="notranslate">reads</span> contained the adapter in both conditions (line <code class="language-plaintext highlighter-rouge"><span class="notranslate">Reads</span> with adapters</code> in the reports)</p>
+          <p>More than 99% of the reads contained the adapter in both conditions (line <code class="language-plaintext highlighter-rouge">Reads with adapters</code> in the reports)</p>
         </blockquote>
       </blockquote>
     </li>
-    <li><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to filter <span class="notranslate">reads</span> based on length with:
+    <li><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to filter reads based on length with:
       <ul>
-        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
+        <li><em>“Single-end or Paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
             <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/A file”</em>: collection output of the previous <strong>Cutadapt</strong></li>
           </ul>
@@ -1193,10 +1191,10 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
-        <p>How many <span class="notranslate">reads</span> where discarded after filtering?</p>
+        <p>How many reads where discarded after filtering?</p>
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-          <p>Less than 2% of the <span class="notranslate">reads</span> were discarded in both conditions (lines <code class="language-plaintext highlighter-rouge"><span class="notranslate">Reads</span> that were too short</code> and <code class="language-plaintext highlighter-rouge"><span class="notranslate">Reads</span> that were too long</code> in the reports)</p>
+          <p>Less than 2% of the reads were discarded in both conditions (lines <code class="language-plaintext highlighter-rouge">Reads that were too short</code> and <code class="language-plaintext highlighter-rouge">Reads that were too long</code> in the reports)</p>
         </blockquote>
       </blockquote>
     </li>
@@ -1204,15 +1202,15 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
 </blockquote>
 
-<p>We can see that is both samples the <span class="notranslate">reads</span> have pass the filtering at more than 98%. If this percentage is very low, it means the previous trimming steps is incomplete or faulty.</p>
+<p>We can see that is both samples the reads have pass the filtering at more than 98%. If this percentage is very low, it means the previous trimming steps is incomplete or faulty.</p>
 
-<h2 id="separate-reads-from-different-transposon-constructs">Separate <span class="notranslate">reads</span> from different transposon constructs</h2>
+<h2 id="separate-reads-from-different-transposon-constructs">Separate reads from different transposon constructs</h2>
 
-<p>The constructs used in this experiment contain different strengths and directions of promoters. We use the different constructs as replicates, so we need now to separate the <span class="notranslate">reads</span> based on the construct specific 3 bp barcodes.</p>
+<p>The constructs used in this experiment contain different strengths and directions of promoters. We use the different constructs as replicates, so we need now to separate the reads based on the construct specific 3 bp barcodes.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
-  <p>In addition of disrupting a gene at the location of the insertion, such constructs can modify the <span class="notranslate">expression</span> of either <span class="notranslate">upstream</span> or <span class="notranslate">downstream</span> regions. The analysis of such modification will be studied in another training material, but for now we consider that the construct does not impact the essentiality analysis.</p>
+  <p>In addition of disrupting a gene at the location of the insertion, such constructs can modify the expression of either upstream or downstream regions. The analysis of such modification will be studied in another training material, but for now we consider that the construct does not impact the essentiality analysis.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
@@ -1229,7 +1227,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-          <p>It means the barcode is anchored at the end of the <span class="notranslate">reads</span>.</p>
+          <p>It means the barcode is anchored at the end of the reads.</p>
         </blockquote>
       </blockquote>
     </li>
@@ -1242,7 +1240,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <ol>
     <li><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
+        <li><em>“Single-end or Paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
             <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/A file”</em>: collection output of the previous <strong>Cutadapt</strong></li>
             <li>In <em>“Read 1 Options”</em>
@@ -1272,7 +1270,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         <li>In <em>“Output Selector”</em>, select
           <ul>
             <li><em>“Report”</em></li>
-            <li><em>“Multiple output”</em> (to separate the <span class="notranslate">reads</span> into one file per condition)</li>
+            <li><em>“Multiple output”</em> (to separate the reads into one file per condition)</li>
           </ul>
         </li>
       </ul>
@@ -1283,11 +1281,11 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
       <blockquote class="question">
         <div class="box-title question-title" id="question-5" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-        <p>Are the <span class="notranslate">reads</span> equally divided between constructs?</p>
+        <p>Are the reads equally divided between constructs?</p>
 
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-          <p>When you look at the reports, you can see that most of the <span class="notranslate">reads</span> have been assigned to the <em>blunt</em> construct (<code class="language-plaintext highlighter-rouge">TAC</code> barcode): the blunt construct is the control and does not contain any promoters. This means that there is less negative selective pressure on blunt than the other ones, that have affected flanking region in addition to the disrupted gene at the insertion site. This won’t be a problem here as the tool we use for the essentiality prediction consider the sum of <span class="notranslate">reads</span> in the replicates.</p>
+          <p>When you look at the reports, you can see that most of the reads have been assigned to the <em>blunt</em> construct (<code class="language-plaintext highlighter-rouge">TAC</code> barcode): the blunt construct is the control and does not contain any promoters. This means that there is less negative selective pressure on blunt than the other ones, that have affected flanking region in addition to the disrupted gene at the insertion site. This won’t be a problem here as the tool we use for the essentiality prediction consider the sum of reads in the replicates.</p>
         </blockquote>
       </blockquote>
     </li>
@@ -1299,7 +1297,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
 <h2 id="remove-the-remaining-transposon-sequence">Remove the remaining transposon sequence</h2>
 
-<p>The last remaining transposon sequence in the <span class="notranslate">reads</span> is the linker with the MmeI restriction site (<code class="language-plaintext highlighter-rouge">ACAGGTTGGATGATAAGTCCCCGGTCTATATTGAGAGTAACTACATTT</code>).</p>
+<p>The last remaining transposon sequence in the reads is the linker with the MmeI restriction site (<code class="language-plaintext highlighter-rouge">ACAGGTTGGATGATAAGTCCCCGGTCTATATTGAGAGTAACTACATTT</code>).</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-remove-linker-with-cutadapt" aria-label="hands-on box:  Remove Linker with Cutadapt"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Remove Linker with Cutadapt</div>
@@ -1307,7 +1305,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <ol>
     <li><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
+        <li><em>“Single-end or Paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
             <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/A file”</em>: collection output of the previous <strong>Cutadapt</strong></li>
             <li>In <em>“Read 1 Options”</em>
@@ -1345,21 +1343,21 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   </ol>
 </blockquote>
 
-<p>Now that we isolated the genomic sequences from the initial <span class="notranslate">reads</span>, we want to align them to count how many insertion have been retained at each TA site.</p>
+<p>Now that we isolated the genomic sequences from the initial reads, we want to align them to count how many insertion have been retained at each TA site.</p>
 
 <h1 id="count-the-number-of-insertion-per-ta-sites">Count the number of insertion per TA sites</h1>
 
-<h2 id="align-the-reads-to-a-reference-genome">Align the <span class="notranslate">reads</span> to a reference genome</h2>
+<h2 id="align-the-reads-to-a-reference-genome">Align the reads to a reference genome</h2>
 
-<p>To identify the location of each TA site to the count them, the first step is to map the <span class="notranslate">reads</span> on the reference genome. We use the <strong>Bowtie</strong>.</p>
+<p>To identify the location of each TA site to the count them, the first step is to map the reads on the reference genome. We use the <strong>Bowtie</strong>.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
-  <p>We could also use <strong>Bowtie2</strong> with an end-to-end option, but <strong>Bowtie</strong> is more suitable for very short <span class="notranslate">reads</span> like ours (16-17 bp).</p>
+  <p>We could also use <strong>Bowtie2</strong> with an end-to-end option, but <strong>Bowtie</strong> is more suitable for very short reads like ours (16-17 bp).</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-map-reads-with-bowtie" aria-label="hands-on box: Map reads with Bowtie"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Map <span class="notranslate">reads</span> with Bowtie</div>
+  <div class="box-title hands-on-title" id="hands-on-map-reads-with-bowtie" aria-label="hands-on box: Map reads with Bowtie"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Map reads with Bowtie</div>
 
   <ol>
     <li><strong>Map with Bowtie for Illumina</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
@@ -1373,7 +1371,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
           <ul>
             <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ file”</em>: collection output of the last <strong>Cutadapt</strong></li>
             <li><em>“Bowtie settings to use”</em>: <code class="language-plaintext highlighter-rouge">Full parameters list</code></li>
-            <li><em>“Skip the first n <span class="notranslate">reads</span> (-s)”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+            <li><em>“Skip the first n reads (-s)”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
             <li><em>“Maximum number of mismatches permitted in the seed (-n)”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
             <li><em>“Seed length (-l)”</em>: <code class="language-plaintext highlighter-rouge">17</code></li>
             <li><em>“Whether or not to make Bowtie guarantee that reported singleton alignments are ‘best’ in terms of stratum and in terms of the quality values at the mismatched positions (–best)”</em>: <code class="language-plaintext highlighter-rouge">Use best</code></li>
@@ -1384,10 +1382,10 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-6" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
-        <p>Why are we strictly enforcing no mismatch <span class="notranslate">mapping</span>?</p>
+        <p>Why are we strictly enforcing no mismatch mapping?</p>
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-6"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-6-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-          <p>Our <span class="notranslate">reads</span> being very short, the smallest size needs precise <span class="notranslate">mapping</span>, allowing even one mismatch would risk having <span class="notranslate">reads</span> <span class="notranslate">mapping</span> in wrong positions.</p>
+          <p>Our reads being very short, the smallest size needs precise mapping, allowing even one mismatch would risk having reads mapping in wrong positions.</p>
         </blockquote>
       </blockquote>
     </li>
@@ -1403,11 +1401,11 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
 <h2 id="compute-coverage-of-the-genome">Compute coverage of the genome</h2>
 
-<p>We have now our <span class="notranslate">reads</span> mapped on the reference genome. We can compute the genome coverage, <em>i.e.</em> how much the nucleotides of the genome are covered by <span class="notranslate">reads</span>. This information will be later crossed with our TA sites position.</p>
+<p>We have now our reads mapped on the reference genome. We can compute the genome coverage, <em>i.e.</em> how much the nucleotides of the genome are covered by reads. This information will be later crossed with our TA sites position.</p>
 
-<p>In our case, the sequenced <span class="notranslate">reads</span> cover the  5’ region flanking region of the TA site where the transposon inserted. We should not then extract the coverage across the whole <span class="notranslate">reads</span>, as it could cover several TA sites, but only the coverage at the 3’ end of the read:</p>
+<p>In our case, the sequenced reads cover the  5’ region flanking region of the TA site where the transposon inserted. We should not then extract the coverage across the whole reads, as it could cover several TA sites, but only the coverage at the 3’ end of the read:</p>
 
-<figure id="figure-4"><img src="../../images/tnseq/Map_cov.png" alt="A read align to the genome with its 3' end covering half of the TA site. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> <span class="notranslate">Mapping</span> read and TA site coverage</figcaption></figure>
+<figure id="figure-4"><img src="../../images/tnseq/Map_cov.png" alt="A read align to the genome with its 3' end covering half of the TA site. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Mapping read and TA site coverage</figcaption></figure>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-compute-genome-coverage" aria-label="hands-on box: Compute genome coverage"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Compute genome coverage</div>
@@ -1418,7 +1416,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM/CRAM file”</em>: collection output of the last <strong>Map with Bowtie for Illumina</strong></li>
         <li><em>“Bin size in bases”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li><em>“Scaling/Normalization method”</em>: <code class="language-plaintext highlighter-rouge">Do not normalize or scale</code></li>
-        <li><em>“Coverage file format”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">bed</span>graph</code></li>
+        <li><em>“Coverage file format”</em>: <code class="language-plaintext highlighter-rouge">bedgraph</code></li>
         <li><em>“Show advanced options”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
           <ul>
             <li><em>“Ignore missing data?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (to get only region with read counts)</li>
@@ -1453,7 +1451,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   </ol>
 </blockquote>
 
-<p><strong>Nucleotide subsequence search</strong> generate one <span class="notranslate">BED</span> file with the coordinates of each TA on the genome:</p>
+<p><strong>Nucleotide subsequence search</strong> generate one BED file with the coordinates of each TA on the genome:</p>
 <ol>
   <li>Chrom</li>
   <li>Start</li>
@@ -1479,7 +1477,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
       <p>Add the <code class="language-plaintext highlighter-rouge">#forward</code> tag to the output</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
     </li>
     <li><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
@@ -1488,9 +1486,9 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Nucleotide subsequence search</strong></li>
       </ul>
     </li>
-    <li><strong>Compute an <span class="notranslate">expression</span> on every row</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to shift the end position of TA sites  by 1 and get the start of the TA site on the reverse strand with:
+    <li><strong>Compute an expression on every row</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to shift the end position of TA sites  by 1 and get the start of the TA site on the reverse strand with:
       <ul>
-        <li><em>Add <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">c2-1</code></li>
+        <li><em>Add expression”</em>: <code class="language-plaintext highlighter-rouge">c2-1</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“as a new column to”</em>: output of <strong>cut</strong></li>
         <li><em>“Round result?”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
       </ul>
@@ -1550,9 +1548,9 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <div class="box-title hands-on-title" id="hands-on-get-total-count-per-ta-site" aria-label="hands-on box: Get total count per TA site"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Get total count per TA site</div>
 
   <ol>
-    <li><strong>Compute an <span class="notranslate">expression</span> on every row</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to shift the positions of reverse strand counts with:
+    <li><strong>Compute an expression on every row</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to shift the positions of reverse strand counts with:
       <ul>
-        <li><em>Add <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">c1-1</code> (to shift the position by 1)</li>
+        <li><em>Add expression”</em>: <code class="language-plaintext highlighter-rouge">c1-1</code> (to shift the position by 1)</li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“as a new column to”</em>: <strong>Cut</strong> output collection with the tags <code class="language-plaintext highlighter-rouge">reverse</code></li>
         <li><em>“Round result?”</em> : <code class="language-plaintext highlighter-rouge">yes</code></li>
       </ul>
@@ -1591,9 +1589,9 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         <li><em>“Value to put in unpaired (empty) fields”</em>: <code class="language-plaintext highlighter-rouge">.</code></li>
       </ul>
     </li>
-    <li><strong>Compute an <span class="notranslate">expression</span> on every row</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to get the total read count with:
+    <li><strong>Compute an expression on every row</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to get the total read count with:
       <ul>
-        <li><em>Add <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">c2+c3</code> to get the total count</li>
+        <li><em>Add expression”</em>: <code class="language-plaintext highlighter-rouge">c2+c3</code> to get the total count</li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“as a new column to”</em>: output of <strong>Join two files</strong> with the tags <code class="language-plaintext highlighter-rouge">reverse</code> and <code class="language-plaintext highlighter-rouge">forward</code></li>
         <li><em>“Round result?”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
       </ul>
@@ -1708,7 +1706,7 @@ creating libraries with lower insertion rates. The difference from the Gumbel me
       <p>Change the datatype if needed</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">gff3</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">gff3</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li><strong>Convert GFF3 to prot_table for TRANSIT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
@@ -1778,7 +1776,7 @@ creating libraries with lower insertion rates. The difference from the Gumbel me
   <div class="box-title hands-on-title" id="hands-on-hands-on-get-table-of-essential-genes" aria-label="hands-on box: Hands-on : Get table of essential genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Hands-on : Get table of essential genes</div>
 
   <ol>
-    <li><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
+    <li><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Filter”</em>: output of the last <strong>Gumbel</strong></li>
         <li><em>With following condition”</em>: <code class="language-plaintext highlighter-rouge">c9=='E'</code> (to select essential genes)</li>
@@ -1913,21 +1911,21 @@ creating libraries with lower insertion rates. The difference from the Gumbel me
 <h1 id="conclusion">Conclusion</h1>
 
 <p>In this tutorial, we learned how to predict essential genes in different conditions. Although it seems to be a long process, keep in mind that the steps allowing to get the list of TA site does not need to be repeated for each analysis as long as you study the same genome.
-For repetitive analyses, the steps are fewer : <span class="notranslate">mapping</span>, coverage, attribution to TA sites, merging of strands and Transit analysis.</p>
+For repetitive analyses, the steps are fewer : mapping, coverage, attribution to TA sites, merging of strands and Transit analysis.</p>
 
-<p>This tutorial focused on simple gene essentiality prediction in individual samples. You could be interested in intergenic regions as well, or comparing many samples together. Other methods exist in transit for these goals, that follow the same <span class="notranslate">workflow</span>. It is important to look at your data and to perform quality control to evaluate the coverage and sparsity of your data. This will influence not only the choice of method (HMM does not manage sparse data well), but the choice of parameters for your analysis.</p>
+<p>This tutorial focused on simple gene essentiality prediction in individual samples. You could be interested in intergenic regions as well, or comparing many samples together. Other methods exist in transit for these goals, that follow the same workflow. It is important to look at your data and to perform quality control to evaluate the coverage and sparsity of your data. This will influence not only the choice of method (HMM does not manage sparse data well), but the choice of parameters for your analysis.</p>
 
 <p>Once you get this list of gene, it is interesting to verify manually the genes classified as essentials. In order to do that, you can visualize the read mapped on your genome by displaying the bam files in IGV.</p>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-add-genome-and-annotations-to-igv-from-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-add-genome-and-annotations-to-igv-from-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: Add genome and annotations to IGV from Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Add genome and annotations to IGV from <span class="notranslate">Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Upload a FASTA file with the reference genome and a GFF3 file with its annotation in the history (if not already there)</li>   <li>Install <a href="https://software.broadinstitute.org/software/igv/download">IGV</a> (if not already installed)</li>   <li>Launch IGV on your computer</li>   <li>Expand the FASTA dataset with the genome in the history</li>   <li>Click on the <code class="language-plaintext highlighter-rouge">local</code> in <code class="language-plaintext highlighter-rouge">display with IGV</code> to load the genome into the IGV browser</li>   <li>Wait until all <strong>Dataset status</strong> are <code class="language-plaintext highlighter-rouge">ok</code></li>   <li>     <p>Close the window</p>     <p>An alert <code class="language-plaintext highlighter-rouge">ERROR Parameter "file" is required</code> may appear. Ignore it.</p>   </li>   <li>Expand the GFF3 dataset with the annotations of the genome in the history</li>   <li>Click on the <code class="language-plaintext highlighter-rouge">local</code> in <code class="language-plaintext highlighter-rouge">display with IGV</code> to load the annotation into the IGV browser</li>   <li>     <p>Switch to the IGV instance</p>     <p>The annotation track should appear. Be careful that all files have the same genome ID</p>   </li> </ol> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-add-genome-and-annotations-to-igv-from-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-add-genome-and-annotations-to-igv-from-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: Add genome and annotations to IGV from Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Add genome and annotations to IGV from Galaxy<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Upload a FASTA file with the reference genome and a GFF3 file with its annotation in the history (if not already there)</li>   <li>Install <a href="https://software.broadinstitute.org/software/igv/download">IGV</a> (if not already installed)</li>   <li>Launch IGV on your computer</li>   <li>Expand the FASTA dataset with the genome in the history</li>   <li>Click on the <code class="language-plaintext highlighter-rouge">local</code> in <code class="language-plaintext highlighter-rouge">display with IGV</code> to load the genome into the IGV browser</li>   <li>Wait until all <strong>Dataset status</strong> are <code class="language-plaintext highlighter-rouge">ok</code></li>   <li>     <p>Close the window</p>     <p>An alert <code class="language-plaintext highlighter-rouge">ERROR Parameter "file" is required</code> may appear. Ignore it.</p>   </li>   <li>Expand the GFF3 dataset with the annotations of the genome in the history</li>   <li>Click on the <code class="language-plaintext highlighter-rouge">local</code> in <code class="language-plaintext highlighter-rouge">display with IGV</code> to load the annotation into the IGV browser</li>   <li>     <p>Switch to the IGV instance</p>     <p>The annotation track should appear. Be careful that all files have the same genome ID</p>   </li> </ol> </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-add-mapped-reads-track-to-igv-from-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-add-mapped-reads-track-to-igv-from-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: Add Mapped reads track to IGV from Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Add Mapped <span class="notranslate">reads</span> track to IGV from <span class="notranslate">Galaxy</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Install <a href="https://software.broadinstitute.org/software/igv/download">IGV</a> (if not already installed)</li>   <li>Launch IGV on your computer</li>   <li>Check if the reference genome is available on the IGV instance</li>   <li>Expand the BAM dataset with the mapped <span class="notranslate">reads</span> in the history</li>   <li>Click on the <code class="language-plaintext highlighter-rouge">local</code> in <code class="language-plaintext highlighter-rouge">display with IGV</code> to load the <span class="notranslate">reads</span> into the IGV browser</li>   <li>     <p>Switch to the IGV instance</p>     <p>The mapped <span class="notranslate">reads</span> track should appear. Be sure that all files have the same genome ID</p>   </li> </ol> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-add-mapped-reads-track-to-igv-from-galaxy"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-add-mapped-reads-track-to-igv-from-galaxy-contents" aria-expanded="true" aria-label="Toggle tip box: Add Mapped reads track to IGV from Galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Add Mapped reads track to IGV from Galaxy<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Install <a href="https://software.broadinstitute.org/software/igv/download">IGV</a> (if not already installed)</li>   <li>Launch IGV on your computer</li>   <li>Check if the reference genome is available on the IGV instance</li>   <li>Expand the BAM dataset with the mapped reads in the history</li>   <li>Click on the <code class="language-plaintext highlighter-rouge">local</code> in <code class="language-plaintext highlighter-rouge">display with IGV</code> to load the reads into the IGV browser</li>   <li>     <p>Switch to the IGV instance</p>     <p>The mapped reads track should appear. Be sure that all files have the same genome ID</p>   </li> </ol> </blockquote>
 
-<p>When looking at the read <span class="notranslate">mapping</span> at the location of predicted essential genes, you may encounter several situation: Some gene will have no read at all <span class="notranslate">mapping</span> to them, some will have an empty region, while other will have no clearly defined empty region but a very low count of <span class="notranslate">reads</span>, possibly indicating a growth defect induced by the gene disruption.</p>
+<p>When looking at the read mapping at the location of predicted essential genes, you may encounter several situation: Some gene will have no read at all mapping to them, some will have an empty region, while other will have no clearly defined empty region but a very low count of reads, possibly indicating a growth defect induced by the gene disruption.</p>
 
-<figure id="figure-6"><img src="../../images/tnseq/empty_gene.png" alt="Example of Essential gene with no reads mapped. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Example of Essential gene with no <span class="notranslate">reads</span> mapped</figcaption></figure>
+<figure id="figure-6"><img src="../../images/tnseq/empty_gene.png" alt="Example of Essential gene with no reads mapped. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Example of Essential gene with no reads mapped</figcaption></figure>
 <figure id="figure-7"><img src="../../images/tnseq/low_coverage_gene.png" alt="Example of Essential gene with depleted coverage. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Example of Essential gene with depleted coverage</figcaption></figure>
 
 <p>Once you have curated and confirm the genes that appear essential, comparing the annotation of essential genes with the condition of growth will allow you a better understanding of certain mechanism of interest, like the gene involved in resistance to stress for example.</p>

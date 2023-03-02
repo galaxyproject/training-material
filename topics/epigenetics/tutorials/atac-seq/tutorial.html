@@ -927,8 +927,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -1014,17 +1012,17 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>In many eukaryotic organisms, such as humans, the genome is tightly packed and organized with the help of nucleosomes (chromatin). A nucleosome is a complex formed by eight histone proteins that is wrapped with ~147bp of <span class="notranslate">DNA</span>. When the <span class="notranslate">DNA</span> is being actively transcribed into <span class="notranslate">RNA</span>, the <span class="notranslate">DNA</span> will be opened and loosened from the nucleosome complex. Many factors, such as the chromatin structure, the position of the nucleosomes, and histone modifications, play an important role in the organization and accessibility of the <span class="notranslate">DNA</span>. Consequently, these factors are also important for the activation and inactivation of genes. <strong>A</strong>ssay for <strong>T</strong>ransposase-<strong>A</strong>ccessible <strong>C</strong>hromatin using <strong>seq</strong>uencing (<a href="https://en.wikipedia.org/wiki/ATAC-seq">ATAC-Seq</a>) is a method to investigate the accessibility of chromatin and thus a method to determine regulatory mechanisms of gene <span class="notranslate">expression</span>. The method can help identify promoter regions and potential enhancers and silencers. A promoter is the <span class="notranslate">DNA</span> region close to the transcription start site (TSS). It contains binding sites for transcription factors that will recruit the <span class="notranslate">RNA</span> polymerase. An enhancer is a <span class="notranslate">DNA</span> region that can be located up to 1 Mb <span class="notranslate">downstream</span> or <span class="notranslate">upstream</span> of the promoter. When transcription factors bind an enhancer and contact a promoter region, the transcription of the gene is increased. In contrast, a silencer decreases or inhibits the gene’s <span class="notranslate">expression</span>. ATAC-Seq has become popular for identifying accessible regions of the genome as it’s easier, faster and requires less cells than alte<span class="notranslate">rna</span>tive techniques, such as FAIRE-Seq and <span class="notranslate">DNa</span>se-Seq.</p>
+<p>In many eukaryotic organisms, such as humans, the genome is tightly packed and organized with the help of nucleosomes (chromatin). A nucleosome is a complex formed by eight histone proteins that is wrapped with ~147bp of DNA. When the DNA is being actively transcribed into RNA, the DNA will be opened and loosened from the nucleosome complex. Many factors, such as the chromatin structure, the position of the nucleosomes, and histone modifications, play an important role in the organization and accessibility of the DNA. Consequently, these factors are also important for the activation and inactivation of genes. <strong>A</strong>ssay for <strong>T</strong>ransposase-<strong>A</strong>ccessible <strong>C</strong>hromatin using <strong>seq</strong>uencing (<a href="https://en.wikipedia.org/wiki/ATAC-seq">ATAC-Seq</a>) is a method to investigate the accessibility of chromatin and thus a method to determine regulatory mechanisms of gene expression. The method can help identify promoter regions and potential enhancers and silencers. A promoter is the DNA region close to the transcription start site (TSS). It contains binding sites for transcription factors that will recruit the RNA polymerase. An enhancer is a DNA region that can be located up to 1 Mb downstream or upstream of the promoter. When transcription factors bind an enhancer and contact a promoter region, the transcription of the gene is increased. In contrast, a silencer decreases or inhibits the gene’s expression. ATAC-Seq has become popular for identifying accessible regions of the genome as it’s easier, faster and requires less cells than alternative techniques, such as FAIRE-Seq and DNase-Seq.</p>
 
 <figure id="figure-1"><img src="../../images/atac-seq/atac-seq.jpeg" alt="ATAC-Seq. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Buenrostro et al. 2013 Nat Methods</figcaption></figure>
 
-<p>With ATAC-Seq, to find accessible (open) chromatin regions, the genome is treated with a hyperactive derivative of the Tn5 transposase. A <a href="https://en.wikipedia.org/wiki/Transposase">transposase</a> can bind to a <a href="https://en.wikipedia.org/wiki/Transposable_element">transposable element</a>, which is a <span class="notranslate">DNA</span> sequence that can change its position (jump) within a genome (read the two links to get a deeper insight). During ATAC-Seq, the modified Tn5 inserts <span class="notranslate">DNA</span> sequences corresponding to truncated Nextera adapters into open regions of the genome and concurrently, the <span class="notranslate">DNA</span> is sheared by the transposase activity. The read library is then prepared for sequencing, including PCR amplification with full Nextera adapters and purification steps. Paired-end <span class="notranslate">reads</span> are recommended for ATAC-Seq for the reasons described <a href="https://informatics.fas.harvard.edu/atac-seq-guidelines.html">here</a>.</p>
+<p>With ATAC-Seq, to find accessible (open) chromatin regions, the genome is treated with a hyperactive derivative of the Tn5 transposase. A <a href="https://en.wikipedia.org/wiki/Transposase">transposase</a> can bind to a <a href="https://en.wikipedia.org/wiki/Transposable_element">transposable element</a>, which is a DNA sequence that can change its position (jump) within a genome (read the two links to get a deeper insight). During ATAC-Seq, the modified Tn5 inserts DNA sequences corresponding to truncated Nextera adapters into open regions of the genome and concurrently, the DNA is sheared by the transposase activity. The read library is then prepared for sequencing, including PCR amplification with full Nextera adapters and purification steps. Paired-end reads are recommended for ATAC-Seq for the reasons described <a href="https://informatics.fas.harvard.edu/atac-seq-guidelines.html">here</a>.</p>
 
-<p>In this tutorial we will use data from the study of <span class="citation"><a href="#Buenrostro2013">Buenrostro <i>et al.</i> 2013</a></span>, the first paper on the ATAC-Seq method. The data is from a human cell line of purified CD4+ T cells, called GM12878. The original dataset had 2 x 200 million <span class="notranslate">reads</span> and would be too big to process in a training session, so we downsampled the original dataset to 200,000 randomly selected <span class="notranslate">reads</span>. We also added about 200,000 <span class="notranslate">reads</span> pairs that will map to chromosome 22 to have a good profile on this chromosome, similar to what you might get with a typical ATAC-Seq sample (2 x 20 million <span class="notranslate">reads</span> in original FASTQ). Furthermore, we want to compare the predicted open chromatin regions to the known binding sites of CTCF, a <span class="notranslate">DNA</span>-binding protein implicated in 3D structure: <a href="https://en.wikipedia.org/wiki/CTCF">CTCF</a>. CTCF is known to bind to thousands of sites in the genome and thus it can be used as a positive control for assessing if the ATAC-Seq experiment is good quality. Good ATAC-Seq data would have accessible regions both within and outside of TSS, for example, at some CTCF binding sites. For that reason, we will download binding sites of CTCF identified by ChIP in the same cell line from ENCODE (ENCSR000AKB, dataset ENCFF933NTR).</p>
+<p>In this tutorial we will use data from the study of <span class="citation"><a href="#Buenrostro2013">Buenrostro <i>et al.</i> 2013</a></span>, the first paper on the ATAC-Seq method. The data is from a human cell line of purified CD4+ T cells, called GM12878. The original dataset had 2 x 200 million reads and would be too big to process in a training session, so we downsampled the original dataset to 200,000 randomly selected reads. We also added about 200,000 reads pairs that will map to chromosome 22 to have a good profile on this chromosome, similar to what you might get with a typical ATAC-Seq sample (2 x 20 million reads in original FASTQ). Furthermore, we want to compare the predicted open chromatin regions to the known binding sites of CTCF, a DNA-binding protein implicated in 3D structure: <a href="https://en.wikipedia.org/wiki/CTCF">CTCF</a>. CTCF is known to bind to thousands of sites in the genome and thus it can be used as a positive control for assessing if the ATAC-Seq experiment is good quality. Good ATAC-Seq data would have accessible regions both within and outside of TSS, for example, at some CTCF binding sites. For that reason, we will download binding sites of CTCF identified by ChIP in the same cell line from ENCODE (ENCSR000AKB, dataset ENCFF933NTR).</p>
 
 <h3 id="when-working-with-real-data">When working with real data</h3>
 
-<p>When you use your own data we suggest you to use <a href="https://usegalaxy.eu/u/ldelisle/w/atac-seq-gtm-with-control">this <span class="notranslate">workflow</span></a> which includes the same steps but is compatible with replicates. If you do not have any control data you can import and edit this <span class="notranslate">workflow</span>, removing all steps with the controls. Controls for the ATAC-Seq procedure are not commonly performed, as discussed <a href="https://informatics.fas.harvard.edu/atac-seq-guidelines.html">here</a>, but could be ATAC-Seq of purified <span class="notranslate">DNA</span>.</p>
+<p>When you use your own data we suggest you to use <a href="https://usegalaxy.eu/u/ldelisle/w/atac-seq-gtm-with-control">this workflow</a> which includes the same steps but is compatible with replicates. If you do not have any control data you can import and edit this workflow, removing all steps with the controls. Controls for the ATAC-Seq procedure are not commonly performed, as discussed <a href="https://informatics.fas.harvard.edu/atac-seq-guidelines.html">here</a>, but could be ATAC-Seq of purified DNA.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -1036,16 +1034,16 @@
   <li><a href="#preprocessing" id="markdown-toc-preprocessing">Preprocessing</a>    <ol>
       <li><a href="#get-data" id="markdown-toc-get-data">Get Data</a></li>
       <li><a href="#quality-control" id="markdown-toc-quality-control">Quality Control</a></li>
-      <li><a href="#trimming-reads" id="markdown-toc-trimming-reads">Trimming <span class="notranslate">Reads</span></a></li>
+      <li><a href="#trimming-reads" id="markdown-toc-trimming-reads">Trimming Reads</a></li>
     </ol>
   </li>
-  <li><a href="#mapping" id="markdown-toc-mapping"><span class="notranslate">Mapping</span></a>    <ol>
-      <li><a href="#mapping-reads-to-reference-genome" id="markdown-toc-mapping-reads-to-reference-genome"><span class="notranslate">Mapping</span> <span class="notranslate">Reads</span> to Reference Genome</a></li>
+  <li><a href="#mapping" id="markdown-toc-mapping">Mapping</a>    <ol>
+      <li><a href="#mapping-reads-to-reference-genome" id="markdown-toc-mapping-reads-to-reference-genome">Mapping Reads to Reference Genome</a></li>
     </ol>
   </li>
-  <li><a href="#filtering-mapped-reads" id="markdown-toc-filtering-mapped-reads">Filtering Mapped <span class="notranslate">Reads</span></a>    <ol>
-      <li><a href="#filter-uninformative-reads" id="markdown-toc-filter-uninformative-reads">Filter Uninformative <span class="notranslate">Reads</span></a></li>
-      <li><a href="#filter-duplicate-reads" id="markdown-toc-filter-duplicate-reads">Filter Duplicate <span class="notranslate">Reads</span></a></li>
+  <li><a href="#filtering-mapped-reads" id="markdown-toc-filtering-mapped-reads">Filtering Mapped Reads</a>    <ol>
+      <li><a href="#filter-uninformative-reads" id="markdown-toc-filter-uninformative-reads">Filter Uninformative Reads</a></li>
+      <li><a href="#filter-duplicate-reads" id="markdown-toc-filter-duplicate-reads">Filter Duplicate Reads</a></li>
       <li><a href="#check-insert-sizes" id="markdown-toc-check-insert-sizes">Check Insert Sizes</a></li>
     </ol>
   </li>
@@ -1065,13 +1063,13 @@
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or because of stochastic processes in the algorithms.</p> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, external databases, or because of stochastic processes in the algorithms.</p> </blockquote>
 
 <h1 id="preprocessing">Preprocessing</h1>
 
 <h2 id="get-data">Get Data</h2>
 
-<p>We first need to download the sequenced <span class="notranslate">reads</span> (FASTQs) as well as other annotation files. Then, to increase the number of <span class="notranslate">reads</span> that will map to the reference genome (here human genome version 38, GRCh38/hg38), we need to preprocess the <span class="notranslate">reads</span>.</p>
+<p>We first need to download the sequenced reads (FASTQs) as well as other annotation files. Then, to increase the number of reads that will map to the reference genome (here human genome version 38, GRCh38/hg38), we need to preprocess the reads.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload" aria-label="hands-on box: Data upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload</div>
@@ -1081,34 +1079,34 @@
       <p>Create a new history for this tutorial</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the files from <a href="https://doi.org/10.5281/zenodo.3862792">Zenodo</a> or from
 the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">epigenetics</code>
  -&gt; <code class="language-plaintext highlighter-rouge">ATAC-Seq data analysis</code>):</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3862793/files/ENCFF933NTR.<span class="notranslate">bed</span>.gz
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3862793/files/ENCFF933NTR.bed.gz
 https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R1.fastq.gz
 https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R2.fastq.gz
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li>
       <p>Add a tag called <code class="language-plaintext highlighter-rouge">#SRR891268_R1</code> to the R1 file and a tag called <code class="language-plaintext highlighter-rouge">#SRR891268_R2</code> to the R2 file.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
     </li>
     <li>
-      <p>Check that the datatype of the 2 FASTQ files is <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> and the peak file (ENCFF933NTR.<span class="notranslate">bed</span>.gz) is <code class="language-plaintext highlighter-rouge">encodepeak</code>. If they are not then change the datatype as described below.</p>
+      <p>Check that the datatype of the 2 FASTQ files is <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> and the peak file (ENCFF933NTR.bed.gz) is <code class="language-plaintext highlighter-rouge">encodepeak</code>. If they are not then change the datatype as described below.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1120,8 +1118,8 @@ https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R2.fastq.gz
 </blockquote>
 <blockquote class="comment">
 
-  <div class="box-title comment-title" id="comment-bed-encode-narrowpeak-format" aria-label="comment box: BED / encode narrowPeak format"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: <span class="notranslate">BED</span> / encode narrowPeak format</div>
-  <p>If you are not familiar with <span class="notranslate">BED</span> format or encode narrowPeak format, see the <a href="https://genome.ucsc.edu/FAQ/FAQformat.html"><span class="notranslate">BED</span> Format</a></p>
+  <div class="box-title comment-title" id="comment-bed-encode-narrowpeak-format" aria-label="comment box: BED / encode narrowPeak format"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: BED / encode narrowPeak format</div>
+  <p>If you are not familiar with BED format or encode narrowPeak format, see the <a href="https://genome.ucsc.edu/FAQ/FAQformat.html">BED Format</a></p>
 </blockquote>
 
 <p>We will visualise regions later in the analysis and obtain the gene information now. We will get information for chromosome 22 genes (names of transcripts and genomic positions) using the UCSC tool.</p>
@@ -1140,14 +1138,14 @@ https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R2.fastq.gz
         <li><em>“table”</em>: <code class="language-plaintext highlighter-rouge">Basic</code></li>
         <li><em>“region”</em>: <code class="language-plaintext highlighter-rouge">position</code> <code class="language-plaintext highlighter-rouge">chr22</code></li>
         <li><em>“output format”</em>: <code class="language-plaintext highlighter-rouge">all fields from selected table</code></li>
-        <li><em>“Send output to”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span></code></li>
+        <li><em>“Send output to”</em>: <code class="language-plaintext highlighter-rouge">Galaxy</code></li>
       </ul>
     </li>
     <li>Click <strong>get output</strong></li>
     <li>
-      <p>Click <strong>Send query to <span class="notranslate">Galaxy</span></strong></p>
+      <p>Click <strong>Send query to Galaxy</strong></p>
 
-      <p>This table contains all the information but is not in a <span class="notranslate">BED</span> format. To transform it into <span class="notranslate">BED</span> format we will cut out the required columns and rearrange:</p>
+      <p>This table contains all the information but is not in a BED format. To transform it into BED format we will cut out the required columns and rearrange:</p>
     </li>
     <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
       <ul>
@@ -1162,11 +1160,11 @@ https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R2.fastq.gz
       <blockquote class="question">
         <div class="box-title question-title" id="question-expected-output" aria-label="question box: Expected output"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Expected output</div>
 
-        <p>Our goal here was to convert the data to <span class="notranslate">BED</span> format.</p>
+        <p>Our goal here was to convert the data to BED format.</p>
 
         <ol>
-          <li>Which columns do you expect in your file? (Tip: read about <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1"><span class="notranslate">BED</span> format</a>)</li>
-          <li>Does your file look like a valid <span class="notranslate">BED</span> format?</li>
+          <li>Which columns do you expect in your file? (Tip: read about <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1">BED format</a>)</li>
+          <li>Does your file look like a valid BED format?</li>
         </ol>
 
         <blockquote class="solution">
@@ -1177,7 +1175,7 @@ https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R2.fastq.gz
             <li>Your file should look something like this:
               <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chr22	10736170	10736283	U2	0	-
 chr22	11066417	11068174	CU104787.1	0	+
-chr22	11249808	11249959	5_8S_r<span class="notranslate">RNA</span>	0	-
+chr22	11249808	11249959	5_8S_rRNA	0	-
 chr22	15273854	15273961	U6	0	+
 [..]
 </code></pre></div>              </div>
@@ -1199,18 +1197,18 @@ chr22	15273854	15273961	U6	0	+
       </blockquote>
     </li>
     <li>
-      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the dataset as <code class="language-plaintext highlighter-rouge">chr22 genes</code></p>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the dataset as <code class="language-plaintext highlighter-rouge">chr22 genes</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
-      <p><strong>Change</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> its datatype to <span class="notranslate">BED</span></p>
+      <p><strong>Change</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> its datatype to BED</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge"><span class="notranslate">bed</span></code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">bed</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
-    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon of the file. It should have now column names and they should match the content.</li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the file. It should have now column names and they should match the content.</li>
   </ol>
 
 </blockquote>
@@ -1218,31 +1216,31 @@ chr22	15273854	15273961	U6	0	+
 <blockquote class="comment">
 
   <div class="box-title comment-title" id="comment-gene-file" aria-label="comment box: Gene file"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Gene file</div>
-  <p>The chr22 genes <span class="notranslate">BED</span> we produced only contains the start, the end, the name, and the strand of each transcript. It does not contain exon information.
+  <p>The chr22 genes BED we produced only contains the start, the end, the name, and the strand of each transcript. It does not contain exon information.
 To be able to have the exon information, you could use a GTF file which can be downloaded from the <a href="ftp://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_37/gencode.v37.annotation.gtf.gz">gencode website</a> but this file would include the information for the whole genome and would slow the analysis.</p>
 </blockquote>
 
 <h2 id="quality-control">Quality Control</h2>
 
-<p>The first step is to check the quality of the <span class="notranslate">reads</span> and the presence of the Nextera adapters. When we perform ATAC-Seq, we can get <span class="notranslate">DNA</span> fragments of about 40 bp if two adjacent Tn5 transposases cut the <span class="notranslate">DNA</span> <span class="citation"><a href="#Adey2010">Adey <i>et al.</i> 2010</a></span>. This can be smaller than the sequencing length so we expect to have Nextera adapters at the end of those <span class="notranslate">reads</span>. We can assess the <span class="notranslate">reads</span> with <strong>FastQC</strong>.</p>
+<p>The first step is to check the quality of the reads and the presence of the Nextera adapters. When we perform ATAC-Seq, we can get DNA fragments of about 40 bp if two adjacent Tn5 transposases cut the DNA <span class="citation"><a href="#Adey2010">Adey <i>et al.</i> 2010</a></span>. This can be smaller than the sequencing length so we expect to have Nextera adapters at the end of those reads. We can assess the reads with <strong>FastQC</strong>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-task-description" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1</span></span>  with the following parameters:
       <ul>
         <li><em>“Short read data from your current history”</em>: Choose here either only the <code class="language-plaintext highlighter-rouge">SRR891268_R1</code> file with <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> or use <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong> to choose both <code class="language-plaintext highlighter-rouge">SRR891268_R1</code> and <code class="language-plaintext highlighter-rouge">SRR891268_R2</code>.</li>
       </ul>
     </li>
-    <li>Inspect the web page output of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <code class="language-plaintext highlighter-rouge">SRR891268_R1</code> sample. Check what adapters are found at the end of the <span class="notranslate">reads</span>.</li>
+    <li>Inspect the web page output of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <code class="language-plaintext highlighter-rouge">SRR891268_R1</code> sample. Check what adapters are found at the end of the reads.</li>
   </ol>
 
   <blockquote class="question">
     <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
     <ol>
-      <li>How many <span class="notranslate">reads</span> are in the FASTQ?</li>
+      <li>How many reads are in the FASTQ?</li>
       <li>Which sections have a warning?</li>
     </ol>
 
@@ -1250,7 +1248,7 @@ To be able to have the exon information, you could use a GTF file which can be d
       <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
       <ol>
-        <li>There are 285247 <span class="notranslate">reads</span>.</li>
+        <li>There are 285247 reads.</li>
         <li>
           <p>The 3 steps below have warnings:</p>
 
@@ -1270,9 +1268,9 @@ simply by the PCR itself. We will remove these duplicates later on.</p>
               <p><strong>Overrepresented sequences</strong></p>
 
               <p>One sequence is over represented: 
-you have 306 <span class="notranslate">reads</span> which are exactly the sequence of the Nextera adapter.
+you have 306 reads which are exactly the sequence of the Nextera adapter.
 They correspond to adapters amplified head-to-head.
-306 is really low (only 0.1% of <span class="notranslate">reads</span>).</p>
+306 is really low (only 0.1% of reads).</p>
             </li>
           </ol>
         </li>
@@ -1289,23 +1287,23 @@ They correspond to adapters amplified head-to-head.
   <figure id="figure-2"><img src="../../images/atac-seq/Screenshot_fastqcBeforecutadapt.png" alt="FastQC screenshot of the Adapter Content section. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> FastQC screenshot on the Adapter Content section</figcaption></figure>
 </blockquote>
 
-<p>The FastQC web page <strong>Adapter Content</strong> section shows the presence of Nextera Transposase Sequence in the <span class="notranslate">reads</span>. We will remove the adapters with Cutadapt.</p>
+<p>The FastQC web page <strong>Adapter Content</strong> section shows the presence of Nextera Transposase Sequence in the reads. We will remove the adapters with Cutadapt.</p>
 
-<h2 id="trimming-reads">Trimming <span class="notranslate">Reads</span></h2>
+<h2 id="trimming-reads">Trimming Reads</h2>
 
 <p>To trim the adapters we provide the Nextera adapter sequences to <strong>Cutadapt</strong>. These adapters are shown in the image below.</p>
 
 <figure id="figure-3"><img src="../../images/atac-seq/nexteraLibraryPicture.svg.png" alt="Nextera library with the sequence of adapters. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Nextera library with the sequence of adapters</figcaption></figure>
 
-<p>The forward and reverse adapters are slightly different. We will also trim low quality bases at the ends of the <span class="notranslate">reads</span> (quality less than 20). We will only keep <span class="notranslate">reads</span> that are at least 20 bases long. We remove short <span class="notranslate">reads</span> (&lt; 20bp) as they are not useful, they will either be thrown out by the <span class="notranslate">mapping</span> or may interfere with our results at the end.</p>
+<p>The forward and reverse adapters are slightly different. We will also trim low quality bases at the ends of the reads (quality less than 20). We will only keep reads that are at least 20 bases long. We remove short reads (&lt; 20bp) as they are not useful, they will either be thrown out by the mapping or may interfere with our results at the end.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-task-description-1" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5" title="Tested with toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5"><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5" title="Tested with toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5"><strong>Cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.5</span></span>  with the following parameters:
       <ul>
-        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code>
+        <li><em>“Single-end or Paired-end reads?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code>
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file #1”</em>: select <code class="language-plaintext highlighter-rouge">SRR891268_R1</code></li>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file #2”</em>: select <code class="language-plaintext highlighter-rouge">SRR891268_R2</code></li>
@@ -1364,7 +1362,7 @@ They correspond to adapters amplified head-to-head.
         </li>
       </ul>
     </li>
-    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon of the report and read the first lines.</li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the report and read the first lines.</li>
   </ol>
 </blockquote>
 
@@ -1378,8 +1376,8 @@ They correspond to adapters amplified head-to-head.
   <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
-    <li>What percentage of <span class="notranslate">reads</span> contain adapters?</li>
-    <li>What percentage of <span class="notranslate">reads</span> are still longer than 20bp after the trimming?</li>
+    <li>What percentage of reads contain adapters?</li>
+    <li>What percentage of reads are still longer than 20bp after the trimming?</li>
   </ol>
 
   <blockquote class="solution">
@@ -1398,12 +1396,12 @@ They correspond to adapters amplified head-to-head.
   <div class="box-title hands-on-title" id="hands-on-check-adapter-removal-with-fastqc" aria-label="hands-on box: Check Adapter Removal with FastQC"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Check Adapter Removal with FastQC</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1</span></span>  with the following parameters:
       <ul>
         <li><em>“Short read data from your current history”</em>: select the output of <strong>Cutadapt</strong> <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong> to choose both <code class="language-plaintext highlighter-rouge">Read 1 Output</code> and <code class="language-plaintext highlighter-rouge">Read 2 Output</code>.</li>
       </ul>
     </li>
-    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon of the report and read the first lines.</li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the report and read the first lines.</li>
   </ol>
 </blockquote>
 
@@ -1411,14 +1409,14 @@ They correspond to adapters amplified head-to-head.
   <div class="box-title comment-title" id="comment-fastqc-results-1" aria-label="comment box: FastQC Results"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: FastQC Results</div>
   <p>Now, you should see under <strong>Overrepresented sequences</strong> that there is no more overrepresented sequences and under <strong>Adapter Content</strong> that the Nextera adapters are no longer present.</p>
   <figure id="figure-5"><img src="../../images/atac-seq/Screenshot_fastqcAftercutadapt.png" alt="FastQC screenshot on the adapter content section after cutadapt. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> FastQC screenshot on the adapter content section after cutadapt</figcaption></figure>
-  <p>However, you may have noticed that you have a new section with warning: <strong>Sequence Length Distribution</strong>. This is expected as you trimmed part of the <span class="notranslate">reads</span>.</p>
+  <p>However, you may have noticed that you have a new section with warning: <strong>Sequence Length Distribution</strong>. This is expected as you trimmed part of the reads.</p>
 </blockquote>
 
-<h1 id="mapping"><span class="notranslate">Mapping</span></h1>
+<h1 id="mapping">Mapping</h1>
 
-<h2 id="mapping-reads-to-reference-genome"><span class="notranslate">Mapping</span> <span class="notranslate">Reads</span> to Reference Genome</h2>
+<h2 id="mapping-reads-to-reference-genome">Mapping Reads to Reference Genome</h2>
 
-<p>Next we map the trimmed <span class="notranslate">reads</span> to the human reference genome. Here we will use <strong>Bowtie2</strong>. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the <code class="language-plaintext highlighter-rouge">--very-sensitive</code> parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the <strong>end-to-end</strong> mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed. Regarding the genome to choose. The hg38 version of the human genome contains <a href="https://www.ncbi.nlm.nih.gov/grc/help/definitions/#ALTERNATE">alte<span class="notranslate">rna</span>te loci</a>. This means that some region of the genome are present both in the canonical chromosome and on its alte<span class="notranslate">rna</span>te loci. The <span class="notranslate">reads</span> that map to these regions would map twice. To be able to filter <span class="notranslate">reads</span> falling into repetitive regions but keep <span class="notranslate">reads</span> falling into regions present in alte<span class="notranslate">rna</span>te loci, we will map on the Canonical version of hg38 (only the chromosome with numbers, chrX, chrY, and chrM).</p>
+<p>Next we map the trimmed reads to the human reference genome. Here we will use <strong>Bowtie2</strong>. We will extend the maximum fragment length (distance between read pairs) from 500 to 1000 because we know some valid read pairs are from this fragment length. We will use the <code class="language-plaintext highlighter-rouge">--very-sensitive</code> parameter to have more chance to get the best match even if it takes a bit longer to run. We will run the <strong>end-to-end</strong> mode because we trimmed the adapters so we expect the whole read to map, no clipping of ends is needed. Regarding the genome to choose. The hg38 version of the human genome contains <a href="https://www.ncbi.nlm.nih.gov/grc/help/definitions/#ALTERNATE">alternate loci</a>. This means that some region of the genome are present both in the canonical chromosome and on its alternate loci. The reads that map to these regions would map twice. To be able to filter reads falling into repetitive regions but keep reads falling into regions present in alternate loci, we will map on the Canonical version of hg38 (only the chromosome with numbers, chrX, chrY, and chrM).</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-dovetailing" aria-label="comment box: Dovetailing"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Dovetailing</div>
@@ -1432,10 +1430,10 @@ AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-mapping-reads-to-reference-genome" aria-label="hands-on box: Mapping reads to reference genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: <span class="notranslate">Mapping</span> <span class="notranslate">reads</span> to reference genome</div>
+  <div class="box-title hands-on-title" id="hands-on-mapping-reads-to-reference-genome" aria-label="hands-on box: Mapping reads to reference genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Mapping reads to reference genome</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0"><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0"><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“Is this single or paired library”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code>
           <ul>
@@ -1461,17 +1459,17 @@ AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
           </ul>
         </li>
         <li><em>“Do you want to tweak SAM/BAM Options?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-        <li><em>“Save the bowtie2 <span class="notranslate">mapping</span> statistics to the history”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Save the bowtie2 mapping statistics to the history”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon of the <span class="notranslate">mapping</span> stats.</li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the mapping stats.</li>
   </ol>
 </blockquote>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-bowtie2-results" aria-label="comment box: Bowtie2 Results"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Bowtie2 Results</div>
   <p>You should get similar results to this from Bowtie2:</p>
-  <figure id="figure-6"><img src="../../images/atac-seq/Screenshot_bowtie2MappingStats.png" alt="Mapping statistics of bowtie2. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> <span class="notranslate">Mapping</span> statistics of bowtie2</figcaption></figure>
+  <figure id="figure-6"><img src="../../images/atac-seq/Screenshot_bowtie2MappingStats.png" alt="Mapping statistics of bowtie2. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Mapping statistics of bowtie2</figcaption></figure>
 </blockquote>
 
 <blockquote class="question">
@@ -1491,23 +1489,23 @@ AGCTTCAACATCGAATACGCCGCAGGCCCCTTCGCCCTATTCTTCATAGC
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-on-the-number-of-uniquely-mapped" aria-label="comment box: On the number of uniquely mapped."><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: On the number of uniquely mapped.</div>
 
-  <p>You might be surprised by the number of uniquely mapped compared to the number of multi-mapped <span class="notranslate">reads</span> (<span class="notranslate">reads</span> <span class="notranslate">mapping</span> to more than one location in the genome).
+  <p>You might be surprised by the number of uniquely mapped compared to the number of multi-mapped reads (reads mapping to more than one location in the genome).
 One of the reasons is that we have used the parameter <code class="language-plaintext highlighter-rouge">--very-sensitive</code>. Bowtie2 considers a read as multi-mapped even if the second hit has a much lower quality than the first one.
-Another reason is that we have <span class="notranslate">reads</span> that map to the mitochondrial genome. The mitochondrial genome has a lot of regions with similar sequence.</p>
+Another reason is that we have reads that map to the mitochondrial genome. The mitochondrial genome has a lot of regions with similar sequence.</p>
 
 </blockquote>
 
-<h1 id="filtering-mapped-reads">Filtering Mapped <span class="notranslate">Reads</span></h1>
+<h1 id="filtering-mapped-reads">Filtering Mapped Reads</h1>
 
-<h2 id="filter-uninformative-reads">Filter Uninformative <span class="notranslate">Reads</span></h2>
+<h2 id="filter-uninformative-reads">Filter Uninformative Reads</h2>
 
-<p>We apply some filters to the <span class="notranslate">reads</span> after the <span class="notranslate">mapping</span>. ATAC-Seq datasets can have a lot of <span class="notranslate">reads</span> that map to the mitchondrial genome because it is nucleosome-free and thus very accessible to Tn5 insertion. The mitchondrial genome is uninteresting for ATAC-Seq so we remove these <span class="notranslate">reads</span>. We also remove <span class="notranslate">reads</span> with low <span class="notranslate">mapping</span> quality and <span class="notranslate">reads</span> that are not properly paired.</p>
+<p>We apply some filters to the reads after the mapping. ATAC-Seq datasets can have a lot of reads that map to the mitchondrial genome because it is nucleosome-free and thus very accessible to Tn5 insertion. The mitchondrial genome is uninteresting for ATAC-Seq so we remove these reads. We also remove reads with low mapping quality and reads that are not properly paired.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filtering-of-uninformative-reads" aria-label="hands-on box: Filtering of uninformative reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filtering of uninformative <span class="notranslate">reads</span></div>
+  <div class="box-title hands-on-title" id="hands-on-filtering-of-uninformative-reads" aria-label="hands-on box: Filtering of uninformative reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filtering of uninformative reads</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1"><strong>Filter BAM datasets on a variety of attributes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1"><strong>Filter BAM datasets on a variety of attributes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM dataset(s) to filter”</em>: Select the output of  <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“alignments”</em></li>
         <li>In <em>“Condition”</em>:
@@ -1520,7 +1518,7 @@ Another reason is that we have <span class="notranslate">reads</span> that map t
                       <ul>
                         <li><em>“Select BAM property to filter on”</em>: <code class="language-plaintext highlighter-rouge">mapQuality</code>
                           <ul>
-                            <li><em>“Filter on read <span class="notranslate">mapping</span> quality (phred scale)”</em>: <code class="language-plaintext highlighter-rouge">&gt;=30</code></li>
+                            <li><em>“Filter on read mapping quality (phred scale)”</em>: <code class="language-plaintext highlighter-rouge">&gt;=30</code></li>
                           </ul>
                         </li>
                       </ul>
@@ -1529,7 +1527,7 @@ Another reason is that we have <span class="notranslate">reads</span> that map t
                       <ul>
                         <li><em>“Select BAM property to filter on”</em>: <code class="language-plaintext highlighter-rouge">isProperPair</code>
                           <ul>
-                            <li><em>“Select properly paired <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                            <li><em>“Select properly paired reads”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                           </ul>
                         </li>
                       </ul>
@@ -1581,30 +1579,30 @@ Another reason is that we have <span class="notranslate">reads</span> that map t
 
 </blockquote>
 
-<p>High numbers of mitochondrial <span class="notranslate">reads</span> can be a problem in ATAC-Seq. Some ATAC-Seq samples have been reported to be 80% mitochondrial <span class="notranslate">reads</span> and so wet-lab methods have been developed to deal with this issue <span class="citation"><a href="#Corces2017">Corces <i>et al.</i> 2017</a></span> and <span class="citation"><a href="#Litzenburger2017">Litzenburger <i>et al.</i> 2017</a></span>. It can be a useful QC to assess the number of mitochondrial <span class="notranslate">reads</span>.
-However, it does not predict the quality of the rest of the data. It is just that sequencing <span class="notranslate">reads</span> have been wasted.</p>
+<p>High numbers of mitochondrial reads can be a problem in ATAC-Seq. Some ATAC-Seq samples have been reported to be 80% mitochondrial reads and so wet-lab methods have been developed to deal with this issue <span class="citation"><a href="#Corces2017">Corces <i>et al.</i> 2017</a></span> and <span class="citation"><a href="#Litzenburger2017">Litzenburger <i>et al.</i> 2017</a></span>. It can be a useful QC to assess the number of mitochondrial reads.
+However, it does not predict the quality of the rest of the data. It is just that sequencing reads have been wasted.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-getting-the-number-of-mitochondrial-reads"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-getting-the-number-of-mitochondrial-reads-contents" aria-expanded="true" aria-label="Toggle tip box: Getting the number of mitochondrial reads"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Getting the number of mitochondrial <span class="notranslate">reads</span><span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-getting-the-number-of-mitochondrial-reads"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-getting-the-number-of-mitochondrial-reads-contents" aria-expanded="true" aria-label="Toggle tip box: Getting the number of mitochondrial reads"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Getting the number of mitochondrial reads<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <p>To get the number of <span class="notranslate">reads</span> that mapped to the mitochondrial genome (chrM) you can run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3"><strong>Samtools idxstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3</span></span>  on the output of  <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“alignments”</em>.
-The columns of the output are: chromosome name, chromosome length, number of <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to the chromosome, number of unaligned mate whose mate is <span class="notranslate">mapping</span> to the chromosome.
-The first 2 lines of the result would be (after using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</span></span> ):</p>
+  <p>To get the number of reads that mapped to the mitochondrial genome (chrM) you can run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3"><strong>Samtools idxstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.3</span></span>  on the output of  <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“alignments”</em>.
+The columns of the output are: chromosome name, chromosome length, number of reads mapping to the chromosome, number of unaligned mate whose mate is mapping to the chromosome.
+The first 2 lines of the result would be (after using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</span></span> ):</p>
 
   <figure id="figure-7"><img src="../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png" alt="Samtools idxstats result. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Samtools idxstats result</figcaption></figure>
 
-  <p>There are 220 000 <span class="notranslate">reads</span> which map to chrM and 165 000 which map to chr22.</p>
+  <p>There are 220 000 reads which map to chrM and 165 000 which map to chr22.</p>
 </blockquote>
 
-<h2 id="filter-duplicate-reads">Filter Duplicate <span class="notranslate">Reads</span></h2>
+<h2 id="filter-duplicate-reads">Filter Duplicate Reads</h2>
 
-<p>Because of the PCR amplification, there might be read duplicates (different <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to exactly the same genomic region) from overamplification of some regions. As the Tn5 insertion is random within an accessible region, we do not expect to see fragments with the same coordinates. We consider such fragments to be PCR duplicates. We will remove them with <strong>Picard MarkDuplicates</strong>.</p>
+<p>Because of the PCR amplification, there might be read duplicates (different reads mapping to exactly the same genomic region) from overamplification of some regions. As the Tn5 insertion is random within an accessible region, we do not expect to see fragments with the same coordinates. We consider such fragments to be PCR duplicates. We will remove them with <strong>Picard MarkDuplicates</strong>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-remove-duplicates" aria-label="hands-on box: Remove duplicates"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Remove duplicates</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2"><strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2"><strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select SAM/BAM dataset or dataset collection”</em>: Select the output of  <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“BAM”</em></li>
         <li><em>“If true do not write duplicates to the output file instead of writing them with appropriate flags set”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1613,10 +1611,10 @@ The first 2 lines of the result would be (after using <span class="tool" data-to
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-defaults-of-markduplicates" aria-label="comment box: Defaults of MarkDuplicates"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Defaults of MarkDuplicates</div>
 
-        <p>By default, the tool will only “Mark” the duplicates. This means that it will change the Flag of the duplicated <span class="notranslate">reads</span> to enable them to be filtered afterwards. We use the parameter <em>“If true do not write duplicates to the output file instead of writing them with appropriate flags set”</em> to directly remove the duplicates.</p>
+        <p>By default, the tool will only “Mark” the duplicates. This means that it will change the Flag of the duplicated reads to enable them to be filtered afterwards. We use the parameter <em>“If true do not write duplicates to the output file instead of writing them with appropriate flags set”</em> to directly remove the duplicates.</p>
       </blockquote>
     </li>
-    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon of the MarkDuplicate metrics.</li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the MarkDuplicate metrics.</li>
   </ol>
 </blockquote>
 
@@ -1630,7 +1628,7 @@ The first 2 lines of the result would be (after using <span class="tool" data-to
   <div class="box-title tip-title" id="tip-formatting-the-markduplicate-metrics-for-readability"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-formatting-the-markduplicate-metrics-for-readability-contents" aria-expanded="true" aria-label="Toggle tip box: Formatting the MarkDuplicate metrics for readability"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Formatting the MarkDuplicate metrics for readability<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <ol>
-    <li><span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select lines that match an expression</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: Select the output of  <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“that</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
@@ -1638,8 +1636,8 @@ The first 2 lines of the result would be (after using <span class="tool" data-to
       </ul>
     </li>
     <li>Check that the datatype is tabular. If not, change it.
-<!--SNIPPET-->&lt;blockquote class="tip"&gt;   &lt;div class="box-title tip-title" id="tip-changing-the-datatype-2"&gt;<button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-2-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button>&lt;/div&gt;   &lt;ul&gt;   &lt;li&gt;Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes&lt;/li&gt;   &lt;li&gt;In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top&lt;/li&gt;   &lt;li&gt;Select <code class="language-plaintext highlighter-rouge">tabular</code>     &lt;ul&gt;       &lt;li&gt;tip: you can start typing the datatype into the field to filter the dropdown menu&lt;/li&gt;     &lt;/ul&gt;   &lt;/li&gt;   &lt;li&gt;Click the <strong>Save</strong> button&lt;/li&gt; &lt;/ul&gt; &lt;/blockquote&gt;</li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0"><strong>Transpose rows/columns in a tabular file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0</span></span> :
+<!--SNIPPET-->&lt;blockquote class="tip"&gt;   &lt;div class="box-title tip-title" id="tip-changing-the-datatype-2"&gt;<button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-2-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button>&lt;/div&gt;   &lt;ul&gt;   &lt;li&gt;Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes&lt;/li&gt;   &lt;li&gt;In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top&lt;/li&gt;   &lt;li&gt;Select <code class="language-plaintext highlighter-rouge">tabular</code>     &lt;ul&gt;       &lt;li&gt;tip: you can start typing the datatype into the field to filter the dropdown menu&lt;/li&gt;     &lt;/ul&gt;   &lt;/li&gt;   &lt;li&gt;Click the <strong>Save</strong> button&lt;/li&gt; &lt;/ul&gt; &lt;/blockquote&gt;</li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0"><strong>Transpose rows/columns in a tabular file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0</span></span> :
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: Select the output of <strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
@@ -1674,20 +1672,20 @@ The first 2 lines of the result would be (after using <span class="tool" data-to
 
 <h2 id="check-insert-sizes">Check Insert Sizes</h2>
 
-<p>We will check the insert sizes with <strong>Paired-end histogram</strong> of insert size frequency. The insert size is the distance between the R1 and R2 read pairs. This tells us the size of the <span class="notranslate">DNA</span> fragment the read pairs came from. The fragment length distribution of a sample gives a very good indication of the quality of the ATAC-Seq.</p>
+<p>We will check the insert sizes with <strong>Paired-end histogram</strong> of insert size frequency. The insert size is the distance between the R1 and R2 read pairs. This tells us the size of the DNA fragment the read pairs came from. The fragment length distribution of a sample gives a very good indication of the quality of the ATAC-Seq.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-plot-the-distribution-of-fragment-sizes" aria-label="hands-on box: Plot the distribution of fragment sizes."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot the distribution of fragment sizes.</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1"><strong>Paired-end histogram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1"><strong>Paired-end histogram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pe_histogram/pe_histogram/1.0.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM file”</em>: Select the output of  <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <em>“BAM output”</em></li>
         <li><em>“Lower bp limit (optional)”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
         <li><em>“Upper bp limit (optional)”</em>: <code class="language-plaintext highlighter-rouge">1000</code></li>
       </ul>
     </li>
-    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon of the lower one of the 2 outputs (the png file).</li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the lower one of the 2 outputs (the png file).</li>
   </ol>
 </blockquote>
 
@@ -1714,7 +1712,7 @@ The first 2 lines of the result would be (after using <span class="tool" data-to
 <p>This fragment size distribution is a good indication if your experiment worked or not.
 In absence of chromatin (without nucleosome), this is the profile you would get:</p>
 
-<figure id="figure-11"><img src="../../images/atac-seq/Screenshot_sizeDistribution_Naked.png" alt="Fragment size distribution of a purified DNA. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Fragment size distribution of a purified <span class="notranslate">DNA</span></figcaption></figure>
+<figure id="figure-11"><img src="../../images/atac-seq/Screenshot_sizeDistribution_Naked.png" alt="Fragment size distribution of a purified DNA. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Fragment size distribution of a purified DNA</figcaption></figure>
 
 <p>Here are examples of Fragment size distributions of ATAC-Seq which were very noisy:</p>
 
@@ -1729,15 +1727,15 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
 
 <h2 id="call-peaks">Call Peaks</h2>
 
-<p>We have now finished the data preprocessing. Next, in order to find regions corresponding to potential open chromatin regions, we want to identify regions where <span class="notranslate">reads</span> have piled up (peaks) greater than the background read coverage. The tools which are currently used are <a href="https://github.com/jsh58/Genrich">Genrich</a> and <a href="https://github.com/taoliu/MACS">MACS2</a>. MACS2 is more widely used. Genrich has a mode dedicated to ATAC-Seq but is still not published and the more <span class="notranslate">reads</span> you have, the less peaks you get (see the issue <a href="https://github.com/jsh58/Genrich/issues/33">here</a>). That’s why we will not use Genrich in this tutorial.</p>
+<p>We have now finished the data preprocessing. Next, in order to find regions corresponding to potential open chromatin regions, we want to identify regions where reads have piled up (peaks) greater than the background read coverage. The tools which are currently used are <a href="https://github.com/jsh58/Genrich">Genrich</a> and <a href="https://github.com/taoliu/MACS">MACS2</a>. MACS2 is more widely used. Genrich has a mode dedicated to ATAC-Seq but is still not published and the more reads you have, the less peaks you get (see the issue <a href="https://github.com/jsh58/Genrich/issues/33">here</a>). That’s why we will not use Genrich in this tutorial.</p>
 
 <p>At this step, two approaches exists:</p>
 
 <ul>
   <li>The first one is to select only paired whose fragment length is below 100bp corresponding to nucleosome-free regions and to use a peak calling like you would do for a ChIP-seq, joining signal between mates. The disadvantages of this approach is that you can only use it if you have paired-end data and you will miss small open regions where only one Tn5 bound.</li>
-  <li>The second one chosen here is to use all <span class="notranslate">reads</span> to be more exhaustive. In this approach, it is very important to re-center the signal of each <span class="notranslate">reads</span> on the 5’ extremity (read start site) as this is where Tn5 cuts. Indeed, you want your peaks around the nucleosomes and not directly on the nucleosome:</li>
+  <li>The second one chosen here is to use all reads to be more exhaustive. In this approach, it is very important to re-center the signal of each reads on the 5’ extremity (read start site) as this is where Tn5 cuts. Indeed, you want your peaks around the nucleosomes and not directly on the nucleosome:</li>
 </ul>
-<figure id="figure-15"><img src="../../images/atac-seq/schemeWithLegend.jpg" alt="Scheme of ATAC-Seq reads relative to nucleosomes. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Scheme of ATAC-Seq <span class="notranslate">reads</span> relative to nucleosomes</figcaption></figure>
+<figure id="figure-15"><img src="../../images/atac-seq/schemeWithLegend.jpg" alt="Scheme of ATAC-Seq reads relative to nucleosomes. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Scheme of ATAC-Seq reads relative to nucleosomes</figcaption></figure>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-on-tn5-insertion" aria-label="comment box: on Tn5 insertion"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: on Tn5 insertion</div>
@@ -1745,22 +1743,22 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   <p>When Tn5 cuts an accessible chromatin locus it inserts adapters separated by 9bp (<span class="citation"><a href="#Kia2017">Kia <i>et al.</i> 2017</a></span>):</p>
   <figure id="figure-16"><img src="../../images/atac-seq/NexteraLibraryConstruction.jpg" alt="Nextera Library Construction. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Nextera Library Construction</figcaption></figure>
 
-  <p>This means in order to have the read start site reflecting the centre of where Tn5 bound, the <span class="notranslate">reads</span> on the positive strand should be shifted 4 bp to the right and <span class="notranslate">reads</span> on the negative strands should be shifted 5 bp to the left as in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825">Buenrostro et al. 2013</a>. <strong>Genrich</strong> can apply these shifts when ATAC-seq mode is selected. In most cases, we do not have 9bp resolution so we don’t take it into account but if you are interested in the footprint, this is important.</p>
+  <p>This means in order to have the read start site reflecting the centre of where Tn5 bound, the reads on the positive strand should be shifted 4 bp to the right and reads on the negative strands should be shifted 5 bp to the left as in <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3959825">Buenrostro et al. 2013</a>. <strong>Genrich</strong> can apply these shifts when ATAC-seq mode is selected. In most cases, we do not have 9bp resolution so we don’t take it into account but if you are interested in the footprint, this is important.</p>
 </blockquote>
 
-<p>If we only assess the coverage of the 5’ extremity of the <span class="notranslate">reads</span>, the data would be too sparse and it would be impossible to call peaks. Thus, we will extend the start sites of the <span class="notranslate">reads</span> by 200bp (100bp in each direction) to assess coverage.</p>
+<p>If we only assess the coverage of the 5’ extremity of the reads, the data would be too sparse and it would be impossible to call peaks. Thus, we will extend the start sites of the reads by 200bp (100bp in each direction) to assess coverage.</p>
 
 <h3 id="using-macs2">Using MACS2</h3>
 
-<p>We convert the BAM file to <span class="notranslate">BED</span> format because when we set the extension size in MACS2, it will only consider one read of the pair while here we would like to use the information from both.</p>
+<p>We convert the BAM file to BED format because when we set the extension size in MACS2, it will only consider one read of the pair while here we would like to use the information from both.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-convert-the-bam-to-bed" aria-label="hands-on box: Convert the BAM to BED"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Convert the BAM to <span class="notranslate">BED</span></div>
+  <div class="box-title hands-on-title" id="hands-on-convert-the-bam-to-bed" aria-label="hands-on box: Convert the BAM to BED"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Convert the BAM to BED</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0"><strong><span class="notranslate">bed</span>tools BAM to <span class="notranslate">BED</span> converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/<span class="notranslate">bed</span>tools/<span class="notranslate">bed</span>tools_bamtobed/2.30.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0"><strong>bedtools BAM to BED converter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_bamtobed/2.30.0</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert the following BAM file to <span class="notranslate">BED</span>”</em>: Select the output of <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert the following BAM file to BED”</em>: Select the output of <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
   </ol>
@@ -1774,15 +1772,15 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   <div class="box-title hands-on-title" id="hands-on-call-peaks-with-macs2" aria-label="hands-on box: Call peaks with MACS2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Call peaks with MACS2</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6"><strong>MACS2 callpeak</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6"><strong>MACS2 callpeak</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/macs2/macs2_callpeak/2.1.1.20160309.6</span></span>  with the following parameters:
       <ul>
         <li><em>“Are you pooling Treatment Files?”</em>: <code class="language-plaintext highlighter-rouge">No</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> Select the output of <strong><span class="notranslate">bed</span>tools BAM to <span class="notranslate">BED</span></strong> converter <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> Select the output of <strong>bedtools BAM to BED</strong> converter <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           </ul>
         </li>
         <li><em>“Do you have a Control File?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-        <li><em>“Format of Input Files”</em>: <code class="language-plaintext highlighter-rouge">Single-end <span class="notranslate">BED</span></code></li>
+        <li><em>“Format of Input Files”</em>: <code class="language-plaintext highlighter-rouge">Single-end BED</code></li>
         <li><em>“Effective genome size”</em>: <code class="language-plaintext highlighter-rouge">H. sapiens (2.7e9)</code></li>
         <li><em>“Build Model”</em>: <code class="language-plaintext highlighter-rouge">Do not build the shifting model (--nomodel)</code>
           <ul>
@@ -1794,7 +1792,7 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
           <ul>
             <li>Check <code class="language-plaintext highlighter-rouge">Peaks as tabular file (compatible with MultiQC)</code></li>
             <li>Check <code class="language-plaintext highlighter-rouge">Peak summits</code></li>
-            <li>Check <code class="language-plaintext highlighter-rouge">Scores in <span class="notranslate">bed</span>Graph files</code></li>
+            <li>Check <code class="language-plaintext highlighter-rouge">Scores in bedGraph files</code></li>
           </ul>
         </li>
         <li>In <em>“Advanced Options”</em>:
@@ -1812,7 +1810,7 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-why-keeping-all-duplicates-is-important" aria-label="comment box: Why keeping all duplicates is important"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Why keeping all duplicates is important</div>
 
-        <p>We previously removed duplicates using <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> using paired-end information. If two pairs had identical R1 but different R2, we knew it was not a PCR duplicate. Because we converted the BAM to <span class="notranslate">BED</span> we lost the pair information. If we keep the default (removing duplicates) one of the 2 identical R1 would be filtered out as duplicate.</p>
+        <p>We previously removed duplicates using <strong>MarkDuplicates</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> using paired-end information. If two pairs had identical R1 but different R2, we knew it was not a PCR duplicate. Because we converted the BAM to BED we lost the pair information. If we keep the default (removing duplicates) one of the 2 identical R1 would be filtered out as duplicate.</p>
       </blockquote>
     </li>
   </ol>
@@ -1830,15 +1828,15 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   <div class="box-title hands-on-title" id="hands-on-select-ctcf-peaks-from-chr22-in-intergenic-regions" aria-label="hands-on box: Select CTCF peaks from chr22 in intergenic regions:"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Select CTCF peaks from chr22 in intergenic regions:</div>
 
   <ol>
-    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: Select the first dataset: <code class="language-plaintext highlighter-rouge">ENCFF933NTR.<span class="notranslate">bed</span>.gz</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: Select the first dataset: <code class="language-plaintext highlighter-rouge">ENCFF933NTR.bed.gz</code></li>
         <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c1=='chr22'</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0"><strong><span class="notranslate">bed</span>tools Intersect intervals find overlapping intervals in various ways</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/<span class="notranslate">bed</span>tools/<span class="notranslate">bed</span>tools_intersectbed/2.30.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0"><strong>bedtools Intersect intervals find overlapping intervals in various ways</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_intersectbed/2.30.0</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File A to intersect with B”</em>: Select the output of <strong>Filter</strong> data on any column using simple <span class="notranslate">expression</span>s <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File A to intersect with B”</em>: Select the output of <strong>Filter</strong> data on any column using simple expressions <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Combined or separate output files”</em>: <code class="language-plaintext highlighter-rouge">One output file per 'input B' file</code>
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File B to intersect with A”</em>:  Select the dataset <code class="language-plaintext highlighter-rouge">chr22 genes</code></li>
@@ -1853,17 +1851,17 @@ In absence of chromatin (without nucleosome), this is the profile you would get:
   </ol>
 </blockquote>
 
-<h3 id="convert-bedgraph-from-macs2-to-bigwig">Convert <span class="notranslate">bed</span>graph from <strong>MACS2</strong> to bigwig</h3>
-<p>The <span class="notranslate">bed</span>graph format is easily readable for human but it can be very large and visualising a specific region is quite slow. We will change it to bigwig format which is a binary format, so we can visualise any region of the genome very quickly.</p>
+<h3 id="convert-bedgraph-from-macs2-to-bigwig">Convert bedgraph from <strong>MACS2</strong> to bigwig</h3>
+<p>The bedgraph format is easily readable for human but it can be very large and visualising a specific region is quite slow. We will change it to bigwig format which is a binary format, so we can visualise any region of the genome very quickly.</p>
 
 <blockquote class="tip">
-  <div class="box-title tip-title" id="tip-speed-up-the-bedgraph-to-bigwig-conversion"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-speed-up-the-bedgraph-to-bigwig-conversion-contents" aria-expanded="true" aria-label="Toggle tip box: Speed-up the bedgraph to bigwig conversion"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Speed-up the <span class="notranslate">bed</span>graph to bigwig conversion<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title tip-title" id="tip-speed-up-the-bedgraph-to-bigwig-conversion"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-speed-up-the-bedgraph-to-bigwig-conversion-contents" aria-expanded="true" aria-label="Toggle tip box: Speed-up the bedgraph to bigwig conversion"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Speed-up the bedgraph to bigwig conversion<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <p>In this tutorial we focus on chr22, thus we could restrict our <span class="notranslate">bed</span>graph to chr22 before doing the conversion. This will both speed-up the conversion and decrease the amount of memory needed.</p>
+  <p>In this tutorial we focus on chr22, thus we could restrict our bedgraph to chr22 before doing the conversion. This will both speed-up the conversion and decrease the amount of memory needed.</p>
 
-  <p>To do so, we will use <span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:</p>
+  <p>To do so, we will use <span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter data on any column using simple expressions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:</p>
   <ul>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: Select the output of <strong>MACS2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="notranslate">Bed</span>graph Treatment).</li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: Select the output of <strong>MACS2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (Bedgraph Treatment).</li>
     <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c1=='chr22'</code></li>
   </ul>
 
@@ -1873,12 +1871,12 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-convert-bedgraphs-to-bigwig" aria-label="hands-on box: Convert bedgraphs to bigWig."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Convert <span class="notranslate">bed</span>graphs to bigWig.</div>
+  <div class="box-title hands-on-title" id="hands-on-convert-bedgraphs-to-bigwig" aria-label="hands-on box: Convert bedgraphs to bigWig."><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Convert bedgraphs to bigWig.</div>
 
   <ol>
-    <li><span class="tool" data-tool="wig_to_bigWig" title="Tested with wig_to_bigWig"><strong>Wig/<span class="notranslate">Bed</span>Graph-to-bigWig</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: wig_to_bigWig</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="wig_to_bigWig" title="Tested with wig_to_bigWig"><strong>Wig/BedGraph-to-bigWig</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: wig_to_bigWig</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert”</em>: Select the output of <strong>MACS2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="notranslate">Bed</span>graph Treatment).</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert”</em>: Select the output of <strong>MACS2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (Bedgraph Treatment).</li>
         <li><em>“Converter settings to use”</em>: <code class="language-plaintext highlighter-rouge">Default</code></li>
       </ul>
     </li>
@@ -1898,7 +1896,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
   <div class="box-title hands-on-title" id="hands-on-generate-the-matrix" aria-label="hands-on box: Generate the matrix"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate the matrix</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0"><strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0"><strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0</span></span>  with the following parameters:
       <ul>
         <li>In <em>“Select regions”</em>:
           <ul>
@@ -1911,7 +1909,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
         </li>
         <li><em>“Sample order matters”</em>: <code class="language-plaintext highlighter-rouge">No</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Score file”</em>: Select the output of <strong>Wig/<span class="notranslate">Bed</span>Graph-to-bigWig</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> that should be named <code class="language-plaintext highlighter-rouge">MACS2 bigwig</code>.</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Score file”</em>: Select the output of <strong>Wig/BedGraph-to-bigWig</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> that should be named <code class="language-plaintext highlighter-rouge">MACS2 bigwig</code>.</li>
           </ul>
         </li>
         <li><em>“computeMatrix has two main output options”</em>: <code class="language-plaintext highlighter-rouge">reference-point</code></li>
@@ -1936,7 +1934,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
   <div class="box-title hands-on-title" id="hands-on-generate-the-heatmap" aria-label="hands-on box: Generate the heatmap"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate the heatmap</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1"><strong>plotHeatmap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1"><strong>plotHeatmap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Matrix file from the computeMatrix tool”</em>: Select the output of <strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
         <li><em>“Show advanced output settings”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
@@ -1978,7 +1976,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
   <div class="box-title hands-on-title" id="hands-on-generate-the-matrix-1" aria-label="hands-on box: Generate the matrix"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate the matrix</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0"><strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0"><strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_compute_matrix/deeptools_compute_matrix/3.3.2.0.0</span></span>  with the following parameters:
       <ul>
         <li>In <em>“Select regions”</em>:
           <ul>
@@ -1991,7 +1989,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
         </li>
         <li><em>“Sample order matters”</em>: <code class="language-plaintext highlighter-rouge">No</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Score file”</em>: Select the output of <strong>Wig/<span class="notranslate">Bed</span>Graph-to-bigWig</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> that should be named <code class="language-plaintext highlighter-rouge">MACS2 bigwig</code>.</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Score file”</em>: Select the output of <strong>Wig/BedGraph-to-bigWig</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> that should be named <code class="language-plaintext highlighter-rouge">MACS2 bigwig</code>.</li>
           </ul>
         </li>
         <li><em>“Would you like custom sample labels?”</em>: <code class="language-plaintext highlighter-rouge">No, use sample names in the history</code></li>
@@ -2008,7 +2006,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1"><strong>plotHeatmap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1"><strong>plotHeatmap</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/deeptools_plot_heatmap/deeptools_plot_heatmap/3.3.2.0.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Matrix file from the computeMatrix tool”</em>:  Select the output of <strong>computeMatrix</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
         <li><em>“Show advanced output settings”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
@@ -2050,7 +2048,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
   <div class="box-title hands-on-title" id="hands-on-task-description-2" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.6" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.6"><strong>pyGenomeTracks</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.6</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.6" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.6"><strong>pyGenomeTracks</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/pygenometracks/pygenomeTracks/3.6</span></span>  with the following parameters:
       <ul>
         <li><em>“Region of the genome to limit the operation”</em>: <code class="language-plaintext highlighter-rouge">chr22:37,193,000-37,252,000</code></li>
         <li>In <em>“Include tracks in your plot”</em>:
@@ -2060,7 +2058,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
                 <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">Bigwig track</code>
                   <ul>
                     <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Coverage from MACS2 (extended +/-100bp)</code></li>
-                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file(s) bigwig format”</em>: Select the output of <strong>Wig/<span class="notranslate">Bed</span>Graph-to-bigWig</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> called <code class="language-plaintext highlighter-rouge">MACS2 bigwig</code>.</li>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file(s) bigwig format”</em>: Select the output of <strong>Wig/BedGraph-to-bigWig</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> called <code class="language-plaintext highlighter-rouge">MACS2 bigwig</code>.</li>
                     <li><em>“Color of track”</em>: Select the color of your choice</li>
                     <li><em>“Minimum value”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
                     <li><em>“height”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
@@ -2074,7 +2072,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
                 <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">NarrowPeak track</code>
                   <ul>
                     <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Peaks from MACS2 (extended +/-100bp)</code></li>
-                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file(s) encodepeak or <span class="notranslate">bed</span> format”</em>: Select the output of <strong>MACS2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (narrow Peaks).</li>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file(s) encodepeak or bed format”</em>: Select the output of <strong>MACS2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (narrow Peaks).</li>
                     <li><em>“Color of track”</em>: Select the color of your choice</li>
                     <li><em>“display to use”</em>: <code class="language-plaintext highlighter-rouge">box: Draw a box</code></li>
                     <li><em>“Plot labels (name, p-val, q-val)”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -2084,10 +2082,10 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
             </li>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Include tracks in your plot”</em>
               <ul>
-                <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">Gene track / <span class="notranslate">Bed</span> track</code>
+                <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">Gene track / Bed track</code>
                   <ul>
                     <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Genes</code></li>
-                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file(s) <span class="notranslate">bed</span> or gtf format”</em>: <code class="language-plaintext highlighter-rouge">chr22 genes</code></li>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file(s) bed or gtf format”</em>: <code class="language-plaintext highlighter-rouge">chr22 genes</code></li>
                     <li><em>“Color of track”</em>: Select the color of your choice</li>
                     <li><em>“height”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
                     <li><em>“Plot labels”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
@@ -2105,7 +2103,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
                 <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">NarrowPeak track</code>
                   <ul>
                     <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">CTCF peaks</code></li>
-                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file(s) encodepeak or <span class="notranslate">bed</span> format”</em>: Select the first dataset: <code class="language-plaintext highlighter-rouge">ENCFF933NTR.<span class="notranslate">bed</span>.gz</code></li>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file(s) encodepeak or bed format”</em>: Select the first dataset: <code class="language-plaintext highlighter-rouge">ENCFF933NTR.bed.gz</code></li>
                     <li><em>“Color of track”</em>: Select the color of your choice</li>
                     <li><em>“display to use”</em>: <code class="language-plaintext highlighter-rouge">box: Draw a box</code></li>
                     <li><em>“Plot labels (name, p-val, q-val)”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -2122,7 +2120,7 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
         </li>
       </ul>
     </li>
-    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon of the output.</li>
+    <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of the output.</li>
   </ol>
 
 </blockquote>
@@ -2169,11 +2167,11 @@ In the next step, choose the output of <strong>Filter</strong> instead of the ou
 <p>In this training you have learned the general principles of ATAC-Seq data analysis. ATAC-Seq
 is a method to investigate the chromatin accessibility and the genome is treated with
 a transposase (enzyme) called Tn5. It marks open chromatin regions by cutting and
-inserting adapters for sequencing. The training material gave you an insight into how to quality control the data. You should look for low quality bases, adapter contamination, correct insert size and PCR duplicates (duplication level). We showed you how to remove adapters and PCR duplicates, if <strong>FastQC</strong>, shows a warning in these areas. We mapped the <span class="notranslate">reads</span>
-with <strong>Bowtie2</strong>, filtered our <span class="notranslate">reads</span> for properly paired, good quality and <span class="notranslate">reads</span> that do not
+inserting adapters for sequencing. The training material gave you an insight into how to quality control the data. You should look for low quality bases, adapter contamination, correct insert size and PCR duplicates (duplication level). We showed you how to remove adapters and PCR duplicates, if <strong>FastQC</strong>, shows a warning in these areas. We mapped the reads
+with <strong>Bowtie2</strong>, filtered our reads for properly paired, good quality and reads that do not
 map to the mitochondrial genome. We found open chromatin regions with <strong>MACS2</strong>, a tool to find regions of genomic enrichment (peaks). We investigated the read coverage around TSS with the help of <strong>computeMatrix</strong> and <strong>plotHeatmap</strong>. Last but not least, we visualised the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of <strong>pyGenomeTracks</strong>. At the end, we found open chromatin regions that did not overlap with CTCF sites or TSS, which could be potential putative enhancer regions detected by the ATAC-Seq experiment.</p>
 
-<figure id="figure-21"><img src="../../images/atac-seq/ATACWF.svg" alt="ATAC workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 21:</span> ATAC <span class="notranslate">workflow</span></figcaption></figure>
+<figure id="figure-21"><img src="../../images/atac-seq/ATACWF.svg" alt="ATAC workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 21:</span> ATAC workflow</figcaption></figure>
 
 
                 

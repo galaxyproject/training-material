@@ -747,8 +747,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -818,7 +816,7 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>This tutorial provides a companion to the work performed in March 2020 by InformaticsMatters, the Diamond Light Source, and the European <span class="notranslate">Galaxy</span> Team to perform virtual screening on candidate ligands for the SARS-CoV-2 main protease (MPro). This work is described <a href="https://covid19.galaxyproject.org/cheminformatics">here</a>.</p>
+<p>This tutorial provides a companion to the work performed in March 2020 by InformaticsMatters, the Diamond Light Source, and the European Galaxy Team to perform virtual screening on candidate ligands for the SARS-CoV-2 main protease (MPro). This work is described <a href="https://covid19.galaxyproject.org/cheminformatics">here</a>.</p>
 
 <p>In this tutorial, you will perform protein-ligand docking to MPro using rxDock (<span class="citation"><a href="#rdock">Ruiz-Carmona <i>et al.</i> 2014</a></span>), a version of the popular rDock software, and score the results using two different methods. The same tools will be used as in the original study, but with a smaller dataset.</p>
 
@@ -858,9 +856,9 @@
 
 <h1 id="background">Background</h1>
 
-<p>Early in March 2020, the Diamond Light Source completed a successful fragment screen on MPro, which provided 55 fragment hits (see their <a href="https://www.diamond.ac.uk/covid-19/for-scientists/Main-protease-structure-and-XChem.html">press release</a> here). In an effort to identify candidate molecules for binding, InformaticsMatters, the XChem group and the European <span class="notranslate">Galaxy</span> team joined forces to construct and execute a <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> for performing and evaluating molecular docking on a massive scale.</p>
+<p>Early in March 2020, the Diamond Light Source completed a successful fragment screen on MPro, which provided 55 fragment hits (see their <a href="https://www.diamond.ac.uk/covid-19/for-scientists/Main-protease-structure-and-XChem.html">press release</a> here). In an effort to identify candidate molecules for binding, InformaticsMatters, the XChem group and the European Galaxy team joined forces to construct and execute a Galaxy workflow for performing and evaluating molecular docking on a massive scale.</p>
 
-<p>An initial list of 41,000 candidate molecules was assembled by using the Fragalysis fragment network to elaborate from the initial fragment hits, as described <a href="https://diamondlightsource.atlassian.net/wiki/spaces/FRAG/pages/8323192/The+Astex+Fragment+network">here</a>. These were used as inputs for the docking and scoring <span class="notranslate">workflow</span>. The <span class="notranslate">workflow</span> consists of the following steps, each of which was carried out using tools installed on the European <span class="notranslate">Galaxy</span> server:</p>
+<p>An initial list of 41,000 candidate molecules was assembled by using the Fragalysis fragment network to elaborate from the initial fragment hits, as described <a href="https://diamondlightsource.atlassian.net/wiki/spaces/FRAG/pages/8323192/The+Astex+Fragment+network">here</a>. These were used as inputs for the docking and scoring workflow. The workflow consists of the following steps, each of which was carried out using tools installed on the European Galaxy server:</p>
 <ol>
   <li>Charge enumeration of the 41,000 candidate molecules selected based on the fragment hits.</li>
   <li>Generation of 3D conformations based on SMILES strings of the candidate molecules.</li>
@@ -868,7 +866,7 @@
   <li>Evaluation of the docking poses using a TransFS, a deep learning approach (<span class="citation"><a href="#transfs">Scantlebury 2019</a></span>) developed by the XChem group and collaborators, and SuCOS scoring (<span class="citation"><a href="#sucos">Leong 2019</a></span>), which compares the poses with the structures of the original fragment hits.</li>
 </ol>
 
-<p>The original study required almost 20 years of CPU time, not counting GPU resources consumed. This is obviously not reproducible as a tutorial. Therefore, we will repeat the <span class="notranslate">workflow</span> with a small library of just 100 molecules, on a single MPro fragment structure. Links will be provided to original <span class="notranslate">Galaxy</span> histories, with notes to explain where and why things were done differently to the tutorial.</p>
+<p>The original study required almost 20 years of CPU time, not counting GPU resources consumed. This is obviously not reproducible as a tutorial. Therefore, we will repeat the workflow with a small library of just 100 molecules, on a single MPro fragment structure. Links will be provided to original Galaxy histories, with notes to explain where and why things were done differently to the tutorial.</p>
 
 <figure id="figure-1"><img src="/training-material/topics/computational-chemistry/images/mpro.png" alt="MPro structure, with a fragment bound. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Structure of MPro, with a fragment bound. <a href="https://usegalaxy.eu/u/sbray/v/mpro-x0072">Click to view</a> in NGL. (<span class="citation"><a href="#ngl">Rose <i>et al.</i> 2018</a></span>)</figcaption></figure>
 
@@ -886,7 +884,7 @@
 
   <p>Of the initial 55 fragment hits, 17 were chosen for further study. From these, 41,587 compounds were generated using the Fragalysis fragment network for further study. The 100 compounds used in the tutorial are taken from this list.</p>
 
-  <p>Starting data is available from this <span class="notranslate">Galaxy</span> history: <a href="https://usegalaxy.eu/u/sbray/h/mpro-raw-data">https://use<span class="notranslate">galaxy</span>.eu/u/sbray/h/mpro-raw-data</a>.</p>
+  <p>Starting data is available from this Galaxy history: <a href="https://usegalaxy.eu/u/sbray/h/mpro-raw-data">https://usegalaxy.eu/u/sbray/h/mpro-raw-data</a>.</p>
 
   <p>This history contains 103 files. One of these (<code class="language-plaintext highlighter-rouge">Initial candidates for docking</code>) contains the 41k candidate compounds in SMILES format. The remaining 102 files (all with names beginning with <code class="language-plaintext highlighter-rouge">Mpro-x...</code>) provide structural information on the fragment hits - 6 files per hit (hence 17 x 6 = 102).</p>
 
@@ -918,14 +916,14 @@ https://zenodo.org/record/3730474/files/hits.sdf
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>Rename the datasets <code class="language-plaintext highlighter-rouge">Candidates SMILES</code>, <code class="language-plaintext highlighter-rouge">Receptor PDB</code> and <code class="language-plaintext highlighter-rouge">Hits SDF</code> respectively.</li>
     <li>
-      <p>Check that the datatypes (<code class="language-plaintext highlighter-rouge">smi</code>, <code class="language-plaintext highlighter-rouge">pdb</code>, and <code class="language-plaintext highlighter-rouge">sdf</code> respectively) are correct. In particularly, check the <code class="language-plaintext highlighter-rouge">Candidates SMILES</code> file, as the SMILES datatype is not detected automatically by <span class="notranslate">Galaxy</span>.</p>
+      <p>Check that the datatypes (<code class="language-plaintext highlighter-rouge">smi</code>, <code class="language-plaintext highlighter-rouge">pdb</code>, and <code class="language-plaintext highlighter-rouge">sdf</code> respectively) are correct. In particularly, check the <code class="language-plaintext highlighter-rouge">Candidates SMILES</code> file, as the SMILES datatype is not detected automatically by Galaxy.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 </blockquote>
@@ -948,7 +946,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
   <div class="box-title hands-on-title" id="hands-on-charge-enumeration" aria-label="hands-on box: Charge enumeration"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Charge enumeration</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/enumerate_charges/enumerate_charges/2020.03.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/enumerate_charges/enumerate_charges/2020.03.4+galaxy0"><strong>Enumerate charges</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/enumerate_charges/enumerate_charges/2020.03.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/enumerate_charges/enumerate_charges/2020.03.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/enumerate_charges/enumerate_charges/2020.03.4+galaxy0"><strong>Enumerate charges</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/enumerate_charges/enumerate_charges/2020.03.4+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“Input molecule data”</em>: <code class="language-plaintext highlighter-rouge">Candidate SMILES</code></li>
         <li><em>“Minimum pH”</em>: <code class="language-plaintext highlighter-rouge">4.4</code></li>
@@ -980,7 +978,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
   <div class="box-title hands-on-title" id="hands-on-convert-to-sdf-format" aria-label="hands-on box: Convert to SDF format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Convert to SDF format</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0"><strong>Compound conversion</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0"><strong>Compound conversion</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“Molecular input file”</em>: <code class="language-plaintext highlighter-rouge">Enumerated candidates</code> dataset.</li>
         <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">MDL MOL format (sdf, mol)</code>
@@ -1015,9 +1013,9 @@ https://zenodo.org/record/3730474/files/hits.sdf
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>The rxDock tool performs one docking at a time (more technically: the task is not parallelized, as it uses only a single CPU). Therefore, splitting the large SD-file into many small files allows the work to be carried out by multiple <span class="notranslate">Galaxy</span> jobs in parallel, so it completes faster.</p>
+    <p>The rxDock tool performs one docking at a time (more technically: the task is not parallelized, as it uses only a single CPU). Therefore, splitting the large SD-file into many small files allows the work to be carried out by multiple Galaxy jobs in parallel, so it completes faster.</p>
 
-    <p>In the original study, this kind of parallelization was absolutely essential because of the enormous dataset; at some points, there were 5,000 docking jobs running concurrently on the European <span class="notranslate">Galaxy</span> server. Even on the much smaller scale of this tutorial, we can speed things up considerably using this trick.</p>
+    <p>In the original study, this kind of parallelization was absolutely essential because of the enormous dataset; at some points, there were 5,000 docking jobs running concurrently on the European Galaxy server. Even on the much smaller scale of this tutorial, we can speed things up considerably using this trick.</p>
 
   </blockquote>
 </blockquote>
@@ -1026,7 +1024,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
   <div class="box-title hands-on-title" id="hands-on-split-the-sd-files" aria-label="hands-on box: Split the SD-files"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Split the SD-files</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0"><strong>Split file to dataset collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0"><strong>Split file to dataset collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/split_file_to_collection/split_file_to_collection/0.5.0</span></span>  with the following parameters:
       <ul>
         <li><em>“Select the file type to split”</em>: <code class="language-plaintext highlighter-rouge">SD-files</code></li>
         <li><em>“SD-file to split”</em>: <code class="language-plaintext highlighter-rouge">Enumerated candidates SDF</code>
@@ -1036,7 +1034,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
                 <li><em>“Number of new files”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
               </ul>
             </li>
-            <li><em>“Method to allocate records to new files”</em>: <code class="language-plaintext highlighter-rouge">Alte<span class="notranslate">rna</span>te output files</code></li>
+            <li><em>“Method to allocate records to new files”</em>: <code class="language-plaintext highlighter-rouge">Alternate output files</code></li>
           </ul>
         </li>
       </ul>
@@ -1063,7 +1061,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
   <div class="box-title hands-on-title" id="hands-on-conversion-to-mol2-format" aria-label="hands-on box: Conversion to MOL2 format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Conversion to MOL2 format</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0"><strong>Compound conversion</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0"><strong>Compound conversion</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/openbabel_compound_convert/openbabel_compound_convert/3.1.1+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“Molecular input file”</em>: <code class="language-plaintext highlighter-rouge">Receptor PDB</code> dataset.</li>
         <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">Sybyl Mol2 format (mol2)</code></li>
@@ -1076,7 +1074,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
 
 <h2 id="generate-frankenstein-ligand">Generate Frankenstein ligand</h2>
 
-<p>For docking with rxDock, a file needs to be created defining the active site. This requires two input files - one for the protein and one for the ligand. We want an active site generation that takes into account the features of all 17 fragments, and therefore need to generate a ‘Frankenstein ligand’ which possesses the properties of all the fragments. A very simple <span class="notranslate">Galaxy</span> tool is available for this.</p>
+<p>For docking with rxDock, a file needs to be created defining the active site. This requires two input files - one for the protein and one for the ligand. We want an active site generation that takes into account the features of all 17 fragments, and therefore need to generate a ‘Frankenstein ligand’ which possesses the properties of all the fragments. A very simple Galaxy tool is available for this.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -1096,7 +1094,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
   <div class="box-title hands-on-title" id="hands-on-generate-frankenstein-ligand" aria-label="hands-on box: Generate Frankenstein ligand"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate Frankenstein ligand</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/ctb_frankenstein_ligand/ctb_frankenstein_ligand/2013.1-0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/ctb_frankenstein_ligand/ctb_frankenstein_ligand/2013.1-0+galaxy0"><strong>Create Frankenstein ligand</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/ctb_frankenstein_ligand/ctb_frankenstein_ligand/2013.1-0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/ctb_frankenstein_ligand/ctb_frankenstein_ligand/2013.1-0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/ctb_frankenstein_ligand/ctb_frankenstein_ligand/2013.1-0+galaxy0"><strong>Create Frankenstein ligand</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/ctb_frankenstein_ligand/ctb_frankenstein_ligand/2013.1-0+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">Hits SDF</code></li>
       </ul>
@@ -1114,7 +1112,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
   <div class="box-title hands-on-title" id="hands-on-active-site-preparation" aria-label="hands-on box: Active site preparation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Active site preparation</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbcavity/rxdock_rbcavity/0.1.5" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbcavity/rxdock_rbcavity/0.1.5"><strong>rxDock cavity definition</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/rxdock_rbcavity/rxdock_rbcavity/0.1.5</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbcavity/rxdock_rbcavity/0.1.5" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbcavity/rxdock_rbcavity/0.1.5"><strong>rxDock cavity definition</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbcavity/rxdock_rbcavity/0.1.5</span></span>  with the following parameters:
       <ul>
         <li><em>“Receptor”</em>: <code class="language-plaintext highlighter-rouge">Receptor MOL2</code></li>
         <li><em>“Reference ligand”</em>: <code class="language-plaintext highlighter-rouge">Frankenstein SDF</code></li>
@@ -1150,7 +1148,7 @@ https://zenodo.org/record/3730474/files/hits.sdf
     <li>25 different poses were generated per candidate, rather than 5, as in this tutorial.</li>
     <li>Because of the large number of poses to score (more than a million), the scoring steps were parallelized by splitting into collections. This is skipped in the tutorial.</li>
     <li>The entire process was repeated 17 times, using a different fragment hit as the receptor structure each time.
-See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">here</a> and <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">here</a> for more details. A full list of <span class="notranslate">Galaxy</span> histories generated is listed <a href="https://covid19.galaxyproject.org/cheminformatics/Histories/">here</a>.</li>
+See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">here</a> and <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">here</a> for more details. A full list of Galaxy histories generated is listed <a href="https://covid19.galaxyproject.org/cheminformatics/Histories/">here</a>.</li>
   </ol>
 </blockquote>
 
@@ -1160,7 +1158,7 @@ See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">here<
   <div class="box-title hands-on-title" id="hands-on-docking" aria-label="hands-on box: Docking"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Docking</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbdock/rxdock_rbdock/0.1.5" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbdock/rxdock_rbdock/0.1.5"><strong>rxDock docking</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/rxdock_rbdock/rxdock_rbdock/0.1.5</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbdock/rxdock_rbdock/0.1.5" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbdock/rxdock_rbdock/0.1.5"><strong>rxDock docking</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/rxdock_rbdock/rxdock_rbdock/0.1.5</span></span>  with the following parameters:
       <ul>
         <li><em>“Receptor”</em>: <code class="language-plaintext highlighter-rouge">Receptor MOL2</code></li>
         <li><em>“Active site”</em>: <code class="language-plaintext highlighter-rouge">Active site</code></li>
@@ -1187,7 +1185,7 @@ See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">here<
   <div class="box-title hands-on-title" id="hands-on-collapse-collection" aria-label="hands-on box: Collapse collection"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Collapse collection</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2"><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2</span></span>  with the following parameters:
       <ul>
         <li><em>“Collection of files to collapse into single dataset”</em>: Output of docking step</li>
       </ul>
@@ -1209,7 +1207,7 @@ See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">here<
   <div class="box-title hands-on-title" id="hands-on-transfs-scoring" aria-label="hands-on box: TransFS scoring"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: TransFS scoring</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/xchem_transfs_scoring/xchem_transfs_scoring/0.4.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/xchem_transfs_scoring/xchem_transfs_scoring/0.4.0"><strong>XChem TransFS pose scoring</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/xchem_transfs_scoring/xchem_transfs_scoring/0.4.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/xchem_transfs_scoring/xchem_transfs_scoring/0.4.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/xchem_transfs_scoring/xchem_transfs_scoring/0.4.0"><strong>XChem TransFS pose scoring</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/xchem_transfs_scoring/xchem_transfs_scoring/0.4.0</span></span>  with the following parameters:
       <ul>
         <li><em>“Receptor”</em>: <code class="language-plaintext highlighter-rouge">Receptor PDB</code></li>
         <li><em>“Ligands”</em>: <code class="language-plaintext highlighter-rouge">Docked poses SDF</code></li>
@@ -1230,7 +1228,7 @@ See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">here<
   <div class="box-title hands-on-title" id="hands-on-sucos-scoring" aria-label="hands-on box: SuCOS scoring"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: SuCOS scoring</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/sucos_max_score/sucos_max_score/2020.03.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/sucos_max_score/sucos_max_score/2020.03.4+galaxy0"><strong>Max SuCOS score</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/sucos_max_score/sucos_max_score/2020.03.4+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/sucos_max_score/sucos_max_score/2020.03.4+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/sucos_max_score/sucos_max_score/2020.03.4+galaxy0"><strong>Max SuCOS score</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/sucos_max_score/sucos_max_score/2020.03.4+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“Ligands to be scored”</em>: Output of the TransFS step</li>
         <li><em>“Set of clusters to score against”</em>: <code class="language-plaintext highlighter-rouge">Hits SDF</code></li>
@@ -1244,7 +1242,7 @@ See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">here<
 
 <p>The aim of the original study was to select 500 candidate molecules for synthesis and experimental study. In order to do this, the data for all fragment hits had to be combined (i.e. so that each compound was assigned the lowest score from all the fragments). The resulting table was then compared with a list of compounds available from <a href="https://enamine.net/">Enamine</a> and <a href="https://chem-space.com/">Chemspace</a> and the 500 highest scoring matching compounds were selected for purchase.</p>
 
-<p>This step is skipped in the tutorial, as only 100 compounds were tested, using only a single fragment hit structure. If you want, though, check out the <a href="https://usegalaxy.eu/u/timdudgeon/h/top-500-enamine--chemspace-bb">history</a> and <a href="https://usegalaxy.eu/u/timdudgeon/w/filter-results"><span class="notranslate">workflow</span></a> used.</p>
+<p>This step is skipped in the tutorial, as only 100 compounds were tested, using only a single fragment hit structure. If you want, though, check out the <a href="https://usegalaxy.eu/u/timdudgeon/h/top-500-enamine--chemspace-bb">history</a> and <a href="https://usegalaxy.eu/u/timdudgeon/w/filter-results">workflow</a> used.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 

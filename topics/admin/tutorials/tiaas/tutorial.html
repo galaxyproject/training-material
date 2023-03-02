@@ -1244,13 +1244,13 @@
             <div class="col-sm-10">
                  
 
-                <p><span class="notranslate">Galaxy</span> is widely used for teaching. In order to facilitate instructors, the <span class="notranslate">Galaxy</span> Project has developed Training Infrastructure as a Service (TIaaS).
+                <p>Galaxy is widely used for teaching. In order to facilitate instructors, the Galaxy Project has developed Training Infrastructure as a Service (TIaaS).
 Workshop instructors can apply for <abbr title="Training Infrastructure as a Service">TIaaS</abbr>, and on the day of their workshop, their participants will be placed in a special group and use dedicated
 resources, thus reducing queue times on the day of the training.</p>
 
 <figure id="figure-1"><img src="../../images/tiaas/tiaas_intro.png" alt="TIaaS concept. " width="70%" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> With TIaaS, all of your users visit the same server. In the background, the scheduler recognises which users are training users, and directs their jobs to special resources. In the EU deployment of TIaaS jobs preferentially use private resources, but can spill over to the main queue if there is not enough space available.</figcaption></figure>
 
-<p>This tutorial will go cover how to set up such a service on your own <span class="notranslate">Galaxy</span> server.</p>
+<p>This tutorial will go cover how to set up such a service on your own Galaxy server.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -1263,7 +1263,7 @@ resources, thus reducing queue times on the day of the training.</p>
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-galaxy-admin-training-path" aria-label="comment box: Galaxy Admin Training Path"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: <span class="notranslate">Galaxy</span> Admin Training Path</div>   <p>The yearly <span class="notranslate">Galaxy</span> Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in <span class="notranslate">Galaxy</span> Admin Training.</p>   <ol id="git-gat-timeline">     <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">     <li class="disabled">         <span>Step 1</span>         <span>ansible-<span class="notranslate">galaxy</span></span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tus/tutorial.html">     <li class="disabled">         <span>Step 2</span>         <span>tus</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">     <li class="disabled">         <span>Step 3</span>         <span>cvmfs</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/singularity/tutorial.html">     <li class="disabled">         <span>Step 4</span>         <span>singularity</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">     <li class="disabled">         <span>Step 5</span>         <span>tool-management</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">     <li class="disabled">         <span>Step 6</span>         <span>data-library</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">     <li class="disabled">         <span>Step 7</span>         <span>connect-to-compute-cluster</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html">     <li class="disabled">         <span>Step 8</span>         <span>job-destinations</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">     <li class="disabled">         <span>Step 9</span>         <span>pulsar</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html">     <li class="disabled">         <span>Step 10</span>         <span>gxadmin</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/monitoring/tutorial.html">     <li class="disabled">         <span>Step 11</span>         <span>monitoring</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">     <li class="active">         <span>Step 12</span>         <span>tiaas</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">     <li class="">         <span>Step 13</span>         <span>reports</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/ftp/tutorial.html">     <li class="">         <span>Step 14</span>         <span>ftp</span>     </li>          </a>      </ol>   <style type="text/css"> #git-gat-timeline {     display: flex;     flex-direction: row;     flex-wrap: wrap; } #git-gat-timeline li  {     display: flex;     flex-direction: column;     border: 1px solid black;     border-radius: 5px;     padding: 0.5em;     margin: 0.5em; } #git-gat-timeline li.active {     background: #86d486;     color: black; } #git-gat-timeline li.disabled {     background: #eee; } #git-gat-timeline span {     align-self: center; } </style> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-galaxy-admin-training-path" aria-label="comment box: Galaxy Admin Training Path"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Galaxy Admin Training Path</div>   <p>The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in Galaxy Admin Training.</p>   <ol id="git-gat-timeline">     <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">     <li class="disabled">         <span>Step 1</span>         <span>ansible-galaxy</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tus/tutorial.html">     <li class="disabled">         <span>Step 2</span>         <span>tus</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">     <li class="disabled">         <span>Step 3</span>         <span>cvmfs</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/singularity/tutorial.html">     <li class="disabled">         <span>Step 4</span>         <span>singularity</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">     <li class="disabled">         <span>Step 5</span>         <span>tool-management</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">     <li class="disabled">         <span>Step 6</span>         <span>data-library</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">     <li class="disabled">         <span>Step 7</span>         <span>connect-to-compute-cluster</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html">     <li class="disabled">         <span>Step 8</span>         <span>job-destinations</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">     <li class="disabled">         <span>Step 9</span>         <span>pulsar</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html">     <li class="disabled">         <span>Step 10</span>         <span>gxadmin</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/monitoring/tutorial.html">     <li class="disabled">         <span>Step 11</span>         <span>monitoring</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">     <li class="active">         <span>Step 12</span>         <span>tiaas</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">     <li class="">         <span>Step 13</span>         <span>reports</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/ftp/tutorial.html">     <li class="">         <span>Step 14</span>         <span>ftp</span>     </li>          </a>      </ol>   <style type="text/css"> #git-gat-timeline {     display: flex;     flex-direction: row;     flex-wrap: wrap; } #git-gat-timeline li  {     display: flex;     flex-direction: column;     border: 1px solid black;     border-radius: 5px;     padding: 0.5em;     margin: 0.5em; } #git-gat-timeline li.active {     background: #86d486;     color: black; } #git-gat-timeline li.disabled {     background: #eee; } #git-gat-timeline span {     align-self: center; } </style> </blockquote>
 
 <h1 id="setting-up-tiaas">Setting up TIaaS</h1>
 
@@ -1280,7 +1280,7 @@ resources, thus reducing queue times on the day of the training.</p>
    version: 0.14.2
  - src: dj-wasabi.telegraf
    version: 0.12.0
-<span class="gi">+- src: <span class="notranslate">galaxy</span>project.tiaas2
+<span class="gi">+- src: galaxyproject.tiaas2
 +  version: 2.1.3
 </span>   
 </code></pre></div>      </div>
@@ -1289,7 +1289,7 @@ resources, thus reducing queue times on the day of the training.</p>
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
 </code></pre></div>        </div>
       </blockquote>
 
@@ -1297,10 +1297,10 @@ resources, thus reducing queue times on the day of the training.</p>
       <blockquote class="tip">   <div class="box-title tip-title" id="tip-how-to-read-a-diff"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-how-to-read-a-diff-contents" aria-expanded="true" aria-label="Toggle tip box: How to read a Diff"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: How to read a Diff<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>If you haven’t worked with diffs before, this can be something quite new or different.</p>   <p>If we have two files, let’s say a grocery list, in two files. We’ll call them ‘a’ and ‘b’.</p>   <blockquote class="code-2col">   <blockquote class="code-in">     <div class="box-title code-in-title" id="code-in-old" aria-label="code-in box: Old"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Old</div>     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat old<br />🍎<br />🍐<br />🍊<br />🍋<br />🍒<br />🥑<br /></code></pre></div>    </div>   </blockquote>   <blockquote class="code-out">     <div class="box-title code-out-title" id="code-out-new" aria-label="code-out box: New"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: New</div>     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat new<br />🍎<br />🍐<br />🍊<br />🍋<br />🍍<br />🥑<br /></code></pre></div>    </div>   </blockquote> </blockquote>   <p>We can see that they have some different entries. We’ve removed 🍒 because they’re awful, and replaced them with an 🍍</p>   <p>Diff lets us compare these files</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff old new<br />5c5<br />&lt; 🍒<br /><span class="nt">---</span><br /><span class="o">&gt;</span> 🍍<br /></code></pre></div></div>   <p>Here we see that 🍒 is only in a, and 🍍 is only in b. But otherwise the files are identical.</p>   <p>There are a couple different formats to diffs, one is the ‘unified diff’</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> old new<br /><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:06:36.340962616 +0100<br />@@ <span class="nt">-3</span>,4 +3,4 @@<br /> 🍊<br /> 🍋<br />-🍒<br />+🍍<br /> 🥑<br /></code></pre></div></div>   <p>This is basically what you see in the training materials which gives you a lot of context about the changes:</p>   <ul>   <li><code class="language-plaintext highlighter-rouge">--- old</code> is the ‘old’ file in our view</li>   <li><code class="language-plaintext highlighter-rouge">+++ new</code> is the ‘new’ file</li>   <li>@@ these lines tell us where the change occurs and how many lines are added or removed.</li>   <li>Lines starting with a - are removed from our ‘new’ file</li>   <li>Lines with a + have been added.</li> </ul>   <p>So when you go to apply these diffs to your files in the training:</p>   <ol>   <li>Ignore the header</li>   <li>Remove lines starting with - from your file</li>   <li>Add lines starting with + to your file</li> </ol>   <p>The other lines (🍊/🍋 and 🥑) above just provide “context”, they help you know where a change belongs in a file, but <strong>should not be edited</strong> when you’re making the above change. Given the above diff, you would find a line with a 🍒, and replace it with a 🍍</p>   <h4 id="added--removed-lines">Added &amp; Removed Lines</h4>   <p>Removals are very easy to spot, we just have removed lines</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:10:14.370722802 +0100<br />@@ <span class="nt">-4</span>,3 +4,2 @@<br /> 🍋<br /> 🍒<br />-🥑<br /></code></pre></div></div>   <p>And additions likewise are very easy, just add a new line, between the other lines in your file.</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ new	2022-02-16 14:11:11.422135393 +0100<br />@@ <span class="nt">-1</span>,3 +1,4 @@<br /> 🍎<br />+🍍<br /> 🍐<br /> 🍊<br /></code></pre></div></div>   <h4 id="completely-new-files">Completely new files</h4>   <p>Completely new files look a bit different, there the “old” file is <code class="language-plaintext highlighter-rouge">/dev/null</code>, the empty file in a Linux machine.</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>diff <span class="nt">-U2</span> /dev/null old<br /><span class="nt">---</span> /dev/null	2022-02-15 11:47:16.100000270 +0100<br />+++ old	2022-02-16 14:06:19.697132568 +0100<br />@@ <span class="nt">-0</span>,0 +1,6 @@<br />+🍎<br />+🍐<br />+🍊<br />+🍋<br />+🍒<br />+🥑<br /></code></pre></div></div>   <p>And removed files are similar, except with the new file being /dev/null</p>   <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">---</span> old	2022-02-16 14:06:19.697132568 +0100<br />+++ /dev/null	2022-02-15 11:47:16.100000270 +0100<br />@@ <span class="nt">-1</span>,6 +0,0 @@<br />-🍎<br />-🍐<br />-🍊<br />-🍋<br />-🍒<br />-🥑<br /></code></pre></div></div> </blockquote>
     </li>
     <li>
-      <p>In your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, add the following:</p>
+      <p>In your <code class="language-plaintext highlighter-rouge">galaxyservers</code> group variables file, add the following:</p>
 
-      <div data-commit="Configure tiaas" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+      <div data-commit="Configure tiaas" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
+</span><span class="gi">+++ b/group_vars/galaxyservers.yml
 </span><span class="p">@@ -234,6 +234,11 @@</span> telegraf_plugins_extra:
        - data_format = "influx"
        - interval = "15s"
@@ -1311,46 +1311,46 @@ resources, thus reducing queue times on the day of the training.</p>
 +tiaas_admin_pass: changeme
 +
 </span> # TUS
- <span class="notranslate">galaxy</span>_tusd_port: 1080
+ galaxy_tusd_port: 1080
  tusd_instances:
    
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>In the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, we also need to set the database permissions correctly for TIaaS. It needs to be able to access some <span class="notranslate">Galaxy</span> tables, and we will carefully define only the ones we really need:</p>
+      <p>In the <code class="language-plaintext highlighter-rouge">galaxyservers</code> group variables file, we also need to set the database permissions correctly for TIaaS. It needs to be able to access some Galaxy tables, and we will carefully define only the ones we really need:</p>
 
-      <div data-commit="Add database privileges for TIaaS" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+      <div data-commit="Add database privileges for TIaaS" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
+</span><span class="gi">+++ b/group_vars/galaxyservers.yml
 </span><span class="p">@@ -8,6 +8,7 @@</span> pip_package: python3-pip                               # geerlingguy.pip
  postgresql_objects_users:
-   - name: <span class="notranslate">galaxy</span>
+   - name: galaxy
    - name: telegraf
 <span class="gi">+  - name: tiaas
 </span> postgresql_objects_databases:
-   - name: <span class="notranslate">galaxy</span>
-     owner: <span class="notranslate">galaxy</span>
+   - name: galaxy
+     owner: galaxy
 <span class="p">@@ -16,6 +17,27 @@</span> postgresql_objects_privileges:
      roles: telegraf
      privs: SELECT
      objs: ALL_IN_SCHEMA
-<span class="gi">+  - database: <span class="notranslate">galaxy</span>
+<span class="gi">+  - database: galaxy
 +    roles: tiaas
-+    objs: <span class="notranslate">galaxy</span>_user,<span class="notranslate">galaxy</span>_session,job,history,<span class="notranslate">workflow</span>,workflow_invocation
++    objs: galaxy_user,galaxy_session,job,history,workflow,workflow_invocation
 +    type: table
 +    privs: SELECT
-+  - database: <span class="notranslate">galaxy</span>
++  - database: galaxy
 +    roles: tiaas
-+    objs: user_group_association,<span class="notranslate">galaxy</span>_group,role,group_role_association
++    objs: user_group_association,galaxy_group,role,group_role_association
 +    type: table
 +    privs: SELECT,INSERT
-+  - database: <span class="notranslate">galaxy</span>
++  - database: galaxy
 +    roles: tiaas
 +    objs: group_role_association
 +    type: table
 +    privs: DELETE
-+  - database: <span class="notranslate">galaxy</span>
++  - database: galaxy
 +    roles: tiaas
-+    objs: role_id_seq,<span class="notranslate">galaxy</span>_group_id_seq,group_role_association_id_seq,user_group_association_id_seq
++    objs: role_id_seq,galaxy_group_id_seq,group_role_association_id_seq,user_group_association_id_seq
 +    type: sequence
 +    privs: USAGE,SELECT
 +
@@ -1361,12 +1361,12 @@ resources, thus reducing queue times on the day of the training.</p>
 </code></pre></div>      </div>
 
       <blockquote class="tip">
-        <div class="box-title tip-title" id="tip-why-does-tiaas-get-delete-privileges-on-galaxy-s-database"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-does-tiaas-get-delete-privileges-on-galaxy-s-database-contents" aria-expanded="true" aria-label="Toggle tip box: Why does TIaaS get `DELETE` privileges on Galaxy's Database?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why does TIaaS get `DELETE` privileges on <span class="notranslate">Galaxy</span>'s Database?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+        <div class="box-title tip-title" id="tip-why-does-tiaas-get-delete-privileges-on-galaxy-s-database"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-why-does-tiaas-get-delete-privileges-on-galaxy-s-database-contents" aria-expanded="true" aria-label="Toggle tip box: Why does TIaaS get `DELETE` privileges on Galaxy's Database?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Why does TIaaS get `DELETE` privileges on Galaxy's Database?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>The <code class="language-plaintext highlighter-rouge">DELETE</code> privilege is limited in scope to one table: <code class="language-plaintext highlighter-rouge">group_role_association</code>. This allows TIaaS to
-disassociate training groups from roles in the <span class="notranslate">Galaxy</span> database after the training event date has passed, so that
+disassociate training groups from roles in the Galaxy database after the training event date has passed, so that
 users who participated in a training return to using normal (non-training) resources after the training ends.</p>
 
-        <p>The <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.tiaas2</code> role will create a <a href="https://manpages.debian.org/stable/cron/cron.8.en.html">cron</a> job
+        <p>The <code class="language-plaintext highlighter-rouge">galaxyproject.tiaas2</code> role will create a <a href="https://manpages.debian.org/stable/cron/cron.8.en.html">cron</a> job
 to perform this process every night at midnight. You can control when this runs (or disable it) using
 <a href="https://github.com/galaxyproject/ansible-tiaas2/blob/d5be2a064c49e010f67bfcea18e36812da23d7d8/defaults/main.yml#L20">the tiaas_disassociate_training_roles variable</a>.</p>
 
@@ -1374,30 +1374,30 @@ to perform this process every night at midnight. You can control when this runs 
 
       <blockquote class="tip">
         <div class="box-title tip-title" id="tip-running-the-playbook-from-scratch"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-running-the-playbook-from-scratch-contents" aria-expanded="true" aria-label="Toggle tip box: Running the playbook from scratch"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Running the playbook from scratch<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-        <p>This is one of the few statements we’ve provided that presents difficulties when running the playbook completely from scratch on a blank machine. Setting postgresql roles is one of the first steps in our playbook, but the rules we’ve provided above depend on the <span class="notranslate">Galaxy</span> tables existing in that database. If those tables aren’t there, it will fail. If you do someday run this from scratch, you’ll find that you need to comment out those roles.</p>
+        <p>This is one of the few statements we’ve provided that presents difficulties when running the playbook completely from scratch on a blank machine. Setting postgresql roles is one of the first steps in our playbook, but the rules we’ve provided above depend on the Galaxy tables existing in that database. If those tables aren’t there, it will fail. If you do someday run this from scratch, you’ll find that you need to comment out those roles.</p>
       </blockquote>
     </li>
     <li>
-      <p>We need to add the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.tiaas2</code> role before the <code class="language-plaintext highlighter-rouge">nginx</code> role, as TIaaS defines variables that Nginx needs.</p>
+      <p>We need to add the <code class="language-plaintext highlighter-rouge">galaxyproject.tiaas2</code> role before the <code class="language-plaintext highlighter-rouge">nginx</code> role, as TIaaS defines variables that Nginx needs.</p>
 
-      <div data-commit="Add TIaaS role to the Galaxy playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
-</span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
+      <div data-commit="Add TIaaS role to the Galaxy playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/galaxy.yml
+</span><span class="gi">+++ b/galaxy.yml
 </span><span class="p">@@ -30,6 +30,7 @@</span>
        become: true
-       become_user: "{{ <span class="notranslate">galaxy</span>_user.name }}"
-     - use<span class="notranslate">galaxy</span>_eu.rabbitmq
-<span class="gi">+    - <span class="notranslate">galaxy</span>project.tiaas2
-</span>     - <span class="notranslate">galaxy</span>project.nginx
-     - <span class="notranslate">galaxy</span>project.tusd
-     - <span class="notranslate">galaxy</span>project.cvmfs
+       become_user: "{{ galaxy_user.name }}"
+     - usegalaxy_eu.rabbitmq
+<span class="gi">+    - galaxyproject.tiaas2
+</span>     - galaxyproject.nginx
+     - galaxyproject.tusd
+     - galaxyproject.cvmfs
    
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Lastly we should add the routes for TIaaS to the NGINX template for <span class="notranslate">Galaxy</span>. TIaaS provides a set of default nginx routes that can be used.</p>
+      <p>Lastly we should add the routes for TIaaS to the NGINX template for Galaxy. TIaaS provides a set of default nginx routes that can be used.</p>
 
-      <div data-commit="Add nginx routes for TIaaS" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/nginx/<span class="notranslate">galaxy</span>.j2
-</span><span class="gi">+++ b/templates/nginx/<span class="notranslate">galaxy</span>.j2
+      <div data-commit="Add nginx routes for TIaaS" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/nginx/galaxy.j2
+</span><span class="gi">+++ b/templates/nginx/galaxy.j2
 </span><span class="p">@@ -90,4 +90,5 @@</span> server {
          proxy_set_header Host $http_host;
      }
@@ -1412,7 +1412,7 @@ to perform this process every night at midnight. You can control when this runs 
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash-1" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1521,7 +1521,7 @@ to perform this process every night at midnight. You can control when this runs 
     </li>
     <li><strong>Join TIaaS Training</strong>
       <ul>
-        <li>Make sure you are logged in to <span class="notranslate">Galaxy</span></li>
+        <li>Make sure you are logged in to Galaxy</li>
         <li>On the day of the workshop, participants will visit a following URL to join the TIaaS group
           <ul>
             <li>https://&lt;server&gt;/join-training/gryffindor</li>
@@ -1575,13 +1575,13 @@ to perform this process every night at midnight. You can control when this runs 
 
   <ol>
     <li>
-      <p>Create and open <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/dynamic_job_rules/hogwarts.py</code></p>
+      <p>Create and open <code class="language-plaintext highlighter-rouge">templates/galaxy/dynamic_job_rules/hogwarts.py</code></p>
 
       <div data-commit="Setup sorting hat for jobs" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- /dev/null
-</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/dynamic_job_rules/hogwarts.py
+</span><span class="gi">+++ b/templates/galaxy/dynamic_job_rules/hogwarts.py
 </span><span class="p">@@ -0,0 +1,19 @@</span>
-<span class="gi">+from <span class="notranslate">galaxy</span>.jobs import JobDestination
-+from <span class="notranslate">galaxy</span>.jobs.mapper import Job<span class="notranslate">Mapping</span>Exception
+<span class="gi">+from galaxy.jobs import JobDestination
++from galaxy.jobs.mapper import JobMappingException
 +import os
 +
 +def sorting_hat(app, user):
@@ -1605,26 +1605,26 @@ to perform this process every night at midnight. You can control when this runs 
       <p>This destination will check that the <code class="language-plaintext highlighter-rouge">user_email</code> is in a training group (role starting with <code class="language-plaintext highlighter-rouge">training-</code>).</p>
     </li>
     <li>
-      <p>As usual, we need to instruct <span class="notranslate">Galaxy</span> of where to find this file. Edit your group variables file and add the following:</p>
+      <p>As usual, we need to instruct Galaxy of where to find this file. Edit your group variables file and add the following:</p>
 
-      <div data-commit="Add to list of deployed rules" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -137,6 +137,7 @@</span> <span class="notranslate">galaxy</span>_local_tools:
- <span class="notranslate">galaxy</span>_dynamic_job_rules:
+      <div data-commit="Add to list of deployed rules" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
+</span><span class="gi">+++ b/group_vars/galaxyservers.yml
+</span><span class="p">@@ -137,6 +137,7 @@</span> galaxy_local_tools:
+ galaxy_dynamic_job_rules:
  - my_rules.py
  - map_resources.py
 <span class="gi">+- hogwarts.py
 </span>    
  # systemd
- <span class="notranslate">galaxy</span>_manage_systemd: true
+ galaxy_manage_systemd: true
    
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>We next need to configure this plugin in our job configuration (<code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2</code>):</p>
+      <p>We next need to configure this plugin in our job configuration (<code class="language-plaintext highlighter-rouge">templates/galaxy/config/job_conf.yml.j2</code>):</p>
 
-      <div data-commit="Setup job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
-</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
+      <div data-commit="Setup job conf" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/galaxy/config/job_conf.yml.j2
+</span><span class="gi">+++ b/templates/galaxy/config/job_conf.yml.j2
 </span><span class="p">@@ -16,7 +16,7 @@</span> runners:
      manager: _default_
     
@@ -1648,14 +1648,14 @@ to perform this process every night at midnight. You can control when this runs 
    
 </code></pre></div>      </div>
 
-      <p>This is a <strong>Python function dynamic destination</strong>. <span class="notranslate">Galaxy</span> will load all python files in the <code class="language-plaintext highlighter-rouge">{{ <span class="notranslate">galaxy</span>_dynamic_rule_dir }}</code>, and all functions defined in those will be available to be used in the <code class="language-plaintext highlighter-rouge">job_conf.yml.j2</code>. Additionally it will send all jobs through the sorting hat, but we want upload jobs to stay local. They should always run locally.</p>
+      <p>This is a <strong>Python function dynamic destination</strong>. Galaxy will load all python files in the <code class="language-plaintext highlighter-rouge">{{ galaxy_dynamic_rule_dir }}</code>, and all functions defined in those will be available to be used in the <code class="language-plaintext highlighter-rouge">job_conf.yml.j2</code>. Additionally it will send all jobs through the sorting hat, but we want upload jobs to stay local. They should always run locally.</p>
     </li>
     <li>
       <p>Run the playbook</p>
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash-2" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1663,13 +1663,13 @@ to perform this process every night at midnight. You can control when this runs 
       <p>Ensure your user is joined to a training</p>
     </li>
     <li>
-      <p>Run a job and observe the logs to see where it goes (<code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl -u <span class="notranslate">galaxy</span> -f</code>)</p>
+      <p>Run a job and observe the logs to see where it goes (<code class="language-plaintext highlighter-rouge">journalctl -u galaxy -f</code>)</p>
     </li>
   </ol>
 
 </blockquote>
 
-<p>Congratulations! you have now set up <abbr title="Training Infrastructure as a Service">TIaaS</abbr> on your <span class="notranslate">Galaxy</span> server.</p>
+<p>Congratulations! you have now set up <abbr title="Training Infrastructure as a Service">TIaaS</abbr> on your Galaxy server.</p>
 
 <blockquote class="hidden">
   <div data-test="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2.sh

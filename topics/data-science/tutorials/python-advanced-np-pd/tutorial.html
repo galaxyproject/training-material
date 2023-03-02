@@ -829,13 +829,13 @@
                     
                  
 
-                <p>In this lesson, we will be using Python 3 with some of its most popular scientific libraries. This tutorial assumes that the reader is familiar with the fundamentals of the Python programming language, as well as, how to run Python programs using <span class="notranslate">Galaxy</span>. Otherwise, it is advised to follow the “Introduction to Python” tutorial available in the same platform. We will be using JupyterNotebook, a Python interpreter that comes with everything we need for the lesson. Please note:  JupyterNotebook is only currently available on the <a href="https://usegalaxy.eu/">use<span class="notranslate">galaxy</span>.eu</a> and <a href="https://usegalaxy.org/">use<span class="notranslate">galaxy</span>.org</a> sites.</p>
+                <p>In this lesson, we will be using Python 3 with some of its most popular scientific libraries. This tutorial assumes that the reader is familiar with the fundamentals of the Python programming language, as well as, how to run Python programs using Galaxy. Otherwise, it is advised to follow the “Introduction to Python” tutorial available in the same platform. We will be using JupyterNotebook, a Python interpreter that comes with everything we need for the lesson. Please note:  JupyterNotebook is only currently available on the <a href="https://usegalaxy.eu/">usegalaxy.eu</a> and <a href="https://usegalaxy.org/">usegalaxy.org</a> sites.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
   <p>This tutorial is <strong>significantly</strong> based on <a href="https://carpentries.org">the Carpentries</a> <a href="https://swcarpentry.github.io/python-novice-inflammation/">Programming with Python</a> and <a href="https://swcarpentry.github.io/python-novice-gapminder/">Plotting and Programming in Python</a>, which is licensed CC-BY 4.0.</p>
 
-  <p>Adaptations have been made to make this work better in a GTN/<span class="notranslate">Galaxy</span> environment.</p>
+  <p>Adaptations have been made to make this work better in a GTN/Galaxy environment.</p>
 </blockquote>
 
 <blockquote class="agenda">
@@ -904,7 +904,7 @@
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'middle value in data:'</span><span class="p">,</span> <span class="n">random_data</span><span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">35</span><span class="p">])</span>
 </code></pre></div></div>
 
-<p>The <span class="notranslate">expression</span> random_data[25, 35] accesses the element at row 25, column 35. While this <span class="notranslate">expression</span> may not surprise you, random_data[0, 0] might. Programming languages like Fortran, MATLAB and R start counting at 1 because that’s what human beings have done for thousands of years. Languages in the C family (including C++, Java, Perl, and Python) count from 0 because it represents an offset from the first value in the array (the second value is offset by one index from the first value). As a result, if we have an M×N array in Python, its indices go from 0 to M-1 on the first axis and 0 to N-1 on the second.</p>
+<p>The expression random_data[25, 35] accesses the element at row 25, column 35. While this expression may not surprise you, random_data[0, 0] might. Programming languages like Fortran, MATLAB and R start counting at 1 because that’s what human beings have done for thousands of years. Languages in the C family (including C++, Java, Perl, and Python) count from 0 because it represents an offset from the first value in the array (the second value is offset by one index from the first value). As a result, if we have an M×N array in Python, its indices go from 0 to M-1 on the first axis and 0 to N-1 on the second.</p>
 
 <p>Slicing data
 An index like [25, 35] selects a single element of an array, but we can select whole sections as well, using slicing the same way as previously with the strings. For example, we can select the first ten days (columns) of values for the first four patients (rows) like this:</p>
@@ -958,7 +958,7 @@ An index like [25, 35] selects a single element of an array, but we can select w
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">random_data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">).</span><span class="n">shape</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>The <span class="notranslate">expression</span> (70,) tells us we have an N×1 vector, so this is the average inflammation per day for all patients. If we average across axis 1 (columns in our 2D example), we get the average inflammation per patient across all days.:</p>
+<p>The expression (70,) tells us we have an N×1 vector, so this is the average inflammation per day for all patients. If we average across axis 1 (columns in our 2D example), we get the average inflammation per patient across all days.:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="p">.</span><span class="n">mean</span><span class="p">(</span><span class="n">random_data</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 </code></pre></div></div>
@@ -1043,7 +1043,7 @@ print(D)
                   <span class="n">columns</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">:]))</span>
 </code></pre></div></div>
 
-<p>For the purposes of this tutorial, we will use a file with the annotated differentially expressed genes that was produced in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">Reference-based <span class="notranslate">RNA</span>-Seq data analysis</a> tutorial</p>
+<p>For the purposes of this tutorial, we will use a file with the annotated differentially expressed genes that was produced in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html">Reference-based RNA-Seq data analysis</a> tutorial</p>
 
 <p>We can read a tabular file with <code class="language-plaintext highlighter-rouge">pd.read_csv</code>. The first argument is the filepath of the file to be read. The <code class="language-plaintext highlighter-rouge">sep</code> argument refers to the symbol used to separate the data into different columns. You can check the rest of the arguments using the <code class="language-plaintext highlighter-rouge">help()</code> function.</p>
 
@@ -1181,7 +1181,7 @@ print(D)
     <p>| GeneID | FBgn0039155 | FBgn0003360 | FBgn0026562 | FBgn0025111 | FBgn0029167 | FBgn0039827 | FBgn0035085 | FBgn0034736 | FBgn0264475 | FBgn0000071 | … | FBgn0264343 | FBgn0038237 | FBgn0020376 | FBgn0028939 | FBgn0036560 | FBgn0035710 | FBgn0035523 | FBgn0038261 | FBgn0039178 | FBgn0034636 |
 | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- | —- |
 | Strand | + | - | - | - | + | + | + | + | + | + | … | + | - | + | + | + | - | + | + | + | - |
-| Feature | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | linc<span class="notranslate">RNA</span> | protein_coding | … | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding |
+| Feature | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | lincRNA | protein_coding | … | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding | protein_coding |
 | Gene name | Kal1 | sesB | BM-40-SPARC | Ant2 | Hml | CG1544 | CG3770 | CG6018 | CR43883 | Ama | … | CG43799 | Pde6 | Sr-CIII | NimC2 | CG5895 | SP1173 | CG1311 | CG14856 | CG6356 | CG10440 |</p>
 
   </blockquote>
@@ -1253,7 +1253,7 @@ print(D)
 
 <h2 id="use-conditionals-to-select-data">Use conditionals to select data</h2>
 
-<p>You can use conditionals to select data. A comparison is applied element by element and returns a similarly-shaped dataframe of <code class="language-plaintext highlighter-rouge">True</code> and <code class="language-plaintext highlighter-rouge">False</code>. The last one can be used as a mask to subset the original dataframe. The following example creates a new dataframe consisting only of the columns ‘P-adj’ and ‘Gene name’, then keeps the rows that comply with the <span class="notranslate">expression</span> <code class="language-plaintext highlighter-rouge">'P-adj' &lt; 0.000005</code></p>
+<p>You can use conditionals to select data. A comparison is applied element by element and returns a similarly-shaped dataframe of <code class="language-plaintext highlighter-rouge">True</code> and <code class="language-plaintext highlighter-rouge">False</code>. The last one can be used as a mask to subset the original dataframe. The following example creates a new dataframe consisting only of the columns ‘P-adj’ and ‘Gene name’, then keeps the rows that comply with the expression <code class="language-plaintext highlighter-rouge">'P-adj' &lt; 0.000005</code></p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">subset</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s">'P-adj'</span><span class="p">,</span> <span class="s">'Gene name'</span><span class="p">]]</span>
 <span class="k">print</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
@@ -1264,9 +1264,9 @@ print(D)
 <span class="k">print</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>If we have not had specified the column, that the <span class="notranslate">expression</span> should be applied to, then it would have been applied to the entire dataframe. But the dataframe contains different type of data. In that case, an error would occur.</p>
+<p>If we have not had specified the column, that the expression should be applied to, then it would have been applied to the entire dataframe. But the dataframe contains different type of data. In that case, an error would occur.</p>
 
-<p>Consider the following example of a dataframe consisting only of numerical data. The <span class="notranslate">expression</span> and the mask would be normally applied to the data and the mask would return <code class="language-plaintext highlighter-rouge">NaN</code> for the data that don’t comply with the <span class="notranslate">expression</span>.</p>
+<p>Consider the following example of a dataframe consisting only of numerical data. The expression and the mask would be normally applied to the data and the mask would return <code class="language-plaintext highlighter-rouge">NaN</code> for the data that don’t comply with the expression.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">subset</span> <span class="o">=</span> <span class="n">data</span><span class="p">.</span><span class="n">loc</span><span class="p">[:,</span> <span class="p">[</span><span class="s">'StdErr'</span><span class="p">,</span>	<span class="s">'Wald-Stats'</span><span class="p">,</span> <span class="s">'P-value'</span><span class="p">,</span> <span class="s">'P-adj'</span><span class="p">]]</span>
 <span class="n">mask</span> <span class="o">=</span> <span class="n">subset</span> <span class="o">&lt;</span> <span class="mf">0.05</span>
@@ -1301,7 +1301,7 @@ fourth.to_csv('result.csv')
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>second = first[first['log2(FC)'] &gt; 0 ]
 </code></pre></div>    </div>
 
-    <p>This line makes a selection: only those rows of first for which the ‘log2(FC)’ column contains a positive value are extracted. Notice how the Boolean <span class="notranslate">expression</span> inside the brackets is used to select only those rows where the <span class="notranslate">expression</span> is true.</p>
+    <p>This line makes a selection: only those rows of first for which the ‘log2(FC)’ column contains a positive value are extracted. Notice how the Boolean expression inside the brackets is used to select only those rows where the expression is true.</p>
 
     <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>third = second.drop('FBgn0025111')
 </code></pre></div>    </div>
@@ -1348,7 +1348,7 @@ FBgn0026562</p>
 <blockquote class="question">
   <div class="box-title question-title" id="question-selecting-with-conditionals-1" aria-label="question box: Selecting with conditionals"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question: Selecting with conditionals</div>
 
-  <p>Assume Pandas has been imported and the previous dataset has been loaded. Write an <span class="notranslate">expression</span> to select each of the following:
+  <p>Assume Pandas has been imported and the previous dataset has been loaded. Write an expression to select each of the following:
 a. P-value of each gene
 b. all the information of gene <code class="language-plaintext highlighter-rouge">FBgn0039178</code>
 c. the information of all genes that belong to chromosome <code class="language-plaintext highlighter-rouge">chr3R</code></p>

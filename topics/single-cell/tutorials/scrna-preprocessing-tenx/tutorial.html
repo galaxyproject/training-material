@@ -930,8 +930,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -1005,22 +1003,22 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p><span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span>-seq analysis is a rapidly evolving field at the forefront of transcriptomic research, used in high-throughput developmental studies and rare transcript studies to examine cell heterogeneity within a populations of cells.
-The cellular resolution and genome wide scope make it possible to draw new conclusions that are not otherwise possible with bulk <span class="notranslate">RNA</span>-seq. The analysis requires a great deal of knowledge about statistics, wet-lab protocols, and some machine learning due to variability and sparseness of the data. The uncertainty from the low coverage and low cell numbers per sample that once were common setbacks in the field are overcome by 10x Genomics which provides high-throughput solutions which are quickly championing the field.</p>
+<p>Single-cell RNA-seq analysis is a rapidly evolving field at the forefront of transcriptomic research, used in high-throughput developmental studies and rare transcript studies to examine cell heterogeneity within a populations of cells.
+The cellular resolution and genome wide scope make it possible to draw new conclusions that are not otherwise possible with bulk RNA-seq. The analysis requires a great deal of knowledge about statistics, wet-lab protocols, and some machine learning due to variability and sparseness of the data. The uncertainty from the low coverage and low cell numbers per sample that once were common setbacks in the field are overcome by 10x Genomics which provides high-throughput solutions which are quickly championing the field.</p>
 
 <h3 id="era-of-10x-genomics">Era of 10x Genomics</h3>
 
-<p>10x genomics has provided not only a cost-effective high-throughput solution to understanding sample heterogeneity at the individual cell level, but has defined the standards of the field that many <span class="notranslate">downstream</span> analysis packages are now scrambling to accommodate.</p>
+<p>10x genomics has provided not only a cost-effective high-throughput solution to understanding sample heterogeneity at the individual cell level, but has defined the standards of the field that many downstream analysis packages are now scrambling to accommodate.</p>
 
-<figure id="figure-1"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_clusters_intro.png" alt="clusters. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> From less than 1K to over 10K with 10x genomics: Analyses of two separate sc<span class="notranslate">RNA</span> datasets using the (left) CelSEQ2 protocol, and the (right) 10x Chromium system.</figcaption></figure>
+<figure id="figure-1"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_clusters_intro.png" alt="clusters. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> From less than 1K to over 10K with 10x genomics: Analyses of two separate scRNA datasets using the (left) CelSEQ2 protocol, and the (right) 10x Chromium system.</figcaption></figure>
 
-<p>The gain in resolution reduces the granularity and noise issues that plagued the field of sc<span class="notranslate">RNA</span>-seq not long ago, where now individual clusters are much easier to decipher due to the added stability added by this gain in information.</p>
+<p>The gain in resolution reduces the granularity and noise issues that plagued the field of scRNA-seq not long ago, where now individual clusters are much easier to decipher due to the added stability added by this gain in information.</p>
 
 <h3 id="library-preparation">Library Preparation</h3>
 
 <figure id="figure-2"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_libprep.png" alt="Library Preparation. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> An overview of the library preparation</figcaption></figure>
 
-<p>The 10X barcoded gel beads consist of a pool barcodes which are used to separately index each cell’s transcriptome. The individual gel barcodes are delivered to each cell via flow-cytometry, where each cell is fed single-file along a liquid tube and tagged with a 10X gel bead. The cells are then isolated from one another within thousands of nanoliter droplets, where each droplet described by a unique 10x barcode that all <span class="notranslate">reads</span> in that droplet are associated with once they undergo reverse-transcription (RT) which reconstructs the m<span class="notranslate">RNA</span> into a c<span class="notranslate">DNA</span> counterpart. The oil is then removed and all (now barcoded) c<span class="notranslate">DNA</span> <span class="notranslate">reads</span> are pooled together to be sequenced.</p>
+<p>The 10X barcoded gel beads consist of a pool barcodes which are used to separately index each cell’s transcriptome. The individual gel barcodes are delivered to each cell via flow-cytometry, where each cell is fed single-file along a liquid tube and tagged with a 10X gel bead. The cells are then isolated from one another within thousands of nanoliter droplets, where each droplet described by a unique 10x barcode that all reads in that droplet are associated with once they undergo reverse-transcription (RT) which reconstructs the mRNA into a cDNA counterpart. The oil is then removed and all (now barcoded) cDNA reads are pooled together to be sequenced.</p>
 
 <p>Though there are approximately 3 million 10x gel barcodes used, the amount actually qualitatively profiled in a sample is ~10,000 due to majority of droplets (&gt;90%) being empty in order to ensure that the remainder contains only one cell.</p>
 
@@ -1031,7 +1029,7 @@ The cellular resolution and genome wide scope make it possible to draw new concl
 
   <p>Both are provided in the Zenodo link, but we will only work with the 3 million barcodes because this is what is provided with the chemistry version.</p>
 
-  <p>If you are getting a low number of cells detected for your <span class="notranslate">reads</span> later on, it could be because the barcodes provided are wrong.</p>
+  <p>If you are getting a low number of cells detected for your reads later on, it could be because the barcodes provided are wrong.</p>
 
 </blockquote>
 
@@ -1069,20 +1067,20 @@ The cellular resolution and genome wide scope make it possible to draw new concl
 
 </blockquote>
 
-<figure id="figure-3"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_workflow.png" alt="Overview of workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> An overview of the <span class="notranslate">workflow</span></figcaption></figure>
+<figure id="figure-3"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_workflow.png" alt="Overview of workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> An overview of the workflow</figcaption></figure>
 
-<p>The first part of this tutorial is essentially a one-click “fire and forget” solution to demultiplexing and quantifying sc<span class="notranslate">RNA</span>-seq data, where much of the complexity required in this extremely crucial stage is simplified into a single step.</p>
+<p>The first part of this tutorial is essentially a one-click “fire and forget” solution to demultiplexing and quantifying scRNA-seq data, where much of the complexity required in this extremely crucial stage is simplified into a single step.</p>
 
-<p>However, those who are more interested in learning the intricacies of how FASTQ files are transformed into a count matrix, please see the <a href="/training-material/topics/single-cell/tutorials/scrna-preprocessing/tutorial.html">Pre-processing of <span class="notranslate">Single-Cell</span> <span class="notranslate">RNA</span> Data</a> tutorial.</p>
+<p>However, those who are more interested in learning the intricacies of how FASTQ files are transformed into a count matrix, please see the <a href="/training-material/topics/single-cell/tutorials/scrna-preprocessing/tutorial.html">Pre-processing of Single-Cell RNA Data</a> tutorial.</p>
 
-<p>10x Genomics has its own processing pipeline, <a href="https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger">Cell Ranger</a> to process the sc<span class="notranslate">RNA</span>-seq outputs it produces, but this process requires much configuration to run and is significantly slower than other mappers.</p>
+<p>10x Genomics has its own processing pipeline, <a href="https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger">Cell Ranger</a> to process the scRNA-seq outputs it produces, but this process requires much configuration to run and is significantly slower than other mappers.</p>
 
-<p>Since STARsolo is a drop-in solution to the <em>Cell Ranger</em> pipeline, the first part of the tutorial is a one-click solution where users are encouraged to launch their <strong><span class="notranslate">RNA</span> STARsolo</strong> jobs and spend the time familiarising themselves with the pre-processing training materials mentioned above.</p>
+<p>Since STARsolo is a drop-in solution to the <em>Cell Ranger</em> pipeline, the first part of the tutorial is a one-click solution where users are encouraged to launch their <strong>RNA STARsolo</strong> jobs and spend the time familiarising themselves with the pre-processing training materials mentioned above.</p>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-benchmark-of-cell-ranger-to-others"><button class="gtn-boxify-button details" type="button" aria-controls="details-benchmark-of-cell-ranger-to-others-contents" aria-expanded="true" aria-label="Toggle details box: Benchmark of Cell Ranger to others"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Benchmark of Cell Ranger to others<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-  <figure id="figure-4"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_runtimes.jpg" alt="tenx_runtimes. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Benchmark of different <span class="notranslate">mapping</span> software.</figcaption></figure>
+  <figure id="figure-4"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_runtimes.jpg" alt="tenx_runtimes. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Benchmark of different mapping software.</figcaption></figure>
 
   <p>The image is from <span class="citation"><a href="#Melsted2019">Melsted <i>et al.</i> 2019</a></span>. Notice the order of magnitude speed up that STARsolo and a few others display, for a variety of different datasets in comparison to Cell Ranger.</p>
 </blockquote>
@@ -1091,9 +1089,9 @@ The cellular resolution and genome wide scope make it possible to draw new concl
 
 <h1 id="producing-a-count-matrix-from-fastq">Producing a Count Matrix from FASTQ</h1>
 
-<p>Here we will use the <a href="https://support.10xgenomics.com/single-cell-gene-expression/datasets/3.0.0/pbmc_1k_v3">1k PBMCs from a Healthy Donor (v3 chemistry)</a> from 10x genomics, consisting of 1000 Peripheral blood mononuclear cells (PBMCs) extracted from a healthy donor, where PBMCs are primary cells with relatively small amounts of <span class="notranslate">RNA</span> (~1pg <span class="notranslate">RNA</span>/cell).</p>
+<p>Here we will use the <a href="https://support.10xgenomics.com/single-cell-gene-expression/datasets/3.0.0/pbmc_1k_v3">1k PBMCs from a Healthy Donor (v3 chemistry)</a> from 10x genomics, consisting of 1000 Peripheral blood mononuclear cells (PBMCs) extracted from a healthy donor, where PBMCs are primary cells with relatively small amounts of RNA (~1pg RNA/cell).</p>
 
-<p>The source material consists of 6 FASTQ files split into two sequencing lanes <em>L001</em> and <em>L002</em>, each with three <span class="notranslate">reads</span> of <strong>R1</strong> (barcodes), <strong>R2</strong> (c<span class="notranslate">DNA</span> sequences), <strong>I1</strong> (illumina lane info):</p>
+<p>The source material consists of 6 FASTQ files split into two sequencing lanes <em>L001</em> and <em>L002</em>, each with three reads of <strong>R1</strong> (barcodes), <strong>R2</strong> (cDNA sequences), <strong>I1</strong> (illumina lane info):</p>
 <ul>
   <li>pbmc_1k_v3_S1_<em>L001</em>_<strong>R1</strong>_001.fastq.gz</li>
   <li>pbmc_1k_v3_S1_<em>L001</em>_<strong>R2</strong>_001.fastq.gz</li>
@@ -1103,29 +1101,29 @@ The cellular resolution and genome wide scope make it possible to draw new concl
   <li>pbmc_1k_v3_S1_<em>L002</em>_<strong>I1</strong>_001.fastq.gz</li>
 </ul>
 
-<p>The <em>Cell Ranger</em> pipeline requires all three files to perform the demultiplexing and quantification, but <strong><span class="notranslate">RNA</span> STARsolo</strong> does <a href="https://github.com/alexdobin/STAR/issues/640">not require</a> the I1 lane file to perform the analysis. These source files are provided in the <a href="https://zenodo.org/record/3457880">Zenodo</a> data repository, but they require approximately 2 hours to process. For this tutorial, we will use datasets sub-sampled from the source files to contain approximately 300 cells instead of 1000. Details of this sub-sampling process can be viewed at the <a href="https://zenodo.org/record/3457880/files/subsetting_data.txt">Zenodo link</a>.</p>
+<p>The <em>Cell Ranger</em> pipeline requires all three files to perform the demultiplexing and quantification, but <strong>RNA STARsolo</strong> does <a href="https://github.com/alexdobin/STAR/issues/640">not require</a> the I1 lane file to perform the analysis. These source files are provided in the <a href="https://zenodo.org/record/3457880">Zenodo</a> data repository, but they require approximately 2 hours to process. For this tutorial, we will use datasets sub-sampled from the source files to contain approximately 300 cells instead of 1000. Details of this sub-sampling process can be viewed at the <a href="https://zenodo.org/record/3457880/files/subsetting_data.txt">Zenodo link</a>.</p>
 
 <h3 id="data-upload-and-organization">Data upload and organization</h3>
 
-<p>For the <span class="notranslate">mapping</span>, we require the sub-sampled source files, as well as a “whitelist” of (~3,7 million) known cell barcodes, <a href="https://kb.10xgenomics.com/hc/en-us/articles/115004506263-What-is-a-barcode-whitelist">freely extracted</a> from the <em>Cell Ranger</em> pipeline. This whitelist file may be found within the <span class="notranslate">Galaxy</span> Data Library, but it is included here in the Zenodo record for convenience and also because the sequencing facility may not always provide this file.</p>
+<p>For the mapping, we require the sub-sampled source files, as well as a “whitelist” of (~3,7 million) known cell barcodes, <a href="https://kb.10xgenomics.com/hc/en-us/articles/115004506263-What-is-a-barcode-whitelist">freely extracted</a> from the <em>Cell Ranger</em> pipeline. This whitelist file may be found within the Galaxy Data Library, but it is included here in the Zenodo record for convenience and also because the sequencing facility may not always provide this file.</p>
 
-<p>The barcodes in the R1 FASTQ data are checked against these known cell barcodes in order assign a specific read to a specific known cell. The barcodes are designed in such a manner that there is virtually no chance that they will align to a place in the reference genome. In this tutorial we will be using hg19 (GRCh37) version of the human genome, and will therefore also need to use a hg19 GTF file to annotate our <span class="notranslate">reads</span>.</p>
+<p>The barcodes in the R1 FASTQ data are checked against these known cell barcodes in order assign a specific read to a specific known cell. The barcodes are designed in such a manner that there is virtually no chance that they will align to a place in the reference genome. In this tutorial we will be using hg19 (GRCh37) version of the human genome, and will therefore also need to use a hg19 GTF file to annotate our reads.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-data-upload-and-organization" aria-label="hands-on box: Data upload and organization"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload and organization</div>
 
   <ol>
     <li>
-      <p>Create a new history and rename it (e.g. sc<span class="notranslate">RNA</span>-seq 10X dataset tutorial)</p>
+      <p>Create a new history and rename it (e.g. scRNA-seq 10X dataset tutorial)</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Import the sub-sampled FASTQ data from <a href="https://zenodo.org/record/3457880"><code class="language-plaintext highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz
 https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz
@@ -1134,7 +1132,7 @@ https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L002_R2_001.fastq.g
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Import the Gene Annotations and Cell Barcodes from <a href="https://zenodo.org/record/3457880"><code class="language-plaintext highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)</p>
@@ -1149,11 +1147,11 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 
 <h2 id="10x-chemistries">10x Chemistries</h2>
 
-<p>There are two main reagent kits used during the library preparation, and the choice of one will influence the size of the sequences we work with. Below we can see the layout of the primers used in both chemistries. We can ignore most of these as they are not relevant, namely: the P5 and P7 illumina primers are used in the illumina <a href="https://en.wikipedia.org/wiki/Illumina_dye_sequencing#Bridge_amplification">bridge amplification</a> process; the Sample Index is an 8bp primer which is related to the Chromium system that balances nucleotide bias and ensures that there is no sample overlap during the multiplexed sequencing; and the Poly(dT) VN primer used to capture <span class="notranslate">RNA</span> sequences with poly-A tails (i.e. m<span class="notranslate">RNA</span>).</p>
+<p>There are two main reagent kits used during the library preparation, and the choice of one will influence the size of the sequences we work with. Below we can see the layout of the primers used in both chemistries. We can ignore most of these as they are not relevant, namely: the P5 and P7 illumina primers are used in the illumina <a href="https://en.wikipedia.org/wiki/Illumina_dye_sequencing#Bridge_amplification">bridge amplification</a> process; the Sample Index is an 8bp primer which is related to the Chromium system that balances nucleotide bias and ensures that there is no sample overlap during the multiplexed sequencing; and the Poly(dT) VN primer used to capture RNA sequences with poly-A tails (i.e. mRNA).</p>
 
 <figure id="figure-5"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_primers.svg" alt="chem. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> 10x Chromiumv2 and Chromiumv3 Chemistries</figcaption></figure>
 
-<p>The primers of interest to us are the Cell Barcode (CB) and the Unique Molecular Identifiers (UMI) used in the Read 1 sequencing primer, as they describe to us how to demultiplex and deduplicate our <span class="notranslate">reads</span>. It is highly advised that the <a href="/training-material/topics/single-cell/tutorials/scrna-preprocessing/tutorial.html">Plates, Batches, and Barcodes</a> slides are revisited to refresh your mind on these concepts.</p>
+<p>The primers of interest to us are the Cell Barcode (CB) and the Unique Molecular Identifiers (UMI) used in the Read 1 sequencing primer, as they describe to us how to demultiplex and deduplicate our reads. It is highly advised that the <a href="/training-material/topics/single-cell/tutorials/scrna-preprocessing/tutorial.html">Plates, Batches, and Barcodes</a> slides are revisited to refresh your mind on these concepts.</p>
 
 <table>
   <thead>
@@ -1187,7 +1185,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 
   <p>Unstranded protocols do not distinguish between whether a fragment was sequenced from the forward or the reverse strand, which can lead to some ambiguity if the fragment overlaps two transcripts. In the image below, it is not clear whether the fragment is derived from GeneF or GeneR due to this overlap.</p>
 
-  <figure id="figure-6"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_strandedness.svg" alt="strandedness. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> <span class="notranslate">Mapping</span> fragments to overlapping transcripts is ambiguous with unstranded protocols.</figcaption></figure>
+  <figure id="figure-6"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_strandedness.svg" alt="strandedness. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Mapping fragments to overlapping transcripts is ambiguous with unstranded protocols.</figcaption></figure>
 
   <p>Stranded protocols overcome this by fitting different 5’ and 3’ primers and adaptors, meaning that the orientation of the fragment is fixed during sequencing. For the Chromium v2 and v3 chemistries, the barcode information is purely within the R1 forward strand.</p>
 
@@ -1215,22 +1213,22 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
           <li>Longer barcodes tend to be more unique, so this is a problem that is being solved as the barcodes increase in size, allowing for barcodes that can be used on more than one reference to be more common, as seen above.</li>
         </ul>
       </li>
-      <li>UMIs (or Unique Molecular identifiers) do not delineate cells as Cell Barcodes do, but instead serve as random ‘salt’ that tag molecules randomly and are used to mitigate amplification bias by deduplicating any two <span class="notranslate">reads</span> that map to the same position with the same UMI, where the chance of this happening will be astronomically small unless one read is a direct amplicon of the other.</li>
+      <li>UMIs (or Unique Molecular identifiers) do not delineate cells as Cell Barcodes do, but instead serve as random ‘salt’ that tag molecules randomly and are used to mitigate amplification bias by deduplicating any two reads that map to the same position with the same UMI, where the chance of this happening will be astronomically small unless one read is a direct amplicon of the other.</li>
       <li>\(4^{10} = 1,048,576\) unique molecules tagged, vs. \(4^{12} = 16,777,216\) unique molecules tagged. The reality is much much smaller due to edit distances being used that would reduce both these numbers substantially (as seen in the <a href="/training-material/topics/single-cell/tutorials/scrna-plates-batches-barcodes/slides.html"><em>Plates, Batches, and Barcodes</em></a> slides), but the scale factor of 16 times more molecules (\(4^{12-10} = 16\)) can be uniquely tagged is true.</li>
       <li>Forward.</li>
     </ol>
   </blockquote>
 </blockquote>
 
-<p>The differences in the chemistries is a slight change in the library size, where the v2 aims to capture <em>on average</em> 50,000 <span class="notranslate">reads</span> per cell, whereas the v3 aims to capture <em>at minimum</em> 20,000 <span class="notranslate">reads</span> per cell. This greatly reduces the lower-tail of the library size compared to the previous version.</p>
+<p>The differences in the chemistries is a slight change in the library size, where the v2 aims to capture <em>on average</em> 50,000 reads per cell, whereas the v3 aims to capture <em>at minimum</em> 20,000 reads per cell. This greatly reduces the lower-tail of the library size compared to the previous version.</p>
 
 <h3 id="determining-what-chemistry-our-data-contains">Determining what Chemistry our Data Contains</h3>
 
-<p>To perform the demultiplexing, we need to tell <strong><span class="notranslate">RNA</span> STARsolo</strong> where to look in the R1 FASTQ to find the cell barcodes. We can do this by simply counting the number of basepairs in any read of the R1 files.</p>
+<p>To perform the demultiplexing, we need to tell <strong>RNA STARsolo</strong> where to look in the R1 FASTQ to find the cell barcodes. We can do this by simply counting the number of basepairs in any read of the R1 files.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
-  <p>Peek at one of the R1 FASTQ files using the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> symbol below the dataset name.</p>
+  <p>Peek at one of the R1 FASTQ files using the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> symbol below the dataset name.</p>
 
   <ol>
     <li>How many basepairs are there in any given read?</li>
@@ -1241,25 +1239,25 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
     <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>There are 28 basepairs.</li>
-      <li>The v2 has 26 basepairs, but the v3 has 28 basepairs. Therefore the <span class="notranslate">reads</span> we have here use the Chromium v3 chemistry.</li>
+      <li>The v2 has 26 basepairs, but the v3 has 28 basepairs. Therefore the reads we have here use the Chromium v3 chemistry.</li>
     </ol>
   </blockquote>
 </blockquote>
 
 <h2 id="performing-the-demultiplexing-and-quantification">Performing the Demultiplexing and Quantification</h2>
 
-<p>We will now proceed to demultiplex, map, and quantify both sets of <span class="notranslate">reads</span> using the correct chemistry discovered in the previous sub-section.</p>
+<p>We will now proceed to demultiplex, map, and quantify both sets of reads using the correct chemistry discovered in the previous sub-section.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
-  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a"><strong><span class="notranslate">RNA</span> STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/<span class="notranslate">rna</span>_starsolo/<span class="notranslate">rna</span>_starsolo/2.7.8a</span></span>  consumes a large amount of memory. During the Smörgåsbord training please use <code class="language-plaintext highlighter-rouge">Human (Homo Sapiens): hg19 chrX</code> as the reference genome if you follow this tutorial on <a href="https://usegalaxy.org">use<span class="notranslate">galaxy</span>.org</a>. This performs the <span class="notranslate">mapping</span> only against chromosome X. The full output dataset is available at <a href="https://zenodo.org/record/3581213/files/matrix.mtx">zenodo</a> and will be the starting point for the next tutorial.</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a"><strong>RNA STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a</span></span>  consumes a large amount of memory. During the Smörgåsbord training please use <code class="language-plaintext highlighter-rouge">Human (Homo Sapiens): hg19 chrX</code> as the reference genome if you follow this tutorial on <a href="https://usegalaxy.org">usegalaxy.org</a>. This performs the mapping only against chromosome X. The full output dataset is available at <a href="https://zenodo.org/record/3581213/files/matrix.mtx">zenodo</a> and will be the starting point for the next tutorial.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
-  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a"><strong><span class="notranslate">RNA</span> STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/<span class="notranslate">rna</span>_starsolo/<span class="notranslate">rna</span>_starsolo/2.7.8a</span></span>   with the following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a"><strong>RNA STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.8a</span></span>   with the following parameters:</p>
   <ul>
     <li><em>“Custom or built-in reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in index</code>
       <ul>
@@ -1272,12 +1270,12 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
         </li>
       </ul>
     </li>
-    <li><em>“Type of <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span>-seq”</em>: <code class="language-plaintext highlighter-rouge">Drop-seq or 10X Chromium</code>
+    <li><em>“Type of single-cell RNA-seq”</em>: <code class="language-plaintext highlighter-rouge">Drop-seq or 10X Chromium</code>
       <ul>
-        <li><em>“Input Type”</em>: <code class="language-plaintext highlighter-rouge">Separate barcode and c<span class="notranslate">DNA</span> <span class="notranslate">reads</span></code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq FASTQ/FASTA file, Barcode <span class="notranslate">reads</span>”</em>: Multi-select <code class="language-plaintext highlighter-rouge">L001_R1_001</code> and <code class="language-plaintext highlighter-rouge">L002_R1_001</code> using the Ctrl key.</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq FASTQ/FASTA file, c<span class="notranslate">DNA</span> <span class="notranslate">reads</span>”</em>: Multi-select <code class="language-plaintext highlighter-rouge">L001_R2_001</code> and <code class="language-plaintext highlighter-rouge">L002_R2_001</code> using the Ctrl key.</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq Cell Barcode Whitelist”</em>: <code class="language-plaintext highlighter-rouge">3M-february-2018.txt.gz</code></li>
+        <li><em>“Input Type”</em>: <code class="language-plaintext highlighter-rouge">Separate barcode and cDNA reads</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RNA-Seq FASTQ/FASTA file, Barcode reads”</em>: Multi-select <code class="language-plaintext highlighter-rouge">L001_R1_001</code> and <code class="language-plaintext highlighter-rouge">L002_R1_001</code> using the Ctrl key.</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RNA-Seq FASTQ/FASTA file, cDNA reads”</em>: Multi-select <code class="language-plaintext highlighter-rouge">L001_R2_001</code> and <code class="language-plaintext highlighter-rouge">L002_R2_001</code> using the Ctrl key.</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“RNA-Seq Cell Barcode Whitelist”</em>: <code class="language-plaintext highlighter-rouge">3M-february-2018.txt.gz</code></li>
         <li><em>“Configure Chemistry Options”</em>: <code class="language-plaintext highlighter-rouge">Cell Ranger v3</code></li>
         <li><em>“UMI deduplication (collapsing) algorithm”</em>: <code class="language-plaintext highlighter-rouge">CellRanger2-4 algorithm</code></li>
         <li><em>“Matching the Cell Barcodes to the WhiteList”</em>: <code class="language-plaintext highlighter-rouge">Multiple matches (CellRanger 2)</code></li>
@@ -1286,10 +1284,10 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
     <li>Under <em>“Advanced Settings”</em>:
       <ul>
         <li><em>“Strandedness of Library”</em>: <code class="language-plaintext highlighter-rouge">Forward</code></li>
-        <li><em>“Collect UMI counts for these genomic features”</em>: <code class="language-plaintext highlighter-rouge">Gene: Count <span class="notranslate">reads</span> matching the Gene Transcript</code></li>
+        <li><em>“Collect UMI counts for these genomic features”</em>: <code class="language-plaintext highlighter-rouge">Gene: Count reads matching the Gene Transcript</code></li>
         <li><em>“Type of UMI filtering”</em>: <code class="language-plaintext highlighter-rouge">Remove UMIs with N and homopolymers (similar to CellRanger 2.2.0)</code></li>
         <li><em>“Cell filter type and parameters”</em>: <code class="language-plaintext highlighter-rouge">Do not filter</code></li>
-        <li><em>“Field 3 in the Genes output”</em>: <code class="language-plaintext highlighter-rouge">Gene <span class="notranslate">Expression</span></code></li>
+        <li><em>“Field 3 in the Genes output”</em>: <code class="language-plaintext highlighter-rouge">Gene Expression</code></li>
       </ul>
     </li>
   </ul>
@@ -1304,7 +1302,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 
 <h2 id="inspecting-the-output-files">Inspecting the Output Files</h2>
 
-<p>At this stage <strong><span class="notranslate">RNA</span> STARsolo</strong> has output 6 files; a program log, a <span class="notranslate">mapping</span> quality file, a BAM file of alignments, and 3 count matrix files:</p>
+<p>At this stage <strong>RNA STARsolo</strong> has output 6 files; a program log, a mapping quality file, a BAM file of alignments, and 3 count matrix files:</p>
 <ol>
   <li>Log</li>
   <li>Feature Statistic Summaries</li>
@@ -1314,16 +1312,16 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
   <li>Genes</li>
 </ol>
 
-<p>The log and the summaries files give program logistics and metrics about the quality of the <span class="notranslate">mapping</span>. The BAM file contains the <span class="notranslate">reads</span> mapped to the reference genome. The matrix gene counts is the count matrix in <em>matrixmarket</em> format, accompanied by the list of genes and cell barcodes in separate files. These can be converted into <em>tabular</em> or <em>AnnData</em> formats using the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Import Anndata and loom</strong> tool.</p>
+<p>The log and the summaries files give program logistics and metrics about the quality of the mapping. The BAM file contains the reads mapped to the reference genome. The matrix gene counts is the count matrix in <em>matrixmarket</em> format, accompanied by the list of genes and cell barcodes in separate files. These can be converted into <em>tabular</em> or <em>AnnData</em> formats using the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Import Anndata and loom</strong> tool.</p>
 
-<h3 id="mapping-quality"><span class="notranslate">Mapping</span> Quality</h3>
+<h3 id="mapping-quality">Mapping Quality</h3>
 
-<p>Let us investigate the output log. This type of quality control is essential in any <span class="notranslate">RNA</span>-based analysis and it is strongly recommended that you familiarise yourself with the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control</a> tutorial.</p>
+<p>Let us investigate the output log. This type of quality control is essential in any RNA-based analysis and it is strongly recommended that you familiarise yourself with the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control</a> tutorial.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-1" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
 
-  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9+galaxy1</span></span>  with the following parameters:</p>
   <ul>
     <li>In <em>“Results”</em>:
       <ul>
@@ -1335,7 +1333,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
                 <li>In <em>“1:STAR output”</em>:
                   <ul>
                     <li><em>“Type of STAR output?”</em>: <code class="language-plaintext highlighter-rouge">Log</code></li>
-                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“STAR log output”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span> STARsolo: log</code></li>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“STAR log output”</em>: <code class="language-plaintext highlighter-rouge">RNA STARsolo: log</code></li>
                   </ul>
                 </li>
               </ul>
@@ -1350,7 +1348,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 <blockquote class="question">
   <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-  <p>What percentage of <span class="notranslate">reads</span> are uniquely mapped?</p>
+  <p>What percentage of reads are uniquely mapped?</p>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1368,10 +1366,10 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 
 <p>However, sometimes it is often more informative to look directly at the source quality control file. For example, let us investigate the STARsolo Feature summaries file.</p>
 
-<p>We can look at this directly by clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> symbol of the <em>Feature Statistic Summaries</em> file.</p>
+<p>We can look at this directly by clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> symbol of the <em>Feature Statistic Summaries</em> file.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-rna-starsolo-log-output" aria-label="comment box: RNA STARsolo log output"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: <span class="notranslate">RNA</span> STARsolo log output</div>
+  <div class="box-title comment-title" id="comment-rna-starsolo-log-output" aria-label="comment box: RNA STARsolo log output"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: RNA STARsolo log output</div>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Barcodes:
                   nNoAdapter              0
                       nNoUMI              0
@@ -1400,7 +1398,7 @@ Genes:
 </code></pre></div>  </div>
 </blockquote>
 
-<p>The explanation of these parameters can be seen in the <a href="https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf"><span class="notranslate">RNA</span> STAR Manual</a> under the <em>STARsolo</em> section, with most of the information given in the details box below.</p>
+<p>The explanation of these parameters can be seen in the <a href="https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf">RNA STAR Manual</a> under the <em>STARsolo</em> section, with most of the information given in the details box below.</p>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-explanation-of-parameters"><button class="gtn-boxify-button details" type="button" aria-controls="details-explanation-of-parameters-contents" aria-expanded="true" aria-label="Toggle details box: Explanation of parameters"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Explanation of parameters<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1415,11 +1413,11 @@ Genes:
     <tbody>
       <tr>
         <td>nNinCB</td>
-        <td>number of <span class="notranslate">reads</span> with more than 2 Ns in cell barcode (CB)</td>
+        <td>number of reads with more than 2 Ns in cell barcode (CB)</td>
       </tr>
       <tr>
         <td>nUMIhomopolymer</td>
-        <td>number of <span class="notranslate">reads</span> with homopolymer in CB</td>
+        <td>number of reads with homopolymer in CB</td>
       </tr>
       <tr>
         <td>nTooMany</td>
@@ -1427,14 +1425,14 @@ Genes:
       </tr>
       <tr>
         <td>nNoMatch</td>
-        <td>number of <span class="notranslate">reads</span> with CBs that do not match whitelist even with one mismatch</td>
+        <td>number of reads with CBs that do not match whitelist even with one mismatch</td>
       </tr>
     </tbody>
   </table>
 
-  <p>All of the above <span class="notranslate">reads</span> are discarded from Solo output.</p>
+  <p>All of the above reads are discarded from Solo output.</p>
 
-  <p>The remaining <span class="notranslate">reads</span> are checked for any overlap with the features/genes:</p>
+  <p>The remaining reads are checked for any overlap with the features/genes:</p>
 
   <table>
     <thead>
@@ -1446,27 +1444,27 @@ Genes:
     <tbody>
       <tr>
         <td>nUnmapped</td>
-        <td>number of <span class="notranslate">reads</span> unmapped to the genome</td>
+        <td>number of reads unmapped to the genome</td>
       </tr>
       <tr>
         <td>nNoFeature</td>
-        <td>number of <span class="notranslate">reads</span> that map to the genome but do not belong to a feature</td>
+        <td>number of reads that map to the genome but do not belong to a feature</td>
       </tr>
       <tr>
         <td>nAmbigFeature</td>
-        <td>number of <span class="notranslate">reads</span> that belong to more than one feature</td>
+        <td>number of reads that belong to more than one feature</td>
       </tr>
       <tr>
         <td>nAmbigFeatureMultimap</td>
-        <td>number of <span class="notranslate">reads</span> that belong to more than one feature and are also multi<span class="notranslate">mapping</span> to the genome (this is a subset of the <code class="language-plaintext highlighter-rouge">nAmbigFeature</code>)</td>
+        <td>number of reads that belong to more than one feature and are also multimapping to the genome (this is a subset of the <code class="language-plaintext highlighter-rouge">nAmbigFeature</code>)</td>
       </tr>
       <tr>
         <td>nTooMany</td>
-        <td>number of <span class="notranslate">reads</span> with ambiguous CB (i.e. CB matches whitelist with one mismatch but with posterior probability 0.95)</td>
+        <td>number of reads with ambiguous CB (i.e. CB matches whitelist with one mismatch but with posterior probability 0.95)</td>
       </tr>
       <tr>
         <td>nNoExactMatch</td>
-        <td>number of <span class="notranslate">reads</span> with CB that matches a whitelist barcode with 1 mismatch, but this whitelist barcode does not get any other <span class="notranslate">reads</span> with exact matches of CB</td>
+        <td>number of reads with CB that matches a whitelist barcode with 1 mismatch, but this whitelist barcode does not get any other reads with exact matches of CB</td>
       </tr>
     </tbody>
   </table>
@@ -1474,20 +1472,20 @@ Genes:
   <p>These metrics can be grouped into more broad categories:</p>
 
   <ul>
-    <li><code class="language-plaintext highlighter-rouge">nNinCB</code> + <code class="language-plaintext highlighter-rouge">nUMIhomopolymer</code> + <code class="language-plaintext highlighter-rouge">nNoMatch</code> + <code class="language-plaintext highlighter-rouge">nTooMany</code> + <code class="language-plaintext highlighter-rouge">nNoExactMatch</code> = number of <span class="notranslate">reads</span> with CBs that do not match whitelist.</li>
-    <li><code class="language-plaintext highlighter-rouge">nUnmapped</code> + <code class="language-plaintext highlighter-rouge">nAmbigFeature</code> = number of <span class="notranslate">reads</span> without defined feature (gene).</li>
-    <li><code class="language-plaintext highlighter-rouge">nMatch</code> = number of <span class="notranslate">reads</span> that are output as solo counts.</li>
+    <li><code class="language-plaintext highlighter-rouge">nNinCB</code> + <code class="language-plaintext highlighter-rouge">nUMIhomopolymer</code> + <code class="language-plaintext highlighter-rouge">nNoMatch</code> + <code class="language-plaintext highlighter-rouge">nTooMany</code> + <code class="language-plaintext highlighter-rouge">nNoExactMatch</code> = number of reads with CBs that do not match whitelist.</li>
+    <li><code class="language-plaintext highlighter-rouge">nUnmapped</code> + <code class="language-plaintext highlighter-rouge">nAmbigFeature</code> = number of reads without defined feature (gene).</li>
+    <li><code class="language-plaintext highlighter-rouge">nMatch</code> = number of reads that are output as solo counts.</li>
   </ul>
 
-  <p>The three categories above summed together should be equal to the total number of <span class="notranslate">reads</span> (which is also given in the MultiQC output).</p>
+  <p>The three categories above summed together should be equal to the total number of reads (which is also given in the MultiQC output).</p>
 
 </blockquote>
 
-<p>The main information to gather at this stage is that the <code class="language-plaintext highlighter-rouge">nCellBarcodes</code> tell us how many cells were detected in our sample, where we see that there are 6101 cells. Another metric to take into account is that the number of matches (<code class="language-plaintext highlighter-rouge">nMatch</code>) has the largest value, and that the number of <span class="notranslate">reads</span> that map to the genome but not to a feature/gene given in the GTF (<code class="language-plaintext highlighter-rouge">nNoFeature</code>) is not too large. The number of no features is also quite high when <span class="notranslate">mapping</span> the original (non-subsampled) 10x input datasets, so this appears to be the default expected behaviour.</p>
+<p>The main information to gather at this stage is that the <code class="language-plaintext highlighter-rouge">nCellBarcodes</code> tell us how many cells were detected in our sample, where we see that there are 6101 cells. Another metric to take into account is that the number of matches (<code class="language-plaintext highlighter-rouge">nMatch</code>) has the largest value, and that the number of reads that map to the genome but not to a feature/gene given in the GTF (<code class="language-plaintext highlighter-rouge">nNoFeature</code>) is not too large. The number of no features is also quite high when mapping the original (non-subsampled) 10x input datasets, so this appears to be the default expected behaviour.</p>
 
 <h1 id="producing-a-quality-count-matrix">Producing a Quality Count Matrix</h1>
 
-<p>The matrix files produced by <strong><span class="notranslate">RNA</span> STARsolo</strong> are in the <em>bundled</em> format, meaning that the information to create a tabular matrix of Genes vs Cells are separated into different files. These files are already 10x analysis datasets, compatible with any <span class="notranslate">downstream</span> <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span> analysis pipeline, however the number of cells represented here are greatly over-represented, as they have not yet been filtered for high quality cells, and therefore the matrix represents <em>any</em> cells that were unambiguously detected in the sample.</p>
+<p>The matrix files produced by <strong>RNA STARsolo</strong> are in the <em>bundled</em> format, meaning that the information to create a tabular matrix of Genes vs Cells are separated into different files. These files are already 10x analysis datasets, compatible with any downstream single-cell RNA analysis pipeline, however the number of cells represented here are greatly over-represented, as they have not yet been filtered for high quality cells, and therefore the matrix represents <em>any</em> cells that were unambiguously detected in the sample.</p>
 
 <p>If we were to construct a cell matrix using the data we have, we would have a large matrix of 60,000 Genes against 3 million Cells, of which most values would be zero, i.e. an <em>extremely</em> sparse matrix.</p>
 
@@ -1498,13 +1496,13 @@ Genes:
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-default-method" aria-label="hands-on box: Default Method"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Default Method</div>
 
-  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1"><strong>DropletUtils</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+<span class="notranslate">galaxy</span>1</span></span>   with the following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1"><strong>DropletUtils</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1</span></span>   with the following parameters:</p>
   <ul>
     <li><em>“Format for the input matrix”</em>: <code class="language-plaintext highlighter-rouge">Bundled (barcodes.tsv, genes.tsv, matrix.mtx)</code>
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Count Data”</em>: <code class="language-plaintext highlighter-rouge">Matrix Gene Counts</code> (output of <strong><span class="notranslate">RNA</span> STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genes List”</em>: <code class="language-plaintext highlighter-rouge">Genes</code> (output of <strong><span class="notranslate">RNA</span> STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Barcodes List”</em>: <code class="language-plaintext highlighter-rouge">Barcodes</code> (output of <strong><span class="notranslate">RNA</span> STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Count Data”</em>: <code class="language-plaintext highlighter-rouge">Matrix Gene Counts</code> (output of <strong>RNA STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genes List”</em>: <code class="language-plaintext highlighter-rouge">Genes</code> (output of <strong>RNA STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Barcodes List”</em>: <code class="language-plaintext highlighter-rouge">Barcodes</code> (output of <strong>RNA STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
     <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Filter for Barcodes</code>
@@ -1542,25 +1540,25 @@ Genes:
 
     <ol>
       <li>By clicking on the title of the output dataset in the history we can expand the box to see the output says that there are <code class="language-plaintext highlighter-rouge">272</code> cells in the output table.</li>
-      <li>If we expand the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> <em><span class="notranslate">RNA</span> STARsolo Feature Statistic Summaries</em> Dataset and look at the <code class="language-plaintext highlighter-rouge">nCellBarcodes</code> value, we see that <em><span class="notranslate">RNA</span> STARsolo</em> detected <code class="language-plaintext highlighter-rouge">6101</code> cells. What this means is that <em>6101</em> barcodes were detected in total, but only <em>272</em> of them were above an acceptable threshold of quality, based on the default upper quantile and lower proportion parameters given in the tool. Later on, we will actually later visualise these thresholds ourselves by “ranking” the barcodes, to see the dividing line between high and low quality barcodes.</li>
+      <li>If we expand the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> <em>RNA STARsolo Feature Statistic Summaries</em> Dataset and look at the <code class="language-plaintext highlighter-rouge">nCellBarcodes</code> value, we see that <em>RNA STARsolo</em> detected <code class="language-plaintext highlighter-rouge">6101</code> cells. What this means is that <em>6101</em> barcodes were detected in total, but only <em>272</em> of them were above an acceptable threshold of quality, based on the default upper quantile and lower proportion parameters given in the tool. Later on, we will actually later visualise these thresholds ourselves by “ranking” the barcodes, to see the dividing line between high and low quality barcodes.</li>
     </ol>
   </blockquote>
 </blockquote>
 
-<p>This will produce a count matrix in a human readable tabular format which can be used in <span class="notranslate">downstream</span> analysis tools, such as those used in the <a href="/training-material/topics/single-cell/tutorials/scrna-raceid/tutorial.html"><em><span class="notranslate">Downstream</span> <span class="notranslate">Single-cell</span> <span class="notranslate">RNA</span> analysis with RaceID</em></a> tutorial.</p>
+<p>This will produce a count matrix in a human readable tabular format which can be used in downstream analysis tools, such as those used in the <a href="/training-material/topics/single-cell/tutorials/scrna-raceid/tutorial.html"><em>Downstream Single-cell RNA analysis with RaceID</em></a> tutorial.</p>
 
 <blockquote class="details">
-  <div class="box-title details-title" id="details-file-formats-in-scrna-seq"><button class="gtn-boxify-button details" type="button" aria-controls="details-file-formats-in-scrna-seq-contents" aria-expanded="true" aria-label="Toggle details box: File Formats in scRNA-seq"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: File Formats in sc<span class="notranslate">RNA</span>-seq<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <div class="box-title details-title" id="details-file-formats-in-scrna-seq"><button class="gtn-boxify-button details" type="button" aria-controls="details-file-formats-in-scrna-seq-contents" aria-expanded="true" aria-label="Toggle details box: File Formats in scRNA-seq"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: File Formats in scRNA-seq<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <p>The tabular outputs here are selected mostly for transparency, since they are easy to inspect. However, the datasets produced with 10x data are very large and very sparse, meaning there is much data redundancy due to the repetition of zeroes everywhere in the data.</p>
 
-  <p><a href="https://bioconductor.org/packages/release/bioc/html/SingleCellExperiment.html">Many</a> analysis <a href="https://www.rdocumentation.org/packages/RaceID/versions/0.1.3/topics/SCseq">packages</a> have <a href="https://github.com/satijalab/seurat/wiki/Seurat">attempted</a> to <a href="https://www.rdocumentation.org/packages/scater/versions/1.0.4/topics/SCESet">solve</a> this problem by inventing their own standard, which has led to the proliferation of many different “standards” in the sc<span class="notranslate">RNA</span>-seq package ecosystem, most of which require an R programming environment to inspect.</p>
+  <p><a href="https://bioconductor.org/packages/release/bioc/html/SingleCellExperiment.html">Many</a> analysis <a href="https://www.rdocumentation.org/packages/RaceID/versions/0.1.3/topics/SCseq">packages</a> have <a href="https://github.com/satijalab/seurat/wiki/Seurat">attempted</a> to <a href="https://www.rdocumentation.org/packages/scater/versions/1.0.4/topics/SCESet">solve</a> this problem by inventing their own standard, which has led to the proliferation of many different “standards” in the scRNA-seq package ecosystem, most of which require an R programming environment to inspect.</p>
 
   <p>As expected, the format that usually wins is the one which is most common in the field. In this case, the format <em>also</em> happens to be a very good format that stores data in a concise, compressed, and extremely readable manner:</p>
 
-  <p>&lt;img src=”/training-material/topics/<span class="notranslate">single-cell</span>/images/sc<span class="notranslate">rna</span>-pre-processing/tenx_anndata.svg “AnnData is an HDF5-based format, which stores gene and cell information in their own matrices, complementary to the main data matrix.” “ alt=”anddata. “  loading=”lazy”&gt;</p>
+  <p>&lt;img src=”/training-material/topics/single-cell/images/scrna-pre-processing/tenx_anndata.svg “AnnData is an HDF5-based format, which stores gene and cell information in their own matrices, complementary to the main data matrix.” “ alt=”anddata. “  loading=”lazy”&gt;</p>
 
-  <p>The <em>AnnData</em> format (<code class="language-plaintext highlighter-rouge">hda5</code>) is an extension of the <a href="https://en.wikipedia.org/wiki/Hierarchical_Data_Format">HDF5 format</a>, which supports multidimensional datasets to be stored in a consistent and space-optimised way. This is the default output of <em>Cell Ranger</em> and so is also the default output of <strong><span class="notranslate">RNA</span> STARsolo</strong>. The format is also now a widely accepted format in many <span class="notranslate">downstream</span> analysis suites.</p>
+  <p>The <em>AnnData</em> format (<code class="language-plaintext highlighter-rouge">hda5</code>) is an extension of the <a href="https://en.wikipedia.org/wiki/Hierarchical_Data_Format">HDF5 format</a>, which supports multidimensional datasets to be stored in a consistent and space-optimised way. This is the default output of <em>Cell Ranger</em> and so is also the default output of <strong>RNA STARsolo</strong>. The format is also now a widely accepted format in many downstream analysis suites.</p>
 </blockquote>
 
 <h2 id="introspective-method">Introspective Method</h2>
@@ -1574,13 +1572,13 @@ Genes:
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-rank-barcodes" aria-label="hands-on box: Rank Barcodes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Rank Barcodes</div>
 
-  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1"><strong>DropletUtils</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+<span class="notranslate">galaxy</span>1</span></span>   with the following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1"><strong>DropletUtils</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1</span></span>   with the following parameters:</p>
   <ul>
     <li><em>“Format for the input matrix”</em>: <code class="language-plaintext highlighter-rouge">Bundled (barcodes.tsv, genes.tsv, matrix.mtx)</code>
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Count Data”</em>: <code class="language-plaintext highlighter-rouge">Matrix Gene Counts</code> (output of <strong><span class="notranslate">RNA</span> STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genes List”</em>: <code class="language-plaintext highlighter-rouge">Genes</code> (output of <strong><span class="notranslate">RNA</span> STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Barcodes List”</em>: <code class="language-plaintext highlighter-rouge">Barcodes</code> (output of <strong><span class="notranslate">RNA</span> STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Count Data”</em>: <code class="language-plaintext highlighter-rouge">Matrix Gene Counts</code> (output of <strong>RNA STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genes List”</em>: <code class="language-plaintext highlighter-rouge">Genes</code> (output of <strong>RNA STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Barcodes List”</em>: <code class="language-plaintext highlighter-rouge">Barcodes</code> (output of <strong>RNA STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
     <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Rank Barcodes</code>
@@ -1594,14 +1592,14 @@ Genes:
 
 <figure id="figure-7"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_knee.png" alt="knee. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Barcode Ranks: The separating thresholds of high and low quality cells</figcaption></figure>
 
-<p>The knee and inflection points on the curve mark the transition between two components of the total count distribution. This is assumed to represent the difference between empty droplets with little <span class="notranslate">RNA</span> and cell-containing droplets with much more <span class="notranslate">RNA</span>, and gives us a rough idea of how many cells to expect in our sample.</p>
+<p>The knee and inflection points on the curve mark the transition between two components of the total count distribution. This is assumed to represent the difference between empty droplets with little RNA and cell-containing droplets with much more RNA, and gives us a rough idea of how many cells to expect in our sample.</p>
 
 <blockquote class="question">
   <h3 id="question-question-questions">Question <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>How many cells do we expect to see in our sample based on the above plot?</li>
-    <li>How many high quality cells do we expect to see in our sample <span class="notranslate">bed</span> on the above plot?</li>
+    <li>How many high quality cells do we expect to see in our sample bed on the above plot?</li>
     <li>What is the minimum number of UMIs that we can expect to see for high quality cells?</li>
   </ol>
 
@@ -1620,13 +1618,13 @@ Genes:
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-custom-filtering" aria-label="hands-on box: Custom Filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Custom Filtering</div>
 
-  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1"><strong>DropletUtils</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+<span class="notranslate">galaxy</span>1</span></span>   with the following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1"><strong>DropletUtils</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1</span></span>   with the following parameters:</p>
   <ul>
     <li><em>“Format for the input matrix”</em>: <code class="language-plaintext highlighter-rouge">Bundled (barcodes.tsv, genes.tsv, matrix.mtx)</code>
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Count Data”</em>: <code class="language-plaintext highlighter-rouge">Matrix Gene Counts</code> (output of <strong><span class="notranslate">RNA</span> STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genes List”</em>: <code class="language-plaintext highlighter-rouge">Genes</code> (output of <strong><span class="notranslate">RNA</span> STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Barcodes List”</em>: <code class="language-plaintext highlighter-rouge">Barcodes</code> (output of <strong><span class="notranslate">RNA</span> STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Count Data”</em>: <code class="language-plaintext highlighter-rouge">Matrix Gene Counts</code> (output of <strong>RNA STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genes List”</em>: <code class="language-plaintext highlighter-rouge">Genes</code> (output of <strong>RNA STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Barcodes List”</em>: <code class="language-plaintext highlighter-rouge">Barcodes</code> (output of <strong>RNA STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
     <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Filter for Barcodes</code>
@@ -1646,19 +1644,19 @@ Genes:
 
 <figure id="figure-8"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/tenx_cells.png" alt="cells. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Detected Cells (red)</figcaption></figure>
 
-<p>Here we recover 278 high quality cells instead of the 272 detected via the default method previously. On large datasets, this difference can help clean <span class="notranslate">downstream</span> clustering. For example, soft or less well-defined clusters are derived from too much noise in the data due to too many low quality cells being in the data during the clustering. Filtering these out during the pre-processing would produce much better separation, albeit at the cost of having less cells to cluster. This filter-cluster trade-off is discussed in more detail in the <span class="notranslate">downstream</span> analysis training materials.</p>
+<p>Here we recover 278 high quality cells instead of the 272 detected via the default method previously. On large datasets, this difference can help clean downstream clustering. For example, soft or less well-defined clusters are derived from too much noise in the data due to too many low quality cells being in the data during the clustering. Filtering these out during the pre-processing would produce much better separation, albeit at the cost of having less cells to cluster. This filter-cluster trade-off is discussed in more detail in the downstream analysis training materials.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>In this <span class="notranslate">workflow</span> we have learned to quickly perform <span class="notranslate">mapping</span> and quantification of sc<span class="notranslate">RNA</span>-seq FASTQ data in a single step via <strong><span class="notranslate">RNA</span> STARsolo</strong>, and have reproduced a <em>Cell Ranger</em> <span class="notranslate">workflow</span> using the <strong>DropletUtils</strong> suite, where we further explored the use of barcode rankings to determine better filtering thresholds to generate a high quality count matrix.</p>
+<p>In this workflow we have learned to quickly perform mapping and quantification of scRNA-seq FASTQ data in a single step via <strong>RNA STARsolo</strong>, and have reproduced a <em>Cell Ranger</em> workflow using the <strong>DropletUtils</strong> suite, where we further explored the use of barcode rankings to determine better filtering thresholds to generate a high quality count matrix.</p>
 
-<p>A full pipeline which produces both an AnnData and tabular file for inspection is provided <a href="workflows/scrna_tenx.ga">in this <span class="notranslate">workflow</span></a>.</p>
+<p>A full pipeline which produces both an AnnData and tabular file for inspection is provided <a href="workflows/scrna_tenx.ga">in this workflow</a>.</p>
 
-<p>Note that, since version <em>2.7.7a</em> of the tool, the entire <em>Cell Ranger</em> pipeline including the filtering can be performed natively within <strong><span class="notranslate">RNA</span> STARsolo</strong>. As this is still a relatively new feature, we do not use it here in this tutorial, but eager users are encouraged to try it out.</p>
+<p>Note that, since version <em>2.7.7a</em> of the tool, the entire <em>Cell Ranger</em> pipeline including the filtering can be performed natively within <strong>RNA STARsolo</strong>. As this is still a relatively new feature, we do not use it here in this tutorial, but eager users are encouraged to try it out.</p>
 
-<p>This tutorial is part of the https://singlecell.use<span class="notranslate">galaxy</span>.eu portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span>).</p>
+<p>This tutorial is part of the https://singlecell.usegalaxy.eu portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span>).</p>
 
-<!-- <figure id="figure-9"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow.svg" alt="Recap of workflow. "  loading="lazy"><figcaption><span class="figcaption-prefix">Figure 9:</span> A recap of the entire <span class="notranslate">workflow</span></figcaption></figure> -->
+<!-- <figure id="figure-9"><img src="/training-material/topics/single-cell/images/scrna-pre-processing/scrna_workflow.svg" alt="Recap of workflow. "  loading="lazy"><figcaption><span class="figcaption-prefix">Figure 9:</span> A recap of the entire workflow</figcaption></figure> -->
 
 
                 

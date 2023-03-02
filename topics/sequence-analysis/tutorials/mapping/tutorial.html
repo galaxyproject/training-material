@@ -878,8 +878,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -957,11 +955,11 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>Sequencing produces a collection of sequences without genomic context. We do not know to which part of the genome the sequences correspond to. <span class="notranslate">Mapping</span> the <span class="notranslate">reads</span> of an experiment to a reference genome is a key step in modern genomic data analysis. With the <span class="notranslate">mapping</span> the <span class="notranslate">reads</span> are assigned to a specific location in the genome and insights like the <span class="notranslate">expression</span> level of genes can be gained.</p>
+<p>Sequencing produces a collection of sequences without genomic context. We do not know to which part of the genome the sequences correspond to. Mapping the reads of an experiment to a reference genome is a key step in modern genomic data analysis. With the mapping the reads are assigned to a specific location in the genome and insights like the expression level of genes can be gained.</p>
 
-<p>The short <span class="notranslate">reads</span> do not come with position information, so we do not know what part of the genome they came from. We need to use the sequence of the read itself to find the corresponding region in the reference sequence. But the reference sequence can be quite long (~3 billion bases for human), making it a daunting task to find a matching region. Since our <span class="notranslate">reads</span> are short, there may be several, equally likely places in the reference sequence from which they could have been read. This is especially true for repetitive regions.</p>
+<p>The short reads do not come with position information, so we do not know what part of the genome they came from. We need to use the sequence of the read itself to find the corresponding region in the reference sequence. But the reference sequence can be quite long (~3 billion bases for human), making it a daunting task to find a matching region. Since our reads are short, there may be several, equally likely places in the reference sequence from which they could have been read. This is especially true for repetitive regions.</p>
 
-<p>In principle, we could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. We would need to do that for each of the millions of <span class="notranslate">reads</span> in our sequencing data. Aligning millions of short sequences this way may, however, take a couple of weeks. And we do not care about the exact base to base correspondence (alignment). What we are interested in is “where these <span class="notranslate">reads</span> came from”. This approach is called <strong><span class="notranslate">mapping</span></strong>.</p>
+<p>In principle, we could do a BLAST analysis to figure out where the sequenced pieces fit best in the known genome. We would need to do that for each of the millions of reads in our sequencing data. Aligning millions of short sequences this way may, however, take a couple of weeks. And we do not care about the exact base to base correspondence (alignment). What we are interested in is “where these reads came from”. This approach is called <strong>mapping</strong>.</p>
 
 <p>In the following, we will process a dataset with the mapper <strong>Bowtie2</strong> and we will visualize the data with the program <strong>IGV</strong>.</p>
 
@@ -973,7 +971,7 @@
 <ol id="markdown-toc">
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
   <li><a href="#prepare-the-data" id="markdown-toc-prepare-the-data">Prepare the data</a></li>
-  <li><a href="#map-reads-on-a-reference-genome" id="markdown-toc-map-reads-on-a-reference-genome">Map <span class="notranslate">reads</span> on a reference genome</a></li>
+  <li><a href="#map-reads-on-a-reference-genome" id="markdown-toc-map-reads-on-a-reference-genome">Map reads on a reference genome</a></li>
   <li><a href="#inspection-of-a-bam-file" id="markdown-toc-inspection-of-a-bam-file">Inspection of a BAM file</a></li>
   <li><a href="#visualization-using-a-genome-browser-igv" id="markdown-toc-visualization-using-a-genome-browser-igv">Visualization using a Genome Browser (IGV)</a></li>
   <li><a href="#visualization-using-a-genome-browser-jbrowse" id="markdown-toc-visualization-using-a-genome-browser-jbrowse">Visualization using a Genome Browser (JBrowse)</a></li>
@@ -992,9 +990,9 @@
       <p>Create a new history for this tutorial and give it a proper name</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
     <li>
       <p>Import <code class="language-plaintext highlighter-rouge">wt_H3K4me3_read1.fastq.gz</code> and <code class="language-plaintext highlighter-rouge">wt_H3K4me3_read2.fastq.gz</code> from <a href="https://zenodo.org/record/1324070">Zenodo</a> or from the data library (ask your instructor)</p>
@@ -1004,35 +1002,35 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
 
-      <p>As default, <span class="notranslate">Galaxy</span> takes the link as name, so rename them.</p>
+      <p>As default, Galaxy takes the link as name, so rename them.</p>
     </li>
     <li>
-      <p>Rename the files to <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span>_1</code> and <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span>_2</code></p>
+      <p>Rename the files to <code class="language-plaintext highlighter-rouge">reads_1</code> and <code class="language-plaintext highlighter-rouge">reads_2</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<p>We just imported in <span class="notranslate">Galaxy</span> FASTQ files corresponding to paired-end data as we could get directly from a sequencing facility.</p>
+<p>We just imported in Galaxy FASTQ files corresponding to paired-end data as we could get directly from a sequencing facility.</p>
 
 <p>During sequencing, errors are introduced, such as incorrect nucleotides being called. Sequencing errors might bias the analysis and can lead to a misinterpretation of the data. The first step for any type of sequencing data is always to check their quality.</p>
 
 <p>There is a dedicated tutorial for <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">quality control</a> of sequencing data. We will not repeat the steps there. You should follow the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">tutorial</a> and apply it to your data before going further.</p>
 
-<h1 id="map-reads-on-a-reference-genome">Map <span class="notranslate">reads</span> on a reference genome</h1>
+<h1 id="map-reads-on-a-reference-genome">Map reads on a reference genome</h1>
 
-<p>Read <span class="notranslate">mapping</span> is the process to align the <span class="notranslate">reads</span> on a reference genomes. A mapper takes as input a reference genome and a set of <span class="notranslate">reads</span>. Its aim is to align each read in the set of <span class="notranslate">reads</span> on the reference genome, allowing mismatches, indels and clipping of some short fragments on the two ends of the <span class="notranslate">reads</span>:</p>
+<p>Read mapping is the process to align the reads on a reference genomes. A mapper takes as input a reference genome and a set of reads. Its aim is to align each read in the set of reads on the reference genome, allowing mismatches, indels and clipping of some short fragments on the two ends of the reads:</p>
 
-<figure id="figure-1"><img src="../../images/mapping/mapping.png" alt="Explanation of mapping. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Illustration of the <span class="notranslate">mapping</span> process. The input consists of a set of <span class="notranslate">reads</span> and a reference genome. In the middle, it gives the results of <span class="notranslate">mapping</span>: the locations of the <span class="notranslate">reads</span> on the reference genome. The first read is aligned at position 100 and the alignment has two mismatches. The second read is aligned at position 114. It is a local alignment with clippings on the left and right. The third read is aligned at position 123. It consists of a 2-base insertion and a 1-base deletion.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/mapping/mapping.png" alt="Explanation of mapping. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Illustration of the mapping process. The input consists of a set of reads and a reference genome. In the middle, it gives the results of mapping: the locations of the reads on the reference genome. The first read is aligned at position 100 and the alignment has two mismatches. The second read is aligned at position 114. It is a local alignment with clippings on the left and right. The third read is aligned at position 123. It consists of a 2-base insertion and a 1-base deletion.</figcaption></figure>
 
-<p>We need a reference genome to map the <span class="notranslate">reads</span> on.</p>
+<p>We need a reference genome to map the reads on.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -1047,27 +1045,27 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
     <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>A reference genome (or reference assembly) is a set of nucleic acid sequences assembled as a representative example of a species’ genetic material. As they are often assembled from the sequencing of different individuals, they do not accurately represent the set of genes of any single organism, but a mosaic of different nucleic acid sequences from each individual.</li>
-      <li>As the cost of <span class="notranslate">DNA</span> sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are built and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different released versions (called “builds”).</li>
+      <li>As the cost of DNA sequencing falls, and new full genome sequencing technologies emerge, more genome sequences continue to be generated. Using these new sequences, new alignments are built and the reference genomes improved (fewer gaps, fixed misrepresentations in the sequence, etc). The different reference genomes correspond to the different released versions (called “builds”).</li>
       <li>This data comes from the ChIP-seq of mice, so we will use mm10 (<em>Mus musculus</em>).</li>
     </ol>
   </blockquote>
 </blockquote>
 
-<p>Currently, there are over 60 different mappers, and their number is growing. In this tutorial, we will use <a href="http://bowtie-bio.sourceforge.net/bowtie2/">Bowtie2</a>, a fast and memory-efficient open-source tool particularly good at aligning sequencing <span class="notranslate">reads</span> of about 50 up to 1,000s of bases to relatively long genomes.</p>
+<p>Currently, there are over 60 different mappers, and their number is growing. In this tutorial, we will use <a href="http://bowtie-bio.sourceforge.net/bowtie2/">Bowtie2</a>, a fast and memory-efficient open-source tool particularly good at aligning sequencing reads of about 50 up to 1,000s of bases to relatively long genomes.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-mapping-with-bowtie2" aria-label="hands-on box: Mapping with Bowtie2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: <span class="notranslate">Mapping</span> with Bowtie2</div>
+  <div class="box-title hands-on-title" id="hands-on-mapping-with-bowtie2" aria-label="hands-on box: Mapping with Bowtie2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Mapping with Bowtie2</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0"><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0"><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.4.2+galaxy0</span></span>  with the following parameters
       <ul>
         <li><em>“Is this single or paired library”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #1”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span>_1</code></li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #2”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span>_2</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #1”</em>: <code class="language-plaintext highlighter-rouge">reads_1</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA/Q file #2”</em>: <code class="language-plaintext highlighter-rouge">reads_2</code></li>
             <li>
               <p><em>“Do you want to set paired-end options?”</em>: <code class="language-plaintext highlighter-rouge">No</code></p>
 
-              <p>You should have a look at the parameters there, specially the mate orientation if you know it. They can improve the quality of the paired-end <span class="notranslate">mapping</span>.</p>
+              <p>You should have a look at the parameters there, specially the mate orientation if you know it. They can improve the quality of the paired-end mapping.</p>
             </li>
           </ul>
         </li>
@@ -1079,34 +1077,34 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
         <li>
           <p><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">Default setting only</code></p>
 
-          <p>You should have a look at the non default parameters and try to understand them. They can have an impact on the <span class="notranslate">mapping</span> and improving it.</p>
+          <p>You should have a look at the non default parameters and try to understand them. They can have an impact on the mapping and improving it.</p>
         </li>
-        <li><em>“Save the bowtie2 <span class="notranslate">mapping</span> statistics to the history”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Save the bowtie2 mapping statistics to the history”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
     <li>
-      <p>Inspect the <code class="language-plaintext highlighter-rouge"><span class="notranslate">mapping</span> stats</code> file by clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon</p>
+      <p>Inspect the <code class="language-plaintext highlighter-rouge">mapping stats</code> file by clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon</p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <ol>
           <li>What information is provided here?</li>
-          <li>How many <span class="notranslate">reads</span> have been mapped exactly 1 time?</li>
-          <li>How many <span class="notranslate">reads</span> have been mapped more than 1 time? How is it possible? What should we do with them?</li>
-          <li>How many pair of <span class="notranslate">reads</span> have not been mapped? What are the causes?</li>
+          <li>How many reads have been mapped exactly 1 time?</li>
+          <li>How many reads have been mapped more than 1 time? How is it possible? What should we do with them?</li>
+          <li>How many pair of reads have not been mapped? What are the causes?</li>
         </ol>
 
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
             <li>The information given here is a quantity one. We can see how many sequences are aligned. It does not tell us something about the quality.</li>
-            <li>~90% <span class="notranslate">reads</span> have been aligned exactly 1 time</li>
-            <li>~7% <span class="notranslate">reads</span> have been aligned concordantly &gt;1 times. These are called multi-mapped <span class="notranslate">reads</span>. It can happen because of repetitions in the reference genome (multiple copies of a gene for example), particularly when the <span class="notranslate">reads</span> are small. It is difficult to decide where these sequences come from and therefore most of the pipelines ignore them. Always check the statistics there to be sure of not discarding too much information in any <span class="notranslate">downstream</span> analyses.</li>
-            <li>~3% pair of <span class="notranslate">reads</span> have not been mapped because
+            <li>~90% reads have been aligned exactly 1 time</li>
+            <li>~7% reads have been aligned concordantly &gt;1 times. These are called multi-mapped reads. It can happen because of repetitions in the reference genome (multiple copies of a gene for example), particularly when the reads are small. It is difficult to decide where these sequences come from and therefore most of the pipelines ignore them. Always check the statistics there to be sure of not discarding too much information in any downstream analyses.</li>
+            <li>~3% pair of reads have not been mapped because
               <ul>
-                <li>both <span class="notranslate">reads</span> in the pair aligned but their positions do not concord with pair of <span class="notranslate">reads</span> (<code class="language-plaintext highlighter-rouge">aligned discordantly 1 time</code>)</li>
-                <li><span class="notranslate">reads</span> of these pairs are multi-mapped (<code class="language-plaintext highlighter-rouge">aligned &gt;1 times</code> in <code class="language-plaintext highlighter-rouge">pairs aligned 0 times concordantly or discordantly</code>)</li>
+                <li>both reads in the pair aligned but their positions do not concord with pair of reads (<code class="language-plaintext highlighter-rouge">aligned discordantly 1 time</code>)</li>
+                <li>reads of these pairs are multi-mapped (<code class="language-plaintext highlighter-rouge">aligned &gt;1 times</code> in <code class="language-plaintext highlighter-rouge">pairs aligned 0 times concordantly or discordantly</code>)</li>
                 <li>one read of these pairs are mapped but not the paired read (<code class="language-plaintext highlighter-rouge">aligned exactly 1 time</code> in <code class="language-plaintext highlighter-rouge">pairs aligned 0 times concordantly or discordantly</code>)</li>
                 <li>the rest are not mapped at all</li>
               </ul>
@@ -1119,17 +1117,17 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 
 </blockquote>
 
-<p>Checking the <span class="notranslate">mapping</span> statistics is an important step to do before continuing any analyses. There are several potential sources for errors in <span class="notranslate">mapping</span>, including (but not limited to):</p>
+<p>Checking the mapping statistics is an important step to do before continuing any analyses. There are several potential sources for errors in mapping, including (but not limited to):</p>
 
 <ul>
-  <li><strong>Polymerase Chain Reaction (PCR) artifacts</strong>: Many high-throughput sequencing (HTS) methods involve one or multiple PCR steps. PCR errors will show as mismatches in the alignment, and especially errors in early PCR rounds will show up in multiple <span class="notranslate">reads</span>, falsely suggesting genetic variation in the sample. A related error would be PCR duplicates, where the same read pair occurs multiple times, skewing coverage calculations in the alignment.</li>
-  <li><strong>Sequencing errors</strong>: The sequencing machine can make an erroneous call either for physical reasons (e.g. oil on an Illumina slide) or due to properties of the sequenced <span class="notranslate">DNA</span> (e.g., homopolymers). As sequencing errors are often random, they can be filtered out as singleton <span class="notranslate">reads</span> during variant calling.</li>
-  <li><strong><span class="notranslate">Mapping</span> errors</strong>: The <span class="notranslate">mapping</span> algorithm can map a read to the wrong location in the reference. This often happens around repeats or other low-complexity regions.</li>
+  <li><strong>Polymerase Chain Reaction (PCR) artifacts</strong>: Many high-throughput sequencing (HTS) methods involve one or multiple PCR steps. PCR errors will show as mismatches in the alignment, and especially errors in early PCR rounds will show up in multiple reads, falsely suggesting genetic variation in the sample. A related error would be PCR duplicates, where the same read pair occurs multiple times, skewing coverage calculations in the alignment.</li>
+  <li><strong>Sequencing errors</strong>: The sequencing machine can make an erroneous call either for physical reasons (e.g. oil on an Illumina slide) or due to properties of the sequenced DNA (e.g., homopolymers). As sequencing errors are often random, they can be filtered out as singleton reads during variant calling.</li>
+  <li><strong>Mapping errors</strong>: The mapping algorithm can map a read to the wrong location in the reference. This often happens around repeats or other low-complexity regions.</li>
 </ul>
 
-<p>So if the <span class="notranslate">mapping</span> statistics are not good, you should investigate the cause of these errors before going further in your analyses.</p>
+<p>So if the mapping statistics are not good, you should investigate the cause of these errors before going further in your analyses.</p>
 
-<p>After that, you should have a look at the <span class="notranslate">reads</span> and inspect the BAM file where the read <span class="notranslate">mapping</span>s are stored.</p>
+<p>After that, you should have a look at the reads and inspect the BAM file where the read mappings are stored.</p>
 
 <h1 id="inspection-of-a-bam-file">Inspection of a BAM file</h1>
 
@@ -1175,7 +1173,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
         </tr>
         <tr>
           <td>3</td>
-          <td><span class="notranslate">RNA</span>ME</td>
+          <td>RNAME</td>
           <td>String</td>
           <td>References sequence NAME</td>
         </tr>
@@ -1183,13 +1181,13 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
           <td>4</td>
           <td>POS</td>
           <td>Integer</td>
-          <td>1- based leftmost <span class="notranslate">mapping</span> POSition</td>
+          <td>1- based leftmost mapping POSition</td>
         </tr>
         <tr>
           <td>5</td>
           <td>MAPQ</td>
           <td>Integer</td>
-          <td><span class="notranslate">MAPping</span> Quality</td>
+          <td>MAPping Quality</td>
         </tr>
         <tr>
           <td>6</td>
@@ -1244,19 +1242,19 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
     <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
       <li>Sequences and quality information, like a FASTQ</li>
-      <li><span class="notranslate">Mapping</span> information, Location of the read on the chromosome, <span class="notranslate">Mapping</span> quality, etc</li>
+      <li>Mapping information, Location of the read on the chromosome, Mapping quality, etc</li>
     </ol>
   </blockquote>
 </blockquote>
 
-<p>The BAM file includes a lot of information about each read, particularly the quality of <span class="notranslate">mapping</span>.</p>
+<p>The BAM file includes a lot of information about each read, particularly the quality of mapping.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-summary-of-mapping-quality" aria-label="hands-on box: Summary of mapping quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Summary of <span class="notranslate">mapping</span> quality</div>
+  <div class="box-title hands-on-title" id="hands-on-summary-of-mapping-quality" aria-label="hands-on box: Summary of mapping quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Summary of mapping quality</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2"><strong>Samtools Stats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+<span class="notranslate">galaxy</span>2</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2"><strong>Samtools Stats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2</span></span>  with the following parameters
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM file”</em>: <code class="language-plaintext highlighter-rouge">aligned <span class="notranslate">reads</span></code> (output of <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“BAM file”</em>: <code class="language-plaintext highlighter-rouge">aligned reads</code> (output of <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Use reference sequence”</em>: <code class="language-plaintext highlighter-rouge">Locally cached/Use a built-in genome</code>
           <ul>
             <li><em>“Using genome”</em>: <code class="language-plaintext highlighter-rouge">Mouse (Mus musculus): mm10 Full</code></li>
@@ -1271,11 +1269,11 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
         <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <ol>
-          <li>What is the proportion of mismatches in the mapped <span class="notranslate">reads</span> when aligned to the reference genome?</li>
+          <li>What is the proportion of mismatches in the mapped reads when aligned to the reference genome?</li>
           <li>What does the error rate represent?</li>
           <li>What is the average quality? How is it represented?</li>
           <li>What is the insert size average?</li>
-          <li>How many <span class="notranslate">reads</span> have a <span class="notranslate">mapping</span> quality score below 20?</li>
+          <li>How many reads have a mapping quality score below 20?</li>
         </ol>
 
         <blockquote class="solution">
@@ -1283,15 +1281,15 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
           <ol>
             <li>There are ~21,900 mismatches for ~4,753,900 bases mapped which on average produces ~0.005 mismatches per mapped bases.</li>
             <li>The error rate is the proportion of mismatches per mapped bases, so the ratio computed right before.</li>
-            <li>The average quality is the mean quality score of the <span class="notranslate">mapping</span>. It is a Phred score like the one used in the FASTQ file for each nucleotide. But here the score is not per nucleotide, but per read and it represents the probability of <span class="notranslate">mapping</span> quality.</li>
-            <li>The insert size is the distance between the two <span class="notranslate">reads</span> in the pairs.</li>
+            <li>The average quality is the mean quality score of the mapping. It is a Phred score like the one used in the FASTQ file for each nucleotide. But here the score is not per nucleotide, but per read and it represents the probability of mapping quality.</li>
+            <li>The insert size is the distance between the two reads in the pairs.</li>
             <li>To get the info:
               <ol>
-                <li><strong>Filter BAM datasets on a variety of attributes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with a filter to keep only the <span class="notranslate">reads</span> with a <span class="notranslate">mapping</span> quality &gt;= 20</li>
+                <li><strong>Filter BAM datasets on a variety of attributes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with a filter to keep only the reads with a mapping quality &gt;= 20</li>
                 <li><strong>Samtools Stats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the output of <strong>Filter</strong></li>
               </ol>
 
-              <p>Before filtering: 95,412 <span class="notranslate">reads</span> and after filtering: 89,664 <span class="notranslate">reads</span>.</p>
+              <p>Before filtering: 95,412 reads and after filtering: 89,664 reads.</p>
             </li>
           </ol>
         </blockquote>
@@ -1302,10 +1300,10 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 
 <h1 id="visualization-using-a-genome-browser-igv">Visualization using a Genome Browser (IGV)</h1>
 
-<p>The Integrative Genomics Viewer (IGV) is a high-performance visualization tool for interactive exploration of large, integrated genomic datasets. It supports a wide variety of data types, including array-based and next-generation sequence data, and genomic annotations. In the following, we will use it to visualize the mapped <span class="notranslate">reads</span>.</p>
+<p>The Integrative Genomics Viewer (IGV) is a high-performance visualization tool for interactive exploration of large, integrated genomic datasets. It supports a wide variety of data types, including array-based and next-generation sequence data, and genomic annotations. In the following, we will use it to visualize the mapped reads.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-visualization-of-the-span-class-quot-notranslate-quot-reads-span-in-igv" aria-label="hands-on box: Visualization of the <span class=&quot;notranslate&quot;>reads</span> in IGV"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualization of the <span class=&quot;notranslate&quot;>reads</span> in IGV</div>
+  <div class="box-title hands-on-title" id="hands-on-visualization-of-the-reads-in-igv" aria-label="hands-on box: Visualization of the reads in IGV"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualization of the reads in IGV</div>
 
   <p>There are two ways to run it:</p>
 
@@ -1315,19 +1313,19 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
         <li>Install <a href="https://software.broadinstitute.org/software/igv/download">IGV</a></li>
         <li>Launch IGV on your computer</li>
         <li>Expand the <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> output of <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li>Click on the <code class="language-plaintext highlighter-rouge">local</code> in <code class="language-plaintext highlighter-rouge">display with IGV</code> to load the <span class="notranslate">reads</span> into the IGV browser</li>
+        <li>Click on the <code class="language-plaintext highlighter-rouge">local</code> in <code class="language-plaintext highlighter-rouge">display with IGV</code> to load the reads into the IGV browser</li>
       </ol>
     </li>
     <li>If you do not have IGV
       <ol>
-        <li>Click on the <code class="language-plaintext highlighter-rouge">Mouse mm10</code> (or correct organism) in <code class="language-plaintext highlighter-rouge">display with IGV</code> to load the <span class="notranslate">reads</span> into the IGV browser</li>
+        <li>Click on the <code class="language-plaintext highlighter-rouge">Mouse mm10</code> (or correct organism) in <code class="language-plaintext highlighter-rouge">display with IGV</code> to load the reads into the IGV browser</li>
       </ol>
     </li>
     <li>Zoom on the <code class="language-plaintext highlighter-rouge">chr2:98,666,236-98,667,473</code></li>
   </ol>
 </blockquote>
 
-<p>The <span class="notranslate">reads</span> have a direction: they are mapped to the forward or reverse strand, respectively. When hovering over a read, extra information is displayed</p>
+<p>The reads have a direction: they are mapped to the forward or reverse strand, respectively. When hovering over a read, extra information is displayed</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -1340,8 +1338,8 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
-      <li>If a nucleotide differs from the reference sequence in more than 20% of quality weighted <span class="notranslate">reads</span>, IGV colors the bar in proportion to the read count of each base.</li>
-      <li>They have a <span class="notranslate">mapping</span> quality equal to zero. Interpretation of this <span class="notranslate">mapping</span> quality depends on the <span class="notranslate">mapping</span> aligner as some commonly used aligners use this convention to mark a read with multiple alignments. In such a case, the read also maps to another location with equally good placement. It is also possible that the read could not be uniquely placed but the other placements do not necessarily give equally good quality hits.</li>
+      <li>If a nucleotide differs from the reference sequence in more than 20% of quality weighted reads, IGV colors the bar in proportion to the read count of each base.</li>
+      <li>They have a mapping quality equal to zero. Interpretation of this mapping quality depends on the mapping aligner as some commonly used aligners use this convention to mark a read with multiple alignments. In such a case, the read also maps to another location with equally good placement. It is also possible that the read could not be uniquely placed but the other placements do not necessarily give equally good quality hits.</li>
     </ol>
   </blockquote>
 </blockquote>
@@ -1349,7 +1347,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-tips-for-igv" aria-label="comment box: Tips for IGV"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Tips for IGV</div>
   <ol>
-    <li>Because the number of <span class="notranslate">reads</span> over a region can be quite large, the IGV browser by default only displays the <span class="notranslate">reads</span> that fall into a small window. This behaviour can be changed in the IGV from <code class="language-plaintext highlighter-rouge">view &gt; Preferences &gt; Alignments</code>.</li>
+    <li>Because the number of reads over a region can be quite large, the IGV browser by default only displays the reads that fall into a small window. This behaviour can be changed in the IGV from <code class="language-plaintext highlighter-rouge">view &gt; Preferences &gt; Alignments</code>.</li>
     <li>
       <p>If the genome of your interest is not there check if it is available via <strong>More…</strong>. If this is not the case, you can add it manually via the menu <strong>Genomes</strong> -&gt; <strong>Load Genome from…</strong></p>
 
@@ -1362,10 +1360,10 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 
 <h1 id="visualization-using-a-genome-browser-jbrowse">Visualization using a Genome Browser (JBrowse)</h1>
 
-<p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy0"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+<span class="notranslate">galaxy</span>0</span></span>  is an alte<span class="notranslate">rna</span>tive, web-based genome browser. Whereas IGV is a piece of software you must download and run, JBrowse instances are websites hosted online that provide an interface to browse genomics data. We’ll use it to visualise the mapped <span class="notranslate">reads</span>.</p>
+<p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy0"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy0</span></span>  is an alternative, web-based genome browser. Whereas IGV is a piece of software you must download and run, JBrowse instances are websites hosted online that provide an interface to browse genomics data. We’ll use it to visualise the mapped reads.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-visualization-of-the-span-class-quot-notranslate-quot-reads-span-in-jbrowse" aria-label="hands-on box: Visualization of the <span class=&quot;notranslate&quot;>reads</span> in JBrowse"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualization of the <span class=&quot;notranslate&quot;>reads</span> in JBrowse</div>
+  <div class="box-title hands-on-title" id="hands-on-visualization-of-the-reads-in-jbrowse" aria-label="hands-on box: Visualization of the reads in JBrowse"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualization of the reads in JBrowse</div>
 
   <ol>
     <li><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> genome browser, with the following parameters:
@@ -1375,13 +1373,13 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
             <li><em>“Select a reference genome”</em>: <code class="language-plaintext highlighter-rouge">mm10</code></li>
           </ul>
         </li>
-        <li><em>“JBrowse-in-<span class="notranslate">Galaxy</span> Action”</em>: <code class="language-plaintext highlighter-rouge">New JBrowse Instance</code></li>
+        <li><em>“JBrowse-in-Galaxy Action”</em>: <code class="language-plaintext highlighter-rouge">New JBrowse Instance</code></li>
         <li><em>“Insert Track Group”</em>:
           <ul>
             <li><em>“Insert Annotation Track”</em>:
               <ul>
                 <li><em>“Track Type”</em>: BAM Pileups</li>
-                <li><em>“BAM Track Data”</em>: <code class="language-plaintext highlighter-rouge">aligned <span class="notranslate">reads</span></code> (output of <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><em>“BAM Track Data”</em>: <code class="language-plaintext highlighter-rouge">aligned reads</code> (output of <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                 <li><em>“Autogenerate SNP Track”</em>: Yes</li>
                 <li><em>“Track Visibility”</em>: On for new users</li>
               </ul>
@@ -1390,7 +1388,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
         </li>
       </ul>
     </li>
-    <li>Visualise the dataset <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span></li>
+    <li>Visualise the dataset <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span></li>
     <li>Zoom on the <code class="language-plaintext highlighter-rouge">chr2:98,666,236-98,667,473</code></li>
   </ol>
 </blockquote>
@@ -1400,20 +1398,20 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
   <p>This can take about a minute or two to run, depending on your training instance’s resources. It takes time as the server builds up a small website for you, and pre-processes the reference genome into a more efficient format. If you wanted to share this with your colleagues, you could download this dataset and directly place it on your webserver.</p>
 </blockquote>
 
-<p>The <span class="notranslate">reads</span> have a direction: they are mapped to the forward or reverse strand, respectively. When clicking on a read, extra information is displayed</p>
+<p>The reads have a direction: they are mapped to the forward or reverse strand, respectively. When clicking on a read, extra information is displayed</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-5" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
     <li>What do the teardrop shape and line mean in the autogenerated SNP track?</li>
-    <li>What do differently coloured <span class="notranslate">reads</span> mean?</li>
+    <li>What do differently coloured reads mean?</li>
   </ol>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-5"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-5-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
     <ol>
-      <li>If enough <span class="notranslate">reads</span> have a different value, then it is marked with a teardrop icon. The coverage plot is marked in height with the percentage of <span class="notranslate">reads</span> with a different call at that position</li>
+      <li>If enough reads have a different value, then it is marked with a teardrop icon. The coverage plot is marked in height with the percentage of reads with a different call at that position</li>
       <li>
         <p>Colour Codes:</p>
 
@@ -1470,7 +1468,7 @@ https://zenodo.org/record/1324070/files/wt_H3K4me3_read2.fastq.gz
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>After quality control, <span class="notranslate">mapping</span> is an important step of most analyses of sequencing data (<span class="notranslate">RNA</span>-Seq, ChIP-Seq, etc) to determine where in the genome our <span class="notranslate">reads</span> originated from and use this information for <span class="notranslate">downstream</span> analyses.</p>
+<p>After quality control, mapping is an important step of most analyses of sequencing data (RNA-Seq, ChIP-Seq, etc) to determine where in the genome our reads originated from and use this information for downstream analyses.</p>
 
 
                 

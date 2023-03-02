@@ -606,11 +606,11 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>Through a series of examples, this tutorial aims to familiarize the reader with building <span class="notranslate">Galaxy</span> collections from tabular data containing URLs, sample sheets, list of accessions or identifiers, etc..</p>
+<p>Through a series of examples, this tutorial aims to familiarize the reader with building Galaxy collections from tabular data containing URLs, sample sheets, list of accessions or identifiers, etc..</p>
 
 <blockquote class="comment">
   <h3 id="comment-audience"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Audience</h3>
-  <p>This tutorial assumes a basic knowledge of using dataset collections in <span class="notranslate">Galaxy</span> but doesn’t assume any particular knowledge of biology or bioinformatics. If you have not used collections with <span class="notranslate">Galaxy</span> previously, please check out the <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">using dataset collections</a> tutorial.</p>
+  <p>This tutorial assumes a basic knowledge of using dataset collections in Galaxy but doesn’t assume any particular knowledge of biology or bioinformatics. If you have not used collections with Galaxy previously, please check out the <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">using dataset collections</a> tutorial.</p>
 </blockquote>
 
 <blockquote class="agenda">
@@ -629,11 +629,11 @@
 
 <h1 id="uploading-datasets-with-rules">Uploading Datasets with Rules</h1>
 
-<p>This approach could be used to manipulate lists of uploads coming from many different formats, but we will start with a tabular description of files for a study from the <a href="https://www.ebi.ac.uk/ena">European Nucleotide Archive</a>. We will be using the data from a study of <a href="https://www.ebi.ac.uk/ena/data/view/PRJDA60709">16s ribosomal <span class="notranslate">RNA</span></a>.</p>
+<p>This approach could be used to manipulate lists of uploads coming from many different formats, but we will start with a tabular description of files for a study from the <a href="https://www.ebi.ac.uk/ena">European Nucleotide Archive</a>. We will be using the data from a study of <a href="https://www.ebi.ac.uk/ena/data/view/PRJDA60709">16s ribosomal RNA</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-downloading-data-from-ena" aria-label="hands-on box: Downloading Data from ENA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Downloading Data from ENA</div>
-  <p>To start, navigate to the above study and click the option to “Show Column Selection”. Here we will narrow the set of columns we consider to just a few relevant to uploading these files to <span class="notranslate">Galaxy</span>.</p>
+  <p>To start, navigate to the above study and click the option to “Show Column Selection”. Here we will narrow the set of columns we consider to just a few relevant to uploading these files to Galaxy.</p>
 
   <p>Select only:</p>
 
@@ -695,7 +695,7 @@
     </tbody>
   </table>
 
-  <p>Download the resulting tabular data describing the files by clicking the “Download report: TSV” link above the table. Alte<span class="notranslate">rna</span>tively, the <a href="https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJDA60709&amp;result=read_run&amp;fields=study_accession,sample_accession,experiment_accession,fastq_ftp&amp;format=tsv&amp;download=true&amp;limit=0">resulting sample sheet can be downloaded directly</a>. The number and size of the files for this example are relatively small for sequencing data but larger files and larger numbers of files should work as well - <span class="notranslate">Galaxy</span> will just need more time to download and process the files.</p>
+  <p>Download the resulting tabular data describing the files by clicking the “Download report: TSV” link above the table. Alternatively, the <a href="https://www.ebi.ac.uk/ena/portal/api/filereport?accession=PRJDA60709&amp;result=read_run&amp;fields=study_accession,sample_accession,experiment_accession,fastq_ftp&amp;format=tsv&amp;download=true&amp;limit=0">resulting sample sheet can be downloaded directly</a>. The number and size of the files for this example are relatively small for sequencing data but larger files and larger numbers of files should work as well - Galaxy will just need more time to download and process the files.</p>
 </blockquote>
 
 <p>Unfortunately the ENA ftp server is not operational at this moment,
@@ -724,7 +724,7 @@ PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8
       <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Rule-based</code> as shown below.</p>
 
       <p><img src="../../images/rules/rules_example_1_1_rules_landing.png" alt="screenshot. " loading="lazy" />
-As you can see in this dialog, data can be selected from a history dataset or pasted in directly. If <span class="notranslate">Galaxy</span> is configured to allow FTP uploads, the contents of your FTP directory may be loaded directly as well.</p>
+As you can see in this dialog, data can be selected from a history dataset or pasted in directly. If Galaxy is configured to allow FTP uploads, the contents of your FTP directory may be loaded directly as well.</p>
     </li>
     <li><strong>Paste</strong> your tabular data right into the textbox on this page as shown below
       <ul>
@@ -751,22 +751,22 @@ PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8
 
 </blockquote>
 
-<p>At first glance, this may be feel like Excel or another sp<span class="notranslate">reads</span>heet program and you may feel the urge to start editing cells but we strongly encourage defining rules for manipulating the data instead. There are a few reasons for this:</p>
+<p>At first glance, this may be feel like Excel or another spreadsheet program and you may feel the urge to start editing cells but we strongly encourage defining rules for manipulating the data instead. There are a few reasons for this:</p>
 
 <ul>
-  <li><strong>Manually modifying this metadata is not reproducible</strong> - we will not belabor the point here but check out <a href="/training-material/faqs/galaxy/why_not_excel.html">Why not use excel for this?</a> for more context. Building up rules for modifying this metadata will allow <span class="notranslate">Galaxy</span> to track and report your manipulations (providing traceability) and apply them to new sets of files (providing reproducibility).</li>
+  <li><strong>Manually modifying this metadata is not reproducible</strong> - we will not belabor the point here but check out <a href="/training-material/faqs/galaxy/why_not_excel.html">Why not use excel for this?</a> for more context. Building up rules for modifying this metadata will allow Galaxy to track and report your manipulations (providing traceability) and apply them to new sets of files (providing reproducibility).</li>
   <li><strong>Manually modifying this metadata is error prone</strong> - we believe defining rules and treating the metadata in a systematic way minimizes the possibility to manual errors. These errors can be very hard to detect for large sets of data.</li>
   <li><strong>Manually modifying data is not scalable</strong> - this rule-based technique potentially scales to importing tens of thousands of datasets.</li>
 </ul>
 
-<p>So rather than modifying the data, we will define rules for manipulating it and setting up “column definitions” that tell <span class="notranslate">Galaxy</span> how to use the metadata during upload or collection creation.</p>
+<p>So rather than modifying the data, we will define rules for manipulating it and setting up “column definitions” that tell Galaxy how to use the metadata during upload or collection creation.</p>
 
-<p>In order to get these files into <span class="notranslate">Galaxy</span>, we will want to do a few things:</p>
+<p>In order to get these files into Galaxy, we will want to do a few things:</p>
 <ul>
-  <li>Strip that header out of the data (it doesn’t contain a URL <span class="notranslate">Galaxy</span> can download).</li>
+  <li>Strip that header out of the data (it doesn’t contain a URL Galaxy can download).</li>
   <li>Define column <code class="language-plaintext highlighter-rouge">C</code> as the dataset name.</li>
-  <li>Define column <code class="language-plaintext highlighter-rouge">D</code> as the dataset URL (this is the location <span class="notranslate">Galaxy</span> can download the data from).</li>
-  <li>Tell <span class="notranslate">Galaxy</span> to treat these files as <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> files.</li>
+  <li>Define column <code class="language-plaintext highlighter-rouge">D</code> as the dataset URL (this is the location Galaxy can download the data from).</li>
+  <li>Tell Galaxy to treat these files as <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> files.</li>
 </ul>
 
 <blockquote class="notranslate hands_on">
@@ -783,7 +783,7 @@ PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8
 <img src="../../images/rules/rules_example_1_4_filter_header.png" alt="screenshot. " loading="lazy" /></li>
       </ul>
 
-      <p>Next we will define these columns for <span class="notranslate">Galaxy</span>.</p>
+      <p>Next we will define these columns for Galaxy.</p>
     </li>
     <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
       <ul>
@@ -817,7 +817,7 @@ PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8
 
 <h1 id="creating-a-simple-dataset-list">Creating a Simple Dataset List</h1>
 
-<p>This example will demonstrate using such history datasets as the source for collection uploads - this can be handy when you’d like to apply existing <span class="notranslate">Galaxy</span> tabular manipulation tools to the metadata before processing for instance.</p>
+<p>This example will demonstrate using such history datasets as the source for collection uploads - this can be handy when you’d like to apply existing Galaxy tabular manipulation tools to the metadata before processing for instance.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-creating-a-simple-dataset-list" aria-label="hands-on box: Creating a Simple Dataset List"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating a Simple Dataset List</div>
@@ -827,16 +827,16 @@ PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8
     <p>Before we start uploading, it may be a good idea to create a new history for this example to keep things simple and match the following screenshots.</p>
   </blockquote>
 
-  <p>For our second example, we will use the same initial metadata, but instead uploaded as a file to <span class="notranslate">Galaxy</span>. This is a relatively common use case wherein you, through some filtering and querying in <span class="notranslate">Galaxy</span>, build a list of accession numbers or other sample identifiers, and then want to fetch the associated datasets to begin working with them.</p>
+  <p>For our second example, we will use the same initial metadata, but instead uploaded as a file to Galaxy. This is a relatively common use case wherein you, through some filtering and querying in Galaxy, build a list of accession numbers or other sample identifiers, and then want to fetch the associated datasets to begin working with them.</p>
 
   <blockquote class="comment">
     <div class="box-title comment-title" id="comment-loading-metadata-from-a-history-element" aria-label="comment box: Loading Metadata from a History Element"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Loading Metadata from a History Element</div>
-    <p>In addition to directly pasting data into the Rule Based Uploader, you can also load the metadata from a dataset in your <span class="notranslate">Galaxy</span> History, or from a file in your FTP directory if the admin has enabled FTP upload</p>
+    <p>In addition to directly pasting data into the Rule Based Uploader, you can also load the metadata from a dataset in your Galaxy History, or from a file in your FTP directory if the admin has enabled FTP upload</p>
   </blockquote>
 
   <ol>
     <li>
-      <p><strong>Upload</strong> the metadata from the <a href="#example-1-metadata">first example</a> to your <span class="notranslate">Galaxy</span>, as a normal paste upload:</p>
+      <p><strong>Upload</strong> the metadata from the <a href="#example-1-metadata">first example</a> to your Galaxy, as a normal paste upload:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>study_accession	sample_accession	experiment_accession	fastq_ftp
 PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000770.fastqsanger.gz
@@ -945,26 +945,26 @@ PRJDB3920	SAMD00034152	DRX036164	https://zenodo.org/api/files/0c8d6a74-23dd-4d36
       </ul>
 
       <p>In this dataset, column <code class="language-plaintext highlighter-rouge">D</code> contains two URLs, separated by a semicolon <code class="language-plaintext highlighter-rouge">;</code>. So we cannot define that column as the URL directly, we will need to split it into two columns first.
-We will build a regular <span class="notranslate">expression</span> that captures two “groups” from this column with two URLs - one group for everything before the <code class="language-plaintext highlighter-rouge">;</code> and one group for everything after.</p>
+We will build a regular expression that captures two “groups” from this column with two URLs - one group for everything before the <code class="language-plaintext highlighter-rouge">;</code> and one group for everything after.</p>
     </li>
-    <li>From <strong>Column</strong>, select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
+    <li>From <strong>Column</strong>, select <code class="language-plaintext highlighter-rouge">Using a Regular Expression</code>
       <ul>
         <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">D</code></li>
-        <li>Select <code class="language-plaintext highlighter-rouge">Create columns matching <span class="notranslate">expression</span> groups</code></li>
-        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">(.*);(.*)</code></li>
+        <li>Select <code class="language-plaintext highlighter-rouge">Create columns matching expression groups</code></li>
+        <li><em>“Regular Expression”</em>: <code class="language-plaintext highlighter-rouge">(.*);(.*)</code></li>
         <li><em>“Number of Groups”</em>: <code class="language-plaintext highlighter-rouge">2</code>
 <img src="../../images/rules/rules_example_3_4_regex.png" alt="screenshot. " loading="lazy" /></li>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-regular-expression-explained" aria-label="comment box: Regular expression explained"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Regular <span class="notranslate">expression</span> explained</div>
+        <div class="box-title comment-title" id="comment-regular-expression-explained" aria-label="comment box: Regular expression explained"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Regular expression explained</div>
         <p>Here <code class="language-plaintext highlighter-rouge">.*</code> means match any number of any character - so basically match anything.
 The parentheses around <code class="language-plaintext highlighter-rouge">.*</code> means form a “group” from whatever is matched. The <code class="language-plaintext highlighter-rouge">;</code> will match with the actual <code class="language-plaintext highlighter-rouge">;</code> in the target cells.
 In his example we have two such matching groups.</p>
       </blockquote>
     </li>
     <li>
-      <p>Click <strong>Apply</strong> to apply the regular <span class="notranslate">expression</span> to the metadata table</p>
+      <p>Click <strong>Apply</strong> to apply the regular expression to the metadata table</p>
 
       <p>Column <code class="language-plaintext highlighter-rouge">D</code> is no longer needed, so we can remove it:</p>
     </li>
@@ -974,7 +974,7 @@ In his example we have two such matching groups.</p>
 <img src="../../images/rules/rules_example_3_7_removed_column.png" alt="screenshot. " loading="lazy" /></li>
       </ul>
 
-      <p>We now have two columns containing URLs - but we can only have one URL per row. So we will split each row into two (one for the forward <span class="notranslate">reads</span> and one for the reverse):</p>
+      <p>We now have two columns containing URLs - but we can only have one URL per row. So we will split each row into two (one for the forward reads and one for the reverse):</p>
     </li>
     <li>From <strong>Rules</strong> select <code class="language-plaintext highlighter-rouge">Split Column(s)</code>
       <ul>
@@ -986,20 +986,20 @@ In his example we have two such matching groups.</p>
       <p><img src="../../images/rules/rules_example_3_9_columns_are_split.png" alt="screenshot. " loading="lazy" />
 For every row before the transformation with columns <code class="language-plaintext highlighter-rouge">ABCDE</code>, this will produce two rows, <code class="language-plaintext highlighter-rouge">ABCD</code> and <code class="language-plaintext highlighter-rouge">ABCE</code>. Thus you will have twice as many rows as before.
 <br /><br />
-Now we need to inform <span class="notranslate">Galaxy</span> which of these rows are “forward” <span class="notranslate">reads</span> and which are “reverse” <span class="notranslate">reads</span>. We will do this by adding a new column again using a regular <span class="notranslate">expression</span>. Here we will match on the <code class="language-plaintext highlighter-rouge">_1</code> or <code class="language-plaintext highlighter-rouge">_2</code> in the filename at the end of the URLs.</p>
+Now we need to inform Galaxy which of these rows are “forward” reads and which are “reverse” reads. We will do this by adding a new column again using a regular expression. Here we will match on the <code class="language-plaintext highlighter-rouge">_1</code> or <code class="language-plaintext highlighter-rouge">_2</code> in the filename at the end of the URLs.</p>
     </li>
-    <li>From <strong>Column</strong>, select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
+    <li>From <strong>Column</strong>, select <code class="language-plaintext highlighter-rouge">Using a Regular Expression</code>
       <ul>
         <li><em>“Column”</em>: <code class="language-plaintext highlighter-rouge">D</code></li>
-        <li>Select <code class="language-plaintext highlighter-rouge">Create columns matching <span class="notranslate">expression</span> groups</code></li>
-        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">.*_(\d).fastq.gz</code></li>
+        <li>Select <code class="language-plaintext highlighter-rouge">Create columns matching expression groups</code></li>
+        <li><em>“Regular Expression”</em>: <code class="language-plaintext highlighter-rouge">.*_(\d).fastq.gz</code></li>
         <li><em>“Number of groups”</em>: <code class="language-plaintext highlighter-rouge">1</code>
 <img src="../../images/rules/rules_example_3_10_regex_paired.png" alt="screenshot. " loading="lazy" /></li>
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-regular-expression-explained-1" aria-label="comment box: Regular expression explained"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Regular <span class="notranslate">expression</span> explained</div>
-        <p>Here <code class="language-plaintext highlighter-rouge">\d</code> means match any digit. This regular <span class="notranslate">expression</span> will use a capturing group to select only the <code class="language-plaintext highlighter-rouge">1</code> or <code class="language-plaintext highlighter-rouge">2</code> part of the URL that appears before the extension.
+        <div class="box-title comment-title" id="comment-regular-expression-explained-1" aria-label="comment box: Regular expression explained"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Regular expression explained</div>
+        <p>Here <code class="language-plaintext highlighter-rouge">\d</code> means match any digit. This regular expression will use a capturing group to select only the <code class="language-plaintext highlighter-rouge">1</code> or <code class="language-plaintext highlighter-rouge">2</code> part of the URL that appears before the extension.
 In his example we have one matching groups ( contained in the parentheses )</p>
       </blockquote>
 
@@ -1019,7 +1019,7 @@ In his example we have one matching groups ( contained in the parentheses )</p>
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-paired-indicator-column-definition" aria-label="comment box: Paired Indicator Column Definition"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Paired Indicator Column Definition</div>
-        <p>The column selector for paired indicator is a bit less obvious and a bit more picky than the other ones we have used. The row value of the paired indicator column must be one of the following to indicate “forward” or “reverse” <span class="notranslate">reads</span>.</p>
+        <p>The column selector for paired indicator is a bit less obvious and a bit more picky than the other ones we have used. The row value of the paired indicator column must be one of the following to indicate “forward” or “reverse” reads.</p>
 
         <table>
           <thead>

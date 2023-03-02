@@ -713,8 +713,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
             Metagenomics
         </a>
@@ -825,17 +823,17 @@
 <p>We chose to include all proteins that are annotated as, or predicted to be, lysosomal proteins. Lysosomal proteins are routinely secreted by malignant and non-malignant cells in high amounts, due to “leakiness” of the mannose-6-phosphate receptor pathway [1,2].
 Furthermore, we chose to exclude proteins annotated as being part of extracellular organelles, e.g. exosomes. While exosomes are secreted by malignant and non-malignant cells, exosomal proteins are expected in the secretome at very low amounts, if not especially enriched for.</p>
 
-<p>For secretome prediction, we combine localization data from the Gene Ontology database with a classical protein localization prediction algorithm (WoLF PSORT). The <span class="notranslate">workflow</span> was designed for sensitivity, i.e. a protein predicted by <em>at least one of the used tools</em> will be included in the output. To change this, follow the instructions in the box <strong>Comment: Customizing the <span class="notranslate">Workflow</span></strong> below.</p>
+<p>For secretome prediction, we combine localization data from the Gene Ontology database with a classical protein localization prediction algorithm (WoLF PSORT). The workflow was designed for sensitivity, i.e. a protein predicted by <em>at least one of the used tools</em> will be included in the output. To change this, follow the instructions in the box <strong>Comment: Customizing the Workflow</strong> below.</p>
 
 <h2 id="overview">Overview</h2>
 
-<p>The figure below gives an overview of the <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span>:</p>
+<p>The figure below gives an overview of the Galaxy workflow:</p>
 
 <p><img src="../../images/wf_secretomePrediction_goWolfpsort.png" alt="Overview Secretome Prediction WF. " loading="lazy" /></p>
 
 <h2 id="input">Input</h2>
 
-<p>The <span class="notranslate">workflow</span> needs three input files:</p>
+<p>The workflow needs three input files:</p>
 
 <ol>
   <li>
@@ -843,11 +841,11 @@ Furthermore, we chose to exclude proteins annotated as being part of extracellul
 
     <blockquote class="comment">
       <div class="box-title comment-title" id="comment-test-data" aria-label="comment box: Test data"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Test data</div>
-      <p>The provided test dataset for input 1 is a list of human proteins, identified by LC-MS/MS in the cellular supe<span class="notranslate">rna</span>tant of MDA-MB-231 cells. The dataset was originally published in <a href="https://www.ncbi.nlm.nih.gov/pubmed/27526672">(Sigloch et al., BBA, 2016)</a>.</p>
+      <p>The provided test dataset for input 1 is a list of human proteins, identified by LC-MS/MS in the cellular supernatant of MDA-MB-231 cells. The dataset was originally published in <a href="https://www.ncbi.nlm.nih.gov/pubmed/27526672">(Sigloch et al., BBA, 2016)</a>.</p>
     </blockquote>
   </li>
   <li>
-    <p>The complete uniprot GO database for the organism of interest, available <a href="ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/">via FTP</a>. To download the human GOA file needed for the test input, paste the following link to the <span class="notranslate">Galaxy</span> upload tool: ‘ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human.gaf.gz’</p>
+    <p>The complete uniprot GO database for the organism of interest, available <a href="ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/">via FTP</a>. To download the human GOA file needed for the test input, paste the following link to the Galaxy upload tool: ‘ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/HUMAN/goa_human.gaf.gz’</p>
 
     <blockquote class="comment">
       <div class="box-title comment-title" id="comment-uniprot-gene-ontology-association-goa-files" aria-label="comment box: Uniprot Gene Ontology Association (GOA) files"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Uniprot Gene Ontology Association (GOA) files</div>
@@ -863,21 +861,21 @@ Furthermore, we chose to exclude proteins annotated as being part of extracellul
 </ol>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-customizing-the-workflow" aria-label="comment box: Customizing the Workflow"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Customizing the <span class="notranslate">Workflow</span></div>
-  <p>This <span class="notranslate">workflow</span> was designed for sensitivity, not for specificity. If you need to increase the specificity, you have the following possibilities, with decreasing efficiency:</p>
+  <div class="box-title comment-title" id="comment-customizing-the-workflow" aria-label="comment box: Customizing the Workflow"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Customizing the Workflow</div>
+  <p>This workflow was designed for sensitivity, not for specificity. If you need to increase the specificity, you have the following possibilities, with decreasing efficiency:</p>
   <ol>
     <li>Switch the setting <code class="language-plaintext highlighter-rouge">Output lines appearing in</code> of the last <strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (last tool before the final <strong>Unique</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> from <code class="language-plaintext highlighter-rouge">All lines [-a 1 -a 2]</code> to <code class="language-plaintext highlighter-rouge">Both 1st &amp; 2nd file</code>. Thus, your output will contain only those proteins that are equally predicted by both methods used.</li>
     <li>(Only after doing 1.) Adding another way of localization prediction, i.e. another database or another prediction algorithm.</li>
-    <li>Replacing <strong>WoLF PSORT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> by a more precise localization prediction tool. If you choose this approach, remember that you will probably have to adjust the settings for all tools in the <span class="notranslate">workflow</span> that are processing the <strong>WoLF PSORT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> output.</li>
+    <li>Replacing <strong>WoLF PSORT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> by a more precise localization prediction tool. If you choose this approach, remember that you will probably have to adjust the settings for all tools in the workflow that are processing the <strong>WoLF PSORT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> output.</li>
   </ol>
 </blockquote>
 
 <h2 id="citation">Citation</h2>
 
-<p>If you use this <span class="notranslate">workflow</span> directly, or any derivative of it, in work leading to a scientific publication,
+<p>If you use this workflow directly, or any derivative of it, in work leading to a scientific publication,
 please cite:</p>
 
-<p>F.C. Sigloch, J.D. Knopf, J. Weißer, A. Gomez-Auli, M.L. Biniossek, A. Petrera, et al., Proteomic analysis of silenced cathepsin B <span class="notranslate">expression</span> suggests non-proteolytic cathepsin B functionality, Biochim. Biophys. Acta - Mol. Cell Res. 1863 (2016) 2700–2709. doi:10.1016/j.bbamcr.2016.08.005. https://www.ncbi.nlm.nih.gov/pubmed/27526672</p>
+<p>F.C. Sigloch, J.D. Knopf, J. Weißer, A. Gomez-Auli, M.L. Biniossek, A. Petrera, et al., Proteomic analysis of silenced cathepsin B expression suggests non-proteolytic cathepsin B functionality, Biochim. Biophys. Acta - Mol. Cell Res. 1863 (2016) 2700–2709. doi:10.1016/j.bbamcr.2016.08.005. https://www.ncbi.nlm.nih.gov/pubmed/27526672</p>
 
 <h2 id="literature">Literature</h2>
 

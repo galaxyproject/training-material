@@ -731,8 +731,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -803,7 +801,7 @@
 <p>To enable the identification and quantification of such high numbers of proteins in a time-wise limited measurement there has been a lot of MS method and data acquisition optimization. The most commonly used technique is the data dependent acquisition (DDA). Here only the most abundant (top N) peptides from each MS1 scan are selected for subsequent fragmentation, with the most promising chance for successful identifications due to high intensity signals. Afterwards the respective mass over charge (m/z) values are set on an exclusion list enabling the selection of less abundant peptides from the following MS1 scan for the next cycle of top N fragmentation (MS2) scans. However, since this acquisition method is highly dependent on the abundance of the respective peptides at a given retention time this method is referred to as data dependent acquisition (DDA). This dependency on both time as well as intensity leads to measurement specific identifications between multiple measurements.</p>
 
 <p>Another more recently developed method is the so called data independent acquisition (DIA). However due to some unique characteristics of this acquisition method it requieres spectral libraries, which contain the peptide sequences as well as their respective fragment spectrum (MS2) information.
-Here we will use DDA data from the same samples to build a spectral library which can than be used for the identification of peptides in data independent acquisition (DIA) data from the same samples using e.g. OpenSwath<span class="notranslate">Workflow</span> <a href="/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html">OpenSwath<span class="notranslate">workflow</span> tutorial</a>.</p>
+Here we will use DDA data from the same samples to build a spectral library which can than be used for the identification of peptides in data independent acquisition (DIA) data from the same samples using e.g. OpenSwathWorkflow <a href="/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html">OpenSwathworkflow tutorial</a>.</p>
 
 <figure id="figure-1"><img src="../../images/DIA_lib_gen_basic.png" alt="DDA_lib_gen. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Labelfree proteomics using liquid chromatography tandem-mass spectrometry (LC-MS/MS). Principles of data dependent acquisition (DDA).</figcaption></figure>
 
@@ -848,7 +846,7 @@ Another way of generating spectral libraries is by measuring the same samples us
       <p>Create a new history for this tutorial and give it a meaningful name</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>Import the fasta and raw files as well as the experimental annotation and the iRTassays file from <a href="https://zenodo.org/record/4293493">Zenodo</a>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4293493/files/Human_database_plus_iRT.fasta
@@ -863,13 +861,13 @@ https://zenodo.org/record/4293493/files/Sample5.raw
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Once the files are green, rename the experimental design file in ‘HEK_Ecoli_exp_design’, the iRT transition file in ‘iRTassays’ and all of the the raw files in ‘Sample1.raw’, ‘Sample2.raw’, ‘Sample3.raw’, ‘Sample4.raw’ and ‘Sample5.raw’</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Once the files are green, generate a collection for all .raw files (and name it DDA_data) as well as for both .fasta files (and name it FASTA)</p>
@@ -883,13 +881,13 @@ https://zenodo.org/record/4293493/files/Sample5.raw
 
 <h1 id="maxquant-analysis-of-dda-data"><strong>MaxQuant</strong> Analysis of DDA data</h1>
 
-<p>The MaxQuant <span class="notranslate">Galaxy</span> implementation contains the most important MaxQuant parameters. As an alte<span class="notranslate">rna</span>tive, <strong>MaxQuant (using mqpar.xml)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> can be used with a preconfigured mqpar.xml file.</p>
+<p>The MaxQuant Galaxy implementation contains the most important MaxQuant parameters. As an alternative, <strong>MaxQuant (using mqpar.xml)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> can be used with a preconfigured mqpar.xml file.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-maxquant-analysis" aria-label="hands-on box: MaxQuant Analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: MaxQuant Analysis</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3"><strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/maxquant/maxquant/1.6.10.43+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3"><strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3</span></span>  with the following parameters:
       <ul>
         <li>In <em>“Input Options”</em>:
           <ul>
@@ -959,9 +957,9 @@ https://zenodo.org/record/4293493/files/MaxQuant_mqpar.xml
 
 <h2 id="quality-control-results">Quality control results</h2>
 
-<p>To get a first overview of the MaxQuant results, the PTXQC report is helpful. Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> eye of the PTXQC pdf file to open it in <span class="notranslate">Galaxy</span>. Screening through the different plots might already give you a hint on how many peptides and proteins were identified as well as some of the data quality.</p>
+<p>To get a first overview of the MaxQuant results, the PTXQC report is helpful. Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> eye of the PTXQC pdf file to open it in Galaxy. Screening through the different plots might already give you a hint on how many peptides and proteins were identified as well as some of the data quality.</p>
 
-<p>The PTXQC software (<span class="citation"><a href="#Bielow2015">Bielow <i>et al.</i> 2015</a></span>) was built to enable direct proteomcs quality control from MaxQuant result files. This quality control can be directly used in the <span class="notranslate">Galaxy</span> MaxQuant wrapper by setting <em>“Generate PTXQC”</em> to <code class="language-plaintext highlighter-rouge">yes</code>. This will generate a pdf file with multiple quality control plots. Be aware that the cutoffs set in PTXQC might not be applicable to your experiment and mass spectrometer type and therefore “under performing” and “fail” do not necessarily mean that the quality is poor.</p>
+<p>The PTXQC software (<span class="citation"><a href="#Bielow2015">Bielow <i>et al.</i> 2015</a></span>) was built to enable direct proteomcs quality control from MaxQuant result files. This quality control can be directly used in the Galaxy MaxQuant wrapper by setting <em>“Generate PTXQC”</em> to <code class="language-plaintext highlighter-rouge">yes</code>. This will generate a pdf file with multiple quality control plots. Be aware that the cutoffs set in PTXQC might not be applicable to your experiment and mass spectrometer type and therefore “under performing” and “fail” do not necessarily mean that the quality is poor.</p>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -1004,7 +1002,7 @@ https://zenodo.org/record/4293493/files/MaxQuant_mqpar.xml
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-unique-features-peptides" aria-label="comment box: Unique Features / peptides"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Unique Features / peptides</div>
-        <p>Peptides which only occur in one protein are considered as unique for this specific protein. To avoid ambigious protein <span class="notranslate">mapping</span> later we filter the <strong>MaxQuant</strong> search results for unique peptides only. CAUTION: This increase in specificity (each peptide originates from only one protein) will reduce the size of the spectral library and might lead to decreased sensitivity  during the DIA analysis.</p>
+        <p>Peptides which only occur in one protein are considered as unique for this specific protein. To avoid ambigious protein mapping later we filter the <strong>MaxQuant</strong> search results for unique peptides only. CAUTION: This increase in specificity (each peptide originates from only one protein) will reduce the size of the spectral library and might lead to decreased sensitivity  during the DIA analysis.</p>
       </blockquote>
     </li>
   </ol>
@@ -1035,7 +1033,7 @@ https://zenodo.org/record/4293493/files/MaxQuant_mqpar.xml
   <div class="box-title hands-on-title" id="hands-on-generation-of-a-spectral-library-using-the-unique-b-maxquant-b-search-results-and-indexed-retention-time-i-irt-i-peptides" aria-label="hands-on box: Generation of a spectral library using the unique &lt;b&gt;MaxQuant&lt;/b&gt; search results and indexed retention time &lt;i&gt;iRT&lt;/i&gt; peptides"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generation of a spectral library using the unique <b>MaxQuant</b> search results and indexed retention time <i>iRT</i> peptides</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/diapysef/diapysef/0.3.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/diapysef/diapysef/0.3.5.0"><strong>diapysef library generation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/diapysef/diapysef/0.3.5.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/diapysef/diapysef/0.3.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/diapysef/diapysef/0.3.5.0"><strong>diapysef library generation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/diapysef/diapysef/0.3.5.0</span></span>  with the following parameters:
       <ul>
         <li>In <em>“MaxQuant output file msms.txt</em>:
           <ul>
@@ -1089,7 +1087,7 @@ https://zenodo.org/record/4293493/files/MaxQuant_mqpar.xml
   <div class="box-title hands-on-title" id="hands-on-spectral-library-optimization-and-refinement-using-b-openswathassaygenerator-b" aria-label="hands-on box: Spectral library optimization and refinement using &lt;b&gt;OpenSwathAssayGenerator&lt;/b&gt;"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Spectral library optimization and refinement using <b>OpenSwathAssayGenerator</b></div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathassaygenerator/OpenSwathAssayGenerator/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathassaygenerator/OpenSwathAssayGenerator/2.6+galaxy0"><strong>OpenSwathAssayGenerator</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_openswathassaygenerator/OpenSwathAssayGenerator/2.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathassaygenerator/OpenSwathAssayGenerator/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathassaygenerator/OpenSwathAssayGenerator/2.6+galaxy0"><strong>OpenSwathAssayGenerator</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathassaygenerator/OpenSwathAssayGenerator/2.6+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“Output file type – default: determined from file extension or content”</em>: <code class="language-plaintext highlighter-rouge">tabular (tsv)</code></li>
         <li><em>“MZ threshold in Thomson for precursor ion selection”</em>: <code class="language-plaintext highlighter-rouge">0.015</code></li>
@@ -1130,7 +1128,7 @@ https://zenodo.org/record/4293493/files/MaxQuant_mqpar.xml
   <div class="box-title hands-on-title" id="hands-on-adding-i-decoy-i-transitions-to-the-spectral-library" aria-label="hands-on box: Adding &lt;i&gt;decoy&lt;/i&gt; transitions to the spectral library"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding <i>decoy</i> transitions to the spectral library</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathdecoygenerator/OpenSwathDecoyGenerator/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathdecoygenerator/OpenSwathDecoyGenerator/2.6+galaxy0"><strong>OpenSwathDecoyGenerator</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_openswathdecoygenerator/OpenSwathDecoyGenerator/2.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathdecoygenerator/OpenSwathDecoyGenerator/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathdecoygenerator/OpenSwathDecoyGenerator/2.6+galaxy0"><strong>OpenSwathDecoyGenerator</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathdecoygenerator/OpenSwathDecoyGenerator/2.6+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“Output file type – default: determined from file extension or content”</em>: <code class="language-plaintext highlighter-rouge">tabular (tsv)</code></li>
         <li><em>“Advanced Options”</em>: <code class="language-plaintext highlighter-rouge">Show Advanced Options</code>
@@ -1174,14 +1172,14 @@ Example: By applying an FDR of 1 % we only allow for e.g only 1 such decoy trans
   <div class="box-title hands-on-title" id="hands-on-converting-the-final-spectral-library-from-i-tsv-i-to-the-sqlite-i-pqp-i-format" aria-label="hands-on box: Converting the final spectral library from &lt;i&gt;.tsv&lt;/i&gt; to the sqlite &lt;i&gt;.pqp&lt;/i&gt; format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Converting the final spectral library from <i>.tsv</i> to the sqlite <i>.pqp</i> format</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_targetedfileconverter/TargetedFileConverter/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_targetedfileconverter/TargetedFileConverter/2.6+galaxy0"><strong>TargetedFileConverter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_targetedfileconverter/TargetedFileConverter/2.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_targetedfileconverter/TargetedFileConverter/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_targetedfileconverter/TargetedFileConverter/2.6+galaxy0"><strong>TargetedFileConverter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/galaxyp/openms_targetedfileconverter/TargetedFileConverter/2.6+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“Output file type – default: determined from file extension or content”</em>: <code class="language-plaintext highlighter-rouge">pqp</code></li>
       </ul>
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-finding-the-right-format-for-the-spectral-library" aria-label="comment box: Finding the right format for the spectral library."><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Finding the right format for the spectral library.</div>
-        <p>Generally there is a broad variety of data formats for spectral libraries including <em>.tsv</em>, <em>.dlib</em>, <em>.pqp</em> and more. Depending on the DIA analysis software one or multiple formats are supported and can be used. In <strong>OpenSwath<span class="notranslate">Workflow</span></strong> one needs to have the spectral library in <em>.pqp</em> format to being able to combine multiple runs after the DIA analysis and before applying the FDR scoring. This is particularily interesting when the multiple runs should be compared later on.</p>
+        <p>Generally there is a broad variety of data formats for spectral libraries including <em>.tsv</em>, <em>.dlib</em>, <em>.pqp</em> and more. Depending on the DIA analysis software one or multiple formats are supported and can be used. In <strong>OpenSwathWorkflow</strong> one needs to have the spectral library in <em>.pqp</em> format to being able to combine multiple runs after the DIA analysis and before applying the FDR scoring. This is particularily interesting when the multiple runs should be compared later on.</p>
       </blockquote>
     </li>
   </ol>
@@ -1210,11 +1208,11 @@ Example: By applying an FDR of 1 % we only allow for e.g only 1 such decoy trans
 
 <h1 id="conclusion">Conclusion</h1>
 
-<figure id="figure-2"><img src="../../images/DIA_lib_gen_sum.png" alt="DDA_lib_gen_pipe. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> All-in one <span class="notranslate">workflow</span> for DIA analysis in <span class="notranslate">Galaxy</span>. The generation of a spectral library is highlighted in red.</figcaption></figure>
+<figure id="figure-2"><img src="../../images/DIA_lib_gen_sum.png" alt="DDA_lib_gen_pipe. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> All-in one workflow for DIA analysis in Galaxy. The generation of a spectral library is highlighted in red.</figcaption></figure>
 
 <p>Using data dependent acquisiton (DDA) mass spectrometry data we generated a spectral library which can be used for the analysis of data independent acquisition (DIA) data. The quality and content of the spectral library is crucial for the following DIA data analysis. Thus, in some analysis it might be beneficial or even necessary to use slightly adjusted spectral libraries, containing e.g. semi-tryptic peptides (see enzyme in <strong>MaxQuant</strong>), non-unique peptides (skip filtering) or longer peptides (higher missed cleavages).</p>
 
-<figure id="figure-3"><img src="../../images/DIA_lib_gen_workflow.png" alt="DDA_lib_gen_galaxy. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> <span class="notranslate">Galaxy</span> worfklow containing all necessary steps for the genration of a spectral library.</figcaption></figure>
+<figure id="figure-3"><img src="../../images/DIA_lib_gen_workflow.png" alt="DDA_lib_gen_galaxy. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Galaxy worfklow containing all necessary steps for the genration of a spectral library.</figcaption></figure>
 
 
 

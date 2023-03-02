@@ -753,8 +753,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
             Metagenomics
         </a>
@@ -883,11 +881,11 @@ analysis steps (e.g. data cleaning) at once, please see the <a href="/training-m
   <li><a href="#overview" id="markdown-toc-overview">Overview</a></li>
   <li><a href="#obtaining-and-preparing-data" id="markdown-toc-obtaining-and-preparing-data">Obtaining and preparing data</a>    <ol>
       <li><a href="#understanding-our-input-data" id="markdown-toc-understanding-our-input-data">Understanding our input data</a></li>
-      <li><a href="#importing-the-data-into-galaxy" id="markdown-toc-importing-the-data-into-galaxy">Importing the data into <span class="notranslate">Galaxy</span></a></li>
+      <li><a href="#importing-the-data-into-galaxy" id="markdown-toc-importing-the-data-into-galaxy">Importing the data into Galaxy</a></li>
     </ol>
   </li>
   <li><a href="#quality-control" id="markdown-toc-quality-control">Quality Control</a>    <ol>
-      <li><a href="#create-contigs-from-paired-end-reads" id="markdown-toc-create-contigs-from-paired-end-reads">Create contigs from paired-end <span class="notranslate">reads</span></a></li>
+      <li><a href="#create-contigs-from-paired-end-reads" id="markdown-toc-create-contigs-from-paired-end-reads">Create contigs from paired-end reads</a></li>
       <li><a href="#data-cleaning" id="markdown-toc-data-cleaning">Data Cleaning</a></li>
       <li><a href="#optimize-files-for-computation" id="markdown-toc-optimize-files-for-computation">Optimize files for computation</a></li>
     </ol>
@@ -919,17 +917,17 @@ analysis steps (e.g. data cleaning) at once, please see the <a href="/training-m
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, exte<span class="notranslate">rna</span>l databases, or because of stochastic processes in the algorithms.</p> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-results-may-vary" aria-label="comment box: Results may vary"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Results may vary</div>   <p>Your results may be slightly different from the ones presented in this tutorial due to differing versions of tools, reference data, external databases, or because of stochastic processes in the algorithms.</p> </blockquote>
 
 <h1 id="obtaining-and-preparing-data">Obtaining and preparing data</h1>
 
-<p>In this tutorial we use 16S r<span class="notranslate">RNA</span> data, but similar pipelines can be used for WGS data.</p>
+<p>In this tutorial we use 16S rRNA data, but similar pipelines can be used for WGS data.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-background-the-16s-ribosomal-rna-gene" aria-label="comment box: Background: The 16S ribosomal RNA gene"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Background: The 16S ribosomal <span class="notranslate">RNA</span> gene</div>
+  <div class="box-title comment-title" id="comment-background-the-16s-ribosomal-rna-gene" aria-label="comment box: Background: The 16S ribosomal RNA gene"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Background: The 16S ribosomal RNA gene</div>
   <p><img src="../../images/16S_gene.png" alt="The 16S ribosomal RNA gene. " loading="lazy" /> <br /><br /></p>
 
-  <p>The 16S r<span class="notranslate">RNA</span> gene has several properties that make it ideally suited for our purposes</p>
+  <p>The 16S rRNA gene has several properties that make it ideally suited for our purposes</p>
 
   <ol>
     <li>Present in all prokaryotes</li>
@@ -962,7 +960,7 @@ weight observed during the first 10 dpw affected the stability microbiome compar
 
 <p>To speed up analysis for this tutorial, we will use only a subset of this data. We will look at a single mouse at 10 different
 time points (5 early, 5 late). In order to assess the error rate of the analysis pipeline and experimental setup, the Schloss lab
-additionally sequenced a mock community with a known composition (genomic <span class="notranslate">DNA</span> from 21 bacterial strains). The sequences used
+additionally sequenced a mock community with a known composition (genomic DNA from 21 bacterial strains). The sequences used
 for this mock sample are contained in the file <code class="language-plaintext highlighter-rouge">HMP_MOCK.v35.fasta</code></p>
 
 <blockquote class="comment">
@@ -972,16 +970,16 @@ for this mock sample are contained in the file <code class="language-plaintext h
  <code class="language-plaintext highlighter-rouge">F3D0_S188_L001_R2_001.fastq</code></p>
 
   <p>The first part of the file name indicates the sample; <code class="language-plaintext highlighter-rouge">F3D0</code> here signifies that this sample was obtained from Female 3 on Day 0.
-The rest of the file name is identical, except for <code class="language-plaintext highlighter-rouge">_R1</code> and <code class="language-plaintext highlighter-rouge">_R2</code>, this is used to indicate the forward and reverse <span class="notranslate">reads</span>
+The rest of the file name is identical, except for <code class="language-plaintext highlighter-rouge">_R1</code> and <code class="language-plaintext highlighter-rouge">_R2</code>, this is used to indicate the forward and reverse reads
 respectively.</p>
 </blockquote>
 
 <!-- note: mothur does not include day 4 in their SOP example data, therefore this description and results
 in this document differ slightly from the description on their website -->
 
-<h2 id="importing-the-data-into-galaxy">Importing the data into <span class="notranslate">Galaxy</span></h2>
+<h2 id="importing-the-data-into-galaxy">Importing the data into Galaxy</h2>
 
-<p>Now that we know what our input data is, let’s get it into our <span class="notranslate">Galaxy</span> history:</p>
+<p>Now that we know what our input data is, let’s get it into our Galaxy history:</p>
 
 <p>All data required for this tutorial has been made available from Zenodo <a href="https://doi.org/10.5281/zenodo.800651"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.800651.svg" alt="DOI. " loading="lazy" /></a></p>
 
@@ -993,7 +991,7 @@ in this document differ slightly from the description on their website -->
       <p>Make sure you have an empty analysis history. Give it a name.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li><strong>Import Sample Data.</strong>
       <ul>
@@ -1047,10 +1045,10 @@ https://zenodo.org/record/800651/files/Mock_R2.fastq
           </blockquote>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
           <!--SNIPPET-->
-          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+          <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
         </li>
       </ul>
     </li>
@@ -1079,12 +1077,12 @@ https://zenodo.org/record/800651/files/mouse.dpw.metadata
   </ol>
 </blockquote>
 
-<p>Now that’s a lot of files to manage. Luckily <span class="notranslate">Galaxy</span> can make life a bit easier by allowing us to create
+<p>Now that’s a lot of files to manage. Luckily Galaxy can make life a bit easier by allowing us to create
 <strong>dataset collections</strong>. This enables us to easily run tools on multiple datasets at once.</p>
 
 <p>Since we have <strong>paired-end</strong> data, each sample consist of two separate fastq files, one containing the
-forward <span class="notranslate">reads</span>, and one containing the reverse <span class="notranslate">reads</span>. We can recognize the pairing from the file names,
-which will differ only by <code class="language-plaintext highlighter-rouge">_R1</code> or <code class="language-plaintext highlighter-rouge">_R2</code> in the filename. We can tell <span class="notranslate">Galaxy</span> about this paired naming
+forward reads, and one containing the reverse reads. We can recognize the pairing from the file names,
+which will differ only by <code class="language-plaintext highlighter-rouge">_R1</code> or <code class="language-plaintext highlighter-rouge">_R2</code> in the filename. We can tell Galaxy about this paired naming
 convention, so that our tools will know which files belong together. We do this by building a <strong>List of Dataset Pairs</strong></p>
 
 <blockquote class="notranslate hands_on">
@@ -1101,14 +1099,14 @@ convention, so that our tools will know which files belong together. We do this 
         <li>Select <strong>Build List of Dataset Pairs</strong> from the dropdown menu</li>
       </ul>
 
-      <p>In the next dialog window you can create the list of pairs. By default <span class="notranslate">Galaxy</span> will look for pairs
+      <p>In the next dialog window you can create the list of pairs. By default Galaxy will look for pairs
 of files that differ only by a <code class="language-plaintext highlighter-rouge">_1</code> and <code class="language-plaintext highlighter-rouge">_2</code> part in their names. In our case however, these
 should be <code class="language-plaintext highlighter-rouge">_R1</code> and <code class="language-plaintext highlighter-rouge">_R2</code>.</p>
     </li>
     <li>
       <p>Click on “Choose Filters” and select <code class="language-plaintext highlighter-rouge">Forward: _R1, Reverse: _R2</code> (note that you can also enter Filters manually in the text fields on the top)</p>
 
-      <p>You should now see a list of pairs suggested by <span class="notranslate">Galaxy</span>:
+      <p>You should now see a list of pairs suggested by Galaxy:
 <img src="../../images/create_collection.png" alt="List of suggested paired datasets. " loading="lazy" /></p>
     </li>
     <li>Click on <strong>Auto-pair</strong> to create the suggested pairs.
@@ -1119,7 +1117,7 @@ should be <code class="language-plaintext highlighter-rouge">_R1</code> and <cod
     <li><strong>Name the pairs</strong>
       <ul>
         <li>The middle segment is the name for each pair.</li>
-        <li>These names will be used as sample names in the <span class="notranslate">downstream</span> analysis, so always make sure they are informative!</li>
+        <li>These names will be used as sample names in the downstream analysis, so always make sure they are informative!</li>
         <li>Make sure that <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <code class="language-plaintext highlighter-rouge">Remove file extensions</code> is checked</li>
         <li><strong>Check</strong> that the pairs are named <code class="language-plaintext highlighter-rouge">F3D0</code>-<code class="language-plaintext highlighter-rouge">F3D9</code>, <code class="language-plaintext highlighter-rouge">F3D141</code>-<code class="language-plaintext highlighter-rouge">F3D150</code> and <code class="language-plaintext highlighter-rouge">Mock</code>.
           <ul>
@@ -1150,29 +1148,29 @@ should be <code class="language-plaintext highlighter-rouge">_R1</code> and <cod
 <p>For more information on the topic of quality control, please see our <a href="/training-material/topics/sequence-analysis/index.html">dedicated QC training materials</a>.</p>
 
 <p>Before starting any analysis, it is always a good idea to assess the quality of your input data and improve it
-where possible by trimming and filtering <span class="notranslate">reads</span>. The mothur toolsuite contains several tools to assist with this task.
-We will begin by merging our <span class="notranslate">reads</span> into contigs, followed by filtering and trimming of <span class="notranslate">reads</span> based on quality score
+where possible by trimming and filtering reads. The mothur toolsuite contains several tools to assist with this task.
+We will begin by merging our reads into contigs, followed by filtering and trimming of reads based on quality score
 and several other metrics.</p>
 
-<h2 id="create-contigs-from-paired-end-reads">Create contigs from paired-end <span class="notranslate">reads</span></h2>
+<h2 id="create-contigs-from-paired-end-reads">Create contigs from paired-end reads</h2>
 
-<p>In this experiment, paired-end sequencing of the ~253 bp V4 region of the 16S r<span class="notranslate">RNA</span> gene was performed.
-The sequencing was done from either end of each fragment. Because the <span class="notranslate">reads</span> are about 250 bp in length, this results in a
-significant overlap between the forward and reverse <span class="notranslate">reads</span> in each pair. We will combine these pairs of <span class="notranslate">reads</span> into <em>contigs</em>.</p>
+<p>In this experiment, paired-end sequencing of the ~253 bp V4 region of the 16S rRNA gene was performed.
+The sequencing was done from either end of each fragment. Because the reads are about 250 bp in length, this results in a
+significant overlap between the forward and reverse reads in each pair. We will combine these pairs of reads into <em>contigs</em>.</p>
 
 <p><img src="../../images/16S_merge_contigs.png" alt="Merging into contigs. " loading="lazy" /></p>
 
 <p>The <strong>Make.contigs</strong> tool creates the contigs, and uses the paired collection as input. <strong>Make.contigs</strong>
 will look at each pair, take the reverse complement reverse read, and then determine the overlap between the
-two sequences. Where an overlapping base call differs between the two <span class="notranslate">reads</span>, the quality score is used to determine
+two sequences. Where an overlapping base call differs between the two reads, the quality score is used to determine
 the consensus base call. A new quality score is derived by combining the two original quality scores in both of
-the <span class="notranslate">reads</span> for all the overlapping positions.</p>
+the reads for all the overlapping positions.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-combine-forward-and-reverse-reads-into-contigs" aria-label="hands-on box: Combine forward and reverse reads into contigs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Combine forward and reverse <span class="notranslate">reads</span> into contigs</div>
+  <div class="box-title hands-on-title" id="hands-on-combine-forward-and-reverse-reads-into-contigs" aria-label="hands-on box: Combine forward and reverse reads into contigs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Combine forward and reverse reads into contigs</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_contigs/mothur_make_contigs/1.39.5.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_contigs/mothur_make_contigs/1.39.5.1"><strong>Make.contigs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_make_contigs/mothur_make_contigs/1.39.5.1</span></span>  with the following parameters</li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_contigs/mothur_make_contigs/1.39.5.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_contigs/mothur_make_contigs/1.39.5.1"><strong>Make.contigs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_contigs/mothur_make_contigs/1.39.5.1</span></span>  with the following parameters</li>
     <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Way to provide files”</em>: <code class="language-plaintext highlighter-rouge">Multiple pairs - Combo mode</code></li>
     <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Fastq pairs”</em>: the collection you just created</li>
     <li>Leave all other parameters to the default settings</li>
@@ -1180,10 +1178,10 @@ the <span class="notranslate">reads</span> for all the overlapping positions.</p
 
 </blockquote>
 
-<p>This step combined the forward and reverse <span class="notranslate">reads</span> for each sample, and also combined
+<p>This step combined the forward and reverse reads for each sample, and also combined
 the resulting contigs from all samples into a single file. So we have gone from a paired
 collection of 20x2 FASTQ files, to a single FASTA file. In order to retain information about
-which <span class="notranslate">reads</span> originated from which samples, the tool also output a <em>group file</em>. View that
+which reads originated from which samples, the tool also output a <em>group file</em>. View that
 file now, it should look something like this:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>M00967_43_000000000-A3JHG_1_1101_10011_3881     F3D0
@@ -1202,7 +1200,7 @@ M00967_43_000000000-A3JHG_1_1101_10051_26098    F3D0
   <div class="box-title hands-on-title" id="hands-on-summarize-data" aria-label="hands-on box: Summarize data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Summarize data</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0"><strong>Summary.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0"><strong>Summary.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">trim.contigs.fasta</code> file created by <strong>Make.contigs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Output logfile?”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
@@ -1230,16 +1228,16 @@ Mean:        1        252.811    252.811    0.70063  4.44854
 <p>In this dataset:</p>
 
 <ul>
-  <li>Almost all of the <span class="notranslate">reads</span> are between 248 and 253 bases long.</li>
-  <li>2,5% or more of our <span class="notranslate">reads</span> had ambiguous base calls (<code class="language-plaintext highlighter-rouge">Ambigs</code> column).</li>
+  <li>Almost all of the reads are between 248 and 253 bases long.</li>
+  <li>2,5% or more of our reads had ambiguous base calls (<code class="language-plaintext highlighter-rouge">Ambigs</code> column).</li>
   <li>The longest read in the dataset is 502 bases.</li>
   <li>There are 152,360 sequences.</li>
 </ul>
 
-<p>Our region of interest, the V4 region of the 16S gene, is only around 250 bases long. Any <span class="notranslate">reads</span> significantly longer than this expected value likely did not
-assemble well in the <strong>Make.contigs</strong> step. Furthermore, we see that 2,5% of our <span class="notranslate">reads</span> had between 6 and 249
+<p>Our region of interest, the V4 region of the 16S gene, is only around 250 bases long. Any reads significantly longer than this expected value likely did not
+assemble well in the <strong>Make.contigs</strong> step. Furthermore, we see that 2,5% of our reads had between 6 and 249
 ambiguous base calls (<code class="language-plaintext highlighter-rouge">Ambigs</code> column). In the next steps we will clean up our data by removing these
-problematic <span class="notranslate">reads</span>.</p>
+problematic reads.</p>
 
 <p>We do this data cleaning using the <code class="language-plaintext highlighter-rouge">Screen.seqs</code> tool, which removes</p>
 
@@ -1249,10 +1247,10 @@ problematic <span class="notranslate">reads</span>.</p>
 </ol>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filter-reads-based-on-quality-and-length" aria-label="hands-on box: Filter reads based on quality and length"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter <span class="notranslate">reads</span> based on quality and length</div>
+  <div class="box-title hands-on-title" id="hands-on-filter-reads-based-on-quality-and-length" aria-label="hands-on box: Filter reads based on quality and length"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filter reads based on quality and length</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1"><strong>Screen.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1"><strong>Screen.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">trim.contigs.fasta</code> file created by <strong>Make.contigs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“group”</em>: the group file created in the <strong>Make.contigs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step</li>
@@ -1265,7 +1263,7 @@ problematic <span class="notranslate">reads</span>.</p>
   <blockquote class="question">
     <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-    <p>How many <span class="notranslate">reads</span> were removed in this screening step? (Hint: run the summary.seqs tool again)</p>
+    <p>How many reads were removed in this screening step? (Hint: run the summary.seqs tool again)</p>
 
     <blockquote class="solution">
       <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1282,14 +1280,14 @@ step</p>
 
 <p>Microbiome samples typically contain a large numbers of the same organism, and therefore we expect
 to find many identical sequences in our data. In order to speed up computation, we first determine
-the unique <span class="notranslate">reads</span>, and then record how many times each of these different <span class="notranslate">reads</span> was observed in
+the unique reads, and then record how many times each of these different reads was observed in
 the original dataset. We do this by using the <strong>Unique.seqs</strong> tool.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-remove-duplicate-sequences" aria-label="hands-on box: Remove duplicate sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Remove duplicate sequences</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0"><strong>Unique.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0"><strong>Unique.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">good.fasta</code> output from <strong>Screen.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“output format”</em>: <code class="language-plaintext highlighter-rouge">Name File</code></li>
@@ -1313,7 +1311,7 @@ number of lines in the fasta file before this step.</p>
 </blockquote>
 
 <p>Here we see that this step has greatly reduced the size of our sequence file; not only will this speed up further computational
-steps, it will also greatly reduce the amount of disk space (and your <span class="notranslate">Galaxy</span> quota) needed to store all the intermediate files generated during
+steps, it will also greatly reduce the amount of disk space (and your Galaxy quota) needed to store all the intermediate files generated during
 this analysis. This <strong>Unique.seqs</strong> tool created two files, one is a FASTA file containing only the unique sequences,
 and the second is a so-called <em>names file</em>. This names file consists of two columns, the first contains the sequence names
 for each of the unique sequences, and the second column contains all other sequence names that are identical to the representative
@@ -1341,7 +1339,7 @@ the <em>group file</em> and the <em>names file</em> into a single <em>count tabl
   <div class="box-title hands-on-title" id="hands-on-generate-count-table" aria-label="hands-on box: Generate count table"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generate count table</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_count_seqs/mothur_count_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_count_seqs/mothur_count_seqs/1.39.5.0"><strong>Count.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_count_seqs/mothur_count_seqs/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_count_seqs/mothur_count_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_count_seqs/mothur_count_seqs/1.39.5.0"><strong>Count.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_count_seqs/mothur_count_seqs/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“name”</em>: the <code class="language-plaintext highlighter-rouge">names</code> output from <strong>Unique.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Use a Group file”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
@@ -1389,7 +1387,7 @@ with the most common k-mers and the unique sequence a standard global sequence a
   <div class="box-title hands-on-title" id="hands-on-align-sequences" aria-label="hands-on box: Align sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Align sequences</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_align_seqs/mothur_align_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_align_seqs/mothur_align_seqs/1.39.5.0"><strong>Align.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_align_seqs/mothur_align_seqs/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_align_seqs/mothur_align_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_align_seqs/mothur_align_seqs/1.39.5.0"><strong>Align.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_align_seqs/mothur_align_seqs/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> output from <strong>Unique.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“reference”</em>: <code class="language-plaintext highlighter-rouge">silva.v4.fasta</code> reference file from your history
@@ -1423,7 +1421,7 @@ There are different alignment characters in this output:</p>
         </blockquote>
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0"><strong>Summary.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0"><strong>Summary.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_seqs/mothur_summary_seqs/1.39.5.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">align</code> output from <strong>Align.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: <code class="language-plaintext highlighter-rouge">count_table</code> output from <strong>Count.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1449,12 +1447,12 @@ Mean:       1967.99  11550    252.462 0        4.36693
 total # of seqs:    128872
 </code></pre></div></div>
 
-<p>The <code class="language-plaintext highlighter-rouge">Start</code> and <code class="language-plaintext highlighter-rouge">End</code> columns tell us that the majority of <span class="notranslate">reads</span> aligned between positions 1968 and 11550,
-which is what we expect to find given the reference file we used. However, some <span class="notranslate">reads</span> align to very different positions,
+<p>The <code class="language-plaintext highlighter-rouge">Start</code> and <code class="language-plaintext highlighter-rouge">End</code> columns tell us that the majority of reads aligned between positions 1968 and 11550,
+which is what we expect to find given the reference file we used. However, some reads align to very different positions,
 which could indicate insertions or deletions at the terminal ends of the alignments or other complicating factors.</p>
 
 <p>Also notice the <code class="language-plaintext highlighter-rouge">Polymer</code> column in the output table. This indicates the average homopolymer length. Since we know that
-our reference database does not contain any homopolymer stretches longer than 8 <span class="notranslate">reads</span>, any <span class="notranslate">reads</span> containing such
+our reference database does not contain any homopolymer stretches longer than 8 reads, any reads containing such
 long stretches are likely the result of PCR errors and we would be wise to remove them.</p>
 
 <p>Next we will clean our data further by removing poorly aligned sequences and any sequences with long
@@ -1462,10 +1460,10 @@ homopolymer stretches.</p>
 
 <h2 id="more-data-cleaning">More Data Cleaning</h2>
 
-<p>To ensure that all our <span class="notranslate">reads</span> overlap our region of interest, we will:</p>
+<p>To ensure that all our reads overlap our region of interest, we will:</p>
 
 <ol>
-  <li>Remove any <span class="notranslate">reads</span> not overlapping the region V4 region (position 1968 to 11550) using <strong>Screen.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
+  <li>Remove any reads not overlapping the region V4 region (position 1968 to 11550) using <strong>Screen.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
   <li>Remove any overhang on either end of the V4 region to ensure our sequences overlap <em>only</em> the V4 region, using <strong>Filter.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
   <li>Clean our alignment file by removing any columns that have a gap character (<code class="language-plaintext highlighter-rouge">-</code>, or <code class="language-plaintext highlighter-rouge">.</code> for terminal gaps) at that position in every sequence (also using <strong>Filter.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>).</li>
   <li>Remove redundancy in the aligned sequences that might have been introduced by filtering columns by running <strong>Unique.seqs</strong> once more.</li>
@@ -1476,7 +1474,7 @@ homopolymer stretches.</p>
   <div class="box-title hands-on-title" id="hands-on-remove-poorly-aligned-sequences" aria-label="hands-on box: Remove poorly aligned sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Remove poorly aligned sequences</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1"><strong>Screen.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1"><strong>Screen.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_screen_seqs/mothur_screen_seqs/1.39.5.1</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the aligned fasta file from <strong>Align.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“start”</em>: <code class="language-plaintext highlighter-rouge">1968</code></li>
@@ -1499,7 +1497,7 @@ homopolymer stretches.</p>
 
       <p>Next, we will remove any overhang on either side of the V4 region, and</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_filter_seqs/mothur_filter_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_filter_seqs/mothur_filter_seqs/1.39.5.0"><strong>Filter.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_filter_seqs/mothur_filter_seqs/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_filter_seqs/mothur_filter_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_filter_seqs/mothur_filter_seqs/1.39.5.0"><strong>Filter.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_filter_seqs/mothur_filter_seqs/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: <code class="language-plaintext highlighter-rouge">good.fasta</code> output from the latest <strong>Screen.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“vertical”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
@@ -1521,7 +1519,7 @@ TAC--GG-AG-GAT--GCG-A-G-C-G-T-T--GT-C-CGG-AA--TC-A-C-T--GG-GC--GT-A-AA-GG-GC-GC-
 TAC--GG-AG-GAT--GCG-A-G-C-G-T-T--AT-C-CGG-AT--TT-A-T-T--GG-GT--TT-A-AA-GG-GT-GC-G-CA-GGC-G-G-A-AG-A-T-C-AA-G-T-C-A-G-C-G-G--TA-A-AA-TT-G-A-GA-GG--CT-C-AA-C-C-T-C-T-T-C--GA-G-C-CGTT-GAAAC-TG-G-TTTTC-TTGA-GT-GA-GC-GA-G-A---AG-T-A-TGCGGAATGCGTGGTGT-AGCGGT-GAAATGCATAG-AT-A-TC-AC-GC-AG-AACTCCGAT-TGCGAAGGCA------GC-ATA-CCG-G-CG-CT-C-A-ACTGACG-CTCA-TGCA-CGAAA-GTG-TGGGT-ATC-GAACAGG
 </code></pre></div></div>
 
-<p>These are all our representative <span class="notranslate">reads</span> again, now with additional alignment information.</p>
+<p>These are all our representative reads again, now with additional alignment information.</p>
 
 <p>In the log file of the <strong>Filter.seqs</strong> step we see the following additional information:</p>
 
@@ -1542,7 +1540,7 @@ the <strong>Unique.seqs</strong> tool:</p>
   <div class="box-title hands-on-title" id="hands-on-re-obtain-unique-sequences" aria-label="hands-on box: Re-obtain unique sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Re-obtain unique sequences</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0"><strong>Unique.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0"><strong>Unique.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_unique_seqs/mothur_unique_seqs/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">filtered fasta</code> output from <strong>Filter.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“name file or count table”</em>: the <code class="language-plaintext highlighter-rouge">count table</code> from the last <strong>Screen.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1572,7 +1570,7 @@ our contigs are ~250 bp long, we will set the threshold to 2 mismatches.</p>
   <div class="box-title hands-on-title" id="hands-on-perform-preliminary-clustering-of-sequences" aria-label="hands-on box: Perform preliminary clustering of sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Perform preliminary clustering of sequences</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_pre_cluster/mothur_pre_cluster/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_pre_cluster/mothur_pre_cluster/1.39.5.0"><strong>Pre.cluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_pre_cluster/mothur_pre_cluster/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_pre_cluster/mothur_pre_cluster/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_pre_cluster/mothur_pre_cluster/1.39.5.0"><strong>Pre.cluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_pre_cluster/mothur_pre_cluster/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> output from the last <strong>Unique.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“name file or count table”</em>: the <code class="language-plaintext highlighter-rouge">count table</code> from the last <strong>Unique.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1615,7 +1613,7 @@ way of doing this is to use the abundant sequences as our reference.</p>
   <div class="box-title hands-on-title" id="hands-on-remove-chimeric-sequences" aria-label="hands-on box: Remove chimeric sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Remove chimeric sequences</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_chimera_vsearch/mothur_chimera_vsearch/1.39.5.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_chimera_vsearch/mothur_chimera_vsearch/1.39.5.1"><strong>Chimera.vsearch</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_chimera_vsearch/mothur_chimera_vsearch/1.39.5.1</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_chimera_vsearch/mothur_chimera_vsearch/1.39.5.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_chimera_vsearch/mothur_chimera_vsearch/1.39.5.1"><strong>Chimera.vsearch</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_chimera_vsearch/mothur_chimera_vsearch/1.39.5.1</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> output from <strong>Pre.cluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select Reference Template from”</em>: <code class="language-plaintext highlighter-rouge">Self</code></li>
@@ -1626,7 +1624,7 @@ way of doing this is to use the abundant sequences as our reference.</p>
       <p>Running <strong>Chimera.vsearch</strong> with the count file will remove the chimeric sequences from the count table, but we
  still need to remove those sequences from the fasta file as well. We do this using <strong>Remove.seqs</strong>:</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_seqs/mothur_remove_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_seqs/mothur_remove_seqs/1.39.5.0"><strong>Remove.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_remove_seqs/mothur_remove_seqs/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_seqs/mothur_remove_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_seqs/mothur_remove_seqs/1.39.5.0"><strong>Remove.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_seqs/mothur_remove_seqs/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“accnos”</em>: the <code class="language-plaintext highlighter-rouge">vsearch.accnos</code> file from <strong>Chimera.vsearch</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> output from <strong>Pre.cluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1676,7 +1674,7 @@ assignment algorithms and reference databases available for this purpose.</p>
     <li>NCBI Taxonomy Database (<span class="citation"><a href="#Federhen2011">Federhen 2011</a></span>)</li>
   </ul>
 
-  <p>The choice of taxonomic classifier and reference taxonomy can impact <span class="notranslate">downstream</span> results. The figure from <span class="citation"><a href="#Liu2008">Liu <i>et al.</i> 2008</a></span>
+  <p>The choice of taxonomic classifier and reference taxonomy can impact downstream results. The figure from <span class="citation"><a href="#Liu2008">Liu <i>et al.</i> 2008</a></span>
 given below shows the taxonomic composition determined when using different classifiers and reference taxonomies, for different primer sets (16S regions).</p>
 
   <p><img src="../../images/reference_taxonomy_comparison.jpg" alt="comparison of reference taxonomies" title="Compositions at the phylum level for each of the three datasets: (a) Guerrero Negro mat, (b) Human gut and (c) Mouse gut, using a range of different methods (separate subpanels within each group). The x-axis of each graph shows region sequenced. The y-axis shows abundance as a fraction of the total number of sequences in the community. The legend shows colors for phyla (consistent across graphs)." width="75%" /></p>
@@ -1693,7 +1691,7 @@ given below shows the taxonomic composition determined when using different clas
 <h2 id="removal-of-non-bacterial-sequences">Removal of non-bacterial sequences</h2>
 
 <p>Despite all we have done to improve data quality, there may still be more to do:
-there may be 18S r<span class="notranslate">RNA</span> gene fragments or 16S r<span class="notranslate">RNA</span> from Archaea, chloroplasts, and mitochondria
+there may be 18S rRNA gene fragments or 16S rRNA from Archaea, chloroplasts, and mitochondria
 that have survived all the cleaning steps up to this point. We are generally not interested in these sequences
 and want to remove them from our dataset.</p>
 
@@ -1701,7 +1699,7 @@ and want to remove them from our dataset.</p>
   <div class="box-title hands-on-title" id="hands-on-taxonomic-classification-and-removal-of-undesired-sequences" aria-label="hands-on box: Taxonomic Classification and Removal of undesired sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Taxonomic Classification and Removal of undesired sequences</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_classify_seqs/mothur_classify_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_classify_seqs/mothur_classify_seqs/1.39.5.0"><strong>Classify.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_classify_seqs/mothur_classify_seqs/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_classify_seqs/mothur_classify_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_classify_seqs/mothur_classify_seqs/1.39.5.0"><strong>Classify.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_classify_seqs/mothur_classify_seqs/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> output from <strong>Remove.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“reference”</em>: <code class="language-plaintext highlighter-rouge">trainset9032012.pds.fasta</code> from your history</li>
@@ -1714,7 +1712,7 @@ and want to remove them from our dataset.</p>
       <p>Now that everything is classified we want to remove our undesirables. We do this with the <strong>Remove.lineage</strong>
  tool:</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_lineage/mothur_remove_lineage/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_lineage/mothur_remove_lineage/1.39.5.0"><strong>Remove.lineage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_remove_lineage/mothur_remove_lineage/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_lineage/mothur_remove_lineage/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_lineage/mothur_remove_lineage/1.39.5.0"><strong>Remove.lineage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_lineage/mothur_remove_lineage/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“taxonomy”</em>: the taxonomy output from <strong>Classify.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“taxon - Manually select taxons for filtering”</em>: <code class="language-plaintext highlighter-rouge">Chloroplast-Mitochondria-unknown-Archaea-Eukaryota</code></li>
@@ -1791,7 +1789,7 @@ analysis pipeline.</p>
     <li>Were we able to accurately detect their relative abundances?</li>
   </ul>
 
-  <p>If our <span class="notranslate">workflow</span> performed well on the mock sample, we have more confidence in the accuracy of the
+  <p>If our workflow performed well on the mock sample, we have more confidence in the accuracy of the
 results on the rest of our samples.</p>
 
   <p><strong>Example</strong></p>
@@ -1807,12 +1805,12 @@ assess different parameter settings of the <em>in-silico</em>  analysis pipeline
 
   <ul>
     <li>Next generation sequencing data of a defined microbial mock community <span class="citation"><a href="#Singer2016">Singer <i>et al.</i> 2016</a></span></li>
-    <li>16S r<span class="notranslate">RNA</span> gene sequencing of mock microbial populations- impact of <span class="notranslate">DNA</span> extraction method, primer choice and sequencing platform <span class="citation"><a href="#Fouhy2016">Fouhy <i>et al.</i> 2016</a></span></li>
+    <li>16S rRNA gene sequencing of mock microbial populations- impact of DNA extraction method, primer choice and sequencing platform <span class="citation"><a href="#Fouhy2016">Fouhy <i>et al.</i> 2016</a></span></li>
   </ul>
 
 </blockquote>
 
-<p>The mock community in this experiment was composed of genomic <span class="notranslate">DNA</span> from 21 bacterial strains. So in a perfect world, this is
+<p>The mock community in this experiment was composed of genomic DNA from 21 bacterial strains. So in a perfect world, this is
 exactly what we would expect the analysis to produce as a result.</p>
 
 <p>First, let’s extract the sequences belonging to our mock samples from our data:</p>
@@ -1821,7 +1819,7 @@ exactly what we would expect the analysis to produce as a result.</p>
   <div class="box-title hands-on-title" id="hands-on-extract-mock-sample-from-our-dataset" aria-label="hands-on box: extract mock sample from our dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: extract mock sample from our dataset</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_get_groups/mothur_get_groups/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_get_groups/mothur_get_groups/1.39.5.0"><strong>Get.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_get_groups/mothur_get_groups/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_get_groups/mothur_get_groups/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_get_groups/mothur_get_groups/1.39.5.0"><strong>Get.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_get_groups/mothur_get_groups/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“group file or count table”</em>: the <code class="language-plaintext highlighter-rouge">count table</code> from <strong>Remove.lineage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“groups”</em>: <code class="language-plaintext highlighter-rouge">Mock</code></li>
@@ -1842,12 +1840,12 @@ Selected 4046 sequences from your count file
 <p>The Mock sample has 58 unique sequences, representing a total of 4,046 total sequences.</p>
 
 <p>The <strong>Seq.error</strong> tool measures the error rates using our mock reference. Here we align
-the <span class="notranslate">reads</span> from our mock sample back to their known sequences, to see how many fail to match.</p>
+the reads from our mock sample back to their known sequences, to see how many fail to match.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-assess-error-rates-based-on-a-mock-community" aria-label="hands-on box: Assess error rates based on a mock community"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Assess error rates based on a mock community</div>
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0"><strong>Seq.error</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0"><strong>Seq.error</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_seq_error/mothur_seq_error/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> output from <strong>Get.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“reference”</em>: <code class="language-plaintext highlighter-rouge">HMP_MOCK.v35.fasta</code> file from your history</li>
@@ -1891,7 +1889,7 @@ a clustering is derived using the OptiClust algorithm:</p>
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-background-what-are-operational-taxonomic-units-otus" aria-label="comment box: Background: What are Operational Taxonomic Units (OTUs)?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Background: What are Operational Taxonomic Units (OTUs)?</div>
 
-  <p>In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S r<span class="notranslate">DNA</span> marker gene
+  <p>In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
 sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
 depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity
 threshold of the 16S gene sequence variants at species level. 98% or 99% identity is suggested for strain
@@ -1908,7 +1906,7 @@ separation.</p>
   <p>First we calculate the pairwise distances between our sequences</p>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_seqs/mothur_dist_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_seqs/mothur_dist_seqs/1.39.5.0"><strong>Dist.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_dist_seqs/mothur_dist_seqs/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_seqs/mothur_dist_seqs/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_seqs/mothur_dist_seqs/1.39.5.0"><strong>Dist.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_seqs/mothur_dist_seqs/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> from <strong>Get.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“cutoff”</em>: <code class="language-plaintext highlighter-rouge">0.20</code></li>
@@ -1916,7 +1914,7 @@ separation.</p>
 
       <p>Next we group sequences into OTUs</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_cluster/mothur_cluster/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_cluster/mothur_cluster/1.39.5.0"><strong>Cluster - Assign sequences to OTUs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_cluster/mothur_cluster/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_cluster/mothur_cluster/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_cluster/mothur_cluster/1.39.5.0"><strong>Cluster - Assign sequences to OTUs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_cluster/mothur_cluster/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“column”</em>: the <code class="language-plaintext highlighter-rouge">dist</code> output from <strong>Dist.seqs</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="language-plaintext highlighter-rouge">count table</code> from <strong>Get.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1924,7 +1922,7 @@ separation.</p>
 
       <p>Now we make a <em>shared</em> file that summarizes all our data into one handy table</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_shared/mothur_make_shared/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_shared/mothur_make_shared/1.39.5.0"><strong>Make.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_make_shared/mothur_make_shared/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_shared/mothur_make_shared/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_shared/mothur_make_shared/1.39.5.0"><strong>Make.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_shared/mothur_make_shared/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“list”</em>: the <code class="language-plaintext highlighter-rouge">OTU list</code> from <strong>Cluster</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="language-plaintext highlighter-rouge">count table</code> from <strong>Get.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -1933,7 +1931,7 @@ separation.</p>
 
       <p>And now we generate intra-sample rarefaction curves</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0"><strong>Rarefaction.single</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0"><strong>Rarefaction.single</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“shared”</em>: the <code class="language-plaintext highlighter-rouge">shared</code> file from <strong>Make.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
@@ -2012,7 +2010,7 @@ approaches, please refer to the <a href="https://www.mothur.org/wiki/MiSeq_SOP">
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-background-what-are-operational-taxonomic-units-otus-1" aria-label="comment box: Background: What are Operational Taxonomic Units (OTUs)?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Background: What are Operational Taxonomic Units (OTUs)?</div>
 
-  <p>In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S r<span class="notranslate">DNA</span> marker gene
+  <p>In 16S metagenomics approaches, OTUs are clusters of similar sequence variants of the 16S rDNA marker gene
 sequence. Each of these clusters is intended to represent a taxonomic unit of a bacteria species or genus
 depending on the sequence similarity threshold. Typically, OTU cluster are defined by a 97% identity
 threshold of the 16S gene sequence variants at species level. 98% or 99% identity is suggested for strain
@@ -2034,7 +2032,7 @@ the <strong>Remove.groups</strong> tool:</p>
   <div class="box-title hands-on-title" id="hands-on-remove-mock-community-from-our-dataset" aria-label="hands-on box: Remove Mock community from our dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Remove Mock community from our dataset</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_groups/mothur_remove_groups/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_groups/mothur_remove_groups/1.39.5.0"><strong>Remove.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_remove_groups/mothur_remove_groups/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_groups/mothur_remove_groups/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_groups/mothur_remove_groups/1.39.5.0"><strong>Remove.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_remove_groups/mothur_remove_groups/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select input type”</em>: <code class="language-plaintext highlighter-rouge">fasta , name, taxonomy, or list with a group file or count table</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“group or count table”</em>: the <code class="language-plaintext highlighter-rouge">pick.count_table</code> output from <strong>Remove.lineage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -2050,7 +2048,7 @@ the <strong>Remove.groups</strong> tool:</p>
 <h3 id="cluster-sequences-into-otus">Cluster sequences into OTUs</h3>
 
 <p>There are several ways we can perform clustering. For the Mock community, we used the traditional approach of
-using the <strong>Dist.seqs</strong> and <strong>Cluster</strong> tools. Alte<span class="notranslate">rna</span>tively, we can also use the <strong>Cluster.split</strong> tool. With
+using the <strong>Dist.seqs</strong> and <strong>Cluster</strong> tools. Alternatively, we can also use the <strong>Cluster.split</strong> tool. With
 this approach, the sequences are split into bins, and then clustered with each bin.  Taxonomic information is used to guide this process.
 The Schloss lab have <a href="https://www.mothur.org/wiki/MiSeq_SOP#OTUs">published results</a> showing that if you split at the level of Order or Family, and cluster to a 0.03
 cutoff, you’ll get just as good of clustering as you would with the “traditional” approach. In addition, this approach
@@ -2063,7 +2061,7 @@ datasets.</p>
   <div class="box-title hands-on-title" id="hands-on-cluster-our-data-into-otus" aria-label="hands-on box: Cluster our data into OTUs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Cluster our data into OTUs</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_cluster_split/mothur_cluster_split/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_cluster_split/mothur_cluster_split/1.39.5.0"><strong>Cluster.split</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_cluster_split/mothur_cluster_split/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_cluster_split/mothur_cluster_split/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_cluster_split/mothur_cluster_split/1.39.5.0"><strong>Cluster.split</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_cluster_split/mothur_cluster_split/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><em>“Split by”</em>: <code class="language-plaintext highlighter-rouge">Classification using fasta</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> output from <strong>Remove.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -2076,7 +2074,7 @@ datasets.</p>
       <p>Next we want to know how many sequences are in each OTU from each group and we can do this using the
 <strong>Make.shared</strong> tool. Here we tell mothur that we’re really only interested in the 0.03 cutoff level:</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_shared/mothur_make_shared/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_shared/mothur_make_shared/1.39.5.0"><strong>Make.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_make_shared/mothur_make_shared/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_shared/mothur_make_shared/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_shared/mothur_make_shared/1.39.5.0"><strong>Make.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_shared/mothur_make_shared/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“list”</em>: the <code class="language-plaintext highlighter-rouge">list</code> output from <strong>Cluster.split</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="language-plaintext highlighter-rouge">count table</code> from <strong>Remove.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -2086,7 +2084,7 @@ datasets.</p>
       <p>We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each
 OTU using the <strong>Classify.otu</strong> tool:</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_classify_otu/mothur_classify_otu/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_classify_otu/mothur_classify_otu/1.39.5.0"><strong>Classify.otu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_classify_otu/mothur_classify_otu/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_classify_otu/mothur_classify_otu/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_classify_otu/mothur_classify_otu/1.39.5.0"><strong>Classify.otu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_classify_otu/mothur_classify_otu/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“list”</em>: the <code class="language-plaintext highlighter-rouge">list</code> output from <strong>Cluster.split</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="language-plaintext highlighter-rouge">count table</code> from <strong>Remove.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -2098,7 +2096,7 @@ OTU using the <strong>Classify.otu</strong> tool:</p>
 
 </blockquote>
 
-<p>Examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the <code class="language-plaintext highlighter-rouge">taxonomy</code> output of <strong>Classify.otu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. This is a collection, and the different levels of taxonomy are shown in the names of the collection elements. In this example we only calculated one level, 0.03. This means we used a 97% similarity threshold. This threshold is commonly used to differentiate at <em>species level</em>.</p>
+<p>Examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the <code class="language-plaintext highlighter-rouge">taxonomy</code> output of <strong>Classify.otu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. This is a collection, and the different levels of taxonomy are shown in the names of the collection elements. In this example we only calculated one level, 0.03. This means we used a 97% similarity threshold. This threshold is commonly used to differentiate at <em>species level</em>.</p>
 
 <p>Opening the taxonomy output for level 0.03 (meaning 97% similarity, or <em>species</em> level) shows a file structured like the following:</p>
 
@@ -2144,7 +2142,7 @@ dataset by subsampling.</p>
 <strong>Count.groups</strong> tool:</p>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_count_groups/mothur_count_groups/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_count_groups/mothur_count_groups/1.39.5.0"><strong>Count.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_count_groups/mothur_count_groups/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_count_groups/mothur_count_groups/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_count_groups/mothur_count_groups/1.39.5.0"><strong>Count.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_count_groups/mothur_count_groups/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“shared”</em>: the <code class="language-plaintext highlighter-rouge">shared</code> file from <strong>Make.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
@@ -2158,7 +2156,7 @@ dataset by subsampling.</p>
         </blockquote>
       </blockquote>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_sub_sample/mothur_sub_sample/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_sub_sample/mothur_sub_sample/1.39.5.0"><strong>Sub.sample</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_sub_sample/mothur_sub_sample/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_sub_sample/mothur_sub_sample/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_sub_sample/mothur_sub_sample/1.39.5.0"><strong>Sub.sample</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_sub_sample/mothur_sub_sample/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><em>“Select type of data to subsample”</em>: <code class="language-plaintext highlighter-rouge">OTU Shared</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“shared”</em>: the <code class="language-plaintext highlighter-rouge">shared</code> file from <strong>Make.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -2269,7 +2267,7 @@ species rich habitat, only a small fraction has been sampled.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-calculate-rarefaction" aria-label="hands-on box: Calculate Rarefaction"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Calculate Rarefaction</div>
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0"><strong>Rarefaction.single</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0"><strong>Rarefaction.single</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_rarefaction_single/mothur_rarefaction_single/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“shared”</em>: the <code class="language-plaintext highlighter-rouge">shared file</code> from <strong>Make.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
@@ -2302,7 +2300,7 @@ Let’s plot the rarefaction curve for a couple of our sequences:</p>
   <div class="box-title hands-on-title" id="hands-on-plot-rarefaction" aria-label="hands-on box: Plot Rarefaction"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Plot Rarefaction</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/xy_plot/XY_Plot_1/1.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/xy_plot/XY_Plot_1/1.0.2"><strong>Plotting tool - for multiple series and graph types</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/xy_plot/XY_Plot_1/1.0.2</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/xy_plot/XY_Plot_1/1.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/xy_plot/XY_Plot_1/1.0.2"><strong>Plotting tool - for multiple series and graph types</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/xy_plot/XY_Plot_1/1.0.2</span></span>  with the following parameters
       <ul>
         <li><em>“Plot Title”</em>: <code class="language-plaintext highlighter-rouge">Rarefaction</code></li>
         <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">Number of Sequences</code></li>
@@ -2335,7 +2333,7 @@ will randomly subsample down to 2389 sequences, repeat this process 1000 times, 
   <div class="box-title hands-on-title" id="hands-on-summary-single" aria-label="hands-on box: Summary.single"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Summary.single</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_single/mothur_summary_single/1.39.5.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_single/mothur_summary_single/1.39.5.2"><strong>Summary.single</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_summary_single/mothur_summary_single/1.39.5.2</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_single/mothur_summary_single/1.39.5.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_single/mothur_summary_single/1.39.5.2"><strong>Summary.single</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_summary_single/mothur_summary_single/1.39.5.2</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“share”</em>: the <code class="language-plaintext highlighter-rouge">shared</code> file from <strong>Make.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“calc”</em>: <code class="language-plaintext highlighter-rouge">nseqs,coverage,sobs,invsimpson</code></li>
@@ -2397,7 +2395,7 @@ coefficient</a>. We will also calculate the <a href="https://en.wikipedia.org/wi
   <div class="box-title hands-on-title" id="hands-on-beta-diversity-1" aria-label="hands-on box: Beta diversity"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Beta diversity</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_shared/mothur_dist_shared/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_shared/mothur_dist_shared/1.39.5.0"><strong>Dist.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_dist_shared/mothur_dist_shared/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_shared/mothur_dist_shared/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_shared/mothur_dist_shared/1.39.5.0"><strong>Dist.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_dist_shared/mothur_dist_shared/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“shared”</em>: to the <code class="language-plaintext highlighter-rouge">shared</code> file from <strong>Make.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“calc”</em>: <code class="language-plaintext highlighter-rouge">thetayc,jclass</code></li>
@@ -2406,7 +2404,7 @@ coefficient</a>. We will also calculate the <a href="https://en.wikipedia.org/wi
 
       <p>Let’s visualize our data in a Heatmap:</p>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_heatmap_sim/mothur_heatmap_sim/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_heatmap_sim/mothur_heatmap_sim/1.39.5.0"><strong>Heatmap.sim</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_heatmap_sim/mothur_heatmap_sim/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_heatmap_sim/mothur_heatmap_sim/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_heatmap_sim/mothur_heatmap_sim/1.39.5.0"><strong>Heatmap.sim</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_heatmap_sim/mothur_heatmap_sim/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><em>“Generate Heatmap for”</em>: <code class="language-plaintext highlighter-rouge">phylip</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“phylip”</em>: the output of <strong>Dist.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (this is a collection input)</li>
@@ -2435,7 +2433,7 @@ Let’s take a look at the Venn diagrams for the first 4 time points of female 3
   <div class="box-title hands-on-title" id="hands-on-venn-diagram" aria-label="hands-on box: Venn diagram"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Venn diagram</div>
 
   <ul>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_venn/mothur_venn/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_venn/mothur_venn/1.39.5.0"><strong>Venn</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_venn/mothur_venn/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_venn/mothur_venn/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_venn/mothur_venn/1.39.5.0"><strong>Venn</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_venn/mothur_venn/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“OTU Shared”</em>: output from <strong>Sub.sample</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (collection)</li>
         <li><em>“groups”</em>: <code class="language-plaintext highlighter-rouge">F3D0,F3D1,F3D2,F3D3</code></li>
@@ -2461,13 +2459,13 @@ dendrogram using the <code class="language-plaintext highlighter-rouge">jclass</
   <div class="box-title hands-on-title" id="hands-on-tree" aria-label="hands-on box: Tree"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Tree</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_tree_shared/mothur_tree_shared/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_tree_shared/mothur_tree_shared/1.39.5.0"><strong>Tree.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_tree_shared/mothur_tree_shared/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_tree_shared/mothur_tree_shared/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_tree_shared/mothur_tree_shared/1.39.5.0"><strong>Tree.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_tree_shared/mothur_tree_shared/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><em>“Select input format”</em>: <code class="language-plaintext highlighter-rouge">Phylip Distance Matrix</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“phylip”</em>: the <code class="language-plaintext highlighter-rouge">distance files</code> output from <strong>Dist.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6+galaxy1"><strong>Newick display</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6+galaxy1"><strong>Newick display</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/newick_utils/newick_display/1.6+galaxy1</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Newick file”</em>: output from <strong>Tree.shared</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
@@ -2498,12 +2496,12 @@ of the others.</p>
   <p>First we convert our mothur taxonomy file to a format compatible with Krona</p>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0"><strong>Taxonomy-to-Krona</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0"><strong>Taxonomy-to-Krona</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Taxonomy file”</em>: the <code class="language-plaintext highlighter-rouge">taxonomy</code> output from <strong>Classify.otu</strong></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0"><strong>Krona pie chart</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0"><strong>Krona pie chart</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0</span></span>  with the following parameters
       <ul>
         <li><em>“Type of input”</em>: <code class="language-plaintext highlighter-rouge">Tabular</code></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input file”</em>: the <code class="language-plaintext highlighter-rouge">taxonomy</code> output from <strong>Taxonomy-to-Krona</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -2537,8 +2535,8 @@ any point in the hierarchy (here 5% of all)</p>
 <p>You may have noticed that this plot shows the results for all samples together. In many
 cases however, you would like to be able to compare results for different samples.</p>
 
-<p>In order to save computation time, mothur pools all <span class="notranslate">reads</span> into a single file, and uses
-the <code class="language-plaintext highlighter-rouge">count table</code> file to keep track of which samples the <span class="notranslate">reads</span> came from. However, Krona
+<p>In order to save computation time, mothur pools all reads into a single file, and uses
+the <code class="language-plaintext highlighter-rouge">count table</code> file to keep track of which samples the reads came from. However, Krona
 does not understand the mothur count table format, so we cannot use that to supply information
 about the groups. But luckily we can get <strong>Classify.otu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to output per-sample
 taxonomy files. In the following exercise, we will create a Krona plot with per-sample subplots.</p>
@@ -2550,7 +2548,7 @@ taxonomy files. In the following exercise, we will create a Krona plot with per-
 is given in the solution box. <br /></p>
 
   <ol>
-    <li>Re-run <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> the <strong>Classify.otu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool we ran earlier
+    <li>Re-run <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> the <strong>Classify.otu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool we ran earlier
       <ul>
         <li>See if you can find a parameter to output a taxonomy file per sample (group)</li>
       </ul>
@@ -2565,7 +2563,7 @@ is given in the solution box. <br /></p>
     <ol>
       <li>Find the previous run of <strong>Classify.otu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in your history
         <ul>
-          <li>Hit the <strong>rerun</strong> button <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> to load the parameters you used before:
+          <li>Hit the <strong>rerun</strong> button <i class="fas fa-redo" aria-hidden="true"></i><span class="visually-hidden">galaxy-refresh</span> to load the parameters you used before:
             <ul>
               <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“list”</em>: the <code class="language-plaintext highlighter-rouge">list</code> output from <strong>Cluster.split</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
               <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="language-plaintext highlighter-rouge">count table</code> from <strong>Remove.groups</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -2582,12 +2580,12 @@ is given in the solution box. <br /></p>
 
         <p><br /> You should now have a collection with per-sample files <br /><br /></p>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0"><strong>Taxonomy-to-Krona</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0</span></span>  with the following parameters
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0"><strong>Taxonomy-to-Krona</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_taxonomy_to_krona/mothur_taxonomy_to_krona/1.0</span></span>  with the following parameters
         <ul>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Taxonomy file”</em>: the <code class="language-plaintext highlighter-rouge">taxonomy</code> collection from <strong>Classify.otu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         </ul>
       </li>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0"><strong>Krona pie chart</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0"><strong>Krona pie chart</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1+galaxy0</span></span>  with the following parameters
         <ul>
           <li><em>“Type of input”</em>: <code class="language-plaintext highlighter-rouge">Tabular</code></li>
           <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input file”</em>: the collection from <strong>Taxonomy-to-Krona</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -2612,7 +2610,7 @@ view it in a platform like <a href="http://www.phinch.org/">Phinch</a>.</p>
   <div class="box-title hands-on-title" id="hands-on-phinch" aria-label="hands-on box: Phinch"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Phinch</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_biom/mothur_make_biom/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_biom/mothur_make_biom/1.39.5.0"><strong>Make.biom</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/mothur_make_biom/mothur_make_biom/1.39.5.0</span></span>  with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_biom/mothur_make_biom/1.39.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_biom/mothur_make_biom/1.39.5.0"><strong>Make.biom</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/mothur_make_biom/mothur_make_biom/1.39.5.0</span></span>  with the following parameters
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“shared”</em>: the output from <strong>Sub.sample</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“constaxonomy”</em>: the <code class="language-plaintext highlighter-rouge">taxonomy</code> output from <strong>Classify.otu</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
@@ -2632,15 +2630,15 @@ view it in a platform like <a href="http://www.phinch.org/">Phinch</a>.</p>
     </li>
   </ol>
 
-  <p>This link will lead you to a Phinch server (hosted by <span class="notranslate">Galaxy</span>), which will automatically load your file, and
+  <p>This link will lead you to a Phinch server (hosted by Galaxy), which will automatically load your file, and
  where you can several interactive visualisations:
  <img src="../../../../shared/images/phinch_overviewpage.png" alt="Phinch overview. " loading="lazy" /></p>
 
   <blockquote class="comment">
     <div class="box-title comment-title" id="comment-no-link-to-phinch-on-your-dataset" aria-label="comment box: No link to Phinch on your dataset?"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: No link to Phinch on your dataset?</div>
 
-    <p>If this visualisation link is not present on your <span class="notranslate">Galaxy</span> dataset, you can download the generated BIOM file from <span class="notranslate">Galaxy</span>,
-and upload it directly to the Phinch server at <a href="https://usegalaxy.eu/phinch/index.html">https://use<span class="notranslate">galaxy</span>.eu/phinch/</a>. <br /><br /></p>
+    <p>If this visualisation link is not present on your Galaxy dataset, you can download the generated BIOM file from Galaxy,
+and upload it directly to the Phinch server at <a href="https://usegalaxy.eu/phinch/index.html">https://usegalaxy.eu/phinch/</a>. <br /><br /></p>
 
     <p><strong>Important:</strong> After downloading, please change the file extension from <code class="language-plaintext highlighter-rouge">.biom1</code> to <code class="language-plaintext highlighter-rouge">.biom</code> before uploading to Phinch. <br /><br /></p>
 

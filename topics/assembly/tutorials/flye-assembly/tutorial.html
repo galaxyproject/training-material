@@ -968,8 +968,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
             Metagenomics
         </a>
@@ -1109,7 +1107,7 @@
 
 <h1 id="get-data">Get data</h1>
 
-<p>We will use long <span class="notranslate">reads</span> sequencing data: CLR (continuous long <span class="notranslate">reads</span>) from PacBio sequencing of <em>Mucor mucedo</em> genome. This data is a subset of data from NCBI. We will also use later a reference genome assembly downloaded from the <a href="https://mycocosm.jgi.doe.gov/Mucmuc1/Mucmuc1.info.html">JGI website</a>. This reference genome was assembled using the same PacBio data, we will use it as a comparison with our own assembly.</p>
+<p>We will use long reads sequencing data: CLR (continuous long reads) from PacBio sequencing of <em>Mucor mucedo</em> genome. This data is a subset of data from NCBI. We will also use later a reference genome assembly downloaded from the <a href="https://mycocosm.jgi.doe.gov/Mucmuc1/Mucmuc1.info.html">JGI website</a>. This reference genome was assembled using the same PacBio data, we will use it as a comparison with our own assembly.</p>
 
 <h2 id="get-data-from-zenodo">Get data from Zenodo</h2>
 
@@ -1121,20 +1119,20 @@
     <li>
       <p>Import the files from <a href="https://zenodo.org/record/5702408">Zenodo</a></p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534473_sub<span class="notranslate">reads</span>.fastq.gz
-https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534474_sub<span class="notranslate">reads</span>.fastq.gz
-https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub<span class="notranslate">reads</span>.fastq.gz
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534473_subreads.fastq.gz
+https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534474_subreads.fastq.gz
+https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_subreads.fastq.gz
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>Rename the datasets</li>
     <li>
       <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1150,12 +1148,12 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
     <li>Sign in JGI Genome Portal <a href="https://genome.jgi.doe.gov/portal/">JGI Genome Portal</a></li>
     <li>Genome assembly is available here: <a href="https://genome.jgi.doe.gov/portal/Mucmuc1/Mucmuc1.download.html">JGI Mucor mucedo</a></li>
     <li>Import fasta assembly file <code class="language-plaintext highlighter-rouge">Mucmuc1_AssemblyScaffolds.fasta</code> on your computer locally</li>
-    <li>Upload this file on <span class="notranslate">Galaxy</span></li>
+    <li>Upload this file on Galaxy</li>
     <li>
       <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">fasta</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1163,15 +1161,15 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
 
 <h1 id="genome-assembly-with-flye">Genome Assembly with <strong>Flye</strong></h1>
 
-<p>We will use <em>Flye</em>, a de novo assembler for single molecule sequencing <span class="notranslate">reads</span>, such as those produced by PacBio and Oxford Nanopore Technologies. It is designed for a wide range of datasets, from small bacterial projects to large mammalian-scale assemblies. The package represents a complete pipeline: it takes raw PacBio / ONT <span class="notranslate">reads</span> as input and outputs polished contigs. Flye also has a special mode for metagenome assembly. All informations about Flye assembler are here: <a href="https://github.com/fenderglass/Flye/">Flye</a>.</p>
+<p>We will use <em>Flye</em>, a de novo assembler for single molecule sequencing reads, such as those produced by PacBio and Oxford Nanopore Technologies. It is designed for a wide range of datasets, from small bacterial projects to large mammalian-scale assemblies. The package represents a complete pipeline: it takes raw PacBio / ONT reads as input and outputs polished contigs. Flye also has a special mode for metagenome assembly. All informations about Flye assembler are here: <a href="https://github.com/fenderglass/Flye/">Flye</a>.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-assembly" aria-label="hands-on box: Assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Assembly</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0"><strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0"><strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.9+galaxy0</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input <span class="notranslate">reads</span>”</em>: the three sequencing datasets</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input reads”</em>: the three sequencing datasets</li>
         <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">PacBio raw</code></li>
         <li><em>“Number of polishing iterations”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li><em>“Reduced contig assembly coverage”</em>: <code class="language-plaintext highlighter-rouge">Disable reduced coverage for initial disjointing assembly</code></li>
@@ -1192,7 +1190,7 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
 
     <ul>
       <li>The first dataset (consensus) is a fasta file containing the final assembly (1461 contigs). You may notice that the result (contigs number) you obtained is sligthy different from the one presented here. This is due to the Flye assembly algorithm which doesn’t always give the eact same results.</li>
-      <li>The second and third dataset are assembly graph files. These graphs are used to represent the final assembly of a genome, they are based on <span class="notranslate">reads</span> and their overlap information. Some tools such as <a href="http://rrwick.github.io/Bandage/">Bandage</a> allow to visualize the assembly graph.</li>
+      <li>The second and third dataset are assembly graph files. These graphs are used to represent the final assembly of a genome, they are based on reads and their overlap information. Some tools such as <a href="http://rrwick.github.io/Bandage/">Bandage</a> allow to visualize the assembly graph.</li>
       <li>The fourth dataset is a tabular file (assembly_info) containing extra information about contigs/scaffolds.</li>
     </ul>
 
@@ -1210,7 +1208,7 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
   <div class="box-title hands-on-title" id="hands-on-fasta-statistics-on-flye-assembly" aria-label="hands-on box: Fasta statistics on Flye assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Fasta statistics on Flye assembly</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0"><strong>Fasta Statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0"><strong>Fasta Statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta or multifasta file”</em>: <code class="language-plaintext highlighter-rouge">consensus</code> (output of <strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1223,7 +1221,7 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
   <div class="box-title hands-on-title" id="hands-on-fasta-statistics-on-the-reference-assembly" aria-label="hands-on box: Fasta statistics on the reference assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Fasta statistics on the reference assembly</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0"><strong>Fasta Statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0"><strong>Fasta Statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/2.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta or multifasta file”</em>: <code class="language-plaintext highlighter-rouge">Mucmuc1_AssemblyScaffolds.fasta</code></li>
       </ul>
@@ -1265,7 +1263,7 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
   <div class="box-title hands-on-title" id="hands-on-task-description" aria-label="hands-on box: Task description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Task description</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy3"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy3"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy3</span></span>  with the following parameters:
       <ul>
         <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">No, use dataset names</code>
           <ul>
@@ -1320,7 +1318,7 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
 
   <p><strong>First on the Flye assembly:</strong></p>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">consensus</code> (output of <strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Auto-detect or select lineage”</em>: <code class="language-plaintext highlighter-rouge">Select lineage</code>
@@ -1335,7 +1333,7 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
   <p><strong>Then, on the reference assembly:</strong></p>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">Mucmuc1_AssemblyScaffolds.fasta</code></li>
         <li><em>“Auto-detect or select lineage”</em>: <code class="language-plaintext highlighter-rouge">Select lineage</code>
@@ -1379,7 +1377,7 @@ https://zenodo.org/api/files/d010d8f1-a1fd-4366-991f-916c2f0c55db/SRR8534475_sub
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>This pipeline shows how to generate and evaluate a genome assembly from long <span class="notranslate">reads</span> PacBio data. Once you are satisfied with your genome sequence, you might want to annotate it: have a look at the <a href="/training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html">RepeatMasker</a> and <a href="/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html">Funannoate</a> tutorials to learn how to do it!</p>
+<p>This pipeline shows how to generate and evaluate a genome assembly from long reads PacBio data. Once you are satisfied with your genome sequence, you might want to annotate it: have a look at the <a href="/training-material/topics/genome-annotation/tutorials/repeatmasker/tutorial.html">RepeatMasker</a> and <a href="/training-material/topics/genome-annotation/tutorials/funannotate/tutorial.html">Funannoate</a> tutorials to learn how to do it!</p>
 
 
                 

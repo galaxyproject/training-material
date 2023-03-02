@@ -1027,8 +1027,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -1107,28 +1105,28 @@
                 <h1 id="introduction">Introduction</h1>
 
 <p>In some research or clinical contexts it is not possible, or very hard, to
-purify <span class="notranslate">DNA</span>/<span class="notranslate">RNA</span> for sequencing from just the specimen of interest.
-Instead you will isolate <span class="notranslate">DNA</span> that is contaminated, sometimes heavily, with
-<span class="notranslate">DNA</span>/<span class="notranslate">RNA</span> of a different origin.
+purify DNA/RNA for sequencing from just the specimen of interest.
+Instead you will isolate DNA that is contaminated, sometimes heavily, with
+DNA/RNA of a different origin.
 This is the case for example with microbiome samples, which typically display
-considerable contamination with host <span class="notranslate">DNA</span>, or with samples of body fluids for
+considerable contamination with host DNA, or with samples of body fluids for
 pathogen detection. Such contamination can pose an issue with certain types of
 analyses, in particular with genome assembly.</p>
 
 <p>This tutorial guides you through the preprocessing of sequencing data of
 bronchoalveolar lavage fluid (BALF) samples obtained from early COVID-19
 patients in China. Since such samples are expected to be contaminated
-signficantly with human sequenced <span class="notranslate">reads</span>, the goal is to enrich the data for
-SARS-CoV-2 <span class="notranslate">reads</span> by identifying and discarding <span class="notranslate">reads</span> of human origin before
+signficantly with human sequenced reads, the goal is to enrich the data for
+SARS-CoV-2 reads by identifying and discarding reads of human origin before
 trying to assemble the viral genome sequence.</p>
 
 <blockquote class="comment">
-  <div class="box-title comment-title" id="comment-the-usegalaxy-covid-19-analysis-project" aria-label="comment box: The usegalaxy.* COVID-19 analysis project"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: The use<span class="notranslate">galaxy</span>.* COVID-19 analysis project</div>
+  <div class="box-title comment-title" id="comment-the-usegalaxy-covid-19-analysis-project" aria-label="comment box: The usegalaxy.* COVID-19 analysis project"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: The usegalaxy.* COVID-19 analysis project</div>
   <p>This tutorial uses the same data as, and recapitulates to a large extent, the
 <a href="https://covid19.galaxyproject.org/genomics/1-PreProcessing/">Pre-processing</a>
 and <a href="https://covid19.galaxyproject.org/genomics/2-Assembly/">Assembly</a> steps
 of the <a href="https://covid19.galaxyproject.org/genomics/">Genomics</a> section of
-<a href="https://covid19.galaxyproject.org/">covid19.<span class="notranslate">galaxy</span>project.org</a>.</p>
+<a href="https://covid19.galaxyproject.org/">covid19.galaxyproject.org</a>.</p>
 
 </blockquote>
 
@@ -1145,24 +1143,24 @@ of the <a href="https://covid19.galaxyproject.org/genomics/">Genomics</a> sectio
     </ol>
   </li>
   <li><a href="#read-trimming-and-quality-control" id="markdown-toc-read-trimming-and-quality-control">Read trimming and quality control</a>    <ol>
-      <li><a href="#trimming-and-filtering-of-illumina-reads" id="markdown-toc-trimming-and-filtering-of-illumina-reads">Trimming and filtering of Illumina <span class="notranslate">reads</span></a></li>
-      <li><a href="#quality-control-of-nanopore-reads" id="markdown-toc-quality-control-of-nanopore-reads">Quality control of Nanopore <span class="notranslate">reads</span></a></li>
+      <li><a href="#trimming-and-filtering-of-illumina-reads" id="markdown-toc-trimming-and-filtering-of-illumina-reads">Trimming and filtering of Illumina reads</a></li>
+      <li><a href="#quality-control-of-nanopore-reads" id="markdown-toc-quality-control-of-nanopore-reads">Quality control of Nanopore reads</a></li>
     </ol>
   </li>
-  <li><a href="#subtraction-of-reads-mapping-to-the-human-reference-genome" id="markdown-toc-subtraction-of-reads-mapping-to-the-human-reference-genome">Subtraction of <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to the human reference genome</a>    <ol>
-      <li><a href="#mapping-of-illumina-reads" id="markdown-toc-mapping-of-illumina-reads"><span class="notranslate">Mapping</span> of Illumina <span class="notranslate">reads</span></a></li>
-      <li><a href="#mapping-of-nanopore-reads" id="markdown-toc-mapping-of-nanopore-reads"><span class="notranslate">Mapping</span> of Nanopore <span class="notranslate">reads</span></a></li>
-      <li><a href="#human-reads-subtraction" id="markdown-toc-human-reads-subtraction">Human <span class="notranslate">reads</span> subtraction</a></li>
+  <li><a href="#subtraction-of-reads-mapping-to-the-human-reference-genome" id="markdown-toc-subtraction-of-reads-mapping-to-the-human-reference-genome">Subtraction of reads mapping to the human reference genome</a>    <ol>
+      <li><a href="#mapping-of-illumina-reads" id="markdown-toc-mapping-of-illumina-reads">Mapping of Illumina reads</a></li>
+      <li><a href="#mapping-of-nanopore-reads" id="markdown-toc-mapping-of-nanopore-reads">Mapping of Nanopore reads</a></li>
+      <li><a href="#human-reads-subtraction" id="markdown-toc-human-reads-subtraction">Human reads subtraction</a></li>
     </ol>
   </li>
-  <li><a href="#format-conversion-of-remaining-reads" id="markdown-toc-format-conversion-of-remaining-reads">Format conversion of remaining <span class="notranslate">reads</span></a>    <ol>
+  <li><a href="#format-conversion-of-remaining-reads" id="markdown-toc-format-conversion-of-remaining-reads">Format conversion of remaining reads</a>    <ol>
       <li><a href="#conversion-to-fastq-format" id="markdown-toc-conversion-to-fastq-format">Conversion to fastq format</a></li>
       <li><a href="#optional-rearrange-the-filtered-data-into-the-original-nested-data-structure" id="markdown-toc-optional-rearrange-the-filtered-data-into-the-original-nested-data-structure">Optional: Rearrange the filtered data into the original nested data structure</a></li>
-      <li><a href="#merging-of-reads-with-collection-operations" id="markdown-toc-merging-of-reads-with-collection-operations">Merging of <span class="notranslate">reads</span> with collection operations</a></li>
+      <li><a href="#merging-of-reads-with-collection-operations" id="markdown-toc-merging-of-reads-with-collection-operations">Merging of reads with collection operations</a></li>
     </ol>
   </li>
   <li><a href="#sars-cov-2-genome-assembly" id="markdown-toc-sars-cov-2-genome-assembly">SARS-CoV-2 genome assembly</a>    <ol>
-      <li><a href="#optional-subsampling-of-reads" id="markdown-toc-optional-subsampling-of-reads">Optional: Subsampling of <span class="notranslate">reads</span></a></li>
+      <li><a href="#optional-subsampling-of-reads" id="markdown-toc-optional-subsampling-of-reads">Optional: Subsampling of reads</a></li>
       <li><a href="#create-assembly" id="markdown-toc-create-assembly">Create assembly</a></li>
       <li><a href="#explore-assembly" id="markdown-toc-explore-assembly">Explore assembly</a></li>
     </ol>
@@ -1175,13 +1173,13 @@ of the <a href="https://covid19.galaxyproject.org/genomics/">Genomics</a> sectio
 <h1 id="get-data">Get data</h1>
 
 <p>We are going to create an assembly of the SARS-CoV-2 genome based on mixed
-short-<span class="notranslate">reads</span> (Illumina) and long-<span class="notranslate">reads</span> (Nanopore) data from a total of six
+short-reads (Illumina) and long-reads (Nanopore) data from a total of six
 different samples, all of which are publicly accessible through the NCBI
-and EBI short-<span class="notranslate">reads</span> archives (SRAs).</p>
+and EBI short-reads archives (SRAs).</p>
 
 <p>Since automated data downloads from SRAs can be unreliable at times and could
 get broken by changes to the download interface on the NCBI/EBI side, this
-tutorial offers two ways to access the sequenced <span class="notranslate">reads</span> input data:</p>
+tutorial offers two ways to access the sequenced reads input data:</p>
 
 <ol>
   <li>
@@ -1189,12 +1187,12 @@ tutorial offers two ways to access the sequenced <span class="notranslate">reads
 dedicated <strong>Faster Download</strong> tool</p>
 
     <p>Use this method if it works and is fast enough for you, and if you are
-interested in learning to obtain short-<span class="notranslate">reads</span> data directly from NCBI, in
+interested in learning to obtain short-reads data directly from NCBI, in
 general.</p>
   </li>
   <li>
     <p>Download of the same data deposited as a copy at <a href="https://zenodo.org/record/3732359">Zenodo</a>
-This method uses <span class="notranslate">Galaxy</span>’s generic data import functionality, and should be
+This method uses Galaxy’s generic data import functionality, and should be
 very reliable and faster than the download from NCBI.
 It also showcases <strong>rule-based</strong> uploads and demonstrates how they can be
 used to download several datasets and to arrange them into easy to handle
@@ -1202,7 +1200,7 @@ data structures at the same time.</p>
 
     <blockquote class="details">
       <div class="box-title details-title" id="details-rule-based-uploads"><button class="gtn-boxify-button details" type="button" aria-controls="details-rule-based-uploads-contents" aria-expanded="true" aria-label="Toggle details box: Rule-based uploads"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Rule-based uploads<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-      <p>In this tutorial you will only use the features of <span class="notranslate">Galaxy</span>’s rule-based
+      <p>In this tutorial you will only use the features of Galaxy’s rule-based
 uploader that are required to get the input data ready for our analysis,
 and we will not explain those features in much detail.</p>
 
@@ -1213,7 +1211,7 @@ we recommend the advanced tutorial
 
     <p>Use this method if the direct download from the NCBI SRA does not work, or
 is too slow for your time frame, or if you are interested in advanced use
-of <span class="notranslate">Galaxy</span>’s data import functionality.</p>
+of Galaxy’s data import functionality.</p>
   </li>
 </ol>
 
@@ -1224,16 +1222,16 @@ steps are independent of the data source you choose.</p>
 <h2 id="get-data-from-ncbi-sra">Get data from NCBI SRA</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload-to-galaxy-from-ncbi-sra" aria-label="hands-on box: Data upload to Galaxy from NCBI SRA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload to <span class="notranslate">Galaxy</span> from NCBI SRA</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-to-galaxy-from-ncbi-sra" aria-label="hands-on box: Data upload to Galaxy from NCBI SRA"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload to Galaxy from NCBI SRA</div>
 
   <ol>
     <li>
       <p>Create a new history for this tutorial and give it a proper name</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
     <li>
       <p>Create a new dataset listing the SRA accession numbers of the Illumina paired-end input data for this tutorial:</p>
@@ -1246,7 +1244,7 @@ SRR10971381
       <p>call it, <em>e.g.</em>, <code class="language-plaintext highlighter-rouge">Illumina accessions</code> and set its datatype to <code class="language-plaintext highlighter-rouge">tabular</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-file-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new file<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Open the <span class="notranslate">Galaxy</span> Upload Manager</li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the file contents into the text field</p>   </li>   <li>     <p>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">tabular</code></p>   </li>   <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-file-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new file<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Open the Galaxy Upload Manager</li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the file contents into the text field</p>   </li>   <li>     <p>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">tabular</code></p>   </li>   <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Create another new dataset listing the SRA accession numbers of the Nanopore input data for this tutorial:</p>
@@ -1267,7 +1265,7 @@ SRR10902284
 separately in this tutorial up to the actual genome assembly step.</p>
 
         <p>To make it easier to keep track of the two branches of the analysis, we
-recommend the use of <span class="notranslate">Galaxy</span>’s dataset <strong>name tags</strong>.
+recommend the use of Galaxy’s dataset <strong>name tags</strong>.
 A name tag will automatically propagate to any new dataset derived
 from the tagged dataset.</p>
       </blockquote>
@@ -1279,12 +1277,12 @@ dataset.</p>
 Feel free to either use the suggested names above or choose ones you like.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
     </li>
     <li>
-      <p>Retrieve the Illumina <span class="notranslate">reads</span> data from NCBI:</p>
+      <p>Retrieve the Illumina reads data from NCBI:</p>
 
-      <p>Run <strong>Faster Download and Extract <span class="notranslate">Reads</span> in FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <p>Run <strong>Faster Download and Extract Reads in FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
 the following parameter settings:</p>
       <ul>
         <li><em>“select input type”</em>: <code class="language-plaintext highlighter-rouge">List of SRA accession, one per line</code>
@@ -1304,7 +1302,7 @@ the <code class="language-plaintext highlighter-rouge">Illumina accessions</code
 collections and one <em>log</em> dataset with a summary of what happened.</p>
 
       <p>Since all three datasets that we tried to retrieve contain only
-paired-end <span class="notranslate">reads</span>, only the <code class="language-plaintext highlighter-rouge">Pair-end data</code> collection is expected to
+paired-end reads, only the <code class="language-plaintext highlighter-rouge">Pair-end data</code> collection is expected to
 contain downloaded data. Click on the other two collections to verify that
 they are empty, then delete them from your history (since the collections
 do not contain any datasets, it does not matter, which delete option -
@@ -1312,9 +1310,9 @@ do not contain any datasets, it does not matter, which delete option -
 are choosing when prompted).</p>
     </li>
     <li>
-      <p>Retrieve the Nanopore <span class="notranslate">reads</span> data from NCBI:</p>
+      <p>Retrieve the Nanopore reads data from NCBI:</p>
 
-      <p>Run <strong>Faster Download and Extract <span class="notranslate">Reads</span> in FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+      <p>Run <strong>Faster Download and Extract Reads in FASTQ</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
 the following parameter settings:</p>
       <ul>
         <li><em>“select input type”</em>: <code class="language-plaintext highlighter-rouge">List of SRA accession, one per line</code>
@@ -1334,7 +1332,7 @@ the <code class="language-plaintext highlighter-rouge">Nanopore accessions</code
 your history.</p>
 
       <p>Since all three datasets that we tried to retrieve in this run contain
-only single-end <span class="notranslate">reads</span>, only the <code class="language-plaintext highlighter-rouge">Single-end data</code> collection is expected to
+only single-end reads, only the <code class="language-plaintext highlighter-rouge">Single-end data</code> collection is expected to
 contain downloaded data this time. Click on the other two collections to
 verify that they are empty, then delete them from your history.</p>
     </li>
@@ -1345,19 +1343,19 @@ verify that they are empty, then delete them from your history.</p>
 <h2 id="get-data-from-zenodo">Get data from Zenodo</h2>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-data-upload-to-galaxy-from-zenodo" aria-label="hands-on box: Data upload to Galaxy from Zenodo"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload to <span class="notranslate">Galaxy</span> from Zenodo</div>
+  <div class="box-title hands-on-title" id="hands-on-data-upload-to-galaxy-from-zenodo" aria-label="hands-on box: Data upload to Galaxy from Zenodo"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Data upload to Galaxy from Zenodo</div>
 
   <ol>
     <li>
       <p>Create a new history for this tutorial and give it a proper name</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-1-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-1-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-1-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
     <li>
-      <p>Import Illumina-sequenced <span class="notranslate">reads</span> data from <a href="https://zenodo.org/record/3732359">Zenodo</a></p>
+      <p>Import Illumina-sequenced reads data from <a href="https://zenodo.org/record/3732359">Zenodo</a></p>
 
       <p>The Zenodo links for the data are these:</p>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3732359/files/SRR10903401_r1.fq.gz
@@ -1368,12 +1366,12 @@ https://zenodo.org/record/3732359/files/SRR10971381_r1.fq.gz
 https://zenodo.org/record/3732359/files/SRR10971381_r2.fq.gz
 </code></pre></div>      </div>
 
-      <p>To upload these data to your <span class="notranslate">Galaxy</span> history in structured form:</p>
+      <p>To upload these data to your Galaxy history in structured form:</p>
 
       <ul>
         <li>Copy the above list of links</li>
-        <li>Open the <span class="notranslate">Galaxy</span> Upload Manager
-(<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top right of the tool panel)</li>
+        <li>Open the Galaxy Upload Manager
+(<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top right of the tool panel)</li>
         <li>In the pop-up window, switch to the <strong>Rule-based</strong> tab and select
           <ul>
             <li><em>“Upload data as:”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
@@ -1384,11 +1382,11 @@ https://zenodo.org/record/3732359/files/SRR10971381_r2.fq.gz
         </li>
         <li>In the next screen, select
           <ul>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Column”</em>: <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">expression</span></code>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Column”</em>: <code class="language-plaintext highlighter-rouge">Using a Regular expression</code>
               <ul>
                 <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
-                <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Create columns matching <span class="notranslate">expression</span> groups.”</em></li>
-                <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">.+/(SRR\d+)_r(\d).fq.gz</code></li>
+                <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Create columns matching expression groups.”</em></li>
+                <li><em>“Regular Expression”</em>: <code class="language-plaintext highlighter-rouge">.+/(SRR\d+)_r(\d).fq.gz</code></li>
                 <li><em>“Number of Groups”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
                 <li>Click <strong>Apply</strong></li>
               </ul>
@@ -1424,12 +1422,12 @@ https://zenodo.org/record/3732359/files/SRR10971381_r2.fq.gz
 separately in this tutorial up to the actual genome assembly step.</p>
 
                 <p>To make it easier to keep track of the two branches of the analysis, we
-recommend the use of <span class="notranslate">Galaxy</span>’s dataset <strong>name tags</strong>.
+recommend the use of Galaxy’s dataset <strong>name tags</strong>.
 A name tag will automatically propagate to any new dataset derived
 from the tagged dataset.</p>
               </blockquote>
 
-              <p>Checking this option tells <span class="notranslate">Galaxy</span> to reuse the collection name above
+              <p>Checking this option tells Galaxy to reuse the collection name above
 as a name tag on the collection.</p>
             </li>
             <li>Click <strong>Upload</strong></li>
@@ -1438,7 +1436,7 @@ as a name tag on the collection.</p>
       </ul>
     </li>
     <li>
-      <p>Import Nanopore-sequenced <span class="notranslate">reads</span> data from <a href="https://zenodo.org/record/3732359">Zenodo</a></p>
+      <p>Import Nanopore-sequenced reads data from <a href="https://zenodo.org/record/3732359">Zenodo</a></p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3732359/files/SRR10902284_ONT.fq.gz
 https://zenodo.org/record/3732359/files/SRR10948474_ONT.fq.gz
@@ -1450,8 +1448,8 @@ To do so:</p>
 
       <ul>
         <li>Copy the above list of links</li>
-        <li>Open the <span class="notranslate">Galaxy</span> Upload Manager
-(<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top right of the tool panel)</li>
+        <li>Open the Galaxy Upload Manager
+(<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top right of the tool panel)</li>
         <li>In the pop-up window, switch to the <strong>Rule-based</strong> tab and select
           <ul>
             <li><em>“Upload data as:”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
@@ -1462,11 +1460,11 @@ To do so:</p>
         </li>
         <li>In the next screen, select
           <ul>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Column”</em>: <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">expression</span></code>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Column”</em>: <code class="language-plaintext highlighter-rouge">Using a Regular expression</code>
               <ul>
                 <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
-                <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Create columns matching <span class="notranslate">expression</span> groups.”</em></li>
-                <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">.+/(SRR\d+)_ONT.fq.gz</code></li>
+                <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Create columns matching expression groups.”</em></li>
+                <li><em>“Regular Expression”</em>: <code class="language-plaintext highlighter-rouge">.+/(SRR\d+)_ONT.fq.gz</code></li>
                 <li><em>“Number of Groups”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
                 <li>Click <strong>Apply</strong></li>
               </ul>
@@ -1500,25 +1498,25 @@ To do so:</p>
 
 <h1 id="read-trimming-and-quality-control">Read trimming and quality control</h1>
 
-<p>In the end, we do not want to base our <span class="notranslate">mapping</span> on low-quality <span class="notranslate">reads</span> that may
+<p>In the end, we do not want to base our mapping on low-quality reads that may
 cause misassembly of fragments or introduce sequencing artefacts into the final
 assembled sequence. Since quality control, read filtering and read trimming are
 all quite fast and computationally cheap operations compared to the read
-<span class="notranslate">mapping</span> that we will use to identify and eliminate human <span class="notranslate">reads</span>, it is best to
+mapping that we will use to identify and eliminate human reads, it is best to
 perform these steps up front.</p>
 
 <p>Due to their very different nature, however, Illumina- and Nanopore-sequenced
-<span class="notranslate">reads</span> should be treated rather differently.</p>
+reads should be treated rather differently.</p>
 
-<h2 id="trimming-and-filtering-of-illumina-reads">Trimming and filtering of Illumina <span class="notranslate">reads</span></h2>
+<h2 id="trimming-and-filtering-of-illumina-reads">Trimming and filtering of Illumina reads</h2>
 
-<p><span class="notranslate">Galaxy</span> offers a panel of different NGS <span class="notranslate">reads</span> trimming/filtering tools. Here,
+<p>Galaxy offers a panel of different NGS reads trimming/filtering tools. Here,
 we use <strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, which is straightforward to configure,
 and when combined with <strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, enables nice and
 easy-to-interpret visualizations of the effects of preprocessing, in particular
 for multiple samples.</p>
 
-<p>In the following, we configure the tool to retain <span class="notranslate">reads</span> only if at most 20% of
+<p>In the following, we configure the tool to retain reads only if at most 20% of
 their bases have a Phred-scaled quality &gt;= 20 and if there length in bases after
 trimming of adapter sequences (which the tool auto-detects for us) is at least
 50.</p>
@@ -1528,14 +1526,14 @@ trimming of adapter sequences (which the tool auto-detects for us) is at least
 metrics for all samples before and after preprocessing.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-reads-preprocessing-and-quality-reporting" aria-label="hands-on box: Reads preprocessing and quality reporting"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: <span class="notranslate">Reads</span> preprocessing and quality reporting</div>
+  <div class="box-title hands-on-title" id="hands-on-reads-preprocessing-and-quality-reporting" aria-label="hands-on box: Reads preprocessing and quality reporting"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Reads preprocessing and quality reporting</div>
   <ol>
     <li><strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><em>“Single-end or paired <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code>
+        <li><em>“Single-end or paired reads”</em>: <code class="language-plaintext highlighter-rouge">Paired Collection</code>
           <ul>
             <li><em>“Select paired collection(s)”</em>: the collection of Illumina-sequenced
-<span class="notranslate">reads</span> as produced in the <em>Get Data</em> section</li>
+reads as produced in the <em>Get Data</em> section</li>
           </ul>
         </li>
         <li>in <em>“Filter Options”</em>
@@ -1564,7 +1562,7 @@ metrics for all samples before and after preprocessing.</p>
       </ul>
 
       <p>The tool run produces two collections - one with the actual preprocessed
-<span class="notranslate">reads</span> of all input samples, another one with a JSON-formatted report of
+reads of all input samples, another one with a JSON-formatted report of
 the processing for every sample.</p>
     </li>
     <li><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
@@ -1589,18 +1587,18 @@ for all samples before and after processing with <strong>fastp</strong> <i class
 
 </blockquote>
 
-<h2 id="quality-control-of-nanopore-reads">Quality control of Nanopore <span class="notranslate">reads</span></h2>
+<h2 id="quality-control-of-nanopore-reads">Quality control of Nanopore reads</h2>
 
-<p>Nanopore-sequenced <span class="notranslate">reads</span> differ greatly in length from one another and are, on
+<p>Nanopore-sequenced reads differ greatly in length from one another and are, on
 average, of relatively low quality (in particular when compared to
-Illumina-sequenced <span class="notranslate">reads</span>). These properties make it challenging to preprocess
+Illumina-sequenced reads). These properties make it challenging to preprocess
 them with standard tools. Quality assessment tools calibrated to work well with
-Illumina-sequenced <span class="notranslate">reads</span> are less useful for Nanopore-sequenced <span class="notranslate">reads</span>, too, for
+Illumina-sequenced reads are less useful for Nanopore-sequenced reads, too, for
 the same reasons. Here we restrict ourselves to a simple quality check with
-<strong>NanoPlot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, a dedicated QC tool for Nanopore-sequenced <span class="notranslate">reads</span>.</p>
+<strong>NanoPlot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, a dedicated QC tool for Nanopore-sequenced reads.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-checking-the-quality-of-nanopore-reads-with-nanoplot" aria-label="hands-on box: Checking the quality of Nanopore reads with NanoPlot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Checking the quality of Nanopore <span class="notranslate">reads</span> with NanoPlot</div>
+  <div class="box-title hands-on-title" id="hands-on-checking-the-quality-of-nanopore-reads-with-nanoplot" aria-label="hands-on box: Checking the quality of Nanopore reads with NanoPlot"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Checking the quality of Nanopore reads with NanoPlot</div>
   <ol>
     <li><strong>NanoPlot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
@@ -1609,7 +1607,7 @@ the same reasons. Here we restrict ourselves to a simple quality check with
             <li><em>“Type of the file(s) to work on”</em>: <code class="language-plaintext highlighter-rouge">fastq</code>
               <ul>
                 <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“files”</em>: the collection of
-Nanopore-sequenced <span class="notranslate">reads</span> as produced in the <em>Get Data</em> section</li>
+Nanopore-sequenced reads as produced in the <em>Get Data</em> section</li>
               </ul>
             </li>
           </ul>
@@ -1640,7 +1638,7 @@ and what are some criteria that support this conclusion?</li>
 two (see the <em>Summary statistics</em> table), has a distribution of
 read qualities that peaks around intermediate quality scores (not
 low ones as for the other samples), and contains some extra-long
-(though at least partly rather low-quality) <span class="notranslate">reads</span>. Those last two
+(though at least partly rather low-quality) reads. Those last two
 points become most obvious when looking at the <em>Read lengths vs
 Average read quality</em> plots.</p>
             </li>
@@ -1652,38 +1650,38 @@ Average read quality</em> plots.</p>
 
 </blockquote>
 
-<h1 id="subtraction-of-reads-mapping-to-the-human-reference-genome">Subtraction of <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to the human reference genome</h1>
+<h1 id="subtraction-of-reads-mapping-to-the-human-reference-genome">Subtraction of reads mapping to the human reference genome</h1>
 
-<h2 id="mapping-of-illumina-reads"><span class="notranslate">Mapping</span> of Illumina <span class="notranslate">reads</span></h2>
+<h2 id="mapping-of-illumina-reads">Mapping of Illumina reads</h2>
 
-<p>In this tutorial, we are using <strong>Bowtie2</strong> for <span class="notranslate">mapping</span> our short-<span class="notranslate">reads</span> data to
-the human genome. <em>BWA-MEM</em> would be a good alte<span class="notranslate">rna</span>tive for <span class="notranslate">mapping</span> the 150
-nucleotides (see the QC report above) <span class="notranslate">reads</span> from our samples.</p>
+<p>In this tutorial, we are using <strong>Bowtie2</strong> for mapping our short-reads data to
+the human genome. <em>BWA-MEM</em> would be a good alternative for mapping the 150
+nucleotides (see the QC report above) reads from our samples.</p>
 
 <p>According to its authors, the <em>Minimap2</em> aligner, which we will be using for
-<span class="notranslate">mapping</span> the Nanopore-sequenced data in the next step, is supposed to outcompete
-<em>Bowtie2</em> and <em>BWA-MEM</em> in terms of speed even for Illumina-sequenced <span class="notranslate">reads</span>
+mapping the Nanopore-sequenced data in the next step, is supposed to outcompete
+<em>Bowtie2</em> and <em>BWA-MEM</em> in terms of speed even for Illumina-sequenced reads
 of length &gt; 100 nts, but we opt for the conservative approach of using a
 widely-used, well-tested tool here.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-mapping-with-bowtie2" aria-label="hands-on box: Mapping with Bowtie2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: <span class="notranslate">Mapping</span> with Bowtie2</div>
+  <div class="box-title hands-on-title" id="hands-on-mapping-with-bowtie2" aria-label="hands-on box: Mapping with Bowtie2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Mapping with Bowtie2</div>
   <ol>
     <li><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><em>“Is this single or paired library”</em>: <code class="language-plaintext highlighter-rouge">Paired-end Dataset Collection</code>
           <ul>
             <li><em>“FASTQ Paired Dataset”</em>: the collection of preprocessed
-Illumina-sequenced <span class="notranslate">reads</span>, output of <strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+Illumina-sequenced reads, output of <strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
             <li>
-              <p><em>“Write unaligned <span class="notranslate">reads</span> (in fastq format) to separate file(s)”</em>: <code class="language-plaintext highlighter-rouge">No</code></p>
+              <p><em>“Write unaligned reads (in fastq format) to separate file(s)”</em>: <code class="language-plaintext highlighter-rouge">No</code></p>
 
-              <p>Activating this option may seem attractive since the unaligned <span class="notranslate">reads</span>
-are what we are interested in, but filtering for those <span class="notranslate">reads</span> with
+              <p>Activating this option may seem attractive since the unaligned reads
+are what we are interested in, but filtering for those reads with
 a dedicated tool in a separate step allows us to filter on the
-properties of the read pairs instead of those of individual <span class="notranslate">reads</span>.</p>
+properties of the read pairs instead of those of individual reads.</p>
             </li>
-            <li><em>“Write aligned <span class="notranslate">reads</span> (in fastq format) to separate file(s)”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+            <li><em>“Write aligned reads (in fastq format) to separate file(s)”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
             <li><em>“Do you want to set paired-end options?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
           </ul>
         </li>
@@ -1696,37 +1694,37 @@ properties of the read pairs instead of those of individual <span class="notrans
         <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
         <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">Default setting only</code></li>
         <li><em>“Do you want to tweak SAM/BAM Options?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-        <li><em>“Save the bowtie2 <span class="notranslate">mapping</span> statistics to the history”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Save the bowtie2 mapping statistics to the history”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
 
       <p>The tool run should produce two collections of output datasets. One with
-the actual mapped <span class="notranslate">reads</span> of the three samples and one with the corresponding
-<span class="notranslate">mapping</span> statistics for each sample, which we want to have a brief look at
+the actual mapped reads of the three samples and one with the corresponding
+mapping statistics for each sample, which we want to have a brief look at
 next.</p>
     </li>
     <li>
-      <p>Inspect the <code class="language-plaintext highlighter-rouge"><span class="notranslate">mapping</span> stats</code> of each sample by clicking on the corresponding collection, then on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon of each individual sample data</p>
+      <p>Inspect the <code class="language-plaintext highlighter-rouge">mapping stats</code> of each sample by clicking on the corresponding collection, then on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon of each individual sample data</p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <ol>
-          <li>What percentage of <span class="notranslate">reads</span> of each sample has been aligned to the <code class="language-plaintext highlighter-rouge">hg38</code> reference genome?</li>
-          <li>Which sample is the least contaminated with human <span class="notranslate">reads</span>?</li>
-          <li>Which sample contains the highest amount of SARS-CoV2 <span class="notranslate">reads</span>?</li>
+          <li>What percentage of reads of each sample has been aligned to the <code class="language-plaintext highlighter-rouge">hg38</code> reference genome?</li>
+          <li>Which sample is the least contaminated with human reads?</li>
+          <li>Which sample contains the highest amount of SARS-CoV2 reads?</li>
         </ol>
 
         <blockquote class="solution">
           <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <ol>
-            <li>The samples have between 13% and 21% of <span class="notranslate">reads</span> aligned to <code class="language-plaintext highlighter-rouge">hg38</code>.
+            <li>The samples have between 13% and 21% of reads aligned to <code class="language-plaintext highlighter-rouge">hg38</code>.
 The information can be found on the last line of output for each
 sample.</li>
             <li>Sample <code class="language-plaintext highlighter-rouge">SRR10971381</code> is the least contaminated with just above 13%
-of human <span class="notranslate">reads</span></li>
+of human reads</li>
             <li>You cannot answer this question with this data. While <code class="language-plaintext highlighter-rouge">SRR10971381</code>
-shows the lowest relative contamination with human <span class="notranslate">reads</span>, that
-does not mean that all other <span class="notranslate">reads</span> are from SARS-CoV-2. They could
+shows the lowest relative contamination with human reads, that
+does not mean that all other reads are from SARS-CoV-2. They could
 come from other species (<em>e.g.</em>, bacteria or other viruses)
 contained in this BALF sample.</li>
           </ol>
@@ -1737,13 +1735,13 @@ contained in this BALF sample.</li>
 
 </blockquote>
 
-<h2 id="mapping-of-nanopore-reads"><span class="notranslate">Mapping</span> of Nanopore <span class="notranslate">reads</span></h2>
+<h2 id="mapping-of-nanopore-reads">Mapping of Nanopore reads</h2>
 
-<p>For the <span class="notranslate">mapping</span> of the Nanopore-sequenced data we are using the <strong>Minimap2</strong>
-aligner, which is particularly efficient for <span class="notranslate">mapping</span> long <span class="notranslate">reads</span>.</p>
+<p>For the mapping of the Nanopore-sequenced data we are using the <strong>Minimap2</strong>
+aligner, which is particularly efficient for mapping long reads.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-nanopore-reads-mapping" aria-label="hands-on box: Nanopore reads mapping"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Nanopore <span class="notranslate">reads</span> <span class="notranslate">mapping</span></div>
+  <div class="box-title hands-on-title" id="hands-on-nanopore-reads-mapping" aria-label="hands-on box: Nanopore reads mapping"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Nanopore reads mapping</div>
 
   <ol>
     <li><strong>Map with minimap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
@@ -1754,24 +1752,24 @@ aligner, which is particularly efficient for <span class="notranslate">mapping</
             <li><em>“Using reference genome”</em>: <code class="language-plaintext highlighter-rouge">Human Dec. 2013 (GRCh38/hg38) (hg38)</code></li>
           </ul>
         </li>
-        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
+        <li><em>“Single or Paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
           <ul>
             <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select fastq dataset”</em>: the collection
-of Nanopore-sequenced <span class="notranslate">reads</span> as set up in the <em>Get Data</em> section</li>
+of Nanopore-sequenced reads as set up in the <em>Get Data</em> section</li>
           </ul>
         </li>
-        <li><em>“Select a profile of preset options”</em>: <code class="language-plaintext highlighter-rouge">Oxford Nanopore read to reference <span class="notranslate">mapping</span>. ...</code></li>
+        <li><em>“Select a profile of preset options”</em>: <code class="language-plaintext highlighter-rouge">Oxford Nanopore read to reference mapping. ...</code></li>
       </ul>
 
-      <p>This tool run produces one collection with the actual mapped <span class="notranslate">reads</span> for
+      <p>This tool run produces one collection with the actual mapped reads for
 each Nanopore-sequenced sample. Unlike <strong>Bowtie2</strong> it does not have an
-option to output <span class="notranslate">mapping</span> statistics directly. However, we can generate
+option to output mapping statistics directly. However, we can generate
 that information through an extra step.</p>
     </li>
     <li><strong>Samtools stats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM file”</em>: the collection of mapped
-Nanopore-sequenced <span class="notranslate">reads</span>, output of **Map with minimap2 <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (step 1)</li>
+Nanopore-sequenced reads, output of **Map with minimap2 <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (step 1)</li>
         <li><em>“Output”</em>: <code class="language-plaintext highlighter-rouge">Separate datasets for each statistic</code>
           <ul>
             <li><em>“Desired output files”</em>
@@ -1789,11 +1787,11 @@ statistics generated by <strong>Bowtie2</strong> and are enough for our purpose.
       </ul>
 
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-mapping-stats-for-nanopore-sequenced-long-reads" aria-label="comment box: Mapping stats for Nanopore-sequenced long reads"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: <span class="notranslate">Mapping</span> stats for Nanopore-sequenced long <span class="notranslate">reads</span></div>
+        <div class="box-title comment-title" id="comment-mapping-stats-for-nanopore-sequenced-long-reads" aria-label="comment box: Mapping stats for Nanopore-sequenced long reads"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Mapping stats for Nanopore-sequenced long reads</div>
 
-        <p>Since, unlike Illumina-generated <span class="notranslate">reads</span>, Nanopore-sequenced <span class="notranslate">reads</span> can
+        <p>Since, unlike Illumina-generated reads, Nanopore-sequenced reads can
 have very different lengths, it makes limited sense to calculate a
-ratio of mapped to overall <span class="notranslate">reads</span> for them.</p>
+ratio of mapped to overall reads for them.</p>
 
         <p>Instead, <code class="language-plaintext highlighter-rouge">bases mapped</code> / <code class="language-plaintext highlighter-rouge">total length</code> should give a more reliable
 estimate of which fraction of the data is due to human genome sequence.</p>
@@ -1805,26 +1803,26 @@ estimate of which fraction of the data is due to human genome sequence.</p>
 
 </blockquote>
 
-<h2 id="human-reads-subtraction">Human <span class="notranslate">reads</span> subtraction</h2>
+<h2 id="human-reads-subtraction">Human reads subtraction</h2>
 
-<p>At this point you should have two collections of mapped <span class="notranslate">reads</span> - one holding the
-<span class="notranslate">mapping</span> results obtained with <strong>Bowtie2</strong> of the three Illumina-sequenced
+<p>At this point you should have two collections of mapped reads - one holding the
+mapping results obtained with <strong>Bowtie2</strong> of the three Illumina-sequenced
 samples, the other one holding the <strong>minimap2</strong> output for the three
 Nanopore-sequenced samples.</p>
 
 <p>Next, we are going to filter the data from both collections to retain only
-those <span class="notranslate">reads</span> that were <em>not</em> mapped to the human genome, <em>i.e</em> those of
+those reads that were <em>not</em> mapped to the human genome, <em>i.e</em> those of
 potential viral origin.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-mapped-reads-filtering" aria-label="hands-on box: Mapped reads filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Mapped <span class="notranslate">reads</span> filtering</div>
+  <div class="box-title hands-on-title" id="hands-on-mapped-reads-filtering" aria-label="hands-on box: Mapped reads filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Mapped reads filtering</div>
 
   <ol>
-    <li><strong>Samtools view</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to filter the Illumina-sequenced <span class="notranslate">reads</span> mapped with Bowtie2:
+    <li><strong>Samtools view</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to filter the Illumina-sequenced reads mapped with Bowtie2:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“SAM/BAM/CRAM data set”</em>: the collection of
-mapped Illumina-sequenced <span class="notranslate">reads</span>, output of <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“What would you like to look at?”</em>: <code class="language-plaintext highlighter-rouge">A filtered/subsampled selection of <span class="notranslate">reads</span></code>
+mapped Illumina-sequenced reads, output of <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“What would you like to look at?”</em>: <code class="language-plaintext highlighter-rouge">A filtered/subsampled selection of reads</code>
           <ul>
             <li>in <em>“Configure filters”</em>
               <ul>
@@ -1832,9 +1830,9 @@ mapped Illumina-sequenced <span class="notranslate">reads</span>, output of <str
 <code class="language-plaintext highlighter-rouge">Mate is unmapped</code></li>
               </ul>
             </li>
-            <li><em>“What would you like to have reported?”</em>: <code class="language-plaintext highlighter-rouge">All <span class="notranslate">reads</span> retained after filtering and subsampling</code>
+            <li><em>“What would you like to have reported?”</em>: <code class="language-plaintext highlighter-rouge">All reads retained after filtering and subsampling</code>
               <ul>
-                <li><em>“Produce extra dataset with dropped <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                <li><em>“Produce extra dataset with dropped reads?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
                 <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">BAM (-b)</code></li>
               </ul>
             </li>
@@ -1842,20 +1840,20 @@ mapped Illumina-sequenced <span class="notranslate">reads</span>, output of <str
         </li>
       </ul>
     </li>
-    <li><strong>Samtools view</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to filter the Nanopore-sequenced <span class="notranslate">reads</span> mapped with minimap2:
+    <li><strong>Samtools view</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to filter the Nanopore-sequenced reads mapped with minimap2:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“SAM/BAM/CRAM data set”</em>: the collection of
-mapped Nanopore-sequenced <span class="notranslate">reads</span>, output of <strong>minimap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“What would you like to look at?”</em>: <code class="language-plaintext highlighter-rouge">A filtered/subsampled selection of <span class="notranslate">reads</span></code>
+mapped Nanopore-sequenced reads, output of <strong>minimap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“What would you like to look at?”</em>: <code class="language-plaintext highlighter-rouge">A filtered/subsampled selection of reads</code>
           <ul>
             <li>In <em>“Configure filters”</em>
               <ul>
                 <li><em>“Require that these flags are set”</em>: <code class="language-plaintext highlighter-rouge">Read is unmapped</code></li>
               </ul>
             </li>
-            <li><em>“What would you like to have reported?”</em>: <code class="language-plaintext highlighter-rouge">All <span class="notranslate">reads</span> retained after filtering and subsampling</code>
+            <li><em>“What would you like to have reported?”</em>: <code class="language-plaintext highlighter-rouge">All reads retained after filtering and subsampling</code>
               <ul>
-                <li><em>“Produce extra dataset with dropped <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                <li><em>“Produce extra dataset with dropped reads?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
                 <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">BAM (-b)</code></li>
               </ul>
             </li>
@@ -1870,12 +1868,12 @@ mapped Nanopore-sequenced <span class="notranslate">reads</span>, output of <str
         <div class="box-title details-title" id="details-why-do-this"><button class="gtn-boxify-button details" type="button" aria-controls="details-why-do-this-contents" aria-expanded="true" aria-label="Toggle details box: Why do this?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Why do this?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
         <p>When we ran the <strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and <strong>minimap2</strong>
 <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> mappers before, these tools set the <em>database</em> attribute
-on their outputs to <code class="language-plaintext highlighter-rouge">hg38</code> to indicate that the mapped <span class="notranslate">reads</span> in these
+on their outputs to <code class="language-plaintext highlighter-rouge">hg38</code> to indicate that the mapped reads in these
 outputs have been mapped against this version of the human reference
 genome - an important piece of information for further work with those
-mapped <span class="notranslate">reads</span>.</p>
+mapped reads.</p>
 
-        <p>In step 1 and 2 above, however, we have eliminated all mapped <span class="notranslate">reads</span> so
+        <p>In step 1 and 2 above, however, we have eliminated all mapped reads so
 the <code class="language-plaintext highlighter-rouge">database: hg38</code> info is misleading from this point onward in the
 analysis. While not directly harmful, it is best practice to remove this
 metadata now.</p>
@@ -1885,37 +1883,37 @@ metadata now.</p>
 (dbkey) to <code class="language-plaintext highlighter-rouge">unspecified (?)</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-database-build-dbkey"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-database-build-dbkey-contents" aria-expanded="true" aria-label="Toggle tip box: Changing database/build (dbkey)"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing database/build (dbkey)<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Database/Build</strong> field</li>   <li>Select your desired database key from the dropdown list: <code class="language-plaintext highlighter-rouge">unspecified (?)</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-database-build-dbkey"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-database-build-dbkey-contents" aria-expanded="true" aria-label="Toggle tip box: Changing database/build (dbkey)"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing database/build (dbkey)<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Database/Build</strong> field</li>   <li>Select your desired database key from the dropdown list: <code class="language-plaintext highlighter-rouge">unspecified (?)</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
   </ol>
 
 </blockquote>
 
-<h1 id="format-conversion-of-remaining-reads">Format conversion of remaining <span class="notranslate">reads</span></h1>
+<h1 id="format-conversion-of-remaining-reads">Format conversion of remaining reads</h1>
 
 <h2 id="conversion-to-fastq-format">Conversion to fastq format</h2>
 
 <p>Assembly tools, typically, expect their input data to be fastq-formatted, but
-what we have after <span class="notranslate">mapping</span> and filtering is data in BAM format. Hence, we need
-to convert the retained Illumina- and Nanopore-sequenced <span class="notranslate">reads</span> back into their
+what we have after mapping and filtering is data in BAM format. Hence, we need
+to convert the retained Illumina- and Nanopore-sequenced reads back into their
 original format before proceeding to assembly.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-bam-to-fastq-format-conversion" aria-label="hands-on box: BAM to fastq format conversion"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: BAM to fastq format conversion</div>
 
   <ol>
-    <li><strong>Samtools fastx</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to convert the filtered Illumina-sequenced <span class="notranslate">reads</span> to fastq format
+    <li><strong>Samtools fastx</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to convert the filtered Illumina-sequenced reads to fastq format
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM or SAM file to convert”</em>: the collection of
-filtered Illumina-sequenced <span class="notranslate">reads</span>, output of first <strong>Samtools view</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
+filtered Illumina-sequenced reads, output of first <strong>Samtools view</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
         <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">compressed FASTQ</code></li>
         <li><em>“outputs”</em>: <code class="language-plaintext highlighter-rouge">READ1</code> and <code class="language-plaintext highlighter-rouge">READ2</code></li>
       </ul>
     </li>
-    <li><strong>Samtools fastx</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to convert the filtered Nanopore-sequenced <span class="notranslate">reads</span> to fastq format
+    <li><strong>Samtools fastx</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to convert the filtered Nanopore-sequenced reads to fastq format
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM or SAM file to convert”</em>: the collection of
-filtered Nanopore-sequenced <span class="notranslate">reads</span>, output of second <strong>Samtools view</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
+filtered Nanopore-sequenced reads, output of second <strong>Samtools view</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
         <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">compressed FASTQ</code></li>
         <li><em>“outputs”</em>: <code class="language-plaintext highlighter-rouge">unspecific</code></li>
       </ul>
@@ -1929,12 +1927,12 @@ filtered Nanopore-sequenced <span class="notranslate">reads</span>, output of se
 <p>If you compare the outputs of the last step to the input data we started out
 with, you will notice that the Illumina-sequenced data is arranged differently
 now than initially. It is arranged now into separate collections of forward and
-reverse <span class="notranslate">reads</span>, whereas we started with a single nested collection of the data.</p>
+reverse reads, whereas we started with a single nested collection of the data.</p>
 
 <p>We can easily cast the data back into its original structure with one of
-<span class="notranslate">Galaxy</span>’s collection manipulation tools, but note that we will not use the
+Galaxy’s collection manipulation tools, but note that we will not use the
 resulting nested collection for this tutorial because the <strong>Unicycler</strong> tool
-for assembling the <span class="notranslate">reads</span> would not be able to handle the nested data correctly.</p>
+for assembling the reads would not be able to handle the nested data correctly.</p>
 
 <p>Thus, the following just serves as an illustration and is entirely optional.</p>
 
@@ -1945,10 +1943,10 @@ for assembling the <span class="notranslate">reads</span> would not be able to h
     <li><strong>Zip Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input Dataset (Forward)”</em>: the collection
-of filtered Illumina-sequenced forward <span class="notranslate">reads</span> in fastq format,
+of filtered Illumina-sequenced forward reads in fastq format,
 first output of first <strong>Samtools fastx</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input Dataset (Reverse)”</em>: the collection
-of filtered Illumina-sequenced reverse <span class="notranslate">reads</span> in fastq format,
+of filtered Illumina-sequenced reverse reads in fastq format,
 second output of first <strong>Samtools fastx</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
       </ul>
     </li>
@@ -1956,14 +1954,14 @@ second output of first <strong>Samtools fastx</strong> <i class="fas fa-wrench" 
 
 </blockquote>
 
-<h2 id="merging-of-reads-with-collection-operations">Merging of <span class="notranslate">reads</span> with collection operations</h2>
+<h2 id="merging-of-reads-with-collection-operations">Merging of reads with collection operations</h2>
 
-<p>To merge <span class="notranslate">reads</span> from several samples into a combined final assembly, we need to
+<p>To merge reads from several samples into a combined final assembly, we need to
 pass the data to <strong>Unicycler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in partially merged form. The
-forward and reverse <span class="notranslate">reads</span> of paired-end data should be kept separate, and so
-should short and long <span class="notranslate">reads</span>. However, the tool has no option to combine data
+forward and reverse reads of paired-end data should be kept separate, and so
+should short and long reads. However, the tool has no option to combine data
 from individual samples, so we need to merge the forward, reverse, and the long
-<span class="notranslate">reads</span> data, respectively, across samples. Conveniently for us, the outputs of
+reads data, respectively, across samples. Conveniently for us, the outputs of
 the earlier <strong>Samtools fastx</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> runs have already returned the
 data structured into three corresponding collections for us.</p>
 
@@ -1971,28 +1969,28 @@ data structured into three corresponding collections for us.</p>
   <div class="box-title hands-on-title" id="hands-on-collapsing-each-collection-into-a-single-dataset" aria-label="hands-on box: Collapsing each collection into a single dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Collapsing each collection into a single dataset</div>
 
   <ol>
-    <li><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> of Illumina-sequenced <em>forward</em> <span class="notranslate">reads</span>
+    <li><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> of Illumina-sequenced <em>forward</em> reads
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse into single dataset”</em>:
-the collection of filtered Illumina-sequenced forward <span class="notranslate">reads</span> in fastq format,
+the collection of filtered Illumina-sequenced forward reads in fastq format,
 first output of first <strong>Samtools fastx</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
         <li><em>“Keep one header line”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><em>“Prepend File name”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
-    <li><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> of Illumina-sequenced <em>reverse</em> <span class="notranslate">reads</span>
+    <li><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> of Illumina-sequenced <em>reverse</em> reads
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse into single dataset”</em>:
-the collection of filtered Illumina-sequenced reverse <span class="notranslate">reads</span> in fastq format,
+the collection of filtered Illumina-sequenced reverse reads in fastq format,
 second output of first <strong>Samtools fastx</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
         <li><em>“Keep one header line”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><em>“Prepend File name”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
-    <li><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> of Nanopore-sequenced <span class="notranslate">reads</span>
+    <li><strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> of Nanopore-sequenced reads
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Collection of files to collapse into single dataset”</em>:
-the collection of filtered Nanopore-sequenced <span class="notranslate">reads</span> in fastq format,
+the collection of filtered Nanopore-sequenced reads in fastq format,
 output of second <strong>Samtools fastx</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
         <li><em>“Keep one header line”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><em>“Prepend File name”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -2004,14 +2002,14 @@ output of second <strong>Samtools fastx</strong> <i class="fas fa-wrench" aria-h
 
 <h1 id="sars-cov-2-genome-assembly">SARS-CoV-2 genome assembly</h1>
 
-<h2 id="optional-subsampling-of-reads">Optional: Subsampling of <span class="notranslate">reads</span></h2>
+<h2 id="optional-subsampling-of-reads">Optional: Subsampling of reads</h2>
 
-<p>The actual assembly of the sequenced <span class="notranslate">reads</span> represents the real bottleneck in
+<p>The actual assembly of the sequenced reads represents the real bottleneck in
 this tutorial. Assembly of the full set of sequences can easily take 10 hours
 and would best be conducted overnight.</p>
 
 <p>If you do not have that much time, you should downsample the Illumina-sequenced
-combined <span class="notranslate">reads</span> now. Which will reduce the time required to finish the
+combined reads now. Which will reduce the time required to finish the
 subsequent assembly step to approximately 1-2 hours.</p>
 
 <blockquote class="comment">
@@ -2022,13 +2020,13 @@ likely lead to poor assembly outcomes.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-subsampling-of-paired-end-short-reads-data" aria-label="hands-on box: Subsampling of paired-end short-reads data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Subsampling of paired-end short-<span class="notranslate">reads</span> data</div>
+  <div class="box-title hands-on-title" id="hands-on-subsampling-of-paired-end-short-reads-data" aria-label="hands-on box: Subsampling of paired-end short-reads data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Subsampling of paired-end short-reads data</div>
 
   <ol>
     <li><strong>seqtk_sample</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTA/Q file”</em>: The two datasets with the
-combined Illumina-sequenced forward and reverse <span class="notranslate">reads</span>, outputs of the
+combined Illumina-sequenced forward and reverse reads, outputs of the
 first and the second run of <strong>Collapse Collection</strong></li>
         <li><em>“RNG seed”</em>: 4</li>
         <li><em>“Subsample (decimal fraction or number)”</em>: 0.1</li>
@@ -2048,18 +2046,18 @@ first and the second run of <strong>Collapse Collection</strong></li>
       <ul>
         <li><em>“Paired or Single end data?”</em>: <code class="language-plaintext highlighter-rouge">Paired</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select first set of <span class="notranslate">reads</span>”</em>: the combined
-Illumina-sequenced forward <span class="notranslate">reads</span> from all samples, output of the
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select first set of reads”</em>: the combined
+Illumina-sequenced forward reads from all samples, output of the
 first <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run (or first output of
 <strong>seqtk_sample</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for a subsample-based assembly)</li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select second set of <span class="notranslate">reads</span>”</em>: the combined
-Illumina-sequenced reverse <span class="notranslate">reads</span> from all samples, output of the
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select second set of reads”</em>: the combined
+Illumina-sequenced reverse reads from all samples, output of the
 second <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run  (or second output
 of <strong>seqtk_sample</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for a subsample-based assembly)</li>
           </ul>
         </li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select long <span class="notranslate">reads</span>. If there are no long <span class="notranslate">reads</span>, leave this empty”</em>:
-Nanpore-sequenced <span class="notranslate">reads</span> from all samples, output of the third
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select long reads. If there are no long reads, leave this empty”</em>:
+Nanpore-sequenced reads from all samples, output of the third
 <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
         <li><em>“Select Bridging mode”</em>: <code class="language-plaintext highlighter-rouge">Normal (moderate contig size and misassembly rate)</code></li>
         <li><em>“Exclude contigs from the FASTA file which are shorter than this length (bp)”</em>:
@@ -2085,7 +2083,7 @@ Nanpore-sequenced <span class="notranslate">reads</span> from all samples, outpu
 contains the sequences of <em>all</em> assembled fragments (including the ones shorter
 than the threshold length defined for inclusion of the fragments into the FASTA
 output), but also indicates the relative average coverage of the fragments by
-sequenced <span class="notranslate">reads</span> and how some of the fragments could potentially be bridged
+sequenced reads and how some of the fragments could potentially be bridged
 after resolving ambiguities manually.</p>
 
 <h3 id="assembly-inspection-with-bandage">Assembly inspection with Bandage</h3>
@@ -2160,7 +2158,7 @@ easier if we work with the FASTA output of <strong>Unicycler</strong> instead.</
 
 <p>From the visualization with <strong>Bandage Image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> we know that the
 separately assembled nodes are all longer than 1000 bp. We can extract those
-sequences based on the length threshold in <span class="notranslate">Galaxy</span>, then BLAST all retained
+sequences based on the length threshold in Galaxy, then BLAST all retained
 sequences in one go.</p>
 
 <blockquote class="notranslate hands_on">
@@ -2202,7 +2200,7 @@ from the output.</p>
 
   <ol>
     <li>View the output of <strong>Filter sequences by length</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> by
-clicking the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon attached to that dataset.</li>
+clicking the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (eye) icon attached to that dataset.</li>
     <li>Click into the middle panel, which should now display the content of the
 dataset, select all sequences by pressing <kbd>Ctrl</kbd>+<kbd>A</kbd>,
 then copy the selection to the clipboard with <kbd>Ctrl</kbd>+<kbd>C</kbd></li>
@@ -2253,16 +2251,16 @@ our analysis worked and produced meaningful results.</li>
 bacterial genomes. The only exceptions are the node #10 sequence, for
 which no significant BLAST hits could be found, and the node #11
 sequence, which represents a small stretch of left-over human genomic
-<span class="notranslate">DNA</span>, which seems to have survived our subtraction approach.</p>
+DNA, which seems to have survived our subtraction approach.</p>
 
         <p>What all the bacterial genomes have in common is that they represent
 genera of bacteria that are known to colonize the oral cavity and
 mucosa. Since all samples in this analysis are BALF samples the presence
-of <span class="notranslate">DNA</span> from such bacteria should not be surprising. In addition, some
+of DNA from such bacteria should not be surprising. In addition, some
 members of the identified genera are known as opportunistic pathogens.
 In particular, members of the genus <em>Prevotella</em> can infect the
 respiratory tract and contribute to inflammation under anaerobic
-conditions caused by primary infections. Hence, an alte<span class="notranslate">rna</span>tive
+conditions caused by primary infections. Hence, an alternative
 explanation for the presence of some of these sequences in the samples
 might be that the corresponding bacteria contributed to the clinical
 picture of some of the Covid-19 patients they were obtained from.</p>
@@ -2275,7 +2273,7 @@ picture of some of the Covid-19 patients they were obtained from.</p>
 <h1 id="conclusion">Conclusion</h1>
 
 <p>The power of modern genome assembly tools is remarkable, and so is their
-robustness in the face of data of metagenomic nature. Assembling <span class="notranslate">reads</span> derived
+robustness in the face of data of metagenomic nature. Assembling reads derived
 from a virus and a good handful of copurified bacteria back into separate
 contigs is a challenging task, which Unicycler solved without major issues!</p>
 

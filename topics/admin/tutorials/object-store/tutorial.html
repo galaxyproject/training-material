@@ -894,11 +894,11 @@
 
 <h1 id="expanding-storage">Expanding Storage</h1>
 
-<p>You may find that your <span class="notranslate">Galaxy</span> files directory has run out of space, but you don’t want to move all of the files from one filesystem to another. One solution to this problem is to use <span class="notranslate">Galaxy</span>’s hierarchical object store to add an additional file space for <span class="notranslate">Galaxy</span>.</p>
+<p>You may find that your Galaxy files directory has run out of space, but you don’t want to move all of the files from one filesystem to another. One solution to this problem is to use Galaxy’s hierarchical object store to add an additional file space for Galaxy.</p>
 
-<p>Alte<span class="notranslate">rna</span>tively, you may wish to write new datasets to more than one filesystem. For this, you can use <span class="notranslate">Galaxy</span>’s distributed object store.</p>
+<p>Alternatively, you may wish to write new datasets to more than one filesystem. For this, you can use Galaxy’s distributed object store.</p>
 
-<p>This tutorial assumes you have done the “Ansible for installing <span class="notranslate">Galaxy</span>” tutorial, it references the base configuration set up in that tutorial in numerous places.</p>
+<p>This tutorial assumes you have done the “Ansible for installing Galaxy” tutorial, it references the base configuration set up in that tutorial in numerous places.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -915,7 +915,7 @@
 
 <h1 id="hierarchical-object-store">Hierarchical Object Store</h1>
 
-<p>First, note that your <span class="notranslate">Galaxy</span> datasets have been created thus far in the directory <code class="language-plaintext highlighter-rouge">/data</code>, due to <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config: <span class="notranslate">galaxy</span>: file_path</code>. In some cases, we run out of storage in a particular location. <span class="notranslate">Galaxy</span> allows us to add additional storage locations where it will create new datasets, while still looking in the old locations for old datasets. You will not have to migrate any of your datasets, and can just “plug and play” with new storage pools.</p>
+<p>First, note that your Galaxy datasets have been created thus far in the directory <code class="language-plaintext highlighter-rouge">/data</code>, due to <code class="language-plaintext highlighter-rouge">galaxy_config: galaxy: file_path</code>. In some cases, we run out of storage in a particular location. Galaxy allows us to add additional storage locations where it will create new datasets, while still looking in the old locations for old datasets. You will not have to migrate any of your datasets, and can just “plug and play” with new storage pools.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-adding-hierarchical-storage" aria-label="hands-on box: Adding Hierarchical Storage"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding Hierarchical Storage</div>
@@ -924,21 +924,21 @@
     <li>
       <p>Open your group variables file and set the <code class="language-plaintext highlighter-rouge">object_store_config_file</code> variable:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
-  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
-    <span class="na">object_store_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/object_store_conf.xml"</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config</span><span class="pi">:</span>
+  <span class="na">galaxy</span><span class="pi">:</span>
+    <span class="na">object_store_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config_dir</span><span class="nv"> </span><span class="s">}}/object_store_conf.xml"</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>In your group variables file, add it to the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_templates</code> section:</p>
+      <p>In your group variables file, add it to the <code class="language-plaintext highlighter-rouge">galaxy_config_templates</code> section:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_templates</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/object_store_conf.xml.j2</span>
-    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.object_store_config_file</span><span class="nv"> </span><span class="s">}}"</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">galaxy_config_templates</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/galaxy/config/object_store_conf.xml.j2</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">galaxy_config.galaxy.object_store_config_file</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Create and edit <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/object_store_conf.xml.j2</code> with the following contents:</p>
+      <p>Create and edit <code class="language-plaintext highlighter-rouge">templates/galaxy/config/object_store_conf.xml.j2</code> with the following contents:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="nt">&lt;object_store</span> <span class="na">type=</span><span class="s">"hierarchical"</span><span class="nt">&gt;</span>
@@ -956,24 +956,24 @@
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Add a <code class="language-plaintext highlighter-rouge">pre_task</code> in your playbook <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> file to create the <code class="language-plaintext highlighter-rouge">/data2</code> folder <a href="https://docs.ansible.com/ansible/2.9/modules/file_module.html">using the file module</a>.</p>
+      <p>Add a <code class="language-plaintext highlighter-rouge">pre_task</code> in your playbook <code class="language-plaintext highlighter-rouge">galaxy.yml</code> file to create the <code class="language-plaintext highlighter-rouge">/data2</code> folder <a href="https://docs.ansible.com/ansible/2.9/modules/file_module.html">using the file module</a>.</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    - name: Create the second storage directory
       file:
-        owner: <span class="notranslate">galaxy</span>
-        group: <span class="notranslate">galaxy</span>
+        owner: galaxy
+        group: galaxy
         path: /data2
         state: directory
         mode: '0755'
 </code></pre></div>      </div>
 
-      <p>We’ve hardcoded the user/group because creating a storage directory is unusual. In normal practice someone provides you with an NFS mount and you will simply point your <span class="notranslate">Galaxy</span> there.</p>
+      <p>We’ve hardcoded the user/group because creating a storage directory is unusual. In normal practice someone provides you with an NFS mount and you will simply point your Galaxy there.</p>
     </li>
     <li>
-      <p>Run the playbook and restart <span class="notranslate">Galaxy</span></p>
+      <p>Run the playbook and restart Galaxy</p>
     </li>
     <li>
-      <p>Run a couple of jobs after <span class="notranslate">Galaxy</span> has restarted.</p>
+      <p>Run a couple of jobs after Galaxy has restarted.</p>
 
       <blockquote class="question">
         <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -995,14 +995,14 @@
 
 <h1 id="distributed-object-store">Distributed Object Store</h1>
 
-<p>Rather than searching a hierarchy of object stores until the dataset is found, <span class="notranslate">Galaxy</span> can store the ID (in the database) of the object store in which a dataset is located when the dataset is created. This allows <span class="notranslate">Galaxy</span> to write to more than one object store for new datasets.</p>
+<p>Rather than searching a hierarchy of object stores until the dataset is found, Galaxy can store the ID (in the database) of the object store in which a dataset is located when the dataset is created. This allows Galaxy to write to more than one object store for new datasets.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-distributed-object-store" aria-label="hands-on box: Distributed Object Store"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Distributed Object Store</div>
 
   <ol>
     <li>
-      <p>Edit your <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/object_store_conf.xml.j2</code> file and replace the contents with:</p>
+      <p>Edit your <code class="language-plaintext highlighter-rouge">templates/galaxy/config/object_store_conf.xml.j2</code> file and replace the contents with:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="nt">&lt;object_store</span> <span class="na">type=</span><span class="s">"distributed"</span><span class="nt">&gt;</span>
@@ -1020,7 +1020,7 @@
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run the playbook, restart <span class="notranslate">Galaxy</span></p>
+      <p>Run the playbook, restart Galaxy</p>
     </li>
     <li>
       <p>Run 4 or so jobs, and check where the output appear. You should see that they are split relatively evenly between the two data directories.</p>
@@ -1029,7 +1029,7 @@
 
 </blockquote>
 
-<p>Sites like Use<span class="notranslate">Galaxy</span>.eu use the distributed object store in order to balance dataset storage across 10 different storage pools.</p>
+<p>Sites like UseGalaxy.eu use the distributed object store in order to balance dataset storage across 10 different storage pools.</p>
 
 <blockquote class="details">
   <div class="box-title details-title" id="details-more-documentation"><button class="gtn-boxify-button details" type="button" aria-controls="details-more-documentation-contents" aria-expanded="true" aria-label="Toggle details box: More documentation"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: More documentation<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1052,17 +1052,17 @@ some example code, and we can include this as a training module for everyone.</p
 
 <blockquote class="warning">
   <div class="box-title warning-title" id="warning-switching-object-store-types-will-cause-issues-1" aria-label="warning box: switching object store types will cause issues"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: switching object store types will cause issues</div>
-  <p>We have switched between two different object stores here, but this is not supported. If you need to do this, you will need to update datasets in <span class="notranslate">Galaxy</span>’s database. Any datasets that were created as hierarchical will lack the <code class="language-plaintext highlighter-rouge">object_store_id</code>, and you will need to supply the correct one. Do not just blindly copy these instructions, please understand what they do before running them and talk to us on <a href="http://gitter.im/galaxyproject/Lobby">Gitter</a> for more help</p>
+  <p>We have switched between two different object stores here, but this is not supported. If you need to do this, you will need to update datasets in Galaxy’s database. Any datasets that were created as hierarchical will lack the <code class="language-plaintext highlighter-rouge">object_store_id</code>, and you will need to supply the correct one. Do not just blindly copy these instructions, please understand what they do before running them and talk to us on <a href="http://gitter.im/galaxyproject/Lobby">Gitter</a> for more help</p>
 
   <ol>
     <li>
-      <p>Move the datasets to their new location: <code class="language-plaintext highlighter-rouge">sudo -u <span class="notranslate">galaxy</span> rsync -avr /hierarchical/000/ /distributed/000/</code></p>
+      <p>Move the datasets to their new location: <code class="language-plaintext highlighter-rouge">sudo -u galaxy rsync -avr /hierarchical/000/ /distributed/000/</code></p>
     </li>
     <li>
-      <p>Update the database: <code class="language-plaintext highlighter-rouge">sudo -Hu <span class="notranslate">galaxy</span> psql <span class="notranslate">galaxy</span> -c "UPDATE dataset SET object_store_id='data';" </code></p>
+      <p>Update the database: <code class="language-plaintext highlighter-rouge">sudo -Hu galaxy psql galaxy -c "UPDATE dataset SET object_store_id='data';" </code></p>
     </li>
     <li>
-      <p>Restart your <span class="notranslate">Galaxy</span></p>
+      <p>Restart your Galaxy</p>
     </li>
   </ol>
 
@@ -1086,7 +1086,7 @@ some example code, and we can include this as a training module for everyone.</p
 </code></pre></div>      </div>
     </li>
     <li>
-      <p><code class="language-plaintext highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml</code></p>
+      <p><code class="language-plaintext highlighter-rouge">ansible-galaxy install -p roles -r requirements.yml</code></p>
     </li>
     <li>
       <p>Edit your group variables to configure the object store:</p>
@@ -1097,15 +1097,15 @@ minio_secret_key: "my-super-extra-top-secret-key"
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Edit your playbook and add the minio role <strong>before</strong> <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code>:</p>
+      <p>Edit your playbook and add the minio role <strong>before</strong> <code class="language-plaintext highlighter-rouge">galaxyproject.galaxy</code>:</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    - atosatto.minio
 </code></pre></div>      </div>
 
-      <p><span class="notranslate">Galaxy</span> will need to use the bucket, and will want it to be there when it boots, so we need to setup the object store first.</p>
+      <p>Galaxy will need to use the bucket, and will want it to be there when it boots, so we need to setup the object store first.</p>
     </li>
     <li>
-      <p>Edit the <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/object_store_conf.xml.j2</code>, and configure the object store as one of the hierarchical backends. The object store does not play nicely with the distributed backend during training preparation. Additionally, reset the orders of the disk backends to be higher than the order of the swift backend.</p>
+      <p>Edit the <code class="language-plaintext highlighter-rouge">templates/galaxy/config/object_store_conf.xml.j2</code>, and configure the object store as one of the hierarchical backends. The object store does not play nicely with the distributed backend during training preparation. Additionally, reset the orders of the disk backends to be higher than the order of the swift backend.</p>
 
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">@@ -1,13 +1,21 @@</span>
  &lt;?xml version="1.0"?&gt;
@@ -1124,11 +1124,11 @@ minio_secret_key: "my-super-extra-top-secret-key"
          &lt;/backend&gt;
 <span class="gi">+        &lt;object_store id="swifty" type="swift" order="0"&gt;
 +            &lt;auth access_key="{{ minio_access_key }}" secret_key="{{ minio_secret_key }}" /&gt;
-+            &lt;bucket name="<span class="notranslate">galaxy</span>" use_reduced_redundancy="False" max_chunk_size="250"/&gt;
++            &lt;bucket name="galaxy" use_reduced_redundancy="False" max_chunk_size="250"/&gt;
 +            &lt;connection host="127.0.0.1" port="9091" is_secure="False" conn_path="" multipart="True"/&gt;
-+            &lt;cache path="{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/database/object_store_cache" size="1000" /&gt;
-+            &lt;extra_dir type="job_work" path="{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/database/job_working_directory_swift"/&gt;
-+            &lt;extra_dir type="temp" path="{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/database/tmp_swift"/&gt;
++            &lt;cache path="{{ galaxy_mutable_data_dir }}/database/object_store_cache" size="1000" /&gt;
++            &lt;extra_dir type="job_work" path="{{ galaxy_mutable_data_dir }}/database/job_working_directory_swift"/&gt;
++            &lt;extra_dir type="temp" path="{{ galaxy_mutable_data_dir }}/database/tmp_swift"/&gt;
 +        &lt;/object_store&gt;
 </span>     &lt;/backends&gt;
  &lt;/object_store&gt;
@@ -1141,12 +1141,12 @@ minio_secret_key: "my-super-extra-top-secret-key"
       <p>Run the playbook.</p>
     </li>
     <li>
-      <p><span class="notranslate">Galaxy</span> should now be configure to use the object store!</p>
+      <p>Galaxy should now be configure to use the object store!</p>
     </li>
     <li>
-      <p>When the playbook is done, upload a dataset to <span class="notranslate">Galaxy</span>, and check if it shows up in the bucket:</p>
+      <p>When the playbook is done, upload a dataset to Galaxy, and check if it shows up in the bucket:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo ls /minio-test/<span class="notranslate">galaxy</span>/000/
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ sudo ls /minio-test/galaxy/000/
 dataset_24.dat
 </code></pre></div>      </div>
     </li>
@@ -1157,25 +1157,25 @@ dataset_24.dat
 <h1 id="dropbox">Dropbox</h1>
 
 <p>Dropbox is a well-known cloud storage service where you can store and share files with anyone.
-As of <a href="https://github.com/galaxyproject/galaxy/pull/9888">20.09</a>, <span class="notranslate">Galaxy</span> has support for a couple of different file storage backends, including NextCloud (via webdavfs) and Dropbox.</p>
+As of <a href="https://github.com/galaxyproject/galaxy/pull/9888">20.09</a>, Galaxy has support for a couple of different file storage backends, including NextCloud (via webdavfs) and Dropbox.</p>
 
-<p>This tutorial will help you setup the connection between <span class="notranslate">Galaxy</span> and Dropbox, allowing your users to add their account details and then access their Dropbox data within <span class="notranslate">Galaxy</span></p>
+<p>This tutorial will help you setup the connection between Galaxy and Dropbox, allowing your users to add their account details and then access their Dropbox data within Galaxy</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-configure-galaxy-to-access-the-dropbox-service" aria-label="hands-on box: Configure Galaxy to access the Dropbox service"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Configure <span class="notranslate">Galaxy</span> to access the Dropbox service</div>
+  <div class="box-title hands-on-title" id="hands-on-configure-galaxy-to-access-the-dropbox-service" aria-label="hands-on box: Configure Galaxy to access the Dropbox service"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Configure Galaxy to access the Dropbox service</div>
 
   <ol>
     <li>
-      <p>If the folder does not exist, create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config</code> next to your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook.</p>
+      <p>If the folder does not exist, create <code class="language-plaintext highlighter-rouge">templates/galaxy/config</code> next to your <code class="language-plaintext highlighter-rouge">galaxy.yml</code> playbook.</p>
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p templates/<span class="notranslate">galaxy</span>/config
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p templates/galaxy/config
 </code></pre></div>        </div>
       </blockquote>
     </li>
     <li>
-      <p>Create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/file_sources_conf.yml</code> with the following contents:</p>
+      <p>Create <code class="language-plaintext highlighter-rouge">templates/galaxy/config/file_sources_conf.yml</code> with the following contents:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">dropbox</span>
   <span class="na">id</span><span class="pi">:</span> <span class="s">dropbox</span>
@@ -1185,7 +1185,7 @@ As of <a href="https://github.com/galaxyproject/galaxy/pull/9888">20.09</a>, <sp
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/user_preferences_extra_conf.yml</code> with the following contents:</p>
+      <p>Create <code class="language-plaintext highlighter-rouge">templates/galaxy/config/user_preferences_extra_conf.yml</code> with the following contents:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">preferences</span><span class="pi">:</span>
     <span class="na">dropbox</span><span class="pi">:</span>
@@ -1198,49 +1198,49 @@ As of <a href="https://github.com/galaxyproject/galaxy/pull/9888">20.09</a>, <sp
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Inform the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role of where you would like the <code class="language-plaintext highlighter-rouge">file_sources_conf.yml</code> and <code class="language-plaintext highlighter-rouge">user_preferences_extra_conf.yml</code> to reside, by setting it in your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
+      <p>Inform the <code class="language-plaintext highlighter-rouge">galaxyproject.galaxy</code> role of where you would like the <code class="language-plaintext highlighter-rouge">file_sources_conf.yml</code> and <code class="language-plaintext highlighter-rouge">user_preferences_extra_conf.yml</code> to reside, by setting it in your <code class="language-plaintext highlighter-rouge">group_vars/galaxyservers.yml</code>:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -35,6 +35,8 @@</span> <span class="notranslate">galaxy</span>_config:
-     tool_data_path: "{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/tool-data"
-     job_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/job_conf.yml"
-<span class="gi">+    file_sources_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/file_sources_conf.yml"
-+    user_preferences_extra_conf_path: "{{ <span class="notranslate">galaxy</span>_config_dir }}/user_preferences_extra_conf.yml"
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
+</span><span class="gi">+++ b/group_vars/galaxyservers.yml
+</span><span class="p">@@ -35,6 +35,8 @@</span> galaxy_config:
+     tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+     job_config_file: "{{ galaxy_config_dir }}/job_conf.yml"
+<span class="gi">+    file_sources_config_file: "{{ galaxy_config_dir }}/file_sources_conf.yml"
++    user_preferences_extra_conf_path: "{{ galaxy_config_dir }}/user_preferences_extra_conf.yml"
 </span></code></pre></div>      </div>
     </li>
     <li>
-      <p>Deploy the new config files using the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> var (also from the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role) in your group vars:</p>
+      <p>Deploy the new config files using the <code class="language-plaintext highlighter-rouge">galaxy_config_files</code> var (also from the <code class="language-plaintext highlighter-rouge">galaxyproject.galaxy</code> role) in your group vars:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -65,6 +67,12 @@</span> <span class="notranslate">galaxy</span>_config_templates:
-   - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.yml.j2
-     dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
+</span><span class="gi">+++ b/group_vars/galaxyservers.yml
+</span><span class="p">@@ -65,6 +67,12 @@</span> galaxy_config_templates:
+   - src: templates/galaxy/config/job_conf.yml.j2
+     dest: "{{ galaxy_config.galaxy.job_config_file }}"
     
-<span class="gi">+<span class="notranslate">galaxy</span>_config_files:
-+  - src: files/<span class="notranslate">galaxy</span>/config/user_preferences_extra_conf.yml
-+    dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.user_preferences_extra_conf_path }}"
-+  - src: files/<span class="notranslate">galaxy</span>/config/file_sources_conf.yml
-+    dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.file_sources_config_file }}"
+<span class="gi">+galaxy_config_files:
++  - src: files/galaxy/config/user_preferences_extra_conf.yml
++    dest: "{{ galaxy_config.galaxy.user_preferences_extra_conf_path }}"
++  - src: files/galaxy/config/file_sources_conf.yml
++    dest: "{{ galaxy_config.galaxy.file_sources_config_file }}"
 +
 </span></code></pre></div>      </div>
     </li>
     <li>
-      <p>Run the playbook. At the very end, you should see output like the following indicating that <span class="notranslate">Galaxy</span> has been restarted:</p>
+      <p>Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:</p>
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
           <div class="box-title code-in-title" id="code-in-bash-1" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>          </div>
         </blockquote>
 
         <blockquote class="code-out">
           <div class="box-title code-out-title" id="code-out-output" aria-label="code-out box: Output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Output</div>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
-RUNNING HANDLER [restart <span class="notranslate">galaxy</span>] ****************************************
-changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
+RUNNING HANDLER [restart galaxy] ****************************************
+changed: [gat-88.training.galaxyproject.eu]
 </code></pre></div>          </div>
         </blockquote>
       </blockquote>
@@ -1249,16 +1249,16 @@ changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
 
 </blockquote>
 
-<p>Now we are ready to configure a <span class="notranslate">Galaxy</span>’s user account to upload dataset from Dropbox to the <span class="notranslate">Galaxy</span> server.</p>
+<p>Now we are ready to configure a Galaxy’s user account to upload dataset from Dropbox to the Galaxy server.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-configure-galaxy-to-access-the-dropbox-service-1" aria-label="hands-on box: Configure Galaxy to access the Dropbox service"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Configure <span class="notranslate">Galaxy</span> to access the Dropbox service</div>
+  <div class="box-title hands-on-title" id="hands-on-configure-galaxy-to-access-the-dropbox-service-1" aria-label="hands-on box: Configure Galaxy to access the Dropbox service"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Configure Galaxy to access the Dropbox service</div>
 
   <ol>
     <li>
       <p>Generate a Dropbox access token following the <a href="https://www.dropbox.com/lp/developers/reference/oauth-guide">Dropbox Oauth guide</a></p>
     </li>
-    <li>Add the Dropbox access token in the <span class="notranslate">Galaxy</span>’s user preferences
+    <li>Add the Dropbox access token in the Galaxy’s user preferences
       <ul>
         <li>Go to https://&lt;server&gt;/user/information</li>
         <li>Here you will find the form user will fill in with his own Dropbox access token:

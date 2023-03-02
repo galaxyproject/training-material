@@ -710,8 +710,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
             UseGalaxy.be
         </a>
@@ -763,20 +761,20 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alte<span class="notranslate">rna</span>tives to the lengthy and expensive traditional experimental approaches.  Properties associated with a group of peptide sequences such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to compare peptide sequences and libraries.  In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to analyze the biological properties of peptides. Additionally, we will learn how to use different utilities of the Peptide Design and Analysis Under <span class="notranslate">Galaxy</span> (PDAUG) package to calculate various peptide-based descriptors, and use these descriptors and feature spaces to build informative plots.</p>
+<p>Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alternatives to the lengthy and expensive traditional experimental approaches.  Properties associated with a group of peptide sequences such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to compare peptide sequences and libraries.  In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to analyze the biological properties of peptides. Additionally, we will learn how to use different utilities of the Peptide Design and Analysis Under Galaxy (PDAUG) package to calculate various peptide-based descriptors, and use these descriptors and feature spaces to build informative plots.</p>
 
 <h3 id="easy-access-to-tools-workflows-and-data-from-the-docker-image">Easy access to tools, workflows and data from the docker image</h3>
 
-<p>An easy way to install and use the PDAUG toolset, and follow this tutorial is via a prebuilt docker image equipped with a PDAUG toolset, <span class="notranslate">workflow</span>, and data library. A prebuilds docker image can be downloaded and run by typing a simple command at the terminal after installing docker software on any operating system.</p>
+<p>An easy way to install and use the PDAUG toolset, and follow this tutorial is via a prebuilt docker image equipped with a PDAUG toolset, workflow, and data library. A prebuilds docker image can be downloaded and run by typing a simple command at the terminal after installing docker software on any operating system.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-easy-access-of-tools-workflows-and-data-from-docker-image" aria-label="hands-on box: Easy access of tools, workflows and data from docker image"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Easy access of tools, workflows and data from docker image</div>
 
   <ol>
-    <li>Downloading the docker image from the docker hub using <code class="language-plaintext highlighter-rouge">docker pull jayadevjoshi12/<span class="notranslate">galaxy</span>_pdaug:latest</code> command.</li>
-    <li>Running the container with latest PDAUG tools <code class="language-plaintext highlighter-rouge">docker run -i -t -p 8080:80 jayadevjoshi12/<span class="notranslate">galaxy</span>_pdaug:latest</code>.</li>
-    <li><span class="notranslate">Workflow</span> is available under the <span class="notranslate">workflow</span> section, use <code class="language-plaintext highlighter-rouge">admin</code> as use<span class="notranslate">rna</span>me and <code class="language-plaintext highlighter-rouge">password</code> as a password to login as an administrator of your <span class="notranslate">galaxy</span> instance.</li>
-    <li>Use <code class="language-plaintext highlighter-rouge">admin</code> as use<span class="notranslate">rna</span>me and <code class="language-plaintext highlighter-rouge">password</code> as a password to login <span class="notranslate">galaxy</span> instance, which is available at <a href="http://127.0.0.1:8080">localhost</a> to access <span class="notranslate">workflow</span> and data.</li>
+    <li>Downloading the docker image from the docker hub using <code class="language-plaintext highlighter-rouge">docker pull jayadevjoshi12/galaxy_pdaug:latest</code> command.</li>
+    <li>Running the container with latest PDAUG tools <code class="language-plaintext highlighter-rouge">docker run -i -t -p 8080:80 jayadevjoshi12/galaxy_pdaug:latest</code>.</li>
+    <li>Workflow is available under the workflow section, use <code class="language-plaintext highlighter-rouge">admin</code> as username and <code class="language-plaintext highlighter-rouge">password</code> as a password to login as an administrator of your galaxy instance.</li>
+    <li>Use <code class="language-plaintext highlighter-rouge">admin</code> as username and <code class="language-plaintext highlighter-rouge">password</code> as a password to login galaxy instance, which is available at <a href="http://127.0.0.1:8080">localhost</a> to access workflow and data.</li>
   </ol>
 
 </blockquote>
@@ -807,7 +805,7 @@
   <div class="box-title hands-on-title" id="hands-on-fetching-inbuild-data" aria-label="hands-on box: Fetching inbuild data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Fetching inbuild data</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_data_access/pdaug_peptide_data_access/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_data_access/pdaug_peptide_data_access/0.1.0"><strong>PDAUG Peptide Data Access</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_peptide_data_access/pdaug_peptide_data_access/0.1.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_data_access/pdaug_peptide_data_access/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_data_access/pdaug_peptide_data_access/0.1.0"><strong>PDAUG Peptide Data Access</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_data_access/pdaug_peptide_data_access/0.1.0</span></span>  with the following parameters:
       <ul>
         <li><em>“Datasets”</em>: <code class="language-plaintext highlighter-rouge">AMPvsTMP</code></li>
       </ul>
@@ -818,13 +816,13 @@
 
 <h2 id="converting-tabular-data-into-fasta-format">Converting tabular data into fasta format</h2>
 
-<p><code class="language-plaintext highlighter-rouge">PDAUG Peptide Data Access</code> tool returns data as a tabular file that contains sequences from both the classes. In order to utilize this data in the next steps, first we need to convert tabular data into fasta format. If data contains sequences from two different classes <code class="language-plaintext highlighter-rouge">PDAUG TSVtoFASTA</code> tool converts and splits data into two separate files for each of the class,  AMPs, and TMPs.  The reason behind converting and splitting the data is that all the <span class="notranslate">downstream</span> tools require two separate files if we are comparing two different peptide classes or calculating features.</p>
+<p><code class="language-plaintext highlighter-rouge">PDAUG Peptide Data Access</code> tool returns data as a tabular file that contains sequences from both the classes. In order to utilize this data in the next steps, first we need to convert tabular data into fasta format. If data contains sequences from two different classes <code class="language-plaintext highlighter-rouge">PDAUG TSVtoFASTA</code> tool converts and splits data into two separate files for each of the class,  AMPs, and TMPs.  The reason behind converting and splitting the data is that all the downstream tools require two separate files if we are comparing two different peptide classes or calculating features.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-converting-tabular-data-into-fasta-formate" aria-label="hands-on box: Converting tabular data into fasta formate"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Converting tabular data into fasta formate</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_tsvtofasta/pdaug_tsvtofasta/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_tsvtofasta/pdaug_tsvtofasta/0.1.0"><strong>PDAUG TSVtoFASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_tsvtofasta/pdaug_tsvtofasta/0.1.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_tsvtofasta/pdaug_tsvtofasta/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_tsvtofasta/pdaug_tsvtofasta/0.1.0"><strong>PDAUG TSVtoFASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/jay/pdaug_tsvtofasta/pdaug_tsvtofasta/0.1.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Peptide Data Access - AMPvsTMP (tabular)</code> (output of <strong>PDAUG Peptide Data Access</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Peptide Column”</em>:  <code class="language-plaintext highlighter-rouge">name</code></li>
@@ -846,7 +844,7 @@
   <div class="box-title hands-on-title" id="hands-on-generating-a-summary-plot-to-assess-peptide-dataset" aria-label="hands-on box: Generating a summary plot to assess peptide dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generating a summary plot to assess peptide dataset</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_sequence_analysis/pdaug_peptide_sequence_analysis/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_sequence_analysis/pdaug_peptide_sequence_analysis/0.1.0"><strong>PDAUG Peptide Sequence Analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_peptide_sequence_analysis/pdaug_peptide_sequence_analysis/0.1.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_sequence_analysis/pdaug_peptide_sequence_analysis/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_sequence_analysis/pdaug_peptide_sequence_analysis/0.1.0"><strong>PDAUG Peptide Sequence Analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_sequence_analysis/pdaug_peptide_sequence_analysis/0.1.0</span></span>  with the following parameters:
       <ul>
         <li><em>“Analysis options”</em>: <code class="language-plaintext highlighter-rouge">Plot Summary</code>
           <ul>
@@ -890,7 +888,7 @@
   <div class="box-title hands-on-title" id="hands-on-generating-a-fisher-s-plot-to-assess-peptide-dataset" aria-label="hands-on box: Generating a Fisher's plot to assess peptide dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generating a Fisher's plot to assess peptide dataset</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_fishers_plot/pdaug_fishers_plot/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_fishers_plot/pdaug_fishers_plot/0.1.0"><strong>PDAUG Fisher’s Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_fishers_plot/pdaug_fishers_plot/0.1.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_fishers_plot/pdaug_fishers_plot/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_fishers_plot/pdaug_fishers_plot/0.1.0"><strong>PDAUG Fisher’s Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/jay/pdaug_fishers_plot/pdaug_fishers_plot/0.1.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“First fasta file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG TSVtoFASTA on data 1 - first (fasta)</code> (first output of <strong>PDAUG TSVtoFASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second fasta file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG TSVtoFASTA on data 1 - second (fasta)</code> (second output of <strong>PDAUG TSVtoFASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -927,13 +925,13 @@
   <div class="box-title hands-on-title" id="hands-on-calculating-descriptors-for-the-peptide-dataset" aria-label="hands-on box: Calculating descriptors for the peptide dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Calculating descriptors for the peptide dataset</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0"><strong>PDAUG Sequence Property Based Descriptors</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0"><strong>PDAUG Sequence Property Based Descriptors</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input fasta file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG TSVtoFASTA on data 1 - first (fasta)</code> (first output of <strong>PDAUG TSVtoFASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Descriptor Type”</em>: <code class="language-plaintext highlighter-rouge">CTD</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0"><strong>PDAUG Sequence Property Based Descriptors</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0"><strong>PDAUG Sequence Property Based Descriptors</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input fasta file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG TSVtoFASTA on data 1 - second (fasta)</code> (second output of <strong>PDAUG TSVtoFASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Descriptor Type”</em>: <code class="language-plaintext highlighter-rouge">CTD</code></li>
@@ -955,13 +953,13 @@
   <div class="box-title hands-on-title" id="hands-on-adding-class-labels-target-labels-to-the-tabular-data" aria-label="hands-on box: Adding Class Labels (target labels) to the tabular data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Adding Class Labels (target labels) to the tabular data</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0"><strong>PDAUG Add Class Label</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0"><strong>PDAUG Add Class Label</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Sequence Property Based Descriptors on data 2 - CTD (tabular)</code> (output of <strong>PDAUG Sequence Property Based Descriptors</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Class Label”</em>: <code class="language-plaintext highlighter-rouge">TMPs</code></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0"><strong>PDAUG Add Class Label</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0"><strong>PDAUG Add Class Label</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Sequence Property Based Descriptors on data 3 - CTD (tabular)</code> (output of <strong>PDAUG Sequence Property Based Descriptors</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Class Label”</em>: <code class="language-plaintext highlighter-rouge">AMPs</code></li>
@@ -979,7 +977,7 @@
   <div class="box-title hands-on-title" id="hands-on-merging-two-tabular-data-files" aria-label="hands-on box: Merging two tabular data files"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Merging two tabular data files</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0"><strong>PDAUG Merge Dataframes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0"><strong>PDAUG Merge Dataframes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input files”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Add Class Label on data 6 - (tabular)</code> (output of <strong>PDAUG Add Class Label</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>), <code class="language-plaintext highlighter-rouge">PDAUG Add Class Label on data 7 - (tabular)</code> (output of <strong>PDAUG Add Class Label</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Option to merg data”</em>: <code class="language-plaintext highlighter-rouge">Merge data without adding class label</code></li>
@@ -997,7 +995,7 @@
   <div class="box-title hands-on-title" id="hands-on-generating-a-scatter-plot-to-assess-features" aria-label="hands-on box: Generating a scatter plot to assess features"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Generating a scatter plot to assess features</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0"><strong>PDAUG Basic Plots</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0"><strong>PDAUG Basic Plots</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0</span></span>  with the following parameters:
       <ul>
         <li><em>“Data plotting method”</em>: <code class="language-plaintext highlighter-rouge">Scatter Plot</code>
           <ul>
@@ -1028,7 +1026,7 @@
 
 <p>In this tutorial, we learned an example flexible and extensible analysis of peptide data using PDAUG tools. We generated various plots based on the quantitative properties of amino acids and peptide sequences.</p>
 
-<figure id="figure-4"><img src="../../images/PeptideAnalysisWorkflow.png" alt="Workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> <span class="notranslate">Workflow</span> used</figcaption></figure>
+<figure id="figure-4"><img src="../../images/PeptideAnalysisWorkflow.png" alt="Workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Workflow used</figcaption></figure>
 
 
 

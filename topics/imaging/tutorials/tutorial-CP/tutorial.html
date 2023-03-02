@@ -741,8 +741,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -808,18 +806,18 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>The nucleolus is a prominent structure of the nucleus of eukaryotic cells and is involved in ribosome biogenesis and cell cycle regulation. In <span class="notranslate">DNA</span> staining of cells, nucleoli can be identified as the absence of <span class="notranslate">DNA</span> in nuclei (<a href="#figure-1">Fig. 1</a>).
-Phenotypes caused by reduced gene function are widely used to elucidate gene function and image-based <span class="notranslate">RNA</span> interference (<span class="notranslate">RNA</span>i) screens are routinely used to find and characterize genes involved in a particular biological process. While screens typically focus on one biological process of interest, the molecular markers used can also inform on other processes. Re-using published screens image data can then be a cost-effective alte<span class="notranslate">rna</span>tive to performing new experiments.
-In particular, regardless of the targeted biological process, many screens include a <span class="notranslate">DNA</span> label and therefore can also reveal the effect of gene knock-downs on nucleoli.</p>
+<p>The nucleolus is a prominent structure of the nucleus of eukaryotic cells and is involved in ribosome biogenesis and cell cycle regulation. In DNA staining of cells, nucleoli can be identified as the absence of DNA in nuclei (<a href="#figure-1">Fig. 1</a>).
+Phenotypes caused by reduced gene function are widely used to elucidate gene function and image-based RNA interference (RNAi) screens are routinely used to find and characterize genes involved in a particular biological process. While screens typically focus on one biological process of interest, the molecular markers used can also inform on other processes. Re-using published screens image data can then be a cost-effective alternative to performing new experiments.
+In particular, regardless of the targeted biological process, many screens include a DNA label and therefore can also reveal the effect of gene knock-downs on nucleoli.</p>
 
-<figure id="figure-1"><img src="../../images/tutorial-CP/img_dna_channel.png" alt="DNA channel. " width="50%" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> <span class="notranslate">DNA</span> channel from the screen described in <span class="citation"><a href="#Heriche_2014">“<b>Integration of biological data by kernels on graph nodes allows prediction of new genes involved in mitotic chromosome condensation</b>” 2014</a></span>. The red arrows point at nucleoli.</figcaption></figure>
+<figure id="figure-1"><img src="../../images/tutorial-CP/img_dna_channel.png" alt="DNA channel. " width="50%" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> DNA channel from the screen described in <span class="citation"><a href="#Heriche_2014">“<b>Integration of biological data by kernels on graph nodes allows prediction of new genes involved in mitotic chromosome condensation</b>” 2014</a></span>. The red arrows point at nucleoli.</figcaption></figure>
 
-<p>In this tutorial, we will analyse <span class="notranslate">DNA</span> channel images of publicly available <span class="notranslate">RNA</span>i screens to extract numerical descriptors (i.e. features) of nucleoli.
+<p>In this tutorial, we will analyse DNA channel images of publicly available RNAi screens to extract numerical descriptors (i.e. features) of nucleoli.
 The images and associated metadata will be retrieved from the <a href="http://idr.openmicroscopy.org/">Image Data Resource (IDR)</a>, a repository that collects image datasets of tissues and cells.</p>
 
-<p>To process and analyse the images, we will use <a href="http://cellprofiler-manual.s3.amazonaws.com/CellProfiler-3.1.9/index.html">CellProfiler</a> (<span class="citation"><a href="#McQuin_2018">“<b>CellProfiler 3.0: Next-generation image processing for biology</b>” 2018</a></span>), a popular image analysis software. CellProfiler normally comes as a desktop application in which users can compose image analysis workflows from a series of modules. Many of these modules are now also available as tools in <span class="notranslate">Galaxy</span>.</p>
+<p>To process and analyse the images, we will use <a href="http://cellprofiler-manual.s3.amazonaws.com/CellProfiler-3.1.9/index.html">CellProfiler</a> (<span class="citation"><a href="#McQuin_2018">“<b>CellProfiler 3.0: Next-generation image processing for biology</b>” 2018</a></span>), a popular image analysis software. CellProfiler normally comes as a desktop application in which users can compose image analysis workflows from a series of modules. Many of these modules are now also available as tools in Galaxy.</p>
 
-<p>To fully emulate the behaviour of the standalone CellProfiler in <span class="notranslate">Galaxy</span>, each image analysis <span class="notranslate">workflow</span> needs to have three parts:</p>
+<p>To fully emulate the behaviour of the standalone CellProfiler in Galaxy, each image analysis workflow needs to have three parts:</p>
 
 <p>1) <strong>StartingModules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to initialise the pipeline,</p>
 
@@ -827,9 +825,9 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 <p>3) <strong>CellProfiler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to actually run the pipeline.</p>
 
-<figure id="figure-2"><img src="../../images/tutorial-CP/wf.jpg" alt="High-level view of the workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> High-level view of the <span class="notranslate">workflow</span></figcaption></figure>
+<figure id="figure-2"><img src="../../images/tutorial-CP/wf.jpg" alt="High-level view of the workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> High-level view of the workflow</figcaption></figure>
 
-<p>In this tutorial, you will learn how to create a <span class="notranslate">workflow</span> that downloads a selection of images from the IDR, and uses CellProfiler to segment the nuclei and nucleoli. You will also learn how to extract and export features at three different levels: image, nucleus, nucleolus.</p>
+<p>In this tutorial, you will learn how to create a workflow that downloads a selection of images from the IDR, and uses CellProfiler to segment the nuclei and nucleoli. You will also learn how to extract and export features at three different levels: image, nucleus, nucleolus.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -874,7 +872,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
       <p>If you are logged in, create a new history for this tutorial.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p><strong>IDR Download</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
@@ -920,7 +918,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
     <ol>
       <li>
-        <p>The <code class="language-plaintext highlighter-rouge">Cy3</code> dye was used in the study to stain <span class="notranslate">DNA</span>. Since we want to segment the abscence of <span class="notranslate">DNA</span>, <code class="language-plaintext highlighter-rouge">Cy3</code> is the only channel that we need to download from the IDR.</p>
+        <p>The <code class="language-plaintext highlighter-rouge">Cy3</code> dye was used in the study to stain DNA. Since we want to segment the abscence of DNA, <code class="language-plaintext highlighter-rouge">Cy3</code> is the only channel that we need to download from the IDR.</p>
       </li>
       <li>
         <p>We could upload a text file with the image ids of interest.</p>
@@ -933,7 +931,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 <h1 id="start-cellprofiler-pipeline">Start CellProfiler pipeline</h1>
 
-<p>The tool <strong>Starting Modules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> comprises the first 4 modules of the standalone CellProfiler. It needs to be the first tool of a <span class="notranslate">workflow</span> because it sets the naming and metadata handling for the rest of tools.</p>
+<p>The tool <strong>Starting Modules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> comprises the first 4 modules of the standalone CellProfiler. It needs to be the first tool of a workflow because it sets the naming and metadata handling for the rest of tools.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-specify-metadata-to-cellprofiler" aria-label="hands-on box: Specify metadata to CellProfiler"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Specify metadata to CellProfiler</div>
@@ -962,7 +960,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
           <ul>
             <li><em>“Process 3D”</em>: <code class="language-plaintext highlighter-rouge">No, do not process 3D data</code></li>
             <li><em>“Assign a name to”</em>: <code class="language-plaintext highlighter-rouge">Give every image the same name</code></li>
-            <li><em>“Name to assign these images”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span></code></li>
+            <li><em>“Name to assign these images”</em>: <code class="language-plaintext highlighter-rouge">DNA</code></li>
             <li><em>“Select the image type”</em>: <code class="language-plaintext highlighter-rouge">Grayscale image</code>
               <ul>
                 <li><em>“Set intensity range from”</em>: <code class="language-plaintext highlighter-rouge">Image metadata</code></li>
@@ -1014,7 +1012,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: <code class="language-plaintext highlighter-rouge">output_pipeline</code> (output of <strong>Starting Modules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Use advanced settings?”</em>: <code class="language-plaintext highlighter-rouge">Yes, use advanced settings</code>
           <ul>
-            <li><em>“Enter the name of the input image (from NamesAndTypes)”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span></code></li>
+            <li><em>“Enter the name of the input image (from NamesAndTypes)”</em>: <code class="language-plaintext highlighter-rouge">DNA</code></li>
             <li><em>“Enter the name of the primary objects to be identified”</em>: <code class="language-plaintext highlighter-rouge">Nuclei</code></li>
             <li><em>“Typical minimum diameter of objects, in pixel units (Min)”</em>: <code class="language-plaintext highlighter-rouge">15</code></li>
             <li><em>“Typical maximum diameter of objects, in pixel units (Max)”</em>: <code class="language-plaintext highlighter-rouge">200</code></li>
@@ -1073,7 +1071,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 </blockquote>
 
-<p>From the previous tool, we got a group of objects (nuclei). Now, we want to export the segmentation masks as a single image to check how well the segmentation algorithm is performing. We also want to label the nuclei with their identifiers for future visual inspection of the results. The output of this step will look like (you will only get this image after running the whole <span class="notranslate">workflow</span>):</p>
+<p>From the previous tool, we got a group of objects (nuclei). Now, we want to export the segmentation masks as a single image to check how well the segmentation algorithm is performing. We also want to label the nuclei with their identifiers for future visual inspection of the results. The output of this step will look like (you will only get this image after running the whole workflow):</p>
 
 <figure id="figure-4"><img src="../../images/tutorial-CP/img_nuclei_labels.png" alt="Identified nuclei with labels. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Identified nuclei with labels.</figcaption></figure>
 
@@ -1112,7 +1110,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
             <li><em>“Measurement category”</em>: <code class="language-plaintext highlighter-rouge">Number</code></li>
           </ul>
         </li>
-        <li><em>“Enter the name of the image on which to display the measurements”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span></code></li>
+        <li><em>“Enter the name of the image on which to display the measurements”</em>: <code class="language-plaintext highlighter-rouge">DNA</code></li>
         <li><em>“Display mode”</em>: <code class="language-plaintext highlighter-rouge">Text</code>
           <ul>
             <li><em>“Text color”</em>: <code class="language-plaintext highlighter-rouge">#ff0000</code></li>
@@ -1133,7 +1131,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
         <li><em>“Enter the name of the image to save”</em>: <code class="language-plaintext highlighter-rouge">ImageDisplay</code></li>
         <li><em>“Select method for constructing file names”</em>: <code class="language-plaintext highlighter-rouge">From image filename</code>
           <ul>
-            <li><em>“Enter the image name (from NamesAndTypes) to be used as file prefix”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span></code></li>
+            <li><em>“Enter the image name (from NamesAndTypes) to be used as file prefix”</em>: <code class="language-plaintext highlighter-rouge">DNA</code></li>
             <li><em>“Append a suffix to the image file name?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
               <ul>
                 <li><em>“Text to append to the image name”</em>: <code class="language-plaintext highlighter-rouge">_nucleiNumbers</code></li>
@@ -1155,7 +1153,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 <h2 id="segment-nucleoli">Segment nucleoli</h2>
 
-<p>The nucleoli are lacking intensity in the <span class="notranslate">DNA</span> staining and therefore, we need to enhance the black holes before masking.</p>
+<p>The nucleoli are lacking intensity in the DNA staining and therefore, we need to enhance the black holes before masking.</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-detect-and-mask-dark-holes" aria-label="hands-on box: Detect and mask dark holes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Detect and mask dark holes</div>
@@ -1164,8 +1162,8 @@ The images and associated metadata will be retrieved from the <a href="http://id
     <li><strong>EnhanceOrSuppressFeatures</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: <code class="language-plaintext highlighter-rouge">output_pipeline</code> (output of <strong>SaveImages</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Enter the name of the input image”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span></code></li>
-        <li><em>“Enter a name for the resulting image”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span>darkholes</code></li>
+        <li><em>“Enter the name of the input image”</em>: <code class="language-plaintext highlighter-rouge">DNA</code></li>
+        <li><em>“Enter a name for the resulting image”</em>: <code class="language-plaintext highlighter-rouge">DNAdarkholes</code></li>
         <li><em>“Select the operation”</em>: <code class="language-plaintext highlighter-rouge">Enhance</code>
           <ul>
             <li><em>“Feature type”</em>: <code class="language-plaintext highlighter-rouge">Dark holes</code>
@@ -1180,8 +1178,8 @@ The images and associated metadata will be retrieved from the <a href="http://id
     <li><strong>MaskImage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: <code class="language-plaintext highlighter-rouge">output_pipeline</code> (output of <strong>EnhanceOrSuppressFeatures</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Enter the name of the input image”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span>darkholes</code></li>
-        <li><em>“Enter the name of the resulting image”</em>: <code class="language-plaintext highlighter-rouge">Mask<span class="notranslate">DNA</span>darkholes</code></li>
+        <li><em>“Enter the name of the input image”</em>: <code class="language-plaintext highlighter-rouge">DNAdarkholes</code></li>
+        <li><em>“Enter the name of the resulting image”</em>: <code class="language-plaintext highlighter-rouge">MaskDNAdarkholes</code></li>
         <li><em>“Use objects or an image as a mask?”</em>: <code class="language-plaintext highlighter-rouge">Objects</code>
           <ul>
             <li><em>“Enter the name objects to mask the input image”</em>: <code class="language-plaintext highlighter-rouge">Nuclei</code></li>
@@ -1205,7 +1203,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: <code class="language-plaintext highlighter-rouge">output_pipeline</code> (output of <strong>MaskImage</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Use advanced settings?”</em>: <code class="language-plaintext highlighter-rouge">Yes, use advanced settings</code>
           <ul>
-            <li><em>“Enter the name of the input image (from NamesAndTypes)”</em>: <code class="language-plaintext highlighter-rouge">Mask<span class="notranslate">DNA</span>darkholes</code></li>
+            <li><em>“Enter the name of the input image (from NamesAndTypes)”</em>: <code class="language-plaintext highlighter-rouge">MaskDNAdarkholes</code></li>
             <li><em>“Enter the name of the primary objects to be identified”</em>: <code class="language-plaintext highlighter-rouge">Nucleoli</code></li>
             <li><em>“Typical minimum diameter of objects, in pixel units (Min)”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
             <li><em>“Typical maximum diameter of objects, in pixel units (Max)”</em>: <code class="language-plaintext highlighter-rouge">15</code></li>
@@ -1249,7 +1247,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 <h2 id="combine-segmentation-masks">Combine segmentation masks</h2>
 
-<p>We have now one segmentation mask per image with all the nuclei detected, <code class="language-plaintext highlighter-rouge">MaskNuclei</code>, and another one for the nucleoli, <code class="language-plaintext highlighter-rouge">MaskNucleoli</code>. These are binary masks in which the background is black and the objects detected are white. We would like to check whether both segmentation steps went well. That could be achieved by combining both of them (using different colors) into one image. Here, we are converting the nucleus mask to blue and the nucleoli to magenta. The outcome that you will obtain after the execution of the <span class="notranslate">workflow</span> will look like:</p>
+<p>We have now one segmentation mask per image with all the nuclei detected, <code class="language-plaintext highlighter-rouge">MaskNuclei</code>, and another one for the nucleoli, <code class="language-plaintext highlighter-rouge">MaskNucleoli</code>. These are binary masks in which the background is black and the objects detected are white. We would like to check whether both segmentation steps went well. That could be achieved by combining both of them (using different colors) into one image. Here, we are converting the nucleus mask to blue and the nucleoli to magenta. The outcome that you will obtain after the execution of the workflow will look like:</p>
 
 <figure id="figure-5"><img src="../../images/tutorial-CP/img_combined_masks.png" alt="Combined mask for nuclei and nucleoli. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Combined segmentation masks for nuclei (blue) and nucleoli (magenta).</figcaption></figure>
 
@@ -1282,7 +1280,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
         <li><em>“Enter the name of the image to save”</em>: <code class="language-plaintext highlighter-rouge">CombinedMask</code></li>
         <li><em>“Select method for constructing file names”</em>: <code class="language-plaintext highlighter-rouge">From image filename</code>
           <ul>
-            <li><em>“Enter the image name (from NamesAndTypes) to be used as file prefix”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span></code></li>
+            <li><em>“Enter the image name (from NamesAndTypes) to be used as file prefix”</em>: <code class="language-plaintext highlighter-rouge">DNA</code></li>
             <li><em>“Append a suffix to the image file name?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
               <ul>
                 <li><em>“Text to append to the image name”</em>: <code class="language-plaintext highlighter-rouge">_combinedMask</code></li>
@@ -1323,7 +1321,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: <code class="language-plaintext highlighter-rouge">output_pipeline</code> (output of <strong>SaveImages</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Use advanced settings?”</em>: <code class="language-plaintext highlighter-rouge">Yes, use advanced settings</code>
           <ul>
-            <li><em>“Enter the name of the input image (from NamesAndTypes)”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span></code></li>
+            <li><em>“Enter the name of the input image (from NamesAndTypes)”</em>: <code class="language-plaintext highlighter-rouge">DNA</code></li>
             <li><em>“Enter the name of the primary objects to be identified”</em>: <code class="language-plaintext highlighter-rouge">NucleiIncludingTouchingBorders</code></li>
             <li><em>“Typical minimum diameter of objects, in pixel units (Min)”</em>: <code class="language-plaintext highlighter-rouge">15</code></li>
             <li><em>“Typical maximum diameter of objects, in pixel units (Max)”</em>: <code class="language-plaintext highlighter-rouge">200</code></li>
@@ -1381,7 +1379,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
           <ul>
             <li><em>“Image or measurement?”</em>: <code class="language-plaintext highlighter-rouge">Image</code>
               <ul>
-                <li><em>“Enter the name of the first image”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span></code></li>
+                <li><em>“Enter the name of the first image”</em>: <code class="language-plaintext highlighter-rouge">DNA</code></li>
               </ul>
             </li>
           </ul>
@@ -1435,7 +1433,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert new image”</em>
               <ul>
-                <li><em>“Enter the name of a greyscale image to measure”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span></code></li>
+                <li><em>“Enter the name of a greyscale image to measure”</em>: <code class="language-plaintext highlighter-rouge">DNA</code></li>
               </ul>
             </li>
           </ul>
@@ -1449,7 +1447,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert new image”</em>
               <ul>
-                <li><em>“Enter the name of an image to measure”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span></code></li>
+                <li><em>“Enter the name of an image to measure”</em>: <code class="language-plaintext highlighter-rouge">DNA</code></li>
               </ul>
             </li>
           </ul>
@@ -1476,7 +1474,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert new image”</em>
               <ul>
-                <li><em>“Enter the name of an image to measure”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span></code></li>
+                <li><em>“Enter the name of an image to measure”</em>: <code class="language-plaintext highlighter-rouge">DNA</code></li>
               </ul>
             </li>
           </ul>
@@ -1523,7 +1521,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>The nucleoli was not stained in the <span class="notranslate">DNA</span> channel and hence, the granularity, texture and intensity are constant values.</p>
+    <p>The nucleoli was not stained in the DNA channel and hence, the granularity, texture and intensity are constant values.</p>
 
   </blockquote>
 
@@ -1623,13 +1621,13 @@ The images and associated metadata will be retrieved from the <a href="http://id
           <ul>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert new image”</em>
               <ul>
-                <li><em>“Enter the name of the image to measure”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span></code></li>
+                <li><em>“Enter the name of the image to measure”</em>: <code class="language-plaintext highlighter-rouge">DNA</code></li>
                 <li><em>“Measure the intensity only from areas enclosed by objects?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
               </ul>
             </li>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert new image”</em>
               <ul>
-                <li><em>“Enter the name of the image to measure”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span></code></li>
+                <li><em>“Enter the name of the image to measure”</em>: <code class="language-plaintext highlighter-rouge">DNA</code></li>
                 <li><em>“Measure the intensity only from areas enclosed by objects?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
                   <ul>
                     <li><em>“Enter the name of the objects that the intensity will be aggregated within”</em>: <code class="language-plaintext highlighter-rouge">Nuclei</code></li>
@@ -1654,7 +1652,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <blockquote class="question">
   <div class="box-title question-title" id="question-4" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
-  <p>In step 3, we are measuring the area occupied by objects for the <span class="notranslate">DNA</span> twice. Why is that?</p>
+  <p>In step 3, we are measuring the area occupied by objects for the DNA twice. Why is that?</p>
 
   <blockquote class="solution">
     <div class="box-title solution-title" id="solution-4"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-4-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1672,7 +1670,7 @@ The images and associated metadata will be retrieved from the <a href="http://id
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-export-features" aria-label="hands-on box: Export features"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Export features</div>
 
-  <p><strong>ExportToSp<span class="notranslate">reads</span>heet</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <p><strong>ExportToSpreadsheet</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the input CellProfiler pipeline”</em>: <code class="language-plaintext highlighter-rouge">output_pipeline</code> (output of <strong>MeasureImageIntensity</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“Select the column delimiter”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
@@ -1685,14 +1683,14 @@ The images and associated metadata will be retrieved from the <a href="http://id
 
 <h1 id="run-the-cellprofiler-pipeline">Run the CellProfiler pipeline</h1>
 
-<p>All the steps in our <span class="notranslate">workflow</span> (except for the <strong>IDR download</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) have been passing through an <code class="language-plaintext highlighter-rouge">output_pipeline</code> as a parameter. This was the way to assemble all the modules from CellProfiler, now we can run all of them together!</p>
+<p>All the steps in our workflow (except for the <strong>IDR download</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>) have been passing through an <code class="language-plaintext highlighter-rouge">output_pipeline</code> as a parameter. This was the way to assemble all the modules from CellProfiler, now we can run all of them together!</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-run-cellprofiler-pipeline" aria-label="hands-on box: Run CellProfiler pipeline"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Run CellProfiler pipeline</div>
 
   <p><strong>CellProfiler</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Pipeline file”</em>: <code class="language-plaintext highlighter-rouge">output_pipeline</code> (output of <strong>ExportToSp<span class="notranslate">reads</span>heet</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Pipeline file”</em>: <code class="language-plaintext highlighter-rouge">output_pipeline</code> (output of <strong>ExportToSpreadsheet</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><em>“Are the input images packed into a tar archive?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“A tarball of images”</em>: <code class="language-plaintext highlighter-rouge">output_tar</code> (output of <strong>IDR Download</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -1704,14 +1702,14 @@ The images and associated metadata will be retrieved from the <a href="http://id
   <blockquote class="comment">
     <div class="box-title comment-title" id="comment-6" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
 
-    <p>This is the only time-consuming step of the <span class="notranslate">workflow</span>, as it needs to perform the whole analysis in the input dataset.</p>
+    <p>This is the only time-consuming step of the workflow, as it needs to perform the whole analysis in the input dataset.</p>
   </blockquote>
 
 </blockquote>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>In this tutorial, you have downloaded images from a public image repository into your <span class="notranslate">Galaxy</span> history. After that, you have built and run a typical image analysis pipeline, composed of segmentation of several objects and feature extraction. As an outcome, you got plenty of features to analyse! And some masks to check that the segmentation algorithms worked as expected. Now you are ready to perform your biological data analysis!</p>
+<p>In this tutorial, you have downloaded images from a public image repository into your Galaxy history. After that, you have built and run a typical image analysis pipeline, composed of segmentation of several objects and feature extraction. As an outcome, you got plenty of features to analyse! And some masks to check that the segmentation algorithms worked as expected. Now you are ready to perform your biological data analysis!</p>
 
 
                 

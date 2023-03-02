@@ -756,8 +756,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://ml.usegalaxy.eu/" title="Machine Learning Workbench">
             Machine Learning Workbench
         </a>
@@ -885,7 +883,7 @@
 
 <p>Species Distribution Modeling (SDM) can help understand the distribution of a species depending on its environment. It can also attempt to quantify the impact of climate change on the species habitat, direct conservation efforts and predict invasive species distributions. This is done by associating data of species occurrences (observations) with a set of environmental data (such as temperature and precipitation).</p>
 
-<p>The goal of this tutorial is to model a theoretical ecological niche and predict species distribution in a future climate scenario by using SDM with the Wallace interactive environment on <span class="notranslate">Galaxy</span>. We’ll use the data occurrences of US <em>Chrysemys picta</em> (<a href="https://en.wikipedia.org/wiki/Painted_turtle">Painted turtle</a>) from the North America region.</p>
+<p>The goal of this tutorial is to model a theoretical ecological niche and predict species distribution in a future climate scenario by using SDM with the Wallace interactive environment on Galaxy. We’ll use the data occurrences of US <em>Chrysemys picta</em> (<a href="https://en.wikipedia.org/wiki/Painted_turtle">Painted turtle</a>) from the North America region.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
@@ -896,7 +894,7 @@
   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
   <li><a href="#step-1-import-data-from-public-databank" id="markdown-toc-step-1-import-data-from-public-databank">Step 1: Import data from public databank</a></li>
   <li><a href="#step-2-development-and-evaluation-of-sdm-using-wallace" id="markdown-toc-step-2-development-and-evaluation-of-sdm-using-wallace">Step 2: Development and evaluation of SDM using Wallace</a>    <ol>
-      <li><a href="#transmit-occurrence-data-from-galaxy-to-wallace" id="markdown-toc-transmit-occurrence-data-from-galaxy-to-wallace">Transmit occurrence data from <span class="notranslate">Galaxy</span> to Wallace</a></li>
+      <li><a href="#transmit-occurrence-data-from-galaxy-to-wallace" id="markdown-toc-transmit-occurrence-data-from-galaxy-to-wallace">Transmit occurrence data from Galaxy to Wallace</a></li>
       <li><a href="#process-occurrence-data" id="markdown-toc-process-occurrence-data">Process occurrence data</a></li>
       <li><a href="#obtain-environmental-data" id="markdown-toc-obtain-environmental-data">Obtain Environmental Data</a></li>
       <li><a href="#process-environmental-data" id="markdown-toc-process-environmental-data">Process environmental Data</a></li>
@@ -922,9 +920,9 @@
       <p>Create a new history for this tutorial and give it a proper name</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
     <li><strong>Get species occurrences data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
@@ -1002,17 +1000,17 @@
 
 <h1 id="step-2-development-and-evaluation-of-sdm-using-wallace">Step 2: Development and evaluation of SDM using Wallace</h1>
 
-<p><a href="https://wallaceecomod.github.io/">Wallace</a> is a R Shiny app integrated into <span class="notranslate">Galaxy</span>. It provides an interactive environment for the rapid and effective development and evaluation of SDM, including data download, cleaning, partitioning, modeling, visualisation and predictions.</p>
+<p><a href="https://wallaceecomod.github.io/">Wallace</a> is a R Shiny app integrated into Galaxy. It provides an interactive environment for the rapid and effective development and evaluation of SDM, including data download, cleaning, partitioning, modeling, visualisation and predictions.</p>
 
-<h2 id="transmit-occurrence-data-from-galaxy-to-wallace">Transmit occurrence data from <span class="notranslate">Galaxy</span> to Wallace</h2>
+<h2 id="transmit-occurrence-data-from-galaxy-to-wallace">Transmit occurrence data from Galaxy to Wallace</h2>
 
-<p>With this you can either upload file you’ve loaded earlier from <span class="notranslate">Galaxy</span> data or you can download data directly from Wallace. Let’s use the data from your <span class="notranslate">Galaxy</span> history:</p>
+<p>With this you can either upload file you’ve loaded earlier from Galaxy data or you can download data directly from Wallace. Let’s use the data from your Galaxy history:</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-launch-wallace" aria-label="hands-on box: Launch Wallace"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launch Wallace</div>
   <ol>
     <li>Verify your current history is the history containing previous filtered occurences data.</li>
-    <li>Open <span class="tool" data-tool="interactive_tool_wallace" title="Tested with interactive_tool_wallace"><strong>Wallace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_wallace</span></span>  in <span class="notranslate">Galaxy</span> or click here to <a href="https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_wallace">open the tool</a> and click on execute</li>
+    <li>Open <span class="tool" data-tool="interactive_tool_wallace" title="Tested with interactive_tool_wallace"><strong>Wallace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_wallace</span></span>  in Galaxy or click here to <a href="https://ecology.usegalaxy.eu/root?tool_id=interactive_tool_wallace">open the tool</a> and click on execute</li>
     <li>Go to User &gt; Active InteractiveTools, then click on the active InteractiveTool named <code class="language-plaintext highlighter-rouge">Wallace visualisation</code></li>
     <li>In Wallace
       <ol>
@@ -1020,8 +1018,8 @@
         <li>Go to <strong>1 Occ Data</strong></li>
         <li>In <strong>Obtain Occurrence Data</strong>
           <ul>
-            <li><em>“Modules Available”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span> History User</code></li>
-            <li><em>“Select from your <span class="notranslate">Galaxy</span> History User csv file”</em>: output of <strong>Tabular to CSV</strong></li>
+            <li><em>“Modules Available”</em>: <code class="language-plaintext highlighter-rouge">Galaxy History User</code></li>
+            <li><em>“Select from your Galaxy History User csv file”</em>: output of <strong>Tabular to CSV</strong></li>
             <li>Click on <strong>Load Occurrences</strong></li>
           </ul>
         </li>
@@ -1100,11 +1098,11 @@
             <div class="box-title comment-title" id="comment-using-your-own-raster" aria-label="comment box: Using your own raster"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Using your own raster</div>
             <p>If you prefer to load your own raster:</p>
             <ol>
-              <li>Import it into <span class="notranslate">Galaxy</span> in the GeoTIFF format</li>
+              <li>Import it into Galaxy in the GeoTIFF format</li>
               <li>In <strong>Obtain Environmental Data</strong>
                 <ul>
-                  <li><em>“Modules Available”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span> History User</code></li>
-                  <li><em>“Select from your <span class="notranslate">Galaxy</span> History User csv file”</em>: imported GeoTIFF file</li>
+                  <li><em>“Modules Available”</em>: <code class="language-plaintext highlighter-rouge">Galaxy History User</code></li>
+                  <li><em>“Select from your Galaxy History User csv file”</em>: imported GeoTIFF file</li>
                 </ul>
               </li>
             </ol>

@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Assembly of metagenomic sequencing data" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-03-02 09:14:16 +0000" />
+<meta name="DC.date" content="2023-03-02 09:25:34 +0000" />
 <meta name="DC.creator" content="Polina Polunina" />
 <meta name="DC.creator" content="Bérénice Batut" />
 
@@ -65,7 +65,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-03-02 09:14:16 +0000",
+  "dateModified": "2023-03-02 09:25:34 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Assembly of metagenomic sequencing data",
   "interactivityType": "mixed",
@@ -743,8 +743,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -806,11 +804,11 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>Metagenomics involves the extraction, sequencing and analysis of combined genomic <span class="notranslate">DNA</span> from <strong>entire microbiome</strong> samples. It includes then <span class="notranslate">DNA</span> from <strong>many different organisms</strong>, with different taxonomic background.</p>
+<p>Metagenomics involves the extraction, sequencing and analysis of combined genomic DNA from <strong>entire microbiome</strong> samples. It includes then DNA from <strong>many different organisms</strong>, with different taxonomic background.</p>
 
-<p>Reconstructing the genomes of microorganisms in the sampled communities is critical step in analyzing metagenomic data. To do that, we can use <strong>assembly</strong> and assemblers, <em>i.e.</em> computational programs that stich together the small fragments of sequenced <span class="notranslate">DNA</span> produced by sequencing instruments.</p>
+<p>Reconstructing the genomes of microorganisms in the sampled communities is critical step in analyzing metagenomic data. To do that, we can use <strong>assembly</strong> and assemblers, <em>i.e.</em> computational programs that stich together the small fragments of sequenced DNA produced by sequencing instruments.</p>
 
-<p>Assembling seems intuitively similar to putting together a jigsaw puzzle. Essentially, it looks for <span class="notranslate">reads</span> “that work together” or more precisely, <span class="notranslate">reads</span> that overlap. Tasks like this are <strong>not straightforward</strong>, but rather complex because of the complexity of the genomics (specially the repeats), the missing pieces and the errors introduced during sequencing.</p>
+<p>Assembling seems intuitively similar to putting together a jigsaw puzzle. Essentially, it looks for reads “that work together” or more precisely, reads that overlap. Tasks like this are <strong>not straightforward</strong>, but rather complex because of the complexity of the genomics (specially the repeats), the missing pieces and the errors introduced during sequencing.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
@@ -866,23 +864,23 @@
 
 <h1 id="prepare-analysis-history-and-data">Prepare analysis history and data</h1>
 
-<p>To run assembly, we first need to get the data into <span class="notranslate">Galaxy</span>. Any analysis should get its own <span class="notranslate">Galaxy</span> history. So let’s start by creating a new one:</p>
+<p>To run assembly, we first need to get the data into Galaxy. Any analysis should get its own Galaxy history. So let’s start by creating a new one:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history" aria-label="hands-on box: Prepare the Galaxy history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Prepare the <span class="notranslate">Galaxy</span> history</div>
+  <div class="box-title hands-on-title" id="hands-on-prepare-the-galaxy-history" aria-label="hands-on box: Prepare the Galaxy history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Prepare the Galaxy history</div>
 
   <ol>
     <li>
       <p>Create a new history for this analysis</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
     </li>
     <li>
       <p>Rename the history</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
   </ol>
 
@@ -890,10 +888,10 @@
 
 <p>We need to get the data into our history.</p>
 
-<p>In case of a not very large dataset it’s more convenient to upload data directly from your computer to <span class="notranslate">Galaxy</span>.</p>
+<p>In case of a not very large dataset it’s more convenient to upload data directly from your computer to Galaxy.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-upload-data-into-galaxy" aria-label="hands-on box: Upload data into Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Upload data into <span class="notranslate">Galaxy</span></div>
+  <div class="box-title hands-on-title" id="hands-on-upload-data-into-galaxy" aria-label="hands-on box: Upload data into Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Upload data into Galaxy</div>
 
   <ol>
     <li>
@@ -914,20 +912,20 @@ https://zenodo.org/record/6958893/files/ERR2231572_Read_2.fastqsanger.gz
 </code></pre></div>      </div>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-1" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
-        <p>In case of large dataset, we can use FTP server or the <a href="/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html"><span class="notranslate">Galaxy</span> Rule-based Uploader</a>.</p>
+        <p>In case of large dataset, we can use FTP server or the <a href="/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html">Galaxy Rule-based Uploader</a>.</p>
       </blockquote>
     </li>
     <li>
-      <p>Create a paired collection named <code class="language-plaintext highlighter-rouge">Raw <span class="notranslate">reads</span></code>, rename your pairs with the sample name</p>
+      <p>Create a paired collection named <code class="language-plaintext highlighter-rouge">Raw reads</code>, rename your pairs with the sample name</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-paired-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-paired-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a paired collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a paired collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>For all selected..</strong> and choose <strong>Build List of Dataset Pairs</strong></p>   </li>   <li>Change the text of <em>unpaired forward</em> to a common selector for the forward <span class="notranslate">reads</span></li>   <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse <span class="notranslate">reads</span></li>   <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-paired-collection"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-paired-collection-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a paired collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a paired collection<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="/training-material/topics/galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>   <li>Check all the datasets in your history you would like to include</li>   <li>     <p>Click <strong>For all selected..</strong> and choose <strong>Build List of Dataset Pairs</strong></p>   </li>   <li>Change the text of <em>unpaired forward</em> to a common selector for the forward reads</li>   <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse reads</li>   <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>   <li>Enter a name for your collection</li>   <li>Click <strong>Create List</strong> to build your collection</li>   <li>Click on the checkmark icon at the top of your history again</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -943,7 +941,7 @@ https://zenodo.org/record/6958893/files/ERR2231572_Read_2.fastqsanger.gz
   <li>the presence of multiple strains of a single species (<span class="citation"><a href="#miller2010">Miller <i>et al.</i> 2010</a></span>).</li>
 </ol>
 
-<p>To reduce the differences in coverage between samples, we can use a <strong>co-assembly</strong> approach, where <span class="notranslate">reads</span> from all samples are aligned together.:</p>
+<p>To reduce the differences in coverage between samples, we can use a <strong>co-assembly</strong> approach, where reads from all samples are aligned together.:</p>
 
 <figure id="figure-2"><img src="./images/co-assembly.png" alt="Image show one pile of sample1 reads and another pile of sample2 reads, then, green arrow leads to assembled reads from both piles. " width="60%" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Co-assembly</figcaption></figure>
 
@@ -1005,21 +1003,21 @@ https://zenodo.org/record/6958893/files/ERR2231572_Read_2.fastqsanger.gz
 
     <p>MetaSPAdes is part of the SPAdes toolkit, which has several assembly pipelines. Since SPAdes handles non-uniform coverage, it is useful for assembling simple communities, but metaSPAdes also handles other problems, allowing it to assemble complex communities’ metagenomes.</p>
 
-    <p>As input for metaSPAdes it can accept short <span class="notranslate">reads</span>. However, there is an option to use additionally long <span class="notranslate">reads</span> besides short <span class="notranslate">reads</span> to produce hybrid input.</p>
+    <p>As input for metaSPAdes it can accept short reads. However, there is an option to use additionally long reads besides short reads to produce hybrid input.</p>
   </li>
   <li>
-    <p><strong>MEGAHIT</strong> (<span class="citation"><a href="#li2015">Li <i>et al.</i> 2015</a></span>): a single node assembler for large and complex metagenomics NGS <span class="notranslate">reads</span>, such as soil</p>
+    <p><strong>MEGAHIT</strong> (<span class="citation"><a href="#li2015">Li <i>et al.</i> 2015</a></span>): a single node assembler for large and complex metagenomics NGS reads, such as soil</p>
 
     <p>It makes use of succinct de Bruijn graph (SdBG) to achieve low memory assembly.</p>
   </li>
 </ul>
 
-<p>Both tools are available in <span class="notranslate">Galaxy</span>. But currently, only MEGAHIT can be used in individual mode for several samples.</p>
+<p>Both tools are available in Galaxy. But currently, only MEGAHIT can be used in individual mode for several samples.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-individual-assembly-of-short-reads-with-megahit" aria-label="hands-on box: Individual assembly of short-reads with MEGAHIT"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Individual assembly of short-<span class="notranslate">reads</span> with MEGAHIT</div>
+  <div class="box-title hands-on-title" id="hands-on-individual-assembly-of-short-reads-with-megahit" aria-label="hands-on box: Individual assembly of short-reads with MEGAHIT"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Individual assembly of short-reads with MEGAHIT</div>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0"><strong>MEGAHIT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+<span class="notranslate">galaxy</span>0</span></span>  with parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0"><strong>MEGAHIT</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0</span></span>  with parameters:
       <ul>
         <li><em>“Select your input option”</em>: <code class="language-plaintext highlighter-rouge">Paired-end collection</code>
           <ul>
@@ -1032,7 +1030,7 @@ https://zenodo.org/record/6958893/files/ERR2231572_Read_2.fastqsanger.gz
               </blockquote>
             </li>
             <li>
-              <p><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select a paired collection”</em>: <code class="language-plaintext highlighter-rouge">Raw <span class="notranslate">reads</span></code></p>
+              <p><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select a paired collection”</em>: <code class="language-plaintext highlighter-rouge">Raw reads</code></p>
             </li>
           </ul>
         </li>
@@ -1055,7 +1053,7 @@ https://zenodo.org/record/6958893/files/ERR2231572_Read_2.fastqsanger.gz
 
 <p><strong>MEGAHIT</strong> produced a collection of output assemblies - one per sample - that can be proceeded further in binning step and then de-replication. The output contains <strong>contigs</strong>, contiguous lengths of genomic sequences in which bases are known to a high degree of certainty.</p>
 
-<p>Contrary to <strong>MetaSPAdes</strong>, <strong>MEGAHIT</strong> does not output <strong>scaffolds</strong>, i.e. segments of genome sequence reconstructed fron contigs and gaps. The gaps occur when <span class="notranslate">reads</span> from the two sequenced ends of at least one fragment overlap with other <span class="notranslate">reads</span> from two different contigs (as long as the arrangement is otherwise consistent with the contigs being adjacent). It is possible to estimate the number of bases between contigs based on fragment lengths.</p>
+<p>Contrary to <strong>MetaSPAdes</strong>, <strong>MEGAHIT</strong> does not output <strong>scaffolds</strong>, i.e. segments of genome sequence reconstructed fron contigs and gaps. The gaps occur when reads from the two sequenced ends of at least one fragment overlap with other reads from two different contigs (as long as the arrangement is otherwise consistent with the contigs being adjacent). It is possible to estimate the number of bases between contigs based on fragment lengths.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-4" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
@@ -1114,11 +1112,11 @@ https://zenodo.org/record/6958893/files/ERR2231572_assembly.fasta
     <div class="box-title hands-on-title" id="hands-on-assembly-with-metaspades" aria-label="hands-on box: Assembly with MetaSPAdes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Assembly with MetaSPAdes</div>
 
     <ol>
-      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/3.15.4+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/3.15.4+galaxy2"><strong>MetaSPAdes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/nml/metaspades/metaspades/3.15.4+<span class="notranslate">galaxy</span>2</span></span>  with following parameters
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/3.15.4+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/3.15.4+galaxy2"><strong>MetaSPAdes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/nml/metaspades/metaspades/3.15.4+galaxy2</span></span>  with following parameters
         <ul>
-          <li><em>“Pair-end <span class="notranslate">reads</span> input format”</em>: <code class="language-plaintext highlighter-rouge">Paired-end: list of dataset pairs</code>
+          <li><em>“Pair-end reads input format”</em>: <code class="language-plaintext highlighter-rouge">Paired-end: list of dataset pairs</code>
             <ul>
-              <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ file(s): collection”</em>: <code class="language-plaintext highlighter-rouge">Raw <span class="notranslate">reads</span></code></li>
+              <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ file(s): collection”</em>: <code class="language-plaintext highlighter-rouge">Raw reads</code></li>
             </ul>
           </li>
           <li><em>“Select k-mer detection option”</em>: <code class="language-plaintext highlighter-rouge">User specific</code>
@@ -1142,7 +1140,7 @@ https://zenodo.org/record/6958893/files/ERR2231572_assembly.fasta
   <div class="box-title hands-on-title" id="hands-on-evaluation-assembly-quality-with-metaquast" aria-label="hands-on box: Evaluation assembly quality with metaQUAST"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Evaluation assembly quality with metaQUAST</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+<span class="notranslate">galaxy</span>0</span></span>  with parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0"><strong>Quast</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0</span></span>  with parameters:
       <ul>
         <li><em>“Use customized names for the input files?”</em>: <code class="language-plaintext highlighter-rouge">No, use dataset names</code>
           <ul>
@@ -1150,15 +1148,15 @@ https://zenodo.org/record/6958893/files/ERR2231572_assembly.fasta
           </ul>
         </li>
         <li>
-          <p><em>“<span class="notranslate">Reads</span> options”</em>: <code class="language-plaintext highlighter-rouge">Illumina paired-end <span class="notranslate">reads</span> in paired collection</code></p>
+          <p><em>“Reads options”</em>: <code class="language-plaintext highlighter-rouge">Illumina paired-end reads in paired collection</code></p>
 
           <blockquote class="comment">
             <div class="box-title comment-title" id="comment-5" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
-            <p>To make the job quicker, you can select <code class="language-plaintext highlighter-rouge">Disabled</code> here. The raw <span class="notranslate">reads</span> will then not been mapped to the assembly to compute metrics, like the coverage.</p>
+            <p>To make the job quicker, you can select <code class="language-plaintext highlighter-rouge">Disabled</code> here. The raw reads will then not been mapped to the assembly to compute metrics, like the coverage.</p>
           </blockquote>
 
           <ul>
-            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/FASTA files”</em>: <code class="language-plaintext highlighter-rouge">Raw <span class="notranslate">reads</span></code></li>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/FASTA files”</em>: <code class="language-plaintext highlighter-rouge">Raw reads</code></li>
           </ul>
         </li>
         <li><em>“Type of assembly”</em>: <code class="language-plaintext highlighter-rouge">Metagenome</code></li>
@@ -1208,7 +1206,7 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
 
         <p>A base in the reference genome is counted as aligned if at least one contig has at least one alignment to this base.</p>
 
-        <p>We did not provide any reference there, but metaQuast try to identify genome content of the metagenome by aligning contigs to <a href="https://www.arb-silva.de/">SILVA</a> 16S r<span class="notranslate">RNA</span> database. For each assembly, 50 reference genomes with top scores are chosen. The full reference genomes of the identified organisms are afterwards downloaded from NCBI to map the assemblies on them and compute the genome fractions.</p>
+        <p>We did not provide any reference there, but metaQuast try to identify genome content of the metagenome by aligning contigs to <a href="https://www.arb-silva.de/">SILVA</a> 16S rRNA database. For each assembly, 50 reference genomes with top scores are chosen. The full reference genomes of the identified organisms are afterwards downloaded from NCBI to map the assemblies on them and compute the genome fractions.</p>
 
         <p>For each identified genomes, the genome fraction is given when clicking on <strong>Genome fraction (%)</strong></p>
 
@@ -1260,50 +1258,50 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
     </ul>
   </li>
   <li>
-    <p><strong>Read <span class="notranslate">mapping</span></strong>: results of the <span class="notranslate">mapping</span> of the raw <span class="notranslate">reads</span> on the different assemblies (only if the <em>“<span class="notranslate">Reads</span> options”</em> is not disabled)</p>
+    <p><strong>Read mapping</strong>: results of the mapping of the raw reads on the different assemblies (only if the <em>“Reads options”</em> is not disabled)</p>
 
-    <p>Here the <span class="notranslate">reads</span> for the selected sample are mapped to all assemblies</p>
+    <p>Here the reads for the selected sample are mapped to all assemblies</p>
 
     <blockquote class="question">
       <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
       <ol>
-        <li>By opening the report for ERR2231568, to which raw <span class="notranslate">reads</span> are the different sample assemblies compared to to extract information like percentage of mapped <span class="notranslate">reads</span>?</li>
+        <li>By opening the report for ERR2231568, to which raw reads are the different sample assemblies compared to to extract information like percentage of mapped reads?</li>
         <li>To get good information for each sample, which report and information should we look at?</li>
-        <li>What is the % of read mapped for ERR2231568 assembly to ERR2231568 raw <span class="notranslate">reads</span>? And for ERR2231572 assembly to ERR2231572 raw <span class="notranslate">reads</span>?</li>
-        <li>What is the percentage of <span class="notranslate">reads</span> used to build the assemblies for ERR2231568? and ERR2231572?</li>
+        <li>What is the % of read mapped for ERR2231568 assembly to ERR2231568 raw reads? And for ERR2231572 assembly to ERR2231572 raw reads?</li>
+        <li>What is the percentage of reads used to build the assemblies for ERR2231568? and ERR2231572?</li>
       </ol>
 
       <blockquote class="solution">
         <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
         <ol>
-          <li>To ERR2231568. That is a bug in the <span class="notranslate">Galaxy</span> tool. We are working on fix it so each sample assembly is compared to its corresponding raw <span class="notranslate">reads</span>.</li>
+          <li>To ERR2231568. That is a bug in the Galaxy tool. We are working on fix it so each sample assembly is compared to its corresponding raw reads.</li>
           <li>To get the good information for ERR2231568, we should open the ERR2231568  and look only at column ERR2231568.</li>
-          <li>…% of ERR2231568 raw <span class="notranslate">reads</span> were mapped to ERR2231568 assembly (column ERR2231568 in ERR2231568 report) and 86.97% of ERR2231572 raw <span class="notranslate">reads</span> to ERR2231572 assembly (column ERR2231572 in ERR2231572 report).</li>
-          <li>…% of <span class="notranslate">reads</span> were used to the assemblies for ERR2231568 and  86.97% for ERR2231572.</li>
+          <li>…% of ERR2231568 raw reads were mapped to ERR2231568 assembly (column ERR2231568 in ERR2231568 report) and 86.97% of ERR2231572 raw reads to ERR2231572 assembly (column ERR2231572 in ERR2231572 report).</li>
+          <li>…% of reads were used to the assemblies for ERR2231568 and  86.97% for ERR2231572.</li>
         </ol>
       </blockquote>
 
     </blockquote>
 
     <blockquote class="details">
-      <div class="box-title details-title" id="details-alternative-ways-to-compute-coverage"><button class="gtn-boxify-button details" type="button" aria-controls="details-alternative-ways-to-compute-coverage-contents" aria-expanded="true" aria-label="Toggle details box: Alternative ways to compute coverage"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Alte<span class="notranslate">rna</span>tive ways to compute coverage<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+      <div class="box-title details-title" id="details-alternative-ways-to-compute-coverage"><button class="gtn-boxify-button details" type="button" aria-controls="details-alternative-ways-to-compute-coverage-contents" aria-expanded="true" aria-label="Toggle details box: Alternative ways to compute coverage"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Alternative ways to compute coverage<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-      <p>2 alte<span class="notranslate">rna</span>tive ways to compute coverage are to</p>
+      <p>2 alternative ways to compute coverage are to</p>
       <ol>
         <li>
-          <p>Use <a href="https://github.com/wwood/CoverM">CoverM</a>, which is available in <span class="notranslate">Galaxy</span></p>
+          <p>Use <a href="https://github.com/wwood/CoverM">CoverM</a>, which is available in Galaxy</p>
 
           <blockquote class="notranslate hands_on">
             <div class="box-title hands-on-title" id="hands-on-calculate-coverage-using-coverm" aria-label="hands-on box: Calculate coverage using CoverM"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Calculate coverage using CoverM</div>
 
             <ol>
-              <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/coverm_contig/coverm_contig/0.2.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/coverm_contig/coverm_contig/0.2.1"><strong>CoverM-CONTIG</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/coverm_contig/coverm_contig/0.2.1</span></span>  with parameters:
+              <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/coverm_contig/coverm_contig/0.2.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/coverm_contig/coverm_contig/0.2.1"><strong>CoverM-CONTIG</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/coverm_contig/coverm_contig/0.2.1</span></span>  with parameters:
                 <ul>
                   <li><em>“Read type”</em>: <code class="language-plaintext highlighter-rouge">Paired collection</code>
                     <ul>
-                      <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“One or more pairs of forward and reverse possibly gzipped FASTA/Q files for <span class="notranslate">mapping</span> in order”</em>: <code class="language-plaintext highlighter-rouge">Raw <span class="notranslate">reads</span></code></li>
+                      <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“One or more pairs of forward and reverse possibly gzipped FASTA/Q files for mapping in order”</em>: <code class="language-plaintext highlighter-rouge">Raw reads</code></li>
                     </ul>
                   </li>
                   <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span>  <em>“FASTA file(s) of contigs”</em>: output of MEGAGIT</li>
@@ -1314,17 +1312,17 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
           </blockquote>
         </li>
         <li>
-          <p>Map the original <span class="notranslate">reads</span> onto contigs and extract the percentage of mapped <span class="notranslate">reads</span>:</p>
+          <p>Map the original reads onto contigs and extract the percentage of mapped reads:</p>
 
           <blockquote class="notranslate hands_on">
-            <div class="box-title hands-on-title" id="hands-on-computation-of-the-reads-used-in-assemblies" aria-label="hands-on box: Computation of the % reads used in assemblies"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Computation of the % <span class="notranslate">reads</span> used in assemblies</div>
+            <div class="box-title hands-on-title" id="hands-on-computation-of-the-reads-used-in-assemblies" aria-label="hands-on box: Computation of the % reads used in assemblies"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Computation of the % reads used in assemblies</div>
 
             <ol>
-              <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0"><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+              <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0"><strong>Bowtie2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0</span></span>  with the following parameters:
                 <ul>
                   <li><em>“Is this single or paired library”</em>: <code class="language-plaintext highlighter-rouge">Paired-end Dataset Collection</code>
                     <ul>
-                      <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ Paired Dataset”</em>: <code class="language-plaintext highlighter-rouge">Raw <span class="notranslate">reads</span></code></li>
+                      <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ Paired Dataset”</em>: <code class="language-plaintext highlighter-rouge">Raw reads</code></li>
                     </ul>
                   </li>
                   <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from the history and build index</code>
@@ -1332,10 +1330,10 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
                       <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select reference genome”</em>: MEGAHIT output</li>
                     </ul>
                   </li>
-                  <li><em>“Save the Bowtie2 <span class="notranslate">mapping</span> statistics to the history”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                  <li><em>“Save the Bowtie2 mapping statistics to the history”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                 </ul>
               </li>
-              <li>Inspect the <span class="notranslate">mapping</span> statistics output</li>
+              <li>Inspect the mapping statistics output</li>
             </ol>
           </blockquote>
 
@@ -1344,7 +1342,7 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
 
             <ol>
               <li>What is the overall alignment rate for ERR2231567? and ERR2231571?</li>
-              <li>What is the percentage of <span class="notranslate">reads</span> used in assemblies for ERR2231567? and ERR2231571?</li>
+              <li>What is the percentage of reads used in assemblies for ERR2231567? and ERR2231571?</li>
             </ol>
 
             <blockquote class="solution">
@@ -1352,7 +1350,7 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
 
               <ol>
                 <li>The overall alignment rate for ERR2231567 is 65.97% and 73.67% for ERR2231571</li>
-                <li>65.97% of the <span class="notranslate">reads</span> were used in assemblies for ERR2231567 and 73.67% for ERR2231571.</li>
+                <li>65.97% of the reads were used in assemblies for ERR2231567 and 73.67% for ERR2231571.</li>
               </ol>
 
             </blockquote>
@@ -1365,15 +1363,15 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
   <li>
     <p><strong>Misassemblies</strong>: joining sequences that should not be adjacent.</p>
 
-    <p>Quast identifies missassemblies by <span class="notranslate">mapping</span> the contigs to the reference genomes of the identified organisms. 3 types of misassemblies can be identified:</p>
+    <p>Quast identifies missassemblies by mapping the contigs to the reference genomes of the identified organisms. 3 types of misassemblies can be identified:</p>
 
     <figure id="figure-5"><img src="./images/quast_misassemblies.png" alt="Image shows on the top a contig with a blue and a gren parts with white arrows (pointing on the right) on them and below a reference with 2 chromosomes. The 3 types of misassemblies are after schematized. Relocation: the blue and gren parts of the contig are on chr 1 but separated. Inversion: the blue and gren parts of the contig are on chr 1 but separated and with the arrows facing each other. Translocation: the blue part is on chr 1 and gren part on chr 2." width="60%" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Source: <a href="https://quast.sourceforge.net/docs/manual.html#sec3.1.2">QUAST manual</a></figcaption></figure>
 
     <ol>
-      <li><strong>Relocation</strong> occur based on signal from two <span class="notranslate">mapping</span>s of the same contig against the same chromosome, with 2 cases:
+      <li><strong>Relocation</strong> occur based on signal from two mappings of the same contig against the same chromosome, with 2 cases:
         <ol>
-          <li>the 2 <span class="notranslate">mapping</span>s are separated by an unmapped region of at least 1 kbp</li>
-          <li>they map on the same chromosome with a shared <span class="notranslate">mapping</span> area of at least 1 kbp</li>
+          <li>the 2 mappings are separated by an unmapped region of at least 1 kbp</li>
+          <li>they map on the same chromosome with a shared mapping area of at least 1 kbp</li>
         </ol>
 
         <figure id="figure-6"><img src="./images/relocation.svg" alt="Image shows on the top a contig with a blue and a gren parts with white arrows (pointing on the right) on them and below a reference with 2 chromosomes. The 3 types of misassemblies are after schematized. Relocation: the blue and gren parts of the contig are on chr 1 but separated. Inversion: the blue and gren parts of the contig are on chr 1 but separated and with the arrows facing each other. Translocation: the blue part is on chr 1 and gren part on chr 2." width="80%" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Source: <a href="https://blog.pierre.marijon.fr/misassemblies-in-noisy-assemblies/">Yet Another Bioinformatic blog by Pierre Marijon</a></figcaption></figure>
@@ -1424,7 +1422,7 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
         </blockquote>
       </li>
       <li>
-        <p><strong>Inversion</strong> occurs when a contig has two consecutive <span class="notranslate">mapping</span>s on the same chromosome but in different strands</p>
+        <p><strong>Inversion</strong> occurs when a contig has two consecutive mappings on the same chromosome but in different strands</p>
 
         <blockquote class="question">
           <div class="box-title question-title" id="question-7" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -1595,9 +1593,9 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
 
 <h1 id="visualization-of-the-de-novo-assembly-graph">Visualization of the <em>de novo</em> assembly graph</h1>
 
-<p>Current metagenome assemblers like MEGAHIT and MetaSPAdes use <strong>graphs</strong>, most typically a de Bruijn graph to stich <span class="notranslate">reads</span> together. In an ideal case, the graph would contain one distinct path for each genome of each micro-organisms, but complexities such as repeated sequences usually prevent this.</p>
+<p>Current metagenome assemblers like MEGAHIT and MetaSPAdes use <strong>graphs</strong>, most typically a de Bruijn graph to stich reads together. In an ideal case, the graph would contain one distinct path for each genome of each micro-organisms, but complexities such as repeated sequences usually prevent this.</p>
 
-<p>Assembly graphs contain then <strong>branching structures</strong>: one node may lead into multiple others. <strong>Contigs</strong> correspond to the longest sequences in the graph that can be determined unambiguously. They are the final results of most assembler. But the assembly graph contains more information. It can be useful for finding sections of the graph, such as r<span class="notranslate">RNA</span>, or to try to find parts of a genome.</p>
+<p>Assembly graphs contain then <strong>branching structures</strong>: one node may lead into multiple others. <strong>Contigs</strong> correspond to the longest sequences in the graph that can be determined unambiguously. They are the final results of most assembler. But the assembly graph contains more information. It can be useful for finding sections of the graph, such as rRNA, or to try to find parts of a genome.</p>
 
 <p><strong>Bandage</strong> (<span class="citation"><a href="#wick2015bandage">Wick <i>et al.</i> 2015</a></span>) is a tool creating interactive visualisations of assembly graphs.</p>
 
@@ -1605,7 +1603,7 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
   <div class="box-title hands-on-title" id="hands-on-visualization-the-assembly-graph" aria-label="hands-on box: Visualization the assembly graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualization the assembly graph</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+galaxy10" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+galaxy10"><strong>megahit contig2fastg</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+<span class="notranslate">galaxy</span>10</span></span>  with parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+galaxy10" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+galaxy10"><strong>megahit contig2fastg</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/megahit_contig2fastg/megahit_contig2fastg/1.1.3+galaxy10</span></span>  with parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Contig file”</em>: Output of <strong>MEGAHIT</strong></li>
         <li>
@@ -1624,7 +1622,7 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
         </li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy4"><strong>Bandage Image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+<span class="notranslate">galaxy</span>4</span></span>  with parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy4"><strong>Bandage Image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy4</span></span>  with parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Graphical Fragment Assembly”</em>: Output of <strong>megahit contig2fastg</strong></li>
       </ul>
@@ -1643,12 +1641,12 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
   <div class="box-title hands-on-title" id="hands-on-visualization-the-de-novo-assembly-graph" aria-label="hands-on box: Visualization the *de novo* assembly graph"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Visualization the *de novo* assembly graph</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy2"><strong>Bandage Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+<span class="notranslate">galaxy</span>2</span></span>  with parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy2"><strong>Bandage Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy2</span></span>  with parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Graphical Fragment Assembly”</em>: Output of <strong>megahit contig2fastg</strong></li>
       </ul>
     </li>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3"><strong>Column join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3</span></span>  with parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3"><strong>Column join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3</span></span>  with parameters:
       <ul>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Tabular files”</em>: Output of <strong>Bandage Info</strong></li>
       </ul>
@@ -1691,7 +1689,7 @@ https://zenodo.org/record/6958893/files/ERR2231572_quast_report.html
 
 De-replication is the process of identifying sets of genomes that are the "same" in a list of genomes, and removing all but the “best” genome from each redundant set. How similar genomes need to be to be considered “same”, how to determine which genome is “best”, and other important decisions are discussed in [Important Concepts](https://drep.readthedocs.io/en/latest/choosing_parameters.html).
 
-A common use for genome de-replication is the case of individual assembly of metagenomic data. If metagenomic samples are collected in a series, a common way to assemble the short <span class="notranslate">reads</span> is with a “co-assembly”. That is, combining the <span class="notranslate">reads</span> from all samples and assembling them together. The problem with this is assembling similar strains together can severely fragment assemblies, precluding recovery of a good genome bin. An alte<span class="notranslate">rna</span>tive option is to assemble each sample separately, and then “de-replicate” the bins from each assembly to make a final genome set.
+A common use for genome de-replication is the case of individual assembly of metagenomic data. If metagenomic samples are collected in a series, a common way to assemble the short reads is with a “co-assembly”. That is, combining the reads from all samples and assembling them together. The problem with this is assembling similar strains together can severely fragment assemblies, precluding recovery of a good genome bin. An alternative option is to assemble each sample separately, and then “de-replicate” the bins from each assembly to make a final genome set.
 
 <figure id="figure-8"><img src="./images/individual-assembly.png" alt="Image shows the process of individual assembly on two strains and five samples, after individual assembly of samples two samples are chosen for de-replication process. In parallel, co-assembly on all five samples is performed. " width="80%" loading="lazy"><figcaption><span class="figcaption-prefix">Figure 8:</span> Individual assembly followed by de-replication vs co-assembly</figcaption></figure>
 

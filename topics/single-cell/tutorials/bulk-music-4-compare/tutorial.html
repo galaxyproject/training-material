@@ -844,8 +844,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
             Plant Anaylsis Workbench
         </a>
@@ -919,13 +917,13 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>The goal of this tutorial is to apply bulk <span class="notranslate">RNA</span> deconvolution techniques to a problem with multiple variables - in this case, a model of diabetes is compared with its healthy counterparts. All you need to compare inferred cell compositions are well-annotated, high quality reference sc<span class="notranslate">RNA</span>-seq datasets, transformed into MuSiC-friendly <span class="notranslate">Expression</span> Set objects, and your bulk <span class="notranslate">RNA</span>-samples of choice (also transformed into MuSiC-friendly <span class="notranslate">Expression</span> Set objects). For more information on how MuSiC works, you can check out their github site <a href="https://xuranw.github.io/MuSiC/articles/MuSiC.html">MuSiC</a> or published article (<span class="citation"><a href="#wang2019bulk">Wang <i>et al.</i> 2019</a></span>).</p>
+<p>The goal of this tutorial is to apply bulk RNA deconvolution techniques to a problem with multiple variables - in this case, a model of diabetes is compared with its healthy counterparts. All you need to compare inferred cell compositions are well-annotated, high quality reference scRNA-seq datasets, transformed into MuSiC-friendly Expression Set objects, and your bulk RNA-samples of choice (also transformed into MuSiC-friendly Expression Set objects). For more information on how MuSiC works, you can check out their github site <a href="https://xuranw.github.io/MuSiC/articles/MuSiC.html">MuSiC</a> or published article (<span class="citation"><a href="#wang2019bulk">Wang <i>et al.</i> 2019</a></span>).</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-research-question" aria-label="comment box: Research question"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Research question</div>
   <ul>
     <li>How does variable X impact the cell distributions in my samples?</li>
-    <li>Needs: sc<span class="notranslate">RNA</span>-seq reference dataset; bulk <span class="notranslate">RNA</span>-seq samples of interest to compare</li>
+    <li>Needs: scRNA-seq reference dataset; bulk RNA-seq samples of interest to compare</li>
   </ul>
 </blockquote>
 
@@ -953,14 +951,14 @@
 
 <h1 id="data">Data</h1>
 
-<p>In the standard MuSiC tutorial, we used human pancreas data. We will now use the same <span class="notranslate">single cell</span> reference dataset <span class="citation"><a href="#segerstolpe2016single">Segerstolpe <i>et al.</i> 2016</a></span> with its 10 samples of 6 healthy subjects and 4 with Type-II diabetes (T2D), as well as the bulk <span class="notranslate">RNA</span>-samples from the same lab (3 healthy, 4 diseased). Both of these datasets were accessed from the public EMBL-EBI repositories and transformed into <span class="notranslate">Expression</span> Set objects in the previous two tutorials. For both the <span class="notranslate">single cell</span> reference and the bulk samples of interest, you have generated <span class="notranslate">Expression</span> Set objects with only T2D samples, only healthy samples, and a final everything-combined sample for the sc<span class="notranslate">RNA</span> reference. We won’t need the combined bulk <span class="notranslate">RNA</span> dataset. The plan is to analyse this data in three ways: using a combined reference (altogether); using only the healthy <span class="notranslate">single cell</span> reference (healthyscref); or using a healthy and combined reference separately (like4like), all to identify differences in cellular composition.</p>
+<p>In the standard MuSiC tutorial, we used human pancreas data. We will now use the same single cell reference dataset <span class="citation"><a href="#segerstolpe2016single">Segerstolpe <i>et al.</i> 2016</a></span> with its 10 samples of 6 healthy subjects and 4 with Type-II diabetes (T2D), as well as the bulk RNA-samples from the same lab (3 healthy, 4 diseased). Both of these datasets were accessed from the public EMBL-EBI repositories and transformed into Expression Set objects in the previous two tutorials. For both the single cell reference and the bulk samples of interest, you have generated Expression Set objects with only T2D samples, only healthy samples, and a final everything-combined sample for the scRNA reference. We won’t need the combined bulk RNA dataset. The plan is to analyse this data in three ways: using a combined reference (altogether); using only the healthy single cell reference (healthyscref); or using a healthy and combined reference separately (like4like), all to identify differences in cellular composition.</p>
 
 <figure id="figure-1"><img src="../../images/bulk-music/comparison.png" alt="Three colours of arrows connect bulk healthy &amp; diseased data sets to a combined single cell (altogether); bulk healthy and single cell healthy &amp; bulk diseased with single cell diseased (like4like); and bulk diseased and healthy with the single cell healthy reference (healthyscref)." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Plan of analysis</figcaption></figure>
 
-<p>If you have followed the previous tutorials to create your own bulk and <span class="notranslate">single cell</span> <span class="notranslate">expression</span> sets, then you can copy these into a new history now. Otherwise, follow the steps below to import the datasets you’ll need.</p>
+<p>If you have followed the previous tutorials to create your own bulk and single cell expression sets, then you can copy these into a new history now. Otherwise, follow the steps below to import the datasets you’ll need.</p>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-copy-a-dataset-between-histories"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-a-dataset-between-histories-contents" aria-expanded="true" aria-label="Toggle tip box: Copy a dataset between histories"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Copy a dataset between histories<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>There 3 ways to copy datasets between histories</p>   <ol>   <li>     <p>From the original history</p>     <ol>       <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>       <li>Click on <strong>Copy Dataset</strong></li>       <li>         <p>Select the desired files</p>       </li>       <li>         <p>Give a relevant name to the “New history”</p>       </li>       <li>Click on the new history name in the green box that have just appear to switch to this history</li>     </ol>   </li>   <li>     <p>From the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong></p>     <ol>       <li>Click on <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong> on the top right</li>       <li>Switch to the history in which the dataset should be copied</li>       <li>Drag the dataset to copy from its original history</li>       <li>Drop it in the target history</li>     </ol>   </li>   <li>     <p>From the target history</p>     <ol>       <li>Click on <strong>User</strong> in the top bar</li>       <li>Click on <strong>Datasets</strong></li>       <li>Search for the dataset to copy</li>       <li>Click on it</li>       <li>Click on <strong>Copy to History</strong></li>     </ol>   </li> </ol> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-copy-a-dataset-between-histories"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-copy-a-dataset-between-histories-contents" aria-expanded="true" aria-label="Toggle tip box: Copy a dataset between histories"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Copy a dataset between histories<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>There 3 ways to copy datasets between histories</p>   <ol>   <li>     <p>From the original history</p>     <ol>       <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>       <li>Click on <strong>Copy Dataset</strong></li>       <li>         <p>Select the desired files</p>       </li>       <li>         <p>Give a relevant name to the “New history”</p>       </li>       <li>Click on the new history name in the green box that have just appear to switch to this history</li>     </ol>   </li>   <li>     <p>From the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-columns</span> <strong>View all histories</strong></p>     <ol>       <li>Click on <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden">galaxy-columns</span> <strong>View all histories</strong> on the top right</li>       <li>Switch to the history in which the dataset should be copied</li>       <li>Drag the dataset to copy from its original history</li>       <li>Drop it in the target history</li>     </ol>   </li>   <li>     <p>From the target history</p>     <ol>       <li>Click on <strong>User</strong> in the top bar</li>       <li>Click on <strong>Datasets</strong></li>       <li>Search for the dataset to copy</li>       <li>Click on it</li>       <li>Click on <strong>Copy to History</strong></li>     </ol>   </li> </ol> </blockquote>
 
 <h2 id="get-data">Get data</h2>
 
@@ -974,7 +972,7 @@
 
       <ul>
         <li>
-          <p>Human <span class="notranslate">single cell</span> <span class="notranslate">RNA</span> ESet objects (tag: <code class="language-plaintext highlighter-rouge">#singlecell</code>)</p>
+          <p>Human single cell RNA ESet objects (tag: <code class="language-plaintext highlighter-rouge">#singlecell</code>)</p>
 
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7319925/files/ESet_object_sc_combined.rdata
 https://zenodo.org/record/7319925/files/ESet_object_sc_T2D.rdata
@@ -982,7 +980,7 @@ https://zenodo.org/record/7319925/files/ESet_object_sc_healthy.rdata
 </code></pre></div>          </div>
         </li>
         <li>
-          <p>Human bulk <span class="notranslate">RNA</span> ESet objects (tag: <code class="language-plaintext highlighter-rouge">#bulk</code>)</p>
+          <p>Human bulk RNA ESet objects (tag: <code class="language-plaintext highlighter-rouge">#bulk</code>)</p>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7319925/files/ESet_object_bulk_healthy.rdata
 https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
 </code></pre></div>          </div>
@@ -990,16 +988,16 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
       </ul>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
     </li>
     <li>
       <p>Rename the datasets as needed</p>
     </li>
     <li>
-      <p>Add to each file a tag corresponding to <code class="language-plaintext highlighter-rouge">#bulk</code> and <code class="language-plaintext highlighter-rouge">#sc<span class="notranslate">rna</span></code></p>
+      <p>Add to each file a tag corresponding to <code class="language-plaintext highlighter-rouge">#bulk</code> and <code class="language-plaintext highlighter-rouge">#scrna</code></p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
     </li>
   </ol>
 
@@ -1012,40 +1010,40 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
 <h2 id="altogether-deconvolution-with-a-combined-sc-reference">Altogether: Deconvolution with a combined sc reference</h2>
 
 <!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your <span class="notranslate">Galaxy</span> may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your <span class="notranslate">Galaxy</span> server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside <span class="notranslate">Galaxy</span>.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the <span class="notranslate">Galaxy</span> analytical interface</li> </ul>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-not-all-browsers-work" aria-label="warning box: Not all browsers work!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Not all browsers work!</div>   <ul>     <li>We’ve had some issues with Tutorial mode on Safari for Mac users.</li>     <li>Try a <strong>different browser</strong> if you aren’t seeing the button.</li>   </ul> </blockquote> </blockquote>
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your Galaxy may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your Galaxy server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside Galaxy.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the Galaxy analytical interface</li> </ul>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-not-all-browsers-work" aria-label="warning box: Not all browsers work!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Not all browsers work!</div>   <ul>     <li>We’ve had some issues with Tutorial mode on Safari for Mac users.</li>     <li>Try a <strong>different browser</strong> if you aren’t seeing the button.</li>   </ul> </blockquote> </blockquote>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-comparing-altogether" aria-label="hands-on box:  Comparing: altogether "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Comparing: altogether</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4"><strong>MuSiC Compare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+<span class="notranslate">galaxy</span>4</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4"><strong>MuSiC Compare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4</span></span>  with the following parameters:
       <ul>
-        <li>In <em>“New sc<span class="notranslate">RNA</span> Group”</em>:
+        <li>In <em>“New scRNA Group”</em>:
           <ul>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert New sc<span class="notranslate">RNA</span> Group”</em>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert New scRNA Group”</em>
               <ul>
-                <li><em>“Name of sc<span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">sc<span class="notranslate">RNA</span>_set</code></li>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“sc<span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_sc_combined.rdata</code> (Input dataset)</li>
-                <li>In <em>“Advanced sc<span class="notranslate">RNA</span> Parameters”</em>:
+                <li><em>“Name of scRNA Dataset”</em>: <code class="language-plaintext highlighter-rouge">scRNA_set</code></li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“scRNA Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_sc_combined.rdata</code> (Input dataset)</li>
+                <li>In <em>“Advanced scRNA Parameters”</em>:
                   <ul>
-                    <li><em>“Cell Types Label from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">Inferred cell type - author labels</code></li>
-                    <li><em>“Samples Identifier from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">Individual</code></li>
-                    <li><em>“Comma list of cell types to use from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">alpha cell,beta cell,delta cell,gamma cell,acinar cell,ductal cell</code></li>
+                    <li><em>“Cell Types Label from scRNA dataset”</em>: <code class="language-plaintext highlighter-rouge">Inferred cell type - author labels</code></li>
+                    <li><em>“Samples Identifier from scRNA dataset”</em>: <code class="language-plaintext highlighter-rouge">Individual</code></li>
+                    <li><em>“Comma list of cell types to use from scRNA dataset”</em>: <code class="language-plaintext highlighter-rouge">alpha cell,beta cell,delta cell,gamma cell,acinar cell,ductal cell</code></li>
                   </ul>
                 </li>
-                <li>In <em>“Bulk Datasets in sc<span class="notranslate">RNA</span> Group”</em>:
+                <li>In <em>“Bulk Datasets in scRNA Group”</em>:
                   <ul>
-                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Bulk Datasets in sc<span class="notranslate">RNA</span> Group”</em>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Bulk Datasets in scRNA Group”</em>
                       <ul>
                         <li><em>“Name of Bulk Dataset”</em>: <code class="language-plaintext highlighter-rouge">Bulk_set:Normal</code></li>
-                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Bulk <span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_bulk_healthy.rdata</code> (Input dataset)</li>
+                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Bulk RNA Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_bulk_healthy.rdata</code> (Input dataset)</li>
                         <li><em>“Factor Name”</em>: <code class="language-plaintext highlighter-rouge">Disease</code></li>
                       </ul>
                     </li>
-                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Bulk Datasets in sc<span class="notranslate">RNA</span> Group”</em>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Bulk Datasets in scRNA Group”</em>
                       <ul>
                         <li><em>“Name of Bulk Dataset”</em>: <code class="language-plaintext highlighter-rouge">Bulk_set:T2D</code></li>
-                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Bulk <span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_bulk_T2D.rdata</code> (Input dataset)</li>
+                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Bulk RNA Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_bulk_T2D.rdata</code> (Input dataset)</li>
                         <li><em>“Factor Name”</em>: <code class="language-plaintext highlighter-rouge">Disease</code></li>
                       </ul>
                     </li>
@@ -1067,26 +1065,26 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
   <li><em>Summarised Plots</em> &lt;- This is the most interesting output, because it has the pretty pictures!</li>
   <li><em>Individual Heatmaps</em> &lt;- This kind of does what standard (non-Comparing) MuSiC does for each sample, rather than combining them.</li>
   <li><em>Stats</em> &lt;- This will be very handy if you want to make any statistical calculations, as it contains medians and quartiles</li>
-  <li><em>Tables</em> &lt;- This contains the cell proportions found within each sample as well as the number of <span class="notranslate">reads</span>.</li>
+  <li><em>Tables</em> &lt;- This contains the cell proportions found within each sample as well as the number of reads.</li>
 </ol>
 
 <h3 id="summarised-plots">Summarised Plots</h3>
 
-<p>Examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the output file <em>Summarised Plots (MuSiC)</em>. Now the first few pages are similar to the standard deconvolution tool, but now comparing across the factor of interest (disease). Among the myriad of visualisations available, our favourite is on page 5 - a comparison of inferred cell proportions across disease.</p>
+<p>Examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the output file <em>Summarised Plots (MuSiC)</em>. Now the first few pages are similar to the standard deconvolution tool, but now comparing across the factor of interest (disease). Among the myriad of visualisations available, our favourite is on page 5 - a comparison of inferred cell proportions across disease.</p>
 
 <figure id="figure-2"><img src="../../images/bulk-music/plot_altogether.png" alt="Graph showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Altogether: Resulting Graph</figcaption></figure>
 
-<p>Here we can see that the bulk-<span class="notranslate">RNA</span> seq samples from the T2D patients contain markedly fewer beta cells as compared with their healthy counterparts. This makes sense, so that’s good!</p>
+<p>Here we can see that the bulk-RNA seq samples from the T2D patients contain markedly fewer beta cells as compared with their healthy counterparts. This makes sense, so that’s good!</p>
 
 <h3 id="individual-heatmaps">Individual Heatmaps</h3>
 
-<p>Examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the output file <em>Individual heatmaps (MuSiC)</em>. This shows the cell distribution across each of the individual samples, separated out by disease factor into two separate plots, but ultimately isn’t particularly informative.</p>
+<p>Examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the output file <em>Individual heatmaps (MuSiC)</em>. This shows the cell distribution across each of the individual samples, separated out by disease factor into two separate plots, but ultimately isn’t particularly informative.</p>
 
 <figure id="figure-3"><img src="../../images/bulk-music/individual_heatmaps.png" alt="Heatmap showing vertically four samples (Bulk) and horizontally each cell type (from alpha to ductal), with gradations of colour referring to the proportion of that cell type within each sample." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Altogether: Individual heatmaps</figcaption></figure>
 
 <h3 id="stats">Stats</h3>
 
-<p>If you select the <em>Stats</em> dataset, you’ll find it contains four sets of data, <code class="language-plaintext highlighter-rouge">Bulk_disease: Read Props</code>, <code class="language-plaintext highlighter-rouge">Bulk_disease: Sample Props</code>, <code class="language-plaintext highlighter-rouge">Bulk_healthy: Read Props</code> and <code class="language-plaintext highlighter-rouge">Bulk_healthy: Sample Props</code>. Examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the file <code class="language-plaintext highlighter-rouge">Bulk_disease: Sample Props</code>. This contains summary statistics (Min, quartiles, median, mean, etc.) for each phenotype. This could be quite helpful if you’re trying to statistically identify differences across samples.</p>
+<p>If you select the <em>Stats</em> dataset, you’ll find it contains four sets of data, <code class="language-plaintext highlighter-rouge">Bulk_disease: Read Props</code>, <code class="language-plaintext highlighter-rouge">Bulk_disease: Sample Props</code>, <code class="language-plaintext highlighter-rouge">Bulk_healthy: Read Props</code> and <code class="language-plaintext highlighter-rouge">Bulk_healthy: Sample Props</code>. Examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the file <code class="language-plaintext highlighter-rouge">Bulk_disease: Sample Props</code>. This contains summary statistics (Min, quartiles, median, mean, etc.) for each phenotype. This could be quite helpful if you’re trying to statistically identify differences across samples.</p>
 
 <figure id="figure-4"><img src="../../images/bulk-music/summary_statistics.png" alt="Table with rows as cell types and columns as statistics: Min, 1st Qu., Median, Mean." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Altogether: Stats</figcaption></figure>
 
@@ -1094,7 +1092,7 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
 
 <p>Finally, if you select the <em>Tables</em> dataset, you’ll find it contains three sets of data, <code class="language-plaintext highlighter-rouge">Data Table</code>, <code class="language-plaintext highlighter-rouge">Matrix of Cell Type Read Counts</code>, and <code class="language-plaintext highlighter-rouge">Matrix of Cell Type Sample Proportions</code>.</p>
 
-<p>Examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the file <code class="language-plaintext highlighter-rouge">Data Table</code>. This contains the inferred proportions and <span class="notranslate">reads</span> associated with each sample and cell type, along with its important factor of interest (Disease). In this tutorial, we tend to use sample proportions rather than read count, but either works. The two other matrix files are just portions of this data table.</p>
+<p>Examine <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> the file <code class="language-plaintext highlighter-rouge">Data Table</code>. This contains the inferred proportions and reads associated with each sample and cell type, along with its important factor of interest (Disease). In this tutorial, we tend to use sample proportions rather than read count, but either works. The two other matrix files are just portions of this data table.</p>
 
 <figure id="figure-5"><img src="../../images/bulk-music/data_table.png" alt="Table with individual rows for each cell type within each sample, with columns of Cell, Factor, CT Prop in Sample and Number of Reads." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Altogether: Data table</figcaption></figure>
 
@@ -1124,27 +1122,27 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
   <div class="box-title hands-on-title" id="hands-on-like4like-inference" aria-label="hands-on box:  Like4like Inference "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Like4like Inference</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4"><strong>MuSiC Compare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+<span class="notranslate">galaxy</span>4</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4"><strong>MuSiC Compare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4</span></span>  with the following parameters:
       <ul>
-        <li>In <em>“New sc<span class="notranslate">RNA</span> Group”</em>:
+        <li>In <em>“New scRNA Group”</em>:
           <ul>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert New sc<span class="notranslate">RNA</span> Group”</em>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert New scRNA Group”</em>
               <ul>
-                <li><em>“Name of sc<span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">sc<span class="notranslate">RNA</span>_set:Normal</code></li>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“sc<span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_sc_healthy.rdata</code> (Input dataset)</li>
-                <li>In <em>“Advanced sc<span class="notranslate">RNA</span> Parameters”</em>:
+                <li><em>“Name of scRNA Dataset”</em>: <code class="language-plaintext highlighter-rouge">scRNA_set:Normal</code></li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“scRNA Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_sc_healthy.rdata</code> (Input dataset)</li>
+                <li>In <em>“Advanced scRNA Parameters”</em>:
                   <ul>
-                    <li><em>“Cell Types Label from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">Inferred cell type - author labels</code></li>
-                    <li><em>“Samples Identifier from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">Individual</code></li>
-                    <li><em>“Comma list of cell types to use from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">alpha cell,beta cell,delta cell,gamma cell,acinar cell,ductal cell</code></li>
+                    <li><em>“Cell Types Label from scRNA dataset”</em>: <code class="language-plaintext highlighter-rouge">Inferred cell type - author labels</code></li>
+                    <li><em>“Samples Identifier from scRNA dataset”</em>: <code class="language-plaintext highlighter-rouge">Individual</code></li>
+                    <li><em>“Comma list of cell types to use from scRNA dataset”</em>: <code class="language-plaintext highlighter-rouge">alpha cell,beta cell,delta cell,gamma cell,acinar cell,ductal cell</code></li>
                   </ul>
                 </li>
-                <li>In <em>“Bulk Datasets in sc<span class="notranslate">RNA</span> Group”</em>:
+                <li>In <em>“Bulk Datasets in scRNA Group”</em>:
                   <ul>
-                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Bulk Datasets in sc<span class="notranslate">RNA</span> Group”</em>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Bulk Datasets in scRNA Group”</em>
                       <ul>
                         <li><em>“Name of Bulk Dataset”</em>: <code class="language-plaintext highlighter-rouge">Bulk_set:Normal</code></li>
-                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Bulk <span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_bulk_healthy.rdata</code> (Input dataset)</li>
+                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Bulk RNA Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_bulk_healthy.rdata</code> (Input dataset)</li>
                         <li><em>“Factor Name”</em>: <code class="language-plaintext highlighter-rouge">Disease</code></li>
                       </ul>
                     </li>
@@ -1152,23 +1150,23 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
                 </li>
               </ul>
             </li>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert New sc<span class="notranslate">RNA</span> Group”</em>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert New scRNA Group”</em>
               <ul>
-                <li><em>“Name of sc<span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">sc<span class="notranslate">RNA</span>_set:T2D</code></li>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“sc<span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_sc_T2D.rdata</code> (Input dataset)</li>
-                <li>In <em>“Advanced sc<span class="notranslate">RNA</span> Parameters”</em>:
+                <li><em>“Name of scRNA Dataset”</em>: <code class="language-plaintext highlighter-rouge">scRNA_set:T2D</code></li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“scRNA Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_sc_T2D.rdata</code> (Input dataset)</li>
+                <li>In <em>“Advanced scRNA Parameters”</em>:
                   <ul>
-                    <li><em>“Cell Types Label from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">Inferred cell type - author labels</code></li>
-                    <li><em>“Samples Identifier from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">Individual</code></li>
-                    <li><em>“Comma list of cell types to use from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">alpha cell,beta cell,delta cell,gamma cell,acinar cell,ductal cell</code></li>
+                    <li><em>“Cell Types Label from scRNA dataset”</em>: <code class="language-plaintext highlighter-rouge">Inferred cell type - author labels</code></li>
+                    <li><em>“Samples Identifier from scRNA dataset”</em>: <code class="language-plaintext highlighter-rouge">Individual</code></li>
+                    <li><em>“Comma list of cell types to use from scRNA dataset”</em>: <code class="language-plaintext highlighter-rouge">alpha cell,beta cell,delta cell,gamma cell,acinar cell,ductal cell</code></li>
                   </ul>
                 </li>
-                <li>In <em>“Bulk Datasets in sc<span class="notranslate">RNA</span> Group”</em>:
+                <li>In <em>“Bulk Datasets in scRNA Group”</em>:
                   <ul>
-                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Bulk Datasets in sc<span class="notranslate">RNA</span> Group”</em>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Bulk Datasets in scRNA Group”</em>
                       <ul>
                         <li><em>“Name of Bulk Dataset”</em>: <code class="language-plaintext highlighter-rouge">bulk_set:T2D</code></li>
-                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Bulk <span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_bulk_T2D.rdata</code> (Input dataset)</li>
+                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Bulk RNA Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_bulk_T2D.rdata</code> (Input dataset)</li>
                         <li><em>“Factor Name”</em>: <code class="language-plaintext highlighter-rouge">Disease</code></li>
                       </ul>
                     </li>
@@ -1189,7 +1187,7 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
   <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
   <ol>
-    <li>How have the cell inferences changed, now that we have changed the sc<span class="notranslate">RNA</span> references used?</li>
+    <li>How have the cell inferences changed, now that we have changed the scRNA references used?</li>
   </ol>
 
   <blockquote class="solution">
@@ -1212,34 +1210,34 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
   <div class="box-title hands-on-title" id="hands-on-healthy-sc-reference-only-inference" aria-label="hands-on box:  Healthy sc reference only inference "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Healthy sc reference only inference</div>
 
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4"><strong>MuSiC Compare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+<span class="notranslate">galaxy</span>4</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4"><strong>MuSiC Compare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4</span></span>  with the following parameters:
       <ul>
-        <li>In <em>“New sc<span class="notranslate">RNA</span> Group”</em>:
+        <li>In <em>“New scRNA Group”</em>:
           <ul>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert New sc<span class="notranslate">RNA</span> Group”</em>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert New scRNA Group”</em>
               <ul>
-                <li><em>“Name of sc<span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">sc<span class="notranslate">RNA</span>_set:Normal</code></li>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“sc<span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_sc_healthy.rdata</code> (Input dataset)</li>
-                <li>In <em>“Advanced sc<span class="notranslate">RNA</span> Parameters”</em>:
+                <li><em>“Name of scRNA Dataset”</em>: <code class="language-plaintext highlighter-rouge">scRNA_set:Normal</code></li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“scRNA Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_sc_healthy.rdata</code> (Input dataset)</li>
+                <li>In <em>“Advanced scRNA Parameters”</em>:
                   <ul>
-                    <li><em>“Cell Types Label from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">Inferred cell type - author labels</code></li>
-                    <li><em>“Samples Identifier from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">Individual</code></li>
-                    <li><em>“Comma list of cell types to use from sc<span class="notranslate">RNA</span> dataset”</em>: <code class="language-plaintext highlighter-rouge">alpha cell,beta cell,delta cell,gamma cell,acinar cell,ductal cell</code></li>
+                    <li><em>“Cell Types Label from scRNA dataset”</em>: <code class="language-plaintext highlighter-rouge">Inferred cell type - author labels</code></li>
+                    <li><em>“Samples Identifier from scRNA dataset”</em>: <code class="language-plaintext highlighter-rouge">Individual</code></li>
+                    <li><em>“Comma list of cell types to use from scRNA dataset”</em>: <code class="language-plaintext highlighter-rouge">alpha cell,beta cell,delta cell,gamma cell,acinar cell,ductal cell</code></li>
                   </ul>
                 </li>
-                <li>In <em>“Bulk Datasets in sc<span class="notranslate">RNA</span> Group”</em>:
+                <li>In <em>“Bulk Datasets in scRNA Group”</em>:
                   <ul>
-                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Bulk Datasets in sc<span class="notranslate">RNA</span> Group”</em>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Bulk Datasets in scRNA Group”</em>
                       <ul>
                         <li><em>“Name of Bulk Dataset”</em>: <code class="language-plaintext highlighter-rouge">Bulk_set:Normal</code></li>
-                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Bulk <span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_bulk_healthy.rdata</code> (Input dataset)</li>
+                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Bulk RNA Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_bulk_healthy.rdata</code> (Input dataset)</li>
                         <li><em>“Factor Name”</em>: <code class="language-plaintext highlighter-rouge">Disease</code></li>
                       </ul>
                     </li>
-                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Bulk Datasets in sc<span class="notranslate">RNA</span> Group”</em>
+                    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Bulk Datasets in scRNA Group”</em>
                       <ul>
                         <li><em>“Name of Bulk Dataset”</em>: <code class="language-plaintext highlighter-rouge">Bulk_set:T2D</code></li>
-                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Bulk <span class="notranslate">RNA</span> Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_bulk_T2D.rdata</code> (Input dataset)</li>
+                        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Bulk RNA Dataset”</em>: <code class="language-plaintext highlighter-rouge">ESet_object_bulk_T2D.rdata</code> (Input dataset)</li>
                         <li><em>“Factor Name”</em>: <code class="language-plaintext highlighter-rouge">Disease</code></li>
                       </ul>
                     </li>
@@ -1268,7 +1266,7 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
 
     <blockquote>
       <blockquote>
-        <figure id="figure-7"><img src="../../images/bulk-music/compare_3.png" alt="Three graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether; the middle labelled #like4like; and the bottom labelled #healthyscref. Differences are most pronounced in the bottom #healthyscref graph." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> The impact of the <span class="notranslate">single cell</span> reference</figcaption></figure>
+        <figure id="figure-7"><img src="../../images/bulk-music/compare_3.png" alt="Three graphs showing two rows for each cell type (gamma, ductal, delta, beta, alpha, and acinar cells) comparison normal or T2D proportions by either read or by sample, with the top graph labelled #altogether; the middle labelled #like4like; and the bottom labelled #healthyscref. Differences are most pronounced in the bottom #healthyscref graph." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> The impact of the single cell reference</figcaption></figure>
       </blockquote>
     </blockquote>
 
@@ -1284,13 +1282,13 @@ https://zenodo.org/record/7319925/files/ESet_object_bulk_T2D.rdata
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>Congrats! You’ve made it to the end of this suite of deconvolution tutorials! You’ve learned how to find quality data for reference and for analysis, how to reformat it for deconvolution using MuSiC, and how to compare cellular inferences using multiple kinds of reference datasets. You can find the <a href="https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-compare-1"><span class="notranslate">workflow</span> for this tutorial</a> and an <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-comparisons--final">example history</a>.</p>
+<p>Congrats! You’ve made it to the end of this suite of deconvolution tutorials! You’ve learned how to find quality data for reference and for analysis, how to reformat it for deconvolution using MuSiC, and how to compare cellular inferences using multiple kinds of reference datasets. You can find the <a href="https://usegalaxy.eu/u/wendi.bacon.training/w/music-deconvolution-compare-1">workflow for this tutorial</a> and an <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/music-deconvolution-comparisons--final">example history</a>.</p>
 
 <p>We hope this helps you in your research!</p>
 
-<figure id="figure-8"><img src="../../images/bulk-music/compare_workflow.png" alt="Workflow editor showing 5 inputs and 3 runs of the MuSiC Compare tool. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> MuSiC Compare Tutorial <span class="notranslate">Workflow</span></figcaption></figure>
+<figure id="figure-8"><img src="../../images/bulk-music/compare_workflow.png" alt="Workflow editor showing 5 inputs and 3 runs of the MuSiC Compare tool. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> MuSiC Compare Tutorial Workflow</figcaption></figure>
 
-<p>This tutorial is part of the <a href="https://singlecell.usegalaxy.eu">https://singlecell.use<span class="notranslate">galaxy</span>.eu</a> portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span>).</p>
+<p>This tutorial is part of the <a href="https://singlecell.usegalaxy.eu">https://singlecell.usegalaxy.eu</a> portal (<span class="citation"><a href="#tekman2020single">Tekman <i>et al.</i> 2020</a></span>).</p>
 
 
                 

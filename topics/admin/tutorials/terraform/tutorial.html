@@ -548,7 +548,7 @@
       <li><a href="#destroy-time-provisioners" id="markdown-toc-destroy-time-provisioners">Destroy time provisioners</a></li>
     </ol>
   </li>
-  <li><a href="#usegalaxyeus-terraform-usage" id="markdown-toc-usegalaxyeus-terraform-usage">Use<span class="notranslate">Galaxy</span>.eu’s Terraform Usage</a></li>
+  <li><a href="#usegalaxyeus-terraform-usage" id="markdown-toc-usegalaxyeus-terraform-usage">UseGalaxy.eu’s Terraform Usage</a></li>
 </ol>
 
 </blockquote>
@@ -569,19 +569,19 @@
 <p>Terraform is a tool you can use to “sync” your infrastructure (VMs in Clouds, DNS records, etc.) with code you have written in configuration files. This is known as <strong>infrastructure as code</strong>.
 Knowing that your infrastructure is exactly what you expect it to be can simplify your operations significantly. You can have confidence that if anything changes, any images crash or are accidentally deleted, that you can immediately re-build your infrastructure.</p>
 
-<p>Use<span class="notranslate">Galaxy</span>.eu used Terraform to migrate easily between clouds, when our old cloud shut down and our new cloud was launched. We simply updated the credentials for connecting to the cloud, and ran Terraform. It recognised that none of our existing resources were there and recreated all of them. This made life incredibly easy for us, we knew that our infrastructure would be exactly correct relative to what it looked like in the previous cloud.</p>
+<p>UseGalaxy.eu used Terraform to migrate easily between clouds, when our old cloud shut down and our new cloud was launched. We simply updated the credentials for connecting to the cloud, and ran Terraform. It recognised that none of our existing resources were there and recreated all of them. This made life incredibly easy for us, we knew that our infrastructure would be exactly correct relative to what it looked like in the previous cloud.</p>
 
 <h2 id="what-can-be-managed">What can be managed</h2>
 
 <p>Terraform supports <a href="https://www.terraform.io/docs/providers/index.html">many providers</a>, allowing you to easily manage resources no matter where they are located. Primarily this consists of resources like virtual machines and DNS records.</p>
 
-<p>If you have VMs you are managing, whether for individual projects or for large scale infrastructure like Use<span class="notranslate">Galaxy</span>.eu, your work or research can be simpler and more reproducible if you are doing it with automation like Terraform.</p>
+<p>If you have VMs you are managing, whether for individual projects or for large scale infrastructure like UseGalaxy.eu, your work or research can be simpler and more reproducible if you are doing it with automation like Terraform.</p>
 
 <h2 id="what-should-be-managed">What should be managed</h2>
 
-<p>Support for certain databases and other software is available, but whether or not this is a good idea depends heavily on your <span class="notranslate">workflow</span>. Use<span class="notranslate">Galaxy</span>.eu found that managing databases and database users was not a good fit with our <span class="notranslate">workflow</span>. We launch VMs with terraform and then provision them with ansible. To then have a second step where we re-connect and provision the database with terraform was an awkward <span class="notranslate">workflow</span>, so we mostly let Ansible manage these resources.</p>
+<p>Support for certain databases and other software is available, but whether or not this is a good idea depends heavily on your workflow. UseGalaxy.eu found that managing databases and database users was not a good fit with our workflow. We launch VMs with terraform and then provision them with ansible. To then have a second step where we re-connect and provision the database with terraform was an awkward workflow, so we mostly let Ansible manage these resources.</p>
 
-<p>Some groups use Ansible or Bash scripts in order to launch VMs. This can be a better <span class="notranslate">workflow</span> for certain cases. Launching VMs that manage themselves or are automatically scaled by some exte<span class="notranslate">rna</span>l process is not a good fit. Terraform expects the resource to be there the next time, with the same ID, with the same values, and will alert you if it isn’t.</p>
+<p>Some groups use Ansible or Bash scripts in order to launch VMs. This can be a better workflow for certain cases. Launching VMs that manage themselves or are automatically scaled by some external process is not a good fit. Terraform expects the resource to be there the next time, with the same ID, with the same values, and will alert you if it isn’t.</p>
 
 <h1 id="managing-a-single-vm">Managing a Single VM</h1>
 
@@ -602,7 +602,7 @@ Knowing that your infrastructure is exactly what you expect it to be can simplif
 
 <h2 id="keypair">Keypair</h2>
 
-<p>Terraform <span class="notranslate">reads</span> all files with the extension <code class="language-plaintext highlighter-rouge">.tf</code> in your current directory. Resources can be in a single file, or organised across several different files. We had the best experience by separating out logical groups of resources:</p>
+<p>Terraform reads all files with the extension <code class="language-plaintext highlighter-rouge">.tf</code> in your current directory. Resources can be in a single file, or organised across several different files. We had the best experience by separating out logical groups of resources:</p>
 
 <ul>
   <li>DNS entries in a single file</li>
@@ -883,7 +883,7 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
       <p>Identify a small image flavor that you can use for your testing.</p>
     </li>
     <li>
-      <p>Upload this <code class="language-plaintext highlighter-rouge">raw</code> format image available from <a href="https://usegalaxy.eu/static/vgcn/denbi-centos7-j10-2e08aa4bfa33-master.raw">Use<span class="notranslate">Galaxy</span>.eu</a> to your OpenStack</p>
+      <p>Upload this <code class="language-plaintext highlighter-rouge">raw</code> format image available from <a href="https://usegalaxy.eu/static/vgcn/denbi-centos7-j10-2e08aa4bfa33-master.raw">UseGalaxy.eu</a> to your OpenStack</p>
     </li>
   </ol>
 
@@ -1131,10 +1131,10 @@ Uptime............: up 5 minutes
   <li>Docker</li>
   <li>Singularity</li>
   <li>Conda</li>
-  <li>CVMFS connected to <span class="notranslate">Galaxy</span>project’s biological databases and Singularity containers</li>
+  <li>CVMFS connected to Galaxyproject’s biological databases and Singularity containers</li>
 </ul>
 
-<p>This is very similar to the standard image that Use<span class="notranslate">Galaxy</span>.eu uses for all of its compute nodes.</p>
+<p>This is very similar to the standard image that UseGalaxy.eu uses for all of its compute nodes.</p>
 
 <h1 id="managing-a-cluster-of-vms">Managing a Cluster of VMs</h1>
 
@@ -1146,7 +1146,7 @@ Uptime............: up 5 minutes
   <li>We will launch two execution nodes to process jobs</li>
 </ul>
 
-<p>We use a very similar setup for our production cloud cluster that powers Use<span class="notranslate">Galaxy</span>.eu’s compute and training infrastructure.</p>
+<p>We use a very similar setup for our production cloud cluster that powers UseGalaxy.eu’s compute and training infrastructure.</p>
 
 <h2 id="configuration">Configuration</h2>
 
@@ -1792,7 +1792,7 @@ condor_drain <span class="si">$(</span><span class="nb">hostname</span><span cla
 
 <p>Terraform will SSH in with those credentials, copy over the script in <code class="language-plaintext highlighter-rouge">prepare-restart.sh</code>, and execute it.</p>
 
-<h1 id="usegalaxyeus-terraform-usage">Use<span class="notranslate">Galaxy</span>.eu’s Terraform Usage</h1>
+<h1 id="usegalaxyeus-terraform-usage">UseGalaxy.eu’s Terraform Usage</h1>
 
 <p>All of <a href="https://github.com/usegalaxy-eu/infrastructure/">our virtual infrastructure</a> is managed, publicly, with Terraform. We hope that this can inspire others and give people ideas of the sort of things they can accomplish with Terraform. If you have questions over the way we have done certain things, feel free to file an issue and ask us!</p>
 

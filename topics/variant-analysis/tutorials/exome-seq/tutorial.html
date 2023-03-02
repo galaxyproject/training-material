@@ -980,8 +980,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -1057,7 +1055,7 @@
 
 <p>Exome sequencing is a method that enables the selective sequencing of the
 exonic regions of a genome - that is the transcribed parts of the genome present
-in mature m<span class="notranslate">RNA</span>, including protein-coding sequences, but also untranslated
+in mature mRNA, including protein-coding sequences, but also untranslated
 regions (UTRs).</p>
 
 <p>In humans, there are about 180,000 exons with a combined length of ~ 30 million
@@ -1065,7 +1063,7 @@ base pairs (30 Mb). Thus, the exome represents only 1% of the human genome, but
 has been estimated to harbor up to 85% of all disease-causing variants (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2768590/">Choi
 et al., 2009</a>).</p>
 
-<p>Exome sequencing, thus, offers an affordable alte<span class="notranslate">rna</span>tive to whole-genome
+<p>Exome sequencing, thus, offers an affordable alternative to whole-genome
 sequencing in the diagnosis of genetic disease, while still covering far more
 potential disease-causing variant sites than genotyping arrays. This is of
 special relevance in the case of rare genetic diseases, for which the causative
@@ -1120,10 +1118,10 @@ variant calling, you may want to have a look at the related tutorial on
 <a href="../dip/tutorial.html">Calling variants in diploid systems</a>.</p>
 
   <p>The tutorial on <a href="../somatic-variants/tutorial.html">Somatic variant calling</a>
-follows an analysis <span class="notranslate">workflow</span> that is rather similar to the one here, but
+follows an analysis workflow that is rather similar to the one here, but
 tries to identify tumor variants by comparing a tumor sample to healthy
 tissue from the same patient. Together, the two tutorials are intended to get
-you started with genomics medicine using <span class="notranslate">Galaxy</span>.</p>
+you started with genomics medicine using Galaxy.</p>
 
 </blockquote>
 
@@ -1139,10 +1137,10 @@ you started with genomics medicine using <span class="notranslate">Galaxy</span>
     </ol>
   </li>
   <li><a href="#quality-control" id="markdown-toc-quality-control">Quality control</a></li>
-  <li><a href="#read-mapping" id="markdown-toc-read-mapping">Read <span class="notranslate">mapping</span></a></li>
-  <li><a href="#mapped-reads-postprocessing" id="markdown-toc-mapped-reads-postprocessing">Mapped <span class="notranslate">reads</span> postprocessing</a>    <ol>
-      <li><a href="#filtering-on-mapped-reads-properties" id="markdown-toc-filtering-on-mapped-reads-properties">Filtering on mapped <span class="notranslate">reads</span> properties</a></li>
-      <li><a href="#removing-duplicate-reads" id="markdown-toc-removing-duplicate-reads">Removing duplicate <span class="notranslate">reads</span></a></li>
+  <li><a href="#read-mapping" id="markdown-toc-read-mapping">Read mapping</a></li>
+  <li><a href="#mapped-reads-postprocessing" id="markdown-toc-mapped-reads-postprocessing">Mapped reads postprocessing</a>    <ol>
+      <li><a href="#filtering-on-mapped-reads-properties" id="markdown-toc-filtering-on-mapped-reads-properties">Filtering on mapped reads properties</a></li>
+      <li><a href="#removing-duplicate-reads" id="markdown-toc-removing-duplicate-reads">Removing duplicate reads</a></li>
     </ol>
   </li>
   <li><a href="#variant-calling" id="markdown-toc-variant-calling">Variant calling</a>    <ol>
@@ -1172,23 +1170,23 @@ identify the genetic variation that is responsible for the disease.</p>
 
 <h2 id="get-data">Get data</h2>
 
-<p><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> This tutorial offers <strong>two alte<span class="notranslate">rna</span>tive entry points</strong> allowing
+<p><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> This tutorial offers <strong>two alternative entry points</strong> allowing
 you to</p>
 
 <ul>
-  <li>conduct a full analysis starting from original sequenced <span class="notranslate">reads</span> in <code class="language-plaintext highlighter-rouge">fastq</code>
+  <li>conduct a full analysis starting from original sequenced reads in <code class="language-plaintext highlighter-rouge">fastq</code>
 format or to</li>
-  <li>start your analysis with premapped <span class="notranslate">reads</span> in <code class="language-plaintext highlighter-rouge">bam</code> format that are (almost)
+  <li>start your analysis with premapped reads in <code class="language-plaintext highlighter-rouge">bam</code> format that are (almost)
 ready for variant calling.</li>
 </ul>
 
 <p>While the full analysis is probably closer to how you would analyze your own
-data, the shortened analysis from premapped <span class="notranslate">reads</span> may suit your time frame
+data, the shortened analysis from premapped reads may suit your time frame
 better, and will avoid redundancy if you have previously worked through other
-tutorials demonstrating NGS quality control and read <span class="notranslate">mapping</span>, like the
+tutorials demonstrating NGS quality control and read mapping, like the
 dedicated
 <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality control</a>
-and <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><span class="notranslate">Mapping</span></a>
+and <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html">Mapping</a>
 tutorials.</p>
 
 <p>The following hands-on section will guide you through obtaining the right
@@ -1202,9 +1200,9 @@ data for either analysis.</p>
       <p>Create a new history for this tutorial and give it a meaningful name</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-history-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>   <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>   <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol> </blockquote>
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Click on <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name (which by default is “Unnamed history”)</li>   <li>Type the new name</li>   <li>Click on <strong>Save</strong></li> </ol>   <p>If you do not have the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> (<strong>Edit</strong>) next to the history name:</p>   <ol>   <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>   <li>Type the new name</li>   <li>Press <kbd>Enter</kbd></li> </ol> </blockquote>
     </li>
     <li>
       <p>Obtain the raw sequencing data</p>
@@ -1212,15 +1210,15 @@ data for either analysis.</p>
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-starting-from-raw-sequencing-data" aria-label="comment box: Starting from raw sequencing data"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Starting from raw sequencing data</div>
         <p>In this and the following steps you will obtain the original unmapped
-sequencing data and prepare for a full analysis including the <span class="notranslate">mapping</span> of
-the sequenced <span class="notranslate">reads</span>.</p>
+sequencing data and prepare for a full analysis including the mapping of
+the sequenced reads.</p>
 
-        <p>If you prefer <strong>to skip the <span class="notranslate">mapping</span> step</strong> and start the analysis from
+        <p>If you prefer <strong>to skip the mapping step</strong> and start the analysis from
 premapped data <strong>you should proceed directly to step 4</strong> of this
 section.</p>
       </blockquote>
 
-      <p>Import the original sequenced <span class="notranslate">reads</span> datasets of the family trio from
+      <p>Import the original sequenced reads datasets of the family trio from
 <a href="https://zenodo.org/record/3054169">Zenodo</a>:</p>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3243160/files/father_R1.fq.gz
 https://zenodo.org/record/3243160/files/father_R2.fq.gz
@@ -1230,15 +1228,15 @@ https://zenodo.org/record/3243160/files/proband_R1.fq.gz
 https://zenodo.org/record/3243160/files/proband_R2.fq.gz
 </code></pre></div>      </div>
 
-      <p>Alte<span class="notranslate">rna</span>tively, the same files may be available on your <span class="notranslate">Galaxy</span> server
+      <p>Alternatively, the same files may be available on your Galaxy server
 through a shared data library (your instructor may tell you so), in
 which case you may prefer to import the data directly from there.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li>
       <p>Check that the newly created datasets in your history have their
@@ -1246,36 +1244,36 @@ datatypes assigned correctly to <code class="language-plaintext highlighter-roug
 wrong datatype assignment</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
 
       <p><i class="fas fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> Congratulations for obtaining the datasets required for
-an analysis including <span class="notranslate">reads</span> <span class="notranslate">mapping</span>. You should now
+an analysis including reads mapping. You should now
 <strong>proceed with Step 7</strong> below.</p>
     </li>
     <li>Obtain the premapped sequencing data
       <blockquote class="comment">
-        <div class="box-title comment-title" id="comment-alternative-entry-point-premapped-data" aria-label="comment box: Alternative entry point: Premapped data"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Alte<span class="notranslate">rna</span>tive entry point: Premapped data</div>
+        <div class="box-title comment-title" id="comment-alternative-entry-point-premapped-data" aria-label="comment box: Alternative entry point: Premapped data"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Alternative entry point: Premapped data</div>
         <p>Skip this and the following two steps if you already obtained and
 prepared the original unmapped seuencing data and are planning to
-perform the <span class="notranslate">mapping</span> step yourself.</p>
+perform the mapping step yourself.</p>
       </blockquote>
 
-      <p>Import the premapped <span class="notranslate">reads</span> datasets of the family trio from
+      <p>Import the premapped reads datasets of the family trio from
 <a href="https://zenodo.org/record/3054169">Zenodo</a>:</p>
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3243160/files/mapped_<span class="notranslate">reads</span>_father.bam
-https://zenodo.org/record/3243160/files/mapped_<span class="notranslate">reads</span>_mother.bam
-https://zenodo.org/record/3243160/files/mapped_<span class="notranslate">reads</span>_proband.bam
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3243160/files/mapped_reads_father.bam
+https://zenodo.org/record/3243160/files/mapped_reads_mother.bam
+https://zenodo.org/record/3243160/files/mapped_reads_proband.bam
 </code></pre></div>      </div>
 
-      <p>Alte<span class="notranslate">rna</span>tively, the same files may be available on your <span class="notranslate">Galaxy</span> server
+      <p>Alternatively, the same files may be available on your Galaxy server
 through a shared data library (your instructor may tell you so), in
 which case you may prefer to import the data directly from there.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">bam</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Change <strong>Type (set all):</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">bam</code></p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-data-from-a-data-library-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-data-from-a-data-library-1-contents" aria-expanded="true" aria-label="Toggle tip box: Importing data from a data library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing data from a data library<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>As an alternative to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>   <ul>   <li>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></li>   <li>Navigate to  the correct folder as indicated by your instructor</li>   <li>Select the desired files</li>   <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>   <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>   <li>Click on <strong>Import</strong></li> </ul> </blockquote>
     </li>
     <li>
       <p>Check that the newly created datasets in your history have their
@@ -1283,16 +1281,16 @@ datatypes assigned correctly to <code class="language-plaintext highlighter-roug
 datatype assignment</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">bam</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-1-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">bam</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
-      <p>Specify the genome version that was used for <span class="notranslate">mapping</span></p>
+      <p>Specify the genome version that was used for mapping</p>
 
       <p>Change the database/build (dbkey) for each of your bam datasets
 to <code class="language-plaintext highlighter-rouge">hg19</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-database-build-dbkey"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-database-build-dbkey-contents" aria-expanded="true" aria-label="Toggle tip box: Changing database/build (dbkey)"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing database/build (dbkey)<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Database/Build</strong> field</li>   <li>Select your desired database key from the dropdown list: <code class="language-plaintext highlighter-rouge">Human Feb. 2009 (GRCh37/hg19) (hg19)</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-database-build-dbkey"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-database-build-dbkey-contents" aria-expanded="true" aria-label="Toggle tip box: Changing database/build (dbkey)"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing database/build (dbkey)<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Database/Build</strong> field</li>   <li>Select your desired database key from the dropdown list: <code class="language-plaintext highlighter-rouge">Human Feb. 2009 (GRCh37/hg19) (hg19)</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
 
       <blockquote class="details">
         <div class="box-title details-title" id="details-why-specify-genome-versions"><button class="gtn-boxify-button details" type="button" aria-controls="details-why-specify-genome-versions-contents" aria-expanded="true" aria-label="Toggle details box: Why specify genome versions"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: Why specify genome versions<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
@@ -1313,12 +1311,12 @@ successful analysis.</p>
     <li>
       <p>Rename the datasets</p>
 
-      <p>For datasets that you upload via a link, <span class="notranslate">Galaxy</span> will pick the link
+      <p>For datasets that you upload via a link, Galaxy will pick the link
 address as the dataset name, which you will likely want to shorten to
 just the file names.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field</li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
     </li>
     <li>
       <p>Add #father/#mother/#child tags to the datasets</p>
@@ -1327,7 +1325,7 @@ just the file names.</p>
 performed on the data of each family member.</p>
 
       <p>To make it easier to keep track of which dataset represents which step in
-the analysis of which sample, <span class="notranslate">Galaxy</span> supports dataset tags. In particular,
+the analysis of which sample, Galaxy supports dataset tags. In particular,
 if you attach a tag starting with <code class="language-plaintext highlighter-rouge">#</code> to any dataset, that tag will
 automatically propagate to any new dataset derived from the tagged
 dataset.</p>
@@ -1336,17 +1334,17 @@ dataset.</p>
 but you can choose them as you like.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-adding-a-tag"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-adding-a-tag-contents" aria-expanded="true" aria-label="Toggle tip box: Adding a tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Adding a tag<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the dataset</li>   <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden">galaxy-tags</span> <strong>Add Tags</strong></li>   <li>     <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>     <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>   </li>   <li>Check that the tag is appearing below the dataset name</li> </ul> </blockquote>
     </li>
     <li>
       <p>Obtain the reference genome</p>
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-shortcut" aria-label="comment box: Shortcut"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Shortcut</div>
-        <p>You can skip this step if the <span class="notranslate">Galaxy</span> server you are working on offers
+        <p>You can skip this step if the Galaxy server you are working on offers
 a <code class="language-plaintext highlighter-rouge">hg19</code> version of the human reference genome with prebuilt indexes for
 <em>bwa-mem</em> (only necessary if starting from unmapped original sequencing
-<span class="notranslate">reads</span>) and <em>freebayes</em>. Ask your instructor, or check the tools
+reads) and <em>freebayes</em>. Ask your instructor, or check the tools
 <strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and <strong>FreeBayes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
 if they list a <code class="language-plaintext highlighter-rouge">hg19</code> version as an option under
 <em>“Select a / Using reference genome”</em>).</p>
@@ -1358,13 +1356,13 @@ if they list a <code class="language-plaintext highlighter-rouge">hg19</code> ve
 
       <p>Make sure you specify the datatype as <code class="language-plaintext highlighter-rouge">fasta</code> in the import dialog.</p>
 
-      <p>Alte<span class="notranslate">rna</span>tively, load the dataset from a shared data library.</p>
+      <p>Alternatively, load the dataset from a shared data library.</p>
     </li>
     <li>
       <p>Rename the reference genome</p>
 
       <p>The reference genome you have imported above came as a compressed
-file, but got unpacked by <span class="notranslate">Galaxy</span> to plain <code class="language-plaintext highlighter-rouge">fasta</code> format according to
+file, but got unpacked by Galaxy to plain <code class="language-plaintext highlighter-rouge">fasta</code> format according to
 your datatype selection. You may now wish to remove the <code class="language-plaintext highlighter-rouge">.gz</code> suffix
 from the dataset name.</p>
     </li>
@@ -1379,16 +1377,16 @@ You are all set for starting the analysis now.</p>
 data, just proceed with the next section.</p>
 
 <p>If, on the other hand, you have prepared to start from the premapped data, skip
-the sections on <em>Quality control</em> and <em>Read <span class="notranslate">mapping</span></em>, and conitnue with
-<strong>Mapped <span class="notranslate">reads</span> postprocessing</strong>.</p>
+the sections on <em>Quality control</em> and <em>Read mapping</em>, and conitnue with
+<strong>Mapped reads postprocessing</strong>.</p>
 
 <h1 id="quality-control">Quality control</h1>
 
 <p>This step serves the purpose of identifying possible issues with the raw
-sequenced <span class="notranslate">reads</span> input data before embarking on any “real” analysis steps.</p>
+sequenced reads input data before embarking on any “real” analysis steps.</p>
 
 <p>Some of the typical problems with NGS data can be mitigated by preprocessing
-affected sequencing <span class="notranslate">reads</span> before trying to map them to the reference genome.
+affected sequencing reads before trying to map them to the reference genome.
 Detecting some other, more severe problems early on may at least save you a lot
 of time spent on analyzing low-quality data that is not worth the effort.</p>
 
@@ -1435,8 +1433,8 @@ outputs of <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"><
         <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
 
         <ol>
-          <li>Based on the report, do you think preprocessing of the <span class="notranslate">reads</span>
-(trimming and/or filtering) will be necessary before <span class="notranslate">mapping</span>?</li>
+          <li>Based on the report, do you think preprocessing of the reads
+(trimming and/or filtering) will be necessary before mapping?</li>
           <li>Why do all samples show a non-normal GC content distribution, and
 should you be worried?</li>
         </ol>
@@ -1446,19 +1444,19 @@ should you be worried?</li>
 
           <ol>
             <li>Sequence quality is quite good overall. If anything you might
-consider trimming the 3’ ends of <span class="notranslate">reads</span> (base qualities decline
+consider trimming the 3’ ends of reads (base qualities decline
 slightly towards the 3’ ends) or to filter out the small fraction
-of <span class="notranslate">reads</span> with a mean base quality &lt; 5.
+of reads with a mean base quality &lt; 5.
 Feel free to run, <em>e.g.</em>, <strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the
 fastq datasets if you want to, but don’t expect this to have a big
 effect on the analysis given the high overall quality of the data
 of all samples.</li>
             <li>
               <p>In whole-genome sequencing, a non-normal distribution of the GC
-content of the <span class="notranslate">reads</span> from a sample is typically considered to hint
+content of the reads from a sample is typically considered to hint
 at possible contamination.
 Here, however, we are dealing with sequencing data from captured
-exomes, <em>i.e</em>, the <span class="notranslate">reads</span> are not representing random sequences from
+exomes, <em>i.e</em>, the reads are not representing random sequences from
 a genome, but rather a biased selection.</p>
 
               <p>A bimodal GC content distribution, like for the samples at hand, is
@@ -1476,21 +1474,21 @@ before (compare Fig. 3D in
   </ol>
 </blockquote>
 
-<h1 id="read-mapping">Read <span class="notranslate">mapping</span></h1>
+<h1 id="read-mapping">Read mapping</h1>
 
 <p>Now that you confirmed that the quality of the input data is good enough to
-warrant further analysis, it is time to map the sequenced <span class="notranslate">reads</span> to the
+warrant further analysis, it is time to map the sequenced reads to the
 reference genome.</p>
 
 <p>We assume here that you are at least vaguely familiar with the concept of read
-<span class="notranslate">mapping</span> and only illustrate the concrete steps necessary  to map our specific
-NGS <span class="notranslate">reads</span> datasets to the human reference genome. We recommend you to follow
-the dedicated <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><span class="notranslate">Mapping</span> tutorial</a>, if you need a general introduction to read <span class="notranslate">mapping</span>.</p>
+mapping and only illustrate the concrete steps necessary  to map our specific
+NGS reads datasets to the human reference genome. We recommend you to follow
+the dedicated <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html">Mapping tutorial</a>, if you need a general introduction to read mapping.</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-read-mapping" aria-label="hands-on box: Read Mapping"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Read <span class="notranslate">Mapping</span></div>
+  <div class="box-title hands-on-title" id="hands-on-read-mapping" aria-label="hands-on box: Read Mapping"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Read Mapping</div>
   <ol>
-    <li><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to map the <span class="notranslate">reads</span> from the <strong>father</strong> sample to the reference genome
+    <li><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to map the reads from the <strong>father</strong> sample to the reference genome
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome index</code>
           <ul>
@@ -1511,12 +1509,12 @@ built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use 
             </ul>
           </blockquote>
         </li>
-        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired</code>
+        <li><em>“Single or Paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Paired</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select first set of <span class="notranslate">reads</span>”</em>: the
-forward <span class="notranslate">reads</span> (R1) dataset of the <strong>father</strong> sample</li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select second set of <span class="notranslate">reads</span>”</em>: the
-reverse <span class="notranslate">reads</span> (R2) dataset of the <strong>father</strong> sample</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select first set of reads”</em>: the
+forward reads (R1) dataset of the <strong>father</strong> sample</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select second set of reads”</em>: the
+reverse reads (R2) dataset of the <strong>father</strong> sample</li>
           </ul>
 
           <blockquote class="tip">
@@ -1524,14 +1522,14 @@ reverse <span class="notranslate">reads</span> (R2) dataset of the <strong>fathe
             <p>Please confirm that the problematic datasets declare <em>format</em>:
 <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code>.</p>
 
-            <p>Most <span class="notranslate">Galaxy</span> tools that accept FASTQ input expect the data to be
+            <p>Most Galaxy tools that accept FASTQ input expect the data to be
 formatted as <em>FASTQ with Sanger-scaled quality values</em>, the most
 widely spread version of the FASTQ format. To make this requirement
 explicit (instead of generating possibly wrong results) these tools
 require you to set the dataset type to <code class="language-plaintext highlighter-rouge">fastqsanger</code> (<code class="language-plaintext highlighter-rouge">fastqsanger.gz</code>
 for data compressed with gzip). You can do so either on data upload
 or later from the <em>Edit dataset attributes</em> view (which you can reach
-by clicking on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> pencil icon.</p>
+by clicking on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> pencil icon.</p>
           </blockquote>
         </li>
         <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Set read groups (SAM/BAM specification)</code>
@@ -1556,7 +1554,7 @@ by clicking on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span cla
 …</p>
 
         <p>The <strong>ID</strong> should <strong>unambiguously identify</strong> the sequencing run that
-produced the <span class="notranslate">reads</span>. At the very least, no two input datasets in any
+produced the reads. At the very least, no two input datasets in any
 given analysis should define the same ID twice, or tools like
 <em>FreeBayes</em>, which we are going to use in the next step, will refuse
 to work with the data.</p>
@@ -1570,15 +1568,15 @@ remember sample names since you will have to type them in again!</p>
       </blockquote>
     </li>
     <li>
-      <p><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to map the <span class="notranslate">reads</span> from the <strong>mother</strong> sample to the reference genome <strong>using the same parameters as before</strong> except</p>
+      <p><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to map the reads from the <strong>mother</strong> sample to the reference genome <strong>using the same parameters as before</strong> except</p>
 
       <ul>
-        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired</code>
+        <li><em>“Single or Paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Paired</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select first set of <span class="notranslate">reads</span>”</em>: the
-forward <span class="notranslate">reads</span> (R1) dataset of the <strong>mother</strong> sample</li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select second set of <span class="notranslate">reads</span>”</em>: the
-reverse <span class="notranslate">reads</span> (R2) dataset of the <strong>mother</strong> sample</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select first set of reads”</em>: the
+forward reads (R1) dataset of the <strong>mother</strong> sample</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select second set of reads”</em>: the
+reverse reads (R2) dataset of the <strong>mother</strong> sample</li>
           </ul>
         </li>
         <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Set read groups (SAM/BAM specification)</code>
@@ -1598,15 +1596,15 @@ reverse <span class="notranslate">reads</span> (R2) dataset of the <strong>mothe
       </ul>
     </li>
     <li>
-      <p><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to map the <span class="notranslate">reads</span> from the <strong>child</strong> sample to the reference genome <strong>using the same parameters as before</strong> except</p>
+      <p><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to map the reads from the <strong>child</strong> sample to the reference genome <strong>using the same parameters as before</strong> except</p>
 
       <ul>
-        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired</code>
+        <li><em>“Single or Paired-end reads”</em>: <code class="language-plaintext highlighter-rouge">Paired</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select first set of <span class="notranslate">reads</span>”</em>: the
-forward <span class="notranslate">reads</span> (R1) dataset of the <strong>child</strong> sample</li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select second set of <span class="notranslate">reads</span>”</em>: the
-reverse <span class="notranslate">reads</span> (R2) dataset of the <strong>child</strong> sample</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select first set of reads”</em>: the
+forward reads (R1) dataset of the <strong>child</strong> sample</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select second set of reads”</em>: the
+reverse reads (R2) dataset of the <strong>child</strong> sample</li>
           </ul>
         </li>
         <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Set read groups (SAM/BAM specification)</code>
@@ -1629,9 +1627,9 @@ reverse <span class="notranslate">reads</span> (R2) dataset of the <strong>child
 
 </blockquote>
 
-<h1 id="mapped-reads-postprocessing">Mapped <span class="notranslate">reads</span> postprocessing</h1>
+<h1 id="mapped-reads-postprocessing">Mapped reads postprocessing</h1>
 
-<p>At this point in the analysis you should have obtained three mapped <span class="notranslate">reads</span>
+<p>At this point in the analysis you should have obtained three mapped reads
 datasets in <code class="language-plaintext highlighter-rouge">bam</code> format. Ideally, these would carry <code class="language-plaintext highlighter-rouge">#father</code>, <code class="language-plaintext highlighter-rouge">#mother</code> and
 <code class="language-plaintext highlighter-rouge">#child</code> tags for quick identification of the samples they provide data for.</p>
 
@@ -1641,13 +1639,13 @@ sought-after variants.</p>
 
 <p>To obtain an accurate picture of the variant spectrum found in your samples it
 is good practice though to perform various postprocessing steps on the mapped
-<span class="notranslate">reads</span> before passing them to a variant caller.</p>
+reads before passing them to a variant caller.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-shortcut-1" aria-label="comment box: Shortcut"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Shortcut</div>
   <p>If you are in a hurry, you may skip the postprocessing steps and continue
-with your mapped <span class="notranslate">reads</span> datasets and the <em>Variant Calling</em> section. Make sure
-though you come back here, or read about mapped <span class="notranslate">reads</span> postprocessing
+with your mapped reads datasets and the <em>Variant Calling</em> section. Make sure
+though you come back here, or read about mapped reads postprocessing
 elsewhere, before attempting to perform any variant analysis on your own data
 that may require high accuracy/sensitivity.</p>
 </blockquote>
@@ -1655,22 +1653,22 @@ that may require high accuracy/sensitivity.</p>
 <p>The optimal set of postprocessing steps required depends on the variant calling
 software used at the next step. The <strong>FreeBayes</strong> variant caller that we are
 going to use in this tutorial is particularly well suited for use with minimal
-mapped <span class="notranslate">reads</span> postprocessing pipelines, so all we are going to do here is:</p>
+mapped reads postprocessing pipelines, so all we are going to do here is:</p>
 
 <ul>
   <li>
-    <p>filter the paired-end <span class="notranslate">reads</span> of all samples to retain only those read pairs,
+    <p>filter the paired-end reads of all samples to retain only those read pairs,
 for which both the forward and the reverse read have been mapped to the
 reference successfully</p>
 
-    <p>For such pairs of <span class="notranslate">reads</span>, we can be extra confident that they don’t
-come from some non-human contaminant <span class="notranslate">DNA</span> or represent a sequencing artefact
+    <p>For such pairs of reads, we can be extra confident that they don’t
+come from some non-human contaminant DNA or represent a sequencing artefact
 of some sort.</p>
   </li>
   <li>
-    <p>deduplicate <span class="notranslate">reads</span></p>
+    <p>deduplicate reads</p>
 
-    <p>Duplicate <span class="notranslate">reads</span>, which typically arise from PCR-overamplification of genomic
+    <p>Duplicate reads, which typically arise from PCR-overamplification of genomic
 fragments during sequencing library preparation, can, to some extent, lead to
 wrong genotype assignments at variant sites (if, for example, a sample is
 heterozygous for a variant, but fragments with one of the two alleles get
@@ -1681,23 +1679,23 @@ amplified more efficiently than the others).</p>
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-more-postprocessing-steps" aria-label="comment box: More postprocessing steps"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: More postprocessing steps</div>
   <p>The <a href="../somatic-variants/tutorial.html">Somatic variant calling tutorial</a>
-provides an example of a much more complex mapped <span class="notranslate">reads</span> postprocessing
+provides an example of a much more complex mapped reads postprocessing
 pipeline that may be required for optimal performance of other variant
 callers.</p>
 </blockquote>
 
-<h2 id="filtering-on-mapped-reads-properties">Filtering on mapped <span class="notranslate">reads</span> properties</h2>
+<h2 id="filtering-on-mapped-reads-properties">Filtering on mapped reads properties</h2>
 
-<p>To produce new filtered BAM datasets with only mapped <span class="notranslate">reads</span> the mate of which is also mapped:</p>
+<p>To produce new filtered BAM datasets with only mapped reads the mate of which is also mapped:</p>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-filtering-for-read-pair-mapping-status" aria-label="hands-on box: Filtering for read pair mapping status"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filtering for read pair <span class="notranslate">mapping</span> status</div>
+  <div class="box-title hands-on-title" id="hands-on-filtering-for-read-pair-mapping-status" aria-label="hands-on box: Filtering for read pair mapping status"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Filtering for read pair mapping status</div>
 
   <ol>
     <li><strong>Filter SAM or BAM, output SAM or BAM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following
 parameters (leaving non-mentioned ones at their defaults):
       <ul>
-        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“SAM or BAM file to filter”</em>: all 3 mapped <span class="notranslate">reads</span>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“SAM or BAM file to filter”</em>: all 3 mapped reads
  datasets of the family trio, outputs of <strong>Map with BWA-MEM</strong>
  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><em>“Filter on bitwise flag”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
@@ -1729,8 +1727,8 @@ be mapped, but the mapped pair also needs to meet additional,
 aligner-specific criteria. These may include (and do so for <strong>BWA-MEM</strong>):</p>
 
   <ul>
-    <li>both <span class="notranslate">reads</span> need to map to the same chomosome</li>
-    <li>the two <span class="notranslate">reads</span> need to map to the reference in the orientation expected by
+    <li>both reads need to map to the same chomosome</li>
+    <li>the two reads need to map to the reference in the orientation expected by
 the aligner</li>
     <li>the two read pairs need to map to the reference within an
 aligner-determined distance</li>
@@ -1745,18 +1743,18 @@ is unmapped</em> flags above</li>
       <p>you will eliminate read pairs that could be informative with regard to
 chromosomal rearrangements and insertion/deletion events</p>
 
-      <p>=&gt; Do not filter for properly paired <span class="notranslate">reads</span> if you plan to detect such
+      <p>=&gt; Do not filter for properly paired reads if you plan to detect such
 structural variants!</p>
     </li>
   </ul>
 
   <p>In addition, the <em>proper pair</em> flag is considered undefined if the read
-itself is unmapped, so a <em>proper pair</em> filter should eliminate unmapped <span class="notranslate">reads</span>
+itself is unmapped, so a <em>proper pair</em> filter should eliminate unmapped reads
 explicitly to be on the safe side.</p>
 
   <p>Thus, if you would like to use proper pair filtering (we have no intention to
 detect structural variants in this tutorial) instead of just filtering for
-mapped <span class="notranslate">reads</span> with a mapped mate, you could run the alte<span class="notranslate">rna</span>tive:</p>
+mapped reads with a mapped mate, you could run the alternative:</p>
 
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on" aria-label="hands-on box: "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on</div>
@@ -1765,7 +1763,7 @@ mapped <span class="notranslate">reads</span> with a mapped mate, you could run 
       <li><strong>Filter SAM or BAM, output SAM or BAM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>:
         <ul>
           <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“SAM or BAM file to filter”</em>: all 3 mapped
- <span class="notranslate">reads</span> datasets of the family trio, outputs of <strong>Map with BWA-MEM</strong>
+ reads datasets of the family trio, outputs of <strong>Map with BWA-MEM</strong>
  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           <li><em>“Filter on bitwise flag”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
         </ul>
@@ -1788,7 +1786,7 @@ mapped <span class="notranslate">reads</span> with a mapped mate, you could run 
 
 </blockquote>
 
-<h2 id="removing-duplicate-reads">Removing duplicate <span class="notranslate">reads</span></h2>
+<h2 id="removing-duplicate-reads">Removing duplicate reads</h2>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-remove-duplicates" aria-label="hands-on box: Remove duplicates"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Remove duplicates</div>
@@ -1796,7 +1794,7 @@ mapped <span class="notranslate">reads</span> with a mapped mate, you could run 
   <ol>
     <li><strong>RmDup</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM file”</em>: all 3 filtered <span class="notranslate">reads</span> datasets; the
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM file”</em>: all 3 filtered reads datasets; the
  outputs of <strong>Filter SAM or BAM</strong></li>
         <li><em>“Is this paired-end or single end data”</em>: <code class="language-plaintext highlighter-rouge">BAM is paired-end</code></li>
       </ul>
@@ -1813,7 +1811,7 @@ trio.</p>
 
 <h1 id="variant-calling">Variant calling</h1>
 
-<p>With the sequenced <span class="notranslate">reads</span> of all samples mapped and postprocessed, we can start
+<p>With the sequenced reads of all samples mapped and postprocessed, we can start
 looking for evidence of sequence deviations, <em>i.e.</em> variants, between the
 sequenced genomic samples and the reference genome.</p>
 
@@ -1843,7 +1841,7 @@ alignment.</p>
           <ul>
             <li><em>“Run in batch mode?”</em>: <code class="language-plaintext highlighter-rouge">Merge output VCFs</code>
               <ul>
-                <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM dataset(s)”</em>: all three mapped <span class="notranslate">reads</span>
+                <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM dataset(s)”</em>: all three mapped reads
 datasets of the family trio; the outputs of <strong>RmDup</strong></li>
               </ul>
             </li>
@@ -1860,7 +1858,7 @@ into your history instead:</p>
                   <li><em>“Run in batch mode?”</em>: <code class="language-plaintext highlighter-rouge">Merge output VCFs</code>
                     <ul>
                       <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM dataset(s)”</em>: all three mapped
-<span class="notranslate">reads</span> datasets of the family trio</li>
+reads datasets of the family trio</li>
                     </ul>
                   </li>
                   <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the
@@ -1900,7 +1898,7 @@ genotype calls</li>
     <li>Display the VCF dataset:
       <ul>
         <li>
-          <p>Click the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> icon next to the VCF dataset generated
+          <p>Click the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> icon next to the VCF dataset generated
 by FreeBayes to display its contents.</p>
 
           <p>VCF is a tabular plain text format though its information density makes
@@ -1952,7 +1950,7 @@ the sample genotype (<code class="language-plaintext highlighter-rouge">GT</code
 variant existing in any of the samples, <em>i.e.</em> it being real) is
 stored in column 6 (<code class="language-plaintext highlighter-rouge">QUAL</code>).
 The values are <a href="https://en.wikipedia.org/wiki/Phred_quality_score">Phred-scaled</a>
-like sequenced <span class="notranslate">reads</span> base qualities.</p>
+like sequenced reads base qualities.</p>
 
               <p>The (log10-scaled) likelihoods of individual genotype calls are
 stored as the last element (<code class="language-plaintext highlighter-rouge">GL</code>) in every sample column.</p>
@@ -1972,13 +1970,13 @@ consult the excellent (but also long) official
 <h2 id="post-processing-freebayes-calls">Post-processing FreeBayes calls</h2>
 
 <p>Before starting to analyze the detected variants, we need to post-process the
-VCF dataset to fix a few incompatibilities between Freebayes and <span class="notranslate">downstream</span>
+VCF dataset to fix a few incompatibilities between Freebayes and downstream
 analysis tools. In particular, we want to:</p>
 
 <ul>
   <li>
     <p>Split multiallelic variant records, <em>i.e.</em>, records that list more than one
-alte<span class="notranslate">rna</span>te allele at a given genomic position, into separate record lines.</p>
+alternate allele at a given genomic position, into separate record lines.</p>
 
     <p>This will allow us to annotate each record with information about the impact
 of one specific variant allele further on.</p>
@@ -2145,7 +2143,7 @@ which is rather simple to generate manually.</p>
 
       <blockquote class="comment">
         <div class="box-title comment-title" id="comment-shortcut-2" aria-label="comment box: Shortcut"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Shortcut</div>
-        <p>You can skip this step if the <span class="notranslate">Galaxy</span> server you are working on offers
+        <p>You can skip this step if the Galaxy server you are working on offers
 <code class="language-plaintext highlighter-rouge">Homo sapiens: hg19</code> as a locally installed snpEff database. You can
 check the <strong>Genome source</strong> select list of the <strong>SnpEff eff</strong>
 <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool to see if this is the case.</p>
@@ -2157,7 +2155,7 @@ check the <strong>Genome source</strong> select list of the <strong>SnpEff eff</
     <li>
       <p>Create a PED-formatted pedigree dataset describing our single-family sample trio:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#family_id    name     pate<span class="notranslate">rna</span>l_id    mate<span class="notranslate">rna</span>l_id    sex    phenotype
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#family_id    name     paternal_id    maternal_id    sex    phenotype
 FAM           father   0              0              1      1
 FAM           mother   0              0              2      1
 FAM           proband  father         mother         1      2
@@ -2166,14 +2164,14 @@ FAM           proband  father         mother         1      2
       <p>and set its datatype to <code class="language-plaintext highlighter-rouge">tabular</code>.</p>
 
       <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-file-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new file<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Open the <span class="notranslate">Galaxy</span> Upload Manager</li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the file contents into the text field</p>   </li>   <li>     <p>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">tabular</code></p>   </li>   <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li> </ul> </blockquote>
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-creating-a-new-file"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-creating-a-new-file-contents" aria-expanded="true" aria-label="Toggle tip box: Creating a new file"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Creating a new file<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Open the Galaxy Upload Manager</li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the file contents into the text field</p>   </li>   <li>     <p>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">tabular</code></p>   </li>   <li>Press <strong>Start</strong> and <strong>Close</strong> the window</li> </ul> </blockquote>
 
       <blockquote class="warning">
         <div class="box-title warning-title" id="warning-remember-those-sample-names" aria-label="warning box: Remember those sample names"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Remember those sample names</div>
 
         <p>The above content of the pedigree dataset assumes you chose <code class="language-plaintext highlighter-rouge">father</code>,
-<code class="language-plaintext highlighter-rouge">mother</code>, <code class="language-plaintext highlighter-rouge">proband</code> as the sample names at the read <span class="notranslate">mapping</span> step
-(if you haven’t mapped the <span class="notranslate">reads</span> yourself, but started with the
+<code class="language-plaintext highlighter-rouge">mother</code>, <code class="language-plaintext highlighter-rouge">proband</code> as the sample names at the read mapping step
+(if you haven’t mapped the reads yourself, but started with the
 premapped data, you can safely skip this warning section).
 By now, these sample names will have been propagated through <em>BWA-MEM</em>
 and <em>Freebayes</em> to the VCF dataset of variants. It is <strong>important</strong> that
@@ -2250,7 +2248,7 @@ column.</p>
   <ol>
     <li>Display the dataset:
       <ul>
-        <li>Click the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> icon next to the HTML dataset generated
+        <li>Click the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> icon next to the HTML dataset generated
 by SnpEff to display its contents.</li>
       </ul>
 
@@ -2364,7 +2362,7 @@ default annotations bundled with GEMINI.</li>
 let you add additional information to a GEMINI database after it has been
 created. Use <strong>GEMINI amend</strong> to overwrite the pedigree info in a database
 with the one found in a given PED input, and <strong>GEMINI annotate</strong> to add
-custom annotations based on a VCF or <span class="notranslate">BED</span> dataset.</li>
+custom annotations based on a VCF or BED dataset.</li>
     <li><strong>GEMINI database info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> lets you peek into the content of
 a GEMINI database to explore, <em>e.g</em>, what annotations are stored in it.</li>
     <li><strong>GEMINI query</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and <strong>GEMINI gene-wise</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
@@ -2428,7 +2426,7 @@ is, of course, possible.</li>
 the parents’ consanguinity.</li>
       <li>For both the de-novo and the inherited recessive case, the variant could
 reside on an autosome or on the X chromosome. Given that we provided you
-with only the subset of sequencing <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to chr8, an X-linked
+with only the subset of sequencing reads mapping to chr8, an X-linked
 variant would not be exactly instructive though ;)</li>
       <li>A compound heterozygous combination of variant alleles affecting the
 same gene is possible, but less likely given the consanguinity of the
@@ -2506,7 +2504,7 @@ for alleles with partial phenotypic penetrance.</p>
               <ul>
                 <li><em>“Choose columns to include in the report”</em>:
                   <ul>
-                    <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“alte<span class="notranslate">rna</span>tive allele frequency (max_aaf_all)”</em></li>
+                    <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“alternative allele frequency (max_aaf_all)”</em></li>
                   </ul>
                 </li>
                 <li><em>“Additional columns (comma-separated)”</em>:

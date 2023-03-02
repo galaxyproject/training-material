@@ -792,14 +792,14 @@
             <div class="col-sm-10">
                  
 
-                <p>This tutorial will guide you to setup an File Transfer Protocol (FTP) server so <span class="notranslate">galaxy</span> users can use it to upload large files. Indeed, as written on the <a href="https://galaxyproject.org/ftp-upload/"><span class="notranslate">galaxy</span> community hub</a>, uploading data directly from the browser can be unreliable and cumbersome. FTP will allow users to monitor the upload status as well as resume interrupted transfers.</p>
+                <p>This tutorial will guide you to setup an File Transfer Protocol (FTP) server so galaxy users can use it to upload large files. Indeed, as written on the <a href="https://galaxyproject.org/ftp-upload/">galaxy community hub</a>, uploading data directly from the browser can be unreliable and cumbersome. FTP will allow users to monitor the upload status as well as resume interrupted transfers.</p>
 
 <blockquote class="agenda">
   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
 
 <ol id="markdown-toc">
   <li><a href="#ftp" id="markdown-toc-ftp">FTP</a></li>
-  <li><a href="#ftp-and-galaxy" id="markdown-toc-ftp-and-galaxy">FTP and <span class="notranslate">Galaxy</span></a>    <ol>
+  <li><a href="#ftp-and-galaxy" id="markdown-toc-ftp-and-galaxy">FTP and Galaxy</a>    <ol>
       <li><a href="#installing-and-configuring" id="markdown-toc-installing-and-configuring">Installing and Configuring</a></li>
       <li><a href="#check-it-works" id="markdown-toc-check-it-works">Check it works</a></li>
     </ol>
@@ -809,18 +809,18 @@
 </blockquote>
 
 <!--SNIPPET-->
-<blockquote class="comment">   <div class="box-title comment-title" id="comment-galaxy-admin-training-path" aria-label="comment box: Galaxy Admin Training Path"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: <span class="notranslate">Galaxy</span> Admin Training Path</div>   <p>The yearly <span class="notranslate">Galaxy</span> Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in <span class="notranslate">Galaxy</span> Admin Training.</p>   <ol id="git-gat-timeline">     <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">     <li class="disabled">         <span>Step 1</span>         <span>ansible-<span class="notranslate">galaxy</span></span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tus/tutorial.html">     <li class="disabled">         <span>Step 2</span>         <span>tus</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">     <li class="disabled">         <span>Step 3</span>         <span>cvmfs</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/singularity/tutorial.html">     <li class="disabled">         <span>Step 4</span>         <span>singularity</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">     <li class="disabled">         <span>Step 5</span>         <span>tool-management</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">     <li class="disabled">         <span>Step 6</span>         <span>data-library</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">     <li class="disabled">         <span>Step 7</span>         <span>connect-to-compute-cluster</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html">     <li class="disabled">         <span>Step 8</span>         <span>job-destinations</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">     <li class="disabled">         <span>Step 9</span>         <span>pulsar</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html">     <li class="disabled">         <span>Step 10</span>         <span>gxadmin</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/monitoring/tutorial.html">     <li class="disabled">         <span>Step 11</span>         <span>monitoring</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">     <li class="disabled">         <span>Step 12</span>         <span>tiaas</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">     <li class="disabled">         <span>Step 13</span>         <span>reports</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/ftp/tutorial.html">     <li class="active">         <span>Step 14</span>         <span>ftp</span>     </li>          </a>      </ol>   <style type="text/css"> #git-gat-timeline {     display: flex;     flex-direction: row;     flex-wrap: wrap; } #git-gat-timeline li  {     display: flex;     flex-direction: column;     border: 1px solid black;     border-radius: 5px;     padding: 0.5em;     margin: 0.5em; } #git-gat-timeline li.active {     background: #86d486;     color: black; } #git-gat-timeline li.disabled {     background: #eee; } #git-gat-timeline span {     align-self: center; } </style> </blockquote>
+<blockquote class="comment">   <div class="box-title comment-title" id="comment-galaxy-admin-training-path" aria-label="comment box: Galaxy Admin Training Path"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Galaxy Admin Training Path</div>   <p>The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in Galaxy Admin Training.</p>   <ol id="git-gat-timeline">     <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">     <li class="disabled">         <span>Step 1</span>         <span>ansible-galaxy</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tus/tutorial.html">     <li class="disabled">         <span>Step 2</span>         <span>tus</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">     <li class="disabled">         <span>Step 3</span>         <span>cvmfs</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/singularity/tutorial.html">     <li class="disabled">         <span>Step 4</span>         <span>singularity</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">     <li class="disabled">         <span>Step 5</span>         <span>tool-management</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">     <li class="disabled">         <span>Step 6</span>         <span>data-library</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">     <li class="disabled">         <span>Step 7</span>         <span>connect-to-compute-cluster</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/job-destinations/tutorial.html">     <li class="disabled">         <span>Step 8</span>         <span>job-destinations</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/pulsar/tutorial.html">     <li class="disabled">         <span>Step 9</span>         <span>pulsar</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/gxadmin/tutorial.html">     <li class="disabled">         <span>Step 10</span>         <span>gxadmin</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/monitoring/tutorial.html">     <li class="disabled">         <span>Step 11</span>         <span>monitoring</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/tiaas/tutorial.html">     <li class="disabled">         <span>Step 12</span>         <span>tiaas</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">     <li class="disabled">         <span>Step 13</span>         <span>reports</span>     </li>          </a>          <span aria-hidden="true">         <i class="fas fa-arrow-right" aria-hidden="true"></i>     </span>          <a href="/training-material/topics/admin/tutorials/ftp/tutorial.html">     <li class="active">         <span>Step 14</span>         <span>ftp</span>     </li>          </a>      </ol>   <style type="text/css"> #git-gat-timeline {     display: flex;     flex-direction: row;     flex-wrap: wrap; } #git-gat-timeline li  {     display: flex;     flex-direction: column;     border: 1px solid black;     border-radius: 5px;     padding: 0.5em;     margin: 0.5em; } #git-gat-timeline li.active {     background: #86d486;     color: black; } #git-gat-timeline li.disabled {     background: #eee; } #git-gat-timeline span {     align-self: center; } </style> </blockquote>
 
 <h1 id="ftp">FTP</h1>
 
-<p><abbr title="File Transfer Protocol">FTP</abbr> is a very old and reliable communication protocol that has been around since 1971 <span class="citation"><a href="#rfc114">Bhushan 1971</a></span>. It requires a server (here our <span class="notranslate">galaxy</span> server) and a client (user’s computer). The FTP server requires to have at least 2 ports accessible from outside (one for the commands and one for the transfer). Usually the port for the command is 21.</p>
+<p><abbr title="File Transfer Protocol">FTP</abbr> is a very old and reliable communication protocol that has been around since 1971 <span class="citation"><a href="#rfc114">Bhushan 1971</a></span>. It requires a server (here our galaxy server) and a client (user’s computer). The FTP server requires to have at least 2 ports accessible from outside (one for the commands and one for the transfer). Usually the port for the command is 21.</p>
 
 <p>FTP supports two different modes: active, and passive. Active mode requires that the user’s computer be reachable from the internet, which in the age of Network Address Translation (NAT) and firewalls is usually unusable. So passive mode is the most commonly used. In passive mode, a client connects to the FTP server, and requests a channel for sending files. The server responds with an IP and port, from its range of “Passive Ports”.</p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-requirements-for-running-this-tutorial" aria-label="comment box: Requirements for Running This Tutorial"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Requirements for Running This Tutorial</div>
 
-  <p>Your VM or wherever you are installing <span class="notranslate">Galaxy</span> needs to have the following ports available:</p>
+  <p>Your VM or wherever you are installing Galaxy needs to have the following ports available:</p>
 
   <ul>
     <li>21</li>
@@ -832,21 +832,21 @@
   <p>Which ports precisely is not important, and these numbers can differ between sites.</p>
 </blockquote>
 
-<h1 id="ftp-and-galaxy">FTP and <span class="notranslate">Galaxy</span></h1>
+<h1 id="ftp-and-galaxy">FTP and Galaxy</h1>
 
 <p>To allow your user to upload via FTP, you will need to:</p>
 
 <ul>
-  <li>configure <span class="notranslate">Galaxy</span> to know where the files are uploaded.</li>
+  <li>configure Galaxy to know where the files are uploaded.</li>
   <li>install a FTP server</li>
-  <li>allow your FTP server to read <span class="notranslate">Galaxy</span>’s database so users can use their credential and upload in the good directory.</li>
+  <li>allow your FTP server to read Galaxy’s database so users can use their credential and upload in the good directory.</li>
 </ul>
 
-<p>For secure transmission we will use SSL/TLS (FTPS), not the SSH File Transfer Protocol (SFTP) as the <span class="notranslate">Galaxy</span> users don’t correspond to users on the machine.</p>
+<p>For secure transmission we will use SSL/TLS (FTPS), not the SSH File Transfer Protocol (SFTP) as the Galaxy users don’t correspond to users on the machine.</p>
 
 <h2 id="installing-and-configuring">Installing and Configuring</h2>
 
-<p>Luckily for us, there is an ansible role written by the <span class="notranslate">Galaxy</span> Project for this purpose. It will install proftpd. Firstly, we need to install the role and then update our playbook for using it.</p>
+<p>Luckily for us, there is an ansible role written by the Galaxy Project for this purpose. It will install proftpd. Firstly, we need to install the role and then update our playbook for using it.</p>
 
 <p>If the terms “Ansible”, “role” and “playbook” mean nothing to you, please checkout <a href="/training-material/topics/admin/tutorials/ansible/slides.html">the Ansible introduction slides</a> and <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html">the Ansible introduction tutorial</a></p>
 
@@ -858,15 +858,15 @@
 
   <ol>
     <li>
-      <p>In your playbook directory, add the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.proftpd</code> role to your <code class="language-plaintext highlighter-rouge">requirements.yml</code></p>
+      <p>In your playbook directory, add the <code class="language-plaintext highlighter-rouge">galaxyproject.proftpd</code> role to your <code class="language-plaintext highlighter-rouge">requirements.yml</code></p>
 
       <div data-commit="Add requirement" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/requirements.yml
 </span><span class="gi">+++ b/requirements.yml
 </span><span class="p">@@ -38,3 +38,5 @@</span>
    version: 0.12.0
- - src: <span class="notranslate">galaxy</span>project.tiaas2
+ - src: galaxyproject.tiaas2
    version: 2.1.3
-<span class="gi">+- src: <span class="notranslate">galaxy</span>project.proftpd
+<span class="gi">+- src: galaxyproject.proftpd
 +  version: 0.3.1
 </span>   
 </code></pre></div>      </div>
@@ -876,15 +876,15 @@
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-galaxy <span class="nb">install</span> <span class="nt">-p</span> roles <span class="nt">-r</span> requirements.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
     <li>
-      <p>As in this training we are using certbot, we will ask for a private key for proftpd. Add the following line to your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>server.yml</code> file:</p>
+      <p>As in this training we are using certbot, we will ask for a private key for proftpd. Add the following line to your <code class="language-plaintext highlighter-rouge">group_vars/galaxyserver.yml</code> file:</p>
 
-      <div data-commit="Add proftpd in certbot" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+      <div data-commit="Add proftpd in certbot" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
+</span><span class="gi">+++ b/group_vars/galaxyservers.yml
 </span><span class="p">@@ -159,9 +159,11 @@</span> certbot_well_known_root: /srv/nginx/_well-known_root
  certbot_share_key_users:
    - nginx
@@ -903,11 +903,11 @@
       <p>This will make a copy of the current letsencrypt key available as <code class="language-plaintext highlighter-rouge">/etc/ssl/user/privkey-proftpd.pem</code>, and automatically restart proftpd every time the key is updated.</p>
     </li>
     <li>
-      <p>We will configure <span class="notranslate">Galaxy</span> to enable ftp file upload. Add the following line to your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>server.yml</code> file in the <span class="notranslate">galaxy</span>_config/<span class="notranslate">galaxy</span> section:</p>
+      <p>We will configure Galaxy to enable ftp file upload. Add the following line to your <code class="language-plaintext highlighter-rouge">group_vars/galaxyserver.yml</code> file in the galaxy_config/galaxy section:</p>
 
-      <div data-commit="Add ftp vars in galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -100,6 +100,9 @@</span> <span class="notranslate">galaxy</span>_config:
+      <div data-commit="Add ftp vars in galaxy" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
+</span><span class="gi">+++ b/group_vars/galaxyservers.yml
+</span><span class="p">@@ -100,6 +100,9 @@</span> galaxy_config:
      outputs_to_working_directory: true
      # TUS
      tus_upload_store: /data/tus
@@ -915,39 +915,39 @@
 +    ftp_upload_dir: /data/uploads
 +    ftp_upload_site: "{{ inventory_hostname }}"
 </span>   gravity:
-     <span class="notranslate">galaxy</span>_root: "{{ <span class="notranslate">galaxy</span>_root }}/server"
+     galaxy_root: "{{ galaxy_root }}/server"
      app_server: gunicorn
    
 </code></pre></div>      </div>
     </li>
   </ol>
 
-  <p>To check the other options for setting up ftp in <span class="notranslate">Galaxy</span>, please check the <a href="https://docs.galaxyproject.org/en/master/admin/galaxy_options.html?highlight=ftp_upload_site#ftp-upload-dir"><span class="notranslate">Galaxy</span> configuration documentation</a>.</p>
+  <p>To check the other options for setting up ftp in Galaxy, please check the <a href="https://docs.galaxyproject.org/en/master/admin/galaxy_options.html?highlight=ftp_upload_site#ftp-upload-dir">Galaxy configuration documentation</a>.</p>
 
   <ol>
     <li>
-      <p>Then we will set the different variables for proftpd. Add the following lines to your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>server.yml</code> file. Please replace the PassivePorts below with the range of ports that are appropriate for your machine!</p>
+      <p>Then we will set the different variables for proftpd. Add the following lines to your <code class="language-plaintext highlighter-rouge">group_vars/galaxyserver.yml</code> file. Please replace the PassivePorts below with the range of ports that are appropriate for your machine!</p>
 
-      <div data-commit="Add proftpd variables" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+      <div data-commit="Add proftpd variables" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/galaxyservers.yml
+</span><span class="gi">+++ b/group_vars/galaxyservers.yml
 </span><span class="p">@@ -250,6 +250,27 @@</span> rabbitmq_users:
      password: "{{ vault_rabbitmq_password_vhost }}"
-     vhost: /pulsar/<span class="notranslate">galaxy</span>_au
+     vhost: /pulsar/galaxy_au
     
 <span class="gi">+# Proftpd:
-+proftpd_<span class="notranslate">galaxy</span>_auth: yes
-+<span class="notranslate">galaxy</span>_ftp_upload_dir: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.ftp_upload_dir }}"
++proftpd_galaxy_auth: yes
++galaxy_ftp_upload_dir: "{{ galaxy_config.galaxy.ftp_upload_dir }}"
 +proftpd_display_connect: |
 +  {{ inventory_hostname }} FTP server
 +
 +  Unauthorized access is prohibited
 +proftpd_create_ftp_upload_dir: yes
 +proftpd_options:
-+  - User: <span class="notranslate">galaxy</span>
-+  - Group: <span class="notranslate">galaxy</span>
++  - User: galaxy
++  - Group: galaxy
 +  - Port: 21
-+proftpd_sql_db: <span class="notranslate">galaxy</span>@/var/run/postgresql
-+proftpd_sql_user: <span class="notranslate">galaxy</span>
++proftpd_sql_db: galaxy@/var/run/postgresql
++proftpd_sql_user: galaxy
 +proftpd_conf_ssl_certificate: /etc/ssl/certs/cert.pem
 +proftpd_conf_ssl_certificate_key: /etc/ssl/user/privkey-proftpd.pem
 +proftpd_global_options:
@@ -957,7 +957,7 @@
 +
 </span> # Telegraf
  telegraf_plugins_extra:
-   listen_<span class="notranslate">galaxy</span>_routes:
+   listen_galaxy_routes:
    
 </code></pre></div>      </div>
 
@@ -972,12 +972,12 @@
         </thead>
         <tbody>
           <tr>
-            <td><code class="language-plaintext highlighter-rouge">proftpd_<span class="notranslate">galaxy</span>_auth</code></td>
-            <td>Attempt to authenticate users against a <span class="notranslate">Galaxy</span> database.</td>
+            <td><code class="language-plaintext highlighter-rouge">proftpd_galaxy_auth</code></td>
+            <td>Attempt to authenticate users against a Galaxy database.</td>
           </tr>
           <tr>
-            <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_ftp_upload_dir</code></td>
-            <td>Path to the <span class="notranslate">Galaxy</span> FTP upload directory, should match <code class="language-plaintext highlighter-rouge">ftp_upload_dir</code> in your <span class="notranslate">Galaxy</span> config.</td>
+            <td><code class="language-plaintext highlighter-rouge">galaxy_ftp_upload_dir</code></td>
+            <td>Path to the Galaxy FTP upload directory, should match <code class="language-plaintext highlighter-rouge">ftp_upload_dir</code> in your Galaxy config.</td>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge">proftpd_display_connect</code></td>
@@ -985,11 +985,11 @@
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge">proftpd_create_ftp_upload_dir</code></td>
-            <td>Whether to allow the role to create this with owner <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_user</code>.</td>
+            <td>Whether to allow the role to create this with owner <code class="language-plaintext highlighter-rouge">galaxy_user</code>.</td>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge">proftpd_options</code></td>
-            <td>Any option for proftpd, we will just set up the user and group of the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_user</code>.</td>
+            <td>Any option for proftpd, we will just set up the user and group of the <code class="language-plaintext highlighter-rouge">galaxy_user</code>.</td>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge">proftpd_sql_db</code></td>
@@ -997,7 +997,7 @@
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge">proftpd_sql_user</code></td>
-            <td>(default: the value of <span class="notranslate">galaxy</span>_user): Value of the use<span class="notranslate">rna</span>me parameter to SQLConnectInfo.</td>
+            <td>(default: the value of galaxy_user): Value of the username parameter to SQLConnectInfo.</td>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge">proftpd_conf_ssl_certificate</code></td>
@@ -1029,18 +1029,18 @@ To relax the requirement that the SSL session from the control connection be reu
       </blockquote>
     </li>
     <li>
-      <p>Add the new role to the list of roles under the <code class="language-plaintext highlighter-rouge">roles</code> key in your playbook, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>:</p>
+      <p>Add the new role to the list of roles under the <code class="language-plaintext highlighter-rouge">roles</code> key in your playbook, <code class="language-plaintext highlighter-rouge">galaxy.yml</code>:</p>
 
-      <div data-commit="Add role to playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
-</span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
+      <div data-commit="Add role to playbook" class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/galaxy.yml
+</span><span class="gi">+++ b/galaxy.yml
 </span><span class="p">@@ -32,6 +32,7 @@</span>
-     - use<span class="notranslate">galaxy</span>_eu.rabbitmq
-     - <span class="notranslate">galaxy</span>project.tiaas2
-     - <span class="notranslate">galaxy</span>project.nginx
-<span class="gi">+    - <span class="notranslate">galaxy</span>project.proftpd
-</span>     - <span class="notranslate">galaxy</span>project.tusd
-     - <span class="notranslate">galaxy</span>project.cvmfs
-     - <span class="notranslate">galaxy</span>project.gxadmin
+     - usegalaxy_eu.rabbitmq
+     - galaxyproject.tiaas2
+     - galaxyproject.nginx
+<span class="gi">+    - galaxyproject.proftpd
+</span>     - galaxyproject.tusd
+     - galaxyproject.cvmfs
+     - galaxyproject.gxadmin
    
 </code></pre></div>      </div>
     </li>
@@ -1049,7 +1049,7 @@ To relax the requirement that the SSL session from the control connection be reu
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash-1" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+        <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook galaxy.yml
 </code></pre></div>        </div>
       </blockquote>
     </li>
@@ -1057,7 +1057,7 @@ To relax the requirement that the SSL session from the control connection be reu
 
 </blockquote>
 
-<p>Congratulations, you’ve set up FTP for <span class="notranslate">Galaxy</span>.</p>
+<p>Congratulations, you’ve set up FTP for Galaxy.</p>
 
 <h2 id="check-it-works">Check it works</h2>
 
@@ -1107,11 +1107,11 @@ You should see TCP *:21 (LISTEN).</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-checking-galaxy-detected-the-ftp-possibility" aria-label="hands-on box: Checking galaxy detected the ftp possibility"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Checking <span class="notranslate">galaxy</span> detected the ftp possibility</div>
+  <div class="box-title hands-on-title" id="hands-on-checking-galaxy-detected-the-ftp-possibility" aria-label="hands-on box: Checking galaxy detected the ftp possibility"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Checking galaxy detected the ftp possibility</div>
 
   <ol>
     <li>
-      <p>Open your <span class="notranslate">galaxy</span> in a browser.</p>
+      <p>Open your galaxy in a browser.</p>
     </li>
     <li>
       <p>Log in with a user (FTP is only possible for authenticated sessions).</p>
@@ -1164,11 +1164,11 @@ echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" &gt; .lftp/rc
 </code></pre></div>            </div>
           </blockquote>
         </li>
-        <li>Enter the password of the admin@example.org <span class="notranslate">galaxy</span> user.</li>
+        <li>Enter the password of the admin@example.org galaxy user.</li>
         <li>
           <p>Put a random file:</p>
 
-          <p><code class="language-plaintext highlighter-rouge">put /srv/<span class="notranslate">galaxy</span>/server/CITATION</code></p>
+          <p><code class="language-plaintext highlighter-rouge">put /srv/galaxy/server/CITATION</code></p>
         </li>
         <li>Check it is there with <code class="language-plaintext highlighter-rouge">ls</code>.</li>
         <li>Leave lftp with <code class="language-plaintext highlighter-rouge">quit</code>.</li>
@@ -1179,7 +1179,7 @@ echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" &gt; .lftp/rc
 
       <blockquote class="code-in">
         <div class="box-title code-in-title" id="code-in-bash-5" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
-        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -T {"/srv/<span class="notranslate">galaxy</span>/server/CITATION"} ftp://localhost --user admin@example.org:password --ssl -k
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -T {"/srv/galaxy/server/CITATION"} ftp://localhost --user admin@example.org:password --ssl -k
 </code></pre></div>        </div>
         <p>Here <code class="language-plaintext highlighter-rouge">-T</code> says to upload a file, <code class="language-plaintext highlighter-rouge">--ssl</code> ensures that the FTP connection is SSL/TLS encrypted, and <code class="language-plaintext highlighter-rouge">-k</code> ignores any certificate issues as the hostname <code class="language-plaintext highlighter-rouge">localhost</code> will not match the certificate we have.</p>
       </blockquote>
@@ -1226,11 +1226,11 @@ echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" &gt; .lftp/rc
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-use-it-in-galaxy" aria-label="hands-on box: Use it in galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Use it in <span class="notranslate">galaxy</span></div>
+  <div class="box-title hands-on-title" id="hands-on-use-it-in-galaxy" aria-label="hands-on box: Use it in galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Use it in galaxy</div>
 
   <ol>
     <li>
-      <p>Open your <span class="notranslate">galaxy</span> in a browser.</p>
+      <p>Open your galaxy in a browser.</p>
     </li>
     <li>
       <p>Log in with the user you used to upload the file.</p>
@@ -1249,7 +1249,7 @@ echo "set ssl:ca-file \"/etc/ssl/certs/cert.pem\"" &gt; .lftp/rc
 
       <blockquote class="tip">
         <div class="box-title tip-title" id="tip-you-want-to-change-this-behaviour"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-you-want-to-change-this-behaviour-contents" aria-expanded="true" aria-label="Toggle tip box: You want to change this behaviour?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: You want to change this behaviour?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
-        <p>You just need to add <code class="language-plaintext highlighter-rouge">ftp_upload_purge: false</code> to the <span class="notranslate">galaxy</span>_config/<span class="notranslate">galaxy</span> variables (next to <code class="language-plaintext highlighter-rouge">ftp_upload_dir</code>).</p>
+        <p>You just need to add <code class="language-plaintext highlighter-rouge">ftp_upload_purge: false</code> to the galaxy_config/galaxy variables (next to <code class="language-plaintext highlighter-rouge">ftp_upload_dir</code>).</p>
       </blockquote>
     </li>
   </ol>
