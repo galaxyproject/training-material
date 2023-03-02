@@ -315,15 +315,21 @@ module TopicFilter
         wfid = "#{page['topic_name']}-#{page['tutorial_name']}"
         wfname = wf.gsub(/.ga/, '').downcase
         trs = "api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}"
+        wf_path = "#{folder}/workflows/#{wf}"
+        wf_json = JSON.parse(File.open(wf_path).read)
+        license = wf_json['license']
+        creators = wf_json['creator'] || []
 
         {
           "workflow" => wf,
           "tests" => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length > 0,
           "url" => "#{site.config['url']}#{site.config['baseurl']}/#{folder}/workflows/#{wf}",
-          "path" => "#{folder}/workflows/#{wf}",
+          "path" => wf_path,
           "wfid" => wfid,
           "wfname" => wfname,
           "trs_endpoint" => "#{site.config['url']}#{site.config['baseurl']}/#{trs}",
+          "license" => license,
+          "creators" => creators,
         }
       }
     end
