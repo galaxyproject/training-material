@@ -220,7 +220,7 @@ Distances have very desirable properties, that can be summarised as follows, for
 
 Here is a flow-chart of the process:
 
-![Tree Construction](./images/WeJustHaveLeaves.png){:align="center"}
+![Tree Construction](./images/TreeConstruction.drawio.png){:align="center"}
 
 ## Challenges
 
@@ -233,14 +233,14 @@ The number of rooted binary trees grows as 1, 3, 15, 105, 945, 10395... in fact 
 
 > | *n*          | # trees    | notes       |
 > |--------------|------------|-------------|
-> | 3    | 3       | trivial to check |
-> | 4    | 15       | enumerable by hand |
-> | 5    | 105       | enumerable by hand on a rainy day |
-> | 6    | 945       | enumerable by hand during lockdown |
-> | 7    | 10395       | easily searched by computer |
-> | 8    | 135135       | a bit more than the number of hairs on your head |
-> | 9    | 2027025       | population of Sydney living west of Paramatta |
-> | 10   | 34459425                      | comparable with the number of possible tickets in a typical lottery |
+> | 3    | $$3$$       | trivial to check |
+> | 4    | $$15$$       | enumerable by hand |
+> | 5    | $$105$$       | enumerable by hand on a rainy day |
+> | 6    | $$945$$       | enumerable by hand during lockdown |
+> | 7    | $$10395$$       | easily searched by computer |
+> | 8    | $$135135$$       | a bit more than the number of hairs on your head |
+> | 9    | $$2027025$$       | population of Sydney living west of Paramatta |
+> | 10   | $$34459425$$                      | comparable with the number of possible tickets in a typical lottery |
 > | 20   | $$\approx 8.2\times 10^{21}$$       | getting slow for computers even with branch-and-bound |
 > | 48  | $$\approx 3.21\times 10^{70}$$       | number of particles in the universe-ish |
 > | 136  | $$\approx 2.11\times 10^{267}$$       | number of trees to choose from in the first "Out of Africa" data set |
@@ -261,7 +261,7 @@ The number of rooted binary trees grows as 1, 3, 15, 105, 945, 10395... in fact 
 
 Background on the data used in this workshop.
 
-This workshop will use some recent SARS-CoV-2 nucleotide sequence data, from NCBI, the National Center for Biotechnology Information.
+<!-- This workshop will use some recent SARS-CoV-2 nucleotide sequence data, from NCBI, the National Center for Biotechnology Information.
 
 The SARS-CoV-2 virus has caused the largest pandemic in modern history (in absolute terms of population affected, in all history) and understanding its evolution is key to managing it.
 
@@ -269,7 +269,10 @@ The SARS-CoV-2 virus has caused the largest pandemic in modern history (in absol
 
 *Source: /www.ncbi.nlm.nih.gov; CC BY-SA • Alexey Solodovnikov*
 
-The sequences we have chosen for this workshop are complete SARS-CoV2 sequences, publicly available from nextStrain (http).
+The sequences we have chosen for this workshop are complete SARS-CoV2 sequences, publicly available from nextStrain (http). -->
+
+This workshop will use a set of malaria DNA sequences. [needs ref]
+
 We are using a relatively small set of sequences because phylogenetic estimation on many sequences is computationally very intensive, and can take weeks of time on a high-performance computer.
 
 
@@ -290,17 +293,8 @@ We are using a relatively small set of sequences because phylogenetic estimation
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
 >  
-> You can click on the `eye' icon on the right to see the unaligned data (go ahead!) but the view isn't very helpful.  This is just the raw FASTA file, with lower case symbols a, c, g, t for the nucleotides.  You can see that the sequences are of different lengths though, since the last lines of each sequence are of different lengths.
+> You can click on the `eye' icon on the right to see the unaligned data (go ahead!) but the view isn't very helpful.  This is just the raw FASTA file, with the case symbols A, C, G, T for the nucleotides.  You can see that the sequences are of different lengths though, since the last lines of each sequence are of different lengths.
 >
-> Now let's view the unaligned sequence in a more understandable form.  Click on the green data on its name; the green bar will open up and show you more options, including the little "Visualise" one.  Click that and then select the Mulitple Sequence Alignment tool.
-> You should see something like this:
->
-> ![Unaligned Sequences](./images/UnalignedSequences.png){:width="400"}
-> 
-> Play around with the view: you can change colour schemes and add or remove various elements.  Good colour schemes for nucleotide data are "Clustal2" and "nucleotide".  
-> If you cannot see the slider at the top (for moving left or right in the view) you will need to check the "Show residues indices" in the "Vis. elements" drop-down menu.
-{: .hands_on}
-
 This is a file in **FASTA** format, which has a very simple structure, as follows:
 
 ```
@@ -312,11 +306,23 @@ TTACTAGCTACTACT
 
 The above toy file has two sequences in it named SEQUENCE_1 and SEQUENCE_2, each with a short set of characters which we can assume are DNA.
 
+> Now let's view the unaligned sequence in a more understandable form.  Click on the green data on its name; the green bar will open up and show you more options, including the little "Visualise" one.  Click that and then select the Mulitple Sequence Alignment tool.
+> You should see something like this:
+>
+> ![Unaligned Sequences](./images/UnalignedMalaria.png){:width="400"}
+> 
+> Play around with the view: you can change colour schemes and add or remove various elements.  Good colour schemes for nucleotide data are "Clustal2" and "nucleotide".  
+> If you cannot see the slider at the top (for moving left or right in the view) you will need to check the "Show residues indices" in the "Vis. elements" drop-down menu.
+> Do not adjust the scale slider!  Currently, this breaks the page.
+{: .hands_on}
+
 > <question-title>Understanding the FASTA file</question-title>
-> 1. How many sequences are there?
+> 1. How many sequences are there in your data?
 > 2. How long is the longest sequence, and what is it?
 > 3. What about the shortest sequence? 
 {: .question}
+
+ (Answers: there should be 55 sequences.  The longest is from <i>Anolis paternus</i> with length 1729 nucleotides; the shortest is <i>A. luciae</i> with length 1252.)
 
 FASTA format is very simple and is commonly used as input to phylogenetic inference programs.
 
@@ -327,8 +333,11 @@ FASTA format is very simple and is commonly used as input to phylogenetic infere
 >
 {: .comment}
 
-**IMAGE HERE: View of unaligned fasta sequences**
-
+> <question-title>Investigating the unaligned data</question-title>
+> 1. How many sequences are there in your data?
+> 2. How long is the longest sequence, and what is it?
+> 3. What about the shortest sequence? 
+{: .question}
 
 # Sequence Alignment
 
@@ -347,8 +356,9 @@ Today you will be aligning sequences using a modern multiple alignment program c
 > <hands-on-title>Sequence alignment with MAFFT</hands-on-title>
 >
 > 1. in Galaxy, search for and select the MAFFT tool from the tool finder on the left.
-> 2. When you select it, the "Sequences to align" field should already be filled with your data.  If it isn't, select it using the drop-down menu.
->
+> 2. When you select it, the "Sequences to align" field should already be filled with your unaligned data.  If it isn't, select it using the drop-down menu.
+> 3. Leave the "Data type" field as "auto detection" since MAFFT will recognise all the symbols are nucleotides.
+> 4. Change the MAFFT flavour to "linsi" as this is a recommended setting for most accurate alignment of a relatively small data set such as this one, with fewer than 200 sequences.
 {: .hands_on}
 
 Here is an embedded image of the resulting alignment:
