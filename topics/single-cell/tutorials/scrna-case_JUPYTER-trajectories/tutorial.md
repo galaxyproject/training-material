@@ -54,7 +54,7 @@ notebook:
 
 # Run the tutorial!
 
-From now on, you can view this tutorial in the Jupyter notebook, which will allow you to read the material and simultaneously execute the code cells! You may have to change certain numbers in the code blocks, so do read carefully. The tutorial is adapted from the [Scanpy Trajectory inference tutorial](https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html).
+The tutorial is adapted from the [Scanpy Trajectory inference tutorial](https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html).
 
 ## Install modules & activate them
 
@@ -80,13 +80,13 @@ import scanpy as sc
 
 ## Import dataset
 
-You can now import files from your Galaxy history directly using the following code. This will depend on what number in your history the final annotated object is. If your object is dataset #3 in your history, then you import it as following:
+You can now import files from your Galaxy history directly using the following code. This will depend on what number in your history the final annotated object is. If your object is dataset #2 in your history, then you import it as following:
 
 ```python
-thymusobject = get(3)
+thymusobject = get(2)
 ```
 
-However you have imported your dataset, you now you need to read it in as an h5ad object.
+You now you need to read it in as an h5ad object.
 
 ```python
 adata = sc.read_h5ad(thymusobject)
@@ -137,7 +137,7 @@ Oh dear! This doesn't look great. Maybe the DP-M4 cells are a whole other trajec
 However, we tried that, and it called far too many clusters given the depth of sequencing in this dataset. Let's stick with our known cell types and move from there.
 
 ## Working in a group? Decision-time!
-If you are working in a group, you can now divide up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
+If you are working in a group, you can now divide up a decision here with one *control* and the rest can vary numbers so that you can compare results throughout the tutorials.
 - Control
    - Go straight to the PAGA section
 - Everyone else:
