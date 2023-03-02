@@ -65,8 +65,6 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 
 One problem with our current dataset is that it's not just T-cells: we found in the previous tutorial that it also contains macrophages. This is a problem, because trajectory analysis will generally try to find relationships between all the cells in the sample. We need to remove those cell types to analyse the trajectory.
 
-{% snippet faqs/galaxy/tutorial_mode.md %}
-
 > <hands-on-title>Removing macrophages</hands-on-title>
 >
 > 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1) %} with the following parameters:
@@ -85,7 +83,7 @@ One problem with our current dataset is that it's not just T-cells: we found in 
 
 You should now have `8569` cells, as opposed to the `8605` you started with. You've only removed a few cells (the contaminants!), but it makes a big difference in the next steps.
 
-Take note of what # this dataset is in your history, as you will need that shortly!
+Take note of what `#` this dataset is in your history, as you will need that shortly!
 
 ## Launching Jupyter
 
@@ -97,19 +95,14 @@ JupyterLab is a bit like RStudio but for other coding languages. What, you've ne
 
 {% icon warning %} Please note: this is only currently available on the [usegalaxy.eu](https://usegalaxy.eu) and [usegalaxy.org](https://usegalaxy.org) sites.
 
-> <hands-on-title>Downloading the tutorial notebook</hands-on-title>
->
-> 1. You will need to download the tutorial notebook locally to your own computer. Do this by clicking on {% icon notebook %}`Jupyter notebook` in the `Supporting Materials` section at the very beginning of the tutorial, in the Overview box.
-{: .hands_on}
-
 > <hands-on-title>Launching JupyterLab</hands-on-title>
 >
 > 1. {% tool [Interactive JupyTool and Notebook](interactive_tool_jupyter_notebook) %} with the following parameters:
 >    - *"Do you already have a notebook?"*: `Start with a fresh notebook`
 >
->    This may take a moment, but once the `Executed notebook` in your dataset is orange, you are up and running!
+>    This may take a moment, but once the `Executed notebook` in your dataset is **orange**, you are up and running!
 >
-> 2. Either click on the blue `User menu`, or go to the top of the screen and choose `User` and then `Active InteractiveTools`
+> 2. Either click on the blue `User menu` that appeared when you executed the **Interactive JupyTool and Notebook**, or go to the top of the screen and choose `User` and then `Active InteractiveTools`.
 >
 > 3. Click on the newest `JupyTool interactive tool`.
 >
@@ -121,7 +114,22 @@ Welcome!
 > Do NOT delete or close this notebook dataset in your history. YOU WILL LOSE IT!
 {: .warning}
 
-> <hands-on-title>Creating a notebook</hands-on-title>
+You have two options for how to proceed with this tutorial - either you download the tutorial notebook and run the lines in that notebook, or you can copy and paste the code for each step into a fresh notebook and run it yourself. The initial instructions for both options are below.
+
+> <hands-on-title>Option 1: Downloading the tutorial notebook</hands-on-title>
+>
+> 1. You will need to download the tutorial notebook locally to your own computer. Do this by clicking on {% icon notebook %}`Jupyter notebook` in the `Supporting Materials` section at the very beginning of the tutorial, in the Overview box.
+{: .hands_on}
+
+> <hands-on-title>Option 1: Uploading the tutorial notebook</hands-on-title>
+>
+> 1. In the folder window, {% icon galaxy-upload %} Upload the downloaded notebook from your computer. It should appear in the file window.
+>
+> 2. Open it by double clicking it in the file window.
+>
+{: .hands_on}
+
+> <hands-on-title>Option 2: Creating a notebook</hands-on-title>
 >
 > 1. Click the **Python 3** icon under **Notebook**
 >
@@ -130,16 +138,6 @@ Welcome!
 > 2. Save your file (**File**: **Save**, or click the {% icon galaxy-save %} Save icon at the top left)
 >
 > 3. If you right click on the file in the folder window at the left, you can rename your file `whateveryoulike.ipynb`
->
-{: .hands_on}
-
-Cool! Now you know how to create a file! Helpfully, however, we have created one for you, and you've downloaded it onto your computer already!
-
-> <hands-on-title>Uploading the tutorial notebook</hands-on-title>
->
-> 1. In the folder window, {% icon galaxy-upload %} Upload the downloaded notebook from your computer. It should appear in the file window.
->
-> 2. Open it by double clicking it in the file window.
 >
 {: .hands_on}
 
