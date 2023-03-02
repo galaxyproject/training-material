@@ -40,10 +40,11 @@ tags:
 contributions:
   authorship:
     - nomadscientist
+    - wee-snufkin
     - mtekman
+
   editing:
     - hexylena
-    - wee-snufkin
 
 notebook:
   language: python
