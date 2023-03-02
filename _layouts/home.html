@@ -21,6 +21,16 @@ layout: base
         Collection of tutorials developed and maintained by the worldwide Galaxy community
     </p>
 
+    {% if site.banner_image %}
+        {% if site.banner_image.link %}
+        <a href="{{ site.banner_image.link }}">
+        {% endif %}
+        <img alt="{{ site.banner_image.alt }}" src="{{ site.banner_image.source }}" style="margin: 0 0 1em 0;width: 100%;max-width: 100%;">
+        {% if site.banner_image.link %}
+        </a>
+        {% endif %}
+    {% endif %}
+
     {% if site.announcement %}
     <div role="alert" class="alert alert-{{ site.announcement.class }}">
         <h4 class="alert-heading">{{ site.announcement.title }}</h4>
