@@ -269,12 +269,11 @@ put("single-cell-scrna-case_JUPYTER-trajectories.ipynb")
 
 This may take a moment, so go check your Galaxy history to make sure your images, anndata object, and notebook (.ipynb) have all made it back into your Galaxy history. Once they are all there, you can exit this browser and return to the Galaxy tutorial!
 
-If things have gone wrong, you can also download this [answer key tutorial]({{ page.zenodo_link }}/files/Trajectories_AnswerKey.ipynb).
+If things have gone wrong, you can also download this [answer key tutorial]({{ page.zenodo_link }}/files/Trajectories_Answer_Key.ipynb).
 
 # Citation
 
-Please note, this is largely based on the trajectories tutorial found on the Scanpy site itself (https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html).
-
+Please note, this is largely based on the trajectories tutorial found on the Scanpy site itself [https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html](https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html).
 
 
 # After Jupyter
@@ -286,7 +285,7 @@ Congratulations! You've made it through Jupyter!
 > 2. Tick the box of your Jupyter Interactive Tool, and click **Stop**
 {: .hands_on}
 
-If you want to run this notebook again, or share it with others, it now exists in your history. You can use this 'finished' version just the same way as you downloaded the directions file and uploaded into the Jupyter environment.
+If you want to run this notebook again, or share it with others, it now exists in your history. You can use this 'finished' version just the same way as you downloaded the directions file and uploaded it into the Jupyter environment.
 
 
 # Conclusion
