@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Calling very rare variants"
+subtopic: introduction
 zenodo_link: ""
 draft: true
 questions:

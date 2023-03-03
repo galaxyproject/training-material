@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Calling variants in non-diploid systems"
+subtopic: introduction
 zenodo_link: "https://doi.org/10.5281/zenodo.1251112"
 tags:
   - prokaryote
