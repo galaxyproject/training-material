@@ -297,7 +297,7 @@ The deconvoluted spectra are annotated for identification by comparing them with
 >
 > 1. {% tool [matchMS similarity](toolshed.g2.bx.psu.edu/repos/recetox/matchms/matchms/0.17.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Queries spectra"*: `output` (output of **RIAssigner** {% icon tool %})
->    - *"Symmetric"*: `No`
+>    - *"Symmetric"*: `No` (if we were to query our spectra agains itself, we would select `Yes`)
 >        - {% icon param-file %} *"Reference spectra"*: `reference_spectra.msp` (loaded Zenodo file)
 >    - In *"Algorithm Parameters"*:
 >        - *"tolerance"*: `0.03`
@@ -310,7 +310,30 @@ The deconvoluted spectra are annotated for identification by comparing them with
 >
 {: .hands_on}
 
+> <details-title> Overview of the spectral similarity scores </details-title>
+> > <h5>Cosine Greedy</h5>
+> > The cosine score, also known as the dot product, is based on representing the similarity of two spectra through the cosine of an  angle between the vectors that the spectra produce. Two peaks are considered as matching if their *m/z* values lie within the given   tolerance. Cosine greedy looks up matching peaks in a "greedy" way, which does not always lead to the most optimal alignments.
+> >
+> > This score was among the first to be used for looking up matching spectra in spectral libraries and to this day remains one of the most popular scoring methods for both library matching and molecular networking workflows.
+> > <p>&nbsp;</p>
+>
+> > <h5>Cosine Hungarian</h5>
+> > This method computes the similarities in the same way as the *Cosine Greedy* but with a difference in *m/z* peak alignment. The difference lies in that the Hungarian algorithm is used here to find matching peaks. This leads to the best peak pairs match, but can take significantly longer than the "greedy" algorithm.
+> > <p>&nbsp;</p>
+>
+> > <h5>Modified Cosine</h5>
+> > Modified Cosine is another, as its name states, representative of the family of cosine-based scores. This method aligns peaks by finding the best possible matches and consideres two peaks a match if their *m/z* values are within a tolerance before or after a mass-shift is applied. A mass shift is essentially a difference of precursor-*m/z* of two compared spectra. The similarity is then again expressed as a cosine of the angle between two vectors.
+> > <p>&nbsp;</p>
+>
+> > <h5>Neutral Losses Cosine</h5>
+> > Neutral Loss metric works similar to all described above with one major difference: instead of encoding the spectra as "intensity vs *m/z*" vector it encodes it to a "intensity vs *Δm/z*", where delta is computed as an *m/z* difference between precursor and a fragment *m/z*. This in theory, could better capture the underlying structural similarities between molecules.
+> >
+>
+{: .details}
+
 ## Format the output
+
+The output of the previous step is a `json` file. This format is very simple to read for our computers, but not so much for us. We can use {% tool [matchms output formatter](toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.1.4) %} to convert the data to a tab-separated file with a scores matrix.
 
 The output table contains the scores and number of matched ions of the deconvoluted spectra with the spectra in the reference library. The raw output is filtered to only contain the top matches (3 by default) and is then further filtered to contain only pairs with a score and number of matched ions larger than provided thresholds (0.65 & 3 by default).
 
@@ -322,6 +345,13 @@ The output table contains the scores and number of matched ions of the deconvolu
 {: .hands_on}
 
 ***TODO***: *Describe the outputs*
+
+> | query | reference | matches | scores |
+> |-------|-----------|---------|--------|
+> | C001  | Glycine   | 6       | 0.5    |
+> | C002  | Glycine   | 3       | 0.34   |
+> | ...   | ...       | ...     | ...    |
+{: .matrix}
 
 # Conclusion
 
