@@ -101,17 +101,6 @@ Our input data are in `.raw` format, which is not suitable for the downstream to
 >    - *"Output Type"*: `mzML`
 >    - In *"Data Processing Filters"*:
 >        - *"Apply peak picking?"*: `Yes`
->        - *"Apply m/z refinement with identification data?"*: `Yes`
->        - *"(Re-)calculate charge states?"*: `no`
->        - *"Filter m/z Window"*: `Yes`
->        - *"Filter out ETD precursor peaks?"*: `Yes`
->        - *"De-noise MS2 with moving window filter"*: `Yes`
->        - *"Demultiplex overlapping or MSX spectra"*: `Yes`
->    - In *"Scan Inclusion/Exclusion Filters"*:
->        - *"Filter MS Levels"*: `Yes`
->    - In *"General Options"*:
->        - *"Sum adjacent scans"*: `Yes`
->        - *"Output multiple runs per file"*: `Yes`
 >
 >    > <comment-title> Centroids </comment-title>
 >    >
@@ -155,8 +144,6 @@ The first step is to extract peaks from each of your data files independently. F
 >        - In *"Advanced Options"*:
 >            - *"Prefilter step for for the first analysis step (ROI detection)"*: `3,500`
 >            - *"Noise filter"*: `1000`
->    - In *"Resubmit your raw dataset or your zip file"*:
->        - *"Resubmit your dataset or your zip file"*: `no need`
 >  
 >    You can leave the other parameters with their default values.
 >
@@ -171,8 +158,6 @@ At this step, you obtain a dataset collection containing one `RData` file per sa
 >  {% tool [xcms findChromPeaks Merger](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **xcms findChromPeaks (xcmsSet)** {% icon tool %})
 >    - {% icon param-file %} *"Sample metadata file "*: `output` (Input dataset)
->    - In *"Resubmit your raw dataset or your zip file"*:
->        - *"Resubmit your dataset or your zip file"*: `no need`
 >
 >    You can leave the other parameters with their default values.
 >
@@ -189,8 +174,6 @@ Now we can proceed with the grouping and determining shared ions among samples. 
 >        - *"Minimum fraction of samples"*: `0.9`
 >        - *"Width of overlapping m/z slices"*: `0.01`
 >    - *"Get the Peak List"*: `Yes`
->    - In *"Resubmit your raw dataset or your zip file"*:
->        - *"Resubmit your dataset or your zip file"*: `no need`
 >
 >    You can leave the other parameters with their default values.
 >
@@ -207,8 +190,6 @@ A deviation in retention time occurs from a sample to another, especially when y
 >    - *"Method to use for retention time correction"*: `PeakGroups - retention time correction based on aligment of features (peak groups) present in most/all samples.`
 >        - *"Minimum required fraction of samples in which peaks for the peak group were identified"*: `0.7`
 >        - *"Smooth method"*: `loess - non-linear alignment`
->    - In *"Resubmit your raw dataset or your zip file"*:
->        - *"Resubmit your dataset or your zip file"*: `no need`
 >
 >    You can leave the other parameters with their default values.
 >
@@ -229,8 +210,6 @@ By applying retention time correction, the used retention time values were modif
 >    - *"Get the Peak List"*: `Yes`
 >        - *"Convert retention time (seconds) into minutes"*: `Yes`
 >        - *"If NA values remain, replace them by 0 in the dataMatrix"*: `Yes`
->    - In *"Resubmit your raw dataset or your zip file"*:
->        - *"Resubmit your dataset or your zip file"*: `no need`
 >
 >    You can leave the other parameters with their default values.
 >
@@ -246,8 +225,6 @@ At this point, the peak list may contain `NA` values when peaks were not conside
 >    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **xcms groupChromPeaks (group)** {% icon tool %})
 >    - In *"Peak List"*:
 >        - *"Convert retention time (seconds) into minutes"*: `Yes`
->    - In *"Resubmit your raw dataset or your zip file"*:
->        - *"Resubmit your dataset or your zip file"*: `no need`
 >
 >    You can leave the other parameters with their default values.
 >
@@ -261,8 +238,6 @@ At this point, the peak list may contain `NA` values when peaks were not conside
 # Peak deconvolution
 
 The next step is deconvoluting the detected peaks in order to reconstruct the full spectra of the analysed compound. {% tool [RAMClustR](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.2.4+galaxy2) %} is used to group features based on correlations across samples in a hierarchy, focusing on consistency across samples. While a feature typically is derived from a single compound, a spectrum of mass signals is more a more-accurate representation of the mass spectrometric signal for a given metabolite. RAMClustR uses a novel grouping method that operates in an unsupervised manner to group signals from MS data into spectra without relying on predictability of the in-source phenomenon.
-
-## Sub-step with **RAMClustR**
 
 > <hands-on-title> Peak deconvolution </hands-on-title>
 >
@@ -286,11 +261,9 @@ The next step is deconvoluting the detected peaks in order to reconstruct the fu
 
 # Retention index calculation
 
-We developed a new package RIAssigner to compute retention indices for files in the `.msp` format using an indexed reference list in `.csv` or `.msp` format.
+We developed a new package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.2+galaxy1) %} to compute retention indices for files in the `.msp` format using an indexed reference list in `.csv` or `.msp` format.
 
 The output follows the same format as the input, but with added retention index values. These will be used at a later stage to improve compound identification with an additional filtering step. Multiple computation methods (piecewise-linear & cubic spline) are supported.
-
-## Sub-step with **RIAssigner**
 
 > <hands-on-title> Retention index calculation </hands-on-title>
 >
@@ -300,119 +273,55 @@ The output follows the same format as the input, but with added retention index 
 >    - In *"Reference dataset"*:
 >        - {% icon param-file %} *"Reference compound list"*: `output` (Input dataset)
 >
->    ***TODO***: *Check parameter descriptions*
+>    ***TODO***: *rename output?*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <comment-title> Minutes vs seconds </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > TBD
+>    {: .comment}
+>
+>    > <comment-title> Kovats method </comment-title>
+>    >
+>    > TBD
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 # Identification
 
 The deconvoluted spectra are annotated for identification by comparing them with a reference spectral library. This library contains spectra of standards measured on the same instrument for optimal comparability. The matchms package is used for spectral matching. The cosine score with a greedy peak pairing heuristic was used to compute the number of matching ions with a given tolerance and the cosine scores for the matched peaks.
 
-## Sub-step with **matchMS similarity**
+## Compute similairity scores
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Compute similairity scores </hands-on-title>
 >
 > 1. {% tool [matchMS similarity](toolshed.g2.bx.psu.edu/repos/recetox/matchms/matchms/0.17.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Queries spectra"*: `output` (output of **RIAssigner** {% icon tool %})
->    - *"Symmetric"*: `Yes`
+>    - *"Symmetric"*: `No`
+>        - {% icon param-file %} *"Reference spectra"*: `reference_spectra.msp` (loaded Zenodo file)
 >    - In *"Algorithm Parameters"*:
 >        - *"tolerance"*: `0.03`
 >    - *"Apply RI filtering"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <comment-title> Reference spectra </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > More details about the reference spectra?
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **matchms output formatter**
+## Format the output
 
 The output table contains the scores and number of matched ions of the deconvoluted spectra with the spectra in the reference library. The raw output is filtered to only contain the top matches (3 by default) and is then further filtered to contain only pairs with a score and number of matched ions larger than provided thresholds (0.65 & 3 by default).
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Format the output </hands-on-title>
 >
 > 1. {% tool [matchms output formatter](toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.1.4) %} with the following parameters:
 >    - {% icon param-file %} *"Scores object"*: `similarity_scores` (output of **matchMS similarity** {% icon tool %})
->    - *"Formatting method"*: `Thresholding`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+***TODO***: *Describe the outputs*
 
 # Conclusion
 
