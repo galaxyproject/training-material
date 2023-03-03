@@ -31,7 +31,7 @@ contributors:
 
 # Introduction
 
-The study of metabolites in biological samples is routinely defined as metabolomics and provides the capability to investigate metabolism on a global and relatively unbiased scale in comparison to traditional targeted studies focused on specific pathways of metabolism and a small number of metabolites. The untargeted approach enables to detect thousands of metabolites in hypothesis-generating studies and to link previously unknown metabolites with biologically important roles. There are two major issues in contemporary metabolomics: the first is enormous loads of signal generated during the experiments, and the second is the fact that some metabolites in the studied samples may not be known to us. These obstacles make the task of processing and interpreting the metabolomics data a cumbersome and time-consuming process 
+The study of metabolites in biological samples is routinely defined as metabolomics and provides the capability to investigate metabolism on a global and relatively unbiased scale in comparison to traditional targeted studies focused on specific pathways of metabolism and a small number of metabolites. The untargeted approach enables to detect thousands of metabolites in hypothesis-generating studies and to link previously unknown metabolites with biologically important roles. There are two major issues in contemporary metabolomics: the first is enormous loads of signal generated during the experiments, and the second is the fact that some metabolites in the studied samples may not be known to us. These obstacles make the task of processing and interpreting the metabolomics data a cumbersome and time-consuming process {% cite Nash2019 %}.
 
 TBD
 
@@ -130,6 +130,11 @@ The first part of data processing is using XCMS tool. This step is only meant to
 >    - {% icon param-file %} *"File(s) from your history containing your chromatograms"*: `output` (output of **msconvert** {% icon tool %})
 >
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
+>
+>    > <comment-title> Output </comment-title>
+>    >
+>    > TBA 
+>    {: .comment}
 {: .hands_on}
 
 # Peak detection using XCMS
@@ -246,15 +251,20 @@ At this point, the peak list may contain `NA` values when peaks were not conside
 >
 >    You can leave the other parameters with their default values.
 >
+>    > <comment-title> Output </comment-title>
+>    >
+>    > TBA 
+>    {: .comment}
+>
 {: .hands_on}
 
 # Peak deconvolution
 
-The next step is deconvoluting the detected peaks in order to reconstruct the full spectra of the analysed compound. RAMClustR is used to group features based on correlations across samples in a hierarchy, focusing on consistency across samples.
+The next step is deconvoluting the detected peaks in order to reconstruct the full spectra of the analysed compound. {% tool [RAMClustR](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.2.4+galaxy2) %} is used to group features based on correlations across samples in a hierarchy, focusing on consistency across samples. While a feature typically is derived from a single compound, a spectrum of mass signals is more a more-accurate representation of the mass spectrometric signal for a given metabolite. RAMClustR uses a novel grouping method that operates in an unsupervised manner to group signals from MS data into spectra without relying on predictability of the in-source phenomenon.
 
 ## Sub-step with **RAMClustR**
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Peak deconvolution </hands-on-title>
 >
 > 1. {% tool [RAMClustR](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.2.4+galaxy2) %} with the following parameters:
 >    - *"Choose input format:"*: `XCMS`
@@ -266,35 +276,13 @@ The next step is deconvoluting the detected peaks in order to reconstruct the fu
 >    - In *"Clustering"*:
 >        - *"Minimal cluster size"*: `5`
 >        - *"Maximal tree height"*: `0.9`
->    - In *"Normalisation"*:
->        - *"Normalisation method"*: `none`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <comment-title> Output </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > A comment about output files
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> <question-title></question-title>
->
-> 1. Question1?
-> 2. Question2?
->
-> > <solution-title></solution-title>
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 # Retention index calculation
 
@@ -304,7 +292,7 @@ The output follows the same format as the input, but with added retention index 
 
 ## Sub-step with **RIAssigner**
 
-> <hands-on-title> Task description </hands-on-title>
+> <hands-on-title> Retention index calculation </hands-on-title>
 >
 > 1. {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.2+galaxy1) %} with the following parameters:
 >    - In *"Query dataset"*:
