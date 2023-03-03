@@ -121,7 +121,7 @@ We uploaded the [Schmitt *et al.* 2015](https://www.ncbi.nlm.nih.gov/pmc/article
 > `https://usegalaxy.org/history/export_archive?id=7ac09d1db287dbba`
 {: .hands_on}
 
-This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using {% icon tool %} **FastQC** [here]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-quality-with-fastqc---short--long-reads).
+This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using {% icon tool %} **FastQC** in the dedicated [quality-control tutorial]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-quality-with-fastqc---short--long-reads).
 
 This gave us the following plots:
 
@@ -391,7 +391,7 @@ Analysis of SSCS data follows the exact same trajectory:
 
 ## Re-running analyses with workflows
 
-Instead of manually re-running all the tools in the variant calling section, you can use a **workflow** to automatically run the same tools, but on the SSCS reads. Workflows let you run a chain of tools on different input data with a single click of a button. You can find more information on using workflows [here](../../../introduction/tutorials/galaxy-intro-101/tutorial.html#run-workflow-on-different-data).
+Instead of manually re-running all the tools in the variant calling section, you can use a **workflow** to automatically run the same tools, but on the SSCS reads. Workflows let you run a chain of tools on different input data with a single click of a button. You can find more information on using workflows in the [Galaxy 101 introductory tutorial](../../../introduction/tutorials/galaxy-intro-101/tutorial.html#run-workflow-on-different-data).
 
 We've prepared two workflows which split the above analysis into two steps:
 
