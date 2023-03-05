@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Calling very rare variants" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-02-17 10:40:02 +0000" />
+<meta name="DC.date" content="2023-03-05 09:19:48 +0000" />
 <meta name="DC.creator" content="Anton Nekrutenko" />
 <meta name="DC.creator" content="Nick Stoler" />
 
@@ -65,7 +65,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-02-17 10:40:02 +0000",
+  "dateModified": "2023-03-05 09:19:48 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Calling very rare variants",
   "interactivityType": "mixed",
@@ -859,7 +859,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 17, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 5, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1020,7 +1020,7 @@
   </ol>
 </blockquote>
 
-<p>This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>FastQC</strong> <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-quality-with-fastqc---short--long-reads">here</a>.</p>
+<p>This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>FastQC</strong> in the dedicated <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-quality-with-fastqc---short--long-reads">quality-control tutorial</a>.</p>
 
 <p>This gave us the following plots:</p>
 
@@ -1390,16 +1390,24 @@
 
 <h2 id="re-running-analyses-with-workflows">Re-running analyses with workflows</h2>
 
-<p>Instead of manually re-running all the tools in the variant calling section, you can use a <strong>workflow</strong> to automatically run the same tools, but on the SSCS reads. Workflows let you run a chain of tools on different input data with a single click of a button. You can find more information on using workflows <a href="../../../introduction/tutorials/galaxy-intro-101/tutorial.html#run-workflow-on-different-data">here</a>.</p>
+<p>Instead of manually re-running all the tools in the variant calling section, you can use a <strong>workflow</strong> to automatically run the same tools, but on the SSCS reads. Workflows let you run a chain of tools on different input data with a single click of a button. You can find more information on using workflows in the <a href="../../../introduction/tutorials/galaxy-intro-101/tutorial.html#run-workflow-on-different-data">Galaxy 101 introductory tutorial</a>.</p>
 
 <p>We’ve prepared two workflows which split the above analysis into two steps:</p>
 
 <ol>
-  <li><a href="https://usegalaxy.org/u/nstoler/w/du-novo-gtn-tutorial">Using Du Novo</a> to create consensus sequencs from raw reads.
+  <li><a href="https://usegalaxy.org/u/nstoler/w/du-novo-gtn-tutorial">Using Du Novo</a> to create consensus sequences from raw reads.
     <ul>
       <li>This will generate trimmed DCS and SSCS files from raw sequencing data.</li>
       <li>This does not include the FastQC step. You should always run FastQC on your raw reads first, to check the quality of your sequencing run before proceeding with the analysis.</li>
     </ul>
+
+    <blockquote class="comment">
+      <div class="box-title comment-title" id="comment-helping-du-novo-1" aria-label="comment box: Helping Du Novo"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Helping Du Novo</div>
+      <p>The <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Send usage data</em> option is left off in the above workflow.
+This is because we want to make sure you only share data knowingly.</p>
+
+      <p>But again, if you’d like to help improve Du Novo, consider turning it on.</p>
+    </blockquote>
   </li>
   <li><a href="https://usegalaxy.org/u/nstoler/w/copy-of-du-novo-gtn-tutorial">Calling variants</a> from consensus sequences.
     <ul>
@@ -1412,23 +1420,9 @@
 
 <p>You can use the variant calling workflow to call variants using the SSCS instead of the DCS.</p>
 
-<blockquote class="comment">
-  <div class="box-title comment-title" id="comment-helping-du-novo-1" aria-label="comment box: Helping Du Novo"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Helping Du Novo</div>
-  <p>The <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>Send usage data</em> option is left off in the above workflows.</p>
-  <ul>
-    <li>We want to make sure you only share data knowingly.</li>
-  </ul>
+<figure id="figure-1"><img src="../../images/workflow-dunovo.png" alt="Du Novo workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Workflow 1: Making consensus sequences</figcaption></figure>
 
-  <p>But again, if you’d like to help improve Du Novo, consider turning it on.</p>
-</blockquote>
-
-<p><strong>Workflow: Making consensus sequences</strong></p>
-
-<p><a href="https://usegalaxy.org/u/nstoler/w/du-novo-gtn-tutorial"><img src="../../images/workflow-dunovo.png" alt="Du Novo workflow. " loading="lazy" /></a></p>
-
-<p><strong>Workflow: Variant calling</strong></p>
-
-<p><a href="https://usegalaxy.org/u/nstoler/w/copy-of-du-novo-gtn-tutorial"><img src="../../images/workflow-dunovo-variant-calling.png" alt="Variant calling workflow. " loading="lazy" /></a></p>
+<figure id="figure-2"><img src="../../images/workflow-dunovo-variant-calling.png" alt="Variant calling workflow. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Workflow 2: Variant calling</figcaption></figure>
 
 <h1 id="conclusion">Conclusion</h1>
 
