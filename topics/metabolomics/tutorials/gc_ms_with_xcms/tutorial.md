@@ -33,9 +33,9 @@ contributors:
 
 The study of metabolites in biological samples is routinely defined as metabolomics and provides the capability to investigate metabolism on a global and relatively unbiased scale in comparison to traditional targeted studies focused on specific pathways of metabolism and a small number of metabolites. The untargeted approach enables to detect thousands of metabolites in hypothesis-generating studies and to link previously unknown metabolites with biologically important roles. There are two major issues in contemporary metabolomics: the first is enormous loads of signal generated during the experiments, and the second is the fact that some metabolites in the studied samples may not be known to us. These obstacles make the task of processing and interpreting the metabolomics data a cumbersome and time-consuming process {% cite Nash2019 %}.
 
-TBD
+A lot of packages are available for the analysis of GC-MS or LC-MS data. In this tutorial, we focus on open-source solutions integrated within Galaxy framework. In this tutorial, we will learn how to process the data from ... to ... . For demonstration, we use three GC-EI+-HRMS files from seminal plasma samples.
 
-In this tutorial you will learn ......
+To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a general package for untargeted metabolomics profiling. We use it to detect peaks within our samples. Once we have detected them, they need to be deconvoluted with focus on consistency across samples. For that, we use **RAMClustR** ({% cite broeckling2014ramclust %}) tool. To normalise the retention time of identified spectra in our sample, we compute retention index using **RIAssigner** ({% cite hecht2022riassigner %}) by comparing the data to well-defined list of alkanes. Finally, we identify detected spectra by aligning it with a database of known compounds. This can be achieved using MatchMS ({% cite Huber2020 %}), resulting into a table of identified compounds, weighted by a confidence score.
 
 > <agenda-title></agenda-title>
 >
