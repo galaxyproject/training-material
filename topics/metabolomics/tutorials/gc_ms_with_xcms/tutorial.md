@@ -99,8 +99,6 @@ As a result of this step, we should have in our history a green Dataset collecti
 
 ## Convert data to mzML
 
->    ***TODO***: *rename inputs and outputs in tools??*
-
 Our input data are in `.raw` format, which is not suitable for the downstream tools in this tutorial. We use tool {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2) %} to convert them to the appropriate format (`.mzML` in this case).
 
 > <hands-on-title> Convert data to mzML </hands-on-title>
@@ -132,7 +130,7 @@ The first part of data processing is using **XCMS** tool. This step is only mean
 >
 >    > <comment-title> Output - `input.raw.RData` </comment-title>
 >    >
->    > Collection of `rdata.msnbase.raw` files. **TODO**
+>    > Collection of `rdata.msnbase.raw` files. **TODO** describe using https://lgatto.github.io/MSnbase/articles/v01-MSnbase-demo.html
 >    {: .comment}
 {: .hands_on}
 
@@ -314,9 +312,9 @@ However, as we can observe, the metadata part is rather incomplete. We would lik
 
 # Retention index calculation
 
-Retention index ({% cite kumari2011applying %}) is a way how to convert equipment- and experiment-specific retention times into system-independent normalised constants. The retention index of a compound is computed from the retention time by interpolating between adjacent alkanes. This can be different for individual chromatographic system, but the derived retention indices are quite independent and allow comparing values measured by different analytical laboratories.
+Retention index ({% cite van1963generalization %}) is a way how to convert equipment- and experiment-specific retention times into system-independent normalised constants. The retention index of a compound is computed from the retention time by interpolating between adjacent alkanes. This can be different for individual chromatographic system, but the derived retention indices are quite independent and allow comparing values measured by different analytical laboratories.
 
-We use package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.2+galaxy1) %} to compute retention indices for files in the `.msp` format using an indexed reference list of alkanes in `.csv` or `.msp` format. The output follows the same format as the input, but with added retention index values. These can be used at a subsequent stage to improve compound identification. Multiple computation methods (e.g. piecewise-linear or cubic spline) are supported by the tool.
+We use package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.2+galaxy1) %} to compute retention indices for files in the `.msp` format using an indexed reference list of alkanes in `.csv` or `.msp` format. The output follows the same format as the input, but with added retention index values. These can be used at a subsequent stage to improve compound identification ({% cite kumari2011applying %}). Multiple computation methods (e.g. piecewise-linear or cubic spline) are supported by the tool.
 
 > <hands-on-title> Retention index calculation </hands-on-title>
 >
@@ -332,10 +330,17 @@ We use package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassig
 >    > You might notice that in the last **XCMS** step, we converted the retention times to minutes. However, in this step, we are using seconds again. The reason is that **RAMClustR** converted them internally again to seconds. Regarding the reference compound list, this database has already its retention times in seconds.
 >    {: .comment}
 >
->    > <comment-title> Kovats method </comment-title>
+>    > <details-title> Kováts method </details-title>
 >    >
->    > TBD
->    {: .comment}
+>    > The Kováts retention index (or Kováts index) of a compound is its retention time normalized to the retention times of adjacently eluting n-alkanes. It is based on the fact that the logarithm of the retention time converges to the number of carbon atoms in the alkane. For an isothermal chromatogram, you use the following equation to calculate the Kováts index: 
+>    > 
+>    > $$I = 100 \times \frac{\mathtt{log}~t_x - \mathtt{log}~t_n}{\mathtt{log}~t_{n+1} - \mathtt{log}~t_n}$$ 
+>    > 
+>    > where $$t_n$$ and $$t_{n+1}$$ are retention times of the reference n-alkane hydrocarbons eluting immediately before and after chemical compound *X* and $$t_x$$ is the retention time of compound *X*.
+>    > 
+>    > In practice, first, you run a chromatogram of a standard alkane mixture in the range of interest. Then you do a co-injection of your sample with the standard alkanes. The main advantage of this method is reproducibility.
+>    >
+>    {: .details}
 >
 {: .hands_on}
 
