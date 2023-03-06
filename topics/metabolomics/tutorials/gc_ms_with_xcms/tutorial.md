@@ -35,7 +35,7 @@ The study of metabolites in biological samples is routinely defined as metabolom
 
 A lot of packages are available for the analysis of GC-MS or LC-MS data. In this tutorial, we focus on open-source solutions integrated within Galaxy framework. In this tutorial, we will learn how to process the data samples and identify the present compounds. For demonstration, we use three GC-EI+-HRMS files from seminal plasma samples.
 
-To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a general package for untargeted metabolomics profiling. It can be used for any type of mass spectrometry acquisition files from low to high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). We use it to detect peaks within our samples. Once we have detected them, they need to be deconvoluted with focus on consistency across samples. For that, we use **RAMClustR** ({% cite broeckling2014ramclust %}) tool. To normalise the retention time of identified spectra in our sample, we compute retention index using **RIAssigner** ({% cite hecht2022riassigner %}) by comparing the data to well-defined list of alkanes. Finally, we identify detected spectra by aligning them with a database of known compounds. This can be achieved using MatchMS ({% cite Huber2020 %}), resulting into a table of identified compounds, weighted by a confidence score.
+To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a general package for untargeted metabolomics profiling. It can be used for any type of mass spectrometry acquisition files from low to high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). We use it to detect peaks within our samples. Once we have detected them, they need to be deconvoluted with focus on consistency across samples. For that, we use **RAMClustR** ({% cite broeckling2014ramclust %}) tool. To normalise the retention time of identified spectra in our sample, we compute retention index using **RIAssigner** ({% cite hecht2022riassigner %}) by comparing the data to well-defined list of alkanes. Finally, we identify detected spectra by aligning them with a database of known compounds. This can be achieved using **MatchMS** ({% cite Huber2020 %}), resulting into a table of identified compounds, weighted by a confidence score.
 
 > <agenda-title></agenda-title>
 >
@@ -86,9 +86,11 @@ Before we can start with the actual analysis pipeline, we first need to download
 >
 >    > <comment-title> The extra files </comment-title>
 >    >
->    > The two additional files contain reference alkanes, reference spectral library, and sample metadata. The list of alkanes with retention time and carbon number or retention index is used to compute the retention index of the deconvoluted peaks. The alkanes should be measured ideally in the same batch as the input sample collection. A reference spectral library (`.msp`) is used for identification of spectra. 
+>    > The two additional files contain **reference alkanes**, reference spectral library, and sample metadata. The list of alkanes with retention time and carbon number or retention index is used to compute the retention index of the deconvoluted peaks. The alkanes should be measured ideally in the same batch as the input sample collection. A reference spectral library (`.msp`) is used for identification of spectra. 
 >    > 
->    > The spectral library contains the recorded and annotated mass spectra of compounds which can be detected in the sample and confirmed via comparison with this library. The specific library is the in-house library of metabolite standards. Sample metadata corresponds to a table containing information about our samples. In particular, it contains sample name, type (QC, blank, sample, etc.), batch number, and injection order.
+>    > The **spectral library** contains the recorded and annotated mass spectra of compounds which can be detected in the sample and confirmed via comparison with this library. The specific library is the in-house library of metabolite standards. **TODO**: what does it mean?
+>    > 
+>    > **Sample metadata** corresponds to a table containing information about our samples. In particular, it contains sample name, type (QC, blank, sample, etc.), batch number, and injection order.
 >    {: .comment}
 >
 {: .hands_on}
@@ -119,9 +121,9 @@ Our input data are in `.raw` format, which is not suitable for the downstream to
 
 ## Create XCMS object
 
-The first part of data processing is using XCMS tool. This step is only meant to read our `.mzML` files and generate an object usable by XCMS tool. {% tool [MSnbase readMSData](toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0) %} takes as input our files and prepares `RData` files for the first XCMS step.
+The first part of data processing is using **XCMS** tool. This step is only meant to read our `.mzML` files and generate an object usable by **XCMS** tool. {% tool [MSnbase readMSData](toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0) %} takes as input our files and prepares `RData` files for the first **XCMS** step.
 
-> <hands-on-title> Create XCMS object </hands-on-title>
+> <hands-on-title> Create **XCMS** object </hands-on-title>
 >
 > 1. {% tool [MSnbase readMSData](toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"File(s) from your history containing your chromatograms"*: `output` (output of **msconvert** {% icon tool %})
@@ -136,7 +138,7 @@ The first part of data processing is using XCMS tool. This step is only meant to
 
 # Peak detection using XCMS
 
-The first step in the workflow is to detect the peaks in our data using XCMS. This part, however, is covered by a [separate tutorial]({{ site.baseurl }}/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html). Although the tutorial is dedicated to LC-MS data, it can be followed also for our GC data. Therefore, in this section, we do not explain this part of the workflow in detials, but rather refer the reader to the dedicated tutorial. Please also pay attention to the parameter values for individual Galaxy tools, as these can differ from the refered tutorial and are adjusted to our dataset.
+The first step in the workflow is to detect the peaks in our data using **XCMS**. This part, however, is covered by a [separate tutorial]({{ site.baseurl }}/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html). Although the tutorial is dedicated to LC-MS data, it can be followed also for our GC data. Therefore, in this section, we do not explain this part of the workflow in detials, but rather refer the reader to the dedicated tutorial. Please also pay attention to the parameter values for individual Galaxy tools, as these can differ from the refered tutorial and are adjusted to our dataset.
 
 ## Peak picking
 
@@ -245,7 +247,7 @@ At this point, the peak list may contain `NA` values when peaks were not conside
 
 # Peak deconvolution
 
-The next step is deconvoluting the detected peaks in order to reconstruct the full spectra of the analysed compound. {% tool [RAMClustR](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.2.4+galaxy2) %} is used to group features based on correlations across samples in a hierarchy, focusing on consistency across samples. While a feature typically is derived from a single compound, a spectrum of mass signals is more a more-accurate representation of the mass spectrometric signal for a given metabolite. RAMClustR uses a novel grouping method that operates in an unsupervised manner to group signals from MS data into spectra without relying on predictability of the in-source phenomenon.
+The next step is deconvoluting the detected peaks in order to reconstruct the full spectra of the analysed compound. {% tool [RAMClustR](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.2.4+galaxy2) %} is used to group features based on correlations across samples in a hierarchy, focusing on consistency across samples. While a feature typically is derived from a single compound, a spectrum of mass signals is more a more-accurate representation of the mass spectrometric signal for a given metabolite. **RAMClustR** uses a novel grouping method that operates in an unsupervised manner to group signals from MS data into spectra without relying on predictability of the in-source phenomenon.
 
 > <hands-on-title> Peak deconvolution </hands-on-title>
 >
