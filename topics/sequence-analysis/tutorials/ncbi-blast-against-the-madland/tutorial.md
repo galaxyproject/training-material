@@ -10,7 +10,6 @@ objectives:
   - "Load FASTA sequence into Galaxy"
   - "Perform NCBI-Blast+ analysis against MAdLandDB"
 time_estimation: "15m"
-enable: false
 key_points:
   - Blast tool searches a database of sequences for similar sequences to a query sequence.
 
