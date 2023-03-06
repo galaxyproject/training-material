@@ -8,15 +8,15 @@ tags:
  - eukaryote
  - VGP
 questions:
-- "what combination of tools can produce the highest quality assembly of vertebrate genomes?"
-- "How can we evaluate how good it is?"
+- "What combination of tools can produce the highest quality assembly of vertebrate genomes?"
+- "How can we evaluate the quality of the assembly in a reference-free way?"
 objectives:
 - "Learn the tools necessary to perform a de novo assembly of a vertebrate genome"
 - "Evaluate the quality of the assembly"
 time_estimation: '3h'
 key_points:
-- "The VGP pipeline allows to generate error-free, near gapless reference-quality genome assemblies"
-- "The assembly can be divided in four main stages: genome profile analysis, HiFi long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C hybrid scaffolding"
+- "The VGP pipeline allows users to generate error-free, near gapless reference-quality genome assemblies"
+- "The assembly can be divided in four main stages: genome profile analysis, HiFi long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C scaffolding"
 contributors:
 - delphine-l
 - astrovsky01
@@ -40,7 +40,9 @@ Repetitive elements can be grouped into two categories: interspersed repeats, su
 
 Heterozygosity is also an important factor in genome assembly. Haplotype phasing, that is, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies ({% cite Zhang2020 %}). When no reference sequence is available, the *state-of-the-art* strategy consists of constructing a string graph with vertices representing reads and edges representing consistent overlaps. In this kind of graph, after transitive reduction, heterozygous alleles in the string graph are represented by bubbles. When combined with Hi-C data, this approach allows complete diploid reconstruction ({% cite DominguezDelAngel2018 %}, {% cite Zhang2020 %}, {% cite Dida2021 %}).
 
-The G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). This tutorial will guide you step by step to assemble a high-quality genome using the VGP assembly pipeline. **NOTE:** Some of your results may slightly differ from results showin in this tutorial, depending on the versions of the tools used, since algorithms can change between versions.
+The G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). This tutorial will guide you step by step to assemble a high-quality genome using the VGP assembly pipeline. 
+
+**NOTE:** Some of your results may slightly differ from results shown in this tutorial, depending on the versions of the tools used, since algorithms can change between versions.
 
 
 
@@ -52,6 +54,49 @@ The G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is
 > {:toc}
 >
 {: .agenda}
+
+# Glossary of terms
+
+Before getting into the thick of things, let's go over some terms you will often hear when learning about genome assembly. These concepts will be used often throughout this tutorial as well, so please refer to this section as necessary to help your understanding. 
+
+**Pseudohaplotype assembly**: An assembly that consists of long phased haplotype blocks that are separated by blocks where the haplotype cannot be distinguished (often homozygous regions). This can result in "switch errors", where a region of DNA might have a block of maternal sequence, then sequence the same in both haplotypes, and then a block of paternal sequence. These types of assemblies are usually represented by a primary assembly and an alternate assembly. (This definition largely taken from the [NCBI's Genome Assembly Model](https://www.ncbi.nlm.nih.gov/assembly/model/#asmb_def).)
+
+**Primary assembly**:
+
+**Alternate assembly**: The alternate assembly consists of sequences that are an alternate representation of loci in the primary assembly (such as at heterozygous loci). Usually this means the alternate haplotypic representation at a given region. These types of sequences are also referred to as haplotigs.
+
+**Phasing**:
+
+**Assembly graph**:
+
+**Unitig**:
+
+**Contig**: A contiguous sequence in an assembly. Contigs necessarily do not contain gaps.
+
+**False duplicate**: In the context of this tutorial, false duplications are not optical nor technical duplicates from PCR as one might be used to from short read sequencing — rather, this term refers to assembly errors that result in one region of the genome being represented *twice* in the same assembly as two separate regions. False duplications can further be classified as either haplotypic duplications or overlaps.
+
+Haplotypic duplication can happen when a region that is heterozygous in the individual has the two haplotypes showing enough differences from each other that the assembler thinks it's two different regions. For example, say an individual is heterozygous in the region Chr1[1:100] and has Haplotype A from their mother and Haplotype B from their father; a false duplication can arise when the haplotypes are not recognized as being from the same region, and the assembler ends up placing both haplotypes in the same assembly, resulting in Chr1[1:100] being represented twice in one assembly. (Ideally, a properly phased assembly would have Haplotype A in one assembly, *e.g.*, the primary, while Haplotype B is in the other.)
+
+False duplications via overlaps result from misassemblies where two different contigs end up representing the same sequence, but not as a result of improper phasing. Overlaps happen when a branching point in an assembly graph is resolved such that the contig before the vertex and a contig after the vertex share the same overlapping sequence.
+
+![Types of false duplication.](../../images/vgp_assembly/falseduplications.png "Schematic of types of false duplication. Image adapted from {% cite Rhie2021 %}.")
+
+**Purging**:
+
+**Scaffold**: A scaffold refers to one or more contigs joined together using additional information, such as Bionano optical maps, linked reads, Hi-C chromatin information, etc. The regions between contigs are usually of unknown sequence, thus they are represented by gaps of N's. Gaps are usually of an arbitrary size assigned by the scaffolding software, but some approaches such as optical maps can create sized gaps. 
+
+For more about the specific scaffolding technologies used in the VGP pipeline (currently Bionano optical maps and Hi-C chromatin conformation data), please refer to those specific sections within this tutorial.
+
+**HiFi reads**: PacBio HiFi reads are the focus of this tutorial — described in 2019, they have revolutionized genome assembly by combining long (average 13.5 kbp) read lengths with high accuracies (99.8%) typically associated with short read sequencing ({% cite Wenger2019 %}). These higher read lengths enable HiFi reads to traverse some repeat regions that are problematic to assemble with short reads.
+
+**Ultra-long reads**: Ultra-long reads are typically reads of over 100 kbp, and are usually generated using Oxford Nanopore Technology. This means that the reads may be noisier (*i.e.*, have a higher error rate), but they are much longer than any other read technology currently, and can help assembly algorithms walk complicated assembly graphs and traverse even longer repeat regions. 
+
+**Manual curation**: This term refers to manually evaluating and manipulating an assembly based on Hi-C contact map information using the software PretextView. The user takes into account the Hi-C signal (and potentially supplementary data such as repeat content or coverage tracks) to resolve potential misassemblies and missed joins. 
+
+**Misassembly**:
+
+**Telomere-to-telomere assembly**:
+
 
 # VGP assembly pipeline overview
 
