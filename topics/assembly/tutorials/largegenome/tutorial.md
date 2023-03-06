@@ -179,10 +179,13 @@ Options:
 
 > <hands-on-title>Run the Data QC workflow</hands-on-title>
 >
-> 1. **Import the Data QC workflow** into Galaxy as described above.
->    - Click "Expand to full workflow form"
+> 1. **Import the Data QC workflow** into Galaxy:
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Galaxy-Workflow-Data_QC.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
+>
+>    - Click "Expand to full workflow form"
 >
 > 2. Run **Data QC** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -258,10 +261,13 @@ Options:
 
 > <hands-on-title>Run the Kmer counting workflow</hands-on-title>
 >
-> 1. **Import the Kmer counting workflow** into Galaxy as described above.
->    - Click "Expand to full workflow form"
+> 1. **Import the Kmer counting workflow** into Galaxy:
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Galaxy-Workflow-kmer_counting.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
+>
+>    - Click "Expand to full workflow form"
 >
 > 2. Run **Data QC** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -348,10 +354,13 @@ Options:
 
 > <hands-on-title>Run the Trim and Filter Reads workflow</hands-on-title>
 >
-> 1. **Import the Trim and Filter reads workflow** into Galaxy as described above.
->    - Click "Expand to full workflow form"
+> 1. **Import the Trim and Filter reads workflow** into Galaxy:
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Galaxy-Workflow-Trim_and_filter_reads.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
+>
+>    - Click "Expand to full workflow form"
 >
 > 2. Run **Trim and Filter Reads** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -445,10 +454,13 @@ Options
 
 > <hands-on-title>Run the Assembly with Flye workflow</hands-on-title>
 >
-> 1. **Import the Assembly with Flye workflow** into Galaxy as described above.
->    - Click "Expand to full workflow form"
+> 1. **Import the Assembly with Flye workflow** into Galaxy:
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Galaxy-Workflow-Assembly_with_Flye.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
+>
+>    - Click "Expand to full workflow form"
 >
 > 2. Run **Assembly with Flye** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -555,10 +567,13 @@ Options:
 
 > <hands-on-title>Run the Assembly polishing workflow</hands-on-title>
 >
-> 1. **Import the Assembly polishing workflow** into Galaxy as described above.
->    - Click "Expand to full workflow form"
+> 1. **Import the Assembly polishing workflow** into Galaxy:
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Galaxy-Workflow-Assembly_polishing.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
+>
+>    - Click "Expand to full workflow form"
 >
 > 2. Run **Assembly polishing** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -653,10 +668,13 @@ Options:
 
 > <hands-on-title>Run the Assess Genome Quality workflow</hands-on-title>
 >
-> 1. **Import the Assess Genome Quality workflow** into Galaxy as described above.
->    - Click "Expand to full workflow form"
+> 1. **Import the Assess Genome Quality workflow** into Galaxy:
+>    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/Galaxy-Workflow-Assess_genome_quality.ga) or download it to your computer.
+>    - Import the workflow into Galaxy
 >
 >    {% snippet faqs/galaxy/workflows_import.md %}
+>
+>    - Click "Expand to full workflow form"
 >
 > 2. Run **Assess Genome Quality** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
