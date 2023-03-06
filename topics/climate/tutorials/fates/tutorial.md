@@ -219,12 +219,12 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 > > You may have to login again to [live.usegalaxy.eu](https://live.usegalaxy.eu) (use the same username and password than on other useGalaxy.eu subdomains)
 > > and switch to the correct history.
 > >
-> > You can access the tool by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply)
+> > You can access the tool by clicking [here to launch it on EU](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply)
 > {: .tip}
 >
 > 1. Open the {% tool [Panoply](interactive_tool_panoply) %}
 > 2. Check **ALP1_exp.nc** dataset selected in the netcdf input field
-> 3. Click Execute
+> 3. Click Run Tool
 > 4. The tool will start running and will stay running permanently
 > 5. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the Panoply instance you started.
 > 6. Click on your Panoply instance

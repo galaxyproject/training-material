@@ -37,6 +37,7 @@ contributions:
 priority: 10 
 notebook:
   language: python
+  pyolite: true
 ---
 
 Here we will cover the basics of testing, an important part of software development. Testing lets you know that your code is correct in many situations that matter to you.

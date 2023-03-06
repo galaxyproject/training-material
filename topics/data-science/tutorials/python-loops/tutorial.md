@@ -39,6 +39,7 @@ contributors:
 priority: 6
 notebook:
   language: python
+  pyolite: true
 ---
 
 A *for loop* tells Python to execute some statements once for each value in a list, a character string, or some other collection: "for each thing in this group, do these operations"

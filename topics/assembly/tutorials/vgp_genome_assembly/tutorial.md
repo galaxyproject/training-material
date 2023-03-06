@@ -40,7 +40,7 @@ Repetitive elements can be grouped into two categories: interspersed repeats, su
 
 Heterozygosity is also an important factor in genome assembly. Haplotype phasing, that is, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies ({% cite Zhang2020 %}). When no reference sequence is available, the *state-of-the-art* strategy consists of constructing a string graph with vertices representing reads and edges representing consistent overlaps. In this kind of graph, after transitive reduction, heterozygous alleles in the string graph are represented by bubbles. When combined with Hi-C data, this approach allows complete diploid reconstruction ({% cite DominguezDelAngel2018 %}, {% cite Zhang2020 %}, {% cite Dida2021 %}).
 
-The G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). This tutorial will guide you step by step to assemble a high-quality genome using the VGP assembly pipeline.
+The G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). This tutorial will guide you step by step to assemble a high-quality genome using the VGP assembly pipeline. **NOTE:** Some of your results may slightly differ from results showin in this tutorial, depending on the versions of the tools used, since algorithms can change between versions.
 
 
 
@@ -334,13 +334,13 @@ Now let's parse the `upper bound for the read depth estimation` parameter. This 
 
 > <hands-on-title>Get maximum read depth</hands-on-title>
 >
-> 1. {% tool [Compute an expression on every row](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} with the following parameters:
+> 1. {% tool [Compute an expression on every row](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} (**VERSION 1.6**) with the following parameters:
 >    - *"Add expression"*: `1.5*c3`
 >    - {% icon param-file %} *"as a new column to"*: `model_params` (output of **GenomeScope** {% icon tool %})
 >    - *"Round result?"*: `Yes`
 >    - *"Input has a header line with column names?"*: `No`
 >
-> 2. {% tool [Compute an expression on every row](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} with the following parameters:
+> 2. {% tool [Compute an expression on every row](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} (**VERSION 1.6**) with the following parameters:
 >    - *"Add expression"*: `3*c7`
 >    - {% icon param-file %} *"as a new column to"*: output of the previous step.
 >    - *"Round result?"*: `Yes`
@@ -579,7 +579,7 @@ Despite BUSCO being robust for species that have been widely studied, it can be 
 {: .hands_on}
 
 
-By default, Merqury generates three collections as output: stats, plots and QV stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the primary assembly copy number (CN) spectrum plot, known as the *spectra-cn* plot (fig. 7).
+By default, Merqury generates three collections as output: stats, plots and QV stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the assembly copy number (CN) spectrum plot, known as the *spectra-cn* plot (fig. 7).
 
 ![Figure 7: Merqury plot](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="80%"}
 

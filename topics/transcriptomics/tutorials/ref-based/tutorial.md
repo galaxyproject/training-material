@@ -43,7 +43,8 @@ follow_up_training:
             - rna-seq-viz-with-volcanoplot
             - rna-seq-genes-to-pathways
 
-contributors:
+contributions:
+  authorship:
     - bebatut
     - malloryfreeberg
     - moheydarian
@@ -54,6 +55,8 @@ contributors:
     - nsoranzo
     - pvanheus
     - lldelisle
+  editing:
+    - hexylena
 ---
 
 # Introduction
@@ -2173,7 +2176,7 @@ As for DESeq2, in the previous step, we counted only reads that mapped to exons 
 - The results of running DEXSeq-count in 'Prepare annotation' mode
 - Seven count files generated in 'Count reads' mode
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. Create a new history
 > 2. Import the seven count files from [Zenodo]({{ page.zenodo_link }}) or the Shared Data library (if available):
@@ -2241,7 +2244,7 @@ Similarly to DESeq2, DEXSeq generates a table with:
 7. *p*-value for the statistical significance of this change
 8. *p*-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate ([FDR](https://en.wikipedia.org/wiki/False_discovery_rate))
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [Filter](Filter1) %} to extract exons with a significant differential usage (adjusted *p*-value equal or below 0.05) between treated and untreated samples
 >

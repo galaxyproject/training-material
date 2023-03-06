@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Hybrid training
 subtopic: practises
-enable: false
+draft: true
 time_estimation: 1h
 questions:
 - What is hybrid training?
@@ -23,7 +23,9 @@ contributions:
     - erasmusplus
 ---
 
-**Combine with Australia Biocommon paper: https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1008715**
+> <tip-title>Combine with Australia Biocommon paper</tip-title>
+> This is an excellent companion paper: {% cite Hall_2021 %}
+{: .tip}
 
 **hybrid training events**, i.e. pairing-up on-site helpers with remote instructors across multiple sites simultaneously:
 
@@ -63,19 +65,19 @@ To help you organize an hybrid event, we have created some checklists, by timing
 
 ### Global organizers
 
-{% include {{ page.dir }}organizer-before.md %}
+{% include topics/teaching/tutorials/hybrid-training/organizer-before.md %}
 
 ### Local hosts
 
-{% include {{ page.dir }}host-before.md %}
+{% include topics/teaching/tutorials/hybrid-training/host-before.md %}
 
 ### Local helpers
 
-{% include {{ page.dir }}helper-before.md %}
+{% include topics/teaching/tutorials/hybrid-training/helper-before.md %}
 
 ### Instructors
 
-{% include {{ page.dir }}instructor-before.md %}
+{% include topics/teaching/tutorials/hybrid-training/instructor-before.md %}
 
 ## During the workshop
 
@@ -86,19 +88,19 @@ put sticky notes there quickly
 
 ### Global organizers
 
-{% include {{ page.dir }}organizer-during.md %}
+{% include topics/teaching/tutorials/hybrid-training/organizer-during.md %}
 
 ### Local hosts
 
-{% include {{ page.dir }}host-during.md %}
+{% include topics/teaching/tutorials/hybrid-training/host-during.md %}
 
 ### Local helpers
 
-{% include {{ page.dir }}helper-during.md %}
+{% include topics/teaching/tutorials/hybrid-training/helper-during.md %}
 
 ### Instructors
 
-{% include {{ page.dir }}instructor-during.md %}
+{% include topics/teaching/tutorials/hybrid-training/instructor-during.md %}
 
 ## After the workshop
 
@@ -109,19 +111,19 @@ Debrief
 
 ### Global organizers
 
-{% include {{ page.dir }}organizer-after.md %}
+{% include topics/teaching/tutorials/hybrid-training/organizer-after.md %}
 
 ### Local hosts
 
-{% include {{ page.dir }}host-after.md %}
+{% include topics/teaching/tutorials/hybrid-training/host-after.md %}
 
 ### Local helpers
 
-{% include {{ page.dir }}helper-after.md %}
+{% include topics/teaching/tutorials/hybrid-training/helper-after.md %}
 
 ### Instructors
 
-{% include {{ page.dir }}instructor-after.md %}
+{% include topics/teaching/tutorials/hybrid-training/instructor-after.md %}
 
 # Checklists by role
 
@@ -129,54 +131,54 @@ Debrief
 
 ### Before the workshop
 
-{% include {{ page.dir }}organizer-before.md %}
+{% include topics/teaching/tutorials/hybrid-training/organizer-before.md %}
 
 ### During the workshop
 
-{% include {{ page.dir }}organizer-during.md %}
+{% include topics/teaching/tutorials/hybrid-training/organizer-during.md %}
 
 ### After the workshop
 
-{% include {{ page.dir }}organizer-after.md %}
+{% include topics/teaching/tutorials/hybrid-training/organizer-after.md %}
 
 ## Local hosts
 
 ### Before the workshop
 
-{% include {{ page.dir }}host-before.md %}
+{% include topics/teaching/tutorials/hybrid-training/host-before.md %}
 
 ### During the workshop
 
-{% include {{ page.dir }}host-during.md %}
+{% include topics/teaching/tutorials/hybrid-training/host-during.md %}
 
 ### After the workshop
 
-{% include {{ page.dir }}host-after.md %}
+{% include topics/teaching/tutorials/hybrid-training/host-after.md %}
 
 ## Local helpers
 
 ### Before the workshop
 
-{% include {{ page.dir }}helper-before.md %}
+{% include topics/teaching/tutorials/hybrid-training/helper-before.md %}
 
 ### During the workshop
 
-{% include {{ page.dir }}helper-during.md %}
+{% include topics/teaching/tutorials/hybrid-training/helper-during.md %}
 
 ### After the workshop
 
-{% include {{ page.dir }}helper-after.md %}
+{% include topics/teaching/tutorials/hybrid-training/helper-after.md %}
 
 ## Instructors
 
 ### Before the workshop
 
-{% include {{ page.dir }}instructor-before.md %}
+{% include topics/teaching/tutorials/hybrid-training/instructor-before.md %}
 
 ### During the workshop
 
-{% include {{ page.dir }}instructor-during.md %}
+{% include topics/teaching/tutorials/hybrid-training/instructor-during.md %}
 
 ### After the workshop
 
-{% include {{ page.dir }}instructor-after.md %}
+{% include topics/teaching/tutorials/hybrid-training/instructor-after.md %}

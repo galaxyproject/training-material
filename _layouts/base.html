@@ -1,6 +1,6 @@
 ---
 ---
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{% if page.lang %}{{ page.lang }}{% else %}en{% endif %}">
     <head>
         <meta charset="utf-8">
@@ -15,7 +15,6 @@
         <link rel="stylesheet" href="{{ "/assets/css/main.css?v=2" | prepend: site.baseurl }}">
         <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="{{ "/assets/css/academicons.css" | prepend: site.baseurl }}">
-        <link rel="stylesheet" href="{{ "/assets/css/syntax_highlighting.css" | prepend: site.baseurl }}">
         <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon" />
         <link rel="alternate" type="application/atom+xml" href="{{ "/feed.xml" | prepend: site.baseurl }}" />
         <link rel="canonical" href="{{ site.url }}{{ site.baseurl }}{{ page.url }}" />
@@ -26,20 +25,24 @@
         {% assign topic = site.data[page.topic_name] %}
         {% assign og_title = topic.title %}
         {% if page.title %}
-          {% assign og_title = page.title %}
+            {% assign og_title = page.title %}
         {% endif %}
-        {% assign og_desc = "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
-        {% if topic.summary %}
-          {% assign og_desc = topic.summary %}
-        {% endif %}
+        {% assign og_desc = topic.summary | default: "Collection of tutorials developed and maintained by the worldwide Galaxy community" %}
         <meta name="description" content="{{ og_desc | strip_html | truncate: 60}}" />
         <meta property="og:site_name" content="Galaxy Training Network" />
         <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}" />
         <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
-        <meta property="og:image" content="{{ "/assets/images/GTNLogo1000.png" | prepend: site.baseurl }}" />
+        {% assign og_image = page.og_image | default: topic.og_image | default: "/assets/images/GTNLogo1000.png" %}
+        <meta property="og:image" content="{{ og_image | prepend: site.baseurl }}" />
 
+        {% if page.layout == "tutorial_hands_on" %}
+        <script type="application/ld+json">
+            {% include _includes/material.jsonld material=page topic=topic site=site %}
+        </script>
+        {% endif %}
     </head>
     <body data-spy="scroll" data-target="#toc">
+        <script type="text/javascript" src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
         {% include _includes/default-header.html %}
         <div class="container main-content" role="main">
         {{ content }}
@@ -54,8 +57,6 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
         <script type="text/javascript" src="{{ "/assets/js/bootstrap-toc.min.js" | prepend: site.baseurl }}"></script>
         <script type="text/javascript" src="{{ "/assets/js/main.js" | prepend: site.baseurl }}"></script>
-        <script type="text/javascript" src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
-
         <script type="text/javascript" src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
         <script type="text/javascript">
         var snippets=document.querySelectorAll('div.highlight');
