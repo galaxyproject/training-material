@@ -15,8 +15,8 @@ objectives:
 - You can use Bloom's Taxonomy to write effective learning objectives
 time_estimation: 2H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- The processing of untargeted GC-MS metabolomic data can be done using open-source tools.
+- TBA
 requirements :
   - type: "internal"
     topic_name: metabolomics
@@ -33,9 +33,9 @@ contributors:
 
 The study of metabolites in biological samples is routinely defined as metabolomics and provides the capability to investigate metabolism on a global and relatively unbiased scale in comparison to traditional targeted studies focused on specific pathways of metabolism and a small number of metabolites. The untargeted approach enables to detect thousands of metabolites in hypothesis-generating studies and to link previously unknown metabolites with biologically important roles. There are two major issues in contemporary metabolomics: the first is enormous loads of signal generated during the experiments, and the second is the fact that some metabolites in the studied samples may not be known to us. These obstacles make the task of processing and interpreting the metabolomics data a cumbersome and time-consuming process {% cite Nash2019 %}.
 
-A lot of packages are available for the analysis of GC-MS or LC-MS data. In this tutorial, we focus on open-source solutions integrated within Galaxy framework. In this tutorial, we will learn how to process the data from ... to ... . For demonstration, we use three GC-EI+-HRMS files from seminal plasma samples.
+A lot of packages are available for the analysis of GC-MS or LC-MS data. In this tutorial, we focus on open-source solutions integrated within Galaxy framework. In this tutorial, we will learn how to process the data samples and identify the present compounds. For demonstration, we use three GC-EI+-HRMS files from seminal plasma samples.
 
-To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a general package for untargeted metabolomics profiling. We use it to detect peaks within our samples. Once we have detected them, they need to be deconvoluted with focus on consistency across samples. For that, we use **RAMClustR** ({% cite broeckling2014ramclust %}) tool. To normalise the retention time of identified spectra in our sample, we compute retention index using **RIAssigner** ({% cite hecht2022riassigner %}) by comparing the data to well-defined list of alkanes. Finally, we identify detected spectra by aligning it with a database of known compounds. This can be achieved using MatchMS ({% cite Huber2020 %}), resulting into a table of identified compounds, weighted by a confidence score.
+To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a general package for untargeted metabolomics profiling. It can be used for any type of mass spectrometry acquisition files from low to high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). We use it to detect peaks within our samples. Once we have detected them, they need to be deconvoluted with focus on consistency across samples. For that, we use **RAMClustR** ({% cite broeckling2014ramclust %}) tool. To normalise the retention time of identified spectra in our sample, we compute retention index using **RIAssigner** ({% cite hecht2022riassigner %}) by comparing the data to well-defined list of alkanes. Finally, we identify detected spectra by aligning them with a database of known compounds. This can be achieved using MatchMS ({% cite Huber2020 %}), resulting into a table of identified compounds, weighted by a confidence score.
 
 > <agenda-title></agenda-title>
 >
@@ -47,6 +47,8 @@ To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a 
 {: .agenda}
 
 # Data preparation and prepocessing
+
+Before we can start with the actual analysis pipeline, we first need to download and prepare our dataset. Many of the preprocessing steps can be run in parallel on individual samples. Therefore, we recommend using the Dataset collections in Galaxy. This can be achieved by using the dataset collection option from the beginning of your analysis, when uploading your data into Galaxy.
 
 ## Import the data into Galaxy
 
@@ -72,7 +74,7 @@ To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a 
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
-> 4. Import the following extra files from Zenodo: 
+> 4. Import the following extra files from [Zenodo]({{ page.zenodo_link }}):
 >
 >    ```
 >    TBA
@@ -84,14 +86,20 @@ To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a 
 >
 >    > <comment-title> The extra files </comment-title>
 >    >
->    > The two additional files contain reference alkanes, reference spectral library, and sample metadata. The list of alkanes with retention time and carbon number or retention index is used to compute the retention index of the deconvoluted peaks. The alkanes should be measured ideally in the same batch as the input sample collection. A reference spectral library (`.msp`) is used for identification of spectra. The spectral library contains the recorded and annotated mass spectra of compounds which can be detected in the sample and confirmed via comparison with this library. The specific library is the in-house library of metabolite standards. Sample metadata corresponds to a table containing information about our samples. In particular, it contains sample name, type (QC, blank, sample, etc.), batch number, and injection order.
+>    > The two additional files contain reference alkanes, reference spectral library, and sample metadata. The list of alkanes with retention time and carbon number or retention index is used to compute the retention index of the deconvoluted peaks. The alkanes should be measured ideally in the same batch as the input sample collection. A reference spectral library (`.msp`) is used for identification of spectra. 
+>    > 
+>    > The spectral library contains the recorded and annotated mass spectra of compounds which can be detected in the sample and confirmed via comparison with this library. The specific library is the in-house library of metabolite standards. Sample metadata corresponds to a table containing information about our samples. In particular, it contains sample name, type (QC, blank, sample, etc.), batch number, and injection order.
 >    {: .comment}
 >
 {: .hands_on}
 
+As a result of this step, we should have in our history a green Dataset collection with three `.raw` files.
+
 ## Convert data to mzML
 
-Our input data are in `.raw` format, which is not suitable for the downstream tools in this tutorial. We can use tool {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2) %} to convert them to the appropriate format (`.mzML` in this case).
+>    ***TODO***: *rename inputs and outputs in tools??*
+
+Our input data are in `.raw` format, which is not suitable for the downstream tools in this tutorial. We use tool {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2) %} to convert them to the appropriate format (`.mzML` in this case).
 
 > <hands-on-title> Convert data to mzML </hands-on-title>
 >
@@ -104,7 +112,7 @@ Our input data are in `.raw` format, which is not suitable for the downstream to
 >
 >    > <comment-title> Centroids </comment-title>
 >    >
->    > msconvert with selected parameters computes centroids in the m/z domain. **TBD** exmplain why !!!
+>    > msconvert with selected parameters computes centroids in the m/z domain. **TBD** explain why !!!
 >    {: .comment}
 >
 {: .hands_on}
@@ -252,18 +260,57 @@ The next step is deconvoluting the detected peaks in order to reconstruct the fu
 >        - *"Minimal cluster size"*: `5`
 >        - *"Maximal tree height"*: `0.9`
 >
->    > <comment-title> Output </comment-title>
->    >
->    > A comment about output files
->    {: .comment}
+{: .hands_on}
+
+The spectral data comes as `.msp` file, which is a text file structured according to the **NIST Search** spectra format. `.msp` is one of the generally accepted formats for mass spectra representations and it is compatible with lots of spectra processing programms (MS-DIAL, NIST MS Search, AMDIS, etc.). Because `.msp` files are text-based, they can be viewed as simple `txt` files. You can use any text editor that you have on your computer or use Galaxy built-in editor. In this tutorial we use the Galaxy editor to check the contents of the file:
+
+> <hands-on-title> Data Exploration </hands-on-title>
+>
+> 1. Click *"Visualize this data"* {% icon galaxy-barchart %} icon next to the dataset in the Galaxy history
+> 2. Select the *"Editor"* {% icon galaxy-eye %} tool. The contents of the file would look like this:
+>
+>    ```
+>     NAME:C001
+>     IONMODE:Negative
+>     SPECTRUMTYPE:Centroid
+>     RETENTIONTIME:383.27
+>     Num Peaks:231
+>     217.1073 64041926
+>     243.0865 35597866
+>     257.1134 31831229
+>     224.061 27258239
+>     258.11 24996353
+>     241.0821 23957171
+>     315.1188 13756744
+>     ...
+>
+>     NAME:C002
+>     IONMODE:Negative
+>     SPECTRUMTYPE:Centroid
+>     RETENTIONTIME:281.62
+>     Num Peaks:165
+>     307.1573 299174880
+>     147.0654 298860831
+>     149.0447 287809889
+>     218.1066 118274758
+>     189.076 112486871
+>     364.1787 75134143
+>     191.0916 52526567
+>     308.1579 52057158
+>     ...
+>    ```
 >
 {: .hands_on}
 
+MSP files can contain one or more mass spectra, these are split by an empty line. The individual spectra essentialy consist of two sections: metadata and peaks. The metadata consists of compound name, spectrum type (which is centroid in this case), ion mode, retention time, and number of *m/z* peaks. If the compound has not been identified as in our case, the *NAME* can be any arbitrary string. It is best however, if that string is unique within that `.msp` file. The metadata fields are usually unordered, so it is quite common for one `.msp` file to contain **NAME** as the first metadata key, and for another `.msp` to have this key somewhere in the middle. The keys themselves also aren't rigid and can have different names (e.g., **compound_name** instead of **NAME**) or store information not present in this `.msp`, such as ionization mode.
+
+However, as we can observe, the metadata part is rather incomplete. We would like to gather more information about the detected spectra and identify the specific compounds corresponding to them.
+
 # Retention index calculation
 
-We developed a new package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.2+galaxy1) %} to compute retention indices for files in the `.msp` format using an indexed reference list in `.csv` or `.msp` format.
+Retention index is a way how to convert equipment- and experiment-specific retention times into system-independent normalised constants. The retention index of a compound is computed from the retention time by interpolating between adjacent alkanes. This can be different for individual chromatographic system, but the derived retention indices are quite independent and allow comparing values measured by different analytical laboratories.
 
-The output follows the same format as the input, but with added retention index values. These will be used at a later stage to improve compound identification with an additional filtering step. Multiple computation methods (piecewise-linear & cubic spline) are supported.
+We use package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.2+galaxy1) %} to compute retention indices for files in the `.msp` format using an indexed reference list of alkanes in `.csv` or `.msp` format. The output follows the same format as the input, but with added retention index values. These can be used at a subsequent stage to improve compound identification. Multiple computation methods (e.g. piecewise-linear or cubic spline) are supported by the tool.
 
 > <hands-on-title> Retention index calculation </hands-on-title>
 >
@@ -273,7 +320,6 @@ The output follows the same format as the input, but with added retention index 
 >    - In *"Reference dataset"*:
 >        - {% icon param-file %} *"Reference compound list"*: `output` (Input dataset)
 >
->    ***TODO***: *rename output?*
 >
 >    > <comment-title> Minutes vs seconds </comment-title>
 >    >
@@ -289,16 +335,18 @@ The output follows the same format as the input, but with added retention index 
 
 # Identification
 
-The deconvoluted spectra are annotated for identification by comparing them with a reference spectral library. This library contains spectra of standards measured on the same instrument for optimal comparability. The matchms package is used for spectral matching. The cosine score with a greedy peak pairing heuristic was used to compute the number of matching ions with a given tolerance and the cosine scores for the matched peaks.
+To identify and annotate the deconvoluted spectra, we compare them with a reference spectral library. This library contains spectra of standards measured on the same instrument for optimal comparability. The **matchMS** package is used for spectral matching. It was build to import and apply different similarity measures to compare large amounts of spectra. This includes common cosine scores, but can also easily be extended by custom measures.
 
 ## Compute similairity scores
+
+We use the cosine score with a greedy peak pairing heuristic to compute the number of matching ions with a given tolerance and the cosine scores for the matched peaks.
 
 > <hands-on-title> Compute similairity scores </hands-on-title>
 >
 > 1. {% tool [matchMS similarity](toolshed.g2.bx.psu.edu/repos/recetox/matchms/matchms/0.17.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Queries spectra"*: `output` (output of **RIAssigner** {% icon tool %})
 >    - *"Symmetric"*: `No` (if we were to query our spectra agains itself, we would select `Yes`)
->        - {% icon param-file %} *"Reference spectra"*: `reference_spectra.msp` (loaded Zenodo file)
+>        - {% icon param-file %} *"Reference spectra"*: `reference_spectra.msp` (downloaded file from Zenodo)
 >    - In *"Algorithm Parameters"*:
 >        - *"tolerance"*: `0.03`
 >    - *"Apply RI filtering"*: `Yes`
@@ -335,7 +383,7 @@ The deconvoluted spectra are annotated for identification by comparing them with
 
 The output of the previous step is a `json` file. This format is very simple to read for our computers, but not so much for us. We can use {% tool [matchms output formatter](toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.1.4) %} to convert the data to a tab-separated file with a scores matrix.
 
-The output table contains the scores and number of matched ions of the deconvoluted spectra with the spectra in the reference library. The raw output is filtered to only contain the top matches (3 by default) and is then further filtered to contain only pairs with a score and number of matched ions larger than provided thresholds (0.65 & 3 by default).
+The output table contains the scores and number of matched ions of the deconvoluted spectra with the spectra in the reference library. The raw output is filtered to only contain the top matches (3 by default) and is then further filtered to contain only pairs with a score and number of matched ions larger than provided thresholds.
 
 > <hands-on-title> Format the output </hands-on-title>
 >
@@ -344,16 +392,16 @@ The output table contains the scores and number of matched ions of the deconvolu
 >
 {: .hands_on}
 
-***TODO***: *Describe the outputs*
-
 > | query | reference | matches | scores |
 > |-------|-----------|---------|--------|
-> | C001  | Glycine   | 6       | 0.5    |
-> | C002  | Glycine   | 3       | 0.34   |
+> | C001  | Uridine_4TMS isomer 1   | 81       | 0.787    |
+> | C004  | Asparagine_3TMS   | 56       | 0.909   |
+> | C012  | Myo-inositol_6TMS | 29       | 0.688   |
 > | ...   | ...       | ...     | ...    |
 {: .matrix}
 
+At this stage, all steps are complete: we have the list of identified spectra corresponding to a compound from the reference database. Since this process is dependent on the parameters we used along the way, the result should be considered dependent on them. To make enumerate this dependency, we each potential compound has assigned a confidence score.
+
 # Conclusion
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+***TODO***
