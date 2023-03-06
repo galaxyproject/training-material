@@ -68,8 +68,6 @@ Before we can start with the actual analysis pipeline, we first need to download
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true format="mzml" collection_name="input" renaming=false %}
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md astype="as a Collection" %}
->
 > 3. Make sure your data is in a **collection**. You can always manually create the collection from separate files:
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
@@ -108,7 +106,7 @@ Our input data are in `.raw` format, which is not suitable for the downstream to
 > <hands-on-title> Convert data to mzML </hands-on-title>
 >
 > 1. {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2) %} with the following parameters:
->    - {% icon param-collection %} *"Input unrefined MS data"*: `output` (Input dataset collection)
+>    - {% icon param-collection %} *"Input unrefined MS data"*: `input` (Input dataset collection)
 >    - *"Do you agree to the vendor licenses?"*: `Yes`
 >    - *"Output Type"*: `mzML`
 >    - In *"Data Processing Filters"*:
@@ -128,13 +126,13 @@ The first part of data processing is using **XCMS** tool. This step is only mean
 > <hands-on-title> Create **XCMS** object </hands-on-title>
 >
 > 1. {% tool [MSnbase readMSData](toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"File(s) from your history containing your chromatograms"*: `output` (output of **msconvert** {% icon tool %})
+>    - {% icon param-file %} *"File(s) from your history containing your chromatograms"*: `input.mzML` (output of **msconvert** {% icon tool %})
 >
 >    {% snippet faqs/galaxy/tools_select_collection.md %}
 >
->    > <comment-title> Output </comment-title>
+>    > <comment-title> Output - `input.raw.RData` </comment-title>
 >    >
->    > TBA 
+>    > Collection of `rdata.msnbase.raw` files. **TODO**
 >    {: .comment}
 {: .hands_on}
 
@@ -149,7 +147,7 @@ The first step is to extract peaks from each of your data files independently. F
 > <hands-on-title> Peak picking </hands-on-title>
 >
 >  {% tool [xcms findChromPeaks (xcmsSet)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **MSnbase readMSData** {% icon tool %})
+>    - {% icon param-file %} *"RData file"*: `input.raw.RData` (output of **MSnbase readMSData** {% icon tool %})
 >    - *"Extraction method for peaks detection"*: `CentWave - chromatographic peak detection using the centWave method`
 >        - *"Max tolerated ppm m/z deviation in consecutive scans in ppm"*: `3.0`
 >        - *"Min,Max peak width in seconds"*: `1,15`
@@ -168,8 +166,8 @@ At this step, you obtain a dataset collection containing one `RData` file per sa
 > <hands-on-title> Merging files </hands-on-title>
 >
 >  {% tool [xcms findChromPeaks Merger](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **xcms findChromPeaks (xcmsSet)** {% icon tool %})
->    - {% icon param-file %} *"Sample metadata file "*: `output` (Input dataset)
+>    - {% icon param-file %} *"RData file"*: `input.raw.xset.RData` (output of **xcms findChromPeaks (xcmsSet)** {% icon tool %})
+>    - {% icon param-file %} *"Sample metadata file "*: `sample_metadata.tsv` (Input dataset)
 >
 >    You can leave the other parameters with their default values.
 >
@@ -180,7 +178,7 @@ Now we can proceed with the grouping and determining shared ions among samples. 
 > <hands-on-title> Grouping peaks </hands-on-title>
 >
 >  {% tool [xcms groupChromPeaks (group)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **xcms findChromPeaks Merger** {% icon tool %})
+>    - {% icon param-file %} *"RData file"*: `xset.merged.RData` (output of **xcms findChromPeaks Merger** {% icon tool %})
 >    - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
 >        - *"Bandwidth"*: `3.0`
 >        - *"Minimum fraction of samples"*: `0.9`
@@ -198,7 +196,7 @@ A deviation in retention time occurs from a sample to another, especially when y
 > <hands-on-title> Retention time correction </hands-on-title>
 >
 >  {% tool [xcms adjustRtime (retcor)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_retcor/abims_xcms_retcor/3.12.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **xcms groupChromPeaks (group)** {% icon tool %})
+>    - {% icon param-file %} *"RData file"*: `xset.merged.groupChromPeaks.RData` (output of **xcms groupChromPeaks (group)** {% icon tool %})
 >    - *"Method to use for retention time correction"*: `PeakGroups - retention time correction based on aligment of features (peak groups) present in most/all samples.`
 >        - *"Minimum required fraction of samples in which peaks for the peak group were identified"*: `0.7`
 >        - *"Smooth method"*: `loess - non-linear alignment`
@@ -214,7 +212,7 @@ By applying retention time correction, the used retention time values were modif
 > <hands-on-title> Grouping peaks </hands-on-title>
 >
 >  {% tool [xcms groupChromPeaks (group)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **xcms adjustRtime (retcor)** {% icon tool %})
+>    - {% icon param-file %} *"RData file"*: `xset.merged.groupChromPeaks.adjustRtime.RData` (output of **xcms adjustRtime (retcor)** {% icon tool %})
 >    - *"Method to use for grouping"*: `PeakDensity - peak grouping based on time dimension peak densities`
 >        - *"Bandwidth"*: `3.0`
 >        - *"Minimum fraction of samples"*: `0.9`
@@ -234,7 +232,7 @@ At this point, the peak list may contain `NA` values when peaks were not conside
 > <hands-on-title> Integrating areas of missing peaks </hands-on-title>
 >
 >  {% tool [xcms fillChromPeaks (fillPeaks)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"RData file"*: `xsetRData` (output of **xcms groupChromPeaks (group)** {% icon tool %})
+>    - {% icon param-file %} *"RData file"*: `xset.merged.groupChromPeaks.adjustRtime.groupChromPeaks.RData` (output of **xcms groupChromPeaks (group)** {% icon tool %})
 >    - In *"Peak List"*:
 >        - *"Convert retention time (seconds) into minutes"*: `Yes`
 >
@@ -258,7 +256,7 @@ The next step is deconvoluting the detected peaks in order to reconstruct the fu
 > 1. {% tool [RAMClustR](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.2.4+galaxy2) %} with the following parameters:
 >    - *"Choose input format:"*: `XCMS`
 >        - In *"Input MS Data as XCMS"*:
->            - {% icon param-file %} *"Input XCMS"*: `xsetRData` (output of **xcms fillChromPeaks (fillPeaks)** {% icon tool %})
+>            - {% icon param-file %} *"Input XCMS"*: `xset.merged.groupChromPeaks.adjustRtime.groupChromPeaks.fillChromPeaks.RData` (output of **xcms fillChromPeaks (fillPeaks)** {% icon tool %})
 >        - In *"General parameters"*:
 >            - *"Sigma r"*: `0.7`
 >            - *"Maximum RT difference"*: `10.0`
@@ -312,6 +310,8 @@ The spectral data comes as `.msp` file, which is a text file structured accordin
 
 However, as we can observe, the metadata part is rather incomplete. We would like to gather more information about the detected spectra and identify the specific compounds corresponding to them.
 
+**TODO** describe `Spec Abundance` file
+
 # Retention index calculation
 
 Retention index is a way how to convert equipment- and experiment-specific retention times into system-independent normalised constants. The retention index of a compound is computed from the retention time by interpolating between adjacent alkanes. This can be different for individual chromatographic system, but the derived retention indices are quite independent and allow comparing values measured by different analytical laboratories.
@@ -322,9 +322,9 @@ We use package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassig
 >
 > 1. {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.2+galaxy1) %} with the following parameters:
 >    - In *"Query dataset"*:
->        - {% icon param-file %} *"Query compound list"*: `mass_spectra_merged` (output of **RAMClustR** {% icon tool %})
+>        - {% icon param-file %} *"Query compound list"*: `Mass spectra from RAMClustR` (output of **RAMClustR** {% icon tool %})
 >    - In *"Reference dataset"*:
->        - {% icon param-file %} *"Reference compound list"*: `output` (Input dataset)
+>        - {% icon param-file %} *"Reference compound list"*: `reference_alkanes.csv` (Input dataset)
 >
 >
 >    > <comment-title> Minutes vs. seconds </comment-title>
@@ -352,9 +352,9 @@ We use the cosine score with a greedy peak pairing heuristic to compute the numb
 > <hands-on-title> Compute similairity scores </hands-on-title>
 >
 > 1. {% tool [matchMS similarity](toolshed.g2.bx.psu.edu/repos/recetox/matchms/matchms/0.17.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Queries spectra"*: `output` (output of **RIAssigner** {% icon tool %})
+>    - {% icon param-file %} *"Queries spectra"*: `RI using kovats of Mass spectra from RAMClustR` (output of **RIAssigner** {% icon tool %})
 >    - *"Symmetric"*: `No` (if we were to query our spectra agains itself, we would select `Yes`)
->        - {% icon param-file %} *"Reference spectra"*: `reference_spectra.msp` (downloaded file from Zenodo)
+>        - {% icon param-file %} *"Reference spectra"*: `reference_spectral_library.msp` (downloaded file from Zenodo)
 >    - In *"Algorithm Parameters"*:
 >        - *"tolerance"*: `0.03`
 >    - *"Apply RI filtering"*: `Yes`
@@ -396,7 +396,7 @@ The output table contains the scores and number of matched ions of the deconvolu
 > <hands-on-title> Format the output </hands-on-title>
 >
 > 1. {% tool [matchms output formatter](toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.1.4) %} with the following parameters:
->    - {% icon param-file %} *"Scores object"*: `similarity_scores` (output of **matchMS similarity** {% icon tool %})
+>    - {% icon param-file %} *"Scores object"*: `CosineGreedy scores` (output of **matchMS similarity** {% icon tool %})
 >
 {: .hands_on}
 
