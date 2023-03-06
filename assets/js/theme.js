@@ -30,9 +30,19 @@ if(training_theme_cookie){
 	setTheme(training_theme_cookie);
 }
 
-// Just for february
-if(window.location.pathname === "/"){
+const d = new Date();
+let month = d.getMonth();
+
+// Just for February
+if(month === 1 && window.location.pathname === "/"){
 	if(getThemePreference() === null || getThemePreference() === "undefined" || getThemePreference() === undefined){
 		setTheme("blm");
+	}
+}
+
+// Just for July
+if(month === 5 && window.location.pathname === "/"){
+	if(getThemePreference() === null || getThemePreference() === "undefined" || getThemePreference() === undefined){
+		setTheme("progress");
 	}
 }
