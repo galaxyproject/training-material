@@ -35,7 +35,7 @@ The study of metabolites in biological samples is routinely defined as metabolom
 
 A lot of packages are available for the analysis of GC-MS or LC-MS data. In this tutorial, we focus on open-source solutions integrated within Galaxy framework. In this tutorial, we will learn how to process the data samples and identify the present compounds. For demonstration, we use three GC-[EI+]-HRMS files from seminal plasma samples.
 
-To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a general package for untargeted metabolomics profiling. It can be used for any type of mass spectrometry acquisition files from low to high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). We use it to detect peaks within our samples. Once we have detected them, they need to be deconvoluted with focus on consistency across samples. For that, we use **RAMClustR** ({% cite broeckling2014ramclust %}) tool. To normalise the retention time of identified spectra in our sample, we compute retention index using **RIAssigner** ({% cite hecht2022riassigner %}) by comparing the data to well-defined list of alkanes. Finally, we identify detected spectra by aligning them with a database of known compounds. This can be achieved using **MatchMS** ({% cite Huber2020 %}), resulting into a table of identified compounds, weighted by a confidence score.
+To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a general package for untargeted metabolomics profiling. It can be used for any type of mass spectrometry acquisition files from low to high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). We use it to detect peaks within our samples. Once we have detected them, they need to be deconvoluted with focus on consistency across samples. For that, we use **RAMClustR** ({% cite broeckling2014ramclust %}) tool. To normalise the retention time of identified spectra in our sample, we compute retention index using **RIAssigner** ({% cite hecht2022riassigner %}) by comparing the data to well-defined list of alkanes. Finally, we identify detected spectra by aligning them with a database of known compounds. This can be achieved using **matchms** ({% cite Huber2020 %}), resulting into a table of identified compounds, weighted by a confidence score.
 
 > <agenda-title></agenda-title>
 >
@@ -314,7 +314,7 @@ However, as we can observe, the metadata part is rather incomplete. We would lik
 
 # Retention index calculation
 
-Retention index is a way how to convert equipment- and experiment-specific retention times into system-independent normalised constants. The retention index of a compound is computed from the retention time by interpolating between adjacent alkanes. This can be different for individual chromatographic system, but the derived retention indices are quite independent and allow comparing values measured by different analytical laboratories.
+Retention index ({% cite kumari2011applying %}) is a way how to convert equipment- and experiment-specific retention times into system-independent normalised constants. The retention index of a compound is computed from the retention time by interpolating between adjacent alkanes. This can be different for individual chromatographic system, but the derived retention indices are quite independent and allow comparing values measured by different analytical laboratories.
 
 We use package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.2+galaxy1) %} to compute retention indices for files in the `.msp` format using an indexed reference list of alkanes in `.csv` or `.msp` format. The output follows the same format as the input, but with added retention index values. These can be used at a subsequent stage to improve compound identification. Multiple computation methods (e.g. piecewise-linear or cubic spline) are supported by the tool.
 
@@ -341,17 +341,33 @@ We use package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassig
 
 # Identification
 
-To identify and annotate the deconvoluted spectra, we compare them with a reference spectral library. This library contains spectra of standards measured on the same instrument for optimal comparability. The **matchMS** package is used for spectral matching. It was build to import and apply different similarity measures to compare large amounts of spectra. This includes common cosine scores, but can also easily be extended by custom measures.
+To identify and annotate the deconvoluted spectra, we compare them with a reference spectral library. This library contains spectra of standards measured on the same instrument for optimal comparability. The **matchms** package is used for spectral matching. It was build to import and apply different similarity measures to compare large amounts of spectra. This includes common cosine scores, but can also easily be extended by custom measures.
 
-## Compute similairity scores
-
-> **TODO** how matchms is doing the matching/computing scores (normalised dot product) - peaks must be present in both reference and measured data + describe how it is diff from forward and reverse matching
-
-We use the cosine score with a greedy peak pairing heuristic to compute the number of matching ions with a given tolerance and the cosine scores for the matched peaks.
-
-> <hands-on-title> Compute similairity scores </hands-on-title>
+> <details-title> Reference spectral library </details-title>
+> 
+> Fragmentation patterns of ions (spectra) are widely used the process of compound identification in complex mixtures. The number of identifiable compounds and associated data keeps growing with the increasing sensitivity and resolution of mass spectrometers. These data are clustered into collections of chemical structures and their spectra, also called spectral libraries ({% cite stein1995chemical %}, {% cite stein2012mass %}), which can be used for fast, reliable identifications for any compound whose fragmentation pattern is measured by the instrument. 
+> 
+> To identify the compounds after GC/MS analysis, the *library searching* is performed for any detected spectrum. This locates the most similar spectra in the reference library, providing a list of the potentially identified compounds sorted by computed similarity. Indeed, a library search should also yield the confidence of compounds identification, often refered to as similarity score.
 >
-> 1. {% tool [matchMS similarity](toolshed.g2.bx.psu.edu/repos/recetox/matchms/matchms/0.17.0+galaxy0) %} with the following parameters:
+> Reference libraries users usually expect their reliability to be quite high. However, there are many sources of error which we need to be aware of. Particularly error-prone aspect is the annotation. Even an excellent spectrum becomes worthless for a wrongly annotated compound. A variety of computer-aided quality control help to improve these issues, but the libraries always require some level of expert human decision-making before a spectrum is added to the library. This is also important for redundant and unidentified spectra.
+>
+{: .details}
+
+
+## Compute similarity scores
+
+We use the cosine score with a greedy peak pairing heuristic to compute the number of matching ions with a given tolerance and the cosine scores for the matched peaks. Compared to more traditional methods of forward and reverse matching, **matchms** is performing matching on peaks present both in the measured sample and the reference data.
+
+> <details-title> Cosine score methods </details-title>
+>
+> One of the most common methods to compute similarity score between two spectra is computing the cosine of the *angle* between them. Each spectrum can be represented as a vector with an axis along each of its *m/z* values. Then the cosine of the angle is basically a normalised *dot product* of these two vectors. Intensity and *m/z* weighting corrections have been used to optimize performance. For
+example, higher mass peaks can be given greater weight since they are more discriminating than lower mass peaks. *Reverse* scores assign no weight to peaks present only in the measured sample spectrum, under the assumption that they arise from impurities.
+>
+{: .details}
+
+> <hands-on-title> Compute similarity scores </hands-on-title>
+>
+> 1. {% tool [matchms similarity](toolshed.g2.bx.psu.edu/repos/recetox/matchms/matchms/0.17.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Queries spectra"*: `RI using kovats of Mass spectra from RAMClustR` (output of **RIAssigner** {% icon tool %})
 >    - *"Symmetric"*: `No` (if we were to query our spectra agains itself, we would select `Yes`)
 >        - {% icon param-file %} *"Reference spectra"*: `reference_spectral_library.msp` (downloaded file from Zenodo)
@@ -359,16 +375,15 @@ We use the cosine score with a greedy peak pairing heuristic to compute the numb
 >        - *"tolerance"*: `0.03`
 >    - *"Apply RI filtering"*: `Yes`
 >
->    > <comment-title> Reference spectra </comment-title>
->    >
->    > More details about the reference spectra?
+>    > <comment-title> Used reference spectra </comment-title>
+>    > The RECETOX Metabolome HR-[EI+]-MS library is a collection of mostly endogoenous compounds from MetaSci Human Metabolite Library. Analytes underwent methoximation/silylation prior to acquisition. Spectra were acquired at 70 eV on Thermo Fisher Q Exactive™ GC Orbitrap™ GC-MS/MS at 60000 resolving power.
 >    {: .comment}
 >
 {: .hands_on}
 
 > <details-title> Overview of the spectral similarity scores </details-title>
 > > <h5>Cosine Greedy</h5>
-> > The cosine score, also known as the dot product, is based on representing the similarity of two spectra through the cosine of an  angle between the vectors that the spectra produce. Two peaks are considered as matching if their *m/z* values lie within the given   tolerance. Cosine greedy looks up matching peaks in a "greedy" way, which does not always lead to the most optimal alignments.
+> > The cosine score, also known as the dot product, is based on representing the similarity of two spectra through the cosine of an angle between the vectors that the spectra produce. Two peaks are considered as matching if their *m/z* values lie within the given tolerance. Cosine greedy looks up matching peaks in a "greedy" way, which does not always lead to the most optimal alignments.
 > >
 > > This score was among the first to be used for looking up matching spectra in spectral libraries and to this day remains one of the most popular scoring methods for both library matching and molecular networking workflows.
 > > <p>&nbsp;</p>
@@ -396,7 +411,7 @@ The output table contains the scores and number of matched ions of the deconvolu
 > <hands-on-title> Format the output </hands-on-title>
 >
 > 1. {% tool [matchms output formatter](toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.1.4) %} with the following parameters:
->    - {% icon param-file %} *"Scores object"*: `CosineGreedy scores` (output of **matchMS similarity** {% icon tool %})
+>    - {% icon param-file %} *"Scores object"*: `CosineGreedy scores` (output of **matchms similarity** {% icon tool %})
 >
 {: .hands_on}
 
