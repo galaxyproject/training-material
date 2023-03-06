@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="VGP assembly pipeline - short version" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-01-12 10:54:01 +0000" />
+<meta name="DC.date" content="2023-02-08 08:36:43 +0000" />
 <meta name="DC.creator" content="Delphine Lariviere" />
 <meta name="DC.creator" content="Alex Ostrovsky" />
 <meta name="DC.creator" content="Cristóbal Gallardo" />
@@ -68,7 +68,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-01-12 10:54:01 +0000",
+  "dateModified": "2023-02-08 08:36:43 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "VGP assembly pipeline - short version",
   "interactivityType": "mixed",
@@ -984,7 +984,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Jan 12, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 8, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -1004,7 +1004,7 @@
 
                 <h1 id="introduction">Introduction</h1>
 
-<p>The Vertebrate Genome Project (VGP), a project of the G10K Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species (<span class="citation"><a href="#Rhie2021">Rhie <i>et al.</i> 2021</a></span>). The VGP has developed a fully automated <em>de-novo</em> genome assembly pipeline, which uses a combination of three different technologies: Pacbio HiFi, Bionano optical maps and Hi-C chromatin interaction data.</p>
+<p>The Vertebrate Genome Project (VGP), a project of the G10K Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species (<span class="citation"><a href="#Rhie2021">Rhie <i>et al.</i> 2020</a></span>). The VGP has developed a fully automated <em>de-novo</em> genome assembly pipeline, which uses a combination of three different technologies: Pacbio HiFi, Bionano optical maps and Hi-C chromatin interaction data.</p>
 
 <p>As a result of a collaboration with the VGP team, a training including a step-by-step detailed description of parameter choices for each step of assembly was developed for the Galaxy Training Network (<span class="citation"><a href="#Lariviere2022">Lariviere <i>et al.</i> 2022</a></span>). This tutorial instead provides a quick walkthrough on how the workflows can be used to rapidly assemble a genome using the VGP pipeline with the Galaxy Workflow System (GWS).</p>
 
@@ -1149,25 +1149,14 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
 
 </blockquote>
 
+<p>Once we have imported the datasets, the next step is to import the VGP workflows from the WorkflowHub.</p>
+
 <h2 id="import-workflows-from-workflowhub">Import workflows from WorkflowHub</h2>
 
-<p>Once we have imported the datasets, the next step is to import the VGP workflows from the <a href="https://workflowhub.eu/">WorkflowHub server</a>. WorkflowHub is a workflow management system which allows workflows to be FAIR (Findable, Accessible, Interoperable, and Reusable), citable, have managed metadata profiles, and be openly available for review and analytics.</p>
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-import-workflows-from-workflowhub"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-import-workflows-from-workflowhub-contents" aria-expanded="true" aria-label="Toggle tip box: Import workflows from WorkflowHub"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Import workflows from WorkflowHub<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p><a href="https://workflowhub.eu/">WorkflowHub</a> is a workflow management system which allows workflows to be FAIR (Findable, Accessible, Interoperable, and Reusable), citable, have managed metadata profiles, and be openly available for review and analytics.</p>   <blockquote class="notranslate hands_on">   <div class="box-title hands-on-title" id="hands-on-import-a-workflow" aria-label="hands-on box:  Import a workflow "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on:  Import a workflow</div>   <ol>     <li>Click on the <strong>Workflow</strong> menu, located in the top bar.</li>     <li>Click on the <strong>Import</strong> button, located in the right corner.</li>     <li>       <p>In the section “Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)”, click on <strong>Search form</strong>.</p>     </li>     <li>In the <strong>TRS Server: <em>workflowhub.eu</em></strong> menu you should type <code class="language-plaintext highlighter-rouge">name:vgp</code> <img src="/training-material/topics/assembly/images/vgp_assembly/workflow_list.png" alt="galaxy TRS workflow search field, name:vgp is entered in the search bar, and five different workflows all labelled VGP are listed" /></li>     <li>Click on the desired workflow, and finally select the latest available version.</li>   </ol> </blockquote>   <p>After that, the imported workflows will appear in the main workflow menu. In order to initialize the workflow, we just need to click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> icon.</p> </blockquote>
 
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-import-a-workflow" aria-label="hands-on box: Import a workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Import a workflow</div>
-
-  <ol>
-    <li>Click on the <strong>Workflow</strong> menu, located in the top bar.
-  <img src="../../images/vgp_assembly/top_bar.png" alt="Workflow menu. " loading="lazy" /></li>
-    <li>Click on the <kbd>Import</kbd> button, located in the right corner.</li>
-    <li>In the section <strong>Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)</strong>, click on <em>Search form</em>.</li>
-    <li>In the <strong>TRS Server: <em>workflowhub.eu</em></strong> menu you should type <code class="language-plaintext highlighter-rouge">name:vgp</code>
-<img src="../../images/vgp_assembly/workflow_list.png" alt="Figure 3: Workflow menu. " loading="lazy" /></li>
-    <li>Click on the desired workflow, and finally select the latest available version.</li>
-  </ol>
-</blockquote>
-
-<p>After that, the imported workflows will appear in the main workflow menu. In order to initialize the workflow, we just need to click in the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <strong>Run workflow</strong> icon, marked with a red square in figure 2.</p>
+<p>The workflows imported are marked with a red square in the following figure:</p>
 
 <figure id="figure-2"><img src="../../images/vgp_assembly/imported_workflows.png" alt="Figure 2: Workflow menu. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Workflow main menu. The workflow menu lists all the workflows that have been imported. It provides useful information for organizing the workflows, such as last update and the tags. The worklows can be run by clicking in the play icon, marked in red in the image.</figcaption></figure>
 
@@ -1469,7 +1458,7 @@ dataset_03    https://zenodo.org/record/6098306/files/HiFi_synthetic_50x_03.fast
                 <h1 id="bibliography">References</h1>
                 <ol class="bibliography"><li id="Simo2015">Simão, F. A., R. M. Waterhouse, P. Ioannidis, E. V. Kriventseva, and E. M. Zdobnov, 2015 <b>BUSCO: assessing genome assembly and annotation completeness with single-copy orthologs</b>. Bioinformatics 31: 3210–3212. <a href="https://doi.org/10.1093/bioinformatics/btv351">10.1093/bioinformatics/btv351</a></li>
 <li id="Guan2019">Guan, D., S. A. McCarthy, J. Wood, K. Howe, Y. Wang <i>et al.</i>, 2019 <b>Identifying and removing haplotypic duplication in primary genome assemblies</b>. <a href="https://doi.org/10.1101/729962">10.1101/729962</a></li>
-<li id="Rhie2021">Rhie, A., S. A. McCarthy, O. Fedrigo, J. Damas, G. Formenti <i>et al.</i>, 2021 <b>Towards complete and error-free genome assemblies of all vertebrate species</b>. Nature 592: 737–746. <a href="https://doi.org/10.1038/s41586-021-03451-0">10.1038/s41586-021-03451-0</a></li>
+<li id="Rhie2021">Rhie, A., B. P. Walenz, S. Koren, and A. M. Phillippy, 2020 <b>Merqury: reference-free quality,  completeness,  and phasing assessment for genome assemblies</b>. Genome Biology 21: <a href="https://doi.org/10.1186/s13059-020-02134-9">10.1186/s13059-020-02134-9</a></li>
 <li id="Lariviere2022">Lariviere, D., A. Ostrovsky, C. Gallardo, A. Syme, L. Abueg <i>et al.</i>, 2022 <b>VGP assembly pipeline</b>. Galaxy Training Network. <a href="https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#Rhie2021">https://training.galaxyproject.org/training-material/topics/assembly/tutorials/vgp_genome_assembly/tutorial.html#Rhie2021</a></li></ol>
                 
 
