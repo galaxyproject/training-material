@@ -1,8 +1,8 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Mass spectrometry: GC-MS analysis with XCMS, RAMClustR, and matchMS'
-zenodo_link: 'https://zenodo.org/record/6878356'
+title: 'Mass spectrometry: GC-MS data processing (with XCMS, RAMClustR, RIAssigner, and matchms)'
+zenodo_link: 'https://zenodo.org/record/7701862'
 questions:
 - What are the main steps of GC-MS data processing for metabolomic analysis?
 - What similarity metrics can be used to compare a pair of mass spectra and what are the differences between them?
@@ -33,7 +33,7 @@ contributors:
 
 The study of metabolites in biological samples is routinely defined as metabolomics and provides the capability to investigate metabolism on a global and relatively unbiased scale in comparison to traditional targeted studies focused on specific pathways of metabolism and a small number of metabolites. The untargeted approach enables to detect thousands of metabolites in hypothesis-generating studies and to link previously unknown metabolites with biologically important roles. There are two major issues in contemporary metabolomics: the first is enormous loads of signal generated during the experiments, and the second is the fact that some metabolites in the studied samples may not be known to us. These obstacles make the task of processing and interpreting the metabolomics data a cumbersome and time-consuming process {% cite Nash2019 %}.
 
-A lot of packages are available for the analysis of GC-MS or LC-MS data. In this tutorial, we focus on open-source solutions integrated within Galaxy framework. In this tutorial, we will learn how to process the data samples and identify the present compounds. For demonstration, we use three GC-EI+-HRMS files from seminal plasma samples.
+A lot of packages are available for the analysis of GC-MS or LC-MS data. In this tutorial, we focus on open-source solutions integrated within Galaxy framework. In this tutorial, we will learn how to process the data samples and identify the present compounds. For demonstration, we use three GC-[EI+]-HRMS files from seminal plasma samples.
 
 To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a general package for untargeted metabolomics profiling. It can be used for any type of mass spectrometry acquisition files from low to high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). We use it to detect peaks within our samples. Once we have detected them, they need to be deconvoluted with focus on consistency across samples. For that, we use **RAMClustR** ({% cite broeckling2014ramclust %}) tool. To normalise the retention time of identified spectra in our sample, we compute retention index using **RIAssigner** ({% cite hecht2022riassigner %}) by comparing the data to well-defined list of alkanes. Finally, we identify detected spectra by aligning them with a database of known compounds. This can be achieved using **MatchMS** ({% cite Huber2020 %}), resulting into a table of identified compounds, weighted by a confidence score.
 
@@ -61,9 +61,9 @@ Before we can start with the actual analysis pipeline, we first need to download
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) into a collection:
 >
 >    ```
->    https://zenodo.org/record/6878356/files/8_qc_no_dil_milliq.raw
->    https://zenodo.org/record/6878356/files/21_qc_no_dil_milliq.raw
->    https://zenodo.org/record/6878356/files/29_qc_no_dil_milliq.raw
+>    https://zenodo.org/record/7701862/files/8_qc_no_dil_milliq.raw
+>    https://zenodo.org/record/7701862/files/21_qc_no_dil_milliq.raw
+>    https://zenodo.org/record/7701862/files/29_qc_no_dil_milliq.raw
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md collection=true format="mzml" collection_name="input" renaming=false %}
@@ -77,7 +77,9 @@ Before we can start with the actual analysis pipeline, we first need to download
 > 4. Import the following extra files from [Zenodo]({{ page.zenodo_link }}):
 >
 >    ```
->    TBA
+>    https://zenodo.org/record/7701862/files/reference_alkanes.csv
+>    https://zenodo.org/record/7701862/files/reference_spectral_library.msp
+>    https://zenodo.org/record/7701862/files/sample_metadata.tsv
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -86,11 +88,11 @@ Before we can start with the actual analysis pipeline, we first need to download
 >
 >    > <comment-title> The extra files </comment-title>
 >    >
->    > The two additional files contain **reference alkanes**, reference spectral library, and sample metadata. The list of alkanes with retention time and carbon number or retention index is used to compute the retention index of the deconvoluted peaks. The alkanes should be measured ideally in the same batch as the input sample collection. A reference spectral library (`.msp`) is used for identification of spectra. 
+>    > The two additional files contain **reference alkanes**, reference spectral library, and sample metadata. The list of alkanes with retention time and carbon number or retention index is used to compute the retention index of the deconvoluted peaks. The alkanes should be measured ideally in the same batch as the input sample collection.
 >    > 
->    > The **spectral library** contains the recorded and annotated mass spectra of compounds which can be detected in the sample and confirmed via comparison with this library. The specific library is the in-house library of metabolite standards. **TODO**: what does it mean?
+>    > The **reference spectral library** (`.msp`) is used for identification of spectra. It contains the recorded and annotated mass spectra of compounds which can be detected in the sample and confirmed via comparison with this library. The specific library is the in-house library of metabolite standards. **TODO**: what does it mean?
 >    > 
->    > **Sample metadata** corresponds to a table containing information about our samples. In particular, it contains sample name, type (QC, blank, sample, etc.), batch number, and injection order.
+>    > The **sample metadata** corresponds to a table containing information about our samples. In particular, it contains sample name, type (QC, blank, sample, etc.), batch number, and injection order.
 >    {: .comment}
 >
 {: .hands_on}
@@ -249,6 +251,8 @@ At this point, the peak list may contain `NA` values when peaks were not conside
 
 The next step is deconvoluting the detected peaks in order to reconstruct the full spectra of the analysed compound. {% tool [RAMClustR](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.2.4+galaxy2) %} is used to group features based on correlations across samples in a hierarchy, focusing on consistency across samples. While a feature typically is derived from a single compound, a spectrum of mass signals is more a more-accurate representation of the mass spectrometric signal for a given metabolite. **RAMClustR** uses a novel grouping method that operates in an unsupervised manner to group signals from MS data into spectra without relying on predictability of the in-source phenomenon.
 
+**TODO** description based on https://pubs.acs.org/doi/10.1021/ac4019268
+
 > <hands-on-title> Peak deconvolution </hands-on-title>
 >
 > 1. {% tool [RAMClustR](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.2.4+galaxy2) %} with the following parameters:
@@ -304,7 +308,7 @@ The spectral data comes as `.msp` file, which is a text file structured accordin
 >
 {: .hands_on}
 
-MSP files can contain one or more mass spectra, these are split by an empty line. The individual spectra essentialy consist of two sections: metadata and peaks. The metadata consists of compound name, spectrum type (which is centroid in this case), ion mode, retention time, and number of *m/z* peaks. If the compound has not been identified as in our case, the *NAME* can be any arbitrary string. It is best however, if that string is unique within that `.msp` file. The metadata fields are usually unordered, so it is quite common for one `.msp` file to contain **NAME** as the first metadata key, and for another `.msp` to have this key somewhere in the middle. The keys themselves also aren't rigid and can have different names (e.g., **compound_name** instead of **NAME**) or store information not present in this `.msp`, such as ionization mode.
+`.msp` files can contain one or more mass spectra, these are split by an empty line. The individual spectra essentialy consist of two sections: metadata and peaks. The metadata consists of compound name, spectrum type (which is centroid in this case), ion mode, retention time, and number of *m/z* peaks. If the compound has not been identified as in our case, the **NAME** can be any arbitrary string. It is best however, if that string is unique within that `.msp` file. The metadata fields are usually unordered, so it is quite common for one `.msp` file to contain **NAME** as the first metadata key, and for another `.msp` to have this key somewhere in the middle. The keys themselves also aren't rigid and can have different names (e.g., **compound_name** instead of **NAME**) or store information not present in this `.msp`, such as ionization mode.
 
 However, as we can observe, the metadata part is rather incomplete. We would like to gather more information about the detected spectra and identify the specific compounds corresponding to them.
 
@@ -323,9 +327,9 @@ We use package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassig
 >        - {% icon param-file %} *"Reference compound list"*: `output` (Input dataset)
 >
 >
->    > <comment-title> Minutes vs seconds </comment-title>
+>    > <comment-title> Minutes vs. seconds </comment-title>
 >    >
->    > TBD
+>    > You might notice that in the last **XCMS** step, we converted the retention times to minutes. However, in this step, we are using seconds again. The reason is that **RAMClustR** converted them internally again to seconds. Regarding the reference compound list, this database has already its retention times in seconds.
 >    {: .comment}
 >
 >    > <comment-title> Kovats method </comment-title>
@@ -340,6 +344,8 @@ We use package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassig
 To identify and annotate the deconvoluted spectra, we compare them with a reference spectral library. This library contains spectra of standards measured on the same instrument for optimal comparability. The **matchMS** package is used for spectral matching. It was build to import and apply different similarity measures to compare large amounts of spectra. This includes common cosine scores, but can also easily be extended by custom measures.
 
 ## Compute similairity scores
+
+> **TODO** how matchms is doing the matching/computing scores (normalised dot product) - peaks must be present in both reference and measured data + describe how it is diff from forward and reverse matching
 
 We use the cosine score with a greedy peak pairing heuristic to compute the number of matching ions with a given tolerance and the cosine scores for the matched peaks.
 
