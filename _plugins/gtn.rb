@@ -137,6 +137,21 @@ module Jekyll
       return str.sub(regex, value_replace)
     end
 
+    def convert_workflow_path_to_trs(str)
+      # Input: topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow1_quality_control.ga
+      # Output /api/ga4gh/trs/v2/tools/metagenomics-mothur-miseq-sop-short/versions/workflow1_quality_control
+      if str.nil?
+        return "GTN_TRS_ERROR_NIL"
+      end
+
+      m = str.match(/topics\/(?<topic>.*)\/tutorials\/(?<tutorial>.*)\/workflows\/(?<workflow>.*)\.ga/)
+      if m
+        puts "str=#{str} m=#{m} #{m[:topic]} #{m[:tutorial]} #{m[:workflow]}"
+        return "/api/ga4gh/trs/v2/tools/#{m[:topic]}-#{m[:tutorial]}/versions/#{m[:workflow]}"
+      end
+      return "GTN_TRS_ERROR"
+    end
+
     def get_default_link(material)
       url = nil
 
