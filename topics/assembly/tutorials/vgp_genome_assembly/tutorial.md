@@ -26,6 +26,9 @@ contributors:
 - pickettbd
 - gf777
 - msozzoni
+abbreviations:
+  primary assembly: test1
+  alternate assembly: test2
 ---
 
 
@@ -42,7 +45,9 @@ Heterozygosity is also an important factor in genome assembly. Haplotype phasing
 
 The G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). This tutorial will guide you step by step to assemble a high-quality genome using the VGP assembly pipeline. 
 
-**NOTE:** Some of your results may slightly differ from results shown in this tutorial, depending on the versions of the tools used, since algorithms can change between versions.
+<warning-title>Your results may differ!</warning-title>
+Some of your results may slightly differ from results shown in this tutorial, depending on the versions of the tools used, since algorithms can change between versions.
+{: .warning}
 
 
 
@@ -61,27 +66,27 @@ Before getting into the thick of things, let's go over some terms you will often
 
 **Pseudohaplotype assembly**: An assembly that consists of long phased haplotype blocks that are separated by blocks where the haplotype cannot be distinguished (often homozygous regions). This can result in "switch errors", where a region of DNA might have a block of maternal sequence, then sequence the same in both haplotypes, and then a block of paternal sequence. These types of assemblies are usually represented by a primary assembly and an alternate assembly. (This definition largely taken from the [NCBI's Genome Assembly Model](https://www.ncbi.nlm.nih.gov/assembly/model/#asmb_def).)
 
-**Primary assembly**:
+**Primary assembly**: The primary assembly is traditionally the more complete representation of an individual's genome, and consists of homozygous regions and one set of loci for heterozygous regions. Because the primary assembly contains both homo- and heterozygous regions, it is more complete than the alternate which might only have alternate alleles for heterozygous regions. Thus, the primary assembly is usually what one would use for downstream analyses.
 
-**Alternate assembly**: The alternate assembly consists of sequences that are an alternate representation of loci in the primary assembly (such as at heterozygous loci). Usually this means the alternate haplotypic representation at a given region. These types of sequences are also referred to as haplotigs.
+**Alternate assembly**: The alternate assembly consists of sequences that are an alternate representation of loci in the primary assembly (such as at heterozygous loci). Usually this means the alternate haplotypic representation at a given region. These types of sequences are also referred to as haplotigs. Traditionally, the alternate assembly is less complete compared to the primary assembly.
 
-**Phasing**:
+**Phasing**: Phasing aims to partition the contigs for an individual according to whether they are sequences from the maternal or the paternal chromosomes. Often this is done by identifying maternal and paternal alleles using read data from the parents. Recent approaches have managed to phase using long-range Hi-C linkage information from the same individual ({% cite Cheng2021 %}). 
 
-**Assembly graph**:
+**Assembly graph**: Sequencing captures the genome as many fragmented pieces, instead of whole entire chromosomes at once (we eagerly await the day when this statement will be outdated!). The start of the assembly process pieces together these genome fragments based on sequence overlap to generate an assembly graph, which is a representation of sequences and their overlaps. Visualizing assembly graphs can show where homozygous regions branch off into alternate paths on different haplotypes.
 
-**Unitig**:
+**Unitig**: A unitig is constructed from a path in the assembly graph where all the vertices have exactly one incoming and one outgoing edge, except the first vertex can have any number of incoming edges, while the last vertex can have any number of outgoing edges ({% cite Rahman2022 %}). In other words, the internal vertices in the unitig path can only be walked one way, so unitigs represent a path of confident sequence. In the assembly graph, unitig nodes can then have overlap edges with other unitigs. 
 
-**Contig**: A contiguous sequence in an assembly. Contigs necessarily do not contain gaps.
+**Contig**: A contiguous sequence in an assembly, usually derived from the unitig graph. Contigs necessarily do not contain gaps.
 
 **False duplicate**: In the context of this tutorial, false duplications are not optical nor technical duplicates from PCR as one might be used to from short read sequencing — rather, this term refers to assembly errors that result in one region of the genome being represented *twice* in the same assembly as two separate regions. False duplications can further be classified as either haplotypic duplications or overlaps.
 
-Haplotypic duplication can happen when a region that is heterozygous in the individual has the two haplotypes showing enough differences from each other that the assembler thinks it's two different regions. For example, say an individual is heterozygous in the region Chr1[1:100] and has Haplotype A from their mother and Haplotype B from their father; a false duplication can arise when the haplotypes are not recognized as being from the same region, and the assembler ends up placing both haplotypes in the same assembly, resulting in Chr1[1:100] being represented twice in one assembly. (Ideally, a properly phased assembly would have Haplotype A in one assembly, *e.g.*, the primary, while Haplotype B is in the other.)
+Haplotypic duplication can happen when a region that is heterozygous in the individual has the two haplotypes showing enough differences from each other that the assembler thinks it's two different regions. For example, say an individual is heterozygous in the region Chr1[1:100] and has Haplotype A from their mother and Haplotype B from their father; a false duplication can arise when the haplotypes are not recognized as being from the same region, and the assembler ends up placing both haplotypes in the same assembly, resulting in Chr1[1:100] being represented twice in one assembly. (Ideally, a properly phased assembly would have Haplotype A in one assembly, *e.g.*, the primary, while Haplotype B is in the alternate.)
 
 False duplications via overlaps result from misassemblies where two different contigs end up representing the same sequence, but not as a result of improper phasing. Overlaps happen when a branching point in an assembly graph is resolved such that the contig before the vertex and a contig after the vertex share the same overlapping sequence.
 
 ![Types of false duplication.](../../images/vgp_assembly/falseduplications.png "Schematic of types of false duplication. Image adapted from {% cite Rhie2021 %}.")
 
-**Purging**:
+**Purging**: Purging aims to remove false duplications, collapsed repeats, and very low coverage regions from an assembly. When performed on a primary assembly, the haplotigs and removed regions are typically placed in the alternate assembly. 
 
 **Scaffold**: A scaffold refers to one or more contigs joined together using additional information, such as Bionano optical maps, linked reads, Hi-C chromatin information, etc. The regions between contigs are usually of unknown sequence, thus they are represented by gaps of N's. Gaps are usually of an arbitrary size assigned by the scaffolding software, but some approaches such as optical maps can create sized gaps. 
 
@@ -93,9 +98,11 @@ For more about the specific scaffolding technologies used in the VGP pipeline (c
 
 **Manual curation**: This term refers to manually evaluating and manipulating an assembly based on Hi-C contact map information using the software PretextView. The user takes into account the Hi-C signal (and potentially supplementary data such as repeat content or coverage tracks) to resolve potential misassemblies and missed joins. 
 
-**Misassembly**:
+**Misassembly**: Misassemblies place together sequences that are not actually adjacent to each other in the real genome, representing an assembly error. Misassemblies can be identified and remedied in manual curation with Hi-C data.
 
-**Telomere-to-telomere assembly**:
+**Missed join**: A missed join happens when two sequences are adjacent to each other in the genome, but are not assembled together (*i.e.*, they are separate contigs). Missed joins can be identified and remedied in manual curation with Hi-C data.
+
+**Telomere-to-telomere assembly**: Often abbreviated as "T2T", this term refers to an assembly that is completely gapless from telomere to telomere. The term usually refers to the recently completed CHM13 human genome ({% cite Nurk2022 %}), though there is an increasing amount of efforts to generate T2T genomes for other species. 
 
 
 # VGP assembly pipeline overview
@@ -445,8 +452,13 @@ Finally, let's parse the `transition between haploid and diploid coverage depths
 
 [{% icon exchange %} Switch to short version]({% link topics/assembly/tutorials/vgp_workflow_training/tutorial.md %}#hifi-phased-assembly-with-hifiasm)
 
-Once we have finished the genome profiling stage, we can start the genome assembly with hifiasm,  a fast open-source *de novo* assembler specifically developed for PacBio HiFi reads.
+NOW WE PICK OPTIONS
 
+{% include _includes/cyoa-choices.html option1="solo" option2="HiC-phased" default="solo"
+       text="Here is why some people choose Ananas. Other times you want Avocados as they fit the menu better." %}
+
+Once we have finished the genome profiling stage, we can start the genome assembly with hifiasm,  a fast open-source *de novo* assembler specifically developed for PacBio HiFi reads.
+<div class = "solo" markdown="1">
 ## Genome assembly with **hifiasm**
 
 One of the key advantages of hifiasm is that it allows us to resolve near-identical, but not exactly identical sequences, such as repeats and segmental duplications ({% cite Cheng2021 %}).
@@ -499,6 +511,10 @@ We have obtained the fully phased contig graphs of the primary and alternate hap
 >
 {: .hands_on}
 
+</div>
+
+<div class="HiC-phased" markdown="1">
+
 ## Initial assembly evaluation
 
 The VGP assembly pipeline contains several built-in QC steps, including QUAST, BUSCO (Benchmarking Universal Single-Copy Orthologs), Merqury, and Pretext. QUAST will generate summary statistics, BUSCO will search for universal single-copy ortholog genes, Merqury will evaluate assembly copy-numbers using *k*-mers, and Pretext will be used to evaluate the assembly contiguity.
@@ -546,6 +562,7 @@ QUAST default pipeline utilizes Minimap2. Functional elements prediction modules
 >
 {: .hands_on}
 
+</div>
     
 Let's have a look at the HTML report generated by QUAST. 
 
