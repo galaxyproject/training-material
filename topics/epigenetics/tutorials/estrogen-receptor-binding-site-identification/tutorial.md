@@ -5,7 +5,7 @@ redirect_from:
 
 title: "Identification of the binding sites of the Estrogen receptor"
 zenodo_link: "https://doi.org/10.5281/zenodo.892432"
-enable: false
+draft: true
 tags:
   - ChIP-seq
 questions:

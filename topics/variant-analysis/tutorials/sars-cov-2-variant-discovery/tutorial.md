@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data
+subtopic: one-health
 level: Intermediate
 zenodo_link: "https://zenodo.org/record/5036687"
 questions:
@@ -24,6 +25,7 @@ contributors:
 - bebatut
 tags:
 - covid19
+- virology
 ---
 
 

@@ -14,7 +14,7 @@ footer: no
 {% assign associated_slides = false %}
 {% assign own_material = null %}
 {% for material in topic_material %}
-    {% if material.enable != "false" or jekyll.environment != "production"  %}
+    {% if material.draft != "true" or jekyll.environment != "production"  %}
         {% if material.tutorial_name == page.tutorial_name %}
             {% assign own_material = material %}
             {% if material.slides  %}
@@ -44,7 +44,7 @@ footer: no
 
 <section class="tutorial topic-{{ page.topic_name }}">
     <h1 data-toc-skip>{{ page.title }}</h1>
-    {% if page.enable == false or page.enable == "false" %}
+    {% if page.draft %}
     <div class="alert alert-warning" role="alert">
         <h4 class="alert-heading">Under Development!</h4>
         <p>This tutorial is not in its final state. The content may change a lot in the next months.
@@ -243,7 +243,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
 
                 {{ content
                     | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">'
-                    | no_translate:site.words_to_not_translate }}
+                    }}
 
                 {% if page.key_points %}
                 <blockquote class="key_points">
@@ -410,7 +410,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                     {% assign topic = site.data[page.topic_name] %}
                     <ol>
                     {% for material in topic_material %}
-                        {% if material.enable != "false" or jekyll.environment != "production" %}
+                        {% if material.draft != true or jekyll.environment != "production" %}
                                 {% if material.hands_on %}
                     <li><a href="{{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.tutorial_name }}/tutorial.html">{{ material.title }}</a></li>
                                 {% elsif material.slides %}

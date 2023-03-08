@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-enable: false
+draft: true
 
 title: De novo transcriptome assembly, annotation, and differential expression analysis
 zenodo_link: 'https://zenodo.org/record/3541678'

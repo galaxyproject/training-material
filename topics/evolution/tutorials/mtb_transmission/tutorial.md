@@ -9,7 +9,7 @@ objectives:
 - Identify transmission clusters based on SNP distances
 - Study the emergence and spread of drug resistance based on transmission analysis.
 time_estimation: 2H
-enable: false
+draft: true
 level : Intermediate
 key_points:
 - Clustering is a useful tool to detect transmission links between patients and oubreak investigation.
