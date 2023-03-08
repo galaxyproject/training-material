@@ -116,7 +116,20 @@ Welcome!
 
 You have two options for how to proceed with this tutorial - either you download the tutorial notebook and run the lines in that notebook, or you can copy and paste the code for each step into a fresh notebook and run it yourself. The initial instructions for both options are below.
 
-> <hands-on-title>Option 1: Downloading the tutorial notebook & Upload</hands-on-title>
+> <hands-on-title>Option 1A: Open the notebook directly in the JupyterLab</hands-on-title>
+>
+> 1. Open a Terminal in JupyterLab with File -> New -> Terminal
+>
+> 2. Run 
+>```
+>wget {{ ipynbpath }}
+>```
+>
+> 3. Select the notebook that appears in the list of files on the left.
+>
+{: .hands_on}
+
+> <hands-on-title>Option 1B: Downloading the tutorial notebook & Upload</hands-on-title>
 >
 > 1. You will need to download the tutorial notebook locally to your own computer. Do this by clicking on {% icon notebook %}`Jupyter notebook` in the `Supporting Materials` section at the very beginning of the tutorial, in the Overview box.
 >
