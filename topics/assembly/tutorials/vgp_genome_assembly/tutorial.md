@@ -45,8 +45,10 @@ Heterozygosity is also an important factor in genome assembly. Haplotype phasing
 
 The G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). This tutorial will guide you step by step to assemble a high-quality genome using the VGP assembly pipeline. 
 
-<warning-title>Your results may differ!</warning-title>
-Some of your results may slightly differ from results shown in this tutorial, depending on the versions of the tools used, since algorithms can change between versions.
+> <warning-title>Your results may differ!</warning-title>
+>
+> Some of your results may slightly differ from results shown in this tutorial, depending on the versions of the tools used, since algorithms can change between versions.
+>
 {: .warning}
 
 
