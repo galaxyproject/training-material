@@ -215,7 +215,7 @@ Parameters:
 
 > ### {% icon question %} Questions
 >
-> 1. Why do we need to fit our peaks to Gaussian shape?
+> 1. Why do we need to fit our peaks to a (in this case Gaussian) shape?
 > 2. Why do we get two standard deviations?
 >
 > > ### {% icon solution %} Solution
@@ -228,6 +228,9 @@ Parameters:
 {: .question}
 
 ## Sub-step with **recetox-aplcms - compute clusters**
+
+pre-alignment step - we put all peaks from all samples to one table and group them based on m/z and rt... for that we can specify parameters which parametrise the "size" of buckets (clusters)
+- all peaks get assignd a cluster_id shared across samples
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -250,19 +253,27 @@ Parameters:
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
+> 1. Can we influence the clustering sensitivity w.r.t. retention time?
 > 2. Question2?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
+> > 1. Yes, use `mz_tol_absolute` parameter.
 > > 2. Answer for question2
 > >
 > {: .solution}
 >
 {: .question}
 
+Output is again separated to individual tables, but with assigned cluster ID.
+
+tolerances - these are values entered in the clustering step - if not provided, they are estimated instead
+
 ## Sub-step with **recetox-aplcms - compute template**
+
+We need a template to which we align the data - this takes peak time which has the highest number of features... gives us the highest number of reference points we fit our curve to. This step can be potentially skipped if you want to select a template manually or provide a custom file used in further steps.
+
+**TODO** add hint how to select single file from collection as input for a tool
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -297,6 +308,8 @@ Parameters:
 {: .question}
 
 ## Sub-step with **recetox-aplcms - correct time**
+
+We need our previously clustered features, selected template and tolerances.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -334,6 +347,8 @@ Parameters:
 
 ## Sub-step with **recetox-aplcms - compute clusters**
 
+second round of grouping... comment on how you can iterativelly combine this steps multiple times, since you still get the same format of outputs etc.
+
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [recetox-aplcms - compute clusters](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_clusters/recetox_aplcms_compute_clusters/0.10.1+galaxy0) %} with the following parameters:
@@ -370,6 +385,10 @@ Parameters:
 
 ## Sub-step with **recetox-aplcms - align features**
 
+kernel density alignment
+
+- `min_occurrence` - how many samples does the feature need to be present in... This way we can filter peaks that appear really consistenly across the samples.
+
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [recetox-aplcms - align features](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_align_features/recetox_aplcms_align_features/0.10.1+galaxy0) %} with the following parameters:
@@ -403,10 +422,21 @@ Parameters:
 >
 {: .question}
 
+Outputs:
+- rt_table - rt for all samples for our features
+- intensity_table - intensities for all samples
+- peak_metadata - all data related to specific peaks that have been detected (enumerate columns), number of peaks that have been grouped together... 
+
 # Unsupervised
 
+**TODO** somehow inspect tables, comment on many gaps
 
 ## Sub-step with **recetox-aplcms - recover weaker signals**
+
+Our tables have many gaps, some features weren't detected in some samples... but it doesn't mean they actually aren't there... so we revisit the data trying to recover them, we do another round of peak picking without any noise filtering, but only on specific place (specified by m/z and rt ranges from already analysed data)
+
+- `recover_min_count` - how many data points need to be there to consider them a peak
+- `bandwidth` - again the same for smoothing
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -448,6 +478,8 @@ Parameters:
 
 ## Sub-step with **recetox-aplcms - compute clusters**
 
+We might have added new features, so we do the clustering again.
+
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [recetox-aplcms - compute clusters](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_compute_clusters/recetox_aplcms_compute_clusters/0.10.1+galaxy0) %} with the following parameters:
@@ -482,6 +514,10 @@ Parameters:
 {: .question}
 
 ## Sub-step with **recetox-aplcms - align features**
+
+Features can now appear in more samples, so we also repeat the alignment step.
+
+These steps can be potentially again repeated and combined (as well as for example combined with retention time correction) in arbitrary number of iterations.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
