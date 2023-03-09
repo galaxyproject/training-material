@@ -62,7 +62,7 @@ The G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is
 >
 {: .agenda}
 
-# Glossary of terms
+# Important terms to know
 
 Before getting into the thick of things, let's go over some terms you will often hear when learning about genome assembly. These concepts will be used often throughout this tutorial as well, so please refer to this section as necessary to help your understanding. 
 
@@ -111,10 +111,10 @@ For more about the specific scaffolding technologies used in the VGP pipeline (c
 
 This training is an adaptation of the VGP assembly pipeline 2.0 (fig. 1).
 
-![Figure 1: VGP pipeline schematic showing steps from genome profiling, to hifiasm contigging, to bionano scaffolding, to HiC scaffolding.](../../images/vgp_assembly/vgp_pipeline_2.0_current.png "VPG Pipeline 2.0. The pipeline starts with reference-free genome profiling using k-mers. Then HiFi reads are assembled into contigs using hifiasm, along with additional phasing data if available. If false duplicates are detected in QC, then the contigs undergo purging. Afterwards, scaffolding takes place with optical maps (if available) and Hi-C data.")
+![Figure 1: VGP pipeline schematic showing steps from genome profiling, to hifiasm contigging, to bionano scaffolding, to HiC scaffolding.](../../images/vgp_assembly/vgp_pipeline_2.0_current.png "VGP Pipeline 2.0. The pipeline starts with reference-free genome profiling using k-mers. Then HiFi reads are assembled into contigs using hifiasm, along with additional phasing data if available. If false duplicates are detected in QC, then the contigs undergo purging. Afterwards, scaffolding takes place with optical maps (if available) and Hi-C data.")
 
-With the aim of making it easier to understand, the training has been organized into four main sections: genome profile analysis, HiFi phased assembly with hifiasm, post-assembly processing and hybrid scaffolding.    
-    
+With the aim of making it easier to understand, the training has been organized into three main sections: genome profile analysis, assembly with hifiasm, and scaffolding. Additionally, the **assembly with hifiasm** section has two possilbe paths in this tutorial: solo contigging or HiC-phased contigging.
+
 # Get data
 
 In order to reduce computation time, we will assemble samples from the yeast _Saccharomyces cerevisiae_ S288C, a widely used laboratory strain isolated in the 1950s by Robert Mortimer. Using _S. cerevisae_, one of the most intensively studied eukaryotic model organisms, has the additional advantage of allowing us to evaluate the final result of our assembly with great precision. For this tutorial, we generated a set of synthetic HiFi reads corresponding to a theoretical diploid genome.
@@ -450,20 +450,28 @@ Finally, let's parse the `transition between haploid and diploid coverage depths
 {: .hands_on}
 
 
-# Assembly with hifiasm
+# Assembly with **hifiasm**
 
 [{% icon exchange %} Switch to short version]({% link topics/assembly/tutorials/vgp_workflow_training/tutorial.md %}#hifi-phased-assembly-with-hifiasm)
 
 Hifiasm can be run in multiple modes depending on data availability.
 
-INCLUDE GRAPHIC HERE
+SOLO:
+![Diagram for hifiasm solo](../../images/vgp_assembly/hifiasm_solo_schematic.png "SOLO SCHEMATIC")
+
+HIC:
+![Diagram for hifiasm hic](../../images/vgp_assembly/hifiasm_hic_schematic.png "HIC SCHEMATIC")
+
+TRIO:
+![Diagram for hifiasm trio](../../images/vgp_assembly/hifiasm_trio_schematic.png "TRIO SCHEMATIC")
 
 {% include _includes/cyoa-choices.html option1="hic" option2="solo" default="hic"
-       text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click SOLO. If you have HiC reads for the same indiviudal, then click HIC-PHASED. NOTE: If you want to learn more about PURGE_DUPS, then please check out the SOLO tutorial for details about running purge_dups." %}
+       text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click SOLO. If you have HiC reads for the same indiviudal, then click HIC-PHASED. NOTE: If you want to learn more about purging, then please check out the SOLO tutorial for details about running purge_dups." %}
 
 Once we have finished the genome profiling stage, we can start the genome assembly with hifiasm,  a fast open-source *de novo* assembler specifically developed for PacBio HiFi reads.
+
 <div class = "hic" markdown="1">
-## Genome assembly with **hifiasm**
+## HiC-phased assembly with **hifiasm**
 
 One of the key advantages of hifiasm is that it allows us to resolve near-identical, but not exactly identical sequences, such as repeats and segmental duplications ({% cite Cheng2021 %}).
 
