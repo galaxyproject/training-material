@@ -29,6 +29,7 @@ contributors:
 abbreviations:
   primary assembly: test1
   alternate assembly: test2
+  BUSCO: Benchmarking Universal Single-Copy Orthologs
 ---
 
 
@@ -524,9 +525,13 @@ We have obtained the fully phased contig graphs of the primary and alternate hap
 {: .hands_on}
 
 
-## Initial assembly evaluation
+## Assembly evaluation
 
-The VGP assembly pipeline contains several built-in QC steps, including QUAST, BUSCO (Benchmarking Universal Single-Copy Orthologs), Merqury, and Pretext. QUAST will generate summary statistics, BUSCO will search for universal single-copy ortholog genes, Merqury will evaluate assembly copy-numbers using *k*-mers, and Pretext will be used to evaluate the assembly contiguity.
+The VGP assembly pipeline contains several built-in QC steps:
+- gfastats ({% cite Formenti2022 %})
+- {BUSCO} ({% cite Simo2015 %})
+- merqury ({% cite Rhie_merqury %})
+- pretext ({% cite Howe2021 %})
 
 > <comment-title>QUAST statistics</comment-title>
 >
@@ -742,7 +747,7 @@ Now, we will segment the draft assembly into contigs by cutting at blocks of *N*
 {: .hands_on}
 
 
-### Resolution of haplotigs and overlaps        
+### Resolution of haplotigs and overlaps
 
 During the final step of the purge_dups pipeline, it will use the self alignments and the cutoffs for identifying the haplotypic duplications.
 
