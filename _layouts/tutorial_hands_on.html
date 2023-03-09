@@ -40,6 +40,12 @@ footer: no
   room: '{{ gitter | remove: "https://gitter.im/" }}'
   };
 </script>
+{% if topic.custom_css %}
+<style>
+{{ topic.custom_css }}
+</style>
+{% endif %}
+
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <section class="tutorial topic-{{ page.topic_name }}">
