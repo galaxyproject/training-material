@@ -450,7 +450,7 @@ Finally, let's parse the `transition between haploid and diploid coverage depths
 {: .hands_on}
 
 
-# Assembly with hifiasm (CYOA: solo, HiC-phased, or trio!)
+# Assembly with hifiasm
 
 [{% icon exchange %} Switch to short version]({% link topics/assembly/tutorials/vgp_workflow_training/tutorial.md %}#hifi-phased-assembly-with-hifiasm)
 
