@@ -247,6 +247,16 @@ At this point, the peak list may contain `NA` values when peaks were not conside
 
 The next step is deconvoluting the detected peaks in order to reconstruct the full spectra of the analysed compound. {% tool [RAMClustR](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.2.4+galaxy2) %} is used to group features based on correlations across samples in a hierarchy, focusing on consistency across samples. While a feature typically is derived from a single compound, a spectrum of mass signals is more a more-accurate representation of the mass spectrometric signal for a given metabolite. **RAMClustR** uses a novel grouping method that operates in an unsupervised manner to group signals from MS data into spectra without relying on predictability of the in-source phenomenon.
 
+> <details-title> RAMClust method </details-title>
+> 
+> The RAMclust similarity scoring utilizes a Gaussian function, allowing flexibility in tuning correlational and retention time similarity decay rates independently, based on the dataset and the acquisition instrumentation. The correlational relationship between two features can be described by either MS-MS, MS-idMS/MS, or idMS/MS-idMS/MS values, and we support several correlation methods (e.g. Pearson’s method) to calculate similarity. These are parametrised by `sigma_t` and `sigma_r`, Gaussian tuning parameters of retention time similarity and correlational score, respectively, between feature pairs.
+> 
+> Similarities are then converted to dissimilarities for clustering. The similarity matrix is then clustered using average or complete linkage hierarchical clustering. The dendrogram is cut using the `cutreeDynamicTree` function from the package `dynamicTreeCut`. For this application, the minimum module size is set to 2, dictating that only clusters with two or more features are returned, as singletons are impossible to interpret intelligently.
+> 
+> Cluster membership, in conjunction with the abundance values from individual features in the input data, are used to create spectra. Mass is derived from the feature mass, and the abundance for each mass in the spectrum is derived from the weighted mean of the intensity values for that feature. These spectra are then exported as an `.msp` formatted file, which can be directly imported by **NIST MSsearch**, or used as input for **MassBank** or **NIST msPepSearch** batch searching. Finally, the cluster membership is used to create a third dataset, SpecData, which represented the MS level data after condensing feature intensities into spectral intensities using a weighted mean function, where the more abundant signals contribute more to the spectral intensity.
+>
+{: .details}
+
 **TODO** description based on https://pubs.acs.org/doi/10.1021/ac4019268
 
 > <hands-on-title> Peak deconvolution </hands-on-title>
@@ -264,7 +274,7 @@ The next step is deconvoluting the detected peaks in order to reconstruct the fu
 >
 {: .hands_on}
 
-The spectral data comes as `.msp` file, which is a text file structured according to the **NIST Search** spectra format. `.msp` is one of the generally accepted formats for mass spectra representations and it is compatible with lots of spectra processing programms (MS-DIAL, NIST MS Search, AMDIS, etc.). Because `.msp` files are text-based, they can be viewed as simple `txt` files. You can use any text editor that you have on your computer or use Galaxy built-in editor. In this tutorial we use the Galaxy editor to check the contents of the file:
+The spectral data comes as `.msp` file, which is a text file structured according to the **NIST MSSearch** spectra format. `.msp` is one of the generally accepted formats for mass spectra representations and it is compatible with lots of spectra processing programms (MS-DIAL, NIST MS Search, AMDIS, etc.). Because `.msp` files are text-based, they can be viewed as simple `txt` files. You can use any text editor that you have on your computer or use Galaxy built-in editor. In this tutorial we use the Galaxy editor to check the contents of the file:
 
 > <hands-on-title> Data Exploration </hands-on-title>
 >
