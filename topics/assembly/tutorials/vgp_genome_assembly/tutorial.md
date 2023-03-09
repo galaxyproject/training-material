@@ -111,7 +111,7 @@ For more about the specific scaffolding technologies used in the VGP pipeline (c
 
 This training is an adaptation of the VGP assembly pipeline 2.0 (fig. 1).
 
-![Figure 1: VGP pipeline](../../images/vgp_assembly/VGP_Pipeline.png "VPG Pipeline 2.0. The pipeline starts with assembly of the HiFi reads into contigs, yielding the primary and alternate assemblies. Then, duplicated and erroneously assigned contigs will be removed by using purge_dups. Finally, Bionano optical maps and HiC data are used to generate a scaffolded primary assembly.")
+![Figure 1: VGP pipeline schematic showing steps from genome profiling, to hifiasm contigging, to bionano scaffolding, to HiC scaffolding.](../../images/vgp_assembly/vgp_pipeline_2.0_current.png "VPG Pipeline 2.0. The pipeline starts with reference-free genome profiling using k-mers. Then HiFi reads are assembled into contigs using hifiasm, along with additional phasing data if available. If false duplicates are detected in QC, then the contigs undergo purging. Afterwards, scaffolding takes place with optical maps (if available) and Hi-C data.")
 
 With the aim of making it easier to understand, the training has been organized into four main sections: genome profile analysis, HiFi phased assembly with hifiasm, post-assembly processing and hybrid scaffolding.    
     
