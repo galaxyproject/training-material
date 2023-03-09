@@ -121,9 +121,9 @@ You have two options for how to proceed with this tutorial - either you download
 > 1. Open a Terminal in JupyterLab with File -> New -> Terminal
 >
 > 2. Run 
->```
->wget {{ ipynbpath }}
->```
+>    ```
+>    wget {{ ipynbpath }}
+>    ```
 >
 > 3. Select the notebook that appears in the list of files on the left.
 >
