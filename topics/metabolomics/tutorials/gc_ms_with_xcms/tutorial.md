@@ -90,7 +90,7 @@ Before we can start with the actual analysis pipeline, we first need to download
 >    > 
 >    > The **reference spectral library** (`.msp`) is used for identification of spectra. It contains the recorded and annotated mass spectra of compounds which can be detected in the sample and confirmed via comparison with this library. The specific library is the in-house library of metabolite standards. **TODO**: what does it mean?
 >    > 
->    > The **sample metadata** corresponds to a table containing information about our samples. In particular, it contains sample name, type (QC, blank, sample, etc.), batch number, and injection order.
+>    > The **sample metadata** corresponds to a table containing information about our samples. In particular, it contains sample name, class (QC, blank, sample, etc.), batch number, and injection order.
 >    {: .comment}
 >
 {: .hands_on}
@@ -365,8 +365,7 @@ We use the cosine score with a greedy peak pairing heuristic to compute the numb
 
 > <details-title> Cosine score methods </details-title>
 >
-> One of the most common methods to compute similarity score between two spectra is computing the cosine of the *angle* between them. Each spectrum can be represented as a vector with an axis along each of its *m/z* values. Then the cosine of the angle is basically a normalised *dot product* of these two vectors. Intensity and *m/z* weighting corrections have been used to optimize performance. For
-example, higher mass peaks can be given greater weight since they are more discriminating than lower mass peaks. *Reverse* scores assign no weight to peaks present only in the measured sample spectrum, under the assumption that they arise from impurities.
+> One of the most common methods to compute similarity score between two spectra is computing the cosine of the *angle* between them. Each spectrum can be represented as a vector with an axis along each of its *m/z* values. Then the cosine of the angle is basically a normalised *dot product* of these two vectors. Intensity and *m/z* weighting corrections have been used to optimize performance. For example, higher mass peaks can be given greater weight since they are more discriminating than lower mass peaks. *Reverse* scores assign no weight to peaks present only in the measured sample spectrum, under the assumption that they arise from impurities.
 >
 {: .details}
 
@@ -378,7 +377,7 @@ example, higher mass peaks can be given greater weight since they are more discr
 >        - {% icon param-file %} *"Reference spectra"*: `reference_spectral_library.msp` (downloaded file from Zenodo)
 >    - In *"Algorithm Parameters"*:
 >        - *"tolerance"*: `0.03`
->    - *"Apply RI filtering"*: `Yes`
+>    - *"Apply RI filtering"*: `Yes` (we use this since our data is GC)
 >
 >    > <comment-title> Used reference spectra </comment-title>
 >    > The RECETOX Metabolome HR-[EI+]-MS library is a collection of mostly endogoenous compounds from MetaSci Human Metabolite Library. Analytes underwent methoximation/silylation prior to acquisition. Spectra were acquired at 70 eV on Thermo Fisher Q Exactive™ GC Orbitrap™ GC-MS/MS at 60000 resolving power.
