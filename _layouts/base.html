@@ -44,6 +44,11 @@
     <body data-spy="scroll" data-target="#toc">
         <script type="text/javascript" src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
         {% include _includes/default-header.html %}
+        {% if topic.custom_css %}
+        <style>
+        {{ topic.custom_css }}
+        </style>
+        {% endif %}
         <div class="container main-content" role="main">
         {{ content }}
         </div>
