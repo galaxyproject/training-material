@@ -245,9 +245,9 @@ Before moving to the transcriptome assembly and quantification step, we are goin
 
 ## RNA-seq specific quality control metrics with **RSeQC**
 
-<!-- Needs to be edited! -->
+RNA-seq-specific quality control metrics, such as sequencing depth, read distribution and coverage uniformity, are essential to ensure that the RNA-seq data are adequate for transcriptome reconstruction and alternative splicing analysis. For example, the use of RNA-seq with unsaturated sequencing depth gives imprecise estimations  and fails to detect low abundance splice junctions, limiting the precision of many analyses ({% cite Wang2012 %}).
 
-Current RNA-seq protocols still possess several intrinsic biases and limitations, such as nucleotide composition bias, GC bias and PCR bias. These biases directly affect the accuracy of many RNA-seq applications and can be directly checked from raw sequences using tools like FastQC. However, these raw sequence-based metrics are not sufficient to ensure the usability of RNA-seq data; other RNA-seq-specific quality control (QC) metrics, such as sequencing depth, read distribution and coverage uniformity, are even more important. For instance, sequencing depth must be saturated before carrying out many RNA-seq applications, including expression profiling, alternative splicing analysis, novel isoform identification and transcriptome reconstruction. The use of RNA-seq with unsaturated sequencing depth gives imprecise estimations (such as for RPKM and splicing index) and fails to detect low abundance splice junctions, thereby limit the precision of many analyses {% cite Wang2012 %}.
+In this section we will make use of of the **RSeQC** toolkit in order to generate the RNA-seq-specific quality control metrics. But before starting, we need to convert the annotation GTF file into BED12 format, which will be required in subsequent steps.
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -258,11 +258,15 @@ Current RNA-seq protocols still possess several intrinsic biases and limitations
 >
 {: .hands_on}
 
-### RNA-seq configuration analysis with **Infer Experiment**
+We are going to use the following RSeQC modules:
 
-<!-- Needs to be edited -->
+- **Infer Experiment**: inference of RNA-seq configuration
+- **Gene Body Coverage**: compute read coverage over gene bodies
+- **Junction Saturation**: check junction saturation
+- **Junction Annotation**: compares detected splice junctions to a reference gene model
+- **Read Distribution**: calculates how mapped reads are distributed over genome features
 
-This program is used to “guess” how RNA-seq sequencing were configured, particulary how reads were stranded for strand-specific RNA-seq data, through comparing the “strandness of reads” with the “standness of transcripts”.
+Once all required outputs have been generated, we will integrate them by using **MultiQC** in order to interpretate the results.
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -270,84 +274,27 @@ This program is used to “guess” how RNA-seq sequencing were configured, part
 >    - {% icon param-file %} *"Input BAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
 >    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
 >
-{: .hands_on}
-
-### Read coverage over gene bodies  with **Gene Body Coverage (BAM)**
-
-<!-- Needs to be edited -->
-
-Gene Body Coverage calculates read coverage over gene bodies. This is used to check if reads coverage is uniform and if there is any 5' or 3' bias.
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Gene body coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.1+galaxy1) %} with the following parameters:
+> 2. {% tool [Gene body coverage (BAM)](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/5.0.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input BAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
 >    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
 >
-{: .hands_on}
-
-### Sequencing depth analysis with **Junction Saturation**
-
-<!-- Needs to be edited -->
-
-It’s very important to check if current sequencing depth is deep enough to perform alternative splicing analyses. For a well annotated organism, the number of expressed genes in particular tissue is almost fixed so the number of splice junctions is also fixed. The fixed splice junctions can be predetermined from reference gene model. All (annotated) splice junctions should be rediscovered from a saturated RNA-seq data, otherwise, downstream alternative splicing analysis is problematic because low abundance splice junctions are missing. This module checks for saturation by resampling 5%, 10%, 15%, …, 95% of total alignments from BAM or SAM file, and then detects splice junctions from each subset and compares them to reference gene model.
-
- The junction saturation test is very important for alternative splicing analysis, as using an unsaturated sequencing depth would miss many rare splice junctions {% cite Wang2012 %}.
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Junction Saturation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_saturation/5.0.1+galaxy1) %} with the following parameters:
+> 3. {% tool [Junction Saturation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_saturation/5.0.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input BAM/SAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
 >    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
 >    - *"Sampling bounds and frequency"*: `Default sampling bounds and frequency`
 >    - *"Output R-Script"*: `Yes`
 >
-{: .hands_on}
-
-### Splice junction classification with **Junction Annotation**
-
-<!-- Needs to be edited -->
-
-It separates all detected splice junctions into ‘known’, ‘complete novel’ and ‘partial novel’ by comparing them with the reference gene model {% cite Wang2012 %}.
-
-It compare detected splice junctions to reference gene model. splicing annotation is performed in two levels: splice event level and splice junction level.
-
-- Splice read: An RNA read, especially long read, can be spliced more than once, therefore, 100 spliced reads can produce >= 100 splicing events.
-- Splice junction: multiple splicing events spanning the same intron can be consolidated into one splicing junction.
-
-Detected junctions were divided to 3 exclusive categories:
-
-- Annotated (known): The junction is part of the gene model. Both splice sites, 5’ splice site (5’SS) and 3’splice site (3’SS) are annotated by reference gene model.
-- Complete_novel: Both 5’SS and 3’SS are novel.
-- Partial_novel: One of the splice site (5’SS or 3’SS) is novel, and the other splice site is annotated.
-
-> <hands-on-title> Task description </hands-on-title>
+> 4. {% tool [Junction Annotation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_annotation/5.0.1+galaxy1) %} with the following parameters:
+>    - {% icon param-file %} *"Input BAM/SAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
+>    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
 >
-> 1. {% tool [Junction Annotation](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_junction_annotation/5.0.1+galaxy1) %} with the following parameters:
+> 5. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input BAM/SAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
 >    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
 >
 {: .hands_on}
 
-
-
-### Genome features analysis with **Read Distribution**
-
-<!-- Needs to be edited -->
-
-Provided a BAM/SAM file and reference gene model, this module will calculate how mapped reads were distributed over genome feature (like CDS exon, 5’UTR exon, 3’ UTR exon, Intron, Intergenic regions). When genome features are overlapped (e.g. a region could be annotated as both exon and intron by two different transcripts) , they are prioritize as: CDS exons > UTR exons > Introns > Intergenic regions, for example, if a read was mapped to both CDS exon and intron, it will be assigned to CDS exons.
-
-> <hands-on-title> Task description </hands-on-title>
->
-> 1. {% tool [Read Distribution](toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/5.0.1+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input BAM/SAM file"*: `mapped_reads` (output of **RNA STAR** {% icon tool %})
->    - {% icon param-file %} *"Reference gene model"*: `bed_file` (output of **Convert GTF to BED12** {% icon tool %})
->
-{: .hands_on}
-
-
-
-### Aggregate results with **MultiQC**
+Now, we will integrate the outputs into **MultiQC**.
 
 > <hands-on-title> Task description </hands-on-title>
 >
@@ -387,6 +334,49 @@ Provided a BAM/SAM file and reference gene model, this module will calculate how
 >                        - *"Type of RSeQC output?"*: `Gene body coverage`
 >
 {: .hands_on}
+
+### RNA-seq configuration analysis with **RSeQC Infer Experiment**
+
+This program is used to “guess” how RNA-seq sequencing were configured, particulary how reads were stranded for strand-specific RNA-seq data, through comparing the “strandness of reads” with the “standness of transcripts”.
+
+
+### Read coverage over gene bodies  with **RSeQC Gene Body Coverage**
+
+Gene Body Coverage calculates read coverage over gene bodies. This is used to check if reads coverage is uniform and if there is any 5' or 3' bias.
+
+### Sequencing depth analysis with **RSeQC Junction Saturation**
+
+It’s very important to check if current sequencing depth is deep enough to perform alternative splicing analyses. For a well annotated organism, the number of expressed genes in particular tissue is almost fixed so the number of splice junctions is also fixed. The fixed splice junctions can be predetermined from reference gene model. All (annotated) splice junctions should be rediscovered from a saturated RNA-seq data, otherwise, downstream alternative splicing analysis is problematic because low abundance splice junctions are missing. This module checks for saturation by resampling 5%, 10%, 15%, …, 95% of total alignments from BAM or SAM file, and then detects splice junctions from each subset and compares them to reference gene model.
+
+The junction saturation test is very important for alternative splicing analysis, as using an unsaturated sequencing depth would miss many rare splice junctions {% cite Wang2012 %}.
+
+### Splice junction classification with **RSeQC Junction Annotation**
+
+<!-- Needs to be edited -->
+
+It separates all detected splice junctions into ‘known’, ‘complete novel’ and ‘partial novel’ by comparing them with the reference gene model {% cite Wang2012 %}.
+
+It compare detected splice junctions to reference gene model. splicing annotation is performed in two levels: splice event level and splice junction level.
+
+- Splice read: An RNA read, especially long read, can be spliced more than once, therefore, 100 spliced reads can produce >= 100 splicing events.
+- Splice junction: multiple splicing events spanning the same intron can be consolidated into one splicing junction.
+
+Detected junctions were divided to 3 exclusive categories:
+
+- Annotated (known): The junction is part of the gene model. Both splice sites, 5’ splice site (5’SS) and 3’splice site (3’SS) are annotated by reference gene model.
+- Complete_novel: Both 5’SS and 3’SS are novel.
+- Partial_novel: One of the splice site (5’SS or 3’SS) is novel, and the other splice site is annotated.
+
+### Genome features analysis with **RSeQC Read Distribution**
+
+<!-- Needs to be edited -->
+
+Provided a BAM/SAM file and reference gene model, this module will calculate how mapped reads were distributed over genome feature (like CDS exon, 5’UTR exon, 3’ UTR exon, Intron, Intergenic regions). When genome features are overlapped (e.g. a region could be annotated as both exon and intron by two different transcripts) , they are prioritize as: CDS exons > UTR exons > Introns > Intergenic regions, for example, if a read was mapped to both CDS exon and intron, it will be assigned to CDS exons.
+
+
+### Aggregate results with **MultiQC**
+
+
 
 ![figX:Mapping general stats](../../images/differential_isoform/mapping_general_statistics.png "Mapping general stats")
 
