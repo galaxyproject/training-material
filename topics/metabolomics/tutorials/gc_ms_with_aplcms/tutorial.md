@@ -134,6 +134,16 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **recetox-aplcms - remove noise**
 
+intensity is droping over time in the experiment, we want to normalise this and remove noise
+
+Parameters
+- `min_pres` - in how many consequent scans do we want to have the signal present
+  - e.g. data point show up only every 3 scans for 10 seconds, this setting can filter it out
+  - we can't set the maximum at this point
+- `min_run` - length of elution time (seconds) - what has to be the minimum width of a peak to it be considered a peak
+- `mz_tol` - ppm tolerance, helps us what is still considered as one signal, width of m/z peak
+- `baseline` - intensity cutoff you want to use
+
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [recetox-aplcms - remove noise](toolshed.g2.bx.psu.edu/repos/recetox/recetox_aplcms_remove_noise/recetox_aplcms_remove_noise/0.10.1+galaxy0) %} with the following parameters:
@@ -154,19 +164,35 @@ A big step can have several subsections or sub steps:
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Can we provide some numerical intervals for input parameters?
+> 2. Is the data filtered also on retention time?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Not really, because they are very instrument and data specific.
+> > 2. Yes, and it can be adjusted with the `min_run` parameter.
 > >
 > {: .solution}
 >
 {: .question}
 
+Output is in the `.parquet` format, just a binary (more accurate yet smaller in size) representation of tabular format. We would loose accuracy by storing it in text format. In the table we have our filtered data, already preliminary grouped on m/z basis - within the ppm tolerance we chose. 
+
 ## Sub-step with **recetox-aplcms - generate feature table**
+
+Peaks detection
+- we want to fit peak shapes to our data, this allows us to compute precise intensities
+- this also resolves peak overlaps, by fitting them both as separate peaks
+- this then ofc does work with centroid data (there we dont have the peak shapes anymore, just some "averages" of them)
+
+This tool takes the grouped features from the previous step and computes the peak shape in retention time domain and then integrates the peak area
+
+
+Parameters:
+- `sd_cut_min/max` - here we can now specify the maximum and minimum peak width by selecting allowed range for standard deviation (either side)
+- `sigma_ratio_lim_min/max` - ratio (sd1 divided by sd2) between standard deviations
+  **TODO** can we add a picture explainig its effects?
+- `bandwidth` - to improve the peak shape by smoothing
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -189,13 +215,13 @@ A big step can have several subsections or sub steps:
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why do we need to fit our peaks to Gaussian shape?
+> 2. Why do we get two standard deviations?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. This allows us to precisely compute the area under the curve and get precise intensity.
+> > 2. two standard deviations (sd1, sd2) because we use bi-Gausian shape (the sides of the shape can be different). if they would be same, then its Gaussian
 > >
 > {: .solution}
 >
