@@ -458,11 +458,11 @@ Hifiasm can be run in multiple modes depending on data availability.
 
 INCLUDE GRAPHIC HERE
 
-{% include _includes/cyoa-choices.html option1="solo" option2="hic" option3="trio" default="solo"
-       text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click SOLO. If you have HiC reads for the same indiviudal, then click HIC-PHASED. If you have parental reads for the parents of the individual, then click TRIO.\nNOTE: If you want to learn more about PURGE_DUPS, then please check out the SOLO tutorial." %}
+{% include _includes/cyoa-choices.html option1="hic" option2="solo" default="hic"
+       text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click SOLO. If you have HiC reads for the same indiviudal, then click HIC-PHASED. NOTE: If you want to learn more about PURGE_DUPS, then please check out the SOLO tutorial for details about running purge_dups." %}
 
 Once we have finished the genome profiling stage, we can start the genome assembly with hifiasm,  a fast open-source *de novo* assembler specifically developed for PacBio HiFi reads.
-<div class = "solo" markdown="1">
+<div class = "hic" markdown="1">
 ## Genome assembly with **hifiasm**
 
 One of the key advantages of hifiasm is that it allows us to resolve near-identical, but not exactly identical sequences, such as repeats and segmental duplications ({% cite Cheng2021 %}).
@@ -967,14 +967,10 @@ Finally, the BUSCO's summary image (fig. 10c) shows that most of the universal s
 </div>
 
 
-<div class="hic" markdown="1">
-HIC PHASED PLACEHOLDER
+<div class="solo" markdown="1">
+SOLO PLACEHOLDER
 </div>
 
-
-<div class="trio" markdown="1">
-TRIO PLACEHOLDER
-</div>
 
 
     
