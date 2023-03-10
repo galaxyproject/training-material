@@ -407,11 +407,11 @@ If you have the {Hi-C} data for the individual you are assembling with {HiFi} re
 >
 {: .hands_on}
 
-We have obtained the fully phased contig graphs (as {GFA} files) of hap1 and hap2, but these must be converted to FASTA format for subsequent steps.
+We have obtained the fully phased contig graphs (as {GFA} files) of hap1 and hap2, but these must be converted to FASTA format for subsequent steps. We will use a tool developed from the VGP: **gfastats**. gfastats is a tool suite that allows for manipulation and evaluation of FASTA and GFA files, but in this instance we will use it to convert our GFAs to FASTA files. Later on we will use it to generate standard summary statistics for our assemblies.
 
 > <hands-on-title>convert GFA to FASTA</hands-on-title>
 >
-> 1. {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2) %} with the following parameters:
+> 1. {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
 >    - {% icon param-files %} *"Input GFA file"*: select `Hap1 contigs graph` and the `Hap2 contigs graph` datasets
 >
 >    > <tip-title>Select multiple datasets</tip-title>
@@ -426,14 +426,12 @@ We have obtained the fully phased contig graphs (as {GFA} files) of hap1 and hap
 >
 {: .hands_on}
 
-
 ## Assembly evaluation
 
 The VGP assembly pipeline contains several built-in QC steps:
-- gfastats ({% cite Formenti2022 %})
-- {BUSCO} ({% cite Simo2015 %})
-- merqury ({% cite Rhie_merqury %})
-- pretext ({% cite Howe2021 %})
+- gfastats: manipulation & evaluation of assembly graphs and FASTA files, particularly used for summary statistics (*e.g.*, contig count, N50, NG50, etc.) ({% cite Formenti2022 %}).
+- {BUSCO}: assesses completeness of a genome from an evolutionarily informed functional point of view. BUSCO genes are genes that are expected to be present at single-copy in one haplotype for a certain clade, so their presence, absence, or duplication can inform scientists about if an assembly is likely missing important regions, or if it has multiple copies of them, which can indicate a need for purging ({% cite Simo2015 %}).
+- Merqury: reference-free assessment of assembly completeness and phasing based on *k*-mers. Merqury compares *k*-mers in the reads to the *k*-mers found in the assemblies, as well as the copy number of each *k*-mer in the assemblies ({% cite Rhie_merqury %}).
 
 > <comment-title>QUAST statistics</comment-title>
 >
