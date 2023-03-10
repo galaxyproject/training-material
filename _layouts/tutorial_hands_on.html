@@ -175,7 +175,7 @@ footer: no
                      {% capture ipynbpathsimplenosoln %}{{ page.topic_name }}-{{ own_material.tutorial_name }}-course.ipynb{% endcapture %}
                     {% if own_material.notebook.snippet %}
                         {% assign pagesnippet = own_material.notebook.snippet %}
-                        {% snippet pagesnippet %}
+                        {% snippet {{own_material.notebook.snippet}} %}
                     {% elsif own_material.notebook.language ==  "r" %}
                         <blockquote class="comment">
                             <div class="box-title" aria-label="comment box">{{locale['best-in-rstudio'] | default: "Best viewed in RStudio" }}</div>
