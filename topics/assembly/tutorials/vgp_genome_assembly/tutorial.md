@@ -353,31 +353,6 @@ This distribution is the result of the Poisson process underlying the generation
 
 Once we have finished the genome profiling stage, we can start the genome assembly with hifiasm,  a fast open-source *de novo* assembler specifically developed for PacBio HiFi reads. One of the key advantages of hifiasm is that it allows us to resolve near-identical, but not exactly identical sequences, such as repeats and segmental duplications ({% cite Cheng2021 %}).
 
-Hifiasm can be run in multiple modes depending on data availability:
-
-**Solo**: generates a pseudohaplotype assembly, resulting in a primary & an alternate assembly (fig. 5). 
-- _Input: only HiFi reads_
-- _Output: scaffolded primary assembly, and alternate contigs_
-![Diagram for hifiasm solo mode.](../../images/vgp_assembly/hifiasm_solo_schematic.png "The solo pipeline creates primary and alternate contigs, which then typically undergo purging with purge_dups to reconcile the haplotypes. During the purging process, haplotigs are removed from the primary assembly and added to the alternate assembly, which is then purged to generate the final alternate set of contigs. The purged primary contigs are then carried through scaffolding with Bionano and/or Hi-C data, resulting in one final draft primary assembly to be sent to manual curation.")
-
-**Hi-C-phased**: generates a hap1 assembly and a hap2 assembly, which are phased using the {Hi-C} reads from the same individual (fig. 6). 
-- _Input: HiFi & HiC reads_
-- _Output: scaffolded hap1 assembly, and scaffolded hap2 assembly (assuming you run the scaffolding on **both** haplotypes)_
-![Diagram for hifiasm hic mode.](../../images/vgp_assembly/hifiasm_hic_schematic.png "The Hi-C-phased mode produces hap1 and hap2 contigs, which have been phased using the HiC information as described in {% cite Cheng2021 %}. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded separately using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
-
-**Trio**: generates a maternal assembly and a paternal assembly, which are phased using reads from the parents (fig. 7). 
-- _Input: HiFi reads from child, Illumina reads from both parents._
-- _Output: scaffolded maternal assembly, and scaffolded paternal assembly (assuming you run the scaffolding on **both** haplotypes)_
-![Diagram for hifiasm trio mode.](../../images/vgp_assembly/hifiasm_trio_schematic.png "The trio mode produces maternal and paternal contigs, which have been phased using paternal short read data. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded separately using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
-
-{% include _includes/cyoa-choices.html option1="hic" option2="solo" default="hic"
-       text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click <b><i>solo</i></b>. If you have HiC reads for the same indiviudal, then click <b><i>hic</i></b>. <b>NOTE: If you want to learn more about purging, then please check out the <i>solo</i> tutorial for details purging false duplications.</b>" %}
-
-
-<div class = "hic" markdown="1">
-
-## HiC-phased assembly with **hifiasm**
-
 > <details-title>Hifiasm algorithm details</details-title>
 >
 > By default hifiasm performs three rounds of haplotype-aware error correction to correct sequence errors but keeping heterozygous alleles. A position on the target read to be corrected is considered informative if there are two different nucleotides at that position in the alignment, and each allele is supported by at least three reads.
@@ -388,7 +363,34 @@ Hifiasm can be run in multiple modes depending on data availability:
 >
 {: .details}
 
-> <hands-on-title>Phased assembly with <b>hifiasm</b></hands-on-title>
+Hifiasm can be run in multiple modes depending on data availability:
+
+**Solo**: generates a pseudohaplotype assembly, resulting in a primary & an alternate assembly (fig. 5). 
+- _Input: only HiFi reads_
+- _Output: scaffolded primary assembly, and alternate contigs_
+![Diagram for hifiasm solo mode.](../../images/vgp_assembly/hifiasm_solo_schematic.png "The <b>solo</b> pipeline creates primary and alternate contigs, which then typically undergo purging with purge_dups to reconcile the haplotypes. During the purging process, haplotigs are removed from the primary assembly and added to the alternate assembly, which is then purged to generate the final alternate set of contigs. The purged primary contigs are then carried through scaffolding with Bionano and/or Hi-C data, resulting in one final draft primary assembly to be sent to manual curation.")
+
+**Hi-C-phased**: generates a hap1 assembly and a hap2 assembly, which are phased using the {Hi-C} reads from the same individual (fig. 6). 
+- _Input: HiFi & HiC reads_
+- _Output: scaffolded hap1 assembly, and scaffolded hap2 assembly (assuming you run the scaffolding on **both** haplotypes)_
+![Diagram for hifiasm hic mode.](../../images/vgp_assembly/hifiasm_hic_schematic.png "The <b>Hi-C-phased</b> mode produces hap1 and hap2 contigs, which have been phased using the HiC information as described in {% cite Cheng2021 %}. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded <i>separately</i> using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
+
+**Trio**: generates a maternal assembly and a paternal assembly, which are phased using reads from the parents (fig. 7). 
+- _Input: HiFi reads from child, Illumina reads from both parents._
+- _Output: scaffolded maternal assembly, and scaffolded paternal assembly (assuming you run the scaffolding on **both** haplotypes)_
+![Diagram for hifiasm trio mode.](../../images/vgp_assembly/hifiasm_trio_schematic.png "The <b>trio</b> mode produces maternal and paternal contigs, which have been phased using paternal short read data. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded <i>separately</i> using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
+
+{% include _includes/cyoa-choices.html option1="hic" option2="solo" default="hic"
+       text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click <b><i>solo</i></b>. If you have HiC reads for the same indiviudal, then click <b><i>hic</i></b>. <b>NOTE: If you want to learn more about purging, then please check out the <i>solo</i> tutorial for details purging false duplications.</b>" %}
+
+
+<div class = "hic" markdown="1">
+
+## HiC-phased assembly with **hifiasm**
+
+gsfagasdfga
+
+> <hands-on-title>Hi-C-phased assembly with <b>hifiasm</b></hands-on-title>
 >
 > 1. {% tool [Hifiasm](toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.14+galaxy0) %} with the following parameters:
 >    - *"Assembly mode"*: `Standard`
@@ -569,17 +571,7 @@ The black region in the left side corresponds to k-mers found only in the read s
 
 ## Pseudohaplotype assembly with **hifiasm**
 
-> <details-title>Hifiasm algorithm details</details-title>
->
-> By default hifiasm performs three rounds of haplotype-aware error correction to correct sequence errors but keeping heterozygous alleles. A position on the target read to be corrected is considered informative if there are two different nucleotides at that position in the alignment, and each allele is supported by at least three reads.
->
-> ![Figure 4: Hifiasm algorithm overview](../../images/vgp_assembly/hifiasm_algorithm.png "Hifiasm algorithm overview. Orange and blue bars represent the reads with heterozygous alleles carrying local phasing information, while green bars come from the homozygous regions without any heterozygous alleles.")
->
-> Then, hifiasm builds a phased assembly string graph with local phasing information from the corrected reads. Only the reads coming from the same haplotype are connected in the phased assembly graph. After transitive reduction, a pair of heterozygous alleles is represented by a _bubble_ in the string graph. If there is no additional data, hifiasm arbitrarily selects one side of each bubble and outputs a primary assembly. In the case of a heterozygous genome, the primary assembly generated at this step may still retain haplotigs from the alternate allele.
->
-{: .details}
-
-
+dfgsdfgsdf
 
 ### Parsing **purge_dups** cutoffs from **GenomeScope2** output
 
@@ -1023,7 +1015,7 @@ Hi-C is a sequencing-based molecular assay designed to identify regions of frequ
 
 > <details-title>How does Hi-C sequencing work?</details-title>
 >
-> The high-throughput chromosome conformation capture (Hi-C) technology is based on the capture of the chromatin in three-dimensional space. During Hi-C library preparation, DNA is crosslinked in its 3D conformation. Then, the DNA is digested using restriction enzymes, and the digested ends are filled with biotinylated nucleotides (fig. 11). The biotinylated nucleotides enable the specific purification of the ligation junctions, preventing the sequencing of DNA molecules that do not contain such junctions which are thus mostly uninformative ({% cite Lajoie2015 %}).
+> The high-throughput chromosome conformation capture (Hi-C) technology is based on the capture of the chromatin in three-dimensional space. During Hi-C library preparation, DNA is crosslinked in its 3D conformation. Then, the DNA is digested using restriction enzymes, and the digested ends are filled with biotinylated nucleotides. The biotinylated nucleotides enable the specific purification of the ligation junctions, preventing the sequencing of DNA molecules that do not contain such junctions which are thus mostly uninformative ({% cite Lajoie2015 %}).
 >
 > ![Hi-C protocol](../../images/vgp_assembly/hi-c_protocol.png "Hi-C protocol. Adapted from {% cite Rao2014 %}")
 >
