@@ -39,7 +39,6 @@ abbreviations:
 
 # Introduction
 
-
 Advances in sequencing technologies over the last few decades have revolutionized the field of genomics, allowing for a reduction in both the time and resources required to *de novo* genome assembly. Until recently, second-generation sequencing technologies (also known as {NGS}) produceed highly accurate but short (up to 800bp) reads, whose extension was not long enough to cope with the difficulties associated with repetitive regions. Today, so-called {TGS} technologies, usually known as {SMRT} sequencing, have become dominant in *de novo* assembly of large genomes. TGS can use native DNA without amplification, reducing sequencing error and bias ({% cite Hon2020 %}, {% cite Giani2020 %}). Very recently, Pacific Biosciences introduced {HiFi} sequencing, which produces reads 10-25 kbp in length with a minimum accuracy of 99% (Q20). In this tutorial you will use HiFi reads in combination with data from additional sequencing technologies to generate a high-quality genome assembly.
 
 Deciphering the structural organization of complex vertebrate genomes is currently one of the largest challenges in genomics ({% cite Frenkel2012 %}). Despite the significant progress made in recent years, a key question remains: what combination of data and tools can produce the highest quality assembly? In order to adequately answer this question, it is necessary to analyse two of the main factors that determine the difficulty of genome assembly processes: repetitive content and heterozygosity.
@@ -118,7 +117,7 @@ This training is an adaptation of the VGP assembly pipeline 2.0 (fig. 1).
 
 ![VGP pipeline schematic showing steps from genome profiling, to hifiasm contigging, to bionano scaffolding, to HiC scaffolding.](../../images/vgp_assembly/vgp_pipeline_2.0_current.png "VGP Pipeline 2.0. The pipeline starts with reference-free genome profiling using k-mers. Then HiFi reads are assembled into contigs using hifiasm, along with additional phasing data if available. If false duplicates are detected in QC, then the contigs undergo purging. Afterwards, scaffolding takes place with optical maps (if available) and Hi-C data.")
 
-With the aim of making it easier to understand, the training has been organized into three main sections: genome profile analysis, assembly with hifiasm, and scaffolding. Additionally, the **assembly with hifiasm** section has two possilbe paths in this tutorial: solo contigging or HiC-phased contigging.
+This training has been organized into four main sections: genome profile analysis, assembly of {HiFi} reads with hifiasm, scaffolding with Bionano optical maps, and scaffolding with {Hi-C} data. Additionally, the **assembly with hifiasm** section has two possible paths in this tutorial: solo contigging or HiC-phased contigging.
 
 # Get data
 
@@ -241,7 +240,7 @@ Adapter trimming usually means trimming the adapter sequence off the ends of rea
 
 [{% icon exchange %} Switch to short version]({% link topics/assembly/tutorials/vgp_workflow_training/tutorial.md %}#genome-profile-analysis)
 
-Before starting a *de novo* genome assembly project, it is useful to collect metrics on the properties of the genome under consideration, such as the expected genome size. Traditionally, DNA flow cytometry was considered the golden standard for estimating the genome size. Nowadays, experimental methods have been replaced by computational approaches ({% cite wang2020estimation %}). One of the widely used genome profiling methods is based on the analysis of *k*-mer frequencies. It allows one to provide information not only about the genomic complexity, such as the genome size and levels of heterozygosity and repeat content, but also about the data quality.
+Before starting a *de novo* genome assembly project, it is useful to collect metrics on the properties of the genome under consideration, such as the expected genome size, so that you know what to expect from your assembly. Traditionally, DNA flow cytometry was considered the golden standard for estimating the genome size. Nowadays, experimental methods have been replaced by computational approaches ({% cite wang2020estimation %}). One of the widely used genome profiling methods is based on the analysis of *k*-mer frequencies. It allows one to provide information not only about the genomic complexity, such as the genome size and levels of heterozygosity and repeat content, but also about the data quality.
 
 > <comment-title>*K*-mer size, sequencing coverage and genome size</comment-title>
 >
@@ -263,7 +262,6 @@ Before starting a *de novo* genome assembly project, it is useful to collect met
 > Each unique k-mer can be assigned a value for coverage based on the number of times it occurs in a sequence, whose distribution will approximate a Poisson distribution, with the peak corresponding to the average genome sequencing depth. From the genome coverage, the genome size can be easily computed.
 {: .comment}
 
-
 ## Generation of k-mer spectra with **Meryl**
 
 Meryl will allow us to generate the *k*-mer profile by decomposing the sequencing data into *k*-length substrings, counting the occurrence of each *k*-mer and determining its frequency. The original version of Meryl was developed for the Celera Assembler. The current Meryl version comprises three main modules: one for generating *k*-mer databases, one for filtering and combining databases, and one for searching databases. *K*-mers are stored in lexicographical order in the database, similar to words in a dictionary ({% cite Rhie2020 %}).
@@ -276,28 +274,28 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 
 > <hands-on-title>Generate <i>k</i>-mers count distribution</hands-on-title>
 >
-> 1. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy2) %} with the following parameters:
+> 1. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} with the following parameters:
 >    - *"Operation type selector"*: `Count operations`
 >        - *"Count operations"*: `Count: count the occurrences of canonical k-mers`
 >        - {% icon param-collection %} *"Input sequences"*: `HiFi_collection (trim)`
 >        - *"k-mer size selector"*: `Set a k-mer size`
->            - "*k-mer size*": `32`
+>            - "*k-mer size*": `31`
 >
 >    > <comment-title>Selection of <i>k</i>-mer size</comment-title>
 >    >
->    > We used 32 as *k*-mer size, as this length has demonstrated to be sufficiently long that most *k*-mers are not repetitive and is short enough to be more robust to sequencing errors. For very large (haploid size > 10 Gb) and/or very repetitive genomes, larger *k*-mer length is recommended to increase the number of unique *k*-mers.
+>    > We used 31 as *k*-mer size, as this length has demonstrated to be sufficiently long that most *k*-mers are not repetitive and is short enough to be more robust to sequencing errors. For very large (haploid size > 10 Gb) and/or very repetitive genomes, larger *k*-mer length is recommended to increase the number of unique *k*-mers.
 >    {: .comment}
 >
 > 2. Rename it `Collection meryldb`
 >
-> 3. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy1) %} again with the following parameters:
+> 3. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} again with the following parameters:
 >    - *"Operation type selector"*: `Operations on sets of k-mers`
 >        - *"Operations on sets of k-mers"*: `Union-sum: return k-mers that occur in any input, set the count to the sum of the counts`
 >        - {% icon param-file %} *"Input meryldb"*: `Collection meryldb`
 >
 > 4. Rename it as `Merged meryldb`    
 >
-> 5. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy0) %} for the third time with the following parameters:
+> 5. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} for the third time with the following parameters:
 >    - *"Operation type selector"*: `Generate histogram dataset`
 >        - {% icon param-file %} *"Input meryldb"*: `Merged meryldb`
 >
@@ -308,13 +306,14 @@ Meryl will allow us to generate the *k*-mer profile by decomposing the sequencin
 
 ## Genome profiling with **GenomeScope2**
 
-The next step is to infer the genome properties from the *k*-mer histogram generated by Meryl, for which we will use GenomeScope2. Genomescope2 relies on a nonlinear least-squares optimization to fit a mixture of negative binomial distributions, generating estimated values for genome size, repetitiveness, and heterozygosity rates ({% cite RanalloBenavidez2020 %}).
+The next step is to infer the genome properties from the *k*-mer histogram generated by Meryl, for which we will use GenomeScope2. GenomeScope2 relies on a nonlinear least-squares optimization to fit a mixture of negative binomial distributions, generating estimated values for genome size, repetitiveness, and heterozygosity rates ({% cite RanalloBenavidez2020 %}).
 
 > <hands-on-title>Estimate genome properties</hands-on-title>
 >
-> 1. {% tool [GenomeScope](toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0) %} with the following parameters:
+> 1. {% tool [GenomeScope](toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Input histogram file"*: `Meryldb histogram`
->    - *"k-mer length used to calculate k-mer spectra"*: `32`
+>    - *Ploidy for model to use*: `2`
+>    - *"k-mer length used to calculate k-mer spectra"*: `31`
 >
 >   - In "*Output options*": mark `Summary of the analysis`
 >   - In "*Advanced options*":
@@ -336,7 +335,7 @@ Genomescope will generate six outputs:
 
 Now, let's analyze the *k*-mer profiles, fitted models and estimated parameters (fig. 3).
 
-![Genomescope plot](../../images/vgp_assembly/genomescope_plot.png "GenomeScope2 32-mer profile. The first peak located at coverage 32x corresponds to the heterozygous peak. The second peak at coverage 50x, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.576%. The plot also includes informatin about the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (het), mean k-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and k-mer size (k).")
+![Genomescope plot](../../images/vgp_assembly/genomescope_plot.png "GenomeScope2 31-mer profile. The first peak located at coverage 32x corresponds to the heterozygous peak. The second peak at coverage 50x, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.576%. The plot also includes informatin about the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (het), mean k-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and k-mer size (k).")
 
 This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the *k*-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit > 93%). Low frequency *k*-mers are the result of sequencing errors. GenomeScope2 estimated a haploid genome size is around 11.7 Mb, a value reasonably close to *Saccharomyces* genome size. Additionally, it revealed that the variation across the genomic sequences is 0.576%.
 
@@ -350,16 +349,22 @@ This distribution is the result of the Poisson process underlying the generation
 
 [{% icon exchange %} Switch to short version]({% link topics/assembly/tutorials/vgp_workflow_training/tutorial.md %}#assembly-with-hifiasm)
 
-Hifiasm can be run in multiple modes depending on data availability.
+Hifiasm can be run in multiple modes depending on data availability:
+- **Solo**: generates a pseudohaplotype assembly, resulting in a primary & an alternate assembly. 
+  - _Input: only HiFi reads._
+- **Hi-C-phased**: generates a hap1 assembly and a hap2 assembly, which are phased using the {Hi-C} reads from the same individual. 
+  - _Input: HiFi & HiC reads._
+- **Trio**: generates a maternal assembly and a paternal assembly, which are phased using reads from the parents. 
+  - _Input: HiFi reads from child, Illumina reads from both parents._
 
 SOLO:
-![Diagram for hifiasm solo](../../images/vgp_assembly/hifiasm_solo_schematic.png "SOLO SCHEMATIC")
+![Diagram for hifiasm solo mode.](../../images/vgp_assembly/hifiasm_solo_schematic.png "SOLO SCHEMATIC")
 
 HIC:
-![Diagram for hifiasm hic](../../images/vgp_assembly/hifiasm_hic_schematic.png "HIC SCHEMATIC")
+![Diagram for hifiasm hic mode.](../../images/vgp_assembly/hifiasm_hic_schematic.png "HIC SCHEMATIC")
 
 TRIO:
-![Diagram for hifiasm trio](../../images/vgp_assembly/hifiasm_trio_schematic.png "TRIO SCHEMATIC")
+![Diagram for hifiasm trio mode.](../../images/vgp_assembly/hifiasm_trio_schematic.png "TRIO SCHEMATIC")
 
 {% include _includes/cyoa-choices.html option1="hic" option2="solo" default="hic"
        text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click SOLO. If you have HiC reads for the same indiviudal, then click HIC-PHASED. **NOTE:** _If you want to learn more about purging, then please check out the SOLO tutorial for details purging false duplications._" %}
