@@ -36,6 +36,7 @@ abbreviations:
   VGP: Vertebrate Genomes Project
   G10K: Genome 10K consortium
   GFA: Graphical Fragment Assembly
+  QC: Quality Control
 ---
 
 # Introduction
@@ -48,7 +49,7 @@ Repetitive elements can be grouped into two categories: interspersed repeats, su
 
 Heterozygosity is also an important factor in genome assembly. Haplotype phasing, that is, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies ({% cite Zhang2020 %}). When no reference sequence is available, the *state-of-the-art* strategy consists of constructing a string graph with vertices representing reads and edges representing consistent overlaps. In this kind of graph, after transitive reduction, heterozygous alleles in the string graph are represented by bubbles. When combined with {Hi-C} data, this approach allows complete diploid reconstruction ({% cite DominguezDelAngel2018 %}, {% cite Zhang2020 %}, {% cite Dida2021 %}).
 
-The {G10K} launched the {VGP}, whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). This tutorial will guide you step by step to assemble a high-quality genome using the VGP assembly pipeline. 
+The {G10K} launched the {VGP}, whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). This tutorial will guide you step by step to assemble a high-quality genome using the VGP assembly pipeline, including multiple {QC} evaluations. 
 
 > <warning-title>Your results may differ!</warning-title>
 >
@@ -429,13 +430,13 @@ We have obtained the fully phased contig graphs (as {GFA} files) of hap1 and hap
 ## Assembly evaluation
 
 The VGP assembly pipeline contains several built-in QC steps:
-- gfastats: manipulation & evaluation of assembly graphs and FASTA files, particularly used for summary statistics (*e.g.*, contig count, N50, NG50, etc.) ({% cite Formenti2022 %}).
-- {BUSCO}: assesses completeness of a genome from an evolutionarily informed functional point of view. BUSCO genes are genes that are expected to be present at single-copy in one haplotype for a certain clade, so their presence, absence, or duplication can inform scientists about if an assembly is likely missing important regions, or if it has multiple copies of them, which can indicate a need for purging ({% cite Simo2015 %}).
-- Merqury: reference-free assessment of assembly completeness and phasing based on *k*-mers. Merqury compares *k*-mers in the reads to the *k*-mers found in the assemblies, as well as the copy number of each *k*-mer in the assemblies ({% cite Rhie_merqury %}).
+- **gfastats**: manipulation & evaluation of assembly graphs and FASTA files, particularly used for summary statistics (*e.g.*, contig count, N50, NG50, etc.) ({% cite Formenti2022 %}).
+- **{BUSCO}**: assesses completeness of a genome from an evolutionarily informed functional point of view. BUSCO genes are genes that are expected to be present at single-copy in one haplotype for a certain clade, so their presence, absence, or duplication can inform scientists about if an assembly is likely missing important regions, or if it has multiple copies of them, which can indicate a need for purging ({% cite Simo2015 %}).
+- **Merqury**: reference-free assessment of assembly completeness and phasing based on *k*-mers. Merqury compares *k*-mers in the reads to the *k*-mers found in the assemblies, as well as the copy number of each *k*-mer in the assemblies ({% cite Rhie_merqury %}).
 
-> <comment-title>QUAST statistics</comment-title>
+> <comment-title>Summary statistics</comment-title>
 >
-> QUAST will provide us with the following statistics:
+> gfastats will provide us with the following statistics:
 >
 > - No. of contigs: The total number of contigs in the assembly.
 > - Largest contig: The length of the largest contig in the assembly.
@@ -446,33 +447,24 @@ The VGP assembly pipeline contains several built-in QC steps:
 >
 {: .comment}
 
-QUAST default pipeline utilizes Minimap2. Functional elements prediction modules include GeneMarkS, GeneMark-ES, GlimmerHMM, Barrnap, and BUSCO.
-    
-> <hands-on-title>assembly evaluation with QUAST</hands-on-title>
+Let's use gfastats to get a basic idea of what our assembly looks like. We'll run gfastats on the {GFA} files because gfastats can report graph-specific statistics as well. After generating the stats, we'll be doing some text manipulation to get the stats side-by-side in a pretty fashion. 
+
+> <hands-on-title>Assembly evaluation with gfastats</hands-on-title>
 >
-> 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1) %} with the following parameters:
->    - *"Use customized names for the input files?"*: `Yes, specify custom names`
->    - In *"1. Contigs/scaffolds"*:
->        - {% icon param-file %} *"Contigs/scaffolds file"*: `Primary contigs FASTA`
->        - *"Name"*: `Primary assembly`
->    - Click in *"Insert Contigs/scaffolds"*
->    - In *"2. Contigs/scaffolds"*:
->        - {% icon param-file %} *"Contigs/scaffolds file"*: `Alternate contigs FASTA`
->        - *"Name"*: `Alternate assembly`
->    - *"Reads options"*: `Pacbio SMRT reads`
->        - {% icon param-collection %} *"FASTQ file"*: `HiFi collection (trim)`
->    - *"Type of assembly"*: `Genome`
->        - *"Use a reference genome?"*: `No`
->            - *"Estimated reference genome size (in bp) for computing NGx statistics"*: `11747076` (previously estimated)
->        - *"Type of organism"*: `Eukaryote: use of GeneMark-ES for gene finding, Barrnap for ribosomal RNA genes prediction, BUSCO for conserved orthologs finding (--eukaryote)`
->    - *"Is genome large (>100Mpb)?"*: `No`
->
->    > <comment-title></comment-title>
->    >
->    > Remember that for this training we are using _S. cerevisiae_, a reduced genome. In the case of assembling a vertebrate genome, you must select `yes` in the previous option.
->    {: .comment}
->
-> 2. Rename the HTML report as `QUAST initial report`
+> 1. {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
+>    - {% icon param-files %} *"Input file"*: select `Hap1 contigs graph` and the `Hap2 contigs graph` datasets
+>    - *"Expected genome size"*: `11747160` (remember we calculated this value earlier, so it should be in your history!)
+>    - *"Generates the initial set of paths*": toggle to `yes`
+> 2. Rename the outputs as `Hap1 stats` and `Hap2 stats`
+> 3. {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
+>    - {% icon param-files %} *"Input file"*: select `Hap1 stats` and the `Hap2 stats` datasets
+> 4. Rename the output as `gfastats on hap1 and hap2 (full)`
+> 5. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+>    - {% icon param-files %} *"Input file"*: select `gfastats on hap1 and hap2 (full)`
+>    - *"that"*: `Don't Match`
+>    - *"Type of regex"*: `Basic`
+>    - *"Regular Expression"*: `[Ss]caffold`
+> 6. Rename the output as `gfastats on hap1 and hap2 contigs`
 >
 {: .hands_on}
 
