@@ -29,8 +29,7 @@ abbreviations:
   QV: assembly consensus quality
   unitig:
   contigs: contiguous sequences in an assembly
-  scaffold:
-  optical map: test2
+  scaffolds: one or more contigs joined by gap sequence
   Hi-C: all-versus-all chromatin conformation capture
   HiFi: high fidelity reads
   GWS: Galaxy Workflow System
@@ -44,7 +43,7 @@ abbreviations:
 
 The {VGP}, a project of the {G10K} Consortium, aims to generate high-quality, near error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). The VGP has developed a fully automated *de-novo* genome assembly pipeline, which uses a combination of three different technologies: Pacbio {HiFi}, Bionano optical maps, and {Hi-C} data.
 
-As a result of a collaboration with the VGP team, a training including a step-by-step detailed description of parameter choices for each step of assembly was developed for the Galaxy Training Network ({% cite Lariviere2022 %}). This tutorial instead provides a quick walkthrough on how the workflows can be used to rapidly assemble a genome using the VGP pipeline with the {GWS}.
+As a result of a collaboration with the VGP team, a training including a step-by-step detailed description of parameter choices for each step of assembly was developed for the Galaxy Training Network ({% cite Lariviere2022 %}). The following tutorial instead provides a quick walkthrough on how the workflows can be used to rapidly assemble a genome using the VGP pipeline with the {GWS}.
 
 GWS facilitates analysis repeatability, while minimizing the number of manual steps required to execute an analysis workflow, and automating the process of inputting parameters and software tool version tracking. The objective of this training is to explain how to run the VGP workflow, focusing on what are the required inputs and which outputs are generated and delegating how the steps are executed to the GWS.
 
@@ -59,7 +58,7 @@ GWS facilitates analysis repeatability, while minimizing the number of manual st
 
 # Getting Started on Galaxy
 
-This tutorial assumes you are comfortable getting data into Galaxy, running jobs, managing history, etc. If you are unfamiliar with Galaxy, we recommed you to visit the [Galaxy Training Network](https://training.galaxyproject.org). Consider starting with the following trainings:
+This tutorial assumes you are comfortable getting data into Galaxy, running jobs, managing history, etc. If you are unfamiliar with Galaxy, we recommed you visit the [Galaxy Training Network](https://training.galaxyproject.org). Consider starting with the following trainings:
 - [Introduction to Galaxy]({% link topics/introduction/tutorials/introduction/slides.html %})
 - [Galaxy 101]({% link topics/introduction/tutorials/galaxy-intro-101/tutorial.md %})
 - [Getting Data into Galaxy]({% link topics/galaxy-interface/tutorials/get-data/slides.html %})
@@ -71,11 +70,11 @@ This tutorial assumes you are comfortable getting data into Galaxy, running jobs
 
 # VGP assembly workflow structure
 
-The VGP assembly pipeline has a modular organization, consisting in five main subworkflows (fig. 1), each one integrated by a series of data manipulation steps. Firstly, it allows the evaluation of intermediate steps, which facilitates the modification of parameters if necessary, without the need to start from the initial stage. Secondly, it allows to adapt the workflow to the available data.
+The {VGP} assembly pipeline has a modular organization, consisting in five main subworkflows (fig. 1), each one integrated by a series of data manipulation steps. Firstly, it allows the evaluation of intermediate steps, which facilitates the modification of parameters if necessary, without the need to start from the initial stage. Secondly, it allows to adapt the workflow to the available data.
 
 > ![Figure 1: VGP pipeline modules](../../images/vgp_assembly/VGP_workflow_modules.png "VGP assembly pipeline. The VGP workflow is implemented in a modular fashion: it consists of five independent subworkflows. In addition, it includes some additional workflows (not shown in the figure), required for exporting the results to GenomeArk.")
 
-The VGP pipeline integrates two workflows to generate scaffolds from the contig level assemblies generated from the HiFi reads. When Hi-C data and Bionano data are available, the default pipeline is running the Bionano workflow first, followed by the Hi-C workflow. However, it is possible that Bionano data may not be available, in which case the HiC workflow can be used directly on the initial purged assembly.
+The VGP pipeline first uses an assembly program to generate {contigs}. When {Hi-C} data and Bionano data are avilable, then they are used to generate {scaffolds}. When both data types are available, then Bionano scaffolding is run first before Hi-C scaffolding, but if optical maps are not available then HiC scaffolding can be run on the contigs. 
 
 > <comment-title>Input option order</comment-title>
 > This tutorial assumes the input datasets are high-quality. QC on raw read data should be performed before it is used. QC on raw read data is outside the scope of this tutorial.
@@ -232,7 +231,7 @@ Let's have a look at the HTML report generated by **QUAST** (fig. 4), which corr
 
 ![Figure 4: QUAST initial plot](../../images/vgp_assembly/QUAST_initial.png "QUAST report. Statistics of the primary and alternate assembly (a). Cumulative length plot (b).")
 
-According to the report, both assemblies are quite similar; the primary assembly includes 18 contigs, whose cumulative length is around 12.2Mbp. The alternate assembly includes 17 contigs, whose total length is 11.3Mbp. As we can see in figure 4a, both assemblies come close to the estimated genome size, which is as expected since we used hifiasm-HiC mode to generate phased assemblies which lowers the chance of false duplications that can inflate assembly size.
+According to the report, both assemblies are quite similar; the primary assembly includes 18 {contigs}, whose cumulative length is around 12.2Mbp. The alternate assembly includes 17 contigs, whose total length is 11.3Mbp. As we can see in figure 4a, both assemblies come close to the estimated genome size, which is as expected since we used hifiasm-HiC mode to generate phased assemblies which lowers the chance of false duplications that can inflate assembly size.
 
 > <comment-title>Are you working with pri/alt assemblies?</comment-title>
 > This tutorial uses the hifiasm-HiC workflow, which generates phased hap1 and hap2 assemblies. The phasing helps lower the chance of false duplications, since the phasing information helps the assembler know which genomic variation is heterozygosity at the same locus versus being two different loci entirely. If you are working with primary/alternate assemblies (especially if there is no internal purging in the initial assembly), you can expect higher false duplication rates than we observe here with the yeast HiC hap1/hap2.

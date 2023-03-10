@@ -27,24 +27,29 @@ contributors:
 - gf777
 - msozzoni
 abbreviations:
-  primary assembly: test1
-  alternate assembly: test2
   BUSCO: Benchmarking Universal Single-Copy Orthologs
+  NGS: next generation sequencing
+  SMRT: single-molecule real-time
+  TGS: third-generation sequencing
+  HiFi: high fidelity
+  Hi-C: all-versus-all chromatin conformation capture
+  VGP: Vertebrate Genomes Project
+  G10K: Genome 10K consortium
 ---
 
 
 # Introduction
 
 
-Advances in sequencing technologies over the last few decades have revolutionized the field of genomics, allowing for a reduction in both the time and resources required to *de novo* genome assembly. Until recently, second-generation sequencing technologies (also known as Next Generation Sequencing or NGS) allowed to produce highly accurate but short (up to 800bp) reads, whose extension was not long enough to cope with the difficulties associated with repetitive regions. Today, so-called third-generation sequencing (TGS) technologies, usually known as single-molecule real-time (SMRT) sequencing, have become dominant in *de novo* assembly of large genomes. TGS can use native DNA without amplification, reducing sequencing error and bias ({% cite Hon2020 %}, {% cite Giani2020 %}). Very recently, Pacific Biosciences introduced High-Fidelity (HiFi) sequencing, which produces reads 10-25 kpb in length with a minimum accuracy of 99% (Q20). In this tutorial you will use HiFi reads in combination with data from additional sequencing technologies to generate a high-quality genome assembly.
+Advances in sequencing technologies over the last few decades have revolutionized the field of genomics, allowing for a reduction in both the time and resources required to *de novo* genome assembly. Until recently, second-generation sequencing technologies (also known as {NGS}) produceed highly accurate but short (up to 800bp) reads, whose extension was not long enough to cope with the difficulties associated with repetitive regions. Today, so-called {TGS} technologies, usually known as {SMRT} sequencing, have become dominant in *de novo* assembly of large genomes. TGS can use native DNA without amplification, reducing sequencing error and bias ({% cite Hon2020 %}, {% cite Giani2020 %}). Very recently, Pacific Biosciences introduced {HiFi} sequencing, which produces reads 10-25 kbp in length with a minimum accuracy of 99% (Q20). In this tutorial you will use HiFi reads in combination with data from additional sequencing technologies to generate a high-quality genome assembly.
 
 Deciphering the structural organization of complex vertebrate genomes is currently one of the largest challenges in genomics ({% cite Frenkel2012 %}). Despite the significant progress made in recent years, a key question remains: what combination of data and tools can produce the highest quality assembly? In order to adequately answer this question, it is necessary to analyse two of the main factors that determine the difficulty of genome assembly processes: repetitive content and heterozygosity.
 
 Repetitive elements can be grouped into two categories: interspersed repeats, such as transposable elements (TE) that occur at multiple loci throughout the genome, and tandem repeats (TR) that occur at a single locus ({% cite Trresen2019 %}). Repetitive elements are an important component of eukaryotic genomes, constituting over a third of the genome in the case of mammals ({% cite SoteroCaio2017 %}, {% cite Chalopin2015 %}). In the case of tandem repeats, various estimates suggest that they are present in at least one third of human protein sequences ({% cite Marcotte1999 %}). TE content is among the main factors contributing to the lack of continuity in the reconstruction of genomes, especially in the case of large ones, as TE content is highly correlated with genome size ({% cite SoteroCaio2017 %}). On the other hand, TR usually lead to local genome assembly collapse, especially when their length is close to that of the reads ({% cite Trresen2019 %}).
 
-Heterozygosity is also an important factor in genome assembly. Haplotype phasing, that is, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies ({% cite Zhang2020 %}). When no reference sequence is available, the *state-of-the-art* strategy consists of constructing a string graph with vertices representing reads and edges representing consistent overlaps. In this kind of graph, after transitive reduction, heterozygous alleles in the string graph are represented by bubbles. When combined with Hi-C data, this approach allows complete diploid reconstruction ({% cite DominguezDelAngel2018 %}, {% cite Zhang2020 %}, {% cite Dida2021 %}).
+Heterozygosity is also an important factor in genome assembly. Haplotype phasing, that is, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies ({% cite Zhang2020 %}). When no reference sequence is available, the *state-of-the-art* strategy consists of constructing a string graph with vertices representing reads and edges representing consistent overlaps. In this kind of graph, after transitive reduction, heterozygous alleles in the string graph are represented by bubbles. When combined with {Hi-C} data, this approach allows complete diploid reconstruction ({% cite DominguezDelAngel2018 %}, {% cite Zhang2020 %}, {% cite Dida2021 %}).
 
-The G10K consortium launched the Vertebrate Genomes Project (VGP), whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). This tutorial will guide you step by step to assemble a high-quality genome using the VGP assembly pipeline. 
+The {G10K} launched the {VGP}, whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). This tutorial will guide you step by step to assemble a high-quality genome using the VGP assembly pipeline. 
 
 > <warning-title>Your results may differ!</warning-title>
 >
@@ -112,7 +117,7 @@ For more about the specific scaffolding technologies used in the VGP pipeline (c
 
 This training is an adaptation of the VGP assembly pipeline 2.0 (fig. 1).
 
-![Figure 1: VGP pipeline schematic showing steps from genome profiling, to hifiasm contigging, to bionano scaffolding, to HiC scaffolding.](../../images/vgp_assembly/vgp_pipeline_2.0_current.png "VGP Pipeline 2.0. The pipeline starts with reference-free genome profiling using k-mers. Then HiFi reads are assembled into contigs using hifiasm, along with additional phasing data if available. If false duplicates are detected in QC, then the contigs undergo purging. Afterwards, scaffolding takes place with optical maps (if available) and Hi-C data.")
+![VGP pipeline schematic showing steps from genome profiling, to hifiasm contigging, to bionano scaffolding, to HiC scaffolding.](../../images/vgp_assembly/vgp_pipeline_2.0_current.png "VGP Pipeline 2.0. The pipeline starts with reference-free genome profiling using k-mers. Then HiFi reads are assembled into contigs using hifiasm, along with additional phasing data if available. If false duplicates are detected in QC, then the contigs undergo purging. Afterwards, scaffolding takes place with optical maps (if available) and Hi-C data.")
 
 With the aim of making it easier to understand, the training has been organized into three main sections: genome profile analysis, assembly with hifiasm, and scaffolding. Additionally, the **assembly with hifiasm** section has two possilbe paths in this tutorial: solo contigging or HiC-phased contigging.
 
