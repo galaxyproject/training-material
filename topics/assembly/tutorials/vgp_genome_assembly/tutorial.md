@@ -35,6 +35,7 @@ abbreviations:
   Hi-C: all-versus-all chromatin conformation capture
   VGP: Vertebrate Genomes Project
   G10K: Genome 10K consortium
+  GFA: Graphical Fragment Assembly
 ---
 
 # Introduction
@@ -363,6 +364,8 @@ Once we have finished the genome profiling stage, we can start the genome assemb
 >
 {: .details}
 
+The output of hifiasm will be {GFA} files. These differ from FASTA files in that they are a representation of the assembly graph instead of just linear sequences, so the GFA contains information about sequences, nodes, and edges (*i.e.*, overlaps). This output preserves the most information about how the reads assemble in graph space, and is useful to visualize in tools such as Bandage; however, our QV tools will expect FASTA files, so we will cover the GFA to FASTA conversion step later.
+
 Hifiasm can be run in multiple modes depending on data availability:
 
 **Solo**: generates a pseudohaplotype assembly, resulting in a primary & an alternate assembly (fig. 5). 
@@ -388,42 +391,38 @@ Hifiasm can be run in multiple modes depending on data availability:
 
 ## HiC-phased assembly with **hifiasm**
 
-gsfagasdfga
+If you have the {Hi-C} data for the individual you are assembling with {HiFi} reads, then you can use that information to phase the {contigs}.
 
 > <hands-on-title>Hi-C-phased assembly with <b>hifiasm</b></hands-on-title>
 >
 > 1. {% tool [Hifiasm](toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.14+galaxy0) %} with the following parameters:
 >    - *"Assembly mode"*: `Standard`
 >        - {% icon param-file %} *"Input reads"*: `HiFi_collection (trim)` (output of **Cutadapt** {% icon tool %})
->    - *"Options for purging duplicates"*: `Specify`
->       - *"Purge level*": `Light`
->       - *"Coverage upper bound"*: `114` (maximum depth previously obtained)
->    - *"Options for Hi-C partition"*: `Specify`
 >       - *"Hi-C R1 reads"*: `Hi-C_dataset_F`
 >       - *"Hi-C R2 reads"*: `Hi-C_dataset_R`
 >
-> 2. After the tool has finished running rename its outputs as follows:
->   - Rename the `Hi-C hap1 balanced contig graph` as `Primary contigs graph` and add a `#primary` tag
->   - Rename the `Hi-C hap2 balanced contig graph` as `Alternate contigs graph` and  add a `#alternate` tag
+> 2. After the tool has finished running, rename its outputs as follows:
+>   - Rename the `Hi-C hap1 balanced contig graph` as `Hap1 contigs graph` and add a `#hap1` tag
+>   - Rename the `Hi-C hap2 balanced contig graph` as `Hap2 contigs graph` and  add a `#hap2` tag
 >
 {: .hands_on}
 
-Hifiasm generates four outputs in Graphical Fragment Assembly (GFA) format; this format is designed to represent genome variation, splice graphs in genes, and even overlaps between reads.
-
-We have obtained the fully phased contig graphs of the primary and alternate haplotypes, but the output format of hifiasm must be converted to FASTA format for the subsequent steps.
-
+We have obtained the fully phased contig graphs (as {GFA} files) of hap1 and hap2, but these must be converted to FASTA format for subsequent steps.
 
 > <hands-on-title>convert GFA to FASTA</hands-on-title>
 >
-> 1. {% tool [GFA to FASTA](toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2) %} with the following parameters:
->    - {% icon param-files %} *"Input GFA file"*: select `Primary contigs graph` and the `Alternate contigs graph` datasets
+> 1. {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.2) %} with the following parameters:
+>    - {% icon param-files %} *"Input GFA file"*: select `Hap1 contigs graph` and the `Hap2 contigs graph` datasets
 >
 >    > <tip-title>Select multiple datasets</tip-title>
 >    > 1. Click on {% icon param-files %} **Multiple datasets**
 >    > 2. Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest
 >    {: .tip}
 >
-> 2. Rename the outputs as `Primary contigs FASTA` and `Alternate contigs FASTA`
+>    - *"Tool mode"*: `Genome assembly manipulation`
+>    - *"Output format"*: `FASTA`
+>    - *"Generates the initial set of paths*": toggle to `yes`
+> 2. Rename the outputs as `Hap1 contigs FASTA` and `Hap2 contigs FASTA`
 >
 {: .hands_on}
 
