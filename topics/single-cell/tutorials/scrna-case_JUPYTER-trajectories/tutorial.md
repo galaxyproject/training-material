@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Inferring Trajectories using Python (Jupyter Notebook) in Galaxy
+title: Inferring Trajectories using Scanpy - Jupyter Notebook
 subtopic: single-cell-CS
 priority: 4
 zenodo_link: 'https://zenodo.org/record/7075718'
@@ -36,6 +36,7 @@ tags:
 - paper-replication
 - interactive-tools
 - transcriptomics
+- jupyter-notebook
 
 contributions:
   authorship:
