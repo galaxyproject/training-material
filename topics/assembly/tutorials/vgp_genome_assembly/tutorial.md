@@ -333,9 +333,9 @@ Genomescope will generate six outputs:
 - Model: this file includes a detailed report about the model fitting.
 - Summary: it includes the properties inferred from the model, such as genome haploid length and the percentage of heterozygosity.
 
-Now, let's analyze the *k*-mer profiles, fitted models and estimated parameters (fig. 3).
+Now, let's analyze the *k*-mer profiles, fitted models and estimated parameters (fig. 4).
 
-![Genomescope plot](../../images/vgp_assembly/genomescope_plot.png "GenomeScope2 31-mer profile. The first peak located at coverage 32x corresponds to the heterozygous peak. The second peak at coverage 50x, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.576%. The plot also includes informatin about the inferred total genome length (len), genome unique length percent (uniq), overall heterozygosity rate (het), mean k-mer coverage for heterozygous bases (kcov), read error rate (err), average rate of read duplications (dup) and k-mer size (k).")
+![Genomescope plot](../../images/vgp_assembly/genomescope_plot.png "GenomeScope2 31-mer profile. The first peak located at coverage 25x corresponds to the heterozygous peak. The second peak at coverage 50x, corresponds to the homozygous peak. Estimate of the heterozygous portion is 0.576%. The plot also includes information about the inferred total genome length (len), genome unique length percent ('uniq'), overall heterozygosity rate ('ab'), mean k-mer coverage for heterozygous bases ('kcov'), read error rate ('err'), and average rate of read duplications ('dup'). It also reports the user-given parameters of k-mer size ('k') and ploidy ('p').")
 
 This distribution is the result of the Poisson process underlying the generation of sequencing reads. As we can see, the *k*-mer profile follows a bimodal distribution, indicative of a diploid genome. The distribution is consistent with the theoretical diploid model (model fit > 93%). Low frequency *k*-mers are the result of sequencing errors. GenomeScope2 estimated a haploid genome size is around 11.7 Mb, a value reasonably close to *Saccharomyces* genome size. Additionally, it revealed that the variation across the genomic sequences is 0.576%.
 
@@ -349,32 +349,31 @@ This distribution is the result of the Poisson process underlying the generation
 
 [{% icon exchange %} Switch to short version]({% link topics/assembly/tutorials/vgp_workflow_training/tutorial.md %}#assembly-with-hifiasm)
 
+Once we have finished the genome profiling stage, we can start the genome assembly with hifiasm,  a fast open-source *de novo* assembler specifically developed for PacBio HiFi reads. One of the key advantages of hifiasm is that it allows us to resolve near-identical, but not exactly identical sequences, such as repeats and segmental duplications ({% cite Cheng2021 %}).
+
 Hifiasm can be run in multiple modes depending on data availability:
-- **Solo**: generates a pseudohaplotype assembly, resulting in a primary & an alternate assembly. 
-  - _Input: only HiFi reads._
-- **Hi-C-phased**: generates a hap1 assembly and a hap2 assembly, which are phased using the {Hi-C} reads from the same individual. 
-  - _Input: HiFi & HiC reads._
-- **Trio**: generates a maternal assembly and a paternal assembly, which are phased using reads from the parents. 
-  - _Input: HiFi reads from child, Illumina reads from both parents._
 
-SOLO:
-![Diagram for hifiasm solo mode.](../../images/vgp_assembly/hifiasm_solo_schematic.png "SOLO SCHEMATIC")
+**Solo**: generates a pseudohaplotype assembly, resulting in a primary & an alternate assembly (fig. 5). 
+- _Input: only HiFi reads_
+- _Output: scaffolded primary assembly, and alternate contigs_
+![Diagram for hifiasm solo mode.](../../images/vgp_assembly/hifiasm_solo_schematic.png "The solo pipeline creates primary and alternate contigs, which then typically undergo purging with purge_dups to reconcile the haplotypes. During the purging process, haplotigs are removed from the primary assembly and added to the alternate assembly, which is then purged to generate the final alternate set of contigs. The purged primary contigs are then carried through scaffolding with Bionano and/or Hi-C data, resulting in one final draft primary assembly to be sent to manual curation.")
 
-HIC:
-![Diagram for hifiasm hic mode.](../../images/vgp_assembly/hifiasm_hic_schematic.png "HIC SCHEMATIC")
+**Hi-C-phased**: generates a hap1 assembly and a hap2 assembly, which are phased using the {Hi-C} reads from the same individual (fig. 6). 
+- _Input: HiFi & HiC reads_
+- _Output: scaffolded hap1 assembly, and scaffolded hap2 assembly (assuming you run the scaffolding on **both** haplotypes)_
+![Diagram for hifiasm hic mode.](../../images/vgp_assembly/hifiasm_hic_schematic.png "The Hi-C-phased mode produces hap1 and hap2 contigs, which have been phased using the HiC information as described in {% cite Cheng2021 %}. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded separately using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
 
-TRIO:
-![Diagram for hifiasm trio mode.](../../images/vgp_assembly/hifiasm_trio_schematic.png "TRIO SCHEMATIC")
+**Trio**: generates a maternal assembly and a paternal assembly, which are phased using reads from the parents (fig. 7). 
+- _Input: HiFi reads from child, Illumina reads from both parents._
+- _Output: scaffolded maternal assembly, and scaffolded paternal assembly (assuming you run the scaffolding on **both** haplotypes)_
+![Diagram for hifiasm trio mode.](../../images/vgp_assembly/hifiasm_trio_schematic.png "The trio mode produces maternal and paternal contigs, which have been phased using paternal short read data. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded separately using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
 
 {% include _includes/cyoa-choices.html option1="hic" option2="solo" default="hic"
-       text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click SOLO. If you have HiC reads for the same indiviudal, then click HIC-PHASED. **NOTE:** _If you want to learn more about purging, then please check out the SOLO tutorial for details purging false duplications._" %}
+       text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click SOLO. If you have HiC reads for the same indiviudal, then click HIC-PHASED. NOTE: If you want to learn more about purging, then please check out the SOLO tutorial for details purging false duplications." %}
 
-Once we have finished the genome profiling stage, we can start the genome assembly with hifiasm,  a fast open-source *de novo* assembler specifically developed for PacBio HiFi reads.
 
 <div class = "hic" markdown="1">
 ## HiC-phased assembly with **hifiasm**
-
-One of the key advantages of hifiasm is that it allows us to resolve near-identical, but not exactly identical sequences, such as repeats and segmental duplications ({% cite Cheng2021 %}).
 
 > <comment-title>Hifiasm algorithm details</comment-title>
 >
