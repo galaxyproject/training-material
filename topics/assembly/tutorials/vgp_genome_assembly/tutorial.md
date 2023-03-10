@@ -362,7 +362,7 @@ TRIO:
 ![Diagram for hifiasm trio](../../images/vgp_assembly/hifiasm_trio_schematic.png "TRIO SCHEMATIC")
 
 {% include _includes/cyoa-choices.html option1="hic" option2="solo" default="hic"
-       text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click SOLO. If you have HiC reads for the same indiviudal, then click HIC-PHASED. NOTE: If you want to learn more about purging, then please check out the SOLO tutorial for details about running purge_dups." %}
+       text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click SOLO. If you have HiC reads for the same indiviudal, then click HIC-PHASED. **NOTE:** _If you want to learn more about purging, then please check out the SOLO tutorial for details purging false duplications._" %}
 
 Once we have finished the genome profiling stage, we can start the genome assembly with hifiasm,  a fast open-source *de novo* assembler specifically developed for PacBio HiFi reads.
 
@@ -891,11 +891,11 @@ Once we have merged the files, we should run the purge_dups pipeline again, but 
 
 </div>
 
-# Hybrid scaffolding with Bionano optical maps
+# Scaffolding
 
 At this point, we have obtained the primary and alternate assemblies, each of which consists in a collection of contigs (contiguous sequences assembled from overlapping reads). Next, the contigs will be assembled into scaffolds, i.e., sequences of contigs interspaced with gaps. For this purpose, we will carry out a hybrid scaffolding by taking advantage of two additional technologies: Bionano optical maps and Hi-C data. 
 
-## Hybrid scaffolding using Bionano data
+# Hybrid scaffolding using Bionano data
 
 [{% icon exchange %} Switch to short version]({% link topics/assembly/tutorials/vgp_workflow_training/tutorial.md %}#hybrid-scaffolding-with-bionano-optical-maps)
 
@@ -1005,7 +1005,7 @@ Finally, the BUSCO's summary image (fig. 10c) shows that most of the universal s
 
 # Hi-C scaffolding
 
-[{% icon exchange %} Switch to short version]({% link topics/assembly/tutorials/vgp_workflow_training/tutorial.md %}#hybrid-scaffolding-with-hi-c-data)
+[{% icon exchange %} Switch to short version]({% link topics/assembly/tutorials/vgp_workflow_training/tutorial.md %}#hi-c-scaffolding)
 
 Hi-C is a sequencing-based molecular assay designed to identify regions of frequent physical interaction in the genome by measuring the contact frequency between all pairs of loci, allowing us to provide an insight into the three-dimensional organization of a genome  ({% cite Dixon2012 %}, {% cite LiebermanAiden2009 %}). In this final stage, we will exploit the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them with the objective of linking the Bionano scaffolds to a chromosome scale.
 
