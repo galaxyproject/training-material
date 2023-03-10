@@ -119,6 +119,8 @@ This training is an adaptation of the VGP assembly pipeline 2.0 (fig. 1).
 
 This training has been organized into four main sections: genome profile analysis, assembly of {HiFi} reads with hifiasm, scaffolding with Bionano optical maps, and scaffolding with {Hi-C} data. Additionally, the **assembly with hifiasm** section has two possible paths in this tutorial: solo contigging or HiC-phased contigging.
 
+Throughout this tutorial, there will be **detail boxes** with additional background information on the science behind the sequencing technologies and software we use in the pipeline. These boxes are minimized by default, but please expand them to learn more about the data we utilize in this pipeline.
+
 # Get data
 
 In order to reduce computation time, we will assemble samples from the yeast _Saccharomyces cerevisiae_ S288C, a widely used laboratory strain isolated in the 1950s by Robert Mortimer. Using _S. cerevisae_, one of the most intensively studied eukaryotic model organisms, has the additional advantage of allowing us to evaluate the final result of our assembly with great precision. For this tutorial, we generated a set of synthetic HiFi reads corresponding to a theoretical diploid genome.
@@ -190,7 +192,7 @@ The first step is to get the datasets from Zenodo. The VGP assembly pipeline use
     
 Adapter trimming usually means trimming the adapter sequence off the ends of reads, which is where the adapter sequence is usually located in {NGS} reads. However, due to the nature of {SMRT} sequencing technology, adapters do not have a specific, predictable location in  {HiFi} reads. Additionally, the reads containing adapter sequence could be of generally lower quality compared to the rest of the reads. Thus, we will use **cutadapt** not to trim, but to remove the entire read if a read is found to have an adapter inside of it.
 
-> <comment-title>Background on PacBio HiFi reads</comment-title>
+> <details-title>Background on PacBio HiFi reads</details-title>
 >
 > PacBio HiFi reads rely on {SMRT} sequencing technology. SMRT is based on real-time imaging of fluorescently tagged nucleotides as they are added to a newly synthesized DNA strand. HiFi further uses multiple subreads from the same circular template to produce one highly accurate consensus sequence (fig. 2).
 >
@@ -198,7 +200,7 @@ Adapter trimming usually means trimming the adapter sequence off the ends of rea
 >
 > This technology allows to generate long-read sequencing data with read lengths in the range of 10-25 kb and minimum read consensus accuracy greater than 99% (Q20).
 >
-{: .comment}
+{: .details}
 
 > <hands-on-title>Primer removal with Cutadapt</hands-on-title>
 >
@@ -242,7 +244,7 @@ Adapter trimming usually means trimming the adapter sequence off the ends of rea
 
 Before starting a *de novo* genome assembly project, it is useful to collect metrics on the properties of the genome under consideration, such as the expected genome size, so that you know what to expect from your assembly. Traditionally, DNA flow cytometry was considered the golden standard for estimating the genome size. Nowadays, experimental methods have been replaced by computational approaches ({% cite wang2020estimation %}). One of the widely used genome profiling methods is based on the analysis of *k*-mer frequencies. It allows one to provide information not only about the genomic complexity, such as the genome size and levels of heterozygosity and repeat content, but also about the data quality.
 
-> <comment-title>*K*-mer size, sequencing coverage and genome size</comment-title>
+> <details-title><i>K</i>-mer size, sequencing coverage and genome size</details-title>
 >
 >*K*-mers are unique substrings of length *k* contained within a DNA sequence. For example, the DNA sequence *TCGATCACA* can be decomposed into five unique *k*-mers that have five bases long: *TCGAT*, *CGATC*, *GATCA*, *ATCAC* and *TCACA*. A sequence of length L will have  L-k+1 *k*-mers. On the other hand, the number of possible *k*-mers can be calculated as  n<sup>k</sup>, where n is the number of possible monomers and k is the k-mer size.
 >
@@ -260,9 +262,9 @@ Before starting a *de novo* genome assembly project, it is useful to collect met
 > Thus, the k-mer size is a key parameter, which must be large enough to map  uniquely to the genome, but not too large, since it can lead to wasting computational resources. In the case of the human genome, *k*-mers of 31 bases in length lead to 96.96% of unique *k*-mers.
 >
 > Each unique k-mer can be assigned a value for coverage based on the number of times it occurs in a sequence, whose distribution will approximate a Poisson distribution, with the peak corresponding to the average genome sequencing depth. From the genome coverage, the genome size can be easily computed.
-{: .comment}
+{: .details}
 
-## Generation of k-mer spectra with **Meryl**
+## Generation of _k_-mer spectra with **Meryl**
 
 Meryl will allow us to generate the *k*-mer profile by decomposing the sequencing data into *k*-length substrings, counting the occurrence of each *k*-mer and determining its frequency. The original version of Meryl was developed for the Celera Assembler. The current Meryl version comprises three main modules: one for generating *k*-mer databases, one for filtering and combining databases, and one for searching databases. *K*-mers are stored in lexicographical order in the database, similar to words in a dictionary ({% cite Rhie2020 %}).
 
@@ -369,7 +371,7 @@ Hifiasm can be run in multiple modes depending on data availability:
 ![Diagram for hifiasm trio mode.](../../images/vgp_assembly/hifiasm_trio_schematic.png "The trio mode produces maternal and paternal contigs, which have been phased using paternal short read data. Typically, these assemblies do not need to undergo purging, but you should always look at your assemblies' QC to make sure. These contigs are then scaffolded separately using Bionano and/or Hi-C workflows, resulting in two scaffolded assemblies.")
 
 {% include _includes/cyoa-choices.html option1="hic" option2="solo" default="hic"
-       text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click SOLO. If you have HiC reads for the same indiviudal, then click HIC-PHASED. NOTE: If you want to learn more about purging, then please check out the SOLO tutorial for details purging false duplications." %}
+       text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click <b><i>solo</i></b>. If you have HiC reads for the same indiviudal, then click <b><i>hic</i></b>. <b>NOTE: If you want to learn more about purging, then please check out the <i>solo</i> tutorial for details purging false duplications.</b>" %}
 
 
 <div class = "hic" markdown="1">
@@ -782,7 +784,7 @@ Now, we will segment the draft assembly into contigs by cutting at blocks of *N*
 
 During the final step of the purge_dups pipeline, it will use the self alignments and the cutoffs for identifying the haplotypic duplications.
 
-> <comment-title>Purge overlaps (purge_dups) algorithm details</comment-title>
+> <details-title>Purge overlaps (purge_dups) algorithm details</details-title>
 >
 > In order to identify the haplotypic duplications, purge_dups uses the  base-level coverage information to flag the contigs according the following criteria:
 > - If more than 80% bases of a contig are above the high read depth cutoff or below the noise cutoff, it is discarded.
@@ -797,7 +799,7 @@ During the final step of the purge_dups pipeline, it will use the self alignment
 >
 > Finally, purge_dups calculates the average coverage of the matching intervals for each overlap, and mark an unambiguous overlap as heterozygous when the average coverage on both contigs is less than the read-depth cutoff, removing the sequences corresponding to the matching interval in the shorter contig.
 >
-{: .comment}
+{: .details}
 
 > <hands-on-title>Resolution of haplotigs and overlaps</hands-on-title>
 >    
@@ -911,15 +913,15 @@ At this point, we have obtained the primary and alternate assemblies, each of wh
 
 In this step, the linkage information provided by optical maps is integrated with primary assembly sequences, and the overlaps are used to orient and order the contigs, resolve chimeric joins, and estimate the length of gaps between adjacent contigs. One of the advantages of optical maps is that they can easily span genomic regions that are difficult to resolve using DNA sequencing technologies ({% cite Savara2021 %}, {% cite Yuan2020 %}).
 
-> <comment-title>Background on Bionano optical maps</comment-title>
+> <details-title>What are Bionano optical maps?</details-title>
 >
 > Bionano technology relies on the isolation of kilobase-long DNA fragments, which are labeled at specific sequence motifs with a fluorescent dye, resulting in a unique fluorescent pattern for each genome. DNA molecules are stretched into nanoscale channels and imaged with a high-resolution camera, allowing us to build optical maps that include the physical locations of labels rather than base-level information ({% cite Lam2012 %}, {% cite Giani2020 %}, {% cite Savara2021 %}).
 >
-> ![Figure 9: Bionano optical maps](../../images/vgp_assembly/bionano.png "Bionano optical maps. Source: https://bionanogenomics.com")
+> ![Bionano optical maps](../../images/vgp_assembly/bionano.png "Bionano optical maps. Source: https://bionanogenomics.com")
 >
 > The average optical map molecule length, around 225 kbp, is substantially larger than the PacBio HiFi reads, with read lengths averaging 10-25 kbp.
 >
-{: .comment}
+{: .details}
 
 The *Bionano Hybrid Scaffold* tool automates the scaffolding process, which includes five main steps:
 
@@ -1019,15 +1021,17 @@ Finally, the BUSCO's summary image (fig. 10c) shows that most of the universal s
 
 Hi-C is a sequencing-based molecular assay designed to identify regions of frequent physical interaction in the genome by measuring the contact frequency between all pairs of loci, allowing us to provide an insight into the three-dimensional organization of a genome  ({% cite Dixon2012 %}, {% cite LiebermanAiden2009 %}). In this final stage, we will exploit the fact that the contact frequency between a pair of loci strongly correlates with the one-dimensional distance between them with the objective of linking the Bionano scaffolds to a chromosome scale.
 
-> <comment-title>Background about Hi-C data</comment-title>
+> <details-title>How does Hi-C sequencing work?</details-title>
 >
 > The high-throughput chromosome conformation capture (Hi-C) technology is based on the capture of the chromatin in three-dimensional space. During Hi-C library preparation, DNA is crosslinked in its 3D conformation. Then, the DNA is digested using restriction enzymes, and the digested ends are filled with biotinylated nucleotides (fig. 11). The biotinylated nucleotides enable the specific purification of the ligation junctions, preventing the sequencing of DNA molecules that do not contain such junctions which are thus mostly uninformative ({% cite Lajoie2015 %}).
 >
-> ![Figure 11: Hi-C protocol](../../images/vgp_assembly/hi-c_protocol.png "Hi-C protocol. Adapted from Rao et al. 2014")
+> ![Hi-C protocol](../../images/vgp_assembly/hi-c_protocol.png "Hi-C protocol. Adapted from {% cite Rao2014 %}")
 >
 > Next, the blunt ends of the spatially proximal digested end are ligated. Each DNA fragment is then sequenced from each end of this artificial junction, generating read pairs. This provides contact information that can be used to reconstruct the proximity of genomic sequences belonging to the same chromosome ({% cite Giani2020 %}). Hi-C data are in the form of two-dimensional matrices (contact maps) whose entries quantify the intensity of the physical interaction between genome regions.
 >
-{: .comment}
+>
+> ![Hi-C scaffolding and haplotyping logic.](../../images/vgp_assembly/hic_scaffolding_haplotyping.jpg "Schematic of how Hi-C information is used to scaffold and orient contigs along chromosomes using long-range information, as well as link separated haplotype blocks into chromosome-scale haplotypes {% cite Korbel2013 %}.")
+{: .details}
 
 
 ### Pre-processing Hi-C data
