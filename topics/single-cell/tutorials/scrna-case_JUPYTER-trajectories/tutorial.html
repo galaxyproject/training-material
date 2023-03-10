@@ -23,8 +23,9 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Inferring Trajectories using Python (Jupyter Notebook) in Galaxy" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2023-02-14 23:04:54 +0000" />
+<meta name="DC.date" content="2023-03-02 21:29:37 +0000" />
 <meta name="DC.creator" content="Wendi Bacon" />
+<meta name="DC.creator" content="Julia Jakiela" />
 <meta name="DC.creator" content="Mehmet Tekman" />
 
         
@@ -65,7 +66,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2023-02-14 23:04:54 +0000",
+  "dateModified": "2023-03-02 21:29:37 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Inferring Trajectories using Python (Jupyter Notebook) in Galaxy",
   "interactivityType": "mixed",
@@ -118,7 +119,7 @@
   "name": "Hands-on for 'Inferring Trajectories using Python (Jupyter Notebook) in Galaxy' tutorial",
   "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html",
   "timeRequired": "PT2H",
-  "keywords": "single-cell, single-cell, 10x, paper-replication, interactive-tools, transcriptomics",
+  "keywords": "single-cell, single-cell, 10x, paper-replication, interactive-tools, transcriptomics, jupyter-notebook",
   "description": "The questions this  addresses are:\n - How can I infer lineage relationships between single cells based on their RNA, without a time series?\n\n\nThe objectives are:\n - Execute multiple plotting methods designed to maintain lineage relationships between cells\n - Interpret these plots\n\n",
   "inLanguage": {
     "@type": "Language",
@@ -432,7 +433,7 @@
 	<tr>
 		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
 		<td>
-			<a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=27" alt="Avatar">Wendi Bacon</a><a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=27" alt="Avatar">Mehmet Tekman</a>
+			<a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge contributor-nomadscientist"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/nomadscientist?s=27" alt="Avatar">Wendi Bacon</a><a href="/training-material/hall-of-fame/wee-snufkin/" class="contributor-badge contributor-wee-snufkin"><img src="https://avatars.githubusercontent.com/wee-snufkin?s=27" alt="Avatar">Julia Jakiela</a><a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge contributor-mtekman"><img src="https://avatars.githubusercontent.com/mtekman?s=27" alt="Avatar">Mehmet Tekman</a>
 		</td>
 	</tr>
 	
@@ -448,12 +449,6 @@
 	</tr>
 	
 
-	
-	<tr>
-		<td><abbr title="These people tested the tutorial to ensure it works correctly for students, or reported issues with the tutorial.">Tester(s)</abbr></td>
-		<td>
-			<a href="/training-material/hall-of-fame/wee-snufkin/" class="contributor-badge contributor-wee-snufkin"><img src="https://avatars.githubusercontent.com/wee-snufkin?s=27" alt="Avatar">Julia Jakiela</a></td>
-	</tr>
 	
 
 	
@@ -770,6 +765,16 @@
             
 
             
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="topic-icon" href="/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/single-cell-scrna-case_JUPYTER-trajectories.ipynb" title="Jupyter Notebook" alt="Inferring Trajectories using Python (Jupyter Notebook) in Galaxy Notebook">
+        <i class="far fa-file-code" aria-hidden="true"></i> Jupyter Notebook
+    </a>
+    
+
+</li>
+            
 
             
             
@@ -830,7 +835,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Feb 14, 2023 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 2, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -847,275 +852,237 @@
             </div>
             <div class="col-sm-10">
                  
+                     
+                     
+                     
+                     
+                    
+                        
+                        <!--SNIPPET--><h1 id="introduction">Introduction</h1> <p>You’ve done all the hard work of: preparing a single cell matrix, processing it, plotting it, interpreting it, and finding lots of lovely genes. Now you want to infer trajectories, or relationships between cells… and you’ve been threatened with learning Python to do so! Well, fear not. If you can have a run-through of a basic python coding introduction such as <a href="https://www.w3schools.com/python/">this one</a>, then that will help you make more sense of this tutorial, however you’ll be able to make and interpret glorious plots even without understanding the Python coding language. This is the beauty of Galaxy - all the ‘set-up’ is identical across computers, because it’s browser based. So fear not!</p> <p>Traditionally, we thought that differentiating or changing cells jumped between discrete states, so ‘Cell A’ became ‘Cell B’ as part of its maturation. However, most data shows otherwise. Generally, there is a spectrum (a ‘trajectory’, if you will…) of small, subtle changes along a pathway of that differentiation. Trying to analyse cells every 10 seconds can be pretty tricky, so ‘pseudotime’ analysis takes a single sample and assumes that those cells are all on slightly different points along a path of differentiation. Some cells might be slightly more mature and others slightly less, all captured at the same ‘time’. We ‘assume’ or ‘infer’ relationships between cells.</p> <p>We will use the same sample from the previous three tutorials, which contains largely T-cells in the thymus. We know T-cells differentiate in the thymus, so we would assume that we would capture cells at slightly different time points within the same sample. Furthermore, our cluster analysis alone showed different states of T-cell. Now it’s time to look further!</p> <blockquote class="agenda">   <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>   <p>In this tutorial, we will cover:</p> <ol id="markdown-toc">   <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a>    <ol>       <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>     </ol>   </li>   <li><a href="#important-tips-for-easier-analysis" id="markdown-toc-important-tips-for-easier-analysis">Important tips for easier analysis</a>    <ol>       <li><a href="#filtering-for-t-cells" id="markdown-toc-filtering-for-t-cells">Filtering for T-cells</a></li>       <li><a href="#launching-jupyter" id="markdown-toc-launching-jupyter">Launching Jupyter</a></li>     </ol>   </li> </ol> </blockquote> <h2 id="get-data">Get data</h2> <p>We’ve provided you with experimental data to analyse from a mouse dataset of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span>. This is the full dataset generated from <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">this tutorial</a> (see the <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">study in Single Cell Expression Atlas</a> and the <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">project submission</a>). You can find the final dataset in this <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferred-trajectory-analysis-using-python-jupyter-notebook-in-galaxy---input">input history</a> or download from Zenodo below.</p> <blockquote class="hands_on">   <div class="box-title hands-on-title" id="hands-on-option-1-data-upload-import-history" aria-label="hands-on box: Option 1: Data upload - Import history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Option 1: Data upload - Import history</div>   <ol>     <li>       <p>Import history from: <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferred-trajectory-analysis-using-python-jupyter-notebook-in-galaxy---input">input history</a></p>       <!--SNIPPET-->       <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open the link to the shared history</li>   <li>Click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>Import history</em> button on the top right</li>   <li>Enter a title for the new history</li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>     </li>     <li>       <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the the history to your name of choice.</p>     </li>   </ol> </blockquote> <blockquote class="hands_on">   <div class="box-title hands-on-title" id="hands-on-option-2-data-upload-add-to-history" aria-label="hands-on box: Option 2: Data upload - Add to history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Option 2: Data upload - Add to history</div>   <ol>     <li>Create a new history for this tutorial</li>     <li>       <p>Import the AnnData object from <a href="https://zenodo.org/record/7075718">Zenodo</a></p>       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7075718/files/Final_cell_annotated_object.h5ad<br></code></pre></div>      </div>       <!--SNIPPET-->       <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>     </li>     <li>       <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the .h5ad object as <code class="language-plaintext highlighter-rouge">Final cell annotated object</code></p>       <!--SNIPPET-->       <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Final cell annotated object</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>     </li>     <li>       <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">h5ad</code></p>       <!--SNIPPET-->       <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">h5ad</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>     </li>   </ol> </blockquote> <h1 id="important-tips-for-easier-analysis">Important tips for easier analysis</h1> <!--SNIPPET--> <blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your Galaxy may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your Galaxy server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside Galaxy.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the Galaxy analytical interface</li> </ul>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-not-all-browsers-work" aria-label="warning box: Not all browsers work!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Not all browsers work!</div>   <ul>     <li>We’ve had some issues with Tutorial mode on Safari for Mac users.</li>     <li>Try a <strong>different browser</strong> if you aren’t seeing the button.</li>   </ul> </blockquote> </blockquote> <blockquote class="comment">   <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>   <ul>     <li>The Galaxy tool search panel sometimes doesn’t find the tools we need from the thousands available.</li>     <li>You’ll have a much easier time selecting tools from the panel (if you aren’t using tutorial mode!) if you are on the <a href="https://humancellatlas.usegalaxy.eu">https://humancellatlas.usegalaxy.eu</a></li>   </ul> </blockquote> <h2 id="filtering-for-t-cells">Filtering for T-cells</h2> <p>One problem with our current dataset is that it’s not just T-cells: we found in the previous tutorial that it also contains macrophages. This is a problem, because trajectory analysis will generally try to find relationships between all the cells in the sample. We need to remove those cell types to analyse the trajectory.</p> <blockquote class="hands_on">   <div class="box-title hands-on-title" id="hands-on-removing-macrophages" aria-label="hands-on box: Removing macrophages"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Removing macrophages</div>   <ol>     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1</span></span>  with the following parameters:       <ul>         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Final cell annotated object</code></li>         <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Filter observations or variables</code></li>         <li><em>“What to filter?”</em>: <code class="language-plaintext highlighter-rouge">Observations (obs)</code></li>         <li><em>“Type of filtering?”</em>: <code class="language-plaintext highlighter-rouge">By key (column) values</code></li>         <li><em>“Key to filter”</em>: <code class="language-plaintext highlighter-rouge">cell_type</code></li>         <li><em>“Type of value to filter”</em>: <code class="language-plaintext highlighter-rouge">Text</code></li>         <li><em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">not equal to</code></li>         <li><em>“Value”</em>: <code class="language-plaintext highlighter-rouge">Macrophages</code></li>       </ul>     </li>     <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output h5ad <code class="language-plaintext highlighter-rouge">T-cell_object.h5ad</code></li>   </ol> </blockquote> <p>You should now have <code class="language-plaintext highlighter-rouge">8569</code> cells, as opposed to the <code class="language-plaintext highlighter-rouge">8605</code> you started with. You’ve only removed a few cells (the contaminants!), but it makes a big difference in the next steps.</p> <p>Take note of what <code class="language-plaintext highlighter-rouge">#</code> this dataset is in your history, as you will need that shortly!</p> <h2 id="launching-jupyter">Launching Jupyter</h2> <blockquote class="warning">   <div class="box-title warning-title" id="warning-data-uploads-and-jupyter" aria-label="warning box: Data uploads and Jupyter"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Data uploads and Jupyter</div>   <p>There are a few ways of importing and uploading data in Jupyter. You might find yourself accidentally doing this differently than the tutorial, and that’s ok. There are a few key steps where you will call files from a location - if these don’t work from you, check that the file location is correct and change accordingly!</p> </blockquote> <p>JupyterLab is a bit like RStudio but for other coding languages. What, you’ve never heard of <a href="https://www.rstudio.com/products/rstudio/features/">RStudio</a>? Then don’t worry, just follow the instructions!</p> <p><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Please note: this is only currently available on the <a href="https://usegalaxy.eu">usegalaxy.eu</a> and <a href="https://usegalaxy.org">usegalaxy.org</a> sites.</p> <blockquote class="hands_on">   <div class="box-title hands-on-title" id="hands-on-launching-jupyterlab" aria-label="hands-on box: Launching JupyterLab"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launching JupyterLab</div>   <ol>     <li><span class="tool" data-tool="interactive_tool_jupyter_notebook" title="Tested with interactive_tool_jupyter_notebook"><strong>Interactive JupyTool and Notebook</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_jupyter_notebook</span></span>  with the following parameters:       <ul>         <li><em>“Do you already have a notebook?”</em>: <code class="language-plaintext highlighter-rouge">Start with a fresh notebook</code></li>       </ul>       <p>This may take a moment, but once the <code class="language-plaintext highlighter-rouge">Executed notebook</code> in your dataset is <strong>orange</strong>, you are up and running!</p>     </li>     <li>       <p>Either click on the blue <code class="language-plaintext highlighter-rouge">User menu</code> that appeared when you executed the <strong>Interactive JupyTool and Notebook</strong>, or go to the top of the screen and choose <code class="language-plaintext highlighter-rouge">User</code> and then <code class="language-plaintext highlighter-rouge">Active InteractiveTools</code>.</p>     </li>     <li>Click on the newest <code class="language-plaintext highlighter-rouge">JupyTool interactive tool</code>.</li>   </ol> </blockquote> <p>Welcome!</p> <blockquote class="warning">   <div class="box-title warning-title" id="warning-danger-you-can-lose-data" aria-label="warning box: Danger: You can lose data!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Danger: You can lose data!</div>   <p>Do NOT delete or close this notebook dataset in your history. YOU WILL LOSE IT!</p> </blockquote> <p>You have two options for how to proceed with this tutorial - either you download the tutorial notebook and run the lines in that notebook, or you can copy and paste the code for each step into a fresh notebook and run it yourself. The initial instructions for both options are below.</p> <blockquote class="hands_on">   <div class="box-title hands-on-title" id="hands-on-option-1a-open-the-notebook-directly-in-the-jupyterlab" aria-label="hands-on box: Option 1A: Open the notebook directly in the JupyterLab"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Option 1A: Open the notebook directly in the JupyterLab</div>   <ol>     <li>       <p>Open a Terminal in JupyterLab with File -&gt; New -&gt; Terminal</p>     </li>     <li>Run       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/single-cell-scrna-case_JUPYTER-trajectories.ipynb<br></code></pre></div>      </div>     </li>     <li>Select the notebook that appears in the list of files on the left.</li>   </ol> </blockquote> <blockquote class="hands_on">   <div class="box-title hands-on-title" id="hands-on-option-1b-downloading-the-tutorial-notebook-amp-upload" aria-label="hands-on box: Option 1B: Downloading the tutorial notebook &amp; Upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Option 1B: Downloading the tutorial notebook &amp; Upload</div>   <ol>     <li>       <p>You will need to download the tutorial notebook locally to your own computer. Do this by clicking on <i class="far fa-file-code" aria-hidden="true"></i><span class="visually-hidden">notebook</span><code class="language-plaintext highlighter-rouge">Jupyter notebook</code> in the <code class="language-plaintext highlighter-rouge">Supporting Materials</code> section at the very beginning of the tutorial, in the Overview box.</p>     </li>     <li>       <p>In the folder window, <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> Upload the downloaded notebook from your computer. It should appear in the file window.</p>     </li>     <li>       <p>Open it by double clicking it in the file window.</p>     </li>   </ol> </blockquote> <blockquote class="hands_on">   <div class="box-title hands-on-title" id="hands-on-option-2-creating-a-notebook" aria-label="hands-on box: Option 2: Creating a notebook"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Option 2: Creating a notebook</div>   <ol>     <li>Click the <strong>Python 3</strong> icon under <strong>Notebook</strong></li>   </ol>   <p><img src="../../images/scrna-casestudy/wab-python3logo.png" alt="Python 3 icon" title="Python 3 Button" /></p>   <ol>     <li>       <p>Save your file (<strong>File</strong>: <strong>Save</strong>, or click the <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> Save icon at the top left)</p>     </li>     <li>       <p>If you right click on the file in the folder window at the left, you can rename your file <code class="language-plaintext highlighter-rouge">whateveryoulike.ipynb</code></p>     </li>   </ol> </blockquote> <blockquote class="warning">   <div class="box-title warning-title" id="warning-you-should-b-save-b-frequently" aria-label="warning box: You should <b>Save</b> frequently!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: You should <b>Save</b> frequently!</div>   <p>This is both for good practice and to protect you in case you accidentally close the browser. Your environment will still run, so it will contain the last saved notebook you have. You might eventually stop your environment after this tutorial, but ONLY once you have saved and exported your notebook (more on that at the end!) Note that you can have multiple notebooks going at the same time within this JupyterLab, so if you do, you will need to save and export each individual notebook. You can also download them at any time.</p> </blockquote> 
+                    
+                 
 
-                <h1 id="introduction">Introduction</h1>
+                <h1 id="run-the-tutorial">Run the tutorial!</h1>
 
-<p>You’ve done all the hard work of preparing a single cell matrix, processing it, plotting it, interpreting it, finding lots of lovely genes, all within the glorious Galaxy interface. Now you want to infer trajectories, or relationships between cells… and you’ve been threatened with learning Python to do so! Well, fear not. If you can have a run-through of a basic python coding introduction such as <a href="https://www.w3schools.com/python/">this one</a>, then that will help you make more sense of this tutorial, however you’ll be able to make and interpret glorious plots even without understanding the Python coding language. This is the beauty of Galaxy - all the ‘set-up’ is identical across computers, because it’s browser based. So fear not!</p>
+<p>The tutorial is adapted from the <a href="https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html">Scanpy Trajectory inference tutorial</a>.</p>
 
-<p>Traditionally, we thought that differentiating or changing cells jumped between discrete states, so ‘Cell A’ became ‘Cell B’ as part of its maturation. However, most data shows otherwise, that generally there is a spectrum (a ‘trajectory’, if you will…) of small, subtle changes along a pathway of that differentiation. Trying to analyse cells every 10 seconds can be pretty tricky, so ‘pseudotime’ analysis takes a single sample and assumes that those cells are all on slightly different points along a path of differentiation. Some cells might be slightly more mature and others slightly less, all captured at the same ‘time’. We ‘assume’ or ‘infer’ relationships between cells.</p>
+<h2 id="install-modules--activate-them">Install modules &amp; activate them</h2>
 
-<p>We will use the same sample from the previous three tutorials, which contains largely T-cells in the thymus. We know T-cells differentiate in the thymus, so we would assume that we would capture cells at slightly different time points within the same sample. Furthermore, our cluster analysis alone showed different states of T-cell. Now it’s time to look further!</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pip</span> <span class="n">install</span> <span class="n">scanpy</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pip</span> <span class="n">install</span> <span class="n">fa2</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pip</span> <span class="n">install</span> <span class="n">python</span><span class="o">-</span><span class="n">igraph</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">pip</span> <span class="n">install</span> <span class="n">louvain</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">pl</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="n">sc</span>
+</code></pre></div></div>
 
-<blockquote class="agenda">
-  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+<h2 id="import-dataset">Import dataset</h2>
 
-  <p>In this tutorial, we will cover:</p>
+<p>You can now import files from your Galaxy history directly using the following code. This will depend on what number in your history the final annotated object is. If your object is dataset #2 in your history, then you import it as following:</p>
 
-<ol id="markdown-toc">
-  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a>    <ol>
-      <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
-    </ol>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">thymusobject</span> <span class="o">=</span> <span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>You now you need to read it in as an h5ad object.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="p">.</span><span class="n">read_h5ad</span><span class="p">(</span><span class="n">thymusobject</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h2 id="draw-force-directed-graph">Draw force-directed graph</h2>
+
+<p>First, we will calculate a <a href="https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.draw_graph.html">force-directed graph</a>, as an alternate to tSNE, which will likely work better for trajectory analysis.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">tl</span><span class="p">.</span><span class="n">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>And now time to plot it!
+<em>Note: We’re saving to <strong>png</strong>, but you can also choose pdf</em></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="n">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'cell_type'</span><span class="p">,</span> <span class="n">legend_loc</span><span class="o">=</span><span class="s">'on data'</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot1.png'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<figure id="figure-1"><img src="../../images/scrna-casestudy/draw_graph_faPlot1.png" alt="Plot1-Force-Directed Graph. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Plot1-Force-Directed Graph</figcaption></figure>
+
+<p>Well now this is exciting! Our DP-late is more clearly separating, and we might also suppose that DP-M1, DP-M2, and DP-M3 are actually earlier on in the differentiation towards mature T-cells. And we’re only just getting started!</p>
+
+<h2 id="diffusion-maps">Diffusion maps</h2>
+
+<p>We’ll now perform an <em>optional step</em>, that basically takes the place of the PCA. Instead of using PCs, we can use <a href="https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.diffmap.html">diffusion maps</a>.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">tl</span><span class="p">.</span><span class="n">diffmap</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now that we have our diffusion map, we need to re-calculate neighbors using the diffusion map instead of the PCs. Then we re-draw and plot a new force directed graph using the new neighbors.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">pp</span><span class="p">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">n_neighbors</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">use_rep</span><span class="o">=</span><span class="s">'X_diffmap'</span><span class="p">)</span>
+<span class="n">sc</span><span class="p">.</span><span class="n">tl</span><span class="p">.</span><span class="n">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="n">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'cell_type'</span><span class="p">,</span> <span class="n">legend_loc</span><span class="o">=</span><span class="s">'on data'</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot2.png'</span><span class="p">)</span>
+</code></pre></div></div>
+<figure id="figure-2"><img src="../../images/scrna-casestudy/draw_graph_faPlot2.png" alt="Diffusion Map. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Diffusion Map</figcaption></figure>
+
+<p>Oh dear! This doesn’t look great. Maybe the DP-M4 cells are a whole other trajectory? That doesn’t seem right. Saying that, this spreads out our T-mature cells, which makes a lot more sense when it comes to T-cell biology (we expect T-cells to differentiate into two types of T-cells, Cd8+Cd4- and Cd4+Cd8-). If you wanted to, you could also re-cluster your cells (since you’ve changed the neighborhood graph on which the clusterisation depends). You could use this: 
+<code class="language-plaintext highlighter-rouge">sc.tl.louvain(adata, resolution=0.6)</code>
+However, we tried that, and it called far too many clusters given the depth of sequencing in this dataset. Let’s stick with our known cell types and move from there.</p>
+
+<h2 id="working-in-a-group-decision-time">Working in a group? Decision-time!</h2>
+<p>If you are working in a group, you can now divide up a decision here with one <em>control</em> and the rest can vary numbers so that you can compare results throughout the tutorials.</p>
+<ul>
+  <li>Control
+    <ul>
+      <li>Go straight to the PAGA section</li>
+    </ul>
   </li>
-  <li><a href="#important-tips-for-easier-analysis" id="markdown-toc-important-tips-for-easier-analysis">Important tips for easier analysis</a>    <ol>
-      <li><a href="#filtering-for-t-cells" id="markdown-toc-filtering-for-t-cells">Filtering for T-cells</a></li>
-      <li><a href="#launching-jupyter" id="markdown-toc-launching-jupyter">Launching Jupyter</a></li>
-    </ol>
+  <li>Everyone else:
+    <ul>
+      <li>you could re-call clusters <code class="language-plaintext highlighter-rouge">sc.tl.louvain(adata, resolution=0.6</code> or use other resolutions! (Tip, go low!)
+        <ul>
+          <li>Please note that in this case, you will want to change the PAGA step <code class="language-plaintext highlighter-rouge">sc.pl.paga</code> to group by <code class="language-plaintext highlighter-rouge">louvain</code> rather than <code class="language-plaintext highlighter-rouge">cell_type</code>. You can certainly still plot both, we only didn’t because with using our old Louvain calls, the cell_type and louvain categories are identical.</li>
+        </ul>
+      </li>
+      <li>you could undo the diffusion map step by running the following
+   <code class="language-plaintext highlighter-rouge">sc.pp.neighbors(adata, n_neighbors=15, use_rep='X_pca')</code>
+   <code class="language-plaintext highlighter-rouge">sc.tl.draw_graph(adata)</code></li>
+      <li>you could also change the number of neighbors used in the pp.neighbors step (this is the same as the Galaxy tool <strong>Scanpy ComputeGraph</strong></li>
+    </ul>
   </li>
-  <li><a href="#run-the-tutorial" id="markdown-toc-run-the-tutorial">Run the tutorial!</a></li>
-  <li><a href="#tutorial-plot-answers" id="markdown-toc-tutorial-plot-answers">Tutorial Plot Answers</a></li>
-  <li><a href="#after-jupyter" id="markdown-toc-after-jupyter">After Jupyter</a></li>
-  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
-</ol>
+  <li>Everyone else: You will want to compare FREQUENTLY with your control team member.</li>
+</ul>
 
-</blockquote>
+<h2 id="paga">PAGA</h2>
 
-<h2 id="get-data">Get data</h2>
+<p><a href="https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.paga.html">PAGA</a> is used to generalise relationships between groups, or likely clusters, in this case.</p>
 
-<p>We’ve provided you with experimental data to analyse from a mouse dataset of fetal growth restriction <span class="citation"><a href="#Bacon2018">Bacon <i>et al.</i> 2018</a></span>. This is the full dataset generated from <a href="/training-material/topics/single-cell/tutorials/scrna-case_basic-pipeline/tutorial.html">this tutorial</a> (see the <a href="https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne">study in Single Cell Expression Atlas</a> and the <a href="https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/">project submission</a>).</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">tl</span><span class="p">.</span><span class="n">paga</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">groups</span><span class="o">=</span><span class="s">'cell_type'</span><span class="p">)</span>
+</code></pre></div></div>
 
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-option-1-data-upload-import-history" aria-label="hands-on box: Option 1: Data upload - Import history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Option 1: Data upload - Import history</div>
+<p>Now we want to plot our PAGA, but we might also be interested in colouring our plot by genes as well. In this case, remembering that we are dutifully counting our genes by their EnsemblIDs rather than Symbols (which do not exist for all EnsemblIDs), we have to look up our gene of interest (CD4, CD8a) and plot the corresponding IDs.</p>
 
-  <ol>
-    <li>
-      <p>Import history from: <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferred-trajectory-analysis-using-python-jupyter-notebook-in-galaxy---input">input history</a></p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="n">paga</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s">'cell_type'</span><span class="p">,</span> <span class="s">'ENSMUSG00000023274'</span><span class="p">,</span> <span class="s">'ENSMUSG00000053977'</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="s">'Cell type'</span><span class="p">,</span> <span class="s">'CD4'</span><span class="p">,</span> <span class="s">'Cd8a'</span><span class="p">],</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot4.png'</span><span class="p">)</span>
+</code></pre></div></div>
 
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-a-history"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-a-history-contents" aria-expanded="true" aria-label="Toggle tip box: Importing a history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing a history<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open the link to the shared history</li>   <li>Click on the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> <em>Import history</em> button on the top right</li>   <li>Enter a title for the new history</li>   <li>Click on <strong>Import</strong></li> </ol> </blockquote>
-    </li>
-    <li>
-      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the the history to your name of choice.</p>
-    </li>
-  </ol>
+<figure id="figure-3"><img src="../../images/scrna-casestudy/pagaPlot4.png" alt="PAGA. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> PAGA</figcaption></figure>
 
-</blockquote>
+<p>Well now that is interesting! This analysis would find that DP-M1 and DP-M4 are both driving towards differentiation, which is not something we had necessarily been able to specify before by just looking at our cluster graphs or applying our biological knowledge.</p>
 
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-option-2-data-upload-add-to-history" aria-label="hands-on box: Option 2: Data upload - Add to history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Option 2: Data upload - Add to history</div>
+<h2 id="re-draw-force-directed-graph">Re-draw force-directed graph</h2>
 
-  <ol>
-    <li>Create a new history for this tutorial</li>
-    <li>
-      <p>Import the AnnData object from <a href="https://zenodo.org/record/7075718">Zenodo</a></p>
+<p>Force directed graphs can be initialised randomly, or we can prod it in the right direction. We’ll prod it with our PAGA calculations. Note that you could also try prodding it with tSNE or UMAP. A lot of these tools can be used on top of each other or with each other in different ways, this tutorial is just one example. Similarly, you could be using any <strong>obs</strong> information for grouping, so could do this for <em>louvain</em> or <em>cell_type</em> for instance.</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/7075718/files/Trajectories_Instructions.ipynb
-https://zenodo.org/record/7075718/files/Final_cell_annotated_object.h5ad
-</code></pre></div>      </div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">tl</span><span class="p">.</span><span class="n">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">init_pos</span><span class="o">=</span><span class="s">'paga'</span><span class="p">)</span>
 
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-importing-via-links"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-importing-via-links-contents" aria-expanded="true" aria-label="Toggle tip box: Importing via links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Importing via links<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Copy the link location</li>   <li>     <p>Open the Galaxy Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> on the top-right of the tool panel)</p>   </li>   <li>Select <strong>Paste/Fetch Data</strong></li>   <li>     <p>Paste the link into the text field</p>   </li>   <li>     <p>Press <strong>Start</strong></p>   </li>   <li><strong>Close</strong> the window</li> </ul> </blockquote>
-    </li>
-    <li>
-      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the .h5ad object as <code class="language-plaintext highlighter-rouge">Final cell annotated object</code></p>
+<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="n">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s">'cell_type'</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="s">'Cluster'</span><span class="p">],</span> <span class="n">legend_loc</span><span class="o">=</span><span class="s">'on data'</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot5.png'</span><span class="p">)</span>
+<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="n">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s">'genotype'</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="s">'Genotype'</span><span class="p">],</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot6.png'</span><span class="p">)</span>
+<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="n">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s">'ENSMUSG00000023274'</span><span class="p">,</span> <span class="s">'ENSMUSG00000053977'</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="s">'CD4'</span><span class="p">,</span> <span class="s">'Cd8a'</span><span class="p">],</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot7.png'</span><span class="p">)</span>
+</code></pre></div></div>
 
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-renaming-a-dataset"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-renaming-a-dataset-contents" aria-expanded="true" aria-label="Toggle tip box: Renaming a dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Renaming a dataset<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">Final cell annotated object</code></li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
-    </li>
-    <li>
-      <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">h5ad</code></p>
+<figure id="figure-4"><img src="../../images/scrna-casestudy/draw_graph_faPlot5.png" alt="Force-Directed + PAGA - Cell type. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Force-Directed + PAGA - Cell type</figcaption></figure>
 
-      <!--SNIPPET-->
-      <blockquote class="tip">   <div class="box-title tip-title" id="tip-changing-the-datatype"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-changing-the-datatype-contents" aria-expanded="true" aria-label="Toggle tip box: Changing the datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Changing the datatype<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ul>   <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>   <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden">galaxy-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>   <li>Select <code class="language-plaintext highlighter-rouge">h5ad</code>     <ul>       <li>tip: you can start typing the datatype into the field to filter the dropdown menu</li>     </ul>   </li>   <li>Click the <strong>Save</strong> button</li> </ul> </blockquote>
-    </li>
-    <li>
-      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> the .ipynb object as <code class="language-plaintext highlighter-rouge">Trajectories_Instructions.ipynb</code></p>
-    </li>
-    <li>Check that the datatype is <code class="language-plaintext highlighter-rouge">.ipynb</code></li>
-  </ol>
+<figure id="figure-5"><img src="../../images/scrna-casestudy/draw_graph_faPlot6.png" alt="Force-Directed + PAGA - Genotype. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Force-Directed + PAGA - Genotype</figcaption></figure>
 
-</blockquote>
+<figure id="figure-6"><img src="../../images/scrna-casestudy/draw_graph_faPlot7.png" alt="Force-Directed + PAGA - Markers. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Force-Directed + PAGA - Markers</figcaption></figure>
 
-<h1 id="important-tips-for-easier-analysis">Important tips for easier analysis</h1>
+<p><strong>Note</strong> - we are aware that something about these graphs has gotten a bit odd in the recent Scanpy updates. Watch this space for a fix!</p>
 
-<!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your Galaxy may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your Galaxy server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside Galaxy.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the Galaxy analytical interface</li> </ul>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-not-all-browsers-work" aria-label="warning box: Not all browsers work!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Not all browsers work!</div>   <ul>     <li>We’ve had some issues with Tutorial mode on Safari for Mac users.</li>     <li>Try a <strong>different browser</strong> if you aren’t seeing the button.</li>   </ul> </blockquote> </blockquote>
+<p>Well aren’t those charts interesting! Using the diffusion map to drive the force-directed graph, we see correct ordering of our cells (from DN to DP to T-mature, which was lost with the diffusion map alone) as well as two apparent branches leaving the mature T-cell population, which is what we’d biologically expect. In terms of our experiment, we’re seeing a clear trajectory issue whereby the knockout cells are not found along the trajectory into T-mature (which, well, we kind of already figured out with just the cluster analysis, but we can feel even more confident about our results!) More importantly, we can see the T-mature population dividing itself, which we did not see in the clustering via UMAP/tSNE alone, and we can verify that as the leftmost branch has CD4 but the rightmost branch does not. This is suggesting our branchpoint from to CD4+ and CD8+ single positive cells. Exciting! However, it is important to note, that the branches there are quite small and sparsely populated, which can indicate artifact branches (i.e. trajectory analysis does its best to find branches, particularly diffusion map, so you can pretty easily force branches to appear even if they are not biologically real!). However, to be frank, we were surprised not to find this clearer in the main cluster map, as we know that the T-cells should diverge at that point, so if anything this is a relief that our data is believable!</p>
 
-<blockquote class="comment">
-  <div class="box-title comment-title" id="comment" aria-label="comment box: "><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment</div>
-  <ul>
-    <li>The Galaxy tool search panel sometimes doesn’t find the tools we need from the thousands available.</li>
-    <li>You’ll have a much easier time selecting tools from the panel (if you aren’t using tutorial mode!) if you are on the <a href="https://humancellatlas.usegalaxy.eu">https://humancellatlas.usegalaxy.eu</a></li>
-  </ul>
-</blockquote>
+<p>And now, just for fun, we can compare the scatter graph with our PAGA side by side.</p>
 
-<h2 id="filtering-for-t-cells">Filtering for T-cells</h2>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="n">paga_compare</span><span class="p">(</span>
+    <span class="n">adata</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s">''</span><span class="p">,</span> <span class="n">right_margin</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">edge_width_scale</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+    <span class="n">legend_fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div></div>
 
-<p>One problem with our current dataset is that it’s not just T-cells: we found in the previous tutorial that it also contains macrophages. This is a problem, because trajectory analysis will generally try to find relationships between all the cells in the sample. We need to remove those cell types to analyse the trajectory.</p>
+<figure id="figure-7"><img src="../../images/scrna-casestudy/paga_compare.png" alt="PAGA Compare. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> PAGA Compare</figcaption></figure>
 
-<!--SNIPPET-->
-<blockquote class="tip">   <div class="box-title tip-title" id="tip-using-tutorial-mode-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-using-tutorial-mode-1-contents" aria-expanded="true" aria-label="Toggle tip box: Using tutorial mode"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Using tutorial mode<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Tools are frequently updated to new versions. Your Galaxy may have multiple versions of the same tool available. By default, you will be shown the latest version of the tool. This may NOT be the same tool used in the tutorial you are accessing. Furthermore, if you use a newer tool in one step, and try using an older tool in the next step… this may fail! To ensure you use the same tool versions of a given tutorial, use the <strong>Tutorial mode</strong> feature.</p>   <ul>   <li>Open your Galaxy server</li>   <li>Click on the <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> icon on the top menu, this will open the GTN inside Galaxy.</li>   <li>Navigate to your tutorial</li>   <li>Tool names in tutorials will be blue buttons that open the correct tool for you</li>   <li><strong>Note:</strong> this does not work for all tutorials (yet)   <img src="/training-material/topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="gif showing how GTN-in-Galaxy works" /></li>   <li>You can click anywhere in the grey-ed out area outside of the tutorial box to return back to the Galaxy analytical interface</li> </ul>   <blockquote class="warning">   <div class="box-title warning-title" id="warning-not-all-browsers-work-1" aria-label="warning box: Not all browsers work!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Not all browsers work!</div>   <ul>     <li>We’ve had some issues with Tutorial mode on Safari for Mac users.</li>     <li>Try a <strong>different browser</strong> if you aren’t seeing the button.</li>   </ul> </blockquote> </blockquote>
+<p><strong>Note</strong> - we are aware that something about these graphs has gotten a bit odd in the recent Scanpy updates. Watch this space for a fix!</p>
 
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-removing-macrophages" aria-label="hands-on box: Removing macrophages"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Removing macrophages</div>
+<h2 id="diffusion-pseudotime">Diffusion pseudotime</h2>
 
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1"><strong>Manipulate AnnData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1</span></span>  with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotated data matrix”</em>: <code class="language-plaintext highlighter-rouge">Final cell annotated object</code></li>
-        <li><em>“Function to manipulate the object”</em>: <code class="language-plaintext highlighter-rouge">Filter observations or variables</code></li>
-        <li><em>“What to filter?”</em>: <code class="language-plaintext highlighter-rouge">Observations (obs)</code></li>
-        <li><em>“Type of filtering?”</em>: <code class="language-plaintext highlighter-rouge">By key (column) values</code></li>
-        <li><em>“Key to filter”</em>: <code class="language-plaintext highlighter-rouge">cell_type</code></li>
-        <li><em>“Type of value to filter”</em>: <code class="language-plaintext highlighter-rouge">Text</code></li>
-        <li><em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">not equal to</code></li>
-        <li><em>“Value”</em>: <code class="language-plaintext highlighter-rouge">Macrophages</code></li>
-      </ul>
-    </li>
-    <li><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">galaxy-pencil</span> output h5ad <code class="language-plaintext highlighter-rouge">T-cell_object.h5ad</code></li>
-  </ol>
+<p>We know that our cells are initialising at DN. We can use feed that information into our algorithms to then calculate a trajectory.</p>
 
-</blockquote>
+<p>First, let’s name our ‘root’.</p>
 
-<p>You should now have <code class="language-plaintext highlighter-rouge">8569</code> cells, as opposed to the <code class="language-plaintext highlighter-rouge">8605</code> you started with. You’ve only removed a few cells (the contaminants!), but it makes a big difference in the next steps.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">adata</span><span class="p">.</span><span class="n">uns</span><span class="p">[</span><span class="s">'iroot'</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">adata</span><span class="p">.</span><span class="n">obs</span><span class="p">[</span><span class="s">'cell_type'</span><span class="p">]</span>  <span class="o">==</span> <span class="s">'DN'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div></div>
 
-<p>Take note of what # this dataset is in your history, as you will need that shortly!</p>
+<h2 id="working-in-a-group-decision-time-1">Working in a group? Decision-time!</h2>
+<p>If you called new clusters using the louvain algorithm, you might want to choose one of those clusters to be your root cell instead, so change the <code class="language-plaintext highlighter-rouge">cell_type</code> above for <code class="language-plaintext highlighter-rouge">louvain</code> and then name the cluster number. Use the plots you created to help you pick the number!</p>
 
-<h2 id="launching-jupyter">Launching Jupyter</h2>
+<p>Onto the <a href="https://scanpy.readthedocs.io/en/stable/api/scanpy.tl.dpt.html">diffusion pseudotime</a>, where we are infer multiple time points within the same piece of data!</p>
 
-<blockquote class="warning">
-  <div class="box-title warning-title" id="warning-data-uploads-and-jupyter" aria-label="warning box: Data uploads and Jupyter"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Data uploads and Jupyter</div>
-  <p>There are a few ways of importing and uploading data in Jupyter. You might find yourself accidentally doing this differently than the tutorial, and that’s ok. There are a few key steps where you will call files from a location - if these don’t work from you, check that the file location is correct and change accordingly!</p>
-</blockquote>
-
-<p>JupyterLab is a bit like RStudio but for other coding languages. What, you’ve never heard of <a href="https://www.rstudio.com/products/rstudio/features/">RStudio</a>? Then don’t worry, just follow the instructions!</p>
-
-<p><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Please note: this is only currently available on the <a href="https://usegalaxy.eu">usegalaxy.eu</a> and <a href="https://usegalaxy.org">usegalaxy.org</a> sites.</p>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-downloading-the-tutorial-notebook" aria-label="hands-on box: Downloading the tutorial notebook"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Downloading the tutorial notebook</div>
-
-  <ol>
-    <li>You will need to download the tutorial notebook locally to your own computer. Do this by going here: <a href="https://zenodo.org/record/7054806/files/Trajectories_Instructions.ipynb?download=1">Download the notebook</a></li>
-  </ol>
-</blockquote>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-launching-jupyterlab" aria-label="hands-on box: Launching JupyterLab"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Launching JupyterLab</div>
-
-  <ol>
-    <li><span class="tool" data-tool="interactive_tool_jupyter_notebook" title="Tested with interactive_tool_jupyter_notebook"><strong>Interactive JupyTool and Notebook</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: interactive_tool_jupyter_notebook</span></span>  with the following parameters:
-      <ul>
-        <li><em>“Do you already have a notebook?”</em>: <code class="language-plaintext highlighter-rouge">Start with a fresh notebook</code></li>
-      </ul>
-
-      <p>This may take a moment, but once the <code class="language-plaintext highlighter-rouge">Executed notebook</code> in your dataset is orange, you are up and running!</p>
-    </li>
-    <li>
-      <p>Either click on the blue <code class="language-plaintext highlighter-rouge">User menu</code>, or go to the top of the screen and choose <code class="language-plaintext highlighter-rouge">User</code> and then <code class="language-plaintext highlighter-rouge">Active InteractiveTools</code></p>
-    </li>
-    <li>Click on the newest <code class="language-plaintext highlighter-rouge">JupyTool interactive tool</code>.</li>
-  </ol>
-
-</blockquote>
-
-<p>Welcome!</p>
-
-<blockquote class="warning">
-  <div class="box-title warning-title" id="warning-danger-you-can-lose-data" aria-label="warning box: Danger: You can lose data!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Danger: You can lose data!</div>
-  <p>Do NOT delete or close this notebook dataset in your history. YOU WILL LOSE IT!</p>
-</blockquote>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-creating-a-notebook" aria-label="hands-on box: Creating a notebook"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Creating a notebook</div>
-
-  <ol>
-    <li>Click the <strong>Python 3</strong> icon under <strong>Notebook</strong></li>
-  </ol>
-
-  <figure id="figure-1"><img src="../../images/scrna-casestudy/wab-python3logo.png" alt="Python 3 icon. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Python 3 Button</figcaption></figure>
-
-  <ol>
-    <li>
-      <p>Save your file (<strong>File</strong>: <strong>Save</strong>, or click the <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> Save icon at the top left)</p>
-    </li>
-    <li>
-      <p>If you right click on the file in the folder window at the left, you can rename your file <code class="language-plaintext highlighter-rouge">whateveryoulike.ipynb</code></p>
-    </li>
-  </ol>
-
-</blockquote>
-
-<p>Cool! Now you know how to create a file! Helpfully, however, we have created one for you, and you’ve downloaded it onto your computer already!</p>
-
-<blockquote class="notranslate hands_on">
-  <div class="box-title hands-on-title" id="hands-on-uploading-the-tutorial-notebook" aria-label="hands-on box: Uploading the tutorial notebook"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Uploading the tutorial notebook</div>
-
-  <ol>
-    <li>
-      <p>In the folder window, <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span> Upload the <code class="language-plaintext highlighter-rouge">Trajectories_Instructions.ipynb</code> from your computer. It should appear in the file window.</p>
-    </li>
-    <li>
-      <p>Open it by double clicking it in the file window.</p>
-    </li>
-  </ol>
-
-</blockquote>
-
-<blockquote class="warning">
-  <div class="box-title warning-title" id="warning-you-should-b-save-b-frequently" aria-label="warning box: You should &lt;b&gt;Save&lt;/b&gt; frequently!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: You should <b>Save</b> frequently!</div>
-  <p>This is both for good practice and to protect you in case you accidentally close the browser. Your environment will still run, so it will contain the last saved notebook you have. You might eventually stop your environment after this tutorial, but ONLY once you have saved and exported your notebook (more on that at the end!) Note that you can have multiple notebooks going at the same time within this JupyterLab, so if you do, you will need to save and export each individual notebook. You can also download them at any time.</p>
-</blockquote>
-
-<h1 id="run-the-tutorial">Run the tutorial!</h1>
-
-<p>At this point, to prevent you having to switch back and forth between browsers, the directions for the rest of tutorial are all in the notebook you input! You may have to change certain numbers in the code blocks, so do read carefully. You will be able to run each step be clicking on the code block and pressing the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden">workflow-run</span> <em>Run the selected cells and advance</em> step. You will want to keep a tab open with your Galaxy history showing (so just launch another browser of your usegalaxy.eu instance), so that you can see when your files appear there. The tutorial is adapted from the <a href="https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html">Scanpy Trajectory inference tutorial</a>.</p>
-
-<h1 id="tutorial-plot-answers">Tutorial Plot Answers</h1>
-
-<p>Just in case, we’ve put the plots you should generate in the tutorial here. If things have gone wrong, you can also download this <a href="https://zenodo.org/record/7075718/files/Trajectories_AnswerKey.ipynb">answer key tutorial</a>.</p>
-
-<figure id="figure-2"><img src="../../images/scrna-casestudy/draw_graph_faPlot1.png" alt="Plot1-Force-Directed Graph. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Plot1-Force-Directed Graph</figcaption></figure>
-
-<figure id="figure-3"><img src="../../images/scrna-casestudy/draw_graph_faPlot2.png" alt="Diffusion Map. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Diffusion Map</figcaption></figure>
-
-<figure id="figure-4"><img src="../../images/scrna-casestudy/pagaPlot4.png" alt="PAGA. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> PAGA</figcaption></figure>
-
-<figure id="figure-5"><img src="../../images/scrna-casestudy/draw_graph_faPlot5.png" alt="Force-Directed + PAGA - Cell type. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Force-Directed + PAGA - Cell type</figcaption></figure>
-
-<figure id="figure-6"><img src="../../images/scrna-casestudy/draw_graph_faPlot6.png" alt="Force-Directed + PAGA - Genotype. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Force-Directed + PAGA - Genotype</figcaption></figure>
-
-<figure id="figure-7"><img src="../../images/scrna-casestudy/draw_graph_faPlot7.png" alt="Force-Directed + PAGA - Markers. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Force-Directed + PAGA - Markers</figcaption></figure>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">tl</span><span class="p">.</span><span class="n">dpt</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
+<span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="n">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s">'cell_type'</span><span class="p">,</span> <span class="s">'dpt_pseudotime'</span><span class="p">],</span> <span class="n">legend_loc</span><span class="o">=</span><span class="s">'on data'</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot8.png'</span><span class="p">)</span>
+</code></pre></div></div>
 
 <figure id="figure-8"><img src="../../images/scrna-casestudy/draw_graph_faPlot8.png" alt="Force-Directed + Pseudotime. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Force-Directed + Pseudotime</figcaption></figure>
 
+<p>This is nice, as it supports our conclusions thus far on the trajectory of the T-cell differentiation. With single-cell, the more ways you can prove to yourself what you’re seeing is real, the better! If we did not find consistent results, we would need to delve in further to see if the algorithm (not all algorithms fit all data!) or the biology.</p>
+
+<p>Where might we go from here? We might consider playing with our louvain resolutions, to get the two branches to be called as different clusters, and then comparing them to each other for gene differences or genotype differences. We might also use different objects (for instance, what if we regressed out cell cycle genes?) and see if that changes the results. Perhaps we would eliminate the DN double-branch input. Or perhaps that’s real, and we should investigate that. What would you do?</p>
+
+<h2 id="working-in-a-group-the-finale">Working in a group? The finale!</h2>
+<p>Look at each others images! How do yours differ, what decisions were made? Previously, when calling clusters in the ‘Filter, Plot and Explore Single-cell RNA-seq Data’, the interpretation at the end is largely consistent, no matter what decisions are made throughout (mostly!). Is this the case with your trajectory analyses? You may find that it is not, which is why pseudotime analysis even more crucially depends on your understanding of the underlying biology (we have to choose the root cells, for instance, or recognise that DN cells should not be found in the middle of the DPs) as well as choosing the right analysis. That’s why it is a huge field! With analysing scRNA-seq data, it’s almost like you need to know about 75% of your data and make sure your analysis shows that, for you to then identify the 25% new information.</p>
+
+<h1 id="export-your-data-figures-and-notebook">Export your data, figures, and notebook</h1>
+
+<p>It’s now time to export your data! First, we need to get it Jupyter to see it as a file.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">adata</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'Trajectorythymus.h5ad'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now you can export it, as well as all your lovely plots! If you go into the <em>figures</em> folder at the left, you’ll see your lovely plots and can choose which ones to export. The following code will push them into your galaxy history. You can also directly download them onto your computer from the file window at the left.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">put</span><span class="p">(</span><span class="s">"Trajectorythymus.h5ad"</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">put</span><span class="p">(</span><span class="s">"figures/draw_graph_faPlot1.png"</span><span class="p">)</span>
+<span class="n">put</span><span class="p">(</span><span class="s">"figures/draw_graph_faPlot2.png"</span><span class="p">)</span>
+<span class="n">put</span><span class="p">(</span><span class="s">"figures/draw_graph_faPlot5.png"</span><span class="p">)</span>
+<span class="n">put</span><span class="p">(</span><span class="s">"figures/draw_graph_faPlot6.png"</span><span class="p">)</span>
+<span class="n">put</span><span class="p">(</span><span class="s">"figures/draw_graph_faPlot7.png"</span><span class="p">)</span>
+<span class="n">put</span><span class="p">(</span><span class="s">"figures/draw_graph_faPlot8.png"</span><span class="p">)</span>
+<span class="n">put</span><span class="p">(</span><span class="s">"figures/paga_compare.pdf"</span><span class="p">)</span>
+<span class="n">put</span><span class="p">(</span><span class="s">"figures/pagaPlot4.png"</span><span class="p">)</span>
+</code></pre></div></div>
+<p>The cell below will only work if you haven’t changed the name of the notebook. If you renamed it, simply type its new name in the parenthesis.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">put</span><span class="p">(</span><span class="s">"single-cell-scrna-case_JUPYTER-trajectories.ipynb"</span><span class="p">)</span>       
+</code></pre></div></div>
+
+<p>This may take a moment, so go check your Galaxy history to make sure your images, anndata object, and notebook (.ipynb) have all made it back into your Galaxy history. Once they are all there, you can exit this browser and return to the Galaxy tutorial!</p>
+
+<p>If things have gone wrong, you can also download this <a href="https://zenodo.org/record/7075718/files/Trajectories_Answer_Key.ipynb">answer key tutorial</a>.</p>
+
+<h1 id="citation">Citation</h1>
+
+<p>Please note, this is largely based on the trajectories tutorial found on the Scanpy site itself <a href="https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html">https://scanpy-tutorials.readthedocs.io/en/latest/paga-paul15.html</a>.</p>
+
 <h1 id="after-jupyter">After Jupyter</h1>
 
-<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations! You’ve made it through Jupyter!</p>
+<p>Congratulations! You’ve made it through Jupyter!</p>
 
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-closing-jupyterlab" aria-label="hands-on box: Closing JupyterLab"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Closing JupyterLab</div>
-
   <ol>
-    <li>
-      <p>Click <strong>User</strong>: <strong>Active Interactive Tools</strong></p>
-    </li>
-    <li>
-      <p>Tick <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">galaxy-selector</span> the box of your Jupyter Interactive Tool, and click <strong>Stop</strong></p>
-    </li>
+    <li>Click <strong>User</strong>: <strong>Active Interactive Tools</strong></li>
+    <li>Tick the box of your Jupyter Interactive Tool, and click <strong>Stop</strong></li>
   </ol>
-
 </blockquote>
 
-<p>If you want to run this notebook again, or share it with others, it now exists in your history. You can use this ‘finished’ version just the same way as you downloaded the directions file and uploaded into the Jupyter environment.</p>
+<p>If you want to run this notebook again, or share it with others, it now exists in your history. You can use this ‘finished’ version just the same way as you downloaded the directions file and uploaded it into the Jupyter environment.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations! You’ve made it to the end! You might be interested in the <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferring-trajectories-using-python-in-galaxyanswer-key">Answer Key History</a> or the <a href="https://zenodo.org/record/7054806/files/Trajectories_Answer_Key.ipynb?download=1">Answer Key Jupyter Notebook</a>.</p>
+<p>Congratulations! You’ve made it to the end! You might be interested in the <a href="https://usegalaxy.eu/u/wendi.bacon.training/h/cs4inferring-trajectories-using-python-in-galaxyanswer-key">Answer Key History</a> or the <a href="https://zenodo.org/record/7054806/files/Trajectories_Answer_Key.ipynb?download=1">Answer Key Jupyter Notebook</a>.</p>
 
 <p>In this tutorial, you moved from called clusters to inferred relationships and trajectories using pseudotime analysis. You found an alternative to PCA (diffusion map), an alternative to tSNE (force-directed graph), a means of identifying cluster relationships (PAGA), and a metric for pseudotime (diffusion pseudotime) to identify early and late cells. If you were working in a group, you found that such analysis is slightly more sensitive to your decisions than the simpler filtering/plotting/clustering is. We are inferring and assuming relationships and time, so that makes sense!</p>
 
-<p>To discuss with like-minded scientists, join our Gitter channel for all things Galaxy-single cell!
-<a href="https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge"><img src="https://badges.gitter.im/Galaxy-Training-Network/galaxy-single-cell.svg" alt="Gitter. " loading="lazy" /></a></p>
+<p>To discuss with like-minded scientists, join our <a href="https://gitter.im/Galaxy-Training-Network/galaxy-single-cell?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge">Gitter</a> channel for all things Galaxy-single cell!</p>
 
 
                 
@@ -1190,7 +1157,7 @@ https://zenodo.org/record/7075718/files/Final_cell_annotated_object.h5ad
                 <p>
                     <ol>
                         <li id="citation-text">
-                            Wendi Bacon, Mehmet Tekman,  <b>Inferring Trajectories using Python (Jupyter Notebook) in Galaxy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html</a> Online; accessed TODAY
+                            Wendi Bacon, Julia Jakiela, Mehmet Tekman,  <b>Inferring Trajectories using Python (Jupyter Notebook) in Galaxy (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html">https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_JUPYTER-trajectories/tutorial.html</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1213,7 +1180,7 @@ https://zenodo.org/record/7075718/files/Final_cell_annotated_object.h5ad
 
 
 <code id="citation-code">@misc{single-cell-scrna-case_JUPYTER-trajectories,
-author = "Wendi Bacon and Mehmet Tekman",
+author = "Wendi Bacon and Julia Jakiela and Mehmet Tekman",
 title = "Inferring Trajectories using Python (Jupyter Notebook) in Galaxy (Galaxy Training Materials)",
 year = "",
 month = "",
