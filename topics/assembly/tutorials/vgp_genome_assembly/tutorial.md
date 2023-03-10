@@ -373,6 +373,7 @@ Hifiasm can be run in multiple modes depending on data availability:
 
 
 <div class = "hic" markdown="1">
+
 ## HiC-phased assembly with **hifiasm**
 
 > <comment-title>Hifiasm algorithm details</comment-title>
@@ -562,7 +563,22 @@ The black region in the left side corresponds to k-mers found only in the read s
 
 </div>
 
+
 <div class="solo" markdown="1">
+
+## Pseudohaplotype assembly with **hifiasm**
+
+> <comment-title>Hifiasm algorithm details</comment-title>
+>
+> By default hifiasm performs three rounds of haplotype-aware error correction to correct sequence errors but keeping heterozygous alleles. A position on the target read to be corrected is considered informative if there are two different nucleotides at that position in the alignment, and each allele is supported by at least three reads.
+>
+> ![Figure 4: Hifiasm algorithm overview](../../images/vgp_assembly/hifiasm_algorithm.png "Hifiasm algorithm overview. Orange and blue bars represent the reads with heterozygous alleles carrying local phasing information, while green bars come from the homozygous regions without any heterozygous alleles.")
+>
+> Then, hifiasm builds a phased assembly string graph with local phasing information from the corrected reads. Only the reads coming from the same haplotype are connected in the phased assembly graph. After transitive reduction, a pair of heterozygous alleles is represented by a _bubble_ in the string graph. If there is no additional data, hifiasm arbitrarily selects one side of each bubble and outputs a primary assembly. In the case of a heterozygous genome, the primary assembly generated at this step may still retain haplotigs from the alternate allele.
+>
+>
+{: .comment}
+
 
 ## Parsing **purge_dups** cutoffs from **GenomeScope2** output
 
@@ -572,14 +588,14 @@ The first relevant parameter is the `estimated genome size`.
 
 > <hands-on-title>Get estimated genome size</hands-on-title>
 >
-> 1. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
+> 1. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `summary` (output of **GenomeScope** {% icon tool %})
 >    - *"Find pattern"*: `bp`
 >    - *"Replace with*": leave this field empty (as it is)
 >    - *"Replace all occurrences of the pattern"*: `Yes`
 >    - *"Find and Replace text in"*: `entire line`
 >
-> 2. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
+> 2. {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: output file of **Replace** {% icon tool %}
 >    - *"Find pattern"*: `,`
 >    - *"Replace with*": leave this field empty (as it is)
@@ -607,7 +623,7 @@ The first relevant parameter is the `estimated genome size`.
 > >
 > > > <solution-title></solution-title>
 > > >
-> > > The estimated genome size is 11.747.076 bp.
+> > > The estimated genome size is 11,747,076 bp.
 > > >
 > > {: .solution}
 > >
@@ -615,30 +631,25 @@ The first relevant parameter is the `estimated genome size`.
 >
 {: .hands_on}
 
-Now let's parse the `upper bound for the read depth estimation` parameter. This parameter will be used later by purge_dups as high read depth cutoff to identify *junk contigs*.
+Now let's parse the `transition between haploid & diploid` and `upper bound for the read depth estimation` parameters. The transition between haploid & diploid represents the coverage value halfway between haploid and diploid coverage, and helps purger_dups identify *haplotigs*. The upper bound parameter will be used by purge_dups as high read depth cutoff to identify *collapsed repeats*. When repeats are collapsed in an assembly, they are not as long as they actually are in the genome. This results in a pileup of reads at the collapsed region when mapping the reads back to the assembly. 
 
 > <hands-on-title>Get maximum read depth</hands-on-title>
 >
-> 1. {% tool [Compute an expression on every row](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} (**VERSION 1.6**) with the following parameters:
->    - *"Add expression"*: `1.5*c3`
->    - {% icon param-file %} *"as a new column to"*: `model_params` (output of **GenomeScope** {% icon tool %})
->    - *"Round result?"*: `Yes`
->    - *"Input has a header line with column names?"*: `No`
->
-> 2. {% tool [Compute an expression on every row](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6) %} (**VERSION 1.6**) with the following parameters:
->    - *"Add expression"*: `3*c7`
->    - {% icon param-file %} *"as a new column to"*: output of the previous step.
->    - *"Round result?"*: `Yes`
->    - *"Input has a header line with column names?"*: `No`
->
-> 3. Rename it as `Parsing temporal output`
->
-> 4. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `Parsing temporal output`
+> 1. {% tool [Compute on rows](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/2.0) %} with the following parameters:
+>    - {% icon param-file %} *"Input file"*: `model_params` (output of **GenomeScope** {% icon tool %})
+>    - For 1: Expressions:
+>      - *"Add expression"*: `round(1.5*c3)`
+>      - *"Mode of the operation"*: `Append`
+>    - Click {% icon galaxy-wf-new %} Insert Expressions
+>    - For 2: Expressions:
+>      - *"Add expression"*: `3*c7`
+>      - *"Mode of the operation"*: `Append`
+> 2. Rename it as `Parsing purge parameters`
+> 3. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"File to cut"*: `Parsing purge parameters`
 >    - *"Cut by"*: `fields`
->        - *"List of Fields"*: `Column 8`
->
-> 6. Rename the output as `Maximum depth`
+>        - *"List of Fields"*: `Column: 8`
+> 4. Rename the output as `Maximum depth`
 >
 > > <question-title></question-title>
 > >
@@ -654,16 +665,12 @@ Now let's parse the `upper bound for the read depth estimation` parameter. This 
 > >
 > {: .question}
 >
-{: .hands_on}
-
-Finally, let's parse the `transition between haploid and diploid coverage depths` parameter. This will be used as threshold to discriminate between haploid and diploid depths.
-
-> <hands-on-title>Get transition parameter        </hands-on-title>
-> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
->    - {% icon param-file %} *"File to cut"*: `Parsing temporal output`
->    - *"Cut by"*: `fields`
->        - *"List of Fields"*: `Column 7`
+> Now let's get the transition parameter.
 >
+> 1. {% tool [Advanced Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} with the following parameters:
+>    - {% icon param-file %} *"File to cut"*: `Parsing purge parameters`
+>    - *"Cut by"*: `fields`
+>        - *"List of Fields"*: `Column: 7`
 > 2. Rename the output as `Transition parameter`
 >
 > > <question-title></question-title>
