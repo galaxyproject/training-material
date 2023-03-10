@@ -56,7 +56,7 @@ GWS facilitates analysis repeatability, while minimizing the number of manual st
 >
 {: .agenda}
 
-# Getting Started on Galaxy
+# Getting started on Galaxy
 
 This tutorial assumes you are comfortable getting data into Galaxy, running jobs, managing history, etc. If you are unfamiliar with Galaxy, we recommed you visit the [Galaxy Training Network](https://training.galaxyproject.org). Consider starting with the following trainings:
 - [Introduction to Galaxy]({% link topics/introduction/tutorials/introduction/slides.html %})
