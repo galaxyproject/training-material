@@ -394,7 +394,7 @@ No matter which way you run hifiasm, you will have to evaluate the assemblies' {
 
 
 {% include _includes/cyoa-choices.html option1="hic" option2="solo" default="hic"
-       text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click <b><i>solo</i></b>. If you have HiC reads for the same indiviudal, then click <b><i>hic</i></b>. <b>NOTE: If you want to learn more about purging, then please check out the <i>solo</i> tutorial for details purging false duplications.</b>" %}
+       text="Use the following buttons to switch between contigging approaches. If you are assembling with only HiFi reads for an individual, then click <b><i>solo</i></b>. If you have HiC reads for the same indiviudal, then click <b><i>hic</i></b>. <b>NOTE: If you want to learn more about purging, then <u>please check out the <i>solo</i> tutorial for details on purging false duplications.</u></b>" %}
 
 
 <div class = "hic" markdown="1">
@@ -470,51 +470,48 @@ Let's use gfastats to get a basic idea of what our assembly looks like. We'll ru
 >
 {: .hands_on}
 
-Take a look at the _gfastats on hap1 and hap2 contigs_ output — it should have three columns: 1) name of statistic, 2) hap1 value, and 3) hap2 value. According to the report, both assemblies are quite similar; the hap1 assembly includes 18 contigs, totalling ~12.1Mbp of sequence, while the hap2 assembly includes 17 contigs, whose total lenghth is 11.3Mbp. 
+Take a look at the _gfastats on hap1 and hap2 contigs_ output — it should have three columns: 1) name of statistic, 2) hap1 value, and 3) hap2 value. According to the report, both assemblies are quite similar; the hap1 assembly includes 16 contigs, totalling ~11.3Mbp of sequence (the `Total contig length` statistic), while the hap2 assembly includes 17 contigs, whose total length is ~12.2Mbp. (**NB**: Your values may differ slightly, or be reversed between the two haplotypes!) 
 
 > <question-title></question-title>
 >
-> 1. What is the longest contig in the primary assembly? And in the alternate one?
-> 2. What is the N50 of the primary assembly?
-> 3. Which percentage of reads mapped to each assembly?
+> 1. What is the length of the longest contigs in the assemblies?
+> 2. What are the N50 values of the two assemblies? Are they very different from each other?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. The longest contig in the primary assembly is 1.531.728 bp, and 1.532.843 bp in the alternate assembly.
-> > 2. The N50 of the primary assembly is 813.039 bp.
-> > 3. According to the report, 100% of reads mapped to both the primary assembly and 97.98% to the alternate assembly.
+> > 1. One assembly's longest contig is 1,532,843 bp, and the other one's is 1,531,728 bp.
+> > 2. One assembly has a N50 of 922,430 and the other's is 923,452. These are pretty close to each other!
 > >
 > {: .solution}
 >
 {: .question}
 
-Next, we will use BUSCO, which will provide quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
+Next, we will use {BUSCO}, which will provide quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
 
 > <hands-on-title>assessing assembly completeness with BUSCO</hands-on-title>
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
->    - {% icon param-files %} *"Sequences to analyze"*: `Primary contigs FASTA` and `Alternate contigs FASTA`
+>    - {% icon param-files %} *"Sequences to analyze"*: `Hap1 contigs FASTA` and `Hap2 contigs FASTA`
 >    - *"Mode"*: `Genome assemblies (DNA)`
 >        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
 >    - *"Auto-detect or select lineage?"*: `Select lineage`
 >       - *"Lineage"*: `Saccharomycetes`
->    - *"Which outputs should be generated"*: `short summary text`
+>    - *"Which outputs should be generated"*: `short summary text` and `summary image`
 >
 >    > <comment-title></comment-title>
 >    >
 >    > Remember to modify the lineage option if you are working with vertebrate genomes.
 >    {: .comment}
 >
-> 2. Rename the summary as `BUSCO initial report primary` and `BUSCO initial report alternate`.
+> 2. Rename the outputs as `BUSCO hap1` and `BUSCO hap2`.
 >
 {: .hands_on}
 
-BUSCO generates two outputs by default: a complete report for each BUSCO gene (fig. 6), and a short summary.
+We have asked {BUSCO} to generate two particular outputs: the short summary, and a summary image.
+![BUSCO for hap1 & hap2.](../../images/vgp_assembly/busco_hap1hap2.png "BUSCO results for hap1 (top) and hap2 (bottom). Each haplotype is showing the summary image output as well as the short summary output. The summary image gives a good overall idea of the status of BUSCO genes within the assembly, while the short summary lists these as percentages as well. In our case, neither assembly seems to have duplicated BUSCO genes (there is a very low amount of dark blue in the summary images), though hap1 seems to be marginally less complete (there is more red in the summary imaged compared to hap2).")
 
-![BUSCO](../../images/vgp_assembly/BUSCO_full_table.png "BUSCO full table. It contains the complete results in a tabular format with scores and lengths of BUSCO matches, and coordinates.")
 
-As we can see in the figure, the detailed report includes valuable information, such as the status of the gene identified in the input sequence, its position (start/end coordinates and strand), the BUSCO score, the gene length and a keyword description.
-    
+
 > <question-title></question-title>
 >
 > 1. How many complete BUSCO genes have been identified in the primary assembly? You can find that information in the short summary.
