@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis"
+subtopic: one-health
 zenodo_link: 'http://zenodo.org/record/3906454'
 questions:
 - Learn how to get and use data from the Sequence Read Archive in Galaxy.
@@ -13,6 +14,7 @@ key_points:
 - Sequence data in the SRA can be directly imported into Galaxy
 tags:
   - covid19
+  - virology
 contributors:
 - mvdbeek
 - tnabtaf

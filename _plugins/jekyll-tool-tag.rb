@@ -32,6 +32,27 @@ module Jekyll
 
     end
   end
+
+  class WorkflowTag < Liquid::Tag
+
+    def initialize(tag_name, text, tokens)
+      super
+      @text = text.strip
+    end
+
+    def render(context)
+      format = /\[(?<title>.*)\]\((?<url>.*)\)/
+      m = @text.match(format)
+      #puts "Found #{@text} => #{m[:title]}, #{m[:url]}"
+
+      # It MUST be this format:
+      # {% workflow [Main Workflow](topics/x/tutorials/y/material/workflows/main.ga) %}
+      %Q(<span class="workflow" data-workflow="#{m[:url]}"><strong>#{m[:title]}</strong> <i class="fas fa-share-alt" aria-hidden="true"></i></span> )
+
+    end
+  end
+
 end
 
 Liquid::Template.register_tag('tool', Jekyll::ToolTag)
+Liquid::Template.register_tag('workflow', Jekyll::WorkflowTag)

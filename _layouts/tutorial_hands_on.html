@@ -40,6 +40,12 @@ footer: no
   room: '{{ gitter | remove: "https://gitter.im/" }}'
   };
 </script>
+{% if topic.custom_css %}
+<style>
+{{ topic.custom_css }}
+</style>
+{% endif %}
+
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <section class="tutorial topic-{{ page.topic_name }}">
@@ -169,7 +175,7 @@ footer: no
                      {% capture ipynbpathsimplenosoln %}{{ page.topic_name }}-{{ own_material.tutorial_name }}-course.ipynb{% endcapture %}
                     {% if own_material.notebook.snippet %}
                         {% assign pagesnippet = own_material.notebook.snippet %}
-                        {% snippet pagesnippet %}
+                        {% snippet {{own_material.notebook.snippet}} %}
                     {% elsif own_material.notebook.language ==  "r" %}
                         <blockquote class="comment">
                             <div class="box-title" aria-label="comment box">{{locale['best-in-rstudio'] | default: "Best viewed in RStudio" }}</div>
@@ -243,7 +249,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
 
                 {{ content
                     | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">'
-                    | no_translate:site.words_to_not_translate }}
+                    }}
 
                 {% if page.key_points %}
                 <blockquote class="key_points">

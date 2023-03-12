@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: Trio Analysis using Synthetic Datasets from RD-Connect GPAP
+subtopic: human-genetics-cancer
 zenodo_link: 'https://doi.org/10.5281/zenodo.6483454'
 questions:
 - How do you import data from the EGA?
@@ -23,7 +24,6 @@ contributors:
 - hexylena
 - shiltemann
 tags:
-- cancer
 - cyoa
 
 ---
