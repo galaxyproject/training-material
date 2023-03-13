@@ -393,7 +393,7 @@ No matter which way you run hifiasm, you will have to evaluate the assemblies' {
 - **gfastats**: manipulation & evaluation of assembly graphs and FASTA files, particularly used for summary statistics (*e.g.*, contig count, N50, NG50, etc.) ({% cite Formenti2022 %}). 
 ![Schematic of N50 calculation.](../../images/vgp_assembly/n50schematic.jpg "<b>N50</b> is a commonly reported statistic used to represent genome contiguity. N50 is calculated by sorting contigs according to their lengths, and then taking the halfway point of the total genome length. The size of the contig at that halfway point is the N50 value. In the pictured example, the total genome length is 400 bp, so the N50 value is 60 because the contig at the halfway point is 60 bp long. N50 can be interpreted as the value where >50% of an assembly's contigs are at that value or higher. Image adapted from <a href='https://www.molecularecologist.com/2017/03/29/whats-n50/'>Elin Videvall at The Molecular Ecologist</a>.")
 - **{BUSCO}**: assesses completeness of a genome from an evolutionarily informed functional point of view. BUSCO genes are genes that are expected to be present at single-copy in one haplotype for a certain clade, so their presence, absence, or duplication can inform scientists about if an assembly is likely missing important regions, or if it has multiple copies of them, which can indicate a need for purging ({% cite Simo2015 %}).
-- **Merqury**: reference-free assessment of assembly completeness and phasing based on *k*-mers. Merqury compares *k*-mers in the reads to the *k*-mers found in the assemblies, as well as the copy number of each *k*-mer in the assemblies ({% cite Rhie_merqury %}).
+- **Merqury**: reference-free assessment of assembly completeness and phasing based on *k*-mers. Merqury compares *k*-mers in the reads to the *k*-mers found in the assemblies, as well as the {CN} of each *k*-mer in the assemblies ({% cite Rhie_merqury %}). 
 
 
 {% include _includes/cyoa-choices.html option1="hic" option2="solo" default="hic"
@@ -407,8 +407,7 @@ No matter which way you run hifiasm, you will have to evaluate the assemblies' {
 If you have the {Hi-C} data for the individual you are assembling with {HiFi} reads, then you can use that information to phase the {contigs}.
 
 > <hands-on-title>Hi-C-phased assembly with <b>hifiasm</b></hands-on-title>
->
-> 1. {% tool [Hifiasm](toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.14+galaxy0) %} with the following parameters:
+> 1. {% tool [Hifiasm](toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.18.8+galaxy1) %} with the following parameters:
 >    - *"Assembly mode"*: `Standard`
 >        - {% icon param-file %} *"Input reads"*: `HiFi_collection (trim)` (output of **Cutadapt** {% icon tool %})
 >       - *"Hi-C R1 reads"*: `Hi-C_dataset_F`
@@ -516,7 +515,7 @@ We have asked {BUSCO} to generate two particular outputs: the short summary, and
 > <question-title></question-title>
 >
 > 1. How many complete and single copy BUSCO genes have been identified in the hap1 assembly? What percentage of the total BUSCO gene set is that?
-> 2. How many BUSCOs genes are absent?
+> 2. How many BUSCO genes are absent in the hap1 assembly?
 >
 > > <solution-title></solution-title>
 > >
@@ -542,9 +541,15 @@ Despite BUSCO being robust for species that have been widely studied, it can be 
 
 By default, Merqury generates three collections as output: stats, plots and {QV} stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the assembly {CN} spectrum plot, known as the *spectra-cn* plot (fig. 7).
 
-![Merqury plot](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="65%"}
+![Merqury spectra-cn plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="65%"}
 
-The black region in the left side corresponds to k-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be indicative of missing sequences in the assembly. The read area represents one-copy k-mers in the genome, while blue area represents two-copy k-mers originating from homozygous sequence or haplotype-specific duplications. From that figure we can state that the sequencing coverage is around 50x.
+The black region in the left side corresponds to k-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be indicative of missing sequences in the assembly. The red area represents one-copy k-mers in the genome, while the blue area represents two-copy k-mers originating from homozygous sequence or haplotype-specific duplications. From this figure we can state that the diploid sequencing coverage is around 50x, which we also know from the GenomeScope2 plot we looked at earlier.
+
+To get an idea of how the *k*-mers have been distributed between our hap1 and hap2 assemblies, we should look at the *spectra-asm* output of Merqury.
+
+![Merqury spectra-asm plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_hap1hap2_asm.png "Merqury ASM plot. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it according to which assemblies contain those k-mers. This can tell you which k-mers are found in only one assembly or shared between them."){:width="65%"}
+
+The large green peak is centered at 50x coverage (remember that's our diploid coverage!), indicating that *k*-mers suggested by the reads to be from diploid regions are in fact shared between the two assemblies, as they should be if they are from homozygous regions. The haploid coverage *k*-mers (around ~25x coverage) are split between hap1 and hap2 assemblies, somewhat unevenly but still not as bad as it would be in an assembly without phasing data.
 
 </div>
 
@@ -553,7 +558,162 @@ The black region in the left side corresponds to k-mers found only in the read s
 
 ## Pseudohaplotype assembly with **hifiasm**
 
-dfgsdfgsdf
+When hifiasm is run without any additional phasing data, it will do its best to generate a pseudohaplotype primary/alternate set of assemblies. These assemblies will typically contain more contigs that switch between parental blocks. Because of this, the primary assembly generated with this method can have a higher N50 value than an assembly generated with haplotype-phasing, but the contigs will contain more switch errors. 
+
+> <hands-on-title>Pseudohaplotype assembly with <b>hifiasm</b></hands-on-title>
+> 1. {% tool [Hifiasm](toolshed.g2.bx.psu.edu/repos/bgruening/hifiasm/hifiasm/0.18.8+galaxy1) %} with the following parameters:
+>    - *"Assembly mode"*: `Standard`
+>        - {% icon param-file %} *"Input reads"*: `HiFi_collection (trim)` (output of **Cutadapt** {% icon tool %})
+>       - *"Options for purging duplicates"*: `Specify`
+>       - *"Purge level"*: `Light (1)`
+>
+>
+>    > <comment-title>A note on hifiasm purging level</comment-title>
+>    > hifiasm has an internal purging function, which we have set to `Light` here. The VGP pipeline currently disables the hifiasm internal purging, in favor of using the <b>purge_dups</b> suite after the fact in order to have more control over the parameters used for purging.
+>    {: .comment}
+>
+>
+> 2. After the tool has finished running, rename its outputs as follows:
+>   - Rename the `primary assembly contig graph for pseudohaplotype assembly` as `Primary contigs graph` and add a `#pri` tag
+>   - Rename the `alternate assembly contig graph for pseudohaplotype assemblyh` as `Alternate contigs graph` and add a `#alt` tag
+>
+{: .hands_on}
+
+We have obtained the primary and alternate contig graphs (as {GFA} files), but these must be converted to FASTA format for subsequent steps. We will use a tool developed from the VGP: **gfastats**. gfastats is a tool suite that allows for manipulation and evaluation of FASTA and GFA files, but in this instance we will use it to convert our GFAs to FASTA files. Later on we will use it to generate standard summary statistics for our assemblies.
+
+> <hands-on-title>convert GFA to FASTA</hands-on-title>
+>
+> 1. {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
+>    - {% icon param-files %} *"Input GFA file"*: select `Primary contigs graph` and the `Alternate contigs graph` datasets
+>
+>    > <tip-title>Select multiple datasets</tip-title>
+>    > 1. Click on {% icon param-files %} **Multiple datasets**
+>    > 2. Select several files by keeping the <kbd>Ctrl</kbd> (or <kbd>COMMAND</kbd>) key pressed and clicking on the files of interest
+>    {: .tip}
+>
+>    - *"Tool mode"*: `Genome assembly manipulation`
+>    - *"Output format"*: `FASTA`
+>    - *"Generates the initial set of paths*": toggle to `yes`
+> 2. Rename the outputs as `Primary contigs FASTA` and `Alternate contigs FASTA`
+>
+{: .hands_on}
+
+> <comment-title>Summary statistics</comment-title>
+>
+> gfastats will provide us with the following statistics:
+>
+> - No. of contigs: The total number of contigs in the assembly.
+> - Largest contig: The length of the largest contig in the assembly.
+> - Total length: The total number of bases in the assembly.
+> - Nx: The largest contig length, *L*, such that contigs of length >= *L* account for at least *x*% of the bases of the assembly.
+> - NGx: The contig length such that using equal or longer length contigs produces *x*% of the length of the reference genome, rather than *x*% of the assembly length.
+> - GC content: the percentage of nitrogenous bases which are either guanine or cytosine.
+>
+{: .comment}
+
+Let's use gfastats to get a basic idea of what our assembly looks like. We'll run gfastats on the {GFA} files because gfastats can report graph-specific statistics as well. After generating the stats, we'll be doing some text manipulation to get the stats side-by-side in a pretty fashion. 
+
+> <hands-on-title>Assembly evaluation with gfastats</hands-on-title>
+>
+> 1. {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
+>    - {% icon param-files %} *"Input file"*: select `Primary contigs graph` and the `Alternate contigs graph` datasets
+>    - *"Expected genome size"*: `11747160` (remember we calculated this value earlier, so it should be in your history!)
+>    - *"Generates the initial set of paths*": toggle to `yes`
+> 2. Rename the outputs as `Primary stats` and `Alternate stats`
+> 3. {% tool [Column join](toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3) %} with the following parameters:
+>    - {% icon param-files %} *"Input file"*: select `Primary stats` and the `Alternate stats` datasets
+> 4. Rename the output as `gfastats on pri and alt (full)`
+> 5. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
+>    - {% icon param-files %} *"Input file"*: select `gfastats on pri and alt (full)`
+>    - *"that"*: `Don't Match`
+>    - *"Type of regex"*: `Basic`
+>    - *"Regular Expression"*: `[Ss]caffold`
+> 6. Rename the output as `gfastats on pri and alt contigs`
+>
+{: .hands_on}
+
+Take a look at the _gfastats on pri and alt contigs_ output — it should have three columns: 1) name of statistic, 2) primary assembly value, and 3) alternate assembly value. The report makes it clear that the two assemblies are markedly uneven: the primary assembly has 25 contigs totalling ~18.5 Mbp, while the alternate assembly has 8 contigs totalling only about 4.95 Mbp. If you'll remember that our estimated genome size is ~11.7 Mbp, then you'll see that the primary assembly has almost 2/3 more sequence than expected for a haploid representation of the genome! This is because a lot of heterozygous regions have had *both* copies of those loci placed into the primary assembly, as a result of incomplete purging. The presence of false duplications can be confirmed by looking at {BUSCO} and Merqury results. 
+
+> <question-title></question-title>
+>
+> 1. What is the length of the longest contigs in the assemblies?
+> 2. What are the N50 values of the two assemblies? Are they very different from each other? What might explain the difference between the two?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. The primary's longest contig is 1,532,843 bp while the alternate's longest contig is 1,090,521.
+> > 2. The primary assembly has a N50 of 813,311, while the alternate's is 1,077,964. These are not that far apart. The alternate might have a bigger N50 due to having fewer contigs.
+> >
+> {: .solution}
+>
+{: .question}
+
+Next, we will use {BUSCO}, which will provide quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
+
+> <hands-on-title>assessing assembly completeness with BUSCO</hands-on-title>
+>
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
+>    - {% icon param-files %} *"Sequences to analyze"*: `Primary contigs FASTA`
+>    - *"Mode"*: `Genome assemblies (DNA)`
+>        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
+>    - *"Auto-detect or select lineage?"*: `Select lineage`
+>       - *"Lineage"*: `Saccharomycetes`
+>    - *"Which outputs should be generated"*: `short summary text` and `summary image`
+>
+>    > <comment-title></comment-title>
+>    >
+>    > Remember to modify the lineage option if you are working with vertebrate genomes.
+>    {: .comment}
+>
+> 2. Rename the outputs as `BUSCO primary contigs`.
+>
+{: .hands_on}
+
+We have asked {BUSCO} to generate two particular outputs: the short summary, and a summary image.
+![BUSCO for primary contigs.](../../images/vgp_assembly/busco_pri_unpurged.png "BUSCO results for the primary contigs. The summary image (left) gives a good overall idea of the status of BUSCO genes within the assembly, while the short summary (right) lists these as percentages as well. In this case, this primary assembly seems to have a large amount of duplicated BUSCO genes, but is otherwise complete (<i>i.e.</i>, not much missing content).")
+
+The BUSCO results support our hypothesis that the primary assembly is so much larger than expected due to improper purging, resulting in false duplications.
+
+> <question-title></question-title>
+>
+> 1. How many complete and single copy BUSCO genes have been identified in the pri assembly? What percentage of the total BUSCO gene set is that?
+> 2. How many complete and duplicated BUSCO genes have been identified in the pri assembly? What percentage of the total BUSCO gene set is that?
+> 3. What is the percentage of complete BUSCO genes for the primary assembly?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. The primary assembly has 1159 complete and single-copy BUSCO genes, which is 54.2% of the gene set.
+> > 2. The primary assembly has 927 complete and duplicated BUSCO genes, which is 43.4% of the gene set.
+> > 3. 97.6% of BUSCOs are complete in the assembly.
+> >
+> {: .solution}
+>
+{: .question}
+
+Despite BUSCO being robust for species that have been widely studied, it can be inaccurate when the newly assembled genome belongs to a taxonomic group that is not well represented in [OrthoDB](https://www.orthodb.org/). Merqury provides a complementary approach for assessing genome assembly quality metrics in a reference-free manner via *k*-mer copy number analysis.
+
+> <hands-on-title><i>k</i>-mer based evaluation with Merqury</hands-on-title>
+>
+> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3) %} with the following parameters:
+>    - *"Evaluation mode"*: `Default mode`
+>        - {% icon param-file %} *"k-mer counts database"*: `Merged meryldb`
+>        - *"Number of assemblies"*: `Two assemblies
+>            - {% icon param-file %} *"First genome assembly"*: `Primary contigs FASTA`
+>            - {% icon param-file %} *"Second genome assembly"*: `Alternate contigs FASTA`    
+>
+{: .hands_on}
+
+By default, Merqury generates three collections as output: stats, plots and {QV} stats. The "stats" collection contains the completeness statistics, while the "QV stats" collection contains the quality value statistics. Let's have a look at the assembly {CN} spectrum plot, known as the *spectra-cn* plot (fig. 7).
+
+![Merqury spectra-cn plot for the pri/alt assemblies.](../../images/vgp_assembly/merqury_cn_plot.png "Merqury CN plot. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it by the number of times it is found in a given assembly. Merqury connects the midpoint of each histogram bin with a line, giving the illusion of a smooth curve."){:width="65%"}
+
+The black region in the left side corresponds to k-mers found only in the read set; it is usually indicative of sequencing error in the read set, although it can also be indicative of missing sequences in the assembly. The red area represents one-copy k-mers in the genome, while the blue area represents two-copy k-mers originating from homozygous sequence or haplotype-specific duplications. From this figure we can state that the diploid sequencing coverage is around 50x, which we also know from the GenomeScope2 plot we looked at earlier.
+
+To get an idea of how the *k*-mers have been distributed between our hap1 and hap2 assemblies, we should look at the *spectra-asm* output of Merqury.
+
+![Merqury spectra-asm plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_prialt_asm_prepurge.png "Merqury ASM plot. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it according to which assemblies contain those k-mers. This can tell you which k-mers are found in only one assembly or shared between them."){:width="65%"}
+
+The large green peak is centered at 50x coverage (remember that's our diploid coverage!), indicating that *k*-mers suggested by the reads to be from diploid regions are in fact shared between the two assemblies, as they should be if they are from homozygous regions. The haploid coverage *k*-mers (around ~25x coverage) are split between hap1 and hap2 assemblies, somewhat unevenly but still not as bad as it would be in an assembly without phasing data.
 
 ### Parsing **purge_dups** cutoffs from **GenomeScope2** output
 
