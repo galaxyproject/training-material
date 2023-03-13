@@ -274,7 +274,7 @@ Now that we know which haplotype contains the false duplications, we can run the
 
 # Post-assembly processing
 
-[{% icon exchange %} Switch to step by step version]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}#post-assembly-processing)
+[{% icon exchange %} Switch to step by step version]({% link topics/assembly/tutorials/vgp_genome_assembly/tutorial.md %}#purging-with-purge-dups)
 
 An ideal haploid representation would consist of one allelic copy of all heterozygous regions in the two haplotypes, as well as all hemizygous regions from both haplotypes ({% cite Guan2019 %}). However, in highly heterozygous genomes, assembly algorithms are frequently not able to identify the highly divergent allelic sequences as belonging to the same region, resulting in the assembly of those regions as separate contigs. In order to prevent potential issues in downstream analysis, we are going to run the **VGP purge assembly with purge_dups workflow**, which will allow to identify and reassign heterozygous contigs. This step is only necessary if haplotypic duplications are observed, and the output should be carefully checked for overpurging.
 
