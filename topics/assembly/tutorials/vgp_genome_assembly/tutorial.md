@@ -1027,7 +1027,6 @@ Once we have merged the files, we should run the purge_dups pipeline again, but 
 >        - {% icon param-file %} *"Base-level coverage file"*: `PBCSTAT base coverage alternate`
 >        - {% icon param-file %} *"Cutoffs file"*: `calcuts cutoff alternate`
 >
->
 > 9. Rename the output as `purge_dups BED alternate`
 > 
 > 10. {% tool [Purge overlaps](toolshed.g2.bx.psu.edu/repos/iuc/purge_dups/purge_dups/1.2.5+galaxy2) %} with the following parameters:
@@ -1072,11 +1071,25 @@ Recall that, prior to purging, our primary assembly showed it needed to be purge
 >        - {% icon param-file %} *"k-mer counts database"*: `Merged meryldb`
 >        - *"Number of assemblies"*: `Two assemblies
 >            - {% icon param-file %} *"First genome assembly"*: `Primary contigs purged`
->            - {% icon param-file %} *"Second genome assembly"*: `Alternate contigs purged`    
+>            - {% icon param-file %} *"Second genome assembly"*: `Alternate contigs purged`
 >
 {: .hands_on}
 
+The summary statistics indicate that both assemblies are now of a similar size that is much closer to the expected genome size: the purged primary assembly is 17 contigs totalling ~12.1 Mbp, while the purged alternate assembly is 16 contigs that amount to ~11.3 Mbp. This makes sense since, during purging, we removed sequences from the primary assembly and added them to the alternate assembly. But did we remove the *right* sequences? Remember, the sequences we are aiming to re-distribute are the false duplications that were flagged by BUSCO.
 
+![BUSCO for primary assembly after purging.](../../images/vgp_assembly/busco_pri_purged.png "BUSCO for the primary assembly after purging.")
+
+The {BUSCO} results for the purged primary assembly look much better, since we no longer have the large amount of duplicate BUSCOs that we previously had. Additionally, there is no large increase in missing BUSCOs, indicating that we have *not* over-purged the primary assembly. 
+
+The previous metrics tell us that the primary is likely fixed after purging, but what about the previously incomplete alternate assembly? Let's see if the Merqury spectra plots show any change in how *k*-mers are split up between the two assemblies.
+
+![Merqury spectra-asm plot after purging.](../../images/vgp_assembly/merqury_prialt_asm_postpurge.png "Merqury ASM plot after purging."){:width="65%"}
+
+This looks a lot better! The diploid regions are all shared between the two assemblies (the large green peak centered at 50x, the diploid coverage value), and the haplotypic variation is shared between the primary and alternate assemblies (the red and blue peaks centered around 25x, the haploid coverage value). 
+
+![Merqury spectra-cn plot for primary assembly after purging.](../../images/vgp_assembly/merqury_prialt_priCN_postpurge.png "Merqury CN plot <i>for the primary assembly only</i> after purging."){:width="65%"}
+
+Additionally, when we look at the primary-only {CN} plot, we see that the large peak of 2-copy *k*-mers is now gone, since those regions are now represented at 1-copy only in the primary assembly, as they should be.
 
 </div>
 
