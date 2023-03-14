@@ -324,7 +324,7 @@ The above toy file has two sequences in it named SEQUENCE_1 and SEQUENCE_2, each
 > 3. What about the shortest sequence? 
 {: .question}
 
- (Answers: there should be 55 sequences.  The longest is from <i>Anolis paternus</i> with length 1729 nucleotides; the shortest is <i>A. luciae</i> with length 1252.)
+ (Answers: there should be 55 sequences.  The longest is from <i>Anolis paternus</i> with length 1729 nucleotides; the shortest is <i>A. luciae</i> with length 1252.) XXX this needs to be hidden by default
 
 FASTA format is very simple and is commonly used as input to phylogenetic inference programs.
 
@@ -375,7 +375,7 @@ Studier, J. A. & Keppler, K. J., _A Note on the Neighbor-Joining Algorithm of Sa
 >
 > 1. Search for the "FastTree" tool in the tool finder.
 > 2. Load your MAFFT output file as the input data for FastTree.
-> 3. Under **protein or  alignment** select "Nucleotide" as it is DNA data
+> 3. Under **protein or nucleotide alignment** select "Nucleotide" as it is DNA data
 > 3. For **Nucleotide evolution model** select Jukes-Cantor + CAT
 > 3. Select "Show Advanced Options"
 > 4. Select "Use Constant Rates"
@@ -388,22 +388,78 @@ The Neighbor-Joining (NJ) algorithm is a standard method that takes as input a s
 
 NJ is only rarely used as a complete tool for phylogenetic analysis, since although it is quite accurate and fast, there are other fast methods that can be then applied to modify the NJ tree and create a better one.
 
-The FastTree2 program that we are using does this: it first creates a "rough" NJ tree, and then modifies it to optimise a quantity called *Minimum Evolution* or ME.  Here is a description from the FastTree2 website at http://www.microbesonline.org/fasttree/
+The FastTree2 program that we are using does this: it first creates a "rough" NJ tree, and then modifies it to optimise a quantity called *Minimum Evolution* or ME.  Here is a description (with some minor formatting) from the FastTree2 website at http://www.microbesonline.org/fasttree/
 
-**blockquote this:**
+#### include diagram of NNI? of SPR? should the BLOSUM45 matrix be a hyperlink?
 
-###Heuristic Neighbor-Joining
+**blockquote this:** XXX
+
+<blockquote>
+
+### Heuristic Neighbor-Joining
 
 First, FastTree uses a heuristic variant of neighbor joining to get a rough topology. During neighbor joining, FastTree stores profiles of internal nodes instead of a distance matrix, which reduces the memory required. FastTree uses a combination of three heuristics to speed up this phase: it remembers the best join for each node, as in fast neighbor-joining; it does a hill-climbing search for better joins from a candidate join, as in relaxed neighbor joining; and it uses the "top hits" heuristic to avoid computing all pairwise distances and to avoid considering all possible joins at every step. It also updates the best join for a node as it comes across them, which reduces the amount of hill-climbing. Another limitation of FastTree's neighbor-joining phase is that it does not correct the distances for multiple substitutions, which exacerbates long-branch attraction. However, this will be corrected in the next stage.
 
-###Minimum Evolution
+### Minimum Evolution
 
-FastTree then tries to reduce the length of the tree, using a mix of nearest-neighbor interchanges (NNIs) and subtree-prune-regraft moves (SPRs). These "balanced minimum-evolution" rearrangements are roughly the same as what FastME does, but because FastTree uses profiles instead of distances, it is much faster. By default, FastTree uses 4*log2(N) rounds of nearest-neighbor interchanges and 2 rounds of subtree-prune-regraft moves. In each round, it considers every possible NNI in the tree. Because there are too many (O(N2)) possible SPR moves, FastTree treats SPR moves as chains of NNIs and only extends the best choice in the chain for chains of length two or greater. In the minimum-evolution framework, if the distances are not too noisy, NNI and SPR moves suffice to reach optimal trees (Desper & Gascuel 2004, Bordewich et al. 2009).
+FastTree then tries to reduce the length of the tree, using a mix of nearest-neighbor interchanges (NNIs) and subtree-prune-regraft moves (SPRs). These "balanced minimum-evolution" rearrangements are roughly the same as what FastME does, but because FastTree uses profiles instead of distances, it is much faster. By default, FastTree uses 4*log<sub>2</sub>(N) rounds of nearest-neighbor interchanges and 2 rounds of subtree-prune-regraft moves. In each round, it considers every possible NNI in the tree. Because there are too many (O(N<sup>2</sup>)) possible SPR moves, FastTree treats SPR moves as chains of NNIs and only extends the best choice in the chain for chains of length two or greater. In the minimum-evolution framework, if the distances are not too noisy, NNI and SPR moves suffice to reach optimal trees (Desper & Gascuel 2004, Bordewich et al. 2009).
 
-Distances: During these minimum evolution steps, FastTree needs to estimate distances between sequences or profiles. For protein sequences, FastTree estimates distances by using the BLOSUM45 amino acid similarity matrix, and it corrects for multiple substitutions by using the formula -1.3 * log(1-d), where d is weighted so that random sequences have an average value of 1. For nucleotide sequences, FastTree uses the Jukes-Cantor distance -0.75*log(1 - 4/3 d), where d is the proportion of positions that differ. When comparing two sequences, positions with gaps are ignored; when comparing two profiles, positions are weighted by their proportions of non-gaps. 
+Distances: During these minimum evolution steps, FastTree needs to estimate distances between sequences or profiles. For protein sequences, FastTree estimates distances by using the BLOSUM45 amino acid similarity matrix, and it corrects for multiple substitutions by using the formula $-1.3 \times \log(1-d)$, where $d$ is weighted so that random sequences have an average value of 1. For nucleotide sequences, FastTree uses the Jukes-Cantor distance $-0.75\times\log(1 - \frac{4}{3} d)$, where $d$ is the proportion of positions that differ. When comparing two sequences, positions with gaps are ignored; when comparing two profiles, positions are weighted by their proportions of non-gaps. 
+</blockquote>
 
-**IMAGE HERE: NJ Tree image**
+It won't take very long for FastTree to build your tree.
+But now it's done, how can you see it?
 
+Clicking on the output doesn't at first appear to be very illuminating: it's just a parenthesised list of taxon names and numbers.
+This is *Newick Format*, and it's worth knowing at least a little of what it means.  
+
+* Each matched pair of parentheses denotes a *cluster* or *subtree*: such as "(A,B)" means that A and B are each others' closest relatives (also called _sister taxa_).
+* A number after such a cluster (so, after a closing parenthesis) is a *label* for that cluster.  In the output from FastTree, this label is an indicator of the support for that branch.
+* If there is a colon ':' followed by a number, then this is the *branch length* for the subtree.
+
+
+![NewickExplained](./images/NewickExplained.png){:align="center"}
+
+The rooted, 3-taxon trees above have three taxa, labelled A, B and C.  Two of the internal nodes have been labelled (x and y), but it isn't necessary to do so in general (for example, if you wanted to use the label for something like support of each branch, as does FastTree).
+
+In both trees, A and B are sister taxa, and branch lengths are indicated near each branch: you can see how the branch lengths are above each cluster, including the individual taxa (the "leaves" of the tree), but not above the root.
+
+The Newick format for the tree on the left is "((A:3, B:2)x:2, C:6)y;" and for the one on the right it is "((A:3, B:2)x:3, C:5)y;".
+
+Note that these two trees are very similar; they only differ in the position of the root (y), either being distance 2 from node x, or being 3 from it.  The distance between any two nodes in the tree is the sum of the branch lengths on the path connecting them, so for the trees above, the distance matrix is
+
+--| A  : B  : C
+A | 0  | 5  | 11
+B | 5  | 0  | 10
+C | 11 | 10 | 0
+
+XXX needs formatting as a matrix / table
+
+Ideally, these will reflect the actual input distances, but such distances are based on messy real data, and do not necessarily obey this ideal.
+That is why methods like FastTree are employed to find a tree with the best possible agreement between the distance inferred it, and those calculated from such as sequence data.
+The Minimum Evolution criterion optimises... XXX Mike to complete.
+
+> <hands-on-title>Visualising a tree</hands-on-title>
+> Click on the title of the completed job and find the row of small icons for saving, linking etc.: 
+> ![LittleIcons](./images/LittleJobIcons.png){:align="center"} XXX Can this be made an inline graphic?
+>
+> 1. The "Visualisation" icon looks like a little bar chart.
+> 2. Select that and you will be presented with a couple of options.  When I do it, I get this:
+
+[image of tree visualisation options]
+
+![SelectTreeVisualisation](./images/PhylogeneticTreeVisualisationOptions.png){:width="400"}
+
+Select "Phylogenetic Tree Visualisation" -- this seems to be the best one.
+
+Your tree is displayed!
+
+At the top right of the central panel are a couple of angle brackets: clicking on that will reveal the settings, enabling you to alter the display options.  Try out "Circular" and "Radial".
+Notice that there are quite a lot of long branches adjacent to the extant taxa (leaves), and that near the centre of the tree these branches are much shorter.
+
+**Short branches are much harder to get right.**
+
+{: .hands_on}
 
 # Phylogenetic Networks
 
