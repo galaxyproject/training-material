@@ -75,7 +75,7 @@ jobs:
           ruby bin/filter-pyolite-safe | xargs -I{} -n1 cp '{}' /tmp/notebook
 
           # Build the notebook site and add to deployment.
-          pip install jupyterlab==3.3.4 jupyterlite==0.1.0b5
+          pip install jupyterlab~=3.5.1 jupyterlite==0.1.0b18 jupyterlite-xeus-sqlite==0.2.1
           jupyter lite build --contents /tmp/notebook
           mv _output _site/training-material/jupyter/
 
