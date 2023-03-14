@@ -461,32 +461,46 @@ Notice that there are quite a lot of long branches adjacent to the extant taxa (
 
 {: .hands_on}
 
-# Phylogenetic Networks
+# Assessing the Quality of trees
 
-Intro to phylogenetic networks as an alternative to trees
+## Bootstrapping
 
-## Building a Neighbor-Net phylogenetic network
+## Resolution
 
-> <hands-on-title>Build a Neighbor-Net with Splitstree</hands-on-title>
+## How tree-like?
+
+# Basics of Maximum Likelihood
+
+Background on ML. How it works. Software. Bootstrap values.
+
+## Likelihood as probability that observed data came from given tree
+
+## Searching for a tree means optimising its branch lengths too
+
+## IQTree
+
+* is state-of-the-art
+* will find a good model
+* can do bootstrapping
+
+##  Estimating a Maximum Likelihood tree 
+
+> <hands-on-title>Estimating a Maximum Likelihood tree with IQTree</hands-on-title>
 >
 > 1. Step 1
 > 2. Step 2
 >
 {: .hands_on}
 
+# Phylogenetic Networks
+
+Intro to phylogenetic networks as an alternative to trees
 
 **IMAGE HERE: Neighbour net image**
 
-# Basics of Maximum Likelihood
+## Building a Neighbor-Net phylogenetic network
 
-Background on ML. How it works. Software. Bootstrap values.
-
-Info on models
-
-
-##  Estimating a Maximum Likelihood tree 
-
-> <hands-on-title>Estimating a Maximum Likelihood tree with IQTree</hands-on-title>
+> <hands-on-title>Build a Neighbor-Net with Splitstree</hands-on-title>
 >
 > 1. Step 1
 > 2. Step 2
