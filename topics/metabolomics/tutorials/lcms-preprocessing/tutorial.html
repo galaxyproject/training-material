@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Mass spectrometry: LC-MS preprocessing with XCMS" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-11-28 09:55:50 +0000" />
+<meta name="DC.date" content="2023-03-14 12:25:23 +0000" />
 <meta name="DC.creator" content="Mélanie Petera" />
 <meta name="DC.creator" content="Jean-François Martin" />
 <meta name="DC.creator" content="Gildas Le Corguillé" />
@@ -67,7 +67,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-11-28 09:55:50 +0000",
+  "dateModified": "2023-03-14 12:25:23 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Mass spectrometry: LC-MS preprocessing with XCMS",
   "interactivityType": "mixed",
@@ -702,7 +702,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 14, 2023 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -744,12 +744,12 @@ the results obtained may not be reliable enough for biological interpretation du
 Nevertheless, the chosen diversity of sample will allow you to explore the basics of a preprocessing workflow.</p>
 
 <p>We chose a subset of 12 samples, composed of 6 biological samples, 3 quality-control pooled samples (‘QC pools’ - mix of all
-biological samples) and 3 blank samples (‘blanks’ - injection solvent).</p>
+biological samples) and 3 blank samples (‘blanks’ - solvent injection).</p>
 
 <p>To analyze these data, we will then follow a Galaxy workflow
 developed by the <a href="http://workflow4metabolomics.org/">Wokflow4metabolomics group</a> (<span class="citation"><a href="#Giacomoni2014">Giacomoni <i>et al.</i> 2014</a></span>, <span class="citation"><a href="#Guitton2017">Guitton <i>et al.</i> 2017</a></span>).</p>
 
-<p><a href="../../images/lcmspreproc_wf.png"><img src="../../images/lcmspreproc_wf.png" alt="The full tutorial workflow. " loading="lazy" /></a></p>
+<p><a href="../../images/lcmspreproc_wf.png"><figure id="figure-1"><img src="../../images/lcmspreproc_wf.png" alt="The full tutorial workflow represented as boxes linked with arrows, each box being labeled with the corresponding galaxy tool name. " loading="lazy" />&lt;figcaption&gt;<span class="figcaption-prefix">Figure 1:</span> The tutorial workflow&lt;/figcaption&gt;</figure></a></p>
 
 <blockquote class="comment">
   <div class="box-title comment-title" id="comment-workflow4metabolomics-public-history" aria-label="comment box: Workflow4Metabolomics public history"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Workflow4Metabolomics public history</div>
@@ -757,11 +757,11 @@ developed by the <a href="http://workflow4metabolomics.org/">Wokflow4metabolomic
   <p>This training material can be followed running it on any Galaxy instance holding the Galaxy modules needed.
 Nonetheless, if you happen to be a W4M user and do not want to run the hands-on yourself, please note that
 you can find the entire history in the ‘published histories’ section:
-<a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a></p>
+<a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms">GTN_LCMSpreprocessingXCMS</a></p>
 
 </blockquote>
 
-<p><strong>Preprocessing with XCMS</strong></p>
+<p>The preprocessing steps presented in this tutorial are built around the solutions provided through the R package <strong>XCMS</strong>.</p>
 
 <p><strong>XCMS</strong> (<span class="citation"><a href="#Smith2006">Smith <i>et al.</i> 2006</a></span>) is a free and open source software dedicated to pre-processing of any type of mass spectrometry acquisition files from low to
 high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). This software is
@@ -878,7 +878,7 @@ https://zenodo.org/record/3757956/files/QC1_014.mzML
 <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingmzml">GTN_LCMSpreprocessing_mzML</a>.
 We highly recommend to get started by importing this history.</p>
 
-    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a> history,
+    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms">GTN_LCMSpreprocessingXCMS</a> history,
 this step corresponds to the dataset collection number 13.</p>
   </blockquote>
 
@@ -898,7 +898,7 @@ this step corresponds to the dataset collection number 13.</p>
   <div class="box-title hands-on-title" id="hands-on-msnbase-readmsdata" aria-label="hands-on box: MSnbase readMSData"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: MSnbase readMSData</div>
 
   <ol>
-    <li>Run <strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0"><strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“File(s) from your history containing your chromatograms”</em>: the <code class="language-plaintext highlighter-rouge">mzML</code> dataset collection</li>
       </ul>
@@ -911,7 +911,7 @@ this step corresponds to the dataset collection number 13.</p>
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-comment-to-w4m-users-1"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-1-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a> history,
+    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms">GTN_LCMSpreprocessingXCMS</a> history,
 this step corresponds to the dataset collection number 14.</p>
   </blockquote>
 
@@ -980,7 +980,7 @@ Below is an optional hands-on explaining how to get a template to fill, with the
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-xcms-get-a-samplemetadata-file" aria-label="hands-on box: xcms get a sampleMetadata file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms get a sampleMetadata file</div>
 
-    <p><strong>xcms get a sampleMetadata file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+    <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_export_samplemetadata/xcms_export_samplemetadata/3.12.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_export_samplemetadata/xcms_export_samplemetadata/3.12.0+galaxy0"><strong>xcms get a sampleMetadata file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_export_samplemetadata/xcms_export_samplemetadata/3.12.0+galaxy0</span></span>  with the following parameters:</p>
     <ul>
       <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RData file”</em>: the <code class="language-plaintext highlighter-rouge">mzML.raw.RData</code> collection output from <strong>MSnbase readMSData</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
     </ul>
@@ -988,7 +988,7 @@ Below is an optional hands-on explaining how to get a template to fill, with the
     <blockquote class="tip">
       <div class="box-title tip-title" id="tip-comment-to-w4m-users-2"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-2-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-      <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a> history,
+      <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms">GTN_LCMSpreprocessingXCMS</a> history,
 this step corresponds to the dataset number 27.</p>
     </blockquote>
 
@@ -1008,7 +1008,7 @@ software you find appropriate to construct your table, as long as you save your 
 use a spreadsheet software such as Microsoft Excel or LibreOffice.</p>
 
 <blockquote class="warning">
-  <div class="box-title warning-title" id="warning-important-save-your-table-in-the-correct-format" aria-label="warning box: Important: Save your table in the correct format"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: Important: Save your table in the correct format</div>
+  <div class="box-title warning-title" id="warning-save-your-table-in-the-correct-format" aria-label="warning box:  Save your table in the correct format"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning:  Save your table in the correct format</div>
 
   <p>The file has to be a <code class="language-plaintext highlighter-rouge">.txt</code> or a <code class="language-plaintext highlighter-rouge">.tsv</code> (tab-separated values). Neither <code class="language-plaintext highlighter-rouge">.xlsx</code> nor <code class="language-plaintext highlighter-rouge">.odt</code> are supported.
 If you use a spreadsheet software, be sure to change the default format to <strong>Text (Tab delimited)</strong> or equivalent.</p>
@@ -1321,6 +1321,15 @@ be uploaded into Galaxy.</p>
 
 </blockquote>
 
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-the-class-column" aria-label="warning box:  The class column "><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning:  The class column</div>
+
+  <p>Depending on further choices, the sampleMetadata file can be decisive.
+It can be used to colour some plots, but also for ion selection (see further in the tutorial). 
+Please note that the information needed for these steps <strong>should be given as the second column of the sampleMetadata file</strong>,
+the first one being the samples’ identifiers.</p>
+</blockquote>
+
 <h4 id="upload-the-samplemetada-file-with-get-data">Upload the sampleMetada file with ‘Get data’</h4>
 
 <blockquote class="notranslate hands_on">
@@ -1366,7 +1375,7 @@ right away if you appear to get one of these obvious issues.</p>
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-comment-to-w4m-users-3"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-3-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a> history,
+    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms">GTN_LCMSpreprocessingXCMS</a> history,
 this step corresponds to the dataset number 28.</p>
   </blockquote>
 
@@ -1413,7 +1422,7 @@ The tool automatically takes the second column as colour groups when a file is p
   <div class="box-title hands-on-title" id="hands-on-xcms-plot-chromatogram" aria-label="hands-on box: xcms plot chromatogram"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms plot chromatogram</div>
 
   <ol>
-    <li><strong>xcms plot chromatogram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_plot_chromatogram/xcms_plot_chromatogram/3.12.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_plot_chromatogram/xcms_plot_chromatogram/3.12.0+galaxy0"><strong>xcms plot chromatogram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_plot_chromatogram/xcms_plot_chromatogram/3.12.0+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">mzML.raw.RData</code> (collection)</li>
         <li><em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">sampleMetadata_completed.tsv</code> that you uploaded previously</li>
@@ -1431,7 +1440,7 @@ The tool automatically takes the second column as colour groups when a file is p
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-comment-to-w4m-users-4"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-4-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a> history,
+    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms">GTN_LCMSpreprocessingXCMS</a> history,
 this step corresponds to the datasets number 29 and 30.</p>
   </blockquote>
 
@@ -1440,7 +1449,7 @@ this step corresponds to the datasets number 29 and 30.</p>
 <p>This tool generates Base Peak Intensity Chromatograms (BPIs) and Total Ion Chromatograms (TICs). If you provide groups as we do here, you obtain two plots:
 one with colours based on provided groups, one with one colour per sample.</p>
 
-<p><img src="../../images/lcmspreproc_BPC12samp.png" alt="Base Peak Intensity Chromatograms. " loading="lazy" /></p>
+<figure id="figure-2"><img src="../../images/lcmspreproc_BPC12samp.png" alt="Screenshot of the PDF output corresponding to the Base Peak Intensity Chromatograms. It is composed of the layering of BPIs: one drawn line per sample." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Base Peak Intensity Chromatograms</figcaption></figure>
 
 <p>How BPIs and TICs look like is dependant of the kind of data you have: LC-MS technology used, study design, type of samples, events that may have occured during the analysis…
 It can vary a lot from one experiment to another due to these characteristics.
@@ -1485,7 +1494,7 @@ pre-processing.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-xcms-findchrompeaks-xcmsset" aria-label="hands-on box: xcms findChromPeaks (xcmsSet)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms findChromPeaks (xcmsSet)</div>
 
-  <p><strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0"><strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0</span></span>  with the following parameters:</p>
   <ul>
     <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">mzML.raw.RData</code> (collection)</li>
     <li><em>“Extraction method for peaks detection”</em>: <code class="language-plaintext highlighter-rouge">CentWave - chromatographic peak detection using the centWave method</code>
@@ -1515,7 +1524,7 @@ ranges, or <em>Noise filter</em> (as in this hands-on) not to use low intensity 
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-comment-to-w4m-users-5"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-5-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms">GTN_LCMSpreprocessingXCMS</a>, this step corresponds to
 the dataset collections number 31 and 32.</p>
   </blockquote>
 
@@ -1548,7 +1557,7 @@ with the second column defining theses classes.</p>
   <div class="box-title hands-on-title" id="hands-on-xcms-findchrompeaks-merger" aria-label="hands-on box: xcms findChromPeaks Merger"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms findChromPeaks Merger</div>
 
   <ol>
-    <li><strong>xcms findChromPeaks Merger</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0"><strong>xcms findChromPeaks Merger</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">mzML.raw.xset.RData</code> (collection)</li>
         <li><em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">sampleMetadata_completed.tsv</code></li>
@@ -1559,7 +1568,7 @@ with the second column defining theses classes.</p>
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-comment-to-w4m-users-6"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-6-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms">GTN_LCMSpreprocessingXCMS</a>, this step corresponds to
 the dataset number 57.</p>
   </blockquote>
 
@@ -1593,7 +1602,7 @@ than a given number of samples. Either a percentage of the total number of sampl
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-xcms-groupchrompeaks-group" aria-label="hands-on box: xcms groupChromPeaks (group)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms groupChromPeaks (group)</div>
 
-  <p><strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0"><strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0</span></span>  with the following parameters:</p>
   <ul>
     <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.RData</code></li>
     <li><em>“Method to use for grouping”</em>: <code class="language-plaintext highlighter-rouge">PeakDensity - peak grouping based on time dimension peak densities</code>
@@ -1614,7 +1623,7 @@ than a given number of samples. Either a percentage of the total number of sampl
     <div class="box-title comment-title" id="comment-minimum-fraction-of-samples" aria-label="comment box: Minimum fraction of samples"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Minimum fraction of samples</div>
 
     <p>This parameter sets the minimum proportion of samples in a class where a peak should be found to keep the corresponding ion in the peaktable.
-The idea is to look inside each class (<em>i.e.</em> each group of samples defined in the second column of the sampleMetadata file) and to keep
+The idea is to look inside <strong>each class (<em>i.e.</em> each group of samples defined in the second column of the sampleMetadata file)</strong> and to keep
 an ion if there is at least one class where the ion is found in at least the specified proportion of samples.</p>
 
     <p>The way to define what kind of classes would be relevant is not straightforward. It is a somehow complex combination of your study objectives,
@@ -1638,7 +1647,7 @@ we may consider to lower a little this threshold, for example using a proportion
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-comment-to-w4m-users-7"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-7-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms">GTN_LCMSpreprocessingXCMS</a>, this step corresponds to
 the datasets number 58 to 61.</p>
   </blockquote>
 
@@ -1654,7 +1663,7 @@ The grey areas’ width is associated with the bandwidth parameter.</p>
 
 <p>Here is an example of two m/z slices obtained from the hands-on:</p>
 
-<p><img src="../../images/lcmspreproc_group12samp.png" alt="plotChromPeakDensity.pdf. " loading="lazy" /></p>
+<figure id="figure-3"><img src="../../images/lcmspreproc_group12samp.png" alt="Picture with two plots extracted from the plotChromPeakDensity.pdf output, one representing the 283.1127-283.1163 m/z slice and the other the 284.1198-284.1253 m/z slice. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Extract from plotChromPeakDensity.pdf</figcaption></figure>
 
 <blockquote class="question">
   <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -1713,7 +1722,7 @@ outstanding behaviour), and to use the <strong>Intensity Check</strong> <i class
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-intensity-check" aria-label="hands-on box: Intensity Check"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Intensity Check</div>
 
-    <p><strong>Intensity Check</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+    <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/melpetera/intensity_checks/intens_check/1.2.8" title="Tested with toolshed.g2.bx.psu.edu/repos/melpetera/intensity_checks/intens_check/1.2.8"><strong>Intensity Check</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/melpetera/intensity_checks/intens_check/1.2.8</span></span>  with the following parameters:</p>
     <ul>
       <li><em>“Data matrix file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.group.dataMatrix.tsv</code></li>
       <li><em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">sampleMetadata_completed.tsv</code></li>
@@ -1730,7 +1739,7 @@ outstanding behaviour), and to use the <strong>Intensity Check</strong> <i class
     <blockquote class="tip">
       <div class="box-title tip-title" id="tip-comment-to-w4m-users-8"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-8-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-      <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+      <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms">GTN_LCMSpreprocessingXCMS</a>, this step corresponds to
 the datasets number 62 and 63.</p>
     </blockquote>
 
@@ -1740,7 +1749,7 @@ the datasets number 62 and 63.</p>
 With the example provided in this tutorial, you can notice that the blk class containing blanks has a high number of NA with 4394 ions
 that have not been found, in any blank.</p>
 
-  <p><img src="../../images/lcmspreproc_ICgp1.png" alt="IC_Graphs.pdf. " loading="lazy" /></p>
+  <figure id="figure-4"><img src="../../images/lcmspreproc_ICgp1.png" alt="Picture representing the proportions of NA in the 3 groups of the class column (blk, QC and sample). It is displayed as number of ions having given proportions of NA - proportions being grouped from 0 to 100 percents by classes of 20 percents." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Content of IC_Graphs.pdf</figcaption></figure>
 
   <blockquote class="question">
     <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
@@ -1787,7 +1796,7 @@ peaks’ parameter to put them aside.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-xcms-adjustrtime-retcor" aria-label="hands-on box: xcms adjustRtime (retcor)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms adjustRtime (retcor)</div>
 
-  <p><strong>xcms adjustRtime (retcor)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_retcor/abims_xcms_retcor/3.12.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_retcor/abims_xcms_retcor/3.12.0+galaxy0"><strong>xcms adjustRtime (retcor)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_retcor/abims_xcms_retcor/3.12.0+galaxy0</span></span>  with the following parameters:</p>
   <ul>
     <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.RData</code></li>
     <li><em>“Method to use for retention time correction”</em>: <code class="language-plaintext highlighter-rouge">PeakGroups - retention time correction based on aligment of features (peak groups) present in most/all samples.</code>
@@ -1812,7 +1821,7 @@ peaks’ parameter to put them aside.</p>
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-comment-to-w4m-users-9"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-9-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms">GTN_LCMSpreprocessingXCMS</a>, this step corresponds to
 the datasets number 64 and 65.</p>
   </blockquote>
 
@@ -1830,7 +1839,7 @@ correction by comparing the chromatogram you obtained previously to a new one ge
   <blockquote class="notranslate hands_on">
     <div class="box-title hands-on-title" id="hands-on-xcms-plot-chromatogram-1" aria-label="hands-on box: xcms plot chromatogram"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms plot chromatogram</div>
 
-    <p><strong>xcms plot chromatogram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+    <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_plot_chromatogram/xcms_plot_chromatogram/3.12.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_plot_chromatogram/xcms_plot_chromatogram/3.12.0+galaxy0"><strong>xcms plot chromatogram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_plot_chromatogram/xcms_plot_chromatogram/3.12.0+galaxy0</span></span>  with the following parameters:</p>
     <ul>
       <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.adjustRtime.RData</code></li>
     </ul>
@@ -1844,7 +1853,7 @@ correction by comparing the chromatogram you obtained previously to a new one ge
     <blockquote class="tip">
       <div class="box-title tip-title" id="tip-comment-to-w4m-users-10"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-10-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-      <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+      <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms">GTN_LCMSpreprocessingXCMS</a>, this step corresponds to
 the datasets number 66 and 67.</p>
     </blockquote>
 
@@ -1866,7 +1875,7 @@ to get an illustration of grouping before/after retention time correction.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-second-xcms-groupchrompeaks-group" aria-label="hands-on box: second 'xcms groupChromPeaks (group)'"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: second 'xcms groupChromPeaks (group)'</div>
 
-  <p><strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0"><strong>xcms groupChromPeaks (group)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_group/abims_xcms_group/3.12.0+galaxy0</span></span>  with the following parameters:</p>
   <ul>
     <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.adjustRtime.RData</code></li>
     <li><em>“Method to use for grouping”</em>: <code class="language-plaintext highlighter-rouge">PeakDensity - peak grouping based on time dimension peak densities</code>
@@ -1896,7 +1905,7 @@ look at your variableMetadata file as well as perform an NA diagnostic using the
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-comment-to-w4m-users-11"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-11-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms">GTN_LCMSpreprocessingXCMS</a>, this step corresponds to
 the datasets from number 68 to number 71.</p>
   </blockquote>
 
@@ -1966,7 +1975,7 @@ proceeding to the integration of missing peak areas.</p>
 <blockquote class="notranslate hands_on">
   <div class="box-title hands-on-title" id="hands-on-xcms-fillchrompeaks-fillpeaks" aria-label="hands-on box: xcms fillChromPeaks (fillPeaks)"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms fillChromPeaks (fillPeaks)</div>
 
-  <p><strong>xcms fillChromPeaks (fillPeaks)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0"><strong>xcms fillChromPeaks (fillPeaks)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_fillpeaks/abims_xcms_fillPeaks/3.12.0+galaxy0</span></span>  with the following parameters:</p>
   <ul>
     <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.*.RData</code> (last step of your previous XCMS step)</li>
     <li>In <em>“Peak List”</em>:
@@ -1991,7 +2000,7 @@ proceeding to the integration of missing peak areas.</p>
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-comment-to-w4m-users-12"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-12-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms">GTN_LCMSpreprocessingXCMS</a>, this step corresponds to
 the datasets number 72 to 74.</p>
   </blockquote>
 
@@ -2034,7 +2043,7 @@ for a first attempt to run this function. Nevertheless, a few parameters have to
   <div class="box-title hands-on-title" id="hands-on-camera-annotate" aria-label="hands-on box: CAMERA.annotate"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: CAMERA.annotate</div>
 
   <ol>
-    <li><strong>CAMERA.annotate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/camera_annotate/abims_CAMERA_annotateDiffreport/2.2.6+camera1.48.0-galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lecorguille/camera_annotate/abims_CAMERA_annotateDiffreport/2.2.6+camera1.48.0-galaxy0"><strong>CAMERA.annotate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/camera_annotate/abims_CAMERA_annotateDiffreport/2.2.6+camera1.48.0-galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.*.fillChromPeaks.RData</code></li>
         <li>In <em>“Annotate Isotopes [findIsotopes]”</em>:
@@ -2063,7 +2072,7 @@ In particular, the <strong>Mode</strong> parameter will influence a lot your res
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-comment-to-w4m-users-13"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-13-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms">GTN_LCMSpreprocessingXCMS</a>, this step corresponds to
 the datasets number 75 and 76.</p>
   </blockquote>
 
@@ -2083,7 +2092,7 @@ With only one single HTML file generated, you have access to all this informatio
   <div class="box-title hands-on-title" id="hands-on-xcms-process-history" aria-label="hands-on box: xcms process history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: xcms process history</div>
 
   <ol>
-    <li><strong>xcms process history</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_summary/abims_xcms_summary/3.12.0+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_summary/abims_xcms_summary/3.12.0+galaxy0"><strong>xcms process history</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_summary/abims_xcms_summary/3.12.0+galaxy0</span></span>  with the following parameters:
       <ul>
         <li><em>“xset RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.[...].fillChromPeaks.RData</code></li>
       </ul>
@@ -2099,7 +2108,7 @@ With only one single HTML file generated, you have access to all this informatio
   <blockquote class="tip">
     <div class="box-title tip-title" id="tip-comment-to-w4m-users-14"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-14-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a>, this step corresponds to
+    <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms">GTN_LCMSpreprocessingXCMS</a>, this step corresponds to
 the dataset number 77.</p>
   </blockquote>
 
@@ -2119,7 +2128,7 @@ You can use this column to switch automatic ion IDs to these customised ones, us
     <div class="box-title hands-on-title" id="hands-on-id-choice" aria-label="hands-on box: ID choice"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: ID choice</div>
 
     <ol>
-      <li><strong>ID choice</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/melpetera/idchoice/idchoice/19.12" title="Tested with toolshed.g2.bx.psu.edu/repos/melpetera/idchoice/idchoice/19.12"><strong>ID choice</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/melpetera/idchoice/idchoice/19.12</span></span>  with the following parameters:
         <ul>
           <li><em>“Data matrix file”</em>: the <code class="language-plaintext highlighter-rouge">xset.merged[...].dataMatrix.tsv</code> dataset from your last XCMS step</li>
           <li><em>“Metadata file containing your new IDs”</em>: the <code class="language-plaintext highlighter-rouge">xset.merged[...].variableMetadata.tsv</code> dataset from your last XCMS or CAMERA step</li>
@@ -2132,7 +2141,7 @@ You can use this column to switch automatic ion IDs to these customised ones, us
     <blockquote class="tip">
       <div class="box-title tip-title" id="tip-comment-to-w4m-users-15"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-to-w4m-users-15-contents" aria-expanded="true" aria-label="Toggle tip box: Comment to W4M users"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Comment to W4M users<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
-      <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessing">GTN_LCMSpreprocessing</a> history,
+      <p>In the <a href="https://workflow4metabolomics.usegalaxy.fr/u/peteram/h/gtnlcmspreprocessingxcms">GTN_LCMSpreprocessingXCMS</a> history,
 this step corresponds to the datasets number 78 and 79.</p>
     </blockquote>
 
