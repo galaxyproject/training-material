@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-
+import urllib.request
+import csv
 import datetime
 import pandas as pd
 from pathlib import Path
@@ -159,6 +160,21 @@ def prepare_feedback(url, out_file):
     :param url: URL to Google sheet with feedback answers
     :param out_file: Path to output file
     '''
+
+    with urllib.request.urlopen(url) as response:
+        feedbackreader = csv.reader(response, delimiter='\t')
+
+    # Skip the header row
+    #next(feedbackreader)
+
+    headers = ['timestamp', 'note', 'pro', 'con', 'tutorial_topic']
+    data = []
+    for row in feedbackreader:
+        data.append(zip(headers, row))
+
+    import pprint
+    pprint.pprint(data)
+
     df = (pd.read_csv(url, sep='\t')
         # rename column
         .rename(columns = {'Timestamp': 'timestamp',
