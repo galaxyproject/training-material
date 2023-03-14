@@ -55,7 +55,7 @@ biological samples) and 3 blank samples ('blanks' - solvent injection).
 To analyze these data, we will then follow a Galaxy workflow
 developed by the [Wokflow4metabolomics group](http://workflow4metabolomics.org/) ({% cite Giacomoni2014 %}, {% cite Guitton2017 %}).
 
-[![The full tutorial workflow represented as boxes linked with arrows, each box being labeled with the corresponding galaxy tool name](../../images/lcmspreproc_wf.png)](../../images/lcmspreproc_wf.png "The tutorial workflow")
+[![The full tutorial workflow represented as boxes linked with arrows, each box being labeled with the corresponding galaxy tool name](../../images/lcmspreproc_wf.png "The tutorial workflow")](../../images/lcmspreproc_wf.png)
 
 > <comment-title>Workflow4Metabolomics public history</comment-title>
 >
