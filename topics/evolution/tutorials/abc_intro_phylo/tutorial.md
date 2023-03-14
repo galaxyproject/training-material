@@ -45,7 +45,7 @@ It has been adapted to work as a stand-alone, self-paced tutorial, which can run
 * Data
 	* What a sequence alignment is and how to interpret one;
 	* What to do with difficult data (lots of gaps in the alignment)
-	* The data we will use: from OzMammals data set
+	* The data we will use: an alignment of malaria sequences.
 * Three different main approaches:
 	* Distance-based (NJ, BioNJ)
 	* Parsimony
@@ -91,6 +91,7 @@ This tutorial has the following structure:
 - Sequence alignment (including manual methods, automatic methods, complexity issues / heuristics) + exercise
 - Distances based on sequence alignment
 - The Neighbor-Joining method & FastME2.0 (https://doi.org/10.1093/molbev/msv150) **needs an update** **not sure that there is a FastME implementation in Galaxy; there is an R package though**
+** NO FASTME on Galaxy: Igor points out that the package isn't well maintained. **
 - Building your first tree (on Galaxy)
 - Models of sequence evolution: from the sublime to the ridiculous
 - Phylogenetic Networks (**SplitsTree needs install**), Neighbor-Net
@@ -247,7 +248,7 @@ The number of rooted binary trees grows as 1, 3, 15, 105, 945, 10395... in fact 
 > |---|---|---|
 
 
-> <comment-title>This is a comment section</comment-title>
+<!-- > <comment-title>This is a comment section</comment-title>
 >
 > This is a comment section
 >
@@ -255,11 +256,11 @@ The number of rooted binary trees grows as 1, 3, 15, 105, 945, 10395... in fact 
 >
 > 2. item 2
 >
-{: .comment}
+{: .comment} -->
 
 ## Data upload
 
-Background on the data used in this workshop.
+<!-- Background on the data used in this workshop. -->
 
 <!-- This workshop will use some recent SARS-CoV-2 nucleotide sequence data, from NCBI, the National Center for Biotechnology Information.
 
@@ -271,9 +272,9 @@ The SARS-CoV-2 virus has caused the largest pandemic in modern history (in absol
 
 The sequences we have chosen for this workshop are complete SARS-CoV2 sequences, publicly available from nextStrain (http). -->
 
-This workshop will use a set of malaria DNA sequences. [needs ref]
+This workshop will use a set of malaria DNA sequences. [needs reference]
 
-We are using a relatively small set of sequences because phylogenetic estimation on many sequences is computationally very intensive, and can take weeks of time on a high-performance computer.
+We are using a relatively small set of sequences because phylogenetic estimation on many sequences is computationally very intensive, and can take weeks of time even on a high-performance computer.
 
 
 ## Get the data
@@ -286,9 +287,10 @@ We are using a relatively small set of sequences because phylogenetic estimation
 >
 > 2. Import the following files from [Zenodo](https://tinyurl.com/phylo-trees-1-data) or from the shared data library
 >     Note: Current link is to google drive. Update to Zenodo for final release.  For testing use https://drive.google.com/file/d/1j96miOPD41no5S8BSqRNG1Ru_-p7w1gg/view?usp=share_link; upload to galaxy from computer.
+> **in fact use the malaria-raw.fst file in the "data" folder here**
 >
 >    ```
->    exon7-unaligned.fst
+>    malaria-raw.fst
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -309,11 +311,11 @@ The above toy file has two sequences in it named SEQUENCE_1 and SEQUENCE_2, each
 > Now let's view the unaligned sequence in a more understandable form.  Click on the green data on its name; the green bar will open up and show you more options, including the little "Visualise" one.  Click that and then select the Mulitple Sequence Alignment tool.
 > You should see something like this:
 >
-> ![Unaligned Sequences](./images/UnalignedMalaria.png){:width="400"}
+> ![Unaligned Sequences](./images/UnalignedMalaria.png){:width="600"}
 > 
 > Play around with the view: you can change colour schemes and add or remove various elements.  Good colour schemes for nucleotide data are "Clustal2" and "nucleotide".  
 > If you cannot see the slider at the top (for moving left or right in the view) you will need to check the "Show residues indices" in the "Vis. elements" drop-down menu.
-> Do not adjust the scale slider!  Currently, this breaks the page.
+> (Do not adjust the scale slider!  Currently, this breaks the page.)
 {: .hands_on}
 
 > <question-title>Understanding the FASTA file</question-title>
@@ -333,11 +335,6 @@ FASTA format is very simple and is commonly used as input to phylogenetic infere
 >
 {: .comment}
 
-> <question-title>Investigating the unaligned data</question-title>
-> 1. How many sequences are there in your data?
-> 2. How long is the longest sequence, and what is it?
-> 3. What about the shortest sequence? 
-{: .question}
 
 # Sequence Alignment
 
@@ -363,22 +360,47 @@ Today you will be aligning sequences using a modern multiple alignment program c
 
 Here is an embedded image of the resulting alignment:
 
-![Alignment](./images/MEGA_alignment.png){:width="500"}
+![Alignment](./images/MEGA_alignment.png){:width="600"}
 
-## Need to get image of alignment in
 
 # Distance-based phylogenetic inference
 
-Calculating distances from an alignment
+Now we will build our first tree, using a very common method called _Neighbor-Joining_.  This method was created in the 1980s by Saitou & Nei (Saitou, N. & Nei, M. _The Neighbor-Joining method: a new method for reconstructing phylogenetic trees_. 1987, *Molecular Biology and Evolution*  , Vol. **4**(4):406-425); see also 
+Studier, J. A. & Keppler, K. J., _A Note on the Neighbor-Joining Algorithm of Saitou and Nei_, 1988.
+*Molecular Biology and Evolution* **5**(6): 729-731) 
 
 ## Building a Neighbor-Joining Tree 
 
-> <hands-on-title>Build a Neighbour-Joining Tree with cleancut</hands-on-title>
+> <hands-on-title>Build a Neighbour-Joining Tree with FastTree</hands-on-title>
 >
-> 1. Step 1
-> 2. Step 2
+> 1. Search for the "FastTree" tool in the tool finder.
+> 2. Load your MAFFT output file as the input data for FastTree.
+> 3. Under **protein or  alignment** select "Nucleotide" as it is DNA data
+> 3. For **Nucleotide evolution model** select Jukes-Cantor + CAT
+> 3. Select "Show Advanced Options"
+> 4. Select "Use Constant Rates"
+> 4. Turn **off** the Maximum Likelihood: we are not up to that bit yet.
+> 5. Click on "Execute".
 >
 {: .hands_on}
+
+The Neighbor-Joining (NJ) algorithm is a standard method that takes as input a set of distances between taxa, and sequentially connects them into larger and larger clusters until all taxa have been joined.
+
+NJ is only rarely used as a complete tool for phylogenetic analysis, since although it is quite accurate and fast, there are other fast methods that can be then applied to modify the NJ tree and create a better one.
+
+The FastTree2 program that we are using does this: it first creates a "rough" NJ tree, and then modifies it to optimise a quantity called *Minimum Evolution* or ME.  Here is a description from the FastTree2 website at http://www.microbesonline.org/fasttree/
+
+**blockquote this:**
+
+###Heuristic Neighbor-Joining
+
+First, FastTree uses a heuristic variant of neighbor joining to get a rough topology. During neighbor joining, FastTree stores profiles of internal nodes instead of a distance matrix, which reduces the memory required. FastTree uses a combination of three heuristics to speed up this phase: it remembers the best join for each node, as in fast neighbor-joining; it does a hill-climbing search for better joins from a candidate join, as in relaxed neighbor joining; and it uses the "top hits" heuristic to avoid computing all pairwise distances and to avoid considering all possible joins at every step. It also updates the best join for a node as it comes across them, which reduces the amount of hill-climbing. Another limitation of FastTree's neighbor-joining phase is that it does not correct the distances for multiple substitutions, which exacerbates long-branch attraction. However, this will be corrected in the next stage.
+
+###Minimum Evolution
+
+FastTree then tries to reduce the length of the tree, using a mix of nearest-neighbor interchanges (NNIs) and subtree-prune-regraft moves (SPRs). These "balanced minimum-evolution" rearrangements are roughly the same as what FastME does, but because FastTree uses profiles instead of distances, it is much faster. By default, FastTree uses 4*log2(N) rounds of nearest-neighbor interchanges and 2 rounds of subtree-prune-regraft moves. In each round, it considers every possible NNI in the tree. Because there are too many (O(N2)) possible SPR moves, FastTree treats SPR moves as chains of NNIs and only extends the best choice in the chain for chains of length two or greater. In the minimum-evolution framework, if the distances are not too noisy, NNI and SPR moves suffice to reach optimal trees (Desper & Gascuel 2004, Bordewich et al. 2009).
+
+Distances: During these minimum evolution steps, FastTree needs to estimate distances between sequences or profiles. For protein sequences, FastTree estimates distances by using the BLOSUM45 amino acid similarity matrix, and it corrects for multiple substitutions by using the formula -1.3 * log(1-d), where d is weighted so that random sequences have an average value of 1. For nucleotide sequences, FastTree uses the Jukes-Cantor distance -0.75*log(1 - 4/3 d), where d is the proportion of positions that differ. When comparing two sequences, positions with gaps are ignored; when comparing two profiles, positions are weighted by their proportions of non-gaps. 
 
 **IMAGE HERE: NJ Tree image**
 
