@@ -118,12 +118,12 @@ We will evaluate the input reads using the FastQC tool. This tool runs a standar
 
 > <hands-on-title>FastQC on a fastq file</hands-on-title>
 >
-> 1. **FastQC** {% icon tool %} with the following parameters
+> 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0) %} with the following parameters:
 >    - {% icon param-files %} *"Raw read data from your current history"*:  `mutant_R1.fastq` and `mutant_R2.fastq`
 >
 >    {% snippet faqs/galaxy/tools_select_multiple_datasets.md %}
 >  
-> 2. **MultiQC** {% icon tool %} with the following parameters
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy1) %} with the following parameters:
 >    - *"Results: Which tool was used to generate logs?"*: `FastQC`
 >    - *Click "Insert FastQC output"*
 >    - *"Type of FastQC output?"*: `multiple datasets, select the raw data files from FastQC`
@@ -202,14 +202,14 @@ The first step of the assembler is to build a de Bruijn graph. For that, it will
 
 > <hands-on-title>Assemble the reads</hands-on-title>
 >
-> 1. **FASTQ interlacer** {% icon tool %} with the following parameters
+> 1. {% tool [FASTQ interlacer](toolshed.g2.bx.psu.edu/repos/devteam/fastq_paired_end_interlacer/fastq_paired_end_interlacer/1.2.0.1+galaxy0) %} with the following parameters:
 >    - *"Type of paired-end datasets"*: `2 separate datasets`
 >    - *"Left-hand mates"*: `mutant_R1.fastq`
 >    - *"Right-hand mates"*: `mutant_R2.fastq`
 >
 >    Currently our paired-end reads are in 2 files (one with the forward reads and one with the reverse reads), but Velvet requires only one file, where each read is next to its mate read. In other words, if the reads are indexed from 0, then reads 0 and 1 are paired, 2 and 3, 4 and 5, etc. Before doing the assembly *per se*, we need to prepare the files by combining them.
 >
-> 2. **velveth** {% icon tool %} with the following parameters
+> 2. {% tool [velveth](toolshed.g2.bx.psu.edu/repos/devteam/velvet/velveth/1.2.10.3) %} with the following parameters:
 >    - *"Hash Length"*: `29`
 >    - *"Input Files"*
 >       - Click on {% icon param-repeat %} *"Input Files"*
@@ -220,7 +220,7 @@ The first step of the assembler is to build a de Bruijn graph. For that, it will
 >
 >    The tool takes our reads and break them into k-mers.
 >
-> 3. **velvetg** {% icon tool %} with the following parameters
+> 3. {% tool [velvetg](toolshed.g2.bx.psu.edu/repos/devteam/velvet/velvetg/1.2.10.2) %} with the following parameters:
 >    - {% icon param-files %} *"Velvet Dataset"*:  outputs of **velveth**
 >    - *"Using Paired Reads"*: `Yes`
 >
@@ -261,7 +261,7 @@ This table is limitted, but we will now collect more basic statistics on our ass
 
 > <hands-on-title>Collect fasta statistics on our contigs</hands-on-title>
 >
-> 1. **Quast** {% icon tool %} with
+> 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1) %} with the following parameters:
 >    - *"Assembly mode"*: `Individual assembly (1 contig file per sample)`
 >    - *"Use customized names?"*: `No`
 >    - *"Contigs/scaffolds file"*: contigs output of **velvetg**
@@ -320,10 +320,10 @@ The HTML report reports many statistics computed by QUAST to assess the quality 
 
 > <hands-on-title>(Optional) Rerun for values <i>k</i> ranging from 31 to 101</hands-on-title>
 >
-> 1. **velveth** {% icon tool %} with the same parameters as before except
+> 1. {% tool [velveth](toolshed.g2.bx.psu.edu/repos/devteam/velvet/velveth/1.2.10.3) %} with the same parameters as before except
 >    - *"Hash Length"*: a value between 31 and 101
-> 2. **velvetg** {% icon tool %} with the same parameters as before
-> 3. **Quast** {% icon tool %} with the same parameters as before
+> 2. {% tool [velvetg](toolshed.g2.bx.psu.edu/repos/devteam/velvet/velvetg/1.2.10.2) %} with the same parameters as before
+> 3. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy1) %} with the same parameters as before
 {: .hands_on}
 
 We have completed an assembly on this data set for a number of k values ranging from 29 to 101. A few of the assembly metrics appear below.
