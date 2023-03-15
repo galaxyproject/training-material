@@ -227,19 +227,20 @@ The first step of the assembler is to build a de Bruijn graph. For that, it will
 >    This last tool actually does the assembly.
 {: .hands_on}
 
-Two files are generated:
+Five files are generated. We will look at the contigs file and the stats file:
 
-- A **Contigs** file
+- The **Contigs** file
 
-    This file contains the sequences of the contigs longer than 2k. In the header of each contig, a bit of information is added:
+    This file contains the sequences of the contigs. In the header of each contig, a bit of information is added:
     - the k-mer length (called "length"): For the value of k chosen in the assembly, a measure of how many k-mers overlap (by 1 bp each overlap) to give this length
     - the k-mer coverage (called "coverage"): For the value of k chosen in the assembly, a measure of how many k-mers overlap each base position (in the assembly).
+    - Note that your results may look different to the example in the image below. 
 
     ![Contigs output](../../images/image10.png)
 
-- A **Stats** file
+- The **Stats** file
 
-    This is a tabular file giving for each contig the k-mer lengths, k-mer coverages and other measures.
+    This is a tabular file giving for each contig the k-mer lengths, k-mer coverages and other measures.  Note that your results may look different to the example in the image below. 
 
     ![Contigs stats output](../../images/image11.png)
 
