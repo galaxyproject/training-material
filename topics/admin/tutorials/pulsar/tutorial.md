@@ -131,7 +131,7 @@ RabbitMQ is an AMQP server that can queue messages between systems for all sorts
 
 ## Installing the roles
 
-Firstly we will add and configure another *role* to our Galaxy playbook - we maintain a slightly modified version of `jasonroyle.rabbitmq` to support python3 and other minor updates. Additionally we will use the Galaxy community role for deploying Pulsar
+Firstly we will add and configure another *role* to our Galaxy playbook - we do that with our ansible role that spinns up RabbitMQ in docker and configures it. Additionally we will use the Galaxy community role for deploying Pulsar
 
 > ### {% icon hands_on %} Hands-on: Install the Ansible roles
 >
@@ -146,7 +146,7 @@ Firstly we will add and configure another *role* to our Galaxy playbook - we mai
 >     - src: galaxyproject.slurm
 >       version: 0.1.3
 >    +- name: usegalaxy_eu.rabbitmq
->    +  version: 0.1.0
+>    +  version: 1.4.1
 >    +- src: galaxyproject.pulsar
 >    +  version: 1.0.8
 >    {% endraw %}
@@ -182,10 +182,11 @@ Users need to be defined, given passwords and access to the various queues. We w
 ```yaml
 rabbitmq_users:
   - user: username
-    password: somelongpasswordstring
+    password: "{{ rabbitmq_password_username }}"
     vhost: /vhostname
 ```
 
+Notice the variable we used instead of directly placing the password there. It will be read from vault instead.
 Optional: You can add tags to each user if required. e.g. For an admin user it could be useful to add in a *administrator* tag. These tags allow you to grant permissions to every user with a specific tag.
 
 ### RabbitMQ server config
@@ -194,9 +195,10 @@ We also need to set some RabbitMQ server configuration variables. Such as where 
 
 > ### {% icon tip %} Port accessibility is important!
 > We will need to make sure that the RabbitMQ default port is open and accessible on the server we are installing RabbitMQ onto. (In our case this is the Galaxy server). Default port number is: `5671`
+> RabbitMQ provides a management interface for us, where we can see e.g. queues, connections and statistics. We should make sure that port 15672 is open, too.
 {: .tip}
 
-More information about the rabbitmq ansible role can be found [in the repository](https://github.com/usegalaxy-eu/ansible-role-rabbitmq).
+More information about the rabbitmq ansible role can be found [in the repository](https://github.com/usegalaxy-eu/ansible-rabbitmq).
 
 ## Add RabbitMQ configuration to Galaxy VM.
 
@@ -273,20 +275,26 @@ More information about the rabbitmq ansible role can be found [in the repository
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >     
 >    +# RabbitMQ
->    +rabbitmq_version: 3.8.16-1
+>    +rabbitmq_container:
+>    +  name: rabbit_hole
+>    +  image: rabbitmq:3.9.11
+>    +  hostname: "{{ inventory_hostname }}"
+>    +
 >    +rabbitmq_plugins: rabbitmq_management
 >    +
 >    +rabbitmq_config:
->    +- rabbit:
->    +  - tcp_listeners:
->    +    - "'127.0.0.1'": 5672
->    +  - ssl_listeners:
->    +    - "'0.0.0.0'": 5671
->    +  - ssl_options:
->    +     - cacertfile: /etc/ssl/certs/fullchain.pem
->    +     - certfile: /etc/ssl/certs/cert.pem
->    +     - keyfile: /etc/ssl/user/privkey-rabbitmq.pem
->    +     - fail_if_no_peer_cert: 'false'
+>    +  listeners:
+>    +    tcp: none
+>    +  ssl_listeners:
+>    +    default: 5671
+>    +  ssl_options:
+>    +    verify: verify_peer
+>    +    cacertfile: /etc/ssl/certs/fullchain.pem
+>    +    certfile: /etc/ssl/certs/cert.pem
+>    +    keyfile: /etc/ssl/user/privkey-rabbitmq.pem
+>    +    fail_if_no_peer_cert: 'false'
+>    +  management_agent:
+>    +    disable_metrics_collector: "false"
 >    +
 >    +rabbitmq_vhosts:
 >    +  - /pulsar/galaxy_au
@@ -358,37 +366,15 @@ More information about the rabbitmq ansible role can be found [in the repository
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > systemctl status rabbitmq-server
+>    > docker ps
 >    > ```
 >    {: .code-in}
 >
 >    > ### {% icon code-out %} Output: Bash
 >    >
 >    > ```ini
->    > ● rabbitmq-server.service - RabbitMQ broker
->    >      Loaded: loaded (/lib/systemd/system/rabbitmq-server.service; enabled; vendor preset: enabled)
->    >      Active: active (running) since Fri 2020-12-18 13:52:14 UTC; 8min ago
->    >    Main PID: 533733 (beam.smp)
->    >      Status: "Initialized"
->    >       Tasks: 163 (limit: 19175)
->    >      Memory: 105.3M
->    >      CGroup: /system.slice/rabbitmq-server.service
->    >              ├─533733 /usr/lib/erlang/erts-11.1.4/bin/beam.smp -W w -K true -A 128 -MBas ageffcbf -MHas ageffcbf -MBlmbcs 512 -MHlmbcs 512 -MMmcs 30 -P 1048576 -t 5000000 -stbt db -zdbbl 1280>
->    >              ├─533923 erl_child_setup 32768
->    >              ├─533969 /usr/lib/erlang/erts-11.1.4/bin/epmd -daemon
->    >              ├─534002 inet_gethost 4
->    >              └─534003 inet_gethost 4
->    >
->    > Dec 18 13:52:10 gat-0.training.galaxyproject.eu rabbitmq-server[533733]:   ##########  Licensed under the MPL 2.0. Website: https://rabbitmq.com
->    > Dec 18 13:52:10 gat-0.training.galaxyproject.eu rabbitmq-server[533733]:   Doc guides: https://rabbitmq.com/documentation.html
->    > Dec 18 13:52:10 gat-0.training.galaxyproject.eu rabbitmq-server[533733]:   Support:    https://rabbitmq.com/contact.html
->    > Dec 18 13:52:10 gat-0.training.galaxyproject.eu rabbitmq-server[533733]:   Tutorials:  https://rabbitmq.com/getstarted.html
->    > Dec 18 13:52:10 gat-0.training.galaxyproject.eu rabbitmq-server[533733]:   Monitoring: https://rabbitmq.com/monitoring.html
->    > Dec 18 13:52:10 gat-0.training.galaxyproject.eu rabbitmq-server[533733]:   Logs: /var/log/rabbitmq/rabbit@gat-0.log
->    > Dec 18 13:52:10 gat-0.training.galaxyproject.eu rabbitmq-server[533733]:         /var/log/rabbitmq/rabbit@gat-0_upgrade.log
->    > Dec 18 13:52:10 gat-0.training.galaxyproject.eu rabbitmq-server[533733]:   Config file(s): (none)
->    > Dec 18 13:52:14 gat-0.training.galaxyproject.eu rabbitmq-server[533733]:   Starting broker... completed with 0 plugins.
->    > Dec 18 13:52:14 gat-0.training.galaxyproject.eu systemd[1]: Started RabbitMQ broker.
+>    >CONTAINER ID   IMAGE             COMMAND                  CREATED        STATUS       PORTS                                                                                              NAMES
+>    >d0d69d035768   rabbitmq:3.9.11   "docker-entrypoint.s…"   6 months ago   Up 5 hours   4369/tcp, 0.0.0.0:5671->5671/tcp, 5672/tcp, 15691-15692/tcp, 25672/tcp, 0.0.0.0:15672->15672/tcp   rabbit_hole
 >    > ```
 >    {: .code-out.code-max-300}
 >
@@ -401,7 +387,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > sudo rabbitmq-diagnostics status
+>    > docker exec rabbit_hole rabbitmq-diagnostics status
 >    > ```
 >    {: .code-in}
 >
@@ -424,19 +410,18 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
 >    > curl http://localhost:5672
->    > curl -k https://localhost:5671
 >    > ```
 >    {: .code-in}
 >
 >    > ### {% icon code-out %} Output: Bash
 >    >
->    > These should *both* report the same response:
+>    > This should report the following response:
 >    >
 >    > ```console
->    > curl: (1) Received HTTP/0.9 when not allowed
+>    > curl: (7) Failed to connect to localhost port 5672: Connection refused
 >    > ```
 >    >
->    > if they don't, consider the following debugging steps:
+>    > if it doesn't, consider the following debugging steps:
 >    >
 >    > 1. Restarting RabbitMQ
 >    > 2. Check that the configuration looks correct (ssl private key path looks valid)
