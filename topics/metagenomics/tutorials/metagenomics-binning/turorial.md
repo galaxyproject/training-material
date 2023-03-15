@@ -52,12 +52,13 @@ Both methods have their strengths and limitations, and researchers often use a c
 
 **Metagenomics binning is a complex process that involves many steps and can be challenging due to several problems that can occur during the process**. Some of the most common problems encountered in metagenomics binning include:
 
-- Low sequencing depth: Metagenomics sequencing often produces data with low coverage, which can lead to incomplete or fragmented genome assemblies, and lower the accuracy of binning.
-- Taxonomic ambiguity: Many microbes in the environment are not well characterized, and their genomes may not be present in reference databases, making it difficult to accurately assign sequences to specific taxa.
-- Strain-level variation: Within a single species, there can be significant genetic variation, making it difficult to distinguish between closely related strains or even different strains of the same species.
-- Contamination: Contamination from laboratory or environmental sources can affect the accuracy of binning results.
-- Non-uniformity of abundance: Some taxa may be present in very low abundance in the sample, making it difficult to distinguish them from sequencing errors or noise.
-- Horizontal gene transfer: Horizontal gene transfer between organisms can complicate binning by introducing foreign DNA sequences into genomes.
+- **High complexity**: Metagenomic samples contain DNA from multiple organisms, which can lead to high complexity in the data.
+- **Fragmented sequences**: Metagenomic sequencing often generates fragmented sequences, which can make it difficult to assign reads to the correct bin.
+- **Uneven coverage**: Some organisms in a metagenomic sample may be more abundant than others, leading to uneven coverage of different genomes.
+- **Incomplete or partial genomes**: Metagenomic sequencing may not capture the entire genome of a given organism, which can make it difficult to accurately bin sequences from that organism.
+- **Horizontal gene transfer**: Horizontal gene transfer (HGT) can complicate metagenomic binning, as it can introduce genetic material from one organism into another.
+- **Chimeric sequences**: Sequences that are the result of sequencing errors or contamination can lead to chimeric sequences, which can make it difficult to accurately bin reads.
+- **Strain variation**: Organisms within a species can exhibit significant genetic variation, which can make it difficult to distinguish between different strains in a metagenomic sample.
 
 <!-- > <details-title>Strategies for assembly</details-title>
 > For assembly, there are 3 main strategies:
@@ -72,15 +73,13 @@ Both methods have their strengths and limitations, and researchers often use a c
 
 Some of the most widely used tools for metagenomics binning include:
 
-- MaxBin: A popular de novo binning algorithm that uses a combination of sequence features and marker genes to cluster contigs into genome bins.
-- MetaBAT: Another widely used de novo binning algorithm that employs a hierarchical clustering approach based on tetranucleotide frequency and coverage information.
-- CONCOCT: A de novo binning tool that uses a clustering algorithm based on sequence composition and coverage information to group contigs into genome bins.
-- MyCC: A reference-based binning tool that uses sequence alignment to identify contigs belonging to the same genome or taxonomic group.
-- GroopM: A hybrid binning tool that combines reference-based and de novo approaches to achieve high binning accuracy.
-- MetaWRAP: A comprehensive metagenomic analysis pipeline that includes various modules for quality control, assembly, binning, and annotation.
-- Anvi'o: A platform for visualizing and analyzing metagenomic data, including features for binning, annotation, and comparative genomics.
-
-These tools vary in their strengths, limitations, and suitability for different types of metagenomic data, so it is important to choose the most appropriate tool for a given analysis. Additionally, it is often beneficial to compare the results of multiple binning methods to improve the accuracy of genome binning.
+- **MaxBin**: A popular de novo binning algorithm that uses a combination of sequence features and marker genes to cluster contigs into genome bins.
+- **MetaBAT**: Another widely used de novo binning algorithm that employs a hierarchical clustering approach based on tetranucleotide frequency and coverage information.
+- **CONCOCT**: A de novo binning tool that uses a clustering algorithm based on sequence composition and coverage information to group contigs into genome bins.
+- **MyCC**: A reference-based binning tool that uses sequence alignment to identify contigs belonging to the same genome or taxonomic group.
+- **GroopM**: A hybrid binning tool that combines reference-based and de novo approaches to achieve high binning accuracy.
+- **MetaWRAP**: A comprehensive metagenomic analysis pipeline that includes various modules for quality control, assembly, binning, and annotation.
+- **Anvi'o**: A platform for visualizing and analyzing metagenomic data, including features for binning, annotation, and comparative genomics.
 
 In this tutorial, we will learn how to run metagenomic binning tools and evaluate the quality of the generated results. To do that, we will use data from the study: [Temporal shotgun metagenomic dissection of the coffee fermentation ecosystem](https://www.ebi.ac.uk/metagenomics/studies/MGYS00005630#overview). For an in-depth analysis of the structure and functions of the coffee microbiome, a temporal shotgun metagenomic study (six time points) was performed. The six samples have been sequenced with Illumina MiSeq utilizing whole genome sequencing.
 
@@ -147,13 +146,17 @@ In case of a not very large dataset it's more convenient to upload data directly
 >
 {: .hands_on}
 
-# Assembly
+# Binning
 
-As explained before, there are many challenges to metagenomics assembly, including:
+As explained before, there are many challenges to metagenomics binning. The most common of them are listed below:
 
-1. differences in coverage between samples, resulting from differences in abundance,
-2. the fact that different species often share conserved regions ({%cite kececioglu2001%}), and
-3. the presence of multiple strains of a single species ({%cite miller2010%}).
+- High complexity.
+- Fragmented sequences.
+- Uneven coverage.
+- Incomplete or partial genomes.
+- Horizontal gene transfer.
+- Chimeric sequences.
+- Strain variation.
 
 To reduce the differences in coverage between samples, we can use a **co-assembly** approach, where reads from all samples are aligned together.:
 
@@ -187,19 +190,17 @@ Co-assembly is more commonly used than individual assembly and then de-replicati
 > Sometimes it is important to run assembly tools both on individual samples and on all pooled samples, and use both outputs to get the better outputs for the certain dataset.
 {: .comment}
 
-As mentioned in the introduction, several tools are available for metagenomic assembly. But 2 are the most used ones:
+As mentioned in the introduction, several tools are available for metagenomic binning. here we focus on **CONCOCT** and **MetaBAT2**:
 
-- **MetaSPAdes** ({%cite nurk2017%}): an short-read assembler designed specifically for large and complex metagenomics datasets
+- **CONCOCT**: Cut up contigs tool from the CONCOCT suite
 
-  MetaSPAdes is part of the SPAdes toolkit, which has several assembly pipelines. Since SPAdes handles non-uniform coverage, it is useful for assembling simple communities, but metaSPAdes also handles other problems, allowing it to assemble complex communities' metagenomes.
+  *CONCOCT (Clustering cONtigs with COverage and ComposiTion) does unsupervised binning of metagenomic contigs by using nucleotide composition - kmer frequencies - and coverage data for multiple samples. CONCOCT can accurately (up to species level) bin metagenomic contigs.*
 
-  As input for metaSPAdes it can accept short reads. However, there is an option to use additionally long reads besides short reads to produce hybrid input.
+- **MetaBAT2**: Metagenome Binning based on Abundance and Tetranucleotide frequency
 
-- **MEGAHIT** ({% cite li2015 %}): a single node assembler for large and complex metagenomics NGS reads, such as soil
+  *Grouping large fragments assembled from shotgun metagenomic sequences to deconvolute complex microbial communities, or metagenome binning, enables the study of individual organisms and their interactions. Here we developed automated metagenome binning software, called MetaBAT, which integrates empirical probabilistic distances of genome abundance and tetranucleotide frequency. On synthetic datasets MetaBAT on average achieves 98percent precision and 90% recall at the strain level with 281 near complete unique genomes. Applying MetaBAT to a human gut microbiome data set we recovered 176 genome bins with 92% precision and 80% recall. Further analyses suggest MetaBAT is able to recover genome fragments missed in reference genomes up to 19%, while 53 genome bins are novel. In summary, we believe MetaBAT is a powerful tool to facilitate comprehensive understanding of complex microbial communities.*
 
-  It makes use of succinct de Bruijn graph (SdBG) to achieve low memory assembly.
-
-Both tools are available in Galaxy. But currently, only MEGAHIT can be used in individual mode for several samples.
+Both tools are available in Galaxy.
 
 > <hands-on-title>Individual assembly of short-reads with MEGAHIT</hands-on-title>
 > 1.  {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0) %} with parameters:
@@ -274,9 +275,9 @@ Contrary to **MetaSPAdes**, **MEGAHIT** does not output **scaffolds**, i.e. segm
 > {: .hands_on}
 {: .details}
 
-# Quality control of assembly
+# Checking the quality of the bins
 
-Once assembly is done, it is important to check its quality.
+Once binning is done, it is important to check its quality.
 
 Assemblies can be evaluated with **metaQUAST** ({%cite mikheenko2016%}), the metagenomics mode of **QUAST** ({%cite gurevich2013%}).
 
@@ -588,7 +589,7 @@ On the top of the report is a table with in rows statistics for contigs larger t
         >
         {: .question}
 
-# Visualization of the *de novo* assembly graph
+<!-- # Visualization of the *de novo* assembly graph
 
 Current metagenome assemblers like MEGAHIT and MetaSPAdes use **graphs**, most typically a de Bruijn graph to stich reads together. In an ideal case, the graph would contain one distinct path for each genome of each micro-organisms, but complexities such as repeated sequences usually prevent this.
 
@@ -655,7 +656,7 @@ But it is really hard to read or extract any information from the graph. Let's i
 > >
 > {: .solution}
 >
-{: .question}
+{: .question} -->
 
 <!--# De-replication
 
@@ -689,14 +690,10 @@ We will perform steps from 1 to 3 in this tutorial a bit later while steps 4 - 8
 
 # Conclusion
 
+In summary, this tutorial shows a step-by-step on how to bin metagenomic contigs using CONCOCT and MetaBAT2.
+
+These tools vary in their strengths, limitations, and suitability for different types of metagenomic data, so it is important to choose the most appropriate tool for a given analysis. Additionally, it is often beneficial to compare the results of multiple binning methods to improve the accuracy of genome binning.
+
 Metagenomic data can be assembled to, ideally, obtain the genomes of the species that are represented within the input data. But metagenomic assembly is **complex** and there are
-- **different approaches** like de Bruijn graphs methods
-- **different strategies**, such as co-assembly, when we assembly all samples together, and individual assembly, when we assembly samples one by one
-- **different tools** like MetaSPAdes and MEGAHIT
-
-Once the choices made, metagenomic assembly can start:
-1. Input data are assembled to obtain contigs and sometimes scaffolds
-2. Assembly quality is evaluated with various metrics
-3. The assembly graph can be visualized.
-
-Once all these steps done, we can move to the next phase to build Metagenomics Assembled Genomes (MAGs): binning
+- **different approaches**: ????
+- **different tools** : ?????
