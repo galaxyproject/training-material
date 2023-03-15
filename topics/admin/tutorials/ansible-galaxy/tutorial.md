@@ -28,6 +28,7 @@ contributions:
   - nsoranzo
   - lecorguille
   - abretaud
+  - ldelisle
   testing:
   - mira-miracoli
 tags:
@@ -2230,6 +2231,7 @@ execution:
   environments:
     local_env:
       runner: local_runner
+      tmp_dir: true
 tools:
 - id: bwa
   environment: local_env
@@ -2254,7 +2256,7 @@ Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` envi
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -37,6 +37,15 @@ galaxy_config:
+>    @@ -37,6 +37,16 @@ galaxy_config:
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
@@ -2270,6 +2272,7 @@ Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` envi
 >    +        environments:
 >    +          local_env:
 >    +            runner: local_runner
+>    +            tmp_dir: true
 >    +      tools:
 >    +        - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >    +          environment: local_env
@@ -2280,8 +2283,12 @@ Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` envi
 >    ```
 >    {: data-commit="Add job conf"}
 >
->    > <tip-title>workers=4</tip-title>
+>    > <tip-title>workers: 4</tip-title>
 >    > In the local runner, `workers: 4` means "number of jobs that can be running at one time". For every other job runner, it means the number of threads that are created to handle Galaxy's internal pre- and post-job tasks. E.g. if you are in a class and 50 people submit jobs, then there are four threads that can handle these jobs at once. But additional job handlers can be more useful as well.
+>    {: .tip}
+>
+>    > <tip-title>tmp_dir: true</tip-title>
+>    > In the environment local_env, `tmp_dir: true` means "create a temp directory in the job directory". By default, it is set to `false` and if the job uses a temp directory it will create one in the `/tmp/` partition and galaxy will not clean it at the end of the job. This can be problematic if the admin does not do regular cleanup of the `/tmp/` partition or if the `/tmp/` partition is rather small. That's why we recommand to set this option to `true` so the admin does not need to worry about the `/tmp/` partition for galaxy jobs.
 >    {: .tip}
 >
 > 2. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
