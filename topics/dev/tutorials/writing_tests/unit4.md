@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} Solution
+> <solution-title></solution-title>
 > 
 > Factoring out code into a fixture: we declare a fixture using pytest's built-in `fixture` decorator,
 > and then simply pass it as an argument to our tests.

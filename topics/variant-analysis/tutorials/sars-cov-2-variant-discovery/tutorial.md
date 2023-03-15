@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: Mutation calling, viral genome reconstruction and lineage/clade assignment from SARS-CoV-2 sequencing data
+subtopic: one-health
 level: Intermediate
 zenodo_link: "https://zenodo.org/record/5036687"
 questions:
@@ -24,11 +25,12 @@ contributors:
 - bebatut
 tags:
 - covid19
+- virology
 ---
 
 
 # Introduction
-{:.no_toc}
+
 
 Effectively monitoring global infectious disease crises, such as the COVID-19 pandemic, requires capacity to generate and analyze large volumes of sequencing data in near real time. These data have proven essential for monitoring the emergence and spread of new variants, and for understanding the evolutionary dynamics of the virus.
 
@@ -38,7 +40,7 @@ Two sequencing platforms (Illumina and Oxford Nanopore) in combination with seve
 - generation of user-friendly reports for batches of results
 - reliable and configurable consensus genome generation from called variants
 
-> ### {% icon details %} Further reading
+> <details-title>Further reading</details-title>
 > More information about the workflows, including benchmarking, can be found
 > - on the Galaxy Covid-19 effort website: [covid19.galaxyproject.org](https://covid19.galaxyproject.org/)
 > - as a BioRxiv preprint: [Global platform for SARS-CoV-2 analysis](https://www.biorxiv.org/content/10.1101/2021.03.25.437046v1)
@@ -51,7 +53,7 @@ This tutorial will teach you how to obtain, run and combine these workflows appr
 - Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols, or
 - ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -64,7 +66,7 @@ This tutorial will teach you how to obtain, run and combine these workflows appr
 
 Any analysis should get its own Galaxy history. So let's start by creating a new one:
 
-> ### {% icon hands_on %} Hands-on: Prepare the Galaxy history
+> <hands-on-title>Prepare the Galaxy history</hands-on-title>
 >
 > 1. Create a new history for this analysis
 >
@@ -97,7 +99,7 @@ There are several possibilities to upload the data depending on how many dataset
 
   and organize the imported data as a dataset collection.
 
-  > ### {% icon comment %} Collections
+  > <comment-title>Collections</comment-title>
   >
   > A dataset collection is a way to represent an arbitrarily large collection of samples as a singular entity within a user's workspace. For an in-depth introduction to the concept you can follow this [dedicated tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}).
   >
@@ -105,13 +107,13 @@ There are several possibilities to upload the data depending on how many dataset
 
 - Import from [NCBI's Sequence Read Archive (SRA) at NCBI](https://www.ncbi.nlm.nih.gov/sra) with the help of a dedicated tool, which will organize the data into collections for you.
 
-   > ### {% icon comment %} Getting data from SRA
+   > <comment-title>Getting data from SRA</comment-title>
    >
    > [A dedicated tutorial is available to explain how to find and import SARS-CoV-2 data from SRA]({% link topics/variant-analysis/tutorials/sars-cov-2/tutorial.md %}).
    >
    {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Import datasets
+> <hands-on-title>Import datasets</hands-on-title>
 >
 > 1. Import the datasets
 >
@@ -202,7 +204,7 @@ There are several possibilities to upload the data depending on how many dataset
 >
 {: .hands_on}
 
-> ### {% icon comment %} Learning to build collections automatically
+> <comment-title>Learning to build collections automatically</comment-title>
 >
 > It is possible to build collections from tabular data containing URLs, sample sheets, list of accessions or identifiers, etc., directly during upload of the data. [A dedicated tutorial is available to explain the different possibilities]({% link topics/galaxy-interface/tutorials/upload-rules/tutorial.md %}).
 >
@@ -222,7 +224,7 @@ Another two datasets are needed only for the analysis of ampliconic, e.g. ARTIC-
 - a custom tabular file describing the amplicon grouping of the primers
 
 
-> ### {% icon hands_on %} Hands-on: Import auxiliary datasets
+> <hands-on-title>Import auxiliary datasets</hands-on-title>
 >
 > 1. Import the auxiliary datasets:
 >    - the SARS-CoV-2 reference (`NC_045512.2_reference.fasta`)
@@ -230,7 +232,7 @@ Another two datasets are needed only for the analysis of ampliconic, e.g. ARTIC-
 >    - ARTIC v3 primer scheme (`ARTIC_nCoV-2019_v3.bed`)
 >    - ARTIC v3 primer amplicon grouping info (`ARTIC_amplicon_info_v3.tsv`)
 >
->    > ### {% icon details %} Not using ARTIC v3 amplified sequencing data?
+>    > <details-title>Not using ARTIC v3 amplified sequencing data?</details-title>
 >    >
 >    > The instructions here assume you will be analyzing the example samples
 >    > suggested above, which have been amplified using version 3 of the ARTIC
@@ -314,7 +316,7 @@ Illumina RNAseq PE | Paired-end data derived from RNAseq experiments | **bwa-mem
 Illumina ARTIC | Paired-end data generated with Illumina-based Ampliconic (ARTIC) protocols | **bwa-mem** {% cite li_2010 %} | **lofreq** {% cite wilm_2012 %}
 ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconic (ARTIC) protocols | **minimap2** {% cite li_2018 %} | **medaka**
 
-> ### {% icon details %} About the workflows
+> <details-title>About the workflows</details-title>
 >
 > - The two Illumina RNASeq workflows (Illumina RNAseq SE and Illumina RNAseq PE) perform read mapping with **bwa-mem** and **bowtie2**, respectively, followed by sensitive allelic-variant (AV) calling across a wide range of AFs with **lofreq**.
 > - The workflow for Illumina-based ARTIC data (Illumina ARTIC) builds on the RNASeq workflow for paired-end data using the same steps for mapping (**bwa-mem**) and AV calling (**lofreq**), but adds extra logic operators for trimming ARTIC primer sequences off reads with the **ivar** package. In addition, this workflow uses **ivar** also to identify amplicons affected by ARTIC primer-binding site mutations and excludes reads derived from such “tainted” amplicons when calculating alternative allele frequences (AFs) of other AVs.
@@ -327,7 +329,7 @@ ONT ARTIC | ONT FASTQ files generated with Oxford nanopore (ONT)-based Ampliconi
 > More details about the workflows, including benchmarking of the tools, can be found on [covid19.galaxyproject.org](https://covid19.galaxyproject.org/genomics/global_platform/#methods)
 {: .details}
 
-> ### {% icon hands_on %} Hands-on: From FASTQ to annotated AVs
+> <hands-on-title>From FASTQ to annotated AVs</hands-on-title>
 >
 > 1. **Get the workflow** for your data into Galaxy 
 >
@@ -399,7 +401,7 @@ Once the jobs of previous workflows are done, we identified AVs for each sample.
 
 This workflow takes the collection of called (with lofreq) and annotated (with SnpEff) variants (one VCF dataset per input sample) that got generated as one of the outputs of any of the four variation analysis workflows above, and generates two tabular reports and an overview plot summarizing all the variant information for your batch of samples.
 
-> ### {% icon warning %} Use the right collection of annotated variants!
+> <warning-title>Use the right collection of annotated variants!</warning-title>
 > The variation analysis workflow should have generated *two* collections of annotated variants - one called `Final (SnpEff-) annotated variants`, the other one called `Final (SnpEff-) annotated variants with strand-bias soft filter applied`.
 > 
 > If you have analyzed ampliconic data with any of the **variation analysis of ARTIC** data workflows, then please consider the strand-bias soft-filtered collection experimental and proceed with the `Final (SnpEff-) annotated variants` collection as input to the next workflow.
@@ -408,7 +410,7 @@ This workflow takes the collection of called (with lofreq) and annotated (with S
 >
 {: .warning}
 
-> ### {% icon hands_on %} Hands-on: From annotated AVs per sample to AV summary
+> <hands-on-title>From annotated AVs per sample to AV summary</hands-on-title>
 >
 > 1. **Get the workflow** into Galaxy
 >    
@@ -496,13 +498,13 @@ The three key results datasets produced by the Reporting workflow are:
    20 |`countunique(FUNCLASS)` | Number of distinct FUNCLASS values at this site across all samples
    21 |`change` | Change at this site in this sample
 
-   > ### {% icon question %} Questions
+   > <question-title></question-title>
    > 
    > 1. How many AVs are found for all samples?
    > 2. How many AVs are found for the first sample in the document?
    > 3. How many AVs are found for each sample?
    >
-   > > ### {% icon solution %} Solution
+   > > <solution-title></solution-title>
    > >
    > > 1. By expanding the dataset in the history, we have the number of lines in the file. 868 lines for the example datasets. The first line is the header of the table. Then 867 AVs.
    > >
@@ -547,7 +549,7 @@ The three key results datasets produced by the Reporting workflow are:
    16 |`AFs(all)` | List of all allele frequencies across all samples 
    17 |`change` |  Change 
 
-   > ### {% icon question %} Questions
+   > <question-title></question-title>
    > 
    > 1. How many AVs are found?
    > 1. What are the different impacts of the AVs?
@@ -555,7 +557,7 @@ The three key results datasets produced by the Reporting workflow are:
    > 3. What are the different effects of HIGH impact?
    > 4. Are there any AVs impacting all samples?
    >
-   > > ### {% icon solution %} Solution
+   > > <solution-title></solution-title>
    > >
    > > 1. By expanding the dataset in the history, we have the number of lines in the file. 184 lines for the example datasets. The first line is the header of the table. Then 183 AVs.
    > >
@@ -610,7 +612,7 @@ For the variant calls, we can now run a workflow which generates reliable consen
 
 The workflow takes a collection of VCFs and a collection of the corresponding aligned reads (for the purpose of calculating genome-wide coverage) such as produced by the first workflow we ran.
 
-> ### {% icon warning %} Use the right collections as input!
+> <warning-title>Use the right collections as input!</warning-title>
 > The variation analysis workflow should have generated *two* collections of annotated variants - one called `Final (SnpEff-) annotated variants`, the other one called `Final (SnpEff-) annotated variants with strand-bias soft filter applied`.
 > 
 > If you have analyzed ampliconic data with any of the **variation analysis of ARTIC** data workflows, then please consider the strand-bias soft-filtered collection experimental and proceed with the `Final (SnpEff-) annotated variants` collection as input to the next workflow.
@@ -622,7 +624,7 @@ The workflow takes a collection of VCFs and a collection of the corresponding al
 {: .warning}
 
 
-> ### {% icon hands_on %} Hands-on: From AVs to consensus sequences
+> <hands-on-title>From AVs to consensus sequences</hands-on-title>
 >
 > 1. **Get the workflow** into Galaxy
 >
@@ -696,7 +698,7 @@ To assign lineages to the different samples from their consensus sequences, two 
 
 Pangolin (Phylogenetic Assignment of Named Global Outbreak LINeages) can be used to assign a SARS-CoV-2 genome sequence the most likely lineage based on the PANGO nomenclature system.
 
-> ### {% icon hands_on %} Hands-on: From consensus sequences to clade assignations using Pangolin
+> <hands-on-title>From consensus sequences to clade assignations using Pangolin</hands-on-title>
 >
 > 1. {% tool [Pangolin](toolshed.g2.bx.psu.edu/repos/iuc/pangolin/pangolin/3.1.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input FASTA File(s)"*: `Multisample consensus FASTA`
@@ -722,11 +724,11 @@ Column | Field | Meaning
 12 | `status` | Indicates whether the sequence passed the QC thresholds for minimum length and maximum N content.
 13 | `note` | If any conflicts from the decision tree, this field will output the alternative assignments. If the sequence failed QC this field will describe why. If the sequence met the SNP thresholds for scorpio to call a constellation, it’ll describe the exact SNP counts of Alt, Ref and Amb (Alternative, Reference and Ambiguous) alleles for that call.
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 > 
 > How many different lineages have been found? How many samples for each lineage?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > To summarize the number of lineages and number of samples for  each lineage, we can run {% tool [Group data](Grouping1) %} with the following parameters:
 > >    - {% icon param-file %} *"Select data"*: output of **pangolin**
@@ -749,7 +751,7 @@ Column | Field | Meaning
 
 Nextclade assigns clades, calls mutations and performs sequence quality checks on SARS-CoV-2 genomes.
 
-> ### {% icon hands_on %} Hands-on: From consensus sequences to clade assignations using Nextclade
+> <hands-on-title>From consensus sequences to clade assignations using Nextclade</hands-on-title>
 >
 > 1. {% tool [Nextclade](toolshed.g2.bx.psu.edu/repos/iuc/nextclade/nextclade/0.14.4+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"SARS-CoV-2 consensus sequences (FASTA)"*: `Multisample consensus FASTA`
@@ -802,13 +804,13 @@ Column | Field | Meaning
 40 | `qc.snpClusters.totalSNPs` | Number of differences in clusters
 41 | `errors` | Other errors (e.g. sequences in which some of the major genes fail to translate because of frame shifting insertions or deletions)
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 > 
 > How many different lineages have been found? How many samples for each lineage?
 >
 > ![Illustration of phylogenetic relationship of clades, as used in Nextclade](../../images/sars-cov-2-variant-discovery/ncov_clades.png "Illustration of phylogenetic relationship of clades, as used in Nextclade (Source: <a href="https://clades.nextstrain.org/">Nextclade</a>)")
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > To summarize the number of lineages and number of samples for  each lineage, we can run {% tool [Group data](Grouping1) %} with the following parameters:
 > >    - {% icon param-file %} *"Select data"*: output of **Nextclade**
@@ -831,7 +833,7 @@ Column | Field | Meaning
 
 We can compare **Pangolin** and **Nextclade** clade assignments by extracting interesting columns and joining them into a single dataset using sample ids.
 
-> ### {% icon hands_on %} Hands-on: Comparison clade assignations
+> <hands-on-title>Comparison clade assignations</hands-on-title>
 >
 > 1. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1,c2`
@@ -855,7 +857,7 @@ We can compare **Pangolin** and **Nextclade** clade assignments by extracting in
 We can see that **Pangolin** and **Nextclade** are globally coherent despite differences in lineage nomenclature.
 
 # Conclusion
-{:.no_toc}
+
 
 In this tutorial, we used a collection of Galaxy workflows for the detection and interpretation of sequence variants in SARS-CoV-2:
 

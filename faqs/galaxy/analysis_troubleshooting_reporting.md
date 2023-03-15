@@ -1,6 +1,6 @@
 ---
 title: What information should I include when reporting a problem?
-area: contributors
+area: troubleshooting
 layout: faq
 box_type: tip
 contributors: [hexylena]

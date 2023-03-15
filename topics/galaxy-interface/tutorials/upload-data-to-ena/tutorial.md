@@ -42,14 +42,14 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 <!-- This is a comment. -->
 
 Raw reads contain valuable information, such as coverage depth and quality scores, that is lost in a consensus sequence.
 Submission of raw reads to public repositories allows reuse of data and reproducibility of analysis and enables discovery of minor allelic variants and intrahost variation, for example during the recent COVID-19 pandemic ({% cite Maier2021 %}).
 
-The European Nucleotide Archive is an Open and FAIR repository of nucleotide data. As part of the International Nucleotide Sequence Database Collaboration (INSDC), ENA also indexes data from the NCBI and DDBJ {% cite Arita2020 %}. Data submitted to ENA must be accompanied by sufficient metadata. You can learn more from this [introductory slide deck](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/upload-data-to-ena/slides.html) or directly from [ENA](https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html).
+The European Nucleotide Archive is an Open and FAIR repository of nucleotide data. As part of the International Nucleotide Sequence Database Collaboration (INSDC), ENA also indexes data from the NCBI and DDBJ {% cite Arita2020 %}. Data submitted to ENA must be accompanied by sufficient metadata. You can learn more from this [introductory slide deck]({% link topics/galaxy-interface/tutorials/upload-data-to-ena/slides.html %}) or directly from [ENA](https://ena-docs.readthedocs.io/en/latest/submit/general-guide/metadata.html).
 
 
 In this tutorial we will show you how to use Galaxy's 'ENA Upload tool' to submit raw sequencing reads, consensus sequences and their associated metadata to ENA {% cite Roncoroni2021 %}. You will learn to add your ENA Webin credentials to Galaxy, input metadata interactively or via a metadata template and submit the reads to ENA (test) server using Galaxy's 'ENA upload tool'.
@@ -57,14 +57,14 @@ Specifically, we will use one ONT sequencing file to demonstrate interactive met
 
 Data will be submitted to ENA's test server and will not be public.
 
-> ### {% icon comment %} Nature of the input data
+> <comment-title>Nature of the input data</comment-title>
 > We will use data derived from sequencing data of bronchoalveolar lavage fluid (BALF) samples obtained from early COVID-19 patients in China as our input data.
-> Human traces have been removed in [Galaxy](https://training.galaxyproject.org/training-material/topics/sequence-analysis/tutorials/human-reads-removal/tutorial.html).
+> Human traces have been removed in [Galaxy]({% link topics/sequence-analysis/tutorials/human-reads-removal/tutorial.md %}).
 >
 {: .comment}
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -75,9 +75,9 @@ Data will be submitted to ENA's test server and will not be public.
 
 # Adding ENA Webin credentials to your Galaxy user information
 
-In order to submit data to ENA, you need to have a valid Webin account. If you don't have one already you can register for one [here](https://www.ebi.ac.uk/ena/submit/sra/#registration). Webin credentials need to be included in your Galaxy user information before you can use the ENA Upload tool.
+In order to submit data to ENA, you need to have a valid Webin account. If you don't have one already you can register for one [on ENA's Registration Page](https://www.ebi.ac.uk/ena/submit/sra/#registration). Webin credentials need to be included in your Galaxy user information before you can use the ENA Upload tool.
 
-> ### {% icon hands_on %} Hands-on: Add Webin credentials to your Galaxy user information
+> <hands-on-title>Add Webin credentials to your Galaxy user information</hands-on-title>
 >
 > 1. If you have not already done so, log in to usegalaxy.eu
 > 2. Navigate to *"User"* > *"Preferences"* on the top menu
@@ -91,7 +91,7 @@ In order to submit data to ENA, you need to have a valid Webin account. If you d
 
 In this first example, you will submit one ONT sequence file using the interactive metadata forms from the ENA Upload tool. This method is only convenient for small submissions. For bulk submissions, we recommend you use the metadata template described below in Option 2.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Upload the ONT data from Zenodo via URLs
 >
@@ -114,7 +114,7 @@ After you confirm that all the data and metadata looks ok, you can go ahead and 
 
 
 
-> ### {% icon hands_on %} Hands-on: add metadata interactively and submit a single sequence to ENA
+> <hands-on-title>add metadata interactively and submit a single sequence to ENA</hands-on-title>
 >
 > 1. {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1) %}:
 >    - *"Action to execute"*: `Add new data`
@@ -144,17 +144,17 @@ After you confirm that all the data and metadata looks ok, you can go ahead and 
 >
 {: .hands_on}
 
-> ### {% icon warning %} Do not include personal identifiable data
+> <warning-title>Do not include personal identifiable data</warning-title>
 > In some cases, some information is requested by ENA that may classify as personal or could be used to identify persons (e.g. 'host ID' for checklist ERC000033). Make sure that you do not publish any personal metadata that infringes privacy protection regulations in your jurisdiction.
 {: .warning}
 
-> ### {% icon warning %} Submit to the test server first
+> <warning-title>Submit to the test server first</warning-title>
 > Make sure  *"Submit to test ENA server?"*: `yes`. Otherwise your data will be submitted to the public server.
 {: .warning}
 
 Four metadata tables (Study, Sample, Experiment and Run), and a metadata ticket with submission information are generated. You can confirm a successful submission at ENA [test server](https://wwwdev.ebi.ac.uk/ena/submit/webin/) (or the [public server](https://www.ebi.ac.uk/ena/submit/sra), if you chose it).
 
-> ### {% icon tip %} Tip: Metadata ticket
+> <tip-title>Metadata ticket</tip-title>
 > Upon successful submission, a metadata ticket is generated. This contains information of the submission, including parseable metadata. Importantly, it contains Study, Sample, Run and Experiment accession numbers. The former two you will use later to link the consensus sequence to the raw data.
 {: .tip}
 
@@ -164,7 +164,7 @@ Four metadata tables (Study, Sample, Experiment and Run), and a metadata ticket 
 For larger submissions, interactive metadata input can be tedious and not practical. In the second example, you will submit two sets of Illumina PE sequence files and input metadata using a template spreadsheet. This template contains all fields for ENA sample checklist *'ERC000033 - ENA virus pathogen reporting standard checklist'*. Tabular (.tsv and .xlsx) metadata templates for all sample checklist can be found in [this repository](https://github.com/ELIXIR-Belgium/ENA-metadata-templates).
 For this tutorial, we provide you with a pre-filled template and encourage you to explore it.
 
-> ### {% icon hands_on %} Hands-on: Upload and inspect data
+> <hands-on-title>Upload and inspect data</hands-on-title>
 >
 > 1. Upload the ONT data from Zenodo via URLs:
 >
@@ -187,21 +187,23 @@ For this tutorial, we provide you with a pre-filled template and encourage you t
 >
 >      All datasets should now be moved to the *paired section* of the dialog, and the middle column there should show that only the sample accession numbers, *i.e.* `SRR10903401` and `SRR10903402`, will be used as the pair names.
 >
->    > ### {% icon warning %} Paired collection names
+>    > <warning-title>Paired collection names</warning-title>
 >    > It is very important that the paired collection names contain no suffix (e.g. _1, _R1, etc.) or file extensions (.fastq, .fastq.gz). The submission tool will add these at runtime and leaving them in the paired collection names will cause a mismatch with the filenames in the metadata table.
 >    {: .warning }
 >    - Make sure *Hide original elements* is checked to obtain a cleaned-up history after building the collection.
 >    - Give your collection a name
 >    - Click *Create Collection*
 >
-> 3. Inspect the `GTN_tutorial_mock_metadata.xlsx` (filled-in template) file by clicking on the {% icon galaxy-eye %} (eye) icon
->https://github.com/enasequence/webin-cli
->    > ### {% icon question %} Questions
+> 3. Inspect the `GTN_tutorial_mock_metadata.xlsx` (filled-in template) file by clicking on the {% icon galaxy-eye %} (eye) icon 
+>
+>    https://github.com/enasequence/webin-cli
+>
+>    > <question-title></question-title>
 >    >
 >    > 1. How many metadata sheets are there?
 >    > 2. How is the 'Sample' section in the template different from that in the interactive metadata input?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. There are four metadata sheets, one per metadata object (Study, Sample, Experiment, Run)
 >    > > 2. The Sample section is more extensive in the template spreadsheet, because it contains all the fields from ENA ERC000033 sample checklist, as well as all 'Recommended' and 'Optional' fields in the other sections.
 >    >  {: .solution }
@@ -212,7 +214,7 @@ For this tutorial, we provide you with a pre-filled template and encourage you t
 
 As before, the submission is done to the test server before submitting to the public one.
 
-> ### {% icon hands_on %} Hands-on: use a metadata template and submit multiple sequences to ENA
+> <hands-on-title>use a metadata template and submit multiple sequences to ENA</hands-on-title>
 >
 > 1. {% tool [ENA Upload tool](toolshed.g2.bx.psu.edu/repos/iuc/ena_upload/ena_upload/0.6.1) %}:
 >    - *"Action to execute"*: `Add new data`
@@ -228,17 +230,17 @@ As before, the submission is done to the test server before submitting to the pu
 >
 {: .hands_on}
 
-> ### {% icon warning %} Do not include personal identifiable data
+> <warning-title>Do not include personal identifiable data</warning-title>
 > In some cases, some information is requested by ENA that may classify as personal or could be used to identify persons (e.g. 'host ID' for checklist ERC000033). Make sure that you do not publish any personal metadata that infringes privacy protection regulations in your jurisdiction.
 {: .warning}
 
-> ### {% icon warning %} Submit to the test server first
+> <warning-title>Submit to the test server first</warning-title>
 > Make sure  *"Submit to test ENA server?"*: `yes`. Otherwise your data will be submitted to the public server.
 {: .warning}
 
 Four metadata tables (Study, Sample, Experiment and Run), and a metadata ticket with submission information are generated. You can confirm a successful submission at ENA [test server](https://wwwdev.ebi.ac.uk/ena/submit/webin/) (or the [public server](https://www.ebi.ac.uk/ena/submit/sra), if you chose it).
 
-> ### {% icon tip %} Tip: Metadata ticket
+> <tip-title>Metadata ticket</tip-title>
 > Upon succesful submission, a metadata ticket is generated. This contains information of the submission, including parseable metadata. Importantly, it contains Study, Sample, Run and Experiment accession numbers. The former two you will use later to link the consensus sequence to the raw data.
 {: .tip}
 
@@ -250,7 +252,7 @@ In this step we will submit one consensus sequence to ENA.
 We will link it to the reads submitted in the first step using the accession numbers given to those submissions. Galaxy's 'ENA Upload tool' captures and stores metadata on a metadata ticket.
 
 
-> ### {% icon hands_on %} Hands-on: submit consensus sequences to ENA
+> <hands-on-title>submit consensus sequences to ENA</hands-on-title>
 >
 > 1. Upload the consensus sequence to Galaxy from Zenodo via URLs:
 >    ```

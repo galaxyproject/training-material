@@ -23,7 +23,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Galaxy is a great solution to train bioinformatics concepts:
 
@@ -39,7 +39,7 @@ We decided on a structure focusing on tutorials with hands-on activities; fittin
 
 Here you will learn how to create a new tutorial by developing a small tutorial explaining how to retrieve climate data from Copernicus (using **Copernicus Climate Data Store** tool).
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -48,7 +48,7 @@ Here you will learn how to create a new tutorial by developing a small tutorial 
 >
 {: .agenda}
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > This tutorial explains the different steps to create a tutorial for the Galaxy Training Material.
 > It may require some knowledge that you may not have or do not have the time to learn. If this is the case, you can create a skeleton of a tutorial with whatever existing materials you have, using your prefered text editor, and then share it with us by opening [issue on GitHub]({{ site.github_repository }}/issues/new), writing us on [Gitter]({{ site.gitter_url }}), or sending us an [email](mailto:{{ site.email }}).
 {: .comment}
@@ -59,12 +59,12 @@ The first step we need to do is to identify in which topic to place our new tuto
 
 We decided to use the categories from the [ToolShed](https://toolshed.g2.bx.psu.edu/) as our initial list of topics. Since every tool uploaded to the ToolShed must be in at least one category, you can look at the main tools in your tutorial and see which categories they are placed in within the ToolShed. This can provide a guide for where you might put your new tutorial. For example, if your tutorial will rely on the **Copernicus** tool:
 
-> ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
+> <hands-on-title>Defining the topic for the tutorial</hands-on-title>
 >
 > 1. Search for **Copernicus** on the [ToolShed](https://toolshed.g2.bx.psu.edu/)
 > 2. Check in which category it has been placed
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > There are a couple steps to reaching the answer:
 > > 1. Search for `Copernicus`
 > > 2. Press the <kbd>Enter</kbd> key to search
@@ -77,11 +77,11 @@ We decided to use the categories from the [ToolShed](https://toolshed.g2.bx.psu.
 > 3. Look if the categories fit to existing topics in the Galaxy Training Material
 {: .hands_on}
 
-> ### {% icon comment %} No fitting topic for the tools in your tutorial?
-> If the categories in ToolShed do not fit to any existing topics, we recommend to use your better judgment to identify in which topic your tutorial should go. You can also ask us on [Gitter]({{ site.gitter }}) or raise an issue on [GitHub]({{ site.github }}) explaining the aim of the tutorial. We will be happy to help you there.
+> <comment-title>No fitting topic for the tools in your tutorial?</comment-title>
+> If the categories in ToolShed do not fit to any existing topics, we recommend to use your better judgment to identify in which topic your tutorial should go. You can also ask us on [Gitter]({{ site.gitter_url }}) or raise an issue on [GitHub]({{ site.github_repository }}) explaining the aim of the tutorial. We will be happy to help you there.
 {: .comment}
 
-> ### {% icon comment %} Creating a new topic
+> <comment-title>Creating a new topic</comment-title>
 > Want to create a new topic? [Check out our tutorial to create a new topic]({% link topics/contributing/tutorials/create-new-topic/tutorial.md %})
 {: .comment}
 
@@ -124,12 +124,12 @@ Most tutorials explain step-by-step a data analysis by running the tools. The st
 
 Before writing the tutorial, it is a good practice to get a workflow with the different steps that will be run during the tutorial. The workflow does not have to be the final one but at least the major steps. It helps to get a direction for the tutorial but also to generate a skeleton of the tutorial as we will see later.
 
-> ### {% icon comment %} Use tools that are available on the ToolShed
+> <comment-title>Use tools that are available on the ToolShed</comment-title>
 > We recommmend you to use in your workflows, specially for training, tools that are available on the Galaxy ToolShed.
 {: .comment}
 
 
-> ### {% icon hands_on %} Hands-on: Prepare the workflow for the training
+> <hands-on-title>Prepare the workflow for the training</hands-on-title>
 >
 > 1. Go to your favorite Galaxy server
 > 2. Create a workflow with the different steps (tools) of your tutorial either from scratch or from an existing history
@@ -156,7 +156,7 @@ Before writing the tutorial, it is a good practice to get a workflow with the di
 > 4. Make the workflow accessible (publishing is not necessary)
 >
 >    {% snippet faqs/galaxy/workflows_publish.md %}
->     
+>
 {: .hands_on}
 
 
@@ -185,7 +185,7 @@ Below we describe two examples of how toy datasets were generated for tutorials:
 
 We would then develop the tutorial and test it on this toy dataset. Once we were ready to share it, we would upload the datasets to [Zenodo](https://zenodo.org/) to store them on long-term and obtain a dedicated DOI in the [Galaxy training network community](https://zenodo.org/communities/galaxy-training/?page=1&size=20).
 
-> ### {% icon hands_on %} Hands-on: Upload the dataset to Zenodo
+> <hands-on-title>Upload the dataset to Zenodo</hands-on-title>
 >
 > 1. Go to [Zenodo](https://zenodo.org/)
 > 2. Log in using your GitHub credentials
@@ -196,7 +196,7 @@ We would then develop the tutorial and test it on this toy dataset. Once we were
 > 4. Start a new upload
 > 5. Upload the files corresponding to your datasets
 >
->     > ### {% icon comment %} No possible changes in the files after publication
+>     > <comment-title>No possible changes in the files after publication</comment-title>
 >     > File addition, removal or modification are not allowed after you have published your upload.
 >     > So be careful when you start your upload that all your needed files are ready.
 >     >
@@ -223,7 +223,7 @@ Writing the tutorial while adding the different tools and their parameters and f
 
 This tool can be used via the command-line but also via a [webserver](https://ptdk.apps.galaxyproject.eu/). The webserver can take a public workflow that is avialable on [usegalaxy.org](https://usegalaxy.org), [usegalaxy.eu](https://usegalaxy.eu) or [usegalaxy.org.au](https://usegalaxy.org.au).
 
-> ### {% icon hands_on %} Hands-on: Create the skeleton of a tutorial using the webserver
+> <hands-on-title>Create the skeleton of a tutorial using the webserver</hands-on-title>
 >
 > 1. Make the workflow public
 >
@@ -254,7 +254,7 @@ This tool can be used via the command-line but also via a [webserver](https://pt
 >
 > 7. Add the new material to Galaxy Training Material by unzip the downloaded archive in the tutorials folder of the topic for the new tutorial
 >
->    > ### {% icon comment %} Using the GitHub interface
+>    > <comment-title>Using the GitHub interface</comment-title>
 >    >
 >    > Prefer to use the GitHub interface?
 >    >
@@ -279,7 +279,7 @@ This tool can be used via the command-line but also via a [webserver](https://pt
 
 If the workflow is not available on one of the previously listed Galaxy servers, we recommend you to run the tool via the command line:
 
-> ### {% icon hands_on %} Hands-on: Create the skeleton of a tutorial via the command line
+> <hands-on-title>Create the skeleton of a tutorial via the command line</hands-on-title>
 >
 > 1. Get the workflow id
 >
@@ -329,11 +329,11 @@ If the workflow is not available on one of the previously listed Galaxy servers,
 
 Now that you have the structure in place, you can then fill the tutorial per se.
 
-> ### {% icon hands_on %} Hands-on: Write the tutorial
+> <hands-on-title>Write the tutorial</hands-on-title>
 >
 > 1. Open the `tutorial.md` file with your favorite text editor
 > 2. Fill out the tutorial by following the [dedicated tutorial]({% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md %})
->    
+>
 >    1. Add metadata on the top of the tutorial
 >    2. Add a proper introduction
 >    3. Organize the tutorial in different sections
@@ -352,7 +352,7 @@ The material is stored in a [GitHub repository]({{ site.github_repository }}), a
 
 This can be done online via the GitHub interface or locally on your computer via command-line.
 
-> ### {% icon comment %} Learning how to contribute
+> <comment-title>Learning how to contribute</comment-title>
 > Want to learn how to contribute? Check our tutorials:
 > - [Contributing with GitHub via its interface]({% link topics/contributing/tutorials/github-interface-contribution/tutorial.md %})
 > - [Contributing with GitHub via command-line]({% link topics/contributing/tutorials/github-command-line-contribution/tutorial.md %})
@@ -362,13 +362,13 @@ This can be done online via the GitHub interface or locally on your computer via
 
 Sometimes, you may want to have slides to support a tutorial and introduce it during a workshop. Sometimes, a set of slides is better than a tutorial to cover a specific topic.
 
-> ### {% icon hands_on %} Hands-on: Add slides
+> <hands-on-title>Add slides</hands-on-title>
 >
 > 1. Create a slide deck in `slides.html` following the [Slide tutorial]({% link topics/contributing/tutorials/create-new-tutorial-slides/slides.html %})
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 To develop a new tutorial:
 
@@ -384,7 +384,7 @@ To develop a new tutorial:
 
 For the next times, you can make it quicker.
 
-> ### {% icon hands_on %} Hands-on: Generation of a tutorial
+> <hands-on-title>Generation of a tutorial</hands-on-title>
 >
 > 1. Determine the topic
 > 2. Create your workflow on a running Galaxy instance
@@ -410,9 +410,9 @@ For the next times, you can make it quicker.
 > 7. Fill the content of the `tutorial.md`
 > 8. Check it by serving the website locally
 >
->    > ### {% icon comment %} Serving the website locally
+>    > <comment-title>Serving the website locally</comment-title>
 >    > Want to learn how to see the change on the website locally? [Check out our dedicated tutorial]({% link topics/contributing/tutorials/running-jekyll/tutorial.md %})
 >    {: .comment}
-> 
+>
 > 9. Submit it to GitHub
 {: .hands_on}

@@ -9,7 +9,7 @@
 
 You can continue improving annotation whenever you want, the Apollo server will keep your changes in a safe place for future use. However at some point you will want to export your work to perform other analyses base on it. This can be done from Galaxy:
 
-> ### {% icon hands_on %} Export data to Galaxy
+> <hands-on-title>Export data to Galaxy</hands-on-title>
 >
 > 1. {% tool [Retrieve Data from Apollo into Galaxy](toolshed.g2.bx.psu.edu/repos/gga/apollo_export/export/4.2.5) %} with the following parameters:
 >    - *"Organism Common Name Source"*: `Direct Entry`
@@ -39,7 +39,7 @@ As explained at the beginning of this tutorial, Apollo is a collaborative annota
 Click on the **Sharing** tab in the Apollo right panel.
 
 {% if include.eukaryote %}
-> ### {% icon comment %} Screenshots
+> <comment-title>Screenshots</comment-title>
 > The following screenshots mention `E. coli K12`, but it works exactly the same for our eukaryote organism `Mucor mucedo`.
 {: .comment}
 {% endif %}
@@ -52,7 +52,7 @@ You should see a screen like this:
 
 It means that you are currently not in any group, and that, as its creator, you have the right to share access to one organism: `{{ organism }}`.
 
-> ### {% icon hands_on %} Create a user group
+> <hands-on-title>Create a user group</hands-on-title>
 >
 > 1. Click on the **Group management** tab
 >
@@ -70,7 +70,7 @@ Now you should see a screen like this:
 
 Let's add a colleague to our newly created group.
 
-> ### {% icon hands_on %} Adding a user in the group
+> <hands-on-title>Adding a user in the group</hands-on-title>
 >
 > 1. Click on the **Group members** tab
 >
@@ -86,7 +86,7 @@ Let's add a colleague to our newly created group.
 
 And now allow the user group to access our `{{ organism }}` organism.
 
-> ### {% icon hands_on %} Giving access to an organism
+> <hands-on-title>Giving access to an organism</hands-on-title>
 >
 > 1. Click on the **Organisms** tab (if not already selected)
 >

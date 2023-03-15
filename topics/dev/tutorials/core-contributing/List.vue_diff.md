@@ -1,5 +1,5 @@
 
-> ### {% icon solution %} ``client/src/components/User/FavoriteExtensions/List.vue``
+> <solution-title>``client/src/components/User/FavoriteExtensions/List.vue``</solution-title>
 > 
 > Possible changes to file ``client/src/components/User/FavoriteExtensions/List.vue``:
 > 

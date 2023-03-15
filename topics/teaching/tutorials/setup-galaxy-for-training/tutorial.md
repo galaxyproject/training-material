@@ -23,7 +23,7 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 In this tutorial, you will learn how to provision your Galaxy instance to support training modules from the GTN repository.
 
@@ -34,13 +34,13 @@ Tutorials in this repository are all supplemented with files describing the tech
   - `workflows` folder: contains one or more workflows with all steps in the tutorial
   - `tours` folder: contains one or more yaml files describing interactive tours
 
-> ### {% icon comment %} Requirements
+> <comment-title>Requirements</comment-title>
 > For more information about how to create these files, please see our module on [specifying the technical requirements for your tutorial]({% link topics/contributing/tutorials/create-new-tutorial-technical/tutorial.md %}).
 {: .comment}
 
 For just the list of Ephemeris commands needed for installation, skip to the [Quickstart section](#quickstart) at the end of this tutorial.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -60,7 +60,7 @@ For the purposes of this training, we will create a Galaxy instance running on `
 To setup a Galaxy server locally, we will first clone the Galaxy github repository, make a few small edits to the `galaxy.yaml` configuration file, and then start the server.
 
 
-> ### {% icon hands_on %} Hands-on: Setup a local Galaxy instance
+> <hands-on-title>Setup a local Galaxy instance</hands-on-title>
 >
 > 1. Clone the github repository
 >    ```bash
@@ -100,7 +100,7 @@ To setup a Galaxy server locally, we will first clone the Galaxy github reposito
 
 In order to install the tutorial requirements, we will need the API key of an admin user.
 
-> ### {% icon hands_on %} Hands-on: Obtain Galaxy API key
+> <hands-on-title>Obtain Galaxy API key</hands-on-title>
 >
 > 1. Register an account on Galaxy using the email address you added to the `config/galaxy.yml` file
 >    - Once logged in, verify that you have a menu item named `Admin` in your top menu bar.
@@ -116,7 +116,7 @@ In order to install the tutorial requirements, we will need the API key of an ad
 To install to training requirements to our Galaxy, we will use Ephemeris, let's install it now:
 
 
-> ### {% icon hands_on %} Hands-on: Install Ephemeris
+> <hands-on-title>Install Ephemeris</hands-on-title>
 >
 > ```bash
 > # optional: create a virtual environment
@@ -135,7 +135,7 @@ We have created a small bash script to automatically install all of a tutorial's
 In this example we will install the requirements for the [*Reference-based RNASeq*]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}) tutorial to the Galaxy instance running on localhost.
 
 
-> ### {% icon hands_on %} Hands-on: Install a tutorial
+> <hands-on-title>Install a tutorial</hands-on-title>
 >
 > 1. If you have not done so yet, clone the training material github repo:
 >    ```bash
@@ -155,7 +155,7 @@ Installation may take some time. This script will automatically install the tool
 
 The only thing the script cannot currently automate is the installation of the interactive tours. We will now do this manually by copying the contents of the `tours` folder to our Galaxy instance, in the folder `$GALAXY_ROOT/config/plugins/tours`
 
-> ### {% icon hands_on %} Hands-on: Install the interactive Tours
+> <hands-on-title>Install the interactive Tours</hands-on-title>
 >
 > 1. Copy the `tour.yaml` file from the training materials repo to Galaxy
 >    ```bash
@@ -216,4 +216,4 @@ copy the contents of the "tours" directory for the tutorial to Galaxy's "config/
 When data libraries are created, depending on the server settings, they may be created privately. You will need to fix their permissions either through the UI or the API if you have many datasets. UseGalaxy.eu uses [a script](https://github.com/usegalaxy-eu/shared-data/blob/fb9b4ed069dcd59a39b40e9c7ea08a068d8a9df2/run.sh) to correct the permissions.
 
 # Conclusion
-{:.no_toc}
+

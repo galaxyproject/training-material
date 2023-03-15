@@ -1,0 +1,475 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Microbiome - Variant calling and Consensus Building",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0001-9047-4215",
+            "name": "Engy Nasr",
+            "url": "https://orcid.org/0000-0001-9047-4215"
+        },
+        {
+            "class": "Person",
+            "identifier": "0000-0001-9852-1987",
+            "name": "B\u00e9r\u00e9nice Batut",
+            "url": "https://orcid.org/0000-0001-9852-1987"
+        }
+    ],
+    "format-version": "0.1",
+    "license": "MIT",
+    "name": "Nanopore Datasets - SNP based pathogenetic Identification",
+    "steps": {
+        "0": {
+            "annotation": "Output from Nanopore - Preprocessing workflow",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Output from Nanopore - Preprocessing workflow",
+                    "name": "Nanopore Preprocessed reads"
+                }
+            ],
+            "label": "Nanopore Preprocessed reads",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 62.0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "36da1bb6-0c14-4cf0-91b0-5f233dc081ec",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "Can be built in the tool later",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "Can be built in the tool later",
+                    "name": "Reference Genome of Tested Strain/Pathogen"
+                }
+            ],
+            "label": "Reference Genome of Tested Strain/Pathogen",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 0,
+                "top": 224.0
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "6dbb6826-2a10-4cab-9826-fca7a3dabd6c",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.24+galaxy0",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "fastq_input|fastq_input1": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "reference_source|ref_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Map with minimap2",
+                    "name": "fastq_input"
+                },
+                {
+                    "description": "runtime parameter for tool Map with minimap2",
+                    "name": "reference_source"
+                }
+            ],
+            "label": null,
+            "name": "Map with minimap2",
+            "outputs": [
+                {
+                    "name": "alignment_output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 278,
+                "top": 31.0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.24+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "11a0d50a54e6",
+                "name": "minimap2",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"alignment_options\": {\"splicing\": {\"splice_mode\": \"preset\", \"__current_case__\": 0}, \"A\": null, \"B\": null, \"O\": null, \"O2\": null, \"E\": null, \"E2\": null, \"z\": null, \"z2\": null, \"s\": null, \"no_end_flt\": \"true\"}, \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 0, \"fastq_input1\": {\"__class__\": \"RuntimeValue\"}, \"analysis_type_selector\": null}, \"indexing_options\": {\"H\": \"false\", \"k\": null, \"w\": null, \"I\": null}, \"io_options\": {\"output_format\": \"BAM\", \"Q\": \"false\", \"L\": \"false\", \"K\": null, \"cs\": null, \"c\": \"false\", \"eqx\": \"false\", \"Y\": \"false\"}, \"mapping_options\": {\"N\": null, \"F\": null, \"f\": null, \"kmer_ocurrence_interval\": {\"interval\": \"\", \"__current_case__\": 1}, \"min_occ_floor\": null, \"q_occ_frac\": \"0.01\", \"g\": null, \"r\": null, \"n\": null, \"m\": null, \"max_chain_skip\": null, \"max_chain_iter\": null, \"X\": \"false\", \"p\": null, \"mask_len\": null}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"RuntimeValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.24+galaxy0",
+            "type": "tool",
+            "uuid": "6236332a-936c-4d16-83d7-e90369f2e94a",
+            "workflow_outputs": [
+                {
+                    "label": "Map with minimap2 on input dataset(s) (mapped reads in BAM format)",
+                    "output_name": "alignment_output",
+                    "uuid": "c299118e-7909-482d-a4ec-d83a5ac55ee0"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/clair3/clair3/0.1.12+galaxy0",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "bam_input": {
+                    "id": 2,
+                    "output_name": "alignment_output"
+                },
+                "ref_source|ref_fasta": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Clair3",
+                    "name": "bam_input"
+                },
+                {
+                    "description": "runtime parameter for tool Clair3",
+                    "name": "ref_source"
+                }
+            ],
+            "label": null,
+            "name": "Clair3",
+            "outputs": [
+                {
+                    "name": "merge_output",
+                    "type": "vcf_bgzip"
+                },
+                {
+                    "name": "pileup",
+                    "type": "vcf_bgzip"
+                },
+                {
+                    "name": "full_alignment",
+                    "type": "vcf_bgzip"
+                }
+            ],
+            "position": {
+                "left": 566,
+                "top": 11.0
+            },
+            "post_job_actions": {
+                "RenameDatasetActionfull_alignment": {
+                    "action_arguments": {
+                        "newname": "Clair3: Full_alignment VCF"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "full_alignment"
+                },
+                "RenameDatasetActionmerge_output": {
+                    "action_arguments": {
+                        "newname": "Clair3: merged output"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "merge_output"
+                },
+                "RenameDatasetActionpileup": {
+                    "action_arguments": {
+                        "newname": "Clair3: Pileup VCF"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "pileup"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/clair3/clair3/0.1.12+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "63e02ef6e153",
+                "name": "clair3",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv\": {\"qual\": \"0\", \"snp_min_af\": \"0.08\", \"indel_min_af\": \"0.15\", \"enable_phasing\": \"false\", \"no_phasing_for_fa\": \"false\", \"print_ref_calls\": \"false\", \"ploidity_model\": \"--haploid_precise\", \"chunk_size\": \"5000000\"}, \"bam_input\": {\"__class__\": \"RuntimeValue\"}, \"bed_or_vcf\": {\"bed_or_vcf_selector\": \"unrestricted\", \"__current_case__\": 2, \"include_all_ctgs\": \"true\"}, \"gvcf\": \"false\", \"model_source\": {\"source\": \"built-in\", \"__current_case__\": 0, \"select_built_in\": \"r941_prom_hac_g360+g422\"}, \"output_files\": [\"full_alignment\", \"pileup\"], \"ref_source\": {\"source\": \"history\", \"__current_case__\": 0, \"ref_fasta\": {\"__class__\": \"RuntimeValue\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.12+galaxy0",
+            "type": "tool",
+            "uuid": "7ef8750a-7d9d-4bab-800f-6e3944d04c8f",
+            "workflow_outputs": [
+                {
+                    "label": "Clair3: Full_alignment VCF",
+                    "output_name": "full_alignment",
+                    "uuid": "57eac631-3f09-464d-8883-b64d0cb01272"
+                },
+                {
+                    "label": "Clair3: merged output",
+                    "output_name": "merge_output",
+                    "uuid": "872abcd0-dfe2-4a43-8977-1d8a7a67cdde"
+                },
+                {
+                    "label": "Clair3: Pileup VCF",
+                    "output_name": "pileup",
+                    "uuid": "8af57cc7-5800-4dbe-97c6-42b943a9c012"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input_file": {
+                    "id": 3,
+                    "output_name": "merge_output"
+                },
+                "reference_source|fasta_ref": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool bcftools norm",
+                    "name": "input_file"
+                },
+                {
+                    "description": "runtime parameter for tool bcftools norm",
+                    "name": "reference_source"
+                }
+            ],
+            "label": null,
+            "name": "bcftools norm",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "left": 844,
+                "top": 93.0
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput_file": {
+                    "action_arguments": {
+                        "newname": "Normalized VCF output "
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output_file"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_norm/bcftools_norm/1.9+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "da6fc9f4a367",
+                "name": "bcftools_norm",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"check_ref\": \"w\", \"input_file\": {\"__class__\": \"RuntimeValue\"}, \"multiallelics\": {\"mode\": \"\", \"__current_case__\": 0}, \"normalize_indels\": \"false\", \"output_type\": \"v\", \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"fasta_ref\": {\"__class__\": \"RuntimeValue\"}}, \"rm_dup\": \"\", \"sec_default\": {\"site_win\": \"1000\"}, \"sec_restrict\": {\"regions\": {\"regions_src\": \"__none__\", \"__current_case__\": 0}, \"targets\": {\"targets_src\": \"__none__\", \"__current_case__\": 0}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.9+galaxy1",
+            "type": "tool",
+            "uuid": "1b1c641a-31cd-4191-9bb3-8de6589339f1",
+            "workflow_outputs": [
+                {
+                    "label": "Normalized VCF output ",
+                    "output_name": "output_file",
+                    "uuid": "5c621044-50f0-4007-b418-97a54654e4a1"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_filter/4.3+t.galaxy1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 4,
+                    "output_name": "output_file"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SnpSift Filter",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "SnpSift Filter",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "vcf"
+                }
+            ],
+            "position": {
+                "left": 1122,
+                "top": 98.0
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Quality Filtered VCF output"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_filter/4.3+t.galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "5fab4f81391d",
+                "name": "snpsift",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"filter_expression\": {\"type\": \"simple\", \"__current_case__\": 0, \"expr\": \"(QUAL > 2)\"}, \"filtering\": {\"mode\": \"entries\", \"__current_case__\": 0}, \"input\": {\"__class__\": \"RuntimeValue\"}, \"inverse\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.3+t.galaxy1",
+            "type": "tool",
+            "uuid": "c774d1a8-815a-4ee0-8d6b-150fd498c7ad",
+            "workflow_outputs": [
+                {
+                    "label": "Quality Filtered VCF output",
+                    "output_name": "output",
+                    "uuid": "0298a341-af33-4368-b13d-a362556ce92a"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "input": {
+                    "id": 5,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool SnpSift Extract Fields",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "SnpSift Extract Fields",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1400,
+                "top": 0.0
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Extracted Fields from the VCF output"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "5fab4f81391d",
+                "name": "snpsift",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"empty_text\": \"\", \"extract\": \"CHROM POS ID REF ALT FILTER\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"one_effect_per_line\": \"false\", \"separator\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "4.3+t.galaxy0",
+            "type": "tool",
+            "uuid": "d14c76a2-c04e-44ba-8526-cb976087448a",
+            "workflow_outputs": [
+                {
+                    "label": "Extracted Fields from the VCF output",
+                    "output_name": "output",
+                    "uuid": "1d04c91b-cafa-4f98-928b-32c058dae8fe"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.9+galaxy1",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input_file": {
+                    "id": 5,
+                    "output_name": "output"
+                },
+                "reference_source|fasta_ref": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool bcftools consensus",
+                    "name": "input_file"
+                },
+                {
+                    "description": "runtime parameter for tool bcftools consensus",
+                    "name": "reference_source"
+                },
+                {
+                    "description": "runtime parameter for tool bcftools consensus",
+                    "name": "sec_default"
+                }
+            ],
+            "label": null,
+            "name": "bcftools consensus",
+            "outputs": [
+                {
+                    "name": "output_file",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 1400,
+                "top": 192.0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.9+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "f867422772d6",
+                "name": "bcftools_consensus",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chain\": \"false\", \"input_file\": {\"__class__\": \"RuntimeValue\"}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"fasta_ref\": {\"__class__\": \"RuntimeValue\"}}, \"sec_default\": {\"mask\": {\"__class__\": \"RuntimeValue\"}, \"iupac_codes\": \"false\", \"sample\": \"\", \"select_haplotype\": null}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.9+galaxy1",
+            "type": "tool",
+            "uuid": "5f29e885-c3b0-491c-a24a-f74461e4dc1b",
+            "workflow_outputs": [
+                {
+                    "label": "bcftools consensus on input dataset(s): consensus fasta",
+                    "output_name": "output_file",
+                    "uuid": "7e62b9d4-414c-42c4-a05d-402f8bf3ba89"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "microbiome",
+        "nanopore"
+    ],
+    "uuid": "69485628-add8-4791-8565-3197196fd4c8",
+    "version": 5
+}

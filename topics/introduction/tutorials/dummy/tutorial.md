@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "Upload data to Galaxy"
 level: Introductory
-enable: false
+draft: true
 questions:
   - How to upload data to Galaxy
 objectives:
@@ -20,7 +20,7 @@ contributors:
 
 
 # Introduction
-{:.no_toc}
+
 
 There are several ways to get data into Galaxy:
 - Uploading a file by pasting in a URL
@@ -30,7 +30,7 @@ There are several ways to get data into Galaxy:
 - Import data from a shared library
 - ...
 
-> ### Agenda
+> <agenda-title></agenda-title>
 > 1. TOC
 > {:toc}
 >
@@ -38,7 +38,7 @@ There are several ways to get data into Galaxy:
 
 # Upload a file via an URL
 
-> ### {% icon hands_on %} Hands-on: Data upload from URL
+> <hands-on-title>Data upload from URL</hands-on-title>
 >
 > 1. Create a new history
 >
@@ -58,7 +58,7 @@ There are several ways to get data into Galaxy:
 
 # Import from a shared library
 
-> ### {% icon hands_on %} Hands-on: Data upload from URL
+> <hands-on-title>Data upload from URL</hands-on-title>
 >
 > 1. Create a new history
 >

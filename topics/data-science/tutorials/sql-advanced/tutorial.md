@@ -91,7 +91,7 @@ tags:
 
 {% include _includes/quiz.html id="recap.yml" %}
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 >
 > This tutorial is **significantly** based on [the Carpentries](https://carpentries.org) [Databases and SQL](https://github.com/swcarpentry/sql-novice-survey/) lesson, which is licensed CC-BY 4.0.
 >
@@ -102,7 +102,7 @@ tags:
 {: .comment}
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -279,7 +279,7 @@ it no longer matters that the database manager
 is picking an arbitrary one to display
 alongside the aggregated `reading` values.
 
-> ### {% icon tip %} Know Excel? It's just a pivot table.
+> <tip-title>Know Excel? It's just a pivot table.</tip-title>
 > `GROUP BY` is basically just a pivot table for Excel users, it lets you build
 > nice summary tables which aggregate your results.
 >
@@ -322,12 +322,12 @@ this query:
 3.  ordered those subsets first by `person`, and then within each sub-group by `quant`; and
 4.  counted the number of records in each subset, calculated the average `reading` in each, and chose a `person` and `quant` value from each (it doesn't matter which ones, since they're all equal).
 
-> ### {% icon question %} Question: Counting Temperature Readings
+> <question-title>Counting Temperature Readings</question-title>
 >
 > How many temperature readings did Frank Pabodie record,
 > and what was their average value?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```
 > > SELECT count(reading), avg(reading) FROM Survey WHERE quant = 'temp' AND person = 'pb';
@@ -350,7 +350,7 @@ this query:
 > Does this mean that the `avg` function returns 2.0 or 3.0
 > when given the values 1.0, `null`, and 5.0?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The answer is 3.0.
 > > `NULL` is not a value; it is the absence of a value.
 > > As such it is not included in the calculation.
@@ -370,7 +370,7 @@ this query:
 -- Try solutions here!
 ```
 
-> ### {% icon question %} Question: What Does This Query Do?
+> <question-title>What Does This Query Do?</question-title>
 >
 > We want to calculate the difference between
 > each individual radiation reading
@@ -383,7 +383,7 @@ this query:
 >
 > What does this actually produce, and can you think of why?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The query produces only one row of results when we what we really want is a result for each of the readings.
 > > The `avg()` function produces only a single value, and because it is run first, the table is reduced to a single row.
 > > The `reading` value is simply an arbitrary one.
@@ -417,7 +417,7 @@ this query:
 -- Try solutions here!
 ```
 
-> ### {% icon question %} Question: Ordering When Concatenating
+> <question-title>Ordering When Concatenating</question-title>
 >
 > The function `group_concat(field, separator)`
 > concatenates all the values in a field
@@ -570,10 +570,10 @@ and we can use those record numbers in queries:
 SELECT rowid, * FROM Person;
 ```
 
-> ### {% icon question %} Question: Listing Radiation Readings
+> <question-title>Listing Radiation Readings</question-title>
 >
 > Write a query that lists all radiation readings from the DR-1 site.
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```
 > > SELECT Survey.reading
@@ -596,10 +596,10 @@ SELECT rowid, * FROM Person;
 -- Try solutions here!
 ```
 
-> ### {% icon question %} Question: Where's Frank?
+> <question-title>Where's Frank?</question-title>
 >
 > Write a query that lists all sites visited by people named "Frank".
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```
 > > SELECT DISTINCT Site.name
@@ -620,7 +620,7 @@ SELECT rowid, * FROM Person;
 -- Try solutions here!
 ```
 
-> ### {% icon question %} Question: Reading Queries
+> <question-title>Reading Queries</question-title>
 >
 > Describe in your own words what the following query produces:
 >
@@ -634,13 +634,13 @@ SELECT rowid, * FROM Person;
 -- Try solutions here!
 ```
 
-> ### {% icon question %} Question: Who Has Been Where?
+> <question-title>Who Has Been Where?</question-title>
 >
 > Write a query that shows each site with exact location (lat, long) ordered by visited date,
 > followed by personal name and family name of the person who visited the site
 > and the type of measurement taken and its reading. Please avoid all null values.
 > Tip: you should get 15 records with 8 fields.
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > ```
 > > SELECT Site.name, Site.lat, Site.long, Person.personal, Person.family, Survey.quant, Survey.reading, Visited.dated
@@ -677,7 +677,7 @@ SELECT rowid, * FROM Person;
 -- Try solutions here!
 ```
 
-A good visual explanation of joins can be found [here][joinref]
+A good visual explanation of joins can be found [in the SQL Join Visualizer][joinref]
 
 [outer]: https://en.wikipedia.org/wiki/Join_%28SQL%29#Outer_join
 [rowid]: https://www.sqlite.org/lang_createtable.html#rowid
@@ -742,7 +742,7 @@ but organize our data that way because we have tools to manipulate it efficientl
 As anthropologists say,
 the tool shapes the hand that shapes the tool.
 
-> ### {% icon question %} Question: Identifying Atomic Values
+> <question-title>Identifying Atomic Values</question-title>
 >
 > Which of the following are atomic values? Which are not? Why?
 >
@@ -751,7 +751,7 @@ the tool shapes the hand that shapes the tool.
 > *   January 25, 1971
 > *   the XY coordinate (0.5, 3.3)
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > New Zealand is the only clear-cut atomic value.
 > >
 > > The address and the XY coordinate contain more than one piece of information
@@ -770,7 +770,7 @@ the tool shapes the hand that shapes the tool.
 -- Try solutions here!
 ```
 
-> ### {% icon question %} Question: Identifying a Primary Key
+> <question-title>Identifying a Primary Key</question-title>
 >
 > What is the primary key in this table?
 > I.e., what value or combination of values uniquely identifies a record?
@@ -779,7 +779,7 @@ the tool shapes the hand that shapes the tool.
 > |--------|---------|----------|-----------|
 > |57.3    |-22.5    |2015-01-09|-14.2      |
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > Latitude, longitude, and date are all required to uniquely identify the temperature record.
 > {: .solution}
 {: .question}
@@ -842,7 +842,7 @@ Keeping track of what particular systems do or do not offer,
 and what names they give different data types,
 is an unending portability headache.
 
-> ### {% icon tip %} Which database should I use?
+> <tip-title>Which database should I use?</tip-title>
 > SQLite is fantastic for small databases or embedded into applications where
 > you want to be able to use SQL to query and process data.
 >
@@ -851,7 +851,7 @@ is an unending portability headache.
 > data type support.
 {: .tip}
 
-> ### {% icon tip %} Do you have geographic data?
+> <tip-title>Do you have geographic data?</tip-title>
 > Use Postgres. The [PostGIS](https://postgis.net/) library is fantastic and industry standard for storing geographic data in a database.
 {: .tip}
 
@@ -943,7 +943,7 @@ using cascading delete.
 However,
 this technique is outside the scope of this chapter.
 
-> ### {% icon tip %} Hybrid Storage Models
+> <tip-title>Hybrid Storage Models</tip-title>
 >
 > Many applications use a hybrid storage model
 > instead of putting everything into a database:
@@ -958,12 +958,12 @@ this technique is outside the scope of this chapter.
 > but the files themselves live on disk.
 {: .tip}
 
-> ### {% icon question %} Question: Replacing NULL
+> <question-title>Replacing NULL</question-title>
 >
 > Write an SQL statement to replace all uses of `null` in
 > `Survey.person` with the string `'unknown'`.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > UPDATE Survey SET person = 'unknown' WHERE person IS NULL;
 > > ```
@@ -974,7 +974,7 @@ this technique is outside the scope of this chapter.
 -- Try solutions here!
 ```
 
-> ### {% icon question %} Question: Backing Up with SQL
+> <question-title>Backing Up with SQL</question-title>
 >
 > SQLite has several administrative commands that aren't part of the
 > SQL standard.  One of them is `.dump`, which prints the SQL commands
@@ -985,7 +985,7 @@ this technique is outside the scope of this chapter.
 > What are the pros and cons of this approach?  (Hint: records aren't
 > stored in any particular order.)
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > #### Advantages
 > > - A version control system will be able to show differences between versions
 > > of the dump file; something it can't do for binary files like databases

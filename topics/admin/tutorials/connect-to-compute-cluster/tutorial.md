@@ -47,7 +47,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 
 {% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -58,15 +58,15 @@ be taken into consideration when choosing where to run jobs and what parameters 
 
 ## Installing Slurm
 
-> ### {% icon comment %} Ansible Best Practices
+> <comment-title>Ansible Best Practices</comment-title>
 > If you've set up your Galaxy server using the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, you will have created a `galaxyservers` group in your inventory file, `hosts`, and placed your variables in `group_vars/galaxyservers.yml`. Although for the purposes of this tutorial, the Galaxy server and Slurm controller/node are one and the same, in a real world deployment they are very likely to be different hosts. We will continue to use the `galaxyservers` group for simplicity, but in your own deployment you should consider creating some additional groups for Slurm controller(s), Slurm nodes, and Slurm clients.
 {: .comment}
 
-> ### {% icon tip %} Do you need a DRM?
+> <tip-title>Do you need a DRM?</tip-title>
 > If you have a smaller server, do you still need a DRM? Yes! You should definitely run Slurm or a similar option. If you don't, as soon as you restart Galaxy with local runners, any running jobs will be killed. Even with a handful of users, it is a good idea to keep 1-2 CPU cores/4GB RAM reserved for Galaxy.
 {: .tip}
 
-> ### {% icon hands_on %} Hands-on: Installing Slurm
+> <hands-on-title>Installing Slurm</hands-on-title>
 >
 > 1. Edit your `requirements.yml` and include the following contents:
 >
@@ -92,7 +92,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >
 > 2. In the same directory, run:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
@@ -112,7 +112,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    +    - galaxyproject.repos
 >    +    - galaxyproject.slurm
 >         - galaxyproject.postgresql
->         - role: natefoo.postgresql_objects
+>         - role: galaxyproject.postgresql_objects
 >           become: true
 >    {% endraw %}
 >    ```
@@ -147,7 +147,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >
 > 5. Run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -232,17 +232,17 @@ We want to ensure that Slurm is actually able to run jobs. There are two ways th
 Galaxy runs `sbatch` jobs but we can use both `srun` and `sbatch` to test:
 
 
-> ### {% icon hands_on %} Hands-on: Running commands with `srun`
+> <hands-on-title>Running commands with `srun`</hands-on-title>
 >
 > 1. Use [`srun`](https://slurm.schedmd.com/srun.html) to run the command `uname -a`
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```
 >    > srun uname -a
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output
+>    > <code-out-title></code-out-title>
 >    > Your output may look slightly different:
 >    > ```console
 >    > $ srun uname -a
@@ -254,15 +254,15 @@ Galaxy runs `sbatch` jobs but we can use both `srun` and `sbatch` to test:
 
 Although it looks like this command ran as if I had not used `srun`, it was in fact routed through Slurm.
 
-> ### {% icon hands_on %} Hands-on: Running commands with `sbatch`
+> <hands-on-title>Running commands with `sbatch`</hands-on-title>
 >
 > 1. Create a test job script somewhere, such as in `~/sbatch-test.sh`. It should be a batch script which runs `uname -a`, `uptime`, and sleeps for 30 seconds.
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What does your shell script look like?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > ```bash
 >    > > #!/bin/bash
 >    > > uname -a
@@ -274,7 +274,7 @@ Although it looks like this command ran as if I had not used `srun`, it was in f
 >
 > 2. Make the script executable:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```
 >    > chmod +x ~/sbatch-test.sh
 >    > ```
@@ -282,11 +282,11 @@ Although it looks like this command ran as if I had not used `srun`, it was in f
 >
 > 3. Use [`sbatch`](https://slurm.schedmd.com/sbatch.html) to submit the job script
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What command did you run?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > ```console
 >    > > $ sbatch ~/sbatch-test.sh
 >    > > ```
@@ -295,13 +295,13 @@ Although it looks like this command ran as if I had not used `srun`, it was in f
 >
 > 4. Use [`squeue`](https://slurm.schedmd.com/squeue.html) to check the queue
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```
 >    > squeue
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output
+>    > <code-out-title></code-out-title>
 >    > Your output may look slightly different:
 >    > ```console
 >    >JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
@@ -317,7 +317,7 @@ If you've made it this far, your Slurm installation is working!
 
 Above Slurm in the stack is slurm-drmaa, a library that provides a translational interface from the Slurm API to the generalized DRMAA API in C.
 
-> ### {% icon hands_on %} Hands-on: Installing Slurm-DRMAA
+> <hands-on-title>Installing Slurm-DRMAA</hands-on-title>
 >
 > 1. Add a `post_task` to your playbook to install `slurm-drmaa1` (Debian/Ubuntu) or `slurm-drmaa` (RedHat/CentOS).
 >
@@ -342,7 +342,7 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >
 > 2. Run the playbook (`ansible-playbook galaxy.yml`)
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -358,7 +358,7 @@ Moving one level further up the stack, we find DRMAA Python. This is a Galaxy fr
 At the top of the stack sits Galaxy. Galaxy must now be configured to use the cluster we've just set up. The DRMAA Python documentation (and Galaxy's own documentation) instruct that you should set the `$DRMAA_LIBRARY_PATH` environment variable so that DRMAA Python can find `libdrmaa.so` (aka slurm-drmaa). Because Galaxy runs under systemd, the environment that Galaxy starts under is controlled by the `environment` option in systemd service unit that the ansible role manages. The galaxy task should thus be updated to refer to the path to slurm-drmaa, which is `/usr/lib/slurm-drmaa/lib/libdrmaa.so.1`:
 
 
-> ### {% icon hands_on %} Hands-on: Making Galaxy aware of DRMAA
+> <hands-on-title>Making Galaxy aware of DRMAA</hands-on-title>
 >
 > 1. Open your group variables and add the environment variable:
 >
@@ -418,7 +418,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 > 4. Run your Galaxy playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -427,13 +427,13 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 > 5. Watch the logs to check that everything loads correctly
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```
 >    > journalctl -f -u galaxy
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output
+>    > <code-out-title></code-out-title>
 >    > Your output may look slightly different:
 >    > ```console
 >    > Jan 12 15:46:01 gat-1.oz.training.galaxyproject.eu gunicorn[1821134]: galaxy.jobs.runners DEBUG 2021-01-12 15:46:01,109 [p:1821134,w:0,m:1] [MainThread] Starting 4 SlurmRunner workers
@@ -448,11 +448,11 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 
 You should now be able to run a Galaxy job through Slurm. The simplest way to test is using the upload tool to upload some text.
 
-> ### {% icon hands_on %} Hands-on: Testing a Slurm Job
+> <hands-on-title>Testing a Slurm Job</hands-on-title>
 >
 > 1. If you're not still following the log files with `journalctl`, do so now.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```
 >    > journalctl -f -u galaxy
 >    > ```
@@ -463,7 +463,7 @@ You should now be able to run a Galaxy job through Slurm. The simplest way to te
 > 4. Type some random characters into the text field that has just appeared.
 > 5. Click "Start" and then "Close"
 >
->    > ### {% icon code-out %} Output
+>    > <code-out-title></code-out-title>
 >    > Your output may look slightly different. In your `journalctl` terminal window you should see the following messages:
 >    >
 >    > ```
@@ -512,14 +512,14 @@ You should now be able to run a Galaxy job through Slurm. The simplest way to te
 
 Slurm allows us to query the exit state of jobs for a time period of the value of Slurm's `MinJobAge` option, which defaults to 300 (seconds, == 5 minutes):
 
-> ### {% icon code-in %} Input: Bash
+> <code-in-title>Bash</code-in-title>
 > Your job number is potentially different.
 > ```
 > scontrol show job 4
 > ```
 {: .code-in}
 
-> ### {% icon code-out %} Output
+> <code-out-title></code-out-title>
 > Your output may also look slightly different:
 > ```console
 > JobId=4 JobName=g1_upload1_admin_example_org
@@ -554,7 +554,7 @@ Slurm allows us to query the exit state of jobs for a time period of the value o
 
 After the job has been purged from the active jobs database, a bit of information (but not as much as `scontrol` provides) can be retrieved from Slurm's logs. However, it's a good idea to set up Slurm's accounting database to keep old job information in a queryable format.
 
-> ### {% icon tip %} Which directories need to be shared on a cluster?
+> <tip-title>Which directories need to be shared on a cluster?</tip-title>
 > The following directories need to be accesible via the same path on both the head node and compute nodes:
 > - `galaxy_shed_tools_dir`
 > - `galaxy_tool_dependency_dir`
@@ -572,7 +572,7 @@ Galaxy collects and records very few job metrics by default, enabling more metri
 
 Some work has been done to try to analyse job runtime metrics to optimise cluster allocation based on job inputs, and enhance job submission ({% cite Tyryshkina_2019 %}). More work will be done in this area.
 
-> ### {% icon comment %} Note
+> <comment-title>Note</comment-title>
 >
 > Job metrics are only visible to Galaxy *admin users*, unless you set `expose_potentially_sensitive_job_metrics: true`, like UseGalaxy.eu does. EU's intention with this is to empower users and make everything as transparent as possible.
 >
@@ -589,11 +589,11 @@ By default, Galaxy enables the `core` metrics:
 
 These include very basic submission parameters. We want more information!
 
-> ### {% icon hands_on %} Hands-on: Setting up the job metrics plugin configuration
+> <hands-on-title>Setting up the job metrics plugin configuration</hands-on-title>
 >
 > 1. Edit the **global** (for all hosts) group variables file, `group_vars/all.yml`:
 >
->    > ### {% icon details %} Why are we editing "all" instead of "galaxyservers" vars?
+>    > <details-title>Why are we editing "all" instead of "galaxyservers" vars?</details-title>
 >    > Both Galaxy and Pulsar use job metrics plugins, and when we configure Pulsar later, we will want it to have the same metrics plugin configuration as Galaxy. Putting this variable in `all.yml` will allow us to refer to it later when setting the corresponding variable for Pulsar.
 >    {: .details}
 >
@@ -623,7 +623,7 @@ These include very basic submission parameters. We want more information!
 >
 > 2. Run your Galaxy playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -634,13 +634,13 @@ These include very basic submission parameters. We want more information!
 
 Currently, the job metrics plugin configuration is stored in a separate configuration file from Galaxy's main configuration file (`galaxy.yml`). By setting `galaxy_job_metrics_plugins`, we instructed the `galaxyproject.galaxy` role to create this file, and update the option (`job_metrics_config_file`) in `galaxy.yml` that sets the path to this file. You can inspect the contents of the new config file on your Galaxy server:
 
-> ### {% icon code-in %} Input: Bash
+> <code-in-title>Bash</code-in-title>
 > ```bash
 > cat /srv/galaxy/config/job_metrics_conf.yml
 > ```
 {: .code-in}
 
-> ### {% icon code-out %} Output: Bash
+> <code-out-title>Bash</code-out-title>
 > ```yaml
 > ---
 > ##
@@ -661,7 +661,7 @@ Currently, the job metrics plugin configuration is stored in a separate configur
 
 With this, the job metrics collection and recording should be set up. Now when you run a job, you will see many more metrics:
 
-> ### {% icon hands_on %} Hands-on: Generate some metrics
+> <hands-on-title>Generate some metrics</hands-on-title>
 >
 > 1. Run a job (any tool is fine, even upload)
 >

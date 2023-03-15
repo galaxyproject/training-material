@@ -30,10 +30,12 @@ requirements:
       - connect-to-compute-cluster
       - job-destinations
       - pulsar
+abbreviations:
+  TIaaS: Training Infrastructure as a Service
 ---
 
-Galaxy is widely used for teaching. In order to facilitate instructors, [Galaxy Europe](https://usegalaxy.eu) has developed Training Infrastructure as a Service (TIaaS).
-Workshop instructors can apply for TIaaS, and on the day of their workshop, their participants will be placed in a special group and use dedicated
+Galaxy is widely used for teaching. In order to facilitate instructors, the Galaxy Project has developed {TIaaS}.
+Workshop instructors can apply for {TIaaS}, and on the day of their workshop, their participants will be placed in a special group and use dedicated
 resources, thus reducing queue times on the day of the training.
 
 ![TIaaS concept](../../images/tiaas/tiaas_intro.png "With TIaaS, all of your users visit the same server. In the background, the scheduler recognises which users are training users, and directs their jobs to special resources. In the EU deployment of TIaaS jobs preferentially use private resources, but can spill over to the main queue if there is not enough space available."){: width="70%"}
@@ -41,7 +43,7 @@ resources, thus reducing queue times on the day of the training.
 This tutorial will go cover how to set up such a service on your own Galaxy server.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -53,9 +55,9 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 
 # Setting up TIaaS
 
-> ### {% icon hands_on %} Hands-on: Setup TIaaS
+> <hands-on-title>Setup TIaaS</hands-on-title>
 >
-> 1. In your `requirements.yml` add the TIaaS ansible role:
+> 1. In your `requirements.yml` add the {TIaaS} ansible role:
 >
 >    {% raw %}
 >    ```diff
@@ -65,15 +67,15 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >       version: 0.14.2
 >     - src: dj-wasabi.telegraf
 >       version: 0.12.0
->    +- src: usegalaxy_eu.tiaas2
->    +  version: 0.0.8
+>    +- src: galaxyproject.tiaas2
+>    +  version: 2.1.3
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tiaas2 requirement"}
 >
 >    And run the install step:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
@@ -88,18 +90,14 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -234,6 +234,15 @@ telegraf_plugins_extra:
+>    @@ -234,6 +234,11 @@ telegraf_plugins_extra:
 >           - data_format = "influx"
 >           - interval = "15s"
 >     
 >    +# TIaaS setup
->    +tiaas_dir: /opt/tiaas
->    +tiaas_user: tiaas
->    +tiaas_group: tiaas
->    +tiaas_version: master
+>    +tiaas_dir: /srv/tiaas
 >    +tiaas_admin_user: admin
 >    +tiaas_admin_pass: changeme
->    +tiaas_listen_url: "127.0.0.1:6000"
 >    +
 >     # TUS
 >     galaxy_tusd_port: 1080
@@ -154,56 +152,49 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```
 >    {: data-commit="Add database privileges for TIaaS"}
 >
->    > ### {% icon tip %} Why does TIaaS get `DELETE` privileges on Galaxy's Database?
+>    > <tip-title>Why does TIaaS get `DELETE` privileges on Galaxy's Database?</tip-title>
 >    > The `DELETE` privilege is limited in scope to one table: `group_role_association`. This allows TIaaS to
 >    > disassociate training groups from roles in the Galaxy database after the training event date has passed, so that
 >    > users who participated in a training return to using normal (non-training) resources after the training ends.
 >    >
->    > The `usegalaxy_eu.tiaas2` role will create a [cron](https://manpages.debian.org/stable/cron/cron.8.en.html) job
+>    > The `galaxyproject.tiaas2` role will create a [cron](https://manpages.debian.org/stable/cron/cron.8.en.html) job
 >    > to perform this process every night at midnight. You can control when this runs (or disable it) using
->    > [the tiaas_disassociate_training_roles variable](https://github.com/usegalaxy-eu/ansible-tiaas2/blob/d5be2a064c49e010f67bfcea18e36812da23d7d8/defaults/main.yml#L20).
+>    > [the tiaas_disassociate_training_roles variable](https://github.com/galaxyproject/ansible-tiaas2/blob/d5be2a064c49e010f67bfcea18e36812da23d7d8/defaults/main.yml#L20).
 >    >
 >    {: .tip}
 >
-> 3. We need to add the `usegalaxy_eu.tiaas2` role to the end of the playbook (`galaxy.yml`)
+>    > <tip-title>Running the playbook from scratch</tip-title>
+>    > This is one of the few statements we've provided that presents difficulties when running the playbook completely from scratch on a blank machine. Setting postgresql roles is one of the first steps in our playbook, but the rules we've provided above depend on the Galaxy tables existing in that database. If those tables aren't there, it will fail. If you do someday run this from scratch, you'll find that you need to comment out those roles.
+>    {: .tip}
+>
+> 3. We need to add the `galaxyproject.tiaas2` role before the `nginx` role, as TIaaS defines variables that Nginx needs.
 >    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -35,3 +35,4 @@
+>    @@ -30,6 +30,7 @@
+>           become: true
+>           become_user: "{{ galaxy_user.name }}"
+>         - usegalaxy_eu.rabbitmq
+>    +    - galaxyproject.tiaas2
+>         - galaxyproject.nginx
+>         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
->         - galaxyproject.gxadmin
->         - dj-wasabi.telegraf
->    +    - usegalaxy_eu.tiaas2
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add TIaaS role to the Galaxy playbook"}
 >
-> 4. Lastly we should add the routes for TIaaS to the NGINX template for Galaxy:
+> 4. Lastly we should add the routes for TIaaS to the NGINX template for Galaxy. TIaaS provides a set of default nginx routes that can be used.
 >
 >    {% raw %}
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -90,4 +90,19 @@ server {
+>    @@ -90,4 +90,5 @@ server {
 >             proxy_set_header Host $http_host;
 >         }
 >     
->    +    location /tiaas {
->    +        uwsgi_pass {{ tiaas_listen_url }};
->    +        uwsgi_param UWSGI_SCHEME $scheme;
->    +        include uwsgi_params;
->    +    }
->    +
->    +    location /tiaas/static {
->    +        alias /opt/tiaas/static;
->    +    }
->    +
->    +    location /join-training {
->    +        uwsgi_pass {{ tiaas_listen_url }};
->    +        uwsgi_param UWSGI_SCHEME $scheme;
->    +        include uwsgi_params;
->    +    }
+>    +    {{ tiaas_nginx_routes }}
 >     }
 >    {% endraw %}
 >    ```
@@ -211,7 +202,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >
 > 5. Run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -227,7 +218,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 {: .hidden}
 
 
-TIaaS should be available now! The following routes on your server are now configured (we will run through these in the next section)
+{TIaaS} should be available now! The following routes on your server are now configured (we will run through these in the next section)
 
 
 |URL | Use | Who |
@@ -242,7 +233,7 @@ TIaaS should be available now! The following routes on your server are now confi
 
 Let's see it in action!
 
-> ### {% icon hands_on %} Hands-on: Using TIaaS
+> <hands-on-title>Using TIaaS</hands-on-title>
 >
 > 1. **Create a new TIaaS request**
 >    - Go to https://\<server\>/tiaas/new/
@@ -292,7 +283,7 @@ Let's see it in action!
 {: .hands_on}
 
 
-> ### {% icon comment %} Note: GDPR assistance
+> <comment-title>Note: GDPR assistance</comment-title>
 >
 > Since this setup tracks additional personal information (submitter name & email, users in the queue view), TIaaS includes some always-on features to assist with your GDPR compliance.
 >
@@ -306,12 +297,12 @@ Let's see it in action!
 
 # Job Configuration
 
-While observability for teachers or trainers is already a huge benefit, one of the primary benefits of TIaaS from UseGalaxy.eu is that your jobs get sent to dedicated compute resources, which won't be used by anyone else, during the period of the training. We will send all of the training jobs to pulsar if you have completed that tutorial, or one of the slurm destinations from the job configuration training.
+While observability for teachers or trainers is already a huge benefit, one of the primary benefits of {TIaaS} is that your jobs get sent to dedicated compute resources, which won't be used by anyone else, during the period of the training. We will send all of the training jobs to pulsar if you have completed that tutorial, or one of the slurm destinations from the job configuration training.
 
 In order to achieve this, we first need some way to *sort* the jobs of the training users into these private queues, while letting the other jobs continue on. So let's create a *sorting hat* to figure out where jobs belong.
 
 
-> ### {% icon hands_on %} Hands-on: Writing a dynamic job destination
+> <hands-on-title>Writing a dynamic job destination</hands-on-title>
 >
 > 1. Create and open `templates/galaxy/dynamic_job_rules/hogwarts.py`
 >
@@ -397,7 +388,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >
 > 6. Run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -410,7 +401,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >
 {: .hands_on}
 
-Congratulations! you have now set up TIaaS on your Galaxy server.
+Congratulations! you have now set up {TIaaS} on your Galaxy server.
 
 > ```bash
 > 2.sh

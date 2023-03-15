@@ -21,7 +21,7 @@ subtopic: manage
 
 
 # Introduction
-{:.no_toc}
+
 
 Advanced uses of Galaxy often require the use of dataset collections,
 which can contain between one and tens of thousands of datasets.
@@ -43,7 +43,7 @@ For a more detailed description and background for differential expression
 testing see the [Reference-based RNA-Seq data analysis]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html).
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -67,7 +67,7 @@ to the Rule Based Uploader.
 
 ## Set group tags during upload
 
-> ### {% icon hands_on %} Hands-on: Set group tags during upload
+> <hands-on-title>Set group tags during upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 >
@@ -121,7 +121,7 @@ to the Rule Based Uploader.
 
 We now want to add group tags using the "Tag elements from file" tool.
 
-> ### {% icon hands_on %} Hands-on: Upload and create a collection
+> <hands-on-title>Upload and create a collection</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the following files
@@ -148,7 +148,7 @@ We have now a collection with our files. We can now either upload a tabular file
 and the tags we want to apply, or we can extract the element identifiers and extract the tags using a Regular Expression.
 We will do the latter.
 
-> ### {% icon hands_on %} Hands-on: Set group tags using the "Tag elements from file" tool
+> <hands-on-title>Set group tags using the "Tag elements from file" tool</hands-on-title>
 > 1. **Extract element identifiers** {% icon tool %}
 >      - {% icon param-collection %} *"Dataset collection"*: created collection
 > 2. **Replace Text in entire line** {% icon tool %}
@@ -182,7 +182,7 @@ The tool interface will prompt you with the group tags that are available for yo
 
 ![Group tags in the tool UI](../../images/group-tags/tool-ui.png)
 
-> ### {% icon hands_on %} Hands-on: Running **DESeq2** with group tags
+> <hands-on-title>Running <b>DESeq2</b> with group tags</hands-on-title>
 >
 > 1. **DESeq2** {% icon tool %} with the following parameters:
 >    - *"how"*: `Select group tags corresponding to levels`
@@ -212,6 +212,6 @@ The tool interface will prompt you with the group tags that are available for yo
 {: .hands_on}
 
 # Conclusion
-{:.no_toc}
+
 
 We can select a subset of Collections using the special group tag.

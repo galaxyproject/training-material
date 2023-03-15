@@ -36,11 +36,13 @@ follow_up_training:
 time_estimation: "1H"
 contributors:
   - thomaswollmann
+tags:
+  - HeLa
 
 ---
 
 # Introduction
-{:.no_toc}
+
 
 This tutorial shows how to segment and extract features from cell nuclei Galaxy for image analysis. As example use case, this tutorial shows you how to compare the phenotypes of PLK1 threated cells in comparison to a control. The data used in this tutorial is available at [Zenodo](https://zenodo.org/record/3362976).
 
@@ -48,7 +50,7 @@ RNA interference (RNAi) is used in the example use case for silencing genes by w
 
 The example used in this tutorial deals with PLK1 knocked down cells. PLK1 is an early trigger for G2/M transition. PLK1 supports the functional maturation of the centrosome in late G2/early prophase and establishment of the bipolar spindle. PLK1 is being studied as a target for cancer drugs. Many colon and lung cancers are caused by K-RAS mutations. These cancers are dependent on PLK1.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -61,7 +63,7 @@ The example used in this tutorial deals with PLK1 knocked down cells. PLK1 is an
 
 The dataset required for this tutorial contains a screen of DAPI stained HeLa nuclei ([more information](https://zenodo.org/record/3360236)). We will use a sample image from this dataset for training basic image processing skills in Galaxy.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. If you are logged in, create a new history for this tutorial
 >
@@ -128,7 +130,7 @@ The dataset required for this tutorial contains a screen of DAPI stained HeLa nu
 # Create feature extraction workflow
 First, we will create and test a workflow which extracts mean DAPI intensity, area, and major axis length of cell nuclei from an image.
 
-> ### {% icon hands_on %} Hands-on: Create feature extraction workflow
+> <hands-on-title>Create feature extraction workflow</hands-on-title>
 >
 > 1. **Filter Image** {% icon tool %} with the following parameters to smooth the image:
 >    - *"Image type"*: `Gaussian Blur`
@@ -182,7 +184,7 @@ The resulting workflow should look something like this:
 
 Now we want to apply our extracted workflow to `original data` and merge the results. For this purpose, we create a workflow which uses the previously created workflow as subworkflow.
 
-> ### {% icon hands_on %} Hands-on: Create screen analysis workflow
+> <hands-on-title>Create screen analysis workflow</hands-on-title>
 >
 > 1. Create a new workflow in the workflow editor.
 >
@@ -205,7 +207,7 @@ The resulting workflow should look something like this:
 ![screen analysis workflow](../../images/hela-screen-analysis/analyze_screen_workflow.png "Full screen analysis workflow.")
 
 
-> ### {% icon hands_on %} Hands-on: Run screen analysis workflow
+> <hands-on-title>Run screen analysis workflow</hands-on-title>
 >
 > 1. Run the screen analysis workflow {% icon workflow %} on the `control` screen and the `rules` file
 >
@@ -219,7 +221,7 @@ The resulting workflow should look something like this:
 
 Finally, we want to plot the results for better interpretation.
 
-> ### {% icon hands_on %} Hands-on: Plot feature extraction results
+> <hands-on-title>Plot feature extraction results</hands-on-title>
 >
 > 1. Click on the `Visualize this data` {% icon galaxy-barchart %} icon of the **Collapse Collection** {% icon tool %} results.
 > 2. Run `Box plot` with the following parameters:
@@ -236,11 +238,11 @@ Finally, we want to plot the results for better interpretation.
 >        - *"Provide a label"*: `Major axis length`
 >        - *"Observations"*: `Column 3`
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > Plot the feature distribution of PLK1 and control. What differences do you observe between the screens?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > The phenotype of PLK1 threated cells show a higher mean intensity and a shorter major axis in comparison to the control.
 >    > {: .solution }
 >    {: .question}
@@ -252,6 +254,6 @@ One of the resulting plots should look something like this:
 ![feature extraction results box plot](../../images/hela-screen-analysis/result_boxplot.png){: width="100%"}
 
 # Conclusion
-{:.no_toc}
+
 
 In this exercise you imported images into Galaxy, segmented cell nuclei, filtered segmentations by morphological features, extracted features from segmentations, scaled your workflow to a whole screen, and plotted the feature extraction results using Galaxy.
