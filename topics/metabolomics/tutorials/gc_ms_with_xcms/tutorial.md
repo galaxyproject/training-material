@@ -280,7 +280,7 @@ The next step is deconvoluting the detected peaks in order to reconstruct the fu
 >
 {: .hands_on}
 
-The spectral data comes as an `.msp` file, which is a text file structured according to the **NIST MSSearch** spectra format. `.msp` is one of the generally accepted formats for mass spectral libraries (or collections of unidentified spectra), and it is compatible with lots of spectra processing programmes (MS-DIAL, NIST MS Search, AMDIS, etc.). Because `.msp` files are text-based, they can be viewed as simple `txt` files. You can use any text editor that you have on your computer or use Galaxy's built-in editor. In this tutorial, we use the Galaxy editor to check the contents of the file:
+The spectral data comes as an `.msp` file, which is a text file structured according to the **NIST MSSearch** spectra format. `.msp` is one of the generally accepted formats for mass spectral libraries (or collections of unidentified spectra, so called spectral archives), and it is compatible with lots of spectra processing programmes (MS-DIAL, NIST MS Search, AMDIS, etc.). Because `.msp` files are text-based, they can be viewed as simple `txt` files. You can use any text editor that you have on your computer or use Galaxy's built-in editor. In this tutorial, we use the Galaxy editor to check the contents of the file:
 
 > <hands-on-title> Data Exploration </hands-on-title>
 >
@@ -369,11 +369,11 @@ We use the package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/ria
 
 # Identification
 
-To identify and annotate the deconvoluted spectra, we compare them with a reference spectral library. This library contains spectra of standards measured on the same instrument for optimal comparability. The **matchms** package is used for spectral matching. It was built to import and apply different similarity measures to compare large numbers of spectra. This includes common cosine scores but can also easily be extended with custom similarity measures.
+To annotate and putatively identify the deconvoluted spectra, we compare them with a reference spectral library. This library contains spectra of standards measured on the same instrument for optimal comparability. The **matchms** package is used for spectral matching. It was built to import and apply different similarity measures to compare large numbers of spectra. This includes common cosine scores but can also easily be extended with custom similarity measures.
 
 > <details-title> Reference spectral library </details-title>
 > 
-> Fragmentation patterns of ions (spectra) are widely used in the process of compound identification in complex mixtures for EI+ ionization. The number of identifiable compounds and associated data keeps growing with the increasing sensitivity and resolution of mass spectrometers. These data are clustered into collections of chemical structures and their spectra, also called spectral libraries ({% cite stein1995chemical %}, {% cite stein2012mass %}), which can be used for fast, reliable identifications for any compound whose fragmentation pattern is measured by the instrument. 
+> Fragmentation patterns of ions (spectra) are widely used in the process of compound identification for EI+ ionization in complex mixtures. The number of identifiable compounds and associated data keeps growing with the increasing sensitivity and resolution of mass spectrometers. These data are clustered into collections of chemical structures and their spectra, also called spectral libraries ({% cite stein1995chemical %}, {% cite stein2012mass %}), which can be used for fast, reliable identifications for any compound whose fragmentation pattern is measured by the instrument. 
 > 
 > To identify the compounds after GC/MS analysis, the *library searching* is performed for any detected spectrum. This locates the most similar spectra in the reference library, providing a list of the potentially identified compounds sorted by computed similarity. Indeed, a library search should also yield the confidence of compound identification, often referred to as similarity score.
 >
