@@ -10,7 +10,7 @@ questions:
 objectives:
 - To learn about the key steps steps in the preprocessing and analysis of untargeted GC-MS metabolomics data.
 - To explore what open-source alternative tools can be used in the analysis of GC-MS data, learn about their possible parametrisations.
-- To analyse authentic data samples and compare them with a data library of human metabolome, composed from a collection of mostly endogoenous compounds.
+- To analyse authentic data samples and compare them with a data library of human metabolome, composed from a collection of mostly endogenous compounds.
 time_estimation: 2H
 key_points:
 - The processing of untargeted GC-MS metabolomic data can be done using open-source tools.
@@ -28,11 +28,11 @@ contributors:
 
 # Introduction
 
-The study of metabolites in biological samples is routinely defined as metabolomics and provides the capability to investigate metabolism on a global and relatively unbiased scale in comparison to traditional targeted studies focused on specific pathways of metabolism and a small number of metabolites. The untargeted approach enables to detect thousands of metabolites in hypothesis-generating studies and to link previously unknown metabolites with biologically important roles. There are two major issues in contemporary metabolomics: the first is enormous loads of signal generated during the experiments, and the second is the fact that some metabolites in the studied samples may not be known to us. These obstacles make the task of processing and interpreting the metabolomics data a cumbersome and time-consuming process {% cite Nash2019 %}.
+The study of metabolites in biological samples is routinely defined as metabolomics and provides the capability to investigate metabolism on a global and relatively unbiased scale in comparison to traditional targeted studies focused on specific pathways of metabolism and a small number of metabolites. The untargeted approach enables the detection of thousands of metabolites in hypothesis-generating studies and links previously unknown metabolites with biologically important roles. There are two major issues in contemporary metabolomics: the first is enormous loads of signal generated during the experiments, and the second is the fact that some metabolites in the studied samples may not be known to us. These obstacles make the task of processing and interpreting the metabolomics data a cumbersome and time-consuming process {% cite Nash2019 %}.
 
-A lot of packages are available for the analysis of GC-MS or LC-MS data. In this tutorial, we focus on open-source solutions integrated within Galaxy framework. In this tutorial, we will learn how to process the data samples and identify the present compounds. For demonstration, we use three GC-[EI+]-HRMS files from seminal plasma samples.
+A lot of packages are available for the analysis of GC-MS or LC-MS data. In this tutorial, we focus on open-source solutions integrated within the Galaxy framework. In this tutorial, we will learn how to process the data samples and identify the present compounds. For demonstration, we use three GC-[EI+]-HRMS files from seminal plasma samples.
 
-To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a general package for untargeted metabolomics profiling. It can be used for any type of mass spectrometry acquisition files from low to high resolution, including FT-MS data coupled with different kind of chromatography (liquid or gas). We use it to detect peaks within our samples. Once we have detected them, they need to be deconvoluted with focus on consistency across samples. For that, we use **RAMClustR** ({% cite broeckling2014ramclust %}) tool. To normalise the retention time of identified spectra in our sample, we compute retention index using **RIAssigner** ({% cite hecht2022riassigner %}) by comparing the data to well-defined list of alkanes. Finally, we identify detected spectra by aligning them with a database of known compounds. This can be achieved using **matchms** ({% cite Huber2020 %}), resulting into a table of identified compounds, weighted by a confidence score.
+To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a general package for untargeted metabolomics profiling. It can be used for any type of mass spectrometry acquisition files from low to high resolution, including FT-MS data coupled with a different kind of chromatography (liquid or gas). We use it to detect peaks within our samples. Once we have detected them, they need to be deconvoluted with a focus on consistency across samples. For that, we use **RAMClustR** ({% cite broeckling2014ramclust %}) tool. To normalise the retention time of identified spectra in our sample, we compute the retention index using **RIAssigner** ({% cite hecht2022riassigner %}) by comparing the data to a well-defined list of alkanes. Finally, we identify detected spectra by aligning them with a database of known compounds. This can be achieved using **matchms** ({% cite Huber2020 %}), resulting in a table of identified compounds weighted by a confidence score.
 
 > <agenda-title></agenda-title>
 >
@@ -45,7 +45,7 @@ To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a 
 
 # Data preparation and prepocessing
 
-Before we can start with the actual analysis pipeline, we first need to download and prepare our dataset. Many of the preprocessing steps can be run in parallel on individual samples. Therefore, we recommend using the Dataset collections in Galaxy. This can be achieved by using the dataset collection option from the beginning of your analysis, when uploading your data into Galaxy.
+Before we can start with the actual analysis pipeline, we first need to download and prepare our dataset. Many of the preprocessing steps can be run in parallel on individual samples. Therefore, we recommend using the Dataset collections in Galaxy. This can be achieved by using the dataset collection option from the beginning of your analysis when uploading your data into Galaxy.
 
 ## Import the data into Galaxy
 
@@ -85,9 +85,9 @@ Before we can start with the actual analysis pipeline, we first need to download
 >    >
 >    > The two additional files contain **reference alkanes**, reference spectral library, and sample metadata. The list of alkanes with retention time and carbon number or retention index is used to compute the retention index of the deconvoluted peaks. The alkanes should be measured ideally in the same batch as the input sample collection.
 >    > 
->    > The **reference spectral library** (`.msp`) is used for identification of spectra. It contains the recorded and annotated mass spectra of compounds which can be detected in the sample and confirmed via comparison with this library. The specific library is the in-house library of metabolite standards. **TODO**: what does it mean?
+>    > The **reference spectral library** (`.msp`) is used for the identification of spectra. It contains the recorded and annotated mass spectra of compounds which can be detected in the sample and confirmed via comparison with this library. The specific library is the in-house library of metabolite standards. **TODO**: what does it mean?
 >    > 
->    > The **sample metadata** corresponds to a table containing information about our samples. In particular, the tabular file that contains for each sample its associated sample name, class (QC, blank, sample, etc.), batch number, and injection order. It is possible to add more columns to include additional details about the samples.
+>    > The **sample metadata** corresponds to a table containing information about our samples. In particular, the tabular file contains for each sample its associated sample name, class (QC, blank, sample, etc.), batch number, and injection order. It is possible to add more columns to include additional details about the samples.
 >    {: .comment}
 >
 {: .hands_on}
@@ -109,7 +109,7 @@ Our input data are in `.raw` format, which is not suitable for the downstream to
 >
 >    > <comment-title> Centroids </comment-title>
 >    >
->    > `msconvert` with selected parameters computes centroids in the m/z domain. MS instruments continuously sample and record signals. A mass peak for a single ion in one spectrum therefore consists of multiple intensities at discrete m/z values. Centroiding is the process to reduce these mass peaks to a single representative signal, the centroid. This results in much smaller file sizes, without loosing too much information. In the further steps, **XCMS** uses the `centWave` chromatographic peak detection algorithm, which was designed for centroided data. That is the reason we perform the centroiding in this step.
+>    > `msconvert` with selected parameters computes centroids in the m/z domain. MS instruments continuously sample and record signals. Therefore, a mass peak for a single ion in one spectrum consists of multiple intensities at discrete m/z values. Centroiding is the process of reducing these mass peaks to a single representative signal, the centroid. This results in much smaller file sizes without losing too much information. In the further steps, **XCMS** uses the `centWave` chromatographic peak detection algorithm, which was designed for centroided data. That is the reason we perform the centroiding in this step.
 >    {: .comment}
 >
 {: .hands_on}
@@ -133,7 +133,7 @@ The first part of data processing is using **XCMS** tool. To be able to do that,
 
 # Peak detection using XCMS
 
-The first step in the workflow is to detect the peaks in our data using **XCMS**. This part, however, is covered by a [separate tutorial]({{ site.baseurl }}/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html). Although the tutorial is dedicated to LC-MS data, it can be followed also for our GC data. Therefore, in this section, we do not explain this part of the workflow in detials, but rather refer the reader to the dedicated tutorial. Please also pay attention to the parameter values for individual Galaxy tools, as these can differ from the refered tutorial and are adjusted to our dataset.
+The first step in the workflow is to detect the peaks in our data using **XCMS**. This part, however, is covered by a [separate tutorial]({{ site.baseurl }}/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html). Although the tutorial is dedicated to LC-MS data, it can also be followed for our GC data. Therefore, in this section, we do not explain this part of the workflow in detail but rather refer the reader to the dedicated tutorial. Please also pay attention to the parameter values for individual Galaxy tools, as these can differ from the referred tutorial and are adjusted to our dataset.
 
 ## Peak picking
 
@@ -156,7 +156,7 @@ The first step is to extract peaks from each of your data files independently. F
 
 ## Determining shared ions
 
-At this step, you obtain a dataset collection containing one `RData` file per sample, with independent lists of ions. Next, we want to identify the ions shared between samples. To do so, first you need to group your individual `RData` files into a single one.
+At this step, you obtain a dataset collection containing one `RData` file per sample, with independent lists of ions. Next, we want to identify the ions shared between samples. To do so, first, you need to group your individual `RData` files into a single one.
 
 > <hands-on-title> Merging files </hands-on-title>
 >
@@ -186,7 +186,7 @@ Now we can proceed with the grouping and determining shared ions among samples. 
 
 ## Retention time correction
 
-A deviation in retention time occurs from a sample to another, especially when you inject large sequences of samples. This steps aims at correcting retention time drift for each peak among samples.
+A deviation in retention time occurs from one sample to another, especially when you inject large sequences of samples. This step aims at correcting retention time drift for each peak among samples.
 
 > <hands-on-title> Retention time correction </hands-on-title>
 >
@@ -202,7 +202,7 @@ A deviation in retention time occurs from a sample to another, especially when y
 
 ## Second round of determining shared ions
 
-By applying retention time correction, the used retention time values were modified. Consequently, applying this step on your data requires to complete it with an additional _grouping_ step.
+By applying retention time correction, the used retention time values were modified. Consequently, applying this step to your data requires completing it with an additional _grouping_ step.
 
 > <hands-on-title> Grouping peaks </hands-on-title>
 >
@@ -222,7 +222,7 @@ By applying retention time correction, the used retention time values were modif
 
 ## Integrating areas of missing peaks
 
-At this point, the peak list may contain `NA` values when peaks were not considered peaks in only some of the samples in the first peak picking step. In this step, we will integrate signal in the mz-rt area of an ion (chromatographic peak group) for samples in which no chromatographic peak for this ion was identified.
+At this point, the peak list may contain `NA` values when peaks were not considered in only some of the samples in the first peak-picking step. In this step, we will integrate the signal in the mz-rt area of an ion (chromatographic peak group) for samples in which no chromatographic peak for this ion was identified.
 
 > <hands-on-title> Integrating areas of missing peaks </hands-on-title>
 >
@@ -242,15 +242,15 @@ At this point, the peak list may contain `NA` values when peaks were not conside
 
 # Peak deconvolution
 
-The next step is deconvoluting the detected peaks in order to reconstruct the full spectra of the analysed compound. {% tool [RAMClustR](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.2.4+galaxy2) %} is used to group features based on correlations across samples in a hierarchy, focusing on consistency across samples. While a feature typically is derived from a single compound, a spectrum of mass signals is more a more-accurate representation of the mass spectrometric signal for a given metabolite. **RAMClustR** uses a novel grouping method that operates in an unsupervised manner to group signals from MS data into spectra without relying on predictability of the in-source phenomenon.
+The next step is deconvoluting the detected peaks in order to reconstruct the full spectra of the analysed compound. {% tool [RAMClustR](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.2.4+galaxy2) %} is used to group features based on correlations across samples in a hierarchy, focusing on consistency across samples. While a feature is typically derived from a single compound, a spectrum of mass signals is more a more-accurate representation of the mass spectrometric signal for a given metabolite. **RAMClustR** uses a novel grouping method that operates in an unsupervised manner to group signals from MS data into spectra without relying on the predictability of the in-source phenomenon.
 
 > <details-title> RAMClust method </details-title>
 > 
-> The RAMclust similarity scoring utilizes a Gaussian function, allowing flexibility in tuning correlational and retention time similarity decay rates independently, based on the dataset and the acquisition instrumentation. The correlational relationship between two features can be described by either MS-MS, MS-idMS/MS, or idMS/MS-idMS/MS values, and we support several correlation methods (e.g. Pearson’s method) to calculate similarity. These are parametrised by `sigma_t` and `sigma_r`, Gaussian tuning parameters of retention time similarity and correlational score, respectively, between feature pairs.
+> The RAMclust similarity scoring utilises a Gaussian function, allowing flexibility in tuning correlational and retention time similarity decay rates independently, based on the dataset and the acquisition instrumentation. The correlational relationship between two features can be described by either MS-MS, MS-idMS/MS, or idMS/MS-idMS/MS values, and we support several correlation methods (e.g. Pearson’s method) to calculate similarity. These are parametrised by `sigma_t` and `sigma_r`, Gaussian tuning parameters of retention time similarity and correlational score, respectively, between feature pairs.
 > 
 > Similarities are then converted to dissimilarities for clustering. The similarity matrix is then clustered using average or complete linkage hierarchical clustering. The dendrogram is cut using the `cutreeDynamicTree` function from the package `dynamicTreeCut`. For this application, the minimum module size is set to 2, dictating that only clusters with two or more features are returned, as singletons are impossible to interpret intelligently.
 > 
-> Cluster membership, in conjunction with the abundance values from individual features in the input data, are used to create spectra. Mass is derived from the feature mass, and the abundance for each mass in the spectrum is derived from the weighted mean of the intensity values for that feature. These spectra are then exported as an `.msp` formatted file, which can be directly imported by **NIST MSsearch**, or used as input for **MassBank** or **NIST msPepSearch** batch searching. Finally, the cluster membership is used to create a third dataset, SpecData, which represented the MS level data after condensing feature intensities into spectral intensities using a weighted mean function, where the more abundant signals contribute more to the spectral intensity.
+> Cluster membership, in conjunction with the abundance values from individual features in the input data, is used to create spectra. Mass is derived from the feature mass, and the abundance for each mass in the spectrum is derived from the weighted mean of the intensity values for that feature. These spectra are then exported as an `.msp` formatted file, which can be directly imported by **NIST MSsearch**, or used as input for **MassBank** or **NIST msPepSearch** batch searching.
 >
 {: .details}
 
@@ -267,9 +267,11 @@ The next step is deconvoluting the detected peaks in order to reconstruct the fu
 >        - *"Minimal cluster size"*: `5`
 >        - *"Maximal tree height"*: `0.9`
 >
+>    You can leave the other parameters with their default values.
+>
 {: .hands_on}
 
-The spectral data comes as `.msp` file, which is a text file structured according to the **NIST MSSearch** spectra format. `.msp` is one of the generally accepted formats for mass spectra representations and it is compatible with lots of spectra processing programms (MS-DIAL, NIST MS Search, AMDIS, etc.). Because `.msp` files are text-based, they can be viewed as simple `txt` files. You can use any text editor that you have on your computer or use Galaxy built-in editor. In this tutorial we use the Galaxy editor to check the contents of the file:
+The spectral data comes as a `.msp` file, which is a text file structured according to the **NIST MSSearch** spectra format. `.msp` is one of the generally accepted formats for mass spectra representations, and it is compatible with lots of spectra processing programmes (MS-DIAL, NIST MS Search, AMDIS, etc.). Because `.msp` files are text-based, they can be viewed as simple `txt` files. You can use any text editor that you have on your computer or use Galaxy's built-in editor. In this tutorial, we use the Galaxy editor to check the contents of the file:
 
 > <hands-on-title> Data Exploration </hands-on-title>
 >
@@ -309,7 +311,7 @@ The spectral data comes as `.msp` file, which is a text file structured accordin
 >
 {: .hands_on}
 
-`.msp` files can contain one or more mass spectra, these are split by an empty line. The individual spectra essentialy consist of two sections: metadata and peaks. The metadata consists of compound name, spectrum type (which is centroid in this case), ion mode, retention time, and number of *m/z* peaks. If the compound has not been identified as in our case, the **NAME** can be any arbitrary string. It is best however, if that string is unique within that `.msp` file. The metadata fields are usually unordered, so it is quite common for one `.msp` file to contain **NAME** as the first metadata key, and for another `.msp` to have this key somewhere in the middle. The keys themselves also aren't rigid and can have different names (e.g., **compound_name** instead of **NAME**) or store information not present in this `.msp`, such as ionization mode.
+`.msp` files can contain one or more mass spectra, these are split by an empty line. The individual spectra essentially consist of two sections: metadata and peaks. The metadata consists of compound name, spectrum type (which is centroid in this case), ion mode, retention time, and the number of *m/z* peaks. If the compound has not been identified, as in our case, the **NAME** can be any arbitrary string. It is best, however, if that string is unique within that `.msp` file. The metadata fields are usually unordered, so it is quite common for one `.msp` file to contain **NAME** as the first metadata key and for another `.msp` to have this key somewhere in the middle. The keys themselves also aren't rigid and can have different names (e.g., **compound_name** instead of **NAME**) or store information not present in this `.msp`, such as ionization mode.
 
 However, as we can observe, the metadata part is rather incomplete. We would like to gather more information about the detected spectra and identify the specific compounds corresponding to them.
 
@@ -317,9 +319,9 @@ However, as we can observe, the metadata part is rather incomplete. We would lik
 
 # Retention index calculation
 
-Retention index ({% cite van1963generalization %}) is a way how to convert equipment- and experiment-specific retention times into system-independent normalised constants. The retention index of a compound is computed from the retention time by interpolating between adjacent alkanes. This can be different for individual chromatographic system, but the derived retention indices are quite independent and allow comparing values measured by different analytical laboratories.
+Retention index ({% cite van1963generalization %}) is a way how to convert equipment- and experiment-specific retention times into system-independent normalised constants. The retention index of a compound is computed from the retention time by interpolating between adjacent alkanes. This can be different for the individual chromatographic system, but the derived retention indices are quite independent and allow comparing values measured by different analytical laboratories.
 
-We use package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.2+galaxy1) %} to compute retention indices for files in the `.msp` format using an indexed reference list of alkanes in `.csv` or `.msp` format. The output follows the same format as the input, but with added retention index values. These can be used at a subsequent stage to improve compound identification ({% cite kumari2011applying %}). Multiple computation methods (e.g. piecewise-linear or cubic spline) are supported by the tool.
+We use package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.2+galaxy1) %} to compute retention indices for files in the `.msp` format using an indexed reference list of alkanes in `.csv` or `.msp` format. The output follows the same format as the input but with added retention index values. These can be used at a subsequent stage to improve compound identification ({% cite kumari2011applying %}). Multiple computation methods (e.g. piecewise-linear or cubic spline) are supported by the tool.
 
 > <hands-on-title> Retention index calculation </hands-on-title>
 >
@@ -329,10 +331,11 @@ We use package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassig
 >    - In *"Reference dataset"*:
 >        - {% icon param-file %} *"Reference compound list"*: `reference_alkanes.csv` (Input dataset)
 >
+>    You can leave the other parameters with their default values.
 >
 >    > <comment-title> Minutes vs. seconds </comment-title>
 >    >
->    > You might notice that in the last **XCMS** step, we converted the retention times to minutes. However, in this step, we are using seconds again. The reason is that **RAMClustR** converted them internally again to seconds. Regarding the reference compound list, this database has already its retention times in seconds.
+>    > You might notice that in the last **XCMS** step, we converted the retention times to minutes. However, in this step, we are using seconds again. The reason is that **RAMClustR** converted them internally again to seconds. Regarding the reference compound list, this database already has its retention times in seconds.
 >    {: .comment}
 >
 >    > <details-title> Kováts method </details-title>
@@ -351,15 +354,15 @@ We use package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassig
 
 # Identification
 
-To identify and annotate the deconvoluted spectra, we compare them with a reference spectral library. This library contains spectra of standards measured on the same instrument for optimal comparability. The **matchms** package is used for spectral matching. It was build to import and apply different similarity measures to compare large amounts of spectra. This includes common cosine scores, but can also easily be extended by custom measures.
+To identify and annotate the deconvoluted spectra, we compare them with a reference spectral library. This library contains spectra of standards measured on the same instrument for optimal comparability. The **matchms** package is used for spectral matching. It was built to import and apply different similarity measures to compare large amounts of spectra. This includes common cosine scores but can also easily be extended by custom measures.
 
 > <details-title> Reference spectral library </details-title>
 > 
-> Fragmentation patterns of ions (spectra) are widely used the process of compound identification in complex mixtures. The number of identifiable compounds and associated data keeps growing with the increasing sensitivity and resolution of mass spectrometers. These data are clustered into collections of chemical structures and their spectra, also called spectral libraries ({% cite stein1995chemical %}, {% cite stein2012mass %}), which can be used for fast, reliable identifications for any compound whose fragmentation pattern is measured by the instrument. 
+> Fragmentation patterns of ions (spectra) are widely used in the process of compound identification in complex mixtures. The number of identifiable compounds and associated data keeps growing with the increasing sensitivity and resolution of mass spectrometers. These data are clustered into collections of chemical structures and their spectra, also called spectral libraries ({% cite stein1995chemical %}, {% cite stein2012mass %}), which can be used for fast, reliable identifications for any compound whose fragmentation pattern is measured by the instrument. 
 > 
-> To identify the compounds after GC/MS analysis, the *library searching* is performed for any detected spectrum. This locates the most similar spectra in the reference library, providing a list of the potentially identified compounds sorted by computed similarity. Indeed, a library search should also yield the confidence of compounds identification, often refered to as similarity score.
+> To identify the compounds after GC/MS analysis, the *library searching* is performed for any detected spectrum. This locates the most similar spectra in the reference library, providing a list of the potentially identified compounds sorted by computed similarity. Indeed, a library search should also yield the confidence of compound identification, often referred to as similarity score.
 >
-> Reference libraries users usually expect their reliability to be quite high. However, there are many sources of error which we need to be aware of. Particularly error-prone aspect is the annotation. Even an excellent spectrum becomes worthless for a wrongly annotated compound. A variety of computer-aided quality control help to improve these issues, but the libraries always require some level of expert human decision-making before a spectrum is added to the library. This is also important for redundant and unidentified spectra.
+> Reference libraries users usually expect their reliability to be quite high. However, there are many sources of error which we need to be aware of. A particularly error-prone aspect is annotation. Even an excellent spectrum becomes worthless for a wrongly annotated compound. A variety of computer-aided quality control help to improve these issues, but libraries always require some level of expert human decision-making before a spectrum is added to the library. This is also important for redundant and unidentified spectra.
 >
 {: .details}
 
@@ -370,7 +373,7 @@ We use the cosine score with a greedy peak pairing heuristic to compute the numb
 
 > <details-title> Cosine score methods </details-title>
 >
-> One of the most common methods to compute similarity score between two spectra is computing the cosine of the *angle* between them. Each spectrum can be represented as a vector with an axis along each of its *m/z* values. Then the cosine of the angle is basically a normalised *dot product* of these two vectors. Intensity and *m/z* weighting corrections have been used to optimize performance. For example, higher mass peaks can be given greater weight since they are more discriminating than lower mass peaks. *Reverse* scores assign no weight to peaks present only in the measured sample spectrum, under the assumption that they arise from impurities.
+> One of the most common methods to compute the similarity score between two spectra is computing the cosine of the *angle* between them. Each spectrum can be represented as a vector with an axis along each of its *m/z* values. Then the cosine of the angle is basically a normalised *dot product* of these two vectors. The intensity and *m/z* weighting corrections have been used to optimise performance. For example, higher mass peaks can be given greater weight since they are more discriminating than lower mass peaks. *Reverse* scores assign no weight to peaks present only in the measured sample spectrum under the assumption that they arise from impurities.
 >
 {: .details}
 
@@ -384,8 +387,10 @@ We use the cosine score with a greedy peak pairing heuristic to compute the numb
 >        - *"tolerance"*: `0.03`
 >    - *"Apply RI filtering"*: `Yes` (we use this since our data is GC)
 >
+>    You can leave the other parameters with their default values.
+>
 >    > <comment-title> Used reference spectra </comment-title>
->    > The RECETOX Metabolome HR-[EI+]-MS library is a collection of mostly endogoenous compounds from MetaSci Human Metabolite Library. Analytes underwent methoximation/silylation prior to acquisition. Spectra were acquired at 70 eV on Thermo Fisher Q Exactive™ GC Orbitrap™ GC-MS/MS at 60000 resolving power.
+>    > The RECETOX Metabolome HR-[EI+]-MS library is a collection of mostly endogenous compounds from MetaSci Human Metabolite Library. Analytes underwent methoximation/silylation prior to acquisition. Spectra were acquired at 70 eV on Thermo Fisher Q Exactive™ GC Orbitrap™ GC-MS/MS at 60000 resolving power.
 >    {: .comment}
 >
 {: .hands_on}
@@ -394,19 +399,19 @@ We use the cosine score with a greedy peak pairing heuristic to compute the numb
 > > <h5>Cosine Greedy</h5>
 > > The cosine score, also known as the dot product, is based on representing the similarity of two spectra through the cosine of an angle between the vectors that the spectra produce. Two peaks are considered as matching if their *m/z* values lie within the given tolerance. Cosine greedy looks up matching peaks in a "greedy" way, which does not always lead to the most optimal alignments.
 > >
-> > This score was among the first to be used for looking up matching spectra in spectral libraries and to this day remains one of the most popular scoring methods for both library matching and molecular networking workflows.
+> > This score was among the first to be used for looking up matching spectra in spectral libraries andand, to this day, remains one of the most popular scoring methods for both library matching and molecular networking workflows.
 > > <p>&nbsp;</p>
 >
 > > <h5>Cosine Hungarian</h5>
-> > This method computes the similarities in the same way as the *Cosine Greedy* but with a difference in *m/z* peak alignment. The difference lies in that the Hungarian algorithm is used here to find matching peaks. This leads to the best peak pairs match, but can take significantly longer than the "greedy" algorithm.
+> > This method computes the similarities in the same way as the *Cosine Greedy* but with a difference in *m/z* peak alignment. The difference lies in that the Hungarian algorithm is used here to find matching peaks. This leads to the best peak pairs match but can take significantly longer than the "greedy" algorithm.
 > > <p>&nbsp;</p>
 >
 > > <h5>Modified Cosine</h5>
-> > Modified Cosine is another, as its name states, representative of the family of cosine-based scores. This method aligns peaks by finding the best possible matches and consideres two peaks a match if their *m/z* values are within a tolerance before or after a mass-shift is applied. A mass shift is essentially a difference of precursor-*m/z* of two compared spectra. The similarity is then again expressed as a cosine of the angle between two vectors.
+> > Modified Cosine is another, as its name states, representative of the family of cosine-based scores. This method aligns peaks by finding the best possible matches and considers two peaks a match if their *m/z* values are within tolerance before or after a mass-shift is applied. A mass shift is essentially a difference of precursor-*m/z* of two compared spectra. The similarity is then again expressed as a cosine of the angle between two vectors.
 > > <p>&nbsp;</p>
 >
 > > <h5>Neutral Losses Cosine</h5>
-> > Neutral Loss metric works similar to all described above with one major difference: instead of encoding the spectra as "intensity vs *m/z*" vector it encodes it to a "intensity vs *Δm/z*", where delta is computed as an *m/z* difference between precursor and a fragment *m/z*. This in theory, could better capture the underlying structural similarities between molecules.
+> > Neutral Loss metric works similarly to all described above with one major difference: instead of encoding the spectra as "intensity vs *m/z*" vector, it encodes it to an "intensity vs *Δm/z*", where delta is computed as an *m/z* difference between precursor and a fragment *m/z*. This, in theory, could better capture the underlying structural similarities between molecules.
 > >
 >
 {: .details}
@@ -422,6 +427,8 @@ The output table contains the scores and number of matched ions of the deconvolu
 > 1. {% tool [matchms output formatter](toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.1.4) %} with the following parameters:
 >    - {% icon param-file %} *"Scores object"*: `CosineGreedy scores` (output of **matchms similarity** {% icon tool %})
 >
+>    You can leave the other parameters with their default values.
+>
 {: .hands_on}
 
 > | query | reference | matches | scores |
@@ -432,7 +439,7 @@ The output table contains the scores and number of matched ions of the deconvolu
 > | ...   | ...       | ...     | ...    |
 {: .matrix}
 
-At this stage, all steps are complete: we have the list of identified spectra corresponding to a compound from the reference database. Since this process is dependent on the parameters we used along the way, the result should be considered dependent on them. To make enumerate this dependency, we each potential compound has assigned a confidence score.
+At this stage, all steps are complete: we have the list of identified spectra corresponding to a compound from the reference database. Since this process is dependent on the parameters we used along the way, the result should be considered dependent on them. To enumerate this dependency, each potential compound has been assigned a confidence score.
 
 # Conclusion
 
