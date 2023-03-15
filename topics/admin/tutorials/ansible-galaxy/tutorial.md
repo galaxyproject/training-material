@@ -776,7 +776,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 > 1. Open `galaxy.yml` with your text editor and set the following:
 >
 >    - Amend the [package installation](https://docs.ansible.com/ansible/2.9/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `bzip2`, `git`, `make`, `tar`, `python3-venv`, and `python3-setuptools`.
->    - Add the roles `geerlingguy.pip`, `galaxyproject.galaxy` and `galaxyproject.miniconda` (in this order) at the end, with `uchida.miniconda` run as the `galaxy` user.
+>    - Add the roles `geerlingguy.pip`, `galaxyproject.galaxy` and `galaxyproject.miniconda` (in this order) at the end, with `galaxyproject.miniconda` run as the `galaxy` user.
 >
 >    {% raw %}
 >    ```diff
