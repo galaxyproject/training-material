@@ -37,8 +37,7 @@ requirements:
         - scrna-case_alevin
         - scrna-case_alevin-combine-datasets
         - scrna-case_basic-pipeline
-        - scrna-case_JUPYTER-trajectories
-        - scrna-case_monocle3-trajectories
+
         
 tags:
 - single-cell
