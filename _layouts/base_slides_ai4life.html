@@ -60,17 +60,20 @@ class: center, middle, inverse
 
 </span></div>
 
-<div class="my-footer"><span>
-{% if page.logo == "GTN" %}
-<img src="{{ site.baseurl }}/{{ site.small_logo }}" alt="Galaxy Training Network" style="height: 40px;"/>
-{% else %}
-  {% if page.logo contains "://" %}
-<img src="{% if page.small_logo %}{{ page.small_logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" style="height: 40px;"/>
-  {% else %}
-<img src="{{ site.baseurl }}/{% if page.small_logo %}{{ page.small_logo }}{% else %}{{ page.logo }}{% endif %}" alt="page logo" style="height: 40px;"/>
-  {% endif %}
-{% endif %}
-</span></div>
+<div class="my-footer" style="display: flex; justify-content: space-around;">
+	<div>
+		<img src="{{ site.baseurl }}/topics/ai4life/images/AI4Life-logo_neg_giraffe-solid.png" alt="AI4Life Logo" style="height: 1.6em">
+	</div>
+	<div>
+		<a href="www.ai4life.eurobioimaging.eu">www.ai4life.eurobioimaging.eu</a>
+	</div>
+	<div>
+		<a href="mailto:ai4life@eurobioimaging.eu">ai4life@eurobioimaging.eu</a>
+	</div>
+	<div>
+		<a href="https://twitter.com/AI4LifeTeam">@AI4LifeTeam</a>
+	</div>
+</div>
 
 ---
 
@@ -105,7 +108,7 @@ class: center, middle, inverse
 
 
 <!-- usage tips -->
-<div class="footnote" style="bottom: 2em;">
+<div class="footnote" style="bottom: 3.3em;">
     <strong>{{locale['tip'] | default: "Tip"}}: </strong>{{locale['presenter-notes'] | default: "press <kbd>P</kbd> to view the presenter notes"}}
     | {% icon arrow-keys %} {{locale['first-time-using-slides'] | default: "Use arrow keys to move between slides"}}
 
