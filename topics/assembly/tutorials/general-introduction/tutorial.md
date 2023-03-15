@@ -133,13 +133,16 @@ MultiQC generates a webpage combining reports for FastQC on both datasets. It in
 
 - General statistics
 
-    This is important in setting maximum k-mer size for an assembly.
+    We need to know about the data for our analysis. In particular, we need to know the read lengths as it is important in setting the maximum k-mer size for an assembly.
 
     > <comment-title>Getting the length of sequences</comment-title>
     >
-    > * Click on **Configure Columns**
-    > * Check **Length**
+    > * Find the MultiQC output that is a webpage and click to view
+    > * The first table shows General Statistics for the input read files
+    > * At the top of this table, click on **Configure Columns**
+    > * Make sure the box next to **Length** is ticked
     > * Close the window
+    > * This table should now show a column for read lengths
     {: .comment}
 
     > <question-title></question-title>
