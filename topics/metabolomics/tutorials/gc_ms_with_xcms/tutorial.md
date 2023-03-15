@@ -146,7 +146,7 @@ The first step in the workflow is to detect the peaks in our data using **XCMS**
 
 ## Peak picking
 
-The first step is to extract peaks from each of your data files independently. For this purpose, we use _centWave_ chromatographic peak detection algorithm implemented in {% tool [xcms findChromPeaks (xcmsSet)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0) %}.
+The first step is to extract peaks from each of your data files independently. For this purpose, we use the _centWave_ chromatographic peak detection algorithm implemented in {% tool [xcms findChromPeaks (xcmsSet)](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_xcmsset/abims_xcms_xcmsSet/3.12.0+galaxy0) %}.
 
 > <hands-on-title> Peak picking </hands-on-title>
 >
@@ -154,7 +154,7 @@ The first step is to extract peaks from each of your data files independently. F
 >    - {% icon param-file %} *"RData file"*: `input.raw.RData` (output of **MSnbase readMSData** {% icon tool %})
 >    - *"Extraction method for peaks detection"*: `CentWave - chromatographic peak detection using the centWave method`
 >        - *"Max tolerated ppm m/z deviation in consecutive scans in ppm"*: `3.0`
->        - *"Min,Max peak width in seconds"*: `1,15`
+>        - *"Min,Max peak width in seconds"*: `1,30`
 >        - In *"Advanced Options"*:
 >            - *"Prefilter step for for the first analysis step (ROI detection)"*: `3,500`
 >            - *"Noise filter"*: `1000`
@@ -177,7 +177,7 @@ At this step, you obtain a dataset collection containing one `RData` file per sa
 >
 {: .hands_on}
 
-Now we can proceed with the grouping and determining shared ions among samples. The aim of this step, called _grouping_, is to obtain a single matrix of ions’ intensities for all samples.
+Now we can proceed with the grouping and determining shared ions among samples. The aim of this step, called _grouping_, is to obtain a single matrix of ions’ intensities across all samples.
 
 > <hands-on-title> Grouping peaks </hands-on-title>
 >
@@ -251,7 +251,7 @@ At this point, the peak list may contain `NA` values when peaks were not conside
 
 # Peak deconvolution
 
-The next step is deconvoluting the detected peaks in order to reconstruct the full spectra of the analysed compound. {% tool [RAMClustR](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.2.4+galaxy2) %} is used to group features based on correlations across samples in a hierarchy, focusing on consistency across samples. While a feature is typically derived from a single compound, a spectrum of mass signals is more a more-accurate representation of the mass spectrometric signal for a given metabolite. **RAMClustR** uses a novel grouping method that operates in an unsupervised manner to group signals from MS data into spectra without relying on the predictability of the in-source phenomenon.
+The next step is deconvoluting the detected peaks in order to reconstruct the full spectra of the chemical compounds present in the sample, separated by the chromatography and ionized in the mass spectrometer. {% tool [RAMClustR](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr/ramclustr/1.2.4+galaxy2) %} is used to group features based on correlations across samples in a hierarchy, focusing on consistency across samples. While each feature is typically derived from a single compound and represents a fragment, the whole mass spectrum can be used to more accurately identify the precursor compound or molecular ion. **RAMClustR** uses a novel grouping method that operates in an unsupervised manner to group peaks into spectra without relying on the predicting in-source phenomena (in-source fragments or adduct formation) or fragmentation mechanisms.
 
 > <details-title> RAMClust method </details-title>
 > 
@@ -259,7 +259,7 @@ The next step is deconvoluting the detected peaks in order to reconstruct the fu
 > 
 > Similarities are then converted to dissimilarities for clustering. The similarity matrix is then clustered using average or complete linkage hierarchical clustering. The dendrogram is cut using the `cutreeDynamicTree` function from the package `dynamicTreeCut`. For this application, the minimum module size is set to 2, dictating that only clusters with two or more features are returned, as singletons are impossible to interpret intelligently.
 > 
-> Cluster membership, in conjunction with the abundance values from individual features in the input data, is used to create spectra. Mass is derived from the feature mass, and the abundance for each mass in the spectrum is derived from the weighted mean of the intensity values for that feature. These spectra are then exported as an `.msp` formatted file, which can be directly imported by **NIST MSsearch**, or used as input for **MassBank** or **NIST msPepSearch** batch searching.
+> Cluster membership, in conjunction with the abundance values from individual features in the input data, is used to create spectra. The mass to charge ratio is derived from the feature m/z, and the abundance for each m/z in the spectrum is derived from the weighted mean of the intensity values for that feature. These spectra are then exported as an `.msp` formatted file, which can be directly imported by **NIST MSsearch**, or used as input for **MassBank** or **NIST msPepSearch** batch searching.
 >
 {: .details}
 
@@ -271,7 +271,7 @@ The next step is deconvoluting the detected peaks in order to reconstruct the fu
 >            - {% icon param-file %} *"Input XCMS"*: `xset.merged.groupChromPeaks.adjustRtime.groupChromPeaks.fillChromPeaks.RData` (output of **xcms fillChromPeaks (fillPeaks)** {% icon tool %})
 >        - In *"General parameters"*:
 >            - *"Sigma r"*: `0.7`
->            - *"Maximum RT difference"*: `10.0`
+>            - *"Maximum RT difference"*: `5.0`
 >    - In *"Clustering"*:
 >        - *"Minimal cluster size"*: `5`
 >        - *"Maximal tree height"*: `0.9`
@@ -280,7 +280,7 @@ The next step is deconvoluting the detected peaks in order to reconstruct the fu
 >
 {: .hands_on}
 
-The spectral data comes as a `.msp` file, which is a text file structured according to the **NIST MSSearch** spectra format. `.msp` is one of the generally accepted formats for mass spectra representations, and it is compatible with lots of spectra processing programmes (MS-DIAL, NIST MS Search, AMDIS, etc.). Because `.msp` files are text-based, they can be viewed as simple `txt` files. You can use any text editor that you have on your computer or use Galaxy's built-in editor. In this tutorial, we use the Galaxy editor to check the contents of the file:
+The spectral data comes as an `.msp` file, which is a text file structured according to the **NIST MSSearch** spectra format. `.msp` is one of the generally accepted formats for mass spectral libraries (or collections of unidentified spectra), and it is compatible with lots of spectra processing programmes (MS-DIAL, NIST MS Search, AMDIS, etc.). Because `.msp` files are text-based, they can be viewed as simple `txt` files. You can use any text editor that you have on your computer or use Galaxy's built-in editor. In this tutorial, we use the Galaxy editor to check the contents of the file:
 
 > <hands-on-title> Data Exploration </hands-on-title>
 >
@@ -320,17 +320,17 @@ The spectral data comes as a `.msp` file, which is a text file structured accord
 >
 >    > <details-title> Negative ion mode </details-title>
 >    >
->    > You might wonder how can the ionisation mode (_IONMODE_) for GC data be negative. This is, of course, incorrect. This is actually just a default behaviour of **RAMClustR**. We can optionally change this by providing **RAMClustR** experiment definition file. This file can be created manualy or using {% tool [RAMClustR define experiment](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr_define_experiment/ramclustr_define_experiment/1.0.2) %} tool. There we can specify annotations such as what instrument we used or ionisation mode (which was EI positive in our case), and this will be transferred to the `.msp` file. Finally, we can provide such a file as an input to **RAMClustR** in the _Extras_ inputs section.
+>    > You might wonder how can the ionisation mode (_IONMODE_) for GC-MS data be negative when using electron impact (EI+) ionization. This is, of course, incorrect. This is actually just a default behaviour of **RAMClustR**. We can optionally change this by providing **RAMClustR** an experiment definition file. This file can be created manually or using the {% tool [RAMClustR define experiment](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr_define_experiment/ramclustr_define_experiment/1.0.2) %} tool. There we can specify annotations such as what instrument we used or ionisation mode (which was EI+ in our case), and this will be transfered to the `.msp` file. Finally, we can provide such a file as an input to **RAMClustR** in the _Extras_ inputs section.
 >    >
 >    {: .details}
 >
 {: .hands_on}
 
-`.msp` files can contain one or more mass spectra, these are split by an empty line. The individual spectra essentially consist of two sections: metadata and peaks. The metadata consists of compound name, spectrum type (which is centroid in this case), ion mode, retention time, and the number of *m/z* peaks. If the compound has not been identified, as in our case, the **NAME** can be any arbitrary string. It is best, however, if that string is unique within that `.msp` file. The metadata fields are usually unordered, so it is quite common for one `.msp` file to contain **NAME** as the first metadata key and for another `.msp` to have this key somewhere in the middle. The keys themselves also aren't rigid and can have different names (e.g., **compound_name** instead of **NAME**) or store information not present in this `.msp`, such as ionization mode.
+`.msp` files can contain one or more mass spectra, these are split by an empty line. The individual spectra essentially consist of two sections: metadata and peaks. The metadata consists of compound name, spectrum type (which is centroid in this case), ion mode, retention time, and the number of *m/z* peaks. If the compound has not been identified, as in our case, the **NAME** can be any arbitrary string. It is best, however, if that string is unique within that `.msp` file. The metadata fields are usually unordered, so it is quite common for one `.msp` file to contain **NAME** as the first metadata key and for another `.msp` to have this key somewhere in the middle. The keys themselves also aren't rigid and can have different names (e.g., **compound_name** instead of **NAME**) or store information not present in this `.msp`, such as the ionization mode. The `msp` format is inherently not standardized and various flavours exist.
 
 However, as we can observe, the metadata part is rather incomplete. We would like to gather more information about the detected spectra and identify the specific compounds corresponding to them.
 
-**TODO** describe `Spec Abundance` file
+The second output file is the so called **Spec Abundance** table, containing the expression of all deconvoluted spectra across all samples. It is the corresponding element to the peak intensity table obtained from **XCMS**, only for the whole deconvoluted spectrum. This file is used for further downstream processing and analysis of the data and eventual comparisons across different sample types or groups. For more information on this downstream data processing see this [tutorial]({{ site.baseurl }}/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.html)
 
 # Retention index calculation
 
