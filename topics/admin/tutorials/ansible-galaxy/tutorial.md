@@ -1192,128 +1192,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > Note: we have only included the `galaxyservers` play output and have stripped out the "diff" output for compactness, your output will be more verbose.
 >    >
 >    > ```ini
->    > PLAY [dbservers] ***************************************************************
->    >
->    > TASK [Gathering Facts] *********************************************************
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [Install Dependencies] ****************************************************
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : include_tasks] ********************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.postgresql/tasks/debian.yml for gat-0.eu.galaxy.training
->    >
->    > TASK [galaxyproject.postgresql : APT keyrings directory] ***********************
->    > skipping: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Install pgdg package signing key (Debian/pgdg)] ***
->    > skipping: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Install pgdg repository (Debian/pgdg)] ********
->    > skipping: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Install PostgreSQL (Debian)] ******************
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Get installed version] ************************
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Set version fact] *****************************
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Install psycopg2] *****************************
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Set version fact] *****************************
->    > skipping: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Set OS-specific variables] ********************
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Set pgdata fact] ******************************
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Set conf dir fact] ****************************
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : include_tasks] ********************************
->    > skipping: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Create conf.d] ********************************
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Check for conf.d include in postgresql.conf] ***
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Set conf.d include in postgresql.conf] ********
->    > skipping: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Include 25ansible_postgresql.conf in postgresql.conf] ***
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Set config options] ***************************
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Install pg_hba.conf] **************************
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : include_tasks] ********************************
->    > included: /home/ubuntu/galaxy/roles/galaxyproject.postgresql/tasks/backup.yml for gat-0.eu.galaxy.training
->    >
->    > TASK [galaxyproject.postgresql : Create backup directories] ********************
->    > ok: [gat-0.eu.galaxy.training] => (item=/var/lib/postgresql/backups)
->    > ok: [gat-0.eu.galaxy.training] => (item=/var/lib/postgresql/backups/bin)
->    >
->    > TASK [galaxyproject.postgresql : Create backup output directory] ***************
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Install backup script templates] **************
->    > ok: [gat-0.eu.galaxy.training] => (item=archive_wal.sh)
->    >
->    > TASK [galaxyproject.postgresql : Install backup script files] ******************
->    > ok: [gat-0.eu.galaxy.training] => (item=backup.py)
->    >
->    > TASK [galaxyproject.postgresql : Set WAL archive config options] ***************
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Schedule backups] *****************************
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Remove PostgreSQL working WAL backup cron job] ***
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql : Ensure PostgreSQL is running] *****************
->    > ok: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql_objects : Warn if deprecated user priv param is set] ***
->    > skipping: [gat-0.eu.galaxy.training] => (item=galaxy)
->    > skipping: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql_objects : Revoke extra privileges] **************
->    > skipping: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql_objects : Drop databases] ***********************
->    > skipping: [gat-0.eu.galaxy.training] => (item={'name': 'galaxy', 'owner': 'galaxy'})
->    > skipping: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql_objects : Create and drop users] ****************
->    > ok: [gat-0.eu.galaxy.training] => (item=galaxy)
->    >
->    > TASK [galaxyproject.postgresql_objects : Create groups] ************************
->    > skipping: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql_objects : Add or remove users from groups] ******
->    > skipping: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql_objects : Drop groups] **************************
->    > skipping: [gat-0.eu.galaxy.training]
->    >
->    > TASK [galaxyproject.postgresql_objects : Create databases] *********************
->    > ok: [gat-0.eu.galaxy.training] => (item=galaxy)
->    >
->    > TASK [galaxyproject.postgresql_objects : Grant extra privileges] ***************
->    > skipping: [gat-0.eu.galaxy.training]
->    >
 >    > PLAY [galaxyservers] ***********************************************************
 >    >
 >    > TASK [Gathering Facts] *********************************************************
@@ -1699,7 +1577,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > changed: [gat-0.eu.galaxy.training]
 >    >
 >    > PLAY RECAP *********************************************************************
->    > gat-0.eu.galaxy.training : ok=101  changed=43   unreachable=0    failed=0    skipped=54   rescued=0    ignored=0
+>    > gat-0.eu.galaxy.training : ok=101  changed=28   unreachable=0    failed=0    skipped=53   rescued=0    ignored=0
 >    > ```
 >    {: .code-out.code-max-300}
 >
