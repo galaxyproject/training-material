@@ -4,11 +4,11 @@ layout: tutorial_hands_on
 title: 'Mass spectrometry: GC-MS data processing (with XCMS, RAMClustR, RIAssigner, and matchms)'
 zenodo_link: 'https://zenodo.org/record/7701862'
 questions:
-- What are the main steps of GC-MS data processing for metabolomic analysis?
+- What are the main steps of gas chromatography-mass spectrometry (GC-MS) data processing for metabolomic analysis?
 - What similarity metrics can be used to compare a pair of mass spectra and what are the differences between them?
-- Do you know any alternative tools that can be used in place of individual steps of this workflow?
+- Do you know any alternative tools that can be used in place of the individual steps of this workflow?
 objectives:
-- To learn about the key steps steps in the preprocessing and analysis of untargeted GC-MS metabolomics data.
+- To learn about the key steps in the preprocessing and analysis of untargeted GC-MS metabolomics data.
 - To explore what open-source alternative tools can be used in the analysis of GC-MS data, learn about their possible parametrisations.
 - To analyse authentic data samples and compare them with a data library of human metabolome, composed from a collection of mostly endogenous compounds.
 time_estimation: 2H
@@ -27,18 +27,19 @@ contributors:
 
 # Introduction
 
-The study of metabolites in biological samples is routinely defined as metabolomics and provides the capability to investigate metabolism on a global and relatively unbiased scale in comparison to traditional targeted studies focused on specific pathways of metabolism and a small number of metabolites. The untargeted approach enables the detection of thousands of metabolites in hypothesis-generating studies and links previously unknown metabolites with biologically important roles. There are two major issues in contemporary metabolomics: the first is enormous loads of signal generated during the experiments, and the second is the fact that some metabolites in the studied samples may not be known to us. These obstacles make the task of processing and interpreting the metabolomics data a cumbersome and time-consuming process {% cite Nash2019 %}.
+The study of metabolites in biological samples is routinely defined as metabolomics. Metabolomics studies based on untargeted mass spectrometry provides the capability to investigate metabolism on a global and relatively unbiased scale in comparison to traditional targeted studies focused on specific pathways of metabolism and a small number of metabolites. The untargeted approach enables the detection of thousands of metabolites in hypothesis-generating studies and links previously unknown metabolites with biologically important roles {% cite Patti2012 %}. There are two major issues in contemporary mass spectrometry-based metabolomics: the first is enormous loads of signal generated during the experiments, and the second is the fact that some metabolites in the studied samples may not be known to us. These obstacles make the task of processing and interpreting the metabolomics data a cumbersome and time-consuming process {% cite Nash2019 %}.
 
-A lot of packages are available for the analysis of GC-MS or LC-MS data. In this tutorial, we focus on open-source solutions integrated within the Galaxy framework. In this tutorial, we will learn how to process the data samples and identify the present compounds. For demonstration, we use three GC-[EI+] high-resolution mass spectrometry files from seminal plasma samples.
+Many packages are available for the analysis of GC-MS or LC-MS data - for more details see the reviews by {% cite Stanstrup2019 %} and {% cite Misra2021 %}. In this tutorial, we focus on open-source solutions integrated within the Galaxy framework, namely **XCMS**, **RAMClustR**, **RIAssigner** and **matchms**. In this tutorial, we will learn how to (1) extract features from the raw data using **XCMS** ({% cite Smith2006 %}), (2) deconvolute the detected features into spectra with **RAMClustR** ({% cite broeckling2014ramclust %}), (3) compute retention indices with **RIAssigner** ({% cite hecht2022riassigner %}) and (4) identify the present compounds leveraging spectra and retention indices using **matchms** ({% cite Huber2020 %}). For demonstration, we use three GC-[EI+] high-resolution mass spectrometry data files generated from quality control seminal plasma samples.
 
 
 > <details-title> Seminal plasma samples </details-title>
 > 
-> TBD
+> The seminal plasma samples were analyzed according to the standard operating procedure (SOP) [SOP for metabolite profiling of seminal plasma via GC Orbitrap](https://zenodo.org/record/5734331).
+> The 3 samples used in this training are pooled quality control (QC) samples coming from about ~200 samples. The pooled samples were analyzed in a dilution series to test the system suitability and the quality of the assay.
 >
 {: .details}
 
-To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a general package for untargeted metabolomics profiling. It can be used for any type of mass spectrometry acquisition files from low to high resolution, including FT-MS data coupled with a different kind of chromatography (liquid or gas). We use it to detect peaks within our samples. Once we have detected them, they need to be deconvoluted with a focus on consistency across samples. For that, we use **RAMClustR** ({% cite broeckling2014ramclust %}) tool. To normalise the retention time of identified spectra in our sample, we compute the retention index using **RIAssigner** ({% cite hecht2022riassigner %}) by comparing the data to a well-defined list of alkanes. Finally, we identify detected spectra by aligning them with a database of known compounds. This can be achieved using **matchms** ({% cite Huber2020 %}), resulting in a table of identified compounds weighted by a confidence score.
+To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a general package for untargeted metabolomics profiling. It can be used for any type of mass spectrometry acquisition (centroid and profile) or resolution (from low to high resolution), including FT-MS data coupled with a different kind of chromatography (liquid or gas). We use it to detect chromatographic peaks within our samples. Once we have detected them, they need to be deconvoluted into spectra representing chemical compounds. For that, we use **RAMClustR** ({% cite broeckling2014ramclust %}) tool. To normalise the retention time of deconvoluted spectra in our sample, we compute the retention index using **RIAssigner** ({% cite hecht2022riassigner %}) by comparing the data to a well-defined list of reference compound (commonly alkanes) analyzed on the same GC column. Finally, we identify detected spectra by aligning them with a database of known compounds. This can be achieved using **matchms** ({% cite Huber2020 %}), resulting in a table of identified compounds weighted by a matching score.
 
 > <agenda-title></agenda-title>
 >
@@ -89,22 +90,24 @@ Before we can start with the actual analysis pipeline, we first need to download
 >
 >    > <comment-title> The extra files </comment-title>
 >    >
->    > The two additional files contain **reference alkanes**, reference spectral library, and sample metadata. The list of alkanes with retention time and carbon number or retention index is used to compute the retention index of the deconvoluted peaks. The alkanes should be measured ideally in the same batch as the input sample collection.
+>    > The three additional files contain the **reference alkanes**, the **reference spectral library**, and the **sample metadata**. Those files are auxiliary inputs used in the data processing and contain either extra information about the samples or serve as reference data for indexing and identification.
 >    > 
->    > The **reference spectral library** (`.msp`) is used for the identification of spectra. It contains the recorded and annotated mass spectra of compounds which can be detected in the sample and confirmed via comparison with this library. The specific library is the in-house library of metabolite standards. **TODO**: what does it mean?
+>    > The **list of alkanes** (`.tsv` or `.csv`) with retention times and carbon number or retention index is used to compute the retention index of the deconvoluted peaks. The alkanes should be measured in the same batch as the input sample collection.
 >    > 
->    > The **sample metadata** corresponds to a table containing information about our samples. In particular, the tabular file contains for each sample its associated sample name, class (QC, blank, sample, etc.), batch number, and injection order. It is possible to add more columns to include additional details about the samples.
+>    > The **reference spectral library** (`.msp`) is used for the identification of spectra. It contains the recorded and annotated mass spectra of chemical standards, ideally from a similar instrument. The unknown spectra which can be detected in the sample can then be confirmed via comparison with this library. The specific library is an in-house library of metabolite standards measured at RECETOX using a GC Orbitrap.
+>    > 
+>    > The **sample metadata** (`.csv` or `.tsv`) is a table containing information about our samples. In particular, the tabular file contains for each sample its associated sample name, class (QC, blank, sample, etc.), batch number, and injection order. It is possible to add more columns to include additional details about the samples.
 >    {: .comment}
 >
 {: .hands_on}
 
 As a result of this step, we should have in our history a green Dataset collection with three `.raw` files as well as three separate files with reference alkanes, reference spectral library and sample metadata.
 
-## Convert data to mzML
+## Convert the raw data to mzML
 
-Our input data are in `.raw` format, which is not suitable for the downstream tools in this tutorial. We use tool {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2) %} to convert them to the appropriate format (`.mzML` in this case).
+Our input data are in `.raw` format, which is not suitable for the downstream tools in this tutorial. We use the tool {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2) %} to convert our samples to the appropriate format (`.mzML` in this case).
 
-> <hands-on-title> Convert data to mzML </hands-on-title>
+> <hands-on-title> Convert the raw data to mzML </hands-on-title>
 >
 > 1. {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.20287.2) %} with the following parameters:
 >    - {% icon param-collection %} *"Input unrefined MS data"*: `input` (Input dataset collection)
@@ -115,16 +118,16 @@ Our input data are in `.raw` format, which is not suitable for the downstream to
 >
 >    > <comment-title> Centroids </comment-title>
 >    >
->    > `msconvert` with selected parameters computes centroids in the m/z domain. MS instruments continuously sample and record signals. Therefore, a mass peak for a single ion in one spectrum consists of multiple intensities at discrete m/z values. Centroiding is the process of reducing these mass peaks to a single representative signal, the centroid. This results in much smaller file sizes without losing too much information. In the further steps, **XCMS** uses the `centWave` chromatographic peak detection algorithm, which was designed for centroided data. That is the reason we perform the centroiding in this step.
+>    > `msconvert` with selected parameters computes centroids in the m/z domain. MS instruments continuously sample and record signals. Therefore, a mass peak for a single ion in one spectrum consists of multiple intensities at discrete m/z values. Centroiding is the process of reducing these mass peaks to a single representative signal, the centroid. This results in much smaller file sizes without losing too much information. In the further steps, **XCMS** uses the `centWave` chromatographic peak detection algorithm, which was designed for centroided data. That is the reason we perform the centroiding prior to chromatographic peak detection in this step.
 >    {: .comment}
 >
 {: .hands_on}
 
-## Create XCMS object
+## Create the XCMS object
 
-The first part of data processing is using **XCMS** tool. To be able to do that, we first need to take the `.mzML` files and create a format usable by **XCMS** tool. {% tool [MSnbase readMSData](toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0) %} ({% cite gatto2012msnbase %}. {% cite gatto2020msnbase %}) takes as input our files and prepares `RData` files for the first **XCMS** step.
+The first part of data processing is using the **XCMS** tool to detect peaks in the MS signal. For that, we first need to take the `.mzML` files and create a format usable by the **XCMS** tool. {% tool [MSnbase readMSData](toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0) %} ({% cite gatto2012msnbase %}. {% cite gatto2020msnbase %}) takes as input our files and prepares `RData` files for the first **XCMS** step.
 
-> <hands-on-title> Create **XCMS** object </hands-on-title>
+> <hands-on-title> Create the **XCMS** object </hands-on-title>
 >
 > 1. {% tool [MSnbase readMSData](toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"File(s) from your history containing your chromatograms"*: `input.mzML` (output of **msconvert** {% icon tool %})
@@ -139,7 +142,7 @@ The first part of data processing is using **XCMS** tool. To be able to do that,
 
 # Peak detection using XCMS
 
-The first step in the workflow is to detect the peaks in our data using **XCMS**. This part, however, is covered by a [separate tutorial]({{ site.baseurl }}/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html). Although the tutorial is dedicated to LC-MS data, it can also be followed for our GC data. Therefore, in this section, we do not explain this part of the workflow in detail but rather refer the reader to the dedicated tutorial. Please also pay attention to the parameter values for individual Galaxy tools, as these can differ from the referred tutorial and are adjusted to our dataset.
+The first step in the workflow is to detect the peaks in our data using **XCMS**. This part, however, is covered by a [separate tutorial]({{ site.baseurl }}/topics/metabolomics/tutorials/lcms-preprocessing/tutorial.html). Although the tutorial is dedicated to LC-MS data, it can also be followed for our GC-MS data. Therefore, in this section, we do not explain this part of the workflow in detail but rather refer the reader to the dedicated tutorial. Please also pay attention to the parameter values for individual Galaxy tools, as these can differ from the referred tutorial and are adjusted to our dataset.
 
 ## Peak picking
 
