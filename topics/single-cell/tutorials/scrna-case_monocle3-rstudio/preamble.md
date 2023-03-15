@@ -66,42 +66,56 @@ Monocle uses *cell_data_set class* to hold expression data. This class requires 
 >
 {: .hands_on}
 
-There are several ways in which you can complete this tutorial – check the {% icon tip %} Tip boxes below and choose your option!
+## Launching JupyterLab
 
-> <tip-title>Jupyter Notebook & Jupyter Lab - recommended</tip-title>
->
-> This is the most recommended way to complete this tutorial (unless you have monocle3 already installed) as it is the most reliable and visually appealing. 
->
-> > <hands-on-title>Downloading the tutorial notebook</hands-on-title>
-> > 1. You will need to download the tutorial notebook locally to your own computer. Simply go to the `Supporting Materials` section in the Overview box at the very beginning of this tutorial and click on `Jupyter Notebook`. It will be downloaded to your computer as `single-cell-scrna-case_monocle3-rstudio.ipynb` file. 
-> {: .hands_on}
->
+{% icon warning %} Please note: this is only currently available on the [usegalaxy.eu](https://usegalaxy.eu) and [usegalaxy.org](https://usegalaxy.org) sites.
+
+> <warning-title>Data uploads & JupyterLab</warning-title>
+> There are a few ways of importing and uploading data into JupyterLab. You might find yourself accidentally doing this differently than the tutorial, and that's ok. There are a few key steps where you will call files from a location - if these don't work from you, check that the file location is correct and change accordingly!
+{: .warning}
+
+JupyterLab is a bit like RStudio but for other coding languages. What, you've never heard of [RStudio](https://www.rstudio.com/products/rstudio/features/)? Then don't worry, just follow the instructions!
+
 > {% snippet faqs/galaxy/interactive_tools_jupyter_launch.md %}
->
-{: .tip}
 
+Welcome to JupyterLab!
 
-> <tip-title>RMarkdown & RStudio</tip-title>
->
-> As monocle3 is originally written in R, you can follow this tutorial simply by copying and pasting code from the GTN, but to make things easier, you can use the RMarkdown Notebook instead to be able to run the code directly as it was written, inside RStudio! This is recommended for users working locally in RStudio due to installation errors that might appear, but our interactive tools allow you to launch RStudio in Galaxy as well. 
->
-> > <hands-on-title>Downloading the tutorial notebook</hands-on-title>
-> > 1. You will need to download the tutorial notebook locally to your own computer. Simply go to the `Supporting Materials` section in the Overview box at the very beginning of this tutorial and click on `RMarkdown Notebook`. It will be downloaded to your computer as `single-cell-scrna-case_monocle3-rstudio.Rmd` file. 
-> {: .hands_on}
->
-> Now you just have to open the notebook in RStudio. 
-> 
-> {% snippet faqs/galaxy/interactive_tools_rstudio_launch.md %}
->
-> {% snippet faqs/galaxy/interactive_tools_rstudio_rmarkdown.md %}
->
-> {% snippet faqs/galaxy/interactive_tools_jupyter_launch.md %}
->
-{: .tip}
+> <warning-title>Danger: You can lose data!</warning-title>
+> Do NOT delete or close this notebook dataset in your history. YOU WILL LOSE IT!
+{: .warning}
 
+You have two options for how to proceed with this JupyterLab tutorial - you can run the tutorial from a pre-populated notebook, or you can copy and paste the code for each step into a fresh notebook and run it. The initial instructions for both options are below.
 
-We will now present the workflow following using JupyterLab, but there will be advice for those using RStudio as well. 
-So let's get our JupyterLab instance up and running and crack on! 
+> <hands-on-title>Option 1: Open the notebook directly in JupyterLab</hands-on-title>
+>
+> 1. Open a Terminal in JupyterLab with File -> New -> Terminal
+>
+> 2. Run 
+>    ```
+>    wget {{ ipynbpath }}
+>    ```
+>
+> 3. Select the notebook that appears in the list of files on the left.
+>
+{: .hands_on}
+
+> <hands-on-title>Option 2: Creating a notebook</hands-on-title>
+>
+> 1. Click the **R** icon under **Notebook**
+>
+>   ![R icon](../../images/scrna-casestudy-monocle/R_logo.png "R Notebook Button")
+>
+> 2. Save your file (**File**: **Save**, or click the {% icon galaxy-save %} Save icon at the top left)
+>
+> 3. If you right click on the file in the folder window at the left, you can rename your file `whateveryoulike.ipynb`
+>
+{: .hands_on}
+
+> <warning-title>You should <b>Save</b> frequently!</warning-title>
+> This is both for good practice and to protect you in case you accidentally close the browser. Your environment will still run, so it will contain the last saved notebook you have. You might eventually stop your environment after this tutorial, but ONLY once you have saved and exported your notebook (more on that at the end!) Note that you can have multiple notebooks going at the same time within this JupyterLab, so if you do, you will need to save and export each individual notebook. You can also download them at any time.
+{: .warning}
+
+Let's crack on! 
 
 ## Installation
 
