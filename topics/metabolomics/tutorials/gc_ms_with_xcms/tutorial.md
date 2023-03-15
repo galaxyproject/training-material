@@ -334,9 +334,9 @@ The second output file is the so called **Spec Abundance** table, containing the
 
 # Retention index calculation
 
-Retention index ({% cite van1963generalization %}) is a way how to convert equipment- and experiment-specific retention times into system-independent normalised constants. The retention index of a compound is computed from the retention time by interpolating between adjacent alkanes. This can be different for the individual chromatographic system, but the derived retention indices are quite independent and allow comparing values measured by different analytical laboratories.
+The retention index ({% cite van1963generalization %}) is a way how to convert equipment- and experiment-specific retention times into system-independent normalised constants for GC-based experiments. The retention index of a compound is computed from the retention time by interpolating between the retention times adjacent alkanes which are assigned a fixed retention index. This can be different for the individual chromatographic system, but the derived retention indices are independent and allow comparing values measured by different analytical laboratories.
 
-We use package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.2+galaxy1) %} to compute retention indices for files in the `.msp` format using an indexed reference list of alkanes in `.csv` or `.msp` format. The output follows the same format as the input but with added retention index values. These can be used at a subsequent stage to improve compound identification ({% cite kumari2011applying %}). Multiple computation methods (e.g. piecewise-linear or cubic spline) are supported by the tool.
+We use the package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassigner/riassigner/0.3.2+galaxy1) %} to compute retention indices for files in the `.msp` format using an indexed reference list of alkanes in `.csv` or `.msp` format. The output follows the same format as the input but with added retention index values. These can be used at a subsequent stage to improve compound identification ({% cite kumari2011applying %}). Multiple computation methods (e.g. piecewise-linear or cubic spline) are supported by the tool.
 
 > <hands-on-title> Retention index calculation </hands-on-title>
 >
@@ -369,11 +369,11 @@ We use package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/riassig
 
 # Identification
 
-To identify and annotate the deconvoluted spectra, we compare them with a reference spectral library. This library contains spectra of standards measured on the same instrument for optimal comparability. The **matchms** package is used for spectral matching. It was built to import and apply different similarity measures to compare large amounts of spectra. This includes common cosine scores but can also easily be extended by custom measures.
+To identify and annotate the deconvoluted spectra, we compare them with a reference spectral library. This library contains spectra of standards measured on the same instrument for optimal comparability. The **matchms** package is used for spectral matching. It was built to import and apply different similarity measures to compare large numbers of spectra. This includes common cosine scores but can also easily be extended with custom similarity measures.
 
 > <details-title> Reference spectral library </details-title>
 > 
-> Fragmentation patterns of ions (spectra) are widely used in the process of compound identification in complex mixtures. The number of identifiable compounds and associated data keeps growing with the increasing sensitivity and resolution of mass spectrometers. These data are clustered into collections of chemical structures and their spectra, also called spectral libraries ({% cite stein1995chemical %}, {% cite stein2012mass %}), which can be used for fast, reliable identifications for any compound whose fragmentation pattern is measured by the instrument. 
+> Fragmentation patterns of ions (spectra) are widely used in the process of compound identification in complex mixtures for EI+ ionization. The number of identifiable compounds and associated data keeps growing with the increasing sensitivity and resolution of mass spectrometers. These data are clustered into collections of chemical structures and their spectra, also called spectral libraries ({% cite stein1995chemical %}, {% cite stein2012mass %}), which can be used for fast, reliable identifications for any compound whose fragmentation pattern is measured by the instrument. 
 > 
 > To identify the compounds after GC/MS analysis, the *library searching* is performed for any detected spectrum. This locates the most similar spectra in the reference library, providing a list of the potentially identified compounds sorted by computed similarity. Indeed, a library search should also yield the confidence of compound identification, often referred to as similarity score.
 >
