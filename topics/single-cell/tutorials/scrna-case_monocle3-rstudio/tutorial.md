@@ -16,16 +16,16 @@ questions:
 objectives:
 - Identify which operations are necessary to transform an AnnData object into the files needed for Monocle
 - Describe the Monocle3 functions in R 
-- Execute tools and be able to switch between Galaxy and R fluently
-- Learn about steps that can only be performed in R, but not with Galaxy tools
-- Follow the Monocle3 workflow and choose the right parameter values
+- Execute tools and functions to switch between Galaxy and R fluently
+- Recognise steps that can only be performed in R, but not with Galaxy tools
+- Repeat the Monocle3 workflow and choose the right parameter values
 - Compare the outputs from Scanpy, Monocle in Galaxy and Monocle in R
-- Learn about differential expression analysis methods
+- Describe differential expression analysis methods
 
 time_estimation: 2H
 
 key_points:
-- Being able to switch between Galaxy and R when using Monocle is very useful, particularly when you need to modify the CDS object manually. 
+- Being able to switch between Galaxy and R when using Monocle is useful, particularly when you need to modify the CDS object manually. 
 - Monocle3 in R gives more flexibility when it comes to differential expression analysis and plotting, but Galaxy offers great reproducibility and ease of analysis.
 - Comparing the output of several different methods applied on the same dataset might be useful to confirm the results, to ensure that the findings are reliable and even sometimes to find a new piece of information.
 
@@ -51,6 +51,7 @@ contributions:
   editing:
     - hexylena
     - pavanvidem
+    - nomadscientist
 
 notebook:
   language: r
