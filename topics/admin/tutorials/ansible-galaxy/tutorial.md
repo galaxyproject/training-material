@@ -868,7 +868,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    3. `database_connection` to point to the database you setup earlier (`postgresql:///galaxy?host=/var/run/postgresql`).
 >    4. `file_path` to a place to store data, `/data` is fine for this lesson which sets up a single-node Galaxy. If you have separate compute machines, this will normally need to be storage shared between the Galaxy node and compute nodes.
 >    5. `tool_data_path` to {% raw %}`{{ galaxy_mutable_data_dir }}/tool-data`{% endraw %}, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
->    6. `id_secret` to {% raw %}`{{ vault_id_secret }}`{% endraw %}, we'll define this variable next but it will be used to encode the IDs used in Galaxy URLs and for securing session cookies.
+>    6. `object_store_store_by` to `uuid`, this is a better way of storing files that will ensure better filesystem balancing than the older system.
+>    7. `id_secret` to {% raw %}`{{ vault_id_secret }}`{% endraw %}, we'll define this variable next but it will be used to encode the IDs used in Galaxy URLs and for securing session cookies.
 >
 >    {% raw %}
 >    ```diff
@@ -886,6 +887,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
 >    +    file_path: /data
 >    +    tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>    +    object_store_store_by: uuid
 >    +    id_secret: "{{ vault_id_secret }}"
 >    {% endraw %}
 >    ```
@@ -937,8 +939,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -37,3 +37,25 @@ galaxy_config:
->         file_path: /data
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >    +  gravity:
 >    +    process_manager: systemd
@@ -960,8 +962,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +      handler:
 >    +        processes: 2
 >    +        pools:
->    +          - job-handler
->    +          - workflow-scheduler
+>    +          - job-handlers
+>    +          - workflow-schedulers
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure gravity"}
@@ -1709,8 +1711,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >     handlers:
 >    >         handler:
 >    >             pools:
->    >             - job-handler
->    >             - workflow-scheduler
+>    >             - job-handlers
+>    >             - workflow-schedulers
 >    >             processes: 2
 >    >     process_manager: systemd
 >    >     virtualenv: /srv/galaxy/venv
@@ -1867,8 +1869,8 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -57,3 +57,55 @@ galaxy_config:
 >             pools:
->               - job-handler
->               - workflow-scheduler
+>               - job-handlers
+>               - workflow-schedulers
 >    +
 >    +# Certbot
 >    +certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
@@ -2323,9 +2325,9 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -38,6 +38,27 @@ galaxy_config:
->         object_store_store_by: uuid
->         id_secret: "{{ vault_id_secret }}"
->         job_config_file: "{{ galaxy_config_dir }}/job_conf.yml"
+>                 runner: local
+>           handling:
+>             assign: ['db-skip-locked']
 >    +    # SQL Performance
 >    +    slow_query_log_threshold: 5
 >    +    enable_per_request_sql_debugging: true
@@ -2348,8 +2350,8 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    +    # Tool security
 >    +    outputs_to_working_directory: true
 >       gravity:
+>         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->         app_server: gunicorn
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add production facing vars"}
