@@ -12,7 +12,7 @@ Click here to run the
 workflow.
 </div>
 
-Or copy the URL (e.g. via right-click) of [this workflow]({{ site.url }}{{ site.baseurl }}{{ include.path }}), and import the workflow into Galaxy
+Or copy the URL (e.g. via right-click) of [this workflow]({{ site.url }}{{ site.baseurl }}/{{ include.path }}), and import the workflow into Galaxy
 {: .galaxy-proxy-active-hide}
 
 <div class="galaxy-proxy-active-hide">
