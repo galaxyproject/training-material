@@ -434,14 +434,10 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    +    owner: galaxy
 >    +# PostgreSQL Backups
 >    +postgresql_backup_dir: /data/backups
->    +postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
+>    +postgresql_backup_local_dir: /var/lib/postgresql/backups
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add initial group variables file"}
->
->    > <comment-title>Regarding `expanduser`</comment-title>
->    > The `expanduser` filter turns `~postgres` into the absolute path to the `postgres` user's home directory. However, you should be warned that the `expanduser` filter, like all Ansible filters, runs *locally*. This works in the training because Ansible is executed from the Galaxy server, but if you run Ansible over SSH, you would need to set the full path in `postgresql_backup_local_dir` directly.
->    {: .comment}
 >
 >    > <tip-title>Using postgres via the network</tip-title>
 >    > To use postgres via another machine, or via the network, you can add lines like the following:
@@ -835,7 +831,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    @@ -13,3 +13,16 @@ postgresql_objects_databases:
 >     # PostgreSQL Backups
 >     postgresql_backup_dir: /data/backups
->     postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
+>     postgresql_backup_local_dir: /var/lib/postgresql/backups
 >    +
 >    +# Galaxy
 >    +galaxy_create_user: true
