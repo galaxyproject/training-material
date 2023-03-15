@@ -25,12 +25,18 @@ contributors:
 
 ---
 
-
 # Introduction
 
 The study of metabolites in biological samples is routinely defined as metabolomics and provides the capability to investigate metabolism on a global and relatively unbiased scale in comparison to traditional targeted studies focused on specific pathways of metabolism and a small number of metabolites. The untargeted approach enables the detection of thousands of metabolites in hypothesis-generating studies and links previously unknown metabolites with biologically important roles. There are two major issues in contemporary metabolomics: the first is enormous loads of signal generated during the experiments, and the second is the fact that some metabolites in the studied samples may not be known to us. These obstacles make the task of processing and interpreting the metabolomics data a cumbersome and time-consuming process {% cite Nash2019 %}.
 
-A lot of packages are available for the analysis of GC-MS or LC-MS data. In this tutorial, we focus on open-source solutions integrated within the Galaxy framework. In this tutorial, we will learn how to process the data samples and identify the present compounds. For demonstration, we use three GC-[EI+]-HRMS files from seminal plasma samples.
+A lot of packages are available for the analysis of GC-MS or LC-MS data. In this tutorial, we focus on open-source solutions integrated within the Galaxy framework. In this tutorial, we will learn how to process the data samples and identify the present compounds. For demonstration, we use three GC-[EI+] high-resolution mass spectrometry files from seminal plasma samples.
+
+
+> <details-title> Seminal plasma samples </details-title>
+> 
+> TBD
+>
+{: .details}
 
 To process the data, we use several tools. **XCMS** ({% cite Smith2006 %}) is a general package for untargeted metabolomics profiling. It can be used for any type of mass spectrometry acquisition files from low to high resolution, including FT-MS data coupled with a different kind of chromatography (liquid or gas). We use it to detect peaks within our samples. Once we have detected them, they need to be deconvoluted with a focus on consistency across samples. For that, we use **RAMClustR** ({% cite broeckling2014ramclust %}) tool. To normalise the retention time of identified spectra in our sample, we compute the retention index using **RIAssigner** ({% cite hecht2022riassigner %}) by comparing the data to a well-defined list of alkanes. Finally, we identify detected spectra by aligning them with a database of known compounds. This can be achieved using **matchms** ({% cite Huber2020 %}), resulting in a table of identified compounds weighted by a confidence score.
 
@@ -308,6 +314,12 @@ The spectral data comes as a `.msp` file, which is a text file structured accord
 >     308.1579 52057158
 >     ...
 >    ```
+>
+>    > <details-title> Negative ion mode </details-title>
+>    >
+>    > You might wonder how can the ionisation mode (_IONMODE_) for GC data be negative. This is, of course, incorrect. This is actually just a default behaviour of **RAMClustR**. We can optionally change this by providing **RAMClustR** experiment definition file. This file can be created manualy or using {% tool [RAMClustR define experiment](toolshed.g2.bx.psu.edu/repos/recetox/ramclustr_define_experiment/ramclustr_define_experiment/1.0.2) %} tool. There we can specify annotations such as what instrument we used or ionisation mode (which was EI positive in our case), and this will be transferred to the `.msp` file. Finally, we can provide such a file as an input to **RAMClustR** in the _Extras_ inputs section.
+>    >
+>    {: .details}
 >
 {: .hands_on}
 
