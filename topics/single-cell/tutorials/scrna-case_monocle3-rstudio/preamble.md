@@ -74,7 +74,7 @@ Monocle uses *cell_data_set class* to hold expression data. This class requires 
 > There are a few ways of importing and uploading data into JupyterLab. You might find yourself accidentally doing this differently than the tutorial, and that's ok. There are a few key steps where you will call files from a location - if these don't work from you, check that the file location is correct and change accordingly!
 {: .warning}
 
-JupyterLab is a bit like RStudio but for other coding languages. What, you've never heard of [RStudio](https://www.rstudio.com/products/rstudio/features/)? Then don't worry, just follow the instructions!
+JupyterLab is a bit like RStudio but for other coding languages. What, you've never heard of [RStudio](https://www.rstudio.com/products/rstudio/features/)? Then don't worry, just follow the instructions! Saying that, for those that are confident with the R programming language and want to run this locally in the RStudio programming environment, we have included some extra details throughout that helped us run the code locally in RStudio. This tutorial is built to run in JupyterLab, however.
 
 > {% snippet faqs/galaxy/interactive_tools_jupyter_launch.md %}
 
@@ -88,7 +88,9 @@ You have two options for how to proceed with this JupyterLab tutorial - you can 
 
 > <hands-on-title>Option 1: Open the notebook directly in JupyterLab</hands-on-title>
 >
-> 1. Open a Terminal in JupyterLab with File -> New -> Terminal
+> 1. Open a `Terminal` in JupyterLab with File -> New -> Terminal
+>
+>   ![Screenshot of the Launcher tab with an arrow indicating where to find Terminal.](../../images/scrna-casestudy-monocle/terminal_choose.jpg "This is how the Launcher tab looks like and where you can find Terminal.")
 >
 > 2. Run 
 >    ```
@@ -101,7 +103,7 @@ You have two options for how to proceed with this JupyterLab tutorial - you can 
 
 > <hands-on-title>Option 2: Creating a notebook</hands-on-title>
 >
-> 1. Click the **R** icon under **Notebook**
+> 1. Select the **R** icon under **Notebook**
 >
 >   ![R icon](../../images/scrna-casestudy-monocle/R_logo.png "R Notebook Button")
 >
@@ -123,10 +125,8 @@ If you followed the {% icon tip %} tip above, you should already have your Jupyt
 
 ><hands-on-title>Installing the packages</hands-on-title>
 >
-> 1. Nawigate to JupyterLab window. You will see the Launcher tab. 
-> 2. Find the `Terminal` and click on that.
-> ![Screenshot of the Launcher tab with an arrow indicating where to find Terminal.](../../images/scrna-casestudy-monocle/terminal_choose.jpg "This is how the Launcher tab looks like and where you can find Terminal.")
-> 3. In the Terminal tab open, write the following, preferably one line at a time:
+> 1. Navigate back to the `Terminal`
+> 2. In the Terminal tab open, write the following, preferably one line at a time:
 > ```
 >conda install -c conda-forge -c bioconda r-monocle3
 >conda install -c conda-forge r-viridislite
