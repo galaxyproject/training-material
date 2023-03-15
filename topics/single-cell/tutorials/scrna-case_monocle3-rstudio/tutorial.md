@@ -7,16 +7,16 @@ priority: 6
 zenodo_link: 'https://zenodo.org/record/7455590'
 
 questions:
-- How to perform a full trajectory analysis using Monocle3 in R?
-- What to do when Galaxy's Monocle tools are not enough?
-- How to assign cell types to the clusters?
-- How can I infer lineage relationships between clusters, without a time series?
-- How to perform batch correction and differential expression analysis in Monocle?
-
+- How do I perform a trajectory analysis using Monocle3 in R?
+- What should I do when Galaxy's Monocle tools are not enough?
+- How do I assign cell types to the clusters?
+- How do I infer lineage relationships between clusters, without a time series?
+- How do I perform batch correction and differential expression analysis in Monocle?
 
 objectives:
-- Identify which operations to perform on an AnnData object to obtain the files needed for Monocle and why to do it this way
-- Become familiar with Monocle3 functions in R and be able to switch between Galaxy and R fluently
+- Identify which operations are necessary to transform an AnnData object into the files needed for Monocle
+- Describe the Monocle3 functions in R 
+- Execute tools and be able to switch between Galaxy and R fluently
 - Learn about steps that can only be performed in R, but not with Galaxy tools
 - Follow the Monocle3 workflow and choose the right parameter values
 - Compare the outputs from Scanpy, Monocle in Galaxy and Monocle in R
