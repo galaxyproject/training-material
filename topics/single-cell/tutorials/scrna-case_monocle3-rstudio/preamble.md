@@ -43,7 +43,7 @@ First, we need to retrieve the appropriate data. We will continue to work on the
 
 
 ## Preparing the files
-Monocle uses cell_data_set class to hold expression data; it requires three input files: `expression_matrix`, `cell_metadata` and `gene_metadata`. We will extract that information from our AnnData object. 
+Monocle uses *cell_data_set class* to hold expression data. This class requires three input files: `expression_matrix`, `cell_metadata` and `gene_metadata`. We will extract that information from our AnnData object. 
 
 ><hands-on-title>Extract and download the input files</hands-on-title>
 >
