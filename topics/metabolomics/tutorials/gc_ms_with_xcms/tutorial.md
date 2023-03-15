@@ -90,12 +90,12 @@ Before we can start with the actual analysis pipeline, we first need to download
 >    > 
 >    > The **reference spectral library** (`.msp`) is used for identification of spectra. It contains the recorded and annotated mass spectra of compounds which can be detected in the sample and confirmed via comparison with this library. The specific library is the in-house library of metabolite standards. **TODO**: what does it mean?
 >    > 
->    > The **sample metadata** corresponds to a table containing information about our samples. In particular, it contains sample name, class (QC, blank, sample, etc.), batch number, and injection order.
+>    > The **sample metadata** corresponds to a table containing information about our samples. In particular, the tabular file that contains for each sample its associated sample name, class (QC, blank, sample, etc.), batch number, and injection order. It is possible to add more columns to include additional details about the samples.
 >    {: .comment}
 >
 {: .hands_on}
 
-As a result of this step, we should have in our history a green Dataset collection with three `.raw` files.
+As a result of this step, we should have in our history a green Dataset collection with three `.raw` files as well as three separate files with reference alkanes, reference spectral library and sample metadata.
 
 ## Convert data to mzML
 
@@ -108,18 +108,18 @@ Our input data are in `.raw` format, which is not suitable for the downstream to
 >    - *"Do you agree to the vendor licenses?"*: `Yes`
 >    - *"Output Type"*: `mzML`
 >    - In *"Data Processing Filters"*:
->        - *"Apply peak picking?"*: `Yes`
+>        - *"Apply peak picking?"*: `Yes` (This option will compute centroids in the m/z domain.)
 >
 >    > <comment-title> Centroids </comment-title>
 >    >
->    > msconvert with selected parameters computes centroids in the m/z domain. **TBD** explain why !!!
+>    > `msconvert` with selected parameters computes centroids in the m/z domain. MS instruments continuously sample and record signals. A mass peak for a single ion in one spectrum therefore consists of multiple intensities at discrete m/z values. Centroiding is the process to reduce these mass peaks to a single representative signal, the centroid. This results in much smaller file sizes, without loosing too much information. In the further steps, **XCMS** uses the `centWave` chromatographic peak detection algorithm, which was designed for centroided data. That is the reason we perform the centroiding in this step.
 >    {: .comment}
 >
 {: .hands_on}
 
 ## Create XCMS object
 
-The first part of data processing is using **XCMS** tool. This step is only meant to read our `.mzML` files and generate an object usable by **XCMS** tool. {% tool [MSnbase readMSData](toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0) %} takes as input our files and prepares `RData` files for the first **XCMS** step.
+The first part of data processing is using **XCMS** tool. To be able to do that, we first need to take the `.mzML` files and create a format usable by **XCMS** tool. {% tool [MSnbase readMSData](toolshed.g2.bx.psu.edu/repos/lecorguille/msnbase_readmsdata/msnbase_readmsdata/2.16.1+galaxy0) %} ({% cite gatto2012msnbase %}. {% cite gatto2020msnbase %}) takes as input our files and prepares `RData` files for the first **XCMS** step.
 
 > <hands-on-title> Create **XCMS** object </hands-on-title>
 >
@@ -130,7 +130,7 @@ The first part of data processing is using **XCMS** tool. This step is only mean
 >
 >    > <comment-title> Output - `input.raw.RData` </comment-title>
 >    >
->    > Collection of `rdata.msnbase.raw` files. **TODO** describe using https://lgatto.github.io/MSnbase/articles/v01-MSnbase-demo.html
+>    > Collection of `rdata.msnbase.raw` files. `Rdata` file that is necessary in the next step of the workflow. These serve for an internal R representation of **XCMS** objects needed in the further steps.
 >    {: .comment}
 {: .hands_on}
 
@@ -256,8 +256,6 @@ The next step is deconvoluting the detected peaks in order to reconstruct the fu
 > Cluster membership, in conjunction with the abundance values from individual features in the input data, are used to create spectra. Mass is derived from the feature mass, and the abundance for each mass in the spectrum is derived from the weighted mean of the intensity values for that feature. These spectra are then exported as an `.msp` formatted file, which can be directly imported by **NIST MSsearch**, or used as input for **MassBank** or **NIST msPepSearch** batch searching. Finally, the cluster membership is used to create a third dataset, SpecData, which represented the MS level data after condensing feature intensities into spectral intensities using a weighted mean function, where the more abundant signals contribute more to the spectral intensity.
 >
 {: .details}
-
-**TODO** description based on https://pubs.acs.org/doi/10.1021/ac4019268
 
 > <hands-on-title> Peak deconvolution </hands-on-title>
 >
@@ -442,3 +440,5 @@ At this stage, all steps are complete: we have the list of identified spectra co
 # Conclusion
 
 ***TODO***
+
+- we need to get back to msp file?
