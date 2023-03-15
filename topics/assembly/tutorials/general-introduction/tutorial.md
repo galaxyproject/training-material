@@ -214,9 +214,9 @@ The first step of the assembler is to build a de Bruijn graph. For that, it will
 >    - *"Input Files"*
 >       - Click on {% icon param-repeat %} *"Input Files"*
 >       - In "1: Input Files"
->          - *"file format"*: `fastq`
+>          - *"Choose the input type"*: `interleaved paired end`
 >          - *"read type"*: `shortPaired reads`
->          - {% icon param-files %} *"Dataset"*:  outputs of **FASTQ interlacer** 
+>          - {% icon param-files %} *"Dataset"*:  pairs output of **FASTQ interlacer** 
 >
 >    The tool takes our reads and break them into k-mers.
 >
