@@ -262,16 +262,17 @@ This table is limitted, but we will now collect more basic statistics on our ass
 > <hands-on-title>Collect fasta statistics on our contigs</hands-on-title>
 >
 > 1. **Quast** {% icon tool %} with
->    - *"Contigs/scaffolds output file"*: outputs of **velvetg**
+>    - *"Assembly mode"*: `Individual assembly (1 contig file per sample)`
+>    - *"Use customized names?"*: `No`
+>    - *"Contigs/scaffolds file"*: contigs output of **velvetg**
 >    - *"Type of assembly"*: `Genome`
 >    - *"Use a reference genome?"*: `Yes`
 >    - *"Reference genome"*: `wildtype.fna`
 >    - *"Type of organism"*: `Prokaryotes`
 >    - *"Lower Threshold"*: `500`
->    - *"Comma-separated list of contig length thresholds"*: `0,1000`
+>    - *"Advanced options: Comma-separated list of contig length thresholds"*: `0,1000`
 {: .hands_on}
 
-This tool generates 5 output files, but we will focus on the HTML report and the Icarus viewer.
 
 > <question-title></question-title>
 >
