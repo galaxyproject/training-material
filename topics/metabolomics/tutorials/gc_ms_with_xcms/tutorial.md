@@ -6,17 +6,14 @@ zenodo_link: 'https://zenodo.org/record/7701862'
 questions:
 - What are the main steps of GC-MS data processing for metabolomic analysis?
 - What similarity metrics can be used to compare a pair of mass spectra and what are the differences between them?
+- Do you know any alternative tools that can be used in place of individual steps of this workflow?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- To learn about the key steps steps in the preprocessing and analysis of untargeted GC-MS metabolomics data.
+- To explore what open-source alternative tools can be used in the analysis of GC-MS data, learn about their possible parametrisations.
+- To analyse authentic data samples and compare them with a data library of human metabolome, composed from a collection of mostly endogoenous compounds.
 time_estimation: 2H
 key_points:
 - The processing of untargeted GC-MS metabolomic data can be done using open-source tools.
-- TBA
 requirements :
   - type: "internal"
     topic_name: metabolomics
