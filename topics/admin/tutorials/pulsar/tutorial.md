@@ -22,6 +22,7 @@ contributors:
   - mvdbeek
   - hexylena
   - gmauro
+  - mira-miracoli
 subtopic: jobs
 tags:
   - ansible
@@ -145,7 +146,7 @@ Firstly we will add and configure another *role* to our Galaxy playbook - we do 
 >       version: 0.0.2
 >     - src: galaxyproject.slurm
 >       version: 0.1.3
->    +- name: usegalaxy_eu.rabbitmq
+>    +- name: usegalaxy_eu.rabbitmqserver
 >    +  version: 1.4.1
 >    +- src: galaxyproject.pulsar
 >    +  version: 1.0.8
