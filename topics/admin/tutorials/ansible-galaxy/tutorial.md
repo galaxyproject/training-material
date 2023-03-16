@@ -28,7 +28,7 @@ contributions:
   - nsoranzo
   - lecorguille
   - abretaud
-  - ldelisle
+  - lldelisle
   testing:
   - mira-miracoli
 tags:
@@ -42,7 +42,7 @@ requirements:
     tutorials:
       - ansible
   - type: "none"
-    title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04."
+    title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 20.04 - 22.04."
 abbreviations:
     DVCS: Distributed Version Control System
 ---
