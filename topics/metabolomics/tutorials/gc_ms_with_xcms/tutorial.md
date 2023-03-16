@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: 'Mass spectrometry: GC-MS data processing (with XCMS, RAMClustR, RIAssigner, and matchms)'
 zenodo_link: 'https://zenodo.org/record/7701862'
+level: Intermediate
 questions:
 - What are the main steps of gas chromatography-mass spectrometry (GC-MS) data processing for metabolomic analysis?
 - What similarity metrics can be used to compare a pair of mass spectra and what are the differences between them?
@@ -14,6 +15,7 @@ objectives:
 time_estimation: 2H
 key_points:
 - The processing of untargeted GC-MS metabolomic data can be done using open-source tools.
+- This processing workflow is complementary to CAMERA and metaMS.
 requirements :
   - type: "internal"
     topic_name: metabolomics
