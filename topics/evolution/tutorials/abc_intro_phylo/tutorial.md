@@ -452,7 +452,7 @@ The Minimum Evolution criterion optimises... XXX Mike to complete.
 
 Select "Phylogenetic Tree Visualisation" -- this seems to be the best one.
 
-Your tree is displayed!
+*Your tree is displayed!*
 
 At the top right of the central panel are a couple of angle brackets: clicking on that will reveal the settings, enabling you to alter the display options.  Try out "Circular" and "Radial".
 Notice that there are quite a lot of long branches adjacent to the extant taxa (leaves), and that near the centre of the tree these branches are much shorter.
@@ -461,11 +461,54 @@ Notice that there are quite a lot of long branches adjacent to the extant taxa (
 
 {: .hands_on}
 
+# Searching for the ``best'' tree
+
+The other main way we can estimate a phylogeny is by choosing some kind of score of ``goodness'' and then searching all of the set of possible trees for the tree or trees that optimises this score.
+Note that such scores are surrogates for truth, in that we *hope* the optimal score will correspond to the true tree, but it is not necessarily the case, and in many analyses we therefore use *multiple* methods, in the hope that different analyses will all give us the same consistent answer.
+
+**If your conclusion changes based on a choice among reasonable analytical options, then perhaps your data are not adequate.**
+
+## Minimum Evolution
+
+Minimum Evolution is the idea that the sum of the branch lengths should be as small as possible to still account for the distances between the leaves of the tree, in that the sum of squared differences between the distances implied by the tree and the observed distances from the data, is minimised.  The interested reader is directed to...
+
+There are some variations on this ME criterion, and FastTree uses an approximation to one of them to find good trees.
+
+## Parsimony Length
+
+The parsimony length of a given site pattern in an alignment, given a particular tree, is the minimum number of changes of state that are required to account for the observed characters (e.g., nucleotides) at the leaves of that tree.
+Finding the parsimony length of a site pattern 
+## Likelihood
+
 # Assessing the Quality of trees
+
+A tree-building method will of course build you a tree.
+
+However, what if your data are not even **from** a tree?  Or, what if the data are from sequences that are so distantly related that they are virtually independent of each other, looking essentially random?
+
+It is important that, once you have estimated a tree, you can assess how reliable it is.
+
+Remember that a phylogeny is a *collection of hypotheses of relatedness*: each branch separates some of the taxa from the others, and if the branch is above a subtree it corresponds to a hypothesis that the taxa in that subtree are *monophyletic* with respect to the other taxa in the rest of the tree (as shown in Fig 1.).
+
+This means that it is meaningful to assess the reliability of *branches* of your tree, in addition to just assessing it overall.
+
+
+## Resolution
+
+Most tree estimation methods output trees with branch lengths, which correspond to the amount of evolutionary ``work'' that has to be done to turn one sequence into another.
+
+This can be given as the *minimum number of character state changes required* -- the so-called *parsimony length* -- to convert the (hypothetical) sequence at one end of a branch to that at the other end.
+The Maximum Parsimony method is based on this approach
 
 ## Bootstrapping
 
-## Resolution
+A very common (and useful) method for this is called *bootstrapping*, which is a technique that has a solid basis in statistics (not just phylogenetics).  The idea is that one resamples with replacement a data set to create a ``pseudoreplicate'' that is analysed in the same way as the original data, this process being repeated many times to create a distribution.  It's known that bootstrapping is a good way to measure the internal consistency of a data set, and its use in phylogenetics is well established.
+
+The naive method for bootstrapping is called "non-parametric" and works by effectively resampling the patterns at each site in the alignment, creating a pseudo-alignment of the same total number of sites, then re-building the tree.
+
+IQTree has a very -- excuse me, *ultra-* -- fast bootstrapping method that is cleverer than the naive method and which works if anything a bit better.  See (citation Minh Bui et al. I think) for details.
+
+When we come to using IQTree next, we will also select to do bootstrapping on the tree.  FastTree does not do bootstrapping natively, but can in conjuction with other tools (see http://meta.microbesonline.org/fasttree/ for details).  It's a little fiddly to accomplish this so we will not try that in this tutorial.
 
 ## How tree-like?
 
@@ -607,3 +650,31 @@ To develop a deeper understanding of phylogenetic trees, there is no better way 
 - [Tutorial on how to read a tree, with a virus example](https://artic.network/how-to-read-a-tree.html)
 - [Tree Of Life web project](http://tolweb.org)
 - [Phylogenetic Inference in the Stanford Encyclopedia](https://plato.stanford.edu/entries/phylogenetic-inference/)
+
+## References
+
+REFERENCES
+----------
+
+To cite IQ-TREE please use:
+
+Bui Quang Minh, Heiko A. Schmidt, Olga Chernomor, Dominik Schrempf,
+Michael D. Woodhams, Arndt von Haeseler, and Robert Lanfear (2020)
+IQ-TREE 2: New models and efficient methods for phylogenetic inference
+in the genomic era. Mol. Biol. Evol., in press.
+https://doi.org/10.1093/molbev/msaa015
+
+To cite ModelFinder please use: 
+
+Subha Kalyaanamoorthy, Bui Quang Minh, Thomas KF Wong, Arndt von Haeseler,
+and Lars S Jermiin (2017) ModelFinder: Fast model selection for
+accurate phylogenetic estimates. Nature Methods, 14:587–589.
+https://doi.org/10.1038/nmeth.4285
+
+Since you used ultrafast bootstrap (UFBoot) please also cite: 
+
+Diep Thi Hoang, Olga Chernomor, Arndt von Haeseler, Bui Quang Minh,
+and Le Sy Vinh (2018) UFBoot2: Improving the ultrafast bootstrap
+approximation. Mol. Biol. Evol., 35:518–522.
+https://doi.org/10.1093/molbev/msx281
+
