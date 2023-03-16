@@ -131,7 +131,7 @@ RabbitMQ is an AMQP server that can queue messages between systems for all sorts
 
 ## Installing the roles
 
-Firstly we will add and configure another *role* to our Galaxy playbook - we do that with our ansible role that spinns up RabbitMQ in docker and configures it. Additionally we will use the Galaxy community role for deploying Pulsar
+Firstly we will add and configure another *role* to our Galaxy playbook - a community role which runs RabbitMQ in docker and configures it. In order to have docker installed automatically, we use geelingguy's docker role, which luckly needs no configuration changes. Additionally we will use the Galaxy community role for deploying Pulsar
 
 > <hands-on-title>Install the Ansible roles</hands-on-title>
 >
