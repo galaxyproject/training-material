@@ -1747,19 +1747,28 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >    To inspect individual services in detail, use `sudo galaxyctl status <service>` where `<service>` is a service from the Gravity configuration such as `gunicorn` or `handler`. Alternatively, you can invoke `sudo systemctl status <service-unit>` where `<service-unit>` (such as `galaxy-gunicorn.service` and `galaxy-handler@0.service`) can be found in the output above (the `.service` suffix is implied and optional, so you can leave it off for convenience).
 >
 >    > <tip-title>Did this fail?</tip-title>
+>    >
 >    > If any of the services show as failed, inspect them using one of the above methods, e.g.:
+>    >
 >    > ```console
 >    > $ sudo galaxyctl status gunicorn
->    > ● galaxy-gunicorn.service - Galaxy gunicorn
->    >      Loaded: loaded (/etc/systemd/system/galaxy-gunicorn.service; enabled; vendor pres>
->    >      Active: failed (Result: exit-code) since Mon 2023-03-14 17:07:58 CEST; 18min ago
->    >     Process: 521705 ExecStart=/srv/galaxy/venv/bin/galaxyctl -c /srv/galaxy/config/gal>
->    >    Main PID: 521705 (code=exited, status=1/FAILURE)
->    >         CPU: 21ms
->    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: galaxy-gunicorn.servic>
->    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: Stopped Galaxy gunicor>
->    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: galaxy-gunicorn.servic>
->    > Jun 28 17:07:58 gat-14.be.training.galaxyproject.eu systemd[1]: Failed to start Galaxy>
+>    > × galaxy-gunicorn.service - Galaxy gunicorn
+>    >      Loaded: loaded (/etc/systemd/system/galaxy-gunicorn.service; disabled; vendor preset: enabled)
+>    >      Active: failed (Result: exit-code) since Thu 2023-03-16 01:15:15 UTC; 1s ago
+>    >     Process: 20306 ExecStart=/srv/galaxy/venv/bin/galaxyctl --config-file /srv/galaxy/config/galaxy.yml exec _default_ gunicorn (code=exited, status=1/FAILURE)
+>    >    Main PID: 20306 (code=exited, status=1/FAILURE)
+>    >         CPU: 3.381s
+>    >
+>    > Mar 16 01:15:14 gat galaxyctl[20306]:   File "/srv/galaxy/venv/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1900, in _execute_context
+>    > Mar 16 01:15:14 gat galaxyctl[20306]:     self.dialect.do_execute(
+>    > Mar 16 01:15:14 gat galaxyctl[20306]:   File "/srv/galaxy/venv/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+>    > Mar 16 01:15:14 gat galaxyctl[20306]:     cursor.execute(statement, parameters)
+>    > Mar 16 01:15:14 gat galaxyctl[20306]: sqlalchemy.exc.ProgrammingError: (psycopg2.errors.InsufficientPrivilege) permission denied to create database
+>    > Mar 16 01:15:14 gat galaxyctl[20306]: [SQL: CREATE DATABASE bork ENCODING 'utf8' TEMPLATE template1]
+>    > Mar 16 01:15:14 gat galaxyctl[20306]: (Background on this error at: https://sqlalche.me/e/14/f405)
+>    > Mar 16 01:15:15 gat systemd[1]: galaxy-gunicorn.service: Main process exited, code=exited, status=1/FAILURE
+>    > Mar 16 01:15:15 gat systemd[1]: galaxy-gunicorn.service: Failed with result 'exit-code'.
+>    > Mar 16 01:15:15 gat systemd[1]: galaxy-gunicorn.service: Consumed 3.381s CPU time.
 >    > ```
 >    >
 >    > Check your /srv/galaxy/config/galaxy.yml and ensure that it lines up exactly with what you expect.
@@ -2087,7 +2096,7 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    > > ```
 >    > > ...
 >    > > RUNNING HANDLER [restart galaxy] ****************************************
->    > > changed: [gat-0.training.galaxyproject.eu]
+>    > > changed: [gat-0.eu.galaxy.training]
 >    > > ```
 >    > {: .code-out}
 >    {: .code-2col}
@@ -2258,7 +2267,7 @@ Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` envi
 >    > > ```
 >    > > ...
 >    > > RUNNING HANDLER [galaxyproject.galaxy : galaxy gravity restart] ****************
->    > > changed: [gat-0.training.galaxyproject.eu]
+>    > > changed: [gat-0.eu.galaxy.training]
 >    > > ```
 >    > {: .code-out}
 >    {: .code-2col}
