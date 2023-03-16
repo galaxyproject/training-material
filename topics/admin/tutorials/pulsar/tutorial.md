@@ -334,7 +334,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >           become: true
 >           become_user: "{{ galaxy_user.name }}"
 >    +    - geerlingguy.docker
->    +    - usegalaxy_eu.rabbitmq
+>    +    - usegalaxy_eu.rabbitmqserver
 >         - galaxyproject.nginx
 >         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
