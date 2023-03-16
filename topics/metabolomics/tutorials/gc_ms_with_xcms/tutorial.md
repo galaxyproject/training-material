@@ -32,13 +32,13 @@ contributors:
 
 The study of metabolites in biological samples is routinely defined as metabolomics. Metabolomics studies based on untargeted mass spectrometry provides the capability to investigate metabolism on a global and relatively unbiased scale in comparison to traditional targeted studies focused on specific pathways of metabolism and a small number of metabolites. The untargeted approach enables the detection of thousands of metabolites in hypothesis-generating studies and links previously unknown metabolites with biologically important roles {% cite Patti2012 %}. There are two major issues in contemporary mass spectrometry-based metabolomics: the first is enormous loads of signal generated during the experiments, and the second is the fact that some metabolites in the studied samples may not be known to us. These obstacles make the task of processing and interpreting the metabolomics data a cumbersome and time-consuming process {% cite Nash2019 %}.
 
-Many packages are available for the analysis of GC-MS or LC-MS data - for more details see the reviews by {% cite Stanstrup2019 %} and {% cite Misra2021 %}. In this tutorial, we focus on open-source solutions integrated within the Galaxy framework, namely **XCMS**, **RAMClustR**, **RIAssigner** and **matchms**. In this tutorial, we will learn how to (1) extract features from the raw data using **XCMS** ({% cite Smith2006 %}), (2) deconvolute the detected features into spectra with **RAMClustR** ({% cite broeckling2014ramclust %}), (3) compute retention indices with **RIAssigner** ({% cite hecht2022riassigner %}) and (4) identify the present compounds leveraging spectra and retention indices using **matchms** ({% cite Huber2020 %}). For demonstration, we use three GC-[EI+] high-resolution mass spectrometry data files generated from quality control seminal plasma samples.
+Many packages are available for the analysis of GC-MS or LC-MS data - for more details see the reviews by {% cite Stanstrup2019 %} and {% cite Misra2021 %}. In this tutorial, we focus on open-source solutions integrated within the Galaxy framework, namely **XCMS**, **RAMClustR**, **RIAssigner**, and **matchms**. In this tutorial, we will learn how to (1) extract features from the raw data using **XCMS** ({% cite Smith2006 %}), (2) deconvolute the detected features into spectra with **RAMClustR** ({% cite broeckling2014ramclust %}), (3) compute retention indices with **RIAssigner** ({% cite hecht2022riassigner %}), and (4) identify the present compounds leveraging spectra and retention indices using **matchms** ({% cite Huber2020 %}). For demonstration, we use three GC-[EI+] high-resolution mass spectrometry data files generated from quality control seminal plasma samples.
 
 
 > <details-title> Seminal plasma samples </details-title>
 > 
-> The seminal plasma samples were analyzed according to the standard operating procedure (SOP) [SOP for metabolite profiling of seminal plasma via GC Orbitrap](https://zenodo.org/record/5734331).
-> The 3 samples used in this training are pooled quality control (QC) samples coming from about ~200 samples. The pooled samples were analyzed in a dilution series to test the system suitability and the quality of the assay.
+> The seminal plasma samples were analyzed according to the standard operating procedure [(SOP) for metabolite profiling of seminal plasma via GC Orbitrap](https://zenodo.org/record/5734331).
+> The 3 samples used in this training are pooled quality control (QC) samples coming from about 200 samples. The pooled samples were analyzed in a dilution series to test the system suitability and the quality of the assay.
 >
 {: .details}
 
@@ -104,7 +104,7 @@ Before we can start with the actual analysis pipeline, we first need to download
 >
 {: .hands_on}
 
-As a result of this step, we should have in our history a green Dataset collection with three `.raw` files as well as three separate files with reference alkanes, reference spectral library and sample metadata.
+As a result of this step, we should have in our history a green Dataset collection with three `.raw` files as well as three separate files with reference alkanes, reference spectral library, and sample metadata.
 
 ## Convert the raw data to mzML
 
@@ -121,7 +121,7 @@ Our input data are in `.raw` format, which is not suitable for the downstream to
 >
 >    > <comment-title> Centroids </comment-title>
 >    >
->    > `msconvert` with selected parameters computes centroids in the m/z domain. MS instruments continuously sample and record signals. Therefore, a mass peak for a single ion in one spectrum consists of multiple intensities at discrete m/z values. Centroiding is the process of reducing these mass peaks to a single representative signal, the centroid. This results in much smaller file sizes without losing too much information. In the further steps, **XCMS** uses the `centWave` chromatographic peak detection algorithm, which was designed for centroided data. That is the reason we perform the centroiding prior to chromatographic peak detection in this step.
+>    > `msconvert` with selected parameters computes centroids in the m/z domain. MS instruments continuously sample and record signals. Therefore, a mass peak for a single ion in one spectrum consists of multiple intensities at discrete m/z values. Centroiding is the process of reducing these mass peaks to a single representative signal, the centroid. This results in much smaller file sizes without losing too much information. In the further steps, **XCMS** uses the _centWave_ chromatographic peak detection algorithm, which was designed for centroided data. That is the reason we perform the centroiding prior to chromatographic peak detection in this step.
 >    {: .comment}
 >
 {: .hands_on}
@@ -174,7 +174,7 @@ At this step, you obtain a dataset collection containing one `RData` file per sa
 >
 >  {% tool [xcms findChromPeaks Merger](toolshed.g2.bx.psu.edu/repos/lecorguille/xcms_merge/xcms_merge/3.12.0+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"RData file"*: `input.raw.xset.RData` (output of **xcms findChromPeaks (xcmsSet)** {% icon tool %})
->    - {% icon param-file %} *"Sample metadata file "*: `sample_metadata.tsv` (Input dataset)
+>    - {% icon param-file %} *"Sample metadata file"*: `sample_metadata.tsv` (Input dataset)
 >
 >    You can leave the other parameters with their default values.
 >
@@ -247,7 +247,7 @@ At this point, the peak list may contain `NA` values when peaks were not conside
 >
 >    > <comment-title> Output </comment-title>
 >    >
->    > After the 'fillChromPeaks' step, you obtain your final intensity table. At this step, you have everything mandatory to begin analysing
+>    > After the `fillChromPeaks` step, you obtain your final intensity table. At this step, you have everything mandatory to begin analysing
 >    > your data:
 >    >  - A *sampleMetadata* file (if not done yet, to be completed with information about your samples)
 >    >  - A *dataMatrix* file (with the intensities)
@@ -337,7 +337,7 @@ The spectral data comes as an `.msp` file, which is a text file structured accor
 
 However, as we can observe, the metadata part is rather incomplete. We would like to gather more information about the detected spectra and identify the specific compounds corresponding to them.
 
-The second output file is the so called **Spec Abundance** table, containing the expression of all deconvoluted spectra across all samples. It is the corresponding element to the peak intensity table obtained from **XCMS**, only for the whole deconvoluted spectrum. This file is used for further downstream processing and analysis of the data and eventual comparisons across different sample types or groups. For more information on this downstream data processing see this [tutorial]({{ site.baseurl }}/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.html)
+The second output file is the so called **Spec Abundance** table, containing the expression of all deconvoluted spectra across all samples. It is the corresponding element to the peak intensity table obtained from **XCMS**, only for the whole deconvoluted spectrum. This file is used for further downstream processing and analysis of the data and eventual comparisons across different sample types or groups. For more information on this downstream data processing see this [tutorial]({{ site.baseurl }}/topics/metabolomics/tutorials/lcms-dataprocessing/tutorial.html).
 
 # Retention index calculation
 
@@ -469,7 +469,7 @@ In this tutorial, we show how untargeted GC-MS data can be processed to obtain t
 Using **XCMS**, we obtain a peak and intensity table from our files which contains information about the detected ions (such as m/z and retention time) and their intensities across all samples.
 Afterwards, we used **RAMClustR** to reconstruct the fragmentation spectra which we assume to originate from the analyzed compounds contained within our samples.
 We use a correlation based approach which allows us to reconstruct also low-abundant features as long as their intensities are correlating across samples.
-This method is different than the sample-wise deconvolution using **CAMERA**({% cite Kuhl2012 %}).
+This method is different than the sample-wise deconvolution using **CAMERA** ({% cite Kuhl2012 %}).
 To have more information available for compound identification, we computed the retention index using **RIAssigner** and added it to our deconvoluted spectra.
 We then finally compare the deconvoluted spectra against the reference library using **matchms**, using a retention index threshold to pre-filter our matches and then computing the cosine similarity for the spectra within the retention index tolerance.
 
