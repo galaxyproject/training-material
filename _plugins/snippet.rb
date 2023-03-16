@@ -1,4 +1,5 @@
 require 'yaml'
+require './_plugins/gtn.rb'
 
 module Jekyll
   module Tags
@@ -45,6 +46,7 @@ module Jekyll
           context["include"] = parse_params(context) if @params
           x = "#{inclusion.render(context)}"
           p = context["include"]
+          count = 0
 
           box_start=""
           box_end=""
@@ -59,33 +61,19 @@ module Jekyll
             end
             icons = get_config(context)
 
-            tiptitle = "Tip"
-            handsontitle = "Hands-on"
             if context.registers[:page]&.key?('lang')
-              lang = context.registers[:page]['lang']
-              tiptitle = context.registers[:site].data["lang"][lang]["tip"]
-              handsontitle = context.registers[:site].data["lang"][lang]["handson"]
+              lang = context.registers[:page].fetch('lang', "en")
+              if lang.nil?
+                lang = "en"
+              end
             end
-
-            if box_type == 'tip'
-                icon_text = icons['tip']
-                box_start = '> ### '+get_icon(icon_text)+' '+tiptitle+': ' + metadata['title']
-                box_end   = "\n{: .tip}"
+            if lang != "en" and lang != "es"
+              lang = "en"
             end
-            if box_type == 'hands_on'
-                icon_text = icons['hands_on']
-                box_start = '> ### '+get_icon(icon_text)+' '+handsontitle+': ' + metadata['title']
-                box_end   = "\n{: .hands_on}"
-            end
-            if box_type == 'comment'
-                icon_text = icons['comment']
-                box_start = '> ### '+get_icon(icon_text)+' ' + metadata['title']
-                box_end   = "\n{: .comment}"
-            end
-            if box_type == 'question'
-                icon_text = icons['question']
-                box_start = '> ### '+get_icon(icon_text)+' ' + metadata['title']
-                box_end   = "\n{: .question}"
+            if box_type != 'none' and !box_type.nil?
+              box_id, box_title = Gtn::Boxify.generate_title(box_type, metadata['title'], lang, context.registers[:page]['path'])
+              box_start = '> ' + box_title
+              box_end = "\n{: ." + box_type + "}"
             end
           end
           y = x.gsub(/\A---(.|\n)*?---/, '')
@@ -100,6 +88,7 @@ module Jekyll
              z = z.gsub(/\R/,"\n> ")
              #puts box_start+y+box_end
           end
+
           #if z =~ /contribute/
             #puts "=== step 3   ===\n#{z}\n\n"
             #puts "=== MARKDOWN ===\n#{box_start+z+box_end}\n\n"
@@ -108,7 +97,7 @@ module Jekyll
 
           '<!--SNIPPET-->' + markdownify(box_start+z+box_end)
             .gsub(/<(pre)[^>]*>(.*?)<\/\1>/m){|m| m.gsub(/\n/, '<br>') } # Replace newlines inside of a PRE with <br>, so they don't get eaten during next one.
-            .gsub(/\R+/, '') # Strip out spaces or the boxes break
+            .gsub(/\R+/, ' ') # Strip out spaces or the boxes break, replace them with single spaces so e.g. newlines get collapsed into a space and don't merge words together that shouldn't be merged.
             .gsub('<h3','<h3 data-toc-skip')
         end
       end
@@ -147,20 +136,12 @@ module Jekyll
       end
     end
   end
-
-  module RegexReplace
-    def regex_replace(str, regex_search, value_replace)
-      regex = /#{regex_search}/m
-      return str.gsub(regex, value_replace)
-    end
-
-    def regex_replace_once(str, regex_search, value_replace)
-      regex = /#{regex_search}/m
-      return str.sub(regex, value_replace)
-    end
-  end
-
 end
 
 Liquid::Template.register_tag("snippet", Jekyll::Tags::SnippetIncludeTag)
-Liquid::Template.register_filter(Jekyll::RegexReplace)
+
+Jekyll::Hooks.register :pages, :post_render do |page|
+  if page.output =~ /-title>/
+    page.output = Gtn::Boxify.replace_elements(page.output, page.data.fetch('lang', 'en'), page.path)
+  end
+end

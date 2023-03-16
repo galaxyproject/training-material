@@ -17,21 +17,20 @@ subtopic: writing
 contributions:
   authorship:
   - bebatut
+  - hexylena
   editing:
   - bgruening
   - shiltemann
-  - hexylena
 abbreviations:
   API: Application Programming Interface
   JSON: JavaScript Object Notation
 ---
 
 # Introduction
-{:.no_toc}
 
 Once we have set up the infrastructure, we are ready to write the tutorial.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -66,10 +65,15 @@ contributors:
 - contributor1
 - contributor2
 ---
-# Introduction
-{:.no_toc}
 
-blabla
+introduction text
+
+> <agenda​-title></agenda​-title>
+>
+> In this tutorial we will deal with:
+>
+> 1. TOC
+> {:toc}
 
 # Section 1
 
@@ -88,7 +92,6 @@ blabla
 blabla
 
 # Conclusion
-{:.no_toc}
 
 blabla
 ```
@@ -103,7 +106,7 @@ The `tutorial.md` needs to start with some metadata at the top:
 - `zenodo_link`: link on Zenodo to the input data for the tutorial
 - `contributions`: eveybody who has contributed to this tutorial (usernames must match those in `CONTRIBUTORS.yaml` file)
 
-> ### {% icon hands_on %} Hands-on: Fill the basic metadata
+> <hands-on-title>Fill the basic metadata</hands-on-title>
 >
 > 1. Update the tutorial information in the header section of your tutorial:
 >
@@ -124,13 +127,13 @@ We also define metadata related to the pedagogical content of the tutorial, whic
 
 For this category of metadata, we have taken inspiration from what Software Carpentry has done and particularly what they described in their [Instructor training](https://swcarpentry.github.io/instructor-training/).
 
-> ### {% icon hands_on %} Hands-on: Fill out the pedagogical metadata
+> <hands-on-title>Fill out the pedagogical metadata</hands-on-title>
 >
 > 1. Define 2 questions that will be addressed during the tutorial and add them to the metadata
 > 2. Define 2 learning objectives for the tutorial and add them to the metadata
 {: .hands_on}
 
-> ### {% icon comment %} When filling the pedagogical metadata
+> <comment-title>When filling the pedagogical metadata</comment-title>
 > We recommend that you fill out the *questions* and the *learning objectives* before starting writing the tutorial content. You can still refine them afterwards, but it will help to guide you in developing your tutorial, and gives you some time to think beforehand on what topics are worth being covered.
 >
 > For the take-home messages, it is easier to define them once the tutorial is written and you identified the issues.
@@ -217,7 +220,7 @@ All tutorials and slides must give credit to all contributors. This can be any t
 
 The tutorial's content is written directly after the section of metadata. This is written in Markdown, a simple markup language.
 
-> ### {% icon comment %} Markdown
+> <comment-title>Markdown</comment-title>
 >
 > Check [this cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) to learn more how to use Markdown.
 {: .comment}
@@ -226,7 +229,7 @@ The Markdown content is then transformed into a user friendly webpage through a 
 
 To help developing the tutorial, we recommend to create a workflow of the different steps of the tutorial inside Galaxy first, and then you can create the structure of the tutorial automatically from that:
 
-> ### {% icon hands_on %} Hands-on: Create the structure of the tutorial from a workflow
+> <hands-on-title>Create the structure of the tutorial from a workflow</hands-on-title>
 >
 > 1. Create a small workflow with one or two steps on a running Galaxy instance
 > 2. Add the topic name as Tag and the tutorial title as Annotation/Notes to the workflow using the workflow editor.
@@ -250,7 +253,7 @@ To help developing the tutorial, we recommend to create a workflow of the differ
 >             --zenodo_link "URL to the Zenodo record (Optional)"
 >    ```
 >
->    > ### {% icon comment %} Using a local workflow
+>    > <comment-title>Using a local workflow</comment-title>
 >    > It is also possible to download the workflow locally (with the `.ga` extension), and then run a slightly different command:
 >    >
 >    > ```
@@ -271,7 +274,7 @@ The generated tutorial is structured with:
 - Multiple sections representing the steps of the analysis, complete with automatically generated hands-on blocks, as practicing is a vital part of the learning process
 - A conclusion to summarize what has been done in the tutorial (with a graphic)
 
-> ### {% icon hands_on %} Hands-on: Filling out the structure of the tutorial
+> <hands-on-title>Filling out the structure of the tutorial</hands-on-title>
 >
 > 1. Fill out the "Introduction" with a general introduction of the tutorial and a small description of the dataset (goals)
 > 2. Rename/restructure the sections with several levels and more explication
@@ -281,7 +284,8 @@ The generated tutorial is structured with:
 {: .hands_on}
 
 ## Adding images with captions
-To add an image in Markdown file, we need to use the markdown syntax for this: `![proper alt text describing the image for visually impaired learners](../../images/image.png)`.
+
+To add an image in Markdown file, we need to use the markdown syntax for this: {% raw %}`!​[proper alt text describing the image for visually impaired learners](../../images/image.png)`{% endraw %}.
 
 We have also added a small plugin to handle captions for each image:
 
@@ -289,11 +293,13 @@ We have also added a small plugin to handle captions for each image:
 
 The prefix "Figure 1." is automatically added before its caption. This is done with the following Markdown syntax:
 
+{% raw %}
 ```markdown
-![A textual description of the image](../images/image.png "Example of an image with a caption")
+!​[A textual description of the image](../images/image.png "Example of an image with a caption")
 ```
+{% endraw %}
 
-We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
+We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text]​(#figure-nb)` (changing `nb` with the image's number).
 
 ### Guidelines on Alt vs Figcaption Text
 
@@ -309,10 +315,11 @@ As an example for this image:
 
 ![alt text]({{site.baseurl}}/topics/metagenomics/images/plasmid-metagenomics-nanopore/sequence_method.jpg "Example of an image with a caption ")
 
-
+{% raw %}
 ```markdown
-![Alt text (shown when image cannot be displayed)](path/to/image.png "Example of an image with a caption")
+!​[Alt text (shown when image cannot be displayed)](path/to/image.png "Example of an image with a caption")
 ```
+{% endraw %}
 
 Field          | Appropriate Contents
 ----           | -----
@@ -380,7 +387,7 @@ The rendered table is then given as a minimum-width and centred matrix:
 > | Feat3 | 2    | 3    | 4    |
 {: .matrix}
 
-# Improving the learning experience
+# Improving the learning experience with Boxes
 
 To improve the learning experience in our tutorial, we define some boxes to highlight content.
 
@@ -388,19 +395,19 @@ These boxes are defined always with the same structure:
 
 {% raw %}
 ```markdown
-> ### {% icon an_icon %} Type of box: Name of the box
-> list
-{: .type_of_box}
+> <type​-title>Name of the box</type​-title>
+> text goes here!
+{: .type}
 ```
 {% endraw %}
 
-You must follow this structure exactly for it to be rendered correctly.
+where type is something like `tip`, so `<tip-title>` and `{: .tip}`. You must follow this structure **exactly** for it to be rendered correctly.
 
 ## **Overview** box
 
 This box at the top of each tutorial is automatically generated using the metadata we defined in the topic's metadata file:
 
-> ### Overview
+> <overview-title>Overview</overview-title>
 >
 > **{% icon question %} Questions**
 > - Which biological questions are addressed by the tutorial?
@@ -419,15 +426,15 @@ This box at the top of each tutorial is automatically generated using the metada
 >
 {: .overview}
 
-> ### {% icon hands_on %} Hands-on: Checking the metadata
+> <hands-on-title>Checking the metadata</hands-on-title>
 >
 > 1. Check that the metadata added previously are correctly filling the overview box
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > What metadata hasn't been added to this box?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > The take-home messages are not added to this box but into the last box of the tutorial
 >    > {: .solution}
@@ -441,7 +448,7 @@ In most tutorials, the second box is the agenda box, placed at the end of the in
 
 {% raw %}
 ```markdown
-> ### Agenda
+> <agenda​-title></agenda​-title>
 >
 > In this tutorial we will deal with:
 >
@@ -452,11 +459,13 @@ In most tutorials, the second box is the agenda box, placed at the end of the in
 ```
 {% endraw %}
 
-There is no need to fill out the list; this will be done automatically based off of your tutorial's section title.
+There is no need to fill out the list; this will be done automatically based off of your tutorial's section titles. First and second level headings (lines starting with `#` and `##` in markdown) will be shown in the agenda.
 
-To avoid adding the "Introduction" and "Conclusion" sections in the agenda, you can add `{:.no_toc}` below the section name. This will be rendered as follows:
+If a section is not important enough to be shown in the agenda, consider making it a third-level heading (`###`) instead.
 
-> ### Agenda
+The agenda will be rendered as follows:
+
+> <agenda-title></agenda-title>
 >
 > In this tutorial we will deal with:
 >
@@ -471,7 +480,7 @@ We find that having users walk through the tutorial, doing all of the steps is i
 
 {% raw %}
 ```markdown
-> ### {% icon hands_on %} Hands-on: Spliced mapping
+> <hands​-on-title>Spliced mapping</hands​-on-title>
 >
 > 1. **RNA STAR** {% icon tool %}: Map your reads on the reference genome with
 >    - *"Single-end or paired-end reads"*:  `Paired-end (as individual datasets)`
@@ -489,7 +498,7 @@ We find that having users walk through the tutorial, doing all of the steps is i
 >      - *"Which tool was used generate logs?"*: `STAR`
 >      - *"Type of FastQC output?"*: `Log`
 >      - *"STAR log output"*: the generated `log` files (multiple datasets)
-{: .hands_on}
+{: .hands​_on}
 ```
 {% endraw %}
 
@@ -503,7 +512,7 @@ For consistency please use:
 This will be rendered like:
 
 
-> ### {% icon hands_on %} Hands-on: Spliced mapping
+> <hands-on-title>Spliced mapping</hands-on-title>
 >
 > 1. **RNA STAR** {% icon tool %}: Map your reads on the reference genome with
 >    - *"Single-end or paired-end reads"*:  `Paired-end (as individual datasets)`
@@ -530,7 +539,7 @@ The available icons are:
 
 {% raw %}
 ```markdown
-> ### {% icon hands_on %} Hands-on: My Step
+> <hands​-on-title>My Step</hands​-on-title>
 >
 > 1. **My Tool** {% icon tool %} with the following parameters
 >    - {% icon param-text %} *"My text parameter"*: `my value`
@@ -541,13 +550,13 @@ The available icons are:
 >    - {% icon param-toggle %} *"My toggle button"*: `Yes`
 >    - {% icon param-repeat %} **My repeat parameter**
 >      - *"param1"*: `42`
-{: .hands_on}
+{: .hands​_on}
 ```
 {% endraw %}
 
 which, when rendered, look like:
 
-> ### {% icon hands_on %} Hands-on: My Step
+> <hands-on-title>My Step</hands-on-title>
 >
 > 1. **My Tool** {% icon tool %} with the following parameters
 >    - {% icon param-text %} *"My text parameter"*: `my value`
@@ -559,6 +568,259 @@ which, when rendered, look like:
 >    - {% icon param-repeat %} **My repeat parameter**
 >      - *"param1"*: `42`
 {: .hands_on}
+
+## **Questions** and **solution** boxes
+
+Questions can be added to force trainees to think about what they are currently doing, and to put things in perspective.
+They can also help the instructors by exposing and clarifying common scenarios, errors, or applications.
+
+{% raw %}
+```markdown
+> <question​-title></question​-title>
+>
+> 1. Why are some tests filtered?
+> 2. Does it improve the *p*-value distribution?
+>
+> > <solution​-title></solution​-title>
+> >
+> > 1. Sol for the first question
+> > 2. Sol for the second question
+> >
+> {: .solution}
+{: .question}
+```
+{% endraw %}
+
+Which will be rendered as:
+
+> <question-title></question-title>
+>
+> 1. Why are some tests filtered?
+> 2. Does it improve the *p*-value distribution?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. Sol for the first question
+> > 2. Sol for the second question
+> >
+> {: .solution}
+{: .question}
+
+Questions should be quick to answer. You can directly ask a question and expect an answer, or you can provide some answers and create multiple choices questions (MCQs).
+With well chosen wrong answers, MCQs can do much more than just measure how much someone knows, such as exposing common misconceptions and mistakes.
+
+In the box below, initially hidden, we add the correct answer and possibly any additional explanation. Self-trainees can then check the solution and its explanation.
+
+
+## **Tips** box
+
+Tips boxes are really just for 'tips', usually hints regarding Galaxy operations that users may or may not be familiar with. If you want to provide extended discussion or links to external materials then consider the comment and detail boxes instead.
+
+{% raw %}
+```markdown
+> <tip​-title>Importing data via links</tip​-title>
+>
+> * Copy the link location
+> * Open the Galaxy Upload Manager
+> * Select **Paste/Fetch Data**
+> * Paste the link into the text field
+> * Press **Start**
+{: .tip​}
+```
+{% endraw %}
+
+Rendered:
+
+> <tip-title>Importing data via links</tip-title>
+>
+> * Copy the link location
+> * Open the Galaxy Upload Manager
+> * Select **Paste/Fetch Data**
+> * Paste the link into the text field
+> * Press **Start**
+{: .tip}
+
+## **Comments** boxes
+
+{% raw %}
+```markdown
+> <comment​-title></comment​-title>
+> - Edit the "Database/Build" to select "dm3"
+> - Rename the datasets according to the samples
+{: .comment}
+```
+{% endraw %}
+
+Rendered:
+
+> <comment-title></comment-title>
+> - Edit the "Database/Build" to select "dm3"
+> - Rename the datasets according to the samples
+{: .comment}
+
+## **Details** box
+
+The detail box is used to give more background explanation on the subject. By default the box is collapsed, trainees can expand it if they wish to know extra information about a topic.
+
+{% raw %}
+```markdown
+> <details​-title>More details on the ....</details​-title>
+>
+> Add more details in Markdown...
+>
+{: .details​}
+```
+{% endraw %}
+
+Rendered:
+
+> <details-title>More details on the ....</details-title>
+>
+> Add more details in Markdown...
+>
+{: .details}
+
+## **Key points** box
+
+This last box of the tutorial is automatically created with the take-home messages defined in the topic's metadata
+
+To render the boxes correctly, the syntax needs to be correct. If it doesn't work, have a look at similar tutorials and get inspiration.
+
+## **Warning** box
+
+{% raw %}
+```markdown
+> <warning​-title>Danger: You can lose data!</warning​-title>
+> Something really bad can happen here!
+{: .warning}
+```
+{% endraw %}
+
+Rendered:
+
+> <warning-title>Danger: You can lose data!</warning-title>
+> Something really bad can happen here!
+{: .warning}
+
+
+## Nested boxes
+
+Boxes can be nested, *e.g.* for having tips inside a hands-on:
+
+{% raw %}
+```markdown
+> <hands​-on-title>Defining the topic for the tutorial</hands​-on-title>
+>
+> 1. Search for NCBI Blast+ on the [ToolShed](https://toolshed.g2.bx.psu.edu/)
+> 2. Check in which category it is
+>
+>    > <question​-title></question​-title>
+>    >
+>    > In which topic will you put the tutorial?
+>    >
+>    > > <solution​-title></solution​-title>
+>    > >
+>    > > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
+>    > > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
+>    > {: .solution​}
+>    {: .question​}
+{: .hands​_on}
+```
+{% endraw %}
+
+## **Code** box
+
+We have added code in/out boxes to help you show commands, and their effects, when running command line commands.
+
+Normally a single column, with the boxes above one another, it will automatically split side-by-side over a given width (1200px);
+
+{% raw %}
+```markdown
+> > <code​-in-title>Bash</code​-in-title>
+> > ```bash
+> > cat /tmp/test.ini
+> > ```
+> {: .code-in}
+>
+> > <code​-out-title></code​-out-title>
+> > The file should look like:
+> >
+> > ```ini
+> > [example]
+> > server_name = Dogs!
+> > listen = 192.168.0.2
+> > apikey = super-secret-api-key-wow!
+> > ```
+> {: .code-out}
+{: .code-2col}
+```
+{% endraw %}
+
+Rendered (try it! resize your browser)
+
+> > <code-in-title>Bash</code-in-title>
+> > ```bash
+> > cat /tmp/test.ini
+> > ```
+> {: .code-in}
+>
+> > <code-out-title></code-out-title>
+> > The file should look like:
+> >
+> > ```ini
+> > [example]
+> > server_name = Dogs!
+> > listen = 192.168.0.2
+> > apikey = super-secret-api-key-wow!
+> > ```
+> {: .code-out}
+{: .code-2col}
+
+If you leave off the `{: .code-2col}`, it will render as a single column always.
+
+{% raw %}
+```markdown
+> <code​-in-title>Bash</code​-in-title>
+> ```bash
+> cat /tmp/test.ini
+> ```
+{: .code-in}
+
+> <code​-out-title></code​-out-title>
+> The file should look like:
+>
+> ```ini
+> [example]
+> server_name = Dogs!
+> listen = 192.168.0.2
+> apikey = super-secret-api-key-wow!
+> ```
+{: .code-out}
+```
+{% endraw %}
+
+Rendered:
+
+> <code-in-title>Bash</code-in-title>
+> ```bash
+> cat /tmp/test.ini
+> ```
+{: .code-in}
+
+> <code-out-title></code-out-title>
+> The file should look like:
+>
+> ```ini
+> [example]
+> server_name = Dogs!
+> listen = 192.168.0.2
+> apikey = super-secret-api-key-wow!
+> ```
+{: .code-out}
+
+# Additional Features to Improve Learning
+
+Here we cover additional features you can use throughout your tutorials to improve the learning experience.
 
 ## Tool Links
 
@@ -600,254 +862,6 @@ The alternative is to figure out the ID for the tool you want to use:
 
 ![Finding the tool ID](../../images/tool-id.png)
 
-## **Questions** and **solution** boxes
-
-Questions can be added to force trainees to think about what they are currently doing, and to put things in perspective.
-They can also help the instructors by exposing and clarifying common scenarios, errors, or applications.
-
-{% raw %}
-```markdown
-> ### {% icon question %} Questions
->
-> 1. Why are some tests filtered?
-> 2. Does it improve the *p*-value distribution?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Sol for the first question
-> > 2. Sol for the second question
-> >
-> {: .solution}
-{: .question}
-```
-{% endraw %}
-
-Which will be rendered as:
-
-> ### {% icon question %} Questions
->
-> 1. Why are some tests filtered?
-> 2. Does it improve the *p*-value distribution?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Sol for the first question
-> > 2. Sol for the second question
-> >
-> {: .solution}
-{: .question}
-
-Questions should be quick to answer. You can directly ask a question and expect an answer, or you can provide some answers and create multiple choices questions (MCQs).
-With well chosen wrong answers, MCQs can do much more than just measure how much someone knows, such as exposing common misconceptions and mistakes.
-
-In the box below, initially hidden, we add the correct answer and possibly any additional explanation. Self-trainees can then check the solution and its explanation.
-
-
-## **Tips** box
-
-Tips boxes are really just for 'tips', usually hints regarding Galaxy operations that users may or may not be familiar with. If you want to provide extended discussion or links to external materials then consider the comment and detail boxes instead.
-
-{% raw %}
-```markdown
-> ### {% icon tip %} Tip: Importing data via links
->
-> * Copy the link location
-> * Open the Galaxy Upload Manager
-> * Select **Paste/Fetch Data**
-> * Paste the link into the text field
-> * Press **Start**
-{: .tip}
-```
-{% endraw %}
-
-Rendered:
-
-> ### {% icon tip %} Tip: Importing data via links
->
-> * Copy the link location
-> * Open the Galaxy Upload Manager
-> * Select **Paste/Fetch Data**
-> * Paste the link into the text field
-> * Press **Start**
-{: .tip}
-
-## **Comments** boxes
-
-{% raw %}
-```markdown
-> ### {% icon comment %} Comments
-> - Edit the "Database/Build" to select "dm3"
-> - Rename the datasets according to the samples
-{: .comment}
-```
-{% endraw %}
-
-Rendered:
-
-> ### {% icon comment %} Comments
-> - Edit the "Database/Build" to select "dm3"
-> - Rename the datasets according to the samples
-{: .comment}
-
-## **Details** box
-
-The detail box is used to give more background explanation on the subject. By default the box is collapsed, trainees can expand it if they wish to know extra information about a topic.
-
-{% raw %}
-```markdown
-> ### {% icon details %} More details on the ....
->
-> Add more details in Markdown...
->
-{: .details}
-```
-{% endraw %}
-
-Rendered:
-
-> ### {% icon details %} More details on the ....
->
-> Add more details in Markdown...
->
-{: .details}
-
-## **Key points** box
-
-This last box of the tutorial is automatically created with the take-home messages defined in the topic's metadata
-
-To render the boxes correctly, the syntax needs to be correct. If it doesn't work, have a look at similar tutorials and get inspiration.
-
-## **Warning** box
-
-{% raw %}
-```markdown
-> ### {% icon warning %} Danger: You can lose data!
-> Something really bad can happen here!
-{: .warning}
-```
-{% endraw %}
-
-Rendered:
-
-> ### {% icon warning %} Danger: You can lose data!
-> Something really bad can happen here!
-{: .warning}
-
-
-## Nested boxes
-
-Boxes can be nested, *e.g.* for having tips inside a hands-on:
-
-{% raw %}
-```markdown
-> ### {% icon hands_on %} Hands-on: Defining the topic for the tutorial
->
-> 1. Search for NCBI Blast+ on the [ToolShed](https://toolshed.g2.bx.psu.edu/)
-> 2. Check in which category it is
->
->    > ### {% icon question %} Questions
->    >
->    > In which topic will you put the tutorial?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > If we search for [NCBI Blast+ in the ToolShed](https://toolshed.g2.bx.psu.edu/view/devteam/ncbi_blast_plus/7538e2bfcd41), it is attributed to 2 categories (bottom): "Next Gen Mappers" and "Sequence Analysis".
->    > > We decided to put it in "Sequence analysis" because this is the most general one for this tutorial.
->    > {: .solution}
->    {: .question}
-{: .hands_on}
-```
-{% endraw %}
-
-## **Code** box
-
-We have added code in/out boxes to help you show commands, and their effects, when running command line commands.
-
-Normally a single column, with the boxes above one another, it will automatically split side-by-side over a given width (1200px);
-
-{% raw %}
-```markdown
-> > ### {% icon code-in %} Input: Bash
-> > ```bash
-> > cat /tmp/test.ini
-> > ```
-> {: .code-in}
->
-> > ### {% icon code-out %} Output
-> > The file should look like:
-> >
-> > ```ini
-> > [example]
-> > server_name = Dogs!
-> > listen = 192.168.0.2
-> > apikey = super-secret-api-key-wow!
-> > ```
-> {: .code-out}
-{: .code-2col}
-```
-{% endraw %}
-
-Rendered (try it! resize your browser)
-
-> > ### {% icon code-in %} Input: Bash
-> > ```bash
-> > cat /tmp/test.ini
-> > ```
-> {: .code-in}
->
-> > ### {% icon code-out %} Output
-> > The file should look like:
-> >
-> > ```ini
-> > [example]
-> > server_name = Dogs!
-> > listen = 192.168.0.2
-> > apikey = super-secret-api-key-wow!
-> > ```
-> {: .code-out}
-{: .code-2col}
-
-If you leave off the `{: .code-2col}`, it will render as a single column always.
-
-{% raw %}
-```markdown
-> ### {% icon code-in %} Input: Bash
-> ```bash
-> cat /tmp/test.ini
-> ```
-{: .code-in}
-
-> ### {% icon code-out %} Output
-> The file should look like:
->
-> ```ini
-> [example]
-> server_name = Dogs!
-> listen = 192.168.0.2
-> apikey = super-secret-api-key-wow!
-> ```
-{: .code-out}
-```
-{% endraw %}
-
-Rendered:
-
-> ### {% icon code-in %} Input: Bash
-> ```bash
-> cat /tmp/test.ini
-> ```
-{: .code-in}
-
-> ### {% icon code-out %} Output
-> The file should look like:
->
-> ```ini
-> [example]
-> server_name = Dogs!
-> listen = 192.168.0.2
-> apikey = super-secret-api-key-wow!
-> ```
-{: .code-out}
 
 
 ## FAQs (snippets)
@@ -867,7 +881,6 @@ These are available in folders named `faqs`, either at the project level, topic 
 - **Tutorial-level FAQs:** `topics/<topic>/tutorials/<tutorial>/faqs/`
   - for questions pertaining to that specific tutorial
   - if this is present, it is linked to from the tutorial overview box at the top, and from the end of the tutorial
-
 
 
 ### Including FAQs/snippets in your tutorials
@@ -956,19 +969,20 @@ If a tutorial-level FAQ page exists (`topics/<topic>/tutorials/<tutorial>/faqs/i
 
 ## Footnotes
 
-> > ### {% icon code-in %} Input: Markdown
+> > <code-in-title>Markdown</code-in-title>
 > >
 > > ```
-> > Footnotes[^1] can be used to insert more content or explanation as reference material to your content. You can use the same footnote reference multiple time, and the footnote will include backlinks to return to the correct place in the text.[^1]
+> > Footnotes[^test] can be used to insert more content or explanation as reference material to your content. You can use the same footnote reference multiple time, and the footnote will include backlinks to return to the correct place in the text.[^test]
 > > ```
 > > {: .pre-break-lines}
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output
-> > Footnotes[^1] can be used to insert more content or explanation as reference material to your content. You can use the same footnote reference multiple time, and the footnote will include backlinks to return to the correct place in the text.[^1]
+> > <code-out-title></code-out-title>
+> > Footnotes[^test] can be used to insert more content or explanation as reference material to your content. You can use the same footnote reference multiple time, and the footnote will include backlinks to return to the correct place in the text.[^test]
 > {: .code-out}
 {: .code-2col}
 
+[^test]: The wikipedia definition of a footnote is: "A note is a string of text placed at the bottom of a page in a book or document or at the end of a chapter, volume or the whole text. The note can provide an author's comments on the main text or citations of a reference work in support of the text. Footnotes are notes at the foot of the page while endnotes are collected under a separate heading at the end of a chapter, volume, or entire work. Unlike footnotes, endnotes have the advantage of not affecting the layout of the main text, but may cause inconvenience to readers who have to move back and forth between the main text and the endnotes."
 
 ## Icons
 
@@ -1005,13 +1019,13 @@ abbreviations:
 
 And in your text you can use braces to refer to the term
 
-> > ### {% icon code-in %} Input: Markdown
+> > <code-in-title>Markdown</code-in-title>
 > > <code>
 > > The `/jobs` &lbrace;API&rbrace; will return &lbrace;JSON&rbrace;. When we call the &lbrace;API&rbrace; we'll get back this result &lbrace;JSON&rbrace;.
 > > </code>
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > >
 > > The `/jobs` {API} will return {JSON}. When we call the {API} we'll get back this result {JSON}.
 > >
@@ -1028,7 +1042,7 @@ Sometimes you're writing a large tutorial and at one small step there are multip
 
 Include this markdown where you want your user to choose between the multiple paths:
 
-> ### {% icon code-in %} Input: Markdown
+> <code-in-title>Markdown</code-in-title>
 > {% raw %}
 > ```
 > {% include _includes/cyoa-choices.html option1="Ananas" option2="Avocados" default="Avocados"
@@ -1042,7 +1056,7 @@ And then they can wrap the relevant sections with a `div` block with the relevan
 
 **NB**: If you do not set a default, then on the very first page load, both options will be shown in their entirety. As soon as the user selects one of the options by clicking the relevant button, then the list is filtered. The user's browser generally will remember which button was selected across navigation and page reloads.
 
-> > ### {% icon code-in %} Input: Markdown
+> > <code-in-title>Markdown</code-in-title>
 > > ```
 > > <div class="Ananas" markdown="1">
 > > - 🍍 are fantastic
@@ -1060,7 +1074,7 @@ And then they can wrap the relevant sections with a `div` block with the relevan
 > >
 > {: .code-in}
 >
-> > ### {% icon code-out %} Output
+> > <code-out-title></code-out-title>
 > >
 > > <div class="Ananas" markdown="1">
 > > - 🍍 are fantastic
@@ -1135,7 +1149,7 @@ For more information please look at this great article {% cite bebatut2018commun
 
 A bibliography will automatically be appended to the end of your tutorial (scroll down to the end of this tutorial to see how it looks! or [jump there directly](#bibliography))
 
-> ### {% icon tip %} Tip: Getting a bibtex citation from a doi
+> <tip-title>Getting a bibtex citation from a doi</tip-title>
 > If you have a DOI for a paper, you can easily obtain the bibtex citation using [doi2bib.org](https://www.doi2bib.org/).
 {: .tip}
 
@@ -1173,6 +1187,7 @@ To use this system, you need to take care of a few things:
 
 - Do **not** use hands-on boxes for segments that should be executed (code needs to be left aligned!)
 - Do **not** use snippets
+- Do **not** use icons `{% raw %}{% icon X %}{% endraw %}`
 - Do not use a terminal or prompt character (that would be included in the execution.)
 - Avoid including output when you can, it doesn't render nicely especially when the cells will become runnable.
 
@@ -1243,11 +1258,14 @@ If all worked well, it should look something like this, with a dropdown menu on 
 Would you like to add a different language to the GTN? Please contact us first (e.g. on [Gitter]({{site.gitter_url}})), to discuss a long-term sustainability plan!
 
 # Conclusion
-{:.no_toc}
+
+If you have created a new tutorial, please also consider writing a [GTN news post]({% link faqs/gtn/gtn_news_create_post.md %}) about it to let people know about it (and make it easy for us to tweet about)!
 
 
 ## Footnotes (Rendered)
 
-[^1]: The wikipedia definition of a footnote is: "A note is a string of text placed at the bottom of a page in a book or document or at the end of a chapter, volume or the whole text. The note can provide an author's comments on the main text or citations of a reference work in support of the text. Footnotes are notes at the foot of the page while endnotes are collected under a separate heading at the end of a chapter, volume, or entire work. Unlike footnotes, endnotes have the advantage of not affecting the layout of the main text, but may cause inconvenience to readers who have to move back and forth between the main text and the endnotes."
 
-
+<script type="text/javascript">
+// Replace all ZWSPs with nothing, to prevent users copying them and them not working.
+document.getElementsByTagName("body")[0].innerHTML = document.getElementsByTagName("body")[0].innerHTML.replaceAll("​", "")
+</script>

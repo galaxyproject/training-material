@@ -2,8 +2,8 @@
 title: "New Tutorial: Downstream Single-cell RNA Plant analysis with ScanPy"
 tags: [new tutorial,single-cell,plant]
 contributors: [mtekman,beatrizserrano]
-tutorial: "topics/transcriptomics/tutorials/scrna-plant/tutorial.html"
-cover: "topics/transcriptomics/images/scrna-plant/scrna-plant1.jpg"
+tutorial: "topics/single-cell/tutorials/scrna-plant/tutorial.html"
+cover: "topics/single-cell/images/scrna-plant/scrna-plant1.jpg"
 coveralt: "Arabidopsis clusters with trajectory from meristematic cells towards trichoblasts"
 
 layout: news

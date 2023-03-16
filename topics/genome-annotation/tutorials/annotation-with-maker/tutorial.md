@@ -20,6 +20,8 @@ key_points:
   - BUSCO and JBrowse allow to inspect the quality of an annotation.
 contributors:
   - abretaud
+subtopic: eukaryote
+priority: 4
 ---
 
-{% include {{ page.dir }}content.md short=false %}
+{% include topics/genome-annotation/tutorials/annotation-with-maker/content.md short=false %}

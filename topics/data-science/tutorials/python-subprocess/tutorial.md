@@ -29,12 +29,13 @@ contributors:
 priority: 12
 notebook:
   language: python
+  pyolite: true
 ---
 
 Sometimes you need to run other tools in Python, like maybe you want to
 Here we'll give a quick tutorial on how to read and write files within Python.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -83,7 +84,7 @@ subprocess.check_call(['wget', url, '-O', genome])
 subprocess.check_call(['gzip', '-d', genome])
 ```
 
-> ### {% icon tip %} Tip: What do these commands look like on the CLI?
+> <tip-title>What do these commands look like on the CLI?</tip-title>
 > ```
 > wget https://ftp.ncbi.nlm.nih.gov/.... -O "Escherichia virus T4.fna.gz"
 > gzip -d "Escherichia virus T4.fna.gz"
@@ -105,13 +106,13 @@ The above segment
 
 This list is especially important. When you run commands on the command line, normally you just type in a really bit of text by yourself. It's one big string, and you're responsible for making sure quotation marks appear in the right place. For instance, if you have spaces in your filenames, you have to quote the filename. Python requires you specify a list of arguments, and then handles the quoting for you! Which, honestly, is easier and safer.
 
-> > ### {% icon code-in %} Terminal
+> > <code-in-title>Terminal</code-in-title>
 > > Here we manually quote the argument
 > > ```
 > > glimmer3 "bow genome.txt"
 > > ```
 > {: .code-in}
-> > ### {% icon code-out %} Python
+> > <code-out-title>Python</code-out-title>
 > > Here python handles that for us
 > > ```
 > > subprocess.check_call(['glimmer3', 'bow genome.txt'])
@@ -119,7 +120,7 @@ This list is especially important. When you run commands on the command line, no
 > {: .code-out}
 {: .code-2col}
 
-> ### {% icon tip %} Tip: Exploitation!
+> <tip-title>Exploitation!</tip-title>
 > This is one of the major reasons we don't use `os.system` or older Python interfaces for running commands.
 > If you're processing files, and a user supplies a file with a space, if your program isn't expecting that space in that filename, then it could do something dangerous!
 > Like exploit your system!
@@ -144,7 +145,7 @@ gff3 = gff3.decode('utf-8')
 gff3 = gff3.split('\n')
 ```
 
-> ### {% icon tip %} Tip: What does this commands look like on the CLI?
+> <tip-title>What does this commands look like on the CLI?</tip-title>
 > ```
 > augustus --species=E_coli_K12 'Escherichia virus T4.fna' --gff3=on
 > ```
@@ -193,7 +194,7 @@ subprocess.check_call(['gzip', '-d', cds])
 
 With subprocesses, you can control the stdin, and stdout of the process by using file handles.
 
-> > ### {% icon code-in %} Terminal
+> > <code-in-title>Terminal</code-in-title>
 > > Here we pipe a file to a process named `build-icm` which takes one argument, the output name. It reads sequences from stdin.
 > > ```
 > > cat seq.fa | build-icm test.icm
@@ -201,7 +202,7 @@ With subprocesses, you can control the stdin, and stdout of the process by using
 > > build-icm test.icm < seq.fa
 > > ```
 > {: .code-in}
-> > ### {% icon code-out %} Python
+> > <code-out-title>Python</code-out-title>
 > > Here we need to do a bit more.
 > > 1. Open a file handle
 > > 2. Pass that file handle to `check_call` or `check_output`. This determines where stdin comes from.
@@ -219,7 +220,7 @@ with open('E. Coli CDSs.fna', 'r') as handle:
     subprocess.check_call(['build-icm', 'test.icm'], stdin=handle)
 ```
 
-> ### {% icon tip %} Tip: What does this commands look like on the CLI?
+> <tip-title>What does this commands look like on the CLI?</tip-title>
 > ```
 > build-icm test.icm < 'E. Coli CDSs.fna'
 > ```
@@ -238,7 +239,7 @@ output = subprocess.check_output([
 print(output)
 ```
 
-> ### {% icon tip %} Tip: What does this commands look like on the CLI?
+> <tip-title>What does this commands look like on the CLI?</tip-title>
 > ```
 > glimmer3 'Escherichia virus T4.fna' test.icm t4-genes
 > ```

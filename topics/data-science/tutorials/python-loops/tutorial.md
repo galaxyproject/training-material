@@ -39,17 +39,18 @@ contributors:
 priority: 6
 notebook:
   language: python
+  pyolite: true
 ---
 
 A *for loop* tells Python to execute some statements once for each value in a list, a character string, or some other collection: "for each thing in this group, do these operations"
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > This tutorial is **significantly** based on [the Carpentries](https://carpentries.org) [Programming with Python](https://swcarpentry.github.io/python-novice-inflammation/), [Programming with Python](https://swcarpentry.github.io/python-novice-inflammation/), and [Plotting and Programming in Python](https://swcarpentry.github.io/python-novice-gapminder/), which are licensed CC-BY 4.0.
 >
 > Adaptations have been made to make this work better in a GTN/Galaxy environment.
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -62,7 +63,7 @@ A *for loop* tells Python to execute some statements once for each value in a li
 
 Which of these would you rather write
 
-> > ### {% icon code-in %} Manually
+> > <code-in-title>Manually</code-in-title>
 > > ```
 > > print(2)
 > > print(3)
@@ -72,7 +73,7 @@ Which of these would you rather write
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} With Loops
+> > <code-out-title>With Loops</code-out-title>
 > > ```python
 > > for number in [2, 3, 5, 7, 11]:
 > >     print(number)
@@ -96,7 +97,7 @@ for number in [2, 3, 5]:
 - the collection, `[2, 3, 5]` is a `list` of numbers which we can tell from the square brackets used: `[`, `]`
 - the loop body, where we double a number and the print out a message. The loop body is what gets executed for every iteration of the loop.
 
-> > ### {% icon code-in %} The loop
+> > <code-in-title>The loop</code-in-title>
 > > ```python
 > > for number in [2, 3, 5]:
 > >     doubled = number * 2
@@ -104,7 +105,7 @@ for number in [2, 3, 5]:
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} What's really happening internally
+> > <code-out-title>What's really happening internally</code-out-title>
 > > ```python
 > > # First iteration, number = 2
 > > doubled = number * 2
@@ -143,7 +144,7 @@ for character in cast:
 
 The first line of the `for` loop must end with a colon, and the body must be indented with *four spaces*. Many editors do this automatically for you and even convert <kbd>Tab</kbd>s into 4 spaces.
 
-> ### {% icon tip %} Tip: Blocks in Python
+> <tip-title>Blocks in Python</tip-title>
 >
 > The colon at the end of the first line signals the start of a *block* of statements.
 >
@@ -214,7 +215,7 @@ for number in range(10):
     print(number)
 ```
 
-> ### {% icon tip %} Tip: Iterables can be weird
+> <tip-title>Iterables can be weird</tip-title>
 > In python `range` is a special type of iterable: none of the numbers are created until we need them.
 >
 > ```python
@@ -251,7 +252,7 @@ print(f'Currently {number}, our total is {total}')
 
 You can add it before you update `total`, after it, or both! Compare the outputs to understand what's happening on each line.
 
-> ### {% icon tip %} Tip: Controlling your loop!
+> <tip-title>Controlling your loop!</tip-title>
 >
 > There are multiple ways to efficiently control your loop if you need it.
 > these are the inbuilt python functions: continue & break
@@ -279,7 +280,7 @@ You can add it before you update `total`, after it, or both! Compare the outputs
 
 ## Exercises
 
-> ### {% icon question %} Question: Tracing Execution
+> <question-title>Tracing Execution</question-title>
 >
 > Create a table showing the numbers of the lines that are executed when this program runs,
 > and the values of the variables after each line is executed.
@@ -289,7 +290,7 @@ You can add it before you update `total`, after it, or both! Compare the outputs
 > for char in "tin":
 >     total = total + 1
 > ```
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > | Line | Variables            |
 > > |------|----------------------|
@@ -307,7 +308,7 @@ You can add it before you update `total`, after it, or both! Compare the outputs
 #Test your code here!
 ```
 
-> ### {% icon question %} Question: Reversing a String
+> <question-title>Reversing a String</question-title>
 >
 > Fill in the blanks in the program below so that it prints "stressed"
 > (the reverse of the original character string "desserts").
@@ -319,7 +320,7 @@ You can add it before you update `total`, after it, or both! Compare the outputs
 >     result = ____
 > print(result)
 > ```
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > original = "stressed"
 > > result = ""
@@ -340,7 +341,7 @@ print(result)
 ```
 
 
-> ### {% icon question %} Question: Practice Accumulating
+> <question-title>Practice Accumulating</question-title>
 >
 > Fill in the blanks in each of the programs below
 > to produce the indicated result.
@@ -353,7 +354,7 @@ print(result)
 > print(total)
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > total = 0
 > > for word in ["red", "green", "blue"]:
@@ -369,7 +370,7 @@ print(result)
 >     lengths.____(____)
 > print(lengths)
 > ```
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > lengths = []
 > > for word in ["red", "green", "blue"]:
@@ -386,7 +387,7 @@ print(result)
 >     ____
 > print(result)
 > ```
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > words = ["red", "green", "blue"]
 > > result = ""
@@ -400,7 +401,7 @@ print(result)
 > a for loop.
 >
 > __Hint:__ You may need to use a string method to properly format the acronym.
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > acronym = ""
 > > for word in ["red", "green", "blue"]:
@@ -429,7 +430,7 @@ print(result)
 > print(cumulative)
 > data = [1,2,2,5]
 > ```
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > total = 0
 > > data = [1,2,2,5]
@@ -446,7 +447,7 @@ print(result)
 # Test your code here!
 ```
 
-> ### {% icon question %} Question: A classic programmer test: Fizz Buzz
+> <question-title>A classic programmer test: Fizz Buzz</question-title>
 > [FizzBuzz](https://en.wikipedia.org/wiki/Fizz_buzz) is a classic "test" question that is used in some job interviews to remove candidates who really do not understand programming. Your task is this:
 >
 > Write a for loop that loops over the numbers 1 to 50.
@@ -456,7 +457,7 @@ print(result)
 > - If the number is divisible by 3 and 5 both, write FizzBuzz instead of the number
 > - Otherwise, write the number itself.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```python
 > > for i in range(1, 50):
 > >     if i % 3 == 0 and i % 5 == 0:
@@ -475,7 +476,7 @@ print(result)
 # Do a FizzBuzz
 ```
 
-> ### {% icon question %} Question: Identifying Item Errors
+> <question-title>Identifying Item Errors</question-title>
 >
 > 1. Read the code below and try to identify what the errors are
 >    **without** running it.
@@ -487,7 +488,7 @@ print(result)
 > print(f'My favorite season is {seasons[4]}')
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > This list has 4 elements and the index to access the last element in the list is `3`.
 > > ```
 > > seasons = ['Spring', 'Summer', 'Fall', 'Winter']
@@ -502,7 +503,7 @@ seasons = ['Spring', 'Summer', 'Fall', 'Winter']
 print(f'My favorite season is {seasons[4]}')
 ```
 
-> ### {% icon question %} Question: Correct the errors
+> <question-title>Correct the errors</question-title>
 >
 > This code is completely missing indentation, it needs to be fixed. Can you make some guesses at how indented each line should be?
 > ```
@@ -517,7 +518,7 @@ print(f'My favorite season is {seasons[4]}')
 > print(f'The answer is {acc}')
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > >
 > > ```python
@@ -590,7 +591,7 @@ print(f'The value at {i} is {acc}')
 print(f'The answer is {acc}')
 ```
 
-> ### {% icon question %} Question: Trimming a FASTQ string
+> <question-title>Trimming a FASTQ string</question-title>
 > Given a FASTQ string, and a list with quality scores, use `break` to print out just the good bit of DNA and it's quality score.
 >
 > ```
@@ -611,13 +612,13 @@ print(f'The answer is {acc}')
 > for i in ... # TODO
 > ```
 >
-> > ### {% icon solution %} Hint: Looping over two variables
+> > <solution-title>Hint: Looping over two variables</solution-title>
 > > There are two ways to do this, one you might be able to guess, and one that might be new:
 > > 1. Loop over a `range()` using `len(sequence)`. Since `len(sequence) == len(quality_scores)`, when we access the Nth position of either, they match up.
 > > 2. `zip(sequence, quality_scores)` will loop over both of these lists together. It produces a new list that looks like `[['G', 20], ['A', 20], ['T', 34]]`.
 > {: .solution}
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The naïve solution is quite easy and readable:
 > > ```
 > > for i in range(len(sequence)):

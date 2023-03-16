@@ -45,7 +45,13 @@ cover="$output".png
 srcdir="$(dirname "$source")"
 
 # Metadata
-meta_authors="$(ruby bin/extract-frontmatter.rb "${source}" | jq '.contributors | join(", ")' -r)"
+ruby bin/extract-frontmatter.rb "${source}" | jq '.contributors | join(", ")' > /dev/null || ec=$?
+if (( ec == 0 )); then
+	meta_authors="$(ruby bin/extract-frontmatter.rb "${source}" | jq '.contributors | join(", ")' -r)"
+else
+	meta_authors="$(ruby bin/extract-frontmatter.rb "${source}" | jq '.contributions.authorship | join(", ")' -r)"
+fi
+
 meta_title="$(ruby bin/extract-frontmatter.rb "${source}" | jq .title -r)"
 REVISION="$(git log -1 --format=%H)"
 

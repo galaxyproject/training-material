@@ -9,7 +9,7 @@ questions:
 objectives:
   - "Adding a video to a set of slides"
 time_estimation: "20m"
-subtopic: extras
+subtopic: writing
 key_points:
   - "Thanks to the GTN, videos are easy to add"
   - "Be mindful of your captions. Short sentences are good!"
@@ -18,11 +18,11 @@ contributors:
 ---
 
 # Video Lectures
-{:.no_toc}
+
 
 Based on the work by Delphine Larivière and James Taylor with their [COVID-19 Lectures](https://github.com/galaxyproject/video-lectures/) we have implemented a similar feature in the Galaxy Training Network.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will:
 >
@@ -112,7 +112,7 @@ Oftentimes the services don't understand part of speech, so by adding adjectives
 
 Lastly, we need to tell the GTN framework we would like videos to be generated.
 
-> ### {% icon hands_on %} Hands-on: Enable video
+> <hands-on-title>Enable video</hands-on-title>
 >
 > 1. Edit the `slides.html` for your tutorial
 > 2. Add `video: true` to the top
@@ -145,4 +145,4 @@ All of this is run on cron by [`.github/workflows/video.yml`](https://github.com
 Many of the scripts internally are prefixed with `ari`, we named our internal version after [github.com/jhudsl/ari/](https://github.com/jhudsl/ari/) which inspired it, but we wanted a version that would be more closely tied to the GTN and integrate with our infrastructure nicely, so we ended up writing our own.
 
 # Conclusion
-{:.no_toc}
+

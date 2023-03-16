@@ -109,7 +109,7 @@ def check_tutorials(server=None):
     else:
         if os.path.exists('.cache.yaml'):
             with open('.cache.yaml', 'r') as handle:
-                server_tools = yaml.load(handle)
+                server_tools = yaml.safe_load(handle)
         else:
             server_tools = extract_public_galaxy_servers_tools()
             with open('.cache.yaml', 'w') as handle:

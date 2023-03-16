@@ -9,7 +9,7 @@ objectives:
 - Identify transmission clusters based on SNP distances
 - Study the emergence and spread of drug resistance based on transmission analysis.
 time_estimation: 2H
-enable: false
+draft: true
 level : Intermediate
 key_points:
 - Clustering is a useful tool to detect transmission links between patients and oubreak investigation.
@@ -25,10 +25,10 @@ contributors:
 # Pre-requisites
 This tutorial assumes that you have watched the respective webinars about ([Drug resistance prediction](https://youtu.be/Ddwt-_gQR2M), [Phylogenetic mutations](https://youtu.be/1ps_o5rpnmw), [The concept of clustering](https://youtu.be/l4cPUECJ7VU) and
   [Genetic distance thresholds](https://youtu.be/kKNgmpy1N94)) and therefore you understand 1) How genotypic drug susceptibility is determined
-based on WGS analysis 2) The concept of clustering. It also assumes that you have completed the tutorial on [MTB variant analysis](https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html).
+based on WGS analysis 2) The concept of clustering. It also assumes that you have completed the tutorial on [MTB variant analysis]({% link topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.md %}).
 
 # Introduction
-{:.no_toc}
+
 
 
 Now you are familiar with the process of genome sequencing, quality control of sequencing data, mapping and
@@ -58,7 +58,7 @@ and we suggest you to do it after you have finished all the tutorials of this wo
 Before starting, bear in mind that this tutorial assumes that you watched the respective webinars of
 this lesson
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -72,7 +72,7 @@ As mentioned in the introduction, we have performed mapping and variant calling 
 that we need to analyze. The result are the respective 20 VCF files that describe the mutations found
 for each of the samples. Before starting the analysis of such mutations, we will need to import them
 into Galaxy:
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
@@ -114,7 +114,7 @@ into Galaxy:
 >    Use a meaningful name, for example **MTB VCFs**.
 {: .hands_on}
 
-> ### {% icon tip %} Tip
+> <tip-title></tip-title>
 > To create a dataset collection:
 > - Click on the box under the history name (bottom right) that says "Operations on multiple datasets"
 > - Tick all 20 VCFs files that we just imported.
@@ -156,7 +156,7 @@ those variants at a frequency equal or greater than 90%. We will be using here t
 
 *Note: TB variant Filter refers to SNPs as SNVs. These two short forms are interchangeable, meaning **S**ingle **N**ucleotide **P**olymorphism and **S**ingle **N**ucleotide **V**ariant, respectively.*
 
-> ### {% icon hands_on %} Hands-on: Filter VCF files for epidemiological investigation
+> <hands-on-title>Filter VCF files for epidemiological investigation</hands-on-title>
 >
 > 1. {% tool [TB Variant Filter](toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.3.5+galaxy2) %} with the following parameters:
 >    - {% icon param-collection %} *"VCF file to be filter"*: `MTB VCFs` (Select Dataset Collection instead of Single Dataset)
@@ -166,12 +166,12 @@ those variants at a frequency equal or greater than 90%. We will be using here t
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > **`TB Variant Filter`** reads the VCF and output only SNPs that have, at least, 90% frequency.
 > How can this sofware extract such information from the VCF files?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > That information is contained, for each mutation, in the VCF:
 > > - The `TYPE` field within the INFO string will tell us if the mutation is a SNP (TYPE=snp)
@@ -194,7 +194,7 @@ given the reference genome and the VCF of the strain we want to reconstruct the 
 
 https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.9+galaxy2
 
-> ### {% icon hands_on %} Hands-on: Reconstruct the complete genome of each sample
+> <hands-on-title>Reconstruct the complete genome of each sample</hands-on-title>
 >
 > 1. {% tool [bcftools consensus](toolshed.g2.bx.psu.edu/repos/iuc/bcftools_consensus/bcftools_consensus/1.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"VCF/BCF Data"*: `MTB VCFs filtered` (output of **TB Variant Filter** {% icon tool %})
@@ -204,23 +204,23 @@ https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/bcftools_cons
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > Imagine that we forgot to filter the VCFs to contain only fixed variants, and there are also
 > SNPs with frequencies, of 15%, 30%, or 56.78%. Which allele do you think bcftools consensus would
 > insert in the genome?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The behaviour of bcftools consensus in this case can be specified with the option `--haplotype`
 > > For example, we can set `haplotype=2` so the second allele will be used... wait... what?
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Second allelle!?
+> <question-title>Second allelle!?</question-title>
 >
 > What do you think that things like "second allele" or "*The* alterntive allele" mean here?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > Many of the bioinformatic programs are developed to analyze eukaryotic genomes, particularly
 > > human genomes. That means that these programs have in mind that the genomes
 > > are diploid and thus each posible position in the genome has two possible alleles. In
@@ -261,7 +261,7 @@ However we can do the same with a specific command that *concatenates* files.
 
 ### Build a multiple-sequence alignment from complete genomes with "**Concatenate datasets**"
 
-> ### {% icon hands_on %} Hands-on: Concatenate genomes to build a MSA
+> <hands-on-title>Concatenate genomes to build a MSA</hands-on-title>
 >
 > 1. {% tool [Concatenate datasets tail-to-head (cat)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Datasets to concatenate"*: `Dataset collection` (output of **bcftools consensus** {% icon tool %})
@@ -275,14 +275,14 @@ Now we have a multifasta file, where **each position of each genome corresponds 
 of the rest of genomes in the file**. This can be seen and used as a multiple-sequence alignment of
 all of our genomes! However, it is important that you understand the following question...
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Generating multiple-sequence alignments can be complicated and computationally demanding, and there are
 > many software packages to perform such task. How is then possible that we were able to build a MSA by just
 > stacking genomes one on top of each other? Can you think about what makes our case special, so we can
 > just use this "trick"?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > We have generated the complete genome of each sample by substituting in the reference genome
 > > those **SNPs** that we found in that said sample (described in the VCF). Remember that **we
@@ -319,7 +319,7 @@ After removing invariant positions, we end up with a SNP alignment like the foll
 
 ![MSA of 5 MTB genomes](./images/SNP_MSA.png "A SNP alignment where all positions are polymorphic")
 
-> ### {% icon hands_on %} Hands-on: Removing invariant sites from a MSA
+> <hands-on-title>Removing invariant sites from a MSA</hands-on-title>
 >
 > 1. {% tool [Finds SNP sites](toolshed.g2.bx.psu.edu/repos/iuc/snp_sites/snp_sites/2.5.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"FASTA file"*: `Single dataset` (output of **Concatenate datasets** {% icon tool %})
@@ -339,12 +339,12 @@ Now we are all set to calculate pairwise SNP distances between samples and decid
 patients are within the same transmission cluster or not. Having a SNP alignment, this is fairly
 easy. We will use **SNP distance matrix**, that will generate a matrix with pairwise SNP distances.
 
-> ### {% icon hands_on %} Hands-on: Distance matrix from SNP alignment.
+> <hands-on-title>Distance matrix from SNP alignment.</hands-on-title>
 >
 > 1. {% tool [SNP distance matrix](toolshed.g2.bx.psu.edu/repos/iuc/snp_dists/snp_dists/0.6.3+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"FASTA multiple sequence alignment"*: `Single dataset` (output of **Finds SNP sites** {% icon tool %})
 >
->    > ### {% icon comment %} Comment
+>    > <comment-title></comment-title>
 >    >
 >    > Have a look at the distance matrix to make sure you understand the whole process. Given that
 >    > we only have 20 samples, you could already spot some samples that are involved in the same
@@ -367,13 +367,13 @@ linking them in between as exemplified in the picture below.
 
 
 
-> ### {% icon question %} Very Important Question
+> <question-title>Very Important Question</question-title>
 >
 > 1. In the image above exemplifying a transmission cluster, the distance between samples A and E is
 > 17 SNPs. Being the other pairwise distances in the figure the same,
 > would it be possible that the distance between A and E is different?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. The figure used above as an example is a **flagrant oversimplification**. In the figure not all pairwise
 > > distances are represented (for example between sample A and C).
@@ -452,11 +452,11 @@ their respective names and the cluster id (an arbitrary number) they belong to:
 | ERR6362253.vcf | 12         |
 | ERR5987352.vcf    | 10         |
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > How many transmission clusters did we find? How many samples are linked to recent transmission in our dataset?
 >
-> > ### {% icon solution %} Answer
+> > <solution-title>Answer</solution-title>
 > > We have found two transmission clusters with respective IDs 10 and 12. Transmission cluster 10
 > > is composed by two samples linked by recent transmission and transmission cluster 12 by three samples
 > > linked by recent transmission. For example samples ERR6362484 and ERR5987352 are linked by
@@ -464,13 +464,13 @@ their respective names and the cluster id (an arbitrary number) they belong to:
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Let's assume that we have the isolation dates of samples ERR6362484 and ERR5987352, which
 > belong to the same transmission cluster. Sample ERR6362484 was isolated on January 2021, while sample
 >  ERR5987352 was isolated on September 2021. Would you be able to determine who was the infector and who the infectee?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > **NO**
 > >
 > >  Isolation dates have been used traditionally to define **index cases** within transmission clusters
@@ -479,7 +479,7 @@ their respective names and the cluster id (an arbitrary number) they belong to:
 > > to misidentification of index cases. **Remember:** we cannot rule out the possibility
 > > that patients within the cluster were infected by an index case that was not sampled.
 > >
-> >  Read [Xu et al., 2019](https://doi.org/10.1371/journal.pmed.1002961) for more information on this topic.
+> >  Read {% cite Xu_2019 %} for more information on this topic.
 > {: .solution}
 {: .question}
 
@@ -495,13 +495,13 @@ on our clustering analysis.
 
 ## Get the data
 
-In the [MTB Variant Analysis tutorial](https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html)
+In the [MTB Variant Analysis tutorial]({% link topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.md %})
 you have used **TB-profiler** to generate a report with determinants of drug resistance of a
 particular MTB strain, and predict its genotypic drug susceptibility. We have done **exactly the same**
 for the 20 samples that we used in the clustering analysis, so we have now the TB-profiler report for
 all of them.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
 >    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
@@ -623,7 +623,7 @@ as output the complete line, for example `Drug-resistance: MDR`
 
 #### *Search in textfiles (grep)*
 
-> ### {% icon hands_on %} Search for `Drug-resistance` in TB-profiler files
+> <hands-on-title>Search for `Drug-resistance` in TB-profiler files</hands-on-title>
 >
 > 1. {% tool [Search in textfiles](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_grep_tool/1.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `Dataset collection` (Collection of the TB profiler reports we just imported) {% icon tool %})
@@ -636,7 +636,7 @@ We will add the name of the input file, to know to which sample the DR line refe
 We will *prepend* the column with the sample name so it appears as the first column.
  This is arbitrary and just a matter of personal taste:
 
-> ### {% icon hands_on %} Prepend the sample name to the DR profile
+> <hands-on-title>Prepend the sample name to the DR profile</hands-on-title>
 >
 > 1. {% tool [Add input name as column](toolshed.g2.bx.psu.edu/repos/mvdbeek/add_input_name_as_column/addName/0.2.0) %} with the following parameters:
 >    - {% icon param-file %} *"to Dataset"*: `Dataset collection` (output of **Search in textfiles** {% icon tool %})
@@ -653,7 +653,7 @@ In this step we will use a simple tool that searches and replaces text. We want 
 at the end of sample names, and the string "Drug-resistance:". So we will tell the tool to search
 for these two *patterns* and to replace them with "*nothing*"
 
-> ### {% icon hands_on %} Hands-on: Task description
+> <hands-on-title>Task description</hands-on-title>
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `Single file` (output of **Concatenate datasets** {% icon tool %})
@@ -668,12 +668,12 @@ for these two *patterns* and to replace them with "*nothing*"
 {: .hands_on}
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. How many MDR strains did we find in the dataset?
 > 2. What does it mean to be Pre-MDR?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. Eight MDR strains, three of which are pre-XDR because they have additional resistance to fluoroquinolones. (You can look into details by looking into the TB profiler reports).
 > > 2. As MDR means to be resistant to INH and RIF, pre-MDR means to be either INH-monoresistant or RIF-monoresistant.
 > > If we have a look at the respective TB-profiler reports, we can see that these three strains are RIF-monoresistant.
@@ -711,13 +711,13 @@ We will be supporting our findings in the results of our analysis, and the conce
 
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > Assuming that we have a very good sampling of the outbreak. Which strains **may** represent instances
 > of *de novo* evolution of drug resistance and which ones instances of *transmitted* (primary) resistance?
 > Remember that you can look at the TB-profiler reports of independent samples for detailed information.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > In a simplistic scenario, we could consider clustered strains as instances of transmission and
 > > unclustered strains as instances of de novo evolution of DR. Thus, we see that for example there
 > > are three MDR strains (ERR551620, ERR6362078, ERR6362653) that are unclustered and therefore may
@@ -739,14 +739,14 @@ We will be supporting our findings in the results of our analysis, and the conce
 
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. The same principles than those explained above apply to the three MDR strains that are
 >    within the same transmission cluster. However in this case there is one strain that shows clear
 >    evidence of *de-novo* evolution of DR. Do you know which strain and why?
 > 2. Are there possible scenarios other than *de-novo* evolution of DR for this strain?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. Within this cluster of MDR strains, there is one tagged as Pre-XDR by TB-profiler. If we have
 > >    a look at the TB profiler report, we can see that this strain carries an additional mutation in
 > >    *gyrA* that confers resistance to fluorioquinolones. This is compatible with an scenario in which
@@ -756,26 +756,26 @@ We will be supporting our findings in the results of our analysis, and the conce
 {: .question}
 
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > There is one strain with a DR profile "other", because it is only resistant to pyrazinamide. This
 > strain is not within a transmission cluster. Therefore, we conclude that pyrazinamide resistance
 > most likely evolved *de-novo* in this patient due to antibiotic treatment. But we are wrong. Do you know why?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The strain is indeed PZA-resistant. And indeed this is strain is NOT linked to transmission
 > > within our population. However, if we have a look at the TB-profiler report, we observe that this
 > > is a *M. bovis* strain, which are known to be intrinsically resistant to PZA.
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > 1. Is it possible to find in the same transmission cluster two RIF-monoresistant strains that
 >    carry different rpoB mutations?
 > 2. Is it possible to find in the same transmission cluster strains of different MTB sublineages?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. Yes, it is **possible**. In that scenario, both patiens were **recently**
 > >    transmitted with the **same susceptible strain**, and RIF resistance evolved **independently** in both.
 > > 2. No, by definition. Remember that clustering is based on a threshold that we set of genetic
@@ -788,7 +788,7 @@ We will be supporting our findings in the results of our analysis, and the conce
 
 
 # Conclusion
-{:.no_toc}
+
 
 You have learned how to perform a clustering analysis to identify patients that are linked by events of
 **recent transmission**. Clustering analysis is very useful in outbreak investigation and

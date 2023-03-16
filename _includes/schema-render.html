@@ -1,11 +1,24 @@
 <blockquote class="{% if include.value.required %}comment{% else %}tip{% endif %}">
-<h3>
-	{% if include.key == "=" %}
-		Any key permitted
-	{% else %}
-		<code>{{ include.key }}</code>
-	{% endif %}
-	{% if include.value.required %} <b>required</b>{% endif %}</h3>
+
+	<div class="box-title">
+		{% if include.value.required %}
+			{% if include.key == "=" %}
+				Any key permitted
+			{% else %}
+				<code>{{ include.key }}</code>
+			{% endif %}
+		{% else %}
+		<button type="button" aria-expanded="true" aria-label="Toggle tip box: {{ include.key }}">
+			<i class="far fa-lightbulb" aria-hidden="true"></i>
+			{% if include.key == "=" %}
+				Any key permitted
+			{% else %}
+				<code>{{ include.key }}</code>
+			{% endif %}
+			<span role="button" class="fold-unfold fa fa-plus-square"></span>
+		</button>
+		{% endif %}
+	</div>
 
 <b>{{ include.value.type | humanize_types }}</b>
 
@@ -88,7 +101,7 @@
 
 {% if include.value.type == "seq" %}
 	{% if include.value.sequence[0].type != "str" %}
-		{% assign kid_key = "Sequence Value" %}
+	{% assign kid_key = "Sequence Value (List of items)" %}
 		{% assign kid_val = include.value.sequence[0] %}
 		{% assign kid_depth = include.depth | plus: 1 %}
 		{% include _includes/schema-render.html key=kid_key value=kid_val depth=kid_depth %}

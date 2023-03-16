@@ -19,7 +19,7 @@ objectives:
 time_estimation: 8h
 level: Intermediate
 key_points:
-  - Funannotate allows to perform structural annotatation of a eukaryotic genome.
+  - Funannotate allows to perform structural annotation of an eukaryotic genome.
   - Functional annotation can be performed using EggNOG-mapper and InterProScan.
   - BUSCO and JBrowse allow to inspect the quality of an annotation.
   - Funannotate allows to format an annotation for sumission at NCBI.
@@ -35,18 +35,21 @@ contributions:
     - erasmusplus
 
 abbreviations:
-    NMDS: Non-metric multidimensional scaling
+  NMDS: Non-metric multidimensional scaling
 
 requirements:
  - type: internal
    topic_name: genome-annotation
    tutorials:
      - repeatmasker
+
+subtopic: eukaryote
+priority: 2
 ---
 
 
 # Introduction
-{:.no_toc}
+
 
 Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.
 
@@ -62,7 +65,7 @@ While for [Maker]({% link topics/genome-annotation/tutorials/annotation-with-mak
 
 In this tutorial, you will learn how to perform a structural genome annotation, and how to evaluate its quality. Then, you will learn how to run functional annotation, using EggNOG-mapper and InterProScan to automatically assign names and functions to the annotated genes. And you will also learn how Funannotate can prepare files ready for submission of your annotation to the NCBI. Finally, you will learn how to use the [JBrowse](http://jbrowse.org/) genome browser to visualise your new annotation.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -81,7 +84,7 @@ To annotate our genome using Funannotate, we will use the following files:
 
  Funannotate will take into account the position of mapped RNASeq reads, and the alignment of protein sequences on the genome sequence to determine gene positions.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 >
@@ -115,7 +118,7 @@ The first one ({% tool [Funannotate assembly clean](toolshed.g2.bx.psu.edu/repos
 
 The second tool will ensure that our fasta file is sorted, based on the length of the contigs (the longest ones first). It will also rename contigs to make sure the name are standard (they will all begin with `scaffold_`, then a number).
 
-> ### {% icon hands_on %} Polish the assembly
+> <hands-on-title>Polish the assembly</hands-on-title>
 >
 > 1. {% tool [Funannotate assembly clean](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_clean/funannotate_clean/1.8.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Assembly to clean"*: `genome_masked.fasta` (Input dataset)
@@ -127,11 +130,11 @@ The second tool will ensure that our fasta file is sorted, based on the length o
 
 After this step, the genome is clean, sorted, and ready for the structural annotation.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > How many sequences are removed by this cleaning step ?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > The repeat masked genome contains 1461 sequences, while the cleand one only contains 1425, so 36 were removed.
 > >
@@ -147,7 +150,7 @@ You would normally get the Fastq files directly from SRA and use them in the fol
 
 To make use of this RNASeq data, we need to map it on the genome. We will use **RNA star** {% icon tool %} and get a result in the form of a BAM file, that we will use in the rest of the tutorial.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [RNA STAR](toolshed.g2.bx.psu.edu/repos/iuc/rgrnastar/rna_star/2.7.8a+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired-end reads"*: `Paired-end (as individual datasets)`
@@ -161,18 +164,18 @@ To make use of this RNASeq data, we need to map it on the genome. We will use **
 
 We select `11` for the *"Length of the SA pre-indexing string"* parameter as it is the recommended value for a small genome of this size. If you select 14 (the default value), STAR will advise you to use `11` instead in its logs.
 
-> ### {% icon comment %} What if I want to use multiple RNASeq libraries
+> <comment-title>What if I want to use multiple RNASeq libraries</comment-title>
 >
 > To get the best possible annotation, it is adviced to use multiple RNASeq libraries, sequences from different tissues in different conditions. To use them, you can map each one individually using STAR, just as in this tutorial. You will get one BAM file per RNASeq library, and you can then easily merge them into a single BAM file by using the {% tool [MergeSamFiles](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MergeSamFiles/2.18.2.1) %} tool. This single BAM file can then be used by Funannotate like we do in the next steps.
 {: .comment}
 
 Before we move on to the next step, we need to make sure that the mapping went well. Have a look at the `log` output of `RNA STAR`.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What proportion of reads were correctly mapped to the genome? Do you think it is enough to continue with this tutorial?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > Look for `Uniquely mapped reads %`: you should get ~96%. This is a very good score, because while reducing the size of the dataset for this tutorial, we have kept mostly reads properly mapping.
 > > Anyway, with real data, you expect to have a vast majority of reads mapping uniquely on the genome. If it's not the case, check that you're using the correct RNASeq files, with the correct genome sequence.
@@ -181,7 +184,7 @@ Before we move on to the next step, we need to make sure that the mapping went w
 >
 {: .question}
 
-# Strutural annotation
+# Structural annotation
 
 We can now run **Funannotate predict annotation** to perform the structural annotation of the genome.
 
@@ -191,7 +194,7 @@ There are other parameters to finely tune how Funannotate will run ab-initio pre
 
 Funannotate is also able to use GeneMark to predict new genes, but to due to licensing restrictions, this software is not available on every Galaxy instance. We will ignore this for this tutorial, it will not impact the results too much.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [Funannotate predict annotation](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_predict/funannotate_predict/1.8.9+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Assembly to annotate"*: `genome` (output of **Sort assembly** {% icon tool %})
@@ -211,14 +214,14 @@ Funannotate is also able to use GeneMark to predict new genes, but to due to lic
 >
 {: .hands_on}
 
-> ### {% icon comment %} Comments on parameters
+> <comment-title>on parameters</comment-title>
 >
 > - For *"Select protein evidences"* we select `Custom protein sequences` to reduce the computing time, but for real data analysis, you should select the default value: `Use UniProtKb/SwissProt (from selected Funannotate database)`.
 > - It is possible to enable the *"Is it a fungus species?"* option in Funannotate: it launches an additional ab initio predictor (CodingQuerry) dedicated to fungi genomes. However it has proved to be unstable on the genome studied in this tutorial, and it can create a lot of fragmented gene models depending on the RNASeq data available. For this tutorial we leave this option to `No`. You can test it with real data, but be sure to compare the result with and without this option.
 > - For real data analysis you can consider enabling the *"Augustus settings (advanced)"* > *"Run 'optimize_augustus.pl' to refine training (long runtime)"*. If you have enough data, you might get better results as there will be an additional training step for augustus (at the cost of a longer runtime).
 {: .comment}
 
-> ### {% icon comment %} Don't wait
+> <comment-title>Don't wait</comment-title>
 >
 > This step will take a bit of time to run. While it runs, we can already schedule the following functional annotation steps. Galaxy will run them automatically as soon as the structural annotation is ready.
 {: .comment}
@@ -247,7 +250,7 @@ Before moving on, have a quick look at the `tbl2asn error summary report` output
 
 If you plan to submit the final genome sequence and annotation to NCBI, there are a few steps to follow.
 
-> ### {% icon warning %} Please do not submit this genome to NCBI!
+> <warning-title>Please do not submit this genome to NCBI!</warning-title>
 > In this tutorial we will **not** perform a real submission, as we don't want to duplicate the annotation in Genbank every time someone follows this tutorial!
 >
 > But here's a description of the main steps, and how Funannotate can help you in this process. NCBI provides a complete documentation for [genome and annotation submission](https://www.ncbi.nlm.nih.gov/genbank/genomesubmit/).
@@ -269,7 +272,7 @@ The next step will show you how Funannotate can use this `.sbt` file, and the `l
 
 Now we have a structural annotation, and the results of both **EggNOG Mapper** and **InterProScan**. Each one is in a separate file, so we will now combine all this data into a single file that will contain both the structural *and* the functional annotation. This will be the final output of our annotation pipeline, ready to be submitted to the NCBI reference database.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [Funannotate functional](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_annotate/funannotate_annotate/1.8.9+galaxy2) %} with the following parameters:
 >    - *"Input format"*: `GenBank (from 'Funannotate predict annotation' tool)`
@@ -298,7 +301,7 @@ If you display the GFF3 output, you will notice that the functional information,
 
 We now have a complete annotation, including functional annotation, but it's time to evaluate the quality of this annotation. [BUSCO](http://busco.ezlab.org/) (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to evaluate the quality of a genome assembly or of a genome annotation. By comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, ...). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced and annotated genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a set of (predicted) transcript or protein sequences. This is a good evaluation of the "completeness" of the annotation.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.2.2+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `protein sequences` (output of **Funannotate functional** {% icon tool %})
@@ -310,11 +313,11 @@ We now have a complete annotation, including functional annotation, but it's tim
 >
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > How many BUSCO genes were found complete in the annotation? Do you think the quality of the annotation is good?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > On a total of 2449, you should find ~2312 BUSCO genes identifed as complete in the annotation, with 2281 being in single copy, and 31 being duplicated.
 > >
@@ -329,7 +332,7 @@ We now have a complete annotation, including functional annotation, but it's tim
 
 With Galaxy, you can visualize the annotation you have generated using JBrowse genome browser. This allows you to navigate along the chromosomes of the genome and see the structure of each predicted gene. We also add an RNASeq track, using the BAM file created with **RNA STAR** {% icon tool %}.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.11+galaxy1) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
@@ -369,7 +372,7 @@ Earlier, we have seen how general statistics and BUSCO results can help to evalu
 
 Let's run **AEGeAn ParsEval** first: it compares two annotations in GFF3 format.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [AEGeAn ParsEval](toolshed.g2.bx.psu.edu/repos/iuc/aegean_parseval/aegean_parseval/0.16.0) %} with the following parameters:
 >    - {% icon param-file %} *"Reference GFF3 file"*: `gff3` (output of **Funannotate functional** {% icon tool %})
@@ -382,7 +385,7 @@ Let's run **AEGeAn ParsEval** first: it compares two annotations in GFF3 format.
 
 The output is a web page where you can see how many loci or genes are identical or different between the two annotations. By clicking on the `(+)` links, or on the scaffold names, you can see the results more in detail, even at the gene level.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. Display the report
 > 2. Click on `scaffold_11`
@@ -390,11 +393,11 @@ The output is a web page where you can see how many loci or genes are identical 
 >
 {: .hands_on}
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What can you tell from the comparison at this gene locus?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > You should see something like this:
 > >
@@ -411,7 +414,7 @@ The output is a web page where you can see how many loci or genes are identical 
 
 **Funannotate compare** {% icon tool %} is another tool to compare several annotations. It uses genbank files, as generated by **Funannotate functional** {% icon tool %}.
 
-> ### {% icon hands_on %} Hands-on
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [Funannotate compare](toolshed.g2.bx.psu.edu/repos/iuc/funannotate_compare/funannotate_compare/1.8.9+galaxy2) %} with the following parameters:
 >    - {% icon param-files %} *"Genome annotations in genbank format"*: `alternate_annotation.gbk` (Input dataset) and `gbk` (output of **Funannotate functional** {% icon tool %})
@@ -427,11 +430,11 @@ The output is a web page with different tabs:
 - `Merops` and `CAZymes`: count the number of members of each Merops/CAZymes family in each annotation. You can download PDF files at the top, showing colorful representations of this data.
 - `GO`: list Gene Ontology terms that were found to be over or under represented in each annotation.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > What can you tell from this report?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > The alternate annotation contains less genes than the one you generated, and misses a lot of functional annotations. It confirms that this alternate annotation have a lower quality than the one you performed.
 > {: .solution}
@@ -439,8 +442,8 @@ The output is a web page with different tabs:
 {: .question}
 
 # Conclusion
-{:.no_toc}
+
 
 Congratulations for reaching the end of this tutorial! Now you know how to perform a structural and functional annotation of a new eukaryotic genome, using Funannotate, EggNOG mapper and InterProScan. You also learned how Funannotate can help you in the submission process to NCBI. And you learned how to visualise your new annotation using JBrowse, and how to compare it with another annotation.
 
-An automatic annotation of an eukaryotic genome is unfortunately rarely perfect. If you inspect some predicted genes (or look at the `tbl2asn genome validation report` output of Funannotate), you may find some mistakes made by Funannotate, or potential problems, e.g. wrong exon/intron limits, splitted genes, or merged genes. Setting up a manual curation project using [Apollo](http://genomearchitect.org/) can help a lot to manually fix these errors. Check out the [Apollo tutorial]({% link topics/genome-annotation/tutorials/apollo/tutorial.md %}) for more details.
+An automatic annotation of an eukaryotic genome is unfortunately rarely perfect. If you inspect some predicted genes (or look at the `tbl2asn genome validation report` output of Funannotate), you may find some mistakes made by Funannotate, or potential problems, e.g. wrong exon/intron limits, splitted genes, or merged genes. Setting up a manual curation project using [Apollo](http://genomearchitect.org/) can help a lot to manually fix these errors. Check out the [Apollo tutorial]({% link topics/genome-annotation/tutorials/apollo-euk/tutorial.md %}) for more details.

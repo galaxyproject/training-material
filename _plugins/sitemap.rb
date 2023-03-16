@@ -1,4 +1,5 @@
 require 'date'
+require './_plugins/gtn.rb'
 
 module Jekyll
   class SitemapGenerator < Generator
@@ -11,7 +12,7 @@ module Jekyll
 
       site.pages.select{|t| t.path !~ /ipynb$/ }.each {|t|
         begin
-          d = t.data['last_modified_at']
+          d = Gtn::ModificationTimes.obtain_time(t.path)
           d.format = '%FT%T%:z'
           formatted_date = d.to_s
         rescue

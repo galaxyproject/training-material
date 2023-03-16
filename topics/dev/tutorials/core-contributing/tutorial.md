@@ -31,7 +31,7 @@ requirements:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 This tutorial walks you through developing an extension to Galaxy, and how to contribute back to the core project.
 
@@ -43,7 +43,7 @@ The proposed extension could be implemented in several different ways on Galaxy'
 
 With simplicity in mind, we will implement our proposed extension to Galaxy by adding a single new table to Galaxy's data model called ``user_favorite_extension``. The concept of a favorite extension will be represented by a one-to-many relationship from the table that stores Galaxy's user records to this new table. The extension itself that will be favorited will be stored as a ``Text`` field in this new table. This table will also need to include an integer primary key named ``id`` to follow the example set by the rest of the Galaxy data model.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -54,12 +54,12 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 
 {% snippet topics/dev/faqs/contributing.md %}
 
-> ### {% icon hands_on %} Hands-on: Setup your local Galaxy instance
+> <hands-on-title>Setup your local Galaxy instance</hands-on-title>
 >
 > 1. Use GitHub UI to fork Galaxy's repository at `galaxyproject/galaxy`.
 > 2. Clone your forked repository to a local path, further referred to as `GALAXY_ROOT` and `cd` into `GALAXY_ROOT`. Note that we specify the tutorial branch with the `-b` option:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git clone https://github.com/<your-username>/galaxy GALAXY_ROOT
 >    > cd GALAXY_ROOT
@@ -69,7 +69,7 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 >
 > 3. Before we can use Galaxy, we need to create a virtual environment and install the required dependencies. This is generally done with the `common_startup.sh` script:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > bash scripts/common_startup.sh --dev-wheels
 >    > ```
@@ -79,7 +79,7 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 >
 > 4. Activate your new virtual environment:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > . .venv/bin/activate
 >    > ```
@@ -89,7 +89,7 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 >
 > 5. Finally, let's create a new branch for your edits:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > git checkout -b my-feature
 >    > ```
@@ -97,13 +97,13 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 >
 >    Now when you run `git branch` you'll see that your new branch is activated:
 >
->    > > ### {% icon code-in %} Input: Bash
+>    > > <code-in-title>Bash</code-in-title>
 >    > > ```bash
 >    > > git branch
 >    > > ```
 >    > {: .code-in}
 >    >
->    > > ### {% icon code-out %} Output
+>    > > <code-out-title></code-out-title>
 >    > > ```bash
 >    > >   dev
 >    > > * my-feature
@@ -121,7 +121,7 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 >    To initialize the database, you can either start Galaxy (might take some time when executing
 >    for the first time):
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > sh run.sh
 >    > ```
@@ -129,7 +129,7 @@ With simplicity in mind, we will implement our proposed extension to Galaxy by a
 >
 >    or you may run the following script (faster):
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > sh create_db.sh
 >    > ```
@@ -158,13 +158,13 @@ value = Column(TEXT)
 
 Associations between objects are usually defined with the `relationship` construct. For example, the `UserAddress` model has an association with the `User` model and is defined with the `relationship` construct as the `user` attribute.
 
-> ### {% icon question %} Questions about Mapping
+> <question-title>about Mapping</question-title>
 >
 > 1. What should be the SQLAlchemy model named corresponding to the table ``user_favorite_extension`` based on [other examples](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/model/__init__.py)?
 > 2. What table stores Galaxy's user records?
 > 3. What is another simple table with a relationship with the Galaxy's user table?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. ``UserFavoriteExtension``
 > > 2. ``galaxy_user``
 > > 3. An example table might be the ``user_preference`` table.
@@ -233,11 +233,11 @@ For this tutorial, you'll need to do the following:
 2. Edit the revision template, filling in the body of the upgrade and downgrade functions. 
 3. Run the migration.
 
-> ### {% icon question %} Question about generating a revision template
+> <question-title> about generating a revision template</question-title>
 >
 > What command should you run to generate a revision template?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```bash
 > > sh run_alembic.sh revision --head=gxy@head -m "Add user_favorite_extentions table"
 > > ```
@@ -256,11 +256,11 @@ do that here.
 
 {% include topics/dev/tutorials/core-contributing/revisionid_add_user_favorite_extensions.py_diff.md %}
 
-> ### {% icon question %} Question about running the migration
+> <question-title>about running the migration</question-title>
 >
 > What command should you run to upgrade your database to include the new table? 
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```bash
 > > sh manage_db.sh upgrade
 > > ```
@@ -318,7 +318,7 @@ Please review ``test_users.py`` and attempt to write a test case that:
 
 Verify this test fails when running stand-alone.
 
-> ### {% icon code-in %} Input: Bash
+> <code-in-title>Bash</code-in-title>
 > ```bash
 > ./run_tests.sh -api lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
 > ```
@@ -350,7 +350,7 @@ Ideally, you'd start at the top of the test case - make sure it fails on the fir
 implement ``get_favorite_extensions`` on the manager and the API code to wire it up, and continue
 with ``add_favorite_extension`` before finishing with ``delete_favorite_extension``.
 
-> ### {% icon code-in %} Input: Bash
+> <code-in-title>Bash</code-in-title>
 > ```bash
 > ./run_tests.sh -api lib/galaxy_test/api/test_users.py::UsersApiTestCase::test_favorite_extensions
 > ```

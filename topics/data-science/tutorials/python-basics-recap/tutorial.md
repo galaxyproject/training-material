@@ -36,6 +36,7 @@ contributors:
 priority: 9
 notebook:
   language: python
+  pyolite: true
 
 abbreviations:
   ORF: Open Reading Frame
@@ -43,7 +44,7 @@ abbreviations:
 
 This module provide something like a recap of everything covered by the modular Python Introductory level curriculum. This serves as something of a graduation into the Intermediate tutorials which cover more advanced topics.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -143,7 +144,11 @@ And a couple that can be used with numbers and strings (or other values!)
 
 ## Iterables
 
-TODO
+In Python, there is a class of things which can be easily looped over, called "iterables". All of the following are examples of iterable items:
+
+- `range(10)`
+- `'abcd'`, a string
+- `['a', 'b' , 'c' , 'd']`, a list
 
 ## Flow Control
 
@@ -251,7 +256,7 @@ Additionally if you need a newline in your file, you *must* write it yourself wi
 
 The above code is equivalent to this, but it is not recommended, it's a bit harder to read, and it is very very common to forget to close files which is not ideal.
 
-```
+```python
 handle = open('out.txt', 'w')
 handle.write("Здравствуйте ")
 handle.write("世界!\n")

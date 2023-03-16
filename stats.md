@@ -8,7 +8,7 @@ layout: base
 <!-- topic stats -->
 {% assign topics = site.data | where_exp: "item", "item.type" | where_exp:"item","item.enable != false" %}
 {% assign topics_science = topics | where: "type","use" | where_exp:"item","item.enable != false" | sort: "name" %}
-{% assign topics_technical = topics | where_exp: "item", "item.type != 'use'" | where_exp:"item","item.enable != false" %}
+{% assign topics_technical = topics | where_exp: "item", "item.type != 'use'" | where_exp: "item", "item.type != 'map'" | where_exp:"item","item.enable != false" %}
 
 <!-- contributors stats -->
 {% assign contributors = site.data['contributors'] | where_exp: "item", "item.halloffame != 'no'" | sort: "joined" %}
@@ -42,41 +42,9 @@ layout: base
 <h1>GTN Statistics</h1>
 
 <div class="stats">
+
+{% snippet faqs/gtn/gtn_stats.md %}
 <div class="row">
-
- <!-- stats cards -->
-
- <!-- number of topics -->
-<div class="col-md-3">
- <div class="gtn-card color-agenda">
-   <div class="card-title">{{ topics | size }}</div>
-   <div class="card-text">Topics</div>
- </div>
-</div>
-
- <!-- number of tutorials -->
-<div class="col-md-3">
- <div class="gtn-card color-tip">
-   <div class="card-title">{{ tutorials | size }}</div>
-   <div class="card-text">Tutorials</div>
- </div>
-</div>
-
-<!-- number of contributors -->
-<div class="col-md-3">
- <div class="gtn-card color-comment">
-   <div class="card-title">{{ contributors | size }}</div>
-   <div class="card-text">Contributors</div>
- </div>
-</div>
-
-<!-- years of contributors -->
-<div class="col-md-3">
- <div class="gtn-card color-handson">
-   <div class="card-title">{{ site.age | round: 1}}</div>
-   <div class="card-text">Years</div>
- </div>
-</div>
 
 <!-- tutorials per topic -->
 <div class="col-md-6">
@@ -134,7 +102,7 @@ layout: base
  <div class="card">
   <div class="card-body">
    <h5 class="card-title">Recently Updated Tutorials</h5>
-   {% assign latest_tutorials = tutorials | filter_recent_modified: 10 %}
+   {% assign latest_tutorials = site | recently_modified_tutorials %}
    <table class="table table-striped">
     <thead>
       <tr><th>Date</th><th>Topic</th><th>Title</th></tr>
@@ -169,7 +137,7 @@ layout: base
  <div class="card">
   <div class="card-body">
    <h5 class="card-title">Analytics Data</h5>
-   <p class="card-text">You get to see the same data that we do! <a href="https://plausible.galaxyproject.eu/training.galaxyproject.org" target="_blank">Visit plausible.galaxyproject.eu</a>.</p>
+   <p class="card-text">You get to see the same data that we do! <a href="https://plausible.galaxyproject.eu/training.galaxyproject.org">Visit plausible.galaxyproject.eu</a>.</p>
    <iframe src="https://plausible.galaxyproject.eu/training.galaxyproject.org" width="100%" height="1600px" frameBorder="0"></iframe>
    </div>
  </div>
@@ -199,12 +167,16 @@ function genColors(size) {
 
 // Charts displaying number of tutorials per topic
 // Scientific Topics
-var tutoBar = document.getElementById('tutorialsBar');
-
 var data_tutos = [{% for topic in topics_science %}{{site | topic_filter: topic.name | size }}{%unless forloop.last%},{%endunless%}{% endfor %}];
 var labels_topics = [{% for topic in topics_science %}"{{ topic.title }}"{%unless forloop.last%},{%endunless%}{% endfor %}];
 
-var tutorialsBar = new Chart(tutoBar, {
+// Remove animations for accessibility
+const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+if(isReduced){
+    Chart.defaults.global.animation.duration = 0;
+}
+
+var tutorialsBar = new Chart('tutorialsBar', {
   type: 'horizontalBar',
 
   data: {
@@ -235,12 +207,10 @@ var tutorialsBar = new Chart(tutoBar, {
 
 // Technical Topics
 // Chart displaying number of tutorials per topic
-var tutoBarTechnical = document.getElementById('tutorialsBarTechnical');
-
 var data_tutos = [{% for topic in topics_technical %}{{site | topic_filter: topic.name | size }}{%unless forloop.last%},{%endunless%}{% endfor %}];
 var labels_topics = [{% for topic in topics_technical %}"{{ topic.title }}"{%unless forloop.last%},{%endunless%}{% endfor %}];
 
-var tutorialsBar = new Chart(tutoBarTechnical, {
+var tutorialsBarTechnical = new Chart("tutorialsBarTechnical", {
   type: 'horizontalBar',
 
   data: {
@@ -279,13 +249,11 @@ var tutorialsBar = new Chart(tutoBarTechnical, {
 
 
 // Contributors chart
-var contributorsGraph = document.getElementById('contributorsGraph');
-
 var data_contributors = [{%for c in contributors_over_time %}{x:"{{contributors_over_time_labels[forloop.index]}}" , y: {{c}} } {%unless forloop.last%},{%endunless%}{%endfor%}];
 
 var labels_contributors = [{%for l in contributors_over_time_labels %}"{{l}}"{%unless forloop.last%},{%endunless%}{%endfor%}];
 
-var tutorialsBar = new Chart(contributorsGraph, {
+var contributorsBar = new Chart('contributorsGraph', {
   type: 'line',
   data: {
     datasets: [{

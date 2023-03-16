@@ -24,11 +24,12 @@ contributors:
 priority: 11
 notebook:
   language: python
+  pyolite: true
 ---
 
 Globbing is the term used in computer science when we have a bunch of files and we want to list all of them matching some pattern.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -96,13 +97,13 @@ print(glob.glob('**/a.csv'))
 
 # Exercise
 
-> ### {% icon question %} Question: Where in the world is the CSV?
+> <question-title>Where in the world is the CSV?</question-title>
 >
 > 1. How would you find all `.csv` files?
 > 2. How would you find all `.txt` files?
 > 3. How would you find all files starting with the letter 'e'?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > 1. `glob.glob('**/*.csv')`
 > > 2. `glob.glob('**/*.txt')`

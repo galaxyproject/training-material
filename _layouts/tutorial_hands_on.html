@@ -14,17 +14,12 @@ footer: no
 {% assign associated_slides = false %}
 {% assign own_material = null %}
 {% for material in topic_material %}
-    {% if material.enable != "false" or jekyll.environment != "production"  %}
+    {% if material.draft != "true" or jekyll.environment != "production"  %}
         {% if material.tutorial_name == page.tutorial_name %}
             {% assign own_material = material %}
             {% if material.slides  %}
                 {% assign associated_slides = true %}
             {% endif %}
-        {% endif %}
-        {% if material.type == "introduction" %}
-            {% assign intro_link = true %}
-            {% assign intro_target = material.tutorial_name | append: '.html' %}
-
         {% endif %}
     {% endif %}
 {% endfor %}
@@ -45,15 +40,17 @@ footer: no
   room: '{{ gitter | remove: "https://gitter.im/" }}'
   };
 </script>
-<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+{% if topic.custom_css %}
+<style>
+{{ topic.custom_css }}
+</style>
+{% endif %}
 
-<script type="application/ld+json">
-    {% include _includes/material.jsonld material=page topic=topic site=site %}
-</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
 
 <section class="tutorial topic-{{ page.topic_name }}">
     <h1 data-toc-skip>{{ page.title }}</h1>
-    {% if page.enable == false or page.enable == "false" %}
+    {% if page.draft %}
     <div class="alert alert-warning" role="alert">
         <h4 class="alert-heading">Under Development!</h4>
         <p>This tutorial is not in its final state. The content may change a lot in the next months.
@@ -64,7 +61,7 @@ footer: no
     {% include _includes/contributors-line.html page=page %}
 
     <blockquote class="overview">
-        <h3>{{ locale['overview'] | default: "Overview"}}</h3>
+        <div class="box-title" aria-label="overview box">{{ locale['overview'] | default: "Overview"}}</div>
         {% unless page.license %}
         <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
         {% endunless %}
@@ -108,7 +105,7 @@ footer: no
             {% assign tuto_has_zenodo = true %}
         {% endif %}
 
-        {% if associated_slides or intro_link or tuto_has_zenodo or own_material.workflows or own_material.tours or tuto_has_docker or material.notebook %}
+        {% if associated_slides or intro_link or tuto_has_zenodo or own_material.workflows or own_material.tours or tuto_has_docker or own_material.notebook %}
         <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> {{ locale['supporting-materials'] | default: "Supporting Materials" }}:</strong></div>
         <ul class="supporting_material">
             {% if associated_slides %}
@@ -133,8 +130,8 @@ footer: no
                 <li class="btn btn-default supporting_material">{% include _includes/resource-tours.html material=own_material topic=topic.name label=true %}</li>
             {% endif %}
 
-            {% if material.notebook %}
-                <li class="btn btn-default supporting_material">{% include _includes/resource-notebooks.html material=material topic=topic.name label=true %}</li>
+            {% if own_material.notebook %}
+                <li class="btn btn-default supporting_material">{% include _includes/resource-notebooks.html material=own_material topic=topic.name label=true %}</li>
             {% endif %}
 
             {% assign faqpage = page.dir | append: 'faqs/index.md' | remove_first: '/' %}
@@ -153,7 +150,7 @@ footer: no
         </ul>
         {% endif %}
 
-        <div><strong>{% icon last_modification aria=false %} {{ locale['last-modification'] | default: "Last modification" }}:</strong> {{ page.last_modified_at | date: "%b %-d, %Y"}} </div>
+        <div><strong>{% icon last_modification aria=false %} {{ locale['last-modification'] | default: "Last modification" }}:</strong> {{ page | last_modified_at | date: "%b %-d, %Y"}} </div>
         <div><strong>{% icon license aria=false %} {{ locale['license'] | default: "License" }}:</strong>
             {% if page.license %}
             Tutorial Content is licensed under {{ page.license }}
@@ -171,17 +168,17 @@ footer: no
                 <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
             </div>
             <div class="col-sm-10">
-                 {% if page.notebook %}
+                 {% if own_material.notebook %}
                      {% capture ipynbpath %}{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", "" }}{{ page.topic_name }}-{{ own_material.tutorial_name }}.ipynb{% endcapture %}
                      {% capture ipynbpathnosoln %}{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: "tutorial.md", "" }}{{ page.topic_name }}-{{ own_material.tutorial_name }}-course.ipynb{% endcapture %}
                      {% capture ipynbpathsimple %}{{ page.topic_name }}-{{ own_material.tutorial_name }}.ipynb{% endcapture %}
                      {% capture ipynbpathsimplenosoln %}{{ page.topic_name }}-{{ own_material.tutorial_name }}-course.ipynb{% endcapture %}
-                    {% if page.notebook.snippet %}
-                        {% assign pagesnippet = page.notebook.snippet %}
-                        {% snippet pagesnippet %}
-                    {% elsif page.notebook.language ==  "r" %}
+                    {% if own_material.notebook.snippet %}
+                        {% assign pagesnippet = own_material.notebook.snippet %}
+                        {% snippet {{own_material.notebook.snippet}} %}
+                    {% elsif own_material.notebook.language ==  "r" %}
                         <blockquote class="comment">
-                            <h3>{% icon comment aria=false %} {{locale['best-in-rstudio'] | default: "Best viewed in RStudio" }}</h3>
+                            <div class="box-title" aria-label="comment box">{{locale['best-in-rstudio'] | default: "Best viewed in RStudio" }}</div>
                             <p>
                                 This tutorial is available as an RMarkdown file and best viewed in RStudio! You can load this notebook in RStudio on one of the UseGalaxy.* servers<!--, or you can click to run it in MyBinder-->
                             </p>
@@ -215,7 +212,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                         {% snippet faqs/galaxy/interactive_tools_rstudio_rmarkdown.md %}
                     {% else %}
                         <blockquote class="comment">
-                            <h3>{% icon comment aria=false %} {{locale['best-in-jupyter'] | default: "Best viewed in a Jupyter Notebook" }}</h3>
+                            <div class="box-title" aria-label="comment box">{{locale['best-in-jupyter'] | default: "Best viewed in a Jupyter Notebook" }}</div>
                             <p>
                                 This tutorial is best viewed in a Jupyter notebook! You can load this notebook one of the following ways<!--, or you can click to run it in MyBinder-->
                             </p>
@@ -252,11 +249,11 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
 
                 {{ content
                     | replace: '<blockquote class="hands_on">', '<blockquote class="notranslate hands_on">'
-                    | no_translate:site.words_to_not_translate }}
+                    }}
 
                 {% if page.key_points %}
                 <blockquote class="key_points">
-                    <h3>{% icon keypoints aria=false %} {{locale['key-points'] | default: "Key points" }}</h3>
+                    <div class="box-title" aria-label="key-points box">{% icon keypoints aria=false %} {{locale['key-points'] | default: "Key points" }}</div>
                     <ul>
                         {% for key_point in page.key_points %}
                         <li>{{ key_point | markdownify }}</li>
@@ -293,7 +290,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                 {% endif %}
 
 
-                {% if material.cited %}
+                {% if page.cited %}
                 <h1 id="bibliography">{{locale['references']| default: "References" }}</h1>
                 {% bibliography --cited %}
                 {% endif %}
@@ -310,7 +307,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                 {% endif %}
 
                 <h1>{{locale['feedback'] | default: "Feedback" }}</h1>
-                <p class="text-muted">{{ locale['feedback-text'] | default: "Did you use this material as an instructor? Feel free to give us feedback on"}} <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">{{ locale['feedback-link-text'] | default: "how it went"}}</a>.
+                <p class="text-muted">{{ locale['feedback-text'] | default: "Did you use this material as an instructor? Feel free to give us feedback on"}} <a href="https://github.com/galaxyproject/training-material/issues/1452">{{ locale['feedback-link-text'] | default: "how it went"}}</a>.
                 <br>{{ locale['feedback-text-learner'] | default: "Did you use this material as a learner or student? Click the form below to leave feedback." }}<i class="fas fa-hand-point-down"></i>
                 </p>
 
@@ -346,7 +343,8 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                 <p>
                     <ol>
                         <li id="citation-text">
-                            {%- include _includes/contributor-list.html contributors=page.contributors sep=", " -%}, {{ page.last_modified_at | date: "%Y" }} <b>{{ page.title }} (Galaxy Training Materials)</b>. <a href="{{ site.url }}{{ site.baseurl }}{{page.url}}">{{ site.url }}{{ site.baseurl }}{{page.url}}</a> Online; accessed TODAY
+                            {% assign c = page.contributions.authorship | default: page.contributors %}
+                            {%- include _includes/contributor-list.html contributors=c sep=", " -%}, {{ page.last_modified_at | date: "%Y" }} <b>{{ page.title }} (Galaxy Training Materials)</b>. <a href="{{ site.url }}{{ site.baseurl }}{{page.url}}">{{ site.url }}{{ site.baseurl }}{{page.url}}</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -354,14 +352,23 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                     </ol>
                 </p>
 
-
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
                 <blockquote class="details">
-                  <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
-                  <p style="display: none;">
 
-                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
 <code id="citation-code">@misc{% raw %}{{% endraw %}{{topic.name}}-{{page.tutorial_name}},
-author = "{%- include _includes/contributor-list.html contributors=page.contributors sep=" and " -%}",
+{% assign authors = page.contributors | filter_authors:page.contributions -%}
+author = "{%- include _includes/contributor-list.html contributors=authors sep=" and " -%}",
 title = "{{ page.title }} (Galaxy Training Materials)",
 year = "{{ page.last_modified_at | date: "%Y"}}",
 month = "{{ page.last_modified_at | date: "%m"}}",
@@ -369,21 +376,23 @@ day = "{{ page.last_modified_at | date: "%d" }}"
 url = "{% raw %}\url{{% endraw %}{{ site.url }}{{ site.baseurl }}{{page.url}}{% raw %}}{% endraw %}",
 note = "[Online; accessed TODAY]"
 }
-@article{Batut_2018,
-    doi = {10.1016/j.cels.2018.05.012},
-    url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
-    year = 2018,
-    month = {jun},
-    publisher = {Elsevier {BV}},
-    volume = {6},
-    number = {6},
-    pages = {752--758.e1},
-    author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
-    title = {Community-Driven Data Analysis Training for Biology},
-    journal = {Cell Systems}
-}</code>
-                </pre></div></div>
-                </p>
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
                 </blockquote>
 
                 {% if page.contributions %}
@@ -398,25 +407,21 @@ document.getElementById("citation-code").innerHTML = document.getElementById("ci
 document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
 </script>
 
-                <h3>{% icon congratulations aria=false %} {{locale['congrats'] | default: "Congratulations on successfully completing this tutorial!"}}</h3>
+                {% icon congratulations aria=false %} {{locale['congrats'] | default: "Congratulations on successfully completing this tutorial!"}}
 
                 {% if topic.name == "contributing" %}
                 <blockquote class="agenda">
-                    <h3>Developing GTN training material</h3>
+                    <div class="box-title" aria-label="agenda box">Developing GTN training material</div>
                     This tutorial is part of a series to develop GTN training material, feel free to also look at:
                     {% assign topic = site.data[page.topic_name] %}
                     <ol>
                     {% for material in topic_material %}
-                        {% if material.enable != "false" or jekyll.environment != "production" %}
-                            {% if material.type == "introduction" %}
-                    <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/slides/{{ material.tutorial_name }}.html">{{ material.title }}</a></li>
-                            {% elsif material.type == "tutorial" %}
+                        {% if material.draft != true or jekyll.environment != "production" %}
                                 {% if material.hands_on %}
                     <li><a href="{{ site.baseurl }}/topics/{{ topic.name  }}/tutorials/{{ material.tutorial_name }}/tutorial.html">{{ material.title }}</a></li>
                                 {% elsif material.slides %}
                     <li><a href="{{ site.baseurl }}/topics/{{ topic.name }}/tutorials/{{ material.tutorial_name }}/slides.html">{{ material.title }}</a></li>
                                 {% endif %}
-                            {% endif %}
                         {% endif %}
                     {% endfor %}
                     </ol>

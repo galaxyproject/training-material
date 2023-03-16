@@ -1,0 +1,436 @@
+---
+layout: tutorial_slides
+logo: "GTN"
+
+title: "Genome assembly quality control."
+questions:
+  - "Assembly: Is my genome assembly ready for scaffolding?"
+  - "Annotation: Is my genome assembly ready for structural annotation?"
+key_points:
+  - "We learned that it is essential to control the quality of an assembly"
+  - "We learned that there are several quality criteria and tools to enable this assessment"
+  - "Certain quality criteria are expected at the time of publication"
+contributors:
+  - abretaud
+  - alexcorm
+  - stephanierobin
+  - r1corre
+  - lleroi
+  - chklopp
+level: Introductory
+
+---
+
+# Genome assembly quality control, or "the 3C"
+
+
+<br>
+<br>
+
+.image-100[
+  ![The 3C for genome assembly quality control](../../images/genome-qc/3C.png)
+]
+
+---
+
+.image-30[
+  ![Illustration of genome assembly contiguity](../../images/genome-qc/contiguity.png)
+]
+
+---
+
+### **C**ontiguity
+
+.pull-left[
+
+**Desire**
+- Fewer sequences
+- Longer sequences
+]
+
+.pull-right[
+**Metrics**:
+- Number of sequences
+- Average sequences length
+- Median sequences length
+- Minimum and maximum sequences length
+- N50, NG50, L50, LG50
+- GC content
+- Number and proportion of bases that are N
+
+]
+
+**Sequences**, i.e. a set of contigs and/or scaffolds
+
+---
+
+### N50 & L50
+
+.left[
+**N50**: given a set of sequences of varying lengths, the N50 is defined as **the length L of the shortest contig** for which **longer and equal length contigs cover at least 50% of the assembly**.
+
+**L50**: given a set of sequences of varying lengths, the L50 is defined as **count of smallest number of sequences** whose **length sum makes up 50% of the assembly**.
+]
+
+**N50 describes a sequence length whereas L50 describes a number of sequences.**
+
+---
+
+### N50 & L50
+
+.pull-left[
+Example:
+- Genome size = 100
+- Sequence sorted by size list L = (25, 10, 10, 8 , 7, 7 , 6 , 5, 5, 5, 5, 3, 2, 2 ) = 100
+- 50% of the total length is contained within sequences of at least 8bp: 25 + 10 + 10 + 8 ≥ 50
+]
+
+.image-100[
+  ![Schematic explanation of N50](../../images/genome-qc/N50.png)
+]
+
+**N50 = 8** and **L50 = 4**
+
+.footnote[Alhakami, H., Mirebrahim, H., & Lonardi, S. (2017). A comparative evaluation of genome assembly reconciliation tools. Genome biology, 18(1), 1-14.]
+
+---
+
+### N50 & L50
+
+However, the theses statistics may not reflect some assembly improvements.
+If we connect two sequences longer than N50 or connect two sequences shorter than N50, N50 is not changed. N50 is only improved if we connect a sequence shorter than N50 and a sequence longer than N50.
+
+.image-40[
+![Schematic explanation of N50 and it limits](../../images/genome-qc/N50-limitation.png)
+]
+
+---
+
+### Nx curve
+
+« 50 » is a single point on the Nx curve. The entire Nx curve in fact gives us a better sense of contiguity.
+
+.pull-left[
+![Example of Nx graph for Drosophila assemblies](../../images/genome-qc/Nx-curve.png)
+]
+
+.pull-right[
+![Example of cumulative sequence length graph for Drosophila assemblies](../../images/genome-qc/cumulative-length.png)
+]
+
+---
+
+### QUAST - A tool to evaluate genome assemblies
+
+- **QUAST**: for genome assemblies.
+- **MetaQUAST**: for metagenomic datasets.
+- **QUAST-LG**: for large genomes (e.g., mammalians).
+- **rnaQUAST**: for RNAseq.
+- **Icarus**: an interactive visualizer for these tools.
+
+
+It also includes:
+- Reads mapping (mi-assemblies evaluation).
+- Kmer representation (KMC)
+- Structural prediction modules (GeneMark,  GlimmerHMM, Barrnap and BUSCO).
+- For metagenomics dataset: MetaGeneMark, Krona tools, BLAST, and SILVA 16S rRNA database.
+
+---
+
+.image-30[
+  ![Illustration of genome assembly completeness](../../images/genome-qc/completeness.png)
+]
+
+---
+
+### Types of completeness
+
+- Assembly size
+- Known vs. unknown nucleotides
+- "Core" genes
+- Assembly kmer content
+- Reads mapping and assembly coverage
+
+---
+
+### Assembly size vs estimated
+
+Proportion of the original genome represented by the assembly:
+
+.image-100[
+![Formula to estimate assembly size completeness](../../images/genome-qc/assembly-size-qc-formula.png)
+]
+
+"*" it’s an estimation, so not perfect. See ![An introduction to get started in genome assembly and annotation]({% link topics/assembly/tutorials/get-started-genome-assembly/slides.html %}) to find methods to determine the genome size.
+
+---
+
+### Known vs. unknown nucleotides
+
+Proportion of A, T, G, C versus N (unknown nucleotide).We expect an assembly without unknown nucleotides (N).
+
+---
+
+### "Core" genes
+
+
+.pull-left[
+Quantitative assessment of genome assembly based on evolutionarily informed expectations of gene content from near-universal single-copy orthologs.
+.image-70[
+![Formula to estimate assembly completeness for core genes](../../images/genome-qc/busco-formula.png)
+]
+]
+.pull-right[
+.image-70[
+![Example of BUSCO plot for Nosema species (Microsporidia) ](../../images/genome-qc/BUSCO-scores.png)
+]]
+
+.footnote[Tips: Reference databases are constructed using known genomes. Species with few/no close genomes available can have very bad scores.]
+
+---
+
+### Core genes evaluation software
+
+**BUSCO**: Assessing genome assembly and annotation completeness with **B**enchmarking **U**niversal **S**ingle-**C**opy **O**rthologs
+
+.pull-left[
+.image-70[
+![Explanation of orthology classification for creation of BUSCO sets - Universality](../../images/genome-qc/busco_sampling_universality.png)
+]]
+
+.pull-right[
+.image-60[
+![Explanation of orthology classification for creation of BUSCO sets - Duplicability](../../images/genome-qc/busco_sampling_duplicability.png)
+]]
+
+Eukaryota: 255 single copy from 70 species; Arthropoda: 1013 single copy from 90 species; Fungi: 758 single copy from 549 species
+
+.footnote[Waterhouse, R. M., Zdobnov, E. M. & Kriventseva, E. V. Correlating Traits of Gene Retention, Sequence Divergence, Duplicability and Essentiality in Vertebrates, Arthropods, and Fungi. Genome Biol Evol 3, 75–86 (2011).]
+
+---
+
+### BUSCO limitations
+
+**The value of the BUSCO is only as good as its reference database.**
+<br>
+
+Example with BUSCO Eukaryotic set:
+.pull-left[
+.image-70[
+![Limitation of BUSCO orthoDB for eukaOrthoDB - part A](../../images/genome-qc/BUSCO_limitations_A.png)
+]]
+.pull-right[
+.image-70[
+![Limitation of BUSCO orthoDB for eukaOrthoDB - part B](../../images/genome-qc/BUSCO_limitations_B.png)
+]]
+
+
+.footnote[Saary, P., Mitchell, A. L. & Finn, R. D. Estimating the quality of eukaryotic genomes recovered from metagenomic analysis with EukCC. Genome Biol 21, 244 (2020).]
+
+---
+
+### BUSCO limitations
+
+The use of transcriptome alignment of a closely related species or a de novo RNA-Seq assembly of the same species can be another proxy to assess the completeness of the assembly and adress BUSCO limitations.
+
+---
+
+### Assembly kmer content
+
+The aim is to check assembly coherence against the content within reads that were used to produce the assembly. Basically, how many elements of each frequency on the read’s spectrum ended up being not included in the assembly, included once, included twice etc.
+<br>
+<br>
+
+- Merqury or KAT
+- Histogram is build with read kmer content.
+
+---
+
+### K-mer spectrum plots
+
+.pull-left[
+.image-70[
+![How to read kmer spectrum of reads](../../images/genome-qc/kmer-spectrum-reads.png)
+]]
+.pull-right[
+.image-70[
+![How to read kmer spectrum of an assembly using reads](../../images/genome-qc/kmer-spectrum-assembly.png)
+]]
+
+.footnote[Rhie, A., Walenz, B. P., Koren, S. & Phillippy, A. M. Merqury: reference-free quality, completeness, and phasing assessment for genome assemblies. Genome Biol 21, 245 (2020).]
+
+---
+
+### Assembly kmer content - Homozygous genomes
+
+.image-70[
+![Merqury spectra-cn plot for S.cerevesiae S288C assembly](../../images/genome-qc/kmer-spectra-merqury-homozygous-good.png)
+]
+
+{% icon congratulations %} Good kmer representation of reads in the assembly
+
+---
+
+### Assembly kmer content - Homozygous genomes
+
+.image-70[
+![Merqury spectra-cn plot for S.cerevesiae S288C assembly in case of missing contigs](../../images/genome-qc/kmer-spectra-merqury-homozygous-bad.png)
+]
+
+<i class="fa fa-thumbs-down"></i> Bad kmer representation of reads in the assembly
+
+---
+
+### Assembly kmer content - Heterozygous genomes
+<br>
+
+.image-70[
+![Merqury spectra-cn plot for highly heterozygous assembly and for which haplotig were purged or collapsed.](../../images/genome-qc/kmer-spectra-merqury-heterozygous-good.png)
+]
+
+{% icon congratulations %} Good kmer representation of reads in the assembly
+
+The lost content (the black peak) represents the half of the heterozygous content that is lost when bubbles are collapsed.
+
+---
+
+### Assembly kmer content - Heterozygous genomes
+
+.image-80[
+![Merqury spectra-cn plot for second haplotype of C. gigas.](../../images/genome-qc/kmer-spectra-merqury-c.gigas-hap2.png)
+]
+
+<i class="fa fa-thumbs-down"></i> Bad kmer representation of reads in the assembly
+
+---
+
+### Reads mapping and assembly coverage
+<br>
+
+- **Proportion of mapped vs. unmapped reads** i.e. proportion of missing parts in the assembly
+- **Coverage in terms of redundancy (A)**: number of reads that align to, or "cover," a known reference. 
+- **Coverage in terms of the percentage coverage of a reference by reads (B)**: E.g. if 90% of a reference is covered by reads (and 10% not) it is a 90% coverage.
+
+.image-60[
+  ![Illustration of genome assembly correctness](../../images/genome-qc/read-coverage.gif)
+]
+
+---
+
+.image-30[
+  ![Illustration of genome assembly correctness](../../images/genome-qc/correctness.png)
+]
+
+---
+
+### Mistakes into the assembly
+
+** Proportion of the assembly that is free from mistakes**
+<br>
+<br>
+- Indels / SNPs
+- Mis-joins
+- Repeat compressions
+- Unnecessary duplications
+- Rearrangements
+<br>
+<br>
+**→ Align back reads to the assembly and check for inconsistencies**
+
+---
+
+### SNP / indels errors
+
+.image-80[
+![Illustration of SNP errors in a genome assembly.](../../images/genome-qc/snp-indels_errors.png)
+]
+
+---
+
+### Other mis-assemblies
+
+.image-80[
+![Illustration of rearrangements inversions assembly errors.](../../images/genome-qc/misassemblies_1.png)
+]
+
+---
+
+### Other mis-assemblies
+
+.image-80[
+![Illustration of collapsed and expanded repeats assembly errors.](../../images/genome-qc/misassemblies_2.png)
+]
+
+---
+
+### Switch and hamming errors (phased assemblies)
+
+.pull-left[
+.image-70[
+![Illustration of switch and hamming errors in phased genome assembly.](../../images/genome-qc/switch-hamming-errors.png)
+]
+In red, heterozygous locus from second haplotype. In blue, heterozygous locus from first haplotype.
+]
+
+.pull-right[
+- **Switch error**: a change from one parental allele to another parental allele on a contig. This terminology has been used for measuring reference-based phasing accuracy for two decades. A haplotig is supposed to have no switch errors.
+- **Yak hamming error**: an allele not on the most supported haplotype of a contig. Its main purpose is to test how close a contig is to a haplotig. The yak definition is not widely accepted. The hamming error rate is arguably less important in practice.
+]
+
+.footnote[http://lh3.github.io/2021/04/17/concepts-in-phased-assemblies]
+
+---
+
+# Evaluation against reference genome
+
+
+.image-30[
+![Example of a dot plot between 2 genomes.](../../images/genome-qc/dotplot-dgenies.png)
+]
+
+---
+
+.pull-left[
+.left[
+Dot plots are widely used to quickly compare 2 sequence sets. They provide a synthetic overview of:
+- Similarity
+- Specificity
+- Highlighting repetitions, breaks and inversions.
+]
+
+</br>
+
+.image-50[
+![Example of a dot plot between 2 genomes.](../../images/genome-qc/dotplot-dgenies.png)
+]
+]
+
+.pull-right[
+.left[
+A non-exhaustive list of tools for making dot plots:
+- MUMmer dotplot
+- Chromeister
+- D-genies (not yet available into Galaxy)
+]
+
+</br>
+</br>
+</br>
+
+.image-50[
+![Interpret Dot Plots here based on great explanation by Michael Schatz.](../../images/dotplot.png)
+]
+]
+
+---
+
+# Tips
+
+- The quality of an assembly is often validated by using other data from the same individual or from other individuals (RNA-Seq alignment, Hi-C alignment, DNA-Seq alignment,...).
+
+- The positions of the telomeric repeats in the chromosome assemblies are also of interesting to evaluate the correctness.
+
+- The identification of organelles (mitochondria, chloroplast,...) can also inform us about the quality of the assembly in terms of completness. However, the structure of the organelles may lead the assembler to think that they are repeats and he discards them.
+
+- In the case of diploid organisms, one of the classical problems of assemblies is the conservation of the two haplotypes. We obtains particular BUSCO / kmer / assembly size metrics that can be corrected by removing, "purging", the haplotigs.
+

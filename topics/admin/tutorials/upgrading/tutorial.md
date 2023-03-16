@@ -30,7 +30,7 @@ requirements:
 ---
 
 # Overview
-{:.no_toc}
+
 
 One of the most important and recurring tasks for a Galaxy server admin is to keep the server up to date with security patches, minor fixes and major version upgrades.
 
@@ -49,7 +49,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 * Each version also has an official branch in the GitHub repo named `release_YY.MM`. e.g. *release_21.01*
 * Galaxy versions will be supported with security fixes, bug patches and other improvements for [one year](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY_POLICY.md#supported-versions) from the time of release at which time they will become "End of Life" and will no longer be supported.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
@@ -62,7 +62,7 @@ This tutorial will show you how and discuss some of the things you need to keep 
 - You have completed at least the "Galaxy Installation with Ansible" tutorial.
 - You have command line and sudo access to the VM/computer where it is installed.
 
-> ### {% icon tip %} Galaxy server version installed by the tutorials
+> <tip-title>Galaxy server version installed by the tutorials</tip-title>
 > At the time of writing, the version of Galaxy that was installed with the "Galaxy Installation with Ansible" tutorial is *20.09*. This tutorial is designed to upgrade the server to *21.01*. If you already have a version equal to or higher than *21.01* running on your server, never fear! The process outlined below can still be used to upgrade to the latest version of Galaxy - just swap out *21.01* used below for the current latest version.
 {: .tip}
 
@@ -72,7 +72,7 @@ The first thing we will do in this tutorial is find the current installed versio
 
 Once we know what our current version is, we can compare it with the latest available version
 
-> ### {% icon hands_on %} Hands-on: Get the current server version
+> <hands-on-title>Get the current server version</hands-on-title>
 >
 > **Method 1: Via the Admin UI page**
 > The currently installed version of Galaxy is shown on the Galaxy server's Admin UI page.
@@ -86,14 +86,14 @@ Once we know what our current version is, we can compare it with the latest avai
 >
 > 1. In your browser - go to the following URL: `https://your-galaxy/api/version`. The version will be displayed as follows:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```shell
 >    > curl https://your-galaxy/api/version
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output: Browser window
+>    > <code-out-title>Browser window</code-out-title>
 >    > ```JSON
 >    > {
 >    >   "version_major": "20.09",
@@ -121,7 +121,7 @@ This site shows all of the release notes of all the available Galaxy versions an
 
 We can see from this page that the latest release version of Galaxy is *21.01* (at the time of writing.)
 
-> ### {% icon question %} Question: What is the current latest version?
+> <question-title>What is the current latest version?</question-title>
 > As previously mentioned, the current latest release of Galaxy may not be *21.01*. What version is the latest that you can see?
 {: .question}
 
@@ -146,7 +146,7 @@ It is highly important that we back it up before making any substantial changes 
 
 In a production environment it is really important to make regular backups of the database in any case. The **usegalaxy.\*** servers all perform at least daily backups of their respective databases and even have replicate database servers *just in case.*
 
-> ### {% icon hands_on %} Hands-on: Back up the Galaxy database
+> <hands-on-title>Back up the Galaxy database</hands-on-title>
 >
 > We will be using the PostgreSQL `pg_dump` command to dump the complete contents of the Galaxy database to a file. From the usage text of the command:
 >
@@ -164,7 +164,7 @@ In a production environment it is really important to make regular backups of th
 >
 > From your terminal -
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > sudo su -l galaxy
 >    > pg_dump galaxy | gzip > galaxy_database-2009-1.sql.gz
@@ -173,7 +173,7 @@ In a production environment it is really important to make regular backups of th
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output: Bash
+>    > <code-out-title>Bash</code-out-title>
 >    > ```bash
 >    > -rw-rw-r-- 1 galaxy galaxy 94K Jun  8 04:12 galaxy_database_2009-1.sql.gz
 >    > ```
@@ -198,7 +198,7 @@ There are however a few things to consider before doing the actual upgrade, espe
 
 Once you've made sure of these things, it's time to do it!
 
-> ### {% icon hands_on %} Hands-on: Back up the Galaxy database
+> <hands-on-title>Back up the Galaxy database</hands-on-title>
 >
 > In this tutorial we will upgrade the server to version *21.01*. This may be different for you. Please use the latest version instead.
 >
@@ -224,7 +224,7 @@ Once you've made sure of these things, it's time to do it!
 >
 > 2. Now run the playbook!
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```

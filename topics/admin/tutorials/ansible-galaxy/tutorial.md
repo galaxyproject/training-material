@@ -42,7 +42,13 @@ requirements:
       - ansible
   - type: "none"
     title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04."
+abbreviations:
+    DVCS: Distributed Version Control System
 ---
+
+> <warning-title>22.05 not yet released</warning-title>
+> We updated the tutorials ahead of GCC, preparing for the GCC Galaxy Admin Training. However, 22.05 is not yet released and we still have some bugs in the roles to work our, so, until that time we recommend you follow the [GTN Training Archive](https://training.galaxyproject.org/archive/2022-05-01/topics/admin/tutorials/ansible-galaxy/tutorial.html) materials for this tutorial (and all others in this series.)
+{: .warning}
 
 This tutorial assumes you have some familiarity with [Ansible](https://www.ansible.com/resources/get-started) and are comfortable with writing and running playbooks. Here we'll see how to install a Galaxy server using an Ansible playbook. The Galaxy Project has decided on Ansible for all of its deployment recipes. For our project, Ansible is even more fitting due to its name:
 
@@ -51,12 +57,14 @@ This tutorial assumes you have some familiarity with [Ansible](https://www.ansib
 
 We want to give you a comprehensive understanding of how the Galaxy installation occurs, but we want to avoid you having to write a "custom" Galaxy installation playbook which you would eventually throw away, in order to use the official playbooks. Given these goals, we will go through the playbook in depth first, and then move to a hands-on portion later. If you are not interested in the inner workings, you can [skip to that section now](#installing-galaxy).
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="ansible-galaxy" %}
 
 {% snippet topics/admin/faqs/admin-testing.md %}
 
@@ -211,11 +219,11 @@ With the necessary background in place, you are ready to install Galaxy with Ans
 
 To proceed from here it is expected that:
 
-> ### {% icon comment %} Requirements for Running This Tutorial
+> <comment-title>Requirements for Running This Tutorial</comment-title>
 >
 > 1. You have [Ansible installed](https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html) on the machine where you will install Galaxy
 >
->    > ### {% icon comment %} Comment: Running Ansible on remote machine
+>    > <comment-title>Running Ansible on remote machine</comment-title>
 >    > It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will **not** do that in this training.
 >    {: .comment}
 >
@@ -238,7 +246,7 @@ To proceed from here it is expected that:
 {: .comment}
 
 
-> ### {% icon comment %} Ubuntu or Debian, CentOS or RHEL?
+> <comment-title>Ubuntu or Debian, CentOS or RHEL?</comment-title>
 > The training tutorial is only tested on Ubuntu, as that is the training platform most often used. The training *should* work on RHEL/CentOS, and the roles we use are definitely compatible with both. If any of the variable values differ between Ubuntu and CentOS, we try to note it in the tutorial. Any places we don't note it are bugs.
 >
 > There are known issues with CentOS7 and python3, which is used in this tutorial. If you use this setup, you should have python2 and python3 coexisting, and use python2 for Ansible (i.e. do not set `interpreter_python` in your `ansible.cfg`) and python3 for Galaxy. This setup requires numerous changes that you will need to discover, which are not covered in this tutorial.
@@ -249,11 +257,15 @@ To proceed from here it is expected that:
 {: .comment}
 
 
+> <warning-title>22.05 not yet released</warning-title>
+> We updated the tutorials ahead of GCC, preparing for the GCC Galaxy Admin Training. However, 22.05 is not yet released and we still have some bugs in the roles to work our, so, until that time we recommend you follow the [GTN Training Archive](https://training.galaxyproject.org/archive/2022-05-01/topics/admin/tutorials/ansible-galaxy/tutorial.html) materials for this tutorial (and all others in this series.)
+{: .warning}
+
 ## Requirements
 
 We have codified all of the dependencies you will need into a YAML file that `ansible-galaxy` can install.
 
-> ### {% icon hands_on %} Hands-on: Installing roles
+> <hands-on-title>Installing roles</hands-on-title>
 >
 > 1. Create a new directory `galaxy` in your home folder, and `cd` into that directory
 >
@@ -265,13 +277,13 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +++ b/requirements.yml
 >    @@ -0,0 +1,14 @@
 >    +- src: galaxyproject.galaxy
->    +  version: 0.10.3
+>    +  version: 0.10.4
 >    +- src: galaxyproject.nginx
 >    +  version: 0.7.0
 >    +- src: galaxyproject.postgresql
 >    +  version: 1.0.3
->    +- src: natefoo.postgresql_objects
->    +  version: 1.1
+>    +- src: galaxyproject.postgresql_objects
+>    +  version: 1.1.0
 >    +- src: geerlingguy.pip
 >    +  version: 2.0.0
 >    +- src: uchida.miniconda
@@ -284,7 +296,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 >    {% snippet topics/admin/faqs/diffs.md %}
 >
->    > ### {% icon details %} What do each of these roles do?
+>    > <details-title>What do each of these roles do?</details-title>
 >    > We'll cover it in more detail as we use each of the roles but briefly:
 >    >
 >    >  | Role | Purpose |
@@ -292,20 +304,20 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    >  |`galaxyproject.galaxy` | Installs and configures the Galaxy application|
 >    >  |`galaxyproject.nginx` | Sets up a webserver|
 >    >  |`galaxyproject.postgresql` | Installs our database, PostgreSQL|
->    >  |`natefoo.postgresql_objects` | Creates users and databases within PostgreSQL|
+>    >  |`galaxyproject.postgresql_objects` | Creates users and databases within PostgreSQL|
 >    >  |`geerlingguy.pip` | Ensures that pip is available|
 >    >  |`uchida.miniconda` | Installs miniconda, which is used by Galaxy|
 >    >  |`usegalaxy_eu.certbot` | Installs certbot and requests SSL certificates|
 >    {: .details}
 >
->    > ### {% icon details %} Role version vs Galaxy version?
+>    > <details-title>Role version vs Galaxy version?</details-title>
 >    > Q: Is there a correspondence between galaxy role versions and galaxy versions?
 >    > A: They  are correlated (because generally new Galaxy versions could introduce e.g. new configuration options that the galaxy role would then need to adopt), but the Galaxy role can install older versions of Galaxy.
 >    {: .details}
 >
 > 3. In the same directory, run:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
@@ -314,7 +326,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 >    This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
 >
->    > ### {% icon tip %} Tip: Using `git`?
+>    > <tip-title>Using `git`?</tip-title>
 >    > If you're using git, it can make sense to tell git to ignore the `roles`
 >    > directory, as all of that data can be perfectly recreated from our
 >    > variables in the requirements.yml file.
@@ -334,7 +346,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 > 4. Inspect the contents of the newly created `roles` directory in your working directory.
 {: .hands_on}
 
-> ### {% icon hands_on %} Hands-on: Configuration files
+> <hands-on-title>Configuration files</hands-on-title>
 >
 > 1. Create a `ansible.cfg` file (next to your playbook) to [configure settings](https://docs.ansible.com/ansible/2.9/reference_appendices/config.html) like the inventory file (and save ourselves some typing!), or the Python interpreter to use:
 >
@@ -342,16 +354,18 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    ```diff
 >    --- /dev/null
 >    +++ b/ansible.cfg
->    @@ -0,0 +1,4 @@
+>    @@ -0,0 +1,6 @@
 >    +[defaults]
 >    +interpreter_python = /usr/bin/python3
 >    +inventory = hosts
 >    +retry_files_enabled = false
+>    +stdout_callback = yaml # Use the YAML callback plugin.
+>    +bin_ansible_callbacks = True # Use the stdout_callback when running ad-hoc commands.
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add ansible.cfg"}
 >
->    > ### {% icon tip %} CentOS7
+>    > <tip-title>CentOS7</tip-title>
 >    > As mentioned in the "Ubuntu or Debian, CentOS or RHEL?" comment above, if you are using CentOS7 do not set `interpreter_python` in `ansible.cfg` .
 >    {: .tip}
 >
@@ -366,13 +380,13 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 > 2. Create the `hosts` inventory file if you have not done so yet, defining a `[galaxyservers]` group with the address of the host where you want to install Galaxy. If you are running Ansible on the same machine where Galaxy will be installed to, you should set the `ansible_connection=local` variable. Lastly, you should explicitly set the `ansible_user` variable to the username to use when connecting to the server. Ansible has changed its behaviour over time regarding whether or not `ansible_user` is defined, and it is most effective to define it explicitly even when it can sometimes be inferred.
 >
->    > > ### {% icon code-in %} Input: Bash
+>    > > <code-in-title>Bash</code-in-title>
 >    > > ```bash
 >    > > cat hosts
 >    > > ```
 >    > {: .code-in}
 >    >
->    > > ### {% icon code-out %} Output: Bash
+>    > > <code-out-title>Bash</code-out-title>
 >    > >
 >    > > Your hostname is probably different:
 >    > >
@@ -397,9 +411,9 @@ Galaxy is capable of talking to multiple databases through SQLAlchemy drivers. S
 
 PostgreSQL maintains its own user database apart from the system user database. By default, PostgreSQL uses the "peer" authentication method which allows access for system users with matching PostgreSQL usernames (other authentication mechanisms are available, see the [PostgreSQL Client Authentication documentation](https://www.postgresql.org/docs/current/static/client-authentication.html).
 
-For this tutorial, we will use the default "peer" authentication, so we need to create a PostgreSQL user matching the system user under which Galaxy will be running, i.e. `galaxy`. This is normally done with the PostgreSQL `createuser` command, and it must be run as the `postgres` user. In our case, we will use the `natefoo.postgresql_objects` role to handle this step. Additionally we're setting a couple of variables to control the automatic backups, they'll be placed in the `/data/backups` folder next to our user uploaded Galaxy data.
+For this tutorial, we will use the default "peer" authentication, so we need to create a PostgreSQL user matching the system user under which Galaxy will be running, i.e. `galaxy`. This is normally done with the PostgreSQL `createuser` command, and it must be run as the `postgres` user. In our case, we will use the `galaxyproject.postgresql_objects` role to handle this step. Additionally we're setting a couple of variables to control the automatic backups, they'll be placed in the `/data/backups` folder next to our user uploaded Galaxy data.
 
-> ### {% icon hands_on %} Hands-on: Installing PostgreSQL
+> <hands-on-title>Installing PostgreSQL</hands-on-title>
 >
 > 1. Create and edit `group_vars/galaxyservers.yml` and add some variables to configure PostgreSQL:
 >
@@ -427,7 +441,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    ```
 >    {: data-commit="Add initial group variables file"}
 >
->    > ### {% icon tip %} Tip: Using postgres via the network
+>    > <tip-title>Using postgres via the network</tip-title>
 >    > To use postgres via another machine, or via the network, you can add lines like the following:
 >    >
 >    > ```yaml
@@ -450,7 +464,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >
 >    - Add a pre-task to install the necessary dependencies: `python3-psycopg2`, `acl`
 >    - A role for `galaxyproject.postgresql`. This will handle the installation of PostgreSQL.
->    - A role for `natefoo.postgresql_objects`, run as the postgres user. (You will need `become`/`become_user`.) This role allows for managing users and databases within postgres.
+>    - A role for `galaxyproject.postgresql_objects`, run as the postgres user. (You will need `become`/`become_user`.) This role allows for managing users and databases within postgres.
 >
 >    {% raw %}
 >    ```diff
@@ -467,18 +481,18 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    +        name: ['acl', 'python3-psycopg2']
 >    +  roles:
 >    +    - galaxyproject.postgresql
->    +    - role: natefoo.postgresql_objects
+>    +    - role: galaxyproject.postgresql_objects
 >    +      become: true
 >    +      become_user: postgres
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add initial galaxy playbook"}
 >
->    > ### {% icon question %} Question
+>    > <question-title></question-title>
 >    >
 >    > What should we expect to see in our folder?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >
 >    > > - a playbook
 >    > > - a hosts file
@@ -486,14 +500,14 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > > - Some group variables
 >    > > - all of our roles
 >    > >
->    > > > ### {% icon code-in %} Input: Bash
+>    > > > <code-in-title>Bash</code-in-title>
 >    > > > Let's investigate our directory.
 >    > > > ```bash
 >    > > > tree -L 2
 >    > > > ```
 >    > > {: .code-in}
 >    > >
->    > > > ### {% icon code-out %} Output: Bash
+>    > > > <code-out-title>Bash</code-out-title>
 >    > > >
 >    > > > Your directory should look approximately like this:
 >    > > >
@@ -510,7 +524,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > > >     ├── galaxyproject.nginx
 >    > > >     ├── galaxyproject.postgresql
 >    > > >     ├── geerlingguy.pip
->    > > >     ├── natefoo.postgresql_objects
+>    > > >     ├── galaxyproject.postgresql_objects
 >    > > >     ├── uchida.miniconda
 >    > > >     └── usegalaxy_eu.certbot
 >    > > >
@@ -528,14 +542,14 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >
 > 3. Run the playbook:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output: Bash
+>    > <code-out-title>Bash</code-out-title>
 >    >
 >    > ```ini
 >    > PLAY [galaxyservers] ************************************************************************************
@@ -603,28 +617,28 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > TASK [galaxyproject.postgresql : Ensure PostgreSQL is running] ******************************************
 >    > ok: [gat-0.training.galaxyproject.eu]
 >    >
->    > TASK [natefoo.postgresql_objects : Revoke extra privileges] *********************************************
+>    > TASK [galaxyproject.postgresql_objects : Revoke extra privileges] *********************************************
 >    >
->    > TASK [natefoo.postgresql_objects : Drop databases] ******************************************************
+>    > TASK [galaxyproject.postgresql_objects : Drop databases] ******************************************************
 >    > skipping: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy', 'owner': 'galaxy'})
 >    >
->    > TASK [natefoo.postgresql_objects : Create and drop users] ***********************************************
+>    > TASK [galaxyproject.postgresql_objects : Create and drop users] ***********************************************
 >    > changed: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy'})
 >    > [WARNING]: Module did not set no_log for no_password_changes
 >    >
->    > TASK [natefoo.postgresql_objects : Create groups] *******************************************************
+>    > TASK [galaxyproject.postgresql_objects : Create groups] *******************************************************
 >    >
->    > TASK [natefoo.postgresql_objects : Add or remove users from groups] *************************************
+>    > TASK [galaxyproject.postgresql_objects : Add or remove users from groups] *************************************
 >    >
->    > TASK [natefoo.postgresql_objects : Drop groups] *********************************************************
+>    > TASK [galaxyproject.postgresql_objects : Drop groups] *********************************************************
 >    >
->    > TASK [natefoo.postgresql_objects : Create databases] ****************************************************
+>    > TASK [galaxyproject.postgresql_objects : Create databases] ****************************************************
 >    > changed: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy', 'owner': 'galaxy'})
 >    >
->    > TASK [natefoo.postgresql_objects : Grant user database privileges] **************************************
+>    > TASK [galaxyproject.postgresql_objects : Grant user database privileges] **************************************
 >    > skipping: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy'})
 >    >
->    > TASK [natefoo.postgresql_objects : Grant extra privileges] **********************************************
+>    > TASK [galaxyproject.postgresql_objects : Grant extra privileges] **********************************************
 >    >
 >    > RUNNING HANDLER [galaxyproject.postgresql : Reload PostgreSQL] ******************************************
 >    > changed: [gat-0.training.galaxyproject.eu]
@@ -635,7 +649,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > ```
 >    {: .code-out.code-max-300}
 >
->    > ### {% icon comment %} Error: `postgresql_version is version_compare('9.3', '>=')' failed`
+>    > <comment-title>Error: `postgresql_version is version_compare('9.3', '>=')' failed`</comment-title>
 >    > You might see an error like this, if you're running with `--check` mode. Unfortunately here `--check` mode meets real life: not all modules support it because some rely on running command line tools to obtain version numbers, something that cannot be mocked with check mode. You can solve this by running it without `--check`.
 >    >
 >    > ```
@@ -643,11 +657,11 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > ```
 >    {: .comment}
 >
->    > ### {% icon comment %} Comment: When running Ansible
+>    > <comment-title>When running Ansible</comment-title>
 >    > Always pay close attention to tasks reported as **changed** and ensure that the changes were expected!
 >    {: .comment}
 >
->    > ### {% icon tip %} Why didn't we use `-i` in our ansible command?
+>    > <tip-title>Why didn't we use `-i` in our ansible command?</tip-title>
 >    > In our `ansible.cfg` file we specified the inventory was stored in a file called `hosts`:
 >    >
 >    > ```ini
@@ -665,14 +679,14 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    - `/etc/postgresql`
 >    - Databases and users in PostgreSQL.
 >
->    > > ### {% icon code-in %} Input: Bash
+>    > > <code-in-title>Bash</code-in-title>
 >    > > List available databases.  You can now login and access the database, but only as the `postgres` user. You will need to `sudo -iu postgres` first, and then you can run `psql galaxy`.
 >    > > ```bash
 >    > > sudo -iu postgres psql -l
 >    > > ```
 >    > {: .code-in}
 >    >
->    > > ### {% icon code-out %} Output: Bash
+>    > > <code-out-title>Bash</code-out-title>
 >    > >
 >    > > ```ini
 >    > >                               List of databases
@@ -689,14 +703,14 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > {: .code-out}
 >    {: .code-2col}
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > Access postgres and list some users
 >    > ```bash
 >    > sudo -iu postgres psql
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output: Bash
+>    > <code-out-title>Bash</code-out-title>
 >    > The database will currently be empty (check relations with \d and list of roles with \dg) as Galaxy has not yet connected to it. Once you install Galaxy in the next step, the database will be populated. (Quit database with \q)
 >    > ```ini
 >    > psql (10.12 (Ubuntu 10.12-0ubuntu0.18.04.1))
@@ -715,14 +729,14 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > ```
 >    {: .code-out}
 >
->    > > ### {% icon code-in %} Input: Bash
+>    > > <code-in-title>Bash</code-in-title>
 >    > > Inspect the postgres directory
 >    > > ```bash
 >    > > ls /etc/postgresql/*/main/
 >    > > ```
 >    > {: .code-in}
 >    >
->    > > ### {% icon code-out %} Output: Bash
+>    > > <code-out-title>Bash</code-out-title>
 >    > >
 >    > > ```ini
 >    > > conf.d
@@ -753,7 +767,7 @@ Additionally we'll go ahead and set up the production-ready Gunicorn which will 
 
 Finally, best admin practices are to not run Galaxy as a user with `sudo` access, like your login user probably has. Additionally, it is best to install the Galaxy code and configs as a separate user, for security purposes. So we will instruct the `galaxyproject.galaxy` role to create a new user account specifically to run Galaxy under.
 
-> ### {% icon details %} Mules are not the only option
+> <details-title>Mules are not the only option</details-title>
 >
 > Galaxy can be run in a [couple of other configurations](https://docs.galaxyproject.org/en/master/admin/scaling.html#deployment-options) depending on your needs. Mules are generally a good solution for most production needs.
 >
@@ -761,7 +775,7 @@ Finally, best admin practices are to not run Galaxy as a user with `sudo` access
 
 The configuration is quite simple thanks to the many sensible defaults that are provided in the Ansible roles.
 
-> ### {% icon hands_on %} Hands-on: Minimal Galaxy Playbook
+> <hands-on-title>Minimal Galaxy Playbook</hands-on-title>
 >
 > 1. Open `galaxy.yml` with your text editor and set the following:
 >
@@ -780,7 +794,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
 >       roles:
 >         - galaxyproject.postgresql
->         - role: natefoo.postgresql_objects
+>         - role: galaxyproject.postgresql_objects
 >           become: true
 >           become_user: postgres
 >    +    - geerlingguy.pip
@@ -792,7 +806,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```
 >    {: data-commit="Add pip, miniconda, galaxy to playbook"}
 >
->    > ### {% icon tip %} Miniconda fails to work
+>    > <tip-title>Miniconda fails to work</tip-title>
 >    > The Galaxy user is created to separate privileges. Then we add `uchida.miniconda`, which is run as the Galaxy user.
 >    >
 >    > The miniconda role attempts to install tar and bzip2, even when the user doesn't have permissions to do this. This issue has been addressed in the codebase, but, the role has not seen a release which would address this. You do *not* need to run this role, Galaxy will attempt to install conda when it is missing. We added it to prevent a possible race condition between the two mules if both attempt to install conda at the same time. So, remove the role from your playbook, and carry on, if you have issues.
@@ -816,7 +830,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `miniconda_version`             | `4.7.12`                                                         | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
 >    `miniconda_manage_dependencies` | `false`                                                          | Specify whether to install the miniconda installer dependencies.
 >
->    > ### {% icon tip %} Different Galaxy Releases!
+>    > <tip-title>Different Galaxy Releases!</tip-title>
 >    > In the time between this tutorial was last updated ({{ page.last_modified_at | date: "%Y-%m-%d" }}), and when you are now reading it, one or more new releases of Galaxy may have occured.
 >    >
 >    > If you wish to use a different version of Galaxy than the one listed, you can do so, but there is no guarantee this tutorial will work without modifications.
@@ -849,7 +863,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```
 >    {: data-commit="Configure miniconda and galaxy"}
 >
->    > ### {% icon tip %} Tip: Following this training outside of a GAT course?
+>    > <tip-title>Following this training outside of a GAT course?</tip-title>
 >    > Consider updating the Galaxy Commit ID to the latest version of Galaxy available, this will probably give better results (given that dependencies are always updating) than using a potentially outdated version.
 >    {: .tip}
 >
@@ -895,11 +909,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```
 >    {: data-commit="Configure galaxy config"}
 >
->    > ### {% icon tip %} Data storage
+>    > <tip-title>Data storage</tip-title>
 >    > Galaxy datasets cannot be separated by user or other attribute currently, but you can spread data unintelligently across 1 or more storage pools.
 >    {: .tip}
 >
->    > ### {% icon tip %} PostgreSQL connection string
+>    > <tip-title>PostgreSQL connection string</tip-title>
 >    > If you want to run your database on a different machine, you will need to change the connection string. In your hosts file, place the hostname of the machine you're installing on. `ansible_connection` can be left off entirely and it will connect over ssh. You may need to set `ansible_user` to the username of the admin user (who can run sudo).
 >    >
 >    > Here are some examples of connection strings:
@@ -912,14 +926,14 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >
 >    {: .tip}
 >
->    > ### {% icon tip %} Tip: Using postgres via the network
+>    > <tip-title>Using postgres via the network</tip-title>
 >    > Here you'll need to re-use the connection details you specified during `postgresql_objects_users`. You can reference it like the following, for example. `localhost` may need to change if you're hosting the database on another host.
 >    > ```
 >    > +    database_connection: "postgres://{{ postgresql_objects_users[0].name }}:{{ postgresql_objects_users[0].password }}@localhost:5432/{{ postgresql_objects_databases[0].name }}"
 >    > ```
 >    {: .tip}
 >
->    > ### {% icon comment %} Ansible Variable Templating
+>    > <comment-title>Ansible Variable Templating</comment-title>
 >    > In this step we use some templated variables. These are seen in our group variables, among other places, and look like {% raw %}`miniconda_prefix: "{{ galaxy_tool_dependency_dir  }}/_conda"`{% endraw %}.
 >    >
 >    > When Ansible runs:
@@ -969,14 +983,14 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    {: data-commit="Configure gravity"}
 >
 >
->    > ### {% icon tip %} Options explanations.
+>    > <tip-title>Options explanations.</tip-title>
 >    > 1`workers`: Controls the number of Galaxy application processes Gunicorn will spawn. Increased web performance can be attained by increasing this value. If Gunicorn is the only application on the server, a good starting value is the number of CPUs * 2 + 1. 4-12 workers should be able to handle hundreds if not thousands of requests per second.
 >    > 2 `extra_args`: You can specify additional arguments to pass to gunicorn here.
 >    {: .tip}
 >
 > 5. Let's set up our vault to store the secrets for these tutorials.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > openssl rand -base64 24 > .vault-password.txt
 >    > ```
@@ -989,10 +1003,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/ansible.cfg
 >    +++ b/ansible.cfg
->    @@ -2,3 +2,4 @@
->     interpreter_python = /usr/bin/python3
->     inventory = hosts
+>    @@ -4,3 +4,4 @@ inventory = hosts
 >     retry_files_enabled = false
+>     stdout_callback = yaml # Use the YAML callback plugin.
+>     bin_ansible_callbacks = True # Use the stdout_callback when running ad-hoc commands.
 >    +vault_password_file = .vault-password.txt
 >    {% endraw %}
 >    ```
@@ -1000,7 +1014,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > 7. Create the vault:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```
 >    > ansible-vault create group_vars/secret.yml
 >    > ```
@@ -1011,11 +1025,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```
 >    vault_id_secret: BxI6zlQVhoHLPVf3gqQ
 >    ```
->    > ### {% icon tip %} How to get a good random value?
+>    > <tip-title>How to get a good random value?</tip-title>
 >    > You can use the same command we ran before: `openssl rand -base64 24` to get a good, secure `id_secret` for your Galaxy
 >    {: .tip}
 >
->    Your vault should probably look *something* like this, it's safe to commit to GitHub (or another public <abbr title="distributed version control system">DVCS</abbr>) now that you've got the secrets safely encrypted.
+>    Your vault should probably look *something* like this, it's safe to commit to GitHub (or another public {DVCS}) now that you've got the secrets safely encrypted.
 >
 >    {% raw %}
 >    ```diff
@@ -1033,7 +1047,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```
 >    {: data-commit="Add id_secret to the vault" data-comment="The password is password"}
 >
->    > ### {% icon tip %} Tip: Using `git`?
+>    > <tip-title>Using `git`?</tip-title>
 >    > If you're using git, and storing all of these steps in your git history,
 >    > you'll find that working with Vault secrets can be rather annoying as
 >    > the opaque blobs are impossible to read. There's a way to make this
@@ -1099,14 +1113,14 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > 9. Run the playbook.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output: Bash
+>    > <code-out-title>Bash</code-out-title>
 >    >
 >    > ```ini
 >    > PLAY [galaxyservers] ***************************************************************************
@@ -1175,28 +1189,28 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > TASK [galaxyproject.postgresql : Ensure PostgreSQL is running] *********************************
 >    > ok: [gat-0.training.galaxyproject.eu]
 >    >
->    > TASK [natefoo.postgresql_objects : Revoke extra privileges] ************************************
+>    > TASK [galaxyproject.postgresql_objects : Revoke extra privileges] ************************************
 >    >
->    > TASK [natefoo.postgresql_objects : Drop databases] *********************************************
+>    > TASK [galaxyproject.postgresql_objects : Drop databases] *********************************************
 >    > skipping: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy', 'owner': 'galaxy'})
 >    >
->    > TASK [natefoo.postgresql_objects : Create and drop users] **************************************
+>    > TASK [galaxyproject.postgresql_objects : Create and drop users] **************************************
 >    > ok: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy'})
 >    > [WARNING]: Module did not set no_log for no_password_changes
 >    >
->    > TASK [natefoo.postgresql_objects : Create groups] **********************************************
+>    > TASK [galaxyproject.postgresql_objects : Create groups] **********************************************
 >    >
->    > TASK [natefoo.postgresql_objects : Add or remove users from groups] ****************************
+>    > TASK [galaxyproject.postgresql_objects : Add or remove users from groups] ****************************
 >    >
->    > TASK [natefoo.postgresql_objects : Drop groups] ************************************************
+>    > TASK [galaxyproject.postgresql_objects : Drop groups] ************************************************
 >    >
->    > TASK [natefoo.postgresql_objects : Create databases] *******************************************
+>    > TASK [galaxyproject.postgresql_objects : Create databases] *******************************************
 >    > ok: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy', 'owner': 'galaxy'})
 >    >
->    > TASK [natefoo.postgresql_objects : Grant user database privileges] *****************************
+>    > TASK [galaxyproject.postgresql_objects : Grant user database privileges] *****************************
 >    > skipping: [gat-0.training.galaxyproject.eu] => (item={'name': 'galaxy'})
 >    >
->    > TASK [natefoo.postgresql_objects : Grant extra privileges] *************************************
+>    > TASK [galaxyproject.postgresql_objects : Grant extra privileges] *************************************
 >    >
 >    > TASK [geerlingguy.pip : Ensure Pip is installed.] **********************************************
 >    > ok: [gat-0.training.galaxyproject.eu]
@@ -1537,7 +1551,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > ```
 >    {: .code-out.code-max-300}
 >
->    > ### {% icon comment %} Free knowledge
+>    > <comment-title>Free knowledge</comment-title>
 >    > You will notice the significant volume of output from this playbook! There are
 >    > many, many steps for deploying a production Galaxy, and there is a vast
 >    > amount of knowledge encoded into these playbooks by the developers and
@@ -1549,12 +1563,12 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > large community of admins.
 >    {: .comment}
 >
->    > ### {% icon tip %} Slow Deployment
+>    > <tip-title>Slow Deployment</tip-title>
 >    > The deployment can be slowed down by the client build.
 >    > The client is only re-built when there are changes in the files needed for the Galaxy user interface (JavaScript, CSS). Because we are tracking a release branch, we’ll receive updates that are published to that branch during the training since the last time the playbook was run.
 >    {: .tip}
 >
->    > ### {% icon tip %} ERROR: Failed to set permissions on the temporary files
+>    > <tip-title>ERROR: Failed to set permissions on the temporary files</tip-title>
 >    > Did you get an error message like this?
 >    > ```
 >    > fatal: [localhost]: FAILED! => {"msg": "Failed to set permissions on the temporary files Ansible needs to create when becoming an unprivileged user (rc: 1, err: chown: changing ownership of '/var/tmp/ansible-tmp-1607430009.739602-32983298209838/': Operation not permitted\nchown: changing ownership of '/var/tmp/ansible-tmp-1607430009.739602-32983298209838/source': Operation not permitted\n}). For information on working around this, see https://docs.ansible.com/ansible/become.html#becoming-an-unprivileged-user"}
@@ -1572,7 +1586,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    - Some config files that Galaxy maintains itself, such as `shed_tool_conf.xml`, which controls what tools that you have installed from the Tool Shed will be loaded, have been instantiated in `/srv/galaxy/var/config`
 >    - A Python virtualenv - an isolated Python environment - with all of the Galaxy framework's dependencies has been installed in `/srv/galaxy/venv`
 >
->    > > ### {% icon code-in %} Input: Bash
+>    > > <code-in-title>Bash</code-in-title>
 >    > > ```bash
 >    > > tree -L 1 /srv/galaxy/
 >    > > ```
@@ -1584,7 +1598,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > - `venv` contains the Galaxy virtual environment and all dependencies, like Gunicorn.
 >    > {: .code-in}
 >    >
->    > > ### {% icon code-out %} Output: Bash
+>    > > <code-out-title>Bash</code-out-title>
 >    > >
 >    > > ```ini
 >    > > /srv/galaxy/
@@ -1600,13 +1614,13 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > {: .code-out}
 >    {: .code-2col}
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > cat /srv/galaxy/config/galaxy.yml
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output: Bash
+>    > <code-out-title>Bash</code-out-title>
 >    > You'll notice that the file is significantly different from the configuration you have set up in your group variables. The Ansible role adds a significant number of additional configuration options which all require a path, and templates the appropriate paths into all of them.
 >    > ```yaml
 >    > ---
@@ -1694,7 +1708,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 
 Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we've immediately configured the mules for production Galaxy serving. So we're ready to set up systemd which will manage the Galaxy processes! Launching Galaxy by hand is not a good use of your time, so we will immediately switch to a process manager for that, [systemd](https://freedesktop.org/wiki/Software/systemd/).
 
-> ### {% icon hands_on %} Hands-on: systemd
+> <hands-on-title>systemd</hands-on-title>
 >
 > 1. Configure systemd in `group_vars/galaxyservers.yml` file:
 >
@@ -1713,7 +1727,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >    ```
 >    {: data-commit="Setup systemd variables"}
 >
->    > ### {% icon tip %} Using Galaxy 21.01?
+>    > <tip-title>Using Galaxy 21.01?</tip-title>
 >    > For versions of Galaxy older than 22.05, using `gravity` was not the default. There you'll need to set these additional variables:
 >    > {% raw %}
 >    > ```diff
@@ -1725,7 +1739,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >
 > 2. Run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -1734,13 +1748,13 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >
 > 3. Log in and check the status with `sudo systemctl status galaxy`
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > sudo systemctl status galaxy
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output: Bash
+>    > <code-out-title>Bash</code-out-title>
 >    >
 >    > ```ini
 >    > ● galaxy.service - Galaxy
@@ -1771,7 +1785,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >    > ```
 >    {: .code-out.code-max-300}
 >
->    > ### {% icon tip %} Did this fail?
+>    > <tip-title>Did this fail?</tip-title>
 >    > ```
 >    > ● galaxy.service - Galaxy
 >    >      Loaded: loaded (/etc/systemd/system/galaxy.service; enabled; vendor preset: enabl>
@@ -1797,7 +1811,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >
 {: .hands_on}
 
-> ### {% icon details %} Ansible, failures, and notifications
+> <details-title>Ansible, failures, and notifications</details-title>
 >
 > Sometimes Ansible tasks will fail. Usually due to misconfiguration, but occasionally due to other issues like your coworker restarted the server while you were doing maintenance, or network failures, or any other possible error. It happens. An unfortunate side effect can be observed in specific situations:
 >
@@ -1826,7 +1840,7 @@ Although Gunicorn can server HTTP for us directly, by moving to NGINX (pronounce
 
 For this, we will use NGINX. It is possible to configure Galaxy with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache.
 
-> ### {% icon hands_on %} Hands-on: NGINX
+> <hands-on-title>NGINX</hands-on-title>
 >
 > 1. Add the role `galaxyproject.nginx` to the end of your playbook and have it run as root.
 >
@@ -1910,7 +1924,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```
 >    {: data-commit="Configure nginx, certbot"}
 >
->    > ### {% icon details %} Certbot details
+>    > <details-title>Certbot details</details-title>
 >    >
 >    > This is a lot of configuration but it is not very complex to understand. We'll go through it step by step:
 >    >
@@ -1924,7 +1938,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    > - `certbot_agree_tos`: We automatically agree to the certbot TOS. You can read the current one on [their website](https://letsencrypt.org/repository/)
 >    {: .details}
 >
->    > ### {% icon details %} Nginx details
+>    > <details-title>Nginx details</details-title>
 >    >
 >    > Likewise the nginx configuration has a couple of important points:
 >    > - `nginx_selinux_allow_local_connections`: Specific to CentOS hosts where Nginx will need to access Galaxy
@@ -1946,13 +1960,13 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    >
 >    {: .details}
 >
->    > ### {% icon details %} Running this tutorial with your own SSL certificates
+>    > <details-title>Running this tutorial with your own SSL certificates</details-title>
 >    >
 >    > If you want, you can run this with your own SSL certificates. You can read about all of the variables you need to set [in the ansible NGINX role](https://github.com/galaxyproject/ansible-nginx#ssl-configuration).
 >    >
 >    {: .details}
 >
->    > ### {% icon details %} Running this tutorial *without* SSL
+>    > <details-title>Running this tutorial <i>without</i> SSL</details-title>
 >    >
 >    > If you want, you can run this tutorial without SSL. We will provide a sketch of the configuration changes needed, but this is of course not recommended for production, so we will not go into detail here:
 >    >
@@ -2031,8 +2045,8 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +    server_name   "{{ inventory_hostname }}";
 >    +
 >    +    # Our log files will go here.
->    +    access_log  /var/log/nginx/access.log;
->    +    error_log   /var/log/nginx/error.log;
+>    +    access_log  syslog:server=unix:/dev/log;
+>    +    error_log   syslog:server=unix:/dev/log;
 >    +
 >    +    # The most important location block, by default all requests are sent to gunicorn
 >    +    # If you serve galaxy at a path like /galaxy, change that below (and all other locations!)
@@ -2083,7 +2097,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 >    You'll notice that we have set a 24 hour cache timeout on static content served by NGINX. [Google's PageSpeed Tools](https://developers.google.com/speed/pagespeed/insights/) can identify any additional compression or caching improvements you can make.
 >
->    > ### {% icon details %} Running this tutorial *without* SSL
+>    > <details-title>Running this tutorial <i>without</i> SSL</details-title>
 >    >
 >    > In your `galaxy.j2` in the above step, you should change the `listen` parameter:
 >    >
@@ -2102,28 +2116,45 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 > 6. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >
->    > > ### {% icon code-in %} Input: Bash
+>    > > <code-in-title>Bash</code-in-title>
 >    > > ```bash
 >    > > ansible-playbook galaxy.yml
 >    > > ```
 >    > > {: data-cmd="true"}
 >    > {: .code-in}
->    > > ### {% icon code-in %} Output
+>    > > <code-out-title>Output</code-out-title>
 >    > > ```
 >    > > ...
 >    > > RUNNING HANDLER [restart galaxy] ****************************************
->    > > changed: [gat-88.training.galaxyproject.eu]
+>    > > changed: [gat-0.training.galaxyproject.eu]
 >    > > ```
 >    > {: .code-out}
 >    {: .code-2col}
 >
 >    If you didn't, you might have missed the first step in this hands-on.
 >
+>    > <tip-title>Install nginx - Failed [emerg] socket() [::]:80 failed</tip-title>
+>    > If you see this message:
+>    >
+>    > ```
+>    > nginx: [emerg] socket() [::]:80 failed (97: Address family not supported by protocol)
+>    > ```
+>    >
+>    > This may be due to missing IPv6 support on your machine. It is extremely unlikely your operating system doesn't support it, instead it was probably disabled. Check `/etc/sysctl.conf` and `/etc/sysctl.d/*` for `net.ipv6.conf.*.disable_ipv6=1`, or `/etc/default/grub` for `ipv6.disable=1`
+>    {: .tip}
+>
 > 7. Check out the changes made to your server in `/etc/nginx/sites-enabled/`, particularly the directory containing the Galaxy virtualhost.
 >
+> 8. Check out the nginx logs with `journalctl`
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > journalctl -fu nginx
+>    > ```
+>    {: .code-in}
 {: .hands_on}
 
-> ### {% icon details %} "Potential Security Risk" / LetsEncrypt Staging Environment
+> <details-title>"Potential Security Risk" / LetsEncrypt Staging Environment</details-title>
 >
 > LetsEncrypt has rate limits on requesting trusted certificates to prevent abuse of their service.
 > In a training setting there is no need to request certificates that will be trusted by all browsers. So we will request a testing certificate to show how it works, and by changing `staging` to `production`, you can request browser trusted certificates.
@@ -2142,14 +2173,14 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 {: .details}
 
-> ### {% icon comment %} Role Dependencies
+> <comment-title>Role Dependencies</comment-title>
 >
 > Throughout the playbook we added roles in a specific order. Partially this was to mimic the original training and build up a working Galaxy server from nothing, but partially this is also because of some hidden role dependencies on each other. Some must run before others, in order to set certain variables. Looking at the dependencies in detail:
 >
 >  Role                         | Role-Role Dependencies
 >  ----                         | ------------
 >  `galaxyproject.postgresql`   | None
->  `natefoo.postgresql_objects` | None
+>  `galaxyproject.postgresql_objects` | None
 >  `geerlingguy.pip`            | None
 >  `galaxyproject.galaxy`       | None
 >  `uchida.miniconda`           | In our group variables, we define the path to {% raw %}`{{ galaxy_tool_dependency_dir }}/_conda`{% endraw %}, so Galaxy needs to have set those variables
@@ -2203,15 +2234,15 @@ The above `job_conf.yml` file defines a *runner* and an *execution* to allow Gal
 
 Firstly, the plugins section contains a plugin called "local" which is of type "runner" and then loads the python code module for supporting local jobs. Next the destinations section contains a destination called "local" using the runner "local". As this is the only destination specified, it is also the default. So now everytime a user clicks "Execute" on a tool form, Galaxy will run the corresponding job locally using the python code specified.
 
-> ### {% icon tip %} Want to use something else?
+> <tip-title>Want to use something else?</tip-title>
 > There are a lot of other plugins available for Galaxy for using other resources such as docker containers, kubernetes hosts, Pulsar destinations and HPC clusters to name a few. See the Galaxy documentation on [job configuration](https://docs.galaxyproject.org/en/master/admin/jobs.html) for more details on these plugins and their configuration.
 {: .tip}
 
-> ### {% icon hands_on %} Hands-on: Job Conf
+> <hands-on-title>Job Conf</hands-on-title>
 >
 > 1. If the folder does not exist, create `templates/galaxy/config` next to your `galaxy.yml` playbook.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > mkdir -p templates/galaxy/config/
 >    > ```
@@ -2238,12 +2269,12 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    +
 >    +tools:
 >    +- class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->    +  execution: local_dest
+>    +  environment: local_dest
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add job conf"}
 >
->    > ### {% icon tip %} workers=4
+>    > <tip-title>workers=4</tip-title>
 >    > In the local runner, `workers: 4` means "number of jobs that can be running at one time". For every other job runner, it means the number of threads that are created to start/manage/finish jobs. E.g. if you are in a class and 50 people submit jobs, then there are four threads that can handle these jobs at once. But additional job handlers can be more useful as well.
 >    {: .tip}
 >
@@ -2288,30 +2319,30 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >
 > 4. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >
->    > > ### {% icon code-in %} Input: Bash
+>    > > <code-in-title>Bash</code-in-title>
 >    > > ```bash
 >    > > ansible-playbook galaxy.yml
 >    > > ```
 >    > > {: data-cmd="true"}
 >    > {: .code-in}
->    > > ### {% icon code-in %} Output
+>    > > <code-out-title>Output</code-out-title>
 >    > > ```
 >    > > ...
 >    > > RUNNING HANDLER [restart galaxy] ****************************************
->    > > changed: [gat-88.training.galaxyproject.eu]
+>    > > changed: [gat-0.training.galaxyproject.eu]
 >    > > ```
 >    > {: .code-out}
 >    {: .code-2col}
 >
 > 5. Checkout the new job_conf.yml file.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > cat /srv/galaxy/config/job_conf.yml
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output: Bash
+>    > <code-out-title>Bash</code-out-title>
 >    > ```yml
 >    > runners:
 >    >   local_runner:
@@ -2331,7 +2362,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 
 This is a fantastic base Galaxy installation but there are numerous additional options we should be setting for a real production Galaxy.
 
-> ### {% icon hands_on %} Hands-on: More Features!
+> <hands-on-title>More Features!</hands-on-title>
 >
 > 1. Make the following changes to your `group_vars/galaxyservers.yml`:
 >
@@ -2372,7 +2403,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    ```
 >    {: data-commit="Add production facing vars"}
 >
->    > ### {% icon tip %} What do these do?
+>    > <tip-title>What do these do?</tip-title>
 >    > Check out the full details in the [Galaxy documentation](https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options), but we'll discuss a couple briefly:
 >    > - `nginx_x_accel_redirect_base`: This is required to have NGINX serve user files. You don't want Galaxy to waste time reading a 100GB fastq file a user has asked for, so you offload that to NGINX. The request is passed through to Galaxy, so permissions checks still occur, but Galaxy instead replies to NGINX just the path to the file that it should send to the requesting user.
 >    > - `enable_quotas`: You definitely want to set a default quota for your users!
@@ -2407,13 +2438,13 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    ```
 >    {: data-commit="Add nginx x-accel-redir and g-i-g webhook config to nginx"}
 >
->    > ### {% icon tip %} What do these do?
+>    > <tip-title>What do these do?</tip-title>
 >    > The `_x_accel_redirect` is required for the NGINX file serving discussed above. For information on the GTN-in-Galaxy Webhook, see the [Galaxy Documentation](https://docs.galaxyproject.org/en/master/admin/special_topics/gtn.html?highlight=gtn%20galaxy). It's a very cool feature which helps your users access training materials directly in Galaxy.
 >    {: .tip}
 >
 > 3. Run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -2437,7 +2468,7 @@ For this "disaster", we will pretend that:
 1. Your database is on another machine
 2. Your datasets are on an NFS server or some other remote machine.
 
-> ### {% icon hands_on %} Hands-on: Summon the Apocalypse
+> <hands-on-title>Summon the Apocalypse</hands-on-title>
 >
 > So let's have a "worst case scenario", where your Galaxy server gets destroyed
 >
@@ -2452,11 +2483,11 @@ You were a responsible admin and had your user data and database stored on a sep
 
 But not you! You spent the day writing this Ansible playbook that describes your environment completely; all of the software that was installed, all of the configuration changes you have made. It leverages many community maintained roles and can be used to completely rebuild the server! With minimal effort on your part.
 
-> ### {% icon hands_on %} Hands-on: Revert the Apocalypse
+> <hands-on-title>Revert the Apocalypse</hands-on-title>
 >
 > 1. Run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -2478,7 +2509,7 @@ Ansible can save you from some really bad scenarios, *if and only if*:
 
 Then you can potentially use it to recover.
 
-> ### {% icon comment %} We have experience
+> <comment-title>We have experience</comment-title>
 >
 > We can tell you this, we can repeat it over and over, but unless you really have a disaster happen to you, it is hard to appreciate how important it is that machines are completely controlled in terms of configuration and software deployment.
 >

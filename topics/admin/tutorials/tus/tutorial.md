@@ -25,12 +25,14 @@ requirements:
 
 Here you'll learn to setup [TUS](https://tus.io/) an open source resumable file upload server to process uploads for Galaxy. We use an external process here to offload the main Galaxy processes for more important work and not impact the entire system during periods of heavy uploading.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="tus" %}
 
 # TUS and Galaxy
 
@@ -42,7 +44,7 @@ To allow your user to upload via TUS, you will need to:
 
 ## Installing and Configuring
 
-> ### {% icon hands_on %} Hands-on: Setting up ftp upload with Ansible
+> <hands-on-title>Setting up ftp upload with Ansible</hands-on-title>
 >
 > 1. In your playbook directory, add the `galaxyproject.tusd` role to your `requirements.yml`
 >
@@ -64,7 +66,7 @@ To allow your user to upload via TUS, you will need to:
 >
 > 2. Install the role with:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
@@ -157,7 +159,7 @@ To allow your user to upload via TUS, you will need to:
 >
 > 6. Run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -170,7 +172,7 @@ Congratulations, you've set up TUS for Galaxy.
 
 ## Check it works
 
-> ### {% icon hands_on %} Hands-on: Check that it works.
+> <hands-on-title>Check that it works.</hands-on-title>
 >
 > 1. SSH into your machine
 >
@@ -180,7 +182,7 @@ Congratulations, you've set up TUS for Galaxy.
 >
 > 4. Check the directory `/data/tus/` has been created and it's contents
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```
 >    > sudo tree /data/tus/
 >    > ```

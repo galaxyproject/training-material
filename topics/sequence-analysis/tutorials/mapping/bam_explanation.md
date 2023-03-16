@@ -1,6 +1,6 @@
 A BAM ([Binary Alignment Map](https://en.wikipedia.org/wiki/SAM_(file_format))) file is a compressed binary file storing the read sequences, whether they have been aligned to a reference sequence (e.g. a chromosome), and if so, the position on the reference sequence at which they have been aligned.
 
-> ### {% icon hands_on %} Hands-on: Inspect a BAM/SAM file
+> <hands-on-title>Inspect a BAM/SAM file</hands-on-title>
 >
 > 1. Inspect the {% icon param-file %} output of **{{ include.mapper }}** {% icon tool %}
 >
@@ -25,12 +25,12 @@ A BAM file (or a SAM file, the non-compressed version) consists of:
     10 | SEQ | String | Segment SEQuence
     11 | QUAL | String | ASCII of Phred-scaled base QUALity+33 
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. Which information do you find in a SAM/BAM file?
 > 2. What is the additional information compared to a FASTQ file?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. Sequences and quality information, like a FASTQ
 > > 2. Mapping information, Location of the read on the chromosome, Mapping quality, etc
 > {: .solution }

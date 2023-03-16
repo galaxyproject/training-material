@@ -31,18 +31,20 @@ requirements:
 
 The reports application gives some pre-configured analytics screens. These are very easy to setup and can help with debugging issues in Galaxy.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
 
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="reports" %}
+
 # Setting up Reports
 
 The reports application is included with the Galaxy codebase and this tutorial assumes you've already done all of the setup required for Galaxy, systemd, uWSGI, and NGINX.
 
-> ### {% icon hands_on %} Hands-on: Setup Reports
+> <hands-on-title>Setup Reports</hands-on-title>
 >
 >
 > 1. First we add a basic configuration of the Reports app to the playbook templates. Create `templates/galaxy/config/` folder, if it doesn't exist, and create `templates/galaxy/config/reports.yml` with the following contents:
@@ -136,10 +138,10 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- a/templates/nginx/galaxy.j2
 >    +++ b/templates/nginx/galaxy.j2
->    @@ -105,4 +105,10 @@ server {
->             uwsgi_param UWSGI_SCHEME $scheme;
->             include uwsgi_params;
+>    @@ -91,4 +91,10 @@ server {
 >         }
+>     
+>         {{ tiaas_nginx_routes }}
 >    +
 >    +    location /reports/ {
 >    +        uwsgi_pass           127.0.0.1:9001;
@@ -153,7 +155,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >
 > 5. Run the playbook:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -169,7 +171,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 > {: data-test="true"}
 {: .hidden}
 
-> ### {% icon comment %} Insecure!
+> <comment-title>Insecure!</comment-title>
 > But notice that your Reports server is not secured! Check out the [External Authentication]({% link topics/admin/tutorials/external-auth/tutorial.md %}) tutorial for information on securing Reports.
 {: .comment}
 

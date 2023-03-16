@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Calling variants in diploid systems"
+subtopic: introduction
 zenodo_link: "https://doi.org/10.5281/zenodo.60520"
 questions:
   - "How to find variable sites in diploid genomes?"
@@ -21,7 +22,7 @@ contributors:
 
 Today we hear a lot about personalized medicine. Yet the *personalization* is defined by the genetic make up of the individual. In this tutorial we will discuss how this information can be uncovered from the genomic sequencing data.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -156,7 +157,7 @@ In this example we will perform variant calling and annotation using [genome in 
 
 Yet for a quick tutorial these datasets are way too big, so we created a [downsampled dataset](https://doi.org/10.5281/zenodo.60520). This dataset was produced by mapping the trio reads against the `hg19` version of the human genome, merging the resulting bam files together (we use readgroups to label individual reads so they can be traced to each of the original individuals), and restricting alignments to a small portion of chromosome 19 containing the [*POLRMT*](https://www.ncbi.nlm.nih.gov/gene?cmd=Retrieve&dopt=Graphics&list_uids=5442) gene.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. Create a new history for this variant calling exercise
 >
@@ -171,7 +172,7 @@ Yet for a quick tutorial these datasets are way too big, so we created a [downsa
 
 ### Generating and post-processing FreeBayes calls
 
-> ### {% icon hands_on %} Hands-on: Generating FreeBayes calls
+> <hands-on-title>Generating FreeBayes calls</hands-on-title>
 >
 > 1. **FreeBayes** {% icon tool %} with the following parameters:
 >    - *"Choose the source for the reference genome"*: `locally cached`
@@ -184,7 +185,7 @@ Yet for a quick tutorial these datasets are way too big, so we created a [downsa
 
 This will produce a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/variant-call-format) format containing 35 putative variants. Before we can continue, we need to post-process this dataset by breaking compound variants into multiple independent variants.
 
-> ### {% icon hands_on %} Hands-on: Simplify variant representation
+> <hands-on-title>Simplify variant representation</hands-on-title>
 >
 > 1. **VcfAllelicPrimitives** {% icon tool %} with:
 >    - *"Select VCF dataset"*: the VCF output of **FreeBayes** {% icon tool %}
@@ -202,7 +203,7 @@ This will produce a dataset in [VCF](http://www.1000genomes.org/wiki/Analysis/va
 
 At this point we are ready to begin annotating variants using [**SnpEff**](http://snpeff.sourceforge.net/SnpEff.html). SnpEff "*...annotates and predicts the effects of variants on genes (such as amino acid changes)...*" and so is critical for functional interpretation of variation data.
 
-> ### {% icon hands_on %} Annotating variants
+> <hands-on-title>Annotating variants</hands-on-title>
 > 1. **SnpEff** (Variant effect and annotation) {% icon tool %} with:
 >    - *"Sequence changes (SNPs, MNPs, InDels)"*: the VCF output of **VcfAllelicPrimitives** {% icon tool %}
 >    - *"Genome source"*: `Locally installed reference genome`
@@ -237,7 +238,7 @@ The first step is to convert a VCF file we would like to analyze into a GEMINI d
 | family1 | HG002_NA24385_son | HG003_NA24149_father | HG004_NA24143_mother | 1 | 2 | CEU |
 {: .table .table-responsive}
 
-> ### {% icon hands_on %} Hands-on: Loading data into GEMINI
+> <hands-on-title>Loading data into GEMINI</hands-on-title>
 >
 > 1. **GEMINI load** {% icon tool %} with:
 >    - *"VCF file to be loaded in the GEMINI database"*: the VCF output of **SnpEff** {% icon tool %}
@@ -248,19 +249,19 @@ The first step is to convert a VCF file we would like to analyze into a GEMINI d
 > 2. Run **GEMINI db_info** {% icon tool %} to see the content of the database:
 >    - *"GEMINI database"*: the output of **GEMINI load** {% icon tool %}
 >
->    This produces a list of all database tables and their columns. The latest version of the GEMINI database schema can be found [here](https://gemini.readthedocs.org/en/latest/content/database_schema.html).
+>    This produces a list of all database tables and their columns according to the [latest version of the GEMINI database schema](https://gemini.readthedocs.org/en/latest/content/database_schema.html).
 {: .hands_on}
 
 ## Querying the GEMINI database
 
-The GEMINI database can be queried using the versatile SQL language (more on SQL [here](https://swcarpentry.github.io/sql-novice-survey)). In Galaxy this is done using the **GEMINI query** tool. Within this tool SQL commands are typed directly into the **The query to be issued to the database** text box. Let's begin getting information from some of the tables we discovered using the **GEMINI db_info** tool above.
+The GEMINI database can be queried using the versatile [SQL language](https://swcarpentry.github.io/sql-novice-survey). In Galaxy this is done using the **GEMINI query** tool. Within this tool SQL commands are typed directly into the **The query to be issued to the database** text box. Let's begin getting information from some of the tables we discovered using the **GEMINI db_info** tool above.
 
-> ### {% icon comment %} GEMINI tutorials
+> <comment-title>GEMINI tutorials</comment-title>
 >
 > The examples below are taken from "[Introduction to GEMINI](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)" tutorial. For extensive documentation see "[Querying the GEMINI database](https://gemini.readthedocs.org/en/latest/content/querying.html)".
 {: .comment}
 
-> ### {% icon hands_on %} Hands-on: Selecting "novel" variants that are not annotated in dbSNP database
+> <hands-on-title>Selecting "novel" variants that are not annotated in dbSNP database</hands-on-title>
 >
 > 1. **GEMINI query** {% icon tool %} with:
 >    - *"GEMINI database"*: the output of **GEMINI load** {% icon tool %}
@@ -269,7 +270,7 @@ The GEMINI database can be queried using the versatile SQL language (more on SQL
 >    As we can see in the output dataset, there are 21 variants that are not annotated in dbSNP.
 {: .hands_on}
 
-> ### {% icon hands_on %} Find variants within the POLRMT gene
+> <hands-on-title>Find variants within the POLRMT gene</hands-on-title>
 >
 > 1. **GEMINI query** {% icon tool %} with:
 >    - *"GEMINI database"*: the output of **GEMINI load** {% icon tool %}
@@ -288,13 +289,13 @@ GEMINI provides access to genotype, sequencing depth, genotype quality, and geno
 - `gt_ref_depths.subjectID` -  number of reference allele reads in this subject at position
 - `gt_alt_depths.subjectID` - number of alternate allele reads in this subject at position
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > 1. At how many sites does child have a non-reference allele?
 > 2. At how many sites both father and son have non reference alleles?
 > 3. List genotypes for father and son where they have non-reference alleles.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. To answer this question you can run the **GEMINI query** {% icon tool %} tool with:
 > >    - *"The query to be issued to the database"*: `SELECT * from variants`
 > >    - *"Restrictions to apply to genotype values"*: `gt_types.HG002_NA24385_son <> HOM_REF`
@@ -317,11 +318,11 @@ Wildcards simply writing SQL expressions when searching across multiple terms. T
 
 Let's look at some examples.
 
-> ### {% icon question %} Question
+> <question-title></question-title>
 >
 > At which variants are every sample heterozygous?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > >
 > > To answer this question you can run the **GEMINI query** {% icon tool %} tool with:
 > > - *"The query to be issued to the database"*: `SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants`

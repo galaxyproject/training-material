@@ -36,17 +36,18 @@ contributors:
 priority: 5
 notebook:
   language: python
+  pyolite: true
 ---
 
 "Flow Control" is how we describe when we change the flow of code's execution, based on some conditions. Here we'll learn how to take different actions depending on what data out program sees, or how to run code only if some condition is true.
 
-> ### {% icon comment %} Comment
+> <comment-title></comment-title>
 > This tutorial is **significantly** based on [the Carpentries](https://carpentries.org) [Programming with Python](https://swcarpentry.github.io/python-novice-inflammation/) and [Plotting and Programming in Python](https://swcarpentry.github.io/python-novice-gapminder/), which are licensed CC-BY 4.0.
 >
 > Adaptations have been made to make this work better in a GTN/Galaxy environment.
 {: .comment}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -128,7 +129,7 @@ if num > 100:
 print('...after conditional')
 ```
 
-> ### {% icon question %} Question: If behaviour
+> <question-title>If behaviour</question-title>
 >
 > Try changing the `num` value and see what happens for different values.
 >
@@ -138,7 +139,7 @@ print('...after conditional')
 > 3. "test"
 > 4. 100.000001
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. Condition is activated!
 > > 2. Nothing, but not because it is a float! Because it's less than 100
 > > 3. Traceback, a `TypeError`, you cannot compare strings with integers
@@ -163,7 +164,7 @@ else:
     print("Dress normally")
 ```
 
-> ### {% icon tip %} Tip: If/Elif/Elif/Elif/Else:
+> <tip-title>If/Elif/Elif/Elif/Else:</tip-title>
 > if/elif/else cases follow these rules:
 >
 > - must start with an `if`
@@ -203,14 +204,14 @@ else:
     print('at least one part is false')
 ```
 
-> ### {% icon question %} Question: Predict what happens
+> <question-title>Predict what happens</question-title>
 > Predict the outcomes of the following values of `a` and `b` above. Predicting what you think the code will do is a useful skill to practice
 > 1. a = 0; b = -1
 > 2. a = 0; b = 10
 > 3. a = 4; b = -22
 > 4. a = 99; b = 99
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. at least one part is false
 > > 2. at least one part is false
 > > 3. both parts are true
@@ -229,7 +230,7 @@ if (a < 0) or (b > 0):
 ```
 
 
-> ### {% icon tip %} Tip: `True` and `False`
+> <tip-title>`True` and `False`</tip-title>
 > `True` and `False` are special words in Python called `booleans`,
 > which represent truth values. A statement such as `1 < 0` returns
 > the value `False`, while `-1 < 0` returns the value `True`.
@@ -310,7 +311,7 @@ There are two important points here:
 
 ## Exercises
 
-> ### {% icon question %} Question:
+> <question-title></question-title>
 > `if`s, `elif`s and `else`s get evaluated in blocks. Look at the following code and list the lines that are part of a single block.
 >
 > ```
@@ -330,7 +331,7 @@ There are two important points here:
 > 14.     # ..
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > "Blocks" of if/elif/elses
 > > - must start with an `if`
 > > - can have 0 or more `elif` conditions
@@ -349,7 +350,7 @@ There are two important points here:
 # Test code here.
 ```
 
-> ### {% icon question %} Question: How Many Paths?
+> <question-title>How Many Paths?</question-title>
 >
 > Consider this code:
 >
@@ -370,7 +371,7 @@ There are two important points here:
 > 3.  C
 > 4.  B and C
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > C gets printed because the first two conditions, `4 > 5` and `4 == 5`, are not true,
 > > but `4 < 5` is true.
 > {: .solution}
@@ -380,14 +381,14 @@ There are two important points here:
 # Test code here.
 ```
 
-> ### {% icon question %} Question: Close Enough
+> <question-title>Close Enough</question-title>
 >
 > Write some conditions that print `True` if the variable `a` is within `10` of the variable `b`
 > and `False` otherwise.
 > Compare your implementation with your partner's:
 > do you get the same answer for all possible pairs of numbers?
 >
-> > ### {% icon tip %} Tip: abs
+> > <tip-title>abs</tip-title>
 > > There is a [built-in function `abs`][abs-function] that returns the absolute value of
 > > a number:
 > > ```python
@@ -399,7 +400,7 @@ There are two important points here:
 > > ```
 > {: .tip}
 >
-> > ### {% icon solution %} Solution 1
+> > <solution-title>1</solution-title>
 > > ```
 > > a = 5
 > > b = 5.1
@@ -411,7 +412,7 @@ There are two important points here:
 > > ```
 > {: .solution}
 >
-> > ### {% icon solution %} Solution 2
+> > <solution-title>2</solution-title>
 > > ```
 > > print(abs(a - b) <= 10)
 > > ```
@@ -425,7 +426,7 @@ There are two important points here:
 # Test code here.
 ```
 
-> ### {% icon question %} Question: Pitfalls
+> <question-title>Pitfalls</question-title>
 >
 > A *integer* number between 0 and 100 will be provided to this function. Answer these two questions:
 >
@@ -448,7 +449,7 @@ There are two important points here:
 >     print("Everything else goes here")
 > ```
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. No, it won't. 32 is the only value there that doesn't print anything. You can either do `x < 57` and later `57 <= x` to test the bigger and smaller values, or you can make use `x < 57` and `56 < x`, which have the same results, but **only with integers**. If your code accepted a float, e.g. `56.5`, both of those tests would be true. So `x < 57` and later `57 <= x` is the preferred way to write that.
 > > 2. `86` is the most obvious solution to this, the programmer added a check specifically to see if the value was 86, but instead it's caught by the previous case.
 > {: .solution}
@@ -470,6 +471,6 @@ elif 57 < num <= 86:
     print("Everything else goes here")
 ```
 
-> ### {% icon tip %} Tip: Why a synthetic example like this?
+> <tip-title>Why a synthetic example like this?</tip-title>
 > Complicated if/elif/else cases are common in code, you need to be able to spot these sort of issues. For example there are large if/else cases in the [Galaxy codebase](https://github.com/galaxyproject/galaxy/blob/9143dd7ca46d150ebfb26febbe187979f682da51/tools/stats/grouping.py#L153-L176), sometimes nested even, and being ale to predict their behaviour is really important to being able to work with the code. [Missing else cases](https://github.com/galaxyproject/galaxy/blob/9143dd7ca46d150ebfb26febbe187979f682da51/tools/stats/grouping.py#L185-L195) are sometimes important, sometimes a bug, sometimes just the code hasn't been implemented yet, which is why we always write good code comments!
 {: .tip}

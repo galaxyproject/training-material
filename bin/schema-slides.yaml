@@ -7,7 +7,8 @@ mapping:
         enum:
             - base_slides
             - tutorial_slides
-            - rdmbites_slides
+            - introduction_slides
+            - tutorial_slides_ai4life
         description: |
             The layout to use. Generally you should use `tutorial_slides` and no other value.
     title:
@@ -102,6 +103,8 @@ mapping:
                     - bebatut
                 infrastructure:
                     - natefoo
+                translation:
+                    - shiltemann
                 funding:
                     - erasmusplus
         type: map
@@ -148,6 +151,13 @@ mapping:
                 - type: str
                   enum:
                   - CONTRIBUTORS
+            translation:
+                type: seq
+                description: These entities did translation and localisation work on this resource
+                sequence:
+                - type: str
+                  enum:
+                  - CONTRIBUTORS
     hands_on:
         type: str
         enum:
@@ -173,12 +183,16 @@ mapping:
             - "https://zenodo.org/record/3706539"
     logo:
         type: str
+        enum:
+          - GTN
+          - assets/images/gat.png
+          - assets/images/gga.png
+          - assets/images/ncbi.png
+          - /assets/images/elixir-uk.png
+          - topics/ai4life/images/AI4Life-logo_giraffe-nodes.png
         required: true
         description: |
             A logo identifier (e.g. GTN) should be used by default, but may be swapped out for special logos from the assets folder.
-        examples:
-            - GTN
-            - assets/images/gat.png
     class:
         type: str
         description: A default CSS class applied to slides
@@ -345,7 +359,14 @@ mapping:
                       type: str
                       description: |
                         URL of the external resource
-    enable:
+    draft:
         type: bool
         description: |
-            `false` to hide your tutorial from the topic page (optional). This is useful if you need a tutorial for a workshop, but have not finished making it up to GTN standards.
+            `true` to hide your tutorial from the topic page (optional). This is useful if you need a tutorial for a workshop, but have not finished making it up to GTN standards.
+    og_image:
+        type: str
+        description: |
+            A custom image to show on the link preview in external applications (e.g. when the URL is pasted into Twitter)
+        pattern: /^\/.*/
+        examples:
+            - /assets/images/gat.png

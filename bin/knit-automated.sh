@@ -3,7 +3,9 @@ DIR=/tmp/git-gat
 op="$1"
 
 declare -a tutorials
-tutorials=(ansible-galaxy tus cvmfs singularity tool-management data-library connect-to-compute-cluster job-destinations pulsar gxadmin monitoring tiaas reports ftp)
+tutorials=(admin/ansible-galaxy admin/tus admin/cvmfs admin/singularity admin/tool-management admin/data-library admin/connect-to-compute-cluster admin/job-destinations admin/pulsar admin/gxadmin admin/monitoring admin/tiaas admin/reports admin/ftp)
+#tutorials=(admin/wireguard-headscale)
+#tutorials=(admin/wireguard)
 
 #echo "${tutorials[0]}"
 #exit 1;
@@ -42,9 +44,12 @@ if [[ "$op" == "export" ]]; then
 	# Then do the rest
 	for idx in "${!tutorials[@]}"; do
 		echo "Processing ${tutorials[$idx]}"
+		folder=$(echo "${tutorials[$idx]}" | cut -d / -f 1)
+		tuto=$(echo "${tutorials[$idx]}" | cut -d / -f 2)
+
 		python3 bin/knit-frog.py \
-			topics/admin/tutorials/${tutorials[$idx]}/tutorial.md \
-			${DIR}/$(( idx + 10 ))-${tutorials[$idx]};
+			topics/${folder}/tutorials/${tuto}/tutorial.md \
+			${DIR}/$(( idx + 10 ))-${tuto};
 	done
 elif [[ "$op" == "import" ]]; then
 	if [[ ! -d "${DIR}" ]]; then
@@ -65,11 +70,14 @@ elif [[ "$op" == "import" ]]; then
 	cd "${CURRENT_DIR}" || exit
 
 	# Import all of the patches
-	for i in "${tutorials[@]}"; do
-		if [[ "$i" != "tool-management" ]]; then
+	for idx in "${!tutorials[@]}"; do
+		if [[ "${tutorials[$idx]}" != "admin/tool-management" ]]; then
+		folder=$(echo "${tutorials[$idx]}" | cut -d / -f 1)
+		tuto=$(echo "${tutorials[$idx]}" | cut -d / -f 2)
+
 		python3 bin/knit.py \
-			topics/admin/tutorials/$i/tutorial.md \
-			--patches ${DIR}/*admin-${i}*.patch
+			topics/${folder}/tutorials/${tuto}/tutorial.md \
+			--patches ${DIR}/*${folder}-${tuto}*.patch
 		fi
 	done
 elif [[ "$op" == "deploy" ]]; then

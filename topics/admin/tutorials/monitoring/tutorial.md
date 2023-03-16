@@ -33,21 +33,22 @@ requirements:
       - ansible
       - ansible-galaxy
       - gxadmin
+abbreviations:
+    TSDB: Time Series Database
 ---
 
-
-# Overview
-{:.no_toc}
 
 Monitoring is an incredibly important part of server monitoring and maintenance. Being able to observe trends and identify hot spots by collecting metrics gives you a significant ability to respond to any issues that arise in production. Monitoring is quite easy to get started with, it can be as simple as writing a quick shell script in order to start collecting metrics.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
+
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="monitoring" %}
 
 This tutorial explicitly assumes you are starting with a setup like that created in the *Galaxy installation with Ansible* tutorial
 
@@ -66,11 +67,11 @@ Setting up the infrastructure is quite simple thanks to the automation provided 
 
 ## InfluxDB
 
-[InfluxDB](https://www.influxdata.com/) provides the data storage for monitoring. It is a <abbr title="Time Series Database">TSDB</abbr>, so it has been designed specifically for storing time-series data like monitoring and metrics. There are other TSBD options for storing data but we have had good experiences with this one. TSBDs commonly feature some form of automatic data expiration after a set period of time. In InfluxDB these are known as "retention policies". Outside of this feature, it is a [relatively normal database](https://docs.influxdata.com/influxdb/v1.7/concepts/crosswalk/).
+[InfluxDB](https://www.influxdata.com/) provides the data storage for monitoring. It is a {TSDB}, so it has been designed specifically for storing time-series data like monitoring and metrics. There are other TSBD options for storing data but we have had good experiences with this one. TSBDs commonly feature some form of automatic data expiration after a set period of time. In InfluxDB these are known as "retention policies". Outside of this feature, it is a [relatively normal database](https://docs.influxdata.com/influxdb/v1.7/concepts/crosswalk/).
 
 The available Ansible roles for InfluxDB unfortunately do not support configuring databases or users or retention policies. Ansible itself contains [several modules](https://docs.ansible.com/ansible/2.9/modules/list_of_database_modules.html#influxdb) you can use to write your own roles, but nothing generic. UseGalaxy.eu wrote [their own role](https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/roles/hxr.influxdb/tasks/main.yml) for setting up their InfluxDB database, but it is not reusable enough for it to be used here yet. If you plan to automate your entire setup, this tutorial can perhaps provide inspiration for writing your own Ansible role. However, in this case it is sufficient to manually create your users and retention policies as a one-off task.
 
-> ### {% icon hands_on %} Hands-on: Setting up InfluxDB
+> <hands-on-title>Setting up InfluxDB</hands-on-title>
 >
 > 1. Edit your `requirements.yml` and add the following:
 >
@@ -92,7 +93,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >
 > 2. Install the role
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
@@ -136,7 +137,7 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >
 > 4. Run the playbook:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook monitoring.yml
 >    > ```
@@ -195,7 +196,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 - [UseGalaxy.eu](https://stats.galaxyproject.eu/)
 - [UseGalaxy.org.au](https://stats.genome.edu.au/)
 
-> ### {% icon hands_on %} Hands-on: Setting up Grafana
+> <hands-on-title>Setting up Grafana</hands-on-title>
 >
 > 1. Edit your `requirements.yml` and add the following:
 >
@@ -215,7 +216,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >
 > 2. Install the role
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
@@ -267,7 +268,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >
 > 5. Run the monitoring playbook:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook monitoring.yml
 >    > ```
@@ -299,7 +300,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >
 > 5. Run the Galaxy playbook which includes Nginx:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -406,7 +407,7 @@ We capture information about what tool is running, the job state, and where it i
 Setting up Telegraf is again very simple. We just add a single role to our playbook and set some variables.
 
 
-> ### {% icon hands_on %} Hands-on: Dependencies
+> <hands-on-title>Dependencies</hands-on-title>
 >
 > 1. Edit your `requirements.yml` and add the following:
 >
@@ -426,7 +427,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >
 > 2. Install the requirements
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
@@ -560,7 +561,7 @@ The stats have been collecting in InfluxDB for a few minutes, so now we will now
 
 For any public Grafana dashboard, you can copy the dashboard for your own use. This is a nice feature of Grafana that has really helped it spread in the Galaxy community, any cool thing one of us builds, everyone else can copy and build upon.
 
-> ### {% icon hands_on %} Hands-on: Import a dashboard
+> <hands-on-title>Import a dashboard</hands-on-title>
 >
 > 1. [Visit UseGalaxy.eu's Node Detail dashboard](https://stats.galaxyproject.eu/d/000000023/node-detail-infrastructure?orgId=1)
 >
@@ -582,7 +583,7 @@ With this, your first dashboard should be live! You should see some data from yo
 
 Importing dashboards is a good start, but it's more interesting to create our own that's personalised to our needs.
 
-> ### {% icon hands_on %} Hands-on: Create a dashboard
+> <hands-on-title>Create a dashboard</hands-on-title>
 >
 > 1. Again find the `+` icon in Grafana and create a dashboard. This will bring you to a new screen
 >
@@ -612,7 +613,7 @@ Importing dashboards is a good start, but it's more interesting to create our ow
 
 This will track how long it takes the interface to respond on various web routes and API routes. The collection of individual points is a bit hard to interpret the "feeling" of, so it's common to add a query like the [95th percentile](https://en.wikipedia.org/wiki/Percentile) of requests. This is a value that is calculated from all of the data points collected. The 95th percentile means that 95% of requests are responded to more quickly than this value.
 
-> ### {% icon hands_on %} Hands-on: Add a second query to an existing graph
+> <hands-on-title>Add a second query to an existing graph</hands-on-title>
 >
 > 1. The top of the graph is probably labelled "Panel Title", unless you changed it. Click this to access a dropdown and click "Edit"
 >
@@ -646,7 +647,7 @@ There is a significant amount of visual styling that one can do to the graphs to
 
 We will update the panel we've added to highlight the important information and downplay less important facets, as well as configuring it to have a nicer title than "Panel Title"
 
-> ### {% icon hands_on %} Hands-on: Styling the graph
+> <hands-on-title>Styling the graph</hands-on-title>
 >
 > 1. Again edit the one graph we've added in our dashboard
 >
@@ -700,13 +701,13 @@ Collecting all of this data is interesting to visualise but as an administrator 
 
 Doing monitoring effectively, without causing undue burden to the administrators (extraneous alerts that are not actionable), or the users (unexpected/unnoticed downtime), is a very complex topic. Recommended reading here includes the [monitoring chapter](https://landing.google.com/sre/sre-book/chapters/monitoring-distributed-systems/) of the Google SRE book {% cite Beyer:2016:SRE:3006357 %} which can provide some general guidance on the topic and what metrics may be interesting or annoying to alert upon.
 
-> ### {% icon comment %} No generic advice
+> <comment-title>No generic advice</comment-title>
 > We cannot easily provide generic and applicable recommendations, that work across every system and every scale. Some of these performance bounds or features you will need to discover yourself, either adding new metrics in support of this, or changing monitoring thresholds to match the values you need.
 {: .comment }
 
 We will add an example alert, to make you familiar with the process. This is not an alert that will probably be useful in production.
 
-> ### {% icon hands_on %} Hands-on: Add an alert to your graph
+> <hands-on-title>Add an alert to your graph</hands-on-title>
 >
 > 1. Again edit the `Galaxy Request Times` graph
 >
@@ -737,7 +738,7 @@ Via this setup using `systemd` we collect metrics about Galaxy request times. To
 
 It's simple to install gxadmin. Here's how you do it, if you haven't done it already:
 
-> ### {% icon hands_on %} Hands-on: Installing gxadmin and configuring Telegraf
+> <hands-on-title>Installing gxadmin and configuring Telegraf</hands-on-title>
 >
 > 1. Edit your `requirements.yml` and add the following:
 >
@@ -756,7 +757,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 
 ## Configuring Telegraf for gxadmin
 
-> ### {% icon hands_on %} Hands-on: Configuring Telegraf
+> <hands-on-title>Configuring Telegraf</hands-on-title>
 >
 > 1. Edit the `group_vars/galaxyservers.yml`, we need to add some additional permissions to permit Telegraf to run `gxadmin`:
 >
@@ -825,7 +826,7 @@ With this, Telegraf will start monitoring the Galaxy queue by calling the query 
 
 We'll now create a graph for this, just like the one on [stats.galaxyproject.eu](https://stats.galaxyproject.eu)
 
-> ### {% icon hands_on %} Hands-on: Building the queue graph
+> <hands-on-title>Building the queue graph</hands-on-title>
 >
 > 1. Click the **new graph** button at the top of Grafana's interface, and *Add a Query*
 >

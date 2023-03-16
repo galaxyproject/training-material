@@ -25,6 +25,8 @@ time_estimation:  30M
 key_points:
 - Functions are foundational in Python
 - Everything you do will require functions
+- Functions keep your code DRY (don't repeat yourself), reducing your copying and pasting or rewriting the same block of code.
+- Deciding what part of your code should, or should not be, a function is something that will come with practice.
 
 subtopic: python-modular
 contributors:
@@ -36,6 +38,7 @@ contributors:
 priority: 2
 notebook:
   language: python
+  pyolite: true
 
 abbreviations:
   DRY: Don't Repeat Yourself
@@ -44,7 +47,7 @@ abbreviations:
 Functions are the basic unit of all work in Python! Absolutely everything you do uses functions. Conceptually, functions are super simple. Just like in maths, they take an input, do some transformation, and return an output. As an example, `f(x) = x + 2` is a function that calculates whatever value you request, plus two. But functions are foundational, so, you should understand them well before moving on.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -58,7 +61,7 @@ Functions are the basic unit of all work in Python! Absolutely everything you do
 
 Functions are a way to re-use some computation you want to do, multiple times. If you don't have a function, you need to re-write the calculation every time, so we use functions to collect those statements and make them easy to re-run. Additionally they let us "parameterise" some computation. Instead of computing the same value every time, we can template it out, we can re-run the computation with new inputs, and see new results.
 
-> > ### {% icon code-in %} Math
+> > <code-in-title>Math</code-in-title>
 > > ```
 > > # Define our function
 > > f(x) = 3 * x
@@ -67,7 +70,7 @@ Functions are a way to re-use some computation you want to do, multiple times. I
 > > ```
 > {: .code-in}
 >
-> > ### {% icon code-out %} Python
+> > <code-out-title>Python</code-out-title>
 > > ```
 > > # Define our function
 > > def f(x):
@@ -107,7 +110,7 @@ print(f"freezing point of water: {fahr_to_celsius(32)}C")
 print(f"boiling point of water: {fahr_to_celsius(212)}C")
 ```
 
-> ### {% icon tip %} Formatting Strings
+> <tip-title>Formatting Strings</tip-title>
 > There are several ways to print out a few values in python. We'd recommend you to use `f-strings` as it's the cleanest and most modern way to do it.
 >
 > `f`-strings start with an `f` (very descriptive name eh?). Within the text between the single or double quotes (`'`/`"`) you can use curly braces to refer to variables or python code which will be placed there in the string.
@@ -139,7 +142,7 @@ def celsius_to_kelvin(temp_c):
 print(f'freezing point of water in Kelvin: {celsius_to_kelvin(0.)}')
 ```
 
-> ### {% icon tip %} Tip: What is `0.`
+> <tip-title>What is `0.`</tip-title>
 > That's a float! A `.` in a number makes it a float, rather than an integer.
 {: .tip}
 
@@ -176,19 +179,20 @@ def fahr_to_kelvin(temp_f):
 print(f'boiling point of water in Kelvin: {fahr_to_kelvin(212.0)}')
 ```
 
-For a function this small, with such a descriptive name (`fahr_to_kelvin`) it feels quite obvious what the function should do, what inputs it takes, what outputs it produces. However
+For a function this small, with such a descriptive name (`fahr_to_kelvin`) it feels quite obvious what the function should do, what inputs it takes, what outputs it produces. However, you will thank yourself in the future if you do this now. You may think you will remember what the code does, but, be kind to your future self who is busy and stressed and may not want to spend time reading the code over again to figure out what every single function does.
 
-> ### {% icon question %} Question: Converting statements to functions
+> <question-title>Converting statements to functions</question-title>
 > A lot of what you'll do in programing is to turn a procedure that you want to do, into statements and a function.
 >
 > Fill in the missing portions of this function, two average numbers. Then use it to find the average of 32326 and 631
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > def average2(a, b):
 > >     c = (a + b) / 2
 > >     return c
 > > ```
+> > We call it "average2" here because it will only average two numbers. It will not work for three numbers or a list of them.
 > {: .solution}
 {: .question}
 
@@ -201,7 +205,7 @@ def average2(a, b):
 print(average2(32326, 631))
 ```
 
-> ### {% icon question %} Question: A more complicated example
+> <question-title>A more complicated example</question-title>
 >
 > The formula for a 90° triangle can be expressed as: $$c = \sqrt{a^2 + b^2}$$
 >
@@ -209,7 +213,7 @@ print(average2(32326, 631))
 > 2. Name this function "pythagorus"
 > 3. Remember to import math, if you haven't already
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > def pythagorus(a, b):
 > >     c = math.sqrt(math.pow(a, 2) + math.pow(b, 2))
@@ -264,10 +268,10 @@ def some_generic_computation(x, y):
 # Location 3
 ```
 
-> ### {% icon question %} Question: Scope
+> <question-title>Scope</question-title>
 > Given the above code, which variables are accessible at Locations 1, 2, and 3?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > 1. a, b
 > > 2. a and b are there but you shouldn't use these. x, y, c, d, e are also accessible.
 > > 3. a, b.
@@ -298,7 +302,7 @@ display(c=77)
 ```
 
 
-> ### {% icon question %} Exercise: Signing a message
+> <question-title>Exercise: Signing a message</question-title>
 > Let's test out a default argument. Imagine you are printing out a message, and at the bottom it should have a signature.
 >
 > Inputs:
@@ -310,7 +314,7 @@ display(c=77)
 > 2. Print nothing (i.e. `print()`)
 > 3. Print a signature variable.
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > ```
 > > def myFunction(message, signature="Your name"):
 > >     print(message)

@@ -19,11 +19,11 @@ contributors:
 ---
 
 # Introduction
-{:.no_toc}
+
 
 All the training material which you find on [{{ site.url }}{{ site.baseurl }}/]({{ site.baseurl }}/) is stored on a [GitHub](https://github.com) repository ([{{ site.github_repository }}]({{ site.github_repository }})), a code hosting platform for version control and collaboration. GitHub interface is quite intuitive and simplifies the contributions from anyone.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, you will learn how to use GitHub interface to contribute to the training material:
 >
@@ -36,7 +36,7 @@ All the training material which you find on [{{ site.url }}{{ site.baseurl }}/](
 
 The GitHub repository for the training material is: [{{ site.github_repository }}]({{ site.github_repository }}).
 
-> ### {% icon hands_on %} Hands-on: Familiarization with GitHub
+> <hands-on-title>Familiarization with GitHub</hands-on-title>
 >
 > 1. Go on the GitHub repository: [{{ site.github_repository }}]({{ site.github_repository }})
 >
@@ -56,7 +56,7 @@ The GitHub repository for the training material is: [{{ site.github_repository }
 
 This `CONTRIBUTORS.yaml` file is where we collect the information (name, email, etc) about the different contributors to display them on our [Hall of Fame]({% link hall-of-fame.md %}). You will add your information there. But first you need to sign in to GitHub to be able to change this file.
 
-> ### {% icon hands_on %} Hands-on: Sign in to GitHub
+> <hands-on-title>Sign in to GitHub</hands-on-title>
 >
 > 1. Create a GitHub account (if you do not have one already)
 >
@@ -70,7 +70,7 @@ This `CONTRIBUTORS.yaml` file is where we collect the information (name, email, 
 
 You can now modify the `CONTRIBUTORS.yaml` file to add your information there
 
-> ### {% icon hands_on %} Hands-on: Edit a file
+> <hands-on-title>Edit a file</hands-on-title>
 >
 > 1. Open the `CONTRIBUTORS.yaml` file on GitHub
 > 2. Click on {% icon hands_on %} icon (top right of the file)
@@ -92,7 +92,7 @@ You can now modify the `CONTRIBUTORS.yaml` file to add your information there
 >
 >    1. Fill the box "Update CONTRIBUTORS.yaml" with "Add < GitHub username > as contributor" (replace < GitHub username > by your GitHub username)
 >
->       > ### {% icon comment %} Commit messages
+>       > <comment-title>Commit messages</comment-title>
 >       > This a commit message: a description explaining why a particular change was made. Theses messages capture the history of the changes, so other contributors can understand what have been done and why
 >       {: .comment}
 >
@@ -108,7 +108,7 @@ You can now modify the `CONTRIBUTORS.yaml` file to add your information there
 
 Without realizing it, GitHub let you create your first branch (named here `patch-1`) and add a changement on this branch.
 
-> ### {% icon comment %} Branching
+> <comment-title>Branching</comment-title>
 > Branching is the way to work on different versions of a repository at one time. By default your repository has one branch named `main` which is considered to be the definitive branch. When you create a branch off the main branch, you're making a copy, or snapshot, of `main` as it was at that point in time.
 >
 > By changing a file in this branch, it will diverge from the `main` branch. It will contain data that is only on this new branch.
@@ -122,7 +122,7 @@ The GitHub interface guides you through this process: after clicking on **Propos
 
 ![Pull request form](../../images/github_pr_interface.png "Pull request form")
 
-> ### {% icon hands_on %} Hands-on: Edit a file
+> <hands-on-title>Edit a file</hands-on-title>
 >
 > 1. Open and read the [CONTRIBUTING.md]({{ site.github_repository }}/blob/main/CONTRIBUTING.md) file
 > 1. Come back to the pull request
@@ -135,7 +135,7 @@ The GitHub interface guides you through this process: after clicking on **Propos
 >
 >       This message is a good way to introduce yourself and to explain the message you made. Be kind and descriptive. It helps the reviewers to understand why you did your changes and if it should be intergrated into the `main` branch (and then website).
 >
->       > ### {% icon comment %} Pull request messages
+>       > <comment-title>Pull request messages</comment-title>
 >       > GitHub uses [Markdown](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet), a simple Markup language, to render the Pull request messages. You can then add bold test, lists, images, etc.
 >       {: .comment}
 >
@@ -158,7 +158,7 @@ Your pull request will be reviewed. There are two possible outcomes:
 
 One of the reviewers of your pull request asked you to add your name after your GitHub username in the `CONTRIBUTORS.yaml` file.
 
-> ### {% icon hands_on %} Hands-on: Update a Pull Request
+> <hands-on-title>Update a Pull Request</hands-on-title>
 >
 > 1. Go to the list of pull request tab on GitHub
 > 2. Click on your pull request
@@ -204,7 +204,7 @@ Reviewers can now approve and merge your pull request.
 Because this was just a practice pull request, let's close it again.
 
 
-> ### {% icon hands_on %} Hands-on: Close the Pull Request
+> <hands-on-title>Close the Pull Request</hands-on-title>
 >
 > Once you have run through all these steps, please close the pull request again.
 >
@@ -219,11 +219,11 @@ Because this was just a practice pull request, let's close it again.
 
 
 # Conclusion
-{:.no_toc}
+
 
 With this tutorial, you learn how to use GitHub to change a file, create a pull request and then contribute to the training material. What you have learned here can be applied to any file.
 
-> ### {% icon details %} More about GitHub
+> <details-title>More about GitHub</details-title>
 > Via the GitHub interface, you can also go further: create file, branch directly, etc.
 > To learn that, we recommend you to read the [GitHub guide](https://guides.github.com/activities/hello-world/)
 {: .details}

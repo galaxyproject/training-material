@@ -27,17 +27,19 @@ follow_up_training:
 contributors:
   - thomaswollmann
   - shiltemann
+tags:
+  - HeLa
 
 ---
 
 # Introduction
-{:.no_toc}
+
 
 Image analysis is the extraction of meaningful information from images by means of digital image processing techniques. Imaging is an important component in a wide range of scientific fields of study, such as astronomy, medicine, physics, biology, geography, chemistry, robotics, and industrial manufacturing.
 
 This tutorial shows how to use Galaxy to perform basic image analysis tasks such as format conversion, image enhancement, segmentation, and feature extraction.
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will deal with:
 >
@@ -54,7 +56,7 @@ contains a screen of [DAPI](https://en.wikipedia.org/wiki/DAPI) stained [HeLa](h
 Our objective is to automatically count the number of cells contained in this image. In order to achieve this, we will enhance the quality of the image, automatically detect the nuclei and segment the nuclei and count them.
 
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> <hands-on-title>Data upload</hands-on-title>
 >
 > 1. If you are logged in, create a new history for this tutorial
 >
@@ -85,19 +87,19 @@ Our objective is to automatically count the number of cells contained in this im
 
 Now, we can extract metadata from an image.
 
-> ### {% icon hands_on %} Hands-on: Extract Image Metadata
+> <hands-on-title>Extract Image Metadata</hands-on-title>
 >
 > 1. **Image Info** {% icon tool %} with the following parameters to extract metadata from the image:
 >    - {% icon param-file %} *"Input Image"*: `input.tif` file (output of the previous step)
 > 2. Click on the {% icon galaxy-eye %} (eye) icon next to the file name, to look at the file content and search for image acquisition information
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What is the datatype?
 >    > 2. What are the pixel dimentions?
 >    > 3. How many bits per pixel are used?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. TIFF
 >    > > 2. 1344x1024
 >    > > 3. 16
@@ -109,7 +111,7 @@ Now, we can extract metadata from an image.
 
 Not all tools can handle all image formats. Especially proprietary microscope image formats should be converted to TIFF ([supported formats](https://docs.openmicroscopy.org/bio-formats/5.7.1/supported-formats.html)). However, TIFF can not be displayed in the browser. Therefore, we convert `input.tif` to a PNG for visualization.
 
-> ### {% icon hands_on %} Hands-on: Convert Image
+> <hands-on-title>Convert Image</hands-on-title>
 >
 > 1. **Convert image** {% icon tool %} with the following parameters to convert the image to PNG:
 >    - {% icon param-file %} *"Input Image"*: `input.tif` file
@@ -123,11 +125,11 @@ Your image should look something like this:
 
 ![raw input image](../../images/imaging-introduction/viz_input.png){: width="75%"}
 
-> ### {% icon question %} Questions
+> <question-title></question-title>
 >
 > You can observe that the image content is barely visible. Why?
 >
-> > ### {% icon solution %} Solution
+> > <solution-title></solution-title>
 > > The original image is 16-bit and the intensity values are spread over a larger range than the
 > > display can render. Therefore, for improved visibility the intensity histogram of the image can
 > > be normalized first.
@@ -137,7 +139,7 @@ Your image should look something like this:
 
 Next we will normalize the histogram to improve the contrast. We do this using a [Contrast Limited Adaptive Histogram Equalization (CLAHE)](https://en.wikipedia.org/wiki/Adaptive_histogram_equalization) approach.
 
-> ### {% icon hands_on %} Hands-on: Normalize Histogram and Convert Image
+> <hands-on-title>Normalize Histogram and Convert Image</hands-on-title>
 >
 > 1. **Histogram equalization** {% icon tool %} with the following parameters to normalize the histogram of the image:
 >    - {% icon param-file %} *"Source file"*: `input.tif` file
@@ -160,7 +162,7 @@ We can now clearly make out the presence of the stained nuclei. Next we will aut
 
 Specific features of interest (e.g., edges, noise) can be enhanced or suppressed by using an image filter.
 
-> ### {% icon hands_on %} Hands-on: Filter image
+> <hands-on-title>Filter image</hands-on-title>
 >
 > 1. **Filter Image** {% icon tool %} with the following parameters to smooth the image:
 >    - *"Image type"*: `Gaussian Blur`
@@ -187,7 +189,7 @@ Your image should now look something like this:
 
 Objects of interest like nuclei can be segmented by using a smoothed image and thresholding. Moreover, the results can be overlayed with the original image.
 
-> ### {% icon hands_on %} Hands-on: Segment image
+> <hands-on-title>Segment image</hands-on-title>
 >
 > 1. **Auto Threshold** {% icon tool %} with the following parameters to segment the image:
 >    - {% icon param-file %} *"Source file"*: `input_smoothed` file (output of **Filter image** {% icon tool %})
@@ -202,14 +204,14 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 >    - *"Output data type"*: `PNG`
 > 6. Rename {% icon galaxy-pencil %} the converted image to `viz segmented`
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > 1. What does **Binary 2 Label** {% icon tool %} do? (Hint: check the tool help section)
 >    > 2. View the `viz_segmented` image from the last step, what do you see?
 >    >      - Can you explain this result?
 >    > 3. Exercise: Try to make the information in this image better visible (Hint: **Histogram Equalization** {% icon tool %})
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > > 1. The tool assigns each connected component (e.g., segmented cell) in the image an object id and stores it as the intensity value.
 >    > > 2. The image looks completely black.
 >    > >    The object IDs generated by **Binary 2 Label** {% icon tool %} are relatively low.
@@ -245,11 +247,11 @@ Objects of interest like nuclei can be segmented by using a smoothed image and t
 > 9. **Count Objects** {% icon tool %} with the following parameters to count the segmented objects in the image:
 >    - {% icon param-file %} *"Source file"*: `input_segmented_labeled` file (output of **Binary 2 Label** {% icon tool %})
 >
->    > ### {% icon question %} Questions
+>    > <question-title></question-title>
 >    >
 >    > How many objects were segmented?
 >    >
->    > > ### {% icon solution %} Solution
+>    > > <solution-title></solution-title>
 >    > >  The **Count Objects** {% icon tool %} tool counted 425 objects.
 >    > {: .solution }
 >    {: .question}
@@ -264,6 +266,6 @@ We see the segmentation mask overlayed; each detected object (nucleus) is labele
 We see that with the help of just a few simple steps, we were able to detect the locations of the stained nuclei, and count them.
 
 # Conclusion
-{:.no_toc}
+
 
 In this exercise you imported images into Galaxy, extracted meta information from an image, converted between file formats, learned how to visualize microscopy images, filtered the image, and segmented cells using Galaxy.

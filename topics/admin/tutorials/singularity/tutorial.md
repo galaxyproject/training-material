@@ -26,9 +26,6 @@ requirements:
       - ansible-galaxy
 ---
 
-# Overview
-{:.no_toc}
-
 In this tutorial you will learn how to configure Galaxy to run jobs using [Singularity](https://sylabs.io/singularity/) containers provided by the [BioContainers](https://biocontainers.pro/) community.
 
 ## Background
@@ -45,22 +42,24 @@ Singularity is an alternative to Docker that is much friendlier for HPCs
 > -- [https://sylabs.io/guides/3.7/user-guide/introduction.html](https://sylabs.io/guides/3.7/user-guide/introduction.html)
 {: .quote}
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > 1. TOC
 > {:toc}
 >
 {: .agenda}
 
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="singularity" %}
+
 # Installing Singularity
 
 First, we will install Singularity using Ansible. On most operating systems there is no package for singularity yet, so we must use a role which will compile it from source. If you're on CentOS7/8, it is available through the EPEL repository.
 
-> ### {% icon tip %} CentOS7
+> <tip-title>CentOS7</tip-title>
 > If you are using CentOS7, you can skip this hands-on section and instead install the `epel-release` and `singularity` system packages in your `pre_tasks`.
 {: .tip}
 
-> ### {% icon hands_on %} Hands-on: Installing Singularity with Ansible
+> <hands-on-title>Installing Singularity with Ansible</hands-on-title>
 >
 > 1. In your working directory, add the Singularity role to your `requirements.yml` file:
 >
@@ -84,7 +83,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >
 > 2. Install the requirements with `ansible-galaxy`:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
@@ -135,7 +134,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >
 > 5. Run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -145,13 +144,13 @@ First, we will install Singularity using Ansible. On most operating systems ther
 > 6. Singularity should now be installed on your Galaxy server. You can test this by connecting
 > to your server and run the following command:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```
 >    > singularity run docker://hello-world
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output: Bash
+>    > <code-out-title>Bash</code-out-title>
 >    > ```
 >    > INFO:    Converting OCI blobs to SIF format
 >    > INFO:    Starting build...
@@ -176,7 +175,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 
 Now, we will configure Galaxy to run tools using Singularity containers, which will be automatically fetched from [the BioContainers repository](https://quay.io/organization/biocontainers).
 
-> ### {% icon hands_on %} Hands-on: Configure Galaxy to use Singularity
+> <hands-on-title>Configure Galaxy to use Singularity</hands-on-title>
 >
 > 1. Edit the `group_vars/galaxyservers.yml` file and add a `dependency_resolvers_config_file` entry and a corresponding `galaxy_config_templatets` entry:
 >
@@ -210,7 +209,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >
 > 2. Create the `templates/galaxy/config` directory if it doesn't exist:
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > mkdir -p templates/galaxy/config
 >    > ```
@@ -284,7 +283,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >
 > 4. Re-run the playbook
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```bash
 >    > ansible-playbook galaxy.yml
 >    > ```
@@ -315,13 +314,13 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >
 >    Your job should be executed using Singularity with a BioContainer! You can watch the logs of Galaxy to see this happening.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > <code-in-title>Bash</code-in-title>
 >    > ```
 >    > journalctl -f
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output
+>    > <code-out-title></code-out-title>
 >    > ```
 >    > gunicorn[1190010]: galaxy.tool_util.deps.containers INFO 2021-01-08 13:37:30,342 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Checking with container resolver [MulledSingularityContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=docker://quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:e1ea28074233d7265a5dc2111d6e55130dff5653-0,type=singularity]]
 >    > gunicorn[1190010]: galaxy.jobs.command_factory INFO 2021-01-08 13:37:30,418 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Built script [/srv/galaxy/jobs/000/23/tool_script.sh] for tool command [minimap2 --version > /srv/galaxy/jobs/000/23/outputs/COMMAND_VERSION 2>&1; ln -f -s '/data/000/dataset_22.dat' reference.fa && minimap2           -t ${GALAXY_SLOTS:-4} reference.fa '/data/000/dataset_22.dat' -a | samtools sort -@${GALAXY_SLOTS:-2} -T "${TMPDIR:-.}" -O BAM -o '/data/000/dataset_23.dat' > '/data/000/dataset_23.dat']
@@ -343,14 +342,14 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 > {: data-test="true"}
 {: .hidden}
 
-> ### {% icon comment %} Manage dependencies menu
+> <comment-title>Manage dependencies menu</comment-title>
 > You can manually pull one or many containers for tools in the admin menu. Go to the admin menu, click Manage Dependencies and select the Containers tab. This will list all tools, their dependencies and whether containers are already pulled or can be pulled on demand.
 >
 > When a container has been resolved through Singularity, you'll see something like this:
 > ![Image of a table entry with minimap2 having requirements minimap2+singularity, a resolved column with a green checkmark next to via singularity, the resolver is mulled_singularity, and a container column with a path to /srv/galaxy/var/cache/singularity/mulled and some long hash.](../../images/singularity-resolved.png)
 {: .comment}
 
-> ### {% icon tip %} Singularity, Conda, something else?
+> <tip-title>Singularity, Conda, something else?</tip-title>
 > We often hear
 >
 > > What would be the best practice, use conda or Singularity?
@@ -359,18 +358,18 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 > Many of us are moving towards Singularity. Conda environments can resolve differently if they were installed at different times, which isn't great for reproducibility. Singularity images are never updated after generation which makes them fantastic. Also the isolation that's there by default is an incredible improvement for less-trustworthy binaries.
 {: .tip}
 
-> ### {% icon tip %} Does Singularity fix issues with Conda dependencies resolution?
+> <tip-title>Does Singularity fix issues with Conda dependencies resolution?</tip-title>
 > Yes and no. Singularity images are built from conda environments. Only now you are no longer responsible for solving the conda environment, or ensuring that all of the dependencies are installed. The Galaxy project uses a system called "mulling" to bring together multiple conda dependencies together in a single environment, and Singularity images are produced for these dependencies as well. That said, complex or unresolvable conda environments are not solved by Singularity, because Singularity is really just packaging conda's environment into a single binary file.
 {: .tip}
 
 
-> ### {% icon tip %} Gateway Time-out (504) in Dependencies view
+> <tip-title>Gateway Time-out (504) in Dependencies view</tip-title>
 > When you open "Admin -> Tool Management -> Manage Dependencies -> Containers", it sometimes shows "Gateway Time-out (504)"
 >
 > Resolving all dependencies for all tools can take a bit, you can increase your timeout with the `uwsgi_read_timeout` setting in `templates/nginx/galaxy.j2`
 {:.tip}
 
-> ### {% icon tip %} Resolution is "unresolved"
+> <tip-title>Resolution is "unresolved"</tip-title>
 > In "Admin -> Tool Management -> Manage Dependencies -> Dependencies", the Resolution for minimap2 @ 2.24 (as well as samtools @1.14) is "unresolved". How can I resolve this issue?
 >
 > Because our training uses containers for resolution it is expected that the non-container dependencies show as "unresolved". There is not currently a view which indicates if the containers have been resolved.
@@ -387,7 +386,7 @@ Galaxy can be configured to use pre-made Singularity containers available from /
 In order to do so, you will first need to set up CVMFS by doing the [CVMFS]({{ site.baseurl }}/topics/admin/tutorials/cvmfs/tutorial.html) tutorial.
 After finishing the CVMFS tutorial, come back, and do this hands-on.
 
-> ### {% icon hands_on %} Optional: Hands-on: Configure Galaxy to use Singularity containers from CVMFS
+> <hands-on-title>Optional: Configure Galaxy to use Singularity containers from CVMFS</hands-on-title>
 >
 > 1. Edit the `group_vars/galaxyservers.yml` file and add `containers_resolvers_config_file` and `galaxy_singularity_images_cvmfs_path`:
 >{% raw %}

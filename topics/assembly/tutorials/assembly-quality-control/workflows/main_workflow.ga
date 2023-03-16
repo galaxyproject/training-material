@@ -1,0 +1,579 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Genome assembly quality control using PacBio data and with reference genome",
+    "creator": [
+            {
+                "class": "Person",
+                "identifier": "",
+                "name": "Erwan Corre"
+            },
+            {
+                "class": "Person",
+                "identifier": "",
+                "name": "St\u00e9phanie Robin"
+            },
+            {
+                "class": "Person",
+                "identifier": "",
+                "name": "Anthony Bretaudeau"
+            },
+            {
+                "class": "Person",
+                "identifier": "",
+                "name": "Alexandre Cormier"
+            },
+            {
+                "class": "Person",
+                "identifier": "",
+                "name": "Laura Leroi"
+            }
+        ],
+    "format-version": "0.1",
+    "license": "GPL-3.0-or-later",
+    "name": "Genome Assembly Quality Control",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "GCA_000146045.2_genomic.fna"
+                }
+            ],
+            "label": "GCA_000146045.2_genomic.fna",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 10,
+                "top": 10
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "67e22573-10a9-4a09-bc6b-ad54147f931a",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Scerevisiae-INSC1019.flye.30x.fa"
+                }
+            ],
+            "label": "Scerevisiae-INSC1019.flye.30x.fa",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 10,
+                "top": 130
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "056f45e5-b3d7-4d43-8c87-497977c8b9f6",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Scerevisiae-INSC1019.hifiasm.30x.fa"
+                }
+            ],
+            "label": "Scerevisiae-INSC1019.hifiasm.30x.fa",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 10,
+                "top": 250
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "e812ab39-31c2-4595-8f11-f1e939e68704",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "SRR13577847_subreads.30x.fastq.gz"
+                }
+            ],
+            "label": "SRR13577847_subreads.30x.fastq.gz",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 10,
+                "top": 370
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "f0a31b4f-fdf0-4417-9300-a4e52dc60580",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+galaxy0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Busco",
+            "outputs": [
+                {
+                    "name": "busco_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "busco_table",
+                    "type": "tabular"
+                },
+                {
+                    "name": "summary_image",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 130
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "41030a6c03b7",
+                "name": "busco",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\"}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"use_augustus\": {\"use_augustus_selector\": \"no\", \"__current_case__\": 0}}, \"chromInfo\": \"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\", \"input\": null, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": \"saccharomycetes_odb10\"}, \"outputs\": [\"short_summary\", \"image\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.3.2+galaxy0",
+            "type": "tool",
+            "uuid": "6051b0c7-9320-4da7-906f-a1d181e69859",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+galaxy0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Busco",
+            "outputs": [
+                {
+                    "name": "busco_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "busco_table",
+                    "type": "tabular"
+                },
+                {
+                    "name": "summary_image",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 250
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "41030a6c03b7",
+                "name": "busco",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\"}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"use_augustus\": {\"use_augustus_selector\": \"no\", \"__current_case__\": 0}}, \"chromInfo\": \"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\", \"input\": null, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": \"saccharomycetes_odb10\"}, \"outputs\": [\"short_summary\", \"image\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.3.2+galaxy0",
+            "type": "tool",
+            "uuid": "70cd022b-01b7-4f4a-9192-04c763e8358c",
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "assembly|ref|r": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "in|inputs": [
+                    {
+                        "id": 1,
+                        "output_name": "output"
+                    },
+                    {
+                        "id": 2,
+                        "output_name": "output"
+                    }
+                ]
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Quast",
+            "outputs": [
+                {
+                    "name": "report_html",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 10
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "675488238c96",
+                "name": "quast",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"advanced\": {\"contig_thresholds\": \"0,1000\", \"strict_NA\": \"false\", \"extensive_mis_size\": \"1000\", \"scaffold_gap_max_size\": \"1000\", \"unaligned_part_size\": \"500\", \"skip_unaligned_mis_contigs\": \"true\", \"fragmented_max_indent\": null}, \"alignments\": {\"use_all_alignments\": \"false\", \"min_alignment\": \"65\", \"min_identity\": \"95.0\", \"ambiguity_usage\": \"one\", \"ambiguity_score\": \"0.99\", \"fragmented\": \"false\", \"upper_bound_assembly\": \"false\", \"upper_bound_min_con\": null}, \"assembly\": {\"type\": \"genome\", \"__current_case__\": 0, \"ref\": {\"use_ref\": \"true\", \"__current_case__\": 0, \"r\": null, \"features\": null, \"operons\": null, \"k_mer\": {\"k_mer_stats\": \"\", \"__current_case__\": 1}, \"circos\": \"false\"}, \"orga_type\": \"\"}, \"chromInfo\": \"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\", \"genes\": {\"gene_finding\": {\"tool\": \"none\", \"__current_case__\": 0}, \"rna_finding\": \"false\", \"conserved_genes_finding\": \"false\"}, \"in\": {\"custom\": \"false\", \"__current_case__\": 1, \"inputs\": null}, \"large\": \"false\", \"min_contig\": \"500\", \"output_files\": [\"html\"], \"reads\": {\"reads_option\": \"disabled\", \"__current_case__\": 0}, \"split_scaffolds\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.0.2+galaxy5",
+            "type": "tool",
+            "uuid": "0ecee1fc-21fe-4ab5-8bf0-80bc09884ce9",
+            "workflow_outputs": []
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+galaxy0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "input": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Busco",
+            "outputs": [
+                {
+                    "name": "busco_sum",
+                    "type": "txt"
+                },
+                {
+                    "name": "busco_table",
+                    "type": "tabular"
+                },
+                {
+                    "name": "summary_image",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 370
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.3.2+galaxy0",
+            "tool_shed_repository": {
+                "changeset_revision": "41030a6c03b7",
+                "name": "busco",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"adv\": {\"evalue\": \"0.001\", \"limit\": \"3\"}, \"busco_mode\": {\"mode\": \"geno\", \"__current_case__\": 0, \"use_augustus\": {\"use_augustus_selector\": \"no\", \"__current_case__\": 0}}, \"chromInfo\": \"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\", \"input\": null, \"lineage\": {\"lineage_mode\": \"select_lineage\", \"__current_case__\": 1, \"lineage_dataset\": \"saccharomycetes_odb10\"}, \"outputs\": [\"short_summary\", \"image\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "5.3.2+galaxy0",
+            "type": "tool",
+            "uuid": "a49cfde9-297a-445d-b373-91091659833e",
+            "workflow_outputs": []
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a+galaxy1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "db": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "query": {
+                    "id": 2,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Chromeister",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "txt"
+                },
+                {
+                    "name": "output_imagen",
+                    "type": "png"
+                },
+                {
+                    "name": "output_csv",
+                    "type": "csv"
+                },
+                {
+                    "name": "output_events",
+                    "type": "txt"
+                },
+                {
+                    "name": "output_events_png",
+                    "type": "png"
+                },
+                {
+                    "name": "output_score",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 610
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "e483be1014b6",
+                "name": "chromeister",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"fasta\", \"chromInfo\": \"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\", \"db\": null, \"diffuse\": \"4\", \"dimension\": \"1000\", \"grid\": \"true\", \"kmer\": \"32\", \"pngevents\": \"true\", \"query\": null, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.5.a+galaxy1",
+            "type": "tool",
+            "uuid": "1b752e86-930e-4acf-a961-44d88191b4a8",
+            "workflow_outputs": []
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "operation_type|input_reads": {
+                    "id": 3,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Meryl",
+            "outputs": [
+                {
+                    "name": "read_db",
+                    "type": "meryldb"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 490
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6",
+            "tool_shed_repository": {
+                "changeset_revision": "29dabd8db6f2",
+                "name": "meryl",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\", \"operation_type\": {\"command_type\": \"count-kmers\", \"__current_case__\": 0, \"count_operations\": \"count\", \"input_reads\": null, \"options_kmer_size\": {\"kmer_size\": \"estimate\", \"__current_case__\": 1, \"genome_size\": \"12000000\", \"collision_rate\": \"0.001\"}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.3+galaxy6",
+            "type": "tool",
+            "uuid": "93f9830c-4a81-4b8e-8397-a9823948e558",
+            "workflow_outputs": []
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "mode|assembly_options|assembly_01": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "mode|meryldb_F1": {
+                    "id": 9,
+                    "output_name": "read_db"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Merqury",
+            "outputs": [
+                {
+                    "name": "qv_files",
+                    "type": "input"
+                },
+                {
+                    "name": "png_files",
+                    "type": "input"
+                },
+                {
+                    "name": "stats_files",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 450,
+                "top": 10
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "589078edd230",
+                "name": "merqury",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\", \"label\": \"output_merqury\", \"mode\": {\"options\": \"default\", \"__current_case__\": 0, \"meryldb_F1\": null, \"assembly_options\": {\"number_assemblies\": \"one\", \"__current_case__\": 0, \"assembly_01\": null}}, \"output_selector\": [\"qv\", \"plots\", \"stats\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.3+galaxy2",
+            "type": "tool",
+            "uuid": "a8c8d455-3768-41c2-82b0-d7ad1b75ea90",
+            "workflow_outputs": []
+        },
+        "11": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2",
+            "errors": null,
+            "id": 11,
+            "input_connections": {
+                "mode|assembly_options|assembly_01": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "mode|meryldb_F1": {
+                    "id": 9,
+                    "output_name": "read_db"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Merqury",
+            "outputs": [
+                {
+                    "name": "qv_files",
+                    "type": "input"
+                },
+                {
+                    "name": "png_files",
+                    "type": "input"
+                },
+                {
+                    "name": "stats_files",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 450,
+                "top": 130
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "589078edd230",
+                "name": "merqury",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\", \"label\": \"output_merqury\", \"mode\": {\"options\": \"default\", \"__current_case__\": 0, \"meryldb_F1\": null, \"assembly_options\": {\"number_assemblies\": \"one\", \"__current_case__\": 0, \"assembly_01\": null}}, \"output_selector\": [\"qv\", \"plots\", \"stats\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.3+galaxy2",
+            "type": "tool",
+            "uuid": "35780f01-c8b0-4e0d-ba7d-f21f34d87ccf",
+            "workflow_outputs": []
+        },
+        "12": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2",
+            "errors": null,
+            "id": 12,
+            "input_connections": {
+                "mode|assembly_options|assembly_01": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "mode|meryldb_F1": {
+                    "id": 9,
+                    "output_name": "read_db"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Merqury",
+            "outputs": [
+                {
+                    "name": "qv_files",
+                    "type": "input"
+                },
+                {
+                    "name": "png_files",
+                    "type": "input"
+                },
+                {
+                    "name": "stats_files",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 450,
+                "top": 250
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2",
+            "tool_shed_repository": {
+                "changeset_revision": "589078edd230",
+                "name": "merqury",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"input\", \"chromInfo\": \"/opt/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\", \"label\": \"output_merqury\", \"mode\": {\"options\": \"default\", \"__current_case__\": 0, \"meryldb_F1\": null, \"assembly_options\": {\"number_assemblies\": \"one\", \"__current_case__\": 0, \"assembly_01\": null}}, \"output_selector\": [\"qv\", \"plots\", \"stats\"], \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.3+galaxy2",
+            "type": "tool",
+            "uuid": "dcb360f9-071a-49dd-a103-8616087894ac",
+            "workflow_outputs": []
+        }
+    },
+    "tags": ["assembly"],
+    "uuid": "b94caf5d-794e-412d-b2db-8e51b01113dc",
+    "version": 0
+}
