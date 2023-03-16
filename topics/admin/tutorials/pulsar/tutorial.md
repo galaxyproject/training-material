@@ -145,6 +145,8 @@ Firstly we will add and configure another *role* to our Galaxy playbook - we do 
 >       version: 0.0.2
 >     - src: galaxyproject.slurm
 >       version: 0.1.3
+>    +- name: geerlingguy.docker
+>    +  version: 6.1.0
 >    +- name: usegalaxy_eu.rabbitmqserver
 >    +  version: 1.4.1
 >    +- src: galaxyproject.pulsar
@@ -273,11 +275,13 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    @@ -180,6 +182,34 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
->     
+>    +#Install pip docker package for ansible
+>    +pip_install_packages:
+>    +  - name: docker
 >    +# RabbitMQ
 >    +rabbitmq_container:
 >    +  name: rabbit_hole
->    +  image: rabbitmq:3.9.11
+>    +  image: rabbitmq:3.11
 >    +  hostname: "{{ inventory_hostname }}"
 >    +
 >    +rabbitmq_plugins: rabbitmq_management
@@ -329,6 +333,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >         - role: uchida.miniconda
 >           become: true
 >           become_user: "{{ galaxy_user.name }}"
+>    +    - geerlingguy.docker
 >    +    - usegalaxy_eu.rabbitmq
 >         - galaxyproject.nginx
 >         - galaxyproject.tusd
