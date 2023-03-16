@@ -151,6 +151,93 @@
   "materials": [
     {
       "layout": "tutorial_hands_on",
+      "title": "Network analysis with Heinz",
+      "zenodo_link": "https://doi.org/10.5281/zenodo.1344105",
+      "tags": [
+        "metatranscriptomics",
+        "network analysis"
+      ],
+      "questions": [
+        "Which pathways are potentially contributing to dental caries?"
+      ],
+      "objectives": [
+        "Network Analysis of metatranscriptomics data using Heinz in Galaxy to pinpoint the optimal scoring subnetwork."
+      ],
+      "time_estimation": "1h30m",
+      "key_points": [
+        "Using Heinz do the network analysis based on the metatranscriptomics or transcriptomics data.",
+        "Extracting the signals hidden in the p-value distribution of the differential expression analysis.",
+        "Visualizing the pinpointed subnetwork helps us understand the result better",
+        "Heinz helps narrow down the scope to find the key pathways",
+        "Multiple CPUs will accelerate the computation especially for the complex datasets"
+      ],
+      "contributors": [
+        {
+          "name": "Chao (Cico) Zhang",
+          "maintainer_contact": "https://hi-it.org",
+          "twitter": "CicoCN",
+          "joined": "2018-08",
+          "id": "cicozhang",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/cicozhang.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/cicozhang/"
+        }
+      ],
+      "url": "/topics/transcriptomics/tutorials/network-analysis-with-heinz/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "network-analysis-with-heinz",
+      "dir": "topics/transcriptomics/tutorials/network-analysis-with-heinz",
+      "id": "transcriptomics/network-analysis-with-heinz",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": true,
+      "workflows": [
+        {
+          "workflow": "Galaxy-Workflow-Heinz.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/network-analysis-with-heinz/workflows/Galaxy-Workflow-Heinz.ga",
+          "path": "topics/transcriptomics/tutorials/network-analysis-with-heinz/workflows/Galaxy-Workflow-Heinz.ga",
+          "wfid": "transcriptomics-network-analysis-with-heinz",
+          "wfname": "galaxy-workflow-heinz",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-network-analysis-with-heinz/versions/galaxy-workflow-heinz",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "Cut1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/heinz/heinz/1.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/heinz/heinz_bum/1.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/heinz/heinz_scoring/1.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/heinz/heinz_visualization/0.1.0"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/network-analysis-with-heinz/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/network-analysis-with-heinz/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "CLIP-Seq data analysis from pre-processing to motif detection",
       "zenodo_link": "https://zenodo.org/record/1327423",
       "questions": [
@@ -359,309 +446,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "3: RNA-seq genes to pathways",
-      "subtopic": "end-to-end",
-      "zenodo_link": "https://zenodo.org/record/2596382",
-      "tags": [
-        "mouse"
-      ],
-      "questions": [
-        "What are the differentially expressed pathways in the mammary gland of pregnant versus lactating mice?"
-      ],
-      "objectives": [
-        "Identification of differentially expressed pathways"
-      ],
-      "time_estimation": "2h",
-      "key_points": [
-        "goseq can be used to identify enriched gene ontology categories and incorporate gene length bias",
-        "fgsea can be used to identify enriched gene sets, such as the MSigDB collections, and generate barcode plots",
-        "EGSEA can be used to identify enriched gene sets, such as MSigDB and KEGG, generating visualisations that include heatmaps and KEGG pathway diagrams",
-        "Multiple methods can be used to help identify differentially expressed pathways and to visualise results"
-      ],
-      "contributors": [
-        {
-          "name": "Maria Doyle",
-          "joined": "2018-09",
-          "orcid": "0000-0003-4847-8436",
-          "id": "mblue9",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/"
-        },
-        {
-          "name": "Belinda Phipson",
-          "joined": "2018-09",
-          "id": "bphipson",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bphipson.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bphipson/"
-        }
-      ],
-      "url": "/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html",
-      "topic_name": "transcriptomics",
-      "tutorial_name": "rna-seq-genes-to-pathways",
-      "dir": "topics/transcriptomics/tutorials/rna-seq-genes-to-pathways",
-      "id": "transcriptomics/rna-seq-genes-to-pathways",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "rna-seq-genes-to-pathways.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/workflows/rna-seq-genes-to-pathways.ga",
-          "path": "topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/workflows/rna-seq-genes-to-pathways.ga",
-          "wfid": "transcriptomics-rna-seq-genes-to-pathways",
-          "wfname": "rna-seq-genes-to-pathways",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-rna-seq-genes-to-pathways/versions/rna-seq-genes-to-pathways",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "Cut1",
-        "join1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6",
-        "toolshed.g2.bx.psu.edu/repos/iuc/egsea/egsea/1.20.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/fgsea/fgsea/1.8.0+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.44.0+galaxy0"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Visualization of RNA-Seq results with Volcano Plot",
-      "level": "Introductory",
-      "subtopic": "visualisation",
-      "zenodo_link": "https://zenodo.org/record/2529117",
-      "questions": [
-        "How to generate a volcano plot from RNA-seq data?"
-      ],
-      "objectives": [
-        "Create a volcano plot of RNA-seq data to visualize significant genes"
-      ],
-      "time_estimation": "30m",
-      "key_points": [
-        "A volcano plot can be used to quickly visualize significant genes in RNA-seq results"
-      ],
-      "contributors": [
-        {
-          "name": "Maria Doyle",
-          "joined": "2018-09",
-          "orcid": "0000-0003-4847-8436",
-          "id": "mblue9",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/"
-        }
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "transcriptomics",
-          "tutorials": [
-            "rna-seq-counts-to-genes"
-          ]
-        }
-      ],
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "transcriptomics",
-          "tutorials": [
-            "rna-seq-viz-with-volcanoplot-r"
-          ]
-        }
-      ],
-      "url": "/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html",
-      "topic_name": "transcriptomics",
-      "tutorial_name": "rna-seq-viz-with-volcanoplot",
-      "dir": "topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot",
-      "id": "transcriptomics/rna-seq-viz-with-volcanoplot",
-      "video_library": {
-        "tutorial": {
-          "description": "This tutorial will show you how you can create volcano plots from your RNA-Seq analysis results using Galaxy tools.",
-          "materials": [
-            {
-              "link": "topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html",
-              "title": "Visualization of RNA-Seq results with Volcano Plot",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "transcriptomics",
-            "visualisation"
-          ],
-          "type": "Tutorial",
-          "versions": [
-            {
-              "captions": [
-                "mblue9"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "10M",
-              "link": "uNGXIcEGZwA",
-              "speakers": [
-                "mblue9"
-              ]
-            }
-          ],
-          "gtn_id": "transcriptomics/rna-seq-viz-with-volcanoplot",
-          "title": "Visualization of RNA-Seq results with Volcano Plot",
-          "captioned": true
-        },
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "rna-seq-viz-with-volcanoplot.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/workflows/rna-seq-viz-with-volcanoplot.ga",
-          "path": "topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/workflows/rna-seq-viz-with-volcanoplot.ga",
-          "wfid": "transcriptomics-rna-seq-viz-with-volcanoplot",
-          "wfname": "rna-seq-viz-with-volcanoplot",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-rna-seq-viz-with-volcanoplot/versions/rna-seq-viz-with-volcanoplot",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "GO Enrichment Analysis",
-      "zenodo_link": "https://zenodo.org/record/2565417#.XGXUXlz7TIU",
-      "questions": [
-        "How can I functionally interpret a list of genes of interest that I obtained from my experiment?"
-      ],
-      "objectives": [
-        "How to perform a GO Enrichment Analysis",
-        "How to interpret and simplify the results"
-      ],
-      "time_estimation": "1h",
-      "key_points": [
-        "The goenrichment tool can be used to perform GO Enrichment analysis",
-        "One needs to be careful when chosing the background population",
-        "There are several methods to simplify the output of the GO Enrichment analysis"
-      ],
-      "contributors": [
-        {
-          "name": "IGC Bioinformatics Unit",
-          "joined": "2018-12",
-          "id": "igcbioinformatics",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/igcbioinformatics.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/igcbioinformatics/"
-        },
-        {
-          "name": "Maria Doyle",
-          "joined": "2018-09",
-          "orcid": "0000-0003-4847-8436",
-          "id": "mblue9",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/"
-        }
-      ],
-      "url": "/topics/transcriptomics/tutorials/goenrichment/tutorial.html",
-      "topic_name": "transcriptomics",
-      "tutorial_name": "goenrichment",
-      "dir": "topics/transcriptomics/tutorials/goenrichment",
-      "id": "transcriptomics/goenrichment",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "goenrichment-workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/goenrichment/workflows/goenrichment-workflow.ga",
-          "path": "topics/transcriptomics/tutorials/goenrichment/workflows/goenrichment-workflow.ga",
-          "wfid": "transcriptomics-goenrichment",
-          "wfname": "goenrichment-workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-goenrichment/versions/goenrichment-workflow",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "Filter1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/goenrichment/goenrichment/2.0.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/goslimmer/goslimmer/1.0.1"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/goenrichment/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/goenrichment/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "draft": true,
       "title": "De novo transcriptome assembly, annotation, and differential expression analysis",
       "zenodo_link": "https://zenodo.org/record/3541678",
@@ -788,37 +572,47 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Small Non-coding RNA Clustering using BlockClust",
-      "zenodo_link": "https://zenodo.org/record/1491876",
+      "title": "3: RNA-seq genes to pathways",
+      "subtopic": "end-to-end",
+      "zenodo_link": "https://zenodo.org/record/2596382",
+      "tags": [
+        "mouse"
+      ],
       "questions": [
-        "What do the read profiles of small non-coding RNAs represent?",
-        "How to cluster the read profiles based on some intrinsic features?"
+        "What are the differentially expressed pathways in the mammary gland of pregnant versus lactating mice?"
       ],
       "objectives": [
-        "Difference between mRNA-seq and smallRNA-seq",
-        "Unsupervised grouping of the adjacent reads into read profiles",
-        "Look and learn what the shapes of the read profiles represent",
-        "Clustering of the read profiles by machine learning algorithm"
+        "Identification of differentially expressed pathways"
       ],
-      "time_estimation": "1H",
+      "time_estimation": "2h",
       "key_points": [
-        "Small non-coding RNA read profiles are often associate with function",
-        "Clusters of read profiles correlate with the ncRNA classes"
+        "goseq can be used to identify enriched gene ontology categories and incorporate gene length bias",
+        "fgsea can be used to identify enriched gene sets, such as the MSigDB collections, and generate barcode plots",
+        "EGSEA can be used to identify enriched gene sets, such as MSigDB and KEGG, generating visualisations that include heatmaps and KEGG pathway diagrams",
+        "Multiple methods can be used to help identify differentially expressed pathways and to visualise results"
       ],
       "contributors": [
         {
-          "name": "Pavankumar Videm",
-          "joined": "2017-09",
-          "id": "pavanvidem",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/pavanvidem.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/"
+          "name": "Maria Doyle",
+          "joined": "2018-09",
+          "orcid": "0000-0003-4847-8436",
+          "id": "mblue9",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/"
+        },
+        {
+          "name": "Belinda Phipson",
+          "joined": "2018-09",
+          "id": "bphipson",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bphipson.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bphipson/"
         }
       ],
-      "url": "/topics/transcriptomics/tutorials/small_ncrna_clustering/tutorial.html",
+      "url": "/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.html",
       "topic_name": "transcriptomics",
-      "tutorial_name": "small_ncrna_clustering",
-      "dir": "topics/transcriptomics/tutorials/small_ncrna_clustering",
-      "id": "transcriptomics/small_ncrna_clustering",
+      "tutorial_name": "rna-seq-genes-to-pathways",
+      "dir": "topics/transcriptomics/tutorials/rna-seq-genes-to-pathways",
+      "id": "transcriptomics/rna-seq-genes-to-pathways",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -830,13 +624,13 @@
       "slides": false,
       "workflows": [
         {
-          "workflow": "blockclust_clustering.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/small_ncrna_clustering/workflows/blockclust_clustering.ga",
-          "path": "topics/transcriptomics/tutorials/small_ncrna_clustering/workflows/blockclust_clustering.ga",
-          "wfid": "transcriptomics-small_ncrna_clustering",
-          "wfname": "blockclust_clustering",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-small_ncrna_clustering/versions/blockclust_clustering",
+          "workflow": "rna-seq-genes-to-pathways.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/workflows/rna-seq-genes-to-pathways.ga",
+          "path": "topics/transcriptomics/tutorials/rna-seq-genes-to-pathways/workflows/rna-seq-genes-to-pathways.ga",
+          "wfid": "transcriptomics-rna-seq-genes-to-pathways",
+          "wfname": "rna-seq-genes-to-pathways",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-rna-seq-genes-to-pathways/versions/rna-seq-genes-to-pathways",
           "license": null,
           "creators": [
 
@@ -844,10 +638,14 @@
         }
       ],
       "tools": [
+        "Cut1",
+        "join1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
         "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_sort/samtools_sort/2.0.2",
-        "toolshed.g2.bx.psu.edu/repos/rnateam/blockbuster/blockbuster/0.1.2",
-        "toolshed.g2.bx.psu.edu/repos/rnateam/blockclust/blockclust/1.1.0"
+        "toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.6",
+        "toolshed.g2.bx.psu.edu/repos/iuc/egsea/egsea/1.20.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/fgsea/fgsea/1.8.0+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/goseq/goseq/1.44.0+galaxy0"
       ],
       "tours": false,
       "video": false,
@@ -862,8 +660,8 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/small_ncrna_clustering/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/small_ncrna_clustering/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-genes-to-pathways/tutorial.json"
       }
     },
     {
@@ -1025,6 +823,291 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "1: RNA-Seq reads to counts",
+      "subtopic": "end-to-end",
+      "zenodo_link": "https://zenodo.org/record/4249555",
+      "tags": [
+        "collections",
+        "mouse",
+        "QC"
+      ],
+      "questions": [
+        "How to convert RNA-seq reads into counts?",
+        "How to perform quality control (QC) of RNA-seq reads?",
+        "How to do this analysis efficiently in Galaxy?"
+      ],
+      "objectives": [
+        "Learn how RNA-seq reads are converted into counts",
+        "Understand QC steps that can be performed on RNA-seq reads",
+        "Generate interactive reports to summarise QC information with MultiQC",
+        "Use the Galaxy Rule-based Uploader to import FASTQs from URLs",
+        "Make use of Galaxy Collections for a tidy analysis",
+        "Create a Galaxy Workflow that converts RNA-seq reads into counts"
+      ],
+      "time_estimation": "3h",
+      "key_points": [
+        "In RNA-seq, reads (FASTQs) are mapped to a reference genome with a spliced aligner (e.g HISAT2, STAR)",
+        "The aligned reads (BAMs) can then be converted to counts",
+        "Many QC steps can be performed to help check the quality of the data",
+        "MultiQC can be used to create a nice summary report of QC information",
+        "The Galaxy Rule-based Uploader, Collections and Workflows can help make analysis more efficient and easier"
+      ],
+      "contributors": [
+        {
+          "name": "Maria Doyle",
+          "joined": "2018-09",
+          "orcid": "0000-0003-4847-8436",
+          "id": "mblue9",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/"
+        },
+        {
+          "name": "Belinda Phipson",
+          "joined": "2018-09",
+          "id": "bphipson",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/bphipson.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bphipson/"
+        },
+        {
+          "name": "Harriet Dashnow",
+          "joined": "2018-09",
+          "id": "hdashnow",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hdashnow.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hdashnow/"
+        }
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "ref-based"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "collections",
+            "upload-rules"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "rna-seq-counts-to-genes"
+          ]
+        }
+      ],
+      "url": "/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "rna-seq-reads-to-counts",
+      "dir": "topics/transcriptomics/tutorials/rna-seq-reads-to-counts",
+      "id": "transcriptomics/rna-seq-reads-to-counts",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "qc_report.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.ga",
+          "path": "topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.ga",
+          "wfid": "transcriptomics-rna-seq-reads-to-counts",
+          "wfname": "qc_report",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-rna-seq-reads-to-counts/versions/qc_report",
+          "license": null,
+          "creators": [
+
+          ]
+        },
+        {
+          "workflow": "rna-seq-reads-to-counts.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/rna-seq-reads-to-counts.ga",
+          "path": "topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/rna-seq-reads-to-counts.ga",
+          "wfid": "transcriptomics-rna-seq-reads-to-counts",
+          "wfname": "rna-seq-reads-to-counts",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-rna-seq-reads-to-counts/versions/rna-seq-reads-to-counts",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72",
+        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3",
+        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4",
+        "toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3",
+        "toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/1.6.3",
+        "toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.1.0+galaxy3",
+        "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.6",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7",
+        "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.3",
+        "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.7+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3",
+        "toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1",
+        "toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/2.6.4.1"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Visualization of RNA-Seq results with Volcano Plot",
+      "level": "Introductory",
+      "subtopic": "visualisation",
+      "zenodo_link": "https://zenodo.org/record/2529117",
+      "questions": [
+        "How to generate a volcano plot from RNA-seq data?"
+      ],
+      "objectives": [
+        "Create a volcano plot of RNA-seq data to visualize significant genes"
+      ],
+      "time_estimation": "30m",
+      "key_points": [
+        "A volcano plot can be used to quickly visualize significant genes in RNA-seq results"
+      ],
+      "contributors": [
+        {
+          "name": "Maria Doyle",
+          "joined": "2018-09",
+          "orcid": "0000-0003-4847-8436",
+          "id": "mblue9",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/"
+        }
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "rna-seq-counts-to-genes"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "rna-seq-viz-with-volcanoplot-r"
+          ]
+        }
+      ],
+      "url": "/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "rna-seq-viz-with-volcanoplot",
+      "dir": "topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot",
+      "id": "transcriptomics/rna-seq-viz-with-volcanoplot",
+      "video_library": {
+        "tutorial": {
+          "description": "This tutorial will show you how you can create volcano plots from your RNA-Seq analysis results using Galaxy tools.",
+          "materials": [
+            {
+              "link": "topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.html",
+              "title": "Visualization of RNA-Seq results with Volcano Plot",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "transcriptomics",
+            "visualisation"
+          ],
+          "type": "Tutorial",
+          "versions": [
+            {
+              "captions": [
+                "mblue9"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "10M",
+              "link": "uNGXIcEGZwA",
+              "speakers": [
+                "mblue9"
+              ]
+            }
+          ],
+          "gtn_id": "transcriptomics/rna-seq-viz-with-volcanoplot",
+          "title": "Visualization of RNA-Seq results with Volcano Plot",
+          "captioned": true
+        },
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "rna-seq-viz-with-volcanoplot.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/workflows/rna-seq-viz-with-volcanoplot.ga",
+          "path": "topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/workflows/rna-seq-viz-with-volcanoplot.ga",
+          "wfid": "transcriptomics-rna-seq-viz-with-volcanoplot",
+          "wfname": "rna-seq-viz-with-volcanoplot",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-rna-seq-viz-with-volcanoplot/versions/rna-seq-viz-with-volcanoplot",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-viz-with-volcanoplot/tutorial.json"
       }
     },
     {
@@ -1222,6 +1305,248 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "title": "GO Enrichment Analysis",
+      "zenodo_link": "https://zenodo.org/record/2565417#.XGXUXlz7TIU",
+      "questions": [
+        "How can I functionally interpret a list of genes of interest that I obtained from my experiment?"
+      ],
+      "objectives": [
+        "How to perform a GO Enrichment Analysis",
+        "How to interpret and simplify the results"
+      ],
+      "time_estimation": "1h",
+      "key_points": [
+        "The goenrichment tool can be used to perform GO Enrichment analysis",
+        "One needs to be careful when chosing the background population",
+        "There are several methods to simplify the output of the GO Enrichment analysis"
+      ],
+      "contributors": [
+        {
+          "name": "IGC Bioinformatics Unit",
+          "joined": "2018-12",
+          "id": "igcbioinformatics",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/igcbioinformatics.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/igcbioinformatics/"
+        },
+        {
+          "name": "Maria Doyle",
+          "joined": "2018-09",
+          "orcid": "0000-0003-4847-8436",
+          "id": "mblue9",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/"
+        }
+      ],
+      "url": "/topics/transcriptomics/tutorials/goenrichment/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "goenrichment",
+      "dir": "topics/transcriptomics/tutorials/goenrichment",
+      "id": "transcriptomics/goenrichment",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "goenrichment-workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/goenrichment/workflows/goenrichment-workflow.ga",
+          "path": "topics/transcriptomics/tutorials/goenrichment/workflows/goenrichment-workflow.ga",
+          "wfid": "transcriptomics-goenrichment",
+          "wfname": "goenrichment-workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-goenrichment/versions/goenrichment-workflow",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "Filter1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/goenrichment/goenrichment/2.0.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/goslimmer/goslimmer/1.0.1"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/goenrichment/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/goenrichment/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Visualization of RNA-Seq results with heatmap2",
+      "subtopic": "visualisation",
+      "zenodo_link": "https://zenodo.org/record/2529926",
+      "questions": [
+        "How to generate heatmaps from RNA-seq data?"
+      ],
+      "objectives": [
+        "Create heatmaps of RNA-seq data"
+      ],
+      "time_estimation": "1h",
+      "key_points": [
+        "Heatmaps can be used to visualize the expression of genes in RNA-Seq samples"
+      ],
+      "contributors": [
+        {
+          "name": "Maria Doyle",
+          "joined": "2018-09",
+          "orcid": "0000-0003-4847-8436",
+          "id": "mblue9",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/"
+        }
+      ],
+      "url": "/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "rna-seq-viz-with-heatmap2",
+      "dir": "topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2",
+      "id": "transcriptomics/rna-seq-viz-with-heatmap2",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "rna-seq-viz-with-heatmap2.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/workflows/rna-seq-viz-with-heatmap2.ga",
+          "path": "topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/workflows/rna-seq-viz-with-heatmap2.ga",
+          "wfid": "transcriptomics-rna-seq-viz-with-heatmap2",
+          "wfname": "rna-seq-viz-with-heatmap2",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-rna-seq-viz-with-heatmap2/versions/rna-seq-viz-with-heatmap2",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "Cut1",
+        "join1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/2.2.1+galaxy1"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Small Non-coding RNA Clustering using BlockClust",
+      "zenodo_link": "https://zenodo.org/record/1491876",
+      "questions": [
+        "What do the read profiles of small non-coding RNAs represent?",
+        "How to cluster the read profiles based on some intrinsic features?"
+      ],
+      "objectives": [
+        "Difference between mRNA-seq and smallRNA-seq",
+        "Unsupervised grouping of the adjacent reads into read profiles",
+        "Look and learn what the shapes of the read profiles represent",
+        "Clustering of the read profiles by machine learning algorithm"
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "Small non-coding RNA read profiles are often associate with function",
+        "Clusters of read profiles correlate with the ncRNA classes"
+      ],
+      "contributors": [
+        {
+          "name": "Pavankumar Videm",
+          "joined": "2017-09",
+          "id": "pavanvidem",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pavanvidem.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pavanvidem/"
+        }
+      ],
+      "url": "/topics/transcriptomics/tutorials/small_ncrna_clustering/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "small_ncrna_clustering",
+      "dir": "topics/transcriptomics/tutorials/small_ncrna_clustering",
+      "id": "transcriptomics/small_ncrna_clustering",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "blockclust_clustering.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/small_ncrna_clustering/workflows/blockclust_clustering.ga",
+          "path": "topics/transcriptomics/tutorials/small_ncrna_clustering/workflows/blockclust_clustering.ga",
+          "wfid": "transcriptomics-small_ncrna_clustering",
+          "wfname": "blockclust_clustering",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-small_ncrna_clustering/versions/blockclust_clustering",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_sort/samtools_sort/2.0.2",
+        "toolshed.g2.bx.psu.edu/repos/rnateam/blockbuster/blockbuster/0.1.2",
+        "toolshed.g2.bx.psu.edu/repos/rnateam/blockclust/blockclust/1.1.0"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/small_ncrna_clustering/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/small_ncrna_clustering/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Differential abundance testing of small RNAs",
       "zenodo_link": "https://zenodo.org/record/826906",
       "questions": [
@@ -1316,331 +1641,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/srna/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/srna/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Network analysis with Heinz",
-      "zenodo_link": "https://doi.org/10.5281/zenodo.1344105",
-      "tags": [
-        "metatranscriptomics",
-        "network analysis"
-      ],
-      "questions": [
-        "Which pathways are potentially contributing to dental caries?"
-      ],
-      "objectives": [
-        "Network Analysis of metatranscriptomics data using Heinz in Galaxy to pinpoint the optimal scoring subnetwork."
-      ],
-      "time_estimation": "1h30m",
-      "key_points": [
-        "Using Heinz do the network analysis based on the metatranscriptomics or transcriptomics data.",
-        "Extracting the signals hidden in the p-value distribution of the differential expression analysis.",
-        "Visualizing the pinpointed subnetwork helps us understand the result better",
-        "Heinz helps narrow down the scope to find the key pathways",
-        "Multiple CPUs will accelerate the computation especially for the complex datasets"
-      ],
-      "contributors": [
-        {
-          "name": "Chao (Cico) Zhang",
-          "maintainer_contact": "https://hi-it.org",
-          "twitter": "CicoCN",
-          "joined": "2018-08",
-          "id": "cicozhang",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/cicozhang.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/cicozhang/"
-        }
-      ],
-      "url": "/topics/transcriptomics/tutorials/network-analysis-with-heinz/tutorial.html",
-      "topic_name": "transcriptomics",
-      "tutorial_name": "network-analysis-with-heinz",
-      "dir": "topics/transcriptomics/tutorials/network-analysis-with-heinz",
-      "id": "transcriptomics/network-analysis-with-heinz",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": true,
-      "workflows": [
-        {
-          "workflow": "Galaxy-Workflow-Heinz.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/network-analysis-with-heinz/workflows/Galaxy-Workflow-Heinz.ga",
-          "path": "topics/transcriptomics/tutorials/network-analysis-with-heinz/workflows/Galaxy-Workflow-Heinz.ga",
-          "wfid": "transcriptomics-network-analysis-with-heinz",
-          "wfname": "galaxy-workflow-heinz",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-network-analysis-with-heinz/versions/galaxy-workflow-heinz",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "Cut1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/deseq2/deseq2/2.11.40.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/heinz/heinz/1.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/heinz/heinz_bum/1.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/heinz/heinz_scoring/1.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/heinz/heinz_visualization/0.1.0"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/network-analysis-with-heinz/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/network-analysis-with-heinz/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "1: RNA-Seq reads to counts",
-      "subtopic": "end-to-end",
-      "zenodo_link": "https://zenodo.org/record/4249555",
-      "tags": [
-        "collections",
-        "mouse",
-        "QC"
-      ],
-      "questions": [
-        "How to convert RNA-seq reads into counts?",
-        "How to perform quality control (QC) of RNA-seq reads?",
-        "How to do this analysis efficiently in Galaxy?"
-      ],
-      "objectives": [
-        "Learn how RNA-seq reads are converted into counts",
-        "Understand QC steps that can be performed on RNA-seq reads",
-        "Generate interactive reports to summarise QC information with MultiQC",
-        "Use the Galaxy Rule-based Uploader to import FASTQs from URLs",
-        "Make use of Galaxy Collections for a tidy analysis",
-        "Create a Galaxy Workflow that converts RNA-seq reads into counts"
-      ],
-      "time_estimation": "3h",
-      "key_points": [
-        "In RNA-seq, reads (FASTQs) are mapped to a reference genome with a spliced aligner (e.g HISAT2, STAR)",
-        "The aligned reads (BAMs) can then be converted to counts",
-        "Many QC steps can be performed to help check the quality of the data",
-        "MultiQC can be used to create a nice summary report of QC information",
-        "The Galaxy Rule-based Uploader, Collections and Workflows can help make analysis more efficient and easier"
-      ],
-      "contributors": [
-        {
-          "name": "Maria Doyle",
-          "joined": "2018-09",
-          "orcid": "0000-0003-4847-8436",
-          "id": "mblue9",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/"
-        },
-        {
-          "name": "Belinda Phipson",
-          "joined": "2018-09",
-          "id": "bphipson",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/bphipson.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/bphipson/"
-        },
-        {
-          "name": "Harriet Dashnow",
-          "joined": "2018-09",
-          "id": "hdashnow",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hdashnow.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hdashnow/"
-        }
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "transcriptomics",
-          "tutorials": [
-            "ref-based"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "galaxy-interface",
-          "tutorials": [
-            "collections",
-            "upload-rules"
-          ]
-        }
-      ],
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "transcriptomics",
-          "tutorials": [
-            "rna-seq-counts-to-genes"
-          ]
-        }
-      ],
-      "url": "/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html",
-      "topic_name": "transcriptomics",
-      "tutorial_name": "rna-seq-reads-to-counts",
-      "dir": "topics/transcriptomics/tutorials/rna-seq-reads-to-counts",
-      "id": "transcriptomics/rna-seq-reads-to-counts",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "qc_report.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.ga",
-          "path": "topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/qc_report.ga",
-          "wfid": "transcriptomics-rna-seq-reads-to-counts",
-          "wfname": "qc_report",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-rna-seq-reads-to-counts/versions/qc_report",
-          "license": null,
-          "creators": [
-
-          ]
-        },
-        {
-          "workflow": "rna-seq-reads-to-counts.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/rna-seq-reads-to-counts.ga",
-          "path": "topics/transcriptomics/tutorials/rna-seq-reads-to-counts/workflows/rna-seq-reads-to-counts.ga",
-          "wfid": "transcriptomics-rna-seq-reads-to-counts",
-          "wfname": "rna-seq-reads-to-counts",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-rna-seq-reads-to-counts/versions/rna-seq-reads-to-counts",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72",
-        "toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.73+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.3",
-        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_idxstats/samtools_idxstats/2.0.4",
-        "toolshed.g2.bx.psu.edu/repos/iuc/collection_column_join/collection_column_join/0.0.3",
-        "toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/1.6.3",
-        "toolshed.g2.bx.psu.edu/repos/iuc/featurecounts/featurecounts/2.0.1+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.1.0+galaxy3",
-        "toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.11+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.6",
-        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.7",
-        "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/1.16.3",
-        "toolshed.g2.bx.psu.edu/repos/lparsons/cutadapt/cutadapt/3.7+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_geneBody_coverage/2.6.4.3",
-        "toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_infer_experiment/2.6.4.1",
-        "toolshed.g2.bx.psu.edu/repos/nilesh/rseqc/rseqc_read_distribution/2.6.4.1"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Visualization of RNA-Seq results with heatmap2",
-      "subtopic": "visualisation",
-      "zenodo_link": "https://zenodo.org/record/2529926",
-      "questions": [
-        "How to generate heatmaps from RNA-seq data?"
-      ],
-      "objectives": [
-        "Create heatmaps of RNA-seq data"
-      ],
-      "time_estimation": "1h",
-      "key_points": [
-        "Heatmaps can be used to visualize the expression of genes in RNA-Seq samples"
-      ],
-      "contributors": [
-        {
-          "name": "Maria Doyle",
-          "joined": "2018-09",
-          "orcid": "0000-0003-4847-8436",
-          "id": "mblue9",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/"
-        }
-      ],
-      "url": "/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html",
-      "topic_name": "transcriptomics",
-      "tutorial_name": "rna-seq-viz-with-heatmap2",
-      "dir": "topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2",
-      "id": "transcriptomics/rna-seq-viz-with-heatmap2",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "rna-seq-viz-with-heatmap2.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/workflows/rna-seq-viz-with-heatmap2.ga",
-          "path": "topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/workflows/rna-seq-viz-with-heatmap2.ga",
-          "wfid": "transcriptomics-rna-seq-viz-with-heatmap2",
-          "wfname": "rna-seq-viz-with-heatmap2",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-rna-seq-viz-with-heatmap2/versions/rna-seq-viz-with-heatmap2",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "Cut1",
-        "join1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_heatmap2/ggplot2_heatmap2/2.2.1+galaxy1"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.json"
       }
     },
     {
@@ -1926,128 +1926,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Visualization of RNA-Seq results with Volcano Plot in R",
-      "level": "Intermediate",
-      "subtopic": "visualisation",
-      "zenodo_link": "https://zenodo.org/record/2529117",
-      "questions": [
-        "How to customise Volcano plot output in R?"
-      ],
-      "objectives": [
-        "Learn how to use R to edit Volcano plot colours, points, labels and categories"
-      ],
-      "time_estimation": "1H",
-      "key_points": [
-        "R can be used to customise Volcano Plot output",
-        "The RStudio interactive tool can be used to run R inside Galaxy"
-      ],
-      "tags": [
-        "interactive-tools"
-      ],
-      "contributors": [
-        {
-          "name": "Maria Doyle",
-          "joined": "2018-09",
-          "orcid": "0000-0003-4847-8436",
-          "id": "mblue9",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/"
-        }
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "galaxy-interface",
-          "tutorials": [
-            "rstudio"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "data-science",
-          "tutorials": [
-            "r-basics",
-            "r-advanced"
-          ]
-        },
-        {
-          "type": "internal",
-          "topic_name": "transcriptomics",
-          "tutorials": [
-            "rna-seq-viz-with-volcanoplot",
-            "rna-seq-counts-to-viz-in-r"
-          ]
-        }
-      ],
-      "url": "/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html",
-      "topic_name": "transcriptomics",
-      "tutorial_name": "rna-seq-viz-with-volcanoplot-r",
-      "dir": "topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r",
-      "id": "transcriptomics/rna-seq-viz-with-volcanoplot-r",
-      "video_library": {
-        "tutorial": {
-          "description": "The previous tutorial introduced volcano plots and showed how they can be generated with the Galaxy Volcano plot tool. In this tutorial we show how you can customise a plot using the R script output from the tool.",
-          "materials": [
-            {
-              "link": "topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html",
-              "title": "Customizing your Volcano plots using R in Galaxy",
-              "type": "Tutorial"
-            }
-          ],
-          "support_channel": "transcriptomics_rna-seq-viz-with-volcanoplot",
-          "tags": [
-            "transcriptomics",
-            "visualisation"
-          ],
-          "type": "Tutorial",
-          "versions": [
-            {
-              "captions": [
-                "mblue9"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "15M",
-              "link": "4dspgiwkuxk",
-              "speakers": [
-                "mblue9"
-              ]
-            }
-          ],
-          "gtn_id": "transcriptomics/rna-seq-viz-with-volcanoplot-r",
-          "title": "Visualization of RNA-Seq results with Volcano Plot in R",
-          "captioned": true
-        },
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "tools": [
-        "interactive_tool_rstudio",
-        "toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "title": "RNA Seq Counts to Viz in R",
       "subtopic": "visualisation",
       "zenodo_link": "https://zenodo.org/record/3477564/",
@@ -2267,6 +2145,128 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "title": "Visualization of RNA-Seq results with Volcano Plot in R",
+      "level": "Intermediate",
+      "subtopic": "visualisation",
+      "zenodo_link": "https://zenodo.org/record/2529117",
+      "questions": [
+        "How to customise Volcano plot output in R?"
+      ],
+      "objectives": [
+        "Learn how to use R to edit Volcano plot colours, points, labels and categories"
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "R can be used to customise Volcano Plot output",
+        "The RStudio interactive tool can be used to run R inside Galaxy"
+      ],
+      "tags": [
+        "interactive-tools"
+      ],
+      "contributors": [
+        {
+          "name": "Maria Doyle",
+          "joined": "2018-09",
+          "orcid": "0000-0003-4847-8436",
+          "id": "mblue9",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mblue9.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mblue9/"
+        }
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "galaxy-interface",
+          "tutorials": [
+            "rstudio"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "data-science",
+          "tutorials": [
+            "r-basics",
+            "r-advanced"
+          ]
+        },
+        {
+          "type": "internal",
+          "topic_name": "transcriptomics",
+          "tutorials": [
+            "rna-seq-viz-with-volcanoplot",
+            "rna-seq-counts-to-viz-in-r"
+          ]
+        }
+      ],
+      "url": "/topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html",
+      "topic_name": "transcriptomics",
+      "tutorial_name": "rna-seq-viz-with-volcanoplot-r",
+      "dir": "topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r",
+      "id": "transcriptomics/rna-seq-viz-with-volcanoplot-r",
+      "video_library": {
+        "tutorial": {
+          "description": "The previous tutorial introduced volcano plots and showed how they can be generated with the Galaxy Volcano plot tool. In this tutorial we show how you can customise a plot using the R script output from the tool.",
+          "materials": [
+            {
+              "link": "topics/transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.html",
+              "title": "Customizing your Volcano plots using R in Galaxy",
+              "type": "Tutorial"
+            }
+          ],
+          "support_channel": "transcriptomics_rna-seq-viz-with-volcanoplot",
+          "tags": [
+            "transcriptomics",
+            "visualisation"
+          ],
+          "type": "Tutorial",
+          "versions": [
+            {
+              "captions": [
+                "mblue9"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "15M",
+              "link": "4dspgiwkuxk",
+              "speakers": [
+                "mblue9"
+              ]
+            }
+          ],
+          "gtn_id": "transcriptomics/rna-seq-viz-with-volcanoplot-r",
+          "title": "Visualization of RNA-Seq results with Volcano Plot in R",
+          "captioned": true
+        },
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "tools": [
+        "interactive_tool_rstudio",
+        "toolshed.g2.bx.psu.edu/repos/iuc/volcanoplot/volcanoplot/0.0.5"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//transcriptomics/tutorials/rna-seq-viz-with-volcanoplot-r/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Reference-based RNA-Seq data analysis",
       "subtopic": "introduction",
       "priority": 2,
@@ -2378,19 +2378,6 @@
       "slides": false,
       "workflows": [
         {
-          "workflow": "deg-analysis.ga",
-          "tests": true,
-          "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/deg-analysis.ga",
-          "path": "topics/transcriptomics/tutorials/ref-based/workflows/deg-analysis.ga",
-          "wfid": "transcriptomics-ref-based",
-          "wfname": "deg-analysis",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis",
-          "license": null,
-          "creators": [
-
-          ]
-        },
-        {
           "workflow": "qc-mapping-counting.ga",
           "tests": true,
           "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/qc-mapping-counting.ga",
@@ -2398,6 +2385,19 @@
           "wfid": "transcriptomics-ref-based",
           "wfname": "qc-mapping-counting",
           "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/qc-mapping-counting",
+          "license": null,
+          "creators": [
+
+          ]
+        },
+        {
+          "workflow": "deg-analysis.ga",
+          "tests": true,
+          "url": "https://training.galaxyproject.org/training-material/topics/transcriptomics/tutorials/ref-based/workflows/deg-analysis.ga",
+          "path": "topics/transcriptomics/tutorials/ref-based/workflows/deg-analysis.ga",
+          "wfid": "transcriptomics-ref-based",
+          "wfname": "deg-analysis",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/transcriptomics-ref-based/versions/deg-analysis",
           "license": null,
           "creators": [
 

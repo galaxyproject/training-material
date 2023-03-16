@@ -844,6 +844,274 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "title": "Downstream Single-cell RNA analysis with RaceID",
+      "subtopic": "end-to-end",
+      "priority": 2,
+      "redirect_from": [
+        "/topics/transcriptomics/tutorials/scrna-raceid/tutorial"
+      ],
+      "zenodo_link": "https://zenodo.org/record/1511582",
+      "tags": [
+        "single-cell"
+      ],
+      "questions": [
+        "What is normalisation and why is it necessary?",
+        "How many types of unwanted variation are there?",
+        "How are biological phenotypes clustered?",
+        "What is the difference between PCA and tSNE?",
+        "What is the difference between cell trajectory and cell fate?"
+      ],
+      "objectives": [
+        "Filtering, normalising, and clustering cells in a matrix",
+        "Assessing the quality of individual clusters",
+        "Inferring cell type lineages",
+        "Examining gene expression",
+        "Determining the top most expressive genes per cluster",
+        "Correcting for unwanted variation"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "scrna-scater-qc"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "scrna-preprocessing-tenx"
+          ]
+        }
+      ],
+      "time_estimation": "3H",
+      "key_points": [
+        "Clustering single-cell RNA-seq data is often noisy",
+        "RaceID can be used to cluster cells based on the their gene expression profiles",
+        "StemID describes a hierarchical relationship between clusters to find multipotent progenitor stem cells to provide an understanding of cell development",
+        "FateID predicts the potential lineages that cells within specific clusters are inclined towards"
+      ],
+      "contributors": [
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "elixir_node": "de",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/"
+        },
+        {
+          "name": "Alex Ostrovsky",
+          "email": "a.ostrovsky@mac.com",
+          "joined": "2019-06",
+          "id": "astrovsky01",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/astrovsky01.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/"
+        }
+      ],
+      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
+      "url": "/topics/single-cell/tutorials/scrna-raceid/tutorial.html",
+      "topic_name": "single-cell",
+      "tutorial_name": "scrna-raceid",
+      "dir": "topics/single-cell/tutorials/scrna-raceid",
+      "id": "single-cell/scrna-raceid",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-raceid/workflows/main_workflow.ga",
+          "path": "topics/single-cell/tutorials/scrna-raceid/workflows/main_workflow.ga",
+          "wfid": "single-cell-scrna-raceid",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-raceid/versions/main_workflow",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "raceid_clustering",
+        "raceid_filtnormconf",
+        "raceid_inspectclusters",
+        "raceid_inspecttrajectory",
+        "raceid_trajectory",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_clustering/raceid_clustering/0.2.3+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_filtnormconf/raceid_filtnormconf/0.2.3+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/0.2.3+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/0.2.3+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_trajectory/raceid_trajectory/0.2.3+galaxy0"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/scrna-raceid/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/scrna-raceid/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "Removing the effects of the cell cycle",
+      "zenodo_link": "https://zenodo.org/record/7311628/",
+      "subtopic": "tricks",
+      "priority": 2,
+      "questions": [
+        "How can I reduce the effects of the cell cycle on my scRNA-seq data?"
+      ],
+      "objectives": [
+        "Identify the cell cycle genes",
+        "Use the cell cycle genes to regress out the effects of the cell cycle",
+        "Create PCA plots to understand the impact of the regression"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "scrna-case_alevin",
+            "scrna-case_alevin-combine-datasets",
+            "scrna-case_basic-pipeline"
+          ]
+        }
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "Cell cycle genes can conceal what is happening in your data if cells are grouping together according to their stage in the cycle",
+        "Identifying the cell cycle genes and using them to regress out the effects of the cell cycle can reveal underlying patterns in the data"
+      ],
+      "contributions": {
+        "authorship": [
+          "MarisaJL"
+        ],
+        "editing": [
+          "nomadscientist"
+        ],
+        "testing": [
+          "hrukkudyr"
+        ]
+      },
+      "url": "/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html",
+      "topic_name": "single-cell",
+      "tutorial_name": "scrna-case_cell-cycle",
+      "dir": "topics/single-cell/tutorials/scrna-case_cell-cycle",
+      "id": "single-cell/scrna-case_cell-cycle",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "main_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/workflows/main_workflow.ga",
+          "path": "topics/single-cell/tutorials/scrna-case_cell-cycle/workflows/main_workflow.ga",
+          "wfid": "single-cell-scrna-case_cell-cycle",
+          "wfname": "main_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_cell-cycle/versions/main_workflow",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "cat1",
+        "sort1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0",
+        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_regress_variable/scanpy_regress_variable/1.8.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Marisa Loach",
+          "orcid": "0000-0001-6979-6930",
+          "twitter": "Marisa_Loach",
+          "email": "marisa.loach@open.ac.uk",
+          "joined": "2022-10",
+          "id": "MarisaJL",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/MarisaJL.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/MarisaJL/"
+        },
+        {
+          "name": "Wendi Bacon",
+          "email": "wendi.bacon@open.ac.uk",
+          "twitter": "WendiBacon1",
+          "gitter": "nomadscientist",
+          "joined": "2020-03",
+          "elixir_node": "uk",
+          "orcid": "0000-0002-8170-8806",
+          "bio": "Lecturer at The Open University",
+          "id": "nomadscientist",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/"
+        },
+        {
+          "name": "Graeme Tyson",
+          "email": "grt67@open.ac.uk",
+          "orcid": "0000-0002-1748-2806",
+          "joined": "2022-09",
+          "id": "hrukkudyr",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/hrukkudyr.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hrukkudyr/"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/scrna-case_cell-cycle/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/scrna-case_cell-cycle/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "subtopic": "deconvo",
       "priority": 2,
       "title": "Creating the single-cell RNA-seq reference dataset for deconvolution",
@@ -912,13 +1180,13 @@
       "slides": false,
       "workflows": [
         {
-          "workflow": "sc_metadata.ga",
+          "workflow": "sc_matrix.ga",
           "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-2-preparescref/workflows/sc_metadata.ga",
-          "path": "topics/single-cell/tutorials/bulk-music-2-preparescref/workflows/sc_metadata.ga",
+          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-2-preparescref/workflows/sc_matrix.ga",
+          "path": "topics/single-cell/tutorials/bulk-music-2-preparescref/workflows/sc_matrix.ga",
           "wfid": "single-cell-bulk-music-2-preparescref",
-          "wfname": "sc_metadata",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-bulk-music-2-preparescref/versions/sc_metadata",
+          "wfname": "sc_matrix",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-bulk-music-2-preparescref/versions/sc_matrix",
           "license": null,
           "creators": [
             {
@@ -934,13 +1202,13 @@
           ]
         },
         {
-          "workflow": "sc_matrix.ga",
+          "workflow": "sc_metadata.ga",
           "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-2-preparescref/workflows/sc_matrix.ga",
-          "path": "topics/single-cell/tutorials/bulk-music-2-preparescref/workflows/sc_matrix.ga",
+          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-2-preparescref/workflows/sc_metadata.ga",
+          "path": "topics/single-cell/tutorials/bulk-music-2-preparescref/workflows/sc_metadata.ga",
           "wfid": "single-cell-bulk-music-2-preparescref",
-          "wfname": "sc_matrix",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-bulk-music-2-preparescref/versions/sc_matrix",
+          "wfname": "sc_metadata",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-bulk-music-2-preparescref/versions/sc_metadata",
           "license": null,
           "creators": [
             {
@@ -1189,274 +1457,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "title": "Removing the effects of the cell cycle",
-      "zenodo_link": "https://zenodo.org/record/7311628/",
-      "subtopic": "tricks",
-      "priority": 2,
-      "questions": [
-        "How can I reduce the effects of the cell cycle on my scRNA-seq data?"
-      ],
-      "objectives": [
-        "Identify the cell cycle genes",
-        "Use the cell cycle genes to regress out the effects of the cell cycle",
-        "Create PCA plots to understand the impact of the regression"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "single-cell",
-          "tutorials": [
-            "scrna-case_alevin",
-            "scrna-case_alevin-combine-datasets",
-            "scrna-case_basic-pipeline"
-          ]
-        }
-      ],
-      "time_estimation": "1H",
-      "key_points": [
-        "Cell cycle genes can conceal what is happening in your data if cells are grouping together according to their stage in the cycle",
-        "Identifying the cell cycle genes and using them to regress out the effects of the cell cycle can reveal underlying patterns in the data"
-      ],
-      "contributions": {
-        "authorship": [
-          "MarisaJL"
-        ],
-        "editing": [
-          "nomadscientist"
-        ],
-        "testing": [
-          "hrukkudyr"
-        ]
-      },
-      "url": "/topics/single-cell/tutorials/scrna-case_cell-cycle/tutorial.html",
-      "topic_name": "single-cell",
-      "tutorial_name": "scrna-case_cell-cycle",
-      "dir": "topics/single-cell/tutorials/scrna-case_cell-cycle",
-      "id": "single-cell/scrna-case_cell-cycle",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_cell-cycle/workflows/main_workflow.ga",
-          "path": "topics/single-cell/tutorials/scrna-case_cell-cycle/workflows/main_workflow.ga",
-          "wfid": "single-cell-scrna-case_cell-cycle",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_cell-cycle/versions/main_workflow",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "cat1",
-        "sort1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/add_value/addValue/1.0.0",
-        "toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_regress_variable/scanpy_regress_variable/1.8.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_cluster_reduce_dimension/scanpy_cluster_reduce_dimension/1.7.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_inspect/scanpy_inspect/1.7.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/scanpy_plot/scanpy_plot/1.7.1+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "contributors": [
-        {
-          "name": "Marisa Loach",
-          "orcid": "0000-0001-6979-6930",
-          "twitter": "Marisa_Loach",
-          "email": "marisa.loach@open.ac.uk",
-          "joined": "2022-10",
-          "id": "MarisaJL",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/MarisaJL.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/MarisaJL/"
-        },
-        {
-          "name": "Wendi Bacon",
-          "email": "wendi.bacon@open.ac.uk",
-          "twitter": "WendiBacon1",
-          "gitter": "nomadscientist",
-          "joined": "2020-03",
-          "elixir_node": "uk",
-          "orcid": "0000-0002-8170-8806",
-          "bio": "Lecturer at The Open University",
-          "id": "nomadscientist",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/"
-        },
-        {
-          "name": "Graeme Tyson",
-          "email": "grt67@open.ac.uk",
-          "orcid": "0000-0002-1748-2806",
-          "joined": "2022-09",
-          "id": "hrukkudyr",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/hrukkudyr.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/hrukkudyr/"
-        }
-      ],
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/scrna-case_cell-cycle/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/scrna-case_cell-cycle/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "title": "Downstream Single-cell RNA analysis with RaceID",
-      "subtopic": "end-to-end",
-      "priority": 2,
-      "redirect_from": [
-        "/topics/transcriptomics/tutorials/scrna-raceid/tutorial"
-      ],
-      "zenodo_link": "https://zenodo.org/record/1511582",
-      "tags": [
-        "single-cell"
-      ],
-      "questions": [
-        "What is normalisation and why is it necessary?",
-        "How many types of unwanted variation are there?",
-        "How are biological phenotypes clustered?",
-        "What is the difference between PCA and tSNE?",
-        "What is the difference between cell trajectory and cell fate?"
-      ],
-      "objectives": [
-        "Filtering, normalising, and clustering cells in a matrix",
-        "Assessing the quality of individual clusters",
-        "Inferring cell type lineages",
-        "Examining gene expression",
-        "Determining the top most expressive genes per cluster",
-        "Correcting for unwanted variation"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "single-cell",
-          "tutorials": [
-            "scrna-scater-qc"
-          ]
-        }
-      ],
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "single-cell",
-          "tutorials": [
-            "scrna-preprocessing-tenx"
-          ]
-        }
-      ],
-      "time_estimation": "3H",
-      "key_points": [
-        "Clustering single-cell RNA-seq data is often noisy",
-        "RaceID can be used to cluster cells based on the their gene expression profiles",
-        "StemID describes a hierarchical relationship between clusters to find multipotent progenitor stem cells to provide an understanding of cell development",
-        "FateID predicts the potential lineages that cells within specific clusters are inclined towards"
-      ],
-      "contributors": [
-        {
-          "name": "Mehmet Tekman",
-          "email": "mtekman89@gmail.com",
-          "joined": "2018-11",
-          "elixir_node": "de",
-          "id": "mtekman",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/"
-        },
-        {
-          "name": "Alex Ostrovsky",
-          "email": "a.ostrovsky@mac.com",
-          "joined": "2019-06",
-          "id": "astrovsky01",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/astrovsky01.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/astrovsky01/"
-        }
-      ],
-      "gitter": "Galaxy-Training-Network/galaxy-single-cell",
-      "url": "/topics/single-cell/tutorials/scrna-raceid/tutorial.html",
-      "topic_name": "single-cell",
-      "tutorial_name": "scrna-raceid",
-      "dir": "topics/single-cell/tutorials/scrna-raceid",
-      "id": "single-cell/scrna-raceid",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "main_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-raceid/workflows/main_workflow.ga",
-          "path": "topics/single-cell/tutorials/scrna-raceid/workflows/main_workflow.ga",
-          "wfid": "single-cell-scrna-raceid",
-          "wfname": "main_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-raceid/versions/main_workflow",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "raceid_clustering",
-        "raceid_filtnormconf",
-        "raceid_inspectclusters",
-        "raceid_inspecttrajectory",
-        "raceid_trajectory",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_clustering/raceid_clustering/0.2.3+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_filtnormconf/raceid_filtnormconf/0.2.3+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/0.2.3+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/0.2.3+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/raceid_trajectory/raceid_trajectory/0.2.3+galaxy0"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/scrna-raceid/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/scrna-raceid/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "title": "Understanding Barcodes",
       "subtopic": "scintroduction",
       "priority": 2,
@@ -1557,164 +1557,6 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/scrna-umis/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/scrna-umis/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
-      "subtopic": "deconvo",
-      "priority": 3,
-      "title": "Creating the bulk RNA-seq dataset for deconvolution",
-      "zenodo_link": "https://zenodo.org/record/7319173",
-      "questions": [
-        "Where can I find good quality RNA-seq datasets?",
-        "How can I reformat and manipulate these downloads to create the right format for MuSiC?"
-      ],
-      "objectives": [
-        "You will retrieve raw data from the EMBL-EBI Expression Atlas.",
-        "You will manipulate the metadata and matrix files.",
-        "You will combine the metadata and matrix files into an ESet object for MuSiC deconvolution.",
-        "You will create multiple ESet objects - both combined and separated out by disease phenotype for your bulk dataset."
-      ],
-      "time_estimation": "1H",
-      "key_points": [
-        "The EMBL-EBI Expression Atlas contains high quality datasets.",
-        "Metadata manipulation is key for generating the correctly formatted resource."
-      ],
-      "contributions": {
-        "authorship": [
-          "nomadscientist",
-          "mtekman"
-        ],
-        "testing": [
-          "MarisaJL"
-        ]
-      },
-      "tags": [
-        "single-cell",
-        "human",
-        "deconvolution",
-        "bulk",
-        "transcriptomics"
-      ],
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "single-cell",
-          "tutorials": [
-            "bulk-music",
-            "bulk-music-2-preparescref"
-          ]
-        }
-      ],
-      "follow_up_training": [
-        {
-          "type": "internal",
-          "topic_name": "single-cell",
-          "tutorials": [
-            "bulk-music-4-compare"
-          ]
-        }
-      ],
-      "url": "/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html",
-      "topic_name": "single-cell",
-      "tutorial_name": "bulk-music-3-preparebulk",
-      "dir": "topics/single-cell/tutorials/bulk-music-3-preparebulk",
-      "id": "single-cell/bulk-music-3-preparebulk",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "bulk_ESet.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/workflows/bulk_ESet.ga",
-          "path": "topics/single-cell/tutorials/bulk-music-3-preparebulk/workflows/bulk_ESet.ga",
-          "wfid": "single-cell-bulk-music-3-preparebulk",
-          "wfname": "bulk_eset",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-bulk-music-3-preparebulk/versions/bulk_eset",
-          "license": null,
-          "creators": [
-            {
-              "class": "Person",
-              "identifier": "0000-0002-8170-8806",
-              "name": "Wendi Bacon"
-            },
-            {
-              "class": "Person",
-              "identifier": "0000-0002-4181-2676",
-              "name": "Mehmet Tekman"
-            }
-          ]
-        }
-      ],
-      "tools": [
-        "sort1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
-        "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/annotatemyids/annotatemyids/3.14.0+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "contributors": [
-        {
-          "name": "Wendi Bacon",
-          "email": "wendi.bacon@open.ac.uk",
-          "twitter": "WendiBacon1",
-          "gitter": "nomadscientist",
-          "joined": "2020-03",
-          "elixir_node": "uk",
-          "orcid": "0000-0002-8170-8806",
-          "bio": "Lecturer at The Open University",
-          "id": "nomadscientist",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/"
-        },
-        {
-          "name": "Mehmet Tekman",
-          "email": "mtekman89@gmail.com",
-          "joined": "2018-11",
-          "elixir_node": "de",
-          "id": "mtekman",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/"
-        },
-        {
-          "name": "Marisa Loach",
-          "orcid": "0000-0001-6979-6930",
-          "twitter": "Marisa_Loach",
-          "email": "marisa.loach@open.ac.uk",
-          "joined": "2022-10",
-          "id": "MarisaJL",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/MarisaJL.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/MarisaJL/"
-        }
-      ],
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/bulk-music-3-preparebulk/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/bulk-music-3-preparebulk/tutorial.json"
       }
     },
     {
@@ -2091,6 +1933,164 @@
       }
     },
     {
+      "layout": "tutorial_hands_on",
+      "subtopic": "deconvo",
+      "priority": 3,
+      "title": "Creating the bulk RNA-seq dataset for deconvolution",
+      "zenodo_link": "https://zenodo.org/record/7319173",
+      "questions": [
+        "Where can I find good quality RNA-seq datasets?",
+        "How can I reformat and manipulate these downloads to create the right format for MuSiC?"
+      ],
+      "objectives": [
+        "You will retrieve raw data from the EMBL-EBI Expression Atlas.",
+        "You will manipulate the metadata and matrix files.",
+        "You will combine the metadata and matrix files into an ESet object for MuSiC deconvolution.",
+        "You will create multiple ESet objects - both combined and separated out by disease phenotype for your bulk dataset."
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "The EMBL-EBI Expression Atlas contains high quality datasets.",
+        "Metadata manipulation is key for generating the correctly formatted resource."
+      ],
+      "contributions": {
+        "authorship": [
+          "nomadscientist",
+          "mtekman"
+        ],
+        "testing": [
+          "MarisaJL"
+        ]
+      },
+      "tags": [
+        "single-cell",
+        "human",
+        "deconvolution",
+        "bulk",
+        "transcriptomics"
+      ],
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "bulk-music",
+            "bulk-music-2-preparescref"
+          ]
+        }
+      ],
+      "follow_up_training": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "bulk-music-4-compare"
+          ]
+        }
+      ],
+      "url": "/topics/single-cell/tutorials/bulk-music-3-preparebulk/tutorial.html",
+      "topic_name": "single-cell",
+      "tutorial_name": "bulk-music-3-preparebulk",
+      "dir": "topics/single-cell/tutorials/bulk-music-3-preparebulk",
+      "id": "single-cell/bulk-music-3-preparebulk",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "bulk_ESet.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-3-preparebulk/workflows/bulk_ESet.ga",
+          "path": "topics/single-cell/tutorials/bulk-music-3-preparebulk/workflows/bulk_ESet.ga",
+          "wfid": "single-cell-bulk-music-3-preparebulk",
+          "wfname": "bulk_eset",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-bulk-music-3-preparebulk/versions/bulk_eset",
+          "license": null,
+          "creators": [
+            {
+              "class": "Person",
+              "identifier": "0000-0002-8170-8806",
+              "name": "Wendi Bacon"
+            },
+            {
+              "class": "Person",
+              "identifier": "0000-0002-4181-2676",
+              "name": "Mehmet Tekman"
+            }
+          ]
+        }
+      ],
+      "tools": [
+        "sort1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+        "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/annotatemyids/annotatemyids/3.14.0+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Wendi Bacon",
+          "email": "wendi.bacon@open.ac.uk",
+          "twitter": "WendiBacon1",
+          "gitter": "nomadscientist",
+          "joined": "2020-03",
+          "elixir_node": "uk",
+          "orcid": "0000-0002-8170-8806",
+          "bio": "Lecturer at The Open University",
+          "id": "nomadscientist",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/"
+        },
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "elixir_node": "de",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/"
+        },
+        {
+          "name": "Marisa Loach",
+          "orcid": "0000-0001-6979-6930",
+          "twitter": "Marisa_Loach",
+          "email": "marisa.loach@open.ac.uk",
+          "joined": "2022-10",
+          "id": "MarisaJL",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/MarisaJL.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/MarisaJL/"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/bulk-music-3-preparebulk/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/bulk-music-3-preparebulk/tutorial.json"
+      }
+    },
+    {
       "layout": "slides-plain",
       "logo": "GTN",
       "title": "Plates, Batches, and Barcodes",
@@ -2182,6 +2182,144 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/scrna-plates-batches-barcodes/slides-plain.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/scrna-plates-batches-barcodes/slides-plain.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "subtopic": "deconvo",
+      "priority": 4,
+      "title": "Comparing inferred cell compositions using MuSiC deconvolution",
+      "zenodo_link": "https://zenodo.org/record/7319925",
+      "tags": [
+        "single-cell",
+        "mouse",
+        "human",
+        "deconvolution",
+        "bulk",
+        "transcriptomics"
+      ],
+      "questions": [
+        "How do the cell type distributions vary in bulk RNA samples across my variable of interest?",
+        "For example, are beta cell proportions different in the pancreas data from diabetes and healthy patients?"
+      ],
+      "objectives": [
+        "Apply the MuSiC deconvolution to samples and compare the cell type distributions",
+        "Compare the results from analysing different types of input, for example, whether combining disease and healthy references or not yields better results"
+      ],
+      "time_estimation": "1H",
+      "key_points": [
+        "Deconvolution can be used to compare cell type distributions from bulk RNA-seq datasets"
+      ],
+      "contributions": {
+        "authorship": [
+          "nomadscientist",
+          "mtekman"
+        ],
+        "testing": [
+          "MarisaJL"
+        ]
+      },
+      "requirements": [
+        {
+          "type": "internal",
+          "topic_name": "single-cell",
+          "tutorials": [
+            "bulk-music",
+            "bulk-music-2-preparescref",
+            "bulk-music-3-preparebulk"
+          ]
+        }
+      ],
+      "url": "/topics/single-cell/tutorials/bulk-music-4-compare/tutorial.html",
+      "topic_name": "single-cell",
+      "tutorial_name": "bulk-music-4-compare",
+      "dir": "topics/single-cell/tutorials/bulk-music-4-compare",
+      "id": "single-cell/bulk-music-4-compare",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "compare.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-4-compare/workflows/compare.ga",
+          "path": "topics/single-cell/tutorials/bulk-music-4-compare/workflows/compare.ga",
+          "wfid": "single-cell-bulk-music-4-compare",
+          "wfname": "compare",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-bulk-music-4-compare/versions/compare",
+          "license": null,
+          "creators": [
+            {
+              "class": "Person",
+              "identifier": "https://orcid.org/0000-0002-8170-8806",
+              "name": "Wendi Bacon"
+            },
+            {
+              "class": "Person",
+              "identifier": "0000-0002-4181-2676",
+              "name": "Mehmet Tekman"
+            }
+          ]
+        }
+      ],
+      "tools": [
+        "toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "contributors": [
+        {
+          "name": "Wendi Bacon",
+          "email": "wendi.bacon@open.ac.uk",
+          "twitter": "WendiBacon1",
+          "gitter": "nomadscientist",
+          "joined": "2020-03",
+          "elixir_node": "uk",
+          "orcid": "0000-0002-8170-8806",
+          "bio": "Lecturer at The Open University",
+          "id": "nomadscientist",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/"
+        },
+        {
+          "name": "Mehmet Tekman",
+          "email": "mtekman89@gmail.com",
+          "joined": "2018-11",
+          "elixir_node": "de",
+          "id": "mtekman",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/"
+        },
+        {
+          "name": "Marisa Loach",
+          "orcid": "0000-0001-6979-6930",
+          "twitter": "Marisa_Loach",
+          "email": "marisa.loach@open.ac.uk",
+          "joined": "2022-10",
+          "id": "MarisaJL",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/MarisaJL.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/MarisaJL/"
+        }
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/bulk-music-4-compare/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/bulk-music-4-compare/tutorial.json"
       }
     },
     {
@@ -2364,144 +2502,6 @@
     },
     {
       "layout": "tutorial_hands_on",
-      "subtopic": "deconvo",
-      "priority": 4,
-      "title": "Comparing inferred cell compositions using MuSiC deconvolution",
-      "zenodo_link": "https://zenodo.org/record/7319925",
-      "tags": [
-        "single-cell",
-        "mouse",
-        "human",
-        "deconvolution",
-        "bulk",
-        "transcriptomics"
-      ],
-      "questions": [
-        "How do the cell type distributions vary in bulk RNA samples across my variable of interest?",
-        "For example, are beta cell proportions different in the pancreas data from diabetes and healthy patients?"
-      ],
-      "objectives": [
-        "Apply the MuSiC deconvolution to samples and compare the cell type distributions",
-        "Compare the results from analysing different types of input, for example, whether combining disease and healthy references or not yields better results"
-      ],
-      "time_estimation": "1H",
-      "key_points": [
-        "Deconvolution can be used to compare cell type distributions from bulk RNA-seq datasets"
-      ],
-      "contributions": {
-        "authorship": [
-          "nomadscientist",
-          "mtekman"
-        ],
-        "testing": [
-          "MarisaJL"
-        ]
-      },
-      "requirements": [
-        {
-          "type": "internal",
-          "topic_name": "single-cell",
-          "tutorials": [
-            "bulk-music",
-            "bulk-music-2-preparescref",
-            "bulk-music-3-preparebulk"
-          ]
-        }
-      ],
-      "url": "/topics/single-cell/tutorials/bulk-music-4-compare/tutorial.html",
-      "topic_name": "single-cell",
-      "tutorial_name": "bulk-music-4-compare",
-      "dir": "topics/single-cell/tutorials/bulk-music-4-compare",
-      "id": "single-cell/bulk-music-4-compare",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "compare.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/bulk-music-4-compare/workflows/compare.ga",
-          "path": "topics/single-cell/tutorials/bulk-music-4-compare/workflows/compare.ga",
-          "wfid": "single-cell-bulk-music-4-compare",
-          "wfname": "compare",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-bulk-music-4-compare/versions/compare",
-          "license": null,
-          "creators": [
-            {
-              "class": "Person",
-              "identifier": "https://orcid.org/0000-0002-8170-8806",
-              "name": "Wendi Bacon"
-            },
-            {
-              "class": "Person",
-              "identifier": "0000-0002-4181-2676",
-              "name": "Mehmet Tekman"
-            }
-          ]
-        }
-      ],
-      "tools": [
-        "toolshed.g2.bx.psu.edu/repos/bgruening/music_compare/music_compare/0.1.1+galaxy4"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "contributors": [
-        {
-          "name": "Wendi Bacon",
-          "email": "wendi.bacon@open.ac.uk",
-          "twitter": "WendiBacon1",
-          "gitter": "nomadscientist",
-          "joined": "2020-03",
-          "elixir_node": "uk",
-          "orcid": "0000-0002-8170-8806",
-          "bio": "Lecturer at The Open University",
-          "id": "nomadscientist",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/nomadscientist.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nomadscientist/"
-        },
-        {
-          "name": "Mehmet Tekman",
-          "email": "mtekman89@gmail.com",
-          "joined": "2018-11",
-          "elixir_node": "de",
-          "id": "mtekman",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mtekman.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mtekman/"
-        },
-        {
-          "name": "Marisa Loach",
-          "orcid": "0000-0001-6979-6930",
-          "twitter": "Marisa_Loach",
-          "email": "marisa.loach@open.ac.uk",
-          "joined": "2022-10",
-          "id": "MarisaJL",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/MarisaJL.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/MarisaJL/"
-        }
-      ],
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/bulk-music-4-compare/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//single-cell/tutorials/bulk-music-4-compare/tutorial.json"
-      }
-    },
-    {
-      "layout": "tutorial_hands_on",
       "title": "Inferring Trajectories using Scanpy - Jupyter Notebook",
       "subtopic": "single-cell-CS",
       "priority": 4,
@@ -2546,6 +2546,7 @@
         "paper-replication",
         "interactive-tools",
         "transcriptomics",
+        "jupyter-notebook",
         "jupyter-notebook"
       ],
       "contributions": {
@@ -2745,19 +2746,6 @@
       "slides": true,
       "workflows": [
         {
-          "workflow": "Galaxy-Workflow-Monocle3_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Galaxy-Workflow-Monocle3_workflow.ga",
-          "path": "topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Galaxy-Workflow-Monocle3_workflow.ga",
-          "wfid": "single-cell-scrna-case_monocle3-trajectories",
-          "wfname": "galaxy-workflow-monocle3_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/galaxy-workflow-monocle3_workflow",
-          "license": null,
-          "creators": [
-
-          ]
-        },
-        {
           "workflow": "Galaxy-Workflow-AnnData_object_to_Monocle_input_files.ga",
           "tests": false,
           "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Galaxy-Workflow-AnnData_object_to_Monocle_input_files.ga",
@@ -2778,6 +2766,19 @@
           "wfid": "single-cell-scrna-case_monocle3-trajectories",
           "wfname": "galaxy-workflow-trajectory_analysis_using_monocle3-full_tutorial_workflow",
           "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/galaxy-workflow-trajectory_analysis_using_monocle3-full_tutorial_workflow",
+          "license": null,
+          "creators": [
+
+          ]
+        },
+        {
+          "workflow": "Galaxy-Workflow-Monocle3_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Galaxy-Workflow-Monocle3_workflow.ga",
+          "path": "topics/single-cell/tutorials/scrna-case_monocle3-trajectories/workflows/Galaxy-Workflow-Monocle3_workflow.ga",
+          "wfid": "single-cell-scrna-case_monocle3-trajectories",
+          "wfname": "galaxy-workflow-monocle3_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/single-cell-scrna-case_monocle3-trajectories/versions/galaxy-workflow-monocle3_workflow",
           "license": null,
           "creators": [
 
