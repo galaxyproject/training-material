@@ -12,7 +12,7 @@ subtopic: jobs
 
 ---
 
-## Can you eat it
+## Can you eat it?
 
 .pull-left[
 Celery is an asynchronous distributed task queue.
@@ -21,7 +21,7 @@ It consists of:
 
 - Application that sends tasks
 - to a broker with queues
-- Worker(s) that execute the tasks
+- Workers that execute the tasks
 - A Result backend to store the task results
 
 It's written in Python but supports multiple other languages via webhooks.
@@ -36,7 +36,7 @@ It's written in Python but supports multiple other languages via webhooks.
 ## So many features
 
 .pull-left[
-- Celeryd – the daemonized version of Celery
+- different worker/process [pool options](https://distributedpython.com/posts/celery-execution-pools-what-is-it-all-about/), depending on your needs – I/O or CPU bound
 - CeleryBeat a scheduler for repeated tasks
 - Flower, a monitoring interface for
 	- Showing tasks, queues and workers
@@ -57,16 +57,15 @@ It's written in Python but supports multiple other languages via webhooks.
 .pull-left[
 **The Problem**
 
-The Galaxy Server should respond quickly to every request. Gunicorn Workers should not do everything.
+The Galaxy Server should respond quickly to every request.
+Without Celery, Gunicorn and the Galaxy handlers have to do many I/O bound side tasks.
+For example packing a zip for history export.
 
 **The Solution**
 
 Queue asynchronous tasks with Celery
-(happens currently internal on the same node)
+- on a different node or even a whole cluster
 
-**The Improvement**
-
-Send the tasks to an external Celery-Cluster
 ]
 
 .pull-right[
@@ -81,21 +80,26 @@ Send the tasks to an external Celery-Cluster
 
 ## What is Celery Used For
 
-- Recalculating Disk Usage
-- Purging Datasets
-- Changing Datatypes
+- Processing upload jobs
+- Processing metadata
+- Recalculating disk usage
+- Purging datasets
+- Changing datatypes
 - Preparing compressed downloads (histories, etc.)
 - Creating PDFs for Galaxy workflow reports
 - Cleaning up short term storage
+- Preparing history exports
+. . .
 
 ---
 
 .pull-left [
-## What we need
+## What do you need to enable Celery?
 
-- A Galaxy Server, configured to use an external MQ and external Celery Workers
-- A properly set up broker (for example the [UseGalaxy.eu RabbitMQ Ansible Role](https://github.com/usegalaxy-eu/ansible-rabbitmq))
-- A Celery-Cluster on external node with the full Galaxy repo, branch -> dev, which has run an initialisation (run.sh) and run the Celery Worker above [task definition folder](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/celery)
+- A properly set up broker, for example with [UseGalaxy.eu RabbitMQ Ansible Role](https://github.com/usegalaxy-eu/ansible-rabbitmq)
+- A redis server, for example with [geerlingguy's Ansible Role](https://github.com/geerlingguy/ansible-role-redis)
+- NFS to which you export galaxy's root dir and which is mounted on the Celery nodes
+- Optional: Flower, the Celery UI, for example with [UseGalaxy.eu Flower Ansible Role](https://github.com/usegalaxy-eu/flower-ansible-role) 
 ]
 
 .pull-right[
@@ -105,13 +109,47 @@ Send the tasks to an external Celery-Cluster
 ---
 
 .pull-left[
+![Celery's green logo](images/celery.img)
+]
+
+.pull-right[
+
+## Where to get Celery?
+
+- It is in your Galaxy venv already!
+- Mount the Galaxy root with venv and config dirs on your Celery node
+- Create an Ansible Playbook with [UseGalaxy.eu's Systemd Role](https://github.com/usegalaxy-eu/ansible-galaxy-systemd)
+- For inspiration, you can check out our vars [file](https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/group_vars/celerycluster.yml)
+]
+
+---
+
+.pull-left[
+![](images/celery.img)
+]
+
+.pull-right[
+
+## Where to get Celery?
+
+- It is in your Galaxy venv already!
+- Mount the Galaxy root with venv and config dirs on your Celery node
+- Create an Ansible Playbook with [UseGalaxy.eu's Systemd Role](https://github.com/usegalaxy-eu/ansible-galaxy-systemd)
+- For inspiration, you can check out our vars [file](https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/group_vars/celerycluster.yml)
+]
+
+---
+.pull-left[
 	![screenshot of galaxy documentation page, linked in next section](images/docs.png)
 ]
 .pull-right[
+## How to set the Galaxy Config
 - [Configuration in `galaxy.yml` file](https://docs.galaxyproject.org/en/latest/admin/options.html#amqp-internal-connection)
-- Documentation primarily within codebase and developer, not admin-focused
-- `celery_broker` can be set, but defaults to `amqp_internal_connection`
-- Contributions are very welcome ;)
+- Documentation still WIP
+- `celery_broker` can be set, but defaults to `amqp_internal_connection`,
+	'where you set the amqp connection string for your Rabbit MQ. That one is also used for Pulsar
+- `celery_conf` taskes basically everything that is also [documented](https://docs.celeryq.dev/en/stable/getting-started/first-steps-with-celery.html)
+- set your [`result_backend`](https://docs.celeryq.dev/en/stable/getting-started/first-steps-with-celery.html#keeping-results) /redis connection here
 - But: Celery, Flower and RabbitMQ are well documented
 ]
 
