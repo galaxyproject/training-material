@@ -376,7 +376,7 @@ We use the package {% tool [RIAssigner](toolshed.g2.bx.psu.edu/repos/recetox/ria
 
 # Identification
 
-To annotate and putatively identify the deconvoluted spectra, we compare them with a reference spectral library. This library contains spectra of standards measured on the same instrument for optimal comparability. The **matchms** package is used for spectral matching. It was built to import and apply different similarity measures to compare large numbers of spectra. This includes common cosine scores but can also easily be extended with custom similarity measures.
+To annotate and putatively identify the deconvoluted spectra, we compare them with a reference spectral library. This library contains spectra of standards measured on the same instrument for optimal comparability. The **matchms** package is used for spectral matching. It was built to import and apply different similarity measures to compare large numbers of spectra. This includes common cosine scores but can also easily be extended with custom similarity measures. For more information on how to use matchms from Python check out this [blog](https://blog.esciencecenter.nl/build-your-own-mass-spectrometry-analysis-pipeline-in-python-using-matchms-part-i-d96c718c68ee).
 
 > <details-title> Reference spectral library </details-title>
 > 
