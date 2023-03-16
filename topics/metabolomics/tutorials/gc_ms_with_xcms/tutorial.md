@@ -375,16 +375,16 @@ To annotate and putatively identify the deconvoluted spectra, we compare them wi
 > 
 > Fragmentation patterns of ions (spectra) are widely used in the process of compound identification for EI+ ionization in complex mixtures. The number of identifiable compounds and associated data keeps growing with the increasing sensitivity and resolution of mass spectrometers. These data are clustered into collections of chemical structures and their spectra, also called spectral libraries ({% cite stein1995chemical %}, {% cite stein2012mass %}), which can be used for fast, reliable identifications for any compound whose fragmentation pattern is measured by the instrument. 
 > 
-> To identify the compounds after GC/MS analysis, the *library searching* is performed for any detected spectrum. This locates the most similar spectra in the reference library, providing a list of the potentially identified compounds sorted by computed similarity. Indeed, a library search should also yield the confidence of compound identification, often referred to as similarity score.
+> To identify the compounds after GC/MS analysis, the *library searching* is performed for every detected spectrum. This locates the most similar spectra in the reference library, providing a list of the potential identifications sorted by computed similarity. Indeed, a library search should also yield the confidence of compound identification, often expressed as a similarity score.
 >
-> Reference libraries users usually expect their reliability to be quite high. However, there are many sources of error which we need to be aware of. A particularly error-prone aspect is annotation. Even an excellent spectrum becomes worthless for a wrongly annotated compound. A variety of computer-aided quality control help to improve these issues, but libraries always require some level of expert human decision-making before a spectrum is added to the library. This is also important for redundant and unidentified spectra.
+> Reference libraries' users usually expect their reliability to be quite high. However, there are many sources of error which we need to be aware of. A particularly error-prone aspect is annotation. Even an excellent spectrum becomes worthless for a wrongly annotated compound. A variety of computer-aided quality control measures can help to improve these issues, but libraries always require some level of expert human decision-making before a spectrum is added to the library. This is also important for redundant and unidentified spectra.
 >
 {: .details}
 
 
 ## Compute similarity scores
 
-We use the cosine score with a greedy peak pairing heuristic to compute the number of matching ions with a given tolerance and the cosine scores for the matched peaks. Compared to more traditional methods of forward and reverse matching, **matchms** is performing matching on peaks present both in the measured sample and the reference data.
+We use the cosine score with a greedy peak pairing heuristic to compute the number of matching ions with a given tolerance and the cosine scores for the matched peaks. Compared to more traditional methods of forward and reverse matching, **matchms** is performing matching on peaks present both in the measured sample and the reference data. This inherently yields higher scores than the forward and reverse scoring used by NIST.
 
 > <details-title> Cosine score methods </details-title>
 >
@@ -405,7 +405,7 @@ We use the cosine score with a greedy peak pairing heuristic to compute the numb
 >    You can leave the other parameters with their default values.
 >
 >    > <comment-title> Used reference spectra </comment-title>
->    > The RECETOX Metabolome HR-[EI+]-MS library is a collection of mostly endogenous compounds from MetaSci Human Metabolite Library. Analytes underwent methoximation/silylation prior to acquisition. Spectra were acquired at 70 eV on Thermo Fisher Q Exactive™ GC Orbitrap™ GC-MS/MS at 60000 resolving power.
+>    > The RECETOX Metabolome HR-[EI+]-MS library is a collection of mostly endogenous compounds from the MetaSci Human Metabolite Library. Analytes underwent methoximation/silylation prior to acquisition. Spectra were acquired at 70 eV on Thermo Fisher Q Exactive™ GC Orbitrap™ GC-MS/MS at 60000 resolving power.
 >    {: .comment}
 >
 {: .hands_on}
@@ -414,7 +414,7 @@ We use the cosine score with a greedy peak pairing heuristic to compute the numb
 > > <h5>Cosine Greedy</h5>
 > > The cosine score, also known as the dot product, is based on representing the similarity of two spectra through the cosine of an angle between the vectors that the spectra produce. Two peaks are considered as matching if their *m/z* values lie within the given tolerance. Cosine greedy looks up matching peaks in a "greedy" way, which does not always lead to the most optimal alignments.
 > >
-> > This score was among the first to be used for looking up matching spectra in spectral libraries andand, to this day, remains one of the most popular scoring methods for both library matching and molecular networking workflows.
+> > This score was among the first to be used for looking up matching spectra in spectral libraries and, to this day, remains one of the most popular scoring methods for both library matching and molecular networking workflows.
 > > <p>&nbsp;</p>
 >
 > > <h5>Cosine Hungarian</h5>
@@ -433,9 +433,9 @@ We use the cosine score with a greedy peak pairing heuristic to compute the numb
 
 ## Format the output
 
-The output of the previous step is a `json` file. This format is very simple to read for our computers, but not so much for us. We can use {% tool [matchms output formatter](toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.1.4) %} to convert the data to a tab-separated file with a scores matrix.
+The output of the previous step is a `json` file. This format is very simple to read for our computers, but not so much for us. We can use the {% tool [matchms output formatter](toolshed.g2.bx.psu.edu/repos/recetox/matchms_formatter/matchms_formatter/0.1.4) %} to convert the data to a tab-separated file with a scores matrix.
 
-The output table contains the scores and number of matched ions of the deconvoluted spectra with the spectra in the reference library. The raw output is filtered to only contain the top matches (3 by default) and is then further filtered to contain only pairs with a score and number of matched ions larger than provided thresholds.
+The output table contains the scores and number of matched ions of the deconvoluted spectra with the spectra in the reference library. The raw output can be filtered to only contain the top matches (3 by default) and or to contain only pairs with a score and number of matched ions larger than provided thresholds.
 
 > <hands-on-title> Format the output </hands-on-title>
 >
