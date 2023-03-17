@@ -58,29 +58,9 @@
         "rank": 0
       },
       {
-        "command": "filebrowser:create-new-directory",
-        "selector": ".jp-DirListing-content",
-        "rank": 1
-      },
-      {
         "command": "filebrowser:open",
         "selector": ".jp-DirListing-item[data-isdir]",
         "rank": 1
-      },
-      {
-        "command": "filebrowser:create-new-file",
-        "selector": ".jp-DirListing-content",
-        "rank": 2
-      },
-      {
-        "command": "filebrowser:create-new-markdown-file",
-        "selector": ".jp-DirListing-content",
-        "rank": 3
-      },
-      {
-        "command": "filebrowser:paste",
-        "selector": ".jp-DirListing-content",
-        "rank": 4
       },
       {
         "type": "separator",
@@ -108,6 +88,11 @@
         "rank": 8
       },
       {
+        "command": "filebrowser:paste",
+        "selector": ".jp-DirListing-content",
+        "rank": 8.5
+      },
+      {
         "command": "filebrowser:duplicate",
         "selector": ".jp-DirListing-item[data-isdir=\"false\"]",
         "rank": 9
@@ -119,7 +104,7 @@
       },
       {
         "command": "filebrowser:shutdown",
-        "selector": ".jp-DirListing-item[data-isdir=\"false\"]",
+        "selector": ".jp-DirListing-item[data-isdir=\"false\"].jp-mod-running",
         "rank": 11
       },
       {
@@ -141,6 +126,21 @@
         "command": "filebrowser:share-main",
         "selector": ".jp-DirListing-item[data-isdir]",
         "rank": 15
+      },
+      {
+        "type": "separator",
+        "selector": ".jp-DirListing-item[data-isdir]",
+        "rank": 50
+      },
+      {
+        "command": "filebrowser:create-new-file",
+        "selector": ".jp-DirListing-content",
+        "rank": 51
+      },
+      {
+        "command": "filebrowser:create-new-directory",
+        "selector": ".jp-DirListing-content",
+        "rank": 55
       }
     ]
   },
@@ -204,6 +204,12 @@
       "type": "boolean",
       "title": "Filter on file name with a fuzzy search",
       "description": "Whether to apply fuzzy algorithm while filtering on file names",
+      "default": true
+    },
+    "filterDirectories": {
+      "type": "boolean",
+      "title": "Filter directories",
+      "description": "Whether to apply the search on directories",
       "default": true
     },
     "showLastModifiedColumn": {

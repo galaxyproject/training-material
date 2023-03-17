@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema",
-  "$id": "https://jupyterlite.readthedocs.org/en/latest/schema-v0.html#",
+  "$id": "https://jupyterlite.readthedocs.org/en/latest/reference/schema-v0.html#",
   "title": "JupyterLite Schema v0",
   "description": "a schema for user-serviceable customizaton of a JupyterLite",
   "$ref": "#/definitions/top",
@@ -54,6 +54,11 @@
           "default": "./lab",
           "$ref": "#/definitions/non-trailing-slash-uri"
         },
+        "defaultKernelName": {
+          "description": "The name of the default kernel. If not available, the first kernel (by alphabetic ordering) will be chosen.",
+          "default": "python",
+          "type": "string"
+        },
         "faviconUrl": {
           "description": "browser tab icon to show",
           "type": "string",
@@ -69,6 +74,12 @@
             "$ref": "#/definitions/federated-extension"
           },
           "default": []
+        },
+        "fileTypes": {
+          "description": "JupyterLab-compatible file types for serving and storing",
+          "additionalProperties": {
+            "$ref": "#/definitions/file-type"
+          }
         },
         "fullLabextensionsUrl": {
           "description": "path to federated extensions, a folder organized by `({:org}/){package}`",
@@ -87,7 +98,7 @@
             "type": "string",
             "format": "uri"
           },
-          "description": "WebSocket URLs to use for finding WebRTC peers",
+          "description": "WebSocket URLs to use for finding WebRTC peers. Requires `jupyterlab-webrtc-docprovider`.",
           "default": [
             "wss://signaling.yjs.dev",
             "wss://y-webrtc-signaling-eu.herokuapp.com",
@@ -202,7 +213,7 @@
         "pyodideUrl": {
           "description": "The path to the main pyodide.js entry point",
           "type": "string",
-          "default": "https://cdn.jsdelivr.net/pyodide/v0.20.0/full/pyodide.js",
+          "default": "https://cdn.jsdelivr.net/pyodide/v0.22.0/full/pyodide.js",
           "format": "uri"
         },
         "disablePyPIFallback": {
@@ -254,6 +265,33 @@
           "type": "string",
           "format": "uri",
           "description": "path to the optional style module provided by the extension"
+        }
+      }
+    },
+    "file-type": {
+      "type": "object",
+      "description": "description of a named contents file format, with extensions and mime types.",
+      "required": ["name", "mimeTypes", "extensions", "fileFormat"],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "mimeTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "extensions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^\\..+"
+          }
+        },
+        "fileFormat": {
+          "type": "string",
+          "enum": ["base64", "text", "json"]
         }
       }
     },
