@@ -44,7 +44,6 @@ jobs:
           bundle install --jobs 4 --retry 3
           npm install
           bundle pristine ffi
-          pip install pandas
       # END Dependencies
 
       - name: Build Site
@@ -54,7 +53,7 @@ jobs:
           pip install requests ephemeris
           export PATH=/home/runner/.local/bin:$PATH
           make annotate ACTIVATE_ENV=pwd
-          python bin/prepare_feedback.py
+          curl -L https://docs.google.com/spreadsheets/d/1NfZhi5Jav7kl9zFCkeb7rIC2F8xW1isruv1TeO4WpNI/export\?format\=tsv | ruby bin/prepare_feedback.rb
           npm install
           make rebuild-search-index ACTIVATE_ENV=pwd
           cat metadata/swagger.yaml | python bin/yaml2json.py > api/swagger.json
