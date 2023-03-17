@@ -31,11 +31,11 @@ subtopic: data
 
 # Overview
 
-**The problem**
+## The problem
 
 The Galaxy server administrator needed to know how to update each type of reference data, how to run the indexers, where to get the data from, and how to update Galaxy's *Tool Data Table* and *location* configuration files.
 
-**Data managers to the rescue**
+## Data managers to the rescue
 
 Data Managers are a special class of Galaxy tool which allows for the download and/or creation of data that is stored within Tool Data Tables and their underlying flat location (e.g. .loc) files. These tools handle the creation of indices and the addition of entries/lines to the data table / .loc file via the Galaxy admin interface.
 
@@ -202,7 +202,7 @@ Next, we will install some reference data. Specifically, we will grab sacCer2 (v
 >
 >    You should see something like this:
 >
->    ![nearly empty data manager tool list](../../images/dm-admin-local-data.png)
+>    ![nearly empty data manager tool list in Galaxy](../../images/dm-admin-local-data.png)
 >
 >    If you instead see the message "You do not currently have any Data Managers installed," you may need to restart your Galaxy server.
 >
@@ -409,7 +409,7 @@ In order to accomplish this, you will need:
 >
 > 1. Re-activate the virtualenv you created for the [ephemeris tool management tutorial]({% link topics/admin/tutorials/tool-management/tutorial.md %}).
 >
->    > <code-in-title>input: bash</code-in-title>
+>    > <code-in-title>Bash</code-in-title>
 >    > ```
 >    > . ~/ephemeris_venv/bin/activate
 >    > ```
@@ -428,7 +428,7 @@ In order to accomplish this, you will need:
 >
 > 2. Install the `data_manager_fetch_genome_dbkeys_all_fasta` data manager tool owned by `devteam`.
 >
->    > <code-in-title>input: bash</code-in-title>
+>    > <code-in-title>Bash</code-in-title>
 >    > Be sure to adjust the value of `-g` appropriately for your Galaxy server, and replace the value of `-a` with your API key.
 >    > ```console
 >    > shed-tools install -g https://galaxy.example.org -a <api-key> --name data_manager_fetch_genome_dbkeys_all_fasta --owner devteam
@@ -494,7 +494,7 @@ In order to accomplish this, you will need:
 >
 > 2. Run the Genome Fetch DM with `run-data-managers`:
 >
->    > <code-in-title>input: bash</code-in-title>
+>    > <code-in-title>Bash</code-in-title>
 >    > ```console
 >    > run-data-managers -g https://galaxy.example.org -a <api-key> --config fetch-sacCer3.yml
 >    > ```
@@ -580,7 +580,7 @@ In order to accomplish this, you will need:
 >
 > 1. Install the `bwa_mem_index_builder_data_manager` data manager tool owned by `devteam`.
 >
->    > <code-in-title>input: bash</code-in-title>
+>    > <code-in-title>Bash</code-in-title>
 >    > ```console
 >    > shed-tools install -g https://galaxy.example.org -a <api-key> --name data_manager_bwa_mem_index_builder --owner devteam
 >    > ```
@@ -624,7 +624,7 @@ In order to accomplish this, you will need:
 >
 > 2. Run the BWA-MEM index builder DM with `run-data-managers`:
 >
->    > <code-in-title>input: bash</code-in-title>
+>    > <code-in-title>Bash</code-in-title>
 >    > ```console
 >    > run-data-managers -g https://galaxy.example.org -a <api-key> --config build-sacCer3-bwa.yml
 >    > ```
