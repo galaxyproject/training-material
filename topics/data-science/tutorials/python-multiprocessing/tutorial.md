@@ -30,6 +30,7 @@ contributions:
 priority: 20
 notebook:
   language: python
+  pyolite: true
 
 abbreviations:
   GIL: Global Interpreter Lock

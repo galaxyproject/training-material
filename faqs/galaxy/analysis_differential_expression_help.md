@@ -1,6 +1,5 @@
 ---
-redirect_from:
-- /faqs/galaxy/analysis_extended_Extended_help_differential_expression_analysis_tools
+redirect_from: [/faqs/galaxy/analysis_extended_Extended_help_differential_expression_analysis_tools]
 title: Extended Help for Differential Expression Analysis Tools
 area: analysis
 box_type: tip

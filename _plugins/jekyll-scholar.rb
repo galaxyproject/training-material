@@ -1,3 +1,5 @@
+require './_plugins/gtn/scholar'
+
 module Jekyll
   class CiteTag < Liquid::Tag
 
@@ -9,6 +11,7 @@ module Jekyll
     def render(context)
       page = context.registers[:page]
       site = context.registers[:site]
+      Gtn::Scholar.load_bib(site)
 
       # Mark this page as having citations
       page['cited'] = true
@@ -19,6 +22,14 @@ module Jekyll
 
       # Which page is rendering this tag?
       source_page = page['path']
+
+      # Citation Frequency
+      if ! site.config.has_key?("citation_count")
+        site.config["citation_count"] = Hash.new(0)
+      end
+      site.config["citation_count"][@text] += 1
+
+
       # If the overall cache is nil, create it
       if site.config['citation_cache'].nil?
         site.config['citation_cache'] = Hash.new
@@ -68,7 +79,6 @@ module Jekyll
 
     private
   end
-
   class BibTag < Liquid::Tag
 
     def initialize(tag_name, text, tokens)
@@ -77,12 +87,14 @@ module Jekyll
     end
 
     def render(context)
+      site = context.registers[:site]
+      Gtn::Scholar.load_bib(site)
       # Which page is rendering this tag?
       source_page = context.registers[:page]['path']
-      global_bib = context.registers[:site].config['cached_global_bib']
-      citeproc = context.registers[:site].config['cached_citeproc']
+      global_bib = site.config['cached_global_bib']
+      citeproc = site.config['cached_citeproc']
       # We have our page's citations
-      citations = context.registers[:site].config['citation_cache'][source_page]
+      citations = site.config['citation_cache'][source_page] || []
       # For each of these citation IDs, we need to get the formatted version + pull out
       # year, month for sorting.
       unique_citations = citations.reduce(Hash.new(0)) { |a, b| a[b] += 1; a }.keys
@@ -96,21 +108,7 @@ module Jekyll
 
       out = "<ol class=\"bibliography\">"
       out += sorted_citations.map{|c|
-        r = citeproc.render(:bibliography, id: c)[0]
-        entry = global_bib[c]
-        if entry.note
-          r += " #{entry.note}."
-        end
-        doi = entry.fetch('doi', nil)
-        if doi
-          r += " <a href=\"https://doi.org/#{doi}\">#{doi}</a>"
-        end
-        url = entry.fetch('url', nil)
-        if url
-          if ! (url.index('doi.org') and entry.doi)
-            r += " <a href=\"#{url}\">#{url}</a>"
-          end
-        end
+        r = Gtn::Scholar.render_citation(c)
         %Q(<li id="#{c}">#{r}</li>)
       }.join("\n")
       out += "</ol>"

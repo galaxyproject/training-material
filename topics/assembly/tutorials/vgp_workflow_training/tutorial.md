@@ -47,13 +47,13 @@ GWS facilitates analysis repeatability, while minimizing the number of manual st
 # Getting Started on Galaxy
 
 This tutorial assumes you are comfortable getting data into Galaxy, running jobs, managing history, etc. If you are unfamiliar with Galaxy, we recommed you to visit the [Galaxy Training Network](https://training.galaxyproject.org). Consider starting with the following trainings:
-- [Introduction to Galaxy](https://training.galaxyproject.org/training-material/topics/introduction/slides/introduction.html)
-- [Galaxy 101](https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html)
-- [Getting Data into Galaxy](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/get-data/slides.html)
-- [Using Dataset Collections](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html)
+- [Introduction to Galaxy]({% link topics/introduction/tutorials/introduction/slides.html %})
+- [Galaxy 101]({% link topics/introduction/tutorials/galaxy-intro-101/tutorial.md %})
+- [Getting Data into Galaxy]({% link topics/galaxy-interface/tutorials/get-data/slides.html %})
+- [Using Dataset Collections]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %})
 - [Introduction to Galaxy Analyses](https://training.galaxyproject.org/training-material/topics/introduction)
-- [Understanding the Galaxy History System](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html)
-- [Downloading and Deleting Data in Galaxy](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/download-delete-data/tutorial.html)
+- [Understanding the Galaxy History System]({% link topics/galaxy-interface/tutorials/history/tutorial.md %})
+- [Downloading and Deleting Data in Galaxy]({% link topics/galaxy-interface/tutorials/download-delete-data/tutorial.md %})
 
 
 # VGP assembly workflow structure
@@ -136,22 +136,13 @@ For this tutorial, the first step is to get the datasets from Zenodo. The VGP as
 >
 {: .details}
 
+Once we have imported the datasets, the next step is to import the VGP workflows from the WorkflowHub.
+
 ## Import workflows from WorkflowHub
 
-Once we have imported the datasets, the next step is to import the VGP workflows from the [WorkflowHub server](https://workflowhub.eu/). WorkflowHub is a workflow management system which allows workflows to be FAIR (Findable, Accessible, Interoperable, and Reusable), citable, have managed metadata profiles, and be openly available for review and analytics.
+{% snippet faqs/galaxy/workflows_import_from_workflowhub.md filter="name:vgp" %}
 
-> <hands-on-title>Import a workflow</hands-on-title>
->
-> 1. Click on the **Workflow** menu, located in the top bar.
->   ![Workflow menu](../../images/vgp_assembly/top_bar.png)
-> 2. Click on the <kbd>Import</kbd> button, located in the right corner.
-> 3. In the section **Import a Workflow from Configured GA4GH Tool Registry Servers (e.g. Dockstore)**, click on *Search form*.
-> 4. In the **TRS Server: *workflowhub.eu*** menu you should type `name:vgp`
->    ![Figure 3: Workflow menu](../../images/vgp_assembly/workflow_list.png)
-> 5. Click on the desired workflow, and finally select the latest available version.
-{: .hands_on}
-
-After that, the imported workflows will appear in the main workflow menu. In order to initialize the workflow, we just need to click in the {% icon workflow-run %} **Run workflow** icon, marked with a red square in figure 2.
+The workflows imported are marked with a red square in the following figure:
 
 ![Figure 2: Workflow menu](../../images/vgp_assembly/imported_workflows.png  "Workflow main menu. The workflow menu lists all the workflows that have been imported. It provides useful information for organizing the workflows, such as last update and the tags. The worklows can be run by clicking in the play icon, marked in red in the image.")
 
@@ -207,9 +198,6 @@ After genome profiling, the next step is to run the **VGP HiFi phased assembly w
 >   - {% icon param-file %} "*HiC forward reads*": `3: Hi-C_dataset_F`
 >   - {% icon param-file %} "*HiC reverse reads*": `2: Hi-C_dataset_R`
 >   - {% icon param-file %} "*Genomescope summary dataset*": `19: Genomescope on data 13 Summary`
->   - "*K-mer length*": `31`
->   - "*Ploidy*": `2`
->   - "*Is genome large (>100Mb)?*": `No`
 > 4. Click on the <kbd>Run workflow</kbd> button
 >
 > > <comment-title>Input option order</comment-title>

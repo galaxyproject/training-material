@@ -34,6 +34,13 @@ contributors:
 - mtekman
 - nomadscientist
 
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: single-cell
+    tutorials:
+        - bulk-music-2-preparescref
+
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
 ---
@@ -81,11 +88,11 @@ The heterogeneity that exists in the cellular composition of bulk RNA-seq can ad
 > **T = C x P**
 > or some fancier formulas...(read more [in-depth here](https://academic.oup.com/bioinformatics/article/34/11/1969/4813737) if you like!)
 >
-> The point is, if we have an idea of what the average expression should be for each gene (what we can get from single cell RNA-seq data, *C*), and we have the total expression (from the bulk RNA-seq, *C*), then we can infer the cell proportions (*P*).
+> The point is, if we have an idea of what the average expression should be for each gene (what we can get from single cell RNA-seq data, *C*), and we have the total expression (from the bulk RNA-seq, *T*), then we can infer the cell proportions (*P*).
 >
 {: .details}
 
-Many different computational methods have been developed to estimate these cell type proportions, but in this tutorial we will be using the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) tool suite {% cite wang2019bulk %} to estimate the proportion of individual cell types in our bulk RNA-seq datasets.
+Many different computational methods have been developed to estimate these cell type proportions, but in this tutorial we will be using the [MuSiC](https://xuranw.github.io/MuSiC/articles/MuSiC.html) tool suite ({% cite wang2019bulk %}) to estimate the proportion of individual cell types in our bulk RNA-seq datasets.
 
 ### MusiC
 
@@ -246,9 +253,11 @@ Let's start exploring the datasets.
 >
 {: .hands_on}
 
-   The bulk RNA-seq phenotype file lists the main factors of interest, and HbA1c appears to be a specific gene assosciated with a phenotype. It is well known that the beta cell proportions are related to T2D disease status. In the progress of T2D, the number of beta cells decreases. One of the most important tests for T2D is the HbA1c (hemoglobin A1c) test. When the HbA1c level is greater than 6.5%, the patient is diagnosed as T2D. We will look later at the beta cell proportions relationship with HbA1c level in this deconvolution analysis.
+   The bulk RNA-seq phenotype file lists the main factors of interest, and HbA1c appears to be a specific gene associated with a phenotype. It is well known that the beta cell proportions are related to T2D disease status. In the progress of T2D, the number of beta cells decreases. One of the most important tests for T2D is the HbA1c (hemoglobin A1c) test. When the HbA1c level is greater than 6.5%, the patient is diagnosed as T2D. We will look later at the beta cell proportions relationship with HbA1c level in this deconvolution analysis.
 
 ## Building the Expression Set objects
+
+{% snippet faqs/galaxy/tutorial_mode.md %}
 
 For now we need to construct our Expression set objects that will be consumed by MuSiC.
 
@@ -350,7 +359,7 @@ The deconvolution of 89 subjects from {%cite fadista2014global %} is performed w
 
 The deconvolution process can be performed by simply inputting the bulk RNA-seq & scRNA-seq datasets and then hitting execute. However, in this section we will be tracing the effect of a disease phenotype across both datasets.
 
-Here we will use one of the factors from the bulk RNA-seq phenotypes related to the the T2D disease status. Any bulk RNA-seq sample coming from a patient with the `HbA1c` factor above 6.5% would be clinically classified as having T2D, so we want to compare these datasets with non-diseased samples. As diabetes affects Beta cells, we're particularly interested in these cells proportions - mostly to prove that the deconvolution has worked well!
+Here we will use one of the factors from the bulk RNA-seq phenotypes related to the T2D disease status. Any bulk RNA-seq sample coming from a patient with the `HbA1c` factor above 6.5% would be clinically classified as having T2D, so we want to compare these datasets with non-diseased samples. As diabetes affects Beta cells, we're particularly interested in these cells proportions - mostly to prove that the deconvolution has worked well!
 
 It's also important that input scRNA-seq datasets (ideally) have some representation of cell populations from diseased patients.
 
@@ -565,7 +574,7 @@ You will need to again create ExpressionSet objects, as before.
 
 ### Heatmap of Cell Type Similarities using **MuSiC**
 
-We shall use the 4 cell type groups determined by the cut off threshold in the above question box. To guide the clustering, we shall upload known epithelial and immune cell markers to improve the more diverse collection of cell types in the C3 and C3 groups.
+We shall use the 4 cell type groups determined by the cut off threshold in the above question box. To guide the clustering, we shall upload known epithelial and immune cell markers to improve the more diverse collection of cell types in the C3 and C4 groups.
 
 > <hands-on-title>Upload marker genes and generate heatmap</hands-on-title>
 > 1. Import the files from [Zenodo]({{ page.zenodo_link }}) or from

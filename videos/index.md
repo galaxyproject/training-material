@@ -55,7 +55,7 @@ The GTN now generates videos for selected slide decks. Click on a topic below to
 <div id="playlist">
 	{% for material in topic_material %}
 		{% if material.video %}
-			{% capture vid %}{{ topic_id }}/{% if material.type == "introduction" %}slides/introduction{% else %}tutorials/{{ material.tutorial_name }}/slides{% endif %}{% endcapture %}
+			{% capture vid %}{{ topic_id }}/tutorials/{{ material.tutorial_name }}/slides{% endcapture %}
 			<div class="pl-item">
 				<a href="watch.html?v={{ vid }}">
 					<div class="cover">
@@ -67,7 +67,7 @@ The GTN now generates videos for selected slide decks. Click on a topic below to
 				</a>
 			</div>
 			{% for lang in material.translations.slides %}
-			{% capture vid %}{{ topic_id }}/{% if material.type == "introduction" %}slides/introduction_{{ lang | upcase }}{% else %}tutorials/{{ material.tutorial_name }}/slides_{{ lang | upcase }}{% endif %}{% endcapture %}
+			{% capture vid %}{{ topic_id }}/tutorials/{{ material.tutorial_name }}/slides_{{ lang | upcase }}{% endcapture %}
 			<div class="pl-item">
 				<a href="watch.html?v={{ vid }}">
 					<div class="cover">

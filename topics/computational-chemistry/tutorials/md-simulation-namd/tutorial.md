@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-enable: false
+draft: true
 
 title: Running molecular dynamics simulations using NAMD
 zenodo_link: 'https://zenodo.org/record/3234841'

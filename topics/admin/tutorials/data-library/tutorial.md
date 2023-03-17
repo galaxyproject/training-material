@@ -227,7 +227,7 @@ Let's try setting that up in our Galaxy!
 
 {% snippet faqs/galaxy/preferences_admin_api_key.md admin=true %}
 
-> <hands-on-title>hands-on: importing data library yaml.</hands-on-title>
+> <hands-on-title>importing data library yaml.</hands-on-title>
 >
 > 1. re-activate the virtualenv you created for the [ephemeris tool management tutorial]({% link topics/admin/tutorials/tool-management/tutorial.md %}).
 >
@@ -242,7 +242,7 @@ Let's try setting that up in our Galaxy!
 >    > then you might need to re-run the steps:
 >    >
 >    > ```bash
->    > virtualenv -p python3 ~/ephemeris_venv
+>    > python3 -m venv ~/ephemeris_venv
 >    > . ~/ephemeris_venv/bin/activate
 >    > pip install ephemeris
 >    > ```
@@ -252,7 +252,7 @@ Let's try setting that up in our Galaxy!
 >
 >    > <code-in-title>input: bash</code-in-title>
 >    > ```bash
->    > setup-data-libraries -g https://your-galaxy -a <api-key> --training -i /libraries/example-library.yaml --legacy
+>    > setup-data-libraries -g https://galaxy.example.org -a <api-key> --training -i /libraries/example-library.yaml --legacy
 >    > ```
 >    > {: data-cmd="true"}
 >    {: .code-in}

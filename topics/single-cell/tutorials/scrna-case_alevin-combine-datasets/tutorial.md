@@ -121,7 +121,18 @@ You can access the data for this tutorial in multiple ways:
 
 Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows you how each `N70X` corresponds to a sample, and whether that sample was from a male or female. This will be important metadata to add to our sample, which we will add very similarly to how you added the `gene_name` and `mito` metadata previously!
 
+# Important tips for easier analysis
+
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
+> <comment-title></comment-title>
+> - The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
+> - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [https://humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
+{: .comment}
+
 ## Concatenating objects
+
+{% snippet faqs/galaxy/tutorial_mode.md %}
 
 > <hands-on-title>Concatenating AnnData objects</hands-on-title>
 >
@@ -130,7 +141,7 @@ Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows yo
 >    - *"Function to manipulate the object"*: `Concatenate along the observations axis`
 >    - {% icon param-file %} *"Annotated data matrix to add"*: `Select all the other matrix files from bottom to top, N707 to N702`
 >
->    > <warning-title>Warning!: N707 to N702!</warning-title>
+>    > <warning-title>N707 to N702!</warning-title>
 >    > You are adding files to N701, so do not add N701 to itself!
 >    {: .warning}
 >
