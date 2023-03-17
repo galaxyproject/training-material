@@ -23,7 +23,7 @@
 <meta name="DC.type" content="text" />
 <meta name="DC.title" content="Galaxy Tool Management with Ephemeris" />
 <meta name="DC.publisher" content="Galaxy Training Network" />
-<meta name="DC.date" content="2022-11-28 09:55:50 +0000" />
+<meta name="DC.date" content="2022-12-14 16:32:27 +0000" />
 <meta name="DC.creator" content="Martin Čech" />
 <meta name="DC.creator" content="Helena Rasche" />
 <meta name="DC.creator" content="Nicola Soranzo" />
@@ -66,7 +66,7 @@
     "name": "Galaxy Training Network",
     "url": "https://galaxyproject.org/teach/gtn/"
   },
-  "dateModified": "2022-11-28 09:55:50 +0000",
+  "dateModified": "2022-12-14 16:32:27 +0000",
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
   "headline": "Galaxy Tool Management with Ephemeris",
   "interactivityType": "mixed",
@@ -623,7 +623,7 @@
         </ul>
         
 
-        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Nov 28, 2022 </div>
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Dec 14, 2022 </div>
         <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
             
             <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
@@ -678,9 +678,9 @@
   <div class="box-title tip-title" id="tip-installing-ephemeris-in-a-python-virtual-environment"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-installing-ephemeris-in-a-python-virtual-environment-contents" aria-expanded="true" aria-label="Toggle tip box: Installing Ephemeris in a Python virtual environment"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Installing Ephemeris in a Python virtual environment<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
 
   <ol>
-    <li>Install <code class="language-plaintext highlighter-rouge">virtualenv</code> if it is not already available. On Ubuntu this can be done with <code class="language-plaintext highlighter-rouge">sudo apt install virtualenv</code></li>
+    <li>Install the Python <code class="language-plaintext highlighter-rouge">venv</code> package if it is not already available. On Ubuntu this can be done with <code class="language-plaintext highlighter-rouge">sudo apt install python3-venv</code></li>
     <li>Create a virtual environment just for ephemeris, activate it and install ephemeris inside it:
-      <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">virtualenv -p python3 ~/ephemeris_venv
+      <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">python3 -m venv ~/ephemeris_venv
 . ~/ephemeris_venv/bin/activate
 pip install ephemeris
 </span></code></pre></div>      </div>
@@ -781,7 +781,7 @@ toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.1
           <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>Use your Galaxy URL and API key in the example command below:</p>
 
-          <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>shed-tools <span class="nb">install</span> <span class="nt">-g</span> https://your-galaxy <span class="nt">-a</span> &lt;api-key&gt; <span class="nt">--name</span> bwa <span class="nt">--owner</span> devteam <span class="nt">--section_label</span> Mapping
+          <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>shed-tools <span class="nb">install</span> <span class="nt">-g</span> https://galaxy.example.org <span class="nt">-a</span> &lt;api-key&gt; <span class="nt">--name</span> bwa <span class="nt">--owner</span> devteam <span class="nt">--section_label</span> Mapping
 </code></pre></div>          </div>
         </blockquote>
       </blockquote>
@@ -827,7 +827,7 @@ For that, you can install from a YAML file:</p>
           <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>Use your Galaxy URL and API key in the example command below:</p>
 
-          <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>shed-tools <span class="nb">install</span> <span class="nt">-g</span> https://your-galaxy <span class="nt">-a</span> &lt;api-key&gt; <span class="nt">-t</span> workflow_tools.yml
+          <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>shed-tools <span class="nb">install</span> <span class="nt">-g</span> https://galaxy.example.org <span class="nt">-a</span> &lt;api-key&gt; <span class="nt">-t</span> workflow_tools.yml
 </code></pre></div>          </div>
         </blockquote>
       </blockquote>
@@ -889,7 +889,7 @@ For that, you can install from a YAML file:</p>
           <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
           <p>Use your Galaxy URL and API key in the example command below:</p>
 
-          <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>shed-tools <span class="nb">test</span> <span class="nt">-g</span> https://your-galaxy <span class="nt">-a</span> &lt;api-key&gt; <span class="nt">--name</span> bamtools_filter <span class="nt">--owner</span> devteam
+          <div data-cmd="true" class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>shed-tools <span class="nb">test</span> <span class="nt">-g</span> https://galaxy.example.org <span class="nt">-a</span> &lt;api-key&gt; <span class="nt">--name</span> bamtools_filter <span class="nt">--owner</span> devteam
 </code></pre></div>          </div>
         </blockquote>
       </blockquote>
@@ -1013,8 +1013,8 @@ We cannot (and would not recommend) setting that certificate on your local machi
   <div class="box-title tip-title" id="tip-tools-not-showing-up-refresh-the-toolbox"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-tools-not-showing-up-refresh-the-toolbox-contents" aria-expanded="true" aria-label="Toggle tip box: Tools not showing up? Refresh the toolbox!"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Tools not showing up? Refresh the toolbox!<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
   <p>Sometimes the toolbox will fail to reload. You can correct for this by manually triggering the toolbox reload with a query:</p>
 
-  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">curl -X PUT https://&lt;your-galaxy&gt;</span>/api/configuration/toolbox <span class="nt">-H</span> <span class="s2">"x-api-key: </span><span class="nv">$GALAXY_API_KEY</span><span class="s2">"</span>
-</code></pre></div>  </div>
+  <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">curl -X PUT https://galaxy.example.org/api/configuration/toolbox -H "x-api-key: $</span>GALAXY_API_KEY<span class="s2">"
+</span></code></pre></div>  </div>
 
   <p>This will request the toolbox to reload and you can check after if it’s discovered your newly installed tools.</p>
 </blockquote>

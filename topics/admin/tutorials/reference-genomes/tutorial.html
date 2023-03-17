@@ -1,0 +1,1755 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Reference Data with Data Managers</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/reference-genomes/tutorial.html" />
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Reference Data with Data Managers" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="2023-03-17 11:20:43 +0000" />
+<meta name="DC.creator" content="Simon Gladman" />
+<meta name="DC.creator" content="Enis Afgan" />
+
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Reference Data with Data Managers" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        
+        <meta property="og:image" content="/training-material/assets/images/gat.png" />
+
+        
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-03-17 11:20:43 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Reference Data with Data Managers",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server administration",
+    "description": "Resources related to configuration and maintenance of Galaxy servers",
+    "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+  },
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Reference Data with Data Managers' tutorial",
+  "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/reference-genomes/tutorial.html",
+  "timeRequired": "PT1H",
+  "keywords": "admin",
+  "description": "The objectives are:\n - Have an understanding of the way in which Galaxy stores and uses reference data\n - Be able to download and use data managers to add a reference genome and its pre-calculated indices into the Galaxy reference data system\n - Use an Ansible playbook for all of the above\n\n",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/slides.html",
+      "name": "Ansible",
+      "description": "Slides for 'Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/tutorial.html",
+      "name": "Ansible",
+      "description": "Hands-on for 'Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/slides.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Slides for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://training.galaxyproject.org/training-material/topics/admin/"
+    }
+  ]
+}
+        </script>
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Galaxy Server administration
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/reference-genomes/tutorial.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/reference-genomes/tutorial.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/reference-genomes/tutorial.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/reference-genomes/tutorial.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/reference-genomes/tutorial.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/admin/tutorials/reference-genomes/tutorial.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/admin/faqs/" title="Check our FAQs for the Galaxy Server administration topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/admin/tutorials/reference-genomes/tutorial.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/admin/tutorials/reference-genomes/tutorial.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                    <button class="btn" data-theme="default">Default</button>
+                    <button class="btn" data-theme="night">Night</button>
+                    <button class="btn" data-theme="midnight">Midnight</button>
+                    <button class="btn" data-theme="rainbow">Rainbow</button>
+                    <button class="btn" data-theme="blm">✊🏿</button>
+                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
+                    <button class="btn" data-theme="halloween">🎃</button>
+                    <button class="btn" data-theme="straya">🇦🇺</button>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-03-01/topics/admin/tutorials/reference-genomes/tutorial.html" title="Version 2023-03-01">2023-03-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-02-01/topics/admin/tutorials/reference-genomes/tutorial.html" title="Version 2023-02-01">2023-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-01-01/topics/admin/tutorials/reference-genomes/tutorial.html" title="Version 2023-01-01">2023-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxyproject/admins'
+  };
+</script>
+
+
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<section class="tutorial topic-admin">
+    <h1 data-toc-skip>Reference Data with Data Managers</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		
+<table class="contributions">
+	
+	<tr>
+		<td><abbr title="These people wrote the bulk of the tutorial, they may have done the analysis, built the workflow, and wrote the text themselves.">Author(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/slugger70/" class="contributor-badge contributor-slugger70"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/slugger70?s=27" alt="Avatar">Simon Gladman</a><a href="/training-material/hall-of-fame/afgane/" class="contributor-badge contributor-afgane"><img src="https://avatars.githubusercontent.com/afgane?s=27" alt="Avatar">Enis Afgan</a>
+		</td>
+	</tr>
+	
+
+
+	
+
+	
+	<tr>
+		<td><abbr title="These people edited the text, either for spelling and grammar, flow, GTN-fit, or other similar editing categories">Editor(s)</abbr></td>
+		<td>
+			<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge contributor-hexylena"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/hexylena?s=27" alt="Avatar">Helena Rasche</a><a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge contributor-natefoo"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/natefoo?s=27" alt="Avatar">Nate Coraor</a></td>
+	</tr>
+	
+
+	
+
+	
+
+	
+</table>
+
+
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div class="box-title" aria-label="overview box">Overview</div>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectives: </strong>
+        <ul>
+        
+        <li><p>Have an understanding of the way in which Galaxy stores and uses reference data</p>
+</li>
+        
+        <li><p>Be able to download and use data managers to add a reference genome and its pre-calculated indices into the Galaxy reference data system</p>
+</li>
+        
+        <li><p>Use an Ansible playbook for all of the above</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Requirements:</strong>
+        <ul>
+        
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/admin">Galaxy Server administration</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy Installation with Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible-galaxy/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Time estimation:</strong> 1 hour</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials:</strong></div>
+        <ul class="supporting_material">
+            
+                <li class="btn btn-default"><a href="/training-material/topics/admin/tutorials/reference-genomes/slides.html" title="Slides for this tutorial">
+                    <i class="fab fa-slideshare" aria-hidden="true"></i> Slides
+                </a></li>
+            
+
+            
+
+            
+
+            
+
+            
+
+            
+            
+            
+                 <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/admin/tutorials/reference-genomes/faqs/" title="Frequently Asked Questions" alt="Tutorial FAQs">
+        <i class="far fa-question-circle" aria-hidden="true"></i> FAQs
+    </a>
+  </li>
+
+
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Last modification:</strong> Mar 17, 2023 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> License:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Tutorial Content is licensed under Creative Commons Attribution 4.0 International License</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">The GTN Framework is licensed under MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <h1 id="overview">Overview</h1>
+
+<h2 id="the-problem">The problem</h2>
+
+<p>The Galaxy server administrator needed to know how to update each type of reference data, how to run the indexers, where to get the data from, and how to update Galaxy’s <em>Tool Data Table</em> and <em>location</em> configuration files.</p>
+
+<h2 id="data-managers-to-the-rescue">Data managers to the rescue</h2>
+
+<p>Data Managers are a special class of Galaxy tool which allows for the download and/or creation of data that is stored within Tool Data Tables and their underlying flat location (e.g. .loc) files. These tools handle the creation of indices and the addition of entries/lines to the data table / .loc file via the Galaxy admin interface.</p>
+
+<p>Data Managers can be defined locally in the data manager and tool data table configuration files or installed through the Tool Shed. When Data Managers are installed from the Tool Shed, their configuration is added to the shed versions of the data manager configuration and tool data table configuration files.</p>
+
+<p>They are a flexible framework for adding reference data to Galaxy (not just genomic data). They are workflow compatible and can run via the Galaxy API. Data managers automatically update the appropriate location files when new data are installed.</p>
+
+<p>For more background details on data managers, check out:</p>
+<ul>
+  <li><a href="https://galaxyproject.org/admin/tools/data-managers/">The data managers documentation on the hub</a></li>
+  <li><a href="https://galaxyproject.org/admin/tools/data-managers/how-to/define/">How to define a data manager for a tool</a></li>
+  <li>There is also discussion of this topic in <a href="/training-material/topics/admin/tutorials/reference-genomes/slides.html">the Reference Genomes in Galaxy slides</a></li>
+</ul>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-pre-built-data-are-available" aria-label="comment box: Pre-built data are available"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Pre-built data are available</div>
+
+  <p>The usegalaxy.* servers and Galaxy Community have a large amount of reference data online and available for use by your Galaxy server. For instructions on how to access and use these data, see <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html">the Reference Data with CVMFS tutorial</a>.</p>
+
+  <p>If your data are not available as part of the CVMFS repository, Galaxy Data Managers can be used to locally install and build reference data.</p>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda" aria-label="agenda box: ">Agenda</div>
+
+<ol id="markdown-toc">
+  <li><a href="#overview" id="markdown-toc-overview">Overview</a>    <ol>
+      <li><a href="#the-problem" id="markdown-toc-the-problem">The problem</a></li>
+      <li><a href="#data-managers-to-the-rescue" id="markdown-toc-data-managers-to-the-rescue">Data managers to the rescue</a></li>
+    </ol>
+  </li>
+  <li><a href="#galaxy-reference-data-components" id="markdown-toc-galaxy-reference-data-components">Galaxy Reference Data Components</a></li>
+  <li><a href="#installing-and-using-data-managers-with-the-galaxy-ui" id="markdown-toc-installing-and-using-data-managers-with-the-galaxy-ui">Installing and Using Data Managers with the Galaxy UI</a>    <ol>
+      <li><a href="#install-a-the-fetch-genome-data-manager-from-the-tool-shed" id="markdown-toc-install-a-the-fetch-genome-data-manager-from-the-tool-shed">Install a the Fetch Genome Data Manager from the Tool Shed</a></li>
+      <li><a href="#download-and-install-a-reference-genome-sequence" id="markdown-toc-download-and-install-a-reference-genome-sequence">Download and install a reference genome sequence</a></li>
+      <li><a href="#download-and-install-the-bwa-data-manager" id="markdown-toc-download-and-install-the-bwa-data-manager">Download and install the BWA data manager</a></li>
+      <li><a href="#build-the-bwa-index-for-a-reference-genome" id="markdown-toc-build-the-bwa-index-for-a-reference-genome">Build the BWA index for a reference genome</a></li>
+    </ol>
+  </li>
+  <li><a href="#installing-and-using-data-managers-from-the-command-line-with-ephemeris" id="markdown-toc-installing-and-using-data-managers-from-the-command-line-with-ephemeris">Installing and Using Data Managers from the command line with Ephemeris</a>    <ol>
+      <li><a href="#install-a-the-fetch-genome-data-manager-from-the-tool-shed-1" id="markdown-toc-install-a-the-fetch-genome-data-manager-from-the-tool-shed-1">Install a the Fetch Genome Data Manager from the Tool Shed</a></li>
+      <li><a href="#download-and-install-a-reference-genome-sequence-1" id="markdown-toc-download-and-install-a-reference-genome-sequence-1">Download and install a reference genome sequence</a></li>
+      <li><a href="#download-and-install-the-bwa-data-manager-1" id="markdown-toc-download-and-install-the-bwa-data-manager-1">Download and install the BWA data manager</a></li>
+      <li><a href="#build-the-bwa-index-for-a-reference-genome-1" id="markdown-toc-build-the-bwa-index-for-a-reference-genome-1">Build the BWA index for a reference genome</a></li>
+    </ol>
+  </li>
+  <li><a href="#verify-that-bwa-can-access-the-new-reference-data" id="markdown-toc-verify-that-bwa-can-access-the-new-reference-data">Verify that BWA can access the new reference data</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="galaxy-reference-data-components">Galaxy Reference Data Components</h1>
+
+<p>As discussed in the overview, Galaxy Data Managers handle the population of numerous Galaxy components. From the highest level to the lowest:</p>
+
+<ul>
+  <li>Addition of tool data table entries into the shed version of the tool data table configuration file, <code class="language-plaintext highlighter-rouge">shed_tool_data_table_conf.xml</code>. Multiple data tables with the same <code class="language-plaintext highlighter-rouge">name</code> attribute are automatically merged by Galaxy.</li>
+  <li>Population of the corresponding location (<code class="language-plaintext highlighter-rouge">.loc</code>) file when new reference data are installed. The <code class="language-plaintext highlighter-rouge">.loc</code> file used corresponds to the Data Manager and its specific version that was executed to install the data. The path to the location file can be found in the Data Manager’s entry in the tool data table configuration file (above).</li>
+  <li>Generation of the reference data on disk, underneath the directory specified by <code class="language-plaintext highlighter-rouge">tool_data_path</code> in <code class="language-plaintext highlighter-rouge">galaxy.yml</code>.</li>
+</ul>
+
+<h1 id="installing-and-using-data-managers-with-the-galaxy-ui">Installing and Using Data Managers with the Galaxy UI</h1>
+
+<h2 id="install-a-the-fetch-genome-data-manager-from-the-tool-shed">Install a the Fetch Genome Data Manager from the Tool Shed</h2>
+
+<blockquote class="comment">
+  <div class="box-title comment-title" id="comment-galaxy-configuration" aria-label="comment box: Galaxy Configuration"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden"></span> Comment: Galaxy Configuration</div>
+
+  <p>No special configuration for Galaxy beyond creating an admin user is necessary in order to use Data Managers. However, you may want to be aware of the <code class="language-plaintext highlighter-rouge">enable_data_manager_user_view</code> option, which enables unprivileged user to browse data installed via Data Managers. This option is not required, and users will be able to <em>use</em> data installed via Data Managers regardless.</p>
+
+  <p>Data are installed in the path specified by <code class="language-plaintext highlighter-rouge">tool_data_path</code> in <code class="language-plaintext highlighter-rouge">galaxy.yml</code>. If you prefer to keep hand-managed reference data separate from DM-managed reference data, you can set <code class="language-plaintext highlighter-rouge">galaxy_data_manager_data_path</code> instead.</p>
+
+</blockquote>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-intall-with-ephemeris"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-intall-with-ephemeris-contents" aria-expanded="true" aria-label="Toggle tip box: Intall with Ephemeris"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Intall with Ephemeris<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+  <p>This hands-on exercise installs data managers and reference data through the Galaxy UI, but you are encouraged to install tools in a deterministic, recordable way through the use of Ephemeris, which is described in <a href="#installing-and-using-data-managers-from-the-command-line-with-ephemeris">the Installing and Using Data Managers from the command line with Ephemeris section</a> below.</p>
+</blockquote>
+
+<p>We will install a data manager that can fetch the various genome sequences from multiple sources.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-install-the-fetch-genome-data-manager" aria-label="hands-on box: Install the Fetch Genome Data Manager"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Install the Fetch Genome Data Manager</div>
+
+  <ol>
+    <li>Access the <strong>Admin</strong> menu from the top bar (you need to be logged-in with an email specified in the <code class="language-plaintext highlighter-rouge">admin_users</code> setting)</li>
+    <li>Click <strong>Install and Uninstall</strong>, which can be found on the left, under <strong>Tool Management</strong></li>
+    <li>Enter <code class="language-plaintext highlighter-rouge">fetch_genome</code> in the search interface</li>
+    <li>Click on the first hit, having <code class="language-plaintext highlighter-rouge">devteam</code> as owner</li>
+    <li>Click the <strong>Install</strong> button for the latest revision</li>
+  </ol>
+</blockquote>
+
+<p>View in the file system where the various elements land. Have a look in the configuration files located in config directory.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+
+  <p>What did this tool installation change?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ul>
+      <li>The data manager and its data tables are added to the Galaxy-managed “shed” versions of the data manager config (<code class="language-plaintext highlighter-rouge">/srv/galaxy/var/config/shed_data_manager_conf.xml</code>) and data table config (<code class="language-plaintext highlighter-rouge">/srv/galaxy/var/config/shed_tool_data_table_conf.xml</code>)</li>
+      <li>The data manager tool is installed along side other Galaxy tools in the shed tools directory</li>
+    </ul>
+
+    <blockquote class="code-in">
+      <div class="box-title code-in-title" id="code-in-bash" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+      <p>Let’s investigate the data manager config file.</p>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /srv/galaxy/var/config/shed_data_manager_conf.xml
+</code></pre></div>      </div>
+    </blockquote>
+
+    <blockquote class="code-out code-max-300">
+      <div class="box-title code-out-title" id="code-out-bash" aria-label="code-out box: Bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Bash</div>
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;data_managers&gt;&lt;data_manager</span> <span class="na">id=</span><span class="s">"fetch_genome_all_fasta_dbkeys"</span> <span class="na">guid=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager/fetch_genome_all_fasta_dbkeys/0.0.1"</span> <span class="na">shed_conf_file=</span><span class="s">"/srv/galaxy/var/config/shed_tool_conf.xml"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;tool</span> <span class="na">file=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/4d3eff1bc421/data_manager_fetch_genome_dbkeys_all_fasta/data_manager/data_manager_fetch_genome_all_fasta_dbkeys.xml"</span> <span class="na">guid=</span><span class="s">"toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.4"</span><span class="nt">&gt;&lt;tool_shed&gt;</span>toolshed.g2.bx.psu.edu<span class="nt">&lt;/tool_shed&gt;&lt;repository_name&gt;</span>data_manager_fetch_genome_dbkeys_all_fasta<span class="nt">&lt;/repository_name&gt;&lt;repository_owner&gt;</span>devteam<span class="nt">&lt;/repository_owner&gt;&lt;installed_changeset_revision&gt;</span>4d3eff1bc421<span class="nt">&lt;/installed_changeset_revision&gt;&lt;id&gt;</span>toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.4<span class="nt">&lt;/id&gt;&lt;version&gt;</span>0.0.4<span class="nt">&lt;/version&gt;&lt;/tool&gt;&lt;data_table</span> <span class="na">name=</span><span class="s">"all_fasta"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;output&gt;</span>
+                <span class="nt">&lt;column</span> <span class="na">name=</span><span class="s">"value"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;column</span> <span class="na">name=</span><span class="s">"dbkey"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;column</span> <span class="na">name=</span><span class="s">"name"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;column</span> <span class="na">name=</span><span class="s">"path"</span> <span class="na">output_ref=</span><span class="s">"out_file"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;move</span> <span class="na">type=</span><span class="s">"file"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;source&gt;</span>${path}<span class="nt">&lt;/source&gt;</span>
+                        <span class="nt">&lt;target</span> <span class="na">base=</span><span class="s">"${GALAXY_DATA_MANAGER_DATA_PATH}"</span><span class="nt">&gt;</span>${dbkey}/seq/${path}<span class="nt">&lt;/target&gt;</span>
+                    <span class="nt">&lt;/move&gt;</span>
+                    <span class="nt">&lt;value_translation&gt;</span>${GALAXY_DATA_MANAGER_DATA_PATH}/${dbkey}/seq/${path}<span class="nt">&lt;/value_translation&gt;</span>
+                    <span class="nt">&lt;value_translation</span> <span class="na">type=</span><span class="s">"function"</span><span class="nt">&gt;</span>abspath<span class="nt">&lt;/value_translation&gt;</span>
+                <span class="nt">&lt;/column&gt;</span>
+            <span class="nt">&lt;/output&gt;</span>
+        <span class="nt">&lt;/data_table&gt;</span>
+        <span class="nt">&lt;data_table</span> <span class="na">name=</span><span class="s">"__dbkeys__"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;output&gt;</span>
+                <span class="nt">&lt;column</span> <span class="na">name=</span><span class="s">"value"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;column</span> <span class="na">name=</span><span class="s">"name"</span><span class="nt">/&gt;</span>
+                <span class="nt">&lt;column</span> <span class="na">name=</span><span class="s">"len_path"</span> <span class="na">output_ref=</span><span class="s">"out_file"</span><span class="nt">&gt;</span>
+                    <span class="nt">&lt;move</span> <span class="na">type=</span><span class="s">"file"</span><span class="nt">&gt;</span>
+                        <span class="nt">&lt;source&gt;</span>${len_path}<span class="nt">&lt;/source&gt;</span>
+                        <span class="nt">&lt;target</span> <span class="na">base=</span><span class="s">"${GALAXY_DATA_MANAGER_DATA_PATH}"</span><span class="nt">&gt;</span>${value}/len/${len_path}<span class="nt">&lt;/target&gt;</span>
+                    <span class="nt">&lt;/move&gt;</span>
+                    <span class="nt">&lt;value_translation&gt;</span>${GALAXY_DATA_MANAGER_DATA_PATH}/${value}/len/${len_path}<span class="nt">&lt;/value_translation&gt;</span>
+                    <span class="nt">&lt;value_translation</span> <span class="na">type=</span><span class="s">"function"</span><span class="nt">&gt;</span>abspath<span class="nt">&lt;/value_translation&gt;</span>
+                <span class="nt">&lt;/column&gt;</span>
+            <span class="nt">&lt;/output&gt;</span>
+        <span class="nt">&lt;/data_table&gt;</span>
+    <span class="nt">&lt;/data_manager&gt;</span>
+</code></pre></div>      </div>
+    </blockquote>
+
+    <blockquote class="code-in">
+      <div class="box-title code-in-title" id="code-in-bash-1" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+      <p>Let’s also investigate the tool data table config file.</p>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /srv/galaxy/var/config/shed_tool_data_table_conf.xml
+</code></pre></div>      </div>
+    </blockquote>
+
+    <blockquote class="code-out code-max-300">
+      <div class="box-title code-out-title" id="code-out-bash-1" aria-label="code-out box: Bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Bash</div>
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" ?&gt;</span>
+<span class="nt">&lt;tables&gt;</span>
+    <span class="nt">&lt;table</span> <span class="na">name=</span><span class="s">"all_fasta"</span> <span class="na">comment_char=</span><span class="s">"#"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;columns&gt;</span>value, dbkey, name, path<span class="nt">&lt;/columns&gt;</span>
+        <span class="nt">&lt;file</span> <span class="na">path=</span><span class="s">"/srv/galaxy/var/tool-data/toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/4d3eff1bc421/all_fasta.loc"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;tool_shed_repository&gt;</span>
+            <span class="nt">&lt;tool_shed&gt;</span>toolshed.g2.bx.psu.edu<span class="nt">&lt;/tool_shed&gt;</span>
+            <span class="nt">&lt;repository_name&gt;</span>data_manager_fetch_genome_dbkeys_all_fasta<span class="nt">&lt;/repository_name&gt;</span>
+            <span class="nt">&lt;repository_owner&gt;</span>devteam<span class="nt">&lt;/repository_owner&gt;</span>
+            <span class="nt">&lt;installed_changeset_revision&gt;</span>4d3eff1bc421<span class="nt">&lt;/installed_changeset_revision&gt;</span>
+        <span class="nt">&lt;/tool_shed_repository&gt;</span>
+    <span class="nt">&lt;/table&gt;</span>
+    <span class="nt">&lt;table</span> <span class="na">name=</span><span class="s">"__dbkeys__"</span> <span class="na">comment_char=</span><span class="s">"#"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;columns&gt;</span>value, name, len_path<span class="nt">&lt;/columns&gt;</span>
+        <span class="nt">&lt;file</span> <span class="na">path=</span><span class="s">"/srv/galaxy/var/tool-data/toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/4d3eff1bc421/dbkeys.loc"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;tool_shed_repository&gt;</span>
+            <span class="nt">&lt;tool_shed&gt;</span>toolshed.g2.bx.psu.edu<span class="nt">&lt;/tool_shed&gt;</span>
+            <span class="nt">&lt;repository_name&gt;</span>data_manager_fetch_genome_dbkeys_all_fasta<span class="nt">&lt;/repository_name&gt;</span>
+            <span class="nt">&lt;repository_owner&gt;</span>devteam<span class="nt">&lt;/repository_owner&gt;</span>
+            <span class="nt">&lt;installed_changeset_revision&gt;</span>4d3eff1bc421<span class="nt">&lt;/installed_changeset_revision&gt;</span>
+        <span class="nt">&lt;/tool_shed_repository&gt;</span>
+    <span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;/tables&gt;</span>
+</code></pre></div>      </div>
+    </blockquote>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="download-and-install-a-reference-genome-sequence">Download and install a reference genome sequence</h2>
+
+<p>Next, we will install some reference data. Specifically, we will grab sacCer2 (version 2 of the <em>Saccharomyces cerevisiae</em> genome).</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-download-and-install-saccer2" aria-label="hands-on box: Download and install sacCer2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Download and install sacCer2</div>
+
+  <ol>
+    <li>Access the Admin menu from the top bar</li>
+    <li>
+      <p>Click <strong>Local Data</strong>, which can be found on the left, under <strong>Server</strong></p>
+
+      <p>You should see something like this:</p>
+
+      <p><img src="../../images/dm-admin-local-data.png" alt="nearly empty data manager tool list in Galaxy. " loading="lazy" /></p>
+
+      <p>If you instead see the message “You do not currently have any Data Managers installed,” you may need to restart your Galaxy server.</p>
+    </li>
+    <li>
+      <p>Click <strong>all_fasta</strong> under <strong>View Tool Data Table Entries</strong></p>
+
+      <p>You should see the current contents of <code class="language-plaintext highlighter-rouge">tool-data/all_fasta.loc</code>, which will be empty.</p>
+    </li>
+    <li>
+      <p>Click <strong>Local Data</strong> to return to the previous page</p>
+    </li>
+    <li>Click <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.4" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.4"><strong>Create DBKey and Reference Genome - fetching</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.4</span></span>  under <strong>Installed Data Managers</strong>.
+      <ul>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Use existing dbkey or create a new one”</em>: <code class="language-plaintext highlighter-rouge">Existing</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“DBKEY to assign to data”</em>: <code class="language-plaintext highlighter-rouge">sacCer2</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Name of sequence”</em>: <code class="language-plaintext highlighter-rouge">S. cerevisiae June 2008 (SGD/sacCer2)</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">UCSC</code></li>
+      </ul>
+
+      <blockquote class="details">
+        <div class="box-title details-title" id="details-what-do-these-fields-mean"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-do-these-fields-mean-contents" aria-expanded="true" aria-label="Toggle details box: What do these fields mean?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: What do these fields mean?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>The data manager tool form fields correspond to the columns in the tool data table, as referenced in <code class="language-plaintext highlighter-rouge">shed_tool_data_table_conf.xml</code>.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Tool Field</th>
+              <th>Tool Data Table Entry</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><em>ID for sequence</em></td>
+              <td><code class="language-plaintext highlighter-rouge">value</code> column in <code class="language-plaintext highlighter-rouge">all_fasta</code></td>
+              <td>Identifier of specific build of the genome, if it differs from the DBKEY. Used for variant builds such as the <code class="language-plaintext highlighter-rouge">hg19female</code> build of <code class="language-plaintext highlighter-rouge">hg19</code>.</td>
+            </tr>
+            <tr>
+              <td><em>DBKEY to assign to data</em></td>
+              <td><code class="language-plaintext highlighter-rouge">dbkey</code> column in <code class="language-plaintext highlighter-rouge">all_fasta</code></td>
+              <td>Identifier of the genome, the UCSC build ID for UCSC builds like <code class="language-plaintext highlighter-rouge">hg19</code>.</td>
+            </tr>
+            <tr>
+              <td><em>Name of sequence</em></td>
+              <td><code class="language-plaintext highlighter-rouge">name</code> column in <code class="language-plaintext highlighter-rouge">all_fasta</code></td>
+              <td>Display name of the genome, displayed in Galaxy tool dropdowns.</td>
+            </tr>
+          </tbody>
+        </table>
+      </blockquote>
+    </li>
+    <li>Click <strong>Execute</strong>. In your history, you will see a new dataset for the data manager run. When the job has finished, go back to the Data Manager view on the Galaxy Admin page (Click <strong>Local Data</strong>).</li>
+    <li>
+      <p>Click <strong>all_fasta</strong> under <em>View Tool Data Table Entries</em></p>
+
+      <p>You should see that <em>sacCer2</em> has been added to all_fasta.</p>
+
+      <p><img src="../../images/dm-all-fasta-populated.png" alt="populated all_fasta data table which now includes sacCer2 in the genome list. " loading="lazy" /></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>View in the file system where the changes to the location file and the reference genome fasta file.</p>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-1" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+
+  <p>What did this data manager execution change?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-1"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-1-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ul>
+      <li>An entry for the <em>sacCer2</em> genome has been added to the <code class="language-plaintext highlighter-rouge">all_fasta.loc</code> file for the <code class="language-plaintext highlighter-rouge">data_manager_fetch_genome_all_fasta_dbkey</code> data manager. The path to the location file can be found in “shed” versions of the data manager config (<code class="language-plaintext highlighter-rouge">/srv/galaxy/var/config/shed_data_manager_conf.xml</code>) and data table config (<code class="language-plaintext highlighter-rouge">/srv/galaxy/var/config/shed_tool_data_table_conf.xml</code>)</li>
+      <li>The data manager tool is installed along side other Galaxy tools in the shed tools directory</li>
+    </ul>
+
+    <blockquote class="code-in">
+      <div class="box-title code-in-title" id="code-in-bash-2" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+      <p>Get the path to the <code class="language-plaintext highlighter-rouge">all_fasta.loc</code> file:</p>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="s1">'data_manager_fetch_genome_dbkeys_all_fasta.*all_fasta.loc'</span> /srv/galaxy/var/config/shed_tool_data_table_conf.xml
+</code></pre></div>      </div>
+    </blockquote>
+
+    <blockquote class="code-out">
+      <div class="box-title code-out-title" id="code-out-bash-2" aria-label="code-out box: Bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Bash</div>
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        <span class="nt">&lt;file</span> <span class="na">path=</span><span class="s">"/srv/galaxy/var/tool-data/toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/4d3eff1bc421/all_fasta.loc"</span><span class="nt">/&gt;</span>
+</code></pre></div>      </div>
+    </blockquote>
+
+    <blockquote class="code-in">
+      <div class="box-title code-in-title" id="code-in-bash-3" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+      <p>Let’s investigate the contents of the location file identified above (the path to yours may be different if you installed a different version of the data manager):</p>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /srv/galaxy/var/tool-data/toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/4d3eff1bc421/all_fasta.loc
+</code></pre></div>      </div>
+    </blockquote>
+
+    <blockquote class="code-out">
+      <div class="box-title code-out-title" id="code-out-bash-3" aria-label="code-out box: Bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Bash</div>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#This file lists the locations and dbkeys of all the fasta files</span>
+<span class="c">#under the "genome" directory (a directory that contains a directory</span>
+<span class="c">#for each build). The script extract_fasta.py will generate the file</span>
+<span class="c">#all_fasta.loc. This file has the format (white space characters are</span>
+<span class="c">#TAB characters):</span>
+<span class="c">#</span>
+<span class="c">#&lt;unique_build_id&gt;  &lt;dbkey&gt;     &lt;display_name&gt;  &lt;file_path&gt;</span>
+<span class="c">#</span>
+<span class="c">#So, all_fasta.loc could look something like this:</span>
+<span class="c">#</span>
+<span class="c">#apiMel3    apiMel3 Honeybee (Apis mellifera): apiMel3      /path/to/genome/apiMel3/apiMel3.fa</span>
+<span class="c">#hg19canon  hg19        Human (Homo sapiens): hg19 Canonical        /path/to/genome/hg19/hg19canon.fa</span>
+<span class="c">#hg19full   hg19        Human (Homo sapiens): hg19 Full         /path/to/genome/hg19/hg19full.fa</span>
+<span class="c">#</span>
+<span class="c">#Your all_fasta.loc file should contain an entry for each individual</span>
+<span class="c">#fasta file. So there will be multiple fasta files for each build,</span>
+<span class="c">#such as with hg19 above.</span>
+<span class="c">#</span>
+sacCer2	sacCer2	S. cerevisiae June 2008 <span class="o">(</span>SGD/sacCer2<span class="o">)</span>	/srv/galaxy/var/tool-data/sacCer2/seq/sacCer2.fa
+</code></pre></div>      </div>
+    </blockquote>
+
+    <blockquote class="code-in">
+      <div class="box-title code-in-title" id="code-in-bash-4" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+      <p>Finally, verify that we have some sequences in the genome fasta file:</p>
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="s1">'^&gt;'</span> /srv/galaxy/var/tool-data/sacCer2/seq/sacCer2.fa
+</code></pre></div>      </div>
+    </blockquote>
+
+    <blockquote class="code-out">
+      <div class="box-title code-out-title" id="code-out-bash-4" aria-label="code-out box: Bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Bash</div>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;2micron
+&gt;chrI
+&gt;chrII
+&gt;chrIII
+&gt;chrIV
+&gt;chrIX
+&gt;chrM
+&gt;chrV
+&gt;chrVI
+&gt;chrVII
+&gt;chrVIII
+&gt;chrX
+&gt;chrXI
+&gt;chrXII
+&gt;chrXIII
+&gt;chrXIV
+&gt;chrXV
+&gt;chrXVI
+</code></pre></div>      </div>
+    </blockquote>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="download-and-install-the-bwa-data-manager">Download and install the BWA data manager</h2>
+
+<p>Having the genome is a prerequisite for our ultimate goal, which is to use the sacCer2 genome as a <em>reference genome</em> for the BWA tool. BWA, like many tools, needs an <em>index</em> of the reference genome, and has its own format for that index. Thankfully, the BWA/BWA-MEM data manager will build that index for us.</p>
+
+<p>In this part we will repeat the same process as when we installed the Fetch Genome data manager, except that we will install the BWA/BWA-MEM data manager this time.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-install-the-bwa-bwa-mem-data-manager" aria-label="hands-on box: Install the BWA/BWA-MEM Data Manager "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Install the BWA/BWA-MEM Data Manager</div>
+
+  <ol>
+    <li>Access the <strong>Admin</strong> menu from the top bar</li>
+    <li>Click <strong>Install and Uninstall</strong>, which can be found on the left, under <strong>Tool Management</strong></li>
+    <li>Enter <code class="language-plaintext highlighter-rouge">bwa_mem_index</code> in the search interface</li>
+    <li>Click on the first hit, having <code class="language-plaintext highlighter-rouge">devteam</code> as owner</li>
+    <li>Click the <strong>Install</strong> button for the latest revision</li>
+  </ol>
+</blockquote>
+
+<h2 id="build-the-bwa-index-for-a-reference-genome">Build the BWA index for a reference genome</h2>
+
+<p>In this part we will actually build the BWA index for sacCer2. It will automatically be added to our list of available reference genomes in the BWA tool.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-build-the-saccer2-bwa-index" aria-label="hands-on box: Build the sacCer2 BWA index"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Build the sacCer2 BWA index</div>
+
+  <ol>
+    <li>Access the Admin menu from the top bar</li>
+    <li>Click <strong>Local Data</strong>, which can be found on the left, under <strong>Server</strong></li>
+    <li>Click <strong><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/data_manager_bwa_mem_index_builder/bwa_mem_index_builder_data_manager/0.0.5" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/data_manager_bwa_mem_index_builder/bwa_mem_index_builder_data_manager/0.0.5"><strong>BWA-MEM index - builder</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/data_manager_bwa_mem_index_builder/bwa_mem_index_builder_data_manager/0.0.5</span></span> ** under **Installed Data Managers</strong>.
+      <ul>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Source Fasta Sequence”</em>: <code class="language-plaintext highlighter-rouge">S. cerevisiae June 2008 (SGD/sacCer2)</code></li>
+      </ul>
+    </li>
+    <li>Click <strong>Execute</strong>.</li>
+    <li>
+      <p>Verify that the new BWA index for sacCer2 has been built and the .loc file has been filled in. From the <strong>Local Data</strong> page in the Admin section, click on <strong>bwa_mem_indexes</strong> under <em>View Tool Data Table Entries</em></p>
+
+      <p><em>S. cerevisiae</em> sacCer2 should now appear in the list!</p>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <div class="box-title question-title" id="question-2" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+
+  <p>What changes were made by the <strong>BWA-MEM index builder</strong>?</p>
+
+  <blockquote class="solution">
+    <div class="box-title solution-title" id="solution-2"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-2-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ul>
+      <li>An entry for the <em>sacCer2</em> BWA/BWA-MEM index has been added to the <code class="language-plaintext highlighter-rouge">bwa_mem_index.loc</code> file for the <code class="language-plaintext highlighter-rouge">data_manager_bwa_mem_index_builder</code> data manager.</li>
+      <li>A symlink to the sacCer2 genome fasta file installed by the Fetch Genome data manager above was created in the sacCer2 BWA index directory, <code class="language-plaintext highlighter-rouge">/srv/galaxy/var/tool-data/sacCer2/bwa_mem_index/sacCer2/</code>.</li>
+      <li>The BWA/BWA-MEM index for the sacCer2 genome has been built.</li>
+    </ul>
+
+    <blockquote class="code-in">
+      <div class="box-title code-in-title" id="code-in-bash-5" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-l</span> /srv/galaxy/var/tool-data/sacCer2/bwa_mem_index/sacCer2
+</code></pre></div>      </div>
+    </blockquote>
+
+    <blockquote class="code-out">
+      <div class="box-title code-out-title" id="code-out-bash-5" aria-label="code-out box: Bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Bash</div>
+      <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">total 20800
+</span><span class="gp">lrwxrwxrwx 1 galaxy galaxy       20 Dec  9 18:29 sacCer2.fa -&gt;</span><span class="w"> </span>../../seq/sacCer2.fa
+<span class="go">-rw-r--r-- 1 galaxy galaxy       14 Dec  9 18:29 sacCer2.fa.amb
+-rw-r--r-- 1 galaxy galaxy      591 Dec  9 18:29 sacCer2.fa.ann
+-rw-r--r-- 1 galaxy galaxy 12163076 Dec  9 18:29 sacCer2.fa.bwt
+-rw-r--r-- 1 galaxy galaxy  3040750 Dec  9 18:29 sacCer2.fa.pac
+-rw-r--r-- 1 galaxy galaxy  6081552 Dec  9 18:29 sacCer2.fa.sa
+</span></code></pre></div>      </div>
+    </blockquote>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="installing-and-using-data-managers-from-the-command-line-with-ephemeris">Installing and Using Data Managers from the command line with Ephemeris</h1>
+
+<p>The same process described in the previous section can also be performed from the command line, e.g. in a CI/CD
+pipeline, using Ephemeris. For a more in-depth look at Ephemeris, especially in the tool installation context, please see <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">the Galaxy Tool Management with Ephemeris tutorial</a>.</p>
+
+<p>In order to accomplish this, you will need:</p>
+
+<ul>
+  <li>The URL of your Galaxy server</li>
+  <li>The API key for your account, which must be an admin</li>
+</ul>
+
+<!--SNIPPET-->
+<blockquote class="tip">   <div class="box-title tip-title" id="tip-getting-your-api-key"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-getting-your-api-key-contents" aria-expanded="true" aria-label="Toggle tip box: Getting your API key"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Getting your API key<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <p>Galaxy admin accounts are specified as a comma-separated email list in the <code class="language-plaintext highlighter-rouge">admin_users</code> directive of <code class="language-plaintext highlighter-rouge">galaxy.yml</code> . If you have set up your Galaxy server using the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html">Galaxy Installation with Ansible</a> tutorial, this is set to <code class="language-plaintext highlighter-rouge">admin@example.org</code>.</p>   <ol>   <li>In your browser, open your Galaxy homepage</li>   <li>Log in, or register a new account, if it’s the first time you’re logging in</li>   <li>Go to <code class="language-plaintext highlighter-rouge">User -&gt; Preferences</code> in the top menu bar, then click on <code class="language-plaintext highlighter-rouge">Manage API key</code></li>   <li>If there is no current API key available, click on <code class="language-plaintext highlighter-rouge">Create a new key</code> to generate it</li>   <li>Copy your API key to somewhere convenient, you will need it throughout this tutorial</li> </ol> </blockquote>
+
+<h2 id="install-a-the-fetch-genome-data-manager-from-the-tool-shed-1">Install a the Fetch Genome Data Manager from the Tool Shed</h2>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-install-the-fetch-genome-data-manager-with-ephemeris" aria-label="hands-on box: Install the Fetch Genome Data Manager with Ephemeris"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Install the Fetch Genome Data Manager with Ephemeris</div>
+
+  <ol>
+    <li>
+      <p>Re-activate the virtualenv you created for the <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">ephemeris tool management tutorial</a>.</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-6" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>. ~/ephemeris_venv/bin/activate
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="tip">
+        <div class="box-title tip-title" id="tip-missing"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-missing-contents" aria-expanded="true" aria-label="Toggle tip box: missing?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: missing?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>then you might need to re-run the steps:</p>
+
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python3 <span class="nt">-m</span> venv ~/ephemeris_venv
+<span class="nb">.</span> ~/ephemeris_venv/bin/activate
+pip <span class="nb">install </span>ephemeris
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Install the <code class="language-plaintext highlighter-rouge">data_manager_fetch_genome_dbkeys_all_fasta</code> data manager tool owned by <code class="language-plaintext highlighter-rouge">devteam</code>.</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-7" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <p>Be sure to adjust the value of <code class="language-plaintext highlighter-rouge">-g</code> appropriately for your Galaxy server, and replace the value of <code class="language-plaintext highlighter-rouge">-a</code> with your API key.</p>
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">shed-tools install -g https://galaxy.example.org -a &lt;api-key&gt;</span><span class="w"> </span><span class="nt">--name</span> data_manager_fetch_genome_dbkeys_all_fasta <span class="nt">--owner</span> devteam
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <div class="box-title code-out-title" id="code-out" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Storing log file in: /tmp/ephemeris_x9xeu8ro
+(1/1) Installing repository data_manager_fetch_genome_dbkeys_all_fasta from devteam to section "None" at revision 4d3eff1bc421 (TRT: 0:00:00.401143)
+	repository data_manager_fetch_genome_dbkeys_all_fasta installed successfully (in 0:00:25.530604) at revision 4d3eff1bc421
+Installed repositories (1): [('data_manager_fetch_genome_dbkeys_all_fasta', '4d3eff1bc421')]
+Skipped repositories (0): []
+Errored repositories (0): []
+All repositories have been installed.
+Total run time: 0:00:25.932659
+</span></code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="download-and-install-a-reference-genome-sequence-1">Download and install a reference genome sequence</h2>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-download-and-install-saccer3-with-ephemeris" aria-label="hands-on box: Download and install sacCer3 with Ephemeris"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Download and install sacCer3 with Ephemeris</div>
+
+  <ol>
+    <li>
+      <p>Create a config file for <code class="language-plaintext highlighter-rouge">run-data-managers</code> named <code class="language-plaintext highlighter-rouge">fetch-sacCer3.yml</code>:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">data_managers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.4</span>
+    <span class="na">params</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">dbkey_source|dbkey'</span><span class="err">:</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">item.dbkey</span><span class="nv"> </span><span class="s">}}'</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">sequence_name'</span><span class="err">:</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">item.name</span><span class="nv"> </span><span class="s">}}'</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">reference_source|reference_source_selector'</span><span class="err">:</span> <span class="s1">'</span><span class="s">ucsc'</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">reference_source|requested_dbkey'</span><span class="err">:</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">item.dbkey</span><span class="nv"> </span><span class="s">}}'</span>
+    <span class="na">items</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">dbkey</span><span class="pi">:</span> <span class="s">sacCer3</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">S.</span><span class="nv"> </span><span class="s">cerevisiae</span><span class="nv"> </span><span class="s">Apr.</span><span class="nv"> </span><span class="s">2011</span><span class="nv"> </span><span class="s">(SacCer_Apr2011/sacCer3)'</span>
+    <span class="na">data_table_reload</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">all_fasta</span>
+      <span class="pi">-</span> <span class="s">__dbkeys__</span>
+</code></pre></div>      </div>
+
+      <blockquote class="details">
+        <div class="box-title details-title" id="details-what-do-these-config-file-compontents-mean"><button class="gtn-boxify-button details" type="button" aria-controls="details-what-do-these-config-file-compontents-mean-contents" aria-expanded="true" aria-label="Toggle details box: What do these config file compontents mean?"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Details: What do these config file compontents mean?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+
+        <p>The <code class="language-plaintext highlighter-rouge">run-data-managers</code> config file options correspond to the options in the data manager tool XML file. To locate the tool XML file for the Fetch Genomes data manager, you can search for it in <a href="https://toolshed.g2.bx.psu.edu">the Tool Shed</a> the same way you did when installing it via the UI. You can also open the data manager’s tool form in the UI as if to run it, and, using the drop-down menu at the top right of the tool form, click “See in Tool Shed”. From the Tool Shed, you can click the <strong>Development repository</strong> link and browse to the <a href="https://github.com/galaxyproject/tools-iuc/blob/8487d2c73793be0afa5b34388b122e686ac8a094/data_managers/data_manager_fetch_genome_dbkeys_all_fasta/data_manager/data_manager_fetch_genome_all_fasta_dbkeys.xml">tool XML file, <code class="language-plaintext highlighter-rouge">data_manager/data_manager_fetch_genome_all_fasta_dbkeys.xml</code></a>.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th><code class="language-plaintext highlighter-rouge">run-data-managers</code> config file component</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code class="language-plaintext highlighter-rouge">id</code></td>
+              <td>Data manager full (shed) tool ID, this can be found in <code class="language-plaintext highlighter-rouge">shed_data_manager_conf.xml</code></td>
+            </tr>
+            <tr>
+              <td><code class="language-plaintext highlighter-rouge">params</code></td>
+              <td>Data manager tool params, these correspond to <code class="language-plaintext highlighter-rouge">&lt;param&gt;</code> tags in the tool XML file. Nested paramaters are specified using a pipe character (<code class="language-plaintext highlighter-rouge">|</code>).</td>
+            </tr>
+            <tr>
+              <td>param <code class="language-plaintext highlighter-rouge">dbkey_source|dbkey</code></td>
+              <td>Value of <code class="language-plaintext highlighter-rouge">&lt;param name="dbkey" ...&gt;</code> in <code class="language-plaintext highlighter-rouge">&lt;conditional name="dbkey_source"&gt;</code>.</td>
+            </tr>
+            <tr>
+              <td>param <code class="language-plaintext highlighter-rouge">sequence_name</code></td>
+              <td>Value of <code class="language-plaintext highlighter-rouge">&lt;param name="sequence_name" ...&gt;</code>.</td>
+            </tr>
+            <tr>
+              <td>param <code class="language-plaintext highlighter-rouge">reference_source|reference_source_selector</code></td>
+              <td>Value of <code class="language-plaintext highlighter-rouge">&lt;param name="reference_source_selector" ...&gt;</code> in <code class="language-plaintext highlighter-rouge">&lt;conditional name="reference_source"&gt;</code>.</td>
+            </tr>
+            <tr>
+              <td>param <code class="language-plaintext highlighter-rouge">reference_source|requested_dbkey</code></td>
+              <td>Value of <code class="language-plaintext highlighter-rouge">&lt;param name="requested_dbkey" ...&gt;</code> in <code class="language-plaintext highlighter-rouge">&lt;conditional name="reference_source"&gt;</code>.</td>
+            </tr>
+            <tr>
+              <td><code class="language-plaintext highlighter-rouge">items</code></td>
+              <td>A list of variables to template in to <code class="language-plaintext highlighter-rouge">params</code>, referenced in param fields with <code class="language-plaintext highlighter-rouge">{{ item }}</code>. In the case of genomes, for example, you can run this DM with multiple genomes, or you could give multiple URLs.</td>
+            </tr>
+            <tr>
+              <td><code class="language-plaintext highlighter-rouge">data_table_reload</code></td>
+              <td>Names of the data tables you want to reload after your DMs are finished running. This can be important for subsequent data managers.</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Run the Genome Fetch DM with <code class="language-plaintext highlighter-rouge">run-data-managers</code>:</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-8" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">run-data-managers -g https://galaxy.example.org -a &lt;api-key&gt;</span><span class="w"> </span><span class="nt">--config</span> fetch-sacCer3.yml
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <div class="box-title code-out-title" id="code-out-1" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Storing log file in: /tmp/ephemeris_f6klyy7v
+Running data managers that populate the following source data tables: ['all_fasta']
+Dispatched job 1. Running DM: "toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/data_manager_fetch_genome_all_fasta_dbkey/0.0.4" with parameters: {'dbkey_source|dbkey': 'sacCer3', 'dbkey_source|dbkey_name': 'S. cerevisiae Apr. 2011 (SacCer_Apr2011/sacCer3)', 'reference_source|reference_source_selector': 'ucsc', 'reference_source|requested_dbkey': 'sacCer3'}
+Job 1 finished with state ok.
+Running data managers that index sequences.
+Finished running data managers. Results:
+Successful jobs: 1
+Skipped jobs: 0
+Failed jobs: 0
+</span></code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>In the Galaxy UI, access the Admin menu from the top bar</li>
+    <li>Click <strong>Local Data</strong>, which can be found on the left, under <strong>Server</strong></li>
+    <li>
+      <p>Click <strong>all_fasta</strong> under <em>View Tool Data Table Entries</em></p>
+
+      <p>You should see that <em>sacCer3</em> has been added to all_fasta.</p>
+
+      <p><img src="../../images/dm-all-fasta-populated-2.png" alt="populated all_fasta data table with sacCer3. " loading="lazy" /></p>
+
+      <blockquote class="question">
+        <div class="box-title question-title" id="question-3" aria-label="question box: "><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Question</div>
+
+        <p>Can we view the changes from the command line? Where are they located?</p>
+
+        <blockquote class="solution">
+          <div class="box-title solution-title" id="solution-3"><button class="gtn-boxify-button solution" type="button" aria-controls="solution-3-contents" aria-expanded="true" aria-label="Toggle solution box: "><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"></span> Solution<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+
+          <p>The <code class="language-plaintext highlighter-rouge">all_fasta.loc</code> file contains the entry for our new genome. If you need a reminder on how to locate it, see the <em>What did this data manager execution change?</em> question in the UI section above.</p>
+
+          <blockquote class="code-in">
+            <div class="box-title code-in-title" id="code-in-bash-9" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+            <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /srv/galaxy/var/tool-data/toolshed.g2.bx.psu.edu/repos/devteam/data_manager_fetch_genome_dbkeys_all_fasta/4d3eff1bc421/all_fasta.loc
+</code></pre></div>            </div>
+          </blockquote>
+
+          <blockquote class="code-out">
+            <div class="box-title code-out-title" id="code-out-bash-6" aria-label="code-out box: Bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output: Bash</div>
+            <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#This file lists the locations and dbkeys of all the fasta files</span>
+<span class="c">#under the "genome" directory (a directory that contains a directory</span>
+<span class="c">#for each build). The script extract_fasta.py will generate the file</span>
+<span class="c">#all_fasta.loc. This file has the format (white space characters are</span>
+<span class="c">#TAB characters):</span>
+<span class="c">#</span>
+<span class="c">#&lt;unique_build_id&gt;  &lt;dbkey&gt;     &lt;display_name&gt;  &lt;file_path&gt;</span>
+<span class="c">#</span>
+<span class="c">#So, all_fasta.loc could look something like this:</span>
+<span class="c">#</span>
+<span class="c">#apiMel3    apiMel3 Honeybee (Apis mellifera): apiMel3      /path/to/genome/apiMel3/apiMel3.fa</span>
+<span class="c">#hg19canon  hg19        Human (Homo sapiens): hg19 Canonical        /path/to/genome/hg19/hg19canon.fa</span>
+<span class="c">#hg19full   hg19        Human (Homo sapiens): hg19 Full         /path/to/genome/hg19/hg19full.fa</span>
+<span class="c">#</span>
+<span class="c">#Your all_fasta.loc file should contain an entry for each individual</span>
+<span class="c">#fasta file. So there will be multiple fasta files for each build,</span>
+<span class="c">#such as with hg19 above.</span>
+<span class="c">#</span>
+sacCer2	sacCer2	S. cerevisiae June 2008 <span class="o">(</span>SGD/sacCer2<span class="o">)</span>	/srv/galaxy/var/tool-data/sacCer2/seq/sacCer2.fa
+sacCer3	sacCer3	S. cerevisiae Apr. 2011 <span class="o">(</span>SacCer_Apr2011/sacCer3<span class="o">)</span>	/srv/galaxy/var/tool-data/sacCer3/seq/sacCer3.fa
+</code></pre></div>            </div>
+          </blockquote>
+
+        </blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="warning">
+  <div class="box-title warning-title" id="warning-run-data-managers-is-not-idempotent" aria-label="warning box: run-data-managers is not idempotent!"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden"></span> Warning: run-data-managers is not idempotent!</div>
+  <p>Unlike <code class="language-plaintext highlighter-rouge">shed-tools install</code>, the Ephemeris <code class="language-plaintext highlighter-rouge">run-data-managers</code> utility is not idempotent. If run a second time on the same set of inputs, you will end up with two entries in your <code class="language-plaintext highlighter-rouge">all_fasta</code> data table, with the data from the second run overwriting the data from the first run.</p>
+
+  <p>Please see <a href="https://github.com/galaxyproject/galaxy/issues/15188">Galaxy issue #15188</a> for details.</p>
+
+</blockquote>
+
+<h2 id="download-and-install-the-bwa-data-manager-1">Download and install the BWA data manager</h2>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-install-the-bwa-bwa-mem-data-manager-1" aria-label="hands-on box: Install the BWA/BWA-MEM Data Manager "><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Install the BWA/BWA-MEM Data Manager</div>
+
+  <ol>
+    <li>
+      <p>Install the <code class="language-plaintext highlighter-rouge">bwa_mem_index_builder_data_manager</code> data manager tool owned by <code class="language-plaintext highlighter-rouge">devteam</code>.</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-10" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">shed-tools install -g https://galaxy.example.org -a &lt;api-key&gt;</span><span class="w"> </span><span class="nt">--name</span> data_manager_bwa_mem_index_builder <span class="nt">--owner</span> devteam
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <div class="box-title code-out-title" id="code-out-2" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Storing log file in: /tmp/ephemeris_2dyujjvi
+(1/1) Installing repository data_manager_bwa_mem_index_builder from devteam to section "None" at revision 63d5652be07a (TRT: 0:00:00.204350)
+	repository data_manager_bwa_mem_index_builder installed successfully (in 0:00:05.599382) at revision 63d5652be07a
+Installed repositories (1): [('data_manager_bwa_mem_index_builder', '63d5652be07a')]
+Skipped repositories (0): []
+Errored repositories (0): []
+All repositories have been installed.
+Total run time: 0:00:05.804217
+</span></code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="build-the-bwa-index-for-a-reference-genome-1">Build the BWA index for a reference genome</h2>
+
+<blockquote class="hands-on">
+  <div class="box-title hands-on-title" id="hands-on-build-the-saccer3-bwa-index" aria-label="hands-on box: Build the sacCer3 BWA index"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Build the sacCer3 BWA index</div>
+
+  <ol>
+    <li>
+      <p>Create a config file for <code class="language-plaintext highlighter-rouge">run-data-managers</code> named <code class="language-plaintext highlighter-rouge">build-sacCer3-bwa.yml</code>:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">data_managers</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">toolshed.g2.bx.psu.edu/repos/devteam/data_manager_bwa_mem_index_builder/bwa_mem_index_builder_data_manager/0.0.5</span>
+    <span class="na">params</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">all_fasta_source'</span><span class="err">:</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">item.dbkey</span><span class="nv"> </span><span class="s">}}'</span>
+      <span class="pi">-</span> <span class="s1">'</span><span class="s">sequence_name'</span><span class="err">:</span> <span class="s1">'</span><span class="s">{{</span><span class="nv"> </span><span class="s">item.name</span><span class="nv"> </span><span class="s">}}'</span>
+    <span class="na">items</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">dbkey</span><span class="pi">:</span> <span class="s">sacCer3</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="s1">'</span><span class="s">S.</span><span class="nv"> </span><span class="s">cerevisiae</span><span class="nv"> </span><span class="s">Apr.</span><span class="nv"> </span><span class="s">2011</span><span class="nv"> </span><span class="s">(SacCer_Apr2011/sacCer3)'</span>
+    <span class="na">data_table_reload</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="s">bwa_mem_indexes</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the BWA-MEM index builder DM with <code class="language-plaintext highlighter-rouge">run-data-managers</code>:</p>
+
+      <blockquote class="code-in">
+        <div class="box-title code-in-title" id="code-in-bash-11" aria-label="code-in box: Bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden"></span> Input: Bash</div>
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">run-data-managers -g https://galaxy.example.org -a &lt;api-key&gt;</span><span class="w"> </span><span class="nt">--config</span> build-sacCer3-bwa.yml
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <div class="box-title code-out-title" id="code-out-3" aria-label="code-out box: "><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden"></span> Output</div>
+        <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">Storing log file in: /tmp/ephemeris_esecdef4
+Running data managers that populate the following source data tables: ['all_fasta']
+Running data managers that index sequences.
+Dispatched job 2. Running DM: "toolshed.g2.bx.psu.edu/repos/devteam/data_manager_bwa_mem_index_builder/bwa_mem_index_builder_data_manager/0.0.5" with parameters: {'all_fasta_source': 'sacCer3', 'sequence_name': 'S. cerevisiae Apr. 2011 (SacCer_Apr2011/sacCer3)'}
+Job 2 finished with state ok.
+Finished running data managers. Results:
+Successful jobs: 1
+Skipped jobs: 0
+Failed jobs: 0
+</span></code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>In the Galaxy UI, access the Admin menu from the top bar</li>
+    <li>Click <strong>Local Data</strong>, which can be found on the left, under <strong>Server</strong></li>
+    <li>
+      <p>Click <strong>bwa_mem_indexes</strong> under <em>View Tool Data Table Entries</em></p>
+
+      <p>You should see that <em>sacCer3</em> has been added to bwa_mem_indexes. You can also verify this via the command line using the methods you’ve learned above.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="verify-that-bwa-can-access-the-new-reference-data">Verify that BWA can access the new reference data</h1>
+
+<p>Finally, we will verify that the BWA tool can see the new genome indexes.</p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-configure-galaxy" aria-label="hands-on box: Configure Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Configure Galaxy</div>
+
+  <ol>
+    <li>
+      <p>Install the BWA and BWA-MEM tools, if needed. If installing with Ephemeris, the repo name for the <code class="language-plaintext highlighter-rouge">--name</code> parameter is <code class="language-plaintext highlighter-rouge">bwa</code> and the owner is <code class="language-plaintext highlighter-rouge">devteam</code>.</p>
+
+      <!--SNIPPET-->
+      <blockquote class="tip">   <div class="box-title tip-title" id="tip-install-tools-via-the-admin-ui"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-install-tools-via-the-admin-ui-contents" aria-expanded="true" aria-label="Toggle tip box: Install tools via the Admin UI"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Tip: Install tools via the Admin UI<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>   <ol>   <li>Open Galaxy in your browser and type <code class="language-plaintext highlighter-rouge">bwa</code> in the tool search box on the left. If “Map with BWA” is among the search results, you can skip the following steps.</li>   <li>Access the Admin menu from the top bar (you need to be logged-in with an email specified in the <code class="language-plaintext highlighter-rouge">admin_users</code> setting)</li>   <li>Click “Install and Uninstall”, which can be found on the left, under “Tool Management”</li>   <li>Enter <code class="language-plaintext highlighter-rouge">bwa</code> in the search interface</li>   <li>Click on the first hit, having <code class="language-plaintext highlighter-rouge">devteam</code> as owner</li>   <li>Click the “Install” button for the latest revision</li>   <li>Enter “Mapping” as the target section and click “OK”.</li> </ol> </blockquote>
+    </li>
+    <li>
+      <p>Click the “Home” icon at the top to return to the Galaxy analysis interface</p>
+    </li>
+    <li>
+      <p>Load the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.5" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.5"><strong>Map with BWA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.5</span></span>  tool and verify that the sacCer2 genome (if you completed the “Galaxy UI” section) and/or sacCer3 genome (if you completed the “command line with Ephemeris” section)  appears in the <i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Using reference genome”</em> option.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<p>How cool is that? No editing <code class="language-plaintext highlighter-rouge">.loc</code> files, no making sure you’ve got TABs instead of spaces. Fully auto!</p>
+
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Key points</div>
+                    <ul>
+                        
+                        <li><p>Understand how Galaxy stores and uses its reference data</p>
+</li>
+                        
+                        <li><p>Understand how to manually add a reference genome and tool indices if required</p>
+</li>
+                        
+                        <li><p>Understand and how to use data managers to make all of this much much easier</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Frequently Asked Questions</h1>
+                Have questions about this tutorial? Check out the <a href="faqs/">tutorial FAQ page</a> or the  <a href="/training-material/topics/admin/faqs/">FAQ page for the Galaxy Server administration topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+
+
+                
+
+                
+
+                <h1>Feedback</h1>
+                <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452">how it went</a>.
+                <br>Did you use this material as a learner or student? Click the form below to leave feedback.<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Reference Data with Data Managers (Galaxy Server administration)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Citing this Tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Simon Gladman, Enis Afgan,  <b>Reference Data with Data Managers (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/admin/tutorials/reference-genomes/tutorial.html">https://training.galaxyproject.org/training-material/topics/admin/tutorials/reference-genomes/tutorial.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{admin-reference-genomes,
+author = "Simon Gladman and Enis Afgan",
+title = "Reference Data with Data Managers (Galaxy Training Materials)",
+year = "",
+month = "",
+day = ""
+url = "\url{https://training.galaxyproject.org/training-material/topics/admin/tutorials/reference-genomes/tutorial.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+                
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Congratulations on successfully completing this tutorial!
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+        <script type="text/javascript">
+        var snippets=document.querySelectorAll('div.highlight');
+        [].forEach.call(snippets,function(snippet){
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+
+        var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+            target:function(trigger){return trigger.nextElementSibling;
+        }});
+        </script>
+        
+
+        <script type="text/javascript">
+            if(window.location.hostname === "galaxyproject.github.io") {
+                // Redirect
+                var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+                $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+                window.setTimeout(function(){
+                    window.location.href = redirect;
+                }, 5000)
+
+            }
+        </script>
+    </body>
+</html>
