@@ -49,10 +49,10 @@ To run this tutorial, you will need to [install Ephemeris](https://ephemeris.rea
 
 > <tip-title>Installing Ephemeris in a Python virtual environment</tip-title>
 >
-> 1. Install `virtualenv` if it is not already available. On Ubuntu this can be done with `sudo apt install virtualenv`
+> 1. Install the Python `venv` package if it is not already available. On Ubuntu this can be done with `sudo apt install python3-venv`
 > 2. Create a virtual environment just for ephemeris, activate it and install ephemeris inside it:
 >    ```console
->    virtualenv -p python3 ~/ephemeris_venv
+>    python3 -m venv ~/ephemeris_venv
 >    . ~/ephemeris_venv/bin/activate
 >    pip install ephemeris
 >    ```
@@ -140,7 +140,7 @@ There are two ways to install tools, depending on how you specify the tools to i
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
 >    > > ```bash
->    > > shed-tools install -g https://your-galaxy -a <api-key> --name bwa --owner devteam --section_label Mapping
+>    > > shed-tools install -g https://galaxy.example.org -a <api-key> --name bwa --owner devteam --section_label Mapping
 >    > > ```
 >    > > {: data-cmd="true"}
 >    > {: .solution}
@@ -178,7 +178,7 @@ For that, you can install from a YAML file:
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
 >    > > ```bash
->    > > shed-tools install -g https://your-galaxy -a <api-key> -t workflow_tools.yml
+>    > > shed-tools install -g https://galaxy.example.org -a <api-key> -t workflow_tools.yml
 >    > > ```
 >    > > {: data-cmd="true"}
 >    > {: .solution}
@@ -229,7 +229,7 @@ Having the tools installed is a good first step, but your users will expect that
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
 >    > > ```bash
->    > > shed-tools test -g https://your-galaxy -a <api-key> --name bamtools_filter --owner devteam
+>    > > shed-tools test -g https://galaxy.example.org -a <api-key> --name bamtools_filter --owner devteam
 >    > > ```
 >    > > {: data-cmd="true"}
 >    > {: .solution}
@@ -330,7 +330,7 @@ If running ephemeris directly is not your preference, there is an Ansible [role]
 > Sometimes the toolbox will fail to reload. You can correct for this by manually triggering the toolbox reload with a query:
 >
 > ```console
-> curl -X PUT https://<your-galaxy>/api/configuration/toolbox -H "x-api-key: $GALAXY_API_KEY"
+> curl -X PUT https://galaxy.example.org/api/configuration/toolbox -H "x-api-key: $GALAXY_API_KEY"
 > ```
 >
 > This will request the toolbox to reload and you can check after if it's discovered your newly installed tools.
