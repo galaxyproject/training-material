@@ -154,7 +154,7 @@ data = data
   .select{|x| not TEST_PHRASES.include? x[:pro] and not TEST_PHRASES.include? x[:con] and not x[:pro].to_s.include? "Helena Testing" }
 
 CSV.open("metadata/feedback.csv", "wb") do |csv|
-  csv << %i[index note pro con anonymous tutorial topic month date]
+  csv << [nil, "note", "pro", "con", "anonymous", "tutorial", "topic", "month", "date"]
   data.each.with_index{|row, index|
     csv << [index, row[:rating], row[:pro], row[:con], nil, row[:tutorial], row[:topic], row[:month], row[:date]]
   }
