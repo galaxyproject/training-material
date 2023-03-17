@@ -30,6 +30,7 @@ contributions:
 
 notebook:
   language: python
+  #pyolite: true # Not possible due to https://pyodide.org/en/stable/project/roadmap.html#write-http-client-in-terms-of-web-apis
 ---
 
 
