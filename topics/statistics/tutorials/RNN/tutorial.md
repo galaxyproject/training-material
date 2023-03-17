@@ -274,7 +274,7 @@ and plot the confusion matrix.
 >            - *"Choose the type of layer"*: `Core -- Dense`
 >                - *"units"*: `1`
 >                - *"Activation function"*: `sigmoid`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 {: .hands_on}
 
 Input is a movie review of size 500 (longer reviews were trimmed and shorter ones padded). Our neural network has 3 layers. The first layer is
@@ -299,7 +299,7 @@ and anything less than 0.5 a negative one. The model config can be downloaded as
 >    - In *"Fit Parameters"*:
 >        - *"epochs"*: `2`
 >        - *"batch_size"*: `128`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 {: .hands_on}
 
 A loss function measures how different the predicted output is versus the expected output. For binary classification problems, we use
@@ -321,7 +321,7 @@ The model builder can be downloaded as a zip file.
 >        - *"Choose how to select data by column:"*: `All columns`
 >        - *"Dataset containing class labels or target values"*: Select `y_train` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 >
 {: .hands_on}
@@ -340,7 +340,7 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 >    - *"Select input data type for prediction"*: `tabular data`
 >    - *"Training samples dataset"*: Select `X_test` dataset
 >    - *"Choose how to select data by column:"*: `All columns`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
@@ -357,7 +357,7 @@ the test dataset.
 >    - *"Choose how to select data by column:"*: `All columns`
 >    - *"Select dataset containing the predicted labels"*": Select `Model Prediction` from the previous step
 >    - *"Does the dataset contain header:"*: `Yes`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 

@@ -38,6 +38,7 @@ contributors:
 priority: 2
 notebook:
   language: python
+  pyolite: true
 
 abbreviations:
   DRY: Don't Repeat Yourself

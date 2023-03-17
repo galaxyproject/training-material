@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis"
+subtopic: one-health
 zenodo_link: 'http://zenodo.org/record/3906454'
 questions:
 - Learn how to get and use data from the Sequence Read Archive in Galaxy.
@@ -13,6 +14,7 @@ key_points:
 - Sequence data in the SRA can be directly imported into Galaxy
 tags:
   - covid19
+  - virology
 contributors:
 - mvdbeek
 - tnabtaf
@@ -70,8 +72,8 @@ At the completion of this tutorial you will know:
 
 We created twoi trajectories that you can follow through this tutorial.
 
-1. **Trajectory 1** - start with NCBI's SRA and search for available accessions &rarr; Start [here](#the-sequence-read-archive)
-2. **Trajectory 2** - bypass NCBI's SRA and start with Galaxy directly. &rarr; Start [here](#back-in-galaxy)
+1. **Trajectory 1** - start with NCBI's SRA and search for available accessions &rarr; Start [in the SRA section](#the-sequence-read-archive)
+2. **Trajectory 2** - bypass NCBI's SRA and start with Galaxy directly. &rarr; Start [in the Galaxy section](#back-in-galaxy)
 
 We recommend beginning with **Trajectory 2**.
 # The Sequence Read Archive
@@ -100,7 +102,7 @@ SRA can be reached either directly through it's website, or through the tool pan
 > <hands-on-title>Explore SRA Entrez</hands-on-title>
 >
 > 1. Go to your Galaxy instance of choice such as one of the [usegalaxy.org](https://usegalaxy.org/), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au) or any other. (This tutorial uses usegalaxy.org).
-> 1. If your history is not already empty, than start a new history (see [here](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html) for more on Galaxy histories)
+> 1. If your history is not already empty, than start a new history (see [galaxy interface tutorial]({% link topics/galaxy-interface/tutorials/history/tutorial.md %}) for more on Galaxy histories)
 > 1. **Click** `Get Data` at the top of the tool panel.
 > 1. **Click** `SRA Server` in the list of tools shown under `Get Data`.
 >    This takes you the [Sequence Read Archive home page](https://www.ncbi.nlm.nih.gov/sra) -- you can also start directly from the SRA.  A search box is shown at the top of the page.  Try searching for something you are interested in, such as `dolphin` or `kidney` or `dolphin kidney` and then **click** the  `Search` button.
@@ -237,7 +239,7 @@ First we need to find a good dataset to play with. The [Sequence Read Archive (S
 >
 > 1. Go to NCBI's SRA page by pointing your browser to https://www.ncbi.nlm.nih.gov/sra
 > 2. In the search box enter `SARS-CoV-2 Patient Sequencing From Partners / MGH`:
-> ![Find data](../../../images/find_mgh_data.png) (Alternatively, you simply click on this [link](https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH))
+> ![Find data](../../../images/find_mgh_data.png) (Alternatively, you [simply access the data via link](https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH))
 > 3. Note that some of the datasets found say "ARTICv3 amplicon sequencing". This is a sequencing technique that requires addition analysis steps not discussed in this tutorial. The data that we will analyse (datasets mentioned below) uses a technique called "metagenomic sequencing".
 > 4. The web page will show a large number of SRA datasets (at the time of writing there were 3,927). This is data from a [study](https://science.sciencemag.org/content/early/2020/12/09/science.abe3261) describing analysis of SARS-CoV-2 in Boston area.
 > 5. Download metadata describing these datasets by:
@@ -285,7 +287,7 @@ Galaxy can process all 2,000+ datasets but to make this tutorial bearable we nee
 >    {: .tip}
 > 1. Make sure the `SraRunInfo.csv` dataset we just uploaded is listed in the {% icon param-file %} "*Select lines from*" field of the tool form.
 > 1. In "*the pattern*" field enter the following expression &rarr; `SRR12733957|SRR11954102`. These are two accession we want to find separated by the pipe symbol `|`. The `|` means `or`: find lines containing `SRR12733957` **or** `SRR11954102`.
-> 1. Click `Execute` button.
+> 1. Click `Run Tool` button.
 > 1. This will generate a file containing two lines (well ... one line is also used as the header, so it will appear the the file has three lines. It is OK.)
 > 1. Cut the first column from the file using {% icon tool %} "**Cut**" tool, which you will find in **Text Manipulation** section of the tool pane.
 > 1. Make sure the dataset produced by the previous step is selected in the "*File to cut*" field of the tool form.
@@ -308,7 +310,7 @@ Now that we have identifiers of datasets we want we need to download the actual 
 > 1. **Faster Download and Extract Reads in FASTQ** {% icon tool %} with the following parameters:
 >    - *"select input type"*: `List of SRA accession, one per line`
 >        - The parameter {% icon param-file %} *"sra accession list"* should point the output of the {% icon tool %} "**Cut**" from the previous step.
->    - **Click** the `Execute` button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the `SRA` dataset. It may take some time. So this may be a good time to do get coffee.
+>    - **Click** the `Run Tool` button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the `SRA` dataset. It may take some time. So this may be a good time to do get coffee.
 >
 > 2. Several entries are created in your history panel when you submit this job:
 >    - **`Pair-end data (fasterq-dump)`**: Contains Paired-end datasets (if available)
@@ -351,7 +353,7 @@ In this part of the tutorial we will perform variant calling and basic analysis 
 
 The reference genome data for today is for SARS-CoV-2, "Severe acute respiratory syndrome coronavirus 2 isolate Wuhan-Hu-1, complete genome", having the accession ID of NC_045512.2.
 
-This data is available from Zenodo using the following [link](https://doi.org/10.5281/zenodo.3906454).
+This [data is available from Zenodo](https://doi.org/10.5281/zenodo.3906454).
 
 > <hands-on-title>Get the reference genome data</hands-on-title>
 >

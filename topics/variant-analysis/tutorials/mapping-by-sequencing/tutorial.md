@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Mapping and molecular identification of phenotype-causing mutations"
+subtopic: model-organisms
 zenodo_link: "https://doi.org/10.5281/zenodo.1098033"
 questions:
   - "What is mapping-by-sequencing?"
@@ -141,7 +142,7 @@ if you do not know what this means).
 
 > <hands-on-title>Data upload and preprocessing</hands-on-title>
 >
-> > <tip-title>Tip</tip-title>
+> > <tip-title></tip-title>
 > > This section assumes that you already know
 > >
 > > - how to upload data to Galaxy via links
@@ -527,4 +528,3 @@ samples for sequencing determines the meaningful variant comparisons that can
 be made in the bioinformatics analysis so it is important to understand the
 essence of the analysis method **before** the preparation of any biological
 samples.
-

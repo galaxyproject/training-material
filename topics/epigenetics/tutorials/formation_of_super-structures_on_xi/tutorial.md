@@ -47,7 +47,7 @@ On a larger scale than nucleosomes, DNA is forming loops. DNA elements that woul
 
 In mammals, the X chromosome inactivation (XCI) balances the dosage of X-linked genes between females and males. The genes on the inactive X (Xi) chromosome are not expressed.
 
-Binding certain proteins to each of the eight histone proteins may modify the chromatin structure and may result in changes in transcription level. For example, the H3K4me3 is adding 3 methyl-group of the 4th Lysine in the histone 3 amino-acid. This modification is known to activate the transcription on nearby genes by opening the chromatin. The H3K27me3 on the other hand is inactivating the transcription of the nearby genes:
+Binding certain molecules to histone proteins can modify the chromatin structure and may result in changes in transcription level. For example, the H3K4me3 results from adding 3 methyl-group to the 4th lysine in the histone 3 protein. This modification is known to activate the transcription on nearby genes by opening the chromatin. The H3K27me3 on the other hand is inactivating the transcription of the nearby genes:
 
 ![Fadloun et al, 2013](../../images/formation_of_super-structures_on_xi/histone_modifications.jpg "Source: Fadloun et al, 2013")
 

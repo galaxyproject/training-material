@@ -9,7 +9,7 @@ objectives:
 - Identify transmission clusters based on SNP distances
 - Study the emergence and spread of drug resistance based on transmission analysis.
 time_estimation: 2H
-enable: false
+draft: true
 level : Intermediate
 key_points:
 - Clustering is a useful tool to detect transmission links between patients and oubreak investigation.
@@ -25,7 +25,7 @@ contributors:
 # Pre-requisites
 This tutorial assumes that you have watched the respective webinars about ([Drug resistance prediction](https://youtu.be/Ddwt-_gQR2M), [Phylogenetic mutations](https://youtu.be/1ps_o5rpnmw), [The concept of clustering](https://youtu.be/l4cPUECJ7VU) and
   [Genetic distance thresholds](https://youtu.be/kKNgmpy1N94)) and therefore you understand 1) How genotypic drug susceptibility is determined
-based on WGS analysis 2) The concept of clustering. It also assumes that you have completed the tutorial on [MTB variant analysis](https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html).
+based on WGS analysis 2) The concept of clustering. It also assumes that you have completed the tutorial on [MTB variant analysis]({% link topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.md %}).
 
 # Introduction
 
@@ -114,7 +114,7 @@ into Galaxy:
 >    Use a meaningful name, for example **MTB VCFs**.
 {: .hands_on}
 
-> <tip-title>Tip</tip-title>
+> <tip-title></tip-title>
 > To create a dataset collection:
 > - Click on the box under the history name (bottom right) that says "Operations on multiple datasets"
 > - Tick all 20 VCFs files that we just imported.
@@ -479,7 +479,7 @@ their respective names and the cluster id (an arbitrary number) they belong to:
 > > to misidentification of index cases. **Remember:** we cannot rule out the possibility
 > > that patients within the cluster were infected by an index case that was not sampled.
 > >
-> >  Read [Xu et al., 2019](https://doi.org/10.1371/journal.pmed.1002961) for more information on this topic.
+> >  Read {% cite Xu_2019 %} for more information on this topic.
 > {: .solution}
 {: .question}
 
@@ -495,7 +495,7 @@ on our clustering analysis.
 
 ## Get the data
 
-In the [MTB Variant Analysis tutorial](https://training.galaxyproject.org/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html)
+In the [MTB Variant Analysis tutorial]({% link topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.md %})
 you have used **TB-profiler** to generate a report with determinants of drug resistance of a
 particular MTB strain, and predict its genotypic drug susceptibility. We have done **exactly the same**
 for the 20 samples that we used in the clustering analysis, so we have now the TB-profiler report for

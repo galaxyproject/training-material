@@ -32,7 +32,7 @@ contributors:
   - stortebecker
   - bgruening
 subtopic: id-quant
-tags: [DDA]
+tags: [DDA, HeLa]
 ---
 
 # Introduction
@@ -116,7 +116,7 @@ If your data were generated on a low resolution mass spectrometer, use **PeakPic
 >           Peak picking will only be performed on MS2 level.
 >
 >   > <comment-title>Local Use of MSConvert</comment-title>
->   > The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If **msconvert** {% icon tool %} is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a detailed description of the necessary steps [here](https://compomics.com/bioinformatics-for-proteomics/identification/) ("Peak List Generation"). Afterwards, upload the resulting mzML file to your Galaxy history.
+>   > The vendor libraries used by MSConvert are only licensed for Windows systems and are therefore rarely implemented in Galaxy instances. If **msconvert** {% icon tool %} is not available in your Galaxy instance, please install the software on a Windows computer and run the conversion locally. You can find a [detailed description of the necessary steps on this site](https://compomics.com/bioinformatics-for-proteomics/identification/) ("Peak List Generation"). Afterwards, upload the resulting mzML file to your Galaxy history.
 >   {: .comment}
 >
 {: .hands_on}
@@ -132,7 +132,7 @@ To find out the peptide sequences, the MS2 spectrum is compared to a theoretical
 
 Different peptide search engines have been developed to fulfill the matching procedure. Here, we will use the search engine [X!Tandem](https://www.ncbi.nlm.nih.gov/pubmed/14976030). OpenMS provides "adapters" (wrappers) for several other peptide search engines, like MSGF+ or OMSSA. You may replace the XTandemAdapter by another search engine of your choice.
 
-> <hands-on-title>Hands-On: Peptide Identification</hands-on-title>
+> <hands-on-title>Peptide Identification</hands-on-title>
 >
 > 1. Copy the prepared protein database (Human database including cRAP contaminants and decoys) from the tutorial [Database Handling]({% link topics/proteomics/tutorials/database-handling/tutorial.md %}) into your current history by using the multiple history view
 >
@@ -175,7 +175,7 @@ The false discovery rate is therefore defined as the number of false discoveries
 
 To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool **PeptideIndexer** {% icon tool %}. This tool allows the annotation of protein names and calculates the protein coverage based on the identified peptides. Then we calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm Fido, which is used by OpenMS. We will then filter PSMs for 1 % FDR with **FalseDiscoveryRate** {% icon tool %}. and set the score back to PEP with **IDScoreSwitcher** {% icon tool %}.
 
-> <hands-on-title>Hands-On: Peptide FDR filtering</hands-on-title>
+> <hands-on-title>Peptide FDR filtering</hands-on-title>
 >
 > 1. Run {% tool [PeptideIndexer](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.6+galaxy0) %} with
 >    - {% icon param-file %} *"Input idXML file containing the identifications"*: output of **XTandemAdapter**
@@ -220,7 +220,7 @@ To calculate FDRs, we first have to annotate the identified peptides to determin
 In bottom-up proteomics, it is necessary to combine the identified peptides to proteins. This is not a trivial task, as proteins are redundant to some degree. Thus, not every peptide can be assigned to only one protein.
 The OpenMS suite implemented the [Fido](https://www.ncbi.nlm.nih.gov/pubmed/20712337) algorithm for protein inference. Fido uses a Bayesian probabilistic model to group and score proteins based on peptide-spectrum matches. Afterwards, we keep only proteins with 1% FDR.
 
-> <hands-on-title>Hands-On: Protein inference</hands-on-title>
+> <hands-on-title>Protein inference</hands-on-title>
 >
 > 1. Run {% tool [FidoAdapter](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.6+galaxy0) %}
 >    - {% icon param-file %} *"Input: identification results"*: output of **IDScoreSwitcher**
@@ -255,7 +255,7 @@ It also enables you to check for contaminations in your samples.
 
 **CAVE:** When analyzing human samples, many proteins that are common contaminants may also stem from the sample. Therefore, human contaminants do not have to be excluded from further analysis, but you should keep in mind that the source of these proteins is unclear.
 
-> <hands-on-title>Hands-On: Analysis of Contaminants</hands-on-title>
+> <hands-on-title>Analysis of Contaminants</hands-on-title>
 >
 > 1. Run {% tool [TextExporter](toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0) %} to convert the idXML output to a human-readable tabular file.
 >    - {% icon param-file %} *"Input file"*: **FalseDiscoveryRate** output
@@ -292,7 +292,7 @@ By comparing results of multiple search engines, you may improve the *sensitivit
 
 Here, we will use the OpenMS tool [ConsensusID](https://abibuilder.informatik.uni-tuebingen.de/archive/openms/Documentation/release/latest/html/TOPP_ConsensusID.html) to combine the search engine results.
 
-> <hands-on-title>Hands-On: Multiple search engines</hands-on-title>
+> <hands-on-title>Multiple search engines</hands-on-title>
 >
 > 1. Run **MSGFPlusAdapter** {% icon tool %} with
 >    - {% icon param-file %} *"Input file"*: the MS2-centroided mzML

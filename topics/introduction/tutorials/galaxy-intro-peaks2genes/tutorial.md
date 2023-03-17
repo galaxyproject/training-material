@@ -282,7 +282,7 @@ As we can see, the peak file lacks `chr` before any chromosome number. But what 
 >     - *"Text file"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
 >     - *"Operation"*: `Keep last lines`
 >     - *"Number of lines"*: Choose a value, e.g. `100`
-> 2. Click **Execute**
+> 2. Click **Run Tool**
 > 3. Wait for the job to finish
 > 4. Inspect the file through the {% icon galaxy-eye %} (eye) icon (**View data**)
 >
@@ -496,7 +496,7 @@ Galaxy makes this very simple with the `Extract workflow` option. This means tha
 
 > <hands-on-title>Extract workflow</hands-on-title>
 >
-> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-cross %} button.
+> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-delete %} button.
 >
 >    This will make the creation of the workflow easier.
 >

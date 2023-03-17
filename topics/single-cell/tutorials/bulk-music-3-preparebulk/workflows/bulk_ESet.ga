@@ -1,0 +1,959 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "This workflow creates bulk ESet objects from uploaded raw matrix &amp; metadata files",
+    "creator": [
+        {
+            "class": "Person",
+            "identifier": "0000-0002-8170-8806",
+            "name": "Wendi Bacon"
+        },
+        {
+            "class": "Person",
+            "identifier": "0000-0002-4181-2676",
+            "name": "Mehmet Tekman"
+        }
+    ],
+    "format-version": "0.1",
+    "name": "MuSiC-Deconvolution: Data generation | bulk | ESet",
+    "steps": {
+        "0": {
+            "annotation": "While the EBI data has the gene symbols in it, these are duplicated, so we still need to thin down the duplications.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0",
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Remove columns",
+                    "name": "input_tabular"
+                }
+            ],
+            "label": "Expression matrix",
+            "name": "Remove columns",
+            "outputs": [
+                {
+                    "name": "output_tabular",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 0.0,
+                "top": 262.5
+            },
+            "post_job_actions": {
+                "TagDatasetActionoutput_tabular": {
+                    "action_arguments": {
+                        "tags": "#bulk,#ebi,#matrix"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "output_tabular"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/column_remove_by_header/column_remove_by_header/1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "2040e4c2750a",
+                "name": "column_remove_by_header",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"headers\": [{\"__index__\": 0, \"name\": \"Gene Name\"}], \"input_tabular\": {\"__class__\": \"RuntimeValue\"}, \"keep_columns\": \"false\", \"strip_characters\": \"#\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "aea0ab42-9fd6-4d16-a5f0-d1ce8cc698b1",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output_tabular",
+                    "uuid": "88efcecd-d1c7-4946-8a18-491ad704f096"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Advanced Cut",
+                    "name": "input"
+                }
+            ],
+            "label": "Metadata",
+            "name": "Advanced Cut",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 9.0,
+                "top": 455.5
+            },
+            "post_job_actions": {
+                "TagDatasetActionoutput": {
+                    "action_arguments": {
+                        "tags": "#bulk,#ebi,#metadata"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "f46f0e4f75c4",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"complement\": \"--complement\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"list\": \"3\\n5\\n7\\n8\\n9\\n10\\n11\\n12\\n13\\n15\\n16\\n17\\n18\"}, \"delimiter\": \"\", \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "456f7c3d-3e34-44d4-b952-440927543a9c",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "71d445d7-061f-41bf-a968-a6705be82fdd"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "Convert EnsemblID to Gene Symbol. Note that some EnsemblID's have multiple Gene Symbols.",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/annotatemyids/annotatemyids/3.14.0+galaxy1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "id_file": {
+                    "id": 0,
+                    "output_name": "output_tabular"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool annotateMyIDs",
+                    "name": "id_file"
+                }
+            ],
+            "label": null,
+            "name": "annotateMyIDs",
+            "outputs": [
+                {
+                    "name": "out_tab",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 290.0,
+                "top": 0
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/annotatemyids/annotatemyids/3.14.0+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "fe3ca740a485",
+                "name": "annotatemyids",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"file_has_header\": \"true\", \"id_file\": {\"__class__\": \"RuntimeValue\"}, \"id_type\": \"ENSEMBL\", \"organism\": \"Hs\", \"output_cols\": [\"SYMBOL\"], \"remove_dups\": \"false\", \"rscriptOpt\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "faff29fb-e920-4767-9da2-f68820116c3b",
+            "workflow_outputs": [
+                {
+                    "label": "annotateMyIDs on input dataset(s): Annotated IDs",
+                    "output_name": "out_tab",
+                    "uuid": "8415bac0-6beb-467d-a0fa-fb6465987ff7"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.2",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "input": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Regex Find And Replace",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Regex Find And Replace",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "left": 466.0,
+                "top": 422.5
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionout_file1": {
+                    "action_arguments": {
+                        "newtype": "tabular"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "out_file1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.2",
+            "tool_shed_repository": {
+                "changeset_revision": "399da6b5ec21",
+                "name": "regex_find_replace",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"checks\": [{\"__index__\": 0, \"pattern\": \"Sample Characteristic\\\\[age\\\\]\", \"replacement\": \"Age\"}, {\"__index__\": 1, \"pattern\": \" year\", \"replacement\": \"\"}, {\"__index__\": 2, \"pattern\": \"Sample Characteristic\\\\[body mass index\\\\]\", \"replacement\": \"BMI\"}, {\"__index__\": 3, \"pattern\": \"Sample Characteristic\\\\[disease\\\\]\", \"replacement\": \"Disease\"}, {\"__index__\": 4, \"pattern\": \"Sample Characteristic\\\\[individual\\\\]\", \"replacement\": \"Individual\"}, {\"__index__\": 5, \"pattern\": \"Sample Characteristic\\\\[sex\\\\]\", \"replacement\": \"Sex\"}], \"input\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "e0bf890a-f327-424b-b6fa-353c4141c900",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "af0da388-91c7-4b22-b9a8-abe3c6655c1b"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "id": 4,
+            "input_connections": {
+                "Annotated IDs": {
+                    "id": 2,
+                    "input_subworkflow_step_id": 0,
+                    "output_name": "out_tab"
+                },
+                "Expression Matrix (Gene Rows)": {
+                    "id": 0,
+                    "input_subworkflow_step_id": 1,
+                    "output_name": "output_tabular"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Copy of Convert from Ensembl to GeneSymbol, summing duplicate genes",
+            "outputs": [],
+            "position": {
+                "left": 525.5,
+                "top": 36.5
+            },
+            "subworkflow": {
+                "a_galaxy_workflow": "true",
+                "annotation": "",
+                "creator": [
+                    {
+                        "class": "Person",
+                        "identifier": "",
+                        "name": "Mehmet Tekman"
+                    }
+                ],
+                "format-version": "0.1",
+                "name": "Copy of Convert from Ensembl to GeneSymbol, summing duplicate genes",
+                "steps": {
+                    "0": {
+                        "annotation": "",
+                        "content_id": null,
+                        "errors": null,
+                        "id": 0,
+                        "input_connections": {},
+                        "inputs": [
+                            {
+                                "description": "",
+                                "name": "Annotated IDs"
+                            }
+                        ],
+                        "label": "Annotated IDs",
+                        "name": "Input dataset",
+                        "outputs": [],
+                        "position": {
+                            "left": 0.5,
+                            "top": 127.52500915527344
+                        },
+                        "tool_id": null,
+                        "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+                        "tool_version": null,
+                        "type": "data_input",
+                        "uuid": "a5355f15-68b7-4551-ac47-49ac73b00edf",
+                        "workflow_outputs": [
+                            {
+                                "label": null,
+                                "output_name": "output",
+                                "uuid": "e6ac7216-b2c6-4232-b911-eb1285ed8a9f"
+                            }
+                        ]
+                    },
+                    "1": {
+                        "annotation": "",
+                        "content_id": null,
+                        "errors": null,
+                        "id": 1,
+                        "input_connections": {},
+                        "inputs": [
+                            {
+                                "description": "",
+                                "name": "Expression Matrix (Gene Rows)"
+                            }
+                        ],
+                        "label": "Expression Matrix (Gene Rows)",
+                        "name": "Input dataset",
+                        "outputs": [],
+                        "position": {
+                            "left": 0.0,
+                            "top": 237.01251220703125
+                        },
+                        "tool_id": null,
+                        "tool_state": "{\"optional\": false, \"tag\": \"\"}",
+                        "tool_version": null,
+                        "type": "data_input",
+                        "uuid": "9aa181ba-56bd-4360-9d50-907bee463505",
+                        "workflow_outputs": []
+                    },
+                    "2": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+                        "errors": null,
+                        "id": 2,
+                        "input_connections": {
+                            "infile": {
+                                "id": 0,
+                                "output_name": "output"
+                            }
+                        },
+                        "inputs": [
+                            {
+                                "description": "runtime parameter for tool Text reformatting",
+                                "name": "infile"
+                            }
+                        ],
+                        "label": "Group Ensembl Duplicates",
+                        "name": "Text reformatting",
+                        "outputs": [
+                            {
+                                "name": "outfile",
+                                "type": "input"
+                            }
+                        ],
+                        "position": {
+                            "left": 328.01251220703125,
+                            "top": 220.0124969482422
+                        },
+                        "post_job_actions": {
+                            "HideDatasetActionoutfile": {
+                                "action_arguments": {},
+                                "action_type": "HideDatasetAction",
+                                "output_name": "outfile"
+                            }
+                        },
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+                        "tool_shed_repository": {
+                            "changeset_revision": "f46f0e4f75c4",
+                            "name": "text_processing",
+                            "owner": "bgruening",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"code\": \"BEGIN {\\n  ordering[\\\"test\\\"]\\n  delete ordering[\\\"test\\\"]\\n}\\nNR > 1 {\\n   if (gene[$1]){\\n      gene[$1] = gene[$1]\\\":\\\"$2\\n   } else {\\n      gene[$1] = $2\\n      ordering[length(ordering)+1] = $1\\n   }\\n   \\n}\\n\\nEND {\\n    for (o=0; o < length(ordering); ++o){\\n         print ordering[o]\\\"\\\\t\\\"gene[ordering[o]]\\n    }\\n}\", \"infile\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": null,
+                        "type": "tool",
+                        "uuid": "e5b51c32-bd3a-440f-a05a-8c1c36384e3c",
+                        "workflow_outputs": []
+                    },
+                    "3": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2",
+                        "errors": null,
+                        "id": 3,
+                        "input_connections": {
+                            "infile1": {
+                                "id": 1,
+                                "output_name": "output"
+                            },
+                            "infile2": {
+                                "id": 2,
+                                "output_name": "outfile"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Merge Gene Symbol and matrix together",
+                        "name": "Join",
+                        "outputs": [
+                            {
+                                "name": "output",
+                                "type": "input"
+                            }
+                        ],
+                        "position": {
+                            "left": 330.98748779296875,
+                            "top": 352.0249938964844
+                        },
+                        "post_job_actions": {
+                            "HideDatasetActionoutput": {
+                                "action_arguments": {},
+                                "action_type": "HideDatasetAction",
+                                "output_name": "output"
+                            }
+                        },
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2",
+                        "tool_shed_repository": {
+                            "changeset_revision": "f46f0e4f75c4",
+                            "name": "text_processing",
+                            "owner": "bgruening",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"column1\": \"1\", \"column2\": \"1\", \"empty_string_filler\": \"0\", \"header\": \"true\", \"ignore_case\": \"false\", \"infile1\": {\"__class__\": \"ConnectedValue\"}, \"infile2\": {\"__class__\": \"ConnectedValue\"}, \"jointype\": \" \", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": null,
+                        "type": "tool",
+                        "uuid": "0ac51cc9-c0b0-4b3d-961c-503860cf423f",
+                        "workflow_outputs": []
+                    },
+                    "4": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+                        "errors": null,
+                        "id": 4,
+                        "input_connections": {
+                            "infile": {
+                                "id": 3,
+                                "output_name": "output"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Relocate the Gene Symbol column to 1st column",
+                        "name": "Text reformatting",
+                        "outputs": [
+                            {
+                                "name": "outfile",
+                                "type": "input"
+                            }
+                        ],
+                        "position": {
+                            "left": 580.9625244140625,
+                            "top": 381.01251220703125
+                        },
+                        "post_job_actions": {
+                            "HideDatasetActionoutfile": {
+                                "action_arguments": {},
+                                "action_type": "HideDatasetAction",
+                                "output_name": "outfile"
+                            }
+                        },
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+                        "tool_shed_repository": {
+                            "changeset_revision": "f46f0e4f75c4",
+                            "name": "text_processing",
+                            "owner": "bgruening",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"code\": \"{print $NF\\\"\\\\t\\\"$0}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": null,
+                        "type": "tool",
+                        "uuid": "44880f2a-430c-4b00-a0b3-e4673fe395ce",
+                        "workflow_outputs": []
+                    },
+                    "5": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+                        "errors": null,
+                        "id": 5,
+                        "input_connections": {
+                            "input": {
+                                "id": 4,
+                                "output_name": "outfile"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Remove second column with Ensembl ID's",
+                        "name": "Advanced Cut",
+                        "outputs": [
+                            {
+                                "name": "output",
+                                "type": "tabular"
+                            }
+                        ],
+                        "position": {
+                            "left": 580.0,
+                            "top": 236.01251220703125
+                        },
+                        "post_job_actions": {
+                            "HideDatasetActionoutput": {
+                                "action_arguments": {},
+                                "action_type": "HideDatasetAction",
+                                "output_name": "output"
+                            }
+                        },
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+                        "tool_shed_repository": {
+                            "changeset_revision": "f46f0e4f75c4",
+                            "name": "text_processing",
+                            "owner": "bgruening",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"complement\": \"--complement\", \"cut_type_options\": {\"cut_element\": \"-f\", \"__current_case__\": 0, \"list\": \"2\"}, \"delimiter\": \"\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": null,
+                        "type": "tool",
+                        "uuid": "104cb55a-f297-4464-b3b6-7021ffd0ae9c",
+                        "workflow_outputs": []
+                    },
+                    "6": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+                        "errors": null,
+                        "id": 6,
+                        "input_connections": {
+                            "infile": {
+                                "id": 5,
+                                "output_name": "output"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Count Unique occurences of Gene Symbol",
+                        "name": "Text reformatting",
+                        "outputs": [
+                            {
+                                "name": "outfile",
+                                "type": "input"
+                            }
+                        ],
+                        "position": {
+                            "left": 832.987548828125,
+                            "top": 0.0
+                        },
+                        "post_job_actions": {
+                            "HideDatasetActionoutfile": {
+                                "action_arguments": {},
+                                "action_type": "HideDatasetAction",
+                                "output_name": "outfile"
+                            }
+                        },
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+                        "tool_shed_repository": {
+                            "changeset_revision": "f46f0e4f75c4",
+                            "name": "text_processing",
+                            "owner": "bgruening",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"code\": \"{ gene[$1] = gene[$1] + 1 }\\n\\nEND {\\n     for (ge in gene){\\n         print ge\\\"\\\\t\\\"gene[ge]\\n     }\\n}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": null,
+                        "type": "tool",
+                        "uuid": "1f84d0c1-b187-4299-a2bd-172964ef3732",
+                        "workflow_outputs": []
+                    },
+                    "7": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+                        "errors": null,
+                        "id": 7,
+                        "input_connections": {
+                            "infile": {
+                                "id": 5,
+                                "output_name": "output"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Group rows by Gene Symbol and append their values (Long Format)",
+                        "name": "Text reformatting",
+                        "outputs": [
+                            {
+                                "name": "outfile",
+                                "type": "input"
+                            }
+                        ],
+                        "position": {
+                            "left": 833.9625244140625,
+                            "top": 246.05001831054688
+                        },
+                        "post_job_actions": {
+                            "HideDatasetActionoutfile": {
+                                "action_arguments": {},
+                                "action_type": "HideDatasetAction",
+                                "output_name": "outfile"
+                            }
+                        },
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+                        "tool_shed_repository": {
+                            "changeset_revision": "f46f0e4f75c4",
+                            "name": "text_processing",
+                            "owner": "bgruening",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"code\": \"NR == 1 {\\n    for (i=2; i <= NF; i++){\\n         cellorder[i] = $i\\n   }\\n}\\n\\nNR > 1 {\\n    for (i=2; i <= NF; i++){\\n         if (cellorder[i] == \\\"0\\\" || $1 == \\\"NA\\\"){\\n         } else {\\n             bc[$1\\\"\\\\t\\\"cellorder[i]] = bc[$1\\\"\\\\t\\\"cellorder[i]] + $i\\n         }\\n   }\\n}\\n\\nEND {\\n   print \\\"gene\\\\tbar\\\\tvalue\\\"\\n   for (key in bc){\\n       print key\\\"\\\\t\\\"bc[key]\\n   }\\n}\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": null,
+                        "type": "tool",
+                        "uuid": "8ac449d7-da88-44b0-bfe2-092d8cd47af9",
+                        "workflow_outputs": []
+                    },
+                    "8": {
+                        "annotation": "",
+                        "content_id": "sort1",
+                        "errors": null,
+                        "id": 8,
+                        "input_connections": {
+                            "input": {
+                                "id": 6,
+                                "output_name": "outfile"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Unique Gene Symbol Occurences, sorted in descending frequency.",
+                        "name": "Sort",
+                        "outputs": [
+                            {
+                                "name": "out_file1",
+                                "type": "input"
+                            }
+                        ],
+                        "position": {
+                            "left": 1067.9625244140625,
+                            "top": 2.0625
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "sort1",
+                        "tool_state": "{\"column\": \"2\", \"column_set\": [], \"header_lines\": \"0\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"order\": \"DESC\", \"style\": \"num\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": null,
+                        "type": "tool",
+                        "uuid": "d3a9bfd0-372a-493c-a83a-578427a7fe17",
+                        "workflow_outputs": [
+                            {
+                                "label": "Report of Duplicate Genes",
+                                "output_name": "out_file1",
+                                "uuid": "274c3805-5b98-4a64-8dcd-c269750b852e"
+                            }
+                        ]
+                    },
+                    "9": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0",
+                        "errors": null,
+                        "id": 9,
+                        "input_connections": {
+                            "singtabop|input": {
+                                "id": 7,
+                                "output_name": "outfile"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Pivot Long Format to Wide Format (Matrix)",
+                        "name": "Table Compute",
+                        "outputs": [
+                            {
+                                "name": "table",
+                                "type": "tabular"
+                            }
+                        ],
+                        "position": {
+                            "left": 1057.987548828125,
+                            "top": 298.0249938964844
+                        },
+                        "post_job_actions": {
+                            "HideDatasetActiontable": {
+                                "action_arguments": {},
+                                "action_type": "HideDatasetAction",
+                                "output_name": "table"
+                            }
+                        },
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/table_compute/table_compute/1.2.4+galaxy0",
+                        "tool_shed_repository": {
+                            "changeset_revision": "3bf5661c0280",
+                            "name": "table_compute",
+                            "owner": "iuc",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"out_opts\": [\"output_headers_col\", \"output_headers_row\"], \"precision\": \"6\", \"singtabop\": {\"use_type\": \"single\", \"__current_case__\": 0, \"input\": {\"__class__\": \"ConnectedValue\"}, \"col_row_names\": [\"has_col_names\"], \"adv\": {\"header\": null, \"nrows\": null, \"skipfooter\": null, \"skip_blank_lines\": \"true\"}, \"user\": {\"mode\": \"fulltable\", \"__current_case__\": 4, \"general\": {\"use\": \"pivot\", \"__current_case__\": 2, \"index\": \"gene\", \"column\": \"bar\", \"values\": \"value\", \"aggfunc\": null, \"colfun_map\": []}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": null,
+                        "type": "tool",
+                        "uuid": "6c98c17e-43ca-4620-a2f7-a919c24bee20",
+                        "workflow_outputs": []
+                    },
+                    "10": {
+                        "annotation": "",
+                        "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+                        "errors": null,
+                        "id": 10,
+                        "input_connections": {
+                            "infile": {
+                                "id": 9,
+                                "output_name": "table"
+                            }
+                        },
+                        "inputs": [],
+                        "label": "Final Count Matrix with Gene Symbol ID's",
+                        "name": "Text transformation",
+                        "outputs": [
+                            {
+                                "name": "output",
+                                "type": "input"
+                            }
+                        ],
+                        "position": {
+                            "left": 1284.0125732421875,
+                            "top": 386.07501220703125
+                        },
+                        "post_job_actions": {},
+                        "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1",
+                        "tool_shed_repository": {
+                            "changeset_revision": "f46f0e4f75c4",
+                            "name": "text_processing",
+                            "owner": "bgruening",
+                            "tool_shed": "toolshed.g2.bx.psu.edu"
+                        },
+                        "tool_state": "{\"adv_opts\": {\"adv_opts_selector\": \"basic\", \"__current_case__\": 0}, \"code\": \"1 s/^gene//\", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+                        "tool_version": null,
+                        "type": "tool",
+                        "uuid": "16452009-e11e-4aeb-8404-6c70e13490ac",
+                        "workflow_outputs": [
+                            {
+                                "label": "Gene Symbol Count Matrix",
+                                "output_name": "output",
+                                "uuid": "f7b8537e-6349-437a-9b89-d9bab0e1e581"
+                            }
+                        ]
+                    }
+                },
+                "tags": "",
+                "uuid": "463a98af-e99f-47d8-9a05-f601d39b506a"
+            },
+            "tool_id": 171557,
+            "type": "subworkflow",
+            "uuid": "319ba9b4-9af0-4a4d-a3d5-b700d1745d3f",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "Report of Duplicate Genes",
+                    "uuid": "915c757d-6fb1-41d2-a9f7-b8b30a29794a"
+                },
+                {
+                    "label": null,
+                    "output_name": "Gene Symbol Count Matrix",
+                    "uuid": "24ace210-3eac-4f62-8781-366e00cff2dc"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "exprs_file": {
+                    "id": 4,
+                    "output_name": "Gene Symbol Count Matrix"
+                },
+                "pdata_file": {
+                    "id": 3,
+                    "output_name": "out_file1"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Construct Expression Set Object",
+                    "name": "exprs_file"
+                },
+                {
+                    "description": "runtime parameter for tool Construct Expression Set Object",
+                    "name": "pdata_file"
+                }
+            ],
+            "label": null,
+            "name": "Construct Expression Set Object",
+            "outputs": [
+                {
+                    "name": "out_txt",
+                    "type": "txt"
+                },
+                {
+                    "name": "out_rds",
+                    "type": "rdata"
+                }
+            ],
+            "position": {
+                "left": 883.0,
+                "top": 343.5
+            },
+            "post_job_actions": {
+                "RemoveTagDatasetActionout_rds": {
+                    "action_arguments": {
+                        "tags": "#metadata,#matrix"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "out_rds"
+                },
+                "TagDatasetActionout_rds": {
+                    "action_arguments": {
+                        "tags": "#combined"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "out_rds"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_construct_eset/music_construct_eset/0.1.1+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "282819d09a4f",
+                "name": "music_construct_eset",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"annotation\": \"\", \"expdata\": {\"name\": \"\", \"lab\": \"\", \"contact\": \"\", \"title\": \"\", \"abstract\": \"\", \"url\": \"\", \"other\": [{\"__index__\": 0, \"field\": \"notes\", \"comment\": \"Created in Galaxy\"}]}, \"exprs_file\": {\"__class__\": \"RuntimeValue\"}, \"metadata\": [], \"pdata_file\": {\"__class__\": \"RuntimeValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "8e428b8e-bda7-4fdb-8daa-2197d1d1d357",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_rds",
+                    "uuid": "28490366-fb29-40df-852c-2f5da6f1a6ce"
+                },
+                {
+                    "label": null,
+                    "output_name": "out_txt",
+                    "uuid": "426d6040-bf0f-4312-babf-2ae9c928eff1"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "rds_eset": {
+                    "id": 5,
+                    "output_name": "out_rds"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Manipulate Expression Set Object",
+                    "name": "rds_eset"
+                }
+            ],
+            "label": null,
+            "name": "Manipulate Expression Set Object",
+            "outputs": [
+                {
+                    "name": "out_eset",
+                    "type": "rdata"
+                }
+            ],
+            "position": {
+                "left": 1186.5,
+                "top": 300.5
+            },
+            "post_job_actions": {
+                "RemoveTagDatasetActionout_eset": {
+                    "action_arguments": {
+                        "tags": "#combined"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "out_eset"
+                },
+                "TagDatasetActionout_eset": {
+                    "action_arguments": {
+                        "tags": "#normal"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "out_eset"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "22232092be53",
+                "name": "music_manipulate_eset",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"combine_eset\": {\"do\": \"No\", \"__current_case__\": 0}, \"rds_eset\": {\"__class__\": \"RuntimeValue\"}, \"subset_eset\": {\"do\": \"Yes\", \"__current_case__\": 1, \"subset_yes\": {\"by\": \"phenotype\", \"__current_case__\": 3, \"pheno_samples\": [{\"__index__\": 0, \"column\": \"Disease\", \"values\": \"normal\"}], \"pheno_genes\": []}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "f7cd1cd9-42bf-4a24-82a3-6720a7783771",
+            "workflow_outputs": [
+                {
+                    "label": "Manipulate Expression Set Object on input dataset(s): ExpressionSet Object",
+                    "output_name": "out_eset",
+                    "uuid": "88196d0b-7254-4794-b08a-5409f19c8323"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "rds_eset": {
+                    "id": 5,
+                    "output_name": "out_rds"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Manipulate Expression Set Object",
+                    "name": "rds_eset"
+                }
+            ],
+            "label": null,
+            "name": "Manipulate Expression Set Object",
+            "outputs": [
+                {
+                    "name": "out_eset",
+                    "type": "rdata"
+                }
+            ],
+            "position": {
+                "left": 1183.5,
+                "top": 528.5
+            },
+            "post_job_actions": {
+                "RemoveTagDatasetActionout_eset": {
+                    "action_arguments": {
+                        "tags": "#combined"
+                    },
+                    "action_type": "RemoveTagDatasetAction",
+                    "output_name": "out_eset"
+                },
+                "TagDatasetActionout_eset": {
+                    "action_arguments": {
+                        "tags": "#T2D"
+                    },
+                    "action_type": "TagDatasetAction",
+                    "output_name": "out_eset"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/music_manipulate_eset/music_manipulate_eset/0.1.1+galaxy4",
+            "tool_shed_repository": {
+                "changeset_revision": "22232092be53",
+                "name": "music_manipulate_eset",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"combine_eset\": {\"do\": \"No\", \"__current_case__\": 0}, \"rds_eset\": {\"__class__\": \"RuntimeValue\"}, \"subset_eset\": {\"do\": \"Yes\", \"__current_case__\": 1, \"subset_yes\": {\"by\": \"phenotype\", \"__current_case__\": 3, \"pheno_samples\": [{\"__index__\": 0, \"column\": \"Disease\", \"values\": \"type II diabetes mellitus\"}], \"pheno_genes\": []}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": null,
+            "type": "tool",
+            "uuid": "8dc9defa-1ae9-4e6b-8479-5034763c7c2f",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_eset",
+                    "uuid": "ecab164b-a19b-4b78-8b6d-491aa2d5c1e7"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "name:singlecell",
+        "name:transcriptomics",
+        "name:training"
+    ],
+    "uuid": "d1a27762-4239-40d1-9cc3-303507f35238",
+    "version": 1
+}

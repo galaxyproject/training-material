@@ -20,7 +20,7 @@ If you can't find a tool you need for a tutorial on Galaxy, please:
   - Check **"Available on these Galaxies"**
   - If your server is not listed here, the tutorial is not supported on your Galaxy server
   - You can create an account on one of the supporting Galaxies
-  ![screenshot of overview box with available Galaxies section]({% link /faqs/galaxy/images/supporting_galaxies.png %})
+  ![screenshot of overview box with available Galaxies section]({% link faqs/galaxy/images/supporting_galaxies.png %})
 
 2. Use the **Tutorial mode** feature
   - Open your Galaxy server
@@ -28,7 +28,7 @@ If you can't find a tool you need for a tutorial on Galaxy, please:
   - Navigate to your tutorial
   - Tool names in tutorials will be blue buttons that open the correct tool for you
   - **Note:** this does not work for all tutorials (yet)
-  ![gif showing how GTN-in-Galaxy works]({% link /topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif %})
+  ![gif showing how GTN-in-Galaxy works]({% link topics/contributing/images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif %})
 
 3. **Still not finding the tool?**
   - Ask help in [Gitter]({{site.gitter_url}}).

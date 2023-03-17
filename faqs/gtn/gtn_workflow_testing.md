@@ -29,7 +29,7 @@ contributors: [hexylena]
 
    ```
    # In a virtualenv
-   pip install git+https://github.com/galaxyproject/planemo
+   pip install planemo
    ```
 
 8. Run the command to initialise a workflow test from the `workflows/` subdirectory - if it doesn't exist, you might need to create it first.

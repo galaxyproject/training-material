@@ -104,7 +104,7 @@ First let's try Red, a tool than can mask repeats *de novo*. For that, select th
 >
 {: .comment}
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [Red](toolshed.g2.bx.psu.edu/repos/iuc/red/red/2018.09.10+galaxy1) %} with the following parameters:
 >   - {% icon param-file %} *"Genome sequence to mask"*: `genome_raw.fasta` (Input dataset)
@@ -136,7 +136,7 @@ Red produces 2 output files :
 > >
 > > As you can see **Red** has no option to hard-mask your genome. However, one of the output is a `bed` file, so you can use {% tool bedtools MaskFastaBed %} to replace repeated regions with stretches of N:
 > >
-> > > <hands-on-title>Hands-on</hands-on-title>
+> > > <hands-on-title></hands-on-title>
 > > >
 > > > 1. {% tool [bedtools MaskFastaBed](toolshed.g2.bx.psu.edu/repos/iuc/bedtools/bedtools_maskfastabed/2.30.0) %} with the following parameters:
 > > >   - {% icon param-file %} *"BED/bedGraph/GFF/VCF/EncodePeak file"*: `Red on data` (`bed` file produced by red)
@@ -160,7 +160,7 @@ Let's run RepeatMasker, by selected the input assembly in fasta format. We selec
 >
 {: .comment}
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [RepeatMasker](toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1) %} with the following parameters:
 >   - {% icon param-file %} *"Genomic DNA"*: `genome_raw.fasta` (Input dataset)
@@ -172,7 +172,7 @@ Let's run RepeatMasker, by selected the input assembly in fasta format. We selec
 >
 {: .hands_on}
 
-RepeatMasker produces 4 output files:
+RepeatMasker produces 5 output files:
 
 - `masked sequence`: this is the fasta file that you will use for future analysis. If you display it, you will notice that some portions of the sequence are in lowercase: these are the regions that were identified as repeats.
 - `repeat statistics`: this one contains some statistics on the number of repeats found in each category, and the total number of base pairs masked.
@@ -195,11 +195,11 @@ As we have used a generic species (Human), we only identified the most common an
 
 To boost RepeatMasker performance, we need a tailored repeat library for *Mucor mucedo*. This step can take from a few hours to a few days and a large number of tools could be used. We pre-computed two librairies :
 
-- `Muco_library_RM2.fasta` using [RepeatModeler](https://doi.org/10.1073/pnas.1921046117)
-- `Muco_library_EDTA.fasta` using [EDTA](https://doi.org/10.1186/s13059-019-1905-y)
+- `Muco_library_RM2.fasta` using RepeatModeler ({% cite Flynn_2020 %})
+- `Muco_library_EDTA.fasta` using EDTA ({% cite Ou_2019 %})
 
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [RepeatMasker](toolshed.g2.bx.psu.edu/repos/bgruening/repeat_masker/repeatmasker_wrapper/4.1.2-p1+galaxy1) %} with the following parameters:
 >   - {% icon param-file %} *"Genomic DNA"*: `genome_raw.fasta` (Input dataset)

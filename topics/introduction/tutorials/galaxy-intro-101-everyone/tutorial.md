@@ -165,7 +165,7 @@ First, we will convert the file from comma-separated to tab-separated format. Ga
 >
 > 1. **Convert** {% icon galaxy-pencil %} the CSV file (comma-separated values) to tabular format (tsv; tab-separated values)
 >
->    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="Convert CSV to Tabular" %}
+>    {% snippet faqs/galaxy/datasets_convert_datatype.md conversion="tabular (using csv-to-tabular)" %}
 >
 > 2. **Rename** {% icon galaxy-pencil %} the resulting dataset to `iris tabular`
 >
@@ -203,7 +203,7 @@ Now it is time to run your first tool! We saw in the previous step that our file
 > 1. {% tool [Remove Beginning](Remove beginning1) %} with the following parameters:
 >    - *Remove first*: `1` (to remove the first line only)
 >    - {% icon param-file %} *"from"*: select the **iris tabular** file from your history
->    - Click **Execute**
+>    - Click **Run Tool**
 >
 >    > <comment-title>Tip: search for the tool</comment-title>
 >    >
@@ -526,7 +526,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 
 > <hands-on-title>Extract workflow</hands-on-title>
 >
-> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-cross %} button.
+> 1. **Clean up** your history: remove any failed (red) jobs from your history by clicking on the {% icon galaxy-delete %} button.
 >
 >    This will make the creation of the workflow easier.
 >
@@ -559,7 +559,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 
 
 > <comment-title>Tip: Problems creating your workflow?</comment-title>
-> If you had problems extracting your workflow in the previous step, we provide a working copy for you [here]({% link topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/main_workflow.ga %}),
+> If you had problems extracting your workflow in the previous step, we provide [a working copy for you]({% link topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/main_workflow.ga %}),
 > which you can import to Galaxy and use for the next sections (see below how to import a workflow to Galaxy).
 >
 > {% snippet faqs/galaxy/workflows_import.md %}

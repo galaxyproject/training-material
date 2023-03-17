@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: Somatic Variant Discovery from WES Data Using Control-FREEC
 zenodo_link: https://doi.org/10.5281/zenodo.2582555
+subtopic: human-genetics-cancer
 questions:
 - What are the specific challenges in locating human Copy Number Variances (hCNVs)?
 - How to preprocess the sequenced reads for hCNVs detection?  
@@ -19,7 +20,7 @@ contributors:
 - Khaled196
 - kpbioteam
 - wm75
-- davidsalgado
+- d-salgado
 - kpoterlowicz
 
 ---

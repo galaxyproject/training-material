@@ -151,7 +151,7 @@ This information is false, because it shows that Red has twice the expression th
 > |--|-------------|-----------------|
 > | Gene Red | Pink | 2 |
 > |          | Blue | 4 |
-> | Gene Blue | Brown | 1 |
+> | Gene Blue | Pink | 1 |
 > |           | Green | 2 |
 {: .matrix}
 
@@ -160,7 +160,7 @@ From this we can then make the decision to ignore the frequencies of these UMIs,
 > |  | Set of UMIs in Gene | UMIs in Cell 1 |
 > |--|---------------------|----------------|
 > | Gene Red | {Pink, Blue} | 2 |
-> | Gene Blue | {Brown, Green} | 2 |
+> | Gene Blue | {Pink, Green} | 2 |
 {: .matrix}
 
 This then provides us with the true count of the number of true transcripts for each gene as given by our original figure.

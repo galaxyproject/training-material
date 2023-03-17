@@ -816,7 +816,7 @@ done
 
 it would work exactly the same way.
 
-**Don't do this.**
+# Don't do this.
 
 Programs are only useful if people can understand them,
 so meaningless names (like `x`) or misleading names (like `temperature`)
@@ -1331,7 +1331,7 @@ so she decides to get some coffee and catch up on her reading.
 > > ```
 > {: .code-in}
 >
-> > <solution-title>Solution</solution-title>
+> > <solution-title></solution-title>
 > > The second version is the one we want to run.
 > > This prints to screen everything enclosed in the quote marks, expanding the
 > > loop variable name because we have prefixed it with a dollar sign.

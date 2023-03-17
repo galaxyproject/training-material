@@ -32,6 +32,7 @@ contributors:
 priority: 7
 notebook:
   language: python
+  pyolite: true
 ---
 
 Here we'll give a quick tutorial on how to read and write files within Python.

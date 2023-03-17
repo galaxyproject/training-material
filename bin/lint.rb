@@ -8,29 +8,6 @@ require 'bibtex'
 require 'citeproc/ruby'
 require 'csl/styles'
 
-# Load our citation library
-CITATION_LIBRARY = BibTeX::Bibliography.new
-Find.find('./') do |path|
-  if FileTest.directory?(path)
-    if File.basename(path).start_with?('.')
-      Find.prune       # Don't look any further into this directory.
-    else
-      next
-    end
-  else
-    if path =~ /bib$/ then
-      b = BibTeX.open(path)
-      for x in b
-        # Record the bib path.
-        x._path = path
-        CITATION_LIBRARY << x
-      end
-    end
-  end
-end
-
-
-
 # This is our ONE central linting script that handles EVERYTHING.
 
 module ReviewDogEmitter
@@ -218,6 +195,21 @@ module GtnLinter
     }
   end
 
+  def self.check_pmids(contents)
+    # https://www.ncbi.nlm.nih.gov/pubmed/24678044
+    self.find_matching_texts(contents, /(\[[^\]]*\]\(https?:\/\/www.ncbi.nlm.nih.gov\/pubmed\/\/[0-9]*\))/).map { |idx, text, selected|
+      ReviewDogEmitter.warning(
+        path: @path,
+        idx: idx,
+        match_start: selected.begin(0),
+        match_end: selected.end(0) + 2,
+        replacement: "{% cite ... %}",
+        message: "This looks like a PMID which could be better served by using the built-in Citations mechanism. You can use https://doi2bib.org to convert your PMID/PMCID into a .bib formatted entry, and add to your tutorial.md",
+        code: "GTN:004"
+      )
+    }
+  end
+
   def self.check_bad_link_text(contents)
     self.find_matching_texts(contents, /\[\s*(here|link)\s*\]/i)
         .map { |idx, text, selected|
@@ -289,17 +281,37 @@ module GtnLinter
     a + b + c + d
   end
 
+  @CITATION_LIBRARY = nil
+
+  def self.get_citation_library
+    if @CITATION_LIBRARY.nil?
+      lib = BibTeX::Bibliography.new
+      (self.enumerate_type(/bib$/) + self.enumerate_type(/bib$/, root_dir: "faqs")).each{|path|
+        b = BibTeX.open(path)
+        for x in b
+          # Record the bib path.
+          x._path = path
+          lib << x
+        end
+      }
+      @CITATION_LIBRARY = lib
+    end
+
+    @CITATION_LIBRARY
+  end
+
   def self.check_bad_cite(contents)
     self.find_matching_texts(contents, /{%\s*cite\s+([^%]*)\s*%}/i)
     .map { |idx, text, selected|
-      if CITATION_LIBRARY[selected[1].strip].nil?
+      citation_key = selected[1].strip
+      if self.get_citation_library[citation_key].nil?
         ReviewDogEmitter.error(
           path: @path,
           idx: idx,
           match_start: selected.begin(0),
           match_end: selected.end(0),
           replacement: nil,
-          message: "The citation (`#{selected[1].strip}`) could not be found.",
+          message: "The citation (#{citation_key}) could not be found.",
           code: "GTN:007",
         )
       end
@@ -344,6 +356,7 @@ module GtnLinter
       'Convert characters1',
       'Count1',
       'Cut1',
+      'Extract_features1',
       'Filter1',
       'Grep1',
       'Grouping1',
@@ -502,6 +515,74 @@ module GtnLinter
     }
   end
 
+  KNOWN_TAGS = [
+    # GTN
+    'cite',
+    'snippet',
+    'link',
+    'icon',
+    'tool',
+    'color',
+
+    'set', # This isn't strictly GTN, it's seen inside a raw in a tool tutorial.
+    # Jekyll
+    'if', 'else', 'elsif', 'endif',
+    'capture', 'assign', 'include',
+    'comment', 'endcomment',
+    'for', 'endfor',
+    'unless', 'endunless',
+    'raw', 'endraw',
+  ]
+
+  def self.check_bad_tag(contents)
+    self.find_matching_texts(contents, /{%\s*(?<tag>[a-z]+)/)
+    .select {|idx, text, selected| ! KNOWN_TAGS.include? selected[:tag]}
+    .map { |idx, text, selected|
+      ReviewDogEmitter.warning(
+        path: @path,
+        idx: idx,
+        match_start: selected.begin(1),
+        match_end: selected.end(1) + 1,
+        replacement: nil,
+        message: "We're not sure this tag is correct (#{selected[:tag]}), it isn't one of the known tags.",
+        code: "GTN:021",
+      )
+    }
+  end
+
+  BOX_CLASSES = [
+      "agenda",
+      "code-in",
+      "code-out",
+      "comment",
+      "details",
+      "feedback",
+      "hands-on",
+      "hands_on",
+      "question",
+      "solution",
+      "tip",
+      "warning",
+  ]
+
+  def self.check_useless_box_prefix(contents)
+    self.find_matching_texts(contents, /<(?<tag>[a-z_-]+)-title>(?<fw>[a-zA-Z_-]+:?\s*)/)
+    .select {|idx, text, selected|
+      BOX_CLASSES.include?(selected[:tag]) and selected[:tag] == selected[:fw].gsub(/:\s*$/, '').downcase
+    }
+    .map { |idx, text, selected|
+      ReviewDogEmitter.warning(
+        path: @path,
+        idx: idx,
+        match_start: selected.begin(2),
+        match_end: selected.end(2) + 1,
+        replacement: "",
+        message: "It is no longer necessary to prefix your #{selected[:tag]} box titles with #{selected[:tag].capitalize}, this is done automatically.",
+        code: "GTN:022",
+      )
+    }
+  end
+
   def self.fix_md(contents)
     [
       *fix_notoc(contents),
@@ -509,9 +590,10 @@ module GtnLinter
       *link_gtn_slides_external(contents),
       *link_gtn_tutorial_external(contents),
       *check_dois(contents),
+      *check_pmids(contents),
       *check_bad_link_text(contents),
       *incorrect_calls(contents),
-      #*check_bad_cite(contents),
+      *check_bad_cite(contents),
       *non_existent_snippet(contents),
       *bad_tool_links(contents),
       *check_tool_link(contents),
@@ -519,6 +601,8 @@ module GtnLinter
       *no_target_blank(contents),
       *check_bad_link(contents),
       *check_looks_like_heading(contents),
+      *check_bad_tag(contents),
+      *check_useless_box_prefix(contents),
     ]
   end
 
@@ -562,11 +646,33 @@ module GtnLinter
     end
 
     if ! contents.has_key?("annotation")
-      topic = @path.split('/')[1]
       results.push(ReviewDogEmitter.file_error(
         path: @path, message: "This workflow is missing an annotation. Please add `\"annotation\": \"title of tutorial\"`", code: "GTN:016"))
     end
 
+    if ! contents.has_key?("license")
+      results.push(ReviewDogEmitter.file_error(
+        path: @path, message: "This workflow is missing a license. Please select a valid OSI license. You can correct this in the Galaxy workflow editor.", code: "GTN:026"))
+    end
+
+    if ! contents.has_key?("creator")
+      results.push(ReviewDogEmitter.file_error(
+        path: @path, message: "This workflow is missing a Creator. Please edit this workflow in Galaxy to add the correct creator entities", code: "GTN:024"))
+    else
+      contents['creator']
+        .select{|c| c["class"] == "Person"}
+        .each{|p|
+          if ! p.has_key?("identifier") or p["identifier"] == ""
+            results.push(ReviewDogEmitter.file_error(
+              path: @path, message: "This workflow has a creator but is missing an identifier for them. Please ensure all creators have valid ORCIDs.", code: "GTN:025"))
+          end
+
+          if ! p.has_key?("name") or p["name"] == ""
+            results.push(ReviewDogEmitter.file_error(
+              path: @path, message: "This workflow has a creator but is a name, please add it.", code: "GTN:025"))
+          end
+        }
+    end
     results
   end
 
@@ -596,9 +702,29 @@ module GtnLinter
     @PLAIN_OUTPUT = true
   end
 
+  def self.set_rdjson_output
+    @PLAIN_OUTPUT = false
+  end
+
+  @LIMIT_EMITTED_CODES = nil
+  def self.set_code_limits(codes)
+    @LIMIT_EMITTED_CODES = codes
+  end
+
+  @AUTO_APPLY_FIXES = false
+  def self.enable_auto_fix
+    @AUTO_APPLY_FIXES = true
+  end
+
   def self.format_reviewdog_output(message)
+    if ! @LIMIT_EMITTED_CODES.nil?
+      if !@LIMIT_EMITTED_CODES.include?(message['code']['value'])
+        return
+      end
+    end
+
     if !message.nil? and message != []
-      if $stdout.tty? or @PLAIN_OUTPUT
+      if @PLAIN_OUTPUT # $stdout.tty? or
         parts = [
           message['location']['path'],
           message['location']['range']['start']['line'],
@@ -610,6 +736,39 @@ module GtnLinter
         puts parts.join(":")
       else
         puts JSON.generate(message)
+      end
+    end
+
+    if @AUTO_APPLY_FIXES and message['suggestions'].length > 0
+      #{"message":"It is no longer necessary to prefix your hands-on box titles with Hands-on, this is done automatically.","location":{"path":"./topics/computational-chemistry/tutorials/zauberkugel/tutorial.md","range":{"start":{"line":186,"column":4},"end":{"line":186,"column":12}}},"severity":"WARNING","code":{"value":"GTN:022","url":"https://github.com/galaxyproject/training-material/wiki/Error-Codes#gtn022"},"suggestions":[{"text":"<hands-on-title>","range":{"start":{"line":186,"column":4},"end":{"line":186,"column":12}}}]}
+
+      start_line = message['location']['range']['start']['line']
+      start_coln = message['location']['range']['start']['column']
+      end_line = message['location']['range']['end']['line']
+      end_coln = message['location']['range']['end']['column']
+
+      if start_line != end_line
+        STDERR.puts "Cannot apply this suggestion sorry"
+      else
+        # We only really support single-line changes. This will probs fuck up
+        lines = File.open(message['location']['path'], 'r').read.split("\n")
+        original = lines[start_line - 1].dup
+
+        repl = message['suggestions'][0]['text']
+
+        #puts "orig #{original}"
+        #puts "before #{original[0..start_coln - 2]}"
+        #puts "selected '#{original[start_coln-1..end_coln-2]}'"
+        #puts "after #{original[end_coln-2..-1]}"
+        #puts "replace: #{repl}"
+
+        #puts "#{original[0..start_coln - 2]} + #{repl} + #{original[end_coln-1..-1]}"
+        fixed = original[0..start_coln - 2] + repl + original[end_coln-1..-1]
+        STDERR.puts "Fixing #{original} to #{fixed}"
+        lines[start_line - 1] = fixed
+
+        # Save our changes
+        File.open(message['location']['path'], 'w').write((lines + [""]).join("\n"))
       end
     end
   end
@@ -624,6 +783,23 @@ module GtnLinter
     contents.select{|x| x.match(/GTN:IGNORE:(\d\d\d)/)}.map{|x| "GTN:" + x.match(/GTN:IGNORE:(\d\d\d)/)[1] }.uniq
   end
 
+  def self.filter_results(results, ignores)
+    if ! results.nil?
+      # Remove any empty lists
+      results = results.select{|x| !x.nil? && x.length > 0 }.flatten
+      # Before ignoring anything matching GTN:IGNORE:###
+      if ignores.nil?
+        return results
+      end
+
+      if results.length > 0
+          results = results.select{|x| ignores.index(x['code']['value']).nil?}
+      end
+      return results
+    end
+    return nil
+  end
+
   def self.fix_file(path)
     @path = path
 
@@ -632,35 +808,45 @@ module GtnLinter
     end
 
     if path.match(/md$/)
-      handle = File.open(path)
+      handle = File.open(path, 'r')
       contents = handle.read.split("\n")
       ignores = should_ignore(contents)
       results = fix_md(contents)
 
-      if ! results.nil?
-        # Remove any empty lists
-        results = results.select{|x| !x.nil? && x.length > 0 }.flatten
-        # Before ignoring anything matching GTN:IGNORE:###
-        if results.length > 0
-            results = results.select{|x| ignores.index(x['code']['value']).nil?}
-        end
-      end
+      results = filter_results(results, ignores)
       emit_results(results)
     elsif path.match(/.bib$/)
-      handle = File.open(path)
+      handle = File.open(path, 'r')
       contents = handle.read.split("\n")
 
       bib = BibTeX.open(path)
       results = fix_bib(contents, bib)
+
+      results = filter_results(results, ignores)
       emit_results(results)
     elsif path.match(/.ga$/)
-      handle = File.open(path)
+      handle = File.open(path, 'r')
       begin
         contents = handle.read
         data = JSON.parse(contents)
+        results = []
+
+        # Check if there's a missing workflow test
+        folder = File.dirname(path)
+        basename = File.basename(path).gsub(/.ga$/, '')
+        possible_tests = Dir.glob("#{folder}/#{basename}*ym*")
+        possible_tests = possible_tests.select{|f| f =~ /#{basename}[_-]tests?.ya?ml/}
+
+        if possible_tests.length == 0
+          results += [
+            ReviewDogEmitter.file_error(path: path, message: "This workflow is missing a test, which is now mandatory. Please see [the FAQ on how to add tests to your workflows](https://training.galaxyproject.org/training-material/faqs/gtn/gtn_workflow_testing.html).", code: "GTN:027")
+          ]
+        end
+
+        # Check if they use TS tools, we do this here because it's easier to look at the plain text.
         contents.split("\n").each.with_index{|text, linenumber|
           if text.match(/testtoolshed/)
-            emit_results([
+            results += [
               ReviewDogEmitter.error(
                 path: @path,
                 idx: linenumber,
@@ -670,10 +856,12 @@ module GtnLinter
                 message: "This step uses a tool from the testtoolshed. These are not permitted in GTN tutorials.",
                 code: "GTN:017",
               )
-            ])
+            ]
           end
         }
-        results = fix_ga_wf(data)
+        results += fix_ga_wf(data)
+
+        results = filter_results(results, ignores)
         emit_results(results)
       rescue
         emit_results([ReviewDogEmitter.file_error(path: path, message: "Unparseable JSON in this workflow file.", code: "GTN:019")])
@@ -736,6 +924,13 @@ module GtnLinter
           )
       end
     }
+    self.enumerate_type(/data[_-]library.ya?ml/).each{|path|
+      if path.split('/')[-1] != "data-library.yaml" then
+        self.format_reviewdog_output(
+          ReviewDogEmitter.file_error(path: path, message: "This file must be named data-library.yaml. Please rename it.", code: "GTN:023")
+        )
+      end
+    }
     self.enumerate_type(/\.ga$/).each{|path|
       self.fix_file(path)
     }
@@ -748,14 +943,39 @@ end
 if $0 == __FILE__
   linter = GtnLinter
 
-  if ARGV.length > 0
-    if ARGV[0] == '--plain'
-      linter.set_plain_output()
-      linter.run_linter_global()
-    else
-      linter.fix_file(ARGV[0])
-    end
+  require 'optparse'
+  require 'ostruct'
+
+  options = OpenStruct.new
+  OptionParser.new do |opt|
+    # Mutually exclusive
+    opt.on('-f', '--format [plain|rdjson]', 'Preferred output format, defaults to plain') { |o| options.format = o }
+    opt.on('-p', '--path file.md', 'Specify a single file to check instead of the entire repository') { |o| options.path = o }
+    opt.on('-l', '--limit GTN:001,...', 'Limit output to specific codes') { |o| options.limit = o }
+    opt.on('-a', '--auto-fix', 'I am not sure this is really safe, be careful') { |o| options.apply = true }
+  end.parse!
+
+  if options.format.nil?
+    options.format = "plain"
+  end
+
+  if options.format == "plain"
+    linter.set_plain_output()
   else
+    linter.set_rdjson_output()
+  end
+
+  if options.limit
+    linter.set_code_limits(options.limit.split(','))
+  end
+
+  if options.apply
+    linter.enable_auto_fix()
+  end
+
+  if options.path.nil?
     linter.run_linter_global()
+  else
+    linter.fix_file(options.path)
   end
 end

@@ -301,10 +301,8 @@ Next, we want to improve the quality of our data. To this end we will run a work
 > <hands-on-title>Perform data cleaning</hands-on-title>
 >
 > 1. **Import the workflow** into Galaxy
->    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow1_quality_control.ga) or download it to your computer.
->    - Import the workflow into Galaxy
 >
->    {% snippet faqs/galaxy/workflows_import.md %}
+>    {% snippet faqs/galaxy/workflows_run_trs.md path="topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow1_quality_control.ga" title="Quality Control" %}
 >
 > 2. Run **Workflow 1: Quality Control** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -1661,7 +1659,7 @@ taxonomy files. In the following exercise, we will create a Krona plot with per-
 > >
 > > <br> The final result should look something like this (switch between samples via the list on the left): <br><br>
 > >
-> > <iframe id="krona" src="krona_multisample.html" frameBorder="0" width="100%" height="900px"> ![Krona](../../images/krona_multisample.png) </iframe>
+> > <iframe id="krona" src="krona_multisample.html" frameBorder="0" width="100%" height="900px"></iframe>
 > >
 > {: .solution }
 {: .question}

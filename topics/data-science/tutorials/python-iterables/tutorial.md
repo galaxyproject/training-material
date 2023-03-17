@@ -35,6 +35,7 @@ contributors:
 priority: 4
 notebook:
   language: python
+  pyolite: true
 ---
 
 
