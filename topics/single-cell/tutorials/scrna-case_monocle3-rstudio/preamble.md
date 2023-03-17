@@ -94,7 +94,7 @@ You have two options for how to proceed with this JupyterLab tutorial - you can 
 >
 > 2. Run 
 >    ```
->    wget {{ ipynbpath }}
+>    download.file("{{ ipynbpath }}", "singlecell.ipynb") 
 >    ```
 >
 > 3. Select the notebook that appears in the list of files on the left.
