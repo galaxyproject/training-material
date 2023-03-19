@@ -22,13 +22,19 @@ contributors:
 
 # Introduction
 
-An important part in genome assembly is quality control. During the whole process of DNA sequencing and assembling the genome, errors like mismatches and gaps can occur. This can affect the accuracy and completeness of the genome. Quality control helps to identify and correct these errors by evaluating the quality of the sequences and by detecting and removing potential contaminations {% cite DominguezDelAngel2018 %}.
-A high-quality end-product as a result also ensures to avoid errors and false conclusions in downstream analyses {% cite DominguezDelAngel2018 %}.
+An important part in genome assembly is quality control. During the whole process of DNA sequencing and assembling the genome, errors like mismatches and gaps can occur. This can affect the accuracy and completeness of the genome. Quality control helps to identify and correct these errors by evaluating the quality of the sequences and by detecting and removing potential contaminations. {% cite DominguezDelAngel2018 %}
+A high-quality end-product as a result also ensures to avoid errors and false conclusions in downstream analyses.
 
 Since there are many different ways how errors can occur there are also many different tools to identify and remove potential problems. The difficult part is to choose between them and to know when it's time to move on. It is important because time and resources play a big role in genome assembly.
+
+But how can we gauge the quality of an assembly? To answer this question we first have to find out the properties to evaluate the quality of an assembly. It turned out to be a good idea to focus on the following aspects: contiguity, completeness and correctness. To gauge those properties some metrics are needed. It is necessary to aim for a value like a score to have the information of the measured quality as one number. This is useful in order to have an easy overview and make it easier for comparisons.({% cite Wang2023 %})
+
+Length metrics like N50, CC ratio and sizes of contigs, scaffolds and gaps are common for contiguity analysis. Tools like gfastats will provide these kinds of metrics and other statistical values by a given assembly to assess contiguity quality. 
+BUSCO and genomescope will help us to evaluate the completeness of the genome. BUSCO for example compares the assembly to a set of conserved single-copy genes and the other tool generates a k-mer profile analysis giving us information about the coverage to frequency ratio.
+Correctness or accuracy of an assembly can be gauged by checking base-level and structural errors. This can be done by mapping the raw sequencing reads to the target assembly and then calculating the error rate or by comparing the assembly to a set of k-mers from raw sequencing reads. Therefore we will use blobtoolkit and merqury.
+
 In this tutorial you will learn how to use the tools for the post-assembly quality control
 workflow. It's part of a post-assembly pipeline from ERGA to ensure high quality assemblies in appropriate time and resources.
-
 
 > <agenda-title></agenda-title>
 >
@@ -38,6 +44,7 @@ workflow. It's part of a post-assembly pipeline from ERGA to ensure high quality
 > {:toc}
 >
 {: .agenda}
+
 
 
 # Get data
@@ -83,22 +90,7 @@ As a first step we will get the data from zenodo.
 Extracted DNA from an organism always contains DNA from other species. This is why most assemblies need to go through a decontamination process to remove the non-target DNA for a higher-quality end product.
 Contamination can also have a significant impact on downstream analysis and interpretation of the genome assembly. For example, host contamination can lead to misinterpretation of gene content and functional annotation. Another point is that environmental contamination can affect the accuracy of taxonomic classification. Therefore, it is important to identify and minimise contamination in genome assemblies using appropriate quality control measures.
 Our goal for the post-assembly quality control workflow is to assess the completeness and the quality of the given assembly and remove potential errors and contaminations to ensure a high-quality end product.
-
-
 It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> <details-title> More details about the theory </details-title>
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
 
 
 ## Sub-step with **BlobToolKit**
@@ -131,14 +123,10 @@ assembly:
   bioproject: PRJEB56892
   biosample: SAMEA9362004
   record_type: Chromosome
-taxon:
-  name: Chondrosia reniformis
 >
 {: .comment}
 
 > <hands-on-title> Creating the BlobDir dataset </hands-on-title>
->
-> 
 >
 > 1. {% tool [BlobToolKit](toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/3.4.0+galaxy0) %} with the following parameters:
 >    - *"Select mode"*: `Create a BlobToolKit dataset`
@@ -147,13 +135,10 @@ taxon:
 >        - *"NCBI taxonomy ID"*: `{'id': 2, 'output_name': 'output'}`
 >        - {% icon param-file %} *"NCBI taxdump directory"*: `output` (Input dataset)
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > <comment-title> BlobDir Structure </comment-title>
 >    >
->    >Here you can have a more detailed look on the structure of the BlobDir dataset:
+>    > Here you can have a more detailed look on the structure of the BlobDir dataset:
 
 DatasetID
 +- meta.json                       # Dataset metadata
@@ -170,34 +155,22 @@ DatasetID
 +- {LINEAGE}_busco.json            # Complete and fragmented {LINEAGE} BUSCOs (array of arrays) 
 >    {: .comment}
 >
-> 2. Run {% tool [BlobToolKit](toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/3.4.0+galaxy0) %} again with the following parameters:
->    - *"Select mode"*: `Generate plots`
->        - {% icon param-file %} *"Blobdir file"*: `blobdir` (output of **BlobToolKit** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> Generate plots </comment-title>
->    >
->    > Blobtoolkit can generate plots to make the analysis of the assembly visible.
->    {: .comment}
 {: .hands_on}
 
 
 ## Sub-step with **HISAT2**
 
-HISAT2 is currently one of the fastest RNA-seq mapper available. The tool will use hierarchically indexing methods to align reads to a reference genome ({% cite Zhang2021 %}). It then provides the alignment output in SAM file format which we will then use as an input for Blobtoolkit.
+HISAT2 is currently one of the fastest RNA-seq mapper available. The tool will use hierarchically indexing methods to align reads to a reference genome ({% cite Zhang2021 %}). It then provides the alignment output in BAM file format which we will then use as an input for Blobtoolkit for analysing the correctness/accuracy of the assembly.
 
-
-> <comment-title> SAM file format </comment-title>
+> <comment-title> BAM/SAM file format </comment-title>
 >
 > SAM is short for Sequence Alignment Map. The file stores alignments of sequences which are often mapped with the help of reference sequences. The information is stored in a text-based format.
+
+BAM contains the same information as SAM files but is in binary format thus it is not readable for humans. However those files are smaller and tools can work faster with it.
 >
 {: .comment}
 
-
-> <hands-on-title> Generate SAM file </hands-on-title>
+> <hands-on-title> Generate BAM file </hands-on-title>
 >
 > 1. {% tool [HISAT2](toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1) %} with the following parameters:
 >    - *"Source for the reference genome"*: `Use a genome from history`
@@ -214,9 +187,6 @@ HISAT2 is currently one of the fastest RNA-seq mapper available. The tool will u
 >        - *"SAM options"*: `Use default values`
 >        - *"Other options"*: `Use default values`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > <comment-title> short description </comment-title>
 >    >
@@ -229,12 +199,12 @@ HISAT2 is currently one of the fastest RNA-seq mapper available. The tool will u
 ## Sub-step with **Busco**
 
 BUSCO(Benchmarking Universal Single-Copy Orthologs) is a tool that will assess gene annotation completeness and the completeness of a genome assembly. The tool has a database of orthologs which will be compared to orthologs found in the assembly. As a result the output provides information about the completeness and quality of the recovered genes and which genes are completely missing. ({% cite Simo2015 %})
-We will also use the output of this tool as an input for Blobtoolkit.
+We will later use these information and provide the output to blobtoolkit for further analysis.
 
 
 > <comment-title> Orthologs </comment-title>
 >
-> Orthologs are genes in different species which have usually the same function and have evolved from a common ancestral gene. They are important for new genome assemblies in order to predict gene functions help with gene annotation. (https://www.sciencedirect.com/topics/medicine-and-dentistry/orthology#:~:text=Orthologs%20are%20genes%20in%20different,function%20in%20newly%20sequenced%20genomes)
+> Orthologs are genes in different species which have usually the same function and have evolved from a common ancestral gene. They are important for new genome assemblies in order to predict gene functions help with gene annotation. ({% cite Gennarelli2010 %})
 >
 {: .comment}
 
@@ -247,11 +217,8 @@ We will also use the output of this tool as an input for Blobtoolkit.
 >    - *"Auto-detect or select lineage?"*: `Auto-detect`
 >    - *"Which outputs should be generated"*: ``
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <comment-title> Output file </comment-title>
 >    >
 >    > A comment about the tool or something else. This box can also be in the main text
 >    {: .comment}
@@ -273,22 +240,36 @@ In the previous steps we generated and prepared the data which we will provide n
 >        - {% icon param-file %} *"BAM/SAM/CRAM read alignment file"*: `output_alignments` (output of **HISAT2** {% icon tool %})
 >        - *"Genetic text file"*: `Disabled`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <comment-title> BUSCO </comment-title>
 >    >
->    > 
+>    > comparing assembly to preserved genes, how can we evaluate the quality?
+>    {: .comment}
+>
+>    > <comment-title> Coverage </comment-title>
+>    >
+>    > Coverage information/how can comparing the assembly against those information can help us analyse completeness 
+>    {: .comment}
+>
+> 2. Run {% tool [BlobToolKit](toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/3.4.0+galaxy0) %} again with the following parameters:
+>    - *"Select mode"*: `Generate plots`
+>        - {% icon param-file %} *"Blobdir file"*: `blobdir` (output of **BlobToolKit** {% icon tool %})
+>
+>
+>    > <comment-title> Generate plots </comment-title>
+>    >
+>    > Blobtoolkit can generate plots to make the analysis of the assembly visible.
 >    {: .comment}
 >
 {: .hands_on}
+
+![Figure 1: Genomescope Profile plot](../../images/post-assembly-QC/GenomeScope_Linear_plot.png "")
+![Figure 2: Genomescope Profile plot](../../images/post-assembly-QC/GenomeScope_Log_plot.png "")
 
 
 # Providing analysis information/statistics using k-mers:
 
 It is common to analyse assemblies with the help of k-mer counting. During an assembly, the DNA fragments are broken down into k-mers. Then they are compared to identify regions of overlap. By aligning overlapping k-mers it's possible to piece the original DNA sequence together and generate a complete genome.
-K-mers are also useful in genome analysis. The frequency and distribution of k-mers can be used to estimate the genome size and identify repetitive sequences. ({% cite Manekar2018 %})
+K-mers are also useful in genome analysis. The frequency and distribution of k-mers can be used to estimate the genome size, identify repetitive sequences and detect errors. ({% cite Manekar2018 %})
 
 
 > <comment-title> k-mers </comment-title>
@@ -305,53 +286,35 @@ The sequence ACGT has four monomers (A, C, G, T), three 2-mers (AC, CG, GT), two
 >
 {: .comment}
 
+
 ## Sub-step with **Meryl**
 
-Meryl is a k-mer counter. It is a powerful tool for counting k-mers in large-scale genomic datasets. Meryl uses a sorting-based approach that sorts the k-mers in lexicographical order. ({% cite Rhie2020 %})
-
-> <hands-on-title> Counting k-mers and generate histogram </hands-on-title>
+> <hands-on-title> Generating k-mer profile </hands-on-title>
 >
 > 1. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} with the following parameters:
 >    - *"Operation type selector"*: `Count operations`
->        - {% icon param-file %} *"Input sequences"*: `output` (Input dataset)
->        - *"K-mer size selector"*: `Estimate the best k-mer size`
->            - *"Genome size"*: `{'id': 4, 'output_name': 'output'}`
+>        - {% icon param-collection %} *"Input sequences"*: `output` (Input dataset collection)
+>        - *"K-mer size selector"*: `Set a k-mer size`
+>            - *"K-mer size"*: `21`
+>
+>    > <comment-title> compute k </comment-title>
+>    >
+>    > In general k can be computed as k=log4 (G(1-p)/p), with G as genome size and p as tolerable collision rate.
+In our case we set the k-mer size to 21.
+>    {: .comment}
 >
 > 2. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} again with the following parameters:
+>    - *"Operation type selector"*: `Operations on sets of k-mers`
+>        - *"Operations on sets of k-mers"*: `Union-sum: return k-mers that occur in any input, set the count to the sum of the counts`
+>        - {% icon param-file %} *"Input meryldb"*: `read_db` (output of **Meryl** {% icon tool %})
+>
+> 3. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} a third time with the following parameters:
 >    - *"Operation type selector"*: `Generate histogram dataset`
 >        - {% icon param-file %} *"Input meryldb"*: `read_db` (output of **Meryl** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > <comment-title> short description </comment-title>
 >    >
->    > Given the (estimated)genome size as input, meryl estimates the best k-mer size itself. In general k can be computed as k=log4 (G(1-p)/p), with G as genome size and p as tolerable collision rate.
->    {: .comment}
->
-{: .hands_on}
-
-
-## Sub-step with **Merqury**
-
-Merqury is designed for evaluating the completeness and accuracy of genome assemblies using short-read sequencing data. The quality of assemblies which are generated by using third-generation sequencing technologies can be reviewed and assessed by the tool. Merqury works by comparing the assembly to a high-quality reference genome. It uses k-mer-based methods to estimate and evaluate the completeness of the assembly and identify errors. ({% cite Rhie2020 %})
-
-> <hands-on-title> Estimate base pair accuracy </hands-on-title>
->
-> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2) %} with the following parameters:
->    - *"Evaluation mode"*: `Default mode`
->        - {% icon param-file %} *"K-mer counts database"*: `read_db` (output of **Meryl** {% icon tool %})
->        - *"Number of assemblies"*: `One assembly (pseudo-haplotype or mixed-haplotype)`
->            - {% icon param-file %} *"Genome assembly"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
->    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > 
 >    {: .comment}
 >
 {: .hands_on}
@@ -359,28 +322,52 @@ Merqury is designed for evaluating the completeness and accuracy of genome assem
 
 ## Sub-step with **GenomeScope**
 
-Genomescope is used for analysing genomes using short-read sequencing data. It's a tool to analyse assemblies by estimating genome heterozygosity, repeat content, and size from sequencing reads using a kmer-based statistical approach ({% cite Vurture2017 %}).
+Genomescope is used for analysing genomes. It estimates the overall genome characteristics and the overall read characteristics. The tool will use a given k-mer profile which is calculated only from raw reads sequencing data. It then generates a plot with the calculated data giving us information about the completeness and quality of the to be assembled data.({% cite Vurture2017 %})
 
-> <hands-on-title> Confirm single copy material </hands-on-title>
+> <hands-on-title> Generate plots for analysis </hands-on-title>
 >
 > 1. {% tool [GenomeScope](toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Input histogram file"*: `read_db_hist` (output of **Meryl** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <comment-title> Plots </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > The generated plots will have the coverage on the x-axis and the frequency on the y-axis. It shows the fitted model in the observed k-mer data as well as the k-mer peaks and other information like some estimated parameters of the assembly.
 >    {: .comment}
 >
 {: .hands_on}
 
+![Figure 3: Genomescope Profile plot](../../images/post-assembly-QC/GenomeScope_Linear_plot.png "")
+![Figure 4: Genomescope Profile plot](../../images/post-assembly-QC/GenomeScope_Log_plot.png "")
+
+
+## Sub-step with **Merqury**
+
+Merqury is designed for evaluating the completeness and accuracy of genome assemblies using short-read sequencing data. The quality of assemblies which are generated by using third-generation sequencing technologies can be reviewed and assessed by the tool. Merqury works by comparing the assembly to a high-quality reference genome. It uses k-mer-based methods to estimate and evaluate the completeness of the assembly and helps to identify errors. ({% cite Rhie2020 %})
+
+> <hands-on-title> Generating stats and plots </hands-on-title>
+>
+> 1. {% tool [Merqury](toolshed.g2.bx.psu.edu/repos/iuc/merqury/merqury/1.3+galaxy2) %} with the following parameters:
+>    - *"Evaluation mode"*: `Default mode`
+>        - {% icon param-file %} *"K-mer counts database"*: `read_db` (output of **Meryl** {% icon tool %})
+>        - *"Number of assemblies"*: `One assembly (pseudo-haplotype or mixed-haplotype)`
+>            - {% icon param-file %} *"Genome assembly"*: `output` (Input dataset)
+>
+>
+>    > <comment-title> Plots and stats </comment-title>
+>    >
+>    > What does the plots and stats tell us? Which information can we get for evaluating completeness and correctness?
+>    {: .comment}
+>
+{: .hands_on}
+
+![Figure 5: Merqury plot](../../images/post-assembly-QC/.png "")
+![Figure 6: Merqury plot](../../images/post-assembly-QC/.png "")
+
 
 ## Sub-step with **gfastats**
 
-Gfastats is a tool for providing summary statistics and genome file manipulation. In our case it will generate genome assembly statistics in a tabular-format output.
+gfastats is a tool for providing summary statistics and genome file manipulation. In our case it will generate genome assembly statistics in a tabular-format output. Metrics like N50/L50, GC-content and lengths of contigs, scaffolds and gaps as well as other statistical information are provided for assessing the contiguity of the assembly.
 
 > <hands-on-title> Generate summary statistics </hands-on-title>
 >
@@ -390,15 +377,16 @@ Gfastats is a tool for providing summary statistics and genome file manipulation
 >    - *"Tool mode"*: `Summary statistics generation`
 >        - *"Report mode"*: `Genome assembly statistics (--nstar-report)`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > <comment-title> short description </comment-title>
+>    > <comment-title> N50/L50 </comment-title>
 >    >
 >    > A comment about the tool or something else. This box can also be in the main text
 >    {: .comment}
 >
+>    > <comment-title> GC-content </comment-title>
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
 {: .hands_on}
 
 
