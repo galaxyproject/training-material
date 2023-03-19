@@ -628,7 +628,16 @@ Intro to phylogenetic networks as an alternative to trees
 {: .hands_on} -->
 
 
-**IMAGE HERE: ML tree with bootstrap values**
+![IQTreePhylovis](./images/PhyloVisTree.png){:align="center"}
+
+The resulting tree found by IQTree, displayed using PhyloVis.
+
+Observe the bootstrap values for deep branches are not as high.
+
+Note that bootstrap values for UFBoot (provided by IQTree) are actual estimates of the probability that the branch is correct, so are not quite the same as traditional "naive" bootstrap values.
+
+### Report on the final tree
+
 
 
 # Possible new section on formatting and exporting a pretty tree
