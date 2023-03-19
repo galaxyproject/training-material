@@ -388,13 +388,11 @@ The Neighbor-Joining (NJ) algorithm is a standard method that takes as input a s
 
 NJ is only rarely used as a complete tool for phylogenetic analysis, since although it is quite accurate and fast, there are other fast methods that can be then applied to modify the NJ tree and create a better one.
 
+**Aside on Fast Tree 2**
+
 The FastTree2 program that we are using does this: it first creates a "rough" NJ tree, and then modifies it to optimise a quantity called *Minimum Evolution* or ME.  Here is a description (with some minor formatting) from the FastTree2 website at http://www.microbesonline.org/fasttree/
 
-#### include diagram of NNI? of SPR? should the BLOSUM45 matrix be a hyperlink?
-
-**blockquote this:** XXX
-
-<blockquote>
+<!-- #### include diagram of NNI? of SPR? should the BLOSUM45 matrix be a hyperlink? -->
 
 ### Heuristic Neighbor-Joining
 
@@ -405,7 +403,9 @@ First, FastTree uses a heuristic variant of neighbor joining to get a rough topo
 FastTree then tries to reduce the length of the tree, using a mix of nearest-neighbor interchanges (NNIs) and subtree-prune-regraft moves (SPRs). These "balanced minimum-evolution" rearrangements are roughly the same as what FastME does, but because FastTree uses profiles instead of distances, it is much faster. By default, FastTree uses 4*log<sub>2</sub>(N) rounds of nearest-neighbor interchanges and 2 rounds of subtree-prune-regraft moves. In each round, it considers every possible NNI in the tree. Because there are too many (O(N<sup>2</sup>)) possible SPR moves, FastTree treats SPR moves as chains of NNIs and only extends the best choice in the chain for chains of length two or greater. In the minimum-evolution framework, if the distances are not too noisy, NNI and SPR moves suffice to reach optimal trees (Desper & Gascuel 2004, Bordewich et al. 2009).
 
 Distances: During these minimum evolution steps, FastTree needs to estimate distances between sequences or profiles. For protein sequences, FastTree estimates distances by using the BLOSUM45 amino acid similarity matrix, and it corrects for multiple substitutions by using the formula $-1.3 \times \log(1-d)$, where $d$ is weighted so that random sequences have an average value of 1. For nucleotide sequences, FastTree uses the Jukes-Cantor distance $-0.75\times\log(1 - \frac{4}{3} d)$, where $d$ is the proportion of positions that differ. When comparing two sequences, positions with gaps are ignored; when comparing two profiles, positions are weighted by their proportions of non-gaps. 
-</blockquote>
+
+**end of Aside**
+
 
 It won't take very long for FastTree to build your tree.
 But now it's done, how can you see it?
@@ -493,6 +493,8 @@ This seems much more biologically reasonable and makes this into a Markov proces
 
 ### Models of sequence evolution
 
+*If you are in a hurry to get stuck in to the phylogenetic analysis you can skip reading this section and go on to the next Hands-On, running IQ Tree.*
+
 Likelihood is based on probability, so requires we choose a probabilistic model for the evolution of sequences.
 The simplest such model for DNA would be that each nucleotide has the same rate of change to each other nucleotide, and that all nucleotides appear with equal frequency (called the base frequencies) of 25%, 25%, 25%, 25%.  This is the Jukes-Cantor (JC) model published in 1969, and this model has just one parameter.
 
@@ -521,7 +523,17 @@ Fortunately there are tools to help determine the most appropriate model for a g
 The program IQTree, which we use next, performs a step to determine which model is most appropriate for your data set, based on AIC and other schemes to avoid over-fitting while still having as good a fit to your data as possible.
 In that step, trees, and their likelihoods given your data, are estimated for many different models.  Each yields a likelihood score but rather than simply take the model that maximises the likelihood, over-complex models are penalised, to avoid over-fitting.  One such penalty function is the AIC; there are others.
 
-There are whole books describing this process, and it's clearly well beyond the scope of this tutorial to go into such depth, but now you shouold have some appreciation of what is going on behind the scenes when an ML method is looking for the best model for your data.
+There are whole books describing this process, and it's clearly well beyond the scope of this tutorial to go into such depth, but now you should have some appreciation of what is going on behind the scenes when an ML method is looking for the best model for your data.
+
+## Searching for trees and their branch lengths
+
+The rate matrices above define the rates at which nucleotides change. 
+There are other 20x20 matrices for amino acids, and even 64x64 matrices for codons.
+
+To convert from a rate to a probability, hence giving us a likelihood, requires that we have a branch length: then, we can calculate the probability under a given model and after a specific time interval of going from one nucleotide to another.  We multiply these site probabilitues to calculate the probability of going from one sequence to another.
+Thus looking for the optimal tree under likelihood requires we also search for the best-fit **branch lengths**, as well as looking for the best **tree**.
+
+Maximum Likelihood is therefore the **slowest** tree inference method we discuss today.
 
 # Assessing the Quality of trees
 
@@ -551,34 +563,54 @@ The naive method for bootstrapping is called "non-parametric" and works by effec
 
 IQTree has a very -- excuse me, *ultra-* -- fast bootstrapping method that is cleverer than the naive method and which works if anything a bit better.  See (citation Minh Bui et al. I think) for details.
 
-When we come to using IQTree next, we will also select to do bootstrapping on the tree.  FastTree does not do bootstrapping natively, but can in conjuction with other tools (see http://meta.microbesonline.org/fasttree/ for details).  It's a little fiddly to accomplish this so we will not try that in this tutorial.
+When we come to using IQTree next, we will also select to do bootstrapping on the tree.  (FastTree does not do bootstrapping natively, but can in conjuction with other tools (see http://meta.microbesonline.org/fasttree/ for details).  It's a little fiddly to accomplish this so we will not try that in this tutorial.)
 
-## How tree-like?
+Bootstrapping can be done on any inference method: so for us, we will use the likelihood method, searching for the tree and branch lengths that maximises the likelihood for (1) our actual data, and then (2), for each of the pseudoreplicates, noting for each of these which branches occur in the best trees found.
+
+By keeping track of which branches occur in the best trees found for each of the pseudoreplicates we can note how often the branches in the best tree for our *actual* data occur in the resampled data.  If they occur a lot -- say, 80% of the time or more -- then we can be fairly sure that that branch is well supported by the data.
+
+Bootstrap values therefore appear for each branch, and are most often expressed as a percentage or proportion.  Branches at the leaves occur in every possible tree so these would get 100% bootstrap values every time, and don't tell us anything.
+
+
+<!-- ## How tree-like?
 
 # Basics of Maximum Likelihood
 
 Background on ML. How it works. Software. Bootstrap values.
 
-## Likelihood as probability that observed data came from given tree
+## Likelihood as probability that observed data came from given tree -->
 
-## Searching for a tree means optimising its branch lengths too
+<!-- ## Searching for a tree means optimising its branch lengths too -->
 
 ## IQTree
 
-* is state-of-the-art
-* will find a good model
-* can do bootstrapping
+IQTree is a state-of-the-art cross-platform program that uses maximum likelihood to find optimal phylogenetic trees.
+It can also perform model selection and bootstrapping.
+Also, it's on Galaxy!
 
 ##  Estimating a Maximum Likelihood tree 
 
 > <hands-on-title>Estimating a Maximum Likelihood tree with IQTree</hands-on-title>
 >
-> 1. Step 1
-> 2. Step 2
+> 1. Find the IQTree program in the tool finder.
+> 2. Load your alignmed sequence data, e.g. the alignment from MAFFT.
+> 3. Leave the selection of data type as DNA.
+> 4. Ignore the Time Tree Reconstruciton settings and Likelihood Mapping analysis settings.
+> 5. Under the Modelling Parameters, leave Automatic model selection ON, and the other parameters as they are except the last: "Write maximum likelihood site ratios to .mlrate file" set to Yes.
+> 6. Leave all the Tree Parameters as they are but do have a look at them and see if you can work out what some of them do.
+> 7. For Bootstrap Parameters select Ultrafast bootstrap parameters and enter 1000 bootstrap replicates.
+> 8. Execute
 >
 {: .hands_on}
 
-# Phylogenetic Networks
+While this is running you might use your time to read the Models of sequence evolution  and Bootstrapping sections above.
+(Though actually, you may not get that much time.)
+
+> <hands-on-title>Visualising your tree</hands-on-time>
+>
+{: .hands_on}
+
+<!-- # Phylogenetic Networks
 
 Intro to phylogenetic networks as an alternative to trees
 
@@ -591,7 +623,7 @@ Intro to phylogenetic networks as an alternative to trees
 > 1. Step 1
 > 2. Step 2
 >
-{: .hands_on}
+{: .hands_on} -->
 
 
 **IMAGE HERE: ML tree with bootstrap values**
