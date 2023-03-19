@@ -503,6 +503,10 @@ Now let's now explore the **Phinch visulization** tool running for `Barcode11` t
 > While these steps are running, you can move on to the next section **Gene based pathogenic identification** and run the steps there, as well. Both analyses can execute in parallel.
 {: .comment}
 
+You may have noticed some sequences have been assigned to the Human Genome (Homosapians) species, when we run **Kraken2** using the **Standard PlusPF** in this section. However, in the **pre-processing** section when we ran **Kraken2** with **Kalamari** no Human Genomes were found. The lab (data producers) has confirmed that these sequences assigned to human by **Standard PlusPF** database are not human and there should be no human sequences in the samples as **Kalamari** database result's confirmed. So these sequences were wrongly assigned to human by **Standard PlusPF**. That is due to resemblance between organisms and the limited species coverage of **Kraken2** databases sometimes does happen that reads corresponding to higher organisms get mapped to humans. It was a very severe problem for the **Standard PlusPF**, because yeast genes were mis-assigned to human.
+
+We decide to keep these sequences since we do not know what are they via the **taxonomy profiling** step, which could mean that they might be identified as pathogens in the coming steps, and if we delete them we are possibly losing important information and losing the main goal of the workflow to detect pathogens and track them.
+
 # Gene based pathogenic identification
 
 With taxonomy profiling, we identified some bacterial species. But we want to be sure they are pathogenic, by **looking for genes known to be linked to pathogenicity or to the pathogenecity character** of the organim:
