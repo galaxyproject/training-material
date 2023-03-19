@@ -603,11 +603,13 @@ Also, it's on Galaxy!
 >
 {: .hands_on}
 
-While this is running you might use your time to read the Models of sequence evolution  and Bootstrapping sections above.
+While this is running you might use your time to read the Models of sequence evolution and Bootstrapping sections above.
 (Though actually, you may not get that much time.)
 
-> <hands-on-title>Visualising your tree</hands-on-time>
->
+> <hands-on-title>Visualising your tree</hands-on-title>
+> 1. View your tree!
+> 2. What are the bootrap values near the root of the tree? Do you think those branches are well supported?
+> 3. Which do you think is the biggest well-supported clade?
 {: .hands_on}
 
 <!-- # Phylogenetic Networks
