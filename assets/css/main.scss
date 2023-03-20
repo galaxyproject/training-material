@@ -274,6 +274,10 @@ nav.navbar {
         color: var(--brand-color-contrast);
     }
 
+    a {
+	border: none;
+    }
+
     .navbar-brand, .navbar-nav li {
 	padding: 0.5em;
 	background: var(--navbar-item-background);
@@ -789,15 +793,20 @@ blockquote {
 /* WCAG Contrast. These aim to pass AAA level for normal sized text. */
 a {
     color: var(--hyperlink);
-    text-decoration: underline;
+    border-bottom: 1px dotted var(--hyperlink);
 
     &:hover,
     &:focus,
     &:focus-visible,
     &:active {
         color: var(--hyperlink-hover);
+        border-bottom: 1px solid var(--hyperlink-hover);
         text-decoration: none;
-	font-weight: bold;
+    }
+
+    // Unset this for logos on the homepage
+    &.logo {
+	border: none;
     }
 }
 
@@ -896,7 +905,7 @@ nav[data-toggle='toc'] {
     flex-direction: row;
     align-items: center;
     border-radius: 1em;
-    border: 1px solid var(--hyperlink);
+    border: 1px dotted var(--hyperlink);
     padding-right: 0.5em;
     margin: 0.2em;
     line-height: 1em;
@@ -909,6 +918,8 @@ nav[data-toggle='toc'] {
     }
 
     &:hover {
+	background: var(--brand-color);
+	color: var(--brand-color-contrast);
 	border: 1px solid var(--hyperlink-hover);
     }
 }
