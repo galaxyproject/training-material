@@ -90,8 +90,7 @@ This tutorial has the following structure:
 - Obtaining the data for this tutorial + exercise
 - Sequence alignment (including manual methods, automatic methods, complexity issues / heuristics) + exercise
 - Distances based on sequence alignment
-- The Neighbor-Joining method & FastME2.0 (https://doi.org/10.1093/molbev/msv150) **needs an update** **not sure that there is a FastME implementation in Galaxy; there is an R package though**
-** NO FASTME on Galaxy: Igor points out that the package isn't well maintained. **
+- The Neighbor-Joining method & Minimum Evolution, using FastTree2
 - Building your first tree (on Galaxy)
 - Models of sequence evolution: from the sublime to the ridiculous
 - Phylogenetic Networks (**SplitsTree needs install**), Neighbor-Net
@@ -103,12 +102,13 @@ This tutorial has the following structure:
 
 There are many ways in which we can use phylogenetic analyses: from the most fundamental understanding of the evolutionary relationships that exist between a set of species, as in Charles Darwin's famous sketch in Origin of Species
 
-![IThink](./images/Darwin_tree.png){:align="center", :width="400"}
+![IThink](./images/Darwin_tree.png){:width="400"}
 
 **needs a reference**
 
-all birds
-![AllBirds](./images/nature11631-f2.jpg){:align="center", :width="400"}
+all birds...
+
+![AllBirds](./images/nature11631-f2.jpg){:width="400"}
 (from from Jetz *et al.* 2012, Nature (491):444–448)
 
 and much bigger projects across all of life:
@@ -243,7 +243,7 @@ The number of rooted binary trees grows as 1, 3, 15, 105, 945, 10395... in fact 
 > | 9    | $$2027025$$       | population of Sydney living west of Paramatta |
 > | 10   | $$34459425$$                      | comparable with the number of possible tickets in a typical lottery |
 > | 20   | $$\approx 8.2\times 10^{21}$$       | getting slow for computers even with branch-and-bound |
-> | 48  | $$\approx 3.21\times 10^{70}$$       | number of particles in the universe-ish |
+> | 48   | $$\approx 3.21\times 10^{70}$$       | number of particles in the universe-ish |
 > | 136  | $$\approx 2.11\times 10^{267}$$       | number of trees to choose from in the first "Out of Africa" data set |
 > |---|---|---|
 
@@ -285,10 +285,8 @@ We are using a relatively small set of sequences because phylogenetic estimation
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the following files from [Zenodo](https://tinyurl.com/phylo-trees-1-data) or from the shared data library
->     Note: Current link is to google drive. Update to Zenodo for final release.  For testing use https://drive.google.com/file/d/1j96miOPD41no5S8BSqRNG1Ru_-p7w1gg/view?usp=share_link; upload to galaxy from computer.
-> **in fact use the malaria-raw.fst file in the "data" folder here**
->
+> 2. Import the following files from [GTN](./data/malaria-raw.fst) or from the shared data library.
+> Note: Old data here: https://tinyurl.com/phylo-trees-1-data
 >    ```
 >    malaria-raw.fst
 >    ```
@@ -341,7 +339,10 @@ FASTA format is very simple and is commonly used as input to phylogenetic infere
 Sequence alignment is a very well developed process, but there can still be some arbitrariness that can make it tricky.
 For a start, while aligning just *two* sequences is "easy", in the sense that an optimal alignment between two sequences can be found in a reasonable amount of time, optimally aligning multiple sequences is *computationally intractable*.
 
-### Aside on dynamic programming for interested readers...
+> <comment-title>Dynamic Programming aside</comment-title>
+>
+{: .comment}
+
 
 ## Aligning sequences with MAFFT
 
@@ -388,27 +389,24 @@ The Neighbor-Joining (NJ) algorithm is a standard method that takes as input a s
 
 NJ is only rarely used as a complete tool for phylogenetic analysis, since although it is quite accurate and fast, there are other fast methods that can be then applied to modify the NJ tree and create a better one.
 
-**Aside on Fast Tree 2**
-
-The FastTree2 program that we are using does this: it first creates a "rough" NJ tree, and then modifies it to optimise a quantity called *Minimum Evolution* or ME.  Here is a description (with some minor formatting) from the FastTree2 website at http://www.microbesonline.org/fasttree/
-
-<!-- #### include diagram of NNI? of SPR? should the BLOSUM45 matrix be a hyperlink? -->
-
-### Heuristic Neighbor-Joining
-
-First, FastTree uses a heuristic variant of neighbor joining to get a rough topology. During neighbor joining, FastTree stores profiles of internal nodes instead of a distance matrix, which reduces the memory required. FastTree uses a combination of three heuristics to speed up this phase: it remembers the best join for each node, as in fast neighbor-joining; it does a hill-climbing search for better joins from a candidate join, as in relaxed neighbor joining; and it uses the "top hits" heuristic to avoid computing all pairwise distances and to avoid considering all possible joins at every step. It also updates the best join for a node as it comes across them, which reduces the amount of hill-climbing. Another limitation of FastTree's neighbor-joining phase is that it does not correct the distances for multiple substitutions, which exacerbates long-branch attraction. However, this will be corrected in the next stage.
-
-### Minimum Evolution
-
-FastTree then tries to reduce the length of the tree, using a mix of nearest-neighbor interchanges (NNIs) and subtree-prune-regraft moves (SPRs). These "balanced minimum-evolution" rearrangements are roughly the same as what FastME does, but because FastTree uses profiles instead of distances, it is much faster. By default, FastTree uses 4*log<sub>2</sub>(N) rounds of nearest-neighbor interchanges and 2 rounds of subtree-prune-regraft moves. In each round, it considers every possible NNI in the tree. Because there are too many (O(N<sup>2</sup>)) possible SPR moves, FastTree treats SPR moves as chains of NNIs and only extends the best choice in the chain for chains of length two or greater. In the minimum-evolution framework, if the distances are not too noisy, NNI and SPR moves suffice to reach optimal trees (Desper & Gascuel 2004, Bordewich et al. 2009).
-
-Distances: During these minimum evolution steps, FastTree needs to estimate distances between sequences or profiles. For protein sequences, FastTree estimates distances by using the BLOSUM45 amino acid similarity matrix, and it corrects for multiple substitutions by using the formula $-1.3 \times \log(1-d)$, where $d$ is weighted so that random sequences have an average value of 1. For nucleotide sequences, FastTree uses the Jukes-Cantor distance $-0.75\times\log(1 - \frac{4}{3} d)$, where $d$ is the proportion of positions that differ. When comparing two sequences, positions with gaps are ignored; when comparing two profiles, positions are weighted by their proportions of non-gaps. 
-
-**end of Aside**
+> <comment-title>Aside on FastTree2</comment-title>
+> The FastTree2 program that we are using does this: it first creates a "rough" NJ tree, and then modifies it to optimise a quantity called *Minimum Evolution* or ME.  Here is a description (with some minor formatting) from the FastTree2 website at http://www.microbesonline.org/fasttree/
+>
+>**Heuristic Neighbor-Joining**
+>
+>First, FastTree uses a heuristic variant of neighbor joining to get a rough topology. During neighbor joining, FastTree stores profiles of internal nodes instead of a distance matrix, which reduces the memory required. FastTree uses a combination of three heuristics to speed up this phase: it remembers the best join for each node, as in fast neighbor-joining; it does a hill-climbing search for better joins from a candidate join, as in relaxed neighbor joining; and it uses the "top hits" heuristic to avoid computing all pairwise distances and to avoid considering all possible joins at every step. It also updates the best join for a node as it comes across them, which reduces the amount of hill-climbing. Another limitation of FastTree's neighbor-joining phase is that it does not correct the distances for multiple substitutions, which exacerbates long-branch attraction. However, this will be corrected in the next stage.
+>
+>**Minimum Evolution**
+>
+>FastTree then tries to reduce the length of the tree, using a mix of nearest-neighbor interchanges (NNIs) and subtree-prune-regraft moves (SPRs). These "balanced minimum-evolution" rearrangements are roughly the same as what FastME does, but because FastTree uses profiles instead of distances, it is much faster. By default, FastTree uses 4*log<sub>2</sub>(N) rounds of nearest-neighbor interchanges and 2 rounds of subtree-prune-regraft moves. In each round, it considers every possible NNI in the tree. Because there are too many (O(N<sup>2</sup>)) possible SPR moves, FastTree treats SPR moves as chains of NNIs and only extends the best choice in the chain for chains of length two or greater. In the minimum-evolution framework, if the distances are not too noisy, NNI and SPR moves suffice to reach optimal trees (Desper & Gascuel 2004, Bordewich et al. 2009).
+>
+>Distances: During these minimum evolution steps, FastTree needs to estimate distances between sequences or profiles. For protein sequences, FastTree estimates distances by using the BLOSUM45 amino acid similarity matrix, and it corrects for multiple substitutions by using the formula $-1.3 \times \log(1-d)$, where $d$ is weighted so that random sequences have an average value of 1. For nucleotide sequences, FastTree uses the Jukes-Cantor distance $-0.75\times\log(1 - \frac{4}{3} d)$, where $d$ is the proportion of positions that differ. When comparing two sequences, positions with gaps are ignored; when comparing two profiles, positions are weighted by their proportions of non-gaps. 
+>
+{: .comment}
 
 
 It won't take very long for FastTree to build your tree.
-But now it's done, how can you see it?
+But when it's done, how can you see it?
 
 Clicking on the output doesn't at first appear to be very illuminating: it's just a parenthesised list of taxon names and numbers.
 This is *Newick Format*, and it's worth knowing at least a little of what it means.  
@@ -457,10 +455,10 @@ The Minimum Evolution criterion optimises... XXX Mike to complete.
 >
 {: .hands_on}
 
-# Searching for the ``best'' tree
+# Searching for the "best" tree
 
-The other main way we can estimate a phylogeny is by choosing some kind of score of ``goodness'' and then searching all of the set of possible trees for the tree or trees that optimises this score.
-Note that such scores are ``surrogates for truth,'' in that we *hope* the optimal score will correspond to the true tree, but it is not necessarily the case, and in many analyses we therefore use *multiple* methods, in the hope that different analyses will all give us the same consistent answer.
+The other main way we can estimate a phylogeny is by choosing some kind of score of "goodness" and then searching all of the set of possible trees for the tree or trees that optimises this score.
+Note that such scores are "surrogates for truth," in that we *hope* the optimal score will correspond to the true tree, but it is not necessarily the case, and in many analyses we therefore use *multiple* methods, in the hope that different analyses will all give us the same consistent answer.
 
 **If your conclusion changes based on a choice among reasonable analytical options, then perhaps your data are not adequate.**
 
@@ -638,7 +636,14 @@ Note that bootstrap values for UFBoot (provided by IQTree) are actual estimates 
 
 ### Report on the final tree
 
+Look at the IQTree Report file.
 
+In that you will see a long list of models that have been tested, with the favoured one at the top.
+
+You will also see the Newick Format of the best tree found.
+
+
+XXX More to go here.
 
 # Possible new section on formatting and exporting a pretty tree
 
