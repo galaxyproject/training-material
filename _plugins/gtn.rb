@@ -146,7 +146,6 @@ module Jekyll
 
       m = str.match(/topics\/(?<topic>.*)\/tutorials\/(?<tutorial>.*)\/workflows\/(?<workflow>.*)\.ga/)
       if m
-        puts "str=#{str} m=#{m} #{m[:topic]} #{m[:tutorial]} #{m[:workflow]}"
         return "/api/ga4gh/trs/v2/tools/#{m[:topic]}-#{m[:tutorial]}/versions/#{m[:workflow]}"
       end
       return "GTN_TRS_ERROR"
