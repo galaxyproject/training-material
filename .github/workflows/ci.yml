@@ -71,16 +71,20 @@ jobs:
       - name: Run aXe accessibility testing on some representative URLs
         run: |
           node_modules/.bin/http-server _site/ &
-          node_modules/.bin/axe http://localhost:8080/training-material/
-          node_modules/.bin/axe http://localhost:8080/training-material/hall-of-fame/
-          node_modules/.bin/axe http://localhost:8080/training-material/hall-of-fame/hexylena/
-          node_modules/.bin/axe http://localhost:8080/training-material/topics/introduction/
-          node_modules/.bin/axe http://localhost:8080/training-material/topics/statistics/
-          node_modules/.bin/axe http://localhost:8080/training-material/topics/genome-annotation/
-          node_modules/.bin/axe http://localhost:8080/training-material/topics/admin/
-          node_modules/.bin/axe http://localhost:8080/training-material/topics/dev/
-          node_modules/.bin/axe http://localhost:8080/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html
-          node_modules/.bin/axe http://localhost:8080/training-material/topics/introduction/tutorials/galaxy-intro-short/workflows/
+          # We can focus AND scroll these regions. I thus disable their violation warning.
+          # Twitter isn't our fault. Sorry.
+          node_modules/.bin/axe --disable scrollable-region-focusable --exclude '#twitter-widget-0' \
+            http://localhost:8080/training-material/ \
+            http://localhost:8080/training-material/hall-of-fame/ \
+            http://localhost:8080/training-material/hall-of-fame/hexylena/ \
+            http://localhost:8080/training-material/topics/introduction/ \
+            http://localhost:8080/training-material/topics/statistics/ \
+            http://localhost:8080/training-material/topics/genome-annotation/ \
+            http://localhost:8080/training-material/topics/admin/ \
+            http://localhost:8080/training-material/topics/dev/ \
+            http://localhost:8080/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html \
+            http://localhost:8080/training-material/topics/introduction/tutorials/galaxy-intro-short/workflows/ \
+            http://localhost:8080/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html
 
       - name: Validate notebooks (If this fails, ask @hexylena to look at your notebook)
         run: |
