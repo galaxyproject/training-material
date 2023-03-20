@@ -24,7 +24,7 @@ The output of this tool is a tabular file, where each line represents a gene fro
 
 Display the file and explore which kind of identifiers were found by EggNOG Mapper.
 
-## **InterProScan**
+## InterProScan
 
 [InterPro](https://www.ebi.ac.uk/interpro/) is a huge integrated database of protein families. Each family is characterized by one or muliple signatures (i.e. sequence motifs) that are specific to the protein family, and corresponding functional annotation like protein names or [Gene Ontology (GO)](http://www.geneontology.org/). A good proportion of the signatures are manually curated, which means they are of very good quality.
 

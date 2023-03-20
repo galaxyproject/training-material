@@ -21,7 +21,8 @@ Basic:
   - Fix spelling and grammar mistakes
   - Simplify the English (to make it more accessible)
 
-*Intermediate*
+Intermediate:
+
 - **Metadata**
   - Are the objectives, keypoints and time estimate filled in?
   - Do they fit with the contents of the tutorial?
@@ -48,4 +49,4 @@ Advanced:
   - Add a data-library.yaml file if none exists
 
 
-Another great way to help out the project is by reviewing [open pull requests]({{ site.github_repository }}/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc). You can use the above checklist as a guide for your review. Some documentation about how to add your review in the GitHub interface can be found [here](https://help.github.com/articles/about-pull-request-reviews/)
+Another great way to help out the project is by reviewing [open pull requests]({{ site.github_repository }}/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc). You can use the above checklist as a guide for your review. Some documentation about how to add your review in the GitHub interface can be found [in GitHub's PR Reviewing Documentation](https://help.github.com/articles/about-pull-request-reviews/)
