@@ -203,55 +203,27 @@ layout: base
            <!-- Our awesome Contributors -->
         <div class="col-12">
             <h2>Contributor Hall of Fame</h2>
-            <p>
-                This project would not be possible without the many amazing
-                community contributors!
-            </p>
+	    <div class="row">
+		<div class="col-md-6">
+			<p>
+			This project would not be possible without the many amazing community contributors! 
+			</p>
+			<p>
+				Check out the full <a class="btn btn-primary" href="{{ site.baseurl }}/hall-of-fame">Hall of Fame</a>.
+			</p>
+			<p>Do you want to help with this project and join our Hall of Fame? Please see our <a href="{{ site.baseurl }}/topics/contributing/">dedicated tutorials</a> or our <a href="{{ site.baseurl }}/faq">Frequently Asked Questions</a> to get you started.</p>
+		</div>
+		<div class="col-md-6">
+		<a  href="{{ site.baseurl }}/hall-of-fame" class="logo">
+		<div class="gtn-card color-agenda" style="color: black">
+			{% assign contributors = site.data['contributors'] | where_exp: "item", "item.halloffame != 'no'" | sort: "joined" %}
+			<div class="card-title">{{ contributors | size }}</div>
+			<div class="card-text">Contributors</div>
+		</div>
+		</a>
+		</div>
+	</div>
 
-                    {% assign ckeys = "" | split: ',' %}
-                    {% for x in contributors %}
-                         {% assign ckeys = ckeys | push: x[0] %}
-                    {% endfor %}
-                    {% assign ckeysN = ckeys | size %}
-                <div class="container-fluid contributors">
-                <span class="visually-hidden">The following element contains a carousel with the images of our {{ ckeysN }} contributors. This is more accessible via the hall of fame link which follows the carousel so we have hidden in from screenreaders so as to not annoy you.</span>
-                <div id="contributors-carousel" class="carousel slide" data-ride="carousel" data-interval="3000" aria-hidden="true">
-
-                    {% assign shuffled_contributors = ckeys | sample: ckeysN %}
-
-                    <div class="carousel-inner" role="listbox" title="Carousel">
-                        {% assign counter = 0 %}
-                        {% for username in shuffled_contributors %}
-                          {% assign contributor = contributors[username] %}
-                          {% unless contributor.halloffame == "no" %}
-                            {% capture modulo %}{{ counter | modulo:10 }}{% endcapture %}
-                              {% if modulo == '0' or counter == 0 %}
-                              {% if counter != 0 %}</div>{% endif %}
-
-                              <div class="carousel-item {% if counter == 0 %}active{% endif %}">
-                            {% endif %}
-                              {% assign fullname = contributor.name %}
-                              <div class="hall-of-fame-hero">
-                                  <a class="thumbnail" href="{{ site.baseurl }}/hall-of-fame/{{ username }}/">
-                                      <img class="img-fluid" src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="{{ fullname | default: username }}" loading="lazy" title="Click to see contributions"/>
-                                  </a>
-                                <p class="name">{{ fullname | default: username }}</p>
-                              </div>
-                            {% assign counter = counter | plus:1 %}
-                            {% endunless%}
-                            {% if forloop.last %}
-                            </div>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
-
-            <p>
-                Check out the full <a href="{{ site.baseurl }}/hall-of-fame">Hall of Fame</a>.
-            </p>
-
-            <p>Do you want to help with this project and join our Hall of Fame? Please see our <a href="{{ site.baseurl }}/topics/contributing/">dedicated tutorials</a> or our <a href="{{ site.baseurl }}/faq">Frequently Asked Questions</a> to get you started.</p>
 
         </div>
         </div>
