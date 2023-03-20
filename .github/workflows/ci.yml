@@ -1,4 +1,4 @@
-name: Lint Broken Links
+name: Accessibility Linting
 
 concurrency:
   group: ci-${{ github.head_ref }}
@@ -55,8 +55,11 @@ jobs:
           bundle pristine ffi
       # END Dependencies
 
-      - run: bundle exec jekyll build --strict_front_matter -d _site/training-material --trace
-      - run: |
+      - name: Build the site
+        run: bundle exec jekyll build --strict_front_matter -d _site/training-material --trace
+
+      - name: Validate all links, enforce alt text
+        run: |
           bundle exec htmlproofer \
             --ignore-urls "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#.*/,/#embedded_jbrowse/","/.*videos.*.mp4.png/","/krona_(all|multisample).html/" \
             --ignore-files "/.*krona.*\.html/","/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//","/.*content.html/" \
@@ -65,6 +68,20 @@ jobs:
             --enforce-https=false \
             ./_site
 
-      - run: |
-          # If this fails, ask @hexylena to look at your notebook
+      - name: Run aXe accessibility testing on some representative URLs
+        run: |
+          node_modules/.bin/http-server _site/ &
+          node_modules/.bin/axe http://localhost:8080/training-material/
+          node_modules/.bin/axe http://localhost:8080/training-material/hall-of-fame/
+          node_modules/.bin/axe http://localhost:8080/training-material/hall-of-fame/hexylena/
+          node_modules/.bin/axe http://localhost:8080/training-material/topics/introduction/
+          node_modules/.bin/axe http://localhost:8080/training-material/topics/statistics/
+          node_modules/.bin/axe http://localhost:8080/training-material/topics/genome-annotation/
+          node_modules/.bin/axe http://localhost:8080/training-material/topics/admin/
+          node_modules/.bin/axe http://localhost:8080/training-material/topics/dev/
+          node_modules/.bin/axe http://localhost:8080/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html
+          node_modules/.bin/axe http://localhost:8080/training-material/topics/introduction/tutorials/galaxy-intro-short/workflows/
+
+      - name: Validate notebooks (If this fails, ask @hexylena to look at your notebook)
+        run: |
           find _site | grep ipynb | xargs bundle exec ruby bin/check-valid-json.rb
