@@ -109,6 +109,8 @@ This first step consist of downloading and uploading obis data onto galaxy.
 >
 {: .hands_on}
 
+You are now all set to use your obis data in order to do a diversity analysis. 
+
 ## **Ocean biodiversity indicators**
 
 > <hands-on-title>Ocean biodiversity indicators</hands-on-title>
@@ -196,11 +198,15 @@ They are calculated as shown below:
      - $$ hill_2   = 1 / simpson $$
      - $$ hill_inf = 1 / maxp $$
 
+## Index file
+
+You also have a tabular file that sums up each indicators.
+![Summary tabular of all the indices](../../images/obisindicators/index.png "Tabular")
+Nb: the column sp is the count of the number of observations in a dataset. It is  the number of records in the dataset.
 
 # Conclusion
 
-You also have a tabular that sums up each indicators.
-![Summary tabular of all the indices](../../images/obisindicators/index.png "Tabular")
-You are now all set to use your obis data in order to do a diversity analysis. 
-Nb: the column sp is the count of the number of observations in a dataset. It is  the number of records in the dataset.
+You here learn how to select and download OBIS dataset for your region of interest, to handle data to finally compute diversity indicators and display it in maps.
+
+
 
