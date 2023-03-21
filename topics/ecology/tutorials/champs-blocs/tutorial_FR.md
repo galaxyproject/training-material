@@ -65,7 +65,7 @@ Ici, nous allons passer en revue les différentes étapes afin d'obtenir ces 2 i
 > * La panneau de visualisation au milieu
 > * L'historique des analyses et l'ensemble des fichiers utilisés et générés sur la droite
 >
-> ![Capture d'écran de l'interface Galaxy, le panneau des outils est à gauche, le panneau principal est au centre et l'historique est à droite.](../../images/champbloc/galaxy_interface.png "Galaxy interface explanation")
+> ![Capture d'écran de l'interface Galaxy, le panneau des outils est à gauche, le panneau principal est au centre et l'historique est à droite.](../../images/champbloc/galaxy_interface.png "Explication de l'interface Galaxy")
 >
 > La première fois que vous utiliserez Galaxy, il n'y aura aucun fichier dans votre panneau d'historique.
 {: .details}
@@ -79,7 +79,7 @@ Concentrons-nous maintenant sur notre workflows d'analyse sur l'état écologiqu
 {% include _includes/cyoa-choices.html option1="Oui" option2="Non" default="Oui" text="Vos données ESTAMP sont prêtes ?" %}
 
 <div class="Non" markdown="1">
-> 1. Télécharger les données depuis la base ESTAMP [estamp.afbiodiversite.fr](https://estamp.afbiodiversite.fr/donnees). Vous obtenez une archive zip.
+> 1. Télécharger les données depuis la base ESTAMP [estamp.afbiodiversite.fr](https://estamp.afbiodiversite.fr/) puis rendez-vous dans l'espace "accédez aux données" en bas à droite de la page. Après aplication des critères de filtre, vous obtenez une archive zip.
 >
 > 2. Dézipper le dossier. Dans le dossier, il y a 3 fichiers .csv qui vont nous intéresser :
 > - champbloc_ivr.csv
@@ -92,15 +92,15 @@ Concentrons-nous maintenant sur notre workflows d'analyse sur l'état écologiqu
 >
 >  * Ouvrir l'outil Galaxy de téléversement de données {% icon galaxy-upload %}
 >  * Sélectionner **Choose local files**
->    ![Choose local files](../../images/champbloc/upload.png "upload your data")
+>    ![Choisir les fihiers en local](../../images/champbloc/upload.png "téléverser vos données")
 >  * Naviguez dans votre ordinateur et récupérez vos fichiers ESTAMP (sélectionnez les trois fichiers mentionnés précédemment : champbloc_ivr.csv, champbloc_qecb.csv et ficheterrain.csv)
 >
 >  * Cliquer sur **Start**
->    ![Start charging your data](../../images/champbloc/start.png "Start")
+>    ![Commencer à charger vos données](../../images/champbloc/start.png "Lancer le chargement des données")
 >  * Cliquer sur **Close**
->    ![Close upload your data](../../images/champbloc/close.png "Close")
+>    ![Fermer la fenêtre de téléversement de données](../../images/champbloc/close.png "Fermer")
 >  Vous devez attendre que les données de votre historique s'affichent en couleur verte sur le panneau de droite avant de pouvoir les utiliser.
->    ![Data ready](../../images/champbloc/after_before.png "Data ready")
+>    ![Jeux de données prêts à être utilisés](../../images/champbloc/after_before.png "Jeux de données prêts")
 >
 > > <tip-title>Création d'un nouvel historique analytique</tip-title>
 > > Créez un nouvel historique pour ce tutoriel et donnez-lui un nom (exemple : "Indicateurs de blocs de champs") pour que vous puissiez le retrouver plus tard si besoin.
@@ -185,9 +185,9 @@ Utiliser l'outil {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb
 >
 >  Les informations sont affichées dans le panneau central
 >
-> ![Dissim fs fi](../../images/champbloc/fs_fi.png "face sup and inf dissimilarity"){:width="620px"}
+> ![Dissim fs fi](../../images/champbloc/fs_fi.png "dissimilarité des faces sup et inf"){:width="620px"}
 >
-> ![Dissim bf bm](../../images/champbloc/bf_bm.png "bloc fixed and mobile dissimilarity"){:width="620px"}
+> ![Dissim bf bm](../../images/champbloc/bf_bm.png "dissimilarité des blocs fixes et mobiles"){:width="620px"}
 >
 > 3. Téléchargez vos résultats
 >
