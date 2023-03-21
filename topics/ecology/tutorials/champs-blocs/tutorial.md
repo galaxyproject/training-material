@@ -148,8 +148,8 @@ Go on the tool **IVR**
 > > <tip-title>Search for your site results</tip-title>
 > >
 > > 1. In the top of the History panel (on the right) go on the search box
-> > 2. Type the name of your site (for instance "Bilfot")
-> > 3. If nothing show up click on **show hidden** (just beneath the name of the history in the History panel)
+> > 2. Click on the double arrows to display more filter options
+> > 3. Type the name of your site (for instance "Bilfot") on the "Filter by name:" criteria then click on "No" for the "Visible:" criteria, as pltos are created in a data collection and not directly visible on the history
 > >
 > {: .tip}
 > **For your reports you need to download the ones you want. You won't be able to vizualise them directly on Galaxy center panel !**
