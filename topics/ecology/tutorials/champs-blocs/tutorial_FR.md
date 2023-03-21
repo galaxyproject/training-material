@@ -100,7 +100,7 @@ Concentrons-nous maintenant sur notre workflows d'analyse sur l'état écologiqu
 >  * Cliquer sur **Close**
 >    ![Fermer la fenêtre de téléversement de données](../../images/champbloc/close.png "Fermer")
 >  Vous devez attendre que les données de votre historique s'affichent en couleur verte sur le panneau de droite avant de pouvoir les utiliser.
->    ![Jeux de données prêts à être utilisés](../../images/champbloc/after_before.png "Jeux de données prêts")
+>    ![Jeux de données prêts à être utilisés](../../images/champbloc/avant_apres.png "Jeux de données prêts")
 >
 > > <tip-title>Création d'un nouvel historique analytique</tip-title>
 > > Créez un nouvel historique pour ce tutoriel et donnez-lui un nom (exemple : "Indicateurs de blocs de champs") pour que vous puissiez le retrouver plus tard si besoin.
