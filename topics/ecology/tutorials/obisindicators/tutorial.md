@@ -122,8 +122,9 @@ You are now all set to use your obis data in order to do a diversity analysis.
 >    - *"Select column containing the species "*: `c4`
 >    - *"Select column containing the number of records"*: `c5`
 >    - *"Type of projection for the map : select your coordinate reference system (CRS)"*: Robinson Projection
->    - *"Write a number between 1 and 30"*: 9
+>    - *"Choose a resolution for the discrete global grid"*: 9
 >
+> Note that you can rerun the tool and modify the resolution of the maps you want to create.
 >
 > 2. Click on **Execute** 
 > 3. You will see 5 outputs appear on the history pannel. one for each of the indicators
