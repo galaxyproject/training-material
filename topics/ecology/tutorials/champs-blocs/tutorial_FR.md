@@ -31,7 +31,7 @@ Ainsi, l'habitat « champs de blocs médiolittoraux » a fait l'objet de plusieu
 Ces projets ont notamment permis de développer un réseau d'acteurs et de gestionnaires de terrain impliqués et des outils d'évaluation de l'état écologique et de la pression de la pêche à pied :
 
 - le Visual Boulder Turning Indicator (VTI), qui s'apparente à un indicateur « paysage » pour évaluer la pression de pêche sur la base de critères architecturaux ;
-- le Boulder Field Ecological Quality Index (BFEQ) - objet de ce rapport - basé sur des variables biotiques et abiotiques qui répondent à la perturbation "boulder tournant".
+- le Boulder Field Ecological Quality Index (BFEQ) - objet de ce rapport - basé sur des variables biotiques et abiotiques qui répondent à la perturbation "blocs retournés".
 
 Ici, nous allons passer en revue les différentes étapes afin d'obtenir ces 2 indicateurs et plus encore.
 
