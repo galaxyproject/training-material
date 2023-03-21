@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Production d'indicateurs champs de bloc</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+        <link rel="alternate" type="application/atom+xml" href="/training-material/feed.xml" />
+        <link rel="canonical" href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/champs-blocs/tutorial_FR.html" />
+        <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+
+        <meta name="DC.identifier" content="https://github.com/galaxyproject/training-material" />
+<meta name="DC.type" content="text" />
+<meta name="DC.title" content="Production d'indicateurs champs de bloc" />
+<meta name="DC.publisher" content="Galaxy Training Network" />
+<meta name="DC.date" content="2023-03-21 14:45:02 +0000" />
+<meta name="DC.creator" content="Marie Josse" />
+<meta name="DC.creator" content="Yvan Le Bras" />
+
+        
+        
+        
+        
+        <meta name="description" content="Learn to analyse Ecological data through Galaxy." />
+        <meta property="og:site_name" content="Galaxy Training Network" />
+        <meta property="og:title" content="Galaxy Training: Production d'indicateurs champs de bloc" />
+        <meta property="og:description" content="Learn to analyse Ecological data through Galaxy." />
+        
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+
+        
+        <script type="application/ld+json">
+            
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "LearningResource",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@id": "https://bioschemas.org/profiles/TrainingMaterial/1.0-RELEASE",
+    "@type": "CreativeWork"
+  },
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "Students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "dateModified": "2023-03-21 14:45:02 +0000",
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Production d'indicateurs champs de bloc",
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "isFamilyFriendly": true,
+  "license": "https://spdx.org/licenses/CC-BY-4.0.html",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "identifier": "https://github.com/galaxyproject/training-material",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "The text aims to be as accessible as possible. Image descriptions will vary per tutorial, from images being completely inaccessible, to images with good descriptions for non-visual users.",
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Ecology",
+    "description": "Learn to analyse Ecological data through Galaxy.",
+    "url": "https://training.galaxyproject.org/training-material/topics/ecology/"
+  },
+  "description": "",
+  "inLanguage": {
+    "@type": "Language",
+    "name": null,
+    "alternateName": "fr"
+  },
+  "competencyRequired": [
+    {
+      "@context": "http://schema.org",
+      "@type": "LearningResource",
+      "url": "https://training.galaxyproject.org/training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "author": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/",
+      "name": "Marie Josse",
+      "image": "https://avatars.githubusercontent.com/Marie59",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "name": "Yvan Le Bras",
+      "image": "https://avatars.githubusercontent.com/yvanlebras",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8504-068X",
+      "orcid": "https://orcid.org/0000-0002-8504-068X"
+    }
+  ],
+  "contributor": [
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/Marie59/",
+      "name": "Marie Josse",
+      "image": "https://avatars.githubusercontent.com/Marie59",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Person/0.2-DRAFT-2019_07_19",
+        "@type": "Person"
+      },
+      "url": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "mainEntityOfPage": "https://training.galaxyproject.org/training-material/hall-of-fame/yvanlebras/",
+      "name": "Yvan Le Bras",
+      "image": "https://avatars.githubusercontent.com/yvanlebras",
+      "description": "A contributor to the GTN project.",
+      "memberOf": [
+        {
+          "@type": "Organization",
+          "email": "galaxytrainingnetwork@gmail.com",
+          "name": "Galaxy Training Network",
+          "url": "https://galaxyproject.org/teach/gtn/"
+        }
+      ],
+      "identifier": "https://orcid.org/0000-0002-8504-068X",
+      "orcid": "https://orcid.org/0000-0002-8504-068X"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Ecology",
+      "description": "Learn to analyse Ecological data through Galaxy.",
+      "url": "https://training.galaxyproject.org/training-material/topics/ecology/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0610",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0610",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0610"
+    }
+  ]
+}
+        </script>
+        
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark" aria-label="Site Navigation">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                
+                    Galaxy Training!
+                
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        
+                        <a class="nav-link" href="/training-material/topics/ecology" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i> Ecology
+                        </a>
+                        
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Languages">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Languages
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            
+                              <strong class="dropdown-header">Curated Translations</strong>
+                              
+                                  
+                                      
+                                      <a class="dropdown-item" href="/training-material/topics/ecology/tutorials/champs-blocs/tutorial.html">
+                                        English
+                                      </a>
+                                  
+                              
+                            
+                              <strong class="dropdown-header">Automatic Translations</strong>
+            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/champs-blocs/tutorial_FR.html&edit-text=&act=url">
+                            Français
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/champs-blocs/tutorial_FR.html&edit-text=&act=url">
+                            日本語
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/champs-blocs/tutorial_FR.html&edit-text=&act=url">
+                            Español
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/champs-blocs/tutorial_FR.html&edit-text=&act=url">
+                            Português
+                            </a>
+                            
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/champs-blocs/tutorial_FR.html&edit-text=&act=url">
+                            العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org/topics/ecology/tutorials/champs-blocs/tutorial_FR.html&edit-text=&act=url" title="">
+                            And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+        -->
+
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQs">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="/training-material/topics/ecology/faqs/" title="Check our FAQs for the Ecology topic">
+           <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Topic FAQs
+        </a>
+        
+        
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            <i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Galaxy Help Forum
+        </a>
+        <a class="dropdown-item" href="https://gitter.im/Galaxy-Training-Network/Lobby" title="Discuss on gitter">
+           <i class="fab fa-gitter" aria-hidden="true"></i><span class="visually-hidden">gitter</span> Discuss on Gitter
+        </a>
+    </div>
+</li>
+
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        <i class="far fa-star" aria-hidden="true"></i><span class="visually-hidden">galaxy-star</span> Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        
+        <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/edit/main/topics/ecology/tutorials/champs-blocs/tutorial_FR.md" title="Edit on GitHub">
+          <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="/training-material/stats.html" title="Show view statistics about this repository">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN statistics
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page=/training-material/topics/ecology/tutorials/champs-blocs/tutorial_FR.html" title="Show view statistics of this page">
+            <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> Page Metrics
+        </a>
+
+        <!-- link to feedback -->
+        
+            
+            
+                <a class="dropdown-item" href="/training-material/feedback.html" title="Show feedback statistics about this repository">
+                    <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden">galaxy-barchart</span> GTN feedback
+                </a>
+            
+        
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-palette" aria-hidden="true"></i><span class="visually-hidden">gtn-theme</span> Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                    <button class="btn" data-theme="default">Default</button>
+                    <button class="btn" data-theme="night">Night</button>
+                    <button class="btn" data-theme="midnight">Midnight</button>
+                    <button class="btn" data-theme="rainbow">Rainbow</button>
+                    <button class="btn" data-theme="blm">✊🏿</button>
+                    <button class="btn" data-theme="progress" >🏳️‍🌈</button>
+                    <button class="btn" data-theme="halloween">🎃</button>
+                    <button class="btn" data-theme="straya">🇦🇺</button>
+            </div>
+
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden">galaxy-rulebuilder-history</span> Previous Versions
+            </div>
+
+            <div id="archive-selector">
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-03-01/topics/ecology/tutorials/champs-blocs/tutorial_FR.html" title="Version 2023-03-01">2023-03-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-02-01/topics/ecology/tutorials/champs-blocs/tutorial_FR.html" title="Version 2023-02-01">2023-02-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/2023-01-01/topics/ecology/tutorials/champs-blocs/tutorial_FR.html" title="Version 2023-01-01">2023-01-01</a>
+            
+                <a class="btn btn-warning" href="https://training.galaxyproject.org/archive/" title="Older Versions">Older Versions</a>
+            </div>
+
+        </div>
+
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent" role="search">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+        
+        <div class="container main-content" role="main">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+
+
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<section class="tutorial topic-ecology">
+    <h1 data-toc-skip>Production d'indicateurs champs de bloc</h1>
+    
+
+    <div markdown="0">
+
+	<div class="contributors-line">
+		Auteurs: <a href="/training-material/hall-of-fame/Marie59/" class="contributor-badge contributor-Marie59"><img src="https://avatars.githubusercontent.com/Marie59?s=27" alt="Avatar">Marie Josse</a><a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge contributor-yvanlebras"><img src="/training-material/assets/images/orcid.png" alt="orcid logo"/><img src="https://avatars.githubusercontent.com/yvanlebras?s=27" alt="Avatar">Yvan Le Bras</a>
+	</div>
+
+</div>
+
+
+    <blockquote class="overview">
+        <div class="box-title" aria-label="overview box">Description générale</div>
+        
+        <img alt="Creative Commons License" class="float-right" style="border-width:0; display: inline-block; margin:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" aria-hidden="true" />
+        
+        <strong><i class="far fa-question-circle" aria-hidden="true"></i> Questions:</strong>
+        <ul>
+        
+        <li><p>Which biological questions are addressed by the tutorial?</p>
+</li>
+        
+        <li><p>Which bioinformatics techniques are important to know for this type of data?</p>
+</li>
+        
+        </ul>
+
+        <strong><i class="fas fa-bullseye" aria-hidden="true"></i> Objectifs: </strong>
+        <ul>
+        
+        <li><p>Calcul de l’indice IVR (Visual Rollover Indicator)</p>
+</li>
+        
+        <li><p>Calcul de l’indice de dissimilarité</p>
+</li>
+        
+        <li><p>Visualisation de quelques indices de diversité</p>
+</li>
+        
+        </ul>
+
+        
+        <strong><i class="fas fa-check-circle" aria-hidden="true"></i> Pré-requis:</strong>
+        <ul>
+        
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+        
+        </ul>
+        
+
+        
+        <div><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i> Durée estimée:</strong> 1 Heure</div>
+        
+
+        
+
+        
+        
+
+        
+        <div id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> supports:</strong></div>
+        <ul class="supporting_material">
+            
+
+            
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a class="btn btn-default topic-icon" href="/training-material/topics/ecology/tutorials/champs-blocs/workflows/" title="Workflows" alt="Champs blocs indicators workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i>&nbsp;Workflows
+    </a>
+
+</li>
+            
+
+            
+
+            
+
+            
+            
+            
+
+            <!-- Check the GTN Video Library for recordings of this tutorial or associated slides -->
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+            
+                <li class="btn btn-default supporting_material">
+
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span>&nbsp;Disponible sur ces instances de Galaxy 
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/main/topics/ecology/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+        <a class="dropdown-item" href="http://aspendb.uga.edu:8085/" title="AGEseq @ AspenDB">
+            AGEseq @ AspenDB
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://motherbox.chemeng.ntua.gr/anastasia_dev/" title="ANASTASIA">
+            ANASTASIA
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://apostl.moffitt.org/" title="APOSTL">
+            APOSTL
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://mem.rcees.ac.cn:8083/" title="ARGA">
+            ARGA
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://smile.hku.hk/SARGs" title="ARGs-OAP">
+            ARGs-OAP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://bf2i-galaxy.insa-lyon.fr:8080/" title="BF2I-MAP">
+            BF2I-MAP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.ugent.be/" title="BioBix">
+            BioBix
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://143.169.238.104/galaxy/" title="Biomina">
+            Biomina
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://iris.angers.inra.fr/galaxypub-cfbp" title="CIRM-CFBP">
+            CIRM-CFBP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://clipseq.usegalaxy.eu/" title="CLIP-Explorer">
+            CLIP-Explorer
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://cpt.tamu.edu/galaxy-public/" title="Center for Phage Technology (CPT)">
+            Center for Phage Technology (CPT)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://vm-chemflow-francegrille.eu/" title="ChemFlow">
+            ChemFlow
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://cheminformatics.usegalaxy.eu/" title="ChemicalToolbox">
+            ChemicalToolbox
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://climate.usegalaxy.eu/" title="Climate Science Workbench">
+            Climate Science Workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://corgat.cloud.ba.infn.it/galaxy" title="CorGAT">
+            CorGAT
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://coralsnp.science.psu.edu/galaxy/" title="CoralSNP">
+            CoralSNP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://cropgalaxy.excellenceinbreeding.org/" title="CropGalaxy">
+            CropGalaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://dintor.eurac.edu/" title="Dintor">
+            Dintor
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://www.freebioinfo.org/" title="FreeBioinfo">
+            FreeBioinfo
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://igg.cloud.ba.infn.it/galaxy" title="GASLINI">
+            GASLINI
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
+            Galaxy Africa
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://india.usegalaxy.eu/" title="Galaxy India">
+            Galaxy India
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://gio.sbcs.qmul.ac.uk/" title="Galaxy Integrated Omics (GIO)">
+            Galaxy Integrated Omics (GIO)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://test.galaxyproject.org/" title="Galaxy Test">
+            Galaxy Test
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://ecology.usegalaxy.eu/" title="Galaxy for Ecology">
+            Galaxy for Ecology
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.mesocentre.uca.fr" title="Galaxy@AuBi">
+            Galaxy@AuBi
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.pasteur.fr/" title="Galaxy@Pasteur">
+            Galaxy@Pasteur
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxytrakr.org/" title="GalaxyTrakr">
+            GalaxyTrakr
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://hyperbrowser.uio.no/hb/" title="Genomic Hyperbrowser">
+            Genomic Hyperbrowser
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://gigagalaxy.net/" title="GigaGalaxy">
+            GigaGalaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://hicexplorer.usegalaxy.eu" title="HiCExplorer">
+            HiCExplorer
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
+            Human Cell Atlas
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://huttenhower.sph.harvard.edu/galaxy/" title="Huttenhower Lab">
+            Huttenhower Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.hyphy.org/" title="HyPhy HIV NGS Tools">
+            HyPhy HIV NGS Tools
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://mem.rcees.ac.cn:8081/" title="IDENAP">
+            IDENAP
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy-web.ipk-gatersleben.de" title="IPK Galaxy Blast Suite">
+            IPK Galaxy Blast Suite
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://www.immportgalaxy.org/" title="ImmPort Galaxy">
+            ImmPort Galaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.interactomix.com/" title="InteractoMIX">
+            InteractoMIX
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.ul.edu.lb/" title="Lebanese University Galaxy">
+            Lebanese University Galaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://ml.usegalaxy.eu/" title="Machine Learning Workbench">
+            Machine Learning Workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://neo.engr.uconn.edu/" title="Mandoiu Lab">
+            Mandoiu Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://metabolomics.usegalaxy.eu/" title="Metabolomics">
+            Metabolomics
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
+            Metagenomics
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://mapping-by-sequencing.vm.uni-freiburg.de:8080/" title="MiModD NacreousMap">
+            MiModD NacreousMap
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://nanopore.usegalaxy.eu/" title="NanoGalaxy">
+            NanoGalaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.inf.ethz.ch" title="Oqtans">
+            Oqtans
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://palfinder.ls.manchester.ac.uk/" title="Palfinder">
+            Palfinder
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://pepsimili.e-nios.com:8080/" title="PepSimili">
+            PepSimili
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.bio.di.uminho.pt/" title="PhagePromotor">
+            PhagePromotor
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://plants.usegalaxy.eu/" title="Plant Anaylsis Workbench">
+            Plant Anaylsis Workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://protologger.de/" title="Protologger">
+            Protologger
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://ribogalaxy.ucc.ie/" title="RiboGalaxy">
+            RiboGalaxy
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://singlecell.usegalaxy.eu/" title="Single Cell Omics workbench">
+            Single Cell Omics workbench
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
+            UseGalaxy.be
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.fr/" title="UseGalaxy.fr">
+            UseGalaxy.fr
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
+            UseGalaxy.org (Main)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
+            UseGalaxy.org.au
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.bio.ku.dk/" title="Vinther Lab">
+            Vinther Lab
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://viralvariant.anses.fr/" title="Viral Variant Visualizer (VVV)">
+            Viral Variant Visualizer (VVV)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://virology.usegalaxy.eu/" title="Virology">
+            Virology
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://covid19.usegalaxy.fr/" title="covid19.UseGalaxy.fr">
+            covid19.UseGalaxy.fr
+        </a>
+        
+    
+    </ul>
+
+
+</li>
+            
+        </ul>
+        
+
+        <div><strong><i class="far fa-calendar" aria-hidden="true"></i> Dernière modification:</strong> Mar 21, 2023 </div>
+        <div><strong><i class="fas fa-balance-scale" aria-hidden="true"></i> Licence:</strong>
+            
+            <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Le Framework GTN est sous licence MIT</a>
+            
+            <a rel="license" href="https://github.com/galaxyproject/training-material/blob/main/LICENSE.md">Le Framework GTN est sous licence MIT</a>
+        </div>
+    </blockquote>
+
+    <div class="container">
+        <div class="row">
+            <!-- sidebar, which will move to the top on a small screen -->
+            <div class="col-sm-2">
+                <nav id="toc" data-toggle="toc" class="sticky-top" aria-label="Table of Contents"></nav>
+            </div>
+            <div class="col-sm-10">
+                 
+
+                <h1 id="introduction">Introduction</h1>
+<p>Ce tutoriel vous permettra de mieux appréhender le workflow des indicateurs “champs de blocs”. Cela vous aidera à comprendre les effets des changements globaux et locaux sur les habitats marins, et l’efficacité des mesures de gestion adoptées, nécessite un suivi standardisé et des indicateurs robustes et sensibles reflétant l’état des habitats.</p>
+
+<p>L’habitat “champs de blocs médiolittoraux” abrite une grande diversité de micro-habitats et d’espèces en raison de sa forte hétérogénéité structurelle et de sa position intermédiaire sur l’estran, ce qui en fait l’un des habitats médiolittoraux les plus diversifiés et d’un grand intérêt écologique le long de la Manche. -Côte atlantique. C’est aussi un habitat très attractif pour la pêche récréative qui, par le remaniement des blocs, peut impacter les communautés.
+Ainsi, l’habitat « champs de blocs médiolittoraux » a fait l’objet de plusieurs initiatives nationales et locales (dont LIFE+ « Expérimentation pour une gestion durable et concertée de la pêche à pied de loisir en France » 2013-2017) pour mieux évaluer son état et le mettre en relation avec la pression de la pêche à pied en vue d’adapter la gestion locale, notamment à travers le réseau des Aires Marines Protégées (Natura 2000, PNM, PNR etc.).</p>
+
+<p>Ces projets ont notamment permis de développer un réseau d’acteurs et de gestionnaires de terrain impliqués et des outils d’évaluation de l’état écologique et de la pression de la pêche à pied :</p>
+
+<ul>
+  <li>le Visual Boulder Turning Indicator (VTI), qui s’apparente à un indicateur « paysage » pour évaluer la pression de pêche sur la base de critères architecturaux ;</li>
+  <li>le Boulder Field Ecological Quality Index (BFEQ) - objet de ce rapport - basé sur des variables biotiques et abiotiques qui répondent à la perturbation “boulder tournant”.</li>
+</ul>
+
+<p>Ici, nous allons passer en revue les différentes étapes afin d’obtenir ces 2 indicateurs et plus encore.</p>
+
+<blockquote class="agenda">
+  <div class="box-title agenda-title" id="agenda-dans-ce-tutoriel-nous-allons-couverir" aria-label="agenda box: Dans ce tutoriel, nous allons couverir:">Agenda: Dans ce tutoriel, nous allons couverir:</div>
+
+<ol id="markdown-toc">
+  <li><a href="#introduction" id="markdown-toc-introduction">Introduction</a></li>
+  <li><a href="#centraliser-les-données" id="markdown-toc-centraliser-les-données">Centraliser les données</a></li>
+  <li><a href="#calcul-de-lindicateur-visuel-de-retournement-de-blocs-pour-chaque-site" id="markdown-toc-calcul-de-lindicateur-visuel-de-retournement-de-blocs-pour-chaque-site">Calcul de l’indicateur visuel de retournement de blocs pour chaque site</a>    <ol>
+      <li><a href="#ivr" id="markdown-toc-ivr"><strong>IVR</strong></a></li>
+    </ol>
+  </li>
+  <li><a href="#calcul-du-coefficient-de-dissimilarité-pour-chaque-site" id="markdown-toc-calcul-du-coefficient-de-dissimilarité-pour-chaque-site">Calcul du coefficient de dissimilarité pour chaque site</a>    <ol>
+      <li><a href="#dissimilarité" id="markdown-toc-dissimilarité"><strong>Dissimilarité</strong></a></li>
+    </ol>
+  </li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<blockquote class="details">
+  <div class="box-title details-title" id="details-rapide-introduction-sr-le-fonctionnement-de-galaxy"><button class="gtn-boxify-button details" type="button" aria-controls="details-rapide-introduction-sr-le-fonctionnement-de-galaxy-contents" aria-expanded="true" aria-label="Toggle details box: Rapide introduction sr le fonctionnement de Galaxy"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"></span> Détails: Rapide introduction sr le fonctionnement de Galaxy<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <p>Vous pouvez quitter le didacticiel et aller vous prélasser sur l’écran principal en cliquant en dehors de l’écran du didacticiel.
+Vous pouvez revenir à tout moment là où vous avez laissé le didacticiel en cliquant sur <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>.</p>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-se-connecter-à-galaxy" aria-label="hands-on box: Se connecter à Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> En pratique: Se connecter à Galaxy</div>
+    <ol>
+      <li>Ouvrez votre navigateur internet préféré (Chrome, Safari ou Firefox, s’il vous plaît, pas Edge ;) !!!)</li>
+      <li>Rendez-vous sur votre instance Galaxy</li>
+      <li>Se connecter ou s’enregistrer</li>
+    </ol>
+
+    <figure id="figure-1"><img src="../../images/champbloc/galaxy_homepage.png" alt="Capture d'écran de l'interface Galaxy avec le bouton d'enregistrement ou de connexion en surbrillance. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Galaxy homepage</figcaption></figure>
+
+    <p>Cette capture d’écran présente l’instance Galaxy Ecology, accessible à l’adresse <a href="https://ecology.usegalaxy.eu/">usegalaxy.eu</a></p>
+
+  </blockquote>
+
+  <p>La page d’acceuil de Galaxy est divisée en 3 parties:</p>
+  <ul>
+    <li>Les outils sur la gauche</li>
+    <li>La panneau de visualisation au milieu</li>
+    <li>L’historique des analyses et l’ensemble des fichiers utilisés et générés sur la droite</li>
+  </ul>
+
+  <figure id="figure-2"><img src="../../images/champbloc/galaxy_interface.png" alt="Capture d'écran de l'interface Galaxy, le panneau des outils est à gauche, le panneau principal est au centre et l'historique est à droite." loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Explication de l'interface Galaxy</figcaption></figure>
+
+  <p>La première fois que vous utiliserez Galaxy, il n’y aura aucun fichier dans votre panneau d’historique.</p>
+</blockquote>
+
+<p>Concentrons-nous maintenant sur notre workflows d’analyse sur l’état écologique de champ de blocs</p>
+
+<figure id="figure-3"><img src="../../images/champbloc/workflow.png" alt="workflows d'analyse sur l'état écologique du champ de blocs. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Workflow</figcaption></figure>
+
+<h1 id="centraliser-les-données">Centraliser les données</h1>
+
+<blockquote class="notranslate hands_on gtn-cyoa" id="gtn-cyoa">
+	<div class="box-title" aria-label="hands-on box: choose your own tutorial"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> Hands-on: Choose Your Own Tutorial</div>
+	<p>This is a "Choose Your Own Tutorial" section, where you can select between multiple paths. Click one of the buttons below to select how you want to follow the tutorial</p>
+	
+	<p>
+		Vos données ESTAMP sont prêtes ?
+	</p>
+	
+	
+		<input id="cyoa-opt1" type="radio" name="cyoa" value="Oui" onclick="cyoaChoice('Oui')" />
+		<label for="cyoa-opt1" class="select btn btn-secondary">Oui</label>
+	
+	
+		<input id="cyoa-opt2" type="radio" name="cyoa" value="Non" onclick="cyoaChoice('Non')" />
+		<label for="cyoa-opt2" class="select btn btn-secondary">Non</label>
+	
+	
+	
+
+	
+	<script type="text/javascript">
+		function ready(fn) {
+			if (document.readyState != 'loading'){
+				fn();
+			} else {
+				document.addEventListener('DOMContentLoaded', fn);
+			}
+		}
+		ready(function() {
+			cyoaDefault("Oui");
+		})
+	</script>
+	
+</blockquote>
+
+<div class="Non">
+  <blockquote>
+    <ol>
+      <li>
+        <p>Télécharger les données depuis la base ESTAMP <a href="https://estamp.afbiodiversite.fr/">estamp.afbiodiversite.fr</a> puis rendez-vous dans l’espace “accédez aux données” en bas à droite de la page. Après aplication des critères de filtre, vous obtenez une archive zip.</p>
+      </li>
+      <li>
+        <p>Dézipper le dossier. Dans le dossier, il y a 3 fichiers .csv qui vont nous intéresser :</p>
+        <ul>
+          <li>champbloc_ivr.csv</li>
+          <li>champbloc_qecb.csv</li>
+          <li>ficheterrain.csv</li>
+        </ul>
+      </li>
+    </ol>
+  </blockquote>
+</div>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-télerversement-des-données-dans-galaxy" aria-label="hands-on box: Télerversement des données dans Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> En pratique: Télerversement des données dans Galaxy</div>
+  <ol>
+    <li>Importer les données dans Galaxy</li>
+  </ol>
+
+  <ul>
+    <li>Ouvrir l’outil Galaxy de téléversement de données <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden">galaxy-upload</span></li>
+    <li>Sélectionner <strong>Choose local files</strong>
+      <figure id="figure-4"><img src="../../images/champbloc/upload.png" alt="Choisir les fihiers en local. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 4:</span> téléverser vos données</figcaption></figure>
+    </li>
+    <li>
+      <p>Naviguez dans votre ordinateur et récupérez vos fichiers ESTAMP (sélectionnez les trois fichiers mentionnés précédemment : champbloc_ivr.csv, champbloc_qecb.csv et ficheterrain.csv)</p>
+    </li>
+    <li>Cliquer sur <strong>Start</strong>
+      <figure id="figure-5"><img src="../../images/champbloc/start.png" alt="Commencer à charger vos données. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Lancer le chargement des données</figcaption></figure>
+    </li>
+    <li>Cliquer sur <strong>Close</strong>
+      <figure id="figure-6"><img src="../../images/champbloc/close.png" alt="Fermer la fenêtre de téléversement de données. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Fermer</figcaption></figure>
+      <p>Vous devez attendre que les données de votre historique s’affichent en couleur verte sur le panneau de droite avant de pouvoir les utiliser.</p>
+      <figure id="figure-7"><img src="../../images/champbloc/avant_apres.png" alt="Jeux de données prêts à être utilisés. " loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Jeux de données prêts</figcaption></figure>
+    </li>
+  </ul>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-création-d-un-nouvel-historique-analytique"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-création-d-un-nouvel-historique-analytique-contents" aria-expanded="true" aria-label="Toggle tip box: Création d'un nouvel historique analytique"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Astuce: Création d'un nouvel historique analytique<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+    <p>Créez un nouvel historique pour ce tutoriel et donnez-lui un nom (exemple : “Indicateurs de blocs de champs”) pour que vous puissiez le retrouver plus tard si besoin.</p>
+
+    <!--SNIPPET-->
+    <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel.</p>
+    <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+    <ol>   <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden">galaxy-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>   <li>Select the option <strong>Create New</strong> from the menu</li> </ol>
+
+  </blockquote>
+</blockquote>
+
+<h1 id="calcul-de-lindicateur-visuel-de-retournement-de-blocs-pour-chaque-site">Calcul de l’indicateur visuel de retournement de blocs pour chaque site</h1>
+
+<p>Basé sur la proportion de blocs « tournés » et « non tournés », cet indicateur varie de 0 à 5 et peut être rapidement utilisé.</p>
+
+<blockquote class="tip">
+  <div class="box-title tip-title" id="tip-comment-accéder-à-l-outil"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-comment-accéder-à-l-outil-contents" aria-expanded="true" aria-label="Toggle tip box: Comment accéder à l'outil ?"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Astuce: Comment accéder à l'outil ?<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+
+  <blockquote class="notranslate hands_on">
+    <div class="box-title hands-on-title" id="hands-on-utilisation-un-outil-galaxy" aria-label="hands-on box: Utilisation 'un outil Galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> En pratique: Utilisation 'un outil Galaxy</div>
+    <ol>
+      <li>cliquer sur le lien de l’outil <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr/cb_ivr/0.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr/cb_ivr/0.0.0"><strong>IVR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr/cb_ivr/0.0.0</span></span>  ou taper <strong>ivr</strong> dans le module de recherche du panneau d’outils (en haut à gauche)
+L’outil sera affiché dans le panneau central Galaxy.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="ivr"><strong>IVR</strong></h2>
+
+<p>Rendez-vous sur le formulaire de l’outil <strong>IVR</strong></p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-calculer-l-indice-ivr" aria-label="hands-on box: Calculer l'indice IVR"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> En pratique: Calculer l'indice IVR</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr/cb_ivr/0.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr/cb_ivr/0.0.0"><strong>IVR</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/cb_ivr/cb_ivr/0.0.0</span></span>  avec ces paramètres :
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input champbloc_ivr.csv”</em>: <code class="language-plaintext highlighter-rouge">input</code> (champbloc_ivr.csv)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input ficheterrain.csv”</em>: <code class="language-plaintext highlighter-rouge">input</code> (ficheterrain.csv)</li>
+      </ul>
+    </li>
+    <li>
+      <p>Cliquer sur <strong>Execute</strong> (cela peut prendre quelques minutes à traiter c’est normal si vous devez attendre un peu surtout si votre connexion internet est faible)</p>
+    </li>
+    <li>
+      <p>Trois sorties apparaîtront dans votre panneau d’historique à droite.</p>
+    </li>
+    <li>Visualisation de graphiques
+      <ul>
+        <li>Une fois que les jeux de données sont affichés en vert dans l’historique, cliquer sur <strong>IVR plot</strong></li>
+        <li>Puis, cliquer sur l’icone <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (oeil) de votre fichier de sortie dans l’historique.</li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>L’inforamtion est affichée dans le panneau du milieu</p>
+
+  <figure id="figure-8"><img src="../../images/champbloc/ivr.png" alt="IVR. " width="620px" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 8:</span> IVR for Bilfot</figcaption></figure>
+
+  <blockquote class="tip">
+    <div class="box-title tip-title" id="tip-rechercher-les-résultats-de-votre-site"><button class="gtn-boxify-button tip" type="button" aria-controls="tip-rechercher-les-résultats-de-votre-site-contents" aria-expanded="true" aria-label="Toggle tip box: Rechercher les résultats de votre site"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden"></span> Astuce: Rechercher les résultats de votre site<span role="button" class="fold-unfold fa fa-minus-square"></span></button></div>
+
+    <ol>
+      <li>En haut du panneau Historique (à droite) allez sur le champ de recherche</li>
+      <li>Tapez le nom de votre site (par exemple “Bilfot”)</li>
+      <li>Si rien ne s’affiche, cliquez sur <strong>show hidden</strong> (juste sous le nom de l’historique dans le panneau Historique)</li>
+    </ol>
+
+  </blockquote>
+  <p><strong>Pour vos rapports, vous pouvez télécharger ceux que vous souhaitez. Vous ne pourrez pas les visualiser directement sur le panneau central Galaxy car le format docx n’est pas pris en charge !</strong></p>
+
+  <ol>
+    <li>Téléchargement des résultats</li>
+  </ol>
+
+  <ul>
+    <li>Cliquez sur la sortie qui vous intéresse par exemple <strong>Rapports</strong></li>
+    <li>Cliquez sur <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> (télécharger)</li>
+  </ul>
+</blockquote>
+
+<h1 id="calcul-du-coefficient-de-dissimilarité-pour-chaque-site">Calcul du coefficient de dissimilarité pour chaque site</h1>
+
+<h2 id="dissimilarité"><strong>Dissimilarité</strong></h2>
+<p>Nettoyez vos données, puis calculez le coefficient de dissimilarité.
+Utiliser l’outil <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/cb_dissim/0.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/cb_dissim/0.0.0"><strong>Dissimilarity</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/cb_dissim/0.0.0</span></span></p>
+
+<blockquote class="notranslate hands_on">
+  <div class="box-title hands-on-title" id="hands-on-calculer-des-index-de-dissimilarité" aria-label="hands-on box: Calculer des index de dissimilarité"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"></span> En pratique: Calculer des index de dissimilarité</div>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/cb_dissim/0.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/cb_dissim/0.0.0"><strong>Dissimilarity</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/cb_dissim/0.0.0</span></span>  avec les paramètres suivants:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input champbloc_qecb.csv”</em>: <code class="language-plaintext highlighter-rouge">input</code> (champbloc_qecb.csv)</li>
+        <li>
+          <p><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input ficheterrain.csv”</em>: <code class="language-plaintext highlighter-rouge">input</code> (ficheterrain.csv)</p>
+        </li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Do you have data after the year 2021 ?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Until when do you have data (write only the YEAR) ?”</em>: <code class="language-plaintext highlighter-rouge">2021</code></li>
+      </ul>
+    </li>
+    <li>
+      <p>Cliquer sur <strong>Execute</strong> (cela peut prendre quelques minutes à traiter c’est normal si vous devez attendre un peu surtout si votre connexion internet est faible)</p>
+    </li>
+    <li>Visualisation des graphiques
+      <ul>
+        <li>Une fois que les jeux de données sont affichés en vert dans l’historique, choisissez les figures que vous souhaitez visualiser.</li>
+        <li>Puis, cliquer sur l’icone <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">galaxy-eye</span> (oeil) de votre fichier de sortie dans l’historique.</li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>Les informations sont affichées dans le panneau central</p>
+
+  <figure id="figure-9"><img src="../../images/champbloc/fs_fi.png" alt="Dissim fs fi. " width="620px" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 9:</span> dissimilarité des faces sup et inf</figcaption></figure>
+
+  <figure id="figure-10"><img src="../../images/champbloc/bf_bm.png" alt="Dissim bf bm. " width="620px" loading="lazy" /><figcaption><span class="figcaption-prefix">Figure 10:</span> dissimilarité des blocs fixes et mobiles</figcaption></figure>
+
+  <ol>
+    <li>Téléchargez vos résultats</li>
+  </ol>
+
+  <ul>
+    <li>Cliquez sur la sortie qui vous intéresse</li>
+    <li>Cliquez sur <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden">galaxy-save</span> (download)</li>
+  </ul>
+
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+<p>Voilà, vous avez terminé votre étude sur l’état de la biodiversité de vos champs blocs.</p>
+
+
+                
+                <blockquote class="key_points">
+                    <div class="box-title" aria-label="key-points box"><i class="fas fa-key" aria-hidden="true"></i> Points clés</div>
+                    <ul>
+                        
+                        <li><p>Indicateurs de diversité</p>
+</li>
+                        
+                        <li><p>Champs de Blocs</p>
+</li>
+                        
+                    </ul>
+                </blockquote>
+                
+
+                <h1>Questions fréquentes</h1>
+                Have questions about this tutorial? Check out the  <a href="/training-material/topics/ecology/faqs/">FAQ page for the Ecology topic</a> to see if your question is listed there.
+                If not, please ask your question on the <a href="https://gitter.im/Galaxy-Training-Network/Lobby">GTN Gitter Channel</a> or the
+                <a href="https://help.galaxyproject.org">Galaxy Help Forum</a>
+
+                
+
+                
+                <h1 data-toc-skip>Useful literature</h1>
+                <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/ecology#references">here</a>.</p>
+                
+
+
+                
+
+                
+
+                <h1>Retours</h1>
+                <p class="text-muted">Utilisation de ce matériel en tant que formateur ? <a href="https://github.com/galaxyproject/training-material/issues/1452">Partagez votre expérience</a>.
+                <br>Avez-vous utilisé ce matériel en tant qu'apprenti ou étudiant ? Cliquez sur le formulaire ci-dessous pour nous laisser votre avis<i class="fas fa-hand-point-down"></i>
+                </p>
+
+                <div id="feedback-button">
+                    <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                </div>
+                <div id="feedback-form">
+                </div>
+                <script type="text/javascript">
+                    (function (window, document) {
+                        function onDocumentReady(fn) {
+                            if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                fn();
+                            } else {
+                                document.addEventListener('DOMContentLoaded', fn);
+                            }
+                        }
+
+                        onDocumentReady(function () {
+                            $("#feedback-button").click(function(evt){
+                                var e = $(evt.target)
+                                e.hide();
+
+                                $("#feedback-form").html(`
+                                    <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Production d'indicateurs champs de bloc (Ecology)">Loading...</iframe>
+                                `)
+                            })
+                        });
+                    })(window, document);
+                </script>
+
+                <h1>Comment citer ce tutorial</h1>
+                <p>
+                    <ol>
+                        <li id="citation-text">
+                            Marie Josse, Yvan Le Bras,  <b>Production d'indicateurs champs de bloc (Galaxy Training Materials)</b>. <a href="https://training.galaxyproject.org/training-material/topics/ecology/tutorials/champs-blocs/tutorial_FR.html">https://training.galaxyproject.org/training-material/topics/ecology/tutorials/champs-blocs/tutorial_FR.html</a> Online; accessed TODAY
+                        </li>
+                        <li>
+                        Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                        </li>
+                    </ol>
+                </p>
+
+                <!-- collapsible boxcontaining the BibTeX-formatted citation -->
+                <blockquote class="details">
+
+                  <div id="citation-bibtex" class="box-title">
+                    <button type="button" aria-controls="citation-bibtex" aria-expanded="false" aria-label="Toggle details box: BibTeX for citing this tutorial">
+                      <i class="fas fa-info-circle" aria-hidden="true"></i>
+                      <span class="visually-hidden"></span> BibTeX<span role="button" class="fold-unfold fa fa-minus-square" aria-hidden="true"></span>
+                    </button>
+                   </div>
+                   <p style="display: none;">
+
+                   <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+
+
+<code id="citation-code">@misc{ecology-champs-blocs,
+author = "Marie Josse and Yvan Le Bras",
+title = "Production d'indicateurs champs de bloc (Galaxy Training Materials)",
+year = "",
+month = "",
+day = ""
+url = "\url{https://training.galaxyproject.org/training-material/topics/ecology/tutorials/champs-blocs/tutorial_FR.html}",
+note = "[Online; accessed TODAY]"
+}
+@article{Hiltemann_2023,
+	doi = {10.1371/journal.pcbi.1010752},
+	url = {https://doi.org/10.1371%2Fjournal.pcbi.1010752},
+	year = 2023,
+	month = {jan},
+	publisher = {Public Library of Science ({PLoS})},
+	volume = {19},
+	number = {1},
+	pages = {e1010752},
+	author = {Saskia Hiltemann and Helena Rasche and Simon Gladman and Hans-Rudolf Hotz and Delphine Larivi{\`{e}}re and Daniel Blankenberg and Pratik D. Jagtap and Thomas Wollmann and Anthony Bretaudeau and Nadia Gou{\'{e}} and Timothy J. Griffin and Coline Royaux and Yvan Le Bras and Subina Mehta and Anna Syme and Frederik Coppens and Bert Droesbeke and Nicola Soranzo and Wendi Bacon and Fotis Psomopoulos and Crist{\'{o}}bal Gallardo-Alba and John Davis and Melanie Christine Föll and Matthias Fahrner and Maria A. Doyle and Beatriz Serrano-Solano and Anne Claire Fouilloux and Peter van Heusden and Wolfgang Maier and Dave Clements and Florian Heyl and Björn Grüning and B{\'{e}}r{\'{e}}nice Batut and},
+	editor = {Francis Ouellette},
+	title = {Galaxy Training: A powerful framework for teaching!},
+	journal = {PLoS Comput Biol} Computational Biology}
+}
+</code>
+                   </pre></div></div>
+                   </p>
+                </blockquote>
+
+                
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                <i class="far fa-thumbs-up" aria-hidden="true"></i> Félicitations ! Vous avez terminé avec succès ce tutoriel !
+
+                
+
+                
+
+            </div>
+        </div>
+    </div>
+</section>
+<br/>
+<br/>
+<br/>
+
+        </div>
+        
+        <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+        <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+        <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+        <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+        <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+        <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+        <script type="text/javascript">
+        var snippets=document.querySelectorAll('div.highlight');
+        [].forEach.call(snippets,function(snippet){
+            snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+
+        var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+            target:function(trigger){return trigger.nextElementSibling;
+        }});
+        </script>
+        
+
+        <script type="text/javascript">
+            if(window.location.hostname === "galaxyproject.github.io") {
+                // Redirect
+                var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+                $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+                window.setTimeout(function(){
+                    window.location.href = redirect;
+                }, 5000)
+
+            }
+        </script>
+    </body>
+</html>
