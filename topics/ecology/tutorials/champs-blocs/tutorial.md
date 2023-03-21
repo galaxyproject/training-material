@@ -77,7 +77,7 @@ Now let's focus on our workflow on boulder field ecological state
 {% include _includes/cyoa-choices.html option1="Yes" option2="No" default="Yes" text="Are your ESTAMP data ready ?" %}
 
 <div class="No" markdown="1">
-> 1. Download your data on ESTAMP [estamp.afbiodiversite.fr](https://estamp.afbiodiversite.fr/donnees). You will get a zip folder.
+> 1. Download your data on ESTAMP [estamp.afbiodiversite.fr](https://estamp.afbiodiversite.fr/) website, clicking on "Accédez aux données" at the bottom of the page. You will get a zip folder.
 >
 > 2. Unzip your folder. In the folder three files .csv will interest us :
 > - champbloc_ivr.csv
@@ -151,7 +151,7 @@ Go on the tool **IVR**
 > > 2. Click on the double arrows to display more filter options
 > > 3. Type the name of your site (for instance "Bilfot") on the "Filter by name:" criteria then click on "No" for the "Visible:" criteria, as plots are created in a data collection and not directly visible on the history
 > >
-> >  ![Bilfot filter](../../images/champbloc/filterbilfot.png "Filter IVR for Bilfot"){:width="620px"}
+> >  ![Bilfot filter](../../images/champbloc/filter_data.jpg "Filter IVR for Bilfot"){:width="620px"}
 > >
 > {: .tip}
 > **For your reports you need to download the ones you want. You won't be able to vizualise them directly on Galaxy center panel !**
