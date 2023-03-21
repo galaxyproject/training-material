@@ -380,12 +380,23 @@ gfastats is a tool for providing summary statistics and genome file manipulation
 >
 >    > <comment-title> N50/L50 </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > N50/L50 a length measurement metric being used to gauge contiguity and completeness of a genome assembly. Contigs, scaffolds and gaps are mostly measured with this metric.
+N50:
+Consider taking all contigs and sorting them by size. Starting with the largest and ending with the smallest. Now add up the length of each contig beginning with the largest, then the second largest and so on. When reaching 50% of the total length of all contigs it's done. The length of the contig you stopped is the N50 value. ({% cite Videvall201703 %})
+L50:
+Remember adding up the length of each contig until reaching the 50%. The L50 value is the number of the contig you have stopped.
+
+Example: The sum of all contigs together is 2000 kbp. The contig at 50% has length 300 kbp and is the third one and thus the third largest.
+Then N50 = 300 kbp and L50 = 3.
+
+In the best case a high quality assembly should consist of just a few and large contigs to represent the genome as a whole. Therefore a good assembly should lead to a high N50 value and in contrast a low quality assembly with tiny, fragmented contigs would lead to a low N50 value. ({% cite Videvall201704 %})
+
 >    {: .comment}
 >
 >    > <comment-title> GC-content </comment-title>
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > The GC-content or guanine-cytosine ratio tells one about the occurrence of guanine and cytosine in a genome. It is stated in percent. The two nucleobases are held together by three hydrogen bonds. A high GC-content makes DNA more stable than a low GC-content. Because the ratio of most species and organisms has been found out by now, it is also a good metric to gauge completeness.({% cite Wikipedia %})
+
 >    {: .comment}
 {: .hands_on}
 
