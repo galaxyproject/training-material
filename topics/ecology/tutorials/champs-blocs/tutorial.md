@@ -151,6 +151,8 @@ Go on the tool **IVR**
 > > 2. Click on the double arrows to display more filter options
 > > 3. Type the name of your site (for instance "Bilfot") on the "Filter by name:" criteria then click on "No" for the "Visible:" criteria, as pltos are created in a data collection and not directly visible on the history
 > >
+> >  ![Bilfot filter](../../images/champbloc/filterbilfot.png "Filter IVR for Bilfot"){:width="620px"}
+> >
 > {: .tip}
 > **For your reports you need to download the ones you want. You won't be able to vizualise them directly on Galaxy center panel !**
 >
