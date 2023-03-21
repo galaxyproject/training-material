@@ -197,5 +197,29 @@ Get the {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/c
 >
 {: .hands_on}
 
+## **Diversity indicators**
+Taking as input cleaned data from the Dissimilarity step tocompute diversity indicators.
+Get the {% tool [Diversity indicators](toolshed.g2.bx.psu.edu/repos/ecology/cb_div/cb_div/0.0.0) %} tool
+
+> <hands-on-title>Calculate diversity indicators</hands-on-title>
+>
+> 1. {% tool [Diversity indicators](toolshed.g2.bx.psu.edu/repos/ecology/cb_div/cb_div/0.0.0) %} with the following parameters:
+>    - {% icon param-file %} *"Input clean data"*: `input` (Clean Rdata)
+>
+> 2. Press **Execute** 
+>
+> 3. View graphs
+>  * Once it's green, click on type of plot you want to see
+>  * Then, click on the {% icon galaxy-eye %} (eye) icon of your output in the history panel.
+> 
+>  The information is displayed in the central panel
+>
+> 3. Download your results
+> 
+>  * Click on the output you are interested in
+>  * Click on {% icon galaxy-save %} (download)
+>
+{: .hands_on}
+
 # Conclusion
 Here you have finished your study on your champs blocs biodiversity state.
