@@ -13,8 +13,10 @@ time_estimation: 1H
 key_points:
 - Diversity indicators
 - Champs Blocs
+- Boulder Fields
 contributors:
 - Marie59
+- yvanlebras
 
 ---
 
@@ -214,6 +216,9 @@ Get the {% tool [Diversity indicators](toolshed.g2.bx.psu.edu/repos/ecology/cb_d
 > 
 >  The information is displayed in the central panel
 >
+> ![Div ](../../images/champbloc/simpson.png "Simpson indicator"){:width="620px"}
+>
+>
 > 3. Download your results
 > 
 >  * Click on the output you are interested in
@@ -222,4 +227,4 @@ Get the {% tool [Diversity indicators](toolshed.g2.bx.psu.edu/repos/ecology/cb_d
 {: .hands_on}
 
 # Conclusion
-Here you have finished your study on your champs blocs biodiversity state.
+Here you have finished your study on your boulder fields biodiversity state.
