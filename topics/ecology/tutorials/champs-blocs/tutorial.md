@@ -36,7 +36,7 @@ In particular, these projects have made it possible to develop a network of invo
 Here we will go over the different steps in order to get those 2 indicators and more.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
