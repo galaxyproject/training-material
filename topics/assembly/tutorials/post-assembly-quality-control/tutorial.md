@@ -123,6 +123,9 @@ assembly:
   bioproject: PRJEB56892
   biosample: SAMEA9362004
   record_type: Chromosome
+taxon:
+  name: Chondrosia reniformis
+  id: 68574
 >
 {: .comment}
 
@@ -262,13 +265,10 @@ In the previous steps we generated and prepared the data which we will provide n
 >
 {: .hands_on}
 
-![Figure 1: Genomescope Profile plot](../../images/post-assembly-QC/GenomeScope_Linear_plot.png "")
-![Figure 2: Genomescope Profile plot](../../images/post-assembly-QC/GenomeScope_Log_plot.png "")
-
 
 # Providing analysis information/statistics using k-mers:
 
-It is common to analyse assemblies with the help of k-mer counting. During an assembly, the DNA fragments are broken down into k-mers. Then they are compared to identify regions of overlap. By aligning overlapping k-mers it's possible to piece the original DNA sequence together and generate a complete genome.
+It is common to analyse assemblies with the help of k-mer counting. During the assembling process, the DNA fragments are broken down into k-mers. Then they are compared to identify regions of overlap. By aligning overlapping k-mers it's possible to piece the original DNA sequence together and generate a complete genome.
 K-mers are also useful in genome analysis. The frequency and distribution of k-mers can be used to estimate the genome size, identify repetitive sequences and detect errors. ({% cite Manekar2018 %})
 
 
@@ -303,6 +303,11 @@ The sequence ACGT has four monomers (A, C, G, T), three 2-mers (AC, CG, GT), two
 In our case we set the k-mer size to 21.
 >    {: .comment}
 >
+>    > <comment-title> canonical k-mer </comment-title>
+>    >
+>    > DNA is double stranded and normally only one strand is sequenced. For our assembly we want to consider the other strand as well. Therefore canonical k-mers are used in most counting tools. A full k-mer pair is a sequence and the reverse complement of the sequence (e.g. ATG/CAT). The canonical sequence of a k-mer pair is the lexicographically smaller of the two reverse complementary sequences. So if CAT appears it will be counted as ATG. ({% cite Clavijo %})
+>    {: .comment}
+>
 > 2. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} again with the following parameters:
 >    - *"Operation type selector"*: `Operations on sets of k-mers`
 >        - *"Operations on sets of k-mers"*: `Union-sum: return k-mers that occur in any input, set the count to the sum of the counts`
@@ -312,10 +317,6 @@ In our case we set the k-mer size to 21.
 >    - *"Operation type selector"*: `Generate histogram dataset`
 >        - {% icon param-file %} *"Input meryldb"*: `read_db` (output of **Meryl** {% icon tool %})
 >
->    > <comment-title> short description </comment-title>
->    >
->    > 
->    {: .comment}
 >
 {: .hands_on}
 
@@ -337,8 +338,10 @@ Genomescope is used for analysing genomes. It estimates the overall genome chara
 >
 {: .hands_on}
 
-![Figure 3: Genomescope Profile plot](../../images/post-assembly-QC/GenomeScope_Linear_plot.png "")
-![Figure 4: Genomescope Profile plot](../../images/post-assembly-QC/GenomeScope_Log_plot.png "")
+![Figure 1: Genomescope plot](../../images/post-assembly-QC/Chondrosia-reniformis-Linear_plot.png "Genomescope 21-mer profile, linear plot.")
+![Figure 2: Genomescope plot ](../../images/post-assembly-QC/Eschrichtius-robustus-Linear_plot.png "Genomescope 21-mer profile, linear plot.")
+![Figure 3: Genomescope plot ](../../images/post-assembly-QC/Erythrolamprus-reginae-Linear_plot.png "Genomescope 21-mer profile, linear plot.")
+
 
 
 ## Sub-step with **Merqury**
@@ -361,8 +364,9 @@ Merqury is designed for evaluating the completeness and accuracy of genome assem
 >
 {: .hands_on}
 
-![Figure 5: Merqury plot](../../images/post-assembly-QC/.png "")
-![Figure 6: Merqury plot](../../images/post-assembly-QC/.png "")
+![Figure 4: Merqury plot](../../images/post-assembly-QC/Chondrosia-reniformis.spectra-cn.fl.png "Merqury copy numbers plot of Chondrosia reniformis.")
+![Figure 5: Merqury plot](../../images/post-assembly-QC/Eschrichtius-robustus.spectra-cn.fl.png "Merqury copy numbers plot of Eschrichtius robustus.")
+![Figure 6: Merqury plot](../../images/post-assembly-QC/Erythrolamprus-reginae.spectra-cn.fl.png "Merqury copy numbers plot of Erythrolamprus reginae.")
 
 
 ## Sub-step with **gfastats**
