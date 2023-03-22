@@ -168,8 +168,8 @@ HISAT2 is currently one of the fastest RNA-seq mapper available. The tool will u
 > <comment-title> BAM/SAM file format </comment-title>
 >
 > SAM is short for Sequence Alignment Map. The file stores alignments of sequences which are often mapped with the help of reference sequences. The information is stored in a text-based format.
-
-BAM contains the same information as SAM files but is in binary format thus it is not readable for humans. However those files are smaller and tools can work faster with it.
+> 
+> BAM contains the same information as SAM files but is in binary format thus it is not readable for humans. However those files are smaller and tools can work faster with it.
 >
 {: .comment}
 
