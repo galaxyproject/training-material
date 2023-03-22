@@ -143,19 +143,19 @@ taxon:
 >    >
 >    > Here you can have a more detailed look on the structure of the BlobDir dataset:
 
-DatasetID
-+- meta.json                       # Dataset metadata
-+- identifiers.json                # Sequence names
-+- gc.json                         # Sequence GC-content (variable)
-+- length.json                     # Sequence lengths (variable)
-+- ncount.json                     # Portion of N bases (variable)
-+- {LIBRARYNAME}_cov.json          # Average per-base coverage in {LIBRARYNAME} read mapping file (variable)
-+- {LIBRARYNAME}_read_cov.json     # Read coverage in {LIBRARYNAME} read mapping file (variable)
-+- {TAXRULE}_{RANK}.json           # Taxonomic assignments from sequence similarity searches at {RANK} using {TAXRULE} (category)
-+- {TAXRULE}_{RANK}_cindex.json    # Number of alternative taxa at {RANK} (variable)
-+- {TAXRULE}_{RANK}_positions.json # Start/end position, NCBI taxon ID and bitscore for each hit (array of arrays)
-+- {TAXRULE}_{RANK}_score.json.    # Sum of bitscores for assigned taxon at {RANK} (variable)
-+- {LINEAGE}_busco.json            # Complete and fragmented {LINEAGE} BUSCOs (array of arrays) 
+>    > DatasetID
+>    > meta.json                       # Dataset metadata
+>    > identifiers.json                # Sequence names
+>    > gc.json                         # Sequence GC-content (variable)
+>    > length.json                     # Sequence lengths (variable)
+>    > ncount.json                     # Portion of N bases (variable)
+>    > {LIBRARYNAME}_cov.json          # Average per-base coverage in {LIBRARYNAME} read mapping file (variable)
+>    > {LIBRARYNAME}_read_cov.json     # Read coverage in {LIBRARYNAME} read mapping file (variable)
+>    > {TAXRULE}_{RANK}.json           # Taxonomic assignments from sequence similarity searches at {RANK} using {TAXRULE} (category)
+>    > {TAXRULE}_{RANK}_cindex.json    # Number of alternative taxa at {RANK} (variable)
+>    > {TAXRULE}_{RANK}_positions.json # Start/end position, NCBI taxon ID and bitscore for each hit (array of arrays)
+>    > {TAXRULE}_{RANK}_score.json.    # Sum of bitscores for assigned taxon at {RANK} (variable)
+>    > {LINEAGE}_busco.json            # Complete and fragmented {LINEAGE} BUSCOs (array of arrays) 
 >    {: .comment}
 >
 {: .hands_on}
