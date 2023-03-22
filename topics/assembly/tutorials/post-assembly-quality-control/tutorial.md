@@ -29,9 +29,8 @@ Since there are many different ways how errors can occur there are also many dif
 
 But how can we gauge the quality of an assembly? To answer this question we first have to find out the properties to evaluate the quality of an assembly. It turned out to be a good idea to focus on the following aspects: contiguity, completeness and correctness. To gauge those properties some metrics are needed. It is necessary to aim for a value like a score to have the information of the measured quality as one number. This is useful in order to have an easy overview and make it easier for comparisons.({% cite Wang2023 %})
 
-Length metrics like N50, CC ratio and sizes of contigs, scaffolds and gaps are common for contiguity analysis. Tools like gfastats will provide these kinds of metrics and other statistical values by a given assembly to assess contiguity quality. 
-BUSCO and genomescope will help us to evaluate the completeness of the genome. BUSCO for example compares the assembly to a set of conserved single-copy genes and the other tool generates a k-mer profile analysis giving us information about the coverage to frequency ratio.
-Correctness or accuracy of an assembly can be gauged by checking base-level and structural errors. This can be done by mapping the raw sequencing reads to the target assembly and then calculating the error rate or by comparing the assembly to a set of k-mers from raw sequencing reads. Therefore we will use blobtoolkit and merqury.
+Length metrics like NG50, CC(contig/chromosome) ratio and sizes of contigs, scaffolds and gaps are common for contiguity and completeness analysis. K-mer counting and the resulting k-mer profile analysis will help us to evaluate completeness and correctness of a genome assembly.
+Correctness or accuracy of an assembly can also be gauged by checking base-level and structural errors. This can be done by mapping the raw sequencing reads to the target assembly and then calculating the error rate or by comparing the assembly to a set of k-mers from raw sequencing reads.
 
 In this tutorial you will learn how to use the tools for the post-assembly quality control
 workflow. It's part of a post-assembly pipeline from ERGA to ensure high quality assemblies in appropriate time and resources.
@@ -269,7 +268,7 @@ In the previous steps we generated and prepared the data which we will provide n
 # Providing analysis information/statistics using k-mers:
 
 It is common to analyse assemblies with the help of k-mer counting. During the assembling process, the DNA fragments are broken down into k-mers. Then they are compared to identify regions of overlap. By aligning overlapping k-mers it's possible to piece the original DNA sequence together and generate a complete genome.
-K-mers are also useful in genome analysis. The frequency and distribution of k-mers can be used to estimate the genome size, identify repetitive sequences and detect errors. ({% cite Manekar2018 %})
+K-mers are also useful for genome analysis. The frequency and distribution of k-mers can be used to estimate the genome size, rate of heterozygosity and to identify repetitive sequences. K-mer counting can also be used to detect and correct errors and it can point out possible contaminations in genome assemblies. ({% cite Manekar2018 %})
 
 
 > <comment-title> k-mers </comment-title>
@@ -289,6 +288,10 @@ The sequence ACGT has four monomers (A, C, G, T), three 2-mers (AC, CG, GT), two
 
 ## Sub-step with **Meryl**
 
+DNA is double stranded and normally only one strand is sequenced. For our assembly we want to consider the other strand as well. Therefore canonical k-mers are used in most counting tools, exactly like in Meryl. A full k-mer pair is a sequence and the reverse complement of the sequence (e.g. ATG/CAT). The canonical sequence of a k-mer pair is the lexicographically smaller of the two reverse complementary sequences. So if CAT appears it will be counted as ATG. ({% cite Clavijo %})
+
+Meryl is a k-mer counter. It is a powerful tool for counting k-mers in large-scale genomic datasets. Meryl uses a sorting-based approach that sorts the k-mers in lexicographical order.
+
 > <hands-on-title> Generating k-mer profile </hands-on-title>
 >
 > 1. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} with the following parameters:
@@ -303,10 +306,6 @@ The sequence ACGT has four monomers (A, C, G, T), three 2-mers (AC, CG, GT), two
 In our case we set the k-mer size to 21.
 >    {: .comment}
 >
->    > <comment-title> canonical k-mer </comment-title>
->    >
->    > DNA is double stranded and normally only one strand is sequenced. For our assembly we want to consider the other strand as well. Therefore canonical k-mers are used in most counting tools. A full k-mer pair is a sequence and the reverse complement of the sequence (e.g. ATG/CAT). The canonical sequence of a k-mer pair is the lexicographically smaller of the two reverse complementary sequences. So if CAT appears it will be counted as ATG. ({% cite Clavijo %})
->    {: .comment}
 >
 > 2. Run {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} again with the following parameters:
 >    - *"Operation type selector"*: `Operations on sets of k-mers`
@@ -323,7 +322,7 @@ In our case we set the k-mer size to 21.
 
 ## Sub-step with **GenomeScope**
 
-Genomescope is used for analysing genomes. It estimates the overall genome characteristics and the overall read characteristics. The tool will use a given k-mer profile which is calculated only from raw reads sequencing data. It then generates a plot with the calculated data giving us information about the completeness and quality of the to be assembled data.({% cite Vurture2017 %})
+Genomescope is used for analysing genomes with the help of k-mer profile analysis. It estimates the overall genome characteristics and the overall read characteristics. The tool will use a given k-mer profile which is calculated only from raw reads sequencing data. It then generates a plot with the calculated data giving us information about the completeness and quality of the to be assembled data.({% cite Vurture2017 %})
 
 > <hands-on-title> Generate plots for analysis </hands-on-title>
 >
@@ -340,13 +339,14 @@ Genomescope is used for analysing genomes. It estimates the overall genome chara
 
 ![Figure 1: Genomescope plot](../../images/post-assembly-QC/Chondrosia-reniformis-Linear_plot.png "Genomescope 21-mer profile, linear plot.")
 ![Figure 2: Genomescope plot ](../../images/post-assembly-QC/Eschrichtius-robustus-Linear_plot.png "Genomescope 21-mer profile, linear plot.")
-![Figure 3: Genomescope plot ](../../images/post-assembly-QC/Erythrolamprus-reginae-Linear_plot.png "Genomescope 21-mer profile, linear plot.")
+![Figure 3: Genomescope plot ](../../images/post-assembly-QC/Erythrolamprus-reginae-linear-ploidy3.png "Genomescope 21-mer profile, linear plot.")
 
 
 
 ## Sub-step with **Merqury**
 
-Merqury is designed for evaluating the completeness and accuracy of genome assemblies using short-read sequencing data. The quality of assemblies which are generated by using third-generation sequencing technologies can be reviewed and assessed by the tool. Merqury works by comparing the assembly to a high-quality reference genome. It uses k-mer-based methods to estimate and evaluate the completeness of the assembly and helps to identify errors. ({% cite Rhie2020 %})
+Merqury is designed for evaluating the completeness and accuracy of long-read genome assemblies using short-read sequencing data. Thus the quality of assemblies which are generated by using third-generation sequencing technologies can be reviewed and assessed by the tool.
+Merqury works by comparing k-mers of an assembly to those from unassembled high-accuracy reads of the raw sequencing data. K-mer-based methods are also used to identify errors and missing sequences. ({% cite Rhie2020 %})
 
 > <hands-on-title> Generating stats and plots </hands-on-title>
 >
@@ -357,12 +357,18 @@ Merqury is designed for evaluating the completeness and accuracy of genome assem
 >            - {% icon param-file %} *"Genome assembly"*: `output` (Input dataset)
 >
 >
->    > <comment-title> Plots and stats </comment-title>
+>    > <comment-title> Output </comment-title>
 >    >
->    > What does the plots and stats tell us? Which information can we get for evaluating completeness and correctness?
+>    > Merqury will now generate following outputs:
+- stats with completeness statistics
+- QV stats with quality value statistics
+- plots
+
 >    {: .comment}
 >
 {: .hands_on}
+
+Let's have a closer look at the copy number plots. For each of our three species a primary and alternate sequence got plotted for comparison.
 
 ![Figure 4: Merqury plot](../../images/post-assembly-QC/Chondrosia-reniformis.spectra-cn.fl.png "Merqury copy numbers plot of Chondrosia reniformis.")
 ![Figure 5: Merqury plot](../../images/post-assembly-QC/Eschrichtius-robustus.spectra-cn.fl.png "Merqury copy numbers plot of Eschrichtius robustus.")
