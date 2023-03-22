@@ -89,7 +89,7 @@ As a first step we will get the data from zenodo.
 {: .hands_on}
 
 
-# Assembly decontamination
+# Assembly contaminant/cobiont detection
 
 Extracted DNA from an organism always contains DNA from other species. This is why most assemblies need to go through a decontamination process to remove the non-target DNA for a higher-quality end product.
 Contamination can also have a significant impact on downstream analysis and interpretation of the genome assembly. For example, host contamination can lead to misinterpretation of gene content and functional annotation. Another point is that environmental contamination can affect the accuracy of taxonomic classification. Therefore, it is important to identify and minimise contamination in genome assemblies using appropriate quality control measures.
