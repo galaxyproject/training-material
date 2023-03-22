@@ -5,6 +5,6 @@ layout: faq
 contributors: [EngyNasr]
 ---
 
-Both
+The workflow can work with both isolates and raw meat. The workflow is designed to remove hosts before detecting any pathogen, so both isolates and raw meat samples are pre-processed equaliy before the analysis starts. 
 
 

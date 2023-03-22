@@ -1,5 +1,5 @@
 ---
-title: How can I import other genomes?
+title: From where can I import other genomes?
 box_type: question
 layout: faq
 contributors: [EngyNasr]
