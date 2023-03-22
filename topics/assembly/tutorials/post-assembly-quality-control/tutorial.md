@@ -279,8 +279,8 @@ K-mers are also useful in genome analysis. The frequency and distribution of k-m
 > <comment-title> k-mers </comment-title>
 >
 > K-mers are contiguous substrings of DNA sequences of length k.
-Example:
-The sequence ACGT has four monomers (A, C, G, T), three 2-mers (AC, CG, GT), two 3-mers (ACG, CGT) and one 4-mer (ACGT)
+> Example:
+> The sequence ACGT has four monomers (A, C, G, T), three 2-mers (AC, CG, GT), two 3-mers (ACG, CGT) and one 4-mer (ACGT)
 >
 {: .comment}
 
