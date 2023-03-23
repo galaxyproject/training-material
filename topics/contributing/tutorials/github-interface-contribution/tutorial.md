@@ -146,7 +146,7 @@ The GitHub interface guides you through this process: after clicking on **Propos
 >
 > 5. Click on **Create pull request** or switch to **Create draft pull request** from the dropdown menu
 >
->    ![Create pull request menu](../../images/PR_create_menu.png)
+>    ![Create pull request dropdown in the GitHub interface is shown, the draft pull request button option is highlighted](../../images/PR_create_menu.png)
 >
 >    >  <details-title>"Draft pull requests"</details-title>
 >    >  [Creating a pull request as a draft](https://github.blog/2019-02-14-introducing-draft-pull-requests/#tag-your-work-in-progress) serves as an indication that you are still working on the content.

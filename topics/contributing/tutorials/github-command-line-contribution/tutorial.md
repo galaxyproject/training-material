@@ -241,7 +241,7 @@ You pushed your changes to GitHub, but currently they are only on your fork. You
 >    2. Add a message explaining the changes you made (Be kind <i class="fa fa-smile-o" aria-hidden="true"></i>)
 >    3. Click on **Create pull request** or switch to **Create draft pull request** from the dropdown menu
 >
->       ![Create pull request menu](../../images/PR_create_menu.png)
+>       ![Create pull request dropdown in the GitHub interface is shown, the draft pull request button option is highlighted](../../images/PR_create_menu.png)
 >
 >       >  <details-title>"Draft pull requests"</details-title>
 >       >  [Creating a pull request as a draft](https://github.blog/2019-02-14-introducing-draft-pull-requests/#tag-your-work-in-progress) serves as an indication that you are still working on the content.
