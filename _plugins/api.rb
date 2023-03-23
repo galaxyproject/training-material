@@ -88,6 +88,7 @@ module Jekyll
                 "joined" => v['joined'],
                 "orcid" => v['orcid'],
                 "id" => k,
+                "contact_for_training" => v.fetch('contact_for_training', false),
               }
             }
           }

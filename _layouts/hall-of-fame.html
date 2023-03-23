@@ -32,18 +32,15 @@ layout: base
 		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 	}).addTo(map);
 
-	const baseballIcon = L.icon({
-		iconUrl: 'baseball-marker.png',
-		iconSize: [32, 37],
-		iconAnchor: [16, 37],
-		popupAnchor: [0, -28]
-	});
-
 	function onEachFeature(feature, layer) {
 		console.log(feature.properties)
 		let orcid = "";
 		if(feature.properties.orcid !== null && feature.properties.orcid !== undefined){
 			orcid = `<a href="https://orcid.org/${feature.properties.orcid}"><img src="{% link assets/images/orcid.png %}" alt="orcid logo"/></a>`
+		}
+		let available = "";
+		if(feature.properties.contact_for_training === true){
+			available = `Available to for trainings 🧑‍🏫`
 		}
 
 		let popupContent = `
@@ -51,7 +48,8 @@ layout: base
 			<td style="min-width: 120px">
 				<b>${feature.properties.name}</b> ${orcid}<br>
 				<a href="${feature.properties.url}">See Profile</a><br>
-				Joined ${feature.properties.joined}
+				Joined ${feature.properties.joined}<br>
+				${available}
 			</td>
 			<td style="min-width: 120px">
 				<img src="https://avatars.githubusercontent.com/${feature.properties.id}?s=120" width="120" height="120" style="width: 120px !important; height: 120px !important;" alt="github avatar">
