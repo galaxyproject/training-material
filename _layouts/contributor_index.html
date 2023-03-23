@@ -68,6 +68,14 @@ layout: base
 				</div>
 				{% endif %}
 
+				{% if contributors[page.contributor].fediverse %}
+				<div class="contact-items">
+					<a href="{{ contributors[page.contributor].fediverse | fedi2link }}">
+						<span style="fill: var(--hyperlink);">{{ "assets/images/mastodon.svg" | load_svg }}</span> {{ contributors[page.contributor].fediverse }}
+					</a>
+				</div>
+				{% endif %}
+
 				{% if contributors[page.contributor].twitter %}
 				<div class="contact-items">
 					<a title="Twitter" href="https://twitter.com/{{ contributors[page.contributor].twitter }}">
