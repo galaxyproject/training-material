@@ -16,10 +16,11 @@ hexylena:
     name: Helena Rasche
     orcid: 0000-0001-9760-8992
     ...
+    contact_for_training: true
     location:
       country: NL
       lat: 51.91
       lon: 4.46
 ```
 
-And we'll add a nice map to the GTN, and potentially the Galaxy Hub as well!
+And we'll add a nice map to the GTN, and potentially the Galaxy Hub as well! The `contact_for_training` field is a true or false value which lets you indicate you're open to being contacted regarding giving training. Other trainers in your region might use this if they're looking for help giving a course or want experts in a field for a course they plan to host. We do not have plans currently expose this to "end users" looking for training, we will probably attempt to push them first to the existing events list.
