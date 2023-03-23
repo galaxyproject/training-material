@@ -239,7 +239,17 @@ You pushed your changes to GitHub, but currently they are only on your fork. You
 >
 >    1. Add a title for the Pull Request
 >    2. Add a message explaining the changes you made (Be kind <i class="fa fa-smile-o" aria-hidden="true"></i>)
->    3. Click on **Create pull request**
+>    3. Click on **Create pull request** or switch to **Create draft pull request** from the dropdown menu
+>
+>       ![Create pull request menu](../../images/PR_create_menu.png)
+>
+>       >  <details-title>"Draft pull requests"</details-title>
+>       >  [Creating a pull request as a draft](https://github.blog/2019-02-14-introducing-draft-pull-requests/#tag-your-work-in-progress) serves as an indication that you are still working on the content.
+>       >  Reviewers may comment on the current state and give general feedback, but they will know that they are not looking at the final version of your contribution.
+>       >
+>       >  In the Galaxy Training Material repository we have also disabled the computationally most expensive automated tests on draft pull requests, and we encourage you to use the draft stage as a small contribution to sustainable computing.
+>       {: .details}
+>
 > 3. Go to **Pull requests** to check if it is there
 {: .hands_on}
 
