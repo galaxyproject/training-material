@@ -3,8 +3,8 @@ layout: tutorial_hands_on
 
 title: Production d'indicateurs champs de bloc
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- Quel est l'état écologique et de la pression de la pêche à pied sur l'habitat « champs de blocs médiolittoraux » ?
+- Est-il possible de calculer des indicateurs de biodiversité et de produire des graphes et rapports à partir des données Estamp "champs de bloc" ?
 objectives:
 - Calcul de l'indice IVR (Visual Rollover Indicator)
 - Calcul de l'indice de dissimilarité
@@ -31,7 +31,7 @@ Ainsi, l'habitat « champs de blocs médiolittoraux » a fait l'objet de plusieu
 Ces projets ont notamment permis de développer un réseau d'acteurs et de gestionnaires de terrain impliqués et des outils d'évaluation de l'état écologique et de la pression de la pêche à pied :
 
 - le Visual Boulder Turning Indicator (VTI), qui s'apparente à un indicateur « paysage » pour évaluer la pression de pêche sur la base de critères architecturaux ;
-- le Boulder Field Ecological Quality Index (BFEQ) - objet de ce rapport - basé sur des variables biotiques et abiotiques qui répondent à la perturbation "boulder tournant".
+- le Boulder Field Ecological Quality Index (BFEQ) - objet de ce rapport - basé sur des variables biotiques et abiotiques qui répondent à la perturbation "blocs retournés".
 
 Ici, nous allons passer en revue les différentes étapes afin d'obtenir ces 2 indicateurs et plus encore.
 
@@ -42,7 +42,7 @@ Ici, nous allons passer en revue les différentes étapes afin d'obtenir ces 2 i
 >
 {: .agenda}
 
-> <details-title>Rapide introduction sr le fonctionnement de Galaxy</details-title>
+> <details-title>Rapide introduction sur le fonctionnement de Galaxy</details-title>
 >
 > Vous pouvez quitter le didacticiel et aller vous prélasser sur l'écran principal en cliquant en dehors de l'écran du didacticiel.
 > Vous pouvez revenir à tout moment là où vous avez laissé le didacticiel en cliquant sur {% icon level %}.
