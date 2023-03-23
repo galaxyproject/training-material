@@ -84,7 +84,10 @@ module Jekyll
               "geometry" => {"type" => "Point", "coordinates" => [v['location']['lon'], v['location']['lat']]},
               "properties" => {
                 "name" => v.fetch('name', k),
-                "URL" => "https://training.galaxyproject.org/training-material/#{k}",
+                "url" => "https://training.galaxyproject.org/training-material/hall-of-fame/#{k}/",
+                "joined" => v['joined'],
+                "orcid" => v['orcid'],
+                "id" => k,
               }
             }
           }

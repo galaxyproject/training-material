@@ -12,6 +12,9 @@ layout: base
 
 {% assign stories = site.pages | where:"layout", "training_philosophy" %}
 
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
 <section>
     <h1>Hall of Fame</h1>
 
@@ -19,6 +22,93 @@ layout: base
         A big <em>Thank You!</em> in no particular order to the <strong>{{ contributors| where_exp: "item", "item.halloffame != 'no'"| size }}</strong>
         awesome contributors to the Galaxy training materials!
     </p>
+
+<div id="map" style="width: 100%; height: 400px"></div>
+<script>
+	const map = L.map('map').setView([0, 0], 1);
+
+	const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+
+	const baseballIcon = L.icon({
+		iconUrl: 'baseball-marker.png',
+		iconSize: [32, 37],
+		iconAnchor: [16, 37],
+		popupAnchor: [0, -28]
+	});
+
+	function onEachFeature(feature, layer) {
+		console.log(feature.properties)
+		let orcid = "";
+		if(feature.properties.orcid !== null && feature.properties.orcid !== undefined){
+			orcid = `<a href="https://orcid.org/${feature.properties.orcid}"><img src="{% link assets/images/orcid.png %}" alt="orcid logo"/></a>`
+		}
+
+		let popupContent = `
+			<table><tr>
+			<td style="min-width: 120px">
+				<b>${feature.properties.name}</b> ${orcid}<br>
+				<a href="${feature.properties.url}">See Profile</a><br>
+				Joined ${feature.properties.joined}
+			</td>
+			<td style="min-width: 120px">
+				<img src="https://avatars.githubusercontent.com/${feature.properties.id}?s=120" width="120" height="120" style="width: 120px !important; height: 120px !important;" alt="github avatar">
+			</td>
+			</tr></table>
+
+		`;
+		layer.bindPopup(popupContent);
+	}
+
+	const gtn_colors = [
+		'#86D486',
+		'#8A9AD0',
+		'#B8C3EA',
+		'#FFA1A1',
+		'#FFE19E',
+		'#ddd',
+		'#de8875',
+		'#dfe5f9',
+		'#fb99d0',
+		'#ffecc1',
+	];
+
+	function randomGtnColor(){
+		return gtn_colors[Math.floor(Math.random() * gtn_colors.length)];
+	}
+
+	fetch('/training-material/api/contributors.geojson')
+		.then(response => response.json())
+		.then(data => {
+			// Do something with the data
+			console.log(data);
+
+			const trainerLayer = L.geoJSON([data], {
+				style(feature) {
+					return feature.properties && feature.properties.style;
+				},
+				onEachFeature,
+				pointToLayer(feature, latlng) {
+					return L.circleMarker(latlng, {
+						radius: 8,
+						fillColor: randomGtnColor(),
+						color: '#000',
+						weight: 1,
+						opacity: 1,
+						fillOpacity: 0.8
+					});
+				}
+			}).addTo(map);
+
+		})
+		.catch(error => {
+			console.error('Error:', error);
+		});
+
+</script>
+
 
     <div class="hall-of-fame">
         {% for username in shuffled_contributors %}
