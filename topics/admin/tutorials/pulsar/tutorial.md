@@ -196,8 +196,12 @@ Optional: You can add tags to each user if required. e.g. For an admin user it c
 We also need to set some RabbitMQ server configuration variables. Such as where its security certificates are and which ports to listen on (both via localhost and network).
 
 > <tip-title>Port accessibility is important!</tip-title>
-> We will need to make sure that the RabbitMQ default port is open and accessible on the server we are installing RabbitMQ onto. (In our case this is the Galaxy server). Default port number is: `5671`  
-> Additionally, RabbitMQ provides a management interface for us, where we can see e.g. queues, connections and statistics. We should make sure that port 15672 is open, too.
+> We will need to make sure that the RabbitMQ default port is open and accessible on the server we are installing RabbitMQ onto. (In our case this is the Galaxy server). Additionally, RabbitMQ provides a management interface for us, where we can see e.g. queues, connections and statistics.
+>
+> Port | Usage | Suggested Restrictions
+> `5671` | SSL Listener | None
+> `5672` | Plain text listener | Limit to just `172.0.0.0/8` to ensure only the host machine and other containers can access it, and we aren't sending plain text credentials over the internet.
+> `15672` | Management interface | Limit to `172.0.0.0/8` to only permit accessing management interface locally.
 {: .tip}
 
 More information about the rabbitmq ansible role can be found [in the repository](https://github.com/usegalaxy-eu/ansible-rabbitmq).
