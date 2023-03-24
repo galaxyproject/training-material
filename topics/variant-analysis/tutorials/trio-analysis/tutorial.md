@@ -18,17 +18,17 @@ key_points:
 - Downloading whole datasets with HTSGET is safe and easy with Galaxy.
 - Regex is a usefull tool for pre-processing VCF files.
 - Variant annotations allows us to strictly filter VCFs to find the causative variant.
-contributors:
-- JasperO98
-- wm75
-- hexylena
-- shiltemann
+contributions:
+  authorship:
+  - JasperO98
+  editing:
+  - wm75
+  - hexylena
+  - shiltemann
 tags:
 - cyoa
 
 ---
-
-# Introduction
 
 To discover causal mutations of inherited diseases it’s common practice to do a trio analysis. In a trio analysis DNA is sequenced of both the patient and parents. Using this method, it’s possible to identify multiple inheritance patterns. Some examples of these patterns are autosomal recessive, autosomal dominant, and  de-novo variants, which are represented in the figure below. To elaborate, the most left tree shows an autosomal dominant inhertitance pattern where the offspring inherits a faulty copy of the gene from one of the parents. The center subfigure represents an autosomal recessive disease, here the offspring inherited a faulty copy of the same gene from both parents. In the right subfigure a de-novo mutation is shown, which is caused by a mutation during the offspring’s lifetime.
 
@@ -51,6 +51,7 @@ We will not start our analysis from scratch, since the main goal of this tutoria
 
 
 # Data preperation
+
 In this tutorial we will use case 5 from the RD-Connect GPAP synthetic datasets. The dataset that we will use consists of WGS VCFs from a real healthy family trio, which originates from the Illumina Platinum initiative {% cite Eberle2017 %} and was made available by the [HapMap project](https://www.genome.gov/10001688/international-hapmap-project). In our dataset a real causative variant was manually spiked-in that should cause breast cancer. The spike-in has been synthetically introduced in the mother and daughter. Here our goal is to identify the genetic variation that is responsible for the disease.
 
 We offer two ways to download the files. Firstly, you can download the files directly from the EGA-archive by requesting DAC access. This will take only 1 workday and gives you access to all of the RD-Connect GPAP synthetic datasets. However if you don't have the time you can also download the data from zenodo.
@@ -87,6 +88,7 @@ I see, you can't wait to get DAC access. To download the data from zenodo for th
 <div class="EGA-Archive" markdown="1">
 
 ## Getting DAC access
+
 Our test data is stored in EGA, which can be easily accessed using the EGA Download Client. Our specific EGA dataset accession ID is: "EGAD00001008392". However, before you can access this data you need to request DAC access to this dataset. This can be requested by emailing to <helpdesk@ega-archive.org>, don’t forget to mention the dataset ID! When the EGA grants you access it will create an account for you, if you don't have it already. Next, you should link your account to your Galaxy account by going to the homepage on Galaxy and at the top bar click **User > Preferences > Manage Information**. Now add your email and password of your (new) EGA account under: **Your EGA (european Genome Archive) account**. After that you can check if you can log in and see if you have access to the dataset.
 
 > <hands-on-title>Check log-in and authorized datasets</hands-on-title>
