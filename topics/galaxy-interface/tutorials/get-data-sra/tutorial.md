@@ -16,6 +16,12 @@ contributors:
 - tnabtaf
 - blankenberg
 - nekrut
+- hexylena
+tags:
+- ncbi
+- sra
+- get-data
+subtopic: upload
 
 ---
 
