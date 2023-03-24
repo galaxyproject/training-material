@@ -375,7 +375,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> The rabbitmq server daemon will have been installed on your Galaxy VM. Check that it's running now:
+> 5. The rabbitmq server daemon will have been installed on your Galaxy VM. Check that it's running now:
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
@@ -391,7 +391,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > ```
 >    {: .code-out.code-max-300}
 >
->    But this doesn't tell the whole story, so run the diagnostics command to
+> 6. But this doesn't tell the whole story, so run the diagnostics command to
 >    check that the interfaces are setup and listening. RabbitMQ has a bad
 >    habit of silently failing when processing the configuration, without any
 >    logging information If RabbitMQ has any problem reading the configuration
@@ -415,6 +415,35 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > Interface: [::], port: 25672, protocol: clustering, purpose: inter-node and CLI tool communication
 >    > Interface: [::], port: 5672, protocol: amqp, purpose: AMQP 0-9-1 and AMQP 1.0
 >    > Interface: 0.0.0.0, port: 5671, protocol: amqp/ssl, purpose: AMQP 0-9-1 and AMQP 1.0 over TLS
+>    > ```
+>    >
+>    {: .code-out.code-max-300}
+>
+> 7. Since we enabled metrics, let's check if the api works:
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > Make sure to replace \<password\> with the one from your vault.
+>    > If you don't have jq installed, just leave that part with the pipe out, it just makes it prettier.
+>    > ```bash
+>    > curl -s -u admin:<password> https://localhost:15672/api/whoami | jq
+>    > ```
+>    {: .code-in}
+>
+>    > <code-out-title>Bash</code-out-title>
+>    >
+>    > This should report the following response:
+>    >
+>    > ```console
+>    >  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+>    >                                 Dload  Upload   Total   Spent    Left  Speed
+>    >100    44  100    44    0     0  22000      0 --:--:-- --:--:-- --:--:-- 22000
+>    >{
+>    >  "name": "admin",
+>    >  "tags": [
+>    >    "administrator"
+>    >  ]
+>    >}
+>    > 
 >    > ```
 >    {: .code-out.code-max-300}
 >
@@ -441,6 +470,26 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > 3. Check that the private key is shared correctly with the rabbitmq user
 >    {: .code-out.code-max-300}
 >
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > curl -k https://localhost:5671 --output - && printf "\n"
+>    > ```
+>    {: .code-in}
+>
+>    > <code-out-title>Bash</code-out-title>
+>    >
+>    > This should report the following response:
+>    >
+>    > ```console
+>    > AMQP
+>    > ```
+>    >
+>    > if it doesn't, consider the following debugging steps:
+>    >
+>    > 1. Restarting RabbitMQ
+>    > 2. Check that the configuration looks correct (ssl private key path looks valid)
+>    > 3. Check that the private key is shared correctly with the rabbitmq user
+>    {: .code-out.code-max-300}
 {: .hands_on}
 
 
@@ -662,7 +711,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    +    amqp_publish_retry_max_retries: 60
 >    +    galaxy_url: "https://{{ inventory_hostname }}"
 >    +    manager: _default_
->     
+>
 >     execution:
 >       default: slurm
 >    {% endraw %}
