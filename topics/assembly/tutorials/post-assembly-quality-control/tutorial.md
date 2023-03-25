@@ -118,16 +118,16 @@ Example:
 > <comment-title> assembly.yaml </comment-title>
 >
 > The assembly.yaml metadata file contains metadata information about the assembly. In general you have to look up those information on your own. Usually the information is available on the official gene databases where the assembly is provided.
-Here an example content of an assembly.yaml file:
-assembly:
-  accession: GCA_947172415.1
-  alias: odChoReni1.1
-  bioproject: PRJEB56892
-  biosample: SAMEA9362004
-  record_type: Chromosome
-taxon:
-  name: Chondrosia reniformis
-  id: 68574
+> Here an example content of an assembly.yaml file:
+> assembly:
+>   accession: GCA_947172415.1
+>   alias: odChoReni1.1
+>   bioproject: PRJEB56892
+>   biosample: SAMEA9362004
+>   record_type: Chromosome
+> taxon:
+>   name: Chondrosia reniformis
+>   id: 68574
 >
 {: .comment}
 
@@ -144,7 +144,7 @@ taxon:
 >    > <details-title> BlobDir structure </details-title>
 >    >
 >    > Here you can have a more detailed look on the structure of the BlobDir dataset:
-
+>    >
 >    > DatasetID
 >    > meta.json                       # Dataset metadata
 >    > identifiers.json                # Sequence names
@@ -283,7 +283,7 @@ K-mers are also useful for genome analysis. The frequency and distribution of k-
 > The sequence ACGT has four monomers (A, C, G, T), three 2-mers (AC, CG, GT), two 3-mers (ACG, CGT) and one 4-mer (ACGT)
 >
 {: .comment}
-
+>
 > <comment-title> Counting k-mers </comment-title>
 >
 > Given the length L of a sequence and the number n of all possible monomers, there are n^k total possible k-mers and L-k+1 k-mers.
@@ -366,10 +366,10 @@ Merqury works by comparing k-mers of an assembly to those from unassembled high-
 >    > <comment-title> Output </comment-title>
 >    >
 >    > Merqury will now generate following outputs:
-- stats with completeness statistics
-- QV stats with quality value statistics
-- plots
-
+>    >  - stats with completeness statistics
+>    >  - QV stats with quality value statistics
+>    >  - plots
+>
 >    {: .comment}
 >
 {: .hands_on}
@@ -397,33 +397,30 @@ gfastats is a tool for providing summary statistics and genome file manipulation
 >    > <comment-title> N50 </comment-title>
 >    >
 >    > Consider taking all contigs and sorting them by size. Starting with the largest and ending with the smallest. Now add up the length of each contig beginning with the largest, then the second largest and so on. When reaching 50% of the total length of all contigs it's done. The length of the contig you stopped is the N50 value. ({% cite Videvall201703 %})
-
+>
 >    {: .comment}
 >
 >    > <comment-title> L50 </comment-title>
 >    >
 >    > Remember adding up the length of each contig until reaching the 50%. The L50 value is the number of the contig you have stopped.
-
+>
 >    > Example: The sum of all contigs together is 2000 kbp. The contig at 50% has length 300 kbp and is the third one and thus the third largest.
 >    > Then N50 = 300 kbp and L50 = 3.
-
+>
 >    {: .comment}
 >
 > In the best case a high quality assembly should consist of just a few and large contigs to represent the genome as a whole. Therefore a good assembly should lead to a high N50 value and in contrast a low quality assembly with tiny, fragmented contigs would lead to a low N50 value. ({% cite Videvall201704 %})
-
+>
 > The metric doesn't only rely on measuring the 50% mark. The general case is N(X) where X ranges from 0 - 100 mostly in ten steps. However the NX metric is not suitable for comparing different species with different genome lengths. NG50 or more general NG(X) is based on the same idea as N50. The difference is that in this case the whole genome size or estimated genome size is taken into account. This is why comparisons can be made over different assemblies and genome sizes.
-
 >
 >    > <details-title> GC-content </details-title>
 >    >
 >    > The GC-content or guanine-cytosine ratio tells one about the occurrence of guanine and cytosine in a genome. It is stated in percent. The two nucleobases are held together by three hydrogen bonds. A high GC-content makes DNA more stable than a low GC-content. Because the ratio of most species and organisms has been found out by now, it is also a good metric to gauge completeness.({% cite Wikipedia %})
-
+>
 >    {: .details}
-
 >    > <details-title> CC(contig/chromosome) ratio </details-title>
 >    >
 >    > Another good metric for gauging contiguity is the CC ratio. The value is calculated by dividing contig counts by the chromosome pair number. A perfect score would be 1. Therefore the lower the value the better the contiguity of the assembly.
-
 >    {: .details}
 {: .hands_on}
 
