@@ -199,7 +199,7 @@ convention, so that our tools will know which files belong together. We do this 
 >
 > 2. Select all the FASTQ files (40 in total)
 >    - **Tip:** type `fastq` in the search bar at the top of your history to filter only the FASTQ files; you can now use the `All` button at the top instead of having to individually select all 40 input files.
->    - Click on **for all selected..**
+>    - Click on **All 40 selected**
 >    - Select **Build List of Dataset Pairs** from the dropdown menu
 >
 >    In the next dialog window you can create the list of pairs. By default Galaxy will look for pairs

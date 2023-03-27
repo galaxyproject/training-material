@@ -648,8 +648,8 @@ In order to use the workflow linked to this tutorial, you have to create two lis
 > * Click on the check box icon in the history.
 > ![builddatasetpairs1](../../images/transcriptomics_images/clipseq_build_list_data_set_pairs_1.png "Select data sets for your list of data set pairs.")
 > * Select the data files for your experiment (or control).
-> * Select **For all selected...** below the check box icon.
-> * Select **Build List of Dataset Paris**
+> * Select **n of N selected** right to the check box icon.
+> * Select **Build List of Dataset Pairs**
 > * In the new window, if you see no files and a warning, then select **Clear filters**. After that, organise the files into forward-reverse pairs.
 > ![builddatasetpairs2](../../images/transcriptomics_images/clipseq_build_list_data_set_pairs_2.png "Organise the data sets into pairs.")
 >
