@@ -65,7 +65,7 @@ At the Galaxy end, it is configured within the `job_conf.yml` file and uses one 
 
 {% snippet topics/admin/faqs/git-gat-path.md tutorial="pulsar" %}
 
-**This tutorial assumes that:**
+## This tutorial assumes that
 
 - You have a VM or machine where you will install Pulsar, and a directory in which the installation will be done. This tutorial assumes it is `/mnt`
 - You have completed the "Galaxy Installation with Ansible", "Connecting Galaxy to a Compute Cluster", and the "CVMFS" tutorials
@@ -75,14 +75,14 @@ At the Galaxy end, it is configured within the `job_conf.yml` file and uses one 
 > This tutorial is not intended to be a standalone Pulsar setup guide. If you read carefully and understand Ansible, it is likely you can figure out which portions are required to just setup Pulsar.
 {: .tip}
 
-# Overview
+## Overview
 
 We will be installing the RabbitMQ server daemon onto the Galaxy server to act as an intermediary message passing system between Galaxy and the remote Pulsar. The figure below shows a schematic representation of the system.
 
 ![Schematic diagram of Galaxy communicating with a Pulsar server via the RabbitMQ server](../../images/pulsar_amqp_schema.png "Schematic diagram of Galaxy communicating with a Pulsar server via the RabbitMQ server. Red arrows represent AMQP communications and blue represent file transfers (initiated by the Pulsar server.)")
 
 
-**How it will work:**
+### How it will work
 
 1. Galaxy will send a message to the RabbitMQ server on the Pulsar server's particular queue saying that there is a job to be run and then will monitor the queue for job status updates.
 2. The Pulsar server monitors this queue and when the job appears it will take control of it.
@@ -93,7 +93,7 @@ We will be installing the RabbitMQ server daemon onto the Galaxy server to act a
 7. Pulsar then sends the output data etc. back to the Galaxy server by `curl` again.
 8. The Galaxy server acknowledges the job status and closes the job.
 
-**Some notes:**
+### Some notes
 
 * RabbitMQ uses the Advanced Message Queueing Protocol (AMQP) to communicate with both the Galaxy server and the remote Pulsar VM.
 * Transport of files, meta-data etc. occur via `curl` from the Pulsar end.
@@ -123,13 +123,13 @@ We will be installing the RabbitMQ server daemon onto the Galaxy server to act a
 > See the [Pulsar documentation](https://pulsar.readthedocs.io/en/latest/) for details.
 {: .details}
 
-# Install and configure a message queueing system
+## Install and configure a message queueing system
 
 In this section we will install the RabbitMQ server on your Galaxy server VM.
 
 RabbitMQ is an AMQP server that can queue messages between systems for all sorts of reasons. Here, we will be using the queue so that Galaxy and Pulsar can communicate jobs, job status and job metadata between them easily and robustly. More information on RabbitMQ can be found [on their website](https://www.rabbitmq.com/).
 
-## Installing the roles
+### Installing the roles
 
 Firstly we will add and configure another *role* to our Galaxy playbook - a community role which runs RabbitMQ in docker and configures it. In order to have docker installed automatically, we use geelingguy's docker role, which luckly needs no configuration changes. Additionally we will use the Galaxy community role for deploying Pulsar
 
@@ -166,15 +166,15 @@ Firstly we will add and configure another *role* to our Galaxy playbook - a comm
 >
 {: .hands_on}
 
-## Configuring RabbitMQ
+### Configuring RabbitMQ
 
 We need to configure RabbitMQ to be able to handle Pulsar messages. To do this we will need to create some queues, Rabbit users, some queue vhosts and set some passwords. We also need to configure rabbit to listen on various interfaces and ports.
 
-### Defining Virtual Hosts
+#### Defining Virtual Hosts
 
 Each set of queues in RabbitMQ are grouped and accessed via virtual hosts. We need to create one of these for the transactions between the Galaxy server and Pulsar server. They are set as an array under the `rabbitmq_vhosts` variable.
 
-### Defining users
+#### Defining users
 
 Users need to be defined, given passwords and access to the various queues. We will need to create a user that can access this vhost. We will also create an admin user. The queue will need access to the Pulsar queue vhost. They are set as an array under the `rabbitmq_users` variable with the following structure:
 
@@ -192,7 +192,7 @@ Notice the variable we used instead of directly placing the password there. It w
 > Optional: You can add tags to each user if required. e.g. For an admin user it could be useful to add in a *administrator* tag. These tags allow you to grant permissions to every user with a specific tag.
 {: .tip_title}
 
-### RabbitMQ server config
+#### RabbitMQ server config
 
 We also need to set some RabbitMQ server configuration variables. Such as where its security certificates are and which ports to listen on (both via localhost and network).
 
@@ -207,7 +207,7 @@ We also need to set some RabbitMQ server configuration variables. Such as where 
 
 More information about the rabbitmq ansible role can be found [in the repository](https://github.com/usegalaxy-eu/ansible-rabbitmq).
 
-## Add RabbitMQ configuration to Galaxy VM.
+### Add RabbitMQ configuration to Galaxy VM.
 
 > <hands-on-title>Add RabbitMQ settings to Galaxy VM groupvars file.</hands-on-title>
 >
@@ -496,11 +496,11 @@ More information about the rabbitmq ansible role can be found [in the repository
 {: .hands_on}
 
 
-# Installing and configuring Pulsar on a remote machine
+## Installing and configuring Pulsar on a remote machine
 
 Now that we have a message queueing system running on our Galaxy VM, we need to install and configure Pulsar on our remote compute VM. To do this we need to create a new ansible playbook to install Pulsar.
 
-## Configuring Pulsar
+### Configuring Pulsar
 
 From the [`galaxyproject.pulsar` ansible role documentation](https://github.com/galaxyproject/ansible-pulsar#role-variables), we need to specify some variables.
 
@@ -678,7 +678,7 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 >
 {: .hands_on}
 
-# Configuring Galaxy to use Pulsar as a job destination
+## Configuring Galaxy to use Pulsar as a job destination
 
 Now we have a Pulsar server up and running, we need to tell our Galaxy about it.
 
@@ -796,7 +796,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 {: .hidden}
 
 
-# Testing Pulsar
+## Testing Pulsar
 
 Now we will upload a small set of data to run bwa-mem with.
 
@@ -842,7 +842,7 @@ How awesome is that? Pulsar in another continent with reference data automatical
 
 {% snippet topics/admin/faqs/missed-something.md step=9 %}
 
-# Retries of the staging actions
+## Retries of the staging actions
 
 When the staging actions are carried out by the Pulsar server itself (like in the case when driving Pulsar by message queue), there are some parameters that can be tweaked to ensure reliable communication between the Galaxy server and the remote Pulsar server.
 The aim of these parameters is to control the retrying of staging actions in the event of a failure.
@@ -873,7 +873,7 @@ In this case, for both actions, Pulsar will try to carry out the staging action 
 
 We hope you never have to experience a situation like this one, but if needed just adapt the numbers to your case and add the parameters in the `pulsar_yaml_config` section of your `pulsarservers.yml` file.
 
-# Pulsar in Production
+## Pulsar in Production
 
 If you want to make use of Pulsar on a Supercomputer, you only need access to a submit node, and you will need to run Pulsar there. We recommend that if you need to run a setup with Pulsar, that you deploy an AMQP server (e.g. RabbitMQ) alongside your Galaxy. That way, you can run Pulsar on any submit nodes, and it can connect directly to the AMQP and Galaxy. Other Pulsar deployment options require exposing ports wherever Pulsar is running, and this requires significant more coordination effort.
 
@@ -887,13 +887,13 @@ For each new Pulsar server, you will need to add:
 
 Pulsar servers can be the head node of a cluster. You can create a cluster and use your favourite job scheduler such as Slurm or PBS to schedule jobs. You can have many destinations in your Galaxy job_conf.yml file that change the number of cpus, amount of RAM etc. It can get quite complex and flexible if you like.
 
-## Australia
+### Australia
 
 You can also create multiple queues on your RabbitMQ server for multiple Pulsar servers. On Galaxy Australia, we run 5 different Pulsar servers spread out all around the country. They all communicate with Galaxy via the one RabbitMQ server.
 
 ![Map of australia with 6 pulsar nodes marked around the country.](../../images/pulsar_australia.png)
 
-## Europe
+### Europe
 
 Galaxy Europe has taken Pulsar and built [The Pulsar Network](https://pulsar-network.readthedocs.io/en/latest). This provides a framework for easily deploying Pulsar clusters in the cloud, something needed to support compute centers which might not have as much experience. This way they get an easy package they can deploy and the European Galaxy team can manage.
 
@@ -901,6 +901,6 @@ Galaxy Europe has taken Pulsar and built [The Pulsar Network](https://pulsar-net
 
 The main purpose of this network is to support the workload of the UseGalaxy.eu instance by distributing it across several European data centers and clusters. If you're interested in setting up something similar, they [provide documentation](https://pulsar-network.readthedocs.io/en/latest/introduction.html) on how to install and configure a Pulsar network endpoint on a cloud infrastructure and how to connect it to your server.
 
-# Conclusion
+## Conclusion
 
 You're ready to ship your Galaxy jobs around the world! Now wherever you have compute space, you know how to setup a Pulsar node and connect it to Galaxy. Let us know if you come up with creative places to run your Galaxy jobs (coworker's laptops, your IoT fridge, the sky is the limit if it's x86 and has python)
