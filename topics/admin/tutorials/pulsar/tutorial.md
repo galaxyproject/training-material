@@ -149,8 +149,6 @@ Firstly we will add and configure another *role* to our Galaxy playbook - a comm
 >    +  version: 6.1.0
 >    +- name: usegalaxy_eu.rabbitmqserver
 >    +  version: 1.4.1
->    +- src: galaxyproject.pulsar
->    +  version: 1.0.8
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirements"}
@@ -279,9 +277,10 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -180,6 +182,34 @@ slurm_config:
+>    @@ -180,6 +182,44 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
+>     
 >    +#Install pip docker package for ansible
 >    +pip_install_packages:
 >    +  - name: docker
@@ -319,6 +318,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +    password: "{{ vault_rabbitmq_password_vhost }}"
 >    +    vhost: /pulsar/galaxy_au
 >    +
+>    +
 >     # TUS
 >     galaxy_tusd_port: 1080
 >     tusd_instances:
@@ -336,7 +336,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -29,6 +29,7 @@
+>    @@ -29,6 +29,8 @@
 >         - role: uchida.miniconda
 >           become: true
 >           become_user: "{{ galaxy_user.name }}"
@@ -714,7 +714,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >    +    amqp_publish_retry_max_retries: 60
 >    +    galaxy_url: "https://{{ inventory_hostname }}"
 >    +    manager: _default_
->
+>     
 >     execution:
 >       default: slurm
 >    {% endraw %}
