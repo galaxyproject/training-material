@@ -189,7 +189,10 @@ rabbitmq_users:
 ```
 
 Notice the variable we used instead of directly placing the password there. It will be read from vault instead.
-Optional: You can add tags to each user if required. e.g. For an admin user it could be useful to add in a *administrator* tag. These tags allow you to grant permissions to every user with a specific tag.
+
+> <tip-title>Tagging users</tip-title>
+> Optional: You can add tags to each user if required. e.g. For an admin user it could be useful to add in a *administrator* tag. These tags allow you to grant permissions to every user with a specific tag.
+{: .tip_title}
 
 ### RabbitMQ server config
 
