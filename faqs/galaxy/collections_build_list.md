@@ -6,9 +6,9 @@ layout: faq
 contributors: [shiltemann, hexylena]
 ---
 
-* Click on **Operations on multiple datasets** (check box icon) at the top of the history panel ![Operations on multiple datasets button]({% link topics/galaxy-interface/images/historyItemControls.png %})
-* Check all the datasets in your history you would like to include
-* Click **For all selected..** and choose **Build dataset list**
+* Click on {% icon galaxy-selector %} **Operations on multiple datasets** at the top of the history panel ![Operations on multiple datasets button]({% link topics/galaxy-interface/images/historyItemControls.png %})
+* Check {% if include.datasets_description %}{{ include.datasets_description }}{% else %}all the datasets in your history you would like to include{% endif %}
+* Click **{% if include.n %}{{ include.n }}{% else %}n{% endif %} of N selected** and choose **Build Dataset List**
 
   ![build list collection menu item]({% link topics/galaxy-interface/images/buildList.png %}){:width="15%"}
 
