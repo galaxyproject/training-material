@@ -411,8 +411,7 @@ Galaxy is capable of talking to multiple databases through SQLAlchemy drivers. S
 
 PostgreSQL maintains its own user database apart from the system user database. By default, PostgreSQL uses the "peer" authentication method which allows access for system users with matching PostgreSQL usernames (other authentication mechanisms are available, see the [PostgreSQL Client Authentication documentation](https://www.postgresql.org/docs/current/static/client-authentication.html).
 
-For this tutorial, we will use the default "peer" authentication, so we need to create a PostgreSQL user matching the system user under which Galaxy will be running, i.e. `galaxy`. This is normally done with the PostgreSQL `createuser` command, and it must be run as the `postgres` user. In our case, we will use the `galaxyproject.postgresql_objects` role to handle this step. Additionally we're setting a couple of variables to control the automatic backups, they'll be placed in the `/data/backups` folder next to our user uploaded Galaxy data.
-
+For this tutorial, we will use the default "peer" authentication, so we need to create a PostgreSQL user matching the system user under which Galaxy will be running, i.e. `galaxy`. This is normally done with the PostgreSQL `createuser` command, and it must be run as the `postgres` user. In our case, we will use the `galaxyproject.postgresql_objects` role to handle this step.
 > <hands-on-title>Installing PostgreSQL</hands-on-title>
 >
 > 1. Create and edit `group_vars/galaxyservers.yml` and add some variables to configure PostgreSQL:
@@ -434,9 +433,6 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    +postgresql_objects_databases:
 >    +  - name: galaxy
 >    +    owner: galaxy
->    +# PostgreSQL Backups
->    +postgresql_backup_dir: /data/backups
->    +postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add initial group variables file"}
