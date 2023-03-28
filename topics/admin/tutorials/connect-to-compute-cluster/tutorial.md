@@ -105,7 +105,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -12,6 +12,8 @@
+>    @@ -18,6 +18,8 @@
 >             repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 >             dest: /libraries/
 >       roles:
@@ -124,7 +124,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -157,6 +157,16 @@ golang_gopath: '/opt/workspace-go'
+>    @@ -159,6 +159,16 @@ golang_gopath: '/opt/workspace-go'
 >     singularity_version: "3.7.4"
 >     singularity_go_path: "{{ golang_install_dir }}"
 >     
@@ -325,7 +325,7 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -11,6 +11,10 @@
+>    @@ -17,6 +17,10 @@
 >         - git:
 >             repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 >             dest: /libraries/
@@ -366,7 +366,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -98,6 +98,7 @@ galaxy_config_templates:
+>    @@ -100,6 +100,7 @@ galaxy_config_templates:
 >     
 >     # systemd
 >     galaxy_manage_systemd: true

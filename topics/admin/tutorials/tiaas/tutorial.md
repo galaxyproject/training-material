@@ -90,7 +90,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -234,6 +234,11 @@ telegraf_plugins_extra:
+>    @@ -236,6 +236,11 @@ telegraf_plugins_extra:
 >           - data_format = "influx"
 >           - interval = "15s"
 >     
@@ -120,7 +120,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >     postgresql_objects_databases:
 >       - name: galaxy
 >         owner: galaxy
->    @@ -16,6 +17,27 @@ postgresql_objects_privileges:
+>    @@ -16,6 +17,26 @@ postgresql_objects_privileges:
 >         roles: telegraf
 >         privs: SELECT
 >         objs: ALL_IN_SCHEMA
@@ -144,10 +144,9 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +    objs: role_id_seq,galaxy_group_id_seq,group_role_association_id_seq,user_group_association_id_seq
 >    +    type: sequence
 >    +    privs: USAGE,SELECT
->    +
+>     
 >     # PostgreSQL Backups
 >     postgresql_backup_dir: /data/backups
->     postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add database privileges for TIaaS"}
@@ -172,7 +171,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -30,6 +30,7 @@
+>    @@ -36,6 +36,7 @@
 >           become: true
 >           become_user: "{{ galaxy_user.name }}"
 >         - usegalaxy_eu.rabbitmq
@@ -342,7 +341,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -137,6 +137,7 @@ galaxy_local_tools:
+>    @@ -138,6 +138,7 @@ galaxy_local_tools:
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py
 >     - map_resources.py

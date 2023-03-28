@@ -77,7 +77,7 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -33,3 +33,4 @@
+>    @@ -39,3 +39,4 @@
 >         - galaxyproject.nginx
 >         - galaxyproject.tusd
 >         - galaxyproject.cvmfs

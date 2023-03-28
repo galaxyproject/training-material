@@ -79,7 +79,7 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -60,6 +60,8 @@ galaxy_config:
+>    @@ -62,6 +62,8 @@ galaxy_config:
 >         allow_user_impersonation: true
 >         # Tool security
 >         outputs_to_working_directory: true
@@ -88,7 +88,7 @@ To allow your user to upload via TUS, you will need to:
 >       gravity:
 >         galaxy_root: "{{ galaxy_root }}/server"
 >         app_server: gunicorn
->    @@ -139,3 +141,16 @@ nginx_conf_http:
+>    @@ -141,3 +143,16 @@ nginx_conf_http:
 >     nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
@@ -148,7 +148,7 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -19,3 +19,4 @@
+>    @@ -25,3 +25,4 @@
 >           become: true
 >           become_user: "{{ galaxy_user.name }}"
 >         - galaxyproject.nginx

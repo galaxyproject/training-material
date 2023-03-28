@@ -420,7 +420,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    ```diff
 >    --- /dev/null
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -0,0 +1,15 @@
+>    @@ -0,0 +1,12 @@
 >    +---
 >    +# Python 3 support
 >    +pip_virtualenv_command: /usr/bin/python3 -m virtualenv # usegalaxy_eu.certbot, usegalaxy_eu.tiaas2, galaxyproject.galaxy
@@ -838,10 +838,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -13,3 +13,16 @@ postgresql_objects_databases:
->     # PostgreSQL Backups
->     postgresql_backup_dir: /data/backups
->     postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
+>    @@ -10,3 +10,16 @@ postgresql_objects_users:
+>     postgresql_objects_databases:
+>       - name: galaxy
+>         owner: galaxy
 >    +
 >    +# Galaxy
 >    +galaxy_create_user: true
@@ -886,7 +886,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -26,3 +26,14 @@ galaxy_force_checkout: true
+>    @@ -23,3 +23,14 @@ galaxy_force_checkout: true
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >     miniconda_version: 4.7.12
 >     miniconda_manage_dependencies: false
@@ -950,7 +950,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -37,3 +37,23 @@ galaxy_config:
+>    @@ -34,3 +34,23 @@ galaxy_config:
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
@@ -1712,7 +1712,7 @@ Galaxy is now configured with an admin user, a database, and a place to store da
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -57,3 +57,6 @@ galaxy_config:
+>    @@ -54,3 +54,6 @@ galaxy_config:
 >             pools:
 >               - job-handler
 >               - workflow-scheduler
@@ -1860,7 +1860,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -60,3 +60,55 @@ galaxy_config:
+>    @@ -57,3 +57,55 @@ galaxy_config:
 >     
 >     # systemd
 >     galaxy_manage_systemd: true
@@ -2280,7 +2280,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -37,6 +37,7 @@ galaxy_config:
+>    @@ -34,6 +34,7 @@ galaxy_config:
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
@@ -2298,7 +2298,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -59,6 +59,10 @@ galaxy_config:
+>    @@ -56,6 +56,10 @@ galaxy_config:
 >               - job-handler
 >               - workflow-scheduler
 >     
@@ -2366,7 +2366,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -38,6 +38,28 @@ galaxy_config:
+>    @@ -35,6 +35,28 @@ galaxy_config:
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >         job_config_file: "{{ galaxy_config_dir }}/job_conf.yml"

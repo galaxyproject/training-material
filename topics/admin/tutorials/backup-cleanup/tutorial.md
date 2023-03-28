@@ -50,14 +50,41 @@ Before we begin backing up our Galaxy data, let's set up automated cleanups to e
 
 > <hands-on-title>Configuring PostgreSQL Backups</hands-on-title>
 >
+> 1. Edit `galaxy.yml` to install `tmpwatch` (if using RHEL/CentOS/Rocky) and `tmpreaper` if using Debian/Ubuntu
+>    {% raw %}
+>    ```diff
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
+>    @@ -8,6 +8,12 @@
+>         - name: Install Dependencies
+>           package:
+>             name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
+>    +    - name: Install RHEL/CentOS/Rocky specific dependencies
+>    +      package:
+>    +        name: ['tmpwatch']
+>    +    - name: Install Debian/Ubuntu specific dependencies
+>    +      package:
+>    +        name: ['tmpreaper']
+>       roles:
+>         - galaxyproject.postgresql
+>         - role: galaxyproject.postgresql_objects
+>    {% endraw %}
+>    ```
+>    {: data-commit="Install tmpwatch/tmpreaper"}
+>
 > 1. Edit `group_vars/galaxyservers.yml` and add some variables to configure PostgreSQL:
 >    {% raw %}
 >    ```diff
->    --- /dev/null
+>    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -0,0 +1,15 @@
->    +pretasks: install tmpwatch (rhel) tmpreaper (deb)
->    +galaxy_manage_cleanup: yes
+>    @@ -15,6 +15,7 @@ postgresql_objects_databases:
+>     galaxy_create_user: true
+>     galaxy_separate_privileges: true
+>     galaxy_manage_paths: true
+>    +galaxy_manage_cleanup: true
+>     galaxy_layout: root-dir
+>     galaxy_root: /srv/galaxy
+>     galaxy_user: {name: galaxy, shell: /bin/bash}
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure automated cleanup"}
@@ -94,12 +121,19 @@ We're setting a couple of variables to control the automatic backups, they'll be
 > 1. Edit `group_vars/galaxyservers.yml` and add some variables to configure PostgreSQL:
 >    {% raw %}
 >    ```diff
->    --- /dev/null
+>    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -0,0 +1,15 @@
+>    @@ -11,6 +11,10 @@ postgresql_objects_databases:
+>       - name: galaxy
+>         owner: galaxy
+>     
 >    +# PostgreSQL Backups
 >    +postgresql_backup_dir: /data/backups
 >    +postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
+>    +
+>     # Galaxy
+>     galaxy_create_user: true
+>     galaxy_separate_privileges: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add backups"}

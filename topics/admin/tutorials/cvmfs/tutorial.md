@@ -305,7 +305,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -20,3 +20,4 @@
+>    @@ -26,3 +26,4 @@
 >           become_user: "{{ galaxy_user.name }}"
 >         - galaxyproject.nginx
 >         - galaxyproject.tusd
@@ -499,7 +499,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -29,6 +29,7 @@ miniconda_manage_dependencies: false
+>    @@ -31,6 +31,7 @@ miniconda_manage_dependencies: false
 >     
 >     galaxy_config:
 >       galaxy:

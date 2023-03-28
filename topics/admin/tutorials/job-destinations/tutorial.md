@@ -89,7 +89,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -96,6 +96,9 @@ galaxy_config_templates:
+>    @@ -98,6 +98,9 @@ galaxy_config_templates:
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
@@ -254,7 +254,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -98,6 +98,8 @@ galaxy_config_templates:
+>    @@ -100,6 +100,8 @@ galaxy_config_templates:
 >     
 >     galaxy_local_tools:
 >     - testing.xml
@@ -365,7 +365,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -29,6 +29,7 @@ miniconda_manage_dependencies: false
+>    @@ -31,6 +31,7 @@ miniconda_manage_dependencies: false
 >     
 >     galaxy_config:
 >       galaxy:
@@ -373,7 +373,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user
 >         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
->    @@ -95,6 +96,8 @@ galaxy_config_templates:
+>    @@ -97,6 +98,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
@@ -478,7 +478,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -90,6 +90,8 @@ galaxy_config:
+>    @@ -92,6 +92,8 @@ galaxy_config:
 >               - workflow-scheduler
 >     
 >     galaxy_config_templates:
@@ -636,7 +636,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -29,6 +29,7 @@ miniconda_manage_dependencies: false
+>    @@ -31,6 +31,7 @@ miniconda_manage_dependencies: false
 >     
 >     galaxy_config:
 >       galaxy:
@@ -644,7 +644,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >         tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user
->    @@ -105,6 +106,7 @@ galaxy_local_tools:
+>    @@ -107,6 +108,7 @@ galaxy_local_tools:
 >     - testing.xml
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py

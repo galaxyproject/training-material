@@ -60,10 +60,10 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -8,6 +8,9 @@
->         - name: Install Dependencies
+>    @@ -14,6 +14,9 @@
+>         - name: Install Debian/Ubuntu specific dependencies
 >           package:
->             name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
+>             name: ['tmpreaper']
 >    +    - git:
 >    +        repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 >    +        dest: /libraries/
@@ -84,7 +84,7 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -29,6 +29,8 @@ miniconda_manage_dependencies: false
+>    @@ -31,6 +31,8 @@ miniconda_manage_dependencies: false
 >     
 >     galaxy_config:
 >       galaxy:

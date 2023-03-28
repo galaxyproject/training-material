@@ -440,7 +440,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -34,3 +34,4 @@
+>    @@ -40,3 +40,4 @@
 >         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
 >         - galaxyproject.gxadmin
@@ -500,7 +500,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -210,6 +210,15 @@ rabbitmq_users:
+>    @@ -212,6 +212,15 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
 >     
@@ -530,7 +530,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -29,6 +29,8 @@ miniconda_manage_dependencies: false
+>    @@ -31,6 +31,8 @@ miniconda_manage_dependencies: false
 >     
 >     galaxy_config:
 >       galaxy:
@@ -778,9 +778,9 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    +    roles: telegraf
 >    +    privs: SELECT
 >    +    objs: ALL_IN_SCHEMA
+>     
 >     # PostgreSQL Backups
 >     postgresql_backup_dir: /data/backups
->     postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure database permissions for Telegraf"}
@@ -793,7 +793,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -226,6 +226,13 @@ telegraf_plugins_extra:
+>    @@ -228,6 +228,13 @@ telegraf_plugins_extra:
 >           - service_address = ":8125"
 >           - metric_separator = "."
 >           - allowed_pending_messages = 10000
