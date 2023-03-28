@@ -221,9 +221,9 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >         - galaxyproject.tiaas2
 >         - galaxyproject.nginx
 >    +    - galaxyproject.proftpd
+>         - galaxyproject.gxadmin
 >         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
->         - galaxyproject.gxadmin
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add role to playbook"}

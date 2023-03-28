@@ -80,9 +80,9 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -30,3 +30,5 @@
+>       version: 0.1.0
+>     - src: galaxyproject.pulsar
 >       version: 1.0.8
->     - src: galaxyproject.gxadmin
->       version: 0.0.8
 >    +- src: usegalaxy_eu.influxdb
 >    +  version: v6.0.7
 >    {% endraw %}
@@ -205,7 +205,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -32,3 +32,5 @@
->       version: 0.0.8
+>       version: 1.0.8
 >     - src: usegalaxy_eu.influxdb
 >       version: v6.0.7
 >    +- src: cloudalchemy.grafana
@@ -440,11 +440,14 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -40,3 +40,4 @@
+>    @@ -40,6 +40,7 @@
+>         - galaxyproject.gxadmin
 >         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
->         - galaxyproject.gxadmin
 >    +    - dj-wasabi.telegraf
+>       post_tasks:
+>         - name: Setup gxadmin cleanup task
+>           ansible.builtin.cron:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add telegraf to the monitoring playbook"}

@@ -66,10 +66,10 @@ tutorial]({% link topics/admin/tutorials/gxadmin/tutorial.md %}).
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -28,3 +28,5 @@
->       version: 0.1.0
->     - src: galaxyproject.pulsar
->       version: 1.0.8
+>    @@ -12,3 +12,5 @@
+>       version: 0.3.0
+>     - src: usegalaxy_eu.certbot
+>       version: 0.1.5
 >    +- src: galaxyproject.gxadmin
 >    +  version: 0.0.8
 >    {% endraw %}
@@ -91,10 +91,10 @@ tutorial]({% link topics/admin/tutorials/gxadmin/tutorial.md %}).
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -39,3 +39,4 @@
+>    @@ -19,3 +19,4 @@
+>           become: true
+>           become_user: "{{ galaxy_user.name }}"
 >         - galaxyproject.nginx
->         - galaxyproject.tusd
->         - galaxyproject.cvmfs
 >    +    - galaxyproject.gxadmin
 >    {% endraw %}
 >    ```
@@ -106,15 +106,18 @@ tutorial]({% link topics/admin/tutorials/gxadmin/tutorial.md %}).
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -39,3 +39,4 @@
->    post_tasks:
->      - name: Setup gxadmin cleanup task
->        ansible.builtin.cron:
->          name: "Cleanup Old User Data"
->          user: galaxy # Run as the Galaxy user
->          minute: "0"
->          hour: "0"
->          job: "GALAXY_LOG_DIR=/tmp/gxadmin/ GALAXY_ROOT={{ galaxy_root }}/server /usr/bin/gxadmin galaxy cleanup 60"
+>    @@ -20,3 +20,11 @@
+>           become_user: "{{ galaxy_user.name }}"
+>         - galaxyproject.nginx
+>         - galaxyproject.gxadmin
+>    +  post_tasks:
+>    +    - name: Setup gxadmin cleanup task
+>    +      ansible.builtin.cron:
+>    +        name: "Cleanup Old User Data"
+>    +        user: galaxy # Run as the Galaxy user
+>    +        minute: "0"
+>    +        hour: "0"
+>    +        job: "GALAXY_LOG_DIR=/tmp/gxadmin/ GALAXY_ROOT={{ galaxy_root }}/server /usr/bin/gxadmin galaxy cleanup 60"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure gxadmin to cleanup data"}

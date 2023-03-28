@@ -52,10 +52,10 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -12,3 +12,5 @@
->       version: 0.3.0
->     - src: usegalaxy_eu.certbot
+>    @@ -14,3 +14,5 @@
 >       version: 0.1.5
+>     - src: galaxyproject.gxadmin
+>       version: 0.0.8
 >    +- name: galaxyproject.tusd
 >    +  version: 0.0.1
 >    {% endraw %}
@@ -148,11 +148,14 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -25,3 +25,4 @@
->           become: true
+>    @@ -26,6 +26,7 @@
 >           become_user: "{{ galaxy_user.name }}"
 >         - galaxyproject.nginx
+>         - galaxyproject.gxadmin
 >    +    - galaxyproject.tusd
+>       post_tasks:
+>         - name: Setup gxadmin cleanup task
+>           ansible.builtin.cron:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the role to the playbook"}

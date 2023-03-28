@@ -183,8 +183,8 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -14,3 +14,5 @@
->       version: 0.1.5
+>    @@ -16,3 +16,5 @@
+>       version: 0.0.8
 >     - name: galaxyproject.tusd
 >       version: 0.0.1
 >    +- src: galaxyproject.cvmfs
@@ -305,11 +305,14 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -26,3 +26,4 @@
->           become_user: "{{ galaxy_user.name }}"
+>    @@ -27,6 +27,7 @@
 >         - galaxyproject.nginx
+>         - galaxyproject.gxadmin
 >         - galaxyproject.tusd
 >    +    - galaxyproject.cvmfs
+>       post_tasks:
+>         - name: Setup gxadmin cleanup task
+>           ansible.builtin.cron:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add role to playbook" data-ref="pb"}

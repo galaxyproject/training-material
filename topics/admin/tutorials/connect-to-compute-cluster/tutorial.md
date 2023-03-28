@@ -74,7 +74,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -20,3 +20,7 @@
+>    @@ -22,3 +22,7 @@
 >       version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
 >     - src: gantsign.golang
 >       version: 2.6.3

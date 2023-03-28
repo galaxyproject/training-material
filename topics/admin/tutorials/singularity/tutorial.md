@@ -67,7 +67,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -16,3 +16,7 @@
+>    @@ -18,3 +18,7 @@
 >       version: 0.0.1
 >     - src: galaxyproject.cvmfs
 >       version: 0.2.13

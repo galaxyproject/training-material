@@ -177,8 +177,8 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >         - usegalaxy_eu.rabbitmq
 >    +    - galaxyproject.tiaas2
 >         - galaxyproject.nginx
+>         - galaxyproject.gxadmin
 >         - galaxyproject.tusd
->         - galaxyproject.cvmfs
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add TIaaS role to the Galaxy playbook"}

@@ -140,7 +140,7 @@ Firstly we will add and configure another *role* to our Galaxy playbook - we mai
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -24,3 +24,7 @@
+>    @@ -26,3 +26,7 @@
 >       version: 0.0.2
 >     - src: galaxyproject.slurm
 >       version: 0.1.3
@@ -322,8 +322,8 @@ More information about the rabbitmq ansible role can be found [in the repository
 >           become_user: "{{ galaxy_user.name }}"
 >    +    - usegalaxy_eu.rabbitmq
 >         - galaxyproject.nginx
+>         - galaxyproject.gxadmin
 >         - galaxyproject.tusd
->         - galaxyproject.cvmfs
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add role"}
