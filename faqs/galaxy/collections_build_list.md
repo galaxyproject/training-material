@@ -6,7 +6,7 @@ layout: faq
 contributors: [shiltemann, hexylena]
 ---
 
-* Click on {% icon galaxy-selector %} **Operations on multiple datasets** at the top of the history panel ![Operations on multiple datasets button]({% link topics/galaxy-interface/images/historyItemControls.png %})
+* Click on {% icon galaxy-selector %} **Select Items** at the top of the history panel ![Select Items button]({% link topics/galaxy-interface/images/historyItemControls.png %})
 * Check {% if include.datasets_description %}{{ include.datasets_description }}{% else %}all the datasets in your history you would like to include{% endif %}
 * Click **{% if include.n %}{{ include.n }}{% else %}n{% endif %} of N selected** and choose **Build Dataset List**
 
