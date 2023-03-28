@@ -1,18 +1,23 @@
 ---
 layout: tutorial_hands_on
 
-title: "Galaxy Backups & Cleanup"
+title: "Server Maintenance: Backups & Cleanup"
 questions:
 - How can I back up my Galaxy?
 - What data should be included?
 - How can I ensure jobs get cleaned up appropriately?
+- How do I maintain a Galaxy server?
+- What happens if I lose everything?
 objectives:
+- Learn about different maintenance steps
 - Setup postgres backups
 - Setup cleanups
+- Learn what to back up and how to recover
 time_estimation: "30m"
 key_points:
-- Most of this is handled for you
-- But it is important to be aware of proper backup procedures
+  - Use configuration management (e.g. Ansible)
+  - Store configuration management in git
+  - Back up the parts of Galaxy that can't be recreated
 contributions:
   authorship:
   - hexylena
