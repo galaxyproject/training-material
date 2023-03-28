@@ -58,7 +58,6 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >    +  version: 0.0.8
 >    {% endraw %}
 >    ```
->    {: data-commit="Add requirement"}
 >
 >    {% snippet topics/admin/faqs/diffs.md %}
 >
@@ -84,7 +83,6 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >    +    - galaxyproject.gxadmin
 >    {% endraw %}
 >    ```
->    {: data-commit="Add the gxadmin role"}
 >
 > 4. Run the playbook
 >

@@ -33,7 +33,11 @@ abbreviations:
     WORM: Write Once Read Many
 ---
 
+Keeping your Galaxy cleaned up is an important way to retain space, especially since for many groups that is the
+limiting factor in their deployment.
 
+Additionally, backups are necessary to ensure that if you ever experience system level failures, you can safely recover
+from these.
 
 > <agenda-title></agenda-title>
 >
@@ -45,6 +49,92 @@ abbreviations:
 {% snippet topics/admin/faqs/git-gat-path.md tutorial="backup-cleanup" %}
 
 # Cleanups
+
+There are two kinds of data that are produced when running a Galaxy: files users create and then delete or purge, and
+then files Galaxy creates itself. Both of these can be cleaned to save space.
+
+## User Created Files
+
+You can use `gxadmin` to cleanup user created files. `gxadmin` is covered in more detail in [it's own dedicated
+tutorial]({% link topics/admin/tutorials/gxadmin/tutorial.md %}).
+
+> <hands-on-title>Installing gxadmin with Ansible</hands-on-title>
+>
+> 1. Edit your `requirements.yml` and add the following:
+>
+>    {% raw %}
+>    ```diff
+>    --- a/requirements.yml
+>    +++ b/requirements.yml
+>    @@ -28,3 +28,5 @@
+>       version: 0.1.0
+>     - src: galaxyproject.pulsar
+>       version: 1.0.8
+>    +- src: galaxyproject.gxadmin
+>    +  version: 0.0.8
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add requirement"}
+>
+> 2. Install the role with:
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-galaxy install -p roles -r requirements.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+> 3. Add the role to your playbook:
+>
+>    {% raw %}
+>    ```diff
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
+>    @@ -39,3 +39,4 @@
+>         - galaxyproject.nginx
+>         - galaxyproject.tusd
+>         - galaxyproject.cvmfs
+>    +    - galaxyproject.gxadmin
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add the gxadmin role"}
+>
+> 3. Setup a cleanup task to run regularly:
+>
+>    {% raw %}
+>    ```diff
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
+>    @@ -39,3 +39,4 @@
+>    post_tasks:
+>      - name: Setup gxadmin cleanup task
+>        ansible.builtin.cron:
+>          name: "Cleanup Old User Data"
+>          user: galaxy # Run as the Galaxy user
+>          minute: "0"
+>          hour: "0"
+>          job: "GALAXY_LOG_DIR=/tmp/gxadmin/ GALAXY_ROOT={{ galaxy_root }}/server /usr/bin/gxadmin galaxy cleanup 60"
+>    {% endraw %}
+>    ```
+>    {: data-commit="Configure gxadmin to cleanup data"}
+>
+>    This will cause datasets deleted for more than 60 days to be purged.
+>
+> 4. Run the playbook
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+{: .hands_on}
+
+Whenever `gxadmin` runs, it will create logs you can read in `/tmp/gxadmin` which you can check later.
+
+## Galaxy Created Files
 
 Before we begin backing up our Galaxy data, let's set up automated cleanups to ensure we backup the minimal required set of data.
 
@@ -109,8 +199,20 @@ This will setup `tmpwatch` to cleanup a few folders:
 
 There are two important things to back up with your Ansible Galaxy:
 
+- Galaxy
 - The Database
 - The Data
+
+## Galaxy
+
+By using Ansible, as long as you are storing your playbooks on another system, you are generally safe from failues of
+the Galaxy node, and you'll be able to re-run your playbook at a later date.
+
+However, playbooks often do not include:
+
+- Which tools you've installed (have you ever installed a tool outside of ephemeris? This might be lost!)
+- Conda environments, which will not always resolve identically over time. If strong guarantees of reproducibility are
+  important, then consider backing these up as well.
 
 ## Database Backups
 
@@ -169,5 +271,3 @@ post_tasks:
 >
 > Please consider communicating **very well** with your users what the data backup policy is.
 {: .tip}
-
-
