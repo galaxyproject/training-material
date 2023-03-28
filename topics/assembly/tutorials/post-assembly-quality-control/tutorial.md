@@ -5,10 +5,11 @@ title: Post Assembly Quality Control Workflow
 zenodo_link: ''
 questions:
 - what combination of tools can assess the quality of an initial assembly?
-- how to use the different tools in galaxy?
+- what metrics can help to analyse the quality?
+- how to evaluate the outputs?
 objectives:
 - apply the post-assembly-QC-workflow using the necessary tools
-- understand the function of the different tools
+- analyse and evaluate the results of the workflow
 time_estimation: 3H
 key_points:
 - The take-home messages
@@ -22,18 +23,18 @@ contributors:
 
 # Introduction
 
-An important part in genome assembly is quality control. During the whole process of DNA sequencing and assembling the genome, errors like mismatches and gaps can occur. This can affect the accuracy and completeness of the genome. Quality control helps to identify and correct these errors by evaluating the quality of the sequences and by detecting and removing potential contaminations. {% cite DominguezDelAngel2018 %}
-A high-quality end-product as a result also ensures to avoid errors and false conclusions in downstream analyses.
+An important part in genome assembly is quality control. During the whole process of DNA sequencing and assembling the genome, errors like mismatches and gaps can occur. This can affect the accuracy and completeness of the genome. Quality control helps to identify and correct these errors by evaluating the quality of the sequences and by detecting and removing potential contaminations.
+A high-quality end-product as a result also ensures to avoid errors and false conclusions in downstream analyses. ({% cite DominguezDelAngel2018 %})
 
-Since there are many different ways how errors can occur there are also many different tools to identify and remove potential problems. The difficult part is to choose between them and to know when it's time to move on. It is important because time and resources play a big role in genome assembly.
+Since there are many different ways how errors can occur there are also many different tools to identify and remove potential problems. The difficult part is to choose between them and to know when it's time to move on. This is important because time and resources play a big role in genome assembly.
 
-But how can we gauge the quality of an assembly? To answer this question we first have to find out the properties to evaluate the quality of an assembly. It turned out to be a good idea to focus on the following aspects: contiguity, completeness and correctness. To gauge those properties some metrics are needed. It is necessary to aim for a value like a score to have the information of the measured quality as one number. This is useful in order to have an easy overview and make it easier for comparisons.({% cite Wang2023 %})
+But how can we gauge the quality of an assembly? To answer this question we first have to find out the properties to evaluate the quality of an assembly. It turned out to be a good idea to focus on the following aspects: contiguity, completeness and correctness. To gauge those properties some metrics are needed. It is necessary to aim for a value like a score to have the information of the measured quality as one number. This is useful in order to have an easy overview and make it easier for comparisons. ({% cite Wang2023 %})
 
-Length metrics like NG50, CC(contig/chromosome) ratio and sizes of contigs, scaffolds and gaps are common for contiguity and completeness analysis. Also a popular and common method to evaluate completeness is by comparing already known genes stored in databases, against those found in the newly assembled genome. K-mer counting and the resulting k-mer profile analysis additionally helps us to evaluate correctness of a genome assembly. When talking about correctness, another association would be accuracy. Another proposed standard to assess the genomes quality is by checking base-level errors and structural errors. By gauging these metrics, a high level of accuracy can be obtained.
-This can be done by mapping the raw sequencing reads to the target assembly and then calculating the error rate or by comparing the assembly to a set of k-mers from raw sequencing reads.({% cite Wang2023 %})
+Length metrics like NG50, CC(contig/chromosome) ratio and sizes of contigs, scaffolds and gaps are common for contiguity and completeness analysis. Also a popular and common method to evaluate completeness is by comparing already known genes stored in databases, against those found in the newly assembled genome. K-mer counting and the resulting k-mer profile analysis additionally helps us to evaluate correctness of a genome assembly. When talking about correctness, a similar meaning would be accuracy. Another proposed standard to assess the genomes quality is by checking base-level errors and structural errors. By gauging these errors and curing the results, a higher level of accuracy can be obtained.
+This can be done by mapping the raw sequencing reads to the target assembly and then calculating the error rate or by comparing the assembly to a set of k-mers from raw sequencing reads. ({% cite Wang2023 %})
 
 In this tutorial you will learn how to use the tools for the post-assembly quality control
-workflow. It's part of a post-assembly pipeline from ERGA to ensure high quality assemblies in appropriate time and resources.
+workflow and how to analyse and evaluate the ouputs. It's part of a post-assembly pipeline from ERGA to ensure high quality assemblies in appropriate time and resources.
 
 > <agenda-title></agenda-title>
 >
@@ -50,11 +51,53 @@ workflow. It's part of a post-assembly pipeline from ERGA to ensure high quality
 
 In this tutorial we will evaluate three different genome assemblies, belonging to three different taxonomic groups, in order to illustrate the different scenarios that can be identified. The characteristics of each of them are described briefly below.
 
-Case 1: *Chondrosia reniformis*: # Here include the information about the technologies used, poliploidy and perhaps some additional characteristics such as the abundance of symbiotic organisms in the sponge, distribution, etc (see recommended doc)
+##### Case 1: ***Chondrosia reniformis***: 
 
-Case 2: *Erythrolamprus reginae*: # Here include the information about the technologies used, poliploidy and perhaps some additional characteristics such as the partenogenesis (see recomended doc)
+*Technology used*:
+- "The assembly odChoReni1.1 is based on 70x PacBio data and Arima2 Hi-C data generated by the Aquatic Symbiosis Genomics Project (https://www.aquaticsymbiosisgenomics.org/). The assembly process included the following sequence of steps: initial PacBio assembly generation with Hifiasm, retained haplotig separation with purge_dups, and Hi-C based scaffolding with YaHS. The mitochondrial genome was assembled using MitoHiFi. Finally, the primary assembly was analysed and manually improved using gEVAL." ({% cite European-Nucleotide-Archive %})
 
-Case 3: *Eschrichtius robustus*: # Here include the information about the technologies used, poliploidy and perhaps some additional characteristics
+*Polyploidy*:
+- diploid
+
+*Characteristics*:
+- abundance of symbiotic organisms (different temperature and locaion means different amount of bacteria and symbionts)
+- absence of skeleton
+- high mean heterozygosity
+- different distributions geographically (mostly) so not conspecific
+- gonochoric and oviparous but asexual
+
+({% cite C2001 %}), ({% cite Webster2008 %})
+
+##### Case 2: ***Erythrolamprus reginae***:
+
+*Technology used*:
+- Assembly method: Hi-C
+- Sequencing: PacBio HiFi
+- Genome coverage: 34.47x
+
+*Polyploidy*:
+- triploid
+
+*Characteristics*:
+- polyploidy and parthenogenesis have a high heterozygosity as a result
+- mean heterozygosity for most vertebrate species ranges from 0.04 to 0.1. but triploid reptiles can have much higher values
+- parthenogenesis also results in higher mutation rate followed by higher DNA replication and tandem dupliation
+
+({% cite Bogart1980 %})
+
+##### Case 3: ***Eschrichtius robustus***:
+
+*Technology used*:
+- Assembly method: HiFiasm
+- Sequencing technology: PacBio Sequel II HiFi
+- Genome coverage: 29.6x
+
+*Polyploidy*:
+- diploid
+
+*Characteristics*:
+- TO-DO
+
 
 As a first step we will get the data from zenodo.
 
@@ -95,7 +138,7 @@ Contamination can also have a significant impact on downstream analysis and inte
 Our goal for the post-assembly quality control workflow is to assess the completeness and the quality of the given assembly and remove potential errors and contaminations to ensure a high-quality end product.
 
 
-## Sub-step with **BlobToolKit**
+## Creating dataset with **BlobToolKit**
 
 Blobtoolkit is a tool for decontamination, analysing and visualising assemblies. It's a great tool to review the quality of an assembled genome. In our case optimal suited for the post-assembly quality control.
 Blobtoolkit can help to identify contaminants by creating a dataset with taxonomic information and then comparing the assembly with the provided data from known contigs or scaffolds. ({% cite Challis2020 %})
@@ -106,28 +149,30 @@ To get a more meaningful analysis and therefore more useful information about ou
 > <comment-title> FASTA file format </comment-title>
 >
 > The FASTA file format consists of a description row starting with '>', followed by a text. The next row/rows consist of a sequence. The file can have more than one description and sequence rows.
-Example:
-    > Sequence 1
-    AATCGGCTATTA
-    GGCAGCGATTAC
-    > Sequence 2
-    GACTCAGCGTAT
+>
+> Example:
+> - '> Sequence 1
+> - AATCGGCTATTA
+> - GGCAGCGATTAC
+> - '> Sequence 2
+> - GACTCAGCGTAT
 >
 {: .comment}
 
 > <comment-title> assembly.yaml </comment-title>
 >
 > The assembly.yaml metadata file contains metadata information about the assembly. In general you have to look up those information on your own. Usually the information is available on the official gene databases where the assembly is provided.
-Here an example content of an assembly.yaml file:
-assembly:
-  accession: GCA_947172415.1
-  alias: odChoReni1.1
-  bioproject: PRJEB56892
-  biosample: SAMEA9362004
-  record_type: Chromosome
-taxon:
-  name: Chondrosia reniformis
-  id: 68574
+> Here an example content of an assembly.yaml file:
+>
+> - assembly:
+>   - accession: GCA_947172415.1
+>   - alias: odChoReni1.1
+>   - bioproject: PRJEB56892
+>   - biosample: SAMEA9362004
+>   - record_type: Chromosome
+> - taxon:
+>   - name: Chondrosia reniformis
+>   - id: 68574
 >
 {: .comment}
 
@@ -137,14 +182,14 @@ taxon:
 >    - *"Select mode"*: `Create a BlobToolKit dataset`
 >        - {% icon param-file %} *"Genome assembly file"*: `output` (Input dataset)
 >        - {% icon param-file %} *"Metadata file"*: `output` (Input dataset)
->        - *"NCBI taxonomy ID"*: `{'id': 6, 'output_name': 'output'}`
+>        - *"NCBI taxonomy ID"*: `{'id': 2, 'output_name': 'output'}`
 >        - {% icon param-file %} *"NCBI taxdump directory"*: `output` (Input dataset)
 >
 >
 >    > <details-title> BlobDir structure </details-title>
 >    >
 >    > Here you can have a more detailed look on the structure of the BlobDir dataset:
-
+>    >
 >    > DatasetID
 >    > meta.json                       # Dataset metadata
 >    > identifiers.json                # Sequence names
@@ -163,11 +208,27 @@ taxon:
 {: .hands_on}
 
 
-## Sub-step with **HISAT2**
+## **Collapse Collection**
+
+> <hands-on-title> Collapse fastq files into single dataset </hands-on-title>
+>
+> 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
+>    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `output` (Input dataset collection)
+>
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > Preperation to get a single BAM file as output by HISAT2. Necessary to get a single input for BlobToolKit afterwards.
+>    {: .comment}
+>
+{: .hands_on}
+
+
+## Mapping raw data with **HISAT2**
 
 HISAT2 is currently one of the fastest RNA-seq mapper available. The tool will use hierarchically indexing methods to align reads to a reference genome ({% cite Zhang2021 %}). It then provides the alignment output in BAM file format which we will then use as an input for Blobtoolkit for analysing the correctness/accuracy of the assembly.
 
-> <comment-title> BAM/SAM file format </comment-title>
+> <comment-title> SAM/BAM file format </comment-title>
 >
 > SAM is short for Sequence Alignment Map. The file stores alignments of sequences which are often mapped with the help of reference sequences. The information is stored in a text-based format.
 > 
@@ -181,7 +242,7 @@ HISAT2 is currently one of the fastest RNA-seq mapper available. The tool will u
 >    - *"Source for the reference genome"*: `Use a genome from history`
 >        - {% icon param-file %} *"Select the reference genome"*: `output` (Input dataset)
 >    - *"Is this a single or paired library"*: `Single-end`
->        - {% icon param-collection %} *"FASTA/Q file"*: `output` (Input dataset collection)
+>        - {% icon param-file %} *"FASTA/Q file"*: `output` (output of **Collapse Collection** {% icon tool %})
 >    - In *"Advanced Options"*:
 >        - *"Input options"*: `Use default values`
 >        - *"Alignment options"*: `Use default values`
@@ -196,7 +257,29 @@ HISAT2 is currently one of the fastest RNA-seq mapper available. The tool will u
 {: .hands_on}
 
 
-## Sub-step with **Busco**
+## Pattern **Replace**
+
+> <hands-on-title> Preperation for BUSCO </hands-on-title>
+>
+> 1. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
+>    - {% icon param-file %} *"File to process"*: `output` (Input dataset)
+>    - In *"Find and Replace"*:
+>        - {% icon param-repeat %} *"Insert Find and Replace"*
+>            - *"Find pattern"*: `|`
+>            - *"Replace with"*: `_`
+>            - *"Replace all occurences of the pattern"*: `Yes`
+>            - *"Find and Replace text in"*: `entire line`
+>
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > BUSCO tool returns an error if files containing '|'. Therefore this tool will replace all '|' character with '_' in the given fasta file.
+>    {: .comment}
+>
+{: .hands_on}
+
+
+## Assessing completeness with **Busco**
 
 BUSCO(Benchmarking Universal Single-Copy Orthologs) is a tool that will assess gene annotation completeness and the completeness of a genome assembly. The tool has a database of orthologs which will be compared to orthologs found in the assembly. As a result the output provides information about the completeness and quality of the recovered genes and which genes are completely missing. ({% cite Simo2015 %})
 We will later use these information and provide the output to blobtoolkit for further analysis.
@@ -211,7 +294,7 @@ We will later use these information and provide the output to blobtoolkit for fu
 > <hands-on-title> Estimate single copy gene representation completeness </hands-on-title>
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.4.4+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Sequences to analyse"*: `outfile` (output of **Replace** {% icon tool %})
 >    - *"Mode"*: `Genome assemblies (DNA)`
 >        - *"Use Augustus instead of Metaeuk"*: `Use Metaeuk`
 >    - *"Auto-detect or select lineage?"*: `Auto-detect`
@@ -233,7 +316,7 @@ The following images are screenshots of the BUSCO output files.
 
 
 
-## Sub-step with **BlobToolKit**
+## Adding information to dataset with **BlobToolKit**
 
 In the previous steps we generated and prepared the data which we will provide now in Blobtoolkit. With the given information the tool can now detect possible contaminations. Once detected the tool can also filter the assembly and generate plots to give an overview of the assemblies analysis and therfore of the overall quality. ({% cite Challis2020 %})
 
@@ -257,14 +340,20 @@ In the previous steps we generated and prepared the data which we will provide n
 >    > Coverage information/how can comparing the assembly against those information can help us analyse completeness 
 >    {: .comment}
 >
-> 2. Run {% tool [BlobToolKit](toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/3.4.0+galaxy0) %} again with the following parameters:
->    - *"Select mode"*: `Generate plots`
->        - {% icon param-file %} *"Blobdir file"*: `blobdir` (output of **BlobToolKit** {% icon tool %})
+{: .hands_on}
+
+
+## Plots with **Interactive BlobToolKit**
+
+> <hands-on-title> Viewing BlobDir dataset as plots </hands-on-title>
+>
+> 1. {% tool [Interactive BlobToolKit](interactive_tool_blobtoolkit) %} with the following parameters:
+>    - {% icon param-file %} *"Blobdir file"*: `blobdir` (output of **BlobToolKit** {% icon tool %})
 >
 >
->    > <comment-title> Generate plots </comment-title>
+>    > <comment-title> short description </comment-title>
 >    >
->    > Blobtoolkit can generate plots to make the analysis of the assembly visible.
+>    > Using the interactive tool of BlobToolKit allows one to view the created BlobDir dataset as plots. Thus we can analyse and evaluate the genome assembly.
 >    {: .comment}
 >
 {: .hands_on}
@@ -283,7 +372,7 @@ K-mers are also useful for genome analysis. The frequency and distribution of k-
 > The sequence ACGT has four monomers (A, C, G, T), three 2-mers (AC, CG, GT), two 3-mers (ACG, CGT) and one 4-mer (ACGT)
 >
 {: .comment}
-
+>
 > <comment-title> Counting k-mers </comment-title>
 >
 > Given the length L of a sequence and the number n of all possible monomers, there are n^k total possible k-mers and L-k+1 k-mers.
@@ -291,7 +380,7 @@ K-mers are also useful for genome analysis. The frequency and distribution of k-
 {: .comment}
 
 
-## Sub-step with **Meryl**
+## Generating k-mer profile with **Meryl**
 
 DNA is double stranded and normally only one strand is sequenced. For our assembly we want to consider the other strand as well. Therefore canonical k-mers are used in most counting tools, exactly like in Meryl. A full k-mer pair is a sequence and the reverse complement of the sequence (e.g. ATG/CAT). The canonical sequence of a k-mer pair is the lexicographically smaller of the two reverse complementary sequences. So if CAT appears it will be counted as ATG. ({% cite Clavijo %})
 
@@ -325,7 +414,7 @@ Meryl is a k-mer counter. It is a powerful tool for counting k-mers in large-sca
 {: .hands_on}
 
 
-## Sub-step with **GenomeScope**
+## K-mer profile analysis with **GenomeScope**
 
 Genomescope is used for analysing genomes with the help of k-mer profile analysis. It estimates the overall genome characteristics and the overall read characteristics. The tool will use a given k-mer profile which is calculated only from raw reads sequencing data. It then generates a plot with the calculated data giving us information about the completeness and quality of the to be assembled data.({% cite Vurture2017 %})
 
@@ -343,13 +432,13 @@ Genomescope is used for analysing genomes with the help of k-mer profile analysi
 >
 {: .hands_on}
 
-![Figure 1: Genomescope plot](../../images/post-assembly-QC/Chondrosia-reniformis-Linear_plot.png "Genomescope 21-mer profile, linear plot.")
-![Figure 2: Genomescope plot ](../../images/post-assembly-QC/Eschrichtius-robustus-Linear_plot.png "Genomescope 21-mer profile, linear plot.")
-![Figure 3: Genomescope plot ](../../images/post-assembly-QC/Erythrolamprus-reginae-linear-ploidy3.png "Genomescope 21-mer profile, linear plot.")
+![Figure 1: Genomescope plot](../../images/post-assembly-QC/Chondrosia-reniformis-Linear_plot.png "Genomescope 21-mer profile of Chondrosia reniformis, linear plot.")
+![Figure 2: Genomescope plot ](../../images/post-assembly-QC/Eschrichtius-robustus-Linear_plot.png "Genomescope 21-mer profile of Eschrichtius robustus, linear plot.")
+![Figure 3: Genomescope plot ](../../images/post-assembly-QC/Erythrolamprus-reginae-linear-ploidy3.png "Genomescope 21-mer profile of Erythrolamprus reginae, linear plot.")
 
 
 
-## Sub-step with **Merqury**
+## K-mer profile evaluation with **Merqury**
 
 Merqury is designed for evaluating the completeness and accuracy of long-read genome assemblies using short-read sequencing data. Thus the quality of assemblies which are generated by using third-generation sequencing technologies can be reviewed and assessed by the tool.
 Merqury works by comparing k-mers of an assembly to those from unassembled high-accuracy reads of the raw sequencing data. K-mer-based methods are also used to identify errors and missing sequences. ({% cite Rhie2020 %})
@@ -366,10 +455,11 @@ Merqury works by comparing k-mers of an assembly to those from unassembled high-
 >    > <comment-title> Output </comment-title>
 >    >
 >    > Merqury will now generate following outputs:
-- stats with completeness statistics
-- QV stats with quality value statistics
-- plots
-
+>    >
+>    >  1. stats with completeness statistics
+>    >  2. QV stats with quality value statistics
+>    >  3. plots
+>    >
 >    {: .comment}
 >
 {: .hands_on}
@@ -381,7 +471,7 @@ Let's have a closer look at the copy number plots. For each of our three species
 ![Figure 6: Merqury plot](../../images/post-assembly-QC/Erythrolamprus-reginae.spectra-cn.fl.png "Merqury copy numbers plot of Erythrolamprus reginae.")
 
 
-## Sub-step with **gfastats**
+## Providing assembly statistics with **gfastats**
 
 gfastats is a tool for providing summary statistics and genome file manipulation. In our case it will generate genome assembly statistics in a tabular-format output. Metrics like N50/L50, GC-content and lengths of contigs, scaffolds and gaps as well as other statistical information are provided for assessing the contiguity of the assembly.
 
@@ -394,36 +484,35 @@ gfastats is a tool for providing summary statistics and genome file manipulation
 >        - *"Report mode"*: `Genome assembly statistics (--nstar-report)`
 >
 >
->    > <comment-title> N50 </comment-title>
+>    > <comment-title> N50/NG50 </comment-title>
 >    >
 >    > Consider taking all contigs and sorting them by size. Starting with the largest and ending with the smallest. Now add up the length of each contig beginning with the largest, then the second largest and so on. When reaching 50% of the total length of all contigs it's done. The length of the contig you stopped is the N50 value. ({% cite Videvall201703 %})
-
+>    >
+>    > NG50 or more general NG(X) is based on the same idea as N50. The difference is that in this case the whole genome size or estimated genome size is taken into account. This is why comparisons can be made over different assemblies and genome sizes.
+>    >
 >    {: .comment}
 >
 >    > <comment-title> L50 </comment-title>
 >    >
 >    > Remember adding up the length of each contig until reaching the 50%. The L50 value is the number of the contig you have stopped.
-
+>    >
 >    > Example: The sum of all contigs together is 2000 kbp. The contig at 50% has length 300 kbp and is the third one and thus the third largest.
 >    > Then N50 = 300 kbp and L50 = 3.
-
+>    >
 >    {: .comment}
 >
 > In the best case a high quality assembly should consist of just a few and large contigs to represent the genome as a whole. Therefore a good assembly should lead to a high N50 value and in contrast a low quality assembly with tiny, fragmented contigs would lead to a low N50 value. ({% cite Videvall201704 %})
-
-> The metric doesn't only rely on measuring the 50% mark. The general case is N(X) where X ranges from 0 - 100 mostly in ten steps. However the NX metric is not suitable for comparing different species with different genome lengths. NG50 or more general NG(X) is based on the same idea as N50. The difference is that in this case the whole genome size or estimated genome size is taken into account. This is why comparisons can be made over different assemblies and genome sizes.
-
+>
+> The metric doesn't only rely on measuring the 50% mark. The general case is N(X) where X ranges from 0 - 100 mostly in ten steps. However the NX metric is not suitable for comparing different species with different genome lengths.
 >
 >    > <details-title> GC-content </details-title>
 >    >
 >    > The GC-content or guanine-cytosine ratio tells one about the occurrence of guanine and cytosine in a genome. It is stated in percent. The two nucleobases are held together by three hydrogen bonds. A high GC-content makes DNA more stable than a low GC-content. Because the ratio of most species and organisms has been found out by now, it is also a good metric to gauge completeness.({% cite Wikipedia %})
-
 >    {: .details}
-
+>
 >    > <details-title> CC(contig/chromosome) ratio </details-title>
 >    >
 >    > Another good metric for gauging contiguity is the CC ratio. The value is calculated by dividing contig counts by the chromosome pair number. A perfect score would be 1. Therefore the lower the value the better the contiguity of the assembly.
-
 >    {: .details}
 {: .hands_on}
 
