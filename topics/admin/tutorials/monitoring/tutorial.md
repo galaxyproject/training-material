@@ -80,9 +80,9 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -30,3 +30,5 @@
->       version: 0.1.0
->     - src: galaxyproject.pulsar
->       version: 1.0.8
+>       version: 6.1.0
+>     - name: usegalaxy_eu.rabbitmqserver
+>       version: 1.4.1
 >    +- src: usegalaxy_eu.influxdb
 >    +  version: v6.0.7
 >    {% endraw %}
@@ -205,7 +205,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -32,3 +32,5 @@
->       version: 1.0.8
+>       version: 1.4.1
 >     - src: usegalaxy_eu.influxdb
 >       version: v6.0.7
 >    +- src: cloudalchemy.grafana
@@ -440,7 +440,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -40,6 +40,7 @@
+>    @@ -41,6 +41,7 @@
 >         - galaxyproject.gxadmin
 >         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
@@ -503,7 +503,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -219,6 +219,14 @@ rabbitmq_users:
+>    @@ -221,6 +221,14 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
 >     
@@ -795,7 +795,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -235,6 +235,13 @@ telegraf_plugins_extra:
+>    @@ -237,6 +237,13 @@ telegraf_plugins_extra:
 >           - service_address = ":8125"
 >           - metric_separator = "."
 >           - allowed_pending_messages = 10000

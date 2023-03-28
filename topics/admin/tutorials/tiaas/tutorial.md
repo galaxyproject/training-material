@@ -90,7 +90,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -243,6 +243,11 @@ telegraf_plugins_extra:
+>    @@ -245,6 +245,11 @@ telegraf_plugins_extra:
 >           - data_format = "influx"
 >           - interval = "15s"
 >     
@@ -171,7 +171,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -31,6 +31,7 @@
+>    @@ -37,6 +37,7 @@
 >           become_user: "{{ galaxy_user.name }}"
 >         - geerlingguy.docker
 >         - usegalaxy_eu.rabbitmqserver

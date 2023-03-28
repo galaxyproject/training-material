@@ -277,7 +277,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -180,6 +182,44 @@ slurm_config:
+>    @@ -182,6 +184,44 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >     
@@ -336,7 +336,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -29,6 +29,8 @@
+>    @@ -35,6 +35,8 @@
 >         - role: uchida.miniconda
 >           become: true
 >           become_user: "{{ galaxy_user.name }}"

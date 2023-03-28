@@ -156,7 +156,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -259,6 +259,27 @@ rabbitmq_users:
+>    @@ -260,6 +260,27 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
 >     
@@ -216,6 +216,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
+>    @@ -39,6 +39,7 @@
 >         - usegalaxy_eu.rabbitmqserver
 >         - galaxyproject.tiaas2
 >         - galaxyproject.nginx
