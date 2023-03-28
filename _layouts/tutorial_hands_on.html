@@ -344,7 +344,7 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
                     <ol>
                         <li id="citation-text">
                             {% assign c = page.contributions.authorship | default: page.contributors %}
-                            {%- include _includes/contributor-list.html contributors=c sep=", " -%}, {{ page.last_modified_at | date: "%Y" }} <b>{{ page.title }} (Galaxy Training Materials)</b>. <a href="{{ site.url }}{{ site.baseurl }}{{page.url}}">{{ site.url }}{{ site.baseurl }}{{page.url}}</a> Online; accessed TODAY
+                            {%- include _includes/contributor-list.html contributors=c sep=", " -%}, {{ page | last_modified_at | date: "%Y" }} <b>{{ page.title }} (Galaxy Training Materials)</b>. <a href="{{ site.url }}{{ site.baseurl }}{{page.url}}">{{ site.url }}{{ site.baseurl }}{{page.url}}</a> Online; accessed TODAY
                         </li>
                         <li>
                         Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -370,9 +370,9 @@ download.file("{{ site.url }}{{ site.baseurl }}/{{ page.path | replace: ".md", "
 {% assign authors = page.contributors | filter_authors:page.contributions -%}
 author = "{%- include _includes/contributor-list.html contributors=authors sep=" and " -%}",
 title = "{{ page.title }} (Galaxy Training Materials)",
-year = "{{ page.last_modified_at | date: "%Y"}}",
-month = "{{ page.last_modified_at | date: "%m"}}",
-day = "{{ page.last_modified_at | date: "%d" }}"
+year = "{{ page | last_modified_at | date: "%Y"}}",
+month = "{{ page | last_modified_at | date: "%m"}}",
+day = "{{ page | last_modified_at | date: "%d" }}"
 url = "{% raw %}\url{{% endraw %}{{ site.url }}{{ site.baseurl }}{{page.url}}{% raw %}}{% endraw %}",
 note = "[Online; accessed TODAY]"
 }

@@ -112,7 +112,7 @@ layout: base
             {% assign topic_id = tuto | get_topic %}
             {% assign topic = site.data[topic_id] %}
       <tr>
-        <td>{{ tuto.last_modified_at | date: "%b %-d, %Y"  }}</td>
+        <td>{{ tuto | last_modified_at | date: "%b %-d, %Y"  }}</td>
         <td style="text-align:right">
             <a href="{{ site.baseurl }}/topics/{{ topic_id }}">
                 {{ topic.title }}

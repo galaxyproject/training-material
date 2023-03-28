@@ -831,7 +831,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `miniconda_manage_dependencies` | `false`                                                          | Specify whether to install the miniconda installer dependencies.
 >
 >    > <tip-title>Different Galaxy Releases!</tip-title>
->    > In the time between this tutorial was last updated ({{ page.last_modified_at | date: "%Y-%m-%d" }}), and when you are now reading it, one or more new releases of Galaxy may have occured.
+>    > In the time between this tutorial was last updated ({{ page | last_modified_at | date: "%Y-%m-%d" }}), and when you are now reading it, one or more new releases of Galaxy may have occured.
 >    >
 >    > If you wish to use a different version of Galaxy than the one listed, you can do so, but there is no guarantee this tutorial will work without modifications.
 >    >
