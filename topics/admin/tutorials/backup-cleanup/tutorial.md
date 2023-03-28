@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Server Maintenance: Backups & Cleanup"
+title: "Server Maintenance: Cleanup, Backup, and Restoration"
 questions:
 - How can I back up my Galaxy?
 - What data should be included?
@@ -21,6 +21,7 @@ key_points:
 contributions:
   authorship:
   - hexylena
+  - lldelisle
   - natefoo
 tags:
   - ansible
@@ -279,3 +280,78 @@ post_tasks:
 >
 > Please consider communicating **very well** with your users what the data backup policy is.
 {: .tip}
+
+# Restoration
+
+Sometimes failures happen! We're sorry you have to read this section.
+
+## Restoring the Database
+
+This procedure is more complicated, you can [read about the restoration procedure](https://github.com/galaxyproject/ansible-postgresql/pull/30#issuecomment-963600656) in the associated PR.
+
+This step assumes you have pre-existing backups in place, you must check this first:
+
+```console
+ls /data/backups/
+```
+
+If you have backups, you're ready to restore:
+
+```console
+# Stop Galaxy, you do NOT want galaxy to connect mid-restoration in case it
+# tries to modify the database.
+sudo systemctl stop galaxy
+
+# Stop the database
+sudo systemctl stop postgresql
+# Ensure that it is stopped
+sudo systemctl status postgresql
+
+# Begin the backup procedure by becoming postgres:
+sudo su - postgres
+
+# Move the current, live database to a backup location just in case:
+mkdir /tmp/test/
+
+# ====
+# NOTE THAT THIS NUMBER MAY BE DIFFERENT FOR YOU!
+# You will need to change 12 to whatever version of postgres you're running
+# in every subsequent command
+# ====
+mv /var/lib/postgresql/12/main/* /tmp/test/
+
+# Add backup
+rsync -av /data/backups/YOUR_LATEST_BACKUP/ /var/lib/postgresql/12/main
+# Add the restore_command, to your backup file:
+# restore_command = 'cp "/tmp/backup/current/wal/%f" "%p"'
+$EDITOR ./12/main/postgresql.auto.conf
+
+# Touch a recovery file
+touch /var/lib/postgresql/12/main/recovery.signal
+
+# As $username (with sudo right)
+sudo systemctl restart postgresql
+sudo systemctl status postgresql
+# Restart Galaxy
+sudo systemctl start galaxy
+```
+
+If you encounter issues, we suggest reading [Lucille's log of her experiences restoring](https://github.com/lldelisle/galaxyduboule-infrastructure/blob/778e5b056f03970a1af5fc2f9dd133b4e4791cac/testUpgradeOnVM.sh#L53-L130) as you might encounter similar issues.
+
+## Restoring Galaxy
+
+Restore Galaxy is easy via Ansible (maybe ensuring users cannot login by disabling the routes in nginx)
+
+```console
+ansible-playbook galaxy.yml
+```
+
+And if you are following best practices, you probably have your tools stored in a YAML file to use with [Ephemeris]({% link topics/admin/tutorials/tool-management/tutorial.md %}):
+
+```console
+shed-tools install -g https://galaxy.example.org -a <api-key> -t our_tools.yml
+```
+
+## Restoring User Data
+
+This should simply be `rsync`ing your data from the backup location back into `/data/galaxy`.
