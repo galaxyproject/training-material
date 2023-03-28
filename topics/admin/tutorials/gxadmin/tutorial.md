@@ -51,9 +51,9 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -28,3 +28,5 @@
->       version: 0.1.0
->     - src: galaxyproject.pulsar
->       version: 1.0.8
+>       version: 6.1.0
+>     - name: usegalaxy_eu.rabbitmqserver
+>       version: 1.4.1
 >    +- src: galaxyproject.gxadmin
 >    +  version: 0.0.8
 >    {% endraw %}
@@ -76,7 +76,7 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -39,3 +39,4 @@
+>    @@ -34,3 +34,4 @@
 >         - galaxyproject.nginx
 >         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
