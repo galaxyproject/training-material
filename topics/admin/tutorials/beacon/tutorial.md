@@ -144,7 +144,7 @@ TODO: write some more things about beacon
 >    {: data-commit="Add relevant group variables"}
 >
 >    TODO: tip about 'groups' variable
-
+>
 > 3. Add the beacon-server playbook
 >
 >    {% raw %}
