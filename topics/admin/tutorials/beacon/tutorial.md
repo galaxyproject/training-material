@@ -15,7 +15,7 @@ contributions:
     authorship:
     - hexylena
     funding:
-    - cineca
+    - CINECA-Project
 subtopic: features
 requirements:
   - type: "internal"
@@ -26,7 +26,6 @@ requirements:
 draft: true
 tags:
   - ga4gh
-  - cineca
   - beacon
   - git-gat
 ---
