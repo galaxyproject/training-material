@@ -32,6 +32,12 @@ tags:
 ---
 
 This tutorial will guide you through setting up a Beacon!
+TODO: write some more things about beacon
+
+> <warning-title>Beacon v1</warning-title>
+> This deploys an older Beacon v1 which was a simpler system.
+> The Beacon v1 is more or less deprecated, with users being pushed to Beacon v2 which gives much richer answers, and offers better querying syntax.
+{: .warning}
 
 > <agenda-title></agenda-title>
 >
@@ -66,6 +72,8 @@ This tutorial will guide you through setting up a Beacon!
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add hosts"}
+>
+>    TODO: tip box about children. We get to learn ansible features!
 >
 > 1. Setup the requirements
 >
@@ -136,7 +144,8 @@ This tutorial will guide you through setting up a Beacon!
 >    ```
 >    {: data-commit="Add relevant group variables"}
 >
->
+>    TODO: tip about 'groups' variable
+
 > 3. Add the beacon-server playbook
 >
 >    {% raw %}
@@ -166,7 +175,17 @@ This tutorial will guide you through setting up a Beacon!
 >    > {: data-cmd="true"}
 >    {: .code-in }
 >
-> 3. Add the beacon-import playbook
+>    TODO: Check that it works
+>
+{: .hands_on}
+
+## Setting up the Importer
+
+Now that our beacon is running, we need to get data from Galaxy to the Beacon
+
+> <hands-on-title>Setting up the Beacon Importer</hands-on-title>
+>
+> 1. Add the beacon-import playbook
 >
 >    {% raw %}
 >    ```diff
@@ -241,7 +260,7 @@ This tutorial will guide you through setting up a Beacon!
 >
 >    -->
 >
-> 5. Run the playbook
+> 1. Run the playbook
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
@@ -250,7 +269,7 @@ This tutorial will guide you through setting up a Beacon!
 >    > {: data-cmd="true"}
 >    {: .code-in }
 >
-> 3. Add the nginx routes
+> 1. Add the nginx routes
 >
 >    {% raw %}
 >    ```diff
@@ -276,7 +295,7 @@ This tutorial will guide you through setting up a Beacon!
 >    ```
 >    {: data-commit="Add beacon routes to nginx"}
 >
-> 5. Run the playbook
+> 1. Run the playbook
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
@@ -290,3 +309,4 @@ Congratulations, you've set up a Beacon for Galaxy
 
 ## Check that it works
 
+????
