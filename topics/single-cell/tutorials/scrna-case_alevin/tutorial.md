@@ -100,10 +100,22 @@ We're going to use Alevin {% cite article-Alevin %} for demonstration purposes, 
 
 We've provided you with some example data to play with, a small subset of the reads in a mouse dataset of fetal growth restriction {% cite Bacon2018 %} (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the [project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). This is a study using the Drop-seq chemistry, however this tutorial is almost identical to a 10x chemistry. We will point out the one tool parameter change you will need to run 10x samples. This data is not carefully curated, standard tutorial data - it's real, it's messy, it desperately needs filtering, it has background RNA running around, and most of all it will give you a chance to practice your analysis as if this data were yours.
 
-Down-sampled reads and some associated annotation can be downloaded from Zenodo below, or you can import this [example input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1). How did I downsample these FASTQ files? Check out [this history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---how-to-downsample) to find out!
-Additionally, to map your reads, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. You can download these for your species of interest [from Ensembe](https://www.ensembl.org/info/data/ftp/index.html). Additionally, these files are available in the above history as well as the Zenodo links below. Keep in mind, these are big files, so they may take a bit to import!
+Down-sampled reads and some associated annotation can be imported below. How did I downsample these FASTQ files? Check out [this history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---how-to-downsample) to find out!
 
-> <hands-on-title>Data upload - Part 1</hands-on-title>
+Additionally, to map your reads, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. You can download these for your species of interest [from Ensembl](https://www.ensembl.org/info/data/ftp/index.html). These files are included in the data import step below. Keep in mind, these are big files, so the fastest way to get these into your Galaxy account is through importing them by history.
+
+> <hands-on-title>Option 1: Data upload - Import history</hands-on-title>
+>
+> 1. Import history from: [example input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/cs1pre-processing-with-alevin---input-1)
+>
+>
+>    {% snippet faqs/galaxy/histories_import.md %}
+>
+> 2. **Rename** {% icon galaxy-pencil %} the the history to your name of choice.
+>
+{: .hands_on}
+
+> <hands-on-title>Option 2: Data upload - Add to history</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the Experimental Design table, sequencing reads 1 & 2, the GTF and fasta files from [Zenodo]({{ page.zenodo_link }})
@@ -137,6 +149,14 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 > {: .solution}
 {: .question}
 
+# Important tips for easier analysis
+
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
+> <comment-title></comment-title>
+> - The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
+> - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [https://humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
+{: .comment}
 
 ## Generate a transcript to gene map
 
@@ -162,8 +182,6 @@ In your example data you will see the murine reference annotation as retrieved f
 {: .question}
 
 It's now time to parse the GTF file using the [rtracklayer](https://bioconductor.org/packages/release/bioc/html/rtracklayer.html) package in R. This parsing will give us a conversion table with a list of transcript identifiers and their corresponding gene identifiers for counting. Additionally, because we will be generating our own binary index (more later!), we also need to input our FASTA so that it can be filtered to only contain transcriptome information found in the GTF.
-
-{% snippet faqs/galaxy/tutorial_mode.md %}
 
 > <hands-on-title>Generate a filtered FASTA and transcript-gene map</hands-on-title>
 >

@@ -9,7 +9,7 @@ objectives:
 - Identify transmission clusters based on SNP distances
 - Study the emergence and spread of drug resistance based on transmission analysis.
 time_estimation: 2H
-enable: false
+draft: true
 level : Intermediate
 key_points:
 - Clustering is a useful tool to detect transmission links between patients and oubreak investigation.
@@ -112,15 +112,10 @@ into Galaxy:
 > 3. Finally  Create a **Dataset List (Collection)** for all the VCFs.
 >
 >    Use a meaningful name, for example **MTB VCFs**.
+>
+>    {% snippet faqs/galaxy/collections_build_list.md datasets_description="all 20 VCFs files that we just imported" n="20" %}
+>
 {: .hands_on}
-
-> <tip-title></tip-title>
-> To create a dataset collection:
-> - Click on the box under the history name (bottom right) that says "Operations on multiple datasets"
-> - Tick all 20 VCFs files that we just imported.
-> - In the "For all selected..." box, select "Build Dataset List"
-> - You can also [watch this one minute video](https://www.youtube.com/watch?v=F3qNs1_675g) about how to create collections
-{: .tip}
 
 
 # Generate a SNP alignment

@@ -32,7 +32,8 @@
         <meta property="og:site_name" content="Galaxy Training Network" />
         <meta property="og:title" content="Galaxy Training{% if og_title %}: {{ og_title | truncate: 60}}{% endif %}" />
         <meta property="og:description" content="{{ og_desc | strip_html | truncate: 60}}" />
-        <meta property="og:image" content="{{ "/assets/images/GTNLogo1000.png" | prepend: site.baseurl }}" />
+        {% assign og_image = page.og_image | default: topic.og_image | default: "/assets/images/GTNLogo1000.png" %}
+        <meta property="og:image" content="{{ og_image | prepend: site.baseurl }}" />
 
         {% if page.layout == "tutorial_hands_on" %}
         <script type="application/ld+json">
@@ -43,6 +44,11 @@
     <body data-spy="scroll" data-target="#toc">
         <script type="text/javascript" src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
         {% include _includes/default-header.html %}
+        {% if topic.custom_css %}
+        <style>
+        {{ topic.custom_css }}
+        </style>
+        {% endif %}
         <div class="container main-content" role="main">
         {{ content }}
         </div>

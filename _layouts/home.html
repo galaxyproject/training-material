@@ -21,16 +21,22 @@ layout: base
         Collection of tutorials developed and maintained by the worldwide Galaxy community
     </p>
 
-    <div role="alert" class="alert alert-success">
-        <h4 class="alert-heading">GTN Celebrates Black History Month</h4>
-        <p>
-                This month, February, is Black History Month in the US. The GTN is celebrating it by sharing the story of Henrietta Lacks.
-        </p>
-        <a class="btn btn-primary" href="{{ site.baseurl }}/news/2023/02/02/black-history-month.html">Henrietta Lacks and Her Contributions to Science</a>
-        <p>
-                As part of this, if you did not have a theme set, we are automatically changing your theme to a theme celebrating this event! If you want to change that at any point, you can do so from the "Extras" menu".
-        </p>
+    {% if site.banner_image %}
+        {% if site.banner_image.link %}
+        <a href="{{ site.banner_image.link }}">
+        {% endif %}
+        <img alt="{{ site.banner_image.alt }}" src="{{ site.banner_image.source }}" style="margin: 0 0 1em 0;width: 100%;max-width: 100%;">
+        {% if site.banner_image.link %}
+        </a>
+        {% endif %}
+    {% endif %}
+
+    {% if site.announcement %}
+    <div role="alert" class="alert alert-{{ site.announcement.class }}">
+        <h4 class="alert-heading">{{ site.announcement.title }}</h4>
+        {{ site.announcement.text | markdownify }}
     </div>
+    {% endif %}
 
     <div class="row">
         <div class="col-lg-7 col-md-7 col-sm-12">
@@ -45,10 +51,10 @@ layout: base
                 <tbody>
                 {% for topic in sorted_topics %}
                     {% if topic[1].type == "use" %}
-                    {% if topic[1].enable != false or jekyll.environment != "production" %}
+                    {% if topic[1].draft != true or jekyll.environment != "production" %}
                     <tr>
                         {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
                     {% endif %}
@@ -68,10 +74,10 @@ layout: base
                 <tbody>
                 {% for topic in sorted_topics %}
                     {% if topic[1].type == "basics" %}
-                    {% if topic[1].enable != false or jekyll.environment != "production" %}
+                    {% if topic[1].draft != true or jekyll.environment != "production" %}
                     <tr>
                         {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
                     {% endif %}
@@ -91,10 +97,10 @@ layout: base
                 <tbody>
                 {% for topic in sorted_topics %}
                     {% if topic[1].type == "data-science" %}
-                    {% if topic[1].enable != false or jekyll.environment != "production" %}
+                    {% if topic[1].draft != true or jekyll.environment != "production" %}
                     <tr>
                         {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
                     {% endif %}
@@ -114,10 +120,10 @@ layout: base
                 <tbody>
                 {% for topic in sorted_topics %}
                     {% if topic[1].type == "admin-dev" %}
-                    {% if topic[1].enable != false or jekyll.environment != "production" %}
+                    {% if topic[1].draft != true or jekyll.environment != "production" %}
                     <tr>
                         {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
                     {% endif %}
@@ -145,10 +151,10 @@ layout: base
                 <tbody>
                 {% for topic in sorted_topics %}
                     {% if topic[1].type == "instructors" %}
-                    {% if topic[1].enable != false or jekyll.environment != "production" %}
+                    {% if topic[1].draft != true or jekyll.environment != "production" %}
                     <tr>
                         {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
                     {% endif %}

@@ -5,6 +5,13 @@ require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'
 
 
+puts "[GTN] You are running #{RUBY_VERSION} released on #{RUBY_RELEASE_DATE} for #{RUBY_PLATFORM}"
+version_parts = RUBY_VERSION.split(".")
+if version_parts[0].to_i < 3
+  puts "[GTN] WARNING: This Ruby is pretty old, you might want to update."
+end
+
+
 def get_authors(material)
   if material.key?('contributors') then
     material['contributors']
@@ -120,6 +127,14 @@ module Jekyll
       end
     end
 
+    def fedi2link(fedi_address)
+      fedi_address.gsub(/^(?<user>.*)@(?<host>.*)$/){|m| "https://#{$~[:host]}/@#{$~[:user]}" }
+    end
+
+    def load_svg(url)
+      File.open(url).read.gsub(/\R+/, '')
+    end
+
     def regex_replace(str, regex_search, value_replace)
       regex = /#{regex_search}/m
       return str.gsub(regex, value_replace)
@@ -128,6 +143,21 @@ module Jekyll
     def regex_replace_once(str, regex_search, value_replace)
       regex = /#{regex_search}/m
       return str.sub(regex, value_replace)
+    end
+
+    def convert_workflow_path_to_trs(str)
+      # Input: topics/metagenomics/tutorials/mothur-miseq-sop-short/workflows/workflow1_quality_control.ga
+      # Output /api/ga4gh/trs/v2/tools/metagenomics-mothur-miseq-sop-short/versions/workflow1_quality_control
+      if str.nil?
+        return "GTN_TRS_ERROR_NIL"
+      end
+
+      m = str.match(/topics\/(?<topic>.*)\/tutorials\/(?<tutorial>.*)\/workflows\/(?<workflow>.*)\.ga/)
+      if m
+        puts "str=#{str} m=#{m} #{m[:topic]} #{m[:tutorial]} #{m[:workflow]}"
+        return "/api/ga4gh/trs/v2/tools/#{m[:topic]}-#{m[:tutorial]}/versions/#{m[:workflow]}"
+      end
+      return "GTN_TRS_ERROR"
     end
 
     def get_default_link(material)

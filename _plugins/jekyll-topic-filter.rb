@@ -108,6 +108,10 @@ module TopicFilter
       out.delete("__OTHER__")
     end
 
+    out.each{|k, v|
+      v['materials'].sort_by!{|m| [m.fetch('priority', 1), m['title']] }
+    }
+
     out
   end
 
@@ -303,16 +307,37 @@ module TopicFilter
       }
     end
 
+    # In dev configuration, this breaks for me. Not sure why config isn't available.
+    if not site.config.nil? and site.config.has_key? "url"
+      domain = "#{site.config['url']}#{site.config['baseurl']}"
+    else
+      domain = "/training-material/"
+    end
+
     # Similar as above.
     workflows = Dir.glob("#{folder}/workflows/*.ga") # TODO: support gxformat2
     if workflows.length > 0
       workflow_names = workflows.map{ |a| a.split('/')[-1] }
       page_obj['workflows'] = workflow_names.map{|wf|
-        x = {
+        wfid = "#{page['topic_name']}-#{page['tutorial_name']}"
+        wfname = wf.gsub(/.ga/, '').downcase
+        trs = "api/ga4gh/trs/v2/tools/#{wfid}/versions/#{wfname}"
+        wf_path = "#{folder}/workflows/#{wf}"
+        wf_json = JSON.parse(File.open(wf_path).read)
+        license = wf_json['license']
+        creators = wf_json['creator'] || []
+
+        {
           "workflow" => wf,
           "tests" => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length > 0,
+          "url" => "#{domain}/#{folder}/workflows/#{wf}",
+          "path" => wf_path,
+          "wfid" => wfid,
+          "wfname" => wfname,
+          "trs_endpoint" => "#{domain}/#{trs}",
+          "license" => license,
+          "creators" => creators,
         }
-        x
       }
     end
 
@@ -347,7 +372,7 @@ module TopicFilter
     # make it future proof.
     page_obj['type'] = 'tutorial'
 
-    if page_obj.has_key?("enable") and !page_obj['enable'] then
+    if page_obj.has_key?("draft") and page_obj['draft'] then
       if ! page_obj.has_key? 'tags'
         page_obj['tags'] = Array.new
       end
