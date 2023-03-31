@@ -2328,7 +2328,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    > - `enable_quotas`: You definitely want to set a default quota for your users!
 >    > - `expose_user_name`: This exposes usernames in the history and dataset sharing forms which makes life easier for your users.
 >    > - `expose_dataset_path`: This shares the entire dataset path and enable the user to have access to the command line that the wrapper launched.
->    > - `cleanup_job`: This prevents a job from being cleaned up if it failed, allowing you to debug and see what went wrong.
+>    > - `cleanup_job`: This prevents a job's files from being cleaned up from disk if it failed, allowing you to debug and see what went wrong.
 >    > - `allow_user_impersonation`: Users submit horrible bug reports (often screenshots of unrelated things), impersonation means you can just see their history and look at what went wrong.
 >    {: .tip}
 >
@@ -2442,7 +2442,7 @@ The time required to maintain a production Galaxy instance depends on the number
 
 ## Keeping Galaxy Updated
 
-If you have set your `galaxy_commit_id` group variable to a branch name like `release_22.05`, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The `git` module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
+If you have set your `galaxy_commit_id` group variable to a branch name like `release_23.0`, then all you need to do to keep Galaxy up to date (e.g. for security and bug fixes) is to run the playbook regularly. The `git` module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.
 
 ## Upgrading Galaxy (Optional)
 
