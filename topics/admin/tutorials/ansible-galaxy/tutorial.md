@@ -1072,7 +1072,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >     # Use the stdout_callback when running ad-hoc commands.
 >     bin_ansible_callbacks = True
 >    +vault_password_file = .vault-password.txt
->
+>     
 >     # Show diffs of changes
 >     [diff]
 >    {% endraw %}
@@ -1818,7 +1818,7 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -18,3 +18,4 @@
+>    @@ -26,3 +26,4 @@
 >         - role: galaxyproject.miniconda
 >           become: true
 >           become_user: "{{ galaxy_user_name }}"
@@ -1834,7 +1834,7 @@ For this, we will use NGINX (pronounced "engine X" /ˌɛndʒɪnˈɛks/ EN-jin-EK
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -57,3 +57,55 @@ galaxy_config:
+>    @@ -42,3 +42,55 @@ galaxy_config:
 >             pools:
 >               - job-handlers
 >               - workflow-schedulers
@@ -2220,7 +2220,7 @@ Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` envi
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -37,6 +37,16 @@ galaxy_config:
+>    @@ -20,6 +20,22 @@ galaxy_config:
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
@@ -2241,8 +2241,8 @@ Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` envi
 >    +        - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >    +          environment: local_env
 >       gravity:
+>         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->         app_server: gunicorn
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add job conf"}
@@ -2290,10 +2290,10 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -38,6 +38,27 @@ galaxy_config:
->                 runner: local
->           handling:
->             assign: ['db-skip-locked']
+>    @@ -36,6 +36,27 @@ galaxy_config:
+>           tools:
+>             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>               environment: local_env
 >    +    # SQL Performance
 >    +    slow_query_log_threshold: 5
 >    +    enable_per_request_sql_debugging: true
