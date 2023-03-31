@@ -21,10 +21,13 @@ requirements :
     topic_name: metabolomics
     tutorials: 
       - lcms-preprocessing
-contributors:
-- xtrojak
-- hechth
-- maximskorik
+contributions:
+  authorship:
+    - xtrojak
+    - hechth
+    - maximskorik
+  editing:
+    - hexylena
 
 ---
 
