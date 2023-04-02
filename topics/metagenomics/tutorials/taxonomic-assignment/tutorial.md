@@ -604,39 +604,78 @@ When generating a metadata file for your own data, you can take this as an examp
 > >    - *"Input"*: `Kraken-biom output file`
 > {: .hands_on}
 >
-> Important note: don't wait for Galaxy to finish the job! Your results are available directly, as Phinch is an interactive tool. To see them, click on User in the blue part right at the top of the Galaxy page, there you can find "Active interactive tools". When you go there, you will find Phinch running and can visit the website with your results by following the link "Phinch Visualisation of Kraken-biom output file" which is provided as the name of the job.
+**Phinch** runs a Galaxy Interactive tool. You can access it when it become orange.
+
+> <hands-on-title>Interact with Pavian</hands-on-title>
 >
-> When you follow the link to the Phinch webpage, you first see an overview of your samples. Here, you have the possibility to further filter your data, for example by date or location, depending on which information you provided in your metadata file.
+> 1. Open **Phinch**
+>
+>    {% snippet faqs/galaxy/interactive_tools_open.md %}
+
+{: .hands_on}
+
+> The first pages shows an overview of your samples. Here, you have the possibility to further filter your data, for example by date or location, depending on which information you provided in your metadata file.
+
+> <question-title></question-title>
+>
+> 1. How many sequence reads do the samples contain?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. JC1A (Phinch name: 0) contains 56008 reads, while JP4D (Phinch name: 1) contains 242438 reads
+> 
+>
+> {: .solution}
+>
+{: .question}
+
+
 Next, you click on ‘proceed to gallery’ to see an overview of all visualization options.
 >
-> Let’s have a look at the **taxonomy bar chart**. Here, you can see the abundance of different taxa depicted in different colors in your samples. On top of the chart you can select which rank is supposed to be shown in the chart. You can also change the display options to for example switch between value und percentage. If you hover over a specific taxon, you get exact information of the taxon’s name and the taxonomy occurrence in the sample. Furthermore, there is a search bar that allows you to search for specific taxa (within the rank that you chose to depict) and gives you the option to hide specific taxons.
+> Let’s have a look at the **taxonomy bar chart**. Here, you can see the abundance of different taxa depicted in different colors in your samples. On top of the chart you can select which rank is supposed to be shown in the chart. You can also change the display options to for example switch between value und percentage. 
+> 
+> > <question-title></question-title>
 >
-> Next, lets go back to the gallery and choose the **bubble chart**. Here, you can find the distribution of taxa across the whole dataset at the rank that you can choose above the chart. When hovering over the bubbles, you get additional information concerning the taxon. Clicking on one bubble gives you the direct comparison of the distribution of this taxon in the different samples.  To oder the bubbles according to their size you can choose the ‘list’ option shown right next to the taxonomy level.
+> 1. What information can you get from hovering over a sample?
+> 2. How many percent of the sample reads are bacteria and how many are eukaryota?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. the taxon’s name and the taxonomy occurrence in the sample
+> > 2. choose kingdom and hover over the bars to find "taxonomy occurence in this sample":
+> > >    - Sample 0: 75,65 % bacteria; 24,51 % eukaryota
+> > >    - Sample 1: 92,70 % bacteria; 6,87 % eukaryota
+> 
+>
+> {: .solution}
+>
+{: .question}
+>
+Lets go back to the gallery and choose the **bubble chart**. Here, you can find the distribution of taxa across the whole dataset at the rank that you can choose above the chart. When hovering over the bubbles, you get additional information concerning the taxon. 
+
+> > <question-title></question-title>
+>
+> 1. Which is the most abundant Class and how many reads are found in both samples?
+>
+> > <solution-title></solution-title>
+> >
+> > 1. To oder the bubbles according to their size you can choose the ‘list’ option shown right next to the taxonomy level. Clicking on one bubble gives you the direct comparison of the distribution of this taxon in the different samples. The most abundant Class is Alphaproteobacteria with 18.114 reads in Sample 0 and 153.230 reads in sample 1
+> 
+>
+> {: .solution}
+>
+{: .question}
+
+
 >
 > Another displaying option is the **Sankey diagram**, that is depicting the abundance of taxonomies as a flow chart. Again, you can choose the taxonomy level that you want to show in your diagram. When clicking on one bar of the diagram, this part is enlarged for better view.
->
+
+
 > The **donut partition** summarizes the microbial community according to non-numerical attributes. In the drop-down menu at the top right corner, you can switch between the different attributes provided in the metadata file. In our case, you can for example choose the ‘environmental medium’ to see the difference between sediment and water (It doesn’t really make a lot of sense in our very simple dataset, as this will show the same result as sorting them by sample 0 and 1, but if attributes change across different samples this might be an interesting visualization option). When clicking on one part of the donut you will also find the distribution of the taxon across the samples. On the right hand side you can additionally choose if you’d like to have dynamic y axis or prefer standard y axis to compare different donuts with each other.
 >
 > The **attributes column chart** summarizes the microbial community according to numerical attributes. In the drop-down menu at the top right corner, you can switch between the different attributes provided in the metadata file. In our case, you can for example choose the ‘geographic location’ to (again, it doesn’t really make a lot of sense in our very simple dataset, as this will show the same result as sorting them by sample 0 and 1, but if attributes change across different samples this might be an interesting visualization option).
->
-> > <question-title></question-title>
-> >
-> > 1. How many percent of the sample reads are bacteria and how many are eukaryota?
-> > 2. How do you filter the data from eukaryotic reads?
-> >
-> > > <solution-title></solution-title>
-> > > 1. go to taxonomy bar chart, choose kingdom and hover over the bars to find "taxonomy occurence in this sample":
-> > >    - Sample 0: 75,65 % bacteria; 24,51 % eukaryota
-> > >    - Sample 1: 92,70 % bacteria; 6,87 % eukaryota
-> > >
-> > > 2. xxx Search function of phinch shows confusing results when clicking on “hide”
-> > >
-> > >    xxx phnich states invalid date format but when I change the date format in the metadata file from 20120706 to > 2012-07-06, kraken-biom doesnt work any more
-> > >
-> > {: .solution}
-> >
-> {: .question}
-{: .details}
+
+Once you are done with Phinch, you should delete it in your history so the corresponding job is killed.
 
 
 # Choosing the right tool
