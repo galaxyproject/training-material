@@ -737,4 +737,4 @@ Kraken | 2.0.8 beta (GSA,Sr) | Yes | Great on marine datase; fastest; most memor
 
 # Conclusion
 
-<!-- To add --->
+In this tutorial, we apply Kraken2 software to assign taxonomic labels to two microbiome sample datasets. We then visualize the results using Krona, Pavian and Phinch to analyze and compare the datasets. Finally, we discuss important facts when it comes to choosing the right tool for taxonomic assignment. Additionally, we use MetaPhlAn on the same datsets and compare the results to Kraken2.
