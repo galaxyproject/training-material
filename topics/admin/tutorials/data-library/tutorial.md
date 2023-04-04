@@ -282,6 +282,8 @@ That's it! You should be able to see your newly created data library in your Gal
 > {: data-test="true"}
 {: .hidden}
 
+{% snippet topics/admin/faqs/library-permissions.md %}
+
 {% snippet topics/admin/faqs/missed-something.md step=6 %}
 
 Note that we've used some special flags here, `--training` and `--legacy`. Training sets some defaults that make sense for the GTN (mostly around library descriptions / etc.)
