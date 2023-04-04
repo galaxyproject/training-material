@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Binning of metagenomic sequencing data"
-# zenodo_link: "https://zenodo.org/record/6958893"
+# zenodo_link: "https://zenodo.org/record/7468921"
 level: Introductory
 # questions:
 #   - "Why metagenomic data should be assembled?"
@@ -81,7 +81,7 @@ Some of the most widely used tools for metagenomics binning include:
 - **MetaWRAP**: A comprehensive metagenomic analysis pipeline that includes various modules for quality control, assembly, binning, and annotation.
 - **Anvi'o**: A platform for visualizing and analyzing metagenomic data, including features for binning, annotation, and comparative genomics.
 
-In this tutorial, we will learn how to run metagenomic binning tools and evaluate the quality of the generated results. To do that, we will use data from the study: [Temporal shotgun metagenomic dissection of the coffee fermentation ecosystem](https://www.ebi.ac.uk/metagenomics/studies/MGYS00005630#overview). For an in-depth analysis of the structure and functions of the coffee microbiome, a temporal shotgun metagenomic study (six time points) was performed. The six samples have been sequenced with Illumina MiSeq utilizing whole genome sequencing.
+In this tutorial, we will learn how to run metagenomic binning tools and evaluate the quality of the results. To do that, we will use data from the study: [Temporal shotgun metagenomic dissection of the coffee fermentation ecosystem](https://www.ebi.ac.uk/metagenomics/studies/MGYS00005630#overview). For an in-depth analysis of the structure and functions of the coffee microbiome, a temporal shotgun metagenomic study (six time points) was performed. The six samples have been sequenced with Illumina MiSeq utilizing whole genome sequencing.
 
 Based on the 6 original dataset of the coffee fermentation system, we generated mock datasets for this tutorial.
 
@@ -116,21 +116,15 @@ In case of a not very large dataset it's more convenient to upload data directly
 
 > <hands-on-title>Upload data into Galaxy</hands-on-title>
 >
-> 2. Import the sequence read raw data (\*.fastqsanger.gz) from [Zenodo]({{ page.zenodo_link }}) or a data library:
+> 2. Import the sequence read data (\*.fasta) from [Zenodo]({{ page.zenodo_link }}) or a data library:
 >
 >    ```text
->    {{ page.zenodo_link }}/files/ERR2231567_Read_1.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231567_Read_2.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231568_Read_1.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231568_Read_2.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231569_Read_1.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231569_Read_2.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231570_Read_1.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231570_Read_2.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231571_Read_1.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231571_Read_2.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231572_Read_1.fastqsanger.gz
->    {{ page.zenodo_link }}/files/ERR2231572_Read_2.fastqsanger.gz
+>    {{ page.zenodo_link }}/files/Assembly_with_MEGAHIT_on_ERR2231567.fasta
+>    {{ page.zenodo_link }}/files/Assembly_with_MEGAHIT_on_ERR2231568.fasta
+>    {{ page.zenodo_link }}/files/Assembly_with_MEGAHIT_on_ERR2231569.fasta
+>    {{ page.zenodo_link }}/files/Assembly_with_MEGAHIT_on_ERR2231570.fasta
+>    {{ page.zenodo_link }}/files/Assembly_with_MEGAHIT_on_ERR2231571.fasta
+>    {{ page.zenodo_link }}/files/Assembly_with_MEGAHIT_on_ERR2231572.fasta
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -158,11 +152,9 @@ As explained before, there are many challenges to metagenomics binning. The most
 - Chimeric sequences.
 - Strain variation.
 
-To reduce the differences in coverage between samples, we can use a **co-assembly** approach, where reads from all samples are aligned together.:
+![Image show the binning process where sequences are grouped together based on genome signatures like the kmer profiles of each contig, contig coverage, or GC content](./images/binning.png "Binning"){:width="60%"}
 
-![Image show one pile of sample1 reads and another pile of sample2 reads, then, green arrow leads to assembled reads from both piles](./images/co-assembly.png "Co-assembly"){:width="60%"}
-
-Pros of co-assembly | Cons of co-assembly
+<!-- Pros of co-assembly | Cons of co-assembly
 --- | ---
 More data | Higher computational overhead
 Better/longer assemblies | Risk of shattering your assembly
@@ -188,45 +180,48 @@ Co-assembly is more commonly used than individual assembly and then de-replicati
 
 > <comment-title></comment-title>
 > Sometimes it is important to run assembly tools both on individual samples and on all pooled samples, and use both outputs to get the better outputs for the certain dataset.
-{: .comment}
+{: .comment} -->
 
-As mentioned in the introduction, several tools are available for metagenomic binning. here we focus on **CONCOCT** and **MetaBAT2**:
-
-- **CONCOCT**: Cut up contigs tool from the CONCOCT suite
-
-  *CONCOCT (Clustering cONtigs with COverage and ComposiTion) does unsupervised binning of metagenomic contigs by using nucleotide composition - kmer frequencies - and coverage data for multiple samples. CONCOCT can accurately (up to species level) bin metagenomic contigs.*
+As mentioned in the introduction, several tools are available for metagenomic binning. In this tutorial we will focus on **MetaBAT2**:
 
 - **MetaBAT2**: Metagenome Binning based on Abundance and Tetranucleotide frequency
 
   *Grouping large fragments assembled from shotgun metagenomic sequences to deconvolute complex microbial communities, or metagenome binning, enables the study of individual organisms and their interactions. Here we developed automated metagenome binning software, called MetaBAT, which integrates empirical probabilistic distances of genome abundance and tetranucleotide frequency. On synthetic datasets MetaBAT on average achieves 98percent precision and 90% recall at the strain level with 281 near complete unique genomes. Applying MetaBAT to a human gut microbiome data set we recovered 176 genome bins with 92% precision and 80% recall. Further analyses suggest MetaBAT is able to recover genome fragments missed in reference genomes up to 19%, while 53 genome bins are novel. In summary, we believe MetaBAT is a powerful tool to facilitate comprehensive understanding of complex microbial communities.*
 
-Both tools are available in Galaxy.
-
 > <hands-on-title>Individual assembly of short-reads with MEGAHIT</hands-on-title>
-> 1.  {% tool [MEGAHIT](toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0) %} with parameters:
->     - *"Select your input option"*: `Paired-end collection`
->       - *"Run in batch mode?"*: `Run individually`
->
->          > <comment-title></comment-title>
->          > To run as co-assembly, select `Merge all fastq pair-end`, instead of `Run individually`
->          {: .comment}
->
->       - {% icon param-collection %} *"Select a paired collection"*: `Raw reads`
->     - In *Basic assembly options*
->       - *"K-mer specification method"*: `Specify min, max, and step values`
->         - *"Minimum kmer size"*: 21
->         - *"Maximum kmer size"*: 91
->         - *"Increment of kmer size of each iteration"*: 12
+> 1.  {% tool [ MetaBAT2](toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0) %} with parameters:
+>     - *"Fasta file containing contigs"*: `assembly fasta file`
+>     - In *Advanced options*
+>       - *"Percentage of good contigs considered for binning decided by connection among contigs"*: `default 95`
+>       - *"Minimum score of an edge for binning"*: `default 60`
+>       - *"Maximum number of edges per node"*: `default 200`
+>       - *"TNF probability cutoff for building TNF graph"*: `default 0`
+>       - *"Turn off additional binning for lost or small contigs?"*: `default "No"`
+>       - *"Minimum mean coverage of a contig in each library for binning"*: `default 1`
+>       - *"Minimum total effective mean coverage of a contig for binning "*: `default 1`
+>       - *"For exact reproducibility"*: `default 0`
+>     - In *Output options*
+>       - *"Minimum size of a bin as the output"*: `default 200000`
+>       - *"Output only sequence labels as a list in a column without sequences?"*: `default "No"`
+>       - *"Save cluster memberships as a matrix format?"*: `"Yes"`
 >
 {: .hands_on}
 
-**MEGAHIT** produced a collection of output assemblies - one per sample - that can be proceeded further in binning step and then de-replication. The output contains **contigs**, contiguous lengths of genomic sequences in which bases are known to a high degree of certainty.
+The output files generated by MetaBAT2 include:
 
-Contrary to **MetaSPAdes**, **MEGAHIT** does not output **scaffolds**, i.e. segments of genome sequence reconstructed fron contigs and gaps. The gaps occur when reads from the two sequenced ends of at least one fragment overlap with other reads from two different contigs (as long as the arrangement is otherwise consistent with the contigs being adjacent). It is possible to estimate the number of bases between contigs based on fragment lengths.
+1. The final set of genome bins in FASTA format (.fa)
+2. A summary file with information on each genome bin, including its length, completeness, contamination, and taxonomy classification (.txt)
+3. A file with the mapping results showing how each contig was assigned to a genome bin (.bam)
+4. A file containing the abundance estimation of each genome bin (.txt)
+5. A file with the coverage profile of each genome bin (.txt)
+6. A file containing the nucleotide composition of each genome bin (.txt)
+7. A file with the predicted gene sequences of each genome bin (.faa)
 
-> <comment-title></comment-title>
+These output files can be further analyzed and used for downstream applications such as functional annotation, comparative genomics, and phylogenetic analysis.
+
+<!-- > <comment-title></comment-title>
 >
-> Since the assembly process would take ~1h we are just going to import the results of the assembly previously run.
+> Since the binning process would take some we are just going to import the results of the binning previously run.
 >
 > > <hands-on-title>Import generated assembly files</hands-on-title>
 > >
@@ -245,25 +240,23 @@ Contrary to **MetaSPAdes**, **MEGAHIT** does not output **scaffolds**, i.e. segm
 > > 2. Create a collection named `MEGAHIT Contig`, rename your pairs with the sample name
 > >
 > {: .hands_on}
-{: .comment}
+{: .comment} -->
 
 > <question-title></question-title>
 >
-> 1. How many contigs has been for ERR2231568 sample?
-> 2. And for ERR2231572?
-> 3. What is the minimum length of the contigs?
+> 1. How many bins has been for ERR2231567 sample?
+> 2. How many sequences are contained in the second bin?
 >
 > > <solution-title></solution-title>
 > >
-> > 1. There are 228,719 sequences in the file so 228,719 contigs
-> > 2. 122,526 contigs
-> > 3. Sequences seems bigger than 200 bp (`len` attribute of the sequence information in Fasta files). It is the default value set up in MEGAHIT.
+> > 1. There are 6 bins identified
+> > 2. 167 sequences are classified into bin.
 > >
 > {: .solution}
 >
 {: .question}
 
-> <details-title>Co-assembly with MetaSPAdes</details-title>
+<!-- > <details-title>Co-assembly with MetaSPAdes</details-title>
 >
 > > <hands-on-title>Assembly with MetaSPAdes</hands-on-title>
 > >
@@ -273,33 +266,42 @@ Contrary to **MetaSPAdes**, **MEGAHIT** does not output **scaffolds**, i.e. segm
 > >     - *"Select k-mer detection option"*: `User specific`
 > >        - *"K-mer size values"*: `21,33,55,77`
 > {: .hands_on}
-{: .details}
+{: .details} -->
 
 # Checking the quality of the bins
 
 Once binning is done, it is important to check its quality.
 
-Assemblies can be evaluated with **metaQUAST** ({%cite mikheenko2016%}), the metagenomics mode of **QUAST** ({%cite gurevich2013%}).
+Binning results can be evaluated with **CheckM** ({%cite mikheenko2016%}). CheckM is a software tool used in metagenomics binning to assess the completeness and contamination of genome bins. Metagenomics binning is the process of separating DNA fragments from a mixed community of microorganisms into individual bins, each representing a distinct genome.
+
+CheckM compares the genome bins to a set of universal single-copy marker genes that are present in nearly all bacterial and archaeal genomes. By identifying the presence or absence of these marker genes in the bins, CheckM can estimate the completeness of each genome bin (i.e., the percentage of the total set of universal single-copy marker genes that are present in the bin) and the degree of contamination (i.e., the percentage of marker genes that are found in more than one bin).
+
+This information can be used to evaluate the quality of genome bins and to select high-quality bins for further analysis, such as genome annotation and comparative genomics. CheckM is widely used in metagenomics research and has been shown to be an effective tool for assessing the quality of genome bins. Some of the key functionalities of CheckM are:
+
+- *Estimation of genome completeness*: CheckM uses a set of universal single-copy marker genes to estimate the completeness of genome bins. The completeness score indicates the proportion of these marker genes that are present in the bin, providing an estimate of how much of the genome has been recovered.
+
+- *Estimation of genome contamination*: CheckM uses the same set of marker genes to estimate the degree of contamination in genome bins. The contamination score indicates the proportion of marker genes that are present in multiple bins, suggesting that the genome bin may contain DNA from more than one organism.
+
+- *Identification of potential misassemblies*: CheckM can identify potential misassemblies in genome bins based on the distribution of marker genes across the genome.
+
+- *Visualization of results*: CheckM can generate various plots and tables to visualize the completeness, contamination, and other quality metrics for genome bins, making it easier to interpret the results.
+
+- *Taxonomic classification*: CheckM can also be used to classify genome bins taxonomically based on the presence of specific marker genes associated with different taxonomic groups.
+
+Based on the previous analysis we will use **CheckM lineage_wf**: *Assessing the completeness and contamination of genome bins using lineage-specific marker sets*
+
+CheckM lineage_wf is a specific workflow within the CheckM software tool that is used for taxonomic classification of genome bins based on their marker gene content. This workflow uses a reference database of marker genes and taxonomic information to classify the genome bins at different taxonomic levels, from domain to species.
 
 > <hands-on-title>Evaluation assembly quality with metaQUAST</hands-on-title>
 >
 > 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.2.0+galaxy0) %} with parameters:
->    - *"Use customized names for the input files?"*: `No, use dataset names`
->      - {% icon param-collection %} *"Contigs/scaffolds file"*: output **MEGAHIT**
->    - *"Reads options"*: `Illumina paired-end reads in paired collection`
+>    - *"Data structure for bins"*: `In collection`
+>    - *"Bins "*: `Bins produced by MetaBAT2`
 >
->        > <comment-title></comment-title>
->        > To make the job quicker, you can select `Disabled` here. The raw reads will then not been mapped to the assembly to compute metrics, like the coverage.
->        {: .comment}
->
->      - {% icon param-collection %} *"FASTQ/FASTA files"*: `Raw reads`
->    - *"Type of assembly"*: `Metagenome`
->    - *"Output files"*: `HTML report`, `PDF report`, `Tabular reports`, `Log file`, `Key metric summary (metagenome mode)`, `Krona charts (metagenome mode without reference genomes)`
->
-> 2. Inspect the HTML reports
+> 2. Inspect produced table
 {: .hands_on}
 
-> <comment-title></comment-title>
+<!-- > <comment-title></comment-title>
 >
 > Since the Quast process would take times we are just going to import the results:
 >
@@ -317,277 +319,19 @@ Assemblies can be evaluated with **metaQUAST** ({%cite mikheenko2016%}), the met
 > >    ```
 > >
 > {: .hands_on}
-{: .comment}
+{: .comment} -->
 
-Quast main output is the HTML report which aggregate different metrics.
+The output of "CheckM lineage_wf" includes several files and tables that provide information about the taxonomic classification and quality assessment of genome bins. Here are some of the key outputs:
 
-On the top of the report is a table with in rows statistics for contigs larger than 500 bp for the different sample assemblies (columns). Let's now look at the table and go from top to bottom:
+- "checkm_taxonomy.tsv" - This is a tab-separated file that lists the taxonomic assignments for each genome bin. The file includes columns for the bin ID, the domain, phylum, class, order, family, genus, and species (if available) of the closest reference genome(s) to the bin.
 
-1. **Genome statistics**
+- "checkm_taxonomy.log" - This file provides detailed information about the taxonomic classification process, including the marker genes used, the reference database, and the classification algorithm.
 
-    - **Genome fraction (%)**: percentage of aligned bases in the reference genome
+- "checkm_ms.txt" - This file contains a summary of the completeness and contamination scores for each genome bin, along with other quality metrics.
 
-      A base in the reference genome is counted as aligned if at least one contig has at least one alignment to this base.
+- "checkm_qa.tsv" - This file provides more detailed information about the completeness and contamination scores, including the number of marker genes used, the number of genome fragments included in the bin, and the size of the bin.
 
-      We did not provide any reference there, but metaQuast try to identify genome content of the metagenome by aligning contigs to [SILVA](https://www.arb-silva.de/) 16S rRNA database. For each assembly, 50 reference genomes with top scores are chosen. The full reference genomes of the identified organisms are afterwards downloaded from NCBI to map the assemblies on them and compute the genome fractions.
-
-      For each identified genomes, the genome fraction is given when clicking on **Genome fraction (%)**
-
-      > <question-title></question-title>
-      >
-      > 1. What is the genome fraction for ERR2231568? And for ERR2231572?
-      > 2. Which reference genome has the highest genome fraction for ERR2231568? And for ERR2231572?
-      >
-      > > <solution-title></solution-title>
-      > >
-      > > 1. The genome fraction is 20.8% for ERR2231568 (column ERR2231568 in ERR2231568 report) and 24.8% for ERR2231572 (column ERR2231572 in ERR2231572 report)
-      > > 2. The highest genome fraction was found for *Leuconostoc pseudomesenteroides* for ERR2231568 (83.4%) and for *Lactobacillus* for ERR2231572 (91%). The genomes of *Leuconostoc pseudomesenteroides* and *Lactobacillus* could be then almost completely recovered from the assemblies of ERR2231568 and ERR2231572 respectively.
-      > >
-      > {: .solution}
-      >
-      {: .question}
-
-    - **Duplication ratio**: total number of aligned bases / genome fraction * reference length
-
-      If an assembly contains many contigs that cover the same regions of the reference, the duplication ratio may be much larger than 1.
-
-      > <question-title></question-title>
-      >
-      > 1. What is the duplication ratio for ERR2231568? And for ERR2231572?
-      > 2. Which reference genome has the highest duplication ratio for ERR2231568? And for ERR2231572?
-      >
-      > > <solution-title></solution-title>
-      > >
-      > > 1. The duplication ratio is 1.061% for ERR2231568 and 1.1% for ERR2231572 (column ERR2231572 in ERR2231572 report)
-      > > 2. The highest duplication ratio was found for *Gluconobacter kondonii* for ERR2231568 (1.163%) and for *Lactobacillus brevis* for ERR2231572 (1.122%).
-      > >
-      > {: .solution}
-      >
-      {: .question}
-
-2. **Read mapping**: results of the mapping of the raw reads on the different assemblies (only if the *"Reads options"* is not disabled)
-
-    Here the reads for the selected sample are mapped to all assemblies
-
-    > <question-title></question-title>
-    >
-    > 1. By opening the report for ERR2231568, to which raw reads are the different sample assemblies compared to to extract information like percentage of mapped reads?
-    > 2. To get good information for each sample, which report and information should we look at?
-    > 3. What is the % of read mapped for ERR2231568 assembly to ERR2231568 raw reads? And for ERR2231572 assembly to ERR2231572 raw reads?
-    > 4. What is the percentage of reads used to build the assemblies for ERR2231568? and ERR2231572?
-    >
-    > > <solution-title></solution-title>
-    > >
-    > > 1. To ERR2231568. That is a bug in the Galaxy tool. We are working on fix it so each sample assembly is compared to its corresponding raw reads.
-    > > 2. To get the good information for ERR2231568, we should open the ERR2231568  and look only at column ERR2231568.
-    > > 3. ...% of ERR2231568 raw reads were mapped to ERR2231568 assembly (column ERR2231568 in ERR2231568 report) and 86.97% of ERR2231572 raw reads to ERR2231572 assembly (column ERR2231572 in ERR2231572 report).
-    > > 4. ...% of reads were used to the assemblies for ERR2231568 and  86.97% for ERR2231572.
-    > {: .solution}
-    >
-    {: .question}
-
-    > <details-title>Alternative ways to compute coverage</details-title>
-    >
-    > 2 alternative ways to compute coverage are to
-    > 1. Use [CoverM](https://github.com/wwood/CoverM), which is available in Galaxy
-    >
-    >    > <hands-on-title>Calculate coverage using CoverM</hands-on-title>
-    >    >
-    >    > 1. {% tool [CoverM-CONTIG](toolshed.g2.bx.psu.edu/repos/iuc/coverm_contig/coverm_contig/0.2.1) %} with parameters:
-    >    >    - *"Read type"*: `Paired collection`
-    >    >      - {% icon param-collection %} *"One or more pairs of forward and reverse possibly gzipped FASTA/Q files for mapping in order"*: `Raw reads`
-    >    >    - {% icon param-collection %}  *"FASTA file(s) of contigs"*: output of MEGAGIT
-    >    >
-    >    > 2. Inspect the HTML report for ERR2231568
-    >    {: .hands_on}
-    >
-    > 2. Map the original reads onto contigs and extract the percentage of mapped reads:
-    >
-    >    > <hands-on-title>Computation of the % reads used in assemblies</hands-on-title>
-    >    >
-    >    > 1. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.5.0+galaxy0) %} with the following parameters:
-    >    >    - *"Is this single or paired library"*: `Paired-end Dataset Collection`
-    >    >      - {% icon param-collection %} *"FASTQ Paired Dataset"*: `Raw reads`
-    >    >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from the history and build index`
-    >    >      - {% icon param-collection %} *"Select reference genome"*: MEGAHIT output
-    >    >    - *"Save the Bowtie2 mapping statistics to the history"*: `Yes`
-    >    > 3. Inspect the mapping statistics output
-    >    {: .hands_on}
-    >
-    >    > <question-title></question-title>
-    >    >
-    >    > 1. What is the overall alignment rate for ERR2231567? and ERR2231571?
-    >    > 2. What is the percentage of reads used in assemblies for ERR2231567? and ERR2231571?
-    >    >
-    >    > > <solution-title></solution-title>
-    >    > >
-    >    > > 1. The overall alignment rate for ERR2231567 is 65.97% and 73.67% for ERR2231571
-    >    > > 2. 65.97% of the reads were used in assemblies for ERR2231567 and 73.67% for ERR2231571.
-    >    > >
-    >    > {: .solution}
-    >    >
-    >    {: .question}
-    {: .details}
-
-3. **Misassemblies**: joining sequences that should not be adjacent.
-
-    Quast identifies missassemblies by mapping the contigs to the reference genomes of the identified organisms. 3 types of misassemblies can be identified:
-
-    ![Image shows on the top a contig with a blue and a gren parts with white arrows (pointing on the right) on them and below a reference with 2 chromosomes. The 3 types of misassemblies are after schematized. Relocation: the blue and gren parts of the contig are on chr 1 but separated. Inversion: the blue and gren parts of the contig are on chr 1 but separated and with the arrows facing each other. Translocation: the blue part is on chr 1 and gren part on chr 2.](./images/quast_misassemblies.png "Source: <a href="https://quast.sourceforge.net/docs/manual.html#sec3.1.2">QUAST manual</a>"){:width="60%"}
-
-    1. **Relocation** occur based on signal from two mappings of the same contig against the same chromosome, with 2 cases:
-        1. the 2 mappings are separated by an unmapped region of at least 1 kbp
-        2. they map on the same chromosome with a shared mapping area of at least 1 kbp
-
-        ![Image shows on the top a contig with a blue and a gren parts with white arrows (pointing on the right) on them and below a reference with 2 chromosomes. The 3 types of misassemblies are after schematized. Relocation: the blue and gren parts of the contig are on chr 1 but separated. Inversion: the blue and gren parts of the contig are on chr 1 but separated and with the arrows facing each other. Translocation: the blue part is on chr 1 and gren part on chr 2.](./images/relocation.svg "Source: <a href="https://blog.pierre.marijon.fr/misassemblies-in-noisy-assemblies/">Yet Another Bioinformatic blog by Pierre Marijon</a>"){:width="80%"}
-
-        > <question-title></question-title>
-        >
-        > 1. How many relocations has been found for ERR2231568? And for ERR2231572?
-        > 2. For which reference genomes are there the most relocation found for ERR2231568? And for ERR2231572?
-        >
-        > > <solution-title></solution-title>
-        > >
-        > > 1. 88 for ERR2231568 and 158 for ERR2231572
-        > > 2. *Pectobacterium carotovorum brasiliensis* for ERR2231568 and *Lactobacillus plantarum argentoratensis* for ERR2231572
-        > {: .solution}
-        >
-        {: .question}
-
-    2. **Translocation** occur when a contig has mapped on more than one reference chromosomes
-
-        > <question-title></question-title>
-        >
-        > 1. How many translocations has been found for ERR2231568? And for ERR2231572?
-        > 2. For which reference genomes are there the most translocations found for ERR2231568? And for ERR2231572?
-        > 3. What are the interspecies translocations?
-        > 4. How many interspecies translocations has been found for ERR2231568? And for ERR2231572?
-        >
-        > > <solution-title></solution-title>
-        > >
-        > > 1. 47 for ERR2231568 and 62 for ERR2231572.
-        > > 2. *Pectobacterium carotovorum brasiliensis* for ERR2231568 and *Lactobacillus vaccinostercus* for ERR2231572.
-        > > 3. Interspecies translocations are translocations where the a contif has mapped on different reference genomes.
-        > > 4. 160 for ERR2231568 and 203 for ERR2231572.
-        > {: .solution}
-        >
-        {: .question}
-
-    3. **Inversion** occurs when a contig has two consecutive mappings on the same chromosome but in different strands
-
-        > <question-title></question-title>
-        >
-        > 1. How many inversion has been found for ERR2231568? And for ERR2231572?
-        > 2. For which reference genomes are there the most inversions found for ERR2231568? And for ERR2231572?
-        >
-        > > <solution-title></solution-title>
-        > >
-        > > 1. 4 for ERR2231568 and 5 for ERR2231572.
-        > > 2. *Gluconobacter kondonii* and *Tatumella morbirosei* for ERR2231568 and *Lactobacillus hordei* for ERR2231572.
-        > {: .solution}
-        >
-        {: .question}
-
-4. **Mismatches** or mismatched bases in the contig-reference alignment
-
-    > <question-title></question-title>
-    >
-    > 1. How many mismatches have been identified for ERR2231568? And for ERR2231572?
-    > 2. For which reference genomes are there the most mismatches for ERR2231568? And for ERR2231572?
-    >
-    > > <solution-title></solution-title>
-    > >
-    > > 1. 764,853 for ERR2231568 and 414,142 for ERR2231572.
-    > > 2. *Pantoea SM3* for ERR2231568 and *Leuconostoc pseudomesenteroides KCTC 3652* for ERR2231572.
-    > {: .solution}
-    >
-    {: .question}
-
-5. **Statistics without reference**
-
-    - **# contigs**: total number of contigs
-
-        > <question-title></question-title>
-        >
-        > 1. How many contigs are for ERR2231568? And for ERR2231572?
-        > 2. How many sequences are in the output of MEGAHIT for ERR2231568? And for ERR2231572?
-        > 3. Why are these numbers different from the number of sequences in the output of MEGAHIT?
-        > 4. Which statistics in the metaQUAST report corresponds to number of sequences in the output of MEGAHIT?
-        > 5. Which reference genomes have the most contigs ($$\geq$$ 500 bp) in ERR2231568? And in ERR2231572?
-        >
-        > > <solution-title></solution-title>
-        > >
-        > > 1. 66,434 contigs for ERR2231568 and 36,112 for ERR2231572.
-        > > 2. In the outputs of MEGAHIT, there are 228,719 contigs for ERR2231568 and 122,526 contigs.
-        > > 3. The numbers are lower in the metaQUAST results because metaQUAST reports there only the contigs longer than 500bp.
-        > > 4. The **# contigs (>= 0 bp)**
-        > > 5. Except the non aligned contigs, *Tatumella morbirosei* for ERR2231568 and *Leuconostoc pseudomesenteroides KCTC 3652* for ERR2231572.
-        > {: .solution}
-        >
-        {: .question}
-
-    - **Largest contig**: length of the longest contig in the assembly
-
-        > <question-title></question-title>
-        >
-        > 1. What is the length of the longest contig in ERR2231568? And in ERR2231572?
-        > 2. Is the longest contig assigned to a reference genome in ERR2231568? And in ERR2231572?
-        >
-        > > <solution-title></solution-title>
-        > >
-        > > 1. 63,871 bp in ERR2231568 and 65,608 for ERR2231572.
-        > > 2. It is assigned to *Leuconostoc pseudomesenteroides KCTC 3652* in ERR2231568 and not assigned in ERR2231572.
-        > {: .solution}
-        >
-        {: .question}
-
-    - **N50**: length for which the collection of all contigs of that length or longer covers at least half an assembly
-
-        N50 statistic defines assembly quality in terms of contiguity. If all contigs in an assembly are ordered by length, the N50 is the minimum length of contigs that contains 50% of the assembled bases. For example, an N50 of 10,000 bp means that 50% of the assembled bases are contained in contigs of at least 10,000 bp.
-
-        Another example. Let's consider 9 contigs with the lengths 2, 3, 4, 5, 6, 7, 8, 9, and 10:
-        - The sum of the length is 54
-        - Half of the sum is 27
-        - 10 + 9 + 8 = 27 (half the length of the sequence)
-        - N50 = 8, i.e. the size of the contig which, along with the larger contigs, contain half of sequence of a particular genome
-
-        > <question-title></question-title>
-        >
-        > 1. What is N50 for ERR2231568? And for ERR2231572?
-        > 2. What is N90?
-        >
-        > > <solution-title></solution-title>
-        > >
-        > > 1. 921 for ERR2231568 and 1,233 for ERR2231572.
-        > > 2. N90 is similar to the N50 metric but with 90% of of the sum of the lengths of all contigs
-        > {: .solution}
-        >
-        {: .question}
-
-        When comparing N50 values from different assemblies, the assembly sizes must be the same size in order for N50 to be meaningful.
-
-        Also the N50 alone is not a useful measure to assess the quality of an assembly. For example, the assemblies with the following contig lengths:
-        - 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 25, 25, 150, 1500
-        - 50, 500, 530, 650
-
-        Both assemblies have the same N50 although one is more contiguous than the other.
-
-    - **L50**: number of contigs equal to or longer than N50
-
-        In other words, L50, for example, is the minimal number of contigs that cover half the assembly.
-
-        If we take the previous example in N50, L50 = 3.
-
-        > <question-title></question-title>
-        >
-        > 1. What is the L50 for ERR2231568? And for ERR2231572?
-        >
-        > > <solution-title></solution-title>
-        > >
-        > > 1. 17,280 for ERR2231568 and 7,496 for ERR2231572.
-        > {: .solution}
-        >
-        {: .question}
+- "checkm_tree.nwk" - This is a Newick format tree file that shows the phylogenetic relationship between the genome bins and the reference genomes used for classification.
 
 <!-- # Visualization of the *de novo* assembly graph
 
@@ -690,9 +434,9 @@ We will perform steps from 1 to 3 in this tutorial a bit later while steps 4 - 8
 
 # Conclusion
 
-In summary, this tutorial shows a step-by-step on how to bin metagenomic contigs using CONCOCT and MetaBAT2.
+In summary, this tutorial shows a step-by-step on how to bin metagenomic contigs using MetaBAT2.
 
-These tools vary in their strengths, limitations, and suitability for different types of metagenomic data, so it is important to choose the most appropriate tool for a given analysis. Additionally, it is often beneficial to compare the results of multiple binning methods to improve the accuracy of genome binning.
+Generally, metagenomics binning tools vary in their strengths, limitations, and suitability for different types of metagenomic data, so it is important to choose the most appropriate tool for a given analysis. Additionally, it is often beneficial to compare the results of multiple binning methods to improve the accuracy of genome binning.
 
 Metagenomic data can be assembled to, ideally, obtain the genomes of the species that are represented within the input data. But metagenomic assembly is **complex** and there are
 - **different approaches**: ????
