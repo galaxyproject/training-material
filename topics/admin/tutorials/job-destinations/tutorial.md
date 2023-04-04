@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Mapping Jobs to Destinations"
+title: "Mapping Jobs to Destinations using TPV"
 questions:
   - How can I configure job dependent resources, like cores, memory for my DRM?
   - How can I map jobs to resources and destinations
@@ -22,7 +22,6 @@ contributors:
   - bgruening
   - hexylena
 tags:
-  - ansible
   - jobs
   - git-gat
 subtopic: jobs
@@ -30,8 +29,6 @@ requirements:
   - type: "internal"
     topic_name: admin
     tutorials:
-      - ansible
-      - ansible-galaxy
       - connect-to-compute-cluster
 ---
 
@@ -39,8 +36,6 @@ requirements:
 This tutorial heavily builds on the [Connecting Galaxy to a compute cluster]({% link topics/admin/tutorials/connect-to-compute-cluster/tutorial.md %}) and it's expected you have completed this tutorial first.
 
 Now that you have a working scheduler, we will start configuring which jobs are sent to which destinations.
-
-{% snippet faqs/galaxy/analysis_results_may_vary.md %}
 
 > <agenda-title></agenda-title>
 >
@@ -51,11 +46,23 @@ Now that you have a working scheduler, we will start configuring which jobs are 
 
 {% snippet topics/admin/faqs/git-gat-path.md tutorial="job-destinations" %}
 
-# Galaxy and Slurm - Statically Mapping a Job
+# Mapping jobs to destinations
 
-We don't want to overload our training VMs trying to run real tools, so to demonstrate how to map a multicore tool to a multicore destination, we'll create a fake tool.
+In order to run jobs in Galaxy, you need to assign them to a resource manager that can handle the task. This involves specifying the appropriate amount of memory and CPU cores. For production installations, the jobs
+must be routed to a resource manager like SLURM, HTCondor, or Pulsar.
+Some tools may need specific resources such as GPUs or multi-core machines to work efficiently.
+
+Sometimes, your available resources are spread out across multiple locations and resource managers. In such cases, you need a way to route your jobs to the appropriate location. Galaxy offers several methods for
+routing jobs, ranging from simple static mappings to custom Python functions called dynamic job destinations.
+
+Recently, the Galaxy project has introduced a library called Total-Perspective-Vortex (TPV) to simplify this process. TPV provides a user-friendly YAML configuration that works for most scenarios.
+For more complex cases, TPV allows you to embed Python code into the YAML file. Additionally, TPV shares a global database of resource requirements,
+so admins don't have to figure out the requirements for each tool separately.
 
 ## Writing a testing tool
+
+To check that resources are being allocated appropriately, We don't want to overload our training VMs trying to run real tools, so to demonstrate how to map a multicore tool to a multicore destination using TPV,
+we'll create a fake tool.
 
 > <hands-on-title>Deploying a Tool</hands-on-title>
 >
@@ -137,45 +144,64 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 
 Of course, this tool doesn't actually *use* the allocated number of cores. In a real tool, you would call the tools's underlying command with whatever flag that tool provides to control the number of threads or processes it starts, such as `samtools sort -@ \${GALAXY_SLOTS:-1}`.
 
-## Running with more resources
+## Configuring TPV
 
-We want our tool to run with more than one core. To do this, we need to instruct Slurm to allocate more cores for this job. This is done in the job configuration file.
+We want our tool to run with more than one core. To do this, we need to instruct Slurm to allocate more cores for this job. First however, we need to configure Galaxy to use TPV.
+
+#TODO: Are we going to rely on tpv being installed as a conditional requirement? Or add it to the playbook as a package?
 
 
-> <hands-on-title>Allocating more resources</hands-on-title>
+> <hands-on-title>Adding TPV to your job configuration</hands-on-title>
 >
 > 1. Edit your `templates/galaxy/config/job_conf.yml.j2` and add the following destination. Then, map the new tool to the new destination using the tool ID (`<tool id="testing">`) and destination id (`<destination id="slurm-2c">`) by adding a new section to the job config, `<tools>`, below the destinations:
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -52,9 +52,22 @@ galaxy_job_config:
->               value: /tmp/singularity
->             - name: SINGULARITY_TMPDIR
->               value: /tmp
->    +      slurm-2c:
->    +        runner: slurm
->    +        singularity_enabled: true
->    +        native_specification: --nodes=1 --ntasks=1 --cpus-per-task=2
->    +        env:
->    +        - name: LC_ALL
->    +          value: C
->    +        - name: SINGULARITY_CACHEDIR
->    +          value: /tmp/singularity
->    +        - name: SINGULARITY_TMPDIR
->    +          value: /tmp
->       tools:
->         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->           environment: local_env
->    +    - id: testing
->    +      environment: slurm-2c
->     
->     galaxy_config:
->       galaxy:
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -20,4 +20,10 @@ execution:
+>             value: /tmp/singularity
+>           - name: SINGULARITY_TMPDIR
+>             value: /tmp
+>    +    tpv_dispatcher:
+>    +      runner: dynamic
+>    +      type: python
+>    +      function: map_tool_to_destination
+>    +      rules_module: tpv.rules
+>    +      tpv_config_files:
+>    +      - config/tpv_rules_local.yml
+>         singularity:
+>           runner: local_runner
+>           singularity_enabled: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure testing tool in job conf"}
+>
+> 2. Create a new file named `tpv_rules_local.yml` in the "files" folder of your ansible playbook, so that it is copied to the config folder on the target. #TODO: Fixme
+>    The file should contain the following content:
+>
+>    {% raw %}
+>    ```diff
+>    --- /dev/null
+>    +++ b/files/galaxy/config/tpv_rules_local.yml
+>    @@ -0,0 +1,15 @@
+>    +tools:
+>    +  testing:
+>    +    cores: 2
+>    +    mem: cores * 4
+>    +
+>    +destinations:
+>    +  runner: slurm
+>    +  params:
+>    +    singularity_enabled: "true"
+>    +    native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
+>    +  env:
+>    +    LC_ALL: C
+>    +    SINGULARITY_CACHEDIR: /tmp/singularity
+>    +    SINGULARITY_TMPDIR: /tmp
+>    +
+>    {% endraw %}
+>
 >
 > 3. Run the Galaxy playbook. Because we modified `job_conf.yml`, Galaxy will be restarted to reread its config files.
 >
