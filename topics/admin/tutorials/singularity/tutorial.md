@@ -188,7 +188,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >     galaxy_config:
 >       galaxy:
 >    +    dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
->    +    containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
+>    +    containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
 >         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >         brand: "🧬🔬🚀"
 >         admin_users: admin@example.org
@@ -196,7 +196,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >     galaxy_config_templates:
 >       - src: templates/galaxy/config/job_conf.yml.j2
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
->    +  - src: templates/galaxy/config/container_resolvers_conf.xml.j2
+>    +  - src: templates/galaxy/config/container_resolvers_conf.yml.j2
 >    +    dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >    +  - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >    +    dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
@@ -229,19 +229,24 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    ```
 >    {: data-commit="Configure the dependency resolvers"}
 >
-> 3. Create the new file `templates/galaxy/config/container_resolvers_conf.xml.j2`, this specifies the order in which to attempt container resolution.
+> 3. Create the new file `templates/galaxy/config/container_resolvers_conf.yml.j2`, this specifies the order in which to attempt container resolution.
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/templates/galaxy/config/container_resolvers_conf.xml.j2
->    @@ -0,0 +1,6 @@
->    +<containers_resolvers>
->    +  <explicit_singularity />
->    +  <cached_mulled_singularity cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
->    +  <mulled_singularity auto_install="False" cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
->    +  <build_mulled_singularity auto_install="False" cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
->    +</containers_resolvers>
+>    +++ b/templates/galaxy/config/container_resolvers_conf.yml.j2
+>    @@ -0,0 +1,11 @@
+>    +container_resolvers:
+>    +  - type: cached_explicit_singularity
+>    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/explicit/"
+>    +  - type: cached_mulled_singularity
+>    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/mulled/"
+>    +  - type: mulled_singularity
+>    +    auto_install: False
+>    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/mulled/"
+>    +  - type: build_mulled_singularity
+>    +    auto_install: False
+>    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/built/"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the container resolver"}
@@ -395,7 +400,7 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 >    galaxy_config:
 >      galaxy:
 >        ...
->        containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
+>        containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
 >    ```
 >{% endraw %}
 >
@@ -403,12 +408,12 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 >{% raw %}
 >    ```yaml
 >    galaxy_config_templates:
->      - src: templates/galaxy/config/container_resolvers_conf.xml.j2
->        dest: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
+>      - src: templates/galaxy/config/container_resolvers_conf.yml.j2
+>        dest: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
 >    ```
 >{% endraw %}
 >
-> 3. Create the new file `templates/galaxy/config/container_resolvers_conf.xml.j2`:
+> 3. Create the new file `templates/galaxy/config/container_resolvers_conf.yml.j2`:
 >{% raw %}
 >    ```xml
 >    <containers_resolvers>
