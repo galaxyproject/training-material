@@ -89,7 +89,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -98,6 +98,9 @@ galaxy_config_templates:
+>    @@ -99,6 +99,9 @@ galaxy_config_templates:
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
@@ -254,7 +254,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -100,6 +100,8 @@ galaxy_config_templates:
+>    @@ -101,6 +101,8 @@ galaxy_config_templates:
 >     
 >     galaxy_local_tools:
 >     - testing.xml
@@ -365,15 +365,16 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -31,6 +31,7 @@ miniconda_manage_dependencies: false
->     
->     galaxy_config:
->       galaxy:
->    +    tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
+>    @@ -70,6 +70,8 @@ galaxy_config:
+>         # Data Library Directories
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user
->         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
->    @@ -97,6 +98,8 @@ galaxy_config_templates:
+>    +    # Tool Destination Configuration
+>    +    tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
+>       gravity:
+>         galaxy_root: "{{ galaxy_root }}/server"
+>         app_server: gunicorn
+>    @@ -98,6 +100,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
@@ -478,15 +479,15 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -92,6 +92,8 @@ galaxy_config:
->               - workflow-scheduler
->     
->     galaxy_config_templates:
+>    @@ -102,6 +102,8 @@ galaxy_config_templates:
+>         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
+>       - src: templates/galaxy/config/tool_destinations.yml
+>         dest: "{{ galaxy_config.galaxy.tool_destinations_config_file }}"
 >    +  - src: templates/galaxy/config/job_resource_params_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
->       - src: templates/galaxy/config/job_conf.yml.j2
->         dest: "{{ galaxy_config.galaxy.job_config_file }}"
->       - src: templates/galaxy/config/container_resolvers_conf.xml.j2
+>     
+>     galaxy_local_tools:
+>     - testing.xml
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy job resource params configuration"}
@@ -636,15 +637,15 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -31,6 +31,7 @@ miniconda_manage_dependencies: false
->     
->     galaxy_config:
->       galaxy:
->    +    job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
->         tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
->         library_import_dir: /libraries/admin
+>    @@ -72,6 +72,7 @@ galaxy_config:
 >         user_library_import_dir: /libraries/user
->    @@ -107,6 +108,7 @@ galaxy_local_tools:
+>         # Tool Destination Configuration
+>         tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
+>    +    job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
+>       gravity:
+>         galaxy_root: "{{ galaxy_root }}/server"
+>         app_server: gunicorn
+>    @@ -109,6 +110,7 @@ galaxy_local_tools:
 >     - testing.xml
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py

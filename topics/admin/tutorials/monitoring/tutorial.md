@@ -503,7 +503,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -221,6 +221,14 @@ rabbitmq_users:
+>    @@ -223,6 +223,14 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
 >     
@@ -532,15 +532,16 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -31,6 +31,8 @@ miniconda_manage_dependencies: false
->     
->     galaxy_config:
->       galaxy:
+>    @@ -73,6 +73,9 @@ galaxy_config:
+>         # Tool Destination Configuration
+>         tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
+>         job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
+>    +    # Monitoring
 >    +    statsd_host: localhost
 >    +    statsd_influxdb: true
->         job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
->         tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
->         library_import_dir: /libraries/admin
+>       gravity:
+>         galaxy_root: "{{ galaxy_root }}/server"
+>         app_server: gunicorn
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add extra monitoring for Galaxy"}
@@ -795,7 +796,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -237,6 +237,13 @@ telegraf_plugins_extra:
+>    @@ -240,6 +240,13 @@ telegraf_plugins_extra:
 >           - service_address = ":8125"
 >           - metric_separator = "."
 >           - allowed_pending_messages = 10000

@@ -84,15 +84,16 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -31,6 +31,8 @@ miniconda_manage_dependencies: false
->     
->     galaxy_config:
->       galaxy:
+>    @@ -67,6 +67,9 @@ galaxy_config:
+>         outputs_to_working_directory: true
+>         # TUS
+>         tus_upload_store: /data/tus
+>    +    # Data Library Directories
 >    +    library_import_dir: /libraries/admin
 >    +    user_library_import_dir: /libraries/user
->         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
->         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
->         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
+>       gravity:
+>         galaxy_root: "{{ galaxy_root }}/server"
+>         app_server: gunicorn
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the library import directories"}

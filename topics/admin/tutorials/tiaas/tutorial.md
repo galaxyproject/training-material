@@ -90,7 +90,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -245,6 +245,11 @@ telegraf_plugins_extra:
+>    @@ -248,6 +248,11 @@ telegraf_plugins_extra:
 >           - data_format = "influx"
 >           - interval = "15s"
 >     
@@ -341,7 +341,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -138,6 +138,7 @@ galaxy_local_tools:
+>    @@ -141,6 +141,7 @@ galaxy_local_tools:
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py
 >     - map_resources.py

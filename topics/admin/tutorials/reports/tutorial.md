@@ -100,10 +100,10 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >     miniconda_version: 4.7.12
 >     miniconda_manage_dependencies: false
->    @@ -132,6 +133,8 @@ galaxy_config_templates:
->         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
->       - src: templates/galaxy/config/tool_destinations.yml
+>    @@ -135,6 +136,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.tool_destinations_config_file }}"
+>       - src: templates/galaxy/config/job_resource_params_conf.xml.j2
+>         dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
 >    +  - src: templates/galaxy/config/reports.yml
 >    +    dest: "{{ galaxy_reports_path }}"
 >     
@@ -120,7 +120,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -145,6 +145,7 @@ galaxy_dynamic_job_rules:
+>    @@ -148,6 +148,7 @@ galaxy_dynamic_job_rules:
 >     
 >     # systemd
 >     galaxy_manage_systemd: true
