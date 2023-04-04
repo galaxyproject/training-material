@@ -74,10 +74,10 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -22,3 +22,7 @@
->       version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
->     - src: gantsign.golang
->       version: 2.6.3
+>    @@ -20,3 +20,7 @@
+>       version: 0.2.13
+>     - src: usegalaxy_eu.apptainer
+>       version: 0.0.1
 >    +- src: galaxyproject.repos
 >    +  version: 0.0.2
 >    +- src: galaxyproject.slurm
@@ -124,9 +124,9 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -160,6 +160,16 @@ golang_gopath: '/opt/workspace-go'
->     singularity_version: "3.7.4"
->     singularity_go_path: "{{ golang_install_dir }}"
+>    @@ -154,6 +154,16 @@ nginx_ssl_role: usegalaxy_eu.certbot
+>     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
+>     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
 >     
 >    +# Slurm
 >    +slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.

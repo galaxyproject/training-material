@@ -141,7 +141,7 @@ Firstly we will add and configure another *role* to our Galaxy playbook - a comm
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -26,3 +26,7 @@
+>    @@ -24,3 +24,7 @@
 >       version: 0.0.2
 >     - src: galaxyproject.slurm
 >       version: 0.1.3
@@ -277,7 +277,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -184,6 +186,44 @@ slurm_config:
+>    @@ -178,6 +180,44 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >     
@@ -336,7 +336,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -35,6 +35,8 @@
+>    @@ -34,6 +34,8 @@
 >         - role: uchida.miniconda
 >           become: true
 >           become_user: "{{ galaxy_user.name }}"

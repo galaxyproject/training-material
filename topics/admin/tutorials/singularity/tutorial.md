@@ -51,13 +51,9 @@ Singularity is an alternative to Docker that is much friendlier for HPCs
 
 {% snippet topics/admin/faqs/git-gat-path.md tutorial="singularity" %}
 
-# Installing Singularity
+# Installing <del>Singularity</del>Apptainer
 
-First, we will install Singularity using Ansible. On most operating systems there is no package for singularity yet, so we must use a role which will compile it from source. If you're on CentOS7/8, it is available through the EPEL repository.
-
-> <tip-title>CentOS7</tip-title>
-> If you are using CentOS7, you can skip this hands-on section and instead install the `epel-release` and `singularity` system packages in your `pre_tasks`.
-{: .tip}
+First, we will install Singularity using Ansible.
 
 > <hands-on-title>Installing Singularity with Ansible</hands-on-title>
 >
@@ -67,17 +63,15 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -18,3 +18,7 @@
+>    @@ -18,3 +18,5 @@
 >       version: 0.0.1
 >     - src: galaxyproject.cvmfs
 >       version: 0.2.13
->    +- src: cyverse-ansible.singularity
->    +  version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
->    +- src: gantsign.golang
->    +  version: 2.6.3
+>    +- src: usegalaxy_eu.apptainer
+>    +  version: 0.0.1
 >    {% endraw %}
 >    ```
->    {: data-commit="Add golang and singulary ansible roles"}
+>    {: data-commit="Add apptainer ansible roles"}
 >
 >    {% snippet topics/admin/faqs/diffs.md %}
 >
@@ -90,41 +84,17 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 4. Specify which version of Singularity you want to install, in `group_vars/galaxyservers.yml`:
->
->    {% raw %}
->    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -145,6 +145,12 @@ nginx_ssl_role: usegalaxy_eu.certbot
->     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
->     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
->     
->    +# Golang
->    +golang_gopath: '/opt/workspace-go'
->    +# Singularity target version
->    +singularity_version: "3.7.4"
->    +singularity_go_path: "{{ golang_install_dir }}"
->    +
->     # TUS
->     galaxy_tusd_port: 1080
->     tusd_instances:
->    {% endraw %}
->    ```
->    {: data-commit="Configure golang and singularity"}
->
 > 4. Add the new roles to your `galaxy.yml` playbook, before the Galaxy server itself. We'll do this bceause it's a dependency of Galaxy to run, so it needs to be there before Galaxy starts.
 >
 >    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -20,6 +20,8 @@
+>    @@ -20,6 +20,7 @@
 >           become: true
 >           become_user: postgres
 >         - geerlingguy.pip
->    +    - gantsign.golang
->    +    - cyverse-ansible.singularity
+>    +    - usegalaxy_eu.apptainer
 >         - galaxyproject.galaxy
 >         - role: uchida.miniconda
 >           become: true
@@ -146,7 +116,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```
->    > singularity run docker://hello-world
+>    > apptainer run docker://hello-world
 >    > ```
 >    {: .code-in}
 >

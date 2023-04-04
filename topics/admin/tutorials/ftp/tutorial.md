@@ -85,7 +85,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -38,3 +38,5 @@
+>    @@ -36,3 +36,5 @@
 >       version: 0.12.0
 >     - src: galaxyproject.tiaas2
 >       version: 2.1.3
@@ -156,7 +156,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -263,6 +263,27 @@ rabbitmq_users:
+>    @@ -257,6 +257,27 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
 >     
@@ -216,7 +216,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -39,6 +39,7 @@
+>    @@ -38,6 +38,7 @@
 >         - usegalaxy_eu.rabbitmqserver
 >         - galaxyproject.tiaas2
 >         - galaxyproject.nginx
