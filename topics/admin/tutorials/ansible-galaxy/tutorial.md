@@ -2216,26 +2216,36 @@ Finally, we have explicitly mapped the tool `bwa` to run in the `local_env` envi
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -20,6 +20,22 @@ galaxy_config:
+>    @@ -11,6 +11,24 @@ miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
+>     miniconda_version: 4.12.0
+>     miniconda_channels: ['conda-forge', 'defaults']
+>     
+>    +# Galaxy Job Configuration
+>    +galaxy_job_config:
+>    +  runners:
+>    +    local_runner:
+>    +      load: galaxy.jobs.runners.local:LocalJobRunner
+>    +      workers: 4
+>    +  handling:
+>    +    assign: ['db-skip-locked']
+>    +  execution:
+>    +    default: local_env
+>    +    environments:
+>    +      local_env:
+>    +        runner: local_runner
+>    +        tmp_dir: true
+>    +  tools:
+>    +    - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>    +      environment: local_env
+>    +
+>     galaxy_config:
+>       galaxy:
+>         brand: "🧬🔬🚀"
+>    @@ -20,6 +38,7 @@ galaxy_config:
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
->    +    job_config:
->    +      runners:
->    +        local_runner:
->    +          load: galaxy.jobs.runners.local:LocalJobRunner
->    +          workers: 4
->    +      handling:
->    +        assign: ['db-skip-locked']
->    +      execution:
->    +        default: local_env
->    +        environments:
->    +          local_env:
->    +            runner: local_runner
->    +            tmp_dir: true
->    +      tools:
->    +        - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->    +          environment: local_env
+>    +    job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
@@ -2286,10 +2296,10 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -36,6 +36,27 @@ galaxy_config:
->           tools:
->             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->               environment: local_env
+>    @@ -39,6 +39,28 @@ galaxy_config:
+>         object_store_store_by: uuid
+>         id_secret: "{{ vault_id_secret }}"
+>         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
 >    +    # SQL Performance
 >    +    slow_query_log_threshold: 5
 >    +    enable_per_request_sql_debugging: true
@@ -2311,6 +2321,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    +    allow_user_impersonation: true
 >    +    # Tool security
 >    +    outputs_to_working_directory: true
+>    +>>>>>>> 1c229da (admin/ansible-galaxy/0025: Add production facing vars)
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"

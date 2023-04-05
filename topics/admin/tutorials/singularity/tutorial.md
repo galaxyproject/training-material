@@ -153,7 +153,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -62,6 +62,9 @@ galaxy_config:
+>    @@ -65,6 +65,9 @@ galaxy_config:
 >         tus_upload_store: /data/tus
 >         # CVMFS
 >         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
@@ -163,7 +163,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->    @@ -85,6 +88,12 @@ galaxy_config:
+>    @@ -88,6 +91,12 @@ galaxy_config:
 >               - job-handlers
 >               - workflow-schedulers
 >     
@@ -230,32 +230,32 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -29,11 +29,24 @@ galaxy_config:
->           handling:
->             assign: ['db-skip-locked']
->           execution:
->    -        default: local_env
->    +        default: singularity
->             environments:
->               local_env:
->                 runner: local_runner
->                 tmp_dir: true
->    +          singularity:
->    +            runner: local_runner
->    +            singularity_enabled: true
->    +            env:
->    +            # Ensuring a consistent collation environment is good for reproducibility.
->    +            - name: LC_ALL
->    +              value: C
->    +            # The cache directory holds the docker containers that get converted
->    +            - name: SINGULARITY_CACHEDIR
->    +              value: /tmp/singularity
->    +            # Singularity uses a temporary directory to build the squashfs filesystem
->    +            - name: SINGULARITY_TMPDIR
->    +              value: /tmp
->           tools:
->             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->               environment: local_env
+>    @@ -21,11 +21,24 @@ galaxy_job_config:
+>       handling:
+>         assign: ['db-skip-locked']
+>       execution:
+>    -    default: local_env
+>    +    default: singularity
+>         environments:
+>           local_env:
+>             runner: local_runner
+>             tmp_dir: true
+>    +      singularity:
+>    +        runner: local_runner
+>    +        singularity_enabled: true
+>    +        env:
+>    +        # Ensuring a consistent collation environment is good for reproducibility.
+>    +        - name: LC_ALL
+>    +          value: C
+>    +        # The cache directory holds the docker containers that get converted
+>    +        - name: SINGULARITY_CACHEDIR
+>    +          value: /tmp/singularity
+>    +        # Singularity uses a temporary directory to build the squashfs filesystem
+>    +        - name: SINGULARITY_TMPDIR
+>    +          value: /tmp
+>       tools:
+>         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>           environment: local_env
 >    {% endraw %}
 >    ```
 >    {: data-commit="Update the job_conf.yml with singularity destination"}

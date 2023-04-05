@@ -503,7 +503,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -289,6 +289,14 @@ rabbitmq_users:
+>    @@ -292,6 +292,14 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
 >     
@@ -532,7 +532,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -149,6 +149,9 @@ galaxy_config:
+>    @@ -152,6 +152,9 @@ galaxy_config:
 >         # Tool Destination Configuration
 >         tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
 >         job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
@@ -797,7 +797,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -300,6 +300,13 @@ telegraf_plugins_extra:
+>    @@ -303,6 +303,13 @@ telegraf_plugins_extra:
 >           - service_address = ":8125"
 >           - metric_separator = "."
 >           - allowed_pending_messages = 10000

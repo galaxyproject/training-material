@@ -79,16 +79,17 @@ To allow your user to upload via TUS, you will need to:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -58,6 +58,8 @@ galaxy_config:
+>    @@ -61,7 +61,8 @@ galaxy_config:
 >         allow_user_impersonation: true
 >         # Tool security
 >         outputs_to_working_directory: true
+>    ->>>>>>> 1c229da (admin/ansible-galaxy/0025: Add production facing vars)
 >    +    # TUS
 >    +    tus_upload_store: /data/tus
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->    @@ -132,3 +134,16 @@ nginx_conf_http:
+>    @@ -136,3 +137,16 @@ nginx_conf_http:
 >     nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
