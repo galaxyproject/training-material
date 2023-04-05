@@ -49,15 +49,14 @@ Now that you have a working scheduler, we will start configuring which jobs are 
 # Mapping jobs to destinations
 
 In order to run jobs in Galaxy, you need to assign them to a resource manager that can handle the task. This involves specifying the appropriate amount of memory and CPU cores. For production installations, the jobs
-must be routed to a resource manager like SLURM, HTCondor, or Pulsar.
-Some tools may need specific resources such as GPUs or multi-core machines to work efficiently.
+must be routed to a resource manager like SLURM, HTCondor, or Pulsar. Some tools may need specific resources such as GPUs or multi-core machines to work efficiently.
 
 Sometimes, your available resources are spread out across multiple locations and resource managers. In such cases, you need a way to route your jobs to the appropriate location. Galaxy offers several methods for
 routing jobs, ranging from simple static mappings to custom Python functions called dynamic job destinations.
 
-Recently, the Galaxy project has introduced a library called Total-Perspective-Vortex (TPV) to simplify this process. TPV provides a user-friendly YAML configuration that works for most scenarios.
-For more complex cases, TPV allows you to embed Python code into the YAML file. Additionally, TPV shares a global database of resource requirements,
-so admins don't have to figure out the requirements for each tool separately.
+Recently, the Galaxy project has introduced a library named Total-Perspective-Vortex (TPV) to simplify this process. TPV provides a user-friendly YAML configuration that works for most scenarios.
+For more complex cases, TPV allows you to embed Python code into the YAML file. Additionally, TPV shares a global database of resource requirements, so admins don't have to figure out the requirements for each tool
+separately.
 
 ## Writing a testing tool
 
@@ -153,7 +152,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 
 > <hands-on-title>Adding TPV to your job configuration</hands-on-title>
 >
-> 1. Edit your `templates/galaxy/config/job_conf.yml.j2` and add the following destination. Then, map the new tool to the new destination using the tool ID (`<tool id="testing">`) and destination id (`<destination id="slurm-2c">`) by adding a new section to the job config, `<tools>`, below the destinations:
+> 1. Edit your `templates/galaxy/config/job_conf.yml.j2` and add the following destination to route all jobs to TPV. # TODO: set default execution context so all jobs go to TPV
 >
 >    {% raw %}
 >    ```diff
@@ -177,32 +176,36 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    ```
 >    {: data-commit="Configure testing tool in job conf"}
 >
-> 2. Create a new file named `tpv_rules_local.yml` in the "files" folder of your ansible playbook, so that it is copied to the config folder on the target. #TODO: Fixme
+> 2. Create a new file named `tpv_rules_local.yml` in the "files" folder of your ansible playbook, so that it is copied to the config folder on the target.
 >    The file should contain the following content:
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
 >    +++ b/files/galaxy/config/tpv_rules_local.yml
->    @@ -0,0 +1,15 @@
+>    @@ -0,0 +1,16 @@
 >    +tools:
->    +  testing:
+>    +  .*testing.*:
 >    +    cores: 2
 >    +    mem: cores * 4
 >    +
 >    +destinations:
->    +  runner: slurm
->    +  params:
->    +    singularity_enabled: "true"
->    +    native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
->    +  env:
->    +    LC_ALL: C
->    +    SINGULARITY_CACHEDIR: /tmp/singularity
->    +    SINGULARITY_TMPDIR: /tmp
+>    +  slurm:
+>    +    runner: slurm
+>    +    params:
+>    +      singularity_enabled: "true"
+>    +      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
+>    +    env:
+>    +      LC_ALL: C
+>    +      SINGULARITY_CACHEDIR: /tmp/singularity
+>    +      SINGULARITY_TMPDIR: /tmp
 >    +
 >    {% endraw %}
 >
->    In this TPV config, we have specified that the testing tool should use `2` cores, and that memory should be 4 times as much as cores, and is therefore, 8GB.
+>    In this TPV config, we have specified that the testing tool should use `2` cores, and that memory is an expression and should be 4 times as much as cores, or in this case, 8GB.
+>    Note that the tool id is matched via a regular expression against the full tool id. For example, a full tool id for hisat may look like: toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.1.0+galaxy7:
+>    This enables complex matching, including matching against specific versions of tools.
+>
 >    Destinations must also be defined in TPV itself (Destinations need not be defined in job_conf.yml and are ignored by TPV). We have designated SLURM as an
 >    available destination, and specified that the `native_specification` param, which is what SLURM uses to allocate resources per job. Note the use of the `{cores}`
 >    parameter, which TPV will replace at runtime with the value of cores assigned to the tool.
@@ -240,6 +243,169 @@ We want our tool to run with more than one core. To do this, we need to instruct
 > ```
 > {: data-test="true"}
 {: .hidden}
+
+
+### Configuring defaults
+
+Now that we've configured the resource requirements for a single tool, let's see how we can configure defaults for all tools, and reuse those defaults to reduce repetition and tedium.
+
+
+> <hands-on-title>Configuring defaults and inheritance</hands-on-title>
+>
+> 1. Edit your `files/galaxy/config/tpv_rules_local.yml` and add the following settings.
+>
+>    {% raw %}
+>    ```diff
+>    --- /dev/null
+>    +++ b/files/galaxy/config/tpv_rules_local.yml
+>    @@ -0,0 +1,16 @@
+>    +global:
+>    +  default_inherits: default
+>    +
+>    +tools:
+>    +  default:
+>    +    abstract: true
+>    +    cores: 1
+>    +    mem: cores * 4
+>    +  testing:
+>    +    cores: 2
+>    -    mem: cores * 4
+>    +
+>    +destinations:
+>    +  default:
+>    +    abstract: true
+>    +    params:
+>    +      singularity_enabled: "true"
+>    +      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
+>    +  slurm:
+>    +    inherits: default
+>    +    runner: slurm
+>    -    params:
+>    -      singularity_enabled: "true"
+>    -      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
+>    +    env:
+>    +      LC_ALL: C
+>    +      SINGULARITY_CACHEDIR: /tmp/singularity
+>    +      SINGULARITY_TMPDIR: /tmp
+>    +
+>    {% endraw %}
+>
+> We have defined a `global` section specifying that all tools and destinations should inherit from a specified `default`. We have then defined a tool named `default`, whose properties
+> are implicitly inherited by all tools at runtime. This means that our `testing` tool will also inherit from this default tool, but it explicitly overrides cores
+> We can also explicitly specify an `inherits` clause if we wish to extend a specific tool or destination, as shown in the destinations section. 
+>
+>
+
+### Selecting between multiple destinations
+
+1. using tags
+2. Using max_accepted_cores
+
+
+### TPV reference documentation
+
+TPV has dedicated documentation at: https://total-perspective-vortex.readthedocs.io/en/latest/
+
+
+# Configuring the TPV shared database
+
+The Galaxy Project maintains a [shared database of TPV rules](https://github.com/galaxyproject/tpv-shared-database) so that admins do not have to independently rediscover ideal resource allocations for specific tools. These rules are based
+on settings that have worked well in the usegalaxy.* federation. The rule file can simply be imported directly, with local overrides applied on top.
+
+> <hands-on-title>Configuring defaults and inheritance</hands-on-title>
+>
+> 1. Edit your `templates/galaxy/config/job_conf.yml.j2` and add the location of the TPV shared rule file.
+>
+>    {% raw %}
+>    ```diff
+>    --- a/templates/galaxy/config/job_conf.yml.j2
+>    +++ b/templates/galaxy/config/job_conf.yml.j2
+>    @@ -20,4 +20,10 @@ execution:
+>             value: /tmp/singularity
+>           - name: SINGULARITY_TMPDIR
+>             value: /tmp
+>         tpv_dispatcher:
+>           runner: dynamic
+>           type: python
+>           function: map_tool_to_destination
+>           rules_module: tpv.rules
+>           tpv_config_files:
+>    +      - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
+>    +      - config/tpv_rules_local.yml
+>         singularity:
+>           runner: local_runner
+>           singularity_enabled: true
+>    {% endraw %}
+>    ```
+>    {: data-commit="Importing TPV shared database via job conf"}
+>
+> Note how TPV allows the file to be imported directly via its http url. As many local and remote rule files as necessary can be combined, with rule files specified later overriding
+> any previously specified rule files. The TPV shared database does not define destinations, only cores and mem settings, as well as any required environment vars.
+> Take a look at the shared database of rules and note that some tools have very large recommended memory settings, which may or may not be available within your local cluster.
+> Nevertheless, you may still wish to execute these tools with memory adjusted to suit your cluster's capabilities. 
+>
+> 2. Edit your `files/galaxy/config/tpv_rules_local.yml` and make the following changes.
+>
+>    {% raw %}
+>    ```diff
+>    --- /dev/null
+>    +++ b/files/galaxy/config/tpv_rules_local.yml
+>    @@ -0,0 +1,16 @@
+>    +global:
+>    +  default_inherits: default
+>    +
+>    +tools:
+>    +  default:
+>    +    abstract: true
+>    +    cores: 1
+>    +    mem: cores * 4
+>    +  testing:
+>    +    cores: 2
+>    -    mem: cores * 4
+>    +
+>    +destinations:
+>    +  default:
+>    +    abstract: true
+>    +    params:
+>    +      singularity_enabled: "true"
+>    +      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
+>    +  slurm:
+>    +    inherits: default
+>    +    runner: slurm
+>    +    max_accepted_cores: 24
+>    +    max_accepted_mem: 256
+>    +    max_cores: 16
+>    +    max_mem: 128
+>    -    params:
+>    -      singularity_enabled: "true"
+>    -      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
+>    +    env:
+>    +      LC_ALL: C
+>    +      SINGULARITY_CACHEDIR: /tmp/singularity
+>    +      SINGULARITY_TMPDIR: /tmp
+>    +
+>    {% endraw %}
+>
+>
+> These changes indicate that the destination will accept jobs that are up to `max_accepted_cores: 24` and `max_accepted_mem: 256`. However, once accepted, it will forcibly clamp it down to 16 and 128 at most using the `max_cores` and `max_mem` clauses.
+> If the tool does not exceed the specified limit, it will run happily. If not, it will be clamped down to the desired range. This allows even the largest resource requirement in the shared database to be accomodated.
+>
+
+# Basic access controls
+
+You may wish to apply some basic restrictions on which users are allowed to run specific tools. TPV accomodates user and role specific rules. Combined with tags, these allow fine-grained control over
+
+
+# More reading
+
+The tutorial provides a quick overview of some of the basic features in TPV. However, there are numerous features that we have not convered such as:
+a. Custom code blocks - execute arbitrary python code blocks, access additional context variables etc.
+a. User and Role Handling - Add scheduling constraints based on the user's email or role
+b. Metascheduling support - Perform advanced querying and filtering prior to choosing an appropriate destination
+c. Job resubmissions - Resubmit jobs on failure
+d. Linting, formatting and dry-run - Automatically format tpv rule files, catch potential syntax errors and perform a dry-run to check where a tool would get scheduled.
+
+These features are covered in detail in the [TPV documentation](https://total-perspective-vortex.readthedocs.io/en/lates/).
 
 
 # Job Resource Selectors
