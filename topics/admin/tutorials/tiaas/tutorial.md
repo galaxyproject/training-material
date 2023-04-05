@@ -299,7 +299,7 @@ Let's see it in action!
 
 While observability for teachers or trainers is already a huge benefit, one of the primary benefits of {TIaaS} is that your jobs get sent to dedicated compute resources, which won't be used by anyone else, during the period of the training. We will send all of the training jobs to pulsar if you have completed that tutorial, or one of the slurm destinations from the job configuration training.
 
-In order to achieve this, we first need some way to *sort* the jobs of the training users into these private queues, while letting the other jobs continue on. So let's create a *sorting hat* to figure out where jobs belong.
+In order to achieve this, we first need some way to *sort* the jobs of the training users into these private queues, while letting the other jobs continue on. So let's create a *traffic controller* to figure out where jobs belong.
 
 
 > <hands-on-title>Writing a dynamic job destination</hands-on-title>
@@ -332,7 +332,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    +    return app.job_config.get_destination('slurm')
 >    {% endraw %}
 >    ```
->    {: data-commit="Setup sorting hat for jobs"}
+>    {: data-commit="Setup traffic controller for jobs"}
 >
 >    This destination will check that the `user_email` is in a training group (role starting with `training-`).
 >
@@ -384,7 +384,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    ```
 >    {: data-commit="Setup job conf"}
 >
->    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available to be used in the `job_conf.yml.j2`. Additionally it will send all jobs through the sorting hat, but we want upload jobs to stay local. They should always run locally.
+>    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available to be used in the `job_conf.yml.j2`. Additionally it will send all jobs through the traffic controller, but we want upload jobs to stay local. They should always run locally.
 >
 > 6. Run the playbook
 >
