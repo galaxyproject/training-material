@@ -684,7 +684,7 @@ You can access the data via BioBlend ([`JobsClient.get_metrics`](https://bioblen
 
 {% snippet topics/admin/faqs/git-commit.md page=page %}
 
-{% snippet topics/admin/faqs/missed-something.md step=7 %}
+{% snippet topics/admin/faqs/missed-something.md step=8 %}
 
 ## Further Reading
 
