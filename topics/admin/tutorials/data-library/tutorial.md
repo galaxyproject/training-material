@@ -60,16 +60,16 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -8,6 +8,9 @@
->         - name: Install Dependencies
+>    @@ -27,6 +27,9 @@
+>         - name: Install Debian/Ubuntu specific dependencies
 >           package:
->             name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
+>             name: ['tmpreaper']
 >    +    - git:
 >    +        repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 >    +        dest: /libraries/
 >       roles:
->         - galaxyproject.postgresql
->         - role: galaxyproject.postgresql_objects
+>         - usegalaxy_eu.apptainer
+>         - galaxyproject.galaxy
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the git repository to the pre-tasks"}
@@ -84,15 +84,16 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -29,6 +29,8 @@ miniconda_manage_dependencies: false
->     
->     galaxy_config:
->       galaxy:
+>    @@ -78,6 +78,9 @@ galaxy_config:
+>         # Tool Dependencies
+>         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
+>         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
+>    +    # Data Library Directories
 >    +    library_import_dir: /libraries/admin
 >    +    user_library_import_dir: /libraries/user
->         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
->         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
->         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
+>       gravity:
+>         process_manager: systemd
+>         galaxy_root: "{{ galaxy_root }}/server"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the library import directories"}
@@ -281,6 +282,8 @@ That's it! You should be able to see your newly created data library in your Gal
 > ```
 > {: data-test="true"}
 {: .hidden}
+
+{% snippet topics/admin/faqs/library-permissions.md %}
 
 {% snippet topics/admin/faqs/missed-something.md step=6 %}
 

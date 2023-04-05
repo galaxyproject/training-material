@@ -51,13 +51,9 @@ Singularity is an alternative to Docker that is much friendlier for HPCs
 
 {% snippet topics/admin/faqs/git-gat-path.md tutorial="singularity" %}
 
-# Installing Singularity
+# Installing <del>Singularity</del>Apptainer
 
-First, we will install Singularity using Ansible. On most operating systems there is no package for singularity yet, so we must use a role which will compile it from source. If you're on CentOS7/8, it is available through the EPEL repository.
-
-> <tip-title>CentOS7</tip-title>
-> If you are using CentOS7, you can skip this hands-on section and instead install the `epel-release` and `singularity` system packages in your `pre_tasks`.
-{: .tip}
+First, we will install Singularity using Ansible.
 
 > <hands-on-title>Installing Singularity with Ansible</hands-on-title>
 >
@@ -67,17 +63,15 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -16,3 +16,7 @@
+>    @@ -16,3 +16,5 @@
 >       version: 0.0.1
 >     - src: galaxyproject.cvmfs
 >       version: 0.2.13
->    +- src: cyverse-ansible.singularity
->    +  version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
->    +- src: gantsign.golang
->    +  version: 2.6.3
+>    +- src: usegalaxy_eu.apptainer
+>    +  version: 0.0.1
 >    {% endraw %}
 >    ```
->    {: data-commit="Add golang and singulary ansible roles"}
+>    {: data-commit="Add apptainer ansible roles"}
 >
 >    {% snippet topics/admin/faqs/diffs.md %}
 >
@@ -90,43 +84,19 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 4. Specify which version of Singularity you want to install, in `group_vars/galaxyservers.yml`:
->
->    {% raw %}
->    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -143,6 +143,12 @@ nginx_ssl_role: usegalaxy_eu.certbot
->     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
->     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
->     
->    +# Golang
->    +golang_gopath: '/opt/workspace-go'
->    +# Singularity target version
->    +singularity_version: "3.7.4"
->    +singularity_go_path: "{{ golang_install_dir }}"
->    +
->     # TUS
->     galaxy_tusd_port: 1080
->     tusd_instances:
->    {% endraw %}
->    ```
->    {: data-commit="Configure golang and singularity"}
->
 > 4. Add the new roles to your `galaxy.yml` playbook, before the Galaxy server itself. We'll do this bceause it's a dependency of Galaxy to run, so it needs to be there before Galaxy starts.
 >
 >    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -14,6 +14,8 @@
->           become: true
->           become_user: postgres
->         - geerlingguy.pip
->    +    - gantsign.golang
->    +    - cyverse-ansible.singularity
+>    @@ -28,6 +28,7 @@
+>           package:
+>             name: ['tmpreaper']
+>       roles:
+>    +    - usegalaxy_eu.apptainer
 >         - galaxyproject.galaxy
->         - role: uchida.miniconda
+>         - role: galaxyproject.miniconda
 >           become: true
 >    {% endraw %}
 >    ```
@@ -146,7 +116,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```
->    > singularity run docker://hello-world
+>    > apptainer run docker://hello-world
 >    > ```
 >    {: .code-in}
 >
@@ -183,26 +153,29 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -29,6 +29,8 @@ miniconda_manage_dependencies: false
->     
->     galaxy_config:
->       galaxy:
->    +    dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
->    +    containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
+>    @@ -62,6 +62,9 @@ galaxy_config:
+>         tus_upload_store: /data/tus
+>         # CVMFS
 >         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
->         brand: "🧬🔬🚀"
->         admin_users: admin@example.org
->    @@ -87,6 +89,10 @@ galaxy_config:
->     galaxy_config_templates:
->       - src: templates/galaxy/config/job_conf.yml.j2
->         dest: "{{ galaxy_config.galaxy.job_config_file }}"
->    +  - src: templates/galaxy/config/container_resolvers_conf.xml.j2
+>    +    # Tool Dependencies
+>    +    dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
+>    +    containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
+>       gravity:
+>         process_manager: systemd
+>         galaxy_root: "{{ galaxy_root }}/server"
+>    @@ -85,6 +88,12 @@ galaxy_config:
+>               - job-handlers
+>               - workflow-schedulers
+>     
+>    +galaxy_config_templates:
+>    +  - src: templates/galaxy/config/container_resolvers_conf.yml.j2
 >    +    dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >    +  - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >    +    dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
->     
->     # systemd
->     galaxy_manage_systemd: true
+>    +
+>     # Certbot
+>     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
+>     certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the container and dependency resolvers"}
@@ -229,19 +202,24 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    ```
 >    {: data-commit="Configure the dependency resolvers"}
 >
-> 3. Create the new file `templates/galaxy/config/container_resolvers_conf.xml.j2`, this specifies the order in which to attempt container resolution.
+> 3. Create the new file `templates/galaxy/config/container_resolvers_conf.yml.j2`, this specifies the order in which to attempt container resolution.
 >
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/templates/galaxy/config/container_resolvers_conf.xml.j2
->    @@ -0,0 +1,6 @@
->    +<containers_resolvers>
->    +  <explicit_singularity />
->    +  <cached_mulled_singularity cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
->    +  <mulled_singularity auto_install="False" cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
->    +  <build_mulled_singularity auto_install="False" cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
->    +</containers_resolvers>
+>    +++ b/templates/galaxy/config/container_resolvers_conf.yml.j2
+>    @@ -0,0 +1,11 @@
+>    +container_resolvers:
+>    +  - type: cached_explicit_singularity
+>    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/explicit/"
+>    +  - type: cached_mulled_singularity
+>    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/mulled/"
+>    +  - type: mulled_singularity
+>    +    auto_install: False
+>    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/mulled/"
+>    +  - type: build_mulled_singularity
+>    +    auto_install: False
+>    +    cache_directory: "{{ galaxy_mutable_data_dir }}/cache/singularity/built/"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the container resolver"}
@@ -250,33 +228,34 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.yml.j2
->    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -4,10 +4,23 @@ runners:
->         workers: 4
->     
->     execution:
->    -  default: local_dest
->    +  default: singularity
->       environments:
->         local_dest:
->           runner: local_runner
->    +    singularity:
->    +      runner: local_runner
->    +      singularity_enabled: true
->    +      env:
->    +      # Ensuring a consistent collation environment is good for reproducibility.
->    +      - name: LC_ALL
->    +        value: C
->    +      # The cache directory holds the docker containers that get converted
->    +      - name: SINGULARITY_CACHEDIR
->    +        value: /tmp/singularity
->    +      # Singularity uses a temporary directory to build the squashfs filesystem
->    +      - name: SINGULARITY_TMPDIR
->    +        value: /tmp
->     
->     tools:
->     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -29,11 +29,24 @@ galaxy_config:
+>           handling:
+>             assign: ['db-skip-locked']
+>           execution:
+>    -        default: local_env
+>    +        default: singularity
+>             environments:
+>               local_env:
+>                 runner: local_runner
+>                 tmp_dir: true
+>    +          singularity:
+>    +            runner: local_runner
+>    +            singularity_enabled: true
+>    +            env:
+>    +            # Ensuring a consistent collation environment is good for reproducibility.
+>    +            - name: LC_ALL
+>    +              value: C
+>    +            # The cache directory holds the docker containers that get converted
+>    +            - name: SINGULARITY_CACHEDIR
+>    +              value: /tmp/singularity
+>    +            # Singularity uses a temporary directory to build the squashfs filesystem
+>    +            - name: SINGULARITY_TMPDIR
+>    +              value: /tmp
+>           tools:
+>             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>               environment: local_env
 >    {% endraw %}
 >    ```
 >    {: data-commit="Update the job_conf.yml with singularity destination"}
@@ -395,7 +374,7 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 >    galaxy_config:
 >      galaxy:
 >        ...
->        containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
+>        containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
 >    ```
 >{% endraw %}
 >
@@ -403,12 +382,12 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 >{% raw %}
 >    ```yaml
 >    galaxy_config_templates:
->      - src: templates/galaxy/config/container_resolvers_conf.xml.j2
->        dest: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
+>      - src: templates/galaxy/config/container_resolvers_conf.yml.j2
+>        dest: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
 >    ```
 >{% endraw %}
 >
-> 3. Create the new file `templates/galaxy/config/container_resolvers_conf.xml.j2`:
+> 3. Create the new file `templates/galaxy/config/container_resolvers_conf.yml.j2`:
 >{% raw %}
 >    ```xml
 >    <containers_resolvers>

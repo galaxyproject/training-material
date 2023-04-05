@@ -448,8 +448,7 @@ Galaxy is capable of talking to multiple databases through SQLAlchemy drivers. S
 
 PostgreSQL maintains its own user database apart from the system user database. By default, PostgreSQL uses the "peer" authentication method which allows access for system users with matching PostgreSQL usernames (other authentication mechanisms are available, see the [PostgreSQL Client Authentication documentation](https://www.postgresql.org/docs/current/static/client-authentication.html).
 
-For this tutorial, we will use the default "peer" authentication, so we need to create a PostgreSQL user matching the system user under which Galaxy will be running, i.e. `galaxy`. This is normally done with the PostgreSQL `createuser` command, and it must be run as the `postgres` user. In our case, we will use the `galaxyproject.postgresql_objects` role to handle this step. Additionally we're setting a couple of variables to control the automatic backups, they'll be placed in the `/data/backups` folder next to our user uploaded Galaxy data.
-
+For this tutorial, we will use the default "peer" authentication, so we need to create a PostgreSQL user matching the system user under which Galaxy will be running, i.e. `galaxy`. This is normally done with the PostgreSQL `createuser` command, and it must be run as the `postgres` user. In our case, we will use the `galaxyproject.postgresql_objects` role to handle this step.
 > <hands-on-title>Installing PostgreSQL</hands-on-title>
 >
 > 1. Create and edit `group_vars/dbservers.yml` and add some variables to configure PostgreSQL:
@@ -458,7 +457,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    ```diff
 >    --- /dev/null
 >    +++ b/group_vars/dbservers.yml
->    @@ -0,0 +1,10 @@
+>    @@ -0,0 +1,7 @@
 >    +---
 >    +# PostgreSQL
 >    +postgresql_objects_users:
@@ -466,9 +465,6 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    +postgresql_objects_databases:
 >    +  - name: "{{ galaxy_db_name }}"
 >    +    owner: "{{ galaxy_user_name }}"
->    +# PostgreSQL Backups
->    +postgresql_backup_dir: /data/backups
->    +postgresql_backup_local_dir: /var/lib/postgresql/backups
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add initial dbservers group variables file"}
@@ -2530,4 +2526,4 @@ If you've been following along you should have a production-ready Galaxy, secure
 
 {% snippet topics/admin/faqs/missed-something.md step=1 %}
 
-![diagram of galaxy setup with postgres, galaxy, nginx, gunicorn, storage, and compute shown attached to each other.](../../images/ansible-galaxy-intro-2.png "This approximately represents what you have setup today, NGINX proxies requests to Gunicorn which runs the Galaxy App. That talks to Postgres, and Storage, and the Compute handlers which interact with the storage. As we setup mules, the compute handlers are the same processes which respond to web requests for nginx.")
+![diagram of galaxy setup with postgres, galaxy, nginx, gunicorn, and storage.](../../images/ansible-galaxy-3.png "This approximately represents what you have setup today, NGINX proxies requests to Gunicorn which runs the Galaxy App. That talks to Postgres, and Storage.")

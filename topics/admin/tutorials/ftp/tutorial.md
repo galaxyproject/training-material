@@ -85,7 +85,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -38,3 +38,5 @@
+>    @@ -34,3 +34,5 @@
 >       version: 0.12.0
 >     - src: galaxyproject.tiaas2
 >       version: 2.1.3
@@ -110,7 +110,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -159,9 +159,11 @@ certbot_well_known_root: /srv/nginx/_well-known_root
+>    @@ -215,9 +215,11 @@ certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - nginx
 >       - rabbitmq
@@ -134,16 +134,16 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -100,6 +100,9 @@ galaxy_config:
->         outputs_to_working_directory: true
->         # TUS
->         tus_upload_store: /data/tus
+>    @@ -156,6 +156,9 @@ galaxy_config:
+>         # Monitoring
+>         statsd_host: localhost
+>         statsd_influxdb: true
 >    +    # FTP
 >    +    ftp_upload_dir: /data/uploads
 >    +    ftp_upload_site: "{{ inventory_hostname }}"
 >       gravity:
+>         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->         app_server: gunicorn
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add ftp vars in galaxy"}
@@ -156,7 +156,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -259,6 +259,27 @@ rabbitmq_users:
+>    @@ -309,6 +309,27 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
 >     
@@ -216,14 +216,14 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -33,6 +33,7 @@
+>    @@ -46,6 +46,7 @@
 >         - usegalaxy_eu.rabbitmqserver
 >         - galaxyproject.tiaas2
 >         - galaxyproject.nginx
 >    +    - galaxyproject.proftpd
+>         - galaxyproject.gxadmin
 >         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
->         - galaxyproject.gxadmin
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add role to playbook"}
