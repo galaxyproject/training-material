@@ -73,6 +73,29 @@ module Jekyll
         site.pages << page4
       }
 
+      page2 = PageWithoutAFile.new(site, "", "api/", "contributors.geojson")
+      page2.content = JSON.pretty_generate({
+        "type" => "FeatureCollection",
+        "features" => site.data['contributors']
+          .select{|k, v| v.has_key? 'location' }
+          .map{|k, v|
+            {
+              "type" => "Feature",
+              "geometry" => {"type" => "Point", "coordinates" => [v['location']['lon'], v['location']['lat']]},
+              "properties" => {
+                "name" => v.fetch('name', k),
+                "url" => "https://training.galaxyproject.org/training-material/hall-of-fame/#{k}/",
+                "joined" => v['joined'],
+                "orcid" => v['orcid'],
+                "id" => k,
+                "contact_for_training" => v.fetch('contact_for_training', false),
+              }
+            }
+          }
+      })
+      page2.data["layout"] = nil
+      site.pages << page2
+
       # Trigger the topic cache to generate if it hasn't already
       puts "[GTN/API] Tutorials"
       TopicFilter.topic_filter(site, 'does-not-matter')

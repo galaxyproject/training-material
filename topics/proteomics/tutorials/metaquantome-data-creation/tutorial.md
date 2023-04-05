@@ -105,7 +105,7 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >
 > 5. Add to each database a tag corresponding to the name of the input data (optional).
 > 6. Build a **Dataset list** for the four mzml files.
->    - Click the **Operations on multiple datasets** check box at the top of the history panel
+>    - Click the {% icon galaxy-selector %} **Select Items** check box at the top of the history panel
 >
 >    {% snippet faqs/galaxy/collections_build_list.md %}
 >
