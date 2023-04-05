@@ -110,7 +110,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -215,9 +215,11 @@ certbot_well_known_root: /srv/nginx/_well-known_root
+>    @@ -218,9 +218,11 @@ certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - nginx
 >       - rabbitmq
@@ -134,7 +134,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -156,6 +156,9 @@ galaxy_config:
+>    @@ -159,6 +159,9 @@ galaxy_config:
 >         # Monitoring
 >         statsd_host: localhost
 >         statsd_influxdb: true
@@ -156,7 +156,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -309,6 +309,27 @@ rabbitmq_users:
+>    @@ -312,6 +312,27 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
 >     

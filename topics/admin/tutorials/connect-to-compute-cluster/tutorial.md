@@ -124,7 +124,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -162,6 +162,16 @@ nginx_ssl_role: usegalaxy_eu.certbot
+>    @@ -165,6 +165,16 @@ nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
 >     
@@ -386,32 +386,32 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -27,6 +27,8 @@ galaxy_config:
->             local_runner:
->               load: galaxy.jobs.runners.local:LocalJobRunner
->               workers: 4
->    +        slurm:
->    +          load: galaxy.jobs.runners.slurm:SlurmJobRunner
->           handling:
->             assign: ['db-skip-locked']
->           execution:
->    @@ -48,6 +50,16 @@ galaxy_config:
->                 # Singularity uses a temporary directory to build the squashfs filesystem
->                 - name: SINGULARITY_TMPDIR
->                   value: /tmp
->    +          slurm:
->    +            runner: slurm
->    +            singularity_enabled: true
->    +            env:
->    +            - name: LC_ALL
->    +              value: C
->    +            - name: SINGULARITY_CACHEDIR
->    +              value: /tmp/singularity
->    +            - name: SINGULARITY_TMPDIR
->    +              value: /tmp
->           tools:
->             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->               environment: local_env
+>    @@ -19,6 +19,8 @@ galaxy_job_config:
+>         local_runner:
+>           load: galaxy.jobs.runners.local:LocalJobRunner
+>           workers: 4
+>    +    slurm:
+>    +      load: galaxy.jobs.runners.slurm:SlurmJobRunner
+>       handling:
+>         assign: ['db-skip-locked']
+>       execution:
+>    @@ -40,6 +42,16 @@ galaxy_job_config:
+>             # Singularity uses a temporary directory to build the squashfs filesystem
+>             - name: SINGULARITY_TMPDIR
+>               value: /tmp
+>    +      slurm:
+>    +        runner: slurm
+>    +        singularity_enabled: true
+>    +        env:
+>    +        - name: LC_ALL
+>    +          value: C
+>    +        - name: SINGULARITY_CACHEDIR
+>    +          value: /tmp/singularity
+>    +        - name: SINGULARITY_TMPDIR
+>    +          value: /tmp
+>       tools:
+>         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>           environment: local_env
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure slurm destination"}

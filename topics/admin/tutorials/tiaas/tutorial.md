@@ -90,7 +90,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -308,6 +308,11 @@ telegraf_plugins_extra:
+>    @@ -311,6 +311,11 @@ telegraf_plugins_extra:
 >           - data_format = "influx"
 >           - interval = "15s"
 >     
@@ -342,7 +342,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -190,6 +190,7 @@ galaxy_local_tools:
+>    @@ -193,6 +193,7 @@ galaxy_local_tools:
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py
 >     - map_resources.py
@@ -360,26 +360,26 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -42,7 +42,7 @@ galaxy_config:
->           handling:
->             assign: ['db-skip-locked']
->           execution:
->    -        default: singularity
->    +        default: traffic_controller
->             environments:
->               local_env:
->                 runner: local_runner
->    @@ -100,6 +100,10 @@ galaxy_config:
->                 rewrite_parameters: true
->                 transport: curl
->                 outputs_to_working_directory: false
->    +          # Next year this will be replaced with the TPV.
->    +          traffic_controller:
->    +            runner: dynamic
->    +            function: traffic_controller
->           resources:
->             default: default
->             groups:
+>    @@ -34,7 +34,7 @@ galaxy_job_config:
+>       handling:
+>         assign: ['db-skip-locked']
+>       execution:
+>    -    default: singularity
+>    +    default: traffic_controller
+>         environments:
+>           local_env:
+>             runner: local_runner
+>    @@ -92,6 +92,10 @@ galaxy_job_config:
+>             rewrite_parameters: true
+>             transport: curl
+>             outputs_to_working_directory: false
+>    +      # Next year this will be replaced with the TPV.
+>    +      traffic_controller:
+>    +        runner: dynamic
+>    +        function: traffic_controller
+>       resources:
+>         default: default
+>         groups:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Setup job conf"}

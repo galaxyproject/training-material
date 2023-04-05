@@ -89,7 +89,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -123,6 +123,9 @@ galaxy_config_templates:
+>    @@ -126,6 +126,9 @@ galaxy_config_templates:
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
@@ -150,29 +150,29 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -60,9 +60,22 @@ galaxy_config:
->                   value: /tmp/singularity
->                 - name: SINGULARITY_TMPDIR
->                   value: /tmp
->    +          slurm-2c:
->    +            runner: slurm
->    +            singularity_enabled: true
->    +            native_specification: --nodes=1 --ntasks=1 --cpus-per-task=2
->    +            env:
->    +            - name: LC_ALL
->    +              value: C
->    +            - name: SINGULARITY_CACHEDIR
->    +              value: /tmp/singularity
->    +            - name: SINGULARITY_TMPDIR
->    +              value: /tmp
->           tools:
->             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->               environment: local_env
->    +        - id: testing
->    +          environment: slurm-2c
->         # SQL Performance
->         slow_query_log_threshold: 5
->         enable_per_request_sql_debugging: true
+>    @@ -52,9 +52,22 @@ galaxy_job_config:
+>               value: /tmp/singularity
+>             - name: SINGULARITY_TMPDIR
+>               value: /tmp
+>    +      slurm-2c:
+>    +        runner: slurm
+>    +        singularity_enabled: true
+>    +        native_specification: --nodes=1 --ntasks=1 --cpus-per-task=2
+>    +        env:
+>    +        - name: LC_ALL
+>    +          value: C
+>    +        - name: SINGULARITY_CACHEDIR
+>    +          value: /tmp/singularity
+>    +        - name: SINGULARITY_TMPDIR
+>    +          value: /tmp
+>       tools:
+>         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>           environment: local_env
+>    +    - id: testing
+>    +      environment: slurm-2c
+>     
+>     galaxy_config:
+>       galaxy:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure testing tool in job conf"}
@@ -253,7 +253,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -138,6 +138,8 @@ galaxy_config_templates:
+>    @@ -141,6 +141,8 @@ galaxy_config_templates:
 >     
 >     galaxy_local_tools:
 >     - testing.xml
@@ -272,16 +272,16 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -71,6 +71,9 @@ galaxy_config:
->                   value: /tmp/singularity
->                 - name: SINGULARITY_TMPDIR
->                   value: /tmp
->    +          dynamic_admin_only:
->    +            runner: dynamic
->    +            function: admin_only
->           tools:
->             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->               environment: local_env
+>    @@ -63,6 +63,9 @@ galaxy_job_config:
+>               value: /tmp/singularity
+>             - name: SINGULARITY_TMPDIR
+>               value: /tmp
+>    +      dynamic_admin_only:
+>    +        runner: dynamic
+>    +        function: admin_only
+>       tools:
+>         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>           environment: local_env
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add dynamic admin only destination"}
@@ -294,15 +294,15 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -78,7 +78,7 @@ galaxy_config:
->             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->               environment: local_env
->             - id: testing
->    -          environment: slurm-2c
->    +          environment: dynamic_admin_only
->         # SQL Performance
->         slow_query_log_threshold: 5
->         enable_per_request_sql_debugging: true
+>    @@ -70,7 +70,7 @@ galaxy_job_config:
+>         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>           environment: local_env
+>         - id: testing
+>    -      environment: slurm-2c
+>    +      environment: dynamic_admin_only
+>     
+>     galaxy_config:
+>       galaxy:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Send testing tool to the dynamic admin only destination."}
@@ -367,7 +367,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -110,6 +110,8 @@ galaxy_config:
+>    @@ -113,6 +113,8 @@ galaxy_config:
 >         # Data Library Directories
 >         library_import_dir: /libraries/admin
 >         user_library_import_dir: /libraries/user
@@ -376,7 +376,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->    @@ -138,6 +140,8 @@ galaxy_config_templates:
+>    @@ -141,6 +143,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
@@ -396,22 +396,22 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -74,11 +74,14 @@ galaxy_config:
->               dynamic_admin_only:
->                 runner: dynamic
->                 function: admin_only
->    +          dtd:
->    +            runner: dynamic
->    +            type: dtd
->           tools:
->             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->               environment: local_env
->             - id: testing
->    -          environment: dynamic_admin_only
->    +          environment: dtd
->         # SQL Performance
->         slow_query_log_threshold: 5
->         enable_per_request_sql_debugging: true
+>    @@ -66,11 +66,14 @@ galaxy_job_config:
+>           dynamic_admin_only:
+>             runner: dynamic
+>             function: admin_only
+>    +      dtd:
+>    +        runner: dynamic
+>    +        type: dtd
+>       tools:
+>         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>           environment: local_env
+>         - id: testing
+>    -      environment: dynamic_admin_only
+>    +      environment: dtd
+>     
+>     galaxy_config:
+>       galaxy:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure dtd in job conf"}
@@ -483,7 +483,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -145,6 +145,8 @@ galaxy_config_templates:
+>    @@ -148,6 +148,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >       - src: templates/galaxy/config/tool_destinations.yml
 >         dest: "{{ galaxy_config.galaxy.tool_destinations_config_file }}"
@@ -502,18 +502,18 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -77,6 +77,11 @@ galaxy_config:
->               dtd:
->                 runner: dynamic
->                 type: dtd
->    +      resources:
->    +        default: default
->    +        groups:
->    +          default: []
->    +          testing: [cores, time]
->           tools:
->             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->               environment: local_env
+>    @@ -69,6 +69,11 @@ galaxy_job_config:
+>           dtd:
+>             runner: dynamic
+>             type: dtd
+>    +  resources:
+>    +    default: default
+>    +    groups:
+>    +      default: []
+>    +      testing: [cores, time]
+>       tools:
+>         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>           environment: local_env
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure resources in job conf"}
@@ -527,16 +527,16 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -86,7 +86,8 @@ galaxy_config:
->             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->               environment: local_env
->             - id: testing
->    -          environment: dtd
->    +          environment: dynamic_cores_time
->    +          resources: testing
->         # SQL Performance
->         slow_query_log_threshold: 5
->         enable_per_request_sql_debugging: true
+>    @@ -78,7 +78,8 @@ galaxy_job_config:
+>         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>           environment: local_env
+>         - id: testing
+>    -      environment: dtd
+>    +      environment: dynamic_cores_time
+>    +      resources: testing
+>     
+>     galaxy_config:
+>       galaxy:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure resources in job conf"}
@@ -547,16 +547,16 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -77,6 +77,9 @@ galaxy_config:
->               dtd:
->                 runner: dynamic
->                 type: dtd
->    +          dynamic_cores_time:
->    +            runner: dynamic
->    +            function: dynamic_cores_time
->           resources:
->             default: default
->             groups:
+>    @@ -69,6 +69,9 @@ galaxy_job_config:
+>           dtd:
+>             runner: dynamic
+>             type: dtd
+>    +      dynamic_cores_time:
+>    +        runner: dynamic
+>    +        function: dynamic_cores_time
+>       resources:
+>         default: default
+>         groups:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add dynamic_cores_time destination"}
@@ -643,7 +643,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -124,6 +124,7 @@ galaxy_config:
+>    @@ -127,6 +127,7 @@ galaxy_config:
 >         user_library_import_dir: /libraries/user
 >         # Tool Destination Configuration
 >         tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
@@ -651,7 +651,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >       gravity:
 >         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->    @@ -161,6 +162,7 @@ galaxy_local_tools:
+>    @@ -164,6 +165,7 @@ galaxy_local_tools:
 >     - testing.xml
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py
