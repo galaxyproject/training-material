@@ -278,6 +278,8 @@ post_tasks:
 > Please consider communicating **very well** with your users what the data backup policy is.
 {: .tip}
 
+{% snippet topics/admin/faqs/missed-something.md step=2 %}
+
 # Restoration
 
 Sometimes failures happen! We're sorry you have to read this section.

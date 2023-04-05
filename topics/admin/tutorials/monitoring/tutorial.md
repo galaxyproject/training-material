@@ -891,7 +891,7 @@ You can also import a [copy of the dashboard]({{ site.baseurl }}{{ page.dir }}da
 
 {% snippet topics/admin/faqs/git-commit.md page=page %}
 
-{% snippet topics/admin/faqs/missed-something.md step=11 %}
+{% snippet topics/admin/faqs/missed-something.md step=12 %}
 
 # Conclusion
 

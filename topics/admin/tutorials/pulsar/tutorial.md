@@ -846,7 +846,7 @@ How awesome is that? Pulsar in another continent with reference data automatical
 
 {% snippet topics/admin/faqs/git-commit.md page=page %}
 
-{% snippet topics/admin/faqs/missed-something.md step=9 %}
+{% snippet topics/admin/faqs/missed-something.md step=10 %}
 
 ## Retries of the staging actions
 
