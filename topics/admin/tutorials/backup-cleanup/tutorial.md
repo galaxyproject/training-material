@@ -72,10 +72,10 @@ tutorial]({% link topics/admin/tutorials/gxadmin/tutorial.md %}).
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -12,3 +12,5 @@
->       version: 0.3.0
+>    @@ -10,3 +10,5 @@
+>       version: 0.3.1
 >     - src: usegalaxy_eu.certbot
->       version: 0.1.5
+>       version: 0.1.7
 >    +- src: galaxyproject.gxadmin
 >    +  version: 0.0.8
 >    {% endraw %}
@@ -97,9 +97,9 @@ tutorial]({% link topics/admin/tutorials/gxadmin/tutorial.md %}).
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -19,3 +19,4 @@
+>    @@ -27,3 +27,4 @@
 >           become: true
->           become_user: "{{ galaxy_user.name }}"
+>           become_user: "{{ galaxy_user_name }}"
 >         - galaxyproject.nginx
 >    +    - galaxyproject.gxadmin
 >    {% endraw %}
@@ -112,8 +112,8 @@ tutorial]({% link topics/admin/tutorials/gxadmin/tutorial.md %}).
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -20,3 +20,11 @@
->           become_user: "{{ galaxy_user.name }}"
+>    @@ -28,3 +28,11 @@
+>           become_user: "{{ galaxy_user_name }}"
 >         - galaxyproject.nginx
 >         - galaxyproject.gxadmin
 >    +  post_tasks:
@@ -154,10 +154,10 @@ Before we begin backing up our Galaxy data, let's set up automated cleanups to e
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -8,6 +8,12 @@
+>    @@ -21,6 +21,12 @@
 >         - name: Install Dependencies
 >           package:
->             name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
+>             name: ['acl', 'bzip2', 'git', 'make', 'tar', 'python3-venv', 'python3-setuptools']
 >    +    - name: Install RHEL/CentOS/Rocky specific dependencies
 >    +      package:
 >    +        name: ['tmpwatch']
@@ -165,8 +165,8 @@ Before we begin backing up our Galaxy data, let's set up automated cleanups to e
 >    +      package:
 >    +        name: ['tmpreaper']
 >       roles:
->         - galaxyproject.postgresql
->         - role: galaxyproject.postgresql_objects
+>         - galaxyproject.galaxy
+>         - role: galaxyproject.miniconda
 >    {% endraw %}
 >    ```
 >    {: data-commit="Install tmpwatch/tmpreaper"}
@@ -176,14 +176,14 @@ Before we begin backing up our Galaxy data, let's set up automated cleanups to e
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -15,6 +15,7 @@ postgresql_objects_databases:
+>    @@ -2,6 +2,7 @@
 >     galaxy_create_user: true
 >     galaxy_separate_privileges: true
 >     galaxy_manage_paths: true
 >    +galaxy_manage_cleanup: true
 >     galaxy_layout: root-dir
 >     galaxy_root: /srv/galaxy
->     galaxy_user: {name: galaxy, shell: /bin/bash}
+>     galaxy_user: {name: "{{ galaxy_user_name }}", shell: /bin/bash}
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure automated cleanup"}
@@ -232,19 +232,16 @@ We're setting a couple of variables to control the automatic backups, they'll be
 > 1. Edit `group_vars/galaxyservers.yml` and add some variables to configure PostgreSQL:
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -11,6 +11,10 @@ postgresql_objects_databases:
->       - name: galaxy
->         owner: galaxy
->     
+>    --- a/group_vars/dbservers.yml
+>    +++ b/group_vars/dbservers.yml
+>    @@ -5,3 +5,7 @@ postgresql_objects_users:
+>     postgresql_objects_databases:
+>       - name: "{{ galaxy_db_name }}"
+>         owner: "{{ galaxy_user_name }}"
+>    +
 >    +# PostgreSQL Backups
 >    +postgresql_backup_dir: /data/backups
 >    +postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
->    +
->     # Galaxy
->     galaxy_create_user: true
->     galaxy_separate_privileges: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add backups"}

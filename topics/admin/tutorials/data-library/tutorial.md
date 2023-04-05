@@ -60,7 +60,7 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -14,6 +14,9 @@
+>    @@ -27,6 +27,9 @@
 >         - name: Install Debian/Ubuntu specific dependencies
 >           package:
 >             name: ['tmpreaper']
@@ -68,8 +68,8 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    +        repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 >    +        dest: /libraries/
 >       roles:
->         - galaxyproject.postgresql
->         - role: galaxyproject.postgresql_objects
+>         - usegalaxy_eu.apptainer
+>         - galaxyproject.galaxy
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the git repository to the pre-tasks"}
@@ -84,16 +84,16 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -67,6 +67,9 @@ galaxy_config:
->         outputs_to_working_directory: true
->         # TUS
->         tus_upload_store: /data/tus
+>    @@ -78,6 +78,9 @@ galaxy_config:
+>         # Tool Dependencies
+>         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
+>         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
 >    +    # Data Library Directories
 >    +    library_import_dir: /libraries/admin
 >    +    user_library_import_dir: /libraries/user
 >       gravity:
+>         process_manager: systemd
 >         galaxy_root: "{{ galaxy_root }}/server"
->         app_server: gunicorn
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the library import directories"}

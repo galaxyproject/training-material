@@ -183,7 +183,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -16,3 +16,5 @@
+>    @@ -14,3 +14,5 @@
 >       version: 0.0.8
 >     - name: galaxyproject.tusd
 >       version: 0.0.1
@@ -271,9 +271,13 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 >    {% raw %}
 >    ```diff
->    --- /dev/null
+>    --- a/group_vars/all.yml
 >    +++ b/group_vars/all.yml
->    @@ -0,0 +1,4 @@
+>    @@ -6,3 +6,8 @@ certbot_virtualenv_package_name: python3-venv     # usegalaxy_eu.certbot
+>     # Common variables needed by all hosts
+>     galaxy_user_name: galaxy
+>     galaxy_db_name: galaxy
+>    +
 >    +# CVMFS vars
 >    +cvmfs_role: client
 >    +galaxy_cvmfs_repos_enabled: config-repo
@@ -305,7 +309,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -27,6 +27,7 @@
+>    @@ -35,6 +35,7 @@
 >         - galaxyproject.nginx
 >         - galaxyproject.gxadmin
 >         - galaxyproject.tusd
@@ -502,14 +506,15 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -31,6 +31,7 @@ miniconda_manage_dependencies: false
->     
->     galaxy_config:
->       galaxy:
+>    @@ -60,6 +60,8 @@ galaxy_config:
+>         outputs_to_working_directory: true
+>         # TUS
+>         tus_upload_store: /data/tus
+>    +    # CVMFS
 >    +    tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
->         brand: "🧬🔬🚀"
->         admin_users: admin@example.org
->         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
+>       gravity:
+>         process_manager: systemd
+>         galaxy_root: "{{ galaxy_root }}/server"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add tool_data_table_config_path to group variables" data-ref="gvconf"}

@@ -457,7 +457,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    ```diff
 >    --- /dev/null
 >    +++ b/group_vars/dbservers.yml
->    @@ -0,0 +1,10 @@
+>    @@ -0,0 +1,7 @@
 >    +---
 >    +# PostgreSQL
 >    +postgresql_objects_users:
@@ -948,7 +948,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -23,3 +23,14 @@ galaxy_force_checkout: true
+>    @@ -10,3 +10,13 @@ galaxy_force_checkout: true
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >     miniconda_version: 4.12.0
 >     miniconda_channels: ['conda-forge', 'defaults']

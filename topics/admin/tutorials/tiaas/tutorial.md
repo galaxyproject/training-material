@@ -63,7 +63,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -34,3 +34,5 @@
+>    @@ -32,3 +32,5 @@
 >       version: 0.14.2
 >     - src: dj-wasabi.telegraf
 >       version: 0.12.0
@@ -90,7 +90,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -242,6 +242,11 @@ telegraf_plugins_extra:
+>    @@ -308,6 +308,11 @@ telegraf_plugins_extra:
 >           - data_format = "influx"
 >           - interval = "15s"
 >     
@@ -110,20 +110,21 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -8,6 +8,7 @@ pip_package: python3-pip                               # geerlingguy.pip
+>    --- a/group_vars/dbservers.yml
+>    +++ b/group_vars/dbservers.yml
+>    @@ -3,6 +3,7 @@
 >     postgresql_objects_users:
->       - name: galaxy
+>       - name: "{{ galaxy_user_name }}"
 >       - name: telegraf
 >    +  - name: tiaas
 >     postgresql_objects_databases:
->       - name: galaxy
->         owner: galaxy
->    @@ -16,6 +17,26 @@ postgresql_objects_privileges:
+>       - name: "{{ galaxy_db_name }}"
+>         owner: "{{ galaxy_user_name }}"
+>    @@ -11,7 +12,26 @@ postgresql_objects_privileges:
 >         roles: telegraf
 >         privs: SELECT
 >         objs: ALL_IN_SCHEMA
+>    -
 >    +  - database: galaxy
 >    +    roles: tiaas
 >    +    objs: galaxy_user,galaxy_session,job,history,workflow,workflow_invocation
@@ -171,8 +172,8 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -36,6 +36,7 @@
->           become_user: "{{ galaxy_user.name }}"
+>    @@ -44,6 +44,7 @@
+>           become_user: "{{ galaxy_user_name }}"
 >         - geerlingguy.docker
 >         - usegalaxy_eu.rabbitmqserver
 >    +    - galaxyproject.tiaas2
@@ -308,13 +309,13 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/templates/galaxy/dynamic_job_rules/hogwarts.py
+>    +++ b/templates/galaxy/dynamic_job_rules/traffic.py
 >    @@ -0,0 +1,19 @@
 >    +from galaxy.jobs import JobDestination
 >    +from galaxy.jobs.mapper import JobMappingException
 >    +import os
 >    +
->    +def sorting_hat(app, user):
+>    +def traffic_controller(app, user):
 >    +    # Check that the user is not anonymous
 >    +    if not user:
 >    +        return app.job_config.get_destination('slurm')
@@ -341,14 +342,14 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -141,6 +141,7 @@ galaxy_local_tools:
+>    @@ -190,6 +190,7 @@ galaxy_local_tools:
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py
 >     - map_resources.py
->    +- hogwarts.py
+>    +- traffic.py
 >     
->     # systemd
->     galaxy_manage_systemd: true
+>     # Certbot
+>     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add to list of deployed rules"}
@@ -357,28 +358,28 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.yml.j2
->    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -16,7 +16,7 @@ runners:
->         manager: _default_
->     
->     execution:
->    -  default: slurm
->    +  default: sorting_hat
->       environments:
->         local_dest:
->           runner: local_runner
->    @@ -73,6 +73,10 @@ execution:
->         dynamic_cores_time:
->           runner: dynamic
->           function: dynamic_cores_time
->    +    # Next year this will be replaced with the TPV.
->    +    sorting_hat:
->    +      runner: dynamic
->    +      function: sorting_hat
->     
->     resources:
->       default: default
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -42,7 +42,7 @@ galaxy_config:
+>           handling:
+>             assign: ['db-skip-locked']
+>           execution:
+>    -        default: singularity
+>    +        default: traffic_controller
+>             environments:
+>               local_env:
+>                 runner: local_runner
+>    @@ -100,6 +100,10 @@ galaxy_config:
+>                 rewrite_parameters: true
+>                 transport: curl
+>                 outputs_to_working_directory: false
+>    +          # Next year this will be replaced with the TPV.
+>    +          traffic_controller:
+>    +            runner: dynamic
+>    +            function: traffic_controller
+>           resources:
+>             default: default
+>             groups:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Setup job conf"}

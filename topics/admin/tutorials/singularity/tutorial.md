@@ -63,7 +63,7 @@ First, we will install Singularity using Ansible.
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -18,3 +18,5 @@
+>    @@ -16,3 +16,5 @@
 >       version: 0.0.1
 >     - src: galaxyproject.cvmfs
 >       version: 0.2.13
@@ -90,13 +90,13 @@ First, we will install Singularity using Ansible.
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -20,6 +20,7 @@
->           become: true
->           become_user: postgres
->         - geerlingguy.pip
+>    @@ -28,6 +28,7 @@
+>           package:
+>             name: ['tmpreaper']
+>       roles:
 >    +    - usegalaxy_eu.apptainer
 >         - galaxyproject.galaxy
->         - role: uchida.miniconda
+>         - role: galaxyproject.miniconda
 >           become: true
 >    {% endraw %}
 >    ```
@@ -153,26 +153,29 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -31,6 +31,8 @@ miniconda_manage_dependencies: false
->     
->     galaxy_config:
->       galaxy:
+>    @@ -62,6 +62,9 @@ galaxy_config:
+>         tus_upload_store: /data/tus
+>         # CVMFS
+>         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
+>    +    # Tool Dependencies
 >    +    dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
 >    +    containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
->         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
->         brand: "🧬🔬🚀"
->         admin_users: admin@example.org
->    @@ -89,6 +91,10 @@ galaxy_config:
->     galaxy_config_templates:
->       - src: templates/galaxy/config/job_conf.yml.j2
->         dest: "{{ galaxy_config.galaxy.job_config_file }}"
+>       gravity:
+>         process_manager: systemd
+>         galaxy_root: "{{ galaxy_root }}/server"
+>    @@ -85,6 +88,12 @@ galaxy_config:
+>               - job-handlers
+>               - workflow-schedulers
+>     
+>    +galaxy_config_templates:
 >    +  - src: templates/galaxy/config/container_resolvers_conf.yml.j2
 >    +    dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >    +  - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >    +    dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
->     
->     # systemd
->     galaxy_manage_systemd: true
+>    +
+>     # Certbot
+>     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
+>     certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the container and dependency resolvers"}
@@ -225,33 +228,34 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.yml.j2
->    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -4,10 +4,23 @@ runners:
->         workers: 4
->     
->     execution:
->    -  default: local_dest
->    +  default: singularity
->       environments:
->         local_dest:
->           runner: local_runner
->    +    singularity:
->    +      runner: local_runner
->    +      singularity_enabled: true
->    +      env:
->    +      # Ensuring a consistent collation environment is good for reproducibility.
->    +      - name: LC_ALL
->    +        value: C
->    +      # The cache directory holds the docker containers that get converted
->    +      - name: SINGULARITY_CACHEDIR
->    +        value: /tmp/singularity
->    +      # Singularity uses a temporary directory to build the squashfs filesystem
->    +      - name: SINGULARITY_TMPDIR
->    +        value: /tmp
->     
->     tools:
->     - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -29,11 +29,24 @@ galaxy_config:
+>           handling:
+>             assign: ['db-skip-locked']
+>           execution:
+>    -        default: local_env
+>    +        default: singularity
+>             environments:
+>               local_env:
+>                 runner: local_runner
+>                 tmp_dir: true
+>    +          singularity:
+>    +            runner: local_runner
+>    +            singularity_enabled: true
+>    +            env:
+>    +            # Ensuring a consistent collation environment is good for reproducibility.
+>    +            - name: LC_ALL
+>    +              value: C
+>    +            # The cache directory holds the docker containers that get converted
+>    +            - name: SINGULARITY_CACHEDIR
+>    +              value: /tmp/singularity
+>    +            # Singularity uses a temporary directory to build the squashfs filesystem
+>    +            - name: SINGULARITY_TMPDIR
+>    +              value: /tmp
+>           tools:
+>             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>               environment: local_env
 >    {% endraw %}
 >    ```
 >    {: data-commit="Update the job_conf.yml with singularity destination"}

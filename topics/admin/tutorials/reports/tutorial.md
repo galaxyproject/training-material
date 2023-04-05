@@ -70,10 +70,10 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -123,6 +123,11 @@ galaxy_config:
+>    @@ -178,6 +178,11 @@ galaxy_config:
 >             pools:
->               - job-handler
->               - workflow-scheduler
+>               - job-handlers
+>               - workflow-schedulers
 >    +    reports:
 >    +      enable: true
 >    +      url_prefix: /reports
@@ -81,14 +81,13 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    +      config_file: "{{ galaxy_config_dir }}/reports.yml"
 >     
 >     galaxy_config_templates:
->       - src: templates/galaxy/config/job_conf.yml.j2
->    @@ -135,6 +140,9 @@ galaxy_config_templates:
+>       - src: templates/galaxy/config/container_resolvers_conf.yml.j2
+>    @@ -188,6 +193,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.tool_destinations_config_file }}"
 >       - src: templates/galaxy/config/job_resource_params_conf.xml.j2
 >         dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
 >    +  - src: templates/galaxy/config/reports.yml
 >    +    dest: "{{ galaxy_config.gravity.reports.config_file }}"
->    +
 >     
 >     galaxy_local_tools:
 >     - testing.xml

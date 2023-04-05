@@ -74,7 +74,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -20,3 +20,7 @@
+>    @@ -18,3 +18,7 @@
 >       version: 0.2.13
 >     - src: usegalaxy_eu.apptainer
 >       version: 0.0.1
@@ -105,15 +105,15 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -18,6 +18,8 @@
+>    @@ -31,6 +31,8 @@
 >             repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 >             dest: /libraries/
 >       roles:
 >    +    - galaxyproject.repos
 >    +    - galaxyproject.slurm
->         - galaxyproject.postgresql
->         - role: galaxyproject.postgresql_objects
->           become: true
+>         - usegalaxy_eu.apptainer
+>         - galaxyproject.galaxy
+>         - role: galaxyproject.miniconda
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add the repos and slurm roles"}
@@ -124,7 +124,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -154,6 +154,16 @@ nginx_ssl_role: usegalaxy_eu.certbot
+>    @@ -162,6 +162,16 @@ nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
 >     
@@ -325,7 +325,7 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -17,6 +17,10 @@
+>    @@ -30,6 +30,10 @@
 >         - git:
 >             repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 >             dest: /libraries/
@@ -366,14 +366,14 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -101,6 +101,7 @@ galaxy_config_templates:
->     
->     # systemd
->     galaxy_manage_systemd: true
->    +galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"]
->     
->     # Certbot
->     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
+>    @@ -8,6 +8,7 @@ galaxy_root: /srv/galaxy
+>     galaxy_user: {name: "{{ galaxy_user_name }}", shell: /bin/bash}
+>     galaxy_commit_id: release_23.0
+>     galaxy_force_checkout: true
+>    +galaxy_systemd_env: [DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"] # TODO(natefoo) fix plz
+>     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
+>     miniconda_version: 4.12.0
+>     miniconda_channels: ['conda-forge', 'defaults']
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure DRMAA_LIBRARY_PATH"}
@@ -384,34 +384,34 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.yml.j2
->    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -2,12 +2,24 @@ runners:
->       local_runner:
->         load: galaxy.jobs.runners.local:LocalJobRunner
->         workers: 4
->    +  slurm:
->    +    load: galaxy.jobs.runners.slurm:SlurmJobRunner
->     
->     execution:
->    -  default: singularity
->    +  default: slurm
->       environments:
->         local_dest:
->           runner: local_runner
->    +    slurm:
->    +      runner: slurm
->    +      singularity_enabled: true
->    +      env:
->    +      - name: LC_ALL
->    +        value: C
->    +      - name: SINGULARITY_CACHEDIR
->    +        value: /tmp/singularity
->    +      - name: SINGULARITY_TMPDIR
->    +        value: /tmp
->         singularity:
->           runner: local_runner
->           singularity_enabled: true
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -27,6 +27,8 @@ galaxy_config:
+>             local_runner:
+>               load: galaxy.jobs.runners.local:LocalJobRunner
+>               workers: 4
+>    +        slurm:
+>    +          load: galaxy.jobs.runners.slurm:SlurmJobRunner
+>           handling:
+>             assign: ['db-skip-locked']
+>           execution:
+>    @@ -48,6 +50,16 @@ galaxy_config:
+>                 # Singularity uses a temporary directory to build the squashfs filesystem
+>                 - name: SINGULARITY_TMPDIR
+>                   value: /tmp
+>    +          slurm:
+>    +            runner: slurm
+>    +            singularity_enabled: true
+>    +            env:
+>    +            - name: LC_ALL
+>    +              value: C
+>    +            - name: SINGULARITY_CACHEDIR
+>    +              value: /tmp/singularity
+>    +            - name: SINGULARITY_TMPDIR
+>    +              value: /tmp
+>           tools:
+>             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>               environment: local_env
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure slurm destination"}
@@ -603,7 +603,7 @@ These include very basic submission parameters. We want more information!
 >    ```diff
 >    --- a/group_vars/all.yml
 >    +++ b/group_vars/all.yml
->    @@ -2,3 +2,13 @@
+>    @@ -11,3 +11,13 @@ galaxy_db_name: galaxy
 >     cvmfs_role: client
 >     galaxy_cvmfs_repos_enabled: config-repo
 >     cvmfs_quota_limit: 500
