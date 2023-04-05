@@ -393,4 +393,6 @@ gxadmin iquery workflow-invocation-status
 
 There are a lot of queries, all tailored to specific use cases, some of these may be interesting for you, some may not. These are [all documented](https://github.com/usegalaxy-eu/gxadmin#commands) with example inputs and outputs in the gxadmin readme, and help is likewise available from the command line.
 
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
 {% snippet topics/admin/faqs/missed-something.md step=10 %}

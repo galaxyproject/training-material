@@ -682,6 +682,8 @@ There is not a good rule we can tell you, just choose what you think is useful o
 You can access the data via BioBlend ([`JobsClient.get_metrics`](https://bioblend.readthedocs.io/en/latest/api_docs/galaxy/all.html#bioblend.galaxy.jobs.JobsClient.get_metrics)), or via SQL with [`gxadmin`](https://usegalaxy-eu.github.io/gxadmin/#/README.query?id=query-tool-metrics).
 
 
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
 {% snippet topics/admin/faqs/missed-something.md step=7 %}
 
 ## Further Reading

@@ -889,6 +889,8 @@ Run some tools in Galaxy, try to generate a large number of jobs. It is relative
 
 You can also import a [copy of the dashboard]({{ site.baseurl }}{{ page.dir }}dashboard.json).
 
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
 {% snippet topics/admin/faqs/missed-something.md step=11 %}
 
 # Conclusion

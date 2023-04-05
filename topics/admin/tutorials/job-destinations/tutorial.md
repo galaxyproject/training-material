@@ -722,6 +722,8 @@ The cores parameter can be verified from the output of the tool. The walltime ca
 > ```
 {: .code-out}
 
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
 {% snippet topics/admin/faqs/missed-something.md step=8 %}
 
 ## Further Reading

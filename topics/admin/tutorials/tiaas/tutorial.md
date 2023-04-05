@@ -409,4 +409,6 @@ Congratulations! you have now set up {TIaaS} on your Galaxy server.
 > {: data-test="true"}
 {: .hidden}
 
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
 {% snippet topics/admin/faqs/missed-something.md step=12 %}

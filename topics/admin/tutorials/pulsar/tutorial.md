@@ -844,6 +844,8 @@ You'll notice that the Pulsar server has received the job (all the way in Austra
 
 How awesome is that? Pulsar in another continent with reference data automatically from CVMFS :)
 
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
 {% snippet topics/admin/faqs/missed-something.md step=9 %}
 
 ## Retries of the staging actions

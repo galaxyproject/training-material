@@ -394,4 +394,6 @@ It's working!
 
 Congratulations! Let your users know this is an option, many of them will prefer to start large uploads from an FTP client.
 
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
 {% snippet topics/admin/faqs/missed-something.md step=14 %}
