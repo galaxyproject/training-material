@@ -137,4 +137,6 @@ The reports application is included with the Galaxy codebase and this tutorial a
 > But notice that your Reports server is not secured! Check out the [External Authentication]({% link topics/admin/tutorials/external-auth/tutorial.md %}) tutorial for information on securing Reports.
 {: .comment}
 
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
 {% snippet topics/admin/faqs/missed-something.md step=13 %}

@@ -411,4 +411,6 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 
 -->
 
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
 {% snippet topics/admin/faqs/missed-something.md step=3 %}

@@ -2535,6 +2535,8 @@ It's very possible to do this piecemeal, taking one component at a time to ansib
 
 If you've been following along you should have a production-ready Galaxy, secured, everything ready to go.
 
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
 {% snippet topics/admin/faqs/missed-something.md step=1 %}
 
 ![diagram of galaxy setup with postgres, galaxy, nginx, gunicorn, and storage.](../../images/ansible-galaxy-3.png "This approximately represents what you have setup today, NGINX proxies requests to Gunicorn which runs the Galaxy App. That talks to Postgres, and Storage.")
