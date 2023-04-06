@@ -88,7 +88,7 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 >    +  version: 0.0.1
 >    {% endraw %}
 >    ```
->    {: data-commit="Add golang and apptainer ansible roles"}
+>    {: data-commit="Add apptainer ansible roles"}
 >
 >    {% snippet topics/admin/faqs/diffs.md %}
 >
@@ -101,28 +101,6 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 4. Specify which version of Apptainer you want to install, in `group_vars/galaxyservers.yml`:
->
->    {% raw %}
->    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -145,6 +145,12 @@ nginx_ssl_role: usegalaxy_eu.certbot
->     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
->     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
->     
->    +# Golang
->    +golang_gopath: '/opt/workspace-go'
->    +# Apptainer target version
->    +singularity_version: "3.7.4"
->    +singularity_go_path: "{{ golang_install_dir }}"
->    +
->     # TUS
->     galaxy_tusd_port: 1080
->     tusd_instances:
->    {% endraw %}
->    ```
->    {: data-commit="Configure golang and singularity"}
 >
 > 4. Add the new roles to your `galaxy.yml` playbook, before the Galaxy server itself. We'll do this bceause it's a dependency of Galaxy to run, so it needs to be there before Galaxy starts.
 >
