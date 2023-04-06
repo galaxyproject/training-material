@@ -31,7 +31,7 @@ In this tutorial you will learn how to configure Galaxy to run jobs using [Appta
 
 ## Background
 
-> BioContainers is a community-driven project that provides the infrastructure and basic guidelines to create, manage and distribute bioinformatics packages (e.g conda) and containers (e.g docker, apptainer). BioContainers is based on the popular frameworks Conda, Docker and Apptainer.
+> BioContainers is a community-driven project that provides the infrastructure and basic guidelines to create, manage and distribute bioinformatics packages (e.g Conda) and containers (e.g Docker, Apptainer). BioContainers is based on the popular frameworks Conda, Docker and Apptainer.
 >
 > -- [https://biocontainers-edu.readthedocs.io/en/latest/what_is_biocontainers.html](https://biocontainers-edu.readthedocs.io/en/latest/what_is_biocontainers.html)
 {: .quote}
@@ -88,7 +88,7 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 >    +  version: 0.0.1
 >    {% endraw %}
 >    ```
->    {: data-commit="Add apptainer ansible roles"}
+>    {: data-commit="Add Apptainer ansible roles"}
 >
 >    {% snippet topics/admin/faqs/diffs.md %}
 >
@@ -101,8 +101,7 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
->
-> 4. Add the new roles to your `galaxy.yml` playbook, before the Galaxy server itself. We'll do this bceause it's a dependency of Galaxy to run, so it needs to be there before Galaxy starts.
+> 4. Add the new roles to your `galaxy.yml` playbook, before the Galaxy server itself. We'll do this because it's a dependency of Galaxy to run, so it needs to be there before Galaxy starts.
 >
 >    {% raw %}
 >    ```diff
@@ -161,10 +160,9 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 
 ## Configure Galaxy to use Apptainer
 
-Now, we will configure Galaxy to run tools using Apptainer containers, which will be automatically fetched from [the BioContainers repository](https://quay.io/organization/biocontainers).
-
+Now, we will configure Galaxy to run tools using Apptainer containers, which will be automatically fetched from [the BioContainers repository](https://quay.io/organization/biocontainers).  
+**Galaxy still uses `singularity` in most variables, they will be replaced successively.**
 > <hands-on-title>Configure Galaxy to use Apptainer</hands-on-title>
-> Galaxy still uses `singularity` in some variables, they will be replaced successively.
 >
 > 1. Edit the `group_vars/galaxyservers.yml` file and add a `dependency_resolvers_config_file` entry and a corresponding `galaxy_config_templatets` entry:
 >
@@ -352,21 +350,21 @@ Now, we will configure Galaxy to run tools using Apptainer containers, which wil
 > <tip-title>Apptainer, Conda, something else?</tip-title>
 > We often hear
 >
-> > What would be the best practice, use conda or Apptainer?
+> > What would be the best practice, use Conda or Apptainer?
 > {: .quote}
 >
 > Many of us are moving towards Apptainer. Conda environments can resolve differently if they were installed at different times, which isn't great for reproducibility. Apptainer images are never updated after generation which makes them fantastic. Also the isolation that's there by default is an incredible improvement for less-trustworthy binaries.
 {: .tip}
 
 > <tip-title>Does Apptainer fix issues with Conda dependencies resolution?</tip-title>
-> Yes and no. Apptainer images are built from conda environments. Only now you are no longer responsible for solving the conda environment, or ensuring that all of the dependencies are installed. The Galaxy project uses a system called "mulling" to bring together multiple conda dependencies together in a single environment, and Apptainer images are produced for these dependencies as well. That said, complex or unresolvable conda environments are not solved by Apptainer, because Apptainer is really just packaging conda's environment into a single binary file.
+> Yes and no. Apptainer images are built from Conda environments. Only now you are no longer responsible for solving the conda environment, or ensuring that all of the dependencies are installed. The Galaxy project uses a system called "mulling" to bring together multiple Conda dependencies together in a single environment, and Apptainer images are produced for these dependencies as well. That said, complex or unresolvable Conda environments are not solved by Apptainer, because Apptainer is really just packaging Conda's environment into a single binary file.
 {: .tip}
 
 
 > <tip-title>Gateway Time-out (504) in Dependencies view</tip-title>
 > When you open "Admin -> Tool Management -> Manage Dependencies -> Containers", it sometimes shows "Gateway Time-out (504)"
 >
-> Resolving all dependencies for all tools can take a bit, you can increase your timeout with the `uwsgi_read_timeout` setting in `templates/nginx/galaxy.j2`
+> Resolving all dependencies for all tools can take a bit, you can increase your timeout with the `proxy_read_timeout` setting in `templates/nginx/galaxy.j2`
 {:.tip}
 
 > <tip-title>Resolution is "unresolved"</tip-title>
