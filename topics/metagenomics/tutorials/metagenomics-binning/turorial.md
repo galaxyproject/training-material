@@ -41,7 +41,7 @@ Metagenomics is the study of genetic material recovered directly from environmen
 
 The goal of metagenomics binning is to assign the DNA sequences to the organisms or taxonomic groups that they originate from, allowing for a better understanding of the diversity and functions of the microbial communities present in the sample. This is typically achieved through computational methods that use sequence similarity, composition, and other features to group the sequences into bins.
 
-There are two main types of metagenomics binning: reference-based and de novo. Reference-based binning involves aligning the sequences to a database of known genomes or reference sequences, while de novo binning involves clustering the sequences based on similarity without prior knowledge of the organisms or reference sequences present in the sample.
+There are two main types of metagenomics binning: *reference-based* and *de novo*. *Reference-based binning* involves aligning the sequences to a database of known genomes or reference sequences, while *de novo binning* involves clustering the sequences based on similarity without prior knowledge of the organisms or reference sequences present in the sample.
 
 Both methods have their strengths and limitations, and researchers often use a combination of approaches to improve the accuracy of their binning results. Metagenomics binning is an important tool for understanding the functional potential of microbial communities in various environments and has applications in fields such as biotechnology, environmental science, and human health.
 
@@ -71,7 +71,7 @@ Both methods have their strengths and limitations, and researchers often use a c
 > The nice paper {% cite miller2010 %} on assemblers based on these algorithms will help you to better understand how they work.
 {: .details} -->
 
-Some of the most widely used tools for metagenomics binning include:
+There are plenty of computational tools to perform metafenomics binning. Some of the most widely used include:
 
 - **MaxBin**: A popular de novo binning algorithm that uses a combination of sequence features and marker genes to cluster contigs into genome bins.
 - **MetaBAT**: Another widely used de novo binning algorithm that employs a hierarchical clustering approach based on tetranucleotide frequency and coverage information.
@@ -81,7 +81,7 @@ Some of the most widely used tools for metagenomics binning include:
 - **MetaWRAP**: A comprehensive metagenomic analysis pipeline that includes various modules for quality control, assembly, binning, and annotation.
 - **Anvi'o**: A platform for visualizing and analyzing metagenomic data, including features for binning, annotation, and comparative genomics.
 
-In this tutorial, we will learn how to run metagenomic binning tools and evaluate the quality of the results. To do that, we will use data from the study: [Temporal shotgun metagenomic dissection of the coffee fermentation ecosystem](https://www.ebi.ac.uk/metagenomics/studies/MGYS00005630#overview). For an in-depth analysis of the structure and functions of the coffee microbiome, a temporal shotgun metagenomic study (six time points) was performed. The six samples have been sequenced with Illumina MiSeq utilizing whole genome sequencing.
+**In this tutorial, we will learn how to run metagenomic binning tools and evaluate the quality of the results**. In order to do that, we will use data from the study: [Temporal shotgun metagenomic dissection of the coffee fermentation ecosystem](https://www.ebi.ac.uk/metagenomics/studies/MGYS00005630#overview) and MetaBAT2 algorithm. For an in-depth analysis of the structure and functions of the coffee microbiome, a temporal shotgun metagenomic study (six time points) was performed. The six samples have been sequenced with Illumina MiSeq utilizing whole genome sequencing.
 
 Based on the 6 original dataset of the coffee fermentation system, we generated mock datasets for this tutorial.
 
@@ -154,43 +154,17 @@ As explained before, there are many challenges to metagenomics binning. The most
 
 ![Image show the binning process where sequences are grouped together based on genome signatures like the kmer profiles of each contig, contig coverage, or GC content](./images/binning.png "Binning"){:width="60%"}
 
-<!-- Pros of co-assembly | Cons of co-assembly
---- | ---
-More data | Higher computational overhead
-Better/longer assemblies | Risk of shattering your assembly
-Access to lower abundant organisms | Risk of increased contamination
-
-Co-assembly is then not always beneficial:
-- Changes in strain can cause the assembly graph to collapse
-- Binned contigs are likely to be misclassified: MAGs must be treated as a population genome.
-
-![Image shows the process of assembled reads from 2 samples followed by binning and there is detailed information about broken contigs, dominant coverage, chimeric contigs found during assembly process](./images/co-assembly-process.png "Co-assembly process"){:width="80%"}
-
-In these cases, co-assembly is reasonable if:
-- Same samples
-- Same sampling event
-- Longitudinal sampling of the same site
-- Related samples
-
-If it is not the case, **individual assembly** should be prefered. In this case, an extra step of **de-replication** should be used:
-
-![Image shows the process of individual assembly on two strains and five samples, after individual assembly of samples two samples are chosen for de-replication process. In parallel, co-assembly on all five samples is performed](./images/individual-assembly.png "Individual assembly followed by de-replication vs co-assembly. Source: dRep documentation"){:width="80%"}
-
-Co-assembly is more commonly used than individual assembly and then de-replication after binning. But in this tutorial, to show all steps, we will run an **individual assembly**.
-
-> <comment-title></comment-title>
-> Sometimes it is important to run assembly tools both on individual samples and on all pooled samples, and use both outputs to get the better outputs for the certain dataset.
-{: .comment} -->
-
-As mentioned in the introduction, several tools are available for metagenomic binning. In this tutorial we will focus on **MetaBAT2**:
+In this tutorial we will learn how to use **MetaBAT2** tool through Galaxy:
 
 - **MetaBAT2**: Metagenome Binning based on Abundance and Tetranucleotide frequency
 
   *Grouping large fragments assembled from shotgun metagenomic sequences to deconvolute complex microbial communities, or metagenome binning, enables the study of individual organisms and their interactions. Here we developed automated metagenome binning software, called MetaBAT, which integrates empirical probabilistic distances of genome abundance and tetranucleotide frequency. On synthetic datasets MetaBAT on average achieves 98percent precision and 90% recall at the strain level with 281 near complete unique genomes. Applying MetaBAT to a human gut microbiome data set we recovered 176 genome bins with 92% precision and 80% recall. Further analyses suggest MetaBAT is able to recover genome fragments missed in reference genomes up to 19%, while 53 genome bins are novel. In summary, we believe MetaBAT is a powerful tool to facilitate comprehensive understanding of complex microbial communities.*
 
+We will use the uploaded assembled fasta files as input to the algorithm (For simplicity reasons all other parameters will be preserved with their default values).
+
 > <hands-on-title>Individual assembly of short-reads with MEGAHIT</hands-on-title>
 > 1.  {% tool [ MetaBAT2](toolshed.g2.bx.psu.edu/repos/iuc/megahit/megahit/1.2.9+galaxy0) %} with parameters:
->     - *"Fasta file containing contigs"*: `assembly fasta file`
+>     - *"Fasta file containing contigs"*: `assembly fasta files`
 >     - In *Advanced options*
 >       - *"Percentage of good contigs considered for binning decided by connection among contigs"*: `default 95`
 >       - *"Minimum score of an edge for binning"*: `default 60`
@@ -207,15 +181,15 @@ As mentioned in the introduction, several tools are available for metagenomic bi
 >
 {: .hands_on}
 
-The output files generated by MetaBAT2 include:
+The output files generated by MetaBAT2 include (some of the files below are optional and not produced unless it is required by the user):
 
-1. The final set of genome bins in FASTA format (.fa)
-2. A summary file with information on each genome bin, including its length, completeness, contamination, and taxonomy classification (.txt)
-3. A file with the mapping results showing how each contig was assigned to a genome bin (.bam)
-4. A file containing the abundance estimation of each genome bin (.txt)
-5. A file with the coverage profile of each genome bin (.txt)
-6. A file containing the nucleotide composition of each genome bin (.txt)
-7. A file with the predicted gene sequences of each genome bin (.faa)
+1. The final set of genome bins in FASTA format (`.fa`)
+2. A summary file with information on each genome bin, including its length, completeness, contamination, and taxonomy classification (`.txt`)
+3. A file with the mapping results showing how each contig was assigned to a genome bin (`.bam`)
+4. A file containing the abundance estimation of each genome bin (`.txt`)
+5. A file with the coverage profile of each genome bin (`.txt`)
+6. A file containing the nucleotide composition of each genome bin (`.txt`)
+7. A file with the predicted gene sequences of each genome bin (`.faa`)
 
 These output files can be further analyzed and used for downstream applications such as functional annotation, comparative genomics, and phylogenetic analysis.
 
@@ -250,7 +224,7 @@ These output files can be further analyzed and used for downstream applications 
 > > <solution-title></solution-title>
 > >
 > > 1. There are 6 bins identified
-> > 2. 167 sequences are classified into bin.
+> > 2. 167 sequences are classified into the second bin.
 > >
 > {: .solution}
 >
@@ -272,7 +246,7 @@ These output files can be further analyzed and used for downstream applications 
 
 Once binning is done, it is important to check its quality.
 
-Binning results can be evaluated with **CheckM** ({%cite mikheenko2016%}). CheckM is a software tool used in metagenomics binning to assess the completeness and contamination of genome bins. Metagenomics binning is the process of separating DNA fragments from a mixed community of microorganisms into individual bins, each representing a distinct genome.
+Binning results can be evaluated with **CheckM**. CheckM is a software tool used in metagenomics binning to assess the completeness and contamination of genome bins. Metagenomics binning is the process of separating DNA fragments from a mixed community of microorganisms into individual bins, each representing a distinct genome.
 
 CheckM compares the genome bins to a set of universal single-copy marker genes that are present in nearly all bacterial and archaeal genomes. By identifying the presence or absence of these marker genes in the bins, CheckM can estimate the completeness of each genome bin (i.e., the percentage of the total set of universal single-copy marker genes that are present in the bin) and the degree of contamination (i.e., the percentage of marker genes that are found in more than one bin).
 
@@ -290,7 +264,7 @@ This information can be used to evaluate the quality of genome bins and to selec
 
 Based on the previous analysis we will use **CheckM lineage_wf**: *Assessing the completeness and contamination of genome bins using lineage-specific marker sets*
 
-CheckM lineage_wf is a specific workflow within the CheckM software tool that is used for taxonomic classification of genome bins based on their marker gene content. This workflow uses a reference database of marker genes and taxonomic information to classify the genome bins at different taxonomic levels, from domain to species.
+`CheckM lineage_wf` is a specific workflow within the CheckM software tool that is used for taxonomic classification of genome bins based on their marker gene content. This workflow uses a reference database of marker genes and taxonomic information to classify the genome bins at different taxonomic levels, from domain to species.
 
 > <hands-on-title>Evaluation assembly quality with metaQUAST</hands-on-title>
 >
@@ -321,17 +295,17 @@ CheckM lineage_wf is a specific workflow within the CheckM software tool that is
 > {: .hands_on}
 {: .comment} -->
 
-The output of "CheckM lineage_wf" includes several files and tables that provide information about the taxonomic classification and quality assessment of genome bins. Here are some of the key outputs:
+The output of "CheckM lineage_wf" includes several (optional) files and tables that provide information about the taxonomic classification and quality assessment of genome bins. Here are some of the key outputs:
 
-- "checkm_taxonomy.tsv" - This is a tab-separated file that lists the taxonomic assignments for each genome bin. The file includes columns for the bin ID, the domain, phylum, class, order, family, genus, and species (if available) of the closest reference genome(s) to the bin.
+- "checkm_taxonomy.tsv": This is a tab-separated file that lists the taxonomic assignments for each genome bin. The file includes columns for the bin ID, the domain, phylum, class, order, family, genus, and species (if available) of the closest reference genome(s) to the bin.
 
-- "checkm_taxonomy.log" - This file provides detailed information about the taxonomic classification process, including the marker genes used, the reference database, and the classification algorithm.
+- "checkm_taxonomy.log": This file provides detailed information about the taxonomic classification process, including the marker genes used, the reference database, and the classification algorithm.
 
-- "checkm_ms.txt" - This file contains a summary of the completeness and contamination scores for each genome bin, along with other quality metrics.
+- "checkm_ms.txt": This file contains a summary of the completeness and contamination scores for each genome bin, along with other quality metrics.
 
-- "checkm_qa.tsv" - This file provides more detailed information about the completeness and contamination scores, including the number of marker genes used, the number of genome fragments included in the bin, and the size of the bin.
+- "checkm_qa.tsv": This file provides more detailed information about the completeness and contamination scores, including the number of marker genes used, the number of genome fragments included in the bin, and the size of the bin.
 
-- "checkm_tree.nwk" - This is a Newick format tree file that shows the phylogenetic relationship between the genome bins and the reference genomes used for classification.
+- "checkm_tree.nwk": This is a Newick format tree file that shows the phylogenetic relationship between the genome bins and the reference genomes used for classification.
 
 <!-- # Visualization of the *de novo* assembly graph
 
