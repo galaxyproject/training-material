@@ -95,7 +95,7 @@ we'll create a fake tool.
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -126,6 +126,9 @@ galaxy_config_templates:
+>    @@ -123,6 +123,9 @@ galaxy_config_templates:
 >       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >     
@@ -103,8 +103,8 @@ we'll create a fake tool.
 >    +- testing.xml
 >    +
 >     # Certbot
->     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
->     certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
+>     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname) }}"
+>     certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname) }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy testing tool"}
@@ -147,34 +147,75 @@ Of course, this tool doesn't actually *use* the allocated number of cores. In a 
 
 We want our tool to run with more than one core. To do this, we need to instruct Slurm to allocate more cores for this job. First however, we need to configure Galaxy to use TPV.
 
-#TODO: Are we going to rely on tpv being installed as a conditional requirement? Or add it to the playbook as a package?
-
-
 > <hands-on-title>Adding TPV to your job configuration</hands-on-title>
 >
-> 1. Edit your `templates/galaxy/config/job_conf.yml.j2` and add the following destination to route all jobs to TPV. # TODO: set default execution context so all jobs go to TPV
+> 1. Edit `group_vars/galaxyservers.yml` and add the following destination under your `job_config` section to route all jobs to TPV.
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.yml.j2
->    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -20,4 +20,10 @@ execution:
->             value: /tmp/singularity
->           - name: SINGULARITY_TMPDIR
->             value: /tmp
->    +    tpv_dispatcher:
->    +      runner: dynamic
->    +      type: python
->    +      function: map_tool_to_destination
->    +      rules_module: tpv.rules
->    +      tpv_config_files:
->    +      - config/tpv_rules_local.yml
->         singularity:
->           runner: local_runner
->           singularity_enabled: true
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -32,34 +32,15 @@ galaxy_config:
+>           handling:
+>             assign: ['db-skip-locked']
+>           execution:
+>    -        default: singularity
+>    +        default: tpv_dispatcher
+>             environments:
+>    -          local_env:
+>    -            runner: local_runner
+>    -            tmp_dir: true
+>    -          singularity:
+>    -            runner: local_runner
+>    -            singularity_enabled: true
+>    -            env:
+>    -            # Ensuring a consistent collation environment is good for reproducibility.
+>    -            - name: LC_ALL
+>    -              value: C
+>    -            # The cache directory holds the docker containers that get converted
+>    -            - name: SINGULARITY_CACHEDIR
+>    -              value: /tmp/singularity
+>    -            # Singularity uses a temporary directory to build the squashfs filesystem
+>    -            - name: SINGULARITY_TMPDIR
+>    -              value: /tmp
+>    -          slurm:
+>    -            runner: slurm
+>    -            singularity_enabled: true
+>    -            env:
+>    -            - name: LC_ALL
+>    -              value: C
+>    -            - name: SINGULARITY_CACHEDIR
+>    -              value: /tmp/singularity
+>    -            - name: SINGULARITY_TMPDIR
+>    -              value: /tmp
+>    +          tpv_dispatcher:
+>    +            runner: dynamic
+>    +            type: python
+>    +            function: map_tool_to_destination
+>    +            rules_module: tpv.rules
+>    +            tpv_config_files:
+>    +              - config/tpv_rules_local.yml
+>           tools:
+>             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>               environment: local_env
+>    @@ -117,6 +98,10 @@ galaxy_config:
+>               - job-handlers
+>               - workflow-schedulers
+>
+>    +galaxy_config_files:
+>    +  - src: files/galaxy/config/tpv_rules_local.yml
+>    +    dest: "{{ galaxy_config_dir }}/tpv_rules_local.yml"
+>    +
+>     galaxy_config_templates:
+>       - src: templates/galaxy/config/container_resolvers_conf.yml.j2
+>         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >    {% endraw %}
 >    ```
->    {: data-commit="Configure testing tool in job conf"}
+>    {: data-commit="Add TPV to job config"}
+>
+>  Note that we set the default execution environment to the tpv_dispatcher, added the tpv_dispatcher itself as a dynamic runner, and removed all other destinations.
+>  Adding TPV as a runner will cause Galaxy to automatically install the `total-perspective-vortex` package on startup as a conditional dependency.
+>  Finally, we added a new config file named `tpv_rules_local.yml`, which we will create next.
 >
 > 2. Create a new file named `tpv_rules_local.yml` in the "files" folder of your ansible playbook, so that it is copied to the config folder on the target.
 >    The file should contain the following content:
@@ -182,34 +223,53 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ b/files/galaxy/config/tpv_rules_local.yml
->    @@ -0,0 +1,16 @@
+>    +++ files/galaxy/config/tpv_rules_local.yml
+>    @@ -0,0 +1,30 @@
 >    +tools:
->    +  .*testing.*:
+>    +  testing:
 >    +    cores: 2
 >    +    mem: cores * 4
 >    +
 >    +destinations:
->    +  slurm:
->    +    runner: slurm
+>    +  local_env:
+>    +    runner: local_runner
+>    +    max_accepted_cores: 1
 >    +    params:
->    +      singularity_enabled: "true"
->    +      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
+>    +      tmp_dir: true
+>    +  singularity:
+>    +    runner: local_runner
+>    +    max_accepted_cores: 1
+>    +    params:
+>    +      singularity_enabled: true
 >    +    env:
+>    +      # Ensuring a consistent collation environment is good for reproducibility.
 >    +      LC_ALL: C
+>    +      # The cache directory holds the docker containers that get converted
 >    +      SINGULARITY_CACHEDIR: /tmp/singularity
+>    +      # Singularity uses a temporary directory to build the squashfs filesystem
 >    +      SINGULARITY_TMPDIR: /tmp
+>    +  slurm:
+>    +    inherits: singularity
+>    +    runner: slurm
+>    +    max_accepted_cores: 16
+>    +    params:
+>    +      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
 >    +
 >    {% endraw %}
+>    ```
+>    {: data-commit="Add TPV local rules"}
 >
->    In this TPV config, we have specified that the testing tool should use `2` cores, and that memory is an expression and should be 4 times as much as cores, or in this case, 8GB.
->    Note that the tool id is matched via a regular expression against the full tool id. For example, a full tool id for hisat may look like: toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.1.0+galaxy7:
+>    In this TPV config, we have specified that the testing tool should use `2` cores. Memory has been defined as an expression and should be 4 times as much as cores, which, in this case, is 8GB.
+>    Note that the tool id is matched via a regular expression against the full tool id. For example, a full tool id for hisat may look like: `toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.1.0+galaxy7`
 >    This enables complex matching, including matching against specific versions of tools.
 >
->    Destinations must also be defined in TPV itself (Destinations need not be defined in job_conf.yml and are ignored by TPV). We have designated SLURM as an
->    available destination, and specified that the `native_specification` param, which is what SLURM uses to allocate resources per job. Note the use of the `{cores}`
->    parameter, which TPV will replace at runtime with the value of cores assigned to the tool.
+>    Destinations must also be defined in TPV itself (Destinations defined in job_conf.yml are ignored by TPV). Therefore, we have moved all destinations from job_conf to TPV. In addition, we have removed some
+>    redundancy by using the "inherits" clause in the `slurm` destination. This means that slurm will inherit all of the settings defined for singularity, but selectively override some settings. We have additionally
+>    defined the `native_specification` param for SLURM, which is what SLURM uses to allocate resources per job. Note the use of the `{cores}`
+>    parameter within the native specification, which TPV will replace at runtime with the value of cores assigned to the tool.
 >
+>    Finally, we have also defined a new property named `max_accepted_cores`, which is the maximum amount of cores this destination will accept. Since the testing tool requests 2 cores, but only the `slurm`
+>    destination is able to accept jobs greater than 1 core, TPV will automatically route the job to the best matching destination, in this case, slurm.
 >
 > 3. Run the Galaxy playbook. Because we modified `job_conf.yml`, Galaxy will be restarted to reread its config files.
 >
@@ -247,7 +307,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 
 ### Configuring defaults
 
-Now that we've configured the resource requirements for a single tool, let's see how we can configure defaults for all tools, and reuse those defaults to reduce repetition and tedium.
+Now that we've configured the resource requirements for a single tool, let's see how we can configure defaults for all tools, and reuse those defaults to reduce repetition.
 
 
 > <hands-on-title>Configuring defaults and inheritance</hands-on-title>
@@ -258,49 +318,38 @@ Now that we've configured the resource requirements for a single tool, let's see
 >    ```diff
 >    --- /dev/null
 >    +++ b/files/galaxy/config/tpv_rules_local.yml
->    @@ -0,0 +1,16 @@
+>    @@ -1,7 +1,13 @@
 >    +global:
 >    +  default_inherits: default
 >    +
->    +tools:
+>     tools:
 >    +  default:
 >    +    abstract: true
 >    +    cores: 1
 >    +    mem: cores * 4
->    +  testing:
->    +    cores: 2
+>       testing:
+>         cores: 2
 >    -    mem: cores * 4
->    +
->    +destinations:
->    +  default:
->    +    abstract: true
->    +    params:
->    +      singularity_enabled: "true"
->    +      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
->    +  slurm:
->    +    inherits: default
->    +    runner: slurm
->    -    params:
->    -      singularity_enabled: "true"
->    -      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
->    +    env:
->    +      LC_ALL: C
->    +      SINGULARITY_CACHEDIR: /tmp/singularity
->    +      SINGULARITY_TMPDIR: /tmp
->    +
+>
+>     destinations:
+>       local_env:
 >    {% endraw %}
+>    ```
+>    {: data-commit="Add TPV default inherits"}
 >
 > We have defined a `global` section specifying that all tools and destinations should inherit from a specified `default`. We have then defined a tool named `default`, whose properties
 > are implicitly inherited by all tools at runtime. This means that our `testing` tool will also inherit from this default tool, but it explicitly overrides cores
-> We can also explicitly specify an `inherits` clause if we wish to extend a specific tool or destination, as shown in the destinations section. 
+> We can also explicitly specify an `inherits` clause if we wish to extend a specific tool or destination, as previously shown in the destinations section.
 >
+> 2. Run the Galaxy playbook. When the new `tpv_rules_local.yml` is copied, TPV will automatically pickup the changes without requiring a restart of Galaxy.
 >
-
-### Selecting between multiple destinations
-
-1. using tags
-2. Using max_accepted_cores
-
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
 
 ### TPV reference documentation
 
@@ -312,29 +361,22 @@ TPV has dedicated documentation at: https://total-perspective-vortex.readthedocs
 The Galaxy Project maintains a [shared database of TPV rules](https://github.com/galaxyproject/tpv-shared-database) so that admins do not have to independently rediscover ideal resource allocations for specific tools. These rules are based
 on settings that have worked well in the usegalaxy.* federation. The rule file can simply be imported directly, with local overrides applied on top.
 
-> <hands-on-title>Configuring defaults and inheritance</hands-on-title>
+> <hands-on-title>Adding the TPV shared database to job_conf</hands-on-title>
 >
-> 1. Edit your `templates/galaxy/config/job_conf.yml.j2` and add the location of the TPV shared rule file.
+> 1. Edit `group_vars/galaxyservers.yml` and add the location of the TPV shared rule file to the `tpv_dispatcher` destination.
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.yml.j2
->    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -20,4 +20,10 @@ execution:
->             value: /tmp/singularity
->           - name: SINGULARITY_TMPDIR
->             value: /tmp
->         tpv_dispatcher:
->           runner: dynamic
->           type: python
->           function: map_tool_to_destination
->           rules_module: tpv.rules
->           tpv_config_files:
->    +      - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
->    +      - config/tpv_rules_local.yml
->         singularity:
->           runner: local_runner
->           singularity_enabled: true
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -40,6 +40,7 @@ galaxy_config:
+>                 function: map_tool_to_destination
+>                 rules_module: tpv.rules
+>                 tpv_config_files:
+>    +              - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
+>                   - config/tpv_rules_local.yml
+>           tools:
+>             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >    {% endraw %}
 >    ```
 >    {: data-commit="Importing TPV shared database via job conf"}
@@ -348,69 +390,81 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >
 >    {% raw %}
 >    ```diff
->    --- /dev/null
+>    --- a/files/galaxy/config/tpv_rules_local.yml
 >    +++ b/files/galaxy/config/tpv_rules_local.yml
->    @@ -0,0 +1,16 @@
->    +global:
->    +  default_inherits: default
->    +
->    +tools:
->    +  default:
->    +    abstract: true
->    +    cores: 1
->    +    mem: cores * 4
->    +  testing:
->    +    cores: 2
->    -    mem: cores * 4
->    +
->    +destinations:
->    +  default:
->    +    abstract: true
->    +    params:
->    +      singularity_enabled: "true"
->    +      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
->    +  slurm:
->    +    inherits: default
->    +    runner: slurm
+>    @@ -30,7 +30,10 @@ destinations:
+>       slurm:
+>         inherits: singularity
+>         runner: slurm
+>    -    max_accepted_cores: 16
 >    +    max_accepted_cores: 24
 >    +    max_accepted_mem: 256
 >    +    max_cores: 16
 >    +    max_mem: 128
->    -    params:
->    -      singularity_enabled: "true"
->    -      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
->    +    env:
->    +      LC_ALL: C
->    +      SINGULARITY_CACHEDIR: /tmp/singularity
->    +      SINGULARITY_TMPDIR: /tmp
->    +
->    {% endraw %}
+>         params:
+>           native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
 >
+>    {% endraw %}
+>    ```
+>    {: data-commit="TPV clamp max cores and mem"}
 >
 > These changes indicate that the destination will accept jobs that are up to `max_accepted_cores: 24` and `max_accepted_mem: 256`. However, once accepted, it will forcibly clamp it down to 16 and 128 at most using the `max_cores` and `max_mem` clauses.
 > If the tool does not exceed the specified limit, it will run happily. If not, it will be clamped down to the desired range. This allows even the largest resource requirement in the shared database to be accomodated.
 >
+> 3. Run the Galaxy playbook.
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
 
 # Basic access controls
 
-You may wish to apply some basic restrictions on which users are allowed to run specific tools. TPV accomodates user and role specific rules. Combined with tags, these allow fine-grained control over
+You may wish to apply some basic restrictions on which users are allowed to run specific tools. TPV accomodates user and role specific rules. In addition, TPV supports tagging of tools, users, roles and destinations. These tags
+can be matched up so that only desired combinations are compatible with each other. While these mechanisms are detailed in the TPV documentation, we will choose a different problem that highlights some other capabilities
+- restricting a tool so that only an admin can execute that tool.
 
-
-# More reading
-
-The tutorial provides a quick overview of some of the basic features in TPV. However, there are numerous features that we have not convered such as:
-a. Custom code blocks - execute arbitrary python code blocks, access additional context variables etc.
-a. User and Role Handling - Add scheduling constraints based on the user's email or role
-b. Metascheduling support - Perform advanced querying and filtering prior to choosing an appropriate destination
-c. Job resubmissions - Resubmit jobs on failure
-d. Linting, formatting and dry-run - Automatically format tpv rule files, catch potential syntax errors and perform a dry-run to check where a tool would get scheduled.
-
-These features are covered in detail in the [TPV documentation](https://total-perspective-vortex.readthedocs.io/en/lates/).
+> <hands-on-title>Using conditionals to restrict a tool to admins only</hands-on-title>
+>
+> 2. Edit your `files/galaxy/config/tpv_rules_local.yml` and add the following rule.
+>
+>    {% raw %}
+>    ```diff
+>    --- a/files/galaxy/config/tpv_rules_local.yml
+>    +++ b/files/galaxy/config/tpv_rules_local.yml
+>    @@ -8,6 +8,15 @@ tools:
+>         mem: cores * 4
+>       testing:
+>         cores: 2
+>    +    rules:
+>    +      - id: admin_only_testing_tool
+>    +        if: |
+>    +          import os
+>    +          # Only allow the tool to be executed if the user is an admin
+>    +          admin_users = app.config.get( "admin_users", "" ).split( "," )
+>    +          # last line in block must evaluate to a value - which determines whether the TPV if conditional matches or not
+>    +          user_email not in admin_users
+>    +        fail: Unauthorized. Only admins can execute this tool.
+>
+>     destinations:
+>       local_env:
+>    {% endraw %}
+>    ```
+>    {: data-commit="TPV admin only tool"}
+>
+> Note the use of the `if` rule, which allows for conditional actions to be taken in TPV. An `if` block is evaluated as a multi-line python block, and can execute arbitrary code, but the last line of the block must evaluate to a value. That value
+> determines whether the `if` condtional is matched or not. If the conditional is matched, the `fail` clause is executed in this case, and the message specified in the `fail` clause is displayed to the user.
+> It is similarly possible to conditionally add job parameters, modify cores/mem/gpus and take other complex actions.
 
 
 # Job Resource Selectors
 
-You may find that certain tools can benefit from having form elements added to them to allow for controlling certain job parameters, so that users can select based on their own knowledge. For example, a user might know that a particular set of parameters and inputs to a certain tool needs a larger memory allocation than the standard amount for a given tool. This of course assumes that your users are well behaved enough not to choose the maximum whenever available, although such concerns can be mitigated somewhat by the use of concurrency limits on larger memory destinations.
+Certain tools can benefit from allowing users to select appropriate job resource parameters, instead of having admins decide resource allocations beforehand. For example, a user might know that a particular set of parameters and inputs to a certain tool needs a larger memory allocation than the standard amount given to that tool.
+Galaxy provides functionality to have extra form elements in the tool execution form to specify these additional job resource parameters.
+This of course assumes that your users are well behaved enough not to choose the maximum whenever available, although such concerns can be mitigated somewhat by the use of concurrency limits on larger memory destinations.
 
 Such form elements can be added to tools without modifying each tool's configuration file through the use of the **job resource parameters configuration file**
 
@@ -442,85 +496,50 @@ Such form elements can be added to tools without modifying each tool's configura
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -148,6 +148,8 @@ galaxy_config_templates:
->         dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
->       - src: templates/galaxy/config/tool_destinations.yml
->         dest: "{{ galaxy_config.galaxy.tool_destinations_config_file }}"
+>    @@ -42,9 +42,17 @@ galaxy_config:
+>                 tpv_config_files:
+>                   - https://raw.githubusercontent.com/galaxyproject/tpv-shared-database/main/tools.yml
+>                   - config/tpv_rules_local.yml
+>    +      resources:
+>    +        default: default
+>    +        groups:
+>    +          default: []
+>    +          testing: [cores, time]
+>           tools:
+>             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
+>               environment: local_env
+>    +        - id: testing
+>    +          environment: tpv_dispatcher
+>    +          resources: testing
+>         # SQL Performance
+>         slow_query_log_threshold: 5
+>         enable_per_request_sql_debugging: true
+>    @@ -73,6 +81,7 @@ galaxy_config:
+>         # Tool Dependencies
+>         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
+>         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.yml"
+>    +    job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
+>         # Data Library Directories
+>         library_import_dir: /libraries/admin
+>         user_library_import_dir: /libraries/user
+>    @@ -104,6 +113,8 @@ galaxy_config_files:
+>         dest: "{{ galaxy_config_dir }}/tpv_rules_local.yml"
+>
+>     galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_resource_params_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
->     
->     galaxy_local_tools:
->     - testing.xml
->    {% endraw %}
->    ```
->    {: data-commit="Deploy job resource params configuration"}
->
-> 3. Next, we define a new section in `job_conf.yml`: `<resources>`. This groups together parameters that should appear together on a tool form. Add the following section to your `templates/galaxy/config/job_conf.yml.j2`:
->
->    {% raw %}
->    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -69,6 +69,11 @@ galaxy_job_config:
->           dtd:
->             runner: dynamic
->             type: dtd
->    +  resources:
->    +    default: default
->    +    groups:
->    +      default: []
->    +      testing: [cores, time]
->       tools:
->         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->           environment: local_env
+>       - src: templates/galaxy/config/container_resolvers_conf.yml.j2
+>         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
+>       - src: templates/galaxy/config/dependency_resolvers_conf.xml
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure resources in job conf"}
 >
->    The group ID will be used to map a tool to job resource parameters, and the text value of the `<group>` tag is a comma-separated list of `name`s from `job_resource_params_conf.xml` to include on the form of any tool that is mapped to the defined `<group>`.
+>    We have added a resources section. The group ID will be used to map a tool to job resource parameters, and the text value of the `<group>` tag is a comma-separated list of `name`s from `job_resource_params_conf.xml` to include on the form of any tool that is mapped to the defined `<group>`.
 >
+>    We have also listed the `testing` tool as a tool which uses resource parameters. When listed here, the resource parameter selection form will be displayed.
 >
-> 4. Finally, in `job_conf.yml`, move the previous `<tool>` definition for the `testing` tool into the comment and define a new `<tool>` that defines the `resources` for the tool:
->
->    {% raw %}
->    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -78,7 +78,8 @@ galaxy_job_config:
->         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->           environment: local_env
->         - id: testing
->    -      environment: dtd
->    +      environment: dynamic_cores_time
->    +      resources: testing
->     
->     galaxy_config:
->       galaxy:
->    {% endraw %}
->    ```
->    {: data-commit="Configure resources in job conf"}
->
-> 5. We have assigned the `testing` tool to a new destination: `dynamic_cores_time`, but this destination does not exist. We need to create it. Add the following destination in your job conf:
->
->    {% raw %}
->    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -69,6 +69,9 @@ galaxy_job_config:
->           dtd:
->             runner: dynamic
->             type: dtd
->    +      dynamic_cores_time:
->    +        runner: dynamic
->    +        function: dynamic_cores_time
->       resources:
->         default: default
->         groups:
->    {% endraw %}
->    ```
->    {: data-commit="Add dynamic_cores_time destination"}
->
->    This will be another dynamic destination. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `dynamic_cores_time` to be used in the `job_conf.yml`
+>    Finally, we have specified that the `job_resource_params_conf.xml.j2` should be copied across.
 >
 {: .hands_on}
 
@@ -529,100 +548,63 @@ This will set everything up to use the function. We have:
 - A set of "job resources" defined which will let the user select the number of cores and walltime.
 - A job configuration which says:
     - that our testing tool should allow selection of the cores and time parameters
-    - directs it to use a new, `dynamic_cores_time` destination
-    - and a has a new destination, `dynamic_cores_time`, which is defined as a dynamic destination which will call a python function we will load.
+    - directs it to TPV's `tpv_dispatcher` destination
 
 This is a lot but we're still missing the last piece for it to work:
 
-## A dynamic destination
+## Configuring TPV to process resource parameters
 
-Lastly, we need to write the rule that will read the value of the job resource parameter form fields and decide how to submit the job.
+Lastly, we need to write a rule in TPV that will read the value of the job resource parameter form fields and decide how to submit the job.
 
-> <hands-on-title>Writing a dynamic destination</hands-on-title>
+> <hands-on-title>Processing job resource parameters in TPV</hands-on-title>
 >
 > 1. Create and edit `files/galaxy/dynamic_job_rules/map_resources.py`. Create it with the following contents:
 >
 >    {% raw %}
 >    ```diff
->    --- /dev/null
->    +++ b/files/galaxy/dynamic_job_rules/map_resources.py
->    @@ -0,0 +1,42 @@
->    +import logging
->    +from galaxy.jobs.mapper import JobMappingException
->    +
->    +log = logging.getLogger(__name__)
->    +
->    +DESTINATION_IDS = {
->    +    1 : 'slurm',
->    +    2 : 'slurm-2c'
->    +}
->    +FAILURE_MESSAGE = 'This tool could not be run because of a misconfiguration in the Galaxy job running system, please report this error'
->    +
->    +
->    +def dynamic_cores_time(app, tool, job, user_email):
->    +    destination = None
->    +    destination_id = 'slurm'
->    +
->    +    # build the param dictionary
->    +    param_dict = job.get_param_values(app)
->    +
->    +    if param_dict.get('__job_resource', {}).get('__job_resource__select') != 'yes':
->    +        log.info("Job resource parameters not seleted, returning default destination")
->    +        return destination_id
->    +
->    +    # handle job resource parameters
->    +    try:
->    +        # validate params
->    +        cores = int(param_dict['__job_resource']['cores'])
->    +        time = int(param_dict['__job_resource']['time'])
->    +        destination_id = DESTINATION_IDS[cores]
->    +        destination = app.job_config.get_destination(destination_id)
->    +        # set walltime
->    +        if 'nativeSpecification' not in destination.params:
->    +            destination.params['nativeSpecification'] = ''
->    +        destination.params['nativeSpecification'] += ' --time=%s:00:00' % time
->    +    except:
->    +        # resource param selector not sent with tool form, job_conf.yml misconfigured
->    +        log.warning('(%s) error, keys were: %s', job.id, param_dict.keys())
->    +        raise JobMappingException(FAILURE_MESSAGE)
->    +
->    +    log.info('returning destination: %s', destination_id)
->    +    log.info('native specification: %s', destination.params.get('nativeSpecification'))
->    +    return destination or destination_id
+>    --- a/files/galaxy/config/tpv_rules_local.yml
+>    +++ b/files/galaxy/config/tpv_rules_local.yml
+>    @@ -6,6 +6,8 @@ tools:
+>         abstract: true
+>         cores: 1
+>         mem: cores * 4
+>    +    params:
+>    +      walltime: 8
+>       testing:
+>         cores: 2
+>         rules:
+>    @@ -17,6 +19,13 @@ tools:
+>               # last line in block must evaluate to a value - which determines whether the TPV if conditional matches or not
+>               user_email not in admin_users
+>             fail: Unauthorized. Only admins can execute this tool.
+>    +      - id: resource_params_defined
+>    +        if: |
+>    +          param_dict = job.get_param_values(app)
+>    +          param_dict.get('__job_resource', {}).get('__job_resource__select') == 'yes'
+>    +        cores: int(job.get_param_values(app)['__job_resource']['cores'])
+>    +        params:
+>    +           walltime: int(job.get_param_values(app)['__job_resource']['time'])
+>
+>     destinations:
+>       local_env:
+>    @@ -44,5 +53,5 @@ destinations:
+>         max_cores: 16
+>         max_mem: 128
+>         params:
+>    -      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
+>    +      native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores} --time={params['walltime']}:00:00
+>
 >    {% endraw %}
 >    ```
->    {: data-commit="Add map_resources python"}
+>    {: data-commit="process resource params in TPV"}
 >
+>    We define a conditional rule and check that the job_resource_params have in fact been defined by the user. If defined, we override the cores value with the one specified by the user. We also define a walltime param, setting it to 8 hours by default.
+>    We also override walltime if the user has specified it.
 >    It is important to note that **you are responsible for parameter validation, including the job resource selector**. This function only handles the job resource parameter fields, but it could do many other things - examine inputs, job queues, other tool parameters, etc.
 >
+>    Finally, we pass the walltime as part of the native specification.
 >
-> 2. As usual, we need to instruct Galaxy of where to find this file:
->
->    {% raw %}
->    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -127,6 +127,7 @@ galaxy_config:
->         user_library_import_dir: /libraries/user
->         # Tool Destination Configuration
->         tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
->    +    job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
->       gravity:
->         process_manager: systemd
->         galaxy_root: "{{ galaxy_root }}/server"
->    @@ -164,6 +165,7 @@ galaxy_local_tools:
->     - testing.xml
->     galaxy_dynamic_job_rules:
->     - my_rules.py
->    +- map_resources.py
->     
->     # Certbot
->     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
->    {% endraw %}
->    ```
->    {: data-commit="Deploy map_resources.py"}
->
-> 3. Run the Galaxy playbook.
+> 2. Run the Galaxy playbook to update the TPV rules.
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```bash
@@ -631,7 +613,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >    > {: data-cmd="true"}
 >    {: .code-in}
 >
-> 4. Run the **Testing Tool** with various resource parameter selections
+> 3. Run the **Testing Tool** with various resource parameter selections
 >
 >    - Use default job resource parameters
 >    - Specify job resource parameters:
@@ -684,6 +666,18 @@ The cores parameter can be verified from the output of the tool. The walltime ca
 {% snippet topics/admin/faqs/git-commit.md page=page %}
 
 {% snippet topics/admin/faqs/missed-something.md step=9 %}
+
+
+# More on TPV
+
+The goal of this tutorial is to provide a quick overview of some of the basic capabilities of TPV. However, there are numerous features that we have not convered such as:
+a. Custom code blocks - execute arbitrary python code blocks, access additional context variables etc.
+a. User and Role Handling - Add scheduling constraints based on the user's email or role
+b. Metascheduling support - Perform advanced querying and filtering prior to choosing an appropriate destination
+c. Job resubmissions - Resubmit a job if it fails for some reason
+d. Linting, formatting and dry-run - Automatically format tpv rule files, catch potential syntax errors and perform a dry-run to check where a tool would get scheduled.
+
+These features are covered in detail in the [TPV documentation](https://total-perspective-vortex.readthedocs.io/en/lates/).
 
 ## Further Reading
 
