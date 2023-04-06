@@ -14,7 +14,9 @@ contributions:
     authorship:
         - Marie59
         - yvanlebras
-
+    funding:
+        - gallantries
+        - fair-ease
 ---
 
 
