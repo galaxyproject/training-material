@@ -8,7 +8,7 @@ contributors: [hexylena]
 
 The yearly Galaxy Admin Training follows a specific ordering of tutorials. Use this timeline to help keep track of where you are in Galaxy Admin Training.
 
-{% assign tutorials = "ansible-galaxy backup-cleanup tus cvmfs singularity tool-management data-library connect-to-compute-cluster job-destinations pulsar gxadmin monitoring tiaas reports ftp" | split: " " %}
+{% assign tutorials = "ansible-galaxy backup-cleanup tus cvmfs apptainer tool-management data-library connect-to-compute-cluster job-destinations pulsar gxadmin monitoring tiaas reports ftp" | split: " " %}
 
 {% assign seen_tuto = 0 %}
 <ol id="git-gat-timeline">
