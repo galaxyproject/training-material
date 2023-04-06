@@ -10,9 +10,10 @@ time_estimation: 1H
 key_points:
 - Marine data
 - Diversity indicators
-contributors:
-- Marie59
-- yvanlebras
+contributions:
+    authorship:
+        - Marie59
+        - yvanlebras
 
 ---
 
