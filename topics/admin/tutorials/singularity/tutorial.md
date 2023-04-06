@@ -40,11 +40,18 @@ Apptainer is an alternative to Docker that is much friendlier for HPCs
 
 > <tip-title>Apptainer, Singularity, SingularityCE?</tip-title>
 >
-> Many people still know Apptainer under it's former name Singularity
-> Singularity was it's former name until it joined the Linux Foundation was renamed to Apptainer in 2021.
-> However the Synlabs fork 'SingularityCE' (for <u>C</u>ommunity <u>E</u>dition) is also free and keeps the name Singularity.
-> 
-> We will use the Name Apptainer for our training Material, because most rpm packages are now named Apptainer.
+> Name                  |  Singularity                                         |      SingularityCE    | Apptainer
+> --------------------- |:----------------------------------------------------:|:---------------------:|:----------------:
+> Origin                |   Original name,<br />used by the project until 2021 | Name of Synlabs' Fork<br />(CE for <u>C</u>ommunity <u>E</u>dition) | Name change when<br />the project joined<br />the Linux Foundation
+> Status                |  renamed in 2021                                     | currently active      | currently active
+> RPM Package available | discontinued                                         |          ❌           |         ✅
+> CLI name              | `singularity`                                        | `singularity`         | `apptainer` or `singularity`
+>
+> Many people still know Apptainer under it's former name Singularity.
+> Singularity was the project's former name until it joined the Linux Foundation was renamed to Apptainer in 2021.
+> However the Synlabs' fork 'SingularityCE' (for <u>C</u>ommunity <u>E</u>dition) is free and open source, too.
+>
+> We will use the Name Apptainer for our training material, because most rpm packages are now named Apptainer.
 {: .tip}
 
 > Apptainer is a container platform. It allows you to create and run containers that package up pieces of software in a way that is portable and reproducible.
@@ -63,11 +70,7 @@ Apptainer is an alternative to Docker that is much friendlier for HPCs
 
 # Installing Apptainer
 
-First, we will install Apptainer using Ansible. On most operating systems there is no package for singularity yet, so we must use a role which will compile it from source. If you're on CentOS7/8, it is available through the EPEL repository.
-
-> <tip-title>CentOS7</tip-title>
-> If you are using CentOS7, you can skip this hands-on section and instead install the `epel-release` and `singularity` system packages in your `pre_tasks`.
-{: .tip}
+First, we will install Apptainer using Ansible. Since there is a package available for major Linux distros now, we could simply install it in the pre tasks. However, we would have to enable additional repos, so we decided to create a role for this:
 
 > <hands-on-title>Installing Apptainer with Ansible</hands-on-title>
 >
@@ -183,6 +186,9 @@ First, we will install Apptainer using Ansible. On most operating systems there 
 Now, we will configure Galaxy to run tools using Apptainer containers, which will be automatically fetched from [the BioContainers repository](https://quay.io/organization/biocontainers).
 
 > <hands-on-title>Configure Galaxy to use Apptainer</hands-on-title>
+> Galaxy still uses `singularity` in some variables, they will be replaced successively.
+>
+> 1. Edit the `group_vars/galaxyservers.yml` file and add a `dependency_resolvers_config_file` entry and a corresponding `galaxy_config_templatets` entry:
 >
 > 1. Edit the `group_vars/galaxyservers.yml` file and add a `dependency_resolvers_config_file` entry and a corresponding `galaxy_config_templatets` entry:
 >
