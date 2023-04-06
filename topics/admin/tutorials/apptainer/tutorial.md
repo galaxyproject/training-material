@@ -15,6 +15,8 @@ contributors:
   - hexylena
   - mira-miracoli
 subtopic: jobs
+redirect_from:
+- /topics/admin/tutorials/singularity/tutorial
 tags:
   - jobs
   - ansible
