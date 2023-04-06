@@ -66,7 +66,7 @@ Apptainer is an alternative to Docker that is much friendlier for HPCs
 >
 {: .agenda}
 
-{% snippet topics/admin/faqs/git-gat-path.md tutorial="singularity" %}
+{% snippet topics/admin/faqs/git-gat-path.md tutorial="apptainer" %}
 
 # Installing Apptainer
 
@@ -161,7 +161,9 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 ## Configure Galaxy to use Apptainer
 
 Now, we will configure Galaxy to run tools using Apptainer containers, which will be automatically fetched from [the BioContainers repository](https://quay.io/organization/biocontainers).  
-**Galaxy still uses `singularity` in most variables, they will be replaced successively.**
+> <tip-title>Variable names</tip-title>
+> Galaxy still uses `singularity` in most variables, they will be replaced successively.
+{: .tip}
 > <hands-on-title>Configure Galaxy to use Apptainer</hands-on-title>
 >
 > 1. Edit the `group_vars/galaxyservers.yml` file and add a `dependency_resolvers_config_file` entry and a corresponding `galaxy_config_templatets` entry:
