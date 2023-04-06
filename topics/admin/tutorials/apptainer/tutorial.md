@@ -131,7 +131,7 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 >    {: .code-in}
 >
 > 6. Apptainer should now be installed on your Galaxy server. You can test this by connecting
-> to your server and run the following command:
+>    to your server and run the following command:
 >
 >    > <code-in-title>Bash</code-in-title>
 >    > ```
@@ -163,9 +163,11 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 ## Configure Galaxy to use Apptainer
 
 Now, we will configure Galaxy to run tools using Apptainer containers, which will be automatically fetched from [the BioContainers repository](https://quay.io/organization/biocontainers).  
-> <tip-title>Variable names</tip-title>
+
+> <warning-title>Galaxy Calls It Singularity, not Apptainer</warning-title>
 > Galaxy still uses `singularity` in most variables, they will be replaced successively.
-{: .tip}
+{: .warning}
+
 > <hands-on-title>Configure Galaxy to use Apptainer</hands-on-title>
 >
 > 1. Edit the `group_vars/galaxyservers.yml` file and add a `dependency_resolvers_config_file` entry and a corresponding `galaxy_config_templatets` entry:
