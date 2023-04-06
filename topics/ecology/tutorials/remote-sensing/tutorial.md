@@ -18,9 +18,10 @@ key_points:
 tags:
 - Ecology
 - Remote sensing
-contributors:
-- Marie59
-- yvanlebras
+contributions:
+    authorship:
+        - Marie59
+        - yvanlebras
 
 ---
 
