@@ -67,7 +67,7 @@ Each part of this workflow has elementary steps :
 In this tutorial, we'll be working on Sentinel 2 data extracted from the Copernicus portal, Scihub.  First those data will be prepared. After pre-processing to fit the input format of the tools, we'll see how to calculate biodiversity metrics.
 
 
-> ### Agenda
+> <agenda-title></agenda-title>
 >
 > In this tutorial, we will cover:
 >
@@ -165,7 +165,7 @@ You can choose to compute spectral and biodiversity indicators either for global
 >
 >    > <tip-title>If you want to use your own files ENVI BIL</tip-title>
 >    >
->    > **TODO**: *Check that the "Input raster" datatype is bil and that "Input raster header" datatype is hdr*
+>    > Check that the "Input raster" datatype is bil and that "Input raster header" datatype is hdr
 >    >
 >    > * Go on your raster data
 >    > * Click on {% icon galaxy-pencil %} to edit it
@@ -195,7 +195,7 @@ You can choose to compute spectral and biodiversity indicators either for global
 >
 >    > <tip-title>If you want to use your own files ENVI BIL</tip-title>
 >    >
->    > **TODO**: *Check that the "Input raster" datatype is bil and that "Input raster header" datatype is hdr*
+>    > Check that the "Input raster" datatype is bil and that "Input raster header" datatype is hdr
 >    >
 >    > * Go on your raster data
 >    > * Click on {% icon galaxy-pencil %} to edit it
@@ -220,7 +220,7 @@ You can choose to compute spectral and biodiversity indicators either for global
 >    > - {% icon param-text %} *"Write a number of the value of alpha"*: '1'
 >    >
 >    >
->    > ***TODO***: *Here again check that the "Input raster" datatype is bil and that "Input raster header" datatype is hdr*
+>    > Here again check that the "Input raster" datatype is bil and that "Input raster header" datatype is hdr
 >    >
 >    {: .tip}
 >
@@ -262,7 +262,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >
 >    > <tip-title>If you want to use your own files ENVI BIL</tip-title>
 >    >
->    > **TODO**: *Check that the "Input raster" datatype is bil and that "Input raster header" datatype is hdr*
+>    > Check that the "Input raster" datatype is bil and that "Input raster header" datatype is hdr
 >    >
 >    > * Go on your raster data
 >    > * Click on {% icon galaxy-pencil %} to edit it
@@ -293,7 +293,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >
 >    > <tip-title>If you want to use your own files ENVI BIL</tip-title>
 >    >
->    > **TODO**: *Check that the "Input raster" datatype is bil and that "Input raster header" datatype is hdr*
+>    > Check that the "Input raster" datatype is bil and that "Input raster header" datatype is hdr
 >    >
 >    > * Go on your raster data
 >    > * Click on {% icon galaxy-pencil %} to edit it
@@ -374,7 +374,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >
 >    > <tip-title>If you want to use your own files ENVI BIL</tip-title>
 >    >
->    > **TODO**: *Check that the "Input raster" datatype is bil and that "Input raster header" datatype is hdr*
+>    > Check that the "Input raster" datatype is bil and that "Input raster header" datatype is hdr
 >    >
 >    > * Go on your raster data
 >    > * Click on {% icon galaxy-pencil %} to edit it
