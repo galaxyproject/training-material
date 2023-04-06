@@ -15,8 +15,7 @@ contributions:
         - Marie59
         - yvanlebras
     funding:
-        - gallantries
-        - fair-ease
+        - erasmusplus
 ---
 
 
