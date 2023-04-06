@@ -459,7 +459,6 @@ can be matched up so that only desired combinations are compatible with each oth
 > determines whether the `if` condtional is matched or not. If the conditional is matched, the `fail` clause is executed in this case, and the message specified in the `fail` clause is displayed to the user.
 > It is similarly possible to conditionally add job parameters, modify cores/mem/gpus and take other complex actions.
 
-
 # Job Resource Selectors
 
 Certain tools can benefit from allowing users to select appropriate job resource parameters, instead of having admins decide resource allocations beforehand. For example, a user might know that a particular set of parameters and inputs to a certain tool needs a larger memory allocation than the standard amount given to that tool.
@@ -662,8 +661,6 @@ The cores parameter can be verified from the output of the tool. The walltime ca
 >    Power= SICP=0
 > ```
 {: .code-out}
-
-{% snippet topics/admin/faqs/git-commit.md page=page %}
 
 {% snippet topics/admin/faqs/missed-something.md step=9 %}
 
