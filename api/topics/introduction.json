@@ -565,6 +565,158 @@
     },
     {
       "layout": "tutorial_hands_on",
+      "title": "NGS data logistics",
+      "zenodo_link": "",
+      "questions": [
+        "How to manipulate and process NGS data"
+      ],
+      "objectives": [
+        "Understand most common types of NGS-related datatypes",
+        "Learn about how Galaxy handles NGS data using Illumina data derived from patients infected with SARS-CoV-2"
+      ],
+      "time_estimation": "1H30M",
+      "key_points": [
+        "FASTQ Sanger version of the format is considered to be the standard form of FASTQ.",
+        "Paired end data can be provided as two files or as an interleaved one.",
+        "FastqQC is a tool allowing to check the quality of FASTQ datasets.",
+        "The most common tools for mapping are Bowtie, BWA, BWA-MEM. You can use in-built genome to map against or upload one if it is missing.",
+        "The standard format for storing aligned reads is SAM/BAM. The major toolsets to process these datasets are DeepTools, SAMtools, BAMtools and Picard.",
+        "Data can be uploaded directly from a computer, from EBI SRA and from NCBI SRA, also using FTP or URL.",
+        "One can retrieve NGS data from Sequence Read Archive",
+        "Galaxy can analyze massive amounts of data and make them suitable for secondary analysis"
+      ],
+      "subtopic": "next-steps",
+      "contributors": [
+        {
+          "name": "Anton Nekrutenko",
+          "email": "anton@nekrut.org",
+          "joined": "2017-09",
+          "id": "nekrut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/"
+        },
+        {
+          "name": "Marius van den Beek",
+          "joined": "2018-06",
+          "id": "mvdbeek",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/mvdbeek.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/"
+        },
+        {
+          "name": "Dave Clements",
+          "joined": "2017-09",
+          "orcid": "0000-0002-9970-6657",
+          "id": "tnabtaf",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/tnabtaf.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/"
+        },
+        {
+          "name": "Daniel Blankenberg",
+          "twitter": "dblankenberg",
+          "orcid": "0000-0002-6833-9049",
+          "joined": "2018-07",
+          "id": "blankenberg",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankenberg.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/"
+        }
+      ],
+      "url": "/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html",
+      "topic_name": "introduction",
+      "tutorial_name": "galaxy-intro-ngs-data-managment",
+      "dir": "topics/introduction/tutorials/galaxy-intro-ngs-data-managment",
+      "id": "introduction/galaxy-intro-ngs-data-managment",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": {
+          "description": "In this demo video, we will show how to perform an NGS data analysis, using a SARS-CoV-2 example dataset. If you would like to run the full tutorial yourself, please find the link below (duration 1h-1.5h).",
+          "materials": [
+            {
+              "link": "topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html",
+              "title": "NGS data logistics",
+              "type": "Tutorial"
+            }
+          ],
+          "tags": [
+            "introduction"
+          ],
+          "type": "Demo",
+          "versions": [
+            {
+              "captions": [
+                "nekrut"
+              ],
+              "date": "2021-02-15",
+              "galaxy_version": "21.01",
+              "length": "15M",
+              "link": "9mIL0tIfZ_o",
+              "speakers": [
+                "nekrut"
+              ]
+            }
+          ],
+          "gtn_id": "introduction/galaxy-intro-ngs-data-managment",
+          "title": "NGS data logistics",
+          "captioned": true
+        },
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "workflows": [
+        {
+          "workflow": "ngs_intro_workflow.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/workflows/ngs_intro_workflow.ga",
+          "path": "topics/introduction/tutorials/galaxy-intro-ngs-data-managment/workflows/ngs_intro_workflow.ga",
+          "wfid": "introduction-galaxy-intro-ngs-data-managment",
+          "wfname": "ngs_intro_workflow",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/introduction-galaxy-intro-ngs-data-managment/versions/ngs_intro_workflow",
+          "license": null,
+          "creators": [
+
+          ]
+        }
+      ],
+      "tools": [
+        "Grep1",
+        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
+        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
+        "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2",
+        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/lofreq_indelqual/lofreq_indelqual/2.1.5+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/lofreq_viterbi/lofreq_viterbi/2.1.5+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1",
+        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy2",
+        "toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19",
+        "toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.8+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.9+galaxy0",
+        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0",
+        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0"
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
       "title": "Introduction to Genomics and Galaxy",
       "zenodo_link": "",
       "level": "Introductory",
@@ -619,19 +771,6 @@
       "slides": false,
       "workflows": [
         {
-          "workflow": "Galaxy-Workflow-galaxy-intro-strands-2.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-strands/workflows/Galaxy-Workflow-galaxy-intro-strands-2.ga",
-          "path": "topics/introduction/tutorials/galaxy-intro-strands/workflows/Galaxy-Workflow-galaxy-intro-strands-2.ga",
-          "wfid": "introduction-galaxy-intro-strands",
-          "wfname": "galaxy-workflowlaxy-intro-strands-2",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/introduction-galaxy-intro-strands/versions/galaxy-workflowlaxy-intro-strands-2",
-          "license": null,
-          "creators": [
-
-          ]
-        },
-        {
           "workflow": "Galaxy-Workflow-galaxy-intro-strands.ga",
           "tests": false,
           "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-strands/workflows/Galaxy-Workflow-galaxy-intro-strands.ga",
@@ -639,6 +778,19 @@
           "wfid": "introduction-galaxy-intro-strands",
           "wfname": "galaxy-workflowlaxy-intro-strands",
           "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/introduction-galaxy-intro-strands/versions/galaxy-workflowlaxy-intro-strands",
+          "license": null,
+          "creators": [
+
+          ]
+        },
+        {
+          "workflow": "Galaxy-Workflow-galaxy-intro-strands-2.ga",
+          "tests": false,
+          "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-strands/workflows/Galaxy-Workflow-galaxy-intro-strands-2.ga",
+          "path": "topics/introduction/tutorials/galaxy-intro-strands/workflows/Galaxy-Workflow-galaxy-intro-strands-2.ga",
+          "wfid": "introduction-galaxy-intro-strands",
+          "wfname": "galaxy-workflowlaxy-intro-strands-2",
+          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/introduction-galaxy-intro-strands/versions/galaxy-workflowlaxy-intro-strands-2",
           "license": null,
           "creators": [
 
@@ -1135,265 +1287,13 @@
       }
     },
     {
-      "layout": "tutorial_hands_on",
-      "title": "NGS data logistics",
-      "zenodo_link": "",
-      "questions": [
-        "How to manipulate and process NGS data"
-      ],
-      "objectives": [
-        "Understand most common types of NGS-related datatypes",
-        "Learn about how Galaxy handles NGS data using Illumina data derived from patients infected with SARS-CoV-2"
-      ],
-      "time_estimation": "1H30M",
-      "key_points": [
-        "FASTQ Sanger version of the format is considered to be the standard form of FASTQ.",
-        "Paired end data can be provided as two files or as an interleaved one.",
-        "FastqQC is a tool allowing to check the quality of FASTQ datasets.",
-        "The most common tools for mapping are Bowtie, BWA, BWA-MEM. You can use in-built genome to map against or upload one if it is missing.",
-        "The standard format for storing aligned reads is SAM/BAM. The major toolsets to process these datasets are DeepTools, SAMtools, BAMtools and Picard.",
-        "Data can be uploaded directly from a computer, from EBI SRA and from NCBI SRA, also using FTP or URL.",
-        "One can retrieve NGS data from Sequence Read Archive",
-        "Galaxy can analyze massive amounts of data and make them suitable for secondary analysis"
-      ],
-      "subtopic": "next-steps",
-      "contributors": [
-        {
-          "name": "Anton Nekrutenko",
-          "email": "anton@nekrut.org",
-          "joined": "2017-09",
-          "id": "nekrut",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/"
-        },
-        {
-          "name": "Marius van den Beek",
-          "joined": "2018-06",
-          "id": "mvdbeek",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/mvdbeek.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/mvdbeek/"
-        },
-        {
-          "name": "Dave Clements",
-          "joined": "2017-09",
-          "orcid": "0000-0002-9970-6657",
-          "id": "tnabtaf",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/tnabtaf.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/"
-        },
-        {
-          "name": "Daniel Blankenberg",
-          "twitter": "dblankenberg",
-          "orcid": "0000-0002-6833-9049",
-          "joined": "2018-07",
-          "id": "blankenberg",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/blankenberg.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/blankenberg/"
-        }
-      ],
-      "url": "/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html",
-      "topic_name": "introduction",
-      "tutorial_name": "galaxy-intro-ngs-data-managment",
-      "dir": "topics/introduction/tutorials/galaxy-intro-ngs-data-managment",
-      "id": "introduction/galaxy-intro-ngs-data-managment",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": {
-          "description": "In this demo video, we will show how to perform an NGS data analysis, using a SARS-CoV-2 example dataset. If you would like to run the full tutorial yourself, please find the link below (duration 1h-1.5h).",
-          "materials": [
-            {
-              "link": "topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html",
-              "title": "NGS data logistics",
-              "type": "Tutorial"
-            }
-          ],
-          "tags": [
-            "introduction"
-          ],
-          "type": "Demo",
-          "versions": [
-            {
-              "captions": [
-                "nekrut"
-              ],
-              "date": "2021-02-15",
-              "galaxy_version": "21.01",
-              "length": "15M",
-              "link": "9mIL0tIfZ_o",
-              "speakers": [
-                "nekrut"
-              ]
-            }
-          ],
-          "gtn_id": "introduction/galaxy-intro-ngs-data-managment",
-          "title": "NGS data logistics",
-          "captioned": true
-        },
-        "session": null
-      },
-      "hands_on": true,
-      "slides": false,
-      "workflows": [
-        {
-          "workflow": "ngs_intro_workflow.ga",
-          "tests": false,
-          "url": "https://training.galaxyproject.org/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/workflows/ngs_intro_workflow.ga",
-          "path": "topics/introduction/tutorials/galaxy-intro-ngs-data-managment/workflows/ngs_intro_workflow.ga",
-          "wfid": "introduction-galaxy-intro-ngs-data-managment",
-          "wfname": "ngs_intro_workflow",
-          "trs_endpoint": "https://training.galaxyproject.org/training-material/api/ga4gh/trs/v2/tools/introduction-galaxy-intro-ngs-data-managment/versions/ngs_intro_workflow",
-          "license": null,
-          "creators": [
-
-          ]
-        }
-      ],
-      "tools": [
-        "Grep1",
-        "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0",
-        "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
-        "toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2",
-        "toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/lofreq_indelqual/lofreq_indelqual/2.1.5+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/lofreq_viterbi/lofreq_viterbi/2.1.5+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1",
-        "toolshed.g2.bx.psu.edu/repos/iuc/samtools_view/samtools_view/1.9+galaxy2",
-        "toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19",
-        "toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.8+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.9+galaxy0",
-        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0",
-        "toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0"
-      ],
-      "tours": false,
-      "video": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": false
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.json"
-      }
-    },
-    {
-      "layout": "slides-plain",
-      "logo": "GTN",
-      "video": true,
-      "title": "Options for using Galaxy",
-      "zenodo_link": "",
-      "questions": [
-        "Which Galaxy instance should I use?"
-      ],
-      "objectives": null,
-      "time_estimation": null,
-      "key_points": null,
-      "subtopic": "next-steps",
-      "contributors": [
-        {
-          "name": "Dave Clements",
-          "joined": "2017-09",
-          "orcid": "0000-0002-9970-6657",
-          "id": "tnabtaf",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/tnabtaf.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/"
-        },
-        {
-          "name": "Anthony Bretaudeau",
-          "email": "anthony.bretaudeau@inrae.fr",
-          "twitter": "abretau",
-          "gitter": "abretaud",
-          "orcid": "0000-0003-0914-2470",
-          "joined": "2017-09",
-          "elixir_node": "fr",
-          "contact_for_training": true,
-          "location": {
-            "country": "FR",
-            "lat": 48.11,
-            "lon": -1.64
-          },
-          "fediverse": "abretaud@genomic.social",
-          "id": "abretaud",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/"
-        },
-        {
-          "name": "Anne Pajon",
-          "joined": "2017-09",
-          "id": "pajanne",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/pajanne.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pajanne/"
-        },
-        {
-          "name": "Nicola Soranzo",
-          "gitter": "nsoranzo",
-          "orcid": "0000-0003-3627-5340",
-          "twitter": "NicolaSoranzo",
-          "joined": "2017-09",
-          "elixir_node": "uk",
-          "id": "nsoranzo",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/nsoranzo.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/"
-        },
-        {
-          "name": "Alaa Elghamry",
-          "joined": "2021-11",
-          "id": "alaaelghamry",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/alaaelghamry.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/alaaelghamry/"
-        }
-      ],
-      "url": "/topics/introduction/tutorials/options-for-using-galaxy/slides-plain.html",
-      "topic_name": "introduction",
-      "tutorial_name": "options-for-using-galaxy",
-      "dir": "topics/introduction/tutorials/options-for-using-galaxy",
-      "id": "introduction/options-for-using-galaxy",
-      "video_library": {
-        "tutorial": null,
-        "slides": null,
-        "demo": null,
-        "both": null,
-        "session": null
-      },
-      "hands_on": false,
-      "slides": true,
-      "tools": [
-
-      ],
-      "tours": false,
-      "translations": {
-        "tutorial": [
-
-        ],
-        "slides": [
-
-        ],
-        "video": true
-      },
-      "type": "tutorial",
-      "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//introduction/tutorials/options-for-using-galaxy/slides-plain.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//introduction/tutorials/options-for-using-galaxy/slides-plain.json"
-      }
-    },
-    {
-      "layout": "slides-plain",
+      "layout": "introduction_slides",
       "logo": "GTN",
       "title": "Introduction to Galaxy",
       "subtopic": "core",
       "priority": 1,
       "redirect_from": [
-        "/topics/introduction/slides-plain/introduction"
+        "/topics/introduction/slides/introduction"
       ],
       "contributors": [
         {
@@ -1531,7 +1431,7 @@
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/"
         }
       ],
-      "url": "/topics/introduction/tutorials/introduction/slides-plain.html",
+      "url": "/topics/introduction/tutorials/introduction/slides.html",
       "topic_name": "introduction",
       "tutorial_name": "introduction",
       "dir": "topics/introduction/tutorials/introduction",
@@ -1561,37 +1461,50 @@
       },
       "type": "tutorial",
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//introduction/tutorials/introduction/slides-plain.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//introduction/tutorials/introduction/slides-plain.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//introduction/tutorials/introduction/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//introduction/tutorials/introduction/slides.json"
       }
     },
     {
-      "layout": "tutorial_hands_on",
-      "title": "IGV Introduction",
-      "draft": true,
+      "layout": "tutorial_slides",
+      "logo": "GTN",
+      "video": true,
+      "title": "Options for using Galaxy",
       "zenodo_link": "",
-      "questions": null,
+      "questions": [
+        "Which Galaxy instance should I use?"
+      ],
       "objectives": null,
-      "time_estimation": "2H",
+      "time_estimation": null,
       "key_points": null,
       "subtopic": "next-steps",
       "contributors": [
         {
-          "name": "Anton Nekrutenko",
-          "email": "anton@nekrut.org",
+          "name": "Dave Clements",
           "joined": "2017-09",
-          "id": "nekrut",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/"
+          "orcid": "0000-0002-9970-6657",
+          "id": "tnabtaf",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/tnabtaf.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/tnabtaf/"
         },
         {
-          "name": "Joachim Wolff",
-          "email": "wolffj@informatik.uni-freiburg.de",
+          "name": "Anthony Bretaudeau",
+          "email": "anthony.bretaudeau@inrae.fr",
+          "twitter": "abretau",
+          "gitter": "abretaud",
+          "orcid": "0000-0003-0914-2470",
           "joined": "2017-09",
-          "elixir_node": "de",
-          "id": "joachimwolff",
-          "url": "https://training.galaxyproject.org/training-material/api/contributors/joachimwolff.json",
-          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/"
+          "elixir_node": "fr",
+          "contact_for_training": true,
+          "location": {
+            "country": "FR",
+            "lat": 48.11,
+            "lon": -1.64
+          },
+          "fediverse": "abretaud@genomic.social",
+          "id": "abretaud",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/abretaud.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/abretaud/"
         },
         {
           "name": "Anne Pajon",
@@ -1599,13 +1512,31 @@
           "id": "pajanne",
           "url": "https://training.galaxyproject.org/training-material/api/contributors/pajanne.json",
           "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pajanne/"
+        },
+        {
+          "name": "Nicola Soranzo",
+          "gitter": "nsoranzo",
+          "orcid": "0000-0003-3627-5340",
+          "twitter": "NicolaSoranzo",
+          "joined": "2017-09",
+          "elixir_node": "uk",
+          "id": "nsoranzo",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nsoranzo.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nsoranzo/"
+        },
+        {
+          "name": "Alaa Elghamry",
+          "joined": "2021-11",
+          "id": "alaaelghamry",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/alaaelghamry.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/alaaelghamry/"
         }
       ],
-      "url": "/topics/introduction/tutorials/igv-introduction/tutorial.html",
+      "url": "/topics/introduction/tutorials/options-for-using-galaxy/slides.html",
       "topic_name": "introduction",
-      "tutorial_name": "igv-introduction",
-      "dir": "topics/introduction/tutorials/igv-introduction",
-      "id": "introduction/igv-introduction",
+      "tutorial_name": "options-for-using-galaxy",
+      "dir": "topics/introduction/tutorials/options-for-using-galaxy",
+      "id": "introduction/options-for-using-galaxy",
       "video_library": {
         "tutorial": null,
         "slides": null,
@@ -1613,13 +1544,12 @@
         "both": null,
         "session": null
       },
-      "hands_on": true,
-      "slides": false,
+      "hands_on": false,
+      "slides": true,
       "tools": [
 
       ],
       "tours": false,
-      "video": false,
       "translations": {
         "tutorial": [
 
@@ -1627,15 +1557,12 @@
         "slides": [
 
         ],
-        "video": false
+        "video": true
       },
       "type": "tutorial",
-      "tags": [
-        "work-in-progress"
-      ],
       "urls": {
-        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//introduction/tutorials/igv-introduction/tutorial.json",
-        "slides": "https://training.galaxyproject.org/training-material/api/topics//introduction/tutorials/igv-introduction/tutorial.json"
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//introduction/tutorials/options-for-using-galaxy/slides.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//introduction/tutorials/options-for-using-galaxy/slides.json"
       }
     },
     {
@@ -1713,6 +1640,79 @@
       "urls": {
         "hands_on": "https://training.galaxyproject.org/training-material/api/topics//introduction/tutorials/dummy/tutorial.json",
         "slides": "https://training.galaxyproject.org/training-material/api/topics//introduction/tutorials/dummy/tutorial.json"
+      }
+    },
+    {
+      "layout": "tutorial_hands_on",
+      "title": "IGV Introduction",
+      "draft": true,
+      "zenodo_link": "",
+      "questions": null,
+      "objectives": null,
+      "time_estimation": "2H",
+      "key_points": null,
+      "subtopic": "next-steps",
+      "contributors": [
+        {
+          "name": "Anton Nekrutenko",
+          "email": "anton@nekrut.org",
+          "joined": "2017-09",
+          "id": "nekrut",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/nekrut.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/nekrut/"
+        },
+        {
+          "name": "Joachim Wolff",
+          "email": "wolffj@informatik.uni-freiburg.de",
+          "joined": "2017-09",
+          "elixir_node": "de",
+          "id": "joachimwolff",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/joachimwolff.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/joachimwolff/"
+        },
+        {
+          "name": "Anne Pajon",
+          "joined": "2017-09",
+          "id": "pajanne",
+          "url": "https://training.galaxyproject.org/training-material/api/contributors/pajanne.json",
+          "page": "https://training.galaxyproject.org/training-material/hall-of-fame/pajanne/"
+        }
+      ],
+      "url": "/topics/introduction/tutorials/igv-introduction/tutorial.html",
+      "topic_name": "introduction",
+      "tutorial_name": "igv-introduction",
+      "dir": "topics/introduction/tutorials/igv-introduction",
+      "id": "introduction/igv-introduction",
+      "video_library": {
+        "tutorial": null,
+        "slides": null,
+        "demo": null,
+        "both": null,
+        "session": null
+      },
+      "hands_on": true,
+      "slides": false,
+      "tools": [
+
+      ],
+      "tours": false,
+      "video": false,
+      "translations": {
+        "tutorial": [
+
+        ],
+        "slides": [
+
+        ],
+        "video": false
+      },
+      "type": "tutorial",
+      "tags": [
+        "work-in-progress"
+      ],
+      "urls": {
+        "hands_on": "https://training.galaxyproject.org/training-material/api/topics//introduction/tutorials/igv-introduction/tutorial.json",
+        "slides": "https://training.galaxyproject.org/training-material/api/topics//introduction/tutorials/igv-introduction/tutorial.json"
       }
     }
   ]
