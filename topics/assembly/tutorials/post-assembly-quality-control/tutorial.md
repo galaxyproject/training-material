@@ -1,8 +1,10 @@
 ---
 layout: tutorial_hands_on
-
 title: Post Assembly Quality Control Workflow
-zenodo_link: ''
+zenodo_link_1: 'https://zenodo.org/record/7781236#.ZCaViY5BwgY'
+zenodo_link_2: 'https://zenodo.org/record/7784764#.ZCaWUY5BwgY'
+zenodo_link_3: 'https://zenodo.org/record/7786773#.ZCaVOo5BwgY'
+level: Intermediate
 questions:
 - what combination of tools can assess the quality of an initial assembly?
 - what metrics can help to analyse the quality?
@@ -12,8 +14,7 @@ objectives:
 - analyse and evaluate the results of the workflow
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+-
 contributors:
 - GitFab93
 - gallardoalba
@@ -79,30 +80,194 @@ As a first step we will get the data from zenodo.
 
 > <hands-on-title> Data Upload </hands-on-title>
 >
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
->     -> `{{ page.title }}`):
+> ##### Case 1: ***Chondrosia reniformis***: 
+> 1. Create a new history for the sponge (Chondrosia reniformis)
+> 2. Import the HiFi files from [Zenodo]({{ page.zenodo_link_3 }})
+>
+>    - Open the file {% icon galaxy-upload %} __upload__ menu
+>    - Click on **Rule-based** tab
+>    - *"Upload data as"*: `Collections`
+>    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >    ```
->    
+>   dataset_01   https://zenodo.org/record/7786773/files/hifi.fastq.gz?download=1   fastq.gz    HiFi    PacBio_HiFi
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
 >
->    ***TODO***: *Remove the useless files (if added)*
+>    - From **Rules** menu select `Add / Modify Column Definitions`
+>       - Click `Add Definition` button and select `List Identifier(s)`: column `A`
+>       - Click `Add Definition` button and select `URL`: column `B`
+>       - Click `Add Definition` button and select `Type`: column `C`
+>       - Click `Add Definition` button and select `Group Tag`: column `D`
+>       - Click `Add Definition` button and select `Collection Name`: column `E`
+>    - Click `Apply` and press <kbd>Upload</kbd>
 >
->    {% snippet faqs/galaxy/datasets_import_via_link.md %}
+> 3. Import the Hi-C datasets from [Zenodo]({{ page.zenodo_link_3 }})
 >
->    {% snippet faqs/galaxy/datasets_import_from_data_library.md %}
+>    - Open the file {% icon galaxy-upload %} __upload__ menu
+>    - Click on **Rule-based** tab
+>    - *"Upload data as"*: `Datasets`
+>    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
+>       ```
+>   Hi-C_dataset_F   https://zenodo.org/record/7786773/files/hiC_1.fastq.gz?download=1   fastq.gz    Hi-C
+>   Hi-C_dataset_R   https://zenodo.org/record/7786773/files/hiC_2.fastq.gz?download=1   fastq.gz    Hi-C
+>       ```
 >
->    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="datatypes" %}
+>    - From **Rules** menu select `Add / Modify Column Definitions`
+>       - Click `Add Definition` button and select `Name`: column `A`
+>       - Click `Add Definition` button and select `URL`: column `B`
+>       - Click `Add Definition` button and select `Type`: column `C`
+>       - Click `Add Definition` button and select `Name Tag`: column `D`
+>    - Click `Apply` and press <kbd>Upload</kbd>
 >
-> 5. Add to each database a tag corresponding to ...
+> 4. Import the remaining data from [Zenodo]({{ page.zenodo_link_1 }})
 >
->    {% snippet faqs/galaxy/datasets_add_tag.md %}
+>    - Open the file {% icon galaxy-upload %} __upload__ menu
+>    - Click on **Regular** tab
+>    - Click on **Paste/Fetch data**
+>    - Edit *New File* name to: assembly
+>    - Edit *Type* to fasta.gz
+>    - Copy the first tabular data, paste it into the textbox
+>    - Click on **Paste/Fetch data**
+>    - Edit *New File* name to: taxdump_directory
+>    - Edit *Type* to gz
+>    - Copy the second tabular data, paste it into the textbox
+>    - Click on **Paste/Fetch data**
+>    - Edit *New File* name to: metadata
+>    - Edit *Type* to yaml
+>    - Copy the third tabular data, paste it into the textbox
+>
+>       ```
+>   https://zenodo.org/record/7781236/files/GCA_947172415.1.fasta.gz?download=1
+>       ```
+>       ```
+>   https://zenodo.org/record/7781236/files/new_taxdump.tar.gz?download=1
+>       ```
+>       ```
+>   https://zenodo.org/record/7781236/files/metadata_chon.yaml?download=1
+>       ```
+>
+>
+> ##### Case 2: ***Erythrolamprus reginae***:
+> 1. Create a new history for the snake (Erythrolamprus reginae)
+> 2. Import the HiFi files from [Zenodo]({{ page.zenodo_link_2 }}) and [Zenodo]({{ page.zenodo_link_3 }})
+>
+>    - Open the file {% icon galaxy-upload %} __upload__ menu
+>    - Click on **Rule-based** tab
+>    - *"Upload data as"*: `Collections`
+>    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
+>
+>    ```
+>   dataset_01   https://zenodo.org/record/7784764/files/m64055_210602_211608.hifi_reads.fastq.gz?download=1   fastq.gz    HiFi    PacBio_HiFi
+>   dataset_02   https://zenodo.org/record/7784764/files/m54306Ue_211020_191957.hifi_reads.fastq.gz?download=1   fastq.gz    HiFi    PacBio_HiFi
+>   dataset_03   https://zenodo.org/record/7784764/files/m54306Ue_211016_070813.hifi_reads.fastq.gz?download=1   fastq.gz    HiFi    PacBio_HiFi
+>   dataset_04   https://zenodo.org/record/7786773/files/m54306U_210529_225553.hifi_reads.fastq.gz?download=1   fastq.gz    HiFi    PacBio_HiFi
+>    ```
+>
+>    - From **Rules** menu select `Add / Modify Column Definitions`
+>       - Click `Add Definition` button and select `List Identifier(s)`: column `A`
+>       - Click `Add Definition` button and select `URL`: column `B`
+>       - Click `Add Definition` button and select `Type`: column `C`
+>       - Click `Add Definition` button and select `Group Tag`: column `D`
+>       - Click `Add Definition` button and select `Collection Name`: column `E`
+>    - Click `Apply` and press <kbd>Upload</kbd>
+>
+> 3. Import the Hi-C datasets from [Zenodo]({{ page.zenodo_link_4 }})
+>
+>    - Open the file {% icon galaxy-upload %} __upload__ menu
+>    - Click on **Rule-based** tab
+>    - *"Upload data as"*: `Datasets`
+>    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
+>
+>       ```
+>   Hi-C_dataset_F   https://zenodo.org/record/5550653/files/SRR7126301_1.fastq.gz?download=1   fastq.gz    Hi-C
+>   Hi-C_dataset_R   https://zenodo.org/record/5550653/files/SRR7126301_2.fastq.gz?download=1   fastq.gz    Hi-C
+>       ```
+>
+>    - From **Rules** menu select `Add / Modify Column Definitions`
+>       - Click `Add Definition` button and select `Name`: column `A`
+>       - Click `Add Definition` button and select `URL`: column `B`
+>       - Click `Add Definition` button and select `Type`: column `C`
+>       - Click `Add Definition` button and select `Name Tag`: column `D`
+>    - Click `Apply` and press <kbd>Upload</kbd>
+>
+> 4. Import the remaining data from [Zenodo]({{ page.zenodo_link_1 }}) and [Zenodo]({{ page.zenodo_link_4 }})
+>
+>    - Open the file {% icon galaxy-upload %} __upload__ menu
+>    - Click on **Regular** tab
+>    - Click on **Paste/Fetch data**
+>    - Edit *New File* name to: assembly
+>    - Edit *Type* to fasta.gz
+>    - Copy the first tabular data, paste it into the textbox
+>    - Click on **Paste/Fetch data**
+>    - Edit *New File* name to: taxdump_directory
+>    - Edit *Type* to gz
+>    - Copy the second tabular data, paste it into the textbox
+>    - Click on **Paste/Fetch data**
+>    - Edit *New File* name to: metadata
+>    - Edit *Type* to yaml
+>    - Copy the third tabular data, paste it into the textbox
+>
+>       ```
+>   
+>       ```
+>       ```
+>   https://zenodo.org/record/7781236/files/new_taxdump.tar.gz?download=1
+>       ```
+>       ```
+>   https://zenodo.org/record/7781236/files/metadata_eryth.yaml?download=1
+>       ```
+>
+> ##### Case 3: ***Eschrichtius robustus***:
+> 1. Create a new history for the whale (Eschrichtius robustus)
+> 2. Import the HiFi files from [Zenodo]({{ page.zenodo_link_1 }}) and [Zenodo]({{ page.zenodo_link_3 }})
+>
+>    - Open the file {% icon galaxy-upload %} __upload__ menu
+>    - Click on **Rule-based** tab
+>    - *"Upload data as"*: `Collections`
+>    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
+>
+>    ```
+>   dataset_01   https://zenodo.org/record/7781236/files/m54306Ue_220411_220734.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz?download=1   fastq.gz    HiFi    PacBio_HiFi
+>   dataset_02   https://zenodo.org/record/7781236/files/m54306Ue_220520_051743.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz?download=1   fastq.gz    HiFi    PacBio_HiFi
+>   dataset_03   https://zenodo.org/record/7781236/files/m64055e_220615_033108.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz?download=1   fastq.gz    HiFi    PacBio_HiFi
+>   dataset_04   https://zenodo.org/record/7786773/files/m64055e_220603_182128.demultiplex.bc1010--bc1010.hifi_reads.fastq.gz?download=1   fastq.gz    HiFi    PacBio_HiFi
+>    ```
+>
+>    - From **Rules** menu select `Add / Modify Column Definitions`
+>       - Click `Add Definition` button and select `List Identifier(s)`: column `A`
+>       - Click `Add Definition` button and select `URL`: column `B`
+>       - Click `Add Definition` button and select `Type`: column `C`
+>       - Click `Add Definition` button and select `Group Tag`: column `D`
+>       - Click `Add Definition` button and select `Collection Name`: column `E`
+>    - Click `Apply` and press <kbd>Upload</kbd>
+>
+> 3. Import the remaining data from [Zenodo]({{ page.zenodo_link_1 }})
+>
+>    - Open the file {% icon galaxy-upload %} __upload__ menu
+>    - Click on **Regular** tab
+>    - Click on **Paste/Fetch data**
+>    - Edit *New File* name to: assembly
+>    - Edit *Type* to fasta.gz
+>    - Copy the first tabular data, paste it into the textbox
+>    - Click on **Paste/Fetch data**
+>    - Edit *New File* name to: taxdump_directory
+>    - Edit *Type* to gz
+>    - Copy the second tabular data, paste it into the textbox
+>    - Click on **Paste/Fetch data**
+>    - Edit *New File* name to: metadata
+>    - Edit *Type* to yaml
+>    - Copy the third tabular data, paste it into the textbox
+>
+>       ```
+>   https://zenodo.org/record/7781236/files/mEscRob2.pri.cur.20221201.fasta.gz?download=1
+>       ```
+>       ```
+>   https://zenodo.org/record/7781236/files/new_taxdump.tar.gz?download=1
+>       ```
+>       ```
+>   https://zenodo.org/record/7781236/files/metadata_esch.yaml?download=1
+>       ```
 >
 {: .hands_on}
 
@@ -117,7 +282,19 @@ In this tutorial, we will use Blobtoolkit in order to integrate the following da
 - Sequence similarity data: Sequence similarity data can be used to identify potential misassemblies or contaminants in the genome assembly. BlobToolKit can use BLAST/DIAMOND searches to compare the genome assembly to reference databases and identify regions that may be problematic.
 - BUSCO reports: BlobToolKit can use BUSCO data to provide additional information about the quality of a genome assembly. It can generate plots of the number of complete and partial BUSCO genes in the genome assembly, as well as the number of missing and fragmented genes.
 
+<<<<<<< HEAD
 > <comment-title>Why should be evaluate contaminants?</comment-title>
+=======
+## Creating dataset with **BlobToolKit**
+
+BlobToolKit is a tool for decontamination, analysing and visualising assemblies. It's a great tool to review the quality of an assembled genome. In our case optimal suited for the post-assembly quality control.
+BlobToolKit can help to identify contaminants by creating a dataset with taxonomic information and then comparing the assembly with the provided data from known contigs and scaffolds. ({% cite Challis2020 %})
+
+To work with BlobToolKit we need to create a new dataset structure called BlobDir. Therefore the minimum requirement is a fasta file which contains the sequence of our assembly. A list of sequence identifiers and some statistics like length, GC proportion and undefined bases will then be generated.
+To get a more meaningful analysis and therefore more useful information about our assembly, it is better to provide as much data as we can get. In our case we will also provide a Metadata file if possible, NCBI taxonomy ID and the NCBI taxdump directory. ({% cite Challis2020 %})
+
+> <comment-title> FASTA file format </comment-title>
+>>>>>>> fa81739a4 (tut update)
 >
 > A significant proportion of the genome sequences in both GenBank and RefSeq (0.54% and 0.34% of entries, respectively) include sequences from contaminants; the contamination primarily exists in the form of short contigs, flanking regions on longer contigs, or areas of larger scaffolds that are flanked by Ns, although a few longer sequences with contamination were also detected ({% cite Steinegger2020 %}).
 >
@@ -137,11 +314,91 @@ In this tutorial we will use HISAT2 for generation the coverage data. This tool 
 >
 {: .comment}
 
+<<<<<<< HEAD
 > <hands-on-title>Generate BAM file with HISAT2</hands-on-title>
+=======
+> <hands-on-title> Creating the BlobDir dataset </hands-on-title>
+>
+> 1. {% tool [BlobToolKit](toolshed.g2.bx.psu.edu/repos/bgruening/BlobToolKit/BlobToolKit/3.4.0+galaxy0) %} with the following parameters:
+>    - *"Select mode"*: `Create a BlobToolKit dataset`
+>        - {% icon param-file %} *"Genome assembly file"*: `assembly` (Input dataset)
+>        - {% icon param-file %} *"Metadata file"*: `metadata` (Input dataset)
+>        - *"NCBI taxonomy ID"*: `{'taxid'}`
+>        - {% icon param-file %} *"NCBI taxdump directory"*: `taxdump_directory` (Input dataset)
+>
+>
+>    > <details-title> BlobDir structure </details-title>
+>    >
+>    > Here you can have a more detailed look on the structure of the BlobDir dataset:
+>    >
+>    > DatasetID
+>    > meta.json                       # Dataset metadata
+>    > identifiers.json                # Sequence names
+>    > gc.json                         # Sequence GC-content (variable)
+>    > length.json                     # Sequence lengths (variable)
+>    > ncount.json                     # Portion of N bases (variable)
+>    > {LIBRARYNAME}_cov.json          # Average per-base coverage in {LIBRARYNAME} read mapping file (variable)
+>    > {LIBRARYNAME}_read_cov.json     # Read coverage in {LIBRARYNAME} read mapping file (variable)
+>    > {TAXRULE}_{RANK}.json           # Taxonomic assignments from sequence similarity searches at {RANK} using {TAXRULE} (category)
+>    > {TAXRULE}_{RANK}_cindex.json    # Number of alternative taxa at {RANK} (variable)
+>    > {TAXRULE}_{RANK}_positions.json # Start/end position, NCBI taxon ID and bitscore for each hit (array of arrays)
+>    > {TAXRULE}_{RANK}_score.json.    # Sum of bitscores for assigned taxon at {RANK} (variable)
+>    > {LINEAGE}_busco.json            # Complete and fragmented {LINEAGE} BUSCOs (array of arrays) 
+>    {: .details}
+>
+{: .hands_on}
+
+
+## **Collapse Collection**
+
+> <hands-on-title> Collapse HiFi fastq files into single dataset </hands-on-title>
+>>>>>>> fa81739a4 (tut update)
 >
 > 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
->    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `output` (Input dataset collection)
+>    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `PacBio_HiFi` (Input dataset collection)
 >
+<<<<<<< HEAD
+=======
+>
+>    > <comment-title> short description </comment-title>
+>    >
+>    > Preperation to get a single BAM file as output by HISAT2. Necessary to get a single input for BlobToolKit afterwards.
+>    {: .comment}
+>
+{: .hands_on}
+
+
+## Mapping raw data with **HISAT2**
+
+HISAT2 is currently one of the fastest RNA-seq mapper available. The tool will use hierarchically indexing methods to align reads to a reference genome ({% cite Zhang2021 %}). It then provides the alignment output in BAM file format which we will then use as an input for BlobToolKit for analysing the correctness/accuracy of the assembly.
+
+> <comment-title> SAM/BAM file format </comment-title>
+>
+> SAM is short for Sequence Alignment Map. The file stores alignments of sequences which are often mapped with the help of reference sequences. The information is stored in a text-based format.
+> 
+> BAM contains the same information as SAM files but is in binary format. Thus it is not readable for humans. However those files are smaller and tools can work faster with it.
+>
+{: .comment}
+
+> <hands-on-title> Generate BAM file </hands-on-title>
+>
+> 1. {% tool [HISAT2](toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.2.1+galaxy1) %} with the following parameters:
+>    - *"Source for the reference genome"*: `Use a genome from history`
+>        - {% icon param-file %} *"Select the reference genome"*: `assembly` (Input dataset)
+>    - *"Is this a single or paired library"*: `Single-end`
+>        - {% icon param-file %} *"FASTA/Q file"*: `output` (output of **Collapse Collection** {% icon tool %})
+>    - In *"Advanced Options"*:
+>        - *"Input options"*: `Use default values`
+>        - *"Alignment options"*: `Use default values`
+>        - *"Scoring options"*: `Use default values`
+>        - *"Spliced alignment options"*: `Use default values`
+>        - *"Reporting options"*: `Use default values`
+>        - *"Output options"*: `Use default values`
+>        - *"SAM options"*: `Use default values`
+>        - *"Other options"*: `Use default values`
+>
+>
+>>>>>>> fa81739a4 (tut update)
 {: .hands_on}
 
 
@@ -150,7 +407,7 @@ In this tutorial we will use HISAT2 for generation the coverage data. This tool 
 > <hands-on-title> Preperation for BUSCO </hands-on-title>
 >
 > 1. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `output` (Input dataset)
+>    - {% icon param-file %} *"File to process"*: `assembly` (Input dataset)
 >    - In *"Find and Replace"*:
 >        - {% icon param-repeat %} *"Insert Find and Replace"*
 >            - *"Find pattern"*: `|`
@@ -178,6 +435,11 @@ DIAMOND is a sequence alignment tool that utilizes a more efficient algorithm co
 ## Generate **BUSCO** report
 
 BUSCO(Benchmarking Universal Single-Copy Orthologs) is a tool that will assess gene annotation completeness and the completeness of a genome assembly. The tool has a database of orthologs which will be compared to orthologs found in the assembly. As a result the output provides information about the completeness and quality of the recovered genes and which genes are completely missing. ({% cite Simo2015 %})
+<<<<<<< HEAD
+=======
+We will later use these information and provide the output to BlobToolKit for further analysis.
+
+>>>>>>> fa81739a4 (tut update)
 
 > <comment-title> Orthologs </comment-title>
 >
@@ -212,13 +474,18 @@ The following images are screenshots of the BUSCO output files.
 
 ## Generate interactive plots with **BlobToolKit**
 
+<<<<<<< HEAD
 BlobToolKit is a tool designed to assist researchers in analyzing and visualizing genome assembly data. The tool uses information from multiple data sources such as read coverage, gene expression, and taxonomic annotations to generate a comprehensive overview of genome assembly data ({% cite Challis2020 %}). One of the key characteristics of BlobToolKit is its ability to provide with a user-friendly interactive interface for analyzing complex genome assembly data. 
+=======
+In the previous steps we generated and prepared the data which we will provide now in BlobToolKit. With the given information the tool can then detect possible contaminants. Once detected the tool can also filter the assembly and generate plots to give an overview of the assemblies analysis and therfore of the overall quality. ({% cite Challis2020 %})
+>>>>>>> fa81739a4 (tut update)
 
 To work with Blobtoolkit we need to create a new dataset structure called BlobDir. Therefore the minimum requirement is a fasta file which contains the sequence of our assembly. A list of sequence identifiers and some statistics like length, GC proportion and undefined bases will then be generated.
 To get a more meaningful analysis and therefore more useful information about our assembly, it is better to provide as much data as we can get. In our case we will also provide a Metadata file if possible, NCBI taxonomy ID and the NCBI taxdump directory. ({% cite Challis2020 %})
 
 > <hands-on-title> Creating the BlobDir dataset </hands-on-title>
 >
+<<<<<<< HEAD
 > 1. {% tool [BlobToolKit](toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/3.4.0+galaxy0) %} with the following parameters:
 >    - *"Select mode"*: `Create a BlobToolKit dataset`
 >        - {% icon param-file %} *"Genome assembly file"*: `output` (Input dataset)
@@ -229,6 +496,9 @@ To get a more meaningful analysis and therefore more useful information about ou
 >
 >
 > 2. {% tool [BlobToolKit](toolshed.g2.bx.psu.edu/repos/bgruening/blobtoolkit/blobtoolkit/3.4.0+galaxy0) %} with the following parameters:
+=======
+> 1. {% tool [BlobToolKit](toolshed.g2.bx.psu.edu/repos/bgruening/BlobToolKit/BlobToolKit/3.4.0+galaxy0) %} with the following parameters:
+>>>>>>> fa81739a4 (tut update)
 >    - *"Select mode"*: `Add data to a BlobToolKit dataset`
 >        - {% icon param-file %} *"Blobdir.tgz file"*: `blobdir` (output of **BlobToolKit** {% icon tool %})
 >        - {% icon param-file %} *"BUSCO full table file"*: `busco_table` (output of **Busco** {% icon tool %})
@@ -246,7 +516,18 @@ To get a more meaningful analysis and therefore more useful information about ou
 >    > Coverage information/how can comparing the assembly against those information can help us analyse completeness 
 >    {: .comment}
 >
+<<<<<<< HEAD
 > 3. {% tool [Interactive BlobToolKit](interactive_tool_blobtoolkit) %} with the following parameters:
+=======
+{: .hands_on}
+
+
+## Plots with **Interactive BlobToolKit**
+
+> <hands-on-title> Viewing BlobDir dataset as plots </hands-on-title>
+>
+> 1. {% tool [Interactive BlobToolKit](interactive_tool_BlobToolKit) %} with the following parameters:
+>>>>>>> fa81739a4 (tut update)
 >    - {% icon param-file %} *"Blobdir file"*: `blobdir` (output of **BlobToolKit** {% icon tool %})
 >
 >
@@ -270,7 +551,7 @@ K-mers are also useful for genome analysis. The frequency and distribution of k-
 
 > <comment-title> k-mers </comment-title>
 >
-> K-mers are contiguous substrings of DNA sequences of length k.
+> K-mers are contiguous sub-strings of DNA sequences of length k.
 > Example:
 > The sequence ACGT has four monomers (A, C, G, T), three 2-mers (AC, CG, GT), two 3-mers (ACG, CGT) and one 4-mer (ACGT)
 >
@@ -293,7 +574,7 @@ Meryl is a k-mer counter. It is a powerful tool for counting k-mers in large-sca
 >
 > 1. {% tool [Meryl](toolshed.g2.bx.psu.edu/repos/iuc/meryl/meryl/1.3+galaxy6) %} with the following parameters:
 >    - *"Operation type selector"*: `Count operations`
->        - {% icon param-collection %} *"Input sequences"*: `output` (Input dataset collection)
+>        - {% icon param-collection %} *"Input sequences"*: `PacBio_HiFi` (Input dataset collection)
 >        - *"K-mer size selector"*: `Set a k-mer size`
 >            - *"K-mer size"*: `21`
 >
@@ -325,7 +606,7 @@ Genomescope is used for analysing genomes with the help of k-mer profile analysi
 >
 > 1. {% tool [GenomeScope](toolshed.g2.bx.psu.edu/repos/iuc/genomescope/genomescope/2.0+galaxy2) %} with the following parameters:
 >    - {% icon param-file %} *"Input histogram file"*: `read_db_hist` (output of **Meryl** {% icon tool %})
->    - *"Ploidy for model to use"*: `{'id': 3, 'output_name': 'output'}`
+>    - *"Ploidy for model to use"*: `{'3 for snake and 2 for sponge and whale'}`
 >
 >
 >    > <comment-title> Plots </comment-title>
@@ -372,7 +653,7 @@ Merqury works by comparing k-mers of an assembly to those from unassembled high-
 >    - *"Evaluation mode"*: `Default mode`
 >        - {% icon param-file %} *"K-mer counts database"*: `read_db` (output of **Meryl** {% icon tool %})
 >        - *"Number of assemblies"*: `One assembly (pseudo-haplotype or mixed-haplotype)`
->            - {% icon param-file %} *"Genome assembly"*: `output` (Input dataset)
+>            - {% icon param-file %} *"Genome assembly"*: `assembly` (Input dataset)
 >
 >
 >    > <comment-title> Output </comment-title>
@@ -409,7 +690,7 @@ gfastats is a tool for providing summary statistics and genome file manipulation
 > <hands-on-title> Generate summary statistics </hands-on-title>
 >
 > 1. {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.2.0+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Input file"*: `assembly` (Input dataset)
 >    - *"Specify target sequences"*: `Disabled`
 >    - *"Tool mode"*: `Summary statistics generation`
 >        - *"Report mode"*: `Genome assembly statistics (--nstar-report)`
