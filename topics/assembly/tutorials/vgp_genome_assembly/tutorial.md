@@ -13,7 +13,7 @@ questions:
 objectives:
 - "Learn the tools necessary to perform a de novo assembly of a vertebrate genome"
 - "Evaluate the quality of the assembly"
-time_estimation: '3h'
+time_estimation: '5h'
 key_points:
 - "The VGP pipeline allows users to generate error-free, near gapless reference-quality genome assemblies"
 - "The assembly can be divided in four main stages: genome profile analysis, HiFi long read phased assembly with hifiasm, Bionano hybrid scaffolding and Hi-C scaffolding"
@@ -44,15 +44,15 @@ abbreviations:
 
 # Introduction
 
-Advances in sequencing technologies over the last few decades have revolutionized the field of genomics, allowing for a reduction in both the time and resources required to *de novo* genome assembly. Until recently, second-generation sequencing technologies (also known as {NGS}) produceed highly accurate but short (up to 800bp) reads, whose extension was not long enough to cope with the difficulties associated with repetitive regions. Today, so-called {TGS} technologies, usually known as {SMRT} sequencing, have become dominant in *de novo* assembly of large genomes. TGS can use native DNA without amplification, reducing sequencing error and bias ({% cite Hon2020 %}, {% cite Giani2020 %}). Very recently, Pacific Biosciences introduced {HiFi} sequencing, which produces reads 10-25 kbp in length with a minimum accuracy of 99% (Q20). In this tutorial you will use HiFi reads in combination with data from additional sequencing technologies to generate a high-quality genome assembly.
+Advances in sequencing technologies over the last few decades have revolutionized the field of genomics, allowing for a reduction in both the time and resources required to *de novo* genome assembly. Until recently, second-generation sequencing technologies (also known as {NGS}) produced highly accurate but short (up to 800bp) reads. Those read extension was not long enough to cope with the difficulties associated with repetitive regions. Today, so-called {TGS} technologies, usually known as {SMRT} sequencing, have become dominant in *de novo* assembly of large genomes. TGS can use native DNA without amplification, reducing sequencing error and bias ({% cite Hon2020 %}, {% cite Giani2020 %}). Very recently, Pacific Biosciences introduced {HiFi} sequencing, which produces reads 10-25 kbp in length with a minimum accuracy of 99% (Q20). In this tutorial you will use HiFi reads in combination with data from additional sequencing technologies to generate a high-quality genome assembly.
 
 Deciphering the structural organization of complex vertebrate genomes is currently one of the largest challenges in genomics ({% cite Frenkel2012 %}). Despite the significant progress made in recent years, a key question remains: what combination of data and tools can produce the highest quality assembly? In order to adequately answer this question, it is necessary to analyse two of the main factors that determine the difficulty of genome assembly processes: repetitive content and heterozygosity.
 
 Repetitive elements can be grouped into two categories: interspersed repeats, such as transposable elements (TE) that occur at multiple loci throughout the genome, and tandem repeats (TR) that occur at a single locus ({% cite Trresen2019 %}). Repetitive elements are an important component of eukaryotic genomes, constituting over a third of the genome in the case of mammals ({% cite SoteroCaio2017 %}, {% cite Chalopin2015 %}). In the case of tandem repeats, various estimates suggest that they are present in at least one third of human protein sequences ({% cite Marcotte1999 %}). TE content is among the main factors contributing to the lack of continuity in the reconstruction of genomes, especially in the case of large ones, as TE content is highly correlated with genome size ({% cite SoteroCaio2017 %}). On the other hand, TR usually lead to local genome assembly collapse, especially when their length is close to that of the reads ({% cite Trresen2019 %}).
 
-Heterozygosity is also an important factor in genome assembly. Haplotype phasing, that is, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies ({% cite Zhang2020 %}). When no reference sequence is available, the *state-of-the-art* strategy consists of constructing a string graph with vertices representing reads and edges representing consistent overlaps. In this kind of graph, after transitive reduction, heterozygous alleles in the string graph are represented by bubbles. When combined with {Hi-C} data, this approach allows complete diploid reconstruction ({% cite DominguezDelAngel2018 %}, {% cite Zhang2020 %}, {% cite Dida2021 %}).
+Heterozygosity is also an important factor impacting genome assembly. Haplotype phasing, the identification of alleles that are co-located on the same chromosome, has become a fundamental problem in heterozygous and polyploid genome assemblies ({% cite Zhang2020 %}). When no reference sequence is available, the *state-of-the-art* strategy consists of constructing a string graph with vertices representing reads and edges representing consistent overlaps. In this kind of graph, after transitive reduction, heterozygous alleles in the string graph are represented by bubbles. When combined with {Hi-C} data, this approach allows complete diploid reconstruction ({% cite DominguezDelAngel2018 %}, {% cite Zhang2020 %}, {% cite Dida2021 %}).
 
-The {G10K} launched the {VGP}, whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). This tutorial will guide you step by step to assemble a high-quality genome using the VGP assembly pipeline, including multiple {QC} evaluations. 
+The {G10K} launched the Vertebrate Genome Project ({VGP}), whose goal is generating high-quality, near-error-free, gap-free, chromosome-level, haplotype-phased, annotated reference genome assemblies for every vertebrate species ({% cite Rhie2021 %}). This tutorial will guide you step by step to assemble a high-quality genome using the VGP assembly pipeline, including multiple {QC} evaluations. 
 
 > <warning-title>Your results may differ!</warning-title>
 >
@@ -75,13 +75,13 @@ The {G10K} launched the {VGP}, whose goal is generating high-quality, near-error
 
 Before getting into the thick of things, let's go over some terms you will often hear when learning about genome assembly. These concepts will be used often throughout this tutorial as well, so please refer to this section as necessary to help your understanding. 
 
-**Pseudohaplotype assembly**: A genome assembly that consists of long phased haplotype blocks separated by regions where the haplotype cannot be distinguished (often homozygous regions). This can result in "switch errors", when the parental haplotypes alternate along the same sequence. These types of assemblies are usually represented by a primary assembly and an alternate assembly. (This definition largely taken from the [NCBI's Genome Assembly Model](https://www.ncbi.nlm.nih.gov/assembly/model/#asmb_def).)
+**Pseudohaplotype assembly**: A genome assembly that consists of long phased haplotype blocks separated by regions where the haplotype cannot be distinguished (often homozygous regions). This can result in "switch errors", when the parental haplotypes alternate along the same sequence. These types of assemblies are usually represented by a _primary assembly_ and an _alternate assembly_. (This definition largely taken from the [NCBI's Genome Assembly Model](https://www.ncbi.nlm.nih.gov/assembly/model/#asmb_def).)
 
-**Primary assembly**: The primary assembly is traditionally the more complete representation of an individual's genome and consists of homozygous regions and one set of loci for heterozygous regions. Because the primary assembly contains both homo- and heterozygous regions, it is more complete than the alternate which often reports only heterozygous regions. Thus, the primary assembly is usually what one would use for downstream analyses.
+**Primary assembly**: The primary assembly is traditionally the more complete representation of an individual's genome and consists of homozygous regions and one set of loci for heterozygous regions. Because the primary assembly contains both homo- and heterozygous regions, it is more complete than the _alternate assambly_ which often reports only the other set of loci for heterozygous regions. Thus, the primary assembly is usually what one would use for downstream analyses.
 
-**Alternate assembly**: The alternate assembly consists of the alternate loci not represented in the primary assembly (heterozygous loci from the other haplotype). These types of sequences are often referred to as haplotigs. Traditionally, the alternate assembly is less complete compared to the primary assembly since homozygous regions are not represented.
+**Alternate assembly**: The alternate assembly consists of the alternate loci not represented in the _primary assembly_ (heterozygous loci from the other haplotype). These types of sequences are often referred to as haplotigs. Traditionally, the alternate assembly is less complete compared to the primary assembly since homozygous regions are not represented.
 
-**Phasing**: Phasing aims to partition the contigs for an individual according to the haplotype they are derived from. Often this is done by identifying parental alleles using read data from the parents. Locally, this is achieved using linkage information in long read datasets. Recent approaches have managed to phase using long-range Hi-C linkage information from the same individual ({% cite Cheng2021 %}). 
+**Phasing**: Phasing aims to partition the contigs for an individual according to the haplotype they are derived from. When possible, this is done by identifying parental alleles using read data from the parents. Locally, this is achieved using linkage information in long read datasets. Recent approaches have managed to phase using long-range Hi-C linkage information from the same individual ({% cite Cheng2021 %}). 
 
 **Assembly graph**: A representation of the genome inferred from sequencing reads. Sequencing captures the genome as many fragmented pieces, instead of whole entire chromosomes at once (we eagerly await the day when this statement will be outdated!). The start of the assembly process pieces together these genome fragments to generate an assembly graph, which is a representation of the sequences and their overlaps. Visualizing assembly graphs can show where homozygous regions branch off into alternate paths on different haplotypes.
 
@@ -89,17 +89,17 @@ Before getting into the thick of things, let's go over some terms you will often
 
 **Contig**: A contiguous (*i.e.*, gapless) sequence in an assembly, usually inferred algorithmically from the unitig graph.
 
-**False duplications**: Assembly errors that result in one region of the genome being represented *twice* in the same assembly as two separate regions. Not to be confused with optical or technical duplicates from PCR from short read sequencing. False duplications can further be classified as either haplotypic duplications or overlaps.
+**False duplications**: Assembly errors that result in one region of the genome being represented twice in the same assembly as two separate regions. Not to be confused with optical or technical duplicates from PCR from short read sequencing. False duplications can further be classified as either _haplotypic duplications_ or _overlaps_.
 
-Haplotypic duplication can happen when a region that is heterozygous in the individual has the two haplotypes showing enough divergence that the assembler fails to interpret them as homologous. For example, say an individual is heterozygous in the region Chr1[1:100] and has Haplotype A from their mother and Haplotype B from their father; a false duplication can arise when the haplotypes are not recognized as being from the same region, and the assembler ends up placing both haplotypes in the same assembly, resulting in Chr1[1:100] being represented twice in one assembly. Ideally, a properly phased assembly would have Haplotype A in one assembly, *e.g.*, the primary, while Haplotype B is in the alternate.
+**Haplotypic duplication** can happen when a region that is heterozygous in the individual has the two haplotypes showing enough divergence that the assembler fails to interpret them as homologous. For example, say an individual is heterozygous in the region Chr1[1:100] and has Haplotype A from their mother and Haplotype B from their father; a false duplication can arise when the haplotypes are not recognized as being from the same region, and the assembler ends up placing both haplotypes in the same assembly, resulting in Chr1[1:100] being represented twice in one assembly. Ideally, a properly phased assembly would have Haplotype A in one assembly, *e.g.*, the primary, while Haplotype B is in the alternate.
 
-False duplications via overlaps result from unresolved overlaps in the assembly graph. In this case, two different contigs end up representing the same sequence, effectively duplicating it. Overlaps happen when a branching point in an assembly graph is resolved such that the contig before the vertex and a contig after the vertex share the same overlapping sequence.
+False duplications via **overlaps** result from unresolved overlaps in the assembly graph. In this case, two different contigs end up representing the same sequence, effectively duplicating it. Overlaps happen when a branching point in an assembly graph is resolved such that the contig before the vertex and a contig after the vertex share the same overlapping sequence.
 
 ![Types of false duplication.](../../images/vgp_assembly/falseduplications.png "Schematic of types of false duplication. Image adapted from {% cite Rhie2021 %}.")
 
 **Purging**: Purging aims to remove false duplications, collapsed repeats, and very low support/coverage regions from an assembly. When performed on a primary assembly, the haplotigs are retained and typically placed in the alternate assembly. 
 
-**Scaffold**: A scaffold refers to one or more contigs separated by gap (unknown) sequence. Contigs are usually generated with the aid of additional information, such as Bionano optical maps, linked reads, Hi-C chromatin information, etc. The regions between contigs are usually of unknown sequence, thus they are represented by sequences of N's. Gaps length in the sequence can be sized or arbitrary, depending on the etchnology used for scaffolding (*e.g.*, optical maps can introduce sized gaps). 
+**Scaffold**: A scaffold refers to one or more contigs separated by gap (unknown) sequence. Contigs are usually generated with the aid of additional information, such as Bionano optical maps, linked reads, Hi-C chromatin information, etc. The regions between contigs are usually of unknown sequence, thus they are represented by sequences of _N_'s. Gaps length in the sequence can be sized or arbitrary, depending on the technology used for scaffolding (*e.g.*, optical maps can introduce sized gaps). 
 
 For more about the specific scaffolding technologies used in the VGP pipeline (currently Bionano optical maps and Hi-C chromatin conformation data), please refer to those specific sections within this tutorial.
 
@@ -107,7 +107,7 @@ For more about the specific scaffolding technologies used in the VGP pipeline (c
 
 **Ultra-long reads**: Ultra-long reads are typically defined as reads of over 100 kbp, and are usually generated using Oxford Nanopore Technology. Read quality is often lower than HiFi or Illumina (*i.e.*, have a higher error rate), but they are often significantly longer than any other current sequencing technology, and can help assembly algorithms walk complex repeat regions in the assembly graphs.
 
-**Manual curation**: This term refers to manually evaluating and manipulating an assembly based on the raw supporting evidence (*e.g.*, using Hi-C contact map information). The user takes into account the original sequencing data to resolve potential misassemblies and missed joins. 
+**Manual curation**: This term refers to manually evaluating and manipulating an assembly based on the raw supporting evidence (*e.g.*, using Hi-C contact map information). The user takes into account the original sequencing data to resolve potential _misassemblies_ and _missed joins_. 
 
 **Misassembly**: Misassemblies are a type of assembly error that usually refers to any structural error in the genome reconstruction, *.e.g.*, sequences that are not adjacent in the genome being placed next to each other in the sequence. Misassemblies can be potentially identified and remedied by manual curation. 
 
@@ -118,11 +118,11 @@ For more about the specific scaffolding technologies used in the VGP pipeline (c
 
 # VGP assembly pipeline overview
 
-This training is an adaptation of the VGP assembly pipeline 2.0 (fig. 1).
+This training is an adaptation of the VGP assembly pipeline 2.0 (Fig. 2).
 
-![VGP pipeline schematic showing steps from genome profiling, to hifiasm contigging, to bionano scaffolding, to HiC scaffolding.](../../images/vgp_assembly/vgp_pipeline_2.0_current.png "VGP Pipeline 2.0. The pipeline starts with reference-free genome profiling using k-mers. Then HiFi reads are assembled into contigs using hifiasm, along with additional phasing data if available. If false duplicates are detected in QC, then the contigs undergo purging. Afterwards, scaffolding takes place with optical maps (if available) and Hi-C data.")
+![VGP pipeline schematic showing steps from genome profiling, to hifiasm contigging, to bionano scaffolding, to HiC scaffolding.](../../images/vgp_assembly/vgp_pipeline_2.0_current.png "VGP Pipeline 2.0. The pipeline starts with reference-free genome profiling using k-mers. Then HiFi reads are assembled into contigs using hifiasm, along with additional phasing data if available. If false duplicates are detected in QC, then the contigs undergo purging. Afterwards, scaffolding takes place with optical maps (if available) and Hi-C data. A final decontamination steps is performed before curation.")
 
-This training has been organized into four main sections: genome profile analysis, assembly of {HiFi} reads with hifiasm, scaffolding with Bionano optical maps, and scaffolding with {Hi-C} data. Additionally, the **assembly with hifiasm** section has two possible paths in this tutorial: solo contigging or HiC-phased contigging.
+This training has been organized into four main sections: genome profile analysis, assembly of {HiFi} reads with hifiasm, scaffolding with Bionano optical maps, and scaffolding with {Hi-C} data. Additionally, the **assembly with hifiasm** section has two possible paths in this tutorial: solo contigging or solo w/HiC contigging.
 
 Throughout this tutorial, there will be **detail boxes** with additional background information on the science behind the sequencing technologies and software we use in the pipeline. These boxes are minimized by default, but please expand them to learn more about the data we utilize in this pipeline.
 
@@ -264,7 +264,7 @@ Before starting a *de novo* genome assembly project, it is useful to collect met
 >    4    |      10      |    1.048.576         
 >---------|--------------|-----------------------
 >
-> Thus, the k-mer size is a key parameter, which must be large enough to map  uniquely to the genome, but not too large, since it can lead to wasting computational resources. In the case of the human genome, *k*-mers of 31 bases in length lead to 96.96% of unique *k*-mers.
+> Thus, the k-mer size is a key parameter, which must be large enough to map uniquely to the genome, but not too large, since it can lead to wasting computational resources. In the case of the human genome, *k*-mers of 31 bases in length lead to 96.96% of unique *k*-mers.
 >
 > Each unique k-mer can be assigned a value for coverage based on the number of times it occurs in a sequence, whose distribution will approximate a Poisson distribution, with the peak corresponding to the average genome sequencing depth. From the genome coverage, the genome size can be easily computed.
 {: .details}
@@ -421,7 +421,7 @@ If you have the {Hi-C} data for the individual you are assembling with {HiFi} re
 
 We have obtained the fully phased contig graphs (as {GFA} files) of hap1 and hap2, but these must be converted to FASTA format for subsequent steps. We will use a tool developed from the VGP: **gfastats**. gfastats is a tool suite that allows for manipulation and evaluation of FASTA and GFA files, but in this instance we will use it to convert our GFAs to FASTA files. Later on we will use it to generate standard summary statistics for our assemblies.
 
-> <hands-on-title>convert GFA to FASTA</hands-on-title>
+> <hands-on-title>Convert GFA to FASTA</hands-on-title>
 >
 > 1. {% tool [gfastats](toolshed.g2.bx.psu.edu/repos/bgruening/gfastats/gfastats/1.3.6+galaxy0) %} with the following parameters:
 >    - {% icon param-files %} *"Input GFA file"*: select `Hap1 contigs graph` and the `Hap2 contigs graph` datasets
@@ -451,7 +451,7 @@ We have obtained the fully phased contig graphs (as {GFA} files) of hap1 and hap
 >
 {: .comment}
 
-Let's use gfastats to get a basic idea of what our assembly looks like. We'll run gfastats on the {GFA} files because gfastats can report graph-specific statistics as well. After generating the stats, we'll be doing some text manipulation to get the stats side-by-side in a pretty fashion. 
+Let's use gfastats to get a basic idea of what our assembly looks like. We'll run gfastats on the {GFA} files because gfastats can report graph-specific statistics as well. After generating the stats, we'll be doing some text manipulations to get the stats side-by-side in a pretty fashion. 
 
 > <hands-on-title>Assembly evaluation with gfastats</hands-on-title>
 >
@@ -490,7 +490,7 @@ Take a look at the _gfastats on hap1 and hap2 contigs_ output — it should have
 
 Next, we will use {BUSCO}, which will provide quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
 
-> <hands-on-title>assessing assembly completeness with BUSCO</hands-on-title>
+> <hands-on-title>Assessing assembly completeness with BUSCO</hands-on-title>
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
 >    - {% icon param-files %} *"Sequences to analyze"*: `Hap1 contigs FASTA` and `Hap2 contigs FASTA`
@@ -650,7 +650,7 @@ Take a look at the _gfastats on pri and alt contigs_ output — it should have t
 
 Next, we will use {BUSCO}, which will provide quantitative assessment of the completeness of a genome assembly in terms of expected gene content. It relies on the analysis of genes that should be present only once in a complete assembly or gene set, while allowing for rare gene duplications or losses ({% cite Simo2015 %}).
 
-> <hands-on-title>assessing assembly completeness with BUSCO</hands-on-title>
+> <hands-on-title>Assessing assembly completeness with BUSCO</hands-on-title>
 >
 > 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/5.0.0+galaxy0) %} with the following parameters:
 >    - {% icon param-files %} *"Sequences to analyze"*: `Primary contigs FASTA`
@@ -713,7 +713,7 @@ To get an idea of how the *k*-mers have been distributed between our hap1 and ha
 
 ![Merqury spectra-asm plot for the hap1/hap2 assemblies.](../../images/vgp_assembly/merqury_prialt_asm_prepurge.png "Merqury ASM plot. This plot tracks the multiplicity of each k-mer found in the Hi-Fi read set and colors it according to which assemblies contain those k-mers. This can tell you which k-mers are found in only one assembly or shared between them."){:width="65%"}
 
-For an idea of what a properly phased spectra-asm plot would look like, **please click over to the Hi-C phasing version of this tutorial to see how the spectra-asm plot would look if there was proper phasing**. A properly phased spectra-asm plot should have a large green peak centered around the point of diploid coverage (here ~50X), and the two assembly-specific peaks should be centered around the point of haploid coverage (here ~25X) and resembling each other in size. 
+For an idea of what a properly phased spectra-asm plot would look like, **please click over to the Hi-C phasing version of this tutorial**. A properly phased spectra-asm plot should have a large green peak centered around the point of diploid coverage (here ~50X), and the two assembly-specific peaks should be centered around the point of haploid coverage (here ~25X) and resembling each other in size. 
 
 The spectra-asm plot we have for our primary & alternate assemblies here does not resemble one that is properly phased. There is a peak of green (shared) *k*-mers around diploid coverage, indicating that some homozygous regions have been properly split between the primary and alternate assemblies; however, there is still a large red peak of primary-assembly-only *k*-mers at that coverage value, too, which means that some homozygous regions are being represented twice in the primary assembly, instead of once in the primary and once in the alternate. Additionally, for the haploid peaks, the primary-only peak (in red) is much larger than the alternate-only peak (in blue), indicating that a lot of heterozygous regions might have both their alternate alleles represented in the primary assembly, which is false duplication. 
 
