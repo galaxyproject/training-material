@@ -5,10 +5,11 @@ title: Post Assembly Quality Control Workflow
 zenodo_link: ''
 questions:
 - what combination of tools can assess the quality of an initial assembly?
-- how to use the different tools in galaxy?
+- what metrics can help to analyse the quality?
+- how to evaluate the outputs?
 objectives:
 - apply the post-assembly-QC-workflow using the necessary tools
-- understand the function of the different tools
+- analyse and evaluate the results of the workflow
 time_estimation: 3H
 key_points:
 - The take-home messages
@@ -37,8 +38,8 @@ Several metrics can be used to evaluate the quality of a genome assembly. Some c
 
 These metrics can help researchers to evaluate the quality of their eukaryotic genome assemblies and identify potential issues that may impact downstream analyses.
 
-In this tutorial you will learn how to implement the ERGA post-assembly quality control
-pipeline, and how to interpretate the potential outcomes.
+In this tutorial you will learn how to implement the ERGA post-assembly quality control pipeline, and how to interpretate the potential outcomes.
+
 
 > <agenda-title></agenda-title>
 >
@@ -105,8 +106,6 @@ As a first step we will get the data from zenodo.
 >
 {: .hands_on}
 
-
-
 # Genome assembly ovierwiew with Blobtoolkit
 
 BlobToolKit is a tool designed to assist researchers in analyzing and visualizing genome assembly data. The tool uses information from multiple data sources such as read coverage, gene expression, and taxonomic annotations to generate a comprehensive overview of genome assembly data ({% cite Challis2020 %}). One of the key characteristics of BlobToolKit is its ability to provide with a user-friendly interactive interface for analyzing complex genome assembly data.
@@ -114,11 +113,8 @@ BlobToolKit is a tool designed to assist researchers in analyzing and visualizin
 In this tutorial, we will use Blobtoolkit in order to integrate the following data:
 
 - Read coverage data: BlobToolKit can use read coverage information to identify potential errors or gaps in the genome assembly. By comparing the depth of coverage across the genome, it can highlight regions that may be overrepresented or underrepresented, which can indicate potential issues with the assembly.
-
 - Taxonomic annotations: BlobToolKit can use taxonomic information to identify potential contaminants or foreign DNA in the genome assembly. It does this by comparing the taxonomic profile of the genome assembly to a reference database of known organisms.
-
 - Sequence similarity data: Sequence similarity data can be used to identify potential misassemblies or contaminants in the genome assembly. BlobToolKit can use BLAST/DIAMOND searches to compare the genome assembly to reference databases and identify regions that may be problematic.
-
 - BUSCO reports: BlobToolKit can use BUSCO data to provide additional information about the quality of a genome assembly. It can generate plots of the number of complete and partial BUSCO genes in the genome assembly, as well as the number of missing and fragmented genes.
 
 > <comment-title>Why should be evaluate contaminants?</comment-title>
@@ -145,6 +141,23 @@ In this tutorial we will use HISAT2 for generation the coverage data. This tool 
 >
 > 1. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/5.1.0) %} with the following parameters:
 >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `output` (Input dataset collection)
+>
+{: .hands_on}
+
+
+## Pattern **Replace**
+
+> <hands-on-title> Preperation for BUSCO </hands-on-title>
+>
+> 1. {% tool [Replace](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.4) %} with the following parameters:
+>    - {% icon param-file %} *"File to process"*: `output` (Input dataset)
+>    - In *"Find and Replace"*:
+>        - {% icon param-repeat %} *"Insert Find and Replace"*
+>            - *"Find pattern"*: `|`
+>            - *"Replace with"*: `_`
+>            - *"Replace all occurences of the pattern"*: `Yes`
+>            - *"Find and Replace text in"*: `entire line`
+>
 >
 >    > <comment-title> short description </comment-title>
 >    > Before performing the mapping, it is necessary to collapse all the sequencing datasets into a single one, in order to generate a single BAM file.
@@ -189,6 +202,12 @@ BUSCO(Benchmarking Universal Single-Copy Orthologs) is a tool that will assess g
 >
 >
 {: .hands_on}
+
+The following images are screenshots of the BUSCO output files.
+
+![Figure 1: Chondrosia reniformis BUSCO short summary](../../images/post-assembly-QC/busco-summary.png "Chondrosia reniformis BUSCO short summary output file.")
+![Figure 2: Chondrosia reniformis BUSCO full table](../../images/post-assembly-QC/busco-table-sub.png "Part of BUSCO full table output file.")
+
 
 
 ## Generate interactive plots with **BlobToolKit**
@@ -325,8 +344,8 @@ Having a high first peak indicates high heterozygosity (at coverage 44).
 
 Genome size should be 117.39 Mbp. Estimated genome size is relatively much larger: 294.72 Mbp.
 
-
 ![Figure 5: Genomescope plot ](../../images/post-assembly-QC/Eschrichtius-robustus-Linear_plot.png "Genomescope 21-mer profile of Eschrichtius robustus, linear plot. Error rate: 0.13%, unique sequences 67.6%, heterozygous level 0.308%, kcov=15.1")
+
 
 The error rate is not high with 0.13%. There are also many unique sequences.
 The first peak is at 15.1 coverage and is tiny in comparison to the second peak at 29.61 coverage.
