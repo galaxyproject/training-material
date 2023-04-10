@@ -402,12 +402,12 @@ To get a more meaningful analysis and therefore more useful information about ou
 >
 >    > <comment-title> BUSCO </comment-title>
 >    >
->    > comparing assembly to preserved genes, how can we evaluate the quality?
+>    > 
 >    {: .comment}
 >
 >    > <comment-title> Coverage </comment-title>
 >    >
->    > Coverage information/how can comparing the assembly against those information can help us analyse completeness 
+>    > 
 >    {: .comment}
 >
 > 3. {% tool [Interactive BlobToolKit](interactive_tool_blobtoolkit) %} with the following parameters:
@@ -421,9 +421,9 @@ To get a more meaningful analysis and therefore more useful information about ou
 >
 {: .hands_on}
 
-![Figure 1: BlobToolKit snail plot](../../images/post-assembly-QC/ "")
-![Figure 2: BlobToolKit snail plot](../../images/post-assembly-QC/ "")
-![Figure 3: BlobToolKit snail plot](../../images/post-assembly-QC/ "")
+![Figure 1: BlobToolKit snail plot](../../images/post-assembly-QC/Blobdir.snail.c.png "Chondrosia reniformis")
+![Figure 2: BlobToolKit cumulativ plot](../../images/post-assembly-QC/Blobdir.cumulative.c.png "Chondrosia reniformis")
+![Figure 3: BlobToolKit circle plot](../../images/post-assembly-QC/Blobdir.blob.circle.c.png "Chondrosia reniformis")
 
 
 # Providing analysis information/statistics using k-mers:
