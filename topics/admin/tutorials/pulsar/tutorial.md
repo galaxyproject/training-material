@@ -180,10 +180,12 @@ Users need to be defined, given passwords and access to the various queues. We w
 
 
 ```yaml
+{% raw %}
 rabbitmq_users:
   - user: username
     password: "{{ rabbitmq_password_username }}"
     vhost: /vhostname
+{% endraw %}
 ```
 
 Notice the variable we used instead of directly placing the password there. It will be read from vault instead.
@@ -305,6 +307,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +    fail_if_no_peer_cert: 'false'
 >    +  management_agent:
 >    +    disable_metrics_collector: "false"
+>    +  consumer_timeout: 21600000 # 6 hours in milliseconds
 >    +
 >    +rabbitmq_vhosts:
 >    +  - /pulsar/galaxy_au
@@ -340,9 +343,9 @@ More information about the rabbitmq ansible role can be found [in the repository
 >         - role: galaxyproject.miniconda
 >           become: true
 >           become_user: "{{ galaxy_user_name }}"
+>         - galaxyproject.nginx
 >    +    - geerlingguy.docker
 >    +    - usegalaxy_eu.rabbitmqserver
->         - galaxyproject.nginx
 >         - galaxyproject.gxadmin
 >         - galaxyproject.tusd
 >    {% endraw %}
