@@ -22,6 +22,8 @@ contributors:
   - bgruening
   - hexylena
   - nuwang
+  - cat-bro
+  - afgane
 tags:
   - jobs
   - git-gat
@@ -63,7 +65,7 @@ separately.
 
 ## Writing a testing tool
 
-To demonstrate a real-life scenario and TPV's role, let's plan on setting up a configuration so that a VM designated for training jobs doesn't run and real jobs and hence doesn't get overloaded. To start, we'll create a fake tool that we'll use in our configuration.
+To demonstrate a real-life scenario and TPV's role in it, let's plan on setting up a configuration where the VM designated for training jobs doesn't run real jobs and hence doesn't get overloaded. To start, we'll create a fake tool that we'll use in our configuration.
 
 > <hands-on-title>Deploying a Tool</hands-on-title>
 >
@@ -196,7 +198,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    +            function: map_tool_to_destination
 >    +            rules_module: tpv.rules
 >    +            tpv_config_files:
->    +              - config/tpv_rules_local.yml
+>    +              - "{{ galaxy_config_dir }}/tpv_rules_local.yml"
 >           tools:
 >             - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
 >               environment: local_env
@@ -228,7 +230,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    +++ files/galaxy/config/tpv_rules_local.yml
 >    @@ -0,0 +1,30 @@
 >    +tools:
->    +  testing:
+>    +  .*testing.*:
 >    +    cores: 2
 >    +    mem: cores * 4
 >    +
@@ -410,8 +412,10 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >    ```
 >    {: data-commit="TPV clamp max cores and mem"}
 >
-> These changes indicate that the destination will accept jobs that are up to `max_accepted_cores: 24` and `max_accepted_mem: 256`. However, once accepted, it will forcibly clamp it down to 16 and 128 at most using the `max_cores` and `max_mem` clauses.
-> If the tool does not exceed the specified limit, it will run happily. If not, it will be clamped down to the desired range. This allows even the largest resource requirement in the shared database to be accomodated.
+> These changes indicate that the destination will accept jobs that are up to `max_accepted_cores: 24` and `max_accepted_mem: 256`. If the tool requests resources that exceed these limits, the tool will be rejected
+> by the destination. However, once accepted, the resources will be forcibly clamped down to 16 and 128 at most because of the `max_cores` and `max_mem` clauses. Therefore, a trick that can be used here to support
+> job resource requirements in the shared database that are much larger than your destination can actually support, is to combine `max_accepted_cores/mem/gpus with `max_cores/mem/gpus` to accept the job and then
+> clamp it down to a supported range. This allows even the largest resource requirement in the shared database to be accomodated.
 >
 > 3. Run the Galaxy playbook.
 >
@@ -437,14 +441,13 @@ can be matched up so that only desired combinations are compatible with each oth
 >    ```diff
 >    --- a/files/galaxy/config/tpv_rules_local.yml
 >    +++ b/files/galaxy/config/tpv_rules_local.yml
->    @@ -8,6 +8,15 @@ tools:
+>    @@ -8,6 +8,14 @@ tools:
 >         mem: cores * 4
 >       testing:
 >         cores: 2
 >    +    rules:
 >    +      - id: admin_only_testing_tool
 >    +        if: |
->    +          import os
 >    +          # Only allow the tool to be executed if the user is an admin
 >    +          admin_users = app.config.get( "admin_users", "" ).split( "," )
 >    +          # last line in block must evaluate to a value - which determines whether the TPV if conditional matches or not
@@ -676,7 +679,7 @@ b. Metascheduling support - Perform advanced querying and filtering prior to cho
 c. Job resubmissions - Resubmit a job if it fails for some reason
 d. Linting, formatting and dry-run - Automatically format tpv rule files, catch potential syntax errors and perform a dry-run to check where a tool would get scheduled.
 
-These features are covered in detail in the [TPV documentation](https://total-perspective-vortex.readthedocs.io/en/lates/).
+These features are covered in detail in the [TPV documentation](https://total-perspective-vortex.readthedocs.io/en/latest/).
 
 ## Further Reading
 
