@@ -21,6 +21,7 @@ contributors:
   - natefoo
   - bgruening
   - hexylena
+  - nuwang
 tags:
   - jobs
   - git-gat
@@ -52,16 +53,17 @@ In order to run jobs in Galaxy, you need to assign them to a resource manager th
 must be routed to a resource manager like SLURM, HTCondor, or Pulsar. Some tools may need specific resources such as GPUs or multi-core machines to work efficiently.
 
 Sometimes, your available resources are spread out across multiple locations and resource managers. In such cases, you need a way to route your jobs to the appropriate location. Galaxy offers several methods for
-routing jobs, ranging from simple static mappings to custom Python functions called dynamic job destinations.
+routing jobs, ranging from simple static mappings to custom Python functions via [dynamic job destinations](https://docs.galaxyproject.org/en/latest/admin/jobs.html#dynamic-destination-mapping).
 
-Recently, the Galaxy project has introduced a library named Total-Perspective-Vortex (TPV) to simplify this process. TPV provides a user-friendly YAML configuration that works for most scenarios.
-For more complex cases, TPV allows you to embed Python code into the YAML file. Additionally, TPV shares a global database of resource requirements, so admins don't have to figure out the requirements for each tool
+Recently, the Galaxy project has introduced a library named [Total-Perspective-Vortex (TPV)](https://total-perspective-vortex.readthedocs.io/) to simplify this process. TPV provides a admin-friendly YAML configuration that works for most scenarios.
+For more complex cases, TPV also allows you to embed Python code into the configuration YAML file and implement fine-grained control over jobs. 
+
+Lastly, TPV offers a shared global database of default resource requirements (more below). By leveraging this database, admins don't have to figure out the requirements for each tool
 separately.
 
 ## Writing a testing tool
 
-To check that resources are being allocated appropriately, We don't want to overload our training VMs trying to run real tools, so to demonstrate how to map a multicore tool to a multicore destination using TPV,
-we'll create a fake tool.
+To demonstrate a real-life scenario and TPV's role, let's plan on setting up a configuration so that a VM designated for training jobs doesn't run and real jobs and hence doesn't get overloaded. To start, we'll create a fake tool that we'll use in our configuration.
 
 > <hands-on-title>Deploying a Tool</hands-on-title>
 >
@@ -263,7 +265,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    Note that the tool id is matched via a regular expression against the full tool id. For example, a full tool id for hisat may look like: `toolshed.g2.bx.psu.edu/repos/iuc/hisat2/hisat2/2.1.0+galaxy7`
 >    This enables complex matching, including matching against specific versions of tools.
 >
->    Destinations must also be defined in TPV itself (Destinations defined in job_conf.yml are ignored by TPV). Therefore, we have moved all destinations from job_conf to TPV. In addition, we have removed some
+>    Destinations must also be defined in TPV itself. Importantly, note that any destinations defined in job_conf.yml are ignored by TPV. Therefore, we have moved all destinations from job_conf to TPV. In addition, we have removed some
 >    redundancy by using the "inherits" clause in the `slurm` destination. This means that slurm will inherit all of the settings defined for singularity, but selectively override some settings. We have additionally
 >    defined the `native_specification` param for SLURM, which is what SLURM uses to allocate resources per job. Note the use of the `{cores}`
 >    parameter within the native specification, which TPV will replace at runtime with the value of cores assigned to the tool.
@@ -446,7 +448,7 @@ can be matched up so that only desired combinations are compatible with each oth
 >    +          # Only allow the tool to be executed if the user is an admin
 >    +          admin_users = app.config.get( "admin_users", "" ).split( "," )
 >    +          # last line in block must evaluate to a value - which determines whether the TPV if conditional matches or not
->    +          user_email not in admin_users
+>    +          not user or user.email not in admin_users
 >    +        fail: Unauthorized. Only admins can execute this tool.
 >
 >     destinations:
@@ -582,7 +584,7 @@ Lastly, we need to write a rule in TPV that will read the value of the job resou
 >    +          param_dict.get('__job_resource', {}).get('__job_resource__select') == 'yes'
 >    +        cores: int(job.get_param_values(app)['__job_resource']['cores'])
 >    +        params:
->    +           walltime: int(job.get_param_values(app)['__job_resource']['time'])
+>    +           walltime: "{int(job.get_param_values(app)['__job_resource']['time'])}"
 >
 >     destinations:
 >       local_env:
