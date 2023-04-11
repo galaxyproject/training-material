@@ -77,7 +77,7 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    ```
 >    {: data-commit="Add hosts"}
 >
->    > <tip-title>What are these :children?<tip-title>
+>    > <tip-title>What are these :children?</tip-title>
 >    > Here we use some of the more advanced features of Ansible's Inventory system.
 >    > We declare a host group called 'beacon' with no hosts of its own.
 >    > 
@@ -155,7 +155,7 @@ This tutorial will guide you through setting up a [GA4GH Beacon](https://beacon-
 >    ```
 >    {: data-commit="Add relevant group variables"}
 >
->    > <tip-title>Groups?<tip-title>
+>    > <tip-title>groups?</tip-title>
 >    > Here we again use some advanced features of Ansible's inventory system. Ansible knows the name of every hostname in the inventory. Now that we want to point the beacon configuration, either at the database which should be on `beacon-server`, or at Galaxy in `galaxyservers`, we ask the `groups` variable for what the inventory looks like. We use `[0]` to pull out the first hostname we find for both of those groups.
 >    {: .tip}
 >
