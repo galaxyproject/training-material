@@ -127,6 +127,14 @@ module Jekyll
       end
     end
 
+    def fedi2link(fedi_address)
+      fedi_address.gsub(/^(?<user>.*)@(?<host>.*)$/){|m| "https://#{$~[:host]}/@#{$~[:user]}" }
+    end
+
+    def load_svg(url)
+      File.open(url).read.gsub(/\R+/, '')
+    end
+
     def regex_replace(str, regex_search, value_replace)
       regex = /#{regex_search}/m
       return str.gsub(regex, value_replace)

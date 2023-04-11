@@ -91,6 +91,12 @@ Your "History" is in the panel at the right.
 >
 >    ![Screenshot of the galaxy interface with the history name being edited, it currently reads "Unnamed history", the default value. An input box is below it.](../../../../shared/images/rename_history.png){:width="250px"}
 >
+>    > <comment-title></comment-title>
+>    >
+>    > In some previous versions of Galaxy, you will need to click on the history name to rename it as shown here:
+>    > ![Screenshot of the galaxy interface with the history name being edited, it currently reads "Unnamed history", the default value.](../../../../shared/images/rename_history_old.png){:width="320px"}
+>    {: .comment}
+>
 > 3. Type in a new name, for example, "My Analysis"
 > 4. Click on **Save**
 >

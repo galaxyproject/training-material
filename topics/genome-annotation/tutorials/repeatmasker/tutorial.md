@@ -172,7 +172,7 @@ Let's run RepeatMasker, by selected the input assembly in fasta format. We selec
 >
 {: .hands_on}
 
-RepeatMasker produces 4 output files:
+RepeatMasker produces 5 output files:
 
 - `masked sequence`: this is the fasta file that you will use for future analysis. If you display it, you will notice that some portions of the sequence are in lowercase: these are the regions that were identified as repeats.
 - `repeat statistics`: this one contains some statistics on the number of repeats found in each category, and the total number of base pairs masked.

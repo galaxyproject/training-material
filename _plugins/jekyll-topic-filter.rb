@@ -307,6 +307,13 @@ module TopicFilter
       }
     end
 
+    # In dev configuration, this breaks for me. Not sure why config isn't available.
+    if not site.config.nil? and site.config.has_key? "url"
+      domain = "#{site.config['url']}#{site.config['baseurl']}"
+    else
+      domain = "/training-material/"
+    end
+
     # Similar as above.
     workflows = Dir.glob("#{folder}/workflows/*.ga") # TODO: support gxformat2
     if workflows.length > 0
@@ -323,11 +330,11 @@ module TopicFilter
         {
           "workflow" => wf,
           "tests" => Dir.glob("#{folder}/workflows/" + wf.gsub(/.ga/, '-test*')).length > 0,
-          "url" => "#{site.config['url']}#{site.config['baseurl']}/#{folder}/workflows/#{wf}",
+          "url" => "#{domain}/#{folder}/workflows/#{wf}",
           "path" => wf_path,
           "wfid" => wfid,
           "wfname" => wfname,
-          "trs_endpoint" => "#{site.config['url']}#{site.config['baseurl']}/#{trs}",
+          "trs_endpoint" => "#{domain}/#{trs}",
           "license" => license,
           "creators" => creators,
         }

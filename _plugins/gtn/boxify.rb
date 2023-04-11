@@ -64,6 +64,19 @@ module Gtn
         "hands_on" => "Práctica",
         "question" => "Preguntas",
         "tip" => "Consejo",
+      },
+      "fr" => {
+        "agenda" => "Agenda",
+        "code-in" => "Entrée",
+        "code-out" => "Sortie",
+        "comment" => "Commentaire",
+        "details" => "Détails",
+        "hands-on" => "En pratique",
+        "hands_on" => "En pratique",
+        "question" => "Question",
+        "solution" => "Solution",
+        "tip" => "Astuce",
+        "warning" => "Attention",
       }
     }
 

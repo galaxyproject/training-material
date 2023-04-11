@@ -6,7 +6,11 @@ concurrency:
 
 # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#example-using-a-list-of-events
 on:
+  push:
+    branches:
+      - main
   pull_request:
+    types: [opened, reopened, synchronize, ready_for_review, review_requested]
     paths:
       - '**/*.md'
       - '**/*.html'
@@ -21,6 +25,7 @@ on:
 jobs:
   build-site:
     runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' || !github.event.pull_request.draft
     steps:
       - uses: actions/checkout@v2
         with:
