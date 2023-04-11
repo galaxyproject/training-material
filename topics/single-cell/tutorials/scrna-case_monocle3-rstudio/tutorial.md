@@ -51,8 +51,8 @@ contributions:
     - hexylena
     - pavanvidem
     - nomadscientist
-   funding:
-    - wee-snufkin
+  funding:
+    - eosc-life
     
 notebook:
   language: r
