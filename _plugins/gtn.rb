@@ -1,5 +1,6 @@
 require './_plugins/gtn/boxify'
 require './_plugins/gtn/mod'
+require './_plugins/gtn/images'
 require './_plugins/gtn/synthetic'
 require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'

@@ -14,3 +14,6 @@ gem 'webrick' if RUBY_VERSION >= '3.0' # Ruby3 does not ship with webrick and Je
 gem 'bibtex-ruby'
 gem 'citeproc-ruby'
 gem 'csl-styles'
+
+# Image processing
+gem 'fastimage'
