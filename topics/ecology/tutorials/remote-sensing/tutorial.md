@@ -11,7 +11,7 @@ objectives:
 - Computing spectral indices such as the NDVI
 - Calculating and vizualizing biodiversity indicators
 - Comparing with in-situ data
-time_estimation: 2H
+time_estimation: 2D
 key_points:
 - Remote sensing data
 - Biodiversity indicators
@@ -64,7 +64,7 @@ Each part of this workflow has elementary steps :
 {: .details}
 
 
-In this tutorial, we'll be working on Sentinel 2 data extracted from the Copernicus portal, Scihub.  First those data will be prepared. After pre-processing to fit the input format of the tools, we'll see how to calculate biodiversity metrics.
+In this tutorial, we'll be working on Sentinel 2 data extracted from the Theia Land portal.  First those data will be prepared. After pre-processing to fit the input format of the tools, we'll see how to calculate biodiversity metrics.
 
 
 > <agenda-title></agenda-title>
@@ -75,6 +75,10 @@ In this tutorial, we'll be working on Sentinel 2 data extracted from the Coperni
 > {:toc}
 >
 {: .agenda}
+
+> <warning-title>It can take a bit of time</warning-title>
+> As your processing heavy data some of the steps can take some time. Notably, the step **Create Biodiversity maps** can run for 2 days. We advise to let it run and proceed with the tutorial. Once, the **pre-processing** part is done all the steps can be done separatly. Thus, no need for you to wait the end of each tool before running another one.
+> {: .warning}
 
 ## Upload and pre-processing of the data
 
