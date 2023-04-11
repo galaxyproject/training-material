@@ -79,10 +79,10 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -30,3 +30,5 @@
+>    @@ -26,3 +26,5 @@
+>       version: 6.1.0
+>     - name: usegalaxy_eu.rabbitmqserver
 >       version: 1.4.1
->     - src: galaxyproject.gxadmin
->       version: 0.0.8
 >    +- src: usegalaxy_eu.influxdb
 >    +  version: v6.0.7
 >    {% endraw %}
@@ -123,8 +123,8 @@ The available Ansible roles for InfluxDB unfortunately do not support configurin
 >    ```diff
 >    --- a/hosts
 >    +++ b/hosts
->    @@ -2,3 +2,5 @@
->     gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
+>    @@ -4,3 +4,5 @@ gat-0.eu.galaxy.training ansible_connection=local ansible_user=ubuntu
+>     galaxyservers
 >     [pulsarservers]
 >     gat-0.au.training.galaxyproject.eu ansible_user=ubuntu
 >    +[monitoring]
@@ -204,8 +204,8 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -32,3 +32,5 @@
->       version: 0.0.8
+>    @@ -28,3 +28,5 @@
+>       version: 1.4.1
 >     - src: usegalaxy_eu.influxdb
 >       version: v6.0.7
 >    +- src: cloudalchemy.grafana
@@ -415,7 +415,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -34,3 +34,5 @@
+>    @@ -30,3 +30,5 @@
 >       version: v6.0.7
 >     - src: cloudalchemy.grafana
 >       version: 0.14.2
@@ -440,11 +440,14 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -35,3 +35,4 @@
+>    @@ -50,6 +50,7 @@
+>         - galaxyproject.gxadmin
 >         - galaxyproject.tusd
 >         - galaxyproject.cvmfs
->         - galaxyproject.gxadmin
 >    +    - dj-wasabi.telegraf
+>       post_tasks:
+>         - name: Setup gxadmin cleanup task
+>           ansible.builtin.cron:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add telegraf to the monitoring playbook"}
@@ -455,7 +458,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/all.yml
 >    +++ b/group_vars/all.yml
->    @@ -12,3 +12,28 @@ galaxy_job_metrics_plugins:
+>    @@ -21,3 +21,28 @@ galaxy_job_metrics_plugins:
 >       - type: env
 >       - type: cgroup
 >       - type: hostname
@@ -500,7 +503,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -219,6 +219,14 @@ rabbitmq_users:
+>    @@ -292,6 +292,14 @@ rabbitmq_users:
 >         password: "{{ vault_rabbitmq_password_vhost }}"
 >         vhost: /pulsar/galaxy_au
 >     
@@ -529,15 +532,16 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -29,6 +29,8 @@ miniconda_manage_dependencies: false
->     
->     galaxy_config:
->       galaxy:
+>    @@ -152,6 +152,9 @@ galaxy_config:
+>         # Tool Destination Configuration
+>         tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
+>         job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
+>    +    # Monitoring
 >    +    statsd_host: localhost
 >    +    statsd_influxdb: true
->         job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
->         tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
->         library_import_dir: /libraries/admin
+>       gravity:
+>         process_manager: systemd
+>         galaxy_root: "{{ galaxy_root }}/server"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add extra monitoring for Galaxy"}
@@ -762,24 +766,25 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -7,9 +7,15 @@ pip_package: python3-pip                               # geerlingguy.pip
+>    --- a/group_vars/dbservers.yml
+>    +++ b/group_vars/dbservers.yml
+>    @@ -2,9 +2,16 @@
 >     # PostgreSQL
 >     postgresql_objects_users:
->       - name: galaxy
+>       - name: "{{ galaxy_user_name }}"
 >    +  - name: telegraf
 >     postgresql_objects_databases:
->       - name: galaxy
->         owner: galaxy
+>       - name: "{{ galaxy_db_name }}"
+>         owner: "{{ galaxy_user_name }}"
 >    +postgresql_objects_privileges:
 >    +  - database: galaxy
 >    +    roles: telegraf
 >    +    privs: SELECT
 >    +    objs: ALL_IN_SCHEMA
+>    +
+>     
 >     # PostgreSQL Backups
 >     postgresql_backup_dir: /data/backups
->     postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure database permissions for Telegraf"}
@@ -792,7 +797,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -235,6 +235,13 @@ telegraf_plugins_extra:
+>    @@ -303,6 +303,13 @@ telegraf_plugins_extra:
 >           - service_address = ":8125"
 >           - metric_separator = "."
 >           - allowed_pending_messages = 10000
@@ -884,7 +889,9 @@ Run some tools in Galaxy, try to generate a large number of jobs. It is relative
 
 You can also import a [copy of the dashboard]({{ site.baseurl }}{{ page.dir }}dashboard.json).
 
-{% snippet topics/admin/faqs/missed-something.md step=11 %}
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
+{% snippet topics/admin/faqs/missed-something.md step=12 %}
 
 # Conclusion
 

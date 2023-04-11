@@ -141,7 +141,7 @@ Firstly we will add and configure another *role* to our Galaxy playbook - a comm
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
->    @@ -24,3 +24,7 @@
+>    @@ -22,3 +22,7 @@
 >       version: 0.0.2
 >     - src: galaxyproject.slurm
 >       version: 0.1.3
@@ -190,7 +190,7 @@ Notice the variable we used instead of directly placing the password there. It w
 
 > <tip-title>Tagging users</tip-title>
 > Optional: You can add tags to each user if required. e.g. For an admin user it could be useful to add in a *administrator* tag. These tags allow you to grant permissions to every user with a specific tag.
-{: .tip_title}
+{: .tip}
 
 #### RabbitMQ server config
 
@@ -266,7 +266,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -123,8 +123,10 @@ certbot_environment: staging
+>    @@ -178,8 +178,10 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - nginx
@@ -277,7 +277,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     certbot_domains:
 >      - "{{ inventory_hostname }}"
 >     certbot_agree_tos: --agree-tos
->    @@ -180,6 +182,44 @@ slurm_config:
+>    @@ -229,6 +231,44 @@ slurm_config:
 >       SelectType: select/cons_res
 >       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
 >     
@@ -336,15 +336,15 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -29,6 +29,8 @@
->         - role: uchida.miniconda
+>    @@ -44,6 +44,8 @@
+>         - role: galaxyproject.miniconda
 >           become: true
->           become_user: "{{ galaxy_user.name }}"
+>           become_user: "{{ galaxy_user_name }}"
 >    +    - geerlingguy.docker
 >    +    - usegalaxy_eu.rabbitmqserver
 >         - galaxyproject.nginx
+>         - galaxyproject.gxadmin
 >         - galaxyproject.tusd
->         - galaxyproject.cvmfs
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add role"}
@@ -601,9 +601,10 @@ Some of the other options we will be using are:
 >    ```diff
 >    --- a/hosts
 >    +++ b/hosts
->    @@ -1,2 +1,4 @@
->     [galaxyservers]
->     gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
+>    @@ -2,3 +2,5 @@
+>     gat-0.eu.galaxy.training ansible_connection=local ansible_user=ubuntu
+>     [dbservers:children]
+>     galaxyservers
 >    +[pulsarservers]
 >    +gat-0.au.training.galaxyproject.eu ansible_user=ubuntu
 >    {% endraw %}
@@ -698,25 +699,25 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.yml.j2
->    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -4,6 +4,16 @@ runners:
->         workers: 4
->       slurm:
->         load: galaxy.jobs.runners.slurm:SlurmJobRunner
->    +  pulsar_runner:
->    +    load: galaxy.jobs.runners.pulsar:PulsarMQJobRunner
->    +    amqp_url: "pyamqp://galaxy_au:{{ vault_rabbitmq_password_vhost }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1"
->    +    amqp_acknowledge: true
->    +    amqp_ack_republish_time: 1200
->    +    amqp_consumer_timeout: 2
->    +    amqp_publish_retry: true
->    +    amqp_publish_retry_max_retries: 60
->    +    galaxy_url: "https://{{ inventory_hostname }}"
->    +    manager: _default_
->     
->     execution:
->       default: slurm
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -21,6 +21,16 @@ galaxy_job_config:
+>           workers: 4
+>         slurm:
+>           load: galaxy.jobs.runners.slurm:SlurmJobRunner
+>    +    pulsar_runner:
+>    +      load: galaxy.jobs.runners.pulsar:PulsarMQJobRunner
+>    +      amqp_url: "pyamqp://galaxy_au:{{ vault_rabbitmq_password_vhost }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1"
+>    +      amqp_acknowledge: true
+>    +      amqp_ack_republish_time: 1200
+>    +      amqp_consumer_timeout: 2
+>    +      amqp_publish_retry: true
+>    +      amqp_publish_retry_max_retries: 60
+>    +      galaxy_url: "https://{{ inventory_hostname }}"
+>    +      manager: _default_
+>       handling:
+>         assign: ['db-skip-locked']
+>       execution:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar plugin"}
@@ -725,25 +726,25 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.yml.j2
->    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -20,6 +20,16 @@ execution:
->       environments:
->         local_dest:
->           runner: local_runner
->    +    pulsar:
->    +      runner: pulsar_runner
->    +      default_file_action: remote_transfer
->    +      dependency_resolution: remote
->    +      jobs_directory: /mnt/pulsar/files/staging
->    +      persistence_directory: /mnt/pulsar/files/persisted_data
->    +      remote_metadata: false
->    +      rewrite_parameters: true
->    +      transport: curl
->    +      outputs_to_working_directory: false
->         slurm:
->           runner: slurm
->           singularity_enabled: true
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -82,6 +82,16 @@ galaxy_job_config:
+>           dynamic_cores_time:
+>             runner: dynamic
+>             function: dynamic_cores_time
+>    +      pulsar:
+>    +        runner: pulsar_runner
+>    +        default_file_action: remote_transfer
+>    +        dependency_resolution: remote
+>    +        jobs_directory: /mnt/pulsar/files/staging
+>    +        persistence_directory: /mnt/pulsar/files/persisted_data
+>    +        remote_metadata: false
+>    +        rewrite_parameters: true
+>    +        transport: curl
+>    +        outputs_to_working_directory: false
+>       resources:
+>         default: default
+>         groups:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar destination"}
@@ -762,16 +763,19 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/galaxy/config/job_conf.yml.j2
->    +++ b/templates/galaxy/config/job_conf.yml.j2
->    @@ -86,3 +86,7 @@ tools:
->     - id: testing
->       environment: dynamic_cores_time
->       resources: testing
->    +- id: bwa
->    +  environment: pulsar
->    +- id: bwa_mem
->    +  environment: pulsar
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -103,6 +103,10 @@ galaxy_job_config:
+>         - id: testing
+>           environment: dynamic_cores_time
+>           resources: testing
+>    +    - id: bwa
+>    +      environment: pulsar
+>    +    - id: bwa_mem
+>    +      environment: pulsar
+>     
+>     galaxy_config:
+>       galaxy:
 >    {% endraw %}
 >    ```
 >    {: data-commit="Send bwa and bwa-mem to pulsar"}
@@ -840,7 +844,9 @@ You'll notice that the Pulsar server has received the job (all the way in Austra
 
 How awesome is that? Pulsar in another continent with reference data automatically from CVMFS :)
 
-{% snippet topics/admin/faqs/missed-something.md step=9 %}
+{% snippet topics/admin/faqs/git-commit.md page=page %}
+
+{% snippet topics/admin/faqs/missed-something.md step=10 %}
 
 ## Retries of the staging actions
 
