@@ -60,10 +60,10 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -27,6 +27,9 @@
->         - name: Install Debian/Ubuntu specific dependencies
+>    @@ -29,6 +29,9 @@
 >           package:
 >             name: ['tmpreaper']
+>           when: ansible_os_family == 'Debian'
 >    +    - git:
 >    +        repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 >    +        dest: /libraries/

@@ -154,7 +154,7 @@ Before we begin backing up our Galaxy data, let's set up automated cleanups to e
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -21,6 +21,12 @@
+>    @@ -21,6 +21,14 @@
 >         - name: Install Dependencies
 >           package:
 >             name: ['acl', 'bzip2', 'git', 'make', 'tar', 'python3-venv', 'python3-setuptools']

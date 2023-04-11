@@ -309,7 +309,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -35,6 +35,7 @@
+>    @@ -37,6 +37,7 @@
 >         - galaxyproject.nginx
 >         - galaxyproject.gxadmin
 >         - galaxyproject.tusd

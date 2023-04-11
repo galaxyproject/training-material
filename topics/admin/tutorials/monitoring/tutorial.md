@@ -440,7 +440,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -48,6 +48,7 @@
+>    @@ -50,6 +50,7 @@
 >         - galaxyproject.gxadmin
 >         - galaxyproject.tusd
 >         - galaxyproject.cvmfs

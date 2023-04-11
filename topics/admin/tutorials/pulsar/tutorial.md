@@ -336,7 +336,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -42,6 +42,8 @@
+>    @@ -44,6 +44,8 @@
 >         - role: galaxyproject.miniconda
 >           become: true
 >           become_user: "{{ galaxy_user_name }}"

@@ -2296,7 +2296,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -39,6 +39,28 @@ galaxy_config:
+>    @@ -39,6 +39,27 @@ galaxy_config:
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >         job_config: "{{ galaxy_job_config }}" # Use the variable we defined above
@@ -2553,7 +2553,7 @@ If you've been following along you should have a production-ready Galaxy, secure
 >    ```diff
 >    --- /dev/null
 >    +++ b/.gitattributes
->    @@ -0,0 +1,1 @@
+>    @@ -0,0 +1 @@
 >    +group_vars/secret.yml diff=ansible-vault merge=binary
 >    {% endraw %}
 >    ```

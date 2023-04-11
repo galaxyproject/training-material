@@ -109,9 +109,9 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -28,6 +28,7 @@
->           package:
+>    @@ -30,6 +30,7 @@
 >             name: ['tmpreaper']
+>           when: ansible_os_family == 'Debian'
 >       roles:
 >    +    - usegalaxy_eu.apptainer
 >         - galaxyproject.galaxy

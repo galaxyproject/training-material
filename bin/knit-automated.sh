@@ -3,7 +3,7 @@ DIR=/tmp/git-gat
 op="$1"
 
 declare -a tutorials
-tutorials=(admin/ansible-galaxy admin/backup-cleanup admin/tus admin/cvmfs admin/singularity admin/tool-management admin/data-library admin/connect-to-compute-cluster admin/job-destinations admin/pulsar admin/monitoring admin/tiaas admin/reports admin/ftp)
+tutorials=(admin/ansible-galaxy admin/backup-cleanup admin/tus admin/cvmfs admin/apptainer admin/tool-management admin/data-library admin/connect-to-compute-cluster admin/job-destinations admin/pulsar admin/monitoring admin/tiaas admin/reports admin/ftp)
 #tutorials=(admin/wireguard-headscale)
 #tutorials=(admin/wireguard)
 

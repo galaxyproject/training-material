@@ -105,7 +105,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -31,6 +31,8 @@
+>    @@ -33,6 +33,8 @@
 >             repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 >             dest: /libraries/
 >       roles:
@@ -325,7 +325,7 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -30,6 +30,10 @@
+>    @@ -32,6 +32,10 @@
 >         - git:
 >             repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 >             dest: /libraries/
@@ -395,10 +395,10 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >       handling:
 >         assign: ['db-skip-locked']
 >       execution:
->    @@ -40,6 +42,16 @@ galaxy_job_config:
->             # Singularity uses a temporary directory to build the squashfs filesystem
->             - name: SINGULARITY_TMPDIR
->               value: /tmp
+>    @@ -27,6 +29,16 @@ galaxy_job_config:
+>           local_env:
+>             runner: local_runner
+>             tmp_dir: true
 >    +      slurm:
 >    +        runner: slurm
 >    +        singularity_enabled: true
@@ -409,9 +409,9 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    +          value: /tmp/singularity
 >    +        - name: SINGULARITY_TMPDIR
 >    +          value: /tmp
->       tools:
->         - class: local # these special tools that aren't parameterized for remote execution - expression tools, upload, etc
->           environment: local_env
+>           singularity:
+>             runner: local_runner
+>             singularity_enabled: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure slurm destination"}

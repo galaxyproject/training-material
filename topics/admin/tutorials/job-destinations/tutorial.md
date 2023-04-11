@@ -151,7 +151,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -52,9 +52,22 @@ galaxy_job_config:
->               value: /tmp/singularity
+>             # Apptainer uses a temporary directory to build the squashfs filesystem
 >             - name: SINGULARITY_TMPDIR
 >               value: /tmp
 >    +      slurm-2c:
