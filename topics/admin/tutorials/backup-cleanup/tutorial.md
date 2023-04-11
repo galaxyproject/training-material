@@ -77,7 +77,7 @@ tutorial]({% link topics/admin/tutorials/gxadmin/tutorial.md %}).
 >     - src: usegalaxy_eu.certbot
 >       version: 0.1.7
 >    +- src: galaxyproject.gxadmin
->    +  version: 0.0.8
+>    +  version: 0.0.12
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement"}

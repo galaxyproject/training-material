@@ -75,13 +75,13 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -18,3 +18,7 @@
->       version: 0.2.13
+>       version: 0.2.21
 >     - src: usegalaxy_eu.apptainer
 >       version: 0.0.1
 >    +- src: galaxyproject.repos
->    +  version: 0.0.2
+>    +  version: 0.0.3
 >    +- src: galaxyproject.slurm
->    +  version: 0.1.3
+>    +  version: 1.0.1
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add requirements"}

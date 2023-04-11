@@ -85,7 +85,7 @@ First, we will install Apptainer using Ansible. Since there is a package availab
 >    @@ -16,3 +16,5 @@
 >       version: 0.0.1
 >     - src: galaxyproject.cvmfs
->       version: 0.2.13
+>       version: 0.2.21
 >    +- src: usegalaxy_eu.apptainer
 >    +  version: 0.0.1
 >    {% endraw %}

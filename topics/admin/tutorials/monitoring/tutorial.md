@@ -747,7 +747,7 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 >
 >    ```yml
 >    - src: galaxyproject.gxadmin
->      version: 0.0.8
+>      version: 0.0.12
 >    ```
 >
 > 2. Install the role with `ansible-galaxy install -p roles -r requirements.yml`

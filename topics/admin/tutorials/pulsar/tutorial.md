@@ -142,9 +142,9 @@ Firstly we will add and configure another *role* to our Galaxy playbook - a comm
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
 >    @@ -22,3 +22,7 @@
->       version: 0.0.2
+>       version: 0.0.3
 >     - src: galaxyproject.slurm
->       version: 0.1.3
+>       version: 1.0.1
 >    +- name: geerlingguy.docker
 >    +  version: 6.1.0
 >    +- name: usegalaxy_eu.rabbitmqserver
