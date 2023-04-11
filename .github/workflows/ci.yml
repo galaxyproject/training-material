@@ -1,4 +1,4 @@
-name: Lint Broken Links
+name: Accessibility Linting
 
 concurrency:
   group: ci-${{ github.head_ref }}
@@ -6,7 +6,11 @@ concurrency:
 
 # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#example-using-a-list-of-events
 on:
+  push:
+    branches:
+      - main
   pull_request:
+    types: [opened, reopened, synchronize, ready_for_review, review_requested]
     paths:
       - '**/*.md'
       - '**/*.html'
@@ -21,6 +25,7 @@ on:
 jobs:
   build-site:
     runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' || !github.event.pull_request.draft
     steps:
       - uses: actions/checkout@v2
         with:
@@ -55,8 +60,11 @@ jobs:
           bundle pristine ffi
       # END Dependencies
 
-      - run: bundle exec jekyll build --strict_front_matter -d _site/training-material --trace
-      - run: |
+      - name: Build the site
+        run: bundle exec jekyll build --strict_front_matter -d _site/training-material --trace
+
+      - name: Validate all links, enforce alt text
+        run: |
           bundle exec htmlproofer \
             --ignore-urls "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#.*/,/#embedded_jbrowse/","/.*videos.*.mp4.png/","/krona_(all|multisample).html/" \
             --ignore-files "/.*krona.*\.html/","/.*\/files\/.*/","/.*\/node_modules\/.*/","/\/tutorials\/.*\/docker\//","/.*content.html/" \
@@ -65,6 +73,24 @@ jobs:
             --enforce-https=false \
             ./_site
 
-      - run: |
-          # If this fails, ask @hexylena to look at your notebook
+      - name: Run aXe accessibility testing on some representative URLs
+        run: |
+          node_modules/.bin/http-server _site/ &
+          # We can focus AND scroll these regions. I thus disable their violation warning.
+          # Twitter isn't our fault. Sorry.
+          node_modules/.bin/axe --disable scrollable-region-focusable --exclude '#twitter-widget-0' --chromedriver-path /usr/bin/chromedriver \
+            http://localhost:8080/training-material/ \
+            http://localhost:8080/training-material/hall-of-fame/ \
+            http://localhost:8080/training-material/hall-of-fame/hexylena/ \
+            http://localhost:8080/training-material/topics/introduction/ \
+            http://localhost:8080/training-material/topics/statistics/ \
+            http://localhost:8080/training-material/topics/genome-annotation/ \
+            http://localhost:8080/training-material/topics/admin/ \
+            http://localhost:8080/training-material/topics/dev/ \
+            http://localhost:8080/training-material/topics/introduction/tutorials/galaxy-intro-short/tutorial.html \
+            http://localhost:8080/training-material/topics/introduction/tutorials/galaxy-intro-short/workflows/ \
+            http://localhost:8080/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html
+
+      - name: Validate notebooks (If this fails, ask @hexylena to look at your notebook)
+        run: |
           find _site | grep ipynb | xargs bundle exec ruby bin/check-valid-json.rb

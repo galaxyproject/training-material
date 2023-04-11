@@ -1,5 +1,6 @@
 require './_plugins/gtn/boxify'
 require './_plugins/gtn/mod'
+require './_plugins/gtn/images'
 require './_plugins/gtn/synthetic'
 require './_plugins/gtn/metrics'
 require './_plugins/gtn/scholar'
@@ -127,6 +128,14 @@ module Jekyll
       end
     end
 
+    def fedi2link(fedi_address)
+      fedi_address.gsub(/^(?<user>.*)@(?<host>.*)$/){|m| "https://#{$~[:host]}/@#{$~[:user]}" }
+    end
+
+    def load_svg(url)
+      File.open(url).read.gsub(/\R+/, '')
+    end
+
     def regex_replace(str, regex_search, value_replace)
       regex = /#{regex_search}/m
       return str.gsub(regex, value_replace)
@@ -146,7 +155,6 @@ module Jekyll
 
       m = str.match(/topics\/(?<topic>.*)\/tutorials\/(?<tutorial>.*)\/workflows\/(?<workflow>.*)\.ga/)
       if m
-        puts "str=#{str} m=#{m} #{m[:topic]} #{m[:tutorial]} #{m[:workflow]}"
         return "/api/ga4gh/trs/v2/tools/#{m[:topic]}-#{m[:tutorial]}/versions/#{m[:workflow]}"
       end
       return "GTN_TRS_ERROR"

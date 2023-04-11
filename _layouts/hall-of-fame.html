@@ -1,5 +1,6 @@
 ---
 layout: base
+lang: en
 ---
 
 {% assign contributors = site.data['contributors'] %}
@@ -20,6 +21,8 @@ layout: base
         awesome contributors to the Galaxy training materials!
     </p>
 
+    {% include _includes/map.html %}
+
     <div class="hall-of-fame">
         {% for username in shuffled_contributors %}
             {% unless contributors[username].halloffame == "no" %}
@@ -31,11 +34,11 @@ layout: base
                 {% else %}
                     <img src="https://avatars.githubusercontent.com/{{ username }}?s=120" alt="avatar" loading="lazy" aria-hidden="true">
                 {% endif %}
-                </a>
 
                 <div class="name" aria-hidden="true">
                     {{ contributors[username].name | default: username }}
                 </div>
+                </a>
 
                 {% assign has_philosophy = false %}
                 {% for story in stories %}
