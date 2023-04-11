@@ -291,7 +291,7 @@ That's it! You should be able to see your newly created data library in your Gal
 
 Note that we've used some special flags here, `--training` and `--legacy`. Training sets some defaults that make sense for the GTN (mostly around library descriptions / etc.)
 
-### `--legacy`
+## `--legacy`
 
 This enables the use of legacy APIs even for newer Galaxies that should have a batch upload API enabled. Unfortunately the new batch upload API is not able to update existing data libraries in place and will always create new libraries with the same name. So currently `--legacy` is quite useful for maintaining a YAML file, and running `setup-data-libraries` regularly whenever that file has updates.
 
