@@ -145,11 +145,11 @@ Firstly we will add and configure another *role* to our Galaxy playbook - a comm
 >       version: 0.0.2
 >     - src: galaxyproject.slurm
 >       version: 0.1.3
->    +- name: geerlingguy.docker
+>    +- src: geerlingguy.docker
 >    +  version: 6.1.0
->    +- name: usegalaxy_eu.rabbitmqserver
+>    +- src: usegalaxy_eu.rabbitmqserver
 >    +  version: 1.4.1
->    +- name: galaxyproject.pulsar
+>    +- src: galaxyproject.pulsar
 >    +  version: 1.0.10
 >    {% endraw %}
 >    ```
