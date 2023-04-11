@@ -18,12 +18,16 @@ key_points:
   - Dynamic Tool Destinations are a convenient way to map
   - Job resource parameters can allow you to give your users control over job resource requirements, if they are knowledgeable about the tools and compute resources available to them.
 contributors:
-  - natefoo
-  - bgruening
-  - hexylena
-  - nuwang
-  - cat-bro
-  - afgane
+  authorship:
+    - natefoo
+    - bgruening
+    - nuwang
+  editing: # And reviewing
+    - hexylena
+    - afgane
+  funding: []
+  testing:
+    - cat-bro
 tags:
   - jobs
   - git-gat
@@ -403,8 +407,8 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 >    -    max_accepted_cores: 16
 >    +    max_accepted_cores: 24
 >    +    max_accepted_mem: 256
->    +    max_cores: 16
->    +    max_mem: 128
+>    +    max_cores: 2
+>    +    max_mem: 8
 >         params:
 >           native_specification: --nodes=1 --ntasks=1 --cpus-per-task={cores}
 >
@@ -416,6 +420,13 @@ on settings that have worked well in the usegalaxy.* federation. The rule file c
 > by the destination. However, once accepted, the resources will be forcibly clamped down to 16 and 128 at most because of the `max_cores` and `max_mem` clauses. Therefore, a trick that can be used here to support
 > job resource requirements in the shared database that are much larger than your destination can actually support, is to combine `max_accepted_cores/mem/gpus with `max_cores/mem/gpus` to accept the job and then
 > clamp it down to a supported range. This allows even the largest resource requirement in the shared database to be accomodated.
+>
+> <comment-title>Clamping in practice</comment-title>
+>
+> For the purposes of this tutorial, we've clamped down from 16 cores to 2 cores, and mem from 256 to 8, which is unlikely to work in practice. In production, you will probably need to manually test
+> any tools that exceed your cluster's capabilities, and decide whether you want those tools to run in the first place.
+>
+> {: .comment}
 >
 > 3. Run the Galaxy playbook.
 >
@@ -435,7 +446,7 @@ can be matched up so that only desired combinations are compatible with each oth
 
 > <hands-on-title>Using conditionals to restrict a tool to admins only</hands-on-title>
 >
-> 2. Edit your `files/galaxy/config/tpv_rules_local.yml` and add the following rule.
+> 1. Edit your `files/galaxy/config/tpv_rules_local.yml` and add the following rule.
 >
 >    {% raw %}
 >    ```diff
@@ -463,6 +474,25 @@ can be matched up so that only desired combinations are compatible with each oth
 > Note the use of the `if` rule, which allows for conditional actions to be taken in TPV. An `if` block is evaluated as a multi-line python block, and can execute arbitrary code, but the last line of the block must evaluate to a value. That value
 > determines whether the `if` condtional is matched or not. If the conditional is matched, the `fail` clause is executed in this case, and the message specified in the `fail` clause is displayed to the user.
 > It is similarly possible to conditionally add job parameters, modify cores/mem/gpus and take other complex actions.
+>
+> 2. Run the Galaxy playbook to update the TPV rules.
+>
+>    > <code-in-title>Bash</code-in-title>
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    > {: data-cmd="true"}
+>    {: .code-in}
+>
+> 3. Try running the tool as both an admin user and a non-admin user, non-admins should not be able to run it. You can start a private browsing session to test as a non-admin, anonymous user. Anonymous users were enabled in your Galaxy configuration.
+>
+{: .hands_on}
+
+> ```bash
+> 3.sh
+> ```
+> {: data-test="true"}
+{: .hidden}
 
 # Job Resource Selectors
 
@@ -607,6 +637,14 @@ Lastly, we need to write a rule in TPV that will read the value of the job resou
 >    It is important to note that **you are responsible for parameter validation, including the job resource selector**. This function only handles the job resource parameter fields, but it could do many other things - examine inputs, job queues, other tool parameters, etc.
 >
 >    Finally, we pass the walltime as part of the native specification.
+>
+> <comment-title>Rules for TPV code evaluation</comment-title>
+>
+> Notice how the `walltime` parameter is wrapped in braces, whereas the `cores` value isn't, yet they are both expressions. The reason for this difference is that when TPV evaluates an expression, all string fields (e.g. env, params) are evaluated as Python f-strings,
+> while all non-string fields (integer fields like `cores` and `gpus`, float fields like `mem`, boolean fields like `if`) are evaluated as Python code-blocks. This rule enables the YAML file to be much more readable, but requires you to keep this simple rule in mind.
+> Note also that Python code-blocks can be multi-line, and that the final line must evaluate to a value that can be assigned to the field.
+>
+> {: .comment}
 >
 > 2. Run the Galaxy playbook to update the TPV rules.
 >
