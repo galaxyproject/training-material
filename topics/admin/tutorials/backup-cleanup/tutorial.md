@@ -161,9 +161,11 @@ Before we begin backing up our Galaxy data, let's set up automated cleanups to e
 >    +    - name: Install RHEL/CentOS/Rocky specific dependencies
 >    +      package:
 >    +        name: ['tmpwatch']
+>    +      when: ansible_os_family == 'RedHat'
 >    +    - name: Install Debian/Ubuntu specific dependencies
 >    +      package:
 >    +        name: ['tmpreaper']
+>    +      when: ansible_os_family == 'Debian'
 >       roles:
 >         - galaxyproject.galaxy
 >         - role: galaxyproject.miniconda
