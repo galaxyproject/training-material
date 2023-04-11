@@ -2,7 +2,12 @@
 layout: tutorial_hands_on
 
 title: Post Assembly Quality Control Workflow
-zenodo_link: ''
+zenodo_link1: 'https://zenodo.org/record/7781236#.ZDWLcI5BwgY'
+zenodo_link2: 'https://zenodo.org/record/7784764#.ZDWLjY5BwgY'
+zenodo_link3: 'https://zenodo.org/record/7814950#.ZDWI445BwgY'
+zenodo_link4: 'https://zenodo.org/record/7817734#.ZDWIsI5BwgY'
+zenodo_link5: 'https://zenodo.org/record/7788734#.ZDWIXY5BwgY'
+zenodo_link6: 'https://zenodo.org/record/7786773#.ZDWLoI5BwgY'
 questions:
 - what combination of tools can assess the quality of an initial assembly?
 - what metrics can help to analyse the quality?
@@ -81,7 +86,7 @@ As a first step we will get the data from zenodo.
 >
 > ##### Case 1: ***Chondrosia reniformis***: 
 > 1. Create a new history for the sponge (Chondrosia reniformis)
-> 2. Import the HiFi files from [Zenodo]({{ page.zenodo_link_3 }})
+> 2. Import the HiFi files from [Zenodo]({{ page.zenodo_link6 }}) and [Zenodo]({{ page.zenodo_link5 }}) and [Zenodo]({{ page.zenodo_link1 }})
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
 >    - Click on **Rule-based** tab
@@ -135,6 +140,9 @@ As a first step we will get the data from zenodo.
 >    - Edit *New File* name to: metadata
 >    - Edit *Type* to yaml
 >    - Copy the third tabular data, paste it into the textbox
+>    - Click on **Paste/Fetch data**
+>    - Edit *New File* name to: diamondDB
+>    - Copy the fourth tabular data, paste it into the textbox
 >
 >       ```
 >   https://zenodo.org/record/7781236/files/GCA_947172415.1.fasta.gz?download=1
@@ -145,11 +153,14 @@ As a first step we will get the data from zenodo.
 >       ```
 >   https://zenodo.org/record/7781236/files/metadata_chon.yaml?download=1
 >       ```
+>       ```
+>   https://zenodo.org/record/7788734/files/Diamond_makedb.dmnd?download=1
+>       ```
 >
 >
 > ##### Case 2: ***Erythrolamprus reginae***:
 > 1. Create a new history for the snake (Erythrolamprus reginae)
-> 2. Import the HiFi files from [Zenodo]({{ page.zenodo_link_2 }}) and [Zenodo]({{ page.zenodo_link_3 }})
+> 2. Import the HiFi files from [Zenodo]({{ page.zenodo_link1 }}) and [Zenodo]({{ page.zenodo_link2 }}) and [Zenodo]({{ page.zenodo_link3 }}) and [Zenodo]({{ page.zenodo_link4 }}) and [Zenodo]({{ page.zenodo_link5 }}) and [Zenodo]({{ page.zenodo_link6 }})
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
 >    - Click on **Rule-based** tab
@@ -179,8 +190,12 @@ As a first step we will get the data from zenodo.
 >    - Copy the tabular data, paste it into the textbox and press <kbd>Build</kbd>
 >
 >       ```
->   Hi-C_dataset_F      fastq.gz    Hi-C
->   Hi-C_dataset_R      fastq.gz    Hi-C
+>   Hi-C_dataset_F   https://zenodo.org/record/7814950/files/rEryReg1_Royal_Ground_Snake_R1.fastq.zip.001?download=1   fastq.gz.zip    Hi-C
+>   Hi-C_dataset_F   https://zenodo.org/record/7814950/files/rEryReg1_Royal_Ground_Snake_R1.fastq.zip.002?download=1   fastq.gz.zip    Hi-C
+>   Hi-C_dataset_F   https://zenodo.org/record/7788734/files/rEryReg1_Royal_Ground_Snake_R1.fastq.zip.003?download=1   fastq.gz.zip    Hi-C
+>   Hi-C_dataset_R   https://zenodo.org/record/7817734/files/rEryReg1_Royal_Ground_Snake_R2.fastq.zip.001?download=1   fastq.gz.zip    Hi-C
+>   Hi-C_dataset_R   https://zenodo.org/record/7817734/files/rEryReg1_Royal_Ground_Snake_R2.fastq.zip.002?download=1   fastq.gz.zip    Hi-C
+>   Hi-C_dataset_R   https://zenodo.org/record/7788734/files/rEryReg1_Royal_Ground_Snake_R2.fastq.zip.003?download=1   fastq.gz.zip    Hi-C
 >       ```
 >
 >    - From **Rules** menu select `Add / Modify Column Definitions`
@@ -206,9 +221,12 @@ As a first step we will get the data from zenodo.
 >    - Edit *New File* name to: metadata
 >    - Edit *Type* to yaml
 >    - Copy the third tabular data, paste it into the textbox
+>    - Click on **Paste/Fetch data**
+>    - Edit *New File* name to: diamondDB
+>    - Copy the fourth tabular data, paste it into the textbox
 >
 >       ```
->   
+>   https://zenodo.org/record/7788734/files/rEryReg1.pri.cur.20230105.fasta.gz?download=1
 >       ```
 >       ```
 >   https://zenodo.org/record/7781236/files/new_taxdump.tar.gz?download=1
@@ -216,10 +234,13 @@ As a first step we will get the data from zenodo.
 >       ```
 >   https://zenodo.org/record/7781236/files/metadata_eryth.yaml?download=1
 >       ```
+>       ```
+>   https://zenodo.org/record/7788734/files/Diamond_makedb.dmnd?download=1
+>       ```
 >
 > ##### Case 3: ***Eschrichtius robustus***:
 > 1. Create a new history for the whale (Eschrichtius robustus)
-> 2. Import the HiFi files from [Zenodo]({{ page.zenodo_link_1 }}) and [Zenodo]({{ page.zenodo_link_3 }})
+> 2. Import the HiFi files from [Zenodo]({{ page.zenodo_link1 }}) and [Zenodo]({{ page.zenodo_link5 }}) and [Zenodo]({{ page.zenodo_link6 }})
 >
 >    - Open the file {% icon galaxy-upload %} __upload__ menu
 >    - Click on **Rule-based** tab
@@ -257,6 +278,9 @@ As a first step we will get the data from zenodo.
 >    - Edit *New File* name to: metadata
 >    - Edit *Type* to yaml
 >    - Copy the third tabular data, paste it into the textbox
+>    - Click on **Paste/Fetch data**
+>    - Edit *New File* name to: diamondDB
+>    - Copy the fourth tabular data, paste it into the textbox
 >
 >       ```
 >   https://zenodo.org/record/7781236/files/mEscRob2.pri.cur.20221201.fasta.gz?download=1
@@ -266,6 +290,9 @@ As a first step we will get the data from zenodo.
 >       ```
 >       ```
 >   https://zenodo.org/record/7781236/files/metadata_esch.yaml?download=1
+>       ```
+>       ```
+>   https://zenodo.org/record/7788734/files/Diamond_makedb.dmnd?download=1
 >       ```
 >
 {: .hands_on}
