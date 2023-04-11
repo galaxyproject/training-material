@@ -65,7 +65,7 @@ separately.
 
 ## Writing a testing tool
 
-To demonstrate a real-life scenario and TPV's role in it, let's plan on setting up a configuration where the VM designated for training jobs doesn't run real jobs and hence doesn't get overloaded. To start, we'll create a fake tool that we'll use in our configuration.
+To demonstrate a real-life scenario and TPV's role in it, let's plan on setting up a configuration where the VM designated for training jobs doesn't run real jobs and hence doesn't get overloaded. To start, we'll create a "testing" tool that we'll use in our configuration. This testing tool can run quickly, and without overloading our small machines.
 
 > <hands-on-title>Deploying a Tool</hands-on-title>
 >
@@ -357,7 +357,7 @@ Now that we've configured the resource requirements for a single tool, let's see
 
 ### TPV reference documentation
 
-TPV has dedicated documentation at: https://total-perspective-vortex.readthedocs.io/en/latest/
+Please see [TPV's dedicated documentation](https://total-perspective-vortex.readthedocs.io/en/latest/) for more information.
 
 
 # Configuring the TPV shared database
