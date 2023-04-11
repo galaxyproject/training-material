@@ -2537,7 +2537,31 @@ If you've been following along you should have a production-ready Galaxy, secure
 
 {% snippet topics/admin/faqs/git-commit.md page=page %}
 
-{% snippet topics/admin/faqs/git-attributes.md %}
+> <hands-on-title>Using Git with Ansible Vaults</hands-on-title>
+> When looking at `git log` to see what you changed, you cannot easily look into
+> Ansible Vault changes: you just see the changes in the encrypted versions which
+> is unpleasant to read.
+> 
+> Instead we can use [`.gitattributes`](https://www.git-scm.com/docs/gitattributes) to tell `git` that we want to use a
+> different program to visualise differences between two versions of a file,
+> namely `ansible-vault`.
+> 
+> 1. Check your `git log -p` and see how the Vault changes look (you can type `/vault` to search). Notice that they're just changed encoded content.
+> 1. Create the file `.gitattributes` in the same folder as your `galaxy.yml` playbook, with the following contents:
+> 
+>    ```
+>    {% raw %}
+>    ```diff
+>    --- /dev/null
+>    +++ b/.gitattributes
+>    @@ -0,0 +1,1 @@
+>    +group_vars/secret.yml diff=ansible-vault merge=binary
+>    {% endraw %}
+>    ```
+>    {: data-commit="Add git attributes"}
+> 
+> 1. Try again to `git log -p` and look for the vault changes. Note that you can now see the decrypted content! Very useful.
+{: .hands_on}
 
 {% snippet topics/admin/faqs/missed-something.md step=1 %}
 
