@@ -1087,7 +1087,7 @@
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="n">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'cell_type'</span><span class="p">,</span> <span class="n">legend_loc</span><span class="o">=</span><span class="s">'on data'</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot1.png'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<figure id="figure-1"><img src="../../images/scrna-casestudy/draw_graph_faPlot1.png" alt="Plot1-Force-Directed Graph. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Plot1-Force-Directed Graph</figcaption></figure>
+<figure id="figure-1"><img src="../../images/scrna-casestudy/draw_graph_faPlot1.png" alt="Plot1-Force-Directed Graph. " width="366" height="265" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 1</strong>:</span> Plot1-Force-Directed Graph</figcaption></figure>
 
 <p>Well now this is exciting! Our DP-late is more clearly separating, and we might also suppose that DP-M1, DP-M2, and DP-M3 are actually earlier on in the differentiation towards mature T-cells. And we’re only just getting started!</p>
 
@@ -1104,7 +1104,7 @@
 <span class="n">sc</span><span class="p">.</span><span class="n">tl</span><span class="p">.</span><span class="n">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">)</span>
 <span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="n">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">'cell_type'</span><span class="p">,</span> <span class="n">legend_loc</span><span class="o">=</span><span class="s">'on data'</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot2.png'</span><span class="p">)</span>
 </code></pre></div></div>
-<figure id="figure-2"><img src="../../images/scrna-casestudy/draw_graph_faPlot2.png" alt="Diffusion Map. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Diffusion Map</figcaption></figure>
+<figure id="figure-2"><img src="../../images/scrna-casestudy/draw_graph_faPlot2.png" alt="Diffusion Map. " width="366" height="265" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 2</strong>:</span> Diffusion Map</figcaption></figure>
 
 <p>Oh dear! This doesn’t look great. Maybe the DP-M4 cells are a whole other trajectory? That doesn’t seem right. Saying that, this spreads out our T-mature cells, which makes a lot more sense when it comes to T-cell biology (we expect T-cells to differentiate into two types of T-cells, Cd8+Cd4- and Cd4+Cd8-). If you wanted to, you could also re-cluster your cells (since you’ve changed the neighborhood graph on which the clusterisation depends). You could use this: 
 <code class="language-plaintext highlighter-rouge">sc.tl.louvain(adata, resolution=0.6)</code>
@@ -1146,7 +1146,7 @@ However, we tried that, and it called far too many clusters given the depth of s
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="n">paga</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s">'cell_type'</span><span class="p">,</span> <span class="s">'ENSMUSG00000023274'</span><span class="p">,</span> <span class="s">'ENSMUSG00000053977'</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="s">'Cell type'</span><span class="p">,</span> <span class="s">'CD4'</span><span class="p">,</span> <span class="s">'Cd8a'</span><span class="p">],</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot4.png'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<figure id="figure-3"><img src="../../images/scrna-casestudy/pagaPlot4.png" alt="PAGA. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> PAGA</figcaption></figure>
+<figure id="figure-3"><img src="../../images/scrna-casestudy/pagaPlot4.png" alt="PAGA. " width="1386" height="264" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 3</strong>:</span> PAGA</figcaption></figure>
 
 <p>Well now that is interesting! This analysis would find that DP-M1 and DP-M4 are both driving towards differentiation, which is not something we had necessarily been able to specify before by just looking at our cluster graphs or applying our biological knowledge.</p>
 
@@ -1161,11 +1161,11 @@ However, we tried that, and it called far too many clusters given the depth of s
 <span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="n">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s">'ENSMUSG00000023274'</span><span class="p">,</span> <span class="s">'ENSMUSG00000053977'</span><span class="p">],</span> <span class="n">title</span><span class="o">=</span><span class="p">[</span><span class="s">'CD4'</span><span class="p">,</span> <span class="s">'Cd8a'</span><span class="p">],</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot7.png'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<figure id="figure-4"><img src="../../images/scrna-casestudy/draw_graph_faPlot5.png" alt="Force-Directed + PAGA - Cell type. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Force-Directed + PAGA - Cell type</figcaption></figure>
+<figure id="figure-4"><img src="../../images/scrna-casestudy/draw_graph_faPlot5.png" alt="Force-Directed + PAGA - Cell type. " width="366" height="265" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 4</strong>:</span> Force-Directed + PAGA - Cell type</figcaption></figure>
 
-<figure id="figure-5"><img src="../../images/scrna-casestudy/draw_graph_faPlot6.png" alt="Force-Directed + PAGA - Genotype. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Force-Directed + PAGA - Genotype</figcaption></figure>
+<figure id="figure-5"><img src="../../images/scrna-casestudy/draw_graph_faPlot6.png" alt="Force-Directed + PAGA - Genotype. " width="452" height="265" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 5</strong>:</span> Force-Directed + PAGA - Genotype</figcaption></figure>
 
-<figure id="figure-6"><img src="../../images/scrna-casestudy/draw_graph_faPlot7.png" alt="Force-Directed + PAGA - Markers. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Force-Directed + PAGA - Markers</figcaption></figure>
+<figure id="figure-6"><img src="../../images/scrna-casestudy/draw_graph_faPlot7.png" alt="Force-Directed + PAGA - Markers. " width="827" height="269" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 6</strong>:</span> Force-Directed + PAGA - Markers</figcaption></figure>
 
 <p><strong>Note</strong> - we are aware that something about these graphs has gotten a bit odd in the recent Scanpy updates. Watch this space for a fix!</p>
 
@@ -1178,7 +1178,7 @@ However, we tried that, and it called far too many clusters given the depth of s
     <span class="n">legend_fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">frameon</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">edges</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </code></pre></div></div>
 
-<figure id="figure-7"><img src="../../images/scrna-casestudy/paga_compare.png" alt="PAGA Compare. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> PAGA Compare</figcaption></figure>
+<figure id="figure-7"><img src="../../images/scrna-casestudy/paga_compare.png" alt="PAGA Compare. " width="819" height="244" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 7</strong>:</span> PAGA Compare</figcaption></figure>
 
 <p><strong>Note</strong> - we are aware that something about these graphs has gotten a bit odd in the recent Scanpy updates. Watch this space for a fix!</p>
 
@@ -1200,7 +1200,7 @@ However, we tried that, and it called far too many clusters given the depth of s
 <span class="n">sc</span><span class="p">.</span><span class="n">pl</span><span class="p">.</span><span class="n">draw_graph</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s">'cell_type'</span><span class="p">,</span> <span class="s">'dpt_pseudotime'</span><span class="p">],</span> <span class="n">legend_loc</span><span class="o">=</span><span class="s">'on data'</span><span class="p">,</span> <span class="n">save</span> <span class="o">=</span> <span class="s">'Plot8.png'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<figure id="figure-8"><img src="../../images/scrna-casestudy/draw_graph_faPlot8.png" alt="Force-Directed + Pseudotime. " loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Force-Directed + Pseudotime</figcaption></figure>
+<figure id="figure-8"><img src="../../images/scrna-casestudy/draw_graph_faPlot8.png" alt="Force-Directed + Pseudotime. " width="819" height="269" loading="lazy" /><figcaption><span class="figcaption-prefix"><strong>Figure 8</strong>:</span> Force-Directed + Pseudotime</figcaption></figure>
 
 <p>This is nice, as it supports our conclusions thus far on the trajectory of the T-cell differentiation. With single-cell, the more ways you can prove to yourself what you’re seeing is real, the better! If we did not find consistent results, we would need to delve in further to see if the algorithm (not all algorithms fit all data!) or the biology.</p>
 
