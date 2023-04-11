@@ -751,7 +751,7 @@ Now that you have a small role built up, you might start thinking about deployin
 >
 {: .hands_on}
 
-In real life scenarios where you are sharing your playbooks publicly, be sure to encrypt all secrets from the start (or fix/remove the git history if you ever did.) If you are storing your vault password in a file, remember to add it to your `.gitignore` (or VCS appropriate file.)
+In real life scenarios where you are sharing your playbooks publicly, be sure to encrypt all secrets from the start (or remove any secrets from the git history if you ever committed them in plain text). If you are storing your vault password in a file, remember to add it to your `.gitignore` (or VCS appropriate file.)
 
 # Other Stuff
 
