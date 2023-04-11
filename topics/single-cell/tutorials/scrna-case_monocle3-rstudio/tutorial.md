@@ -52,7 +52,7 @@ contributions:
     - pavanvidem
     - nomadscientist
    funding:
-    - eosc-life
+    - wee-snufkin
     
 notebook:
   language: r
