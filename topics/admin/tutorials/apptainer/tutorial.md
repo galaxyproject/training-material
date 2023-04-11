@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+- /topics/admin/tutorials/singularity/tutorial
 
 title: "Use Apptainer containers for running Galaxy jobs"
 zenodo_link: ""
@@ -15,8 +17,6 @@ contributors:
   - hexylena
   - mira-miracoli
 subtopic: jobs
-redirect_from:
-- /topics/admin/tutorials/singularity/tutorial
 tags:
   - jobs
   - ansible
