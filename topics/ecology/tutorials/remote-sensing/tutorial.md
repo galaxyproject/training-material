@@ -11,7 +11,7 @@ objectives:
 - Computing spectral indices such as the NDVI
 - Calculating and vizualizing biodiversity indicators
 - Comparing with in-situ data
-time_estimation: 2D
+time_estimation: 48H
 key_points:
 - Remote sensing data
 - Biodiversity indicators
@@ -315,13 +315,12 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >
 {: .hands_on}
 
-![A graph showing the alpha diversity according to the longitude and the latitude](../../images/remote_sensing/alpha.png "Alpha diversity map")
-![A tabular with a column for the functionnal diversity, the longitude and the latitude](../../images/remote_sensing/funct_tb.png "Functionnal diversity tabular")
+![A graph showing the beta diversity according to the longitude and the latitude](../../images/remote_sensing/beta.png "Beta diversity map")
+![A tabular with a column for the beta diversity, the longitude and the latitude](../../images/remote_sensing/betatab.png "Beta diversity tabular")
 
 ## **Processing remote sensing data**
 
 > <hands-on-title>Comparing biodiversity indicators for canopy</hands-on-title>
->
 > 1. {% tool [Comparing remote sensing data](toolshed.g2.bx.psu.edu/repos/ecology/srs_process_data/srs_process_data/0.0.1) %} with the following parameters:
 >    - {% icon param-select %} *"In which format are your data ?"*: 'The data you are using are in a zip folder Reflectance'
 >      - {% icon param-file %} *"Input data"*: `Reflectance` (output of **Preprocessing sentinel 2 data** {% icon tool %})
