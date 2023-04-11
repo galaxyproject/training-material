@@ -217,7 +217,7 @@ Get the {% tool [Diversity indicators](toolshed.g2.bx.psu.edu/repos/ecology/cb_d
 > 
 >  The information is displayed in the central panel
 >
-> ![Div ](../../images/champbloc/simpson.png "Simpson indicator"){:width="620px"}
+> ![Div ](../../images/champbloc/simpson.jpg "Simpson indicator"){:width="620px"}
 >
 >
 > 3. Download your results
