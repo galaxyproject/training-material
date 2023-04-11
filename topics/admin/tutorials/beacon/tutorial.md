@@ -118,14 +118,14 @@ TODO: write some more things about beacon
 >    +# Database Configuration
 >    +beacon_db_user: beacon
 >    +beacon_db_host: "{{ groups['beacon-server'][0] }}"
->    +beacon_db_password: "{{ beacon_db_password }}"
->    +beacon_db_port: 8080
+>    +beacon_db_password: "{{ vault_beacon_db_password }}"
+>    +beacon_db_port: 9001
 >    +#galaxy_api_key: This we will set in secrets.
 >    +# Information about your beacon (consider filling this out.
 >    +beacon_info_title: GA4GH Beacon
 >    +beacon_info_beacon_id: your.galaxy.beacon
 >    +beacon_info_description: Beacon service hosting datasets from all over the Galaxy
->    +beacon_info_url: https://{{ ansible_inventory_name }}/beacon/
+>    +beacon_info_url: https://{{ groups['beacon-server'][0] }}/beacon/
 >    +beacon_info_service_group: galaxy-eu
 >    +beacon_info_org_id: usegalaxy.aq
 >    +beacon_info_org_name: Some Galaxy
@@ -136,7 +136,7 @@ TODO: write some more things about beacon
 >    +beacon_info_org_logo_url: https://galaxyproject.org/images/galaxy-logos/galaxy_project_logo_square.png
 >    +beacon_info_org_info: More information about the organisation than just the description can go here.
 >    +# Script Configuration
->    +galaxy_api_url: "{{ galaxy_server_hostname }}"
+>    +galaxy_api_url: "https://{{ groups['beacon-server'][0] }}"
 >    +script_user: beacon
 >    +script-dir: /home/beacon/script
 >    {% endraw %}
@@ -280,7 +280,7 @@ Now that our beacon is running, we need to get data from Galaxy to the Beacon
 >          }
 >    +
 >    +    location /beacon {
->    +        proxy_pass http://{{ groups['beacon-server'][0] }};
+>    +        proxy_pass http://{{ groups['beacon-server'][0] }}:5050;
 >    +        proxy_http_version 1.1;
 >    +        proxy_set_header Upgrade $http_upgrade;
 >    +        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
