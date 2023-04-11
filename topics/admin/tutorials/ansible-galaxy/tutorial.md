@@ -270,7 +270,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +++ b/requirements.yml
 >    @@ -0,0 +1,12 @@
 >    +- src: galaxyproject.galaxy
->    +  version: 0.10.8
+>    +  version: 0.10.10
 >    +- src: galaxyproject.nginx
 >    +  version: 0.7.1
 >    +- src: galaxyproject.postgresql
