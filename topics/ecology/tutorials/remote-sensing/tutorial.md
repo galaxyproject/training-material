@@ -114,7 +114,7 @@ This first step consist of downloading and properly prepare the data to use it i
 
 Using preprocS2 R package, this step provides a unique tool to read, crop, resample the original image directory, and write it as a raster stack
 
-## **Preprocessing sentinel 2 data**
+## Preprocessing sentinel 2 data
 
 > <hands-on-title>Preprocess</hands-on-title>
 >
@@ -157,7 +157,7 @@ You can choose to compute spectral and biodiversity indicators either for global
 <!-- Choose your own adventure path -->
 <div class="Global" markdown="1">
 
-## **Compute a PCA**
+## Compute a PCA
 
 > <hands-on-title>Principal components analysis for remote sensing data</hands-on-title>
 >
@@ -187,7 +187,7 @@ You can choose to compute spectral and biodiversity indicators either for global
 >
 {: .hands_on}
 
-## **Compute biodiversity indices**
+## Compute biodiversity indices
 
 > <hands-on-title>Biodiversity indicators for global remote sensing data</hands-on-title>
 >
@@ -254,7 +254,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 <!-- Choose your own adventure path -->
 <div class="Canopy" markdown="1">
 
-## **Compute a PCA**
+## Compute a PCA
 
 > <hands-on-title>Principal components analysis for remote sensing data</hands-on-title>
 >
@@ -285,7 +285,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 >
 {: .hands_on}
 
-## **Create Biodiversity maps**
+## Create Biodiversity maps
 
 > <hands-on-title>Biodiversity indicators for canopy remote sensing data</hands-on-title>
 >
@@ -318,7 +318,7 @@ These 2 pictures are only exemple it is normal if you don't have exactly the sam
 ![A graph showing the beta diversity according to the longitude and the latitude](../../images/remote_sensing/beta.png "Beta diversity map")
 ![A tabular with a column for the beta diversity, the longitude and the latitude](../../images/remote_sensing/betatab.png "Beta diversity tabular")
 
-## **Processing remote sensing data**
+## Processing remote sensing data
 
 > <hands-on-title>Comparing biodiversity indicators for canopy</hands-on-title>
 > 1. {% tool [Comparing remote sensing data](toolshed.g2.bx.psu.edu/repos/ecology/srs_process_data/srs_process_data/0.0.1) %} with the following parameters:
