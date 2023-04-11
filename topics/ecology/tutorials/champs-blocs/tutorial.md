@@ -126,7 +126,7 @@ Based on the proportion of "turned" and "not turned" blocs this indicator vary f
 {: .tip}
 
 
-## **IVR**
+## IVR
 
 Go on the tool **IVR**
 
@@ -165,7 +165,7 @@ Go on the tool **IVR**
 
 # Computing dissimilarity coefficient for each site
 
-## **Dissimilarity**
+## Dissimilarity
 Cleaning out your data in order and then compute de dissimilarity coefficient.
 Get the {% tool [Dissimilarity](toolshed.g2.bx.psu.edu/repos/ecology/cb_dissim/cb_dissim/0.0.0) %} tool
 

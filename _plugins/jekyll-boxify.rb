@@ -32,7 +32,7 @@ module Jekyll
           title = Gtn::Boxify.safe_title(title)
           title = Gtn::Boxify.format_box_title(title, box_type, lang=lang)
           icon = Gtn::Boxify.get_icon(box_type, emoji: true)
-          box = "<div class=\"box-title\" aria-label=\"#{box_type} box: #{title}\" style=\"font-size: 150%\">#{icon} #{title}</div>"
+          box = "<div class=\"box-title\" aria-description=\"#{box_type} box: #{title}\" style=\"font-size: 150%\">#{icon} #{title}</div>"
           box.gsub!(/\\&quot/, '&quot')
           box.gsub!(/([^\\])"/, '\1\\"')
         else
