@@ -21,6 +21,23 @@ layout: base
         Collection of tutorials developed and maintained by the worldwide Galaxy community
     </p>
 
+    {% if site.banner_image %}
+        {% if site.banner_image.link %}
+        <a href="{{ site.banner_image.link }}">
+        {% endif %}
+        <img alt="{{ site.banner_image.alt }}" src="{{ site.banner_image.source }}" style="margin: 0 0 1em 0;width: 100%;max-width: 100%;">
+        {% if site.banner_image.link %}
+        </a>
+        {% endif %}
+    {% endif %}
+
+    {% if site.announcement %}
+    <div role="alert" class="alert alert-{{ site.announcement.class }}">
+        <h4 class="alert-heading">{{ site.announcement.title }}</h4>
+        {{ site.announcement.text | markdownify }}
+    </div>
+    {% endif %}
+
     <div class="row">
         <div class="col-lg-7 col-md-7 col-sm-12">
             <h2>Galaxy for Scientists</h2>
@@ -34,10 +51,10 @@ layout: base
                 <tbody>
                 {% for topic in sorted_topics %}
                     {% if topic[1].type == "use" %}
-                    {% if topic[1].enable != false or jekyll.environment != "production" %}
+                    {% if topic[1].draft != true or jekyll.environment != "production" %}
                     <tr>
                         {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
                     {% endif %}
@@ -57,10 +74,10 @@ layout: base
                 <tbody>
                 {% for topic in sorted_topics %}
                     {% if topic[1].type == "basics" %}
-                    {% if topic[1].enable != false or jekyll.environment != "production" %}
+                    {% if topic[1].draft != true or jekyll.environment != "production" %}
                     <tr>
                         {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
                     {% endif %}
@@ -80,10 +97,10 @@ layout: base
                 <tbody>
                 {% for topic in sorted_topics %}
                     {% if topic[1].type == "data-science" %}
-                    {% if topic[1].enable != false or jekyll.environment != "production" %}
+                    {% if topic[1].draft != true or jekyll.environment != "production" %}
                     <tr>
                         {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
                     {% endif %}
@@ -103,10 +120,10 @@ layout: base
                 <tbody>
                 {% for topic in sorted_topics %}
                     {% if topic[1].type == "admin-dev" %}
-                    {% if topic[1].enable != false or jekyll.environment != "production" %}
+                    {% if topic[1].draft != true or jekyll.environment != "production" %}
                     <tr>
                         {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
                     {% endif %}
@@ -134,10 +151,10 @@ layout: base
                 <tbody>
                 {% for topic in sorted_topics %}
                     {% if topic[1].type == "instructors" %}
-                    {% if topic[1].enable != false or jekyll.environment != "production" %}
+                    {% if topic[1].draft != true or jekyll.environment != "production" %}
                     <tr>
                         {% assign tutorial_number = site | topic_filter:topic[1].name | topic_count %}
-                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].enable == false %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
+                        <td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a>{% if topic[1].draft %} <div class="label label-default tutorial_tag" style="{{ 'work-in-progress' | colour_tag }}">work-in-progress</div>{% endif %}</td>
                         <td>{{ tutorial_number }}</td>
                     </tr>
                     {% endif %}
@@ -241,7 +258,7 @@ layout: base
         <div class="col-lg-5 col-md-5 col-sm-12">
           <div class="col-12">
                         <h2>The Galaxy Training Network</h2>
-                        <a href="https://www.google.com/maps/d/u/0/viewer?mid=1r8LJy6la-JeIrg23aZjpwVNjJDE"><img alt="static screenshot of google maps showing trainer locations mostly across the northern hemisphere" src="{{ site.baseurl }}/assets/images/map.png" loading="lazy"/></a>
+                        {% include _includes/map.html %}
 
             </div>
           </div>

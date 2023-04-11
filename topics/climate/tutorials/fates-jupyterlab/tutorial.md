@@ -143,7 +143,7 @@ In that particular case, we would suggest to use the Galaxy CLM-FATES Galaxy too
 > is tutorial.
 >
 > 1. Open the {% tool [JupyterLab](interactive_tool_jupyter_notebook) %} or opening directly on [live.usegalaxy](https://live.usegalaxy.eu/?tool_id=interactive_tool_climate_notebook)
-> 2. Click Execute
+> 2. Click Run Tool
 > 3. The tool will start running and will stay running permanently
 > 4. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the JupyterLab instance you started.
 > 5. Click on your JupyterLab instance (please not that it may take a few minutes before you can click on the link to your jupyterLab instance).

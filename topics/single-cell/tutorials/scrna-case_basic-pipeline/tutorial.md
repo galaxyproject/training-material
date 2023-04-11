@@ -80,7 +80,19 @@ You've done all the work to make a single cell matrix, with gene counts and mito
 
 We've provided you with experimental data to analyse from a mouse dataset of fetal growth restriction {% cite Bacon2018 %}. This is the full dataset generated from [this tutorial]({% link topics/single-cell/tutorials/scrna-case_alevin-combine-datasets/tutorial.md %}) if you used the full FASTQ files rather than the subsampled ones (see the [study in Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the [project submission](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). You can find this dataset in this [input history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs3-answerkey) or download from Zenodo below.
 
-> <hands-on-title>Data upload</hands-on-title>
+You can access the data for this tutorial in multiple ways:
+
+1. **Your own history** - If you're feeling confident that you successfully ran a workflow on all 7 samples from the previous tutorial, and that your resulting 7 AnnData objects look right (you can compare with the [answer key history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs2combining-datasets-after-pre-processing---input-1)), then you can use those! To avoid a million-line history, I recommend dragging the resultant datasets into a fresh history
+
+   {% snippet faqs/galaxy/histories_copy_dataset.md %}
+
+2. **Importing from a history** - You can import [this history](https://usegalaxy.eu/u/wendi.bacon.training/h/cs3-answerkey)
+
+   {% snippet faqs/galaxy/histories_import.md %}
+
+3. **Uploading from Zenodo** (see below)
+
+> <hands-on-title>Option 3: Uploading from Zenodo</hands-on-title>
 >
 > 1. Create a new history for this tutorial
 > 2. Import the AnnData object from [Zenodo]({{ page.zenodo_link }})
@@ -97,6 +109,15 @@ We've provided you with experimental data to analyse from a mouse dataset of fet
 >    {% snippet faqs/galaxy/datasets_change_datatype.md datatype="h5ad" %}
 >
 {: .hands_on}
+
+# Important tips for easier analysis
+
+{% snippet faqs/galaxy/tutorial_mode.md %}
+
+> <comment-title></comment-title>
+> - The Galaxy tool search panel sometimes doesn't find the tools we need from the thousands available.
+> - You'll have a much easier time selecting tools from the panel (if you aren't using tutorial mode!) if you are on the [https://humancellatlas.usegalaxy.eu](https://humancellatlas.usegalaxy.eu)
+{: .comment}
 
 # Filtering
 
@@ -661,7 +682,6 @@ Nearly plotting time! But one final piece is to add in SOME gene information. Le
 >
 > 1. {% tool [Scanpy FindMarkers](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_find_markers/scanpy_find_markers/1.8.1+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in AnnData/Loom format"*: `output_h5ad` (output of **Scanpy FindClusters** {% icon tool %})
->    - *"Use programme defaults"*: {% icon history-share %} `Yes` <--- trust me, there's an odd glitch here in some tool versions that is solved by simply ticking `Yes`
 >
 > 2. **Rename** {% icon galaxy-pencil %} output table (not h5ad) `Markers - cluster`
 >

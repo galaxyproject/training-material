@@ -15,7 +15,7 @@ layout: base
 }
 
 </style>
-<section>
+<section class="contributor-{{ page.contributor }}">
 	<div class="stats">
 		<div class="row">
 
@@ -64,6 +64,14 @@ layout: base
 				<div class="contact-items">
 					<a title="Gitter" href="https://gitter.im/{{ contributors[page.contributor].gitter }}">
 						{% icon gitter %} {{ contributors[page.contributor].gitter }}
+					</a>
+				</div>
+				{% endif %}
+
+				{% if contributors[page.contributor].fediverse %}
+				<div class="contact-items">
+					<a href="{{ contributors[page.contributor].fediverse | fedi2link }}">
+						<span style="fill: var(--hyperlink);">{{ "assets/images/mastodon.svg" | load_svg }}</span> {{ contributors[page.contributor].fediverse }}
 					</a>
 				</div>
 				{% endif %}

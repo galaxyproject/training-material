@@ -258,7 +258,7 @@ its OHE representation.
 >    - *"Delimited by"*: Select `Tab`
 >    - *"Cut by"*: Select `fields`
 >    - *"List of fields"*: Select `Column: 3`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
@@ -270,7 +270,7 @@ its OHE representation.
 >    - *"Input file"* : Select the output of the previous step.
 >    - *"Does the dataset contain header?"* : Select `Yes`
 >    - *"Total number of classes"*: Select `10`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
@@ -320,7 +320,7 @@ its OHE representation.
 >            - *"Choose the type of layer"*: `Core -- Dense`
 >                - *"units"*": `10`
 >                - *"Activation function"*: `softmax`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 {: .hands_on}
 
 Each image is passed in as a vector of size 30,000 (100 x 100 X 3 = 30,000). The reshape 
@@ -352,7 +352,7 @@ highest probability is predicted by CNN. The model config can be downloaded as a
 >    - In *"Fit Parameters"*:
 >        - *"epochs"*: `40`
 >        - *"batch_size"*: `50`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 {: .hands_on}
 
 A loss function measures how different the predicted output is from the expected output. For multi-class classification problems, 
@@ -374,7 +374,7 @@ the weights/biases. *batch_size* decides the size of this subset. The model buil
 >        - *"Choose how to select data by column:"*: `All columns`
 >        - *"Dataset containing class labels or target values"*: Select the OHE representation of `train_y_10` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 >
 {: .hands_on}
@@ -393,7 +393,7 @@ The training step generates 3 datasets. 1) accuracy of the trained model, 2) the
 >    - *"Select input data type for prediction"*: `tabular data`
 >    - *"Training samples dataset"*: Select `test_X_10` dataset
 >    - *"Choose how to select data by column:"*: `All columns`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
@@ -412,7 +412,7 @@ in the test dataset.
 >    	- *"Type header name(s):"*: `Label`
 >    - *"Select dataset containing the predicted labels"*": Select `Model Prediction` from the previous step
 >    - *"Does the dataset contain header:"*: `Yes`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 

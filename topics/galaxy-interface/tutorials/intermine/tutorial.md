@@ -123,7 +123,7 @@ We will use **Create InterMine Interchange Dataset** {% icon tool %} in order to
 >    > - *"Organism Name"*: alternatively you can directly provide the organism's name. The organims' name is not mandatory, but is good to provide if it is known. It does not have to be precise
 >    {: .comment}
 >
-> 2. Click on **Execute**
+> 2. Click on **Run Tool**
 >
 {: .hands_on}
 

@@ -36,7 +36,7 @@ at a given point in time. It has the potential to unravel the mechanistic detail
 the host / environment by analyzing the functional dynamics of the microbiome.
 
 In this tutorial, we will analyze a sample of sea water that was collected in August of 2013 from the Bering
-Strait chlorophyll maximum layer (7m depth, 65° 43.44″ N, 168° 57.42″ W). The data were originally published in [May et al., 2016](https://www.ncbi.nlm.nih.gov/pubmed/27396978).
+Strait chlorophyll maximum layer (7m depth, 65° 43.44″ N, 168° 57.42″ W). The data were originally published in {% cite May_2016 %}.
 
 > <agenda-title></agenda-title>
 >
@@ -114,7 +114,7 @@ We have a choice to run all these steps using a single workflow, then discuss ea
 ## Match peptide sequences
 
 The search database labelled `FASTA_Bering_Strait_Trimmed_metapeptides_cRAP.FASTA` is the input database that
-will be used to match MS/MS to peptide sequences via a sequence database search. It is a small excerpt of the original database, which was constructed based on a metagenomic screening of the sea water samples (see [May et al. (2016)](https://www.ncbi.nlm.nih.gov/pubmed/27396978)). The full original database can be accessed from [here](https://noble.gs.washington.edu/proj/metapeptide/data/metapeptides_BSt.fasta). The contaminant database (cRAP) was merged with the original database.
+will be used to match MS/MS to peptide sequences via a sequence database search. It is a small excerpt of the original database, which was constructed based on a metagenomic screening of the sea water samples (see {% cite May_2016 %}). The full original database [is available online](https://noble.gs.washington.edu/proj/metapeptide/data/metapeptides_BSt.fasta). The contaminant database (cRAP) was merged with the original database.
 
 For this, the sequence database-searching program called [SearchGUI](https://compomics.github.io/projects/searchgui.html) will be used.
 The created dataset collection of the three *MGF files* in the history is used as the MS/MS input.
@@ -171,7 +171,7 @@ The created dataset collection of the three *MGF files* in the history is used a
 >
 >    - leave everything else as default
 >
-> 2. Click **Execute**.
+> 2. Click **Run Tool**.
 >
 {: .hands_on}
 
@@ -223,7 +223,7 @@ outputs.
 >       > Galaxy instance to your local computer in a text file if desired.
 >       {: .comment}
 >
-> 2. Click **Execute** and inspect the resulting files after they turned green with the **View data** icon:
+> 2. Click **Run Tool** and inspect the resulting files after they turned green with the **View data** icon:
 >     ![View data button](../../images/view_data_icon.png)
 >
 {: .hands_on}
@@ -334,7 +334,7 @@ As a tabular file is being read, line filters may be applied and an SQL query ca
 >
 >    - **include query result column headers**: `No`
 >
-> 2. Click **Execute** and inspect the query results file after it turned green. If everything went well, it should look similiar:
+> 2. Click **Run Tool** and inspect the query results file after it turned green. If everything went well, it should look similiar:
 >
 >     ![Query Tabular output showing the peptides](../../images/query_tabular_1.png "Query Tabular output")
 >
@@ -361,7 +361,7 @@ Therefore we can search the database for the peptides and count the occurrence w
 >          ORDER BY sequence
 >
 >
-> 2. Click **Execute**. The resulting file should have two columns, one with the distinct peptides, the other with the count number of PSMs.
+> 2. Click **Run Tool**. The resulting file should have two columns, one with the distinct peptides, the other with the count number of PSMs.
 >
 {: .hands_on}
 
@@ -381,7 +381,7 @@ We do a taxonomy analysis using the UniPept pept2lca function to return the taxo
 >    - **Select column with peptides**: `Column 1`
 >    - **Choose outputs**: Select `tabular` and `JSON taxonomy tree`
 >
-> 2. Click **Execute**. The history should grow by two files. View each to see the difference.
+> 2. Click **Run Tool**. The history should grow by two files. View each to see the difference.
 >
 >       > <comment-title></comment-title>
 >       >
@@ -461,7 +461,7 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
 >          ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc
 >
 >
-> 2. Click **Execute** and inspect the query results file after it turned green:
+> 2. Click **Run Tool** and inspect the query results file after it turned green:
 >
 >     ![Query Tabular output showing gene, PSMs and distinct peptides](../../images/metaproteomics_summary.png "Query Tabular output")
 >
@@ -525,11 +525,11 @@ It is available at Zenodo: [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8
 
 > <details-title>Creating your own Gene Ontology list</details-title>
 >
-> The latest Gene Ontology can be downloaded [here](http://geneontology.org/page/download-ontology) as a text file in the `OBO` format.
+> The latest Gene Ontology can be downloaded [the GO website](http://geneontology.org/page/download-ontology) as a text file in the `OBO` format.
 > `OBO` files are human-readable (in addition to machine-readable) and can be opened in any text editor. They contain more information than just the name and aspect.
 >
 > In order to receive a file like we use in the tutorial for your own analysis, different tools are available to extract information from `OBO` files,
-> one of them being [ONTO-PERL](https://doi.org/10.1093/bioinformatics/btn042).
+> one of them being ONTO-PERL ({% cite Antezana_2008 %}).
 > An example file with all GO terms from 08.07.2017 named `Gene_Ontology_Terms_full_07.08.2017.tabular` can be found on the [Zenodo repository](https://doi.org/10.5281/zenodo.839701) of this tutorial as well.
 > You could also upload the Gene Ontology Terms by copying this link on to the Upload Data - Paste/Fetch data `https://zenodo.org/record/839701/files/Gene_Ontology_Terms_full_07.08.2017.tabular`
 >
@@ -552,7 +552,7 @@ for each protein.
 >    - **Select column with peptides**: `Column 1`
 >    - **Choose outputs**: Select `tabular`
 >
-> 2. Click **Execute**.
+> 2. Click **Run Tool**.
 >
 > 3. inspect the result:
 >
@@ -690,7 +690,7 @@ As a final step we will use **Query Tabular** in a more sophisticated way to com
 >          ORDER BY sequence
 >
 >
-> 5. Click **Execute**.
+> 5. Click **Run Tool**.
 >
 {: .hands_on}
 
@@ -717,7 +717,7 @@ With this we have combined all the data into a single database which we can now 
 >
 >          ORDER BY  bering_peptides desc,bering_psms desc
 >
-> 2. Click **Execute**.
+> 2. Click **Run Tool**.
 > 3. Repeat these steps two times by replacing `molecular_function` in the fifth row of the SQL query by `biological_process` and `cellular_component`.
 >
 {: .hands_on}

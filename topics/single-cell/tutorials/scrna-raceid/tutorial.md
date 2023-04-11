@@ -489,7 +489,7 @@ The most differentially expressed genes (below a maximum p-value cutoff) in each
 >
 > 1. What is the most significant differentially expressed gene in Cluster 5?
 > 2. Which cluster has the most genes with a fold-change greater than 30?
->    > <tip-title>Tip</tip-title>
+>    > <tip-title></tip-title>
 >    > One way to answer is this is to scroll through the list and make a mental note of all the genes with a high fold-change value...
 >    >
 >    > ...but a *better* way is to sort the data in descending order on Column 5 using the {%icon tool %} **Sort** tool.
@@ -793,7 +793,7 @@ It was [mentioned previously](#details-continuous-phenotypes-vs-discrete-cluster
 
 ## Computing the Lineage Tree
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [Lineage computation using StemID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_trajectory/raceid_trajectory/0.2.3+galaxy0) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})
@@ -995,7 +995,7 @@ Where **StemID** utilises a bottom-up approach by starting from mature cell type
 
 Here we will see if we can see any pseudo-time dynamics taking place between the branching point (3 to 1, and 3 to 5) that we explored previously.
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > 1. {% tool [Lineage Branch Analysis using StemID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/0.2.3+galaxy0) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RDS"*: `outrdat` (output of **Lineage computation using StemID** {% icon tool %})

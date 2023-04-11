@@ -57,13 +57,26 @@ module Gtn
         "comment" => "Comentario",
         "details" => "Detalles",
         "solution" => "Solución",
-        "warning" => "Aviso",
+        "warning" => "¡Precaucion!",
 
         # The only ones we have translations for??
         "hands-on" => "Práctica",
         "hands_on" => "Práctica",
         "question" => "Preguntas",
         "tip" => "Consejo",
+      },
+      "fr" => {
+        "agenda" => "Agenda",
+        "code-in" => "Entrée",
+        "code-out" => "Sortie",
+        "comment" => "Commentaire",
+        "details" => "Détails",
+        "hands-on" => "En pratique",
+        "hands_on" => "En pratique",
+        "question" => "Question",
+        "solution" => "Solution",
+        "tip" => "Astuce",
+        "warning" => "Attention",
       }
     }
 
@@ -118,6 +131,7 @@ module Gtn
     end
 
     def self.format_box_title(title, box_type, lang="en")
+      if lang == "" or lang.nil? then lang = "en" end
       title_fmted = ((!title.nil?) && title.length > 0 ? ": #{title}" : "")
       "#{@@BOX_TITLES[lang][box_type]}#{title_fmted}"
     end
@@ -126,8 +140,8 @@ module Gtn
       box_id = self.get_id(box_type, title, key)
       box_title = self.format_box_title(title, box_type, lang=lang)
       return [box_id, %Q(
-        <div id="#{box_id}" class="box-title">
-        <button type="button" aria-controls="#{box_id}-contents" aria-expanded="true" aria-label="Toggle #{box_type} box: #{title}">
+        <div class="box-title #{box_type}-title" id="#{box_id}">
+        <button class="gtn-boxify-button #{box_type}" type="button" aria-controls="#{box_id}-contents" aria-expanded="true" aria-label="Toggle #{box_type} box: #{title}">
           #{self.get_icon(box_type)} #{box_title}
           <span role="button" class="fold-unfold fa fa-minus-square"></span>
         </button>
@@ -144,7 +158,7 @@ module Gtn
       end
 
       return [box_id, %Q(
-        <div id="#{box_id}" class="box-title" aria-label="#{box_type} box: #{title}">
+        <div class="box-title #{box_type}-title" id="#{box_id}" aria-label="#{box_type} box: #{title}">
           #{self.get_icon(box_type)} #{box_title}
         </div>
       ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip]
@@ -174,11 +188,24 @@ module Gtn
       return %Q(
         <div class="box #{box_type}" markdown=0>
         #{box_title}
-        <div id=#{box_id}-contents class="box-content" markdown=1>
+        <div class="box-content" id="#{box_id}-contents" markdown=1>
       ).split(/\n/).map{|x| x.lstrip.rstrip}.join("").lstrip.rstrip
     end
 
-
+    def self.replace_elements(text, lang="en", key)
+      # We want to replace any `<x-title>(.*)</x-title>` bits
+      # And replace them one by one with "proper" boxes, based on generate_title.
+      #
+      # We're going to rely on never having two on one line
+      text.split("\n").map{|line|
+        line.gsub(/<(?<type>[a-z-]*)-title>(?<title>.*?)<\/[a-z-]*-title>/){|m|
+          title = Regexp.last_match[:title]
+          type = Regexp.last_match[:type]
+          _, box = self.generate_title(type, title, lang=lang, key)
+          box
+        }
+      }.join("\n")
+    end
   end
 end
 

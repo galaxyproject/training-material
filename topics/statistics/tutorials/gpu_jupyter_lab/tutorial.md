@@ -46,7 +46,7 @@ contributors:
 {: .agenda}
 
 # Introduction
-[Jupyterlab](https://jupyterlab.readthedocs.io/en/stable/) is a popular integrated development environment (IDE) for a variety of tasks in data science such as prototyping analyses, creating meaningful plots, data manipulation and preprocessing. Python is one of the most used languages in such an environment. Given the usefulness of Jupyterlab, more importantly in online platforms, a robust [Jupyterlab notebook application](https://usegalaxy.eu/tool_runner?tool_id=interactive_tool_ml_jupyter_notebook) has been developed that is powered by GPU acceleration and contains numerous packages such as Pandas, Numpy, Scipy, [Scikit-learn](https://scikit-learn.org/), [Tensorflow](https://www.tensorflow.org/), [ONNX](https://onnx.ai/) to support modern data science projects. It has been developed as an interactive Galaxy tool that runs on an isolated [docker container](https://github.com/anuprulez/ml-jupyter-notebook). The docker container has been built using [nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu22.04](https://hub.docker.com/layers/nvidia/cuda/11.8.0-cudnn8-runtime-ubuntu22.04/images/sha256-08aed54a213b52e9cb658760b6d985db2f4c5f7e8f11ac45ec66b5c746237823?context=explore) as the base container. Moreover, a Galaxy [tool](https://github.com/bgruening/galaxytools/pull/1157) ( `run_jupyter_job`) can be executed using [Bioblend](https://bioblend.readthedocs.io/) which uses Galaxy's remote job handling for long-running machine learning and deep learning training. The training happens remotely on a Galaxy cluster and the outcome datasets such as the trained models, tabular files and so on are saved in a Galaxy history for further use.
+[Jupyterlab](https://jupyterlab.readthedocs.io/en/stable/) is a popular integrated development environment (IDE) for a variety of tasks in data science such as prototyping analyses, creating meaningful plots, data manipulation and preprocessing. Python is one of the most used languages in such an environment. Given the usefulness of Jupyterlab, more importantly in online platforms, a robust [Jupyterlab notebook application](https://usegalaxy.eu/root?tool_id=interactive_tool_ml_jupyter_notebook) has been developed that is powered by GPU acceleration and contains numerous packages such as Pandas, Numpy, Scipy, [Scikit-learn](https://scikit-learn.org/), [Tensorflow](https://www.tensorflow.org/), [ONNX](https://onnx.ai/) to support modern data science projects. It has been developed as an interactive Galaxy tool that runs on an isolated [docker container](https://github.com/anuprulez/ml-jupyter-notebook). The docker container has been built using [nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu20.04](https://hub.docker.com/layers/anupkumar/docker-ml-jupyterlab/galaxy-integration-0.2/images/sha256-e2d7e28a2f975523db0f5ac29c2e2ce3c7a35b061072098ad388d5b42ee86fba?context=repo) as the base container. Moreover, a Galaxy [tool](https://github.com/bgruening/galaxytools/pull/1157) ( `run_jupyter_job`) can be executed using [Bioblend](https://bioblend.readthedocs.io/) which uses Galaxy's remote job handling for long-running machine learning and deep learning training. The training happens remotely on a Galaxy cluster and the outcome datasets such as the trained models, tabular files and so on are saved in a Galaxy history for further use.
 
 ## Features of Jupyterlab
 [Jupyterlab](https://jupyterlab.readthedocs.io/en/stable/) notebook has been augmented with several useful features and together they make it ready-to-use for quick prototyping and end-to-end artificial intelligence (AI) projects. Being able to **serve online** makes it convenient to share it with other researchers and users. Its features can be broadly classified into two categories - features that have been added solely as Python packages and those that have been added also as Python packages but have their respective user interfaces. We will briefly discuss these features and later, we will use some of those for building and using AI models.
@@ -97,7 +97,7 @@ First, we will discuss a few features of Jupyterlab to create and train a Unet d
 >
 > - {% tool [GPU enabled Interactive Jupyter Notebook for Machine Learning](interactive_tool_ml_jupyter_notebook) %}
 >    - *"Do you already have a notebook?"*: `Start with default notebooks`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
@@ -270,7 +270,7 @@ This tool showcases how a tool prior to using the GPU Jupyterlab tool (in a work
 >    - *"Filter *"* : Select `train_rows`
 >    - *"With following condition"* :`c3==0`
 >    - *"Number of header lines to skip"*: `1`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 
@@ -311,7 +311,7 @@ This tool showcases how the output dataset collection produced by the GPU Jupyte
 >    - *"Cut columns"* : `c1`
 >    - *"Delimited by"* : `Comma`
 >    - *"From"*: Choose dataset collection `GPU JupyterLab notebook output collection`
->    - Click *"Execute"*
+>    - Click *"Run Tool"*
 >
 {: .hands_on}
 

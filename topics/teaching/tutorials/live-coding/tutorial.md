@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: Live Coding is a Skill
 subtopic: practises
-enable: false
+draft: true
 time_estimation: 1h
 questions:
   - Why do we teach programming using participatory live coding?

@@ -1,6 +1,5 @@
 ---
-redirect_from:
-- /faqs/galaxy/analysis_job_failure_cluster_failure
+redirect_from: [/faqs/galaxy/analysis_job_failure_cluster_failure]
 title: Understanding 'canceled by admin' or cluster failure error messages
 area: troubleshooting
 box_type: tip

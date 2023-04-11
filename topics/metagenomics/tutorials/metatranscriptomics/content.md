@@ -27,7 +27,6 @@ In this tutorial we will perform a metatranscriptomics analysis based on the ASA
 {: .comment}
 
 # Introduction
-{:.no_toc}
 
 Microbiomes play a critical role in host health, disease, and the environment. The study of microbiota and microbial communities has been facilitated by the evolution of technologies, specifically the sequencing techniques. We can now study the microbiome dynamics by investigating the DNA content (metagenomics), RNA expression (metatranscriptomics), protein expression (metaproteomics) or small molecules (metabolomics):
 
@@ -1141,7 +1140,6 @@ Hungateiclostridium	94.67418	Hungateiclostridium_thermocellum	94.67418	UniRef90_
 We could now apply the same tool to the pathways and run similar analysis.
 
 # Conclusion
-{:.no_toc}
 
 In this tutorial, we analyzed one metatranscriptomics sample from raw sequences to community structure, functional profiling. To do that, we:
 

@@ -34,8 +34,7 @@ Metabolomics analyses can be quite complex to conduct, especially when dealing w
 **Liquid-Chromatography Mass Spectrometry** (LC-MS) is one of the three main technologies used to perform this kind of approach. 
 Data analysis for this technology requires a large variety of steps, ranging from extracting information from the raw data to statistical analysis and annotation. 
 One of these steps is called "data processing". It takes place after the pre-processing step (extraction of the peak list from raw data) and before any statistical analysis.
-You can get an overview of a complete LC-MS untargeted metabolomic workflow by following the dedicated 
-training material [here](https://training.galaxyproject.org/training-material/topics/metabolomics/tutorials/lcms/tutorial.html).
+You can get an overview of a complete LC-MS untargeted metabolomic workflow by following [the dedicated training material]({% link topics/metabolomics/tutorials/lcms/tutorial.md %}).
 
 After the pre-processing step, what you have at your disposal is a list of ions (hereafter in the form of a "variableMetadata" file) and the corresponding intensities ("dataMatrix" file).
 What you may want now is to get some relevant information from your tables. However, your data may not be suitable yet for statistical analysis.

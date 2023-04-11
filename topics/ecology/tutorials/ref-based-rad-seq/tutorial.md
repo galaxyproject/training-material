@@ -139,7 +139,7 @@ For demultiplexing, we use the Process Radtags tool from [STACKS](https://www.g3
 {: .hands_on}
 
 
-> <hands-on-title>Hands-on</hands-on-title>
+> <hands-on-title></hands-on-title>
 >
 > You can use the `Charts` functionality through the Visualize button reachable on the `Radtags logs` file you just generated.
 >

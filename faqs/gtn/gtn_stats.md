@@ -12,7 +12,7 @@ contributors: [hexylena]
 {% assign topics = site.data | where_exp: "item", "item.type" | where_exp:"item","item.enable != false" %}
 {% assign contributors = site.data['contributors'] | where_exp: "item", "item.halloffame != 'no'" | sort: "joined" %}
 
-<div class="row">
+<div class="row" style="color: var(--text-color-boxtitle)">
 <div class="col-md-4">
  <div class="gtn-card color-agenda">
    <div class="card-title">{{ topics | size }}</div>
